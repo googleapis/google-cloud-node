@@ -20,7 +20,7 @@ import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
 import {SinonStub} from 'sinon';
-import {describe, it} from 'mocha';
+import { describe, it } from 'mocha';
 import * as recaptchaenterpriseserviceModule from '../src';
 
 import {PassThrough} from 'stream';
@@ -28,1362 +28,978 @@ import {PassThrough} from 'stream';
 import {protobuf} from 'google-gax';
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (instance.constructor as typeof protobuf.Message).toObject(
-    instance as protobuf.Message<T>,
-    {defaults: true}
-  );
-  return (instance.constructor as typeof protobuf.Message).fromObject(
-    filledObject
-  ) as T;
+    const filledObject = (instance.constructor as typeof protobuf.Message)
+        .toObject(instance as protobuf.Message<T>, {defaults: true});
+    return (instance.constructor as typeof protobuf.Message).fromObject(filledObject) as T;
 }
 
 function stubSimpleCall<ResponseType>(response?: ResponseType, error?: Error) {
-  return error
-    ? sinon.stub().rejects(error)
-    : sinon.stub().resolves([response]);
+    return error ? sinon.stub().rejects(error) : sinon.stub().resolves([response]);
 }
 
-function stubSimpleCallWithCallback<ResponseType>(
-  response?: ResponseType,
-  error?: Error
-) {
-  return error
-    ? sinon.stub().callsArgWith(2, error)
-    : sinon.stub().callsArgWith(2, null, response);
+function stubSimpleCallWithCallback<ResponseType>(response?: ResponseType, error?: Error) {
+    return error ? sinon.stub().callsArgWith(2, error) : sinon.stub().callsArgWith(2, null, response);
 }
 
-function stubPageStreamingCall<ResponseType>(
-  responses?: ResponseType[],
-  error?: Error
-) {
-  const pagingStub = sinon.stub();
-  if (responses) {
-    for (let i = 0; i < responses.length; ++i) {
-      pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
+function stubPageStreamingCall<ResponseType>(responses?: ResponseType[], error?: Error) {
+    const pagingStub = sinon.stub();
+    if (responses) {
+        for (let i = 0; i < responses.length; ++i) {
+            pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
+        }
     }
-  }
-  const transformStub = error
-    ? sinon.stub().callsArgWith(2, error)
-    : pagingStub;
-  const mockStream = new PassThrough({
-    objectMode: true,
-    transform: transformStub,
-  });
-  // trigger as many responses as needed
-  if (responses) {
-    for (let i = 0; i < responses.length; ++i) {
-      setImmediate(() => {
-        mockStream.write({});
-      });
+    const transformStub = error ? sinon.stub().callsArgWith(2, error) : pagingStub;
+    const mockStream = new PassThrough({
+        objectMode: true,
+        transform: transformStub,
+    });
+    // trigger as many responses as needed
+    if (responses) {
+        for (let i = 0; i < responses.length; ++i) {
+            setImmediate(() => { mockStream.write({}); });
+        }
+        setImmediate(() => { mockStream.end(); });
+    } else {
+        setImmediate(() => { mockStream.write({}); });
+        setImmediate(() => { mockStream.end(); });
     }
-    setImmediate(() => {
-      mockStream.end();
-    });
-  } else {
-    setImmediate(() => {
-      mockStream.write({});
-    });
-    setImmediate(() => {
-      mockStream.end();
-    });
-  }
-  return sinon.stub().returns(mockStream);
+    return sinon.stub().returns(mockStream);
 }
 
-function stubAsyncIterationCall<ResponseType>(
-  responses?: ResponseType[],
-  error?: Error
-) {
-  let counter = 0;
-  const asyncIterable = {
-    [Symbol.asyncIterator]() {
-      return {
-        async next() {
-          if (error) {
-            return Promise.reject(error);
-          }
-          if (counter >= responses!.length) {
-            return Promise.resolve({done: true, value: undefined});
-          }
-          return Promise.resolve({done: false, value: responses![counter++]});
-        },
-      };
-    },
-  };
-  return sinon.stub().returns(asyncIterable);
+function stubAsyncIterationCall<ResponseType>(responses?: ResponseType[], error?: Error) {
+    let counter = 0;
+    const asyncIterable = {
+        [Symbol.asyncIterator]() {
+            return {
+                async next() {
+                    if (error) {
+                        return Promise.reject(error);
+                    }
+                    if (counter >= responses!.length) {
+                        return Promise.resolve({done: true, value: undefined});
+                    }
+                    return Promise.resolve({done: false, value: responses![counter++]});
+                }
+            };
+        }
+    };
+    return sinon.stub().returns(asyncIterable);
 }
 
 describe('v1.RecaptchaEnterpriseServiceClient', () => {
-  it('has servicePath', () => {
-    const servicePath =
-      recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient
-        .servicePath;
-    assert(servicePath);
-  });
-
-  it('has apiEndpoint', () => {
-    const apiEndpoint =
-      recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient
-        .apiEndpoint;
-    assert(apiEndpoint);
-  });
-
-  it('has port', () => {
-    const port =
-      recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient.port;
-    assert(port);
-    assert(typeof port === 'number');
-  });
-
-  it('should create a client with no option', () => {
-    const client = new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient();
-    assert(client);
-  });
-
-  it('should create a client with gRPC fallback', () => {
-    const client = new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
-      {
-        fallback: true,
-      }
-    );
-    assert(client);
-  });
-
-  it('has initialize method and supports deferred initialization', async () => {
-    const client = new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
-      {
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      }
-    );
-    assert.strictEqual(client.recaptchaEnterpriseServiceStub, undefined);
-    await client.initialize();
-    assert(client.recaptchaEnterpriseServiceStub);
-  });
-
-  it('has close method', () => {
-    const client = new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
-      {
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      }
-    );
-    client.close();
-  });
-
-  it('has getProjectId method', async () => {
-    const fakeProjectId = 'fake-project-id';
-    const client = new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
-      {
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      }
-    );
-    client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
-    const result = await client.getProjectId();
-    assert.strictEqual(result, fakeProjectId);
-    assert((client.auth.getProjectId as SinonStub).calledWithExactly());
-  });
-
-  it('has getProjectId method with callback', async () => {
-    const fakeProjectId = 'fake-project-id';
-    const client = new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
-      {
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      }
-    );
-    client.auth.getProjectId = sinon
-      .stub()
-      .callsArgWith(0, null, fakeProjectId);
-    const promise = new Promise((resolve, reject) => {
-      client.getProjectId((err?: Error | null, projectId?: string | null) => {
-        if (err) {
-          reject(err);
-        } else {
-          resolve(projectId);
-        }
-      });
-    });
-    const result = await promise;
-    assert.strictEqual(result, fakeProjectId);
-  });
-
-  describe('createAssessment', () => {
-    it('invokes createAssessment without error', async () => {
-      const client = new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.recaptchaenterprise.v1.CreateAssessmentRequest()
-      );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.recaptchaenterprise.v1.Assessment()
-      );
-      client.innerApiCalls.createAssessment = stubSimpleCall(expectedResponse);
-      const [response] = await client.createAssessment(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createAssessment as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+    it('has servicePath', () => {
+        const servicePath = recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient.servicePath;
+        assert(servicePath);
     });
 
-    it('invokes createAssessment without error using callback', async () => {
-      const client = new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.recaptchaenterprise.v1.CreateAssessmentRequest()
-      );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.recaptchaenterprise.v1.Assessment()
-      );
-      client.innerApiCalls.createAssessment = stubSimpleCallWithCallback(
-        expectedResponse
-      );
-      const promise = new Promise((resolve, reject) => {
-        client.createAssessment(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.recaptchaenterprise.v1.IAssessment | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createAssessment as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+    it('has apiEndpoint', () => {
+        const apiEndpoint = recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient.apiEndpoint;
+        assert(apiEndpoint);
     });
 
-    it('invokes createAssessment with error', async () => {
-      const client = new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.recaptchaenterprise.v1.CreateAssessmentRequest()
-      );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createAssessment = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(async () => {
-        await client.createAssessment(request);
-      }, expectedError);
-      assert(
-        (client.innerApiCalls.createAssessment as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
-    });
-  });
-
-  describe('annotateAssessment', () => {
-    it('invokes annotateAssessment without error', async () => {
-      const client = new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.recaptchaenterprise.v1.AnnotateAssessmentRequest()
-      );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.recaptchaenterprise.v1.AnnotateAssessmentResponse()
-      );
-      client.innerApiCalls.annotateAssessment = stubSimpleCall(
-        expectedResponse
-      );
-      const [response] = await client.annotateAssessment(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.annotateAssessment as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+    it('has port', () => {
+        const port = recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient.port;
+        assert(port);
+        assert(typeof port === 'number');
     });
 
-    it('invokes annotateAssessment without error using callback', async () => {
-      const client = new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.recaptchaenterprise.v1.AnnotateAssessmentRequest()
-      );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.recaptchaenterprise.v1.AnnotateAssessmentResponse()
-      );
-      client.innerApiCalls.annotateAssessment = stubSimpleCallWithCallback(
-        expectedResponse
-      );
-      const promise = new Promise((resolve, reject) => {
-        client.annotateAssessment(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.recaptchaenterprise.v1.IAnnotateAssessmentResponse | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.annotateAssessment as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+    it('should create a client with no option', () => {
+        const client = new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient();
+        assert(client);
     });
 
-    it('invokes annotateAssessment with error', async () => {
-      const client = new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.recaptchaenterprise.v1.AnnotateAssessmentRequest()
-      );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedError = new Error('expected');
-      client.innerApiCalls.annotateAssessment = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(async () => {
-        await client.annotateAssessment(request);
-      }, expectedError);
-      assert(
-        (client.innerApiCalls.annotateAssessment as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
-    });
-  });
-
-  describe('createKey', () => {
-    it('invokes createKey without error', async () => {
-      const client = new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.recaptchaenterprise.v1.CreateKeyRequest()
-      );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.recaptchaenterprise.v1.Key()
-      );
-      client.innerApiCalls.createKey = stubSimpleCall(expectedResponse);
-      const [response] = await client.createKey(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createKey as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
-    });
-
-    it('invokes createKey without error using callback', async () => {
-      const client = new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.recaptchaenterprise.v1.CreateKeyRequest()
-      );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.recaptchaenterprise.v1.Key()
-      );
-      client.innerApiCalls.createKey = stubSimpleCallWithCallback(
-        expectedResponse
-      );
-      const promise = new Promise((resolve, reject) => {
-        client.createKey(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.recaptchaenterprise.v1.IKey | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createKey as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
-    });
-
-    it('invokes createKey with error', async () => {
-      const client = new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.recaptchaenterprise.v1.CreateKeyRequest()
-      );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createKey = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(async () => {
-        await client.createKey(request);
-      }, expectedError);
-      assert(
-        (client.innerApiCalls.createKey as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
-    });
-  });
-
-  describe('getKey', () => {
-    it('invokes getKey without error', async () => {
-      const client = new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.recaptchaenterprise.v1.GetKeyRequest()
-      );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.recaptchaenterprise.v1.Key()
-      );
-      client.innerApiCalls.getKey = stubSimpleCall(expectedResponse);
-      const [response] = await client.getKey(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getKey as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
-    });
-
-    it('invokes getKey without error using callback', async () => {
-      const client = new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.recaptchaenterprise.v1.GetKeyRequest()
-      );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.recaptchaenterprise.v1.Key()
-      );
-      client.innerApiCalls.getKey = stubSimpleCallWithCallback(
-        expectedResponse
-      );
-      const promise = new Promise((resolve, reject) => {
-        client.getKey(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.recaptchaenterprise.v1.IKey | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getKey as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
-    });
-
-    it('invokes getKey with error', async () => {
-      const client = new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.recaptchaenterprise.v1.GetKeyRequest()
-      );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getKey = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(async () => {
-        await client.getKey(request);
-      }, expectedError);
-      assert(
-        (client.innerApiCalls.getKey as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
-    });
-  });
-
-  describe('updateKey', () => {
-    it('invokes updateKey without error', async () => {
-      const client = new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.recaptchaenterprise.v1.UpdateKeyRequest()
-      );
-      request.key = {};
-      request.key.name = '';
-      const expectedHeaderRequestParams = 'key.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.recaptchaenterprise.v1.Key()
-      );
-      client.innerApiCalls.updateKey = stubSimpleCall(expectedResponse);
-      const [response] = await client.updateKey(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateKey as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
-    });
-
-    it('invokes updateKey without error using callback', async () => {
-      const client = new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.recaptchaenterprise.v1.UpdateKeyRequest()
-      );
-      request.key = {};
-      request.key.name = '';
-      const expectedHeaderRequestParams = 'key.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.recaptchaenterprise.v1.Key()
-      );
-      client.innerApiCalls.updateKey = stubSimpleCallWithCallback(
-        expectedResponse
-      );
-      const promise = new Promise((resolve, reject) => {
-        client.updateKey(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.recaptchaenterprise.v1.IKey | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateKey as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
-    });
-
-    it('invokes updateKey with error', async () => {
-      const client = new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.recaptchaenterprise.v1.UpdateKeyRequest()
-      );
-      request.key = {};
-      request.key.name = '';
-      const expectedHeaderRequestParams = 'key.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateKey = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(async () => {
-        await client.updateKey(request);
-      }, expectedError);
-      assert(
-        (client.innerApiCalls.updateKey as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
-    });
-  });
-
-  describe('deleteKey', () => {
-    it('invokes deleteKey without error', async () => {
-      const client = new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.recaptchaenterprise.v1.DeleteKeyRequest()
-      );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.innerApiCalls.deleteKey = stubSimpleCall(expectedResponse);
-      const [response] = await client.deleteKey(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteKey as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
-    });
-
-    it('invokes deleteKey without error using callback', async () => {
-      const client = new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.recaptchaenterprise.v1.DeleteKeyRequest()
-      );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.innerApiCalls.deleteKey = stubSimpleCallWithCallback(
-        expectedResponse
-      );
-      const promise = new Promise((resolve, reject) => {
-        client.deleteKey(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.protobuf.IEmpty | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteKey as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
-    });
-
-    it('invokes deleteKey with error', async () => {
-      const client = new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.recaptchaenterprise.v1.DeleteKeyRequest()
-      );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteKey = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(async () => {
-        await client.deleteKey(request);
-      }, expectedError);
-      assert(
-        (client.innerApiCalls.deleteKey as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
-    });
-  });
-
-  describe('listKeys', () => {
-    it('invokes listKeys without error', async () => {
-      const client = new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.recaptchaenterprise.v1.ListKeysRequest()
-      );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.recaptchaenterprise.v1.Key()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.recaptchaenterprise.v1.Key()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.recaptchaenterprise.v1.Key()
-        ),
-      ];
-      client.innerApiCalls.listKeys = stubSimpleCall(expectedResponse);
-      const [response] = await client.listKeys(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listKeys as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
-    });
-
-    it('invokes listKeys without error using callback', async () => {
-      const client = new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.recaptchaenterprise.v1.ListKeysRequest()
-      );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.recaptchaenterprise.v1.Key()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.recaptchaenterprise.v1.Key()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.recaptchaenterprise.v1.Key()
-        ),
-      ];
-      client.innerApiCalls.listKeys = stubSimpleCallWithCallback(
-        expectedResponse
-      );
-      const promise = new Promise((resolve, reject) => {
-        client.listKeys(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.recaptchaenterprise.v1.IKey[] | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listKeys as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
-    });
-
-    it('invokes listKeys with error', async () => {
-      const client = new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.recaptchaenterprise.v1.ListKeysRequest()
-      );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listKeys = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(async () => {
-        await client.listKeys(request);
-      }, expectedError);
-      assert(
-        (client.innerApiCalls.listKeys as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
-    });
-
-    it('invokes listKeysStream without error', async () => {
-      const client = new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.recaptchaenterprise.v1.ListKeysRequest()
-      );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.recaptchaenterprise.v1.Key()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.recaptchaenterprise.v1.Key()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.recaptchaenterprise.v1.Key()
-        ),
-      ];
-      client.descriptors.page.listKeys.createStream = stubPageStreamingCall(
-        expectedResponse
-      );
-      const stream = client.listKeysStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.recaptchaenterprise.v1.Key[] = [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.recaptchaenterprise.v1.Key) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+    it('should create a client with gRPC fallback', () => {
+        const client = new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient({
+            fallback: true,
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+        assert(client);
+    });
+
+    it('has initialize method and supports deferred initialization', async () => {
+        const client = new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient({
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            projectId: 'bogus',
         });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.listKeys.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listKeys, request)
-      );
-      assert.strictEqual(
-        (client.descriptors.page.listKeys.createStream as SinonStub).getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
-      );
+        assert.strictEqual(client.recaptchaEnterpriseServiceStub, undefined);
+        await client.initialize();
+        assert(client.recaptchaEnterpriseServiceStub);
     });
 
-    it('invokes listKeysStream with error', async () => {
-      const client = new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.recaptchaenterprise.v1.ListKeysRequest()
-      );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedError = new Error('expected');
-      client.descriptors.page.listKeys.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
-      const stream = client.listKeysStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.recaptchaenterprise.v1.Key[] = [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.recaptchaenterprise.v1.Key) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+    it('has close method', () => {
+        const client = new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient({
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            projectId: 'bogus',
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+        client.close();
+    });
+
+    it('has getProjectId method', async () => {
+        const fakeProjectId = 'fake-project-id';
+        const client = new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient({
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            projectId: 'bogus',
         });
-      });
-      await assert.rejects(async () => {
-        await promise;
-      }, expectedError);
-      assert(
-        (client.descriptors.page.listKeys.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listKeys, request)
-      );
-      assert.strictEqual(
-        (client.descriptors.page.listKeys.createStream as SinonStub).getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
-      );
+        client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
+        const result = await client.getProjectId();
+        assert.strictEqual(result, fakeProjectId);
+        assert((client.auth.getProjectId as SinonStub).calledWithExactly());
     });
 
-    it('uses async iteration with listKeys without error', async () => {
-      const client = new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.recaptchaenterprise.v1.ListKeysRequest()
-      );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.recaptchaenterprise.v1.Key()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.recaptchaenterprise.v1.Key()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.recaptchaenterprise.v1.Key()
-        ),
-      ];
-      client.descriptors.page.listKeys.asyncIterate = stubAsyncIterationCall(
-        expectedResponse
-      );
-      const responses: protos.google.cloud.recaptchaenterprise.v1.IKey[] = [];
-      const iterable = client.listKeysAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (client.descriptors.page.listKeys.asyncIterate as SinonStub).getCall(0)
-          .args[1],
-        request
-      );
-      assert.strictEqual(
-        (client.descriptors.page.listKeys.asyncIterate as SinonStub).getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
-      );
+    it('has getProjectId method with callback', async () => {
+        const fakeProjectId = 'fake-project-id';
+        const client = new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient({
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            projectId: 'bogus',
+        });
+        client.auth.getProjectId = sinon.stub().callsArgWith(0, null, fakeProjectId);
+        const promise = new Promise((resolve, reject) => {
+            client.getProjectId((err?: Error|null, projectId?: string|null) => {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(projectId);
+                }
+            });
+        });
+        const result = await promise;
+        assert.strictEqual(result, fakeProjectId);
     });
 
-    it('uses async iteration with listKeys with error', async () => {
-      const client = new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.recaptchaenterprise.v1.ListKeysRequest()
-      );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedError = new Error('expected');
-      client.descriptors.page.listKeys.asyncIterate = stubAsyncIterationCall(
-        undefined,
-        expectedError
-      );
-      const iterable = client.listKeysAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.recaptchaenterprise.v1.IKey[] = [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (client.descriptors.page.listKeys.asyncIterate as SinonStub).getCall(0)
-          .args[1],
-        request
-      );
-      assert.strictEqual(
-        (client.descriptors.page.listKeys.asyncIterate as SinonStub).getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
-      );
-    });
-  });
+    describe('createAssessment', () => {
+        it('invokes createAssessment without error', async () => {
+            const client = new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            client.initialize();
+            const request = generateSampleMessage(new protos.google.cloud.recaptchaenterprise.v1.CreateAssessmentRequest());
+            request.parent = '';
+            const expectedHeaderRequestParams = "parent=";
+            const expectedOptions = {
+                otherArgs: {
+                    headers: {
+                        'x-goog-request-params': expectedHeaderRequestParams,
+                    },
+                },
+            };
+            const expectedResponse = generateSampleMessage(new protos.google.cloud.recaptchaenterprise.v1.Assessment());
+            client.innerApiCalls.createAssessment = stubSimpleCall(expectedResponse);
+            const [response] = await client.createAssessment(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            assert((client.innerApiCalls.createAssessment as SinonStub)
+                .getCall(0).calledWith(request, expectedOptions, undefined));
+        });
 
-  describe('Path templates', () => {
-    describe('assessment', () => {
-      const fakePath = '/rendered/path/assessment';
-      const expectedParameters = {
-        project: 'projectValue',
-        assessment: 'assessmentValue',
-      };
-      const client = new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      client.initialize();
-      client.pathTemplates.assessmentPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.assessmentPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
+        it('invokes createAssessment without error using callback', async () => {
+            const client = new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            client.initialize();
+            const request = generateSampleMessage(new protos.google.cloud.recaptchaenterprise.v1.CreateAssessmentRequest());
+            request.parent = '';
+            const expectedHeaderRequestParams = "parent=";
+            const expectedOptions = {
+                otherArgs: {
+                    headers: {
+                        'x-goog-request-params': expectedHeaderRequestParams,
+                    },
+                },
+            };
+            const expectedResponse = generateSampleMessage(new protos.google.cloud.recaptchaenterprise.v1.Assessment());
+            client.innerApiCalls.createAssessment = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createAssessment(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.recaptchaenterprise.v1.IAssessment|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            assert((client.innerApiCalls.createAssessment as SinonStub)
+                .getCall(0).calledWith(request, expectedOptions /*, callback defined above */));
+        });
 
-      it('assessmentPath', () => {
-        const result = client.assessmentPath('projectValue', 'assessmentValue');
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.assessmentPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromAssessmentName', () => {
-        const result = client.matchProjectFromAssessmentName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.assessmentPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchAssessmentFromAssessmentName', () => {
-        const result = client.matchAssessmentFromAssessmentName(fakePath);
-        assert.strictEqual(result, 'assessmentValue');
-        assert(
-          (client.pathTemplates.assessmentPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        it('invokes createAssessment with error', async () => {
+            const client = new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            client.initialize();
+            const request = generateSampleMessage(new protos.google.cloud.recaptchaenterprise.v1.CreateAssessmentRequest());
+            request.parent = '';
+            const expectedHeaderRequestParams = "parent=";
+            const expectedOptions = {
+                otherArgs: {
+                    headers: {
+                        'x-goog-request-params': expectedHeaderRequestParams,
+                    },
+                },
+            };
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createAssessment = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(async () => { await client.createAssessment(request); }, expectedError);
+            assert((client.innerApiCalls.createAssessment as SinonStub)
+                .getCall(0).calledWith(request, expectedOptions, undefined));
+        });
     });
 
-    describe('key', () => {
-      const fakePath = '/rendered/path/key';
-      const expectedParameters = {
-        project: 'projectValue',
-        key: 'keyValue',
-      };
-      const client = new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      client.initialize();
-      client.pathTemplates.keyPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.keyPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
+    describe('annotateAssessment', () => {
+        it('invokes annotateAssessment without error', async () => {
+            const client = new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            client.initialize();
+            const request = generateSampleMessage(new protos.google.cloud.recaptchaenterprise.v1.AnnotateAssessmentRequest());
+            request.name = '';
+            const expectedHeaderRequestParams = "name=";
+            const expectedOptions = {
+                otherArgs: {
+                    headers: {
+                        'x-goog-request-params': expectedHeaderRequestParams,
+                    },
+                },
+            };
+            const expectedResponse = generateSampleMessage(new protos.google.cloud.recaptchaenterprise.v1.AnnotateAssessmentResponse());
+            client.innerApiCalls.annotateAssessment = stubSimpleCall(expectedResponse);
+            const [response] = await client.annotateAssessment(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            assert((client.innerApiCalls.annotateAssessment as SinonStub)
+                .getCall(0).calledWith(request, expectedOptions, undefined));
+        });
 
-      it('keyPath', () => {
-        const result = client.keyPath('projectValue', 'keyValue');
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.keyPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
+        it('invokes annotateAssessment without error using callback', async () => {
+            const client = new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            client.initialize();
+            const request = generateSampleMessage(new protos.google.cloud.recaptchaenterprise.v1.AnnotateAssessmentRequest());
+            request.name = '';
+            const expectedHeaderRequestParams = "name=";
+            const expectedOptions = {
+                otherArgs: {
+                    headers: {
+                        'x-goog-request-params': expectedHeaderRequestParams,
+                    },
+                },
+            };
+            const expectedResponse = generateSampleMessage(new protos.google.cloud.recaptchaenterprise.v1.AnnotateAssessmentResponse());
+            client.innerApiCalls.annotateAssessment = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.annotateAssessment(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.recaptchaenterprise.v1.IAnnotateAssessmentResponse|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            assert((client.innerApiCalls.annotateAssessment as SinonStub)
+                .getCall(0).calledWith(request, expectedOptions /*, callback defined above */));
+        });
 
-      it('matchProjectFromKeyName', () => {
-        const result = client.matchProjectFromKeyName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.keyPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchKeyFromKeyName', () => {
-        const result = client.matchKeyFromKeyName(fakePath);
-        assert.strictEqual(result, 'keyValue');
-        assert(
-          (client.pathTemplates.keyPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        it('invokes annotateAssessment with error', async () => {
+            const client = new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            client.initialize();
+            const request = generateSampleMessage(new protos.google.cloud.recaptchaenterprise.v1.AnnotateAssessmentRequest());
+            request.name = '';
+            const expectedHeaderRequestParams = "name=";
+            const expectedOptions = {
+                otherArgs: {
+                    headers: {
+                        'x-goog-request-params': expectedHeaderRequestParams,
+                    },
+                },
+            };
+            const expectedError = new Error('expected');
+            client.innerApiCalls.annotateAssessment = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(async () => { await client.annotateAssessment(request); }, expectedError);
+            assert((client.innerApiCalls.annotateAssessment as SinonStub)
+                .getCall(0).calledWith(request, expectedOptions, undefined));
+        });
     });
 
-    describe('project', () => {
-      const fakePath = '/rendered/path/project';
-      const expectedParameters = {
-        project: 'projectValue',
-      };
-      const client = new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      client.initialize();
-      client.pathTemplates.projectPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.projectPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
+    describe('createKey', () => {
+        it('invokes createKey without error', async () => {
+            const client = new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            client.initialize();
+            const request = generateSampleMessage(new protos.google.cloud.recaptchaenterprise.v1.CreateKeyRequest());
+            request.parent = '';
+            const expectedHeaderRequestParams = "parent=";
+            const expectedOptions = {
+                otherArgs: {
+                    headers: {
+                        'x-goog-request-params': expectedHeaderRequestParams,
+                    },
+                },
+            };
+            const expectedResponse = generateSampleMessage(new protos.google.cloud.recaptchaenterprise.v1.Key());
+            client.innerApiCalls.createKey = stubSimpleCall(expectedResponse);
+            const [response] = await client.createKey(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            assert((client.innerApiCalls.createKey as SinonStub)
+                .getCall(0).calledWith(request, expectedOptions, undefined));
+        });
 
-      it('projectPath', () => {
-        const result = client.projectPath('projectValue');
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.projectPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
+        it('invokes createKey without error using callback', async () => {
+            const client = new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            client.initialize();
+            const request = generateSampleMessage(new protos.google.cloud.recaptchaenterprise.v1.CreateKeyRequest());
+            request.parent = '';
+            const expectedHeaderRequestParams = "parent=";
+            const expectedOptions = {
+                otherArgs: {
+                    headers: {
+                        'x-goog-request-params': expectedHeaderRequestParams,
+                    },
+                },
+            };
+            const expectedResponse = generateSampleMessage(new protos.google.cloud.recaptchaenterprise.v1.Key());
+            client.innerApiCalls.createKey = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createKey(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.recaptchaenterprise.v1.IKey|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            assert((client.innerApiCalls.createKey as SinonStub)
+                .getCall(0).calledWith(request, expectedOptions /*, callback defined above */));
+        });
 
-      it('matchProjectFromProjectName', () => {
-        const result = client.matchProjectFromProjectName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.projectPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        it('invokes createKey with error', async () => {
+            const client = new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            client.initialize();
+            const request = generateSampleMessage(new protos.google.cloud.recaptchaenterprise.v1.CreateKeyRequest());
+            request.parent = '';
+            const expectedHeaderRequestParams = "parent=";
+            const expectedOptions = {
+                otherArgs: {
+                    headers: {
+                        'x-goog-request-params': expectedHeaderRequestParams,
+                    },
+                },
+            };
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createKey = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(async () => { await client.createKey(request); }, expectedError);
+            assert((client.innerApiCalls.createKey as SinonStub)
+                .getCall(0).calledWith(request, expectedOptions, undefined));
+        });
     });
-  });
+
+    describe('getKey', () => {
+        it('invokes getKey without error', async () => {
+            const client = new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            client.initialize();
+            const request = generateSampleMessage(new protos.google.cloud.recaptchaenterprise.v1.GetKeyRequest());
+            request.name = '';
+            const expectedHeaderRequestParams = "name=";
+            const expectedOptions = {
+                otherArgs: {
+                    headers: {
+                        'x-goog-request-params': expectedHeaderRequestParams,
+                    },
+                },
+            };
+            const expectedResponse = generateSampleMessage(new protos.google.cloud.recaptchaenterprise.v1.Key());
+            client.innerApiCalls.getKey = stubSimpleCall(expectedResponse);
+            const [response] = await client.getKey(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            assert((client.innerApiCalls.getKey as SinonStub)
+                .getCall(0).calledWith(request, expectedOptions, undefined));
+        });
+
+        it('invokes getKey without error using callback', async () => {
+            const client = new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            client.initialize();
+            const request = generateSampleMessage(new protos.google.cloud.recaptchaenterprise.v1.GetKeyRequest());
+            request.name = '';
+            const expectedHeaderRequestParams = "name=";
+            const expectedOptions = {
+                otherArgs: {
+                    headers: {
+                        'x-goog-request-params': expectedHeaderRequestParams,
+                    },
+                },
+            };
+            const expectedResponse = generateSampleMessage(new protos.google.cloud.recaptchaenterprise.v1.Key());
+            client.innerApiCalls.getKey = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getKey(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.recaptchaenterprise.v1.IKey|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            assert((client.innerApiCalls.getKey as SinonStub)
+                .getCall(0).calledWith(request, expectedOptions /*, callback defined above */));
+        });
+
+        it('invokes getKey with error', async () => {
+            const client = new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            client.initialize();
+            const request = generateSampleMessage(new protos.google.cloud.recaptchaenterprise.v1.GetKeyRequest());
+            request.name = '';
+            const expectedHeaderRequestParams = "name=";
+            const expectedOptions = {
+                otherArgs: {
+                    headers: {
+                        'x-goog-request-params': expectedHeaderRequestParams,
+                    },
+                },
+            };
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getKey = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(async () => { await client.getKey(request); }, expectedError);
+            assert((client.innerApiCalls.getKey as SinonStub)
+                .getCall(0).calledWith(request, expectedOptions, undefined));
+        });
+    });
+
+    describe('updateKey', () => {
+        it('invokes updateKey without error', async () => {
+            const client = new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            client.initialize();
+            const request = generateSampleMessage(new protos.google.cloud.recaptchaenterprise.v1.UpdateKeyRequest());
+            request.key = {};
+            request.key.name = '';
+            const expectedHeaderRequestParams = "key.name=";
+            const expectedOptions = {
+                otherArgs: {
+                    headers: {
+                        'x-goog-request-params': expectedHeaderRequestParams,
+                    },
+                },
+            };
+            const expectedResponse = generateSampleMessage(new protos.google.cloud.recaptchaenterprise.v1.Key());
+            client.innerApiCalls.updateKey = stubSimpleCall(expectedResponse);
+            const [response] = await client.updateKey(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            assert((client.innerApiCalls.updateKey as SinonStub)
+                .getCall(0).calledWith(request, expectedOptions, undefined));
+        });
+
+        it('invokes updateKey without error using callback', async () => {
+            const client = new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            client.initialize();
+            const request = generateSampleMessage(new protos.google.cloud.recaptchaenterprise.v1.UpdateKeyRequest());
+            request.key = {};
+            request.key.name = '';
+            const expectedHeaderRequestParams = "key.name=";
+            const expectedOptions = {
+                otherArgs: {
+                    headers: {
+                        'x-goog-request-params': expectedHeaderRequestParams,
+                    },
+                },
+            };
+            const expectedResponse = generateSampleMessage(new protos.google.cloud.recaptchaenterprise.v1.Key());
+            client.innerApiCalls.updateKey = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updateKey(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.recaptchaenterprise.v1.IKey|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            assert((client.innerApiCalls.updateKey as SinonStub)
+                .getCall(0).calledWith(request, expectedOptions /*, callback defined above */));
+        });
+
+        it('invokes updateKey with error', async () => {
+            const client = new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            client.initialize();
+            const request = generateSampleMessage(new protos.google.cloud.recaptchaenterprise.v1.UpdateKeyRequest());
+            request.key = {};
+            request.key.name = '';
+            const expectedHeaderRequestParams = "key.name=";
+            const expectedOptions = {
+                otherArgs: {
+                    headers: {
+                        'x-goog-request-params': expectedHeaderRequestParams,
+                    },
+                },
+            };
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateKey = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(async () => { await client.updateKey(request); }, expectedError);
+            assert((client.innerApiCalls.updateKey as SinonStub)
+                .getCall(0).calledWith(request, expectedOptions, undefined));
+        });
+    });
+
+    describe('deleteKey', () => {
+        it('invokes deleteKey without error', async () => {
+            const client = new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            client.initialize();
+            const request = generateSampleMessage(new protos.google.cloud.recaptchaenterprise.v1.DeleteKeyRequest());
+            request.name = '';
+            const expectedHeaderRequestParams = "name=";
+            const expectedOptions = {
+                otherArgs: {
+                    headers: {
+                        'x-goog-request-params': expectedHeaderRequestParams,
+                    },
+                },
+            };
+            const expectedResponse = generateSampleMessage(new protos.google.protobuf.Empty());
+            client.innerApiCalls.deleteKey = stubSimpleCall(expectedResponse);
+            const [response] = await client.deleteKey(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            assert((client.innerApiCalls.deleteKey as SinonStub)
+                .getCall(0).calledWith(request, expectedOptions, undefined));
+        });
+
+        it('invokes deleteKey without error using callback', async () => {
+            const client = new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            client.initialize();
+            const request = generateSampleMessage(new protos.google.cloud.recaptchaenterprise.v1.DeleteKeyRequest());
+            request.name = '';
+            const expectedHeaderRequestParams = "name=";
+            const expectedOptions = {
+                otherArgs: {
+                    headers: {
+                        'x-goog-request-params': expectedHeaderRequestParams,
+                    },
+                },
+            };
+            const expectedResponse = generateSampleMessage(new protos.google.protobuf.Empty());
+            client.innerApiCalls.deleteKey = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deleteKey(
+                    request,
+                    (err?: Error|null, result?: protos.google.protobuf.IEmpty|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            assert((client.innerApiCalls.deleteKey as SinonStub)
+                .getCall(0).calledWith(request, expectedOptions /*, callback defined above */));
+        });
+
+        it('invokes deleteKey with error', async () => {
+            const client = new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            client.initialize();
+            const request = generateSampleMessage(new protos.google.cloud.recaptchaenterprise.v1.DeleteKeyRequest());
+            request.name = '';
+            const expectedHeaderRequestParams = "name=";
+            const expectedOptions = {
+                otherArgs: {
+                    headers: {
+                        'x-goog-request-params': expectedHeaderRequestParams,
+                    },
+                },
+            };
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteKey = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(async () => { await client.deleteKey(request); }, expectedError);
+            assert((client.innerApiCalls.deleteKey as SinonStub)
+                .getCall(0).calledWith(request, expectedOptions, undefined));
+        });
+    });
+
+    describe('listKeys', () => {
+        it('invokes listKeys without error', async () => {
+            const client = new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            client.initialize();
+            const request = generateSampleMessage(new protos.google.cloud.recaptchaenterprise.v1.ListKeysRequest());
+            request.parent = '';
+            const expectedHeaderRequestParams = "parent=";
+            const expectedOptions = {
+                otherArgs: {
+                    headers: {
+                        'x-goog-request-params': expectedHeaderRequestParams,
+                    },
+                },
+            };
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.recaptchaenterprise.v1.Key()),
+              generateSampleMessage(new protos.google.cloud.recaptchaenterprise.v1.Key()),
+              generateSampleMessage(new protos.google.cloud.recaptchaenterprise.v1.Key()),
+            ];
+            client.innerApiCalls.listKeys = stubSimpleCall(expectedResponse);
+            const [response] = await client.listKeys(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            assert((client.innerApiCalls.listKeys as SinonStub)
+                .getCall(0).calledWith(request, expectedOptions, undefined));
+        });
+
+        it('invokes listKeys without error using callback', async () => {
+            const client = new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            client.initialize();
+            const request = generateSampleMessage(new protos.google.cloud.recaptchaenterprise.v1.ListKeysRequest());
+            request.parent = '';
+            const expectedHeaderRequestParams = "parent=";
+            const expectedOptions = {
+                otherArgs: {
+                    headers: {
+                        'x-goog-request-params': expectedHeaderRequestParams,
+                    },
+                },
+            };
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.recaptchaenterprise.v1.Key()),
+              generateSampleMessage(new protos.google.cloud.recaptchaenterprise.v1.Key()),
+              generateSampleMessage(new protos.google.cloud.recaptchaenterprise.v1.Key()),
+            ];
+            client.innerApiCalls.listKeys = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listKeys(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.recaptchaenterprise.v1.IKey[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            assert((client.innerApiCalls.listKeys as SinonStub)
+                .getCall(0).calledWith(request, expectedOptions /*, callback defined above */));
+        });
+
+        it('invokes listKeys with error', async () => {
+            const client = new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            client.initialize();
+            const request = generateSampleMessage(new protos.google.cloud.recaptchaenterprise.v1.ListKeysRequest());
+            request.parent = '';
+            const expectedHeaderRequestParams = "parent=";
+            const expectedOptions = {
+                otherArgs: {
+                    headers: {
+                        'x-goog-request-params': expectedHeaderRequestParams,
+                    },
+                },
+            };
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listKeys = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(async () => { await client.listKeys(request); }, expectedError);
+            assert((client.innerApiCalls.listKeys as SinonStub)
+                .getCall(0).calledWith(request, expectedOptions, undefined));
+        });
+
+        it('invokes listKeysStream without error', async () => {
+            const client = new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            client.initialize();
+            const request = generateSampleMessage(new protos.google.cloud.recaptchaenterprise.v1.ListKeysRequest());
+            request.parent = '';
+            const expectedHeaderRequestParams = "parent=";
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.recaptchaenterprise.v1.Key()),
+              generateSampleMessage(new protos.google.cloud.recaptchaenterprise.v1.Key()),
+              generateSampleMessage(new protos.google.cloud.recaptchaenterprise.v1.Key()),
+            ];
+            client.descriptors.page.listKeys.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listKeysStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.recaptchaenterprise.v1.Key[] = [];
+                stream.on('data', (response: protos.google.cloud.recaptchaenterprise.v1.Key) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listKeys.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listKeys, request));
+            assert.strictEqual(
+                (client.descriptors.page.listKeys.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+                expectedHeaderRequestParams
+            );
+        });
+
+        it('invokes listKeysStream with error', async () => {
+            const client = new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            client.initialize();
+            const request = generateSampleMessage(new protos.google.cloud.recaptchaenterprise.v1.ListKeysRequest());
+            request.parent = '';
+            const expectedHeaderRequestParams = "parent=";
+            const expectedError = new Error('expected');
+            client.descriptors.page.listKeys.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listKeysStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.recaptchaenterprise.v1.Key[] = [];
+                stream.on('data', (response: protos.google.cloud.recaptchaenterprise.v1.Key) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(async () => { await promise; }, expectedError);
+            assert((client.descriptors.page.listKeys.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listKeys, request));
+            assert.strictEqual(
+                (client.descriptors.page.listKeys.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+                expectedHeaderRequestParams
+            );
+        });
+
+        it('uses async iteration with listKeys without error', async () => {
+            const client = new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            client.initialize();
+            const request = generateSampleMessage(new protos.google.cloud.recaptchaenterprise.v1.ListKeysRequest());
+            request.parent = '';
+            const expectedHeaderRequestParams = "parent=";const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.recaptchaenterprise.v1.Key()),
+              generateSampleMessage(new protos.google.cloud.recaptchaenterprise.v1.Key()),
+              generateSampleMessage(new protos.google.cloud.recaptchaenterprise.v1.Key()),
+            ];
+            client.descriptors.page.listKeys.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.recaptchaenterprise.v1.IKey[] = [];
+            const iterable = client.listKeysAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
+            }
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listKeys.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert.strictEqual(
+                (client.descriptors.page.listKeys.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+                expectedHeaderRequestParams
+            );
+        });
+
+        it('uses async iteration with listKeys with error', async () => {
+            const client = new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            client.initialize();
+            const request = generateSampleMessage(new protos.google.cloud.recaptchaenterprise.v1.ListKeysRequest());
+            request.parent = '';
+            const expectedHeaderRequestParams = "parent=";const expectedError = new Error('expected');
+            client.descriptors.page.listKeys.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listKeysAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.recaptchaenterprise.v1.IKey[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listKeys.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert.strictEqual(
+                (client.descriptors.page.listKeys.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+                expectedHeaderRequestParams
+            );
+        });
+    });
+
+    describe('Path templates', () => {
+
+        describe('assessment', () => {
+            const fakePath = "/rendered/path/assessment";
+            const expectedParameters = {
+                project: "projectValue",
+                assessment: "assessmentValue",
+            };
+            const client = new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            client.initialize();
+            client.pathTemplates.assessmentPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.assessmentPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('assessmentPath', () => {
+                const result = client.assessmentPath("projectValue", "assessmentValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.assessmentPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromAssessmentName', () => {
+                const result = client.matchProjectFromAssessmentName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.assessmentPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchAssessmentFromAssessmentName', () => {
+                const result = client.matchAssessmentFromAssessmentName(fakePath);
+                assert.strictEqual(result, "assessmentValue");
+                assert((client.pathTemplates.assessmentPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('key', () => {
+            const fakePath = "/rendered/path/key";
+            const expectedParameters = {
+                project: "projectValue",
+                key: "keyValue",
+            };
+            const client = new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            client.initialize();
+            client.pathTemplates.keyPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.keyPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('keyPath', () => {
+                const result = client.keyPath("projectValue", "keyValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.keyPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromKeyName', () => {
+                const result = client.matchProjectFromKeyName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.keyPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchKeyFromKeyName', () => {
+                const result = client.matchKeyFromKeyName(fakePath);
+                assert.strictEqual(result, "keyValue");
+                assert((client.pathTemplates.keyPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('project', () => {
+            const fakePath = "/rendered/path/project";
+            const expectedParameters = {
+                project: "projectValue",
+            };
+            const client = new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            client.initialize();
+            client.pathTemplates.projectPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectPath', () => {
+                const result = client.projectPath("projectValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectName', () => {
+                const result = client.matchProjectFromProjectName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+    });
 });
