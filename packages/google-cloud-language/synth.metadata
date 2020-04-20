@@ -1,11 +1,25 @@
 {
-  "updateTime": "2020-04-11T00:27:32.512826Z",
   "sources": [
+    {
+      "git": {
+        "name": ".",
+        "remote": "https://github.com/googleapis/nodejs-language.git",
+        "sha": "e11e643289693bd582f379fc3b9015680811da38"
+      }
+    },
+    {
+      "git": {
+        "name": "googleapis",
+        "remote": "https://github.com/googleapis/googleapis.git",
+        "sha": "cdf13efacdea0649e940452f9c5d320b93735974",
+        "internalRef": "306783437"
+      }
+    },
     {
       "git": {
         "name": "synthtool",
         "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "6f32150677c9784f3c3a7e1949472bd29c9d72c5"
+        "sha": "52638600f387deb98efb5f9c85fec39e82aa9052"
       }
     }
   ],
