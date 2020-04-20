@@ -1,3 +1,11 @@
 {
-  "updateTime": "2020-04-06T11:10:08.062634Z"
+  "sources": [
+    {
+      "git": {
+        "name": ".",
+        "remote": "https://github.com/googleapis/google-cloud-node.git",
+        "sha": "9bad5ff7b083009933749efca044fc4dae98306f"
+      }
+    }
+  ]
 }
