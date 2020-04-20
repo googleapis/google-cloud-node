@@ -51,6 +51,7 @@ export class SpeechClient {
     batching: {},
   };
   innerApiCalls: {[name: string]: Function};
+  pathTemplates: {[name: string]: gax.PathTemplate};
   operationsClient: gax.OperationsClient;
   speechStub?: Promise<{[name: string]: Function}>;
 
@@ -148,6 +149,18 @@ export class SpeechClient {
           require('../../protos/protos.json')
         : nodejsProtoPath
     );
+
+    // This API contains "path templates"; forward-slash-separated
+    // identifiers to uniquely identify resources within the API.
+    // Create useful helper objects for these.
+    this.pathTemplates = {
+      customClassPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/customClasses/{custom_class}'
+      ),
+      phraseSetPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/phraseSets/{phrase_set}'
+      ),
+    };
 
     // Some of the methods on this service provide streaming responses.
     // Provide descriptors for these.
@@ -510,6 +523,113 @@ export class SpeechClient {
     options = options || {};
     this.initialize();
     return this.innerApiCalls.longRunningRecognize(request, options, callback);
+  }
+  // --------------------
+  // -- Path templates --
+  // --------------------
+
+  /**
+   * Return a fully-qualified customClass resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} custom_class
+   * @returns {string} Resource name string.
+   */
+  customClassPath(project: string, location: string, customClass: string) {
+    return this.pathTemplates.customClassPathTemplate.render({
+      project: project,
+      location: location,
+      custom_class: customClass,
+    });
+  }
+
+  /**
+   * Parse the project from CustomClass resource.
+   *
+   * @param {string} customClassName
+   *   A fully-qualified path representing CustomClass resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromCustomClassName(customClassName: string) {
+    return this.pathTemplates.customClassPathTemplate.match(customClassName)
+      .project;
+  }
+
+  /**
+   * Parse the location from CustomClass resource.
+   *
+   * @param {string} customClassName
+   *   A fully-qualified path representing CustomClass resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromCustomClassName(customClassName: string) {
+    return this.pathTemplates.customClassPathTemplate.match(customClassName)
+      .location;
+  }
+
+  /**
+   * Parse the custom_class from CustomClass resource.
+   *
+   * @param {string} customClassName
+   *   A fully-qualified path representing CustomClass resource.
+   * @returns {string} A string representing the custom_class.
+   */
+  matchCustomClassFromCustomClassName(customClassName: string) {
+    return this.pathTemplates.customClassPathTemplate.match(customClassName)
+      .custom_class;
+  }
+
+  /**
+   * Return a fully-qualified phraseSet resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} phrase_set
+   * @returns {string} Resource name string.
+   */
+  phraseSetPath(project: string, location: string, phraseSet: string) {
+    return this.pathTemplates.phraseSetPathTemplate.render({
+      project: project,
+      location: location,
+      phrase_set: phraseSet,
+    });
+  }
+
+  /**
+   * Parse the project from PhraseSet resource.
+   *
+   * @param {string} phraseSetName
+   *   A fully-qualified path representing PhraseSet resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromPhraseSetName(phraseSetName: string) {
+    return this.pathTemplates.phraseSetPathTemplate.match(phraseSetName)
+      .project;
+  }
+
+  /**
+   * Parse the location from PhraseSet resource.
+   *
+   * @param {string} phraseSetName
+   *   A fully-qualified path representing PhraseSet resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromPhraseSetName(phraseSetName: string) {
+    return this.pathTemplates.phraseSetPathTemplate.match(phraseSetName)
+      .location;
+  }
+
+  /**
+   * Parse the phrase_set from PhraseSet resource.
+   *
+   * @param {string} phraseSetName
+   *   A fully-qualified path representing PhraseSet resource.
+   * @returns {string} A string representing the phrase_set.
+   */
+  matchPhraseSetFromPhraseSetName(phraseSetName: string) {
+    return this.pathTemplates.phraseSetPathTemplate.match(phraseSetName)
+      .phrase_set;
   }
 
   /**

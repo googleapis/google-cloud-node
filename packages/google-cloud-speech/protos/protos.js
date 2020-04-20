@@ -6039,6 +6039,7 @@
                          * @property {Array.<string>|null} [alternativeLanguageCodes] RecognitionConfig alternativeLanguageCodes
                          * @property {number|null} [maxAlternatives] RecognitionConfig maxAlternatives
                          * @property {boolean|null} [profanityFilter] RecognitionConfig profanityFilter
+                         * @property {google.cloud.speech.v1p1beta1.ISpeechAdaptation|null} [adaptation] RecognitionConfig adaptation
                          * @property {Array.<google.cloud.speech.v1p1beta1.ISpeechContext>|null} [speechContexts] RecognitionConfig speechContexts
                          * @property {boolean|null} [enableWordTimeOffsets] RecognitionConfig enableWordTimeOffsets
                          * @property {boolean|null} [enableWordConfidence] RecognitionConfig enableWordConfidence
@@ -6131,6 +6132,14 @@
                          * @instance
                          */
                         RecognitionConfig.prototype.profanityFilter = false;
+    
+                        /**
+                         * RecognitionConfig adaptation.
+                         * @member {google.cloud.speech.v1p1beta1.ISpeechAdaptation|null|undefined} adaptation
+                         * @memberof google.cloud.speech.v1p1beta1.RecognitionConfig
+                         * @instance
+                         */
+                        RecognitionConfig.prototype.adaptation = null;
     
                         /**
                          * RecognitionConfig speechContexts.
@@ -6274,6 +6283,8 @@
                                     writer.uint32(/* id 18, wireType 2 =*/146).string(message.alternativeLanguageCodes[i]);
                             if (message.diarizationConfig != null && message.hasOwnProperty("diarizationConfig"))
                                 $root.google.cloud.speech.v1p1beta1.SpeakerDiarizationConfig.encode(message.diarizationConfig, writer.uint32(/* id 19, wireType 2 =*/154).fork()).ldelim();
+                            if (message.adaptation != null && message.hasOwnProperty("adaptation"))
+                                $root.google.cloud.speech.v1p1beta1.SpeechAdaptation.encode(message.adaptation, writer.uint32(/* id 20, wireType 2 =*/162).fork()).ldelim();
                             return writer;
                         };
     
@@ -6333,6 +6344,9 @@
                                     break;
                                 case 5:
                                     message.profanityFilter = reader.bool();
+                                    break;
+                                case 20:
+                                    message.adaptation = $root.google.cloud.speech.v1p1beta1.SpeechAdaptation.decode(reader, reader.uint32());
                                     break;
                                 case 6:
                                     if (!(message.speechContexts && message.speechContexts.length))
@@ -6441,6 +6455,11 @@
                             if (message.profanityFilter != null && message.hasOwnProperty("profanityFilter"))
                                 if (typeof message.profanityFilter !== "boolean")
                                     return "profanityFilter: boolean expected";
+                            if (message.adaptation != null && message.hasOwnProperty("adaptation")) {
+                                var error = $root.google.cloud.speech.v1p1beta1.SpeechAdaptation.verify(message.adaptation);
+                                if (error)
+                                    return "adaptation." + error;
+                            }
                             if (message.speechContexts != null && message.hasOwnProperty("speechContexts")) {
                                 if (!Array.isArray(message.speechContexts))
                                     return "speechContexts: array expected";
@@ -6553,6 +6572,11 @@
                                 message.maxAlternatives = object.maxAlternatives | 0;
                             if (object.profanityFilter != null)
                                 message.profanityFilter = Boolean(object.profanityFilter);
+                            if (object.adaptation != null) {
+                                if (typeof object.adaptation !== "object")
+                                    throw TypeError(".google.cloud.speech.v1p1beta1.RecognitionConfig.adaptation: object expected");
+                                message.adaptation = $root.google.cloud.speech.v1p1beta1.SpeechAdaptation.fromObject(object.adaptation);
+                            }
                             if (object.speechContexts) {
                                 if (!Array.isArray(object.speechContexts))
                                     throw TypeError(".google.cloud.speech.v1p1beta1.RecognitionConfig.speechContexts: array expected");
@@ -6624,6 +6648,7 @@
                                 object.enableSpeakerDiarization = false;
                                 object.diarizationSpeakerCount = 0;
                                 object.diarizationConfig = null;
+                                object.adaptation = null;
                             }
                             if (message.encoding != null && message.hasOwnProperty("encoding"))
                                 object.encoding = options.enums === String ? $root.google.cloud.speech.v1p1beta1.RecognitionConfig.AudioEncoding[message.encoding] : message.encoding;
@@ -6667,6 +6692,8 @@
                             }
                             if (message.diarizationConfig != null && message.hasOwnProperty("diarizationConfig"))
                                 object.diarizationConfig = $root.google.cloud.speech.v1p1beta1.SpeakerDiarizationConfig.toObject(message.diarizationConfig, options);
+                            if (message.adaptation != null && message.hasOwnProperty("adaptation"))
+                                object.adaptation = $root.google.cloud.speech.v1p1beta1.SpeechAdaptation.toObject(message.adaptation, options);
                             return object;
                         };
     
@@ -6721,6 +6748,7 @@
                          * @property {boolean|null} [enableSpeakerDiarization] SpeakerDiarizationConfig enableSpeakerDiarization
                          * @property {number|null} [minSpeakerCount] SpeakerDiarizationConfig minSpeakerCount
                          * @property {number|null} [maxSpeakerCount] SpeakerDiarizationConfig maxSpeakerCount
+                         * @property {number|null} [speakerTag] SpeakerDiarizationConfig speakerTag
                          */
     
                         /**
@@ -6763,6 +6791,14 @@
                         SpeakerDiarizationConfig.prototype.maxSpeakerCount = 0;
     
                         /**
+                         * SpeakerDiarizationConfig speakerTag.
+                         * @member {number} speakerTag
+                         * @memberof google.cloud.speech.v1p1beta1.SpeakerDiarizationConfig
+                         * @instance
+                         */
+                        SpeakerDiarizationConfig.prototype.speakerTag = 0;
+    
+                        /**
                          * Creates a new SpeakerDiarizationConfig instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.speech.v1p1beta1.SpeakerDiarizationConfig
@@ -6792,6 +6828,8 @@
                                 writer.uint32(/* id 2, wireType 0 =*/16).int32(message.minSpeakerCount);
                             if (message.maxSpeakerCount != null && message.hasOwnProperty("maxSpeakerCount"))
                                 writer.uint32(/* id 3, wireType 0 =*/24).int32(message.maxSpeakerCount);
+                            if (message.speakerTag != null && message.hasOwnProperty("speakerTag"))
+                                writer.uint32(/* id 5, wireType 0 =*/40).int32(message.speakerTag);
                             return writer;
                         };
     
@@ -6834,6 +6872,9 @@
                                     break;
                                 case 3:
                                     message.maxSpeakerCount = reader.int32();
+                                    break;
+                                case 5:
+                                    message.speakerTag = reader.int32();
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -6879,6 +6920,9 @@
                             if (message.maxSpeakerCount != null && message.hasOwnProperty("maxSpeakerCount"))
                                 if (!$util.isInteger(message.maxSpeakerCount))
                                     return "maxSpeakerCount: integer expected";
+                            if (message.speakerTag != null && message.hasOwnProperty("speakerTag"))
+                                if (!$util.isInteger(message.speakerTag))
+                                    return "speakerTag: integer expected";
                             return null;
                         };
     
@@ -6900,6 +6944,8 @@
                                 message.minSpeakerCount = object.minSpeakerCount | 0;
                             if (object.maxSpeakerCount != null)
                                 message.maxSpeakerCount = object.maxSpeakerCount | 0;
+                            if (object.speakerTag != null)
+                                message.speakerTag = object.speakerTag | 0;
                             return message;
                         };
     
@@ -6920,6 +6966,7 @@
                                 object.enableSpeakerDiarization = false;
                                 object.minSpeakerCount = 0;
                                 object.maxSpeakerCount = 0;
+                                object.speakerTag = 0;
                             }
                             if (message.enableSpeakerDiarization != null && message.hasOwnProperty("enableSpeakerDiarization"))
                                 object.enableSpeakerDiarization = message.enableSpeakerDiarization;
@@ -6927,6 +6974,8 @@
                                 object.minSpeakerCount = message.minSpeakerCount;
                             if (message.maxSpeakerCount != null && message.hasOwnProperty("maxSpeakerCount"))
                                 object.maxSpeakerCount = message.maxSpeakerCount;
+                            if (message.speakerTag != null && message.hasOwnProperty("speakerTag"))
+                                object.speakerTag = message.speakerTag;
                             return object;
                         };
     
@@ -8422,6 +8471,7 @@
                          * @property {number|null} [progressPercent] LongRunningRecognizeMetadata progressPercent
                          * @property {google.protobuf.ITimestamp|null} [startTime] LongRunningRecognizeMetadata startTime
                          * @property {google.protobuf.ITimestamp|null} [lastUpdateTime] LongRunningRecognizeMetadata lastUpdateTime
+                         * @property {string|null} [uri] LongRunningRecognizeMetadata uri
                          */
     
                         /**
@@ -8464,6 +8514,14 @@
                         LongRunningRecognizeMetadata.prototype.lastUpdateTime = null;
     
                         /**
+                         * LongRunningRecognizeMetadata uri.
+                         * @member {string} uri
+                         * @memberof google.cloud.speech.v1p1beta1.LongRunningRecognizeMetadata
+                         * @instance
+                         */
+                        LongRunningRecognizeMetadata.prototype.uri = "";
+    
+                        /**
                          * Creates a new LongRunningRecognizeMetadata instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.speech.v1p1beta1.LongRunningRecognizeMetadata
@@ -8493,6 +8551,8 @@
                                 $root.google.protobuf.Timestamp.encode(message.startTime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                             if (message.lastUpdateTime != null && message.hasOwnProperty("lastUpdateTime"))
                                 $root.google.protobuf.Timestamp.encode(message.lastUpdateTime, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.uri != null && message.hasOwnProperty("uri"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.uri);
                             return writer;
                         };
     
@@ -8535,6 +8595,9 @@
                                     break;
                                 case 3:
                                     message.lastUpdateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                case 4:
+                                    message.uri = reader.string();
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -8584,6 +8647,9 @@
                                 if (error)
                                     return "lastUpdateTime." + error;
                             }
+                            if (message.uri != null && message.hasOwnProperty("uri"))
+                                if (!$util.isString(message.uri))
+                                    return "uri: string expected";
                             return null;
                         };
     
@@ -8611,6 +8677,8 @@
                                     throw TypeError(".google.cloud.speech.v1p1beta1.LongRunningRecognizeMetadata.lastUpdateTime: object expected");
                                 message.lastUpdateTime = $root.google.protobuf.Timestamp.fromObject(object.lastUpdateTime);
                             }
+                            if (object.uri != null)
+                                message.uri = String(object.uri);
                             return message;
                         };
     
@@ -8631,6 +8699,7 @@
                                 object.progressPercent = 0;
                                 object.startTime = null;
                                 object.lastUpdateTime = null;
+                                object.uri = "";
                             }
                             if (message.progressPercent != null && message.hasOwnProperty("progressPercent"))
                                 object.progressPercent = message.progressPercent;
@@ -8638,6 +8707,8 @@
                                 object.startTime = $root.google.protobuf.Timestamp.toObject(message.startTime, options);
                             if (message.lastUpdateTime != null && message.hasOwnProperty("lastUpdateTime"))
                                 object.lastUpdateTime = $root.google.protobuf.Timestamp.toObject(message.lastUpdateTime, options);
+                            if (message.uri != null && message.hasOwnProperty("uri"))
+                                object.uri = message.uri;
                             return object;
                         };
     
@@ -10060,6 +10131,1163 @@
                         return WordInfo;
                     })();
     
+                    v1p1beta1.CustomClass = (function() {
+    
+                        /**
+                         * Properties of a CustomClass.
+                         * @memberof google.cloud.speech.v1p1beta1
+                         * @interface ICustomClass
+                         * @property {string|null} [name] CustomClass name
+                         * @property {string|null} [customClassId] CustomClass customClassId
+                         * @property {Array.<google.cloud.speech.v1p1beta1.CustomClass.IClassItem>|null} [items] CustomClass items
+                         */
+    
+                        /**
+                         * Constructs a new CustomClass.
+                         * @memberof google.cloud.speech.v1p1beta1
+                         * @classdesc Represents a CustomClass.
+                         * @implements ICustomClass
+                         * @constructor
+                         * @param {google.cloud.speech.v1p1beta1.ICustomClass=} [properties] Properties to set
+                         */
+                        function CustomClass(properties) {
+                            this.items = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CustomClass name.
+                         * @member {string} name
+                         * @memberof google.cloud.speech.v1p1beta1.CustomClass
+                         * @instance
+                         */
+                        CustomClass.prototype.name = "";
+    
+                        /**
+                         * CustomClass customClassId.
+                         * @member {string} customClassId
+                         * @memberof google.cloud.speech.v1p1beta1.CustomClass
+                         * @instance
+                         */
+                        CustomClass.prototype.customClassId = "";
+    
+                        /**
+                         * CustomClass items.
+                         * @member {Array.<google.cloud.speech.v1p1beta1.CustomClass.IClassItem>} items
+                         * @memberof google.cloud.speech.v1p1beta1.CustomClass
+                         * @instance
+                         */
+                        CustomClass.prototype.items = $util.emptyArray;
+    
+                        /**
+                         * Creates a new CustomClass instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.speech.v1p1beta1.CustomClass
+                         * @static
+                         * @param {google.cloud.speech.v1p1beta1.ICustomClass=} [properties] Properties to set
+                         * @returns {google.cloud.speech.v1p1beta1.CustomClass} CustomClass instance
+                         */
+                        CustomClass.create = function create(properties) {
+                            return new CustomClass(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CustomClass message. Does not implicitly {@link google.cloud.speech.v1p1beta1.CustomClass.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.speech.v1p1beta1.CustomClass
+                         * @static
+                         * @param {google.cloud.speech.v1p1beta1.ICustomClass} message CustomClass message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CustomClass.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.customClassId != null && message.hasOwnProperty("customClassId"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.customClassId);
+                            if (message.items != null && message.items.length)
+                                for (var i = 0; i < message.items.length; ++i)
+                                    $root.google.cloud.speech.v1p1beta1.CustomClass.ClassItem.encode(message.items[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CustomClass message, length delimited. Does not implicitly {@link google.cloud.speech.v1p1beta1.CustomClass.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.speech.v1p1beta1.CustomClass
+                         * @static
+                         * @param {google.cloud.speech.v1p1beta1.ICustomClass} message CustomClass message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CustomClass.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CustomClass message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.speech.v1p1beta1.CustomClass
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.speech.v1p1beta1.CustomClass} CustomClass
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CustomClass.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.speech.v1p1beta1.CustomClass();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                case 2:
+                                    message.customClassId = reader.string();
+                                    break;
+                                case 3:
+                                    if (!(message.items && message.items.length))
+                                        message.items = [];
+                                    message.items.push($root.google.cloud.speech.v1p1beta1.CustomClass.ClassItem.decode(reader, reader.uint32()));
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CustomClass message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.speech.v1p1beta1.CustomClass
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.speech.v1p1beta1.CustomClass} CustomClass
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CustomClass.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CustomClass message.
+                         * @function verify
+                         * @memberof google.cloud.speech.v1p1beta1.CustomClass
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CustomClass.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.customClassId != null && message.hasOwnProperty("customClassId"))
+                                if (!$util.isString(message.customClassId))
+                                    return "customClassId: string expected";
+                            if (message.items != null && message.hasOwnProperty("items")) {
+                                if (!Array.isArray(message.items))
+                                    return "items: array expected";
+                                for (var i = 0; i < message.items.length; ++i) {
+                                    var error = $root.google.cloud.speech.v1p1beta1.CustomClass.ClassItem.verify(message.items[i]);
+                                    if (error)
+                                        return "items." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CustomClass message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.speech.v1p1beta1.CustomClass
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.speech.v1p1beta1.CustomClass} CustomClass
+                         */
+                        CustomClass.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.speech.v1p1beta1.CustomClass)
+                                return object;
+                            var message = new $root.google.cloud.speech.v1p1beta1.CustomClass();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.customClassId != null)
+                                message.customClassId = String(object.customClassId);
+                            if (object.items) {
+                                if (!Array.isArray(object.items))
+                                    throw TypeError(".google.cloud.speech.v1p1beta1.CustomClass.items: array expected");
+                                message.items = [];
+                                for (var i = 0; i < object.items.length; ++i) {
+                                    if (typeof object.items[i] !== "object")
+                                        throw TypeError(".google.cloud.speech.v1p1beta1.CustomClass.items: object expected");
+                                    message.items[i] = $root.google.cloud.speech.v1p1beta1.CustomClass.ClassItem.fromObject(object.items[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CustomClass message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.speech.v1p1beta1.CustomClass
+                         * @static
+                         * @param {google.cloud.speech.v1p1beta1.CustomClass} message CustomClass
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CustomClass.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.items = [];
+                            if (options.defaults) {
+                                object.name = "";
+                                object.customClassId = "";
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.customClassId != null && message.hasOwnProperty("customClassId"))
+                                object.customClassId = message.customClassId;
+                            if (message.items && message.items.length) {
+                                object.items = [];
+                                for (var j = 0; j < message.items.length; ++j)
+                                    object.items[j] = $root.google.cloud.speech.v1p1beta1.CustomClass.ClassItem.toObject(message.items[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CustomClass to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.speech.v1p1beta1.CustomClass
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CustomClass.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        CustomClass.ClassItem = (function() {
+    
+                            /**
+                             * Properties of a ClassItem.
+                             * @memberof google.cloud.speech.v1p1beta1.CustomClass
+                             * @interface IClassItem
+                             * @property {string|null} [value] ClassItem value
+                             */
+    
+                            /**
+                             * Constructs a new ClassItem.
+                             * @memberof google.cloud.speech.v1p1beta1.CustomClass
+                             * @classdesc Represents a ClassItem.
+                             * @implements IClassItem
+                             * @constructor
+                             * @param {google.cloud.speech.v1p1beta1.CustomClass.IClassItem=} [properties] Properties to set
+                             */
+                            function ClassItem(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * ClassItem value.
+                             * @member {string} value
+                             * @memberof google.cloud.speech.v1p1beta1.CustomClass.ClassItem
+                             * @instance
+                             */
+                            ClassItem.prototype.value = "";
+    
+                            /**
+                             * Creates a new ClassItem instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.speech.v1p1beta1.CustomClass.ClassItem
+                             * @static
+                             * @param {google.cloud.speech.v1p1beta1.CustomClass.IClassItem=} [properties] Properties to set
+                             * @returns {google.cloud.speech.v1p1beta1.CustomClass.ClassItem} ClassItem instance
+                             */
+                            ClassItem.create = function create(properties) {
+                                return new ClassItem(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified ClassItem message. Does not implicitly {@link google.cloud.speech.v1p1beta1.CustomClass.ClassItem.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.speech.v1p1beta1.CustomClass.ClassItem
+                             * @static
+                             * @param {google.cloud.speech.v1p1beta1.CustomClass.IClassItem} message ClassItem message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ClassItem.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.value != null && message.hasOwnProperty("value"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.value);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified ClassItem message, length delimited. Does not implicitly {@link google.cloud.speech.v1p1beta1.CustomClass.ClassItem.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.speech.v1p1beta1.CustomClass.ClassItem
+                             * @static
+                             * @param {google.cloud.speech.v1p1beta1.CustomClass.IClassItem} message ClassItem message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ClassItem.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a ClassItem message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.speech.v1p1beta1.CustomClass.ClassItem
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.speech.v1p1beta1.CustomClass.ClassItem} ClassItem
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ClassItem.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.speech.v1p1beta1.CustomClass.ClassItem();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1:
+                                        message.value = reader.string();
+                                        break;
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a ClassItem message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.speech.v1p1beta1.CustomClass.ClassItem
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.speech.v1p1beta1.CustomClass.ClassItem} ClassItem
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ClassItem.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a ClassItem message.
+                             * @function verify
+                             * @memberof google.cloud.speech.v1p1beta1.CustomClass.ClassItem
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            ClassItem.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.value != null && message.hasOwnProperty("value"))
+                                    if (!$util.isString(message.value))
+                                        return "value: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a ClassItem message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.speech.v1p1beta1.CustomClass.ClassItem
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.speech.v1p1beta1.CustomClass.ClassItem} ClassItem
+                             */
+                            ClassItem.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.speech.v1p1beta1.CustomClass.ClassItem)
+                                    return object;
+                                var message = new $root.google.cloud.speech.v1p1beta1.CustomClass.ClassItem();
+                                if (object.value != null)
+                                    message.value = String(object.value);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a ClassItem message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.speech.v1p1beta1.CustomClass.ClassItem
+                             * @static
+                             * @param {google.cloud.speech.v1p1beta1.CustomClass.ClassItem} message ClassItem
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            ClassItem.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.value = "";
+                                if (message.value != null && message.hasOwnProperty("value"))
+                                    object.value = message.value;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this ClassItem to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.speech.v1p1beta1.CustomClass.ClassItem
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            ClassItem.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            return ClassItem;
+                        })();
+    
+                        return CustomClass;
+                    })();
+    
+                    v1p1beta1.PhraseSet = (function() {
+    
+                        /**
+                         * Properties of a PhraseSet.
+                         * @memberof google.cloud.speech.v1p1beta1
+                         * @interface IPhraseSet
+                         * @property {string|null} [name] PhraseSet name
+                         * @property {Array.<google.cloud.speech.v1p1beta1.PhraseSet.IPhrase>|null} [phrases] PhraseSet phrases
+                         * @property {number|null} [boost] PhraseSet boost
+                         */
+    
+                        /**
+                         * Constructs a new PhraseSet.
+                         * @memberof google.cloud.speech.v1p1beta1
+                         * @classdesc Represents a PhraseSet.
+                         * @implements IPhraseSet
+                         * @constructor
+                         * @param {google.cloud.speech.v1p1beta1.IPhraseSet=} [properties] Properties to set
+                         */
+                        function PhraseSet(properties) {
+                            this.phrases = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * PhraseSet name.
+                         * @member {string} name
+                         * @memberof google.cloud.speech.v1p1beta1.PhraseSet
+                         * @instance
+                         */
+                        PhraseSet.prototype.name = "";
+    
+                        /**
+                         * PhraseSet phrases.
+                         * @member {Array.<google.cloud.speech.v1p1beta1.PhraseSet.IPhrase>} phrases
+                         * @memberof google.cloud.speech.v1p1beta1.PhraseSet
+                         * @instance
+                         */
+                        PhraseSet.prototype.phrases = $util.emptyArray;
+    
+                        /**
+                         * PhraseSet boost.
+                         * @member {number} boost
+                         * @memberof google.cloud.speech.v1p1beta1.PhraseSet
+                         * @instance
+                         */
+                        PhraseSet.prototype.boost = 0;
+    
+                        /**
+                         * Creates a new PhraseSet instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.speech.v1p1beta1.PhraseSet
+                         * @static
+                         * @param {google.cloud.speech.v1p1beta1.IPhraseSet=} [properties] Properties to set
+                         * @returns {google.cloud.speech.v1p1beta1.PhraseSet} PhraseSet instance
+                         */
+                        PhraseSet.create = function create(properties) {
+                            return new PhraseSet(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified PhraseSet message. Does not implicitly {@link google.cloud.speech.v1p1beta1.PhraseSet.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.speech.v1p1beta1.PhraseSet
+                         * @static
+                         * @param {google.cloud.speech.v1p1beta1.IPhraseSet} message PhraseSet message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        PhraseSet.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.phrases != null && message.phrases.length)
+                                for (var i = 0; i < message.phrases.length; ++i)
+                                    $root.google.cloud.speech.v1p1beta1.PhraseSet.Phrase.encode(message.phrases[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.boost != null && message.hasOwnProperty("boost"))
+                                writer.uint32(/* id 4, wireType 5 =*/37).float(message.boost);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified PhraseSet message, length delimited. Does not implicitly {@link google.cloud.speech.v1p1beta1.PhraseSet.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.speech.v1p1beta1.PhraseSet
+                         * @static
+                         * @param {google.cloud.speech.v1p1beta1.IPhraseSet} message PhraseSet message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        PhraseSet.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a PhraseSet message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.speech.v1p1beta1.PhraseSet
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.speech.v1p1beta1.PhraseSet} PhraseSet
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        PhraseSet.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.speech.v1p1beta1.PhraseSet();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                case 2:
+                                    if (!(message.phrases && message.phrases.length))
+                                        message.phrases = [];
+                                    message.phrases.push($root.google.cloud.speech.v1p1beta1.PhraseSet.Phrase.decode(reader, reader.uint32()));
+                                    break;
+                                case 4:
+                                    message.boost = reader.float();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a PhraseSet message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.speech.v1p1beta1.PhraseSet
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.speech.v1p1beta1.PhraseSet} PhraseSet
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        PhraseSet.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a PhraseSet message.
+                         * @function verify
+                         * @memberof google.cloud.speech.v1p1beta1.PhraseSet
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        PhraseSet.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.phrases != null && message.hasOwnProperty("phrases")) {
+                                if (!Array.isArray(message.phrases))
+                                    return "phrases: array expected";
+                                for (var i = 0; i < message.phrases.length; ++i) {
+                                    var error = $root.google.cloud.speech.v1p1beta1.PhraseSet.Phrase.verify(message.phrases[i]);
+                                    if (error)
+                                        return "phrases." + error;
+                                }
+                            }
+                            if (message.boost != null && message.hasOwnProperty("boost"))
+                                if (typeof message.boost !== "number")
+                                    return "boost: number expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a PhraseSet message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.speech.v1p1beta1.PhraseSet
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.speech.v1p1beta1.PhraseSet} PhraseSet
+                         */
+                        PhraseSet.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.speech.v1p1beta1.PhraseSet)
+                                return object;
+                            var message = new $root.google.cloud.speech.v1p1beta1.PhraseSet();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.phrases) {
+                                if (!Array.isArray(object.phrases))
+                                    throw TypeError(".google.cloud.speech.v1p1beta1.PhraseSet.phrases: array expected");
+                                message.phrases = [];
+                                for (var i = 0; i < object.phrases.length; ++i) {
+                                    if (typeof object.phrases[i] !== "object")
+                                        throw TypeError(".google.cloud.speech.v1p1beta1.PhraseSet.phrases: object expected");
+                                    message.phrases[i] = $root.google.cloud.speech.v1p1beta1.PhraseSet.Phrase.fromObject(object.phrases[i]);
+                                }
+                            }
+                            if (object.boost != null)
+                                message.boost = Number(object.boost);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a PhraseSet message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.speech.v1p1beta1.PhraseSet
+                         * @static
+                         * @param {google.cloud.speech.v1p1beta1.PhraseSet} message PhraseSet
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        PhraseSet.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.phrases = [];
+                            if (options.defaults) {
+                                object.name = "";
+                                object.boost = 0;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.phrases && message.phrases.length) {
+                                object.phrases = [];
+                                for (var j = 0; j < message.phrases.length; ++j)
+                                    object.phrases[j] = $root.google.cloud.speech.v1p1beta1.PhraseSet.Phrase.toObject(message.phrases[j], options);
+                            }
+                            if (message.boost != null && message.hasOwnProperty("boost"))
+                                object.boost = options.json && !isFinite(message.boost) ? String(message.boost) : message.boost;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this PhraseSet to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.speech.v1p1beta1.PhraseSet
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        PhraseSet.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        PhraseSet.Phrase = (function() {
+    
+                            /**
+                             * Properties of a Phrase.
+                             * @memberof google.cloud.speech.v1p1beta1.PhraseSet
+                             * @interface IPhrase
+                             * @property {string|null} [value] Phrase value
+                             * @property {number|null} [boost] Phrase boost
+                             */
+    
+                            /**
+                             * Constructs a new Phrase.
+                             * @memberof google.cloud.speech.v1p1beta1.PhraseSet
+                             * @classdesc Represents a Phrase.
+                             * @implements IPhrase
+                             * @constructor
+                             * @param {google.cloud.speech.v1p1beta1.PhraseSet.IPhrase=} [properties] Properties to set
+                             */
+                            function Phrase(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * Phrase value.
+                             * @member {string} value
+                             * @memberof google.cloud.speech.v1p1beta1.PhraseSet.Phrase
+                             * @instance
+                             */
+                            Phrase.prototype.value = "";
+    
+                            /**
+                             * Phrase boost.
+                             * @member {number} boost
+                             * @memberof google.cloud.speech.v1p1beta1.PhraseSet.Phrase
+                             * @instance
+                             */
+                            Phrase.prototype.boost = 0;
+    
+                            /**
+                             * Creates a new Phrase instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.speech.v1p1beta1.PhraseSet.Phrase
+                             * @static
+                             * @param {google.cloud.speech.v1p1beta1.PhraseSet.IPhrase=} [properties] Properties to set
+                             * @returns {google.cloud.speech.v1p1beta1.PhraseSet.Phrase} Phrase instance
+                             */
+                            Phrase.create = function create(properties) {
+                                return new Phrase(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified Phrase message. Does not implicitly {@link google.cloud.speech.v1p1beta1.PhraseSet.Phrase.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.speech.v1p1beta1.PhraseSet.Phrase
+                             * @static
+                             * @param {google.cloud.speech.v1p1beta1.PhraseSet.IPhrase} message Phrase message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Phrase.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.value != null && message.hasOwnProperty("value"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.value);
+                                if (message.boost != null && message.hasOwnProperty("boost"))
+                                    writer.uint32(/* id 2, wireType 5 =*/21).float(message.boost);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified Phrase message, length delimited. Does not implicitly {@link google.cloud.speech.v1p1beta1.PhraseSet.Phrase.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.speech.v1p1beta1.PhraseSet.Phrase
+                             * @static
+                             * @param {google.cloud.speech.v1p1beta1.PhraseSet.IPhrase} message Phrase message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Phrase.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a Phrase message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.speech.v1p1beta1.PhraseSet.Phrase
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.speech.v1p1beta1.PhraseSet.Phrase} Phrase
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Phrase.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.speech.v1p1beta1.PhraseSet.Phrase();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1:
+                                        message.value = reader.string();
+                                        break;
+                                    case 2:
+                                        message.boost = reader.float();
+                                        break;
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a Phrase message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.speech.v1p1beta1.PhraseSet.Phrase
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.speech.v1p1beta1.PhraseSet.Phrase} Phrase
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Phrase.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a Phrase message.
+                             * @function verify
+                             * @memberof google.cloud.speech.v1p1beta1.PhraseSet.Phrase
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            Phrase.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.value != null && message.hasOwnProperty("value"))
+                                    if (!$util.isString(message.value))
+                                        return "value: string expected";
+                                if (message.boost != null && message.hasOwnProperty("boost"))
+                                    if (typeof message.boost !== "number")
+                                        return "boost: number expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a Phrase message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.speech.v1p1beta1.PhraseSet.Phrase
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.speech.v1p1beta1.PhraseSet.Phrase} Phrase
+                             */
+                            Phrase.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.speech.v1p1beta1.PhraseSet.Phrase)
+                                    return object;
+                                var message = new $root.google.cloud.speech.v1p1beta1.PhraseSet.Phrase();
+                                if (object.value != null)
+                                    message.value = String(object.value);
+                                if (object.boost != null)
+                                    message.boost = Number(object.boost);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a Phrase message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.speech.v1p1beta1.PhraseSet.Phrase
+                             * @static
+                             * @param {google.cloud.speech.v1p1beta1.PhraseSet.Phrase} message Phrase
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            Phrase.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.value = "";
+                                    object.boost = 0;
+                                }
+                                if (message.value != null && message.hasOwnProperty("value"))
+                                    object.value = message.value;
+                                if (message.boost != null && message.hasOwnProperty("boost"))
+                                    object.boost = options.json && !isFinite(message.boost) ? String(message.boost) : message.boost;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this Phrase to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.speech.v1p1beta1.PhraseSet.Phrase
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            Phrase.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            return Phrase;
+                        })();
+    
+                        return PhraseSet;
+                    })();
+    
+                    v1p1beta1.SpeechAdaptation = (function() {
+    
+                        /**
+                         * Properties of a SpeechAdaptation.
+                         * @memberof google.cloud.speech.v1p1beta1
+                         * @interface ISpeechAdaptation
+                         * @property {Array.<google.cloud.speech.v1p1beta1.IPhraseSet>|null} [phraseSets] SpeechAdaptation phraseSets
+                         * @property {Array.<google.cloud.speech.v1p1beta1.ICustomClass>|null} [customClasses] SpeechAdaptation customClasses
+                         */
+    
+                        /**
+                         * Constructs a new SpeechAdaptation.
+                         * @memberof google.cloud.speech.v1p1beta1
+                         * @classdesc Represents a SpeechAdaptation.
+                         * @implements ISpeechAdaptation
+                         * @constructor
+                         * @param {google.cloud.speech.v1p1beta1.ISpeechAdaptation=} [properties] Properties to set
+                         */
+                        function SpeechAdaptation(properties) {
+                            this.phraseSets = [];
+                            this.customClasses = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * SpeechAdaptation phraseSets.
+                         * @member {Array.<google.cloud.speech.v1p1beta1.IPhraseSet>} phraseSets
+                         * @memberof google.cloud.speech.v1p1beta1.SpeechAdaptation
+                         * @instance
+                         */
+                        SpeechAdaptation.prototype.phraseSets = $util.emptyArray;
+    
+                        /**
+                         * SpeechAdaptation customClasses.
+                         * @member {Array.<google.cloud.speech.v1p1beta1.ICustomClass>} customClasses
+                         * @memberof google.cloud.speech.v1p1beta1.SpeechAdaptation
+                         * @instance
+                         */
+                        SpeechAdaptation.prototype.customClasses = $util.emptyArray;
+    
+                        /**
+                         * Creates a new SpeechAdaptation instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.speech.v1p1beta1.SpeechAdaptation
+                         * @static
+                         * @param {google.cloud.speech.v1p1beta1.ISpeechAdaptation=} [properties] Properties to set
+                         * @returns {google.cloud.speech.v1p1beta1.SpeechAdaptation} SpeechAdaptation instance
+                         */
+                        SpeechAdaptation.create = function create(properties) {
+                            return new SpeechAdaptation(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified SpeechAdaptation message. Does not implicitly {@link google.cloud.speech.v1p1beta1.SpeechAdaptation.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.speech.v1p1beta1.SpeechAdaptation
+                         * @static
+                         * @param {google.cloud.speech.v1p1beta1.ISpeechAdaptation} message SpeechAdaptation message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SpeechAdaptation.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.phraseSets != null && message.phraseSets.length)
+                                for (var i = 0; i < message.phraseSets.length; ++i)
+                                    $root.google.cloud.speech.v1p1beta1.PhraseSet.encode(message.phraseSets[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.customClasses != null && message.customClasses.length)
+                                for (var i = 0; i < message.customClasses.length; ++i)
+                                    $root.google.cloud.speech.v1p1beta1.CustomClass.encode(message.customClasses[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified SpeechAdaptation message, length delimited. Does not implicitly {@link google.cloud.speech.v1p1beta1.SpeechAdaptation.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.speech.v1p1beta1.SpeechAdaptation
+                         * @static
+                         * @param {google.cloud.speech.v1p1beta1.ISpeechAdaptation} message SpeechAdaptation message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SpeechAdaptation.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a SpeechAdaptation message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.speech.v1p1beta1.SpeechAdaptation
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.speech.v1p1beta1.SpeechAdaptation} SpeechAdaptation
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SpeechAdaptation.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.speech.v1p1beta1.SpeechAdaptation();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    if (!(message.phraseSets && message.phraseSets.length))
+                                        message.phraseSets = [];
+                                    message.phraseSets.push($root.google.cloud.speech.v1p1beta1.PhraseSet.decode(reader, reader.uint32()));
+                                    break;
+                                case 2:
+                                    if (!(message.customClasses && message.customClasses.length))
+                                        message.customClasses = [];
+                                    message.customClasses.push($root.google.cloud.speech.v1p1beta1.CustomClass.decode(reader, reader.uint32()));
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a SpeechAdaptation message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.speech.v1p1beta1.SpeechAdaptation
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.speech.v1p1beta1.SpeechAdaptation} SpeechAdaptation
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SpeechAdaptation.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a SpeechAdaptation message.
+                         * @function verify
+                         * @memberof google.cloud.speech.v1p1beta1.SpeechAdaptation
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        SpeechAdaptation.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.phraseSets != null && message.hasOwnProperty("phraseSets")) {
+                                if (!Array.isArray(message.phraseSets))
+                                    return "phraseSets: array expected";
+                                for (var i = 0; i < message.phraseSets.length; ++i) {
+                                    var error = $root.google.cloud.speech.v1p1beta1.PhraseSet.verify(message.phraseSets[i]);
+                                    if (error)
+                                        return "phraseSets." + error;
+                                }
+                            }
+                            if (message.customClasses != null && message.hasOwnProperty("customClasses")) {
+                                if (!Array.isArray(message.customClasses))
+                                    return "customClasses: array expected";
+                                for (var i = 0; i < message.customClasses.length; ++i) {
+                                    var error = $root.google.cloud.speech.v1p1beta1.CustomClass.verify(message.customClasses[i]);
+                                    if (error)
+                                        return "customClasses." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a SpeechAdaptation message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.speech.v1p1beta1.SpeechAdaptation
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.speech.v1p1beta1.SpeechAdaptation} SpeechAdaptation
+                         */
+                        SpeechAdaptation.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.speech.v1p1beta1.SpeechAdaptation)
+                                return object;
+                            var message = new $root.google.cloud.speech.v1p1beta1.SpeechAdaptation();
+                            if (object.phraseSets) {
+                                if (!Array.isArray(object.phraseSets))
+                                    throw TypeError(".google.cloud.speech.v1p1beta1.SpeechAdaptation.phraseSets: array expected");
+                                message.phraseSets = [];
+                                for (var i = 0; i < object.phraseSets.length; ++i) {
+                                    if (typeof object.phraseSets[i] !== "object")
+                                        throw TypeError(".google.cloud.speech.v1p1beta1.SpeechAdaptation.phraseSets: object expected");
+                                    message.phraseSets[i] = $root.google.cloud.speech.v1p1beta1.PhraseSet.fromObject(object.phraseSets[i]);
+                                }
+                            }
+                            if (object.customClasses) {
+                                if (!Array.isArray(object.customClasses))
+                                    throw TypeError(".google.cloud.speech.v1p1beta1.SpeechAdaptation.customClasses: array expected");
+                                message.customClasses = [];
+                                for (var i = 0; i < object.customClasses.length; ++i) {
+                                    if (typeof object.customClasses[i] !== "object")
+                                        throw TypeError(".google.cloud.speech.v1p1beta1.SpeechAdaptation.customClasses: object expected");
+                                    message.customClasses[i] = $root.google.cloud.speech.v1p1beta1.CustomClass.fromObject(object.customClasses[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a SpeechAdaptation message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.speech.v1p1beta1.SpeechAdaptation
+                         * @static
+                         * @param {google.cloud.speech.v1p1beta1.SpeechAdaptation} message SpeechAdaptation
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        SpeechAdaptation.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.phraseSets = [];
+                                object.customClasses = [];
+                            }
+                            if (message.phraseSets && message.phraseSets.length) {
+                                object.phraseSets = [];
+                                for (var j = 0; j < message.phraseSets.length; ++j)
+                                    object.phraseSets[j] = $root.google.cloud.speech.v1p1beta1.PhraseSet.toObject(message.phraseSets[j], options);
+                            }
+                            if (message.customClasses && message.customClasses.length) {
+                                object.customClasses = [];
+                                for (var j = 0; j < message.customClasses.length; ++j)
+                                    object.customClasses[j] = $root.google.cloud.speech.v1p1beta1.CustomClass.toObject(message.customClasses[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this SpeechAdaptation to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.speech.v1p1beta1.SpeechAdaptation
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        SpeechAdaptation.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return SpeechAdaptation;
+                    })();
+    
                     return v1p1beta1;
                 })();
     
@@ -11002,6 +12230,565 @@
                 values[valuesById[4] = "INPUT_ONLY"] = 4;
                 values[valuesById[5] = "IMMUTABLE"] = 5;
                 return values;
+            })();
+    
+            api.ResourceDescriptor = (function() {
+    
+                /**
+                 * Properties of a ResourceDescriptor.
+                 * @memberof google.api
+                 * @interface IResourceDescriptor
+                 * @property {string|null} [type] ResourceDescriptor type
+                 * @property {Array.<string>|null} [pattern] ResourceDescriptor pattern
+                 * @property {string|null} [nameField] ResourceDescriptor nameField
+                 * @property {google.api.ResourceDescriptor.History|null} [history] ResourceDescriptor history
+                 * @property {string|null} [plural] ResourceDescriptor plural
+                 * @property {string|null} [singular] ResourceDescriptor singular
+                 */
+    
+                /**
+                 * Constructs a new ResourceDescriptor.
+                 * @memberof google.api
+                 * @classdesc Represents a ResourceDescriptor.
+                 * @implements IResourceDescriptor
+                 * @constructor
+                 * @param {google.api.IResourceDescriptor=} [properties] Properties to set
+                 */
+                function ResourceDescriptor(properties) {
+                    this.pattern = [];
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * ResourceDescriptor type.
+                 * @member {string} type
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 */
+                ResourceDescriptor.prototype.type = "";
+    
+                /**
+                 * ResourceDescriptor pattern.
+                 * @member {Array.<string>} pattern
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 */
+                ResourceDescriptor.prototype.pattern = $util.emptyArray;
+    
+                /**
+                 * ResourceDescriptor nameField.
+                 * @member {string} nameField
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 */
+                ResourceDescriptor.prototype.nameField = "";
+    
+                /**
+                 * ResourceDescriptor history.
+                 * @member {google.api.ResourceDescriptor.History} history
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 */
+                ResourceDescriptor.prototype.history = 0;
+    
+                /**
+                 * ResourceDescriptor plural.
+                 * @member {string} plural
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 */
+                ResourceDescriptor.prototype.plural = "";
+    
+                /**
+                 * ResourceDescriptor singular.
+                 * @member {string} singular
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 */
+                ResourceDescriptor.prototype.singular = "";
+    
+                /**
+                 * Creates a new ResourceDescriptor instance using the specified properties.
+                 * @function create
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {google.api.IResourceDescriptor=} [properties] Properties to set
+                 * @returns {google.api.ResourceDescriptor} ResourceDescriptor instance
+                 */
+                ResourceDescriptor.create = function create(properties) {
+                    return new ResourceDescriptor(properties);
+                };
+    
+                /**
+                 * Encodes the specified ResourceDescriptor message. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {google.api.IResourceDescriptor} message ResourceDescriptor message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ResourceDescriptor.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.type != null && message.hasOwnProperty("type"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.type);
+                    if (message.pattern != null && message.pattern.length)
+                        for (var i = 0; i < message.pattern.length; ++i)
+                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.pattern[i]);
+                    if (message.nameField != null && message.hasOwnProperty("nameField"))
+                        writer.uint32(/* id 3, wireType 2 =*/26).string(message.nameField);
+                    if (message.history != null && message.hasOwnProperty("history"))
+                        writer.uint32(/* id 4, wireType 0 =*/32).int32(message.history);
+                    if (message.plural != null && message.hasOwnProperty("plural"))
+                        writer.uint32(/* id 5, wireType 2 =*/42).string(message.plural);
+                    if (message.singular != null && message.hasOwnProperty("singular"))
+                        writer.uint32(/* id 6, wireType 2 =*/50).string(message.singular);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified ResourceDescriptor message, length delimited. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {google.api.IResourceDescriptor} message ResourceDescriptor message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ResourceDescriptor.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a ResourceDescriptor message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.api.ResourceDescriptor} ResourceDescriptor
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ResourceDescriptor.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.ResourceDescriptor();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            message.type = reader.string();
+                            break;
+                        case 2:
+                            if (!(message.pattern && message.pattern.length))
+                                message.pattern = [];
+                            message.pattern.push(reader.string());
+                            break;
+                        case 3:
+                            message.nameField = reader.string();
+                            break;
+                        case 4:
+                            message.history = reader.int32();
+                            break;
+                        case 5:
+                            message.plural = reader.string();
+                            break;
+                        case 6:
+                            message.singular = reader.string();
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a ResourceDescriptor message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.api.ResourceDescriptor} ResourceDescriptor
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ResourceDescriptor.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a ResourceDescriptor message.
+                 * @function verify
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                ResourceDescriptor.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.type != null && message.hasOwnProperty("type"))
+                        if (!$util.isString(message.type))
+                            return "type: string expected";
+                    if (message.pattern != null && message.hasOwnProperty("pattern")) {
+                        if (!Array.isArray(message.pattern))
+                            return "pattern: array expected";
+                        for (var i = 0; i < message.pattern.length; ++i)
+                            if (!$util.isString(message.pattern[i]))
+                                return "pattern: string[] expected";
+                    }
+                    if (message.nameField != null && message.hasOwnProperty("nameField"))
+                        if (!$util.isString(message.nameField))
+                            return "nameField: string expected";
+                    if (message.history != null && message.hasOwnProperty("history"))
+                        switch (message.history) {
+                        default:
+                            return "history: enum value expected";
+                        case 0:
+                        case 1:
+                        case 2:
+                            break;
+                        }
+                    if (message.plural != null && message.hasOwnProperty("plural"))
+                        if (!$util.isString(message.plural))
+                            return "plural: string expected";
+                    if (message.singular != null && message.hasOwnProperty("singular"))
+                        if (!$util.isString(message.singular))
+                            return "singular: string expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a ResourceDescriptor message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.api.ResourceDescriptor} ResourceDescriptor
+                 */
+                ResourceDescriptor.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.api.ResourceDescriptor)
+                        return object;
+                    var message = new $root.google.api.ResourceDescriptor();
+                    if (object.type != null)
+                        message.type = String(object.type);
+                    if (object.pattern) {
+                        if (!Array.isArray(object.pattern))
+                            throw TypeError(".google.api.ResourceDescriptor.pattern: array expected");
+                        message.pattern = [];
+                        for (var i = 0; i < object.pattern.length; ++i)
+                            message.pattern[i] = String(object.pattern[i]);
+                    }
+                    if (object.nameField != null)
+                        message.nameField = String(object.nameField);
+                    switch (object.history) {
+                    case "HISTORY_UNSPECIFIED":
+                    case 0:
+                        message.history = 0;
+                        break;
+                    case "ORIGINALLY_SINGLE_PATTERN":
+                    case 1:
+                        message.history = 1;
+                        break;
+                    case "FUTURE_MULTI_PATTERN":
+                    case 2:
+                        message.history = 2;
+                        break;
+                    }
+                    if (object.plural != null)
+                        message.plural = String(object.plural);
+                    if (object.singular != null)
+                        message.singular = String(object.singular);
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a ResourceDescriptor message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {google.api.ResourceDescriptor} message ResourceDescriptor
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                ResourceDescriptor.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.arrays || options.defaults)
+                        object.pattern = [];
+                    if (options.defaults) {
+                        object.type = "";
+                        object.nameField = "";
+                        object.history = options.enums === String ? "HISTORY_UNSPECIFIED" : 0;
+                        object.plural = "";
+                        object.singular = "";
+                    }
+                    if (message.type != null && message.hasOwnProperty("type"))
+                        object.type = message.type;
+                    if (message.pattern && message.pattern.length) {
+                        object.pattern = [];
+                        for (var j = 0; j < message.pattern.length; ++j)
+                            object.pattern[j] = message.pattern[j];
+                    }
+                    if (message.nameField != null && message.hasOwnProperty("nameField"))
+                        object.nameField = message.nameField;
+                    if (message.history != null && message.hasOwnProperty("history"))
+                        object.history = options.enums === String ? $root.google.api.ResourceDescriptor.History[message.history] : message.history;
+                    if (message.plural != null && message.hasOwnProperty("plural"))
+                        object.plural = message.plural;
+                    if (message.singular != null && message.hasOwnProperty("singular"))
+                        object.singular = message.singular;
+                    return object;
+                };
+    
+                /**
+                 * Converts this ResourceDescriptor to JSON.
+                 * @function toJSON
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                ResourceDescriptor.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * History enum.
+                 * @name google.api.ResourceDescriptor.History
+                 * @enum {string}
+                 * @property {number} HISTORY_UNSPECIFIED=0 HISTORY_UNSPECIFIED value
+                 * @property {number} ORIGINALLY_SINGLE_PATTERN=1 ORIGINALLY_SINGLE_PATTERN value
+                 * @property {number} FUTURE_MULTI_PATTERN=2 FUTURE_MULTI_PATTERN value
+                 */
+                ResourceDescriptor.History = (function() {
+                    var valuesById = {}, values = Object.create(valuesById);
+                    values[valuesById[0] = "HISTORY_UNSPECIFIED"] = 0;
+                    values[valuesById[1] = "ORIGINALLY_SINGLE_PATTERN"] = 1;
+                    values[valuesById[2] = "FUTURE_MULTI_PATTERN"] = 2;
+                    return values;
+                })();
+    
+                return ResourceDescriptor;
+            })();
+    
+            api.ResourceReference = (function() {
+    
+                /**
+                 * Properties of a ResourceReference.
+                 * @memberof google.api
+                 * @interface IResourceReference
+                 * @property {string|null} [type] ResourceReference type
+                 * @property {string|null} [childType] ResourceReference childType
+                 */
+    
+                /**
+                 * Constructs a new ResourceReference.
+                 * @memberof google.api
+                 * @classdesc Represents a ResourceReference.
+                 * @implements IResourceReference
+                 * @constructor
+                 * @param {google.api.IResourceReference=} [properties] Properties to set
+                 */
+                function ResourceReference(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * ResourceReference type.
+                 * @member {string} type
+                 * @memberof google.api.ResourceReference
+                 * @instance
+                 */
+                ResourceReference.prototype.type = "";
+    
+                /**
+                 * ResourceReference childType.
+                 * @member {string} childType
+                 * @memberof google.api.ResourceReference
+                 * @instance
+                 */
+                ResourceReference.prototype.childType = "";
+    
+                /**
+                 * Creates a new ResourceReference instance using the specified properties.
+                 * @function create
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {google.api.IResourceReference=} [properties] Properties to set
+                 * @returns {google.api.ResourceReference} ResourceReference instance
+                 */
+                ResourceReference.create = function create(properties) {
+                    return new ResourceReference(properties);
+                };
+    
+                /**
+                 * Encodes the specified ResourceReference message. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {google.api.IResourceReference} message ResourceReference message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ResourceReference.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.type != null && message.hasOwnProperty("type"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.type);
+                    if (message.childType != null && message.hasOwnProperty("childType"))
+                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.childType);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified ResourceReference message, length delimited. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {google.api.IResourceReference} message ResourceReference message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ResourceReference.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a ResourceReference message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.api.ResourceReference} ResourceReference
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ResourceReference.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.ResourceReference();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            message.type = reader.string();
+                            break;
+                        case 2:
+                            message.childType = reader.string();
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a ResourceReference message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.api.ResourceReference} ResourceReference
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ResourceReference.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a ResourceReference message.
+                 * @function verify
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                ResourceReference.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.type != null && message.hasOwnProperty("type"))
+                        if (!$util.isString(message.type))
+                            return "type: string expected";
+                    if (message.childType != null && message.hasOwnProperty("childType"))
+                        if (!$util.isString(message.childType))
+                            return "childType: string expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a ResourceReference message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.api.ResourceReference} ResourceReference
+                 */
+                ResourceReference.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.api.ResourceReference)
+                        return object;
+                    var message = new $root.google.api.ResourceReference();
+                    if (object.type != null)
+                        message.type = String(object.type);
+                    if (object.childType != null)
+                        message.childType = String(object.childType);
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a ResourceReference message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {google.api.ResourceReference} message ResourceReference
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                ResourceReference.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults) {
+                        object.type = "";
+                        object.childType = "";
+                    }
+                    if (message.type != null && message.hasOwnProperty("type"))
+                        object.type = message.type;
+                    if (message.childType != null && message.hasOwnProperty("childType"))
+                        object.childType = message.childType;
+                    return object;
+                };
+    
+                /**
+                 * Converts this ResourceReference to JSON.
+                 * @function toJSON
+                 * @memberof google.api.ResourceReference
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                ResourceReference.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                return ResourceReference;
             })();
     
             return api;
@@ -15175,6 +16962,7 @@
                  * @property {string|null} [phpMetadataNamespace] FileOptions phpMetadataNamespace
                  * @property {string|null} [rubyPackage] FileOptions rubyPackage
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] FileOptions uninterpretedOption
+                 * @property {Array.<google.api.IResourceDescriptor>|null} [".google.api.resourceDefinition"] FileOptions .google.api.resourceDefinition
                  */
     
                 /**
@@ -15187,6 +16975,7 @@
                  */
                 function FileOptions(properties) {
                     this.uninterpretedOption = [];
+                    this[".google.api.resourceDefinition"] = [];
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
@@ -15362,6 +17151,14 @@
                 FileOptions.prototype.uninterpretedOption = $util.emptyArray;
     
                 /**
+                 * FileOptions .google.api.resourceDefinition.
+                 * @member {Array.<google.api.IResourceDescriptor>} .google.api.resourceDefinition
+                 * @memberof google.protobuf.FileOptions
+                 * @instance
+                 */
+                FileOptions.prototype[".google.api.resourceDefinition"] = $util.emptyArray;
+    
+                /**
                  * Creates a new FileOptions instance using the specified properties.
                  * @function create
                  * @memberof google.protobuf.FileOptions
@@ -15428,6 +17225,9 @@
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
+                    if (message[".google.api.resourceDefinition"] != null && message[".google.api.resourceDefinition"].length)
+                        for (var i = 0; i < message[".google.api.resourceDefinition"].length; ++i)
+                            $root.google.api.ResourceDescriptor.encode(message[".google.api.resourceDefinition"][i], writer.uint32(/* id 1053, wireType 2 =*/8426).fork()).ldelim();
                     return writer;
                 };
     
@@ -15526,6 +17326,11 @@
                             if (!(message.uninterpretedOption && message.uninterpretedOption.length))
                                 message.uninterpretedOption = [];
                             message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
+                            break;
+                        case 1053:
+                            if (!(message[".google.api.resourceDefinition"] && message[".google.api.resourceDefinition"].length))
+                                message[".google.api.resourceDefinition"] = [];
+                            message[".google.api.resourceDefinition"].push($root.google.api.ResourceDescriptor.decode(reader, reader.uint32()));
                             break;
                         default:
                             reader.skipType(tag & 7);
@@ -15637,6 +17442,15 @@
                                 return "uninterpretedOption." + error;
                         }
                     }
+                    if (message[".google.api.resourceDefinition"] != null && message.hasOwnProperty(".google.api.resourceDefinition")) {
+                        if (!Array.isArray(message[".google.api.resourceDefinition"]))
+                            return ".google.api.resourceDefinition: array expected";
+                        for (var i = 0; i < message[".google.api.resourceDefinition"].length; ++i) {
+                            var error = $root.google.api.ResourceDescriptor.verify(message[".google.api.resourceDefinition"][i]);
+                            if (error)
+                                return ".google.api.resourceDefinition." + error;
+                        }
+                    }
                     return null;
                 };
     
@@ -15714,6 +17528,16 @@
                             message.uninterpretedOption[i] = $root.google.protobuf.UninterpretedOption.fromObject(object.uninterpretedOption[i]);
                         }
                     }
+                    if (object[".google.api.resourceDefinition"]) {
+                        if (!Array.isArray(object[".google.api.resourceDefinition"]))
+                            throw TypeError(".google.protobuf.FileOptions..google.api.resourceDefinition: array expected");
+                        message[".google.api.resourceDefinition"] = [];
+                        for (var i = 0; i < object[".google.api.resourceDefinition"].length; ++i) {
+                            if (typeof object[".google.api.resourceDefinition"][i] !== "object")
+                                throw TypeError(".google.protobuf.FileOptions..google.api.resourceDefinition: object expected");
+                            message[".google.api.resourceDefinition"][i] = $root.google.api.ResourceDescriptor.fromObject(object[".google.api.resourceDefinition"][i]);
+                        }
+                    }
                     return message;
                 };
     
@@ -15730,8 +17554,10 @@
                     if (!options)
                         options = {};
                     var object = {};
-                    if (options.arrays || options.defaults)
+                    if (options.arrays || options.defaults) {
                         object.uninterpretedOption = [];
+                        object[".google.api.resourceDefinition"] = [];
+                    }
                     if (options.defaults) {
                         object.javaPackage = "";
                         object.javaOuterClassname = "";
@@ -15799,6 +17625,11 @@
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
                             object.uninterpretedOption[j] = $root.google.protobuf.UninterpretedOption.toObject(message.uninterpretedOption[j], options);
                     }
+                    if (message[".google.api.resourceDefinition"] && message[".google.api.resourceDefinition"].length) {
+                        object[".google.api.resourceDefinition"] = [];
+                        for (var j = 0; j < message[".google.api.resourceDefinition"].length; ++j)
+                            object[".google.api.resourceDefinition"][j] = $root.google.api.ResourceDescriptor.toObject(message[".google.api.resourceDefinition"][j], options);
+                    }
                     return object;
                 };
     
@@ -15843,6 +17674,7 @@
                  * @property {boolean|null} [deprecated] MessageOptions deprecated
                  * @property {boolean|null} [mapEntry] MessageOptions mapEntry
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] MessageOptions uninterpretedOption
+                 * @property {google.api.IResourceDescriptor|null} [".google.api.resource"] MessageOptions .google.api.resource
                  */
     
                 /**
@@ -15902,6 +17734,14 @@
                 MessageOptions.prototype.uninterpretedOption = $util.emptyArray;
     
                 /**
+                 * MessageOptions .google.api.resource.
+                 * @member {google.api.IResourceDescriptor|null|undefined} .google.api.resource
+                 * @memberof google.protobuf.MessageOptions
+                 * @instance
+                 */
+                MessageOptions.prototype[".google.api.resource"] = null;
+    
+                /**
                  * Creates a new MessageOptions instance using the specified properties.
                  * @function create
                  * @memberof google.protobuf.MessageOptions
@@ -15936,6 +17776,8 @@
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
+                    if (message[".google.api.resource"] != null && message.hasOwnProperty(".google.api.resource"))
+                        $root.google.api.ResourceDescriptor.encode(message[".google.api.resource"], writer.uint32(/* id 1053, wireType 2 =*/8426).fork()).ldelim();
                     return writer;
                 };
     
@@ -15986,6 +17828,9 @@
                             if (!(message.uninterpretedOption && message.uninterpretedOption.length))
                                 message.uninterpretedOption = [];
                             message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
+                            break;
+                        case 1053:
+                            message[".google.api.resource"] = $root.google.api.ResourceDescriptor.decode(reader, reader.uint32());
                             break;
                         default:
                             reader.skipType(tag & 7);
@@ -16043,6 +17888,11 @@
                                 return "uninterpretedOption." + error;
                         }
                     }
+                    if (message[".google.api.resource"] != null && message.hasOwnProperty(".google.api.resource")) {
+                        var error = $root.google.api.ResourceDescriptor.verify(message[".google.api.resource"]);
+                        if (error)
+                            return ".google.api.resource." + error;
+                    }
                     return null;
                 };
     
@@ -16076,6 +17926,11 @@
                             message.uninterpretedOption[i] = $root.google.protobuf.UninterpretedOption.fromObject(object.uninterpretedOption[i]);
                         }
                     }
+                    if (object[".google.api.resource"] != null) {
+                        if (typeof object[".google.api.resource"] !== "object")
+                            throw TypeError(".google.protobuf.MessageOptions..google.api.resource: object expected");
+                        message[".google.api.resource"] = $root.google.api.ResourceDescriptor.fromObject(object[".google.api.resource"]);
+                    }
                     return message;
                 };
     
@@ -16099,6 +17954,7 @@
                         object.noStandardDescriptorAccessor = false;
                         object.deprecated = false;
                         object.mapEntry = false;
+                        object[".google.api.resource"] = null;
                     }
                     if (message.messageSetWireFormat != null && message.hasOwnProperty("messageSetWireFormat"))
                         object.messageSetWireFormat = message.messageSetWireFormat;
@@ -16113,6 +17969,8 @@
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
                             object.uninterpretedOption[j] = $root.google.protobuf.UninterpretedOption.toObject(message.uninterpretedOption[j], options);
                     }
+                    if (message[".google.api.resource"] != null && message.hasOwnProperty(".google.api.resource"))
+                        object[".google.api.resource"] = $root.google.api.ResourceDescriptor.toObject(message[".google.api.resource"], options);
                     return object;
                 };
     
@@ -16144,6 +18002,7 @@
                  * @property {boolean|null} [weak] FieldOptions weak
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] FieldOptions uninterpretedOption
                  * @property {Array.<google.api.FieldBehavior>|null} [".google.api.fieldBehavior"] FieldOptions .google.api.fieldBehavior
+                 * @property {google.api.IResourceReference|null} [".google.api.resourceReference"] FieldOptions .google.api.resourceReference
                  */
     
                 /**
@@ -16228,6 +18087,14 @@
                 FieldOptions.prototype[".google.api.fieldBehavior"] = $util.emptyArray;
     
                 /**
+                 * FieldOptions .google.api.resourceReference.
+                 * @member {google.api.IResourceReference|null|undefined} .google.api.resourceReference
+                 * @memberof google.protobuf.FieldOptions
+                 * @instance
+                 */
+                FieldOptions.prototype[".google.api.resourceReference"] = null;
+    
+                /**
                  * Creates a new FieldOptions instance using the specified properties.
                  * @function create
                  * @memberof google.protobuf.FieldOptions
@@ -16272,6 +18139,8 @@
                             writer.int32(message[".google.api.fieldBehavior"][i]);
                         writer.ldelim();
                     }
+                    if (message[".google.api.resourceReference"] != null && message.hasOwnProperty(".google.api.resourceReference"))
+                        $root.google.api.ResourceReference.encode(message[".google.api.resourceReference"], writer.uint32(/* id 1055, wireType 2 =*/8442).fork()).ldelim();
                     return writer;
                 };
     
@@ -16338,6 +18207,9 @@
                                     message[".google.api.fieldBehavior"].push(reader.int32());
                             } else
                                 message[".google.api.fieldBehavior"].push(reader.int32());
+                            break;
+                        case 1055:
+                            message[".google.api.resourceReference"] = $root.google.api.ResourceReference.decode(reader, reader.uint32());
                             break;
                         default:
                             reader.skipType(tag & 7);
@@ -16428,6 +18300,11 @@
                             case 5:
                                 break;
                             }
+                    }
+                    if (message[".google.api.resourceReference"] != null && message.hasOwnProperty(".google.api.resourceReference")) {
+                        var error = $root.google.api.ResourceReference.verify(message[".google.api.resourceReference"]);
+                        if (error)
+                            return ".google.api.resourceReference." + error;
                     }
                     return null;
                 };
@@ -16523,6 +18400,11 @@
                                 break;
                             }
                     }
+                    if (object[".google.api.resourceReference"] != null) {
+                        if (typeof object[".google.api.resourceReference"] !== "object")
+                            throw TypeError(".google.protobuf.FieldOptions..google.api.resourceReference: object expected");
+                        message[".google.api.resourceReference"] = $root.google.api.ResourceReference.fromObject(object[".google.api.resourceReference"]);
+                    }
                     return message;
                 };
     
@@ -16550,6 +18432,7 @@
                         object.lazy = false;
                         object.jstype = options.enums === String ? "JS_NORMAL" : 0;
                         object.weak = false;
+                        object[".google.api.resourceReference"] = null;
                     }
                     if (message.ctype != null && message.hasOwnProperty("ctype"))
                         object.ctype = options.enums === String ? $root.google.protobuf.FieldOptions.CType[message.ctype] : message.ctype;
@@ -16573,6 +18456,8 @@
                         for (var j = 0; j < message[".google.api.fieldBehavior"].length; ++j)
                             object[".google.api.fieldBehavior"][j] = options.enums === String ? $root.google.api.FieldBehavior[message[".google.api.fieldBehavior"][j]] : message[".google.api.fieldBehavior"][j];
                     }
+                    if (message[".google.api.resourceReference"] != null && message.hasOwnProperty(".google.api.resourceReference"))
+                        object[".google.api.resourceReference"] = $root.google.api.ResourceReference.toObject(message[".google.api.resourceReference"], options);
                     return object;
                 };
     

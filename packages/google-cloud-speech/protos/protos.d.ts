@@ -2490,6 +2490,9 @@ export namespace google {
                     /** RecognitionConfig profanityFilter */
                     profanityFilter?: (boolean|null);
 
+                    /** RecognitionConfig adaptation */
+                    adaptation?: (google.cloud.speech.v1p1beta1.ISpeechAdaptation|null);
+
                     /** RecognitionConfig speechContexts */
                     speechContexts?: (google.cloud.speech.v1p1beta1.ISpeechContext[]|null);
 
@@ -2553,6 +2556,9 @@ export namespace google {
 
                     /** RecognitionConfig profanityFilter. */
                     public profanityFilter: boolean;
+
+                    /** RecognitionConfig adaptation. */
+                    public adaptation?: (google.cloud.speech.v1p1beta1.ISpeechAdaptation|null);
 
                     /** RecognitionConfig speechContexts. */
                     public speechContexts: google.cloud.speech.v1p1beta1.ISpeechContext[];
@@ -2682,6 +2688,9 @@ export namespace google {
 
                     /** SpeakerDiarizationConfig maxSpeakerCount */
                     maxSpeakerCount?: (number|null);
+
+                    /** SpeakerDiarizationConfig speakerTag */
+                    speakerTag?: (number|null);
                 }
 
                 /** Represents a SpeakerDiarizationConfig. */
@@ -2701,6 +2710,9 @@ export namespace google {
 
                     /** SpeakerDiarizationConfig maxSpeakerCount. */
                     public maxSpeakerCount: number;
+
+                    /** SpeakerDiarizationConfig speakerTag. */
+                    public speakerTag: number;
 
                     /**
                      * Creates a new SpeakerDiarizationConfig instance using the specified properties.
@@ -3339,6 +3351,9 @@ export namespace google {
 
                     /** LongRunningRecognizeMetadata lastUpdateTime */
                     lastUpdateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** LongRunningRecognizeMetadata uri */
+                    uri?: (string|null);
                 }
 
                 /** Represents a LongRunningRecognizeMetadata. */
@@ -3358,6 +3373,9 @@ export namespace google {
 
                     /** LongRunningRecognizeMetadata lastUpdateTime. */
                     public lastUpdateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** LongRunningRecognizeMetadata uri. */
+                    public uri: string;
 
                     /**
                      * Creates a new LongRunningRecognizeMetadata instance using the specified properties.
@@ -3978,6 +3996,498 @@ export namespace google {
                      */
                     public toJSON(): { [k: string]: any };
                 }
+
+                /** Properties of a CustomClass. */
+                interface ICustomClass {
+
+                    /** CustomClass name */
+                    name?: (string|null);
+
+                    /** CustomClass customClassId */
+                    customClassId?: (string|null);
+
+                    /** CustomClass items */
+                    items?: (google.cloud.speech.v1p1beta1.CustomClass.IClassItem[]|null);
+                }
+
+                /** Represents a CustomClass. */
+                class CustomClass implements ICustomClass {
+
+                    /**
+                     * Constructs a new CustomClass.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.speech.v1p1beta1.ICustomClass);
+
+                    /** CustomClass name. */
+                    public name: string;
+
+                    /** CustomClass customClassId. */
+                    public customClassId: string;
+
+                    /** CustomClass items. */
+                    public items: google.cloud.speech.v1p1beta1.CustomClass.IClassItem[];
+
+                    /**
+                     * Creates a new CustomClass instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CustomClass instance
+                     */
+                    public static create(properties?: google.cloud.speech.v1p1beta1.ICustomClass): google.cloud.speech.v1p1beta1.CustomClass;
+
+                    /**
+                     * Encodes the specified CustomClass message. Does not implicitly {@link google.cloud.speech.v1p1beta1.CustomClass.verify|verify} messages.
+                     * @param message CustomClass message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.speech.v1p1beta1.ICustomClass, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CustomClass message, length delimited. Does not implicitly {@link google.cloud.speech.v1p1beta1.CustomClass.verify|verify} messages.
+                     * @param message CustomClass message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.speech.v1p1beta1.ICustomClass, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CustomClass message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CustomClass
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.speech.v1p1beta1.CustomClass;
+
+                    /**
+                     * Decodes a CustomClass message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CustomClass
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.speech.v1p1beta1.CustomClass;
+
+                    /**
+                     * Verifies a CustomClass message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CustomClass message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CustomClass
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.speech.v1p1beta1.CustomClass;
+
+                    /**
+                     * Creates a plain object from a CustomClass message. Also converts values to other types if specified.
+                     * @param message CustomClass
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.speech.v1p1beta1.CustomClass, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CustomClass to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                namespace CustomClass {
+
+                    /** Properties of a ClassItem. */
+                    interface IClassItem {
+
+                        /** ClassItem value */
+                        value?: (string|null);
+                    }
+
+                    /** Represents a ClassItem. */
+                    class ClassItem implements IClassItem {
+
+                        /**
+                         * Constructs a new ClassItem.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.speech.v1p1beta1.CustomClass.IClassItem);
+
+                        /** ClassItem value. */
+                        public value: string;
+
+                        /**
+                         * Creates a new ClassItem instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ClassItem instance
+                         */
+                        public static create(properties?: google.cloud.speech.v1p1beta1.CustomClass.IClassItem): google.cloud.speech.v1p1beta1.CustomClass.ClassItem;
+
+                        /**
+                         * Encodes the specified ClassItem message. Does not implicitly {@link google.cloud.speech.v1p1beta1.CustomClass.ClassItem.verify|verify} messages.
+                         * @param message ClassItem message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.speech.v1p1beta1.CustomClass.IClassItem, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ClassItem message, length delimited. Does not implicitly {@link google.cloud.speech.v1p1beta1.CustomClass.ClassItem.verify|verify} messages.
+                         * @param message ClassItem message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.speech.v1p1beta1.CustomClass.IClassItem, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ClassItem message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ClassItem
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.speech.v1p1beta1.CustomClass.ClassItem;
+
+                        /**
+                         * Decodes a ClassItem message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ClassItem
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.speech.v1p1beta1.CustomClass.ClassItem;
+
+                        /**
+                         * Verifies a ClassItem message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ClassItem message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ClassItem
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.speech.v1p1beta1.CustomClass.ClassItem;
+
+                        /**
+                         * Creates a plain object from a ClassItem message. Also converts values to other types if specified.
+                         * @param message ClassItem
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.speech.v1p1beta1.CustomClass.ClassItem, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ClassItem to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+                }
+
+                /** Properties of a PhraseSet. */
+                interface IPhraseSet {
+
+                    /** PhraseSet name */
+                    name?: (string|null);
+
+                    /** PhraseSet phrases */
+                    phrases?: (google.cloud.speech.v1p1beta1.PhraseSet.IPhrase[]|null);
+
+                    /** PhraseSet boost */
+                    boost?: (number|null);
+                }
+
+                /** Represents a PhraseSet. */
+                class PhraseSet implements IPhraseSet {
+
+                    /**
+                     * Constructs a new PhraseSet.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.speech.v1p1beta1.IPhraseSet);
+
+                    /** PhraseSet name. */
+                    public name: string;
+
+                    /** PhraseSet phrases. */
+                    public phrases: google.cloud.speech.v1p1beta1.PhraseSet.IPhrase[];
+
+                    /** PhraseSet boost. */
+                    public boost: number;
+
+                    /**
+                     * Creates a new PhraseSet instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns PhraseSet instance
+                     */
+                    public static create(properties?: google.cloud.speech.v1p1beta1.IPhraseSet): google.cloud.speech.v1p1beta1.PhraseSet;
+
+                    /**
+                     * Encodes the specified PhraseSet message. Does not implicitly {@link google.cloud.speech.v1p1beta1.PhraseSet.verify|verify} messages.
+                     * @param message PhraseSet message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.speech.v1p1beta1.IPhraseSet, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified PhraseSet message, length delimited. Does not implicitly {@link google.cloud.speech.v1p1beta1.PhraseSet.verify|verify} messages.
+                     * @param message PhraseSet message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.speech.v1p1beta1.IPhraseSet, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a PhraseSet message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns PhraseSet
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.speech.v1p1beta1.PhraseSet;
+
+                    /**
+                     * Decodes a PhraseSet message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns PhraseSet
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.speech.v1p1beta1.PhraseSet;
+
+                    /**
+                     * Verifies a PhraseSet message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a PhraseSet message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns PhraseSet
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.speech.v1p1beta1.PhraseSet;
+
+                    /**
+                     * Creates a plain object from a PhraseSet message. Also converts values to other types if specified.
+                     * @param message PhraseSet
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.speech.v1p1beta1.PhraseSet, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this PhraseSet to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                namespace PhraseSet {
+
+                    /** Properties of a Phrase. */
+                    interface IPhrase {
+
+                        /** Phrase value */
+                        value?: (string|null);
+
+                        /** Phrase boost */
+                        boost?: (number|null);
+                    }
+
+                    /** Represents a Phrase. */
+                    class Phrase implements IPhrase {
+
+                        /**
+                         * Constructs a new Phrase.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.speech.v1p1beta1.PhraseSet.IPhrase);
+
+                        /** Phrase value. */
+                        public value: string;
+
+                        /** Phrase boost. */
+                        public boost: number;
+
+                        /**
+                         * Creates a new Phrase instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns Phrase instance
+                         */
+                        public static create(properties?: google.cloud.speech.v1p1beta1.PhraseSet.IPhrase): google.cloud.speech.v1p1beta1.PhraseSet.Phrase;
+
+                        /**
+                         * Encodes the specified Phrase message. Does not implicitly {@link google.cloud.speech.v1p1beta1.PhraseSet.Phrase.verify|verify} messages.
+                         * @param message Phrase message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.speech.v1p1beta1.PhraseSet.IPhrase, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified Phrase message, length delimited. Does not implicitly {@link google.cloud.speech.v1p1beta1.PhraseSet.Phrase.verify|verify} messages.
+                         * @param message Phrase message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.speech.v1p1beta1.PhraseSet.IPhrase, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a Phrase message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns Phrase
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.speech.v1p1beta1.PhraseSet.Phrase;
+
+                        /**
+                         * Decodes a Phrase message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns Phrase
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.speech.v1p1beta1.PhraseSet.Phrase;
+
+                        /**
+                         * Verifies a Phrase message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a Phrase message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns Phrase
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.speech.v1p1beta1.PhraseSet.Phrase;
+
+                        /**
+                         * Creates a plain object from a Phrase message. Also converts values to other types if specified.
+                         * @param message Phrase
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.speech.v1p1beta1.PhraseSet.Phrase, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this Phrase to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+                }
+
+                /** Properties of a SpeechAdaptation. */
+                interface ISpeechAdaptation {
+
+                    /** SpeechAdaptation phraseSets */
+                    phraseSets?: (google.cloud.speech.v1p1beta1.IPhraseSet[]|null);
+
+                    /** SpeechAdaptation customClasses */
+                    customClasses?: (google.cloud.speech.v1p1beta1.ICustomClass[]|null);
+                }
+
+                /** Represents a SpeechAdaptation. */
+                class SpeechAdaptation implements ISpeechAdaptation {
+
+                    /**
+                     * Constructs a new SpeechAdaptation.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.speech.v1p1beta1.ISpeechAdaptation);
+
+                    /** SpeechAdaptation phraseSets. */
+                    public phraseSets: google.cloud.speech.v1p1beta1.IPhraseSet[];
+
+                    /** SpeechAdaptation customClasses. */
+                    public customClasses: google.cloud.speech.v1p1beta1.ICustomClass[];
+
+                    /**
+                     * Creates a new SpeechAdaptation instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SpeechAdaptation instance
+                     */
+                    public static create(properties?: google.cloud.speech.v1p1beta1.ISpeechAdaptation): google.cloud.speech.v1p1beta1.SpeechAdaptation;
+
+                    /**
+                     * Encodes the specified SpeechAdaptation message. Does not implicitly {@link google.cloud.speech.v1p1beta1.SpeechAdaptation.verify|verify} messages.
+                     * @param message SpeechAdaptation message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.speech.v1p1beta1.ISpeechAdaptation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SpeechAdaptation message, length delimited. Does not implicitly {@link google.cloud.speech.v1p1beta1.SpeechAdaptation.verify|verify} messages.
+                     * @param message SpeechAdaptation message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.speech.v1p1beta1.ISpeechAdaptation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SpeechAdaptation message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SpeechAdaptation
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.speech.v1p1beta1.SpeechAdaptation;
+
+                    /**
+                     * Decodes a SpeechAdaptation message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SpeechAdaptation
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.speech.v1p1beta1.SpeechAdaptation;
+
+                    /**
+                     * Verifies a SpeechAdaptation message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SpeechAdaptation message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SpeechAdaptation
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.speech.v1p1beta1.SpeechAdaptation;
+
+                    /**
+                     * Creates a plain object from a SpeechAdaptation message. Also converts values to other types if specified.
+                     * @param message SpeechAdaptation
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.speech.v1p1beta1.SpeechAdaptation, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SpeechAdaptation to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
             }
         }
     }
@@ -4332,6 +4842,232 @@ export namespace google {
             OUTPUT_ONLY = 3,
             INPUT_ONLY = 4,
             IMMUTABLE = 5
+        }
+
+        /** Properties of a ResourceDescriptor. */
+        interface IResourceDescriptor {
+
+            /** ResourceDescriptor type */
+            type?: (string|null);
+
+            /** ResourceDescriptor pattern */
+            pattern?: (string[]|null);
+
+            /** ResourceDescriptor nameField */
+            nameField?: (string|null);
+
+            /** ResourceDescriptor history */
+            history?: (google.api.ResourceDescriptor.History|keyof typeof google.api.ResourceDescriptor.History|null);
+
+            /** ResourceDescriptor plural */
+            plural?: (string|null);
+
+            /** ResourceDescriptor singular */
+            singular?: (string|null);
+        }
+
+        /** Represents a ResourceDescriptor. */
+        class ResourceDescriptor implements IResourceDescriptor {
+
+            /**
+             * Constructs a new ResourceDescriptor.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.IResourceDescriptor);
+
+            /** ResourceDescriptor type. */
+            public type: string;
+
+            /** ResourceDescriptor pattern. */
+            public pattern: string[];
+
+            /** ResourceDescriptor nameField. */
+            public nameField: string;
+
+            /** ResourceDescriptor history. */
+            public history: (google.api.ResourceDescriptor.History|keyof typeof google.api.ResourceDescriptor.History);
+
+            /** ResourceDescriptor plural. */
+            public plural: string;
+
+            /** ResourceDescriptor singular. */
+            public singular: string;
+
+            /**
+             * Creates a new ResourceDescriptor instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns ResourceDescriptor instance
+             */
+            public static create(properties?: google.api.IResourceDescriptor): google.api.ResourceDescriptor;
+
+            /**
+             * Encodes the specified ResourceDescriptor message. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
+             * @param message ResourceDescriptor message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.IResourceDescriptor, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified ResourceDescriptor message, length delimited. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
+             * @param message ResourceDescriptor message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.IResourceDescriptor, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a ResourceDescriptor message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns ResourceDescriptor
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.ResourceDescriptor;
+
+            /**
+             * Decodes a ResourceDescriptor message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns ResourceDescriptor
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.ResourceDescriptor;
+
+            /**
+             * Verifies a ResourceDescriptor message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a ResourceDescriptor message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns ResourceDescriptor
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.ResourceDescriptor;
+
+            /**
+             * Creates a plain object from a ResourceDescriptor message. Also converts values to other types if specified.
+             * @param message ResourceDescriptor
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.ResourceDescriptor, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this ResourceDescriptor to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+        }
+
+        namespace ResourceDescriptor {
+
+            /** History enum. */
+            enum History {
+                HISTORY_UNSPECIFIED = 0,
+                ORIGINALLY_SINGLE_PATTERN = 1,
+                FUTURE_MULTI_PATTERN = 2
+            }
+        }
+
+        /** Properties of a ResourceReference. */
+        interface IResourceReference {
+
+            /** ResourceReference type */
+            type?: (string|null);
+
+            /** ResourceReference childType */
+            childType?: (string|null);
+        }
+
+        /** Represents a ResourceReference. */
+        class ResourceReference implements IResourceReference {
+
+            /**
+             * Constructs a new ResourceReference.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.IResourceReference);
+
+            /** ResourceReference type. */
+            public type: string;
+
+            /** ResourceReference childType. */
+            public childType: string;
+
+            /**
+             * Creates a new ResourceReference instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns ResourceReference instance
+             */
+            public static create(properties?: google.api.IResourceReference): google.api.ResourceReference;
+
+            /**
+             * Encodes the specified ResourceReference message. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
+             * @param message ResourceReference message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.IResourceReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified ResourceReference message, length delimited. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
+             * @param message ResourceReference message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.IResourceReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a ResourceReference message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns ResourceReference
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.ResourceReference;
+
+            /**
+             * Decodes a ResourceReference message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns ResourceReference
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.ResourceReference;
+
+            /**
+             * Verifies a ResourceReference message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a ResourceReference message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns ResourceReference
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.ResourceReference;
+
+            /**
+             * Creates a plain object from a ResourceReference message. Also converts values to other types if specified.
+             * @param message ResourceReference
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.ResourceReference, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this ResourceReference to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
         }
     }
 
@@ -5893,6 +6629,9 @@ export namespace google {
 
             /** FileOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
+
+            /** FileOptions .google.api.resourceDefinition */
+            ".google.api.resourceDefinition"?: (google.api.IResourceDescriptor[]|null);
         }
 
         /** Represents a FileOptions. */
@@ -6065,6 +6804,9 @@ export namespace google {
 
             /** MessageOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
+
+            /** MessageOptions .google.api.resource */
+            ".google.api.resource"?: (google.api.IResourceDescriptor|null);
         }
 
         /** Represents a MessageOptions. */
@@ -6188,6 +6930,9 @@ export namespace google {
 
             /** FieldOptions .google.api.fieldBehavior */
             ".google.api.fieldBehavior"?: (google.api.FieldBehavior[]|null);
+
+            /** FieldOptions .google.api.resourceReference */
+            ".google.api.resourceReference"?: (google.api.IResourceReference|null);
         }
 
         /** Represents a FieldOptions. */
