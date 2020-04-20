@@ -17,11 +17,19 @@
 // ** All changes to this file may be overwritten. **
 
 import * as gax from 'google-gax';
-import {Callback, CallOptions, Descriptors, ClientOptions, LROperation, PaginationCallback, GaxCall} from 'google-gax';
+import {
+  Callback,
+  CallOptions,
+  Descriptors,
+  ClientOptions,
+  LROperation,
+  PaginationCallback,
+  GaxCall,
+} from 'google-gax';
 import * as path from 'path';
 
-import { Transform } from 'stream';
-import { RequestType } from 'google-gax/build/src/apitypes';
+import {Transform} from 'stream';
+import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
 import * as gapicConfig from './documents_client_config.json';
 
@@ -40,7 +48,12 @@ export class DocumentsClient {
   private _protos: {};
   private _defaults: {[method: string]: gax.CallSettings};
   auth: gax.GoogleAuth;
-  descriptors: Descriptors = {page: {}, stream: {}, longrunning: {}, batching: {}};
+  descriptors: Descriptors = {
+    page: {},
+    stream: {},
+    longrunning: {},
+    batching: {},
+  };
   innerApiCalls: {[name: string]: Function};
   pathTemplates: {[name: string]: gax.PathTemplate};
   operationsClient: gax.OperationsClient;
@@ -75,10 +88,12 @@ export class DocumentsClient {
   constructor(opts?: ClientOptions) {
     // Ensure that options include the service address and port.
     const staticMembers = this.constructor as typeof DocumentsClient;
-    const servicePath = opts && opts.servicePath ?
-        opts.servicePath :
-        ((opts && opts.apiEndpoint) ? opts.apiEndpoint :
-                                      staticMembers.servicePath);
+    const servicePath =
+      opts && opts.servicePath
+        ? opts.servicePath
+        : opts && opts.apiEndpoint
+        ? opts.apiEndpoint
+        : staticMembers.servicePath;
     const port = opts && opts.port ? opts.port : staticMembers.port;
 
     if (!opts) {
@@ -88,8 +103,8 @@ export class DocumentsClient {
     opts.port = opts.port || port;
     opts.clientConfig = opts.clientConfig || {};
 
-    const isBrowser = (typeof window !== 'undefined');
-    if (isBrowser){
+    const isBrowser = typeof window !== 'undefined';
+    if (isBrowser) {
       opts.fallback = true;
     }
     // If we are in browser, we are already using fallback because of the
@@ -106,13 +121,10 @@ export class DocumentsClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
+    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
 
     // Determine the client header string.
-    const clientHeader = [
-      `gax/${this._gaxModule.version}`,
-      `gapic/${version}`,
-    ];
+    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
     if (typeof process !== 'undefined' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -128,12 +140,18 @@ export class DocumentsClient {
     // For Node.js, pass the path to JSON proto file.
     // For browsers, pass the JSON content.
 
-    const nodejsProtoPath = path.join(__dirname, '..', '..', 'protos', 'protos.json');
+    const nodejsProtoPath = path.join(
+      __dirname,
+      '..',
+      '..',
+      'protos',
+      'protos.json'
+    );
     this._protos = this._gaxGrpc.loadProto(
-      opts.fallback ?
-        // eslint-disable-next-line @typescript-eslint/no-var-requires
-        require("../../protos/protos.json") :
-        nodejsProtoPath
+      opts.fallback
+        ? // eslint-disable-next-line @typescript-eslint/no-var-requires
+          require('../../protos/protos.json')
+        : nodejsProtoPath
     );
 
     // This API contains "path templates"; forward-slash-separated
@@ -158,63 +176,84 @@ export class DocumentsClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listDocuments:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'documents')
+      listDocuments: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'documents'
+      ),
     };
 
     // This API contains "long-running operations", which return a
     // an Operation object that allows for tracking of the operation,
     // rather than holding a request open.
-    const protoFilesRoot = opts.fallback ?
-      this._gaxModule.protobuf.Root.fromJSON(
-        // eslint-disable-next-line @typescript-eslint/no-var-requires
-        require("../../protos/protos.json")) :
-      this._gaxModule.protobuf.loadSync(nodejsProtoPath);
+    const protoFilesRoot = opts.fallback
+      ? this._gaxModule.protobuf.Root.fromJSON(
+          // eslint-disable-next-line @typescript-eslint/no-var-requires
+          require('../../protos/protos.json')
+        )
+      : this._gaxModule.protobuf.loadSync(nodejsProtoPath);
 
-    this.operationsClient = this._gaxModule.lro({
-      auth: this.auth,
-      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined
-    }).operationsClient(opts);
+    this.operationsClient = this._gaxModule
+      .lro({
+        auth: this.auth,
+        grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
+      })
+      .operationsClient(opts);
     const createDocumentResponse = protoFilesRoot.lookup(
-      '.google.cloud.dialogflow.v2beta1.Document') as gax.protobuf.Type;
+      '.google.cloud.dialogflow.v2beta1.Document'
+    ) as gax.protobuf.Type;
     const createDocumentMetadata = protoFilesRoot.lookup(
-      '.google.cloud.dialogflow.v2beta1.KnowledgeOperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.dialogflow.v2beta1.KnowledgeOperationMetadata'
+    ) as gax.protobuf.Type;
     const deleteDocumentResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty') as gax.protobuf.Type;
+      '.google.protobuf.Empty'
+    ) as gax.protobuf.Type;
     const deleteDocumentMetadata = protoFilesRoot.lookup(
-      '.google.cloud.dialogflow.v2beta1.KnowledgeOperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.dialogflow.v2beta1.KnowledgeOperationMetadata'
+    ) as gax.protobuf.Type;
     const updateDocumentResponse = protoFilesRoot.lookup(
-      '.google.cloud.dialogflow.v2beta1.Document') as gax.protobuf.Type;
+      '.google.cloud.dialogflow.v2beta1.Document'
+    ) as gax.protobuf.Type;
     const updateDocumentMetadata = protoFilesRoot.lookup(
-      '.google.cloud.dialogflow.v2beta1.KnowledgeOperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.dialogflow.v2beta1.KnowledgeOperationMetadata'
+    ) as gax.protobuf.Type;
     const reloadDocumentResponse = protoFilesRoot.lookup(
-      '.google.cloud.dialogflow.v2beta1.Document') as gax.protobuf.Type;
+      '.google.cloud.dialogflow.v2beta1.Document'
+    ) as gax.protobuf.Type;
     const reloadDocumentMetadata = protoFilesRoot.lookup(
-      '.google.cloud.dialogflow.v2beta1.KnowledgeOperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.dialogflow.v2beta1.KnowledgeOperationMetadata'
+    ) as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       createDocument: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         createDocumentResponse.decode.bind(createDocumentResponse),
-        createDocumentMetadata.decode.bind(createDocumentMetadata)),
+        createDocumentMetadata.decode.bind(createDocumentMetadata)
+      ),
       deleteDocument: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         deleteDocumentResponse.decode.bind(deleteDocumentResponse),
-        deleteDocumentMetadata.decode.bind(deleteDocumentMetadata)),
+        deleteDocumentMetadata.decode.bind(deleteDocumentMetadata)
+      ),
       updateDocument: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         updateDocumentResponse.decode.bind(updateDocumentResponse),
-        updateDocumentMetadata.decode.bind(updateDocumentMetadata)),
+        updateDocumentMetadata.decode.bind(updateDocumentMetadata)
+      ),
       reloadDocument: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         reloadDocumentResponse.decode.bind(reloadDocumentResponse),
-        reloadDocumentMetadata.decode.bind(reloadDocumentMetadata))
+        reloadDocumentMetadata.decode.bind(reloadDocumentMetadata)
+      ),
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-        'google.cloud.dialogflow.v2beta1.Documents', gapicConfig as gax.ClientConfig,
-        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
+      'google.cloud.dialogflow.v2beta1.Documents',
+      gapicConfig as gax.ClientConfig,
+      opts.clientConfig || {},
+      {'x-goog-api-client': clientHeader.join(' ')}
+    );
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -242,16 +281,25 @@ export class DocumentsClient {
     // Put together the "service stub" for
     // google.cloud.dialogflow.v2beta1.Documents.
     this.documentsStub = this._gaxGrpc.createStub(
-        this._opts.fallback ?
-          (this._protos as protobuf.Root).lookupService('google.cloud.dialogflow.v2beta1.Documents') :
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      this._opts.fallback
+        ? (this._protos as protobuf.Root).lookupService(
+            'google.cloud.dialogflow.v2beta1.Documents'
+          )
+        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.dialogflow.v2beta1.Documents,
-        this._opts) as Promise<{[method: string]: Function}>;
+      this._opts
+    ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const documentsStubMethods =
-        ['listDocuments', 'getDocument', 'createDocument', 'deleteDocument', 'updateDocument', 'reloadDocument'];
+    const documentsStubMethods = [
+      'listDocuments',
+      'getDocument',
+      'createDocument',
+      'deleteDocument',
+      'updateDocument',
+      'reloadDocument',
+    ];
     for (const methodName of documentsStubMethods) {
       const callPromise = this.documentsStub.then(
         stub => (...args: Array<{}>) => {
@@ -261,16 +309,17 @@ export class DocumentsClient {
           const func = stub[methodName];
           return func.apply(stub, args);
         },
-        (err: Error|null|undefined) => () => {
+        (err: Error | null | undefined) => () => {
           throw err;
-        });
+        }
+      );
 
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
         this.descriptors.page[methodName] ||
-            this.descriptors.stream[methodName] ||
-            this.descriptors.longrunning[methodName]
+          this.descriptors.stream[methodName] ||
+          this.descriptors.longrunning[methodName]
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -308,7 +357,7 @@ export class DocumentsClient {
   static get scopes() {
     return [
       'https://www.googleapis.com/auth/cloud-platform',
-      'https://www.googleapis.com/auth/dialogflow'
+      'https://www.googleapis.com/auth/dialogflow',
     ];
   }
 
@@ -319,8 +368,9 @@ export class DocumentsClient {
    * @param {function(Error, string)} callback - the callback to
    *   be called with the current project Id.
    */
-  getProjectId(callback?: Callback<string, undefined, undefined>):
-      Promise<string>|void {
+  getProjectId(
+    callback?: Callback<string, undefined, undefined>
+  ): Promise<string> | void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -332,64 +382,85 @@ export class DocumentsClient {
   // -- Service calls --
   // -------------------
   getDocument(
-      request: protos.google.cloud.dialogflow.v2beta1.IGetDocumentRequest,
-      options?: gax.CallOptions):
-      Promise<[
-        protos.google.cloud.dialogflow.v2beta1.IDocument,
-        protos.google.cloud.dialogflow.v2beta1.IGetDocumentRequest|undefined, {}|undefined
-      ]>;
+    request: protos.google.cloud.dialogflow.v2beta1.IGetDocumentRequest,
+    options?: gax.CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.dialogflow.v2beta1.IDocument,
+      protos.google.cloud.dialogflow.v2beta1.IGetDocumentRequest | undefined,
+      {} | undefined
+    ]
+  >;
   getDocument(
-      request: protos.google.cloud.dialogflow.v2beta1.IGetDocumentRequest,
-      options: gax.CallOptions,
-      callback: Callback<
-          protos.google.cloud.dialogflow.v2beta1.IDocument,
-          protos.google.cloud.dialogflow.v2beta1.IGetDocumentRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.dialogflow.v2beta1.IGetDocumentRequest,
+    options: gax.CallOptions,
+    callback: Callback<
+      protos.google.cloud.dialogflow.v2beta1.IDocument,
+      | protos.google.cloud.dialogflow.v2beta1.IGetDocumentRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
   getDocument(
-      request: protos.google.cloud.dialogflow.v2beta1.IGetDocumentRequest,
-      callback: Callback<
-          protos.google.cloud.dialogflow.v2beta1.IDocument,
-          protos.google.cloud.dialogflow.v2beta1.IGetDocumentRequest|null|undefined,
-          {}|null|undefined>): void;
-/**
- * Retrieves the specified document.
- *
- * Note: The `projects.agent.knowledgeBases.documents` resource is deprecated;
- * only use `projects.knowledgeBases.documents`.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The name of the document to retrieve.
- *   Format `projects/<Project ID>/knowledgeBases/<Knowledge Base
- *   ID>/documents/<Document ID>`.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing [Document]{@link google.cloud.dialogflow.v2beta1.Document}.
- *   The promise has a method named "cancel" which cancels the ongoing API call.
- */
+    request: protos.google.cloud.dialogflow.v2beta1.IGetDocumentRequest,
+    callback: Callback<
+      protos.google.cloud.dialogflow.v2beta1.IDocument,
+      | protos.google.cloud.dialogflow.v2beta1.IGetDocumentRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Retrieves the specified document.
+   *
+   * Note: The `projects.agent.knowledgeBases.documents` resource is deprecated;
+   * only use `projects.knowledgeBases.documents`.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the document to retrieve.
+   *   Format `projects/<Project ID>/knowledgeBases/<Knowledge Base
+   *   ID>/documents/<Document ID>`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Document]{@link google.cloud.dialogflow.v2beta1.Document}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   */
   getDocument(
-      request: protos.google.cloud.dialogflow.v2beta1.IGetDocumentRequest,
-      optionsOrCallback?: gax.CallOptions|Callback<
+    request: protos.google.cloud.dialogflow.v2beta1.IGetDocumentRequest,
+    optionsOrCallback?:
+      | gax.CallOptions
+      | Callback<
           protos.google.cloud.dialogflow.v2beta1.IDocument,
-          protos.google.cloud.dialogflow.v2beta1.IGetDocumentRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.dialogflow.v2beta1.IDocument,
-          protos.google.cloud.dialogflow.v2beta1.IGetDocumentRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.dialogflow.v2beta1.IDocument,
-        protos.google.cloud.dialogflow.v2beta1.IGetDocumentRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.dialogflow.v2beta1.IGetDocumentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.dialogflow.v2beta1.IDocument,
+      | protos.google.cloud.dialogflow.v2beta1.IGetDocumentRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.dialogflow.v2beta1.IDocument,
+      protos.google.cloud.dialogflow.v2beta1.IGetDocumentRequest | undefined,
+      {} | undefined
+    ]
+  > | void {
     request = request || {};
     let options: gax.CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as gax.CallOptions;
     }
     options = options || {};
@@ -398,72 +469,103 @@ export class DocumentsClient {
     options.otherArgs.headers[
       'x-goog-request-params'
     ] = gax.routingHeader.fromParams({
-      'name': request.name || '',
+      name: request.name || '',
     });
     this.initialize();
     return this.innerApiCalls.getDocument(request, options, callback);
   }
 
   createDocument(
-      request: protos.google.cloud.dialogflow.v2beta1.ICreateDocumentRequest,
-      options?: gax.CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.dialogflow.v2beta1.IDocument, protos.google.cloud.dialogflow.v2beta1.IKnowledgeOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request: protos.google.cloud.dialogflow.v2beta1.ICreateDocumentRequest,
+    options?: gax.CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.dialogflow.v2beta1.IDocument,
+        protos.google.cloud.dialogflow.v2beta1.IKnowledgeOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
   createDocument(
-      request: protos.google.cloud.dialogflow.v2beta1.ICreateDocumentRequest,
-      options: gax.CallOptions,
-      callback: Callback<
-          LROperation<protos.google.cloud.dialogflow.v2beta1.IDocument, protos.google.cloud.dialogflow.v2beta1.IKnowledgeOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.dialogflow.v2beta1.ICreateDocumentRequest,
+    options: gax.CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.dialogflow.v2beta1.IDocument,
+        protos.google.cloud.dialogflow.v2beta1.IKnowledgeOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
   createDocument(
-      request: protos.google.cloud.dialogflow.v2beta1.ICreateDocumentRequest,
-      callback: Callback<
-          LROperation<protos.google.cloud.dialogflow.v2beta1.IDocument, protos.google.cloud.dialogflow.v2beta1.IKnowledgeOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
-/**
- * Creates a new document.
- *
- * Note: The `projects.agent.knowledgeBases.documents` resource is deprecated;
- * only use `projects.knowledgeBases.documents`.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The knoweldge base to create a document for.
- *   Format: `projects/<Project ID>/knowledgeBases/<Knowledge Base ID>`.
- * @param {google.cloud.dialogflow.v2beta1.Document} request.document
- *   Required. The document to create.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing [Operation]{@link google.longrunning.Operation}.
- *   The promise has a method named "cancel" which cancels the ongoing API call.
- */
+    request: protos.google.cloud.dialogflow.v2beta1.ICreateDocumentRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.dialogflow.v2beta1.IDocument,
+        protos.google.cloud.dialogflow.v2beta1.IKnowledgeOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Creates a new document.
+   *
+   * Note: The `projects.agent.knowledgeBases.documents` resource is deprecated;
+   * only use `projects.knowledgeBases.documents`.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The knoweldge base to create a document for.
+   *   Format: `projects/<Project ID>/knowledgeBases/<Knowledge Base ID>`.
+   * @param {google.cloud.dialogflow.v2beta1.Document} request.document
+   *   Required. The document to create.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Operation]{@link google.longrunning.Operation}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   */
   createDocument(
-      request: protos.google.cloud.dialogflow.v2beta1.ICreateDocumentRequest,
-      optionsOrCallback?: gax.CallOptions|Callback<
-          LROperation<protos.google.cloud.dialogflow.v2beta1.IDocument, protos.google.cloud.dialogflow.v2beta1.IKnowledgeOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.cloud.dialogflow.v2beta1.IDocument, protos.google.cloud.dialogflow.v2beta1.IKnowledgeOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.dialogflow.v2beta1.IDocument, protos.google.cloud.dialogflow.v2beta1.IKnowledgeOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request: protos.google.cloud.dialogflow.v2beta1.ICreateDocumentRequest,
+    optionsOrCallback?:
+      | gax.CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.dialogflow.v2beta1.IDocument,
+            protos.google.cloud.dialogflow.v2beta1.IKnowledgeOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.dialogflow.v2beta1.IDocument,
+        protos.google.cloud.dialogflow.v2beta1.IKnowledgeOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.dialogflow.v2beta1.IDocument,
+        protos.google.cloud.dialogflow.v2beta1.IKnowledgeOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  > | void {
     request = request || {};
     let options: gax.CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as gax.CallOptions;
     }
     options = options || {};
@@ -472,70 +574,101 @@ export class DocumentsClient {
     options.otherArgs.headers[
       'x-goog-request-params'
     ] = gax.routingHeader.fromParams({
-      'parent': request.parent || '',
+      parent: request.parent || '',
     });
     this.initialize();
     return this.innerApiCalls.createDocument(request, options, callback);
   }
   deleteDocument(
-      request: protos.google.cloud.dialogflow.v2beta1.IDeleteDocumentRequest,
-      options?: gax.CallOptions):
-      Promise<[
-        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.dialogflow.v2beta1.IKnowledgeOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request: protos.google.cloud.dialogflow.v2beta1.IDeleteDocumentRequest,
+    options?: gax.CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.dialogflow.v2beta1.IKnowledgeOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
   deleteDocument(
-      request: protos.google.cloud.dialogflow.v2beta1.IDeleteDocumentRequest,
-      options: gax.CallOptions,
-      callback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.dialogflow.v2beta1.IKnowledgeOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.dialogflow.v2beta1.IDeleteDocumentRequest,
+    options: gax.CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.dialogflow.v2beta1.IKnowledgeOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
   deleteDocument(
-      request: protos.google.cloud.dialogflow.v2beta1.IDeleteDocumentRequest,
-      callback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.dialogflow.v2beta1.IKnowledgeOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
-/**
- * Deletes the specified document.
- *
- * Note: The `projects.agent.knowledgeBases.documents` resource is deprecated;
- * only use `projects.knowledgeBases.documents`.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   The name of the document to delete.
- *   Format: `projects/<Project ID>/knowledgeBases/<Knowledge Base
- *   ID>/documents/<Document ID>`.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing [Operation]{@link google.longrunning.Operation}.
- *   The promise has a method named "cancel" which cancels the ongoing API call.
- */
+    request: protos.google.cloud.dialogflow.v2beta1.IDeleteDocumentRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.dialogflow.v2beta1.IKnowledgeOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Deletes the specified document.
+   *
+   * Note: The `projects.agent.knowledgeBases.documents` resource is deprecated;
+   * only use `projects.knowledgeBases.documents`.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   The name of the document to delete.
+   *   Format: `projects/<Project ID>/knowledgeBases/<Knowledge Base
+   *   ID>/documents/<Document ID>`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Operation]{@link google.longrunning.Operation}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   */
   deleteDocument(
-      request: protos.google.cloud.dialogflow.v2beta1.IDeleteDocumentRequest,
-      optionsOrCallback?: gax.CallOptions|Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.dialogflow.v2beta1.IKnowledgeOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.dialogflow.v2beta1.IKnowledgeOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.dialogflow.v2beta1.IKnowledgeOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request: protos.google.cloud.dialogflow.v2beta1.IDeleteDocumentRequest,
+    optionsOrCallback?:
+      | gax.CallOptions
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.dialogflow.v2beta1.IKnowledgeOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.dialogflow.v2beta1.IKnowledgeOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.dialogflow.v2beta1.IKnowledgeOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  > | void {
     request = request || {};
     let options: gax.CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as gax.CallOptions;
     }
     options = options || {};
@@ -544,72 +677,103 @@ export class DocumentsClient {
     options.otherArgs.headers[
       'x-goog-request-params'
     ] = gax.routingHeader.fromParams({
-      'name': request.name || '',
+      name: request.name || '',
     });
     this.initialize();
     return this.innerApiCalls.deleteDocument(request, options, callback);
   }
   updateDocument(
-      request: protos.google.cloud.dialogflow.v2beta1.IUpdateDocumentRequest,
-      options?: gax.CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.dialogflow.v2beta1.IDocument, protos.google.cloud.dialogflow.v2beta1.IKnowledgeOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request: protos.google.cloud.dialogflow.v2beta1.IUpdateDocumentRequest,
+    options?: gax.CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.dialogflow.v2beta1.IDocument,
+        protos.google.cloud.dialogflow.v2beta1.IKnowledgeOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
   updateDocument(
-      request: protos.google.cloud.dialogflow.v2beta1.IUpdateDocumentRequest,
-      options: gax.CallOptions,
-      callback: Callback<
-          LROperation<protos.google.cloud.dialogflow.v2beta1.IDocument, protos.google.cloud.dialogflow.v2beta1.IKnowledgeOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.dialogflow.v2beta1.IUpdateDocumentRequest,
+    options: gax.CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.dialogflow.v2beta1.IDocument,
+        protos.google.cloud.dialogflow.v2beta1.IKnowledgeOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
   updateDocument(
-      request: protos.google.cloud.dialogflow.v2beta1.IUpdateDocumentRequest,
-      callback: Callback<
-          LROperation<protos.google.cloud.dialogflow.v2beta1.IDocument, protos.google.cloud.dialogflow.v2beta1.IKnowledgeOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
-/**
- * Updates the specified document.
- *
- * Note: The `projects.agent.knowledgeBases.documents` resource is deprecated;
- * only use `projects.knowledgeBases.documents`.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {google.cloud.dialogflow.v2beta1.Document} request.document
- *   Required. The document to update.
- * @param {google.protobuf.FieldMask} request.updateMask
- *   Optional. Not specified means `update all`.
- *   Currently, only `display_name` can be updated, an InvalidArgument will be
- *   returned for attempting to update other fields.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing [Operation]{@link google.longrunning.Operation}.
- *   The promise has a method named "cancel" which cancels the ongoing API call.
- */
+    request: protos.google.cloud.dialogflow.v2beta1.IUpdateDocumentRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.dialogflow.v2beta1.IDocument,
+        protos.google.cloud.dialogflow.v2beta1.IKnowledgeOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Updates the specified document.
+   *
+   * Note: The `projects.agent.knowledgeBases.documents` resource is deprecated;
+   * only use `projects.knowledgeBases.documents`.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.dialogflow.v2beta1.Document} request.document
+   *   Required. The document to update.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Optional. Not specified means `update all`.
+   *   Currently, only `display_name` can be updated, an InvalidArgument will be
+   *   returned for attempting to update other fields.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Operation]{@link google.longrunning.Operation}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   */
   updateDocument(
-      request: protos.google.cloud.dialogflow.v2beta1.IUpdateDocumentRequest,
-      optionsOrCallback?: gax.CallOptions|Callback<
-          LROperation<protos.google.cloud.dialogflow.v2beta1.IDocument, protos.google.cloud.dialogflow.v2beta1.IKnowledgeOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.cloud.dialogflow.v2beta1.IDocument, protos.google.cloud.dialogflow.v2beta1.IKnowledgeOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.dialogflow.v2beta1.IDocument, protos.google.cloud.dialogflow.v2beta1.IKnowledgeOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request: protos.google.cloud.dialogflow.v2beta1.IUpdateDocumentRequest,
+    optionsOrCallback?:
+      | gax.CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.dialogflow.v2beta1.IDocument,
+            protos.google.cloud.dialogflow.v2beta1.IKnowledgeOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.dialogflow.v2beta1.IDocument,
+        protos.google.cloud.dialogflow.v2beta1.IKnowledgeOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.dialogflow.v2beta1.IDocument,
+        protos.google.cloud.dialogflow.v2beta1.IKnowledgeOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  > | void {
     request = request || {};
     let options: gax.CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as gax.CallOptions;
     }
     options = options || {};
@@ -624,70 +788,101 @@ export class DocumentsClient {
     return this.innerApiCalls.updateDocument(request, options, callback);
   }
   reloadDocument(
-      request: protos.google.cloud.dialogflow.v2beta1.IReloadDocumentRequest,
-      options?: gax.CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.dialogflow.v2beta1.IDocument, protos.google.cloud.dialogflow.v2beta1.IKnowledgeOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request: protos.google.cloud.dialogflow.v2beta1.IReloadDocumentRequest,
+    options?: gax.CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.dialogflow.v2beta1.IDocument,
+        protos.google.cloud.dialogflow.v2beta1.IKnowledgeOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
   reloadDocument(
-      request: protos.google.cloud.dialogflow.v2beta1.IReloadDocumentRequest,
-      options: gax.CallOptions,
-      callback: Callback<
-          LROperation<protos.google.cloud.dialogflow.v2beta1.IDocument, protos.google.cloud.dialogflow.v2beta1.IKnowledgeOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.dialogflow.v2beta1.IReloadDocumentRequest,
+    options: gax.CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.dialogflow.v2beta1.IDocument,
+        protos.google.cloud.dialogflow.v2beta1.IKnowledgeOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
   reloadDocument(
-      request: protos.google.cloud.dialogflow.v2beta1.IReloadDocumentRequest,
-      callback: Callback<
-          LROperation<protos.google.cloud.dialogflow.v2beta1.IDocument, protos.google.cloud.dialogflow.v2beta1.IKnowledgeOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
-/**
- * Reloads the specified document from its specified source, content_uri or
- * content. The previously loaded content of the document will be deleted.
- * Note: Even when the content of the document has not changed, there still
- * may be side effects because of internal implementation changes.
- *
- * Note: The `projects.agent.knowledgeBases.documents` resource is deprecated;
- * only use `projects.knowledgeBases.documents`.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   The name of the document to reload.
- *   Format: `projects/<Project ID>/knowledgeBases/<Knowledge Base
- *   ID>/documents/<Document ID>`
- * @param {google.cloud.dialogflow.v2beta1.GcsSource} request.gcsSource
- *   Optional. The path for a Cloud Storage source file for reloading document content.
- *   If not provided, the Document's existing source will be reloaded.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing [Operation]{@link google.longrunning.Operation}.
- *   The promise has a method named "cancel" which cancels the ongoing API call.
- */
+    request: protos.google.cloud.dialogflow.v2beta1.IReloadDocumentRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.dialogflow.v2beta1.IDocument,
+        protos.google.cloud.dialogflow.v2beta1.IKnowledgeOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Reloads the specified document from its specified source, content_uri or
+   * content. The previously loaded content of the document will be deleted.
+   * Note: Even when the content of the document has not changed, there still
+   * may be side effects because of internal implementation changes.
+   *
+   * Note: The `projects.agent.knowledgeBases.documents` resource is deprecated;
+   * only use `projects.knowledgeBases.documents`.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   The name of the document to reload.
+   *   Format: `projects/<Project ID>/knowledgeBases/<Knowledge Base
+   *   ID>/documents/<Document ID>`
+   * @param {google.cloud.dialogflow.v2beta1.GcsSource} request.gcsSource
+   *   Optional. The path for a Cloud Storage source file for reloading document content.
+   *   If not provided, the Document's existing source will be reloaded.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Operation]{@link google.longrunning.Operation}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   */
   reloadDocument(
-      request: protos.google.cloud.dialogflow.v2beta1.IReloadDocumentRequest,
-      optionsOrCallback?: gax.CallOptions|Callback<
-          LROperation<protos.google.cloud.dialogflow.v2beta1.IDocument, protos.google.cloud.dialogflow.v2beta1.IKnowledgeOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.cloud.dialogflow.v2beta1.IDocument, protos.google.cloud.dialogflow.v2beta1.IKnowledgeOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.dialogflow.v2beta1.IDocument, protos.google.cloud.dialogflow.v2beta1.IKnowledgeOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request: protos.google.cloud.dialogflow.v2beta1.IReloadDocumentRequest,
+    optionsOrCallback?:
+      | gax.CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.dialogflow.v2beta1.IDocument,
+            protos.google.cloud.dialogflow.v2beta1.IKnowledgeOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.dialogflow.v2beta1.IDocument,
+        protos.google.cloud.dialogflow.v2beta1.IKnowledgeOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.dialogflow.v2beta1.IDocument,
+        protos.google.cloud.dialogflow.v2beta1.IKnowledgeOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  > | void {
     request = request || {};
     let options: gax.CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as gax.CallOptions;
     }
     options = options || {};
@@ -696,88 +891,107 @@ export class DocumentsClient {
     options.otherArgs.headers[
       'x-goog-request-params'
     ] = gax.routingHeader.fromParams({
-      'name': request.name || '',
+      name: request.name || '',
     });
     this.initialize();
     return this.innerApiCalls.reloadDocument(request, options, callback);
   }
   listDocuments(
-      request: protos.google.cloud.dialogflow.v2beta1.IListDocumentsRequest,
-      options?: gax.CallOptions):
-      Promise<[
-        protos.google.cloud.dialogflow.v2beta1.IDocument[],
-        protos.google.cloud.dialogflow.v2beta1.IListDocumentsRequest|null,
-        protos.google.cloud.dialogflow.v2beta1.IListDocumentsResponse
-      ]>;
+    request: protos.google.cloud.dialogflow.v2beta1.IListDocumentsRequest,
+    options?: gax.CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.dialogflow.v2beta1.IDocument[],
+      protos.google.cloud.dialogflow.v2beta1.IListDocumentsRequest | null,
+      protos.google.cloud.dialogflow.v2beta1.IListDocumentsResponse
+    ]
+  >;
   listDocuments(
-      request: protos.google.cloud.dialogflow.v2beta1.IListDocumentsRequest,
-      options: gax.CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.dialogflow.v2beta1.IListDocumentsRequest,
-          protos.google.cloud.dialogflow.v2beta1.IListDocumentsResponse|null|undefined,
-          protos.google.cloud.dialogflow.v2beta1.IDocument>): void;
+    request: protos.google.cloud.dialogflow.v2beta1.IListDocumentsRequest,
+    options: gax.CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.dialogflow.v2beta1.IListDocumentsRequest,
+      | protos.google.cloud.dialogflow.v2beta1.IListDocumentsResponse
+      | null
+      | undefined,
+      protos.google.cloud.dialogflow.v2beta1.IDocument
+    >
+  ): void;
   listDocuments(
-      request: protos.google.cloud.dialogflow.v2beta1.IListDocumentsRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.dialogflow.v2beta1.IListDocumentsRequest,
-          protos.google.cloud.dialogflow.v2beta1.IListDocumentsResponse|null|undefined,
-          protos.google.cloud.dialogflow.v2beta1.IDocument>): void;
-/**
- * Returns the list of all documents of the knowledge base.
- *
- * Note: The `projects.agent.knowledgeBases.documents` resource is deprecated;
- * only use `projects.knowledgeBases.documents`.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The knowledge base to list all documents for.
- *   Format: `projects/<Project ID>/knowledgeBases/<Knowledge Base ID>`.
- * @param {number} request.pageSize
- *   Optional. The maximum number of items to return in a single page. By
- *   default 10 and at most 100.
- * @param {string} request.pageToken
- *   Optional. The next_page_token value returned from a previous list request.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of [Document]{@link google.cloud.dialogflow.v2beta1.Document}.
- *   The client library support auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *
- *   When autoPaginate: false is specified through options, the array has three elements.
- *   The first element is Array of [Document]{@link google.cloud.dialogflow.v2beta1.Document} that corresponds to
- *   the one page received from the API server.
- *   If the second element is not null it contains the request object of type [ListDocumentsRequest]{@link google.cloud.dialogflow.v2beta1.ListDocumentsRequest}
- *   that can be used to obtain the next page of the results.
- *   If it is null, the next page does not exist.
- *   The third element contains the raw response received from the API server. Its type is
- *   [ListDocumentsResponse]{@link google.cloud.dialogflow.v2beta1.ListDocumentsResponse}.
- *
- *   The promise has a method named "cancel" which cancels the ongoing API call.
- */
+    request: protos.google.cloud.dialogflow.v2beta1.IListDocumentsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.dialogflow.v2beta1.IListDocumentsRequest,
+      | protos.google.cloud.dialogflow.v2beta1.IListDocumentsResponse
+      | null
+      | undefined,
+      protos.google.cloud.dialogflow.v2beta1.IDocument
+    >
+  ): void;
+  /**
+   * Returns the list of all documents of the knowledge base.
+   *
+   * Note: The `projects.agent.knowledgeBases.documents` resource is deprecated;
+   * only use `projects.knowledgeBases.documents`.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The knowledge base to list all documents for.
+   *   Format: `projects/<Project ID>/knowledgeBases/<Knowledge Base ID>`.
+   * @param {number} request.pageSize
+   *   Optional. The maximum number of items to return in a single page. By
+   *   default 10 and at most 100.
+   * @param {string} request.pageToken
+   *   Optional. The next_page_token value returned from a previous list request.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of [Document]{@link google.cloud.dialogflow.v2beta1.Document}.
+   *   The client library support auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *
+   *   When autoPaginate: false is specified through options, the array has three elements.
+   *   The first element is Array of [Document]{@link google.cloud.dialogflow.v2beta1.Document} that corresponds to
+   *   the one page received from the API server.
+   *   If the second element is not null it contains the request object of type [ListDocumentsRequest]{@link google.cloud.dialogflow.v2beta1.ListDocumentsRequest}
+   *   that can be used to obtain the next page of the results.
+   *   If it is null, the next page does not exist.
+   *   The third element contains the raw response received from the API server. Its type is
+   *   [ListDocumentsResponse]{@link google.cloud.dialogflow.v2beta1.ListDocumentsResponse}.
+   *
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   */
   listDocuments(
-      request: protos.google.cloud.dialogflow.v2beta1.IListDocumentsRequest,
-      optionsOrCallback?: gax.CallOptions|PaginationCallback<
+    request: protos.google.cloud.dialogflow.v2beta1.IListDocumentsRequest,
+    optionsOrCallback?:
+      | gax.CallOptions
+      | PaginationCallback<
           protos.google.cloud.dialogflow.v2beta1.IListDocumentsRequest,
-          protos.google.cloud.dialogflow.v2beta1.IListDocumentsResponse|null|undefined,
-          protos.google.cloud.dialogflow.v2beta1.IDocument>,
-      callback?: PaginationCallback<
-          protos.google.cloud.dialogflow.v2beta1.IListDocumentsRequest,
-          protos.google.cloud.dialogflow.v2beta1.IListDocumentsResponse|null|undefined,
-          protos.google.cloud.dialogflow.v2beta1.IDocument>):
-      Promise<[
-        protos.google.cloud.dialogflow.v2beta1.IDocument[],
-        protos.google.cloud.dialogflow.v2beta1.IListDocumentsRequest|null,
-        protos.google.cloud.dialogflow.v2beta1.IListDocumentsResponse
-      ]>|void {
+          | protos.google.cloud.dialogflow.v2beta1.IListDocumentsResponse
+          | null
+          | undefined,
+          protos.google.cloud.dialogflow.v2beta1.IDocument
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.dialogflow.v2beta1.IListDocumentsRequest,
+      | protos.google.cloud.dialogflow.v2beta1.IListDocumentsResponse
+      | null
+      | undefined,
+      protos.google.cloud.dialogflow.v2beta1.IDocument
+    >
+  ): Promise<
+    [
+      protos.google.cloud.dialogflow.v2beta1.IDocument[],
+      protos.google.cloud.dialogflow.v2beta1.IListDocumentsRequest | null,
+      protos.google.cloud.dialogflow.v2beta1.IListDocumentsResponse
+    ]
+  > | void {
     request = request || {};
     let options: gax.CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as gax.CallOptions;
     }
     options = options || {};
@@ -786,44 +1000,44 @@ export class DocumentsClient {
     options.otherArgs.headers[
       'x-goog-request-params'
     ] = gax.routingHeader.fromParams({
-      'parent': request.parent || '',
+      parent: request.parent || '',
     });
     this.initialize();
     return this.innerApiCalls.listDocuments(request, options, callback);
   }
 
-/**
- * Equivalent to {@link listDocuments}, but returns a NodeJS Stream object.
- *
- * This fetches the paged responses for {@link listDocuments} continuously
- * and invokes the callback registered for 'data' event for each element in the
- * responses.
- *
- * The returned object has 'end' method when no more elements are required.
- *
- * autoPaginate option will be ignored.
- *
- * @see {@link https://nodejs.org/api/stream.html}
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The knowledge base to list all documents for.
- *   Format: `projects/<Project ID>/knowledgeBases/<Knowledge Base ID>`.
- * @param {number} request.pageSize
- *   Optional. The maximum number of items to return in a single page. By
- *   default 10 and at most 100.
- * @param {string} request.pageToken
- *   Optional. The next_page_token value returned from a previous list request.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing [Document]{@link google.cloud.dialogflow.v2beta1.Document} on 'data' event.
- */
+  /**
+   * Equivalent to {@link listDocuments}, but returns a NodeJS Stream object.
+   *
+   * This fetches the paged responses for {@link listDocuments} continuously
+   * and invokes the callback registered for 'data' event for each element in the
+   * responses.
+   *
+   * The returned object has 'end' method when no more elements are required.
+   *
+   * autoPaginate option will be ignored.
+   *
+   * @see {@link https://nodejs.org/api/stream.html}
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The knowledge base to list all documents for.
+   *   Format: `projects/<Project ID>/knowledgeBases/<Knowledge Base ID>`.
+   * @param {number} request.pageSize
+   *   Optional. The maximum number of items to return in a single page. By
+   *   default 10 and at most 100.
+   * @param {string} request.pageToken
+   *   Optional. The next_page_token value returned from a previous list request.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing [Document]{@link google.cloud.dialogflow.v2beta1.Document} on 'data' event.
+   */
   listDocumentsStream(
-      request?: protos.google.cloud.dialogflow.v2beta1.IListDocumentsRequest,
-      options?: gax.CallOptions):
-    Transform{
+    request?: protos.google.cloud.dialogflow.v2beta1.IListDocumentsRequest,
+    options?: gax.CallOptions
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -831,7 +1045,7 @@ export class DocumentsClient {
     options.otherArgs.headers[
       'x-goog-request-params'
     ] = gax.routingHeader.fromParams({
-      'parent': request.parent || '',
+      parent: request.parent || '',
     });
     const callSettings = new gax.CallSettings(options);
     this.initialize();
@@ -842,30 +1056,30 @@ export class DocumentsClient {
     );
   }
 
-/**
- * Equivalent to {@link listDocuments}, but returns an iterable object.
- *
- * for-await-of syntax is used with the iterable to recursively get response element on-demand.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The knowledge base to list all documents for.
- *   Format: `projects/<Project ID>/knowledgeBases/<Knowledge Base ID>`.
- * @param {number} request.pageSize
- *   Optional. The maximum number of items to return in a single page. By
- *   default 10 and at most 100.
- * @param {string} request.pageToken
- *   Optional. The next_page_token value returned from a previous list request.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that conforms to @link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols.
- */
+  /**
+   * Equivalent to {@link listDocuments}, but returns an iterable object.
+   *
+   * for-await-of syntax is used with the iterable to recursively get response element on-demand.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The knowledge base to list all documents for.
+   *   Format: `projects/<Project ID>/knowledgeBases/<Knowledge Base ID>`.
+   * @param {number} request.pageSize
+   *   Optional. The maximum number of items to return in a single page. By
+   *   default 10 and at most 100.
+   * @param {string} request.pageToken
+   *   Optional. The next_page_token value returned from a previous list request.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that conforms to @link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols.
+   */
   listDocumentsAsync(
-      request?: protos.google.cloud.dialogflow.v2beta1.IListDocumentsRequest,
-      options?: gax.CallOptions):
-    AsyncIterable<protos.google.cloud.dialogflow.v2beta1.IDocument>{
+    request?: protos.google.cloud.dialogflow.v2beta1.IListDocumentsRequest,
+    options?: gax.CallOptions
+  ): AsyncIterable<protos.google.cloud.dialogflow.v2beta1.IDocument> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -873,14 +1087,14 @@ export class DocumentsClient {
     options.otherArgs.headers[
       'x-goog-request-params'
     ] = gax.routingHeader.fromParams({
-      'parent': request.parent || '',
+      parent: request.parent || '',
     });
     options = options || {};
     const callSettings = new gax.CallSettings(options);
     this.initialize();
     return this.descriptors.page.listDocuments.asyncIterate(
       this.innerApiCalls['listDocuments'] as GaxCall,
-      request as unknown as RequestType,
+      (request as unknown) as RequestType,
       callSettings
     ) as AsyncIterable<protos.google.cloud.dialogflow.v2beta1.IDocument>;
   }
@@ -894,7 +1108,7 @@ export class DocumentsClient {
    * @param {string} project
    * @returns {string} Resource name string.
    */
-  projectAgentPath(project:string) {
+  projectAgentPath(project: string) {
     return this.pathTemplates.projectAgentPathTemplate.render({
       project: project,
     });
@@ -908,7 +1122,8 @@ export class DocumentsClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromProjectAgentName(projectAgentName: string) {
-    return this.pathTemplates.projectAgentPathTemplate.match(projectAgentName).project;
+    return this.pathTemplates.projectAgentPathTemplate.match(projectAgentName)
+      .project;
   }
 
   /**
@@ -918,7 +1133,7 @@ export class DocumentsClient {
    * @param {string} intent
    * @returns {string} Resource name string.
    */
-  projectAgentIntentPath(project:string,intent:string) {
+  projectAgentIntentPath(project: string, intent: string) {
     return this.pathTemplates.projectAgentIntentPathTemplate.render({
       project: project,
       intent: intent,
@@ -933,7 +1148,9 @@ export class DocumentsClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromProjectAgentIntentName(projectAgentIntentName: string) {
-    return this.pathTemplates.projectAgentIntentPathTemplate.match(projectAgentIntentName).project;
+    return this.pathTemplates.projectAgentIntentPathTemplate.match(
+      projectAgentIntentName
+    ).project;
   }
 
   /**
@@ -944,7 +1161,9 @@ export class DocumentsClient {
    * @returns {string} A string representing the intent.
    */
   matchIntentFromProjectAgentIntentName(projectAgentIntentName: string) {
-    return this.pathTemplates.projectAgentIntentPathTemplate.match(projectAgentIntentName).intent;
+    return this.pathTemplates.projectAgentIntentPathTemplate.match(
+      projectAgentIntentName
+    ).intent;
   }
 
   /**
@@ -954,7 +1173,7 @@ export class DocumentsClient {
    * @param {string} location
    * @returns {string} Resource name string.
    */
-  projectLocationAgentPath(project:string,location:string) {
+  projectLocationAgentPath(project: string, location: string) {
     return this.pathTemplates.projectLocationAgentPathTemplate.render({
       project: project,
       location: location,
@@ -969,7 +1188,9 @@ export class DocumentsClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromProjectLocationAgentName(projectLocationAgentName: string) {
-    return this.pathTemplates.projectLocationAgentPathTemplate.match(projectLocationAgentName).project;
+    return this.pathTemplates.projectLocationAgentPathTemplate.match(
+      projectLocationAgentName
+    ).project;
   }
 
   /**
@@ -980,7 +1201,9 @@ export class DocumentsClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromProjectLocationAgentName(projectLocationAgentName: string) {
-    return this.pathTemplates.projectLocationAgentPathTemplate.match(projectLocationAgentName).location;
+    return this.pathTemplates.projectLocationAgentPathTemplate.match(
+      projectLocationAgentName
+    ).location;
   }
 
   /**
@@ -991,7 +1214,11 @@ export class DocumentsClient {
    * @param {string} intent
    * @returns {string} Resource name string.
    */
-  projectLocationAgentIntentPath(project:string,location:string,intent:string) {
+  projectLocationAgentIntentPath(
+    project: string,
+    location: string,
+    intent: string
+  ) {
     return this.pathTemplates.projectLocationAgentIntentPathTemplate.render({
       project: project,
       location: location,
@@ -1006,8 +1233,12 @@ export class DocumentsClient {
    *   A fully-qualified path representing project_location_agent_intent resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationAgentIntentName(projectLocationAgentIntentName: string) {
-    return this.pathTemplates.projectLocationAgentIntentPathTemplate.match(projectLocationAgentIntentName).project;
+  matchProjectFromProjectLocationAgentIntentName(
+    projectLocationAgentIntentName: string
+  ) {
+    return this.pathTemplates.projectLocationAgentIntentPathTemplate.match(
+      projectLocationAgentIntentName
+    ).project;
   }
 
   /**
@@ -1017,8 +1248,12 @@ export class DocumentsClient {
    *   A fully-qualified path representing project_location_agent_intent resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationAgentIntentName(projectLocationAgentIntentName: string) {
-    return this.pathTemplates.projectLocationAgentIntentPathTemplate.match(projectLocationAgentIntentName).location;
+  matchLocationFromProjectLocationAgentIntentName(
+    projectLocationAgentIntentName: string
+  ) {
+    return this.pathTemplates.projectLocationAgentIntentPathTemplate.match(
+      projectLocationAgentIntentName
+    ).location;
   }
 
   /**
@@ -1028,8 +1263,12 @@ export class DocumentsClient {
    *   A fully-qualified path representing project_location_agent_intent resource.
    * @returns {string} A string representing the intent.
    */
-  matchIntentFromProjectLocationAgentIntentName(projectLocationAgentIntentName: string) {
-    return this.pathTemplates.projectLocationAgentIntentPathTemplate.match(projectLocationAgentIntentName).intent;
+  matchIntentFromProjectLocationAgentIntentName(
+    projectLocationAgentIntentName: string
+  ) {
+    return this.pathTemplates.projectLocationAgentIntentPathTemplate.match(
+      projectLocationAgentIntentName
+    ).intent;
   }
 
   /**

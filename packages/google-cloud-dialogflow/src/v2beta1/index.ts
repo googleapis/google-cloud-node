@@ -16,4 +16,11 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export {AgentsClient} from './agents_client';export {ContextsClient} from './contexts_client';export {DocumentsClient} from './documents_client';export {EntityTypesClient} from './entity_types_client';export {IntentsClient} from './intents_client';export {KnowledgeBasesClient} from './knowledge_bases_client';export {SessionEntityTypesClient} from './session_entity_types_client';export {SessionsClient} from './sessions_client';
+export {AgentsClient} from './agents_client';
+export {ContextsClient} from './contexts_client';
+export {DocumentsClient} from './documents_client';
+export {EntityTypesClient} from './entity_types_client';
+export {IntentsClient} from './intents_client';
+export {KnowledgeBasesClient} from './knowledge_bases_client';
+export {SessionEntityTypesClient} from './session_entity_types_client';
+export {SessionsClient} from './sessions_client';

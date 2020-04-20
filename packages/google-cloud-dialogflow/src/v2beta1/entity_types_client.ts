@@ -17,11 +17,18 @@
 // ** All changes to this file may be overwritten. **
 
 import * as gax from 'google-gax';
-import {Callback, CallOptions, Descriptors, ClientOptions, PaginationCallback, GaxCall} from 'google-gax';
+import {
+  Callback,
+  CallOptions,
+  Descriptors,
+  ClientOptions,
+  PaginationCallback,
+  GaxCall,
+} from 'google-gax';
 import * as path from 'path';
 
-import { Transform } from 'stream';
-import { RequestType } from 'google-gax/build/src/apitypes';
+import {Transform} from 'stream';
+import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
 import * as gapicConfig from './entity_types_client_config.json';
 
@@ -67,7 +74,12 @@ export class EntityTypesClient {
   private _protos: {};
   private _defaults: {[method: string]: gax.CallSettings};
   auth: gax.GoogleAuth;
-  descriptors: Descriptors = {page: {}, stream: {}, longrunning: {}, batching: {}};
+  descriptors: Descriptors = {
+    page: {},
+    stream: {},
+    longrunning: {},
+    batching: {},
+  };
   innerApiCalls: {[name: string]: Function};
   pathTemplates: {[name: string]: gax.PathTemplate};
   entityTypesStub?: Promise<{[name: string]: Function}>;
@@ -101,10 +113,12 @@ export class EntityTypesClient {
   constructor(opts?: ClientOptions) {
     // Ensure that options include the service address and port.
     const staticMembers = this.constructor as typeof EntityTypesClient;
-    const servicePath = opts && opts.servicePath ?
-        opts.servicePath :
-        ((opts && opts.apiEndpoint) ? opts.apiEndpoint :
-                                      staticMembers.servicePath);
+    const servicePath =
+      opts && opts.servicePath
+        ? opts.servicePath
+        : opts && opts.apiEndpoint
+        ? opts.apiEndpoint
+        : staticMembers.servicePath;
     const port = opts && opts.port ? opts.port : staticMembers.port;
 
     if (!opts) {
@@ -114,8 +128,8 @@ export class EntityTypesClient {
     opts.port = opts.port || port;
     opts.clientConfig = opts.clientConfig || {};
 
-    const isBrowser = (typeof window !== 'undefined');
-    if (isBrowser){
+    const isBrowser = typeof window !== 'undefined';
+    if (isBrowser) {
       opts.fallback = true;
     }
     // If we are in browser, we are already using fallback because of the
@@ -132,13 +146,10 @@ export class EntityTypesClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
+    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
 
     // Determine the client header string.
-    const clientHeader = [
-      `gax/${this._gaxModule.version}`,
-      `gapic/${version}`,
-    ];
+    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
     if (typeof process !== 'undefined' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -154,12 +165,18 @@ export class EntityTypesClient {
     // For Node.js, pass the path to JSON proto file.
     // For browsers, pass the JSON content.
 
-    const nodejsProtoPath = path.join(__dirname, '..', '..', 'protos', 'protos.json');
+    const nodejsProtoPath = path.join(
+      __dirname,
+      '..',
+      '..',
+      'protos',
+      'protos.json'
+    );
     this._protos = this._gaxGrpc.loadProto(
-      opts.fallback ?
-        // eslint-disable-next-line @typescript-eslint/no-var-requires
-        require("../../protos/protos.json") :
-        nodejsProtoPath
+      opts.fallback
+        ? // eslint-disable-next-line @typescript-eslint/no-var-requires
+          require('../../protos/protos.json')
+        : nodejsProtoPath
     );
 
     // This API contains "path templates"; forward-slash-separated
@@ -184,14 +201,20 @@ export class EntityTypesClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listEntityTypes:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'entityTypes')
+      listEntityTypes: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'entityTypes'
+      ),
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-        'google.cloud.dialogflow.v2beta1.EntityTypes', gapicConfig as gax.ClientConfig,
-        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
+      'google.cloud.dialogflow.v2beta1.EntityTypes',
+      gapicConfig as gax.ClientConfig,
+      opts.clientConfig || {},
+      {'x-goog-api-client': clientHeader.join(' ')}
+    );
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -219,16 +242,29 @@ export class EntityTypesClient {
     // Put together the "service stub" for
     // google.cloud.dialogflow.v2beta1.EntityTypes.
     this.entityTypesStub = this._gaxGrpc.createStub(
-        this._opts.fallback ?
-          (this._protos as protobuf.Root).lookupService('google.cloud.dialogflow.v2beta1.EntityTypes') :
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      this._opts.fallback
+        ? (this._protos as protobuf.Root).lookupService(
+            'google.cloud.dialogflow.v2beta1.EntityTypes'
+          )
+        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.dialogflow.v2beta1.EntityTypes,
-        this._opts) as Promise<{[method: string]: Function}>;
+      this._opts
+    ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const entityTypesStubMethods =
-        ['listEntityTypes', 'getEntityType', 'createEntityType', 'updateEntityType', 'deleteEntityType', 'batchUpdateEntityTypes', 'batchDeleteEntityTypes', 'batchCreateEntities', 'batchUpdateEntities', 'batchDeleteEntities'];
+    const entityTypesStubMethods = [
+      'listEntityTypes',
+      'getEntityType',
+      'createEntityType',
+      'updateEntityType',
+      'deleteEntityType',
+      'batchUpdateEntityTypes',
+      'batchDeleteEntityTypes',
+      'batchCreateEntities',
+      'batchUpdateEntities',
+      'batchDeleteEntities',
+    ];
     for (const methodName of entityTypesStubMethods) {
       const callPromise = this.entityTypesStub.then(
         stub => (...args: Array<{}>) => {
@@ -238,16 +274,17 @@ export class EntityTypesClient {
           const func = stub[methodName];
           return func.apply(stub, args);
         },
-        (err: Error|null|undefined) => () => {
+        (err: Error | null | undefined) => () => {
           throw err;
-        });
+        }
+      );
 
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
         this.descriptors.page[methodName] ||
-            this.descriptors.stream[methodName] ||
-            this.descriptors.longrunning[methodName]
+          this.descriptors.stream[methodName] ||
+          this.descriptors.longrunning[methodName]
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -285,7 +322,7 @@ export class EntityTypesClient {
   static get scopes() {
     return [
       'https://www.googleapis.com/auth/cloud-platform',
-      'https://www.googleapis.com/auth/dialogflow'
+      'https://www.googleapis.com/auth/dialogflow',
     ];
   }
 
@@ -296,8 +333,9 @@ export class EntityTypesClient {
    * @param {function(Error, string)} callback - the callback to
    *   be called with the current project Id.
    */
-  getProjectId(callback?: Callback<string, undefined, undefined>):
-      Promise<string>|void {
+  getProjectId(
+    callback?: Callback<string, undefined, undefined>
+  ): Promise<string> | void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -309,66 +347,87 @@ export class EntityTypesClient {
   // -- Service calls --
   // -------------------
   getEntityType(
-      request: protos.google.cloud.dialogflow.v2beta1.IGetEntityTypeRequest,
-      options?: gax.CallOptions):
-      Promise<[
-        protos.google.cloud.dialogflow.v2beta1.IEntityType,
-        protos.google.cloud.dialogflow.v2beta1.IGetEntityTypeRequest|undefined, {}|undefined
-      ]>;
+    request: protos.google.cloud.dialogflow.v2beta1.IGetEntityTypeRequest,
+    options?: gax.CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.dialogflow.v2beta1.IEntityType,
+      protos.google.cloud.dialogflow.v2beta1.IGetEntityTypeRequest | undefined,
+      {} | undefined
+    ]
+  >;
   getEntityType(
-      request: protos.google.cloud.dialogflow.v2beta1.IGetEntityTypeRequest,
-      options: gax.CallOptions,
-      callback: Callback<
-          protos.google.cloud.dialogflow.v2beta1.IEntityType,
-          protos.google.cloud.dialogflow.v2beta1.IGetEntityTypeRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.dialogflow.v2beta1.IGetEntityTypeRequest,
+    options: gax.CallOptions,
+    callback: Callback<
+      protos.google.cloud.dialogflow.v2beta1.IEntityType,
+      | protos.google.cloud.dialogflow.v2beta1.IGetEntityTypeRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
   getEntityType(
-      request: protos.google.cloud.dialogflow.v2beta1.IGetEntityTypeRequest,
-      callback: Callback<
-          protos.google.cloud.dialogflow.v2beta1.IEntityType,
-          protos.google.cloud.dialogflow.v2beta1.IGetEntityTypeRequest|null|undefined,
-          {}|null|undefined>): void;
-/**
- * Retrieves the specified entity type.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The name of the entity type.
- *   Format: `projects/<Project ID>/agent/entityTypes/<EntityType ID>`.
- * @param {string} [request.languageCode]
- *   Optional. The language used to access language-specific data.
- *   If not specified, the agent's default language is used.
- *   For more information, see
- *   [Multilingual intent and entity
- *   data](https://cloud.google.com/dialogflow/docs/agents-multilingual#intent-entity).
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing [EntityType]{@link google.cloud.dialogflow.v2beta1.EntityType}.
- *   The promise has a method named "cancel" which cancels the ongoing API call.
- */
+    request: protos.google.cloud.dialogflow.v2beta1.IGetEntityTypeRequest,
+    callback: Callback<
+      protos.google.cloud.dialogflow.v2beta1.IEntityType,
+      | protos.google.cloud.dialogflow.v2beta1.IGetEntityTypeRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Retrieves the specified entity type.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the entity type.
+   *   Format: `projects/<Project ID>/agent/entityTypes/<EntityType ID>`.
+   * @param {string} [request.languageCode]
+   *   Optional. The language used to access language-specific data.
+   *   If not specified, the agent's default language is used.
+   *   For more information, see
+   *   [Multilingual intent and entity
+   *   data](https://cloud.google.com/dialogflow/docs/agents-multilingual#intent-entity).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [EntityType]{@link google.cloud.dialogflow.v2beta1.EntityType}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   */
   getEntityType(
-      request: protos.google.cloud.dialogflow.v2beta1.IGetEntityTypeRequest,
-      optionsOrCallback?: gax.CallOptions|Callback<
+    request: protos.google.cloud.dialogflow.v2beta1.IGetEntityTypeRequest,
+    optionsOrCallback?:
+      | gax.CallOptions
+      | Callback<
           protos.google.cloud.dialogflow.v2beta1.IEntityType,
-          protos.google.cloud.dialogflow.v2beta1.IGetEntityTypeRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.dialogflow.v2beta1.IEntityType,
-          protos.google.cloud.dialogflow.v2beta1.IGetEntityTypeRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.dialogflow.v2beta1.IEntityType,
-        protos.google.cloud.dialogflow.v2beta1.IGetEntityTypeRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.dialogflow.v2beta1.IGetEntityTypeRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.dialogflow.v2beta1.IEntityType,
+      | protos.google.cloud.dialogflow.v2beta1.IGetEntityTypeRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.dialogflow.v2beta1.IEntityType,
+      protos.google.cloud.dialogflow.v2beta1.IGetEntityTypeRequest | undefined,
+      {} | undefined
+    ]
+  > | void {
     request = request || {};
     let options: gax.CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as gax.CallOptions;
     }
     options = options || {};
@@ -377,74 +436,101 @@ export class EntityTypesClient {
     options.otherArgs.headers[
       'x-goog-request-params'
     ] = gax.routingHeader.fromParams({
-      'name': request.name || '',
+      name: request.name || '',
     });
     this.initialize();
     return this.innerApiCalls.getEntityType(request, options, callback);
   }
   createEntityType(
-      request: protos.google.cloud.dialogflow.v2beta1.ICreateEntityTypeRequest,
-      options?: gax.CallOptions):
-      Promise<[
-        protos.google.cloud.dialogflow.v2beta1.IEntityType,
-        protos.google.cloud.dialogflow.v2beta1.ICreateEntityTypeRequest|undefined, {}|undefined
-      ]>;
+    request: protos.google.cloud.dialogflow.v2beta1.ICreateEntityTypeRequest,
+    options?: gax.CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.dialogflow.v2beta1.IEntityType,
+      (
+        | protos.google.cloud.dialogflow.v2beta1.ICreateEntityTypeRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
   createEntityType(
-      request: protos.google.cloud.dialogflow.v2beta1.ICreateEntityTypeRequest,
-      options: gax.CallOptions,
-      callback: Callback<
-          protos.google.cloud.dialogflow.v2beta1.IEntityType,
-          protos.google.cloud.dialogflow.v2beta1.ICreateEntityTypeRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.dialogflow.v2beta1.ICreateEntityTypeRequest,
+    options: gax.CallOptions,
+    callback: Callback<
+      protos.google.cloud.dialogflow.v2beta1.IEntityType,
+      | protos.google.cloud.dialogflow.v2beta1.ICreateEntityTypeRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
   createEntityType(
-      request: protos.google.cloud.dialogflow.v2beta1.ICreateEntityTypeRequest,
-      callback: Callback<
-          protos.google.cloud.dialogflow.v2beta1.IEntityType,
-          protos.google.cloud.dialogflow.v2beta1.ICreateEntityTypeRequest|null|undefined,
-          {}|null|undefined>): void;
-/**
- * Creates an entity type in the specified agent.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The agent to create a entity type for.
- *   Format: `projects/<Project ID>/agent`.
- * @param {google.cloud.dialogflow.v2beta1.EntityType} request.entityType
- *   Required. The entity type to create.
- * @param {string} [request.languageCode]
- *   Optional. The language used to access language-specific data.
- *   If not specified, the agent's default language is used.
- *   For more information, see
- *   [Multilingual intent and entity
- *   data](https://cloud.google.com/dialogflow/docs/agents-multilingual#intent-entity).
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing [EntityType]{@link google.cloud.dialogflow.v2beta1.EntityType}.
- *   The promise has a method named "cancel" which cancels the ongoing API call.
- */
+    request: protos.google.cloud.dialogflow.v2beta1.ICreateEntityTypeRequest,
+    callback: Callback<
+      protos.google.cloud.dialogflow.v2beta1.IEntityType,
+      | protos.google.cloud.dialogflow.v2beta1.ICreateEntityTypeRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Creates an entity type in the specified agent.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The agent to create a entity type for.
+   *   Format: `projects/<Project ID>/agent`.
+   * @param {google.cloud.dialogflow.v2beta1.EntityType} request.entityType
+   *   Required. The entity type to create.
+   * @param {string} [request.languageCode]
+   *   Optional. The language used to access language-specific data.
+   *   If not specified, the agent's default language is used.
+   *   For more information, see
+   *   [Multilingual intent and entity
+   *   data](https://cloud.google.com/dialogflow/docs/agents-multilingual#intent-entity).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [EntityType]{@link google.cloud.dialogflow.v2beta1.EntityType}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   */
   createEntityType(
-      request: protos.google.cloud.dialogflow.v2beta1.ICreateEntityTypeRequest,
-      optionsOrCallback?: gax.CallOptions|Callback<
+    request: protos.google.cloud.dialogflow.v2beta1.ICreateEntityTypeRequest,
+    optionsOrCallback?:
+      | gax.CallOptions
+      | Callback<
           protos.google.cloud.dialogflow.v2beta1.IEntityType,
-          protos.google.cloud.dialogflow.v2beta1.ICreateEntityTypeRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.dialogflow.v2beta1.IEntityType,
-          protos.google.cloud.dialogflow.v2beta1.ICreateEntityTypeRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.dialogflow.v2beta1.IEntityType,
-        protos.google.cloud.dialogflow.v2beta1.ICreateEntityTypeRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.dialogflow.v2beta1.ICreateEntityTypeRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.dialogflow.v2beta1.IEntityType,
+      | protos.google.cloud.dialogflow.v2beta1.ICreateEntityTypeRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.dialogflow.v2beta1.IEntityType,
+      (
+        | protos.google.cloud.dialogflow.v2beta1.ICreateEntityTypeRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
     request = request || {};
     let options: gax.CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as gax.CallOptions;
     }
     options = options || {};
@@ -453,73 +539,100 @@ export class EntityTypesClient {
     options.otherArgs.headers[
       'x-goog-request-params'
     ] = gax.routingHeader.fromParams({
-      'parent': request.parent || '',
+      parent: request.parent || '',
     });
     this.initialize();
     return this.innerApiCalls.createEntityType(request, options, callback);
   }
   updateEntityType(
-      request: protos.google.cloud.dialogflow.v2beta1.IUpdateEntityTypeRequest,
-      options?: gax.CallOptions):
-      Promise<[
-        protos.google.cloud.dialogflow.v2beta1.IEntityType,
-        protos.google.cloud.dialogflow.v2beta1.IUpdateEntityTypeRequest|undefined, {}|undefined
-      ]>;
+    request: protos.google.cloud.dialogflow.v2beta1.IUpdateEntityTypeRequest,
+    options?: gax.CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.dialogflow.v2beta1.IEntityType,
+      (
+        | protos.google.cloud.dialogflow.v2beta1.IUpdateEntityTypeRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
   updateEntityType(
-      request: protos.google.cloud.dialogflow.v2beta1.IUpdateEntityTypeRequest,
-      options: gax.CallOptions,
-      callback: Callback<
-          protos.google.cloud.dialogflow.v2beta1.IEntityType,
-          protos.google.cloud.dialogflow.v2beta1.IUpdateEntityTypeRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.dialogflow.v2beta1.IUpdateEntityTypeRequest,
+    options: gax.CallOptions,
+    callback: Callback<
+      protos.google.cloud.dialogflow.v2beta1.IEntityType,
+      | protos.google.cloud.dialogflow.v2beta1.IUpdateEntityTypeRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
   updateEntityType(
-      request: protos.google.cloud.dialogflow.v2beta1.IUpdateEntityTypeRequest,
-      callback: Callback<
-          protos.google.cloud.dialogflow.v2beta1.IEntityType,
-          protos.google.cloud.dialogflow.v2beta1.IUpdateEntityTypeRequest|null|undefined,
-          {}|null|undefined>): void;
-/**
- * Updates the specified entity type.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {google.cloud.dialogflow.v2beta1.EntityType} request.entityType
- *   Required. The entity type to update.
- * @param {string} [request.languageCode]
- *   Optional. The language used to access language-specific data.
- *   If not specified, the agent's default language is used.
- *   For more information, see
- *   [Multilingual intent and entity
- *   data](https://cloud.google.com/dialogflow/docs/agents-multilingual#intent-entity).
- * @param {google.protobuf.FieldMask} request.updateMask
- *   Optional. The mask to control which fields get updated.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing [EntityType]{@link google.cloud.dialogflow.v2beta1.EntityType}.
- *   The promise has a method named "cancel" which cancels the ongoing API call.
- */
+    request: protos.google.cloud.dialogflow.v2beta1.IUpdateEntityTypeRequest,
+    callback: Callback<
+      protos.google.cloud.dialogflow.v2beta1.IEntityType,
+      | protos.google.cloud.dialogflow.v2beta1.IUpdateEntityTypeRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Updates the specified entity type.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.dialogflow.v2beta1.EntityType} request.entityType
+   *   Required. The entity type to update.
+   * @param {string} [request.languageCode]
+   *   Optional. The language used to access language-specific data.
+   *   If not specified, the agent's default language is used.
+   *   For more information, see
+   *   [Multilingual intent and entity
+   *   data](https://cloud.google.com/dialogflow/docs/agents-multilingual#intent-entity).
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Optional. The mask to control which fields get updated.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [EntityType]{@link google.cloud.dialogflow.v2beta1.EntityType}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   */
   updateEntityType(
-      request: protos.google.cloud.dialogflow.v2beta1.IUpdateEntityTypeRequest,
-      optionsOrCallback?: gax.CallOptions|Callback<
+    request: protos.google.cloud.dialogflow.v2beta1.IUpdateEntityTypeRequest,
+    optionsOrCallback?:
+      | gax.CallOptions
+      | Callback<
           protos.google.cloud.dialogflow.v2beta1.IEntityType,
-          protos.google.cloud.dialogflow.v2beta1.IUpdateEntityTypeRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.dialogflow.v2beta1.IEntityType,
-          protos.google.cloud.dialogflow.v2beta1.IUpdateEntityTypeRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.dialogflow.v2beta1.IEntityType,
-        protos.google.cloud.dialogflow.v2beta1.IUpdateEntityTypeRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.dialogflow.v2beta1.IUpdateEntityTypeRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.dialogflow.v2beta1.IEntityType,
+      | protos.google.cloud.dialogflow.v2beta1.IUpdateEntityTypeRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.dialogflow.v2beta1.IEntityType,
+      (
+        | protos.google.cloud.dialogflow.v2beta1.IUpdateEntityTypeRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
     request = request || {};
     let options: gax.CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as gax.CallOptions;
     }
     options = options || {};
@@ -534,60 +647,87 @@ export class EntityTypesClient {
     return this.innerApiCalls.updateEntityType(request, options, callback);
   }
   deleteEntityType(
-      request: protos.google.cloud.dialogflow.v2beta1.IDeleteEntityTypeRequest,
-      options?: gax.CallOptions):
-      Promise<[
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.dialogflow.v2beta1.IDeleteEntityTypeRequest|undefined, {}|undefined
-      ]>;
+    request: protos.google.cloud.dialogflow.v2beta1.IDeleteEntityTypeRequest,
+    options?: gax.CallOptions
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.cloud.dialogflow.v2beta1.IDeleteEntityTypeRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
   deleteEntityType(
-      request: protos.google.cloud.dialogflow.v2beta1.IDeleteEntityTypeRequest,
-      options: gax.CallOptions,
-      callback: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.dialogflow.v2beta1.IDeleteEntityTypeRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.dialogflow.v2beta1.IDeleteEntityTypeRequest,
+    options: gax.CallOptions,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.dialogflow.v2beta1.IDeleteEntityTypeRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
   deleteEntityType(
-      request: protos.google.cloud.dialogflow.v2beta1.IDeleteEntityTypeRequest,
-      callback: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.dialogflow.v2beta1.IDeleteEntityTypeRequest|null|undefined,
-          {}|null|undefined>): void;
-/**
- * Deletes the specified entity type.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The name of the entity type to delete.
- *   Format: `projects/<Project ID>/agent/entityTypes/<EntityType ID>`.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing [Empty]{@link google.protobuf.Empty}.
- *   The promise has a method named "cancel" which cancels the ongoing API call.
- */
+    request: protos.google.cloud.dialogflow.v2beta1.IDeleteEntityTypeRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.dialogflow.v2beta1.IDeleteEntityTypeRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Deletes the specified entity type.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the entity type to delete.
+   *   Format: `projects/<Project ID>/agent/entityTypes/<EntityType ID>`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Empty]{@link google.protobuf.Empty}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   */
   deleteEntityType(
-      request: protos.google.cloud.dialogflow.v2beta1.IDeleteEntityTypeRequest,
-      optionsOrCallback?: gax.CallOptions|Callback<
+    request: protos.google.cloud.dialogflow.v2beta1.IDeleteEntityTypeRequest,
+    optionsOrCallback?:
+      | gax.CallOptions
+      | Callback<
           protos.google.protobuf.IEmpty,
-          protos.google.cloud.dialogflow.v2beta1.IDeleteEntityTypeRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.dialogflow.v2beta1.IDeleteEntityTypeRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.dialogflow.v2beta1.IDeleteEntityTypeRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.dialogflow.v2beta1.IDeleteEntityTypeRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.dialogflow.v2beta1.IDeleteEntityTypeRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.cloud.dialogflow.v2beta1.IDeleteEntityTypeRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
     request = request || {};
     let options: gax.CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as gax.CallOptions;
     }
     options = options || {};
@@ -596,83 +736,110 @@ export class EntityTypesClient {
     options.otherArgs.headers[
       'x-goog-request-params'
     ] = gax.routingHeader.fromParams({
-      'name': request.name || '',
+      name: request.name || '',
     });
     this.initialize();
     return this.innerApiCalls.deleteEntityType(request, options, callback);
   }
   batchUpdateEntityTypes(
-      request: protos.google.cloud.dialogflow.v2beta1.IBatchUpdateEntityTypesRequest,
-      options?: gax.CallOptions):
-      Promise<[
-        protos.google.longrunning.IOperation,
-        protos.google.cloud.dialogflow.v2beta1.IBatchUpdateEntityTypesRequest|undefined, {}|undefined
-      ]>;
+    request: protos.google.cloud.dialogflow.v2beta1.IBatchUpdateEntityTypesRequest,
+    options?: gax.CallOptions
+  ): Promise<
+    [
+      protos.google.longrunning.IOperation,
+      (
+        | protos.google.cloud.dialogflow.v2beta1.IBatchUpdateEntityTypesRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
   batchUpdateEntityTypes(
-      request: protos.google.cloud.dialogflow.v2beta1.IBatchUpdateEntityTypesRequest,
-      options: gax.CallOptions,
-      callback: Callback<
-          protos.google.longrunning.IOperation,
-          protos.google.cloud.dialogflow.v2beta1.IBatchUpdateEntityTypesRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.dialogflow.v2beta1.IBatchUpdateEntityTypesRequest,
+    options: gax.CallOptions,
+    callback: Callback<
+      protos.google.longrunning.IOperation,
+      | protos.google.cloud.dialogflow.v2beta1.IBatchUpdateEntityTypesRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
   batchUpdateEntityTypes(
-      request: protos.google.cloud.dialogflow.v2beta1.IBatchUpdateEntityTypesRequest,
-      callback: Callback<
-          protos.google.longrunning.IOperation,
-          protos.google.cloud.dialogflow.v2beta1.IBatchUpdateEntityTypesRequest|null|undefined,
-          {}|null|undefined>): void;
-/**
- * Updates/Creates multiple entity types in the specified agent.
- *
- * Operation <response: {@link google.cloud.dialogflow.v2beta1.BatchUpdateEntityTypesResponse|BatchUpdateEntityTypesResponse}>
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The name of the agent to update or create entity types in.
- *   Format: `projects/<Project ID>/agent`.
- * @param {string} request.entityTypeBatchUri
- *   The URI to a Google Cloud Storage file containing entity types to update
- *   or create. The file format can either be a serialized proto (of
- *   EntityBatch type) or a JSON object. Note: The URI must start with
- *   "gs://".
- * @param {google.cloud.dialogflow.v2beta1.EntityTypeBatch} request.entityTypeBatchInline
- *   The collection of entity types to update or create.
- * @param {string} [request.languageCode]
- *   Optional. The language used to access language-specific data.
- *   If not specified, the agent's default language is used.
- *   For more information, see
- *   [Multilingual intent and entity
- *   data](https://cloud.google.com/dialogflow/docs/agents-multilingual#intent-entity).
- * @param {google.protobuf.FieldMask} request.updateMask
- *   Optional. The mask to control which fields get updated.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing [Operation]{@link google.longrunning.Operation}.
- *   The promise has a method named "cancel" which cancels the ongoing API call.
- */
+    request: protos.google.cloud.dialogflow.v2beta1.IBatchUpdateEntityTypesRequest,
+    callback: Callback<
+      protos.google.longrunning.IOperation,
+      | protos.google.cloud.dialogflow.v2beta1.IBatchUpdateEntityTypesRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Updates/Creates multiple entity types in the specified agent.
+   *
+   * Operation <response: {@link google.cloud.dialogflow.v2beta1.BatchUpdateEntityTypesResponse|BatchUpdateEntityTypesResponse}>
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The name of the agent to update or create entity types in.
+   *   Format: `projects/<Project ID>/agent`.
+   * @param {string} request.entityTypeBatchUri
+   *   The URI to a Google Cloud Storage file containing entity types to update
+   *   or create. The file format can either be a serialized proto (of
+   *   EntityBatch type) or a JSON object. Note: The URI must start with
+   *   "gs://".
+   * @param {google.cloud.dialogflow.v2beta1.EntityTypeBatch} request.entityTypeBatchInline
+   *   The collection of entity types to update or create.
+   * @param {string} [request.languageCode]
+   *   Optional. The language used to access language-specific data.
+   *   If not specified, the agent's default language is used.
+   *   For more information, see
+   *   [Multilingual intent and entity
+   *   data](https://cloud.google.com/dialogflow/docs/agents-multilingual#intent-entity).
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Optional. The mask to control which fields get updated.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Operation]{@link google.longrunning.Operation}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   */
   batchUpdateEntityTypes(
-      request: protos.google.cloud.dialogflow.v2beta1.IBatchUpdateEntityTypesRequest,
-      optionsOrCallback?: gax.CallOptions|Callback<
+    request: protos.google.cloud.dialogflow.v2beta1.IBatchUpdateEntityTypesRequest,
+    optionsOrCallback?:
+      | gax.CallOptions
+      | Callback<
           protos.google.longrunning.IOperation,
-          protos.google.cloud.dialogflow.v2beta1.IBatchUpdateEntityTypesRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.longrunning.IOperation,
-          protos.google.cloud.dialogflow.v2beta1.IBatchUpdateEntityTypesRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.longrunning.IOperation,
-        protos.google.cloud.dialogflow.v2beta1.IBatchUpdateEntityTypesRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.dialogflow.v2beta1.IBatchUpdateEntityTypesRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.longrunning.IOperation,
+      | protos.google.cloud.dialogflow.v2beta1.IBatchUpdateEntityTypesRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.longrunning.IOperation,
+      (
+        | protos.google.cloud.dialogflow.v2beta1.IBatchUpdateEntityTypesRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
     request = request || {};
     let options: gax.CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as gax.CallOptions;
     }
     options = options || {};
@@ -681,71 +848,102 @@ export class EntityTypesClient {
     options.otherArgs.headers[
       'x-goog-request-params'
     ] = gax.routingHeader.fromParams({
-      'parent': request.parent || '',
+      parent: request.parent || '',
     });
     this.initialize();
-    return this.innerApiCalls.batchUpdateEntityTypes(request, options, callback);
+    return this.innerApiCalls.batchUpdateEntityTypes(
+      request,
+      options,
+      callback
+    );
   }
   batchDeleteEntityTypes(
-      request: protos.google.cloud.dialogflow.v2beta1.IBatchDeleteEntityTypesRequest,
-      options?: gax.CallOptions):
-      Promise<[
-        protos.google.longrunning.IOperation,
-        protos.google.cloud.dialogflow.v2beta1.IBatchDeleteEntityTypesRequest|undefined, {}|undefined
-      ]>;
+    request: protos.google.cloud.dialogflow.v2beta1.IBatchDeleteEntityTypesRequest,
+    options?: gax.CallOptions
+  ): Promise<
+    [
+      protos.google.longrunning.IOperation,
+      (
+        | protos.google.cloud.dialogflow.v2beta1.IBatchDeleteEntityTypesRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
   batchDeleteEntityTypes(
-      request: protos.google.cloud.dialogflow.v2beta1.IBatchDeleteEntityTypesRequest,
-      options: gax.CallOptions,
-      callback: Callback<
-          protos.google.longrunning.IOperation,
-          protos.google.cloud.dialogflow.v2beta1.IBatchDeleteEntityTypesRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.dialogflow.v2beta1.IBatchDeleteEntityTypesRequest,
+    options: gax.CallOptions,
+    callback: Callback<
+      protos.google.longrunning.IOperation,
+      | protos.google.cloud.dialogflow.v2beta1.IBatchDeleteEntityTypesRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
   batchDeleteEntityTypes(
-      request: protos.google.cloud.dialogflow.v2beta1.IBatchDeleteEntityTypesRequest,
-      callback: Callback<
-          protos.google.longrunning.IOperation,
-          protos.google.cloud.dialogflow.v2beta1.IBatchDeleteEntityTypesRequest|null|undefined,
-          {}|null|undefined>): void;
-/**
- * Deletes entity types in the specified agent.
- *
- * Operation <response: {@link google.protobuf.Empty|google.protobuf.Empty}>
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The name of the agent to delete all entities types for. Format:
- *   `projects/<Project ID>/agent`.
- * @param {string[]} request.entityTypeNames
- *   Required. The names entity types to delete. All names must point to the
- *   same agent as `parent`.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing [Operation]{@link google.longrunning.Operation}.
- *   The promise has a method named "cancel" which cancels the ongoing API call.
- */
+    request: protos.google.cloud.dialogflow.v2beta1.IBatchDeleteEntityTypesRequest,
+    callback: Callback<
+      protos.google.longrunning.IOperation,
+      | protos.google.cloud.dialogflow.v2beta1.IBatchDeleteEntityTypesRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Deletes entity types in the specified agent.
+   *
+   * Operation <response: {@link google.protobuf.Empty|google.protobuf.Empty}>
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The name of the agent to delete all entities types for. Format:
+   *   `projects/<Project ID>/agent`.
+   * @param {string[]} request.entityTypeNames
+   *   Required. The names entity types to delete. All names must point to the
+   *   same agent as `parent`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Operation]{@link google.longrunning.Operation}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   */
   batchDeleteEntityTypes(
-      request: protos.google.cloud.dialogflow.v2beta1.IBatchDeleteEntityTypesRequest,
-      optionsOrCallback?: gax.CallOptions|Callback<
+    request: protos.google.cloud.dialogflow.v2beta1.IBatchDeleteEntityTypesRequest,
+    optionsOrCallback?:
+      | gax.CallOptions
+      | Callback<
           protos.google.longrunning.IOperation,
-          protos.google.cloud.dialogflow.v2beta1.IBatchDeleteEntityTypesRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.longrunning.IOperation,
-          protos.google.cloud.dialogflow.v2beta1.IBatchDeleteEntityTypesRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.longrunning.IOperation,
-        protos.google.cloud.dialogflow.v2beta1.IBatchDeleteEntityTypesRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.dialogflow.v2beta1.IBatchDeleteEntityTypesRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.longrunning.IOperation,
+      | protos.google.cloud.dialogflow.v2beta1.IBatchDeleteEntityTypesRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.longrunning.IOperation,
+      (
+        | protos.google.cloud.dialogflow.v2beta1.IBatchDeleteEntityTypesRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
     request = request || {};
     let options: gax.CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as gax.CallOptions;
     }
     options = options || {};
@@ -754,76 +952,107 @@ export class EntityTypesClient {
     options.otherArgs.headers[
       'x-goog-request-params'
     ] = gax.routingHeader.fromParams({
-      'parent': request.parent || '',
+      parent: request.parent || '',
     });
     this.initialize();
-    return this.innerApiCalls.batchDeleteEntityTypes(request, options, callback);
+    return this.innerApiCalls.batchDeleteEntityTypes(
+      request,
+      options,
+      callback
+    );
   }
   batchCreateEntities(
-      request: protos.google.cloud.dialogflow.v2beta1.IBatchCreateEntitiesRequest,
-      options?: gax.CallOptions):
-      Promise<[
-        protos.google.longrunning.IOperation,
-        protos.google.cloud.dialogflow.v2beta1.IBatchCreateEntitiesRequest|undefined, {}|undefined
-      ]>;
+    request: protos.google.cloud.dialogflow.v2beta1.IBatchCreateEntitiesRequest,
+    options?: gax.CallOptions
+  ): Promise<
+    [
+      protos.google.longrunning.IOperation,
+      (
+        | protos.google.cloud.dialogflow.v2beta1.IBatchCreateEntitiesRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
   batchCreateEntities(
-      request: protos.google.cloud.dialogflow.v2beta1.IBatchCreateEntitiesRequest,
-      options: gax.CallOptions,
-      callback: Callback<
-          protos.google.longrunning.IOperation,
-          protos.google.cloud.dialogflow.v2beta1.IBatchCreateEntitiesRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.dialogflow.v2beta1.IBatchCreateEntitiesRequest,
+    options: gax.CallOptions,
+    callback: Callback<
+      protos.google.longrunning.IOperation,
+      | protos.google.cloud.dialogflow.v2beta1.IBatchCreateEntitiesRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
   batchCreateEntities(
-      request: protos.google.cloud.dialogflow.v2beta1.IBatchCreateEntitiesRequest,
-      callback: Callback<
-          protos.google.longrunning.IOperation,
-          protos.google.cloud.dialogflow.v2beta1.IBatchCreateEntitiesRequest|null|undefined,
-          {}|null|undefined>): void;
-/**
- * Creates multiple new entities in the specified entity type.
- *
- * Operation <response: {@link google.protobuf.Empty|google.protobuf.Empty}>
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The name of the entity type to create entities in. Format:
- *   `projects/<Project ID>/agent/entityTypes/<Entity Type ID>`.
- * @param {number[]} request.entities
- *   Required. The entities to create.
- * @param {string} [request.languageCode]
- *   Optional. The language used to access language-specific data.
- *   If not specified, the agent's default language is used.
- *   For more information, see
- *   [Multilingual intent and entity
- *   data](https://cloud.google.com/dialogflow/docs/agents-multilingual#intent-entity).
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing [Operation]{@link google.longrunning.Operation}.
- *   The promise has a method named "cancel" which cancels the ongoing API call.
- */
+    request: protos.google.cloud.dialogflow.v2beta1.IBatchCreateEntitiesRequest,
+    callback: Callback<
+      protos.google.longrunning.IOperation,
+      | protos.google.cloud.dialogflow.v2beta1.IBatchCreateEntitiesRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Creates multiple new entities in the specified entity type.
+   *
+   * Operation <response: {@link google.protobuf.Empty|google.protobuf.Empty}>
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The name of the entity type to create entities in. Format:
+   *   `projects/<Project ID>/agent/entityTypes/<Entity Type ID>`.
+   * @param {number[]} request.entities
+   *   Required. The entities to create.
+   * @param {string} [request.languageCode]
+   *   Optional. The language used to access language-specific data.
+   *   If not specified, the agent's default language is used.
+   *   For more information, see
+   *   [Multilingual intent and entity
+   *   data](https://cloud.google.com/dialogflow/docs/agents-multilingual#intent-entity).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Operation]{@link google.longrunning.Operation}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   */
   batchCreateEntities(
-      request: protos.google.cloud.dialogflow.v2beta1.IBatchCreateEntitiesRequest,
-      optionsOrCallback?: gax.CallOptions|Callback<
+    request: protos.google.cloud.dialogflow.v2beta1.IBatchCreateEntitiesRequest,
+    optionsOrCallback?:
+      | gax.CallOptions
+      | Callback<
           protos.google.longrunning.IOperation,
-          protos.google.cloud.dialogflow.v2beta1.IBatchCreateEntitiesRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.longrunning.IOperation,
-          protos.google.cloud.dialogflow.v2beta1.IBatchCreateEntitiesRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.longrunning.IOperation,
-        protos.google.cloud.dialogflow.v2beta1.IBatchCreateEntitiesRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.dialogflow.v2beta1.IBatchCreateEntitiesRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.longrunning.IOperation,
+      | protos.google.cloud.dialogflow.v2beta1.IBatchCreateEntitiesRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.longrunning.IOperation,
+      (
+        | protos.google.cloud.dialogflow.v2beta1.IBatchCreateEntitiesRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
     request = request || {};
     let options: gax.CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as gax.CallOptions;
     }
     options = options || {};
@@ -832,80 +1061,107 @@ export class EntityTypesClient {
     options.otherArgs.headers[
       'x-goog-request-params'
     ] = gax.routingHeader.fromParams({
-      'parent': request.parent || '',
+      parent: request.parent || '',
     });
     this.initialize();
     return this.innerApiCalls.batchCreateEntities(request, options, callback);
   }
   batchUpdateEntities(
-      request: protos.google.cloud.dialogflow.v2beta1.IBatchUpdateEntitiesRequest,
-      options?: gax.CallOptions):
-      Promise<[
-        protos.google.longrunning.IOperation,
-        protos.google.cloud.dialogflow.v2beta1.IBatchUpdateEntitiesRequest|undefined, {}|undefined
-      ]>;
+    request: protos.google.cloud.dialogflow.v2beta1.IBatchUpdateEntitiesRequest,
+    options?: gax.CallOptions
+  ): Promise<
+    [
+      protos.google.longrunning.IOperation,
+      (
+        | protos.google.cloud.dialogflow.v2beta1.IBatchUpdateEntitiesRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
   batchUpdateEntities(
-      request: protos.google.cloud.dialogflow.v2beta1.IBatchUpdateEntitiesRequest,
-      options: gax.CallOptions,
-      callback: Callback<
-          protos.google.longrunning.IOperation,
-          protos.google.cloud.dialogflow.v2beta1.IBatchUpdateEntitiesRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.dialogflow.v2beta1.IBatchUpdateEntitiesRequest,
+    options: gax.CallOptions,
+    callback: Callback<
+      protos.google.longrunning.IOperation,
+      | protos.google.cloud.dialogflow.v2beta1.IBatchUpdateEntitiesRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
   batchUpdateEntities(
-      request: protos.google.cloud.dialogflow.v2beta1.IBatchUpdateEntitiesRequest,
-      callback: Callback<
-          protos.google.longrunning.IOperation,
-          protos.google.cloud.dialogflow.v2beta1.IBatchUpdateEntitiesRequest|null|undefined,
-          {}|null|undefined>): void;
-/**
- * Updates or creates multiple entities in the specified entity type. This
- * method does not affect entities in the entity type that aren't explicitly
- * specified in the request.
- *
- * Operation <response: {@link google.protobuf.Empty|google.protobuf.Empty}>
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The name of the entity type to update or create entities in.
- *   Format: `projects/<Project ID>/agent/entityTypes/<Entity Type ID>`.
- * @param {number[]} request.entities
- *   Required. The entities to update or create.
- * @param {string} [request.languageCode]
- *   Optional. The language used to access language-specific data.
- *   If not specified, the agent's default language is used.
- *   For more information, see
- *   [Multilingual intent and entity
- *   data](https://cloud.google.com/dialogflow/docs/agents-multilingual#intent-entity).
- * @param {google.protobuf.FieldMask} request.updateMask
- *   Optional. The mask to control which fields get updated.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing [Operation]{@link google.longrunning.Operation}.
- *   The promise has a method named "cancel" which cancels the ongoing API call.
- */
+    request: protos.google.cloud.dialogflow.v2beta1.IBatchUpdateEntitiesRequest,
+    callback: Callback<
+      protos.google.longrunning.IOperation,
+      | protos.google.cloud.dialogflow.v2beta1.IBatchUpdateEntitiesRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Updates or creates multiple entities in the specified entity type. This
+   * method does not affect entities in the entity type that aren't explicitly
+   * specified in the request.
+   *
+   * Operation <response: {@link google.protobuf.Empty|google.protobuf.Empty}>
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The name of the entity type to update or create entities in.
+   *   Format: `projects/<Project ID>/agent/entityTypes/<Entity Type ID>`.
+   * @param {number[]} request.entities
+   *   Required. The entities to update or create.
+   * @param {string} [request.languageCode]
+   *   Optional. The language used to access language-specific data.
+   *   If not specified, the agent's default language is used.
+   *   For more information, see
+   *   [Multilingual intent and entity
+   *   data](https://cloud.google.com/dialogflow/docs/agents-multilingual#intent-entity).
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Optional. The mask to control which fields get updated.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Operation]{@link google.longrunning.Operation}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   */
   batchUpdateEntities(
-      request: protos.google.cloud.dialogflow.v2beta1.IBatchUpdateEntitiesRequest,
-      optionsOrCallback?: gax.CallOptions|Callback<
+    request: protos.google.cloud.dialogflow.v2beta1.IBatchUpdateEntitiesRequest,
+    optionsOrCallback?:
+      | gax.CallOptions
+      | Callback<
           protos.google.longrunning.IOperation,
-          protos.google.cloud.dialogflow.v2beta1.IBatchUpdateEntitiesRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.longrunning.IOperation,
-          protos.google.cloud.dialogflow.v2beta1.IBatchUpdateEntitiesRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.longrunning.IOperation,
-        protos.google.cloud.dialogflow.v2beta1.IBatchUpdateEntitiesRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.dialogflow.v2beta1.IBatchUpdateEntitiesRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.longrunning.IOperation,
+      | protos.google.cloud.dialogflow.v2beta1.IBatchUpdateEntitiesRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.longrunning.IOperation,
+      (
+        | protos.google.cloud.dialogflow.v2beta1.IBatchUpdateEntitiesRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
     request = request || {};
     let options: gax.CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as gax.CallOptions;
     }
     options = options || {};
@@ -914,78 +1170,105 @@ export class EntityTypesClient {
     options.otherArgs.headers[
       'x-goog-request-params'
     ] = gax.routingHeader.fromParams({
-      'parent': request.parent || '',
+      parent: request.parent || '',
     });
     this.initialize();
     return this.innerApiCalls.batchUpdateEntities(request, options, callback);
   }
   batchDeleteEntities(
-      request: protos.google.cloud.dialogflow.v2beta1.IBatchDeleteEntitiesRequest,
-      options?: gax.CallOptions):
-      Promise<[
-        protos.google.longrunning.IOperation,
-        protos.google.cloud.dialogflow.v2beta1.IBatchDeleteEntitiesRequest|undefined, {}|undefined
-      ]>;
+    request: protos.google.cloud.dialogflow.v2beta1.IBatchDeleteEntitiesRequest,
+    options?: gax.CallOptions
+  ): Promise<
+    [
+      protos.google.longrunning.IOperation,
+      (
+        | protos.google.cloud.dialogflow.v2beta1.IBatchDeleteEntitiesRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
   batchDeleteEntities(
-      request: protos.google.cloud.dialogflow.v2beta1.IBatchDeleteEntitiesRequest,
-      options: gax.CallOptions,
-      callback: Callback<
-          protos.google.longrunning.IOperation,
-          protos.google.cloud.dialogflow.v2beta1.IBatchDeleteEntitiesRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.dialogflow.v2beta1.IBatchDeleteEntitiesRequest,
+    options: gax.CallOptions,
+    callback: Callback<
+      protos.google.longrunning.IOperation,
+      | protos.google.cloud.dialogflow.v2beta1.IBatchDeleteEntitiesRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
   batchDeleteEntities(
-      request: protos.google.cloud.dialogflow.v2beta1.IBatchDeleteEntitiesRequest,
-      callback: Callback<
-          protos.google.longrunning.IOperation,
-          protos.google.cloud.dialogflow.v2beta1.IBatchDeleteEntitiesRequest|null|undefined,
-          {}|null|undefined>): void;
-/**
- * Deletes entities in the specified entity type.
- *
- * Operation <response: {@link google.protobuf.Empty|google.protobuf.Empty}>
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The name of the entity type to delete entries for. Format:
- *   `projects/<Project ID>/agent/entityTypes/<Entity Type ID>`.
- * @param {string[]} request.entityValues
- *   Required. The reference `values` of the entities to delete. Note that
- *   these are not fully-qualified names, i.e. they don't start with
- *   `projects/<Project ID>`.
- * @param {string} [request.languageCode]
- *   Optional. The language used to access language-specific data.
- *   If not specified, the agent's default language is used.
- *   For more information, see
- *   [Multilingual intent and entity
- *   data](https://cloud.google.com/dialogflow/docs/agents-multilingual#intent-entity).
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing [Operation]{@link google.longrunning.Operation}.
- *   The promise has a method named "cancel" which cancels the ongoing API call.
- */
+    request: protos.google.cloud.dialogflow.v2beta1.IBatchDeleteEntitiesRequest,
+    callback: Callback<
+      protos.google.longrunning.IOperation,
+      | protos.google.cloud.dialogflow.v2beta1.IBatchDeleteEntitiesRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Deletes entities in the specified entity type.
+   *
+   * Operation <response: {@link google.protobuf.Empty|google.protobuf.Empty}>
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The name of the entity type to delete entries for. Format:
+   *   `projects/<Project ID>/agent/entityTypes/<Entity Type ID>`.
+   * @param {string[]} request.entityValues
+   *   Required. The reference `values` of the entities to delete. Note that
+   *   these are not fully-qualified names, i.e. they don't start with
+   *   `projects/<Project ID>`.
+   * @param {string} [request.languageCode]
+   *   Optional. The language used to access language-specific data.
+   *   If not specified, the agent's default language is used.
+   *   For more information, see
+   *   [Multilingual intent and entity
+   *   data](https://cloud.google.com/dialogflow/docs/agents-multilingual#intent-entity).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Operation]{@link google.longrunning.Operation}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   */
   batchDeleteEntities(
-      request: protos.google.cloud.dialogflow.v2beta1.IBatchDeleteEntitiesRequest,
-      optionsOrCallback?: gax.CallOptions|Callback<
+    request: protos.google.cloud.dialogflow.v2beta1.IBatchDeleteEntitiesRequest,
+    optionsOrCallback?:
+      | gax.CallOptions
+      | Callback<
           protos.google.longrunning.IOperation,
-          protos.google.cloud.dialogflow.v2beta1.IBatchDeleteEntitiesRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.longrunning.IOperation,
-          protos.google.cloud.dialogflow.v2beta1.IBatchDeleteEntitiesRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.longrunning.IOperation,
-        protos.google.cloud.dialogflow.v2beta1.IBatchDeleteEntitiesRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.dialogflow.v2beta1.IBatchDeleteEntitiesRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.longrunning.IOperation,
+      | protos.google.cloud.dialogflow.v2beta1.IBatchDeleteEntitiesRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.longrunning.IOperation,
+      (
+        | protos.google.cloud.dialogflow.v2beta1.IBatchDeleteEntitiesRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
     request = request || {};
     let options: gax.CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as gax.CallOptions;
     }
     options = options || {};
@@ -994,92 +1277,111 @@ export class EntityTypesClient {
     options.otherArgs.headers[
       'x-goog-request-params'
     ] = gax.routingHeader.fromParams({
-      'parent': request.parent || '',
+      parent: request.parent || '',
     });
     this.initialize();
     return this.innerApiCalls.batchDeleteEntities(request, options, callback);
   }
 
   listEntityTypes(
-      request: protos.google.cloud.dialogflow.v2beta1.IListEntityTypesRequest,
-      options?: gax.CallOptions):
-      Promise<[
-        protos.google.cloud.dialogflow.v2beta1.IEntityType[],
-        protos.google.cloud.dialogflow.v2beta1.IListEntityTypesRequest|null,
-        protos.google.cloud.dialogflow.v2beta1.IListEntityTypesResponse
-      ]>;
+    request: protos.google.cloud.dialogflow.v2beta1.IListEntityTypesRequest,
+    options?: gax.CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.dialogflow.v2beta1.IEntityType[],
+      protos.google.cloud.dialogflow.v2beta1.IListEntityTypesRequest | null,
+      protos.google.cloud.dialogflow.v2beta1.IListEntityTypesResponse
+    ]
+  >;
   listEntityTypes(
-      request: protos.google.cloud.dialogflow.v2beta1.IListEntityTypesRequest,
-      options: gax.CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.dialogflow.v2beta1.IListEntityTypesRequest,
-          protos.google.cloud.dialogflow.v2beta1.IListEntityTypesResponse|null|undefined,
-          protos.google.cloud.dialogflow.v2beta1.IEntityType>): void;
+    request: protos.google.cloud.dialogflow.v2beta1.IListEntityTypesRequest,
+    options: gax.CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.dialogflow.v2beta1.IListEntityTypesRequest,
+      | protos.google.cloud.dialogflow.v2beta1.IListEntityTypesResponse
+      | null
+      | undefined,
+      protos.google.cloud.dialogflow.v2beta1.IEntityType
+    >
+  ): void;
   listEntityTypes(
-      request: protos.google.cloud.dialogflow.v2beta1.IListEntityTypesRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.dialogflow.v2beta1.IListEntityTypesRequest,
-          protos.google.cloud.dialogflow.v2beta1.IListEntityTypesResponse|null|undefined,
-          protos.google.cloud.dialogflow.v2beta1.IEntityType>): void;
-/**
- * Returns the list of all entity types in the specified agent.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The agent to list all entity types from.
- *   Format: `projects/<Project ID>/agent`.
- * @param {string} [request.languageCode]
- *   Optional. The language used to access language-specific data.
- *   If not specified, the agent's default language is used.
- *   For more information, see
- *   [Multilingual intent and entity
- *   data](https://cloud.google.com/dialogflow/docs/agents-multilingual#intent-entity).
- * @param {number} request.pageSize
- *   Optional. The maximum number of items to return in a single page. By
- *   default 100 and at most 1000.
- * @param {string} request.pageToken
- *   Optional. The next_page_token value returned from a previous list request.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of [EntityType]{@link google.cloud.dialogflow.v2beta1.EntityType}.
- *   The client library support auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *
- *   When autoPaginate: false is specified through options, the array has three elements.
- *   The first element is Array of [EntityType]{@link google.cloud.dialogflow.v2beta1.EntityType} that corresponds to
- *   the one page received from the API server.
- *   If the second element is not null it contains the request object of type [ListEntityTypesRequest]{@link google.cloud.dialogflow.v2beta1.ListEntityTypesRequest}
- *   that can be used to obtain the next page of the results.
- *   If it is null, the next page does not exist.
- *   The third element contains the raw response received from the API server. Its type is
- *   [ListEntityTypesResponse]{@link google.cloud.dialogflow.v2beta1.ListEntityTypesResponse}.
- *
- *   The promise has a method named "cancel" which cancels the ongoing API call.
- */
+    request: protos.google.cloud.dialogflow.v2beta1.IListEntityTypesRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.dialogflow.v2beta1.IListEntityTypesRequest,
+      | protos.google.cloud.dialogflow.v2beta1.IListEntityTypesResponse
+      | null
+      | undefined,
+      protos.google.cloud.dialogflow.v2beta1.IEntityType
+    >
+  ): void;
+  /**
+   * Returns the list of all entity types in the specified agent.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The agent to list all entity types from.
+   *   Format: `projects/<Project ID>/agent`.
+   * @param {string} [request.languageCode]
+   *   Optional. The language used to access language-specific data.
+   *   If not specified, the agent's default language is used.
+   *   For more information, see
+   *   [Multilingual intent and entity
+   *   data](https://cloud.google.com/dialogflow/docs/agents-multilingual#intent-entity).
+   * @param {number} request.pageSize
+   *   Optional. The maximum number of items to return in a single page. By
+   *   default 100 and at most 1000.
+   * @param {string} request.pageToken
+   *   Optional. The next_page_token value returned from a previous list request.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of [EntityType]{@link google.cloud.dialogflow.v2beta1.EntityType}.
+   *   The client library support auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *
+   *   When autoPaginate: false is specified through options, the array has three elements.
+   *   The first element is Array of [EntityType]{@link google.cloud.dialogflow.v2beta1.EntityType} that corresponds to
+   *   the one page received from the API server.
+   *   If the second element is not null it contains the request object of type [ListEntityTypesRequest]{@link google.cloud.dialogflow.v2beta1.ListEntityTypesRequest}
+   *   that can be used to obtain the next page of the results.
+   *   If it is null, the next page does not exist.
+   *   The third element contains the raw response received from the API server. Its type is
+   *   [ListEntityTypesResponse]{@link google.cloud.dialogflow.v2beta1.ListEntityTypesResponse}.
+   *
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   */
   listEntityTypes(
-      request: protos.google.cloud.dialogflow.v2beta1.IListEntityTypesRequest,
-      optionsOrCallback?: gax.CallOptions|PaginationCallback<
+    request: protos.google.cloud.dialogflow.v2beta1.IListEntityTypesRequest,
+    optionsOrCallback?:
+      | gax.CallOptions
+      | PaginationCallback<
           protos.google.cloud.dialogflow.v2beta1.IListEntityTypesRequest,
-          protos.google.cloud.dialogflow.v2beta1.IListEntityTypesResponse|null|undefined,
-          protos.google.cloud.dialogflow.v2beta1.IEntityType>,
-      callback?: PaginationCallback<
-          protos.google.cloud.dialogflow.v2beta1.IListEntityTypesRequest,
-          protos.google.cloud.dialogflow.v2beta1.IListEntityTypesResponse|null|undefined,
-          protos.google.cloud.dialogflow.v2beta1.IEntityType>):
-      Promise<[
-        protos.google.cloud.dialogflow.v2beta1.IEntityType[],
-        protos.google.cloud.dialogflow.v2beta1.IListEntityTypesRequest|null,
-        protos.google.cloud.dialogflow.v2beta1.IListEntityTypesResponse
-      ]>|void {
+          | protos.google.cloud.dialogflow.v2beta1.IListEntityTypesResponse
+          | null
+          | undefined,
+          protos.google.cloud.dialogflow.v2beta1.IEntityType
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.dialogflow.v2beta1.IListEntityTypesRequest,
+      | protos.google.cloud.dialogflow.v2beta1.IListEntityTypesResponse
+      | null
+      | undefined,
+      protos.google.cloud.dialogflow.v2beta1.IEntityType
+    >
+  ): Promise<
+    [
+      protos.google.cloud.dialogflow.v2beta1.IEntityType[],
+      protos.google.cloud.dialogflow.v2beta1.IListEntityTypesRequest | null,
+      protos.google.cloud.dialogflow.v2beta1.IListEntityTypesResponse
+    ]
+  > | void {
     request = request || {};
     let options: gax.CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as gax.CallOptions;
     }
     options = options || {};
@@ -1088,50 +1390,50 @@ export class EntityTypesClient {
     options.otherArgs.headers[
       'x-goog-request-params'
     ] = gax.routingHeader.fromParams({
-      'parent': request.parent || '',
+      parent: request.parent || '',
     });
     this.initialize();
     return this.innerApiCalls.listEntityTypes(request, options, callback);
   }
 
-/**
- * Equivalent to {@link listEntityTypes}, but returns a NodeJS Stream object.
- *
- * This fetches the paged responses for {@link listEntityTypes} continuously
- * and invokes the callback registered for 'data' event for each element in the
- * responses.
- *
- * The returned object has 'end' method when no more elements are required.
- *
- * autoPaginate option will be ignored.
- *
- * @see {@link https://nodejs.org/api/stream.html}
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The agent to list all entity types from.
- *   Format: `projects/<Project ID>/agent`.
- * @param {string} [request.languageCode]
- *   Optional. The language used to access language-specific data.
- *   If not specified, the agent's default language is used.
- *   For more information, see
- *   [Multilingual intent and entity
- *   data](https://cloud.google.com/dialogflow/docs/agents-multilingual#intent-entity).
- * @param {number} request.pageSize
- *   Optional. The maximum number of items to return in a single page. By
- *   default 100 and at most 1000.
- * @param {string} request.pageToken
- *   Optional. The next_page_token value returned from a previous list request.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing [EntityType]{@link google.cloud.dialogflow.v2beta1.EntityType} on 'data' event.
- */
+  /**
+   * Equivalent to {@link listEntityTypes}, but returns a NodeJS Stream object.
+   *
+   * This fetches the paged responses for {@link listEntityTypes} continuously
+   * and invokes the callback registered for 'data' event for each element in the
+   * responses.
+   *
+   * The returned object has 'end' method when no more elements are required.
+   *
+   * autoPaginate option will be ignored.
+   *
+   * @see {@link https://nodejs.org/api/stream.html}
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The agent to list all entity types from.
+   *   Format: `projects/<Project ID>/agent`.
+   * @param {string} [request.languageCode]
+   *   Optional. The language used to access language-specific data.
+   *   If not specified, the agent's default language is used.
+   *   For more information, see
+   *   [Multilingual intent and entity
+   *   data](https://cloud.google.com/dialogflow/docs/agents-multilingual#intent-entity).
+   * @param {number} request.pageSize
+   *   Optional. The maximum number of items to return in a single page. By
+   *   default 100 and at most 1000.
+   * @param {string} request.pageToken
+   *   Optional. The next_page_token value returned from a previous list request.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing [EntityType]{@link google.cloud.dialogflow.v2beta1.EntityType} on 'data' event.
+   */
   listEntityTypesStream(
-      request?: protos.google.cloud.dialogflow.v2beta1.IListEntityTypesRequest,
-      options?: gax.CallOptions):
-    Transform{
+    request?: protos.google.cloud.dialogflow.v2beta1.IListEntityTypesRequest,
+    options?: gax.CallOptions
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1139,7 +1441,7 @@ export class EntityTypesClient {
     options.otherArgs.headers[
       'x-goog-request-params'
     ] = gax.routingHeader.fromParams({
-      'parent': request.parent || '',
+      parent: request.parent || '',
     });
     const callSettings = new gax.CallSettings(options);
     this.initialize();
@@ -1150,36 +1452,36 @@ export class EntityTypesClient {
     );
   }
 
-/**
- * Equivalent to {@link listEntityTypes}, but returns an iterable object.
- *
- * for-await-of syntax is used with the iterable to recursively get response element on-demand.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The agent to list all entity types from.
- *   Format: `projects/<Project ID>/agent`.
- * @param {string} [request.languageCode]
- *   Optional. The language used to access language-specific data.
- *   If not specified, the agent's default language is used.
- *   For more information, see
- *   [Multilingual intent and entity
- *   data](https://cloud.google.com/dialogflow/docs/agents-multilingual#intent-entity).
- * @param {number} request.pageSize
- *   Optional. The maximum number of items to return in a single page. By
- *   default 100 and at most 1000.
- * @param {string} request.pageToken
- *   Optional. The next_page_token value returned from a previous list request.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that conforms to @link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols.
- */
+  /**
+   * Equivalent to {@link listEntityTypes}, but returns an iterable object.
+   *
+   * for-await-of syntax is used with the iterable to recursively get response element on-demand.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The agent to list all entity types from.
+   *   Format: `projects/<Project ID>/agent`.
+   * @param {string} [request.languageCode]
+   *   Optional. The language used to access language-specific data.
+   *   If not specified, the agent's default language is used.
+   *   For more information, see
+   *   [Multilingual intent and entity
+   *   data](https://cloud.google.com/dialogflow/docs/agents-multilingual#intent-entity).
+   * @param {number} request.pageSize
+   *   Optional. The maximum number of items to return in a single page. By
+   *   default 100 and at most 1000.
+   * @param {string} request.pageToken
+   *   Optional. The next_page_token value returned from a previous list request.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that conforms to @link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols.
+   */
   listEntityTypesAsync(
-      request?: protos.google.cloud.dialogflow.v2beta1.IListEntityTypesRequest,
-      options?: gax.CallOptions):
-    AsyncIterable<protos.google.cloud.dialogflow.v2beta1.IEntityType>{
+    request?: protos.google.cloud.dialogflow.v2beta1.IListEntityTypesRequest,
+    options?: gax.CallOptions
+  ): AsyncIterable<protos.google.cloud.dialogflow.v2beta1.IEntityType> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1187,14 +1489,14 @@ export class EntityTypesClient {
     options.otherArgs.headers[
       'x-goog-request-params'
     ] = gax.routingHeader.fromParams({
-      'parent': request.parent || '',
+      parent: request.parent || '',
     });
     options = options || {};
     const callSettings = new gax.CallSettings(options);
     this.initialize();
     return this.descriptors.page.listEntityTypes.asyncIterate(
       this.innerApiCalls['listEntityTypes'] as GaxCall,
-      request as unknown as RequestType,
+      (request as unknown) as RequestType,
       callSettings
     ) as AsyncIterable<protos.google.cloud.dialogflow.v2beta1.IEntityType>;
   }
@@ -1208,7 +1510,7 @@ export class EntityTypesClient {
    * @param {string} project
    * @returns {string} Resource name string.
    */
-  projectAgentPath(project:string) {
+  projectAgentPath(project: string) {
     return this.pathTemplates.projectAgentPathTemplate.render({
       project: project,
     });
@@ -1222,7 +1524,8 @@ export class EntityTypesClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromProjectAgentName(projectAgentName: string) {
-    return this.pathTemplates.projectAgentPathTemplate.match(projectAgentName).project;
+    return this.pathTemplates.projectAgentPathTemplate.match(projectAgentName)
+      .project;
   }
 
   /**
@@ -1232,7 +1535,7 @@ export class EntityTypesClient {
    * @param {string} intent
    * @returns {string} Resource name string.
    */
-  projectAgentIntentPath(project:string,intent:string) {
+  projectAgentIntentPath(project: string, intent: string) {
     return this.pathTemplates.projectAgentIntentPathTemplate.render({
       project: project,
       intent: intent,
@@ -1247,7 +1550,9 @@ export class EntityTypesClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromProjectAgentIntentName(projectAgentIntentName: string) {
-    return this.pathTemplates.projectAgentIntentPathTemplate.match(projectAgentIntentName).project;
+    return this.pathTemplates.projectAgentIntentPathTemplate.match(
+      projectAgentIntentName
+    ).project;
   }
 
   /**
@@ -1258,7 +1563,9 @@ export class EntityTypesClient {
    * @returns {string} A string representing the intent.
    */
   matchIntentFromProjectAgentIntentName(projectAgentIntentName: string) {
-    return this.pathTemplates.projectAgentIntentPathTemplate.match(projectAgentIntentName).intent;
+    return this.pathTemplates.projectAgentIntentPathTemplate.match(
+      projectAgentIntentName
+    ).intent;
   }
 
   /**
@@ -1268,7 +1575,7 @@ export class EntityTypesClient {
    * @param {string} location
    * @returns {string} Resource name string.
    */
-  projectLocationAgentPath(project:string,location:string) {
+  projectLocationAgentPath(project: string, location: string) {
     return this.pathTemplates.projectLocationAgentPathTemplate.render({
       project: project,
       location: location,
@@ -1283,7 +1590,9 @@ export class EntityTypesClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromProjectLocationAgentName(projectLocationAgentName: string) {
-    return this.pathTemplates.projectLocationAgentPathTemplate.match(projectLocationAgentName).project;
+    return this.pathTemplates.projectLocationAgentPathTemplate.match(
+      projectLocationAgentName
+    ).project;
   }
 
   /**
@@ -1294,7 +1603,9 @@ export class EntityTypesClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromProjectLocationAgentName(projectLocationAgentName: string) {
-    return this.pathTemplates.projectLocationAgentPathTemplate.match(projectLocationAgentName).location;
+    return this.pathTemplates.projectLocationAgentPathTemplate.match(
+      projectLocationAgentName
+    ).location;
   }
 
   /**
@@ -1305,7 +1616,11 @@ export class EntityTypesClient {
    * @param {string} intent
    * @returns {string} Resource name string.
    */
-  projectLocationAgentIntentPath(project:string,location:string,intent:string) {
+  projectLocationAgentIntentPath(
+    project: string,
+    location: string,
+    intent: string
+  ) {
     return this.pathTemplates.projectLocationAgentIntentPathTemplate.render({
       project: project,
       location: location,
@@ -1320,8 +1635,12 @@ export class EntityTypesClient {
    *   A fully-qualified path representing project_location_agent_intent resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationAgentIntentName(projectLocationAgentIntentName: string) {
-    return this.pathTemplates.projectLocationAgentIntentPathTemplate.match(projectLocationAgentIntentName).project;
+  matchProjectFromProjectLocationAgentIntentName(
+    projectLocationAgentIntentName: string
+  ) {
+    return this.pathTemplates.projectLocationAgentIntentPathTemplate.match(
+      projectLocationAgentIntentName
+    ).project;
   }
 
   /**
@@ -1331,8 +1650,12 @@ export class EntityTypesClient {
    *   A fully-qualified path representing project_location_agent_intent resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationAgentIntentName(projectLocationAgentIntentName: string) {
-    return this.pathTemplates.projectLocationAgentIntentPathTemplate.match(projectLocationAgentIntentName).location;
+  matchLocationFromProjectLocationAgentIntentName(
+    projectLocationAgentIntentName: string
+  ) {
+    return this.pathTemplates.projectLocationAgentIntentPathTemplate.match(
+      projectLocationAgentIntentName
+    ).location;
   }
 
   /**
@@ -1342,8 +1665,12 @@ export class EntityTypesClient {
    *   A fully-qualified path representing project_location_agent_intent resource.
    * @returns {string} A string representing the intent.
    */
-  matchIntentFromProjectLocationAgentIntentName(projectLocationAgentIntentName: string) {
-    return this.pathTemplates.projectLocationAgentIntentPathTemplate.match(projectLocationAgentIntentName).intent;
+  matchIntentFromProjectLocationAgentIntentName(
+    projectLocationAgentIntentName: string
+  ) {
+    return this.pathTemplates.projectLocationAgentIntentPathTemplate.match(
+      projectLocationAgentIntentName
+    ).intent;
   }
 
   /**

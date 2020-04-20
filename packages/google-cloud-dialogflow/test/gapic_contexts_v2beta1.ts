@@ -20,7 +20,7 @@ import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
 import {SinonStub} from 'sinon';
-import { describe, it } from 'mocha';
+import {describe, it} from 'mocha';
 import * as contextsModule from '../src';
 
 import {PassThrough} from 'stream';
@@ -28,940 +28,1288 @@ import {PassThrough} from 'stream';
 import {protobuf} from 'google-gax';
 
 function generateSampleMessage<T extends object>(instance: T) {
-    const filledObject = (instance.constructor as typeof protobuf.Message)
-        .toObject(instance as protobuf.Message<T>, {defaults: true});
-    return (instance.constructor as typeof protobuf.Message).fromObject(filledObject) as T;
+  const filledObject = (instance.constructor as typeof protobuf.Message).toObject(
+    instance as protobuf.Message<T>,
+    {defaults: true}
+  );
+  return (instance.constructor as typeof protobuf.Message).fromObject(
+    filledObject
+  ) as T;
 }
 
 function stubSimpleCall<ResponseType>(response?: ResponseType, error?: Error) {
-    return error ? sinon.stub().rejects(error) : sinon.stub().resolves([response]);
+  return error
+    ? sinon.stub().rejects(error)
+    : sinon.stub().resolves([response]);
 }
 
-function stubSimpleCallWithCallback<ResponseType>(response?: ResponseType, error?: Error) {
-    return error ? sinon.stub().callsArgWith(2, error) : sinon.stub().callsArgWith(2, null, response);
+function stubSimpleCallWithCallback<ResponseType>(
+  response?: ResponseType,
+  error?: Error
+) {
+  return error
+    ? sinon.stub().callsArgWith(2, error)
+    : sinon.stub().callsArgWith(2, null, response);
 }
 
-function stubPageStreamingCall<ResponseType>(responses?: ResponseType[], error?: Error) {
-    const pagingStub = sinon.stub();
-    if (responses) {
-        for (let i = 0; i < responses.length; ++i) {
-            pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
-        }
+function stubPageStreamingCall<ResponseType>(
+  responses?: ResponseType[],
+  error?: Error
+) {
+  const pagingStub = sinon.stub();
+  if (responses) {
+    for (let i = 0; i < responses.length; ++i) {
+      pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
     }
-    const transformStub = error ? sinon.stub().callsArgWith(2, error) : pagingStub;
-    const mockStream = new PassThrough({
-        objectMode: true,
-        transform: transformStub,
+  }
+  const transformStub = error
+    ? sinon.stub().callsArgWith(2, error)
+    : pagingStub;
+  const mockStream = new PassThrough({
+    objectMode: true,
+    transform: transformStub,
+  });
+  // trigger as many responses as needed
+  if (responses) {
+    for (let i = 0; i < responses.length; ++i) {
+      setImmediate(() => {
+        mockStream.write({});
+      });
+    }
+    setImmediate(() => {
+      mockStream.end();
     });
-    // trigger as many responses as needed
-    if (responses) {
-        for (let i = 0; i < responses.length; ++i) {
-            setImmediate(() => { mockStream.write({}); });
-        }
-        setImmediate(() => { mockStream.end(); });
-    } else {
-        setImmediate(() => { mockStream.write({}); });
-        setImmediate(() => { mockStream.end(); });
-    }
-    return sinon.stub().returns(mockStream);
+  } else {
+    setImmediate(() => {
+      mockStream.write({});
+    });
+    setImmediate(() => {
+      mockStream.end();
+    });
+  }
+  return sinon.stub().returns(mockStream);
 }
 
-function stubAsyncIterationCall<ResponseType>(responses?: ResponseType[], error?: Error) {
-    let counter = 0;
-    const asyncIterable = {
-        [Symbol.asyncIterator]() {
-            return {
-                async next() {
-                    if (error) {
-                        return Promise.reject(error);
-                    }
-                    if (counter >= responses!.length) {
-                        return Promise.resolve({done: true, value: undefined});
-                    }
-                    return Promise.resolve({done: false, value: responses![counter++]});
-                }
-            };
-        }
-    };
-    return sinon.stub().returns(asyncIterable);
+function stubAsyncIterationCall<ResponseType>(
+  responses?: ResponseType[],
+  error?: Error
+) {
+  let counter = 0;
+  const asyncIterable = {
+    [Symbol.asyncIterator]() {
+      return {
+        async next() {
+          if (error) {
+            return Promise.reject(error);
+          }
+          if (counter >= responses!.length) {
+            return Promise.resolve({done: true, value: undefined});
+          }
+          return Promise.resolve({done: false, value: responses![counter++]});
+        },
+      };
+    },
+  };
+  return sinon.stub().returns(asyncIterable);
 }
 
 describe('v2beta1.ContextsClient', () => {
-    it('has servicePath', () => {
-        const servicePath = contextsModule.v2beta1.ContextsClient.servicePath;
-        assert(servicePath);
+  it('has servicePath', () => {
+    const servicePath = contextsModule.v2beta1.ContextsClient.servicePath;
+    assert(servicePath);
+  });
+
+  it('has apiEndpoint', () => {
+    const apiEndpoint = contextsModule.v2beta1.ContextsClient.apiEndpoint;
+    assert(apiEndpoint);
+  });
+
+  it('has port', () => {
+    const port = contextsModule.v2beta1.ContextsClient.port;
+    assert(port);
+    assert(typeof port === 'number');
+  });
+
+  it('should create a client with no option', () => {
+    const client = new contextsModule.v2beta1.ContextsClient();
+    assert(client);
+  });
+
+  it('should create a client with gRPC fallback', () => {
+    const client = new contextsModule.v2beta1.ContextsClient({
+      fallback: true,
+    });
+    assert(client);
+  });
+
+  it('has initialize method and supports deferred initialization', async () => {
+    const client = new contextsModule.v2beta1.ContextsClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    assert.strictEqual(client.contextsStub, undefined);
+    await client.initialize();
+    assert(client.contextsStub);
+  });
+
+  it('has close method', () => {
+    const client = new contextsModule.v2beta1.ContextsClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    client.close();
+  });
+
+  it('has getProjectId method', async () => {
+    const fakeProjectId = 'fake-project-id';
+    const client = new contextsModule.v2beta1.ContextsClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
+    const result = await client.getProjectId();
+    assert.strictEqual(result, fakeProjectId);
+    assert((client.auth.getProjectId as SinonStub).calledWithExactly());
+  });
+
+  it('has getProjectId method with callback', async () => {
+    const fakeProjectId = 'fake-project-id';
+    const client = new contextsModule.v2beta1.ContextsClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    client.auth.getProjectId = sinon
+      .stub()
+      .callsArgWith(0, null, fakeProjectId);
+    const promise = new Promise((resolve, reject) => {
+      client.getProjectId((err?: Error | null, projectId?: string | null) => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve(projectId);
+        }
+      });
+    });
+    const result = await promise;
+    assert.strictEqual(result, fakeProjectId);
+  });
+
+  describe('getContext', () => {
+    it('invokes getContext without error', async () => {
+      const client = new contextsModule.v2beta1.ContextsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.v2beta1.GetContextRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.dialogflow.v2beta1.Context()
+      );
+      client.innerApiCalls.getContext = stubSimpleCall(expectedResponse);
+      const [response] = await client.getContext(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.getContext as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
     });
 
-    it('has apiEndpoint', () => {
-        const apiEndpoint = contextsModule.v2beta1.ContextsClient.apiEndpoint;
-        assert(apiEndpoint);
-    });
-
-    it('has port', () => {
-        const port = contextsModule.v2beta1.ContextsClient.port;
-        assert(port);
-        assert(typeof port === 'number');
-    });
-
-    it('should create a client with no option', () => {
-        const client = new contextsModule.v2beta1.ContextsClient();
-        assert(client);
-    });
-
-    it('should create a client with gRPC fallback', () => {
-        const client = new contextsModule.v2beta1.ContextsClient({
-            fallback: true,
-        });
-        assert(client);
-    });
-
-    it('has initialize method and supports deferred initialization', async () => {
-        const client = new contextsModule.v2beta1.ContextsClient({
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
-            projectId: 'bogus',
-        });
-        assert.strictEqual(client.contextsStub, undefined);
-        await client.initialize();
-        assert(client.contextsStub);
-    });
-
-    it('has close method', () => {
-        const client = new contextsModule.v2beta1.ContextsClient({
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
-            projectId: 'bogus',
-        });
-        client.close();
-    });
-
-    it('has getProjectId method', async () => {
-        const fakeProjectId = 'fake-project-id';
-        const client = new contextsModule.v2beta1.ContextsClient({
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
-            projectId: 'bogus',
-        });
-        client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
-        const result = await client.getProjectId();
-        assert.strictEqual(result, fakeProjectId);
-        assert((client.auth.getProjectId as SinonStub).calledWithExactly());
-    });
-
-    it('has getProjectId method with callback', async () => {
-        const fakeProjectId = 'fake-project-id';
-        const client = new contextsModule.v2beta1.ContextsClient({
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
-            projectId: 'bogus',
-        });
-        client.auth.getProjectId = sinon.stub().callsArgWith(0, null, fakeProjectId);
-        const promise = new Promise((resolve, reject) => {
-            client.getProjectId((err?: Error|null, projectId?: string|null) => {
-                if (err) {
-                    reject(err);
-                } else {
-                    resolve(projectId);
-                }
-            });
-        });
-        const result = await promise;
-        assert.strictEqual(result, fakeProjectId);
-    });
-
-    describe('getContext', () => {
-        it('invokes getContext without error', async () => {
-            const client = new contextsModule.v2beta1.ContextsClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            client.initialize();
-            const request = generateSampleMessage(new protos.google.cloud.dialogflow.v2beta1.GetContextRequest());
-            request.name = '';
-            const expectedHeaderRequestParams = "name=";
-            const expectedOptions = {
-                otherArgs: {
-                    headers: {
-                        'x-goog-request-params': expectedHeaderRequestParams,
-                    },
-                },
-            };
-            const expectedResponse = generateSampleMessage(new protos.google.cloud.dialogflow.v2beta1.Context());
-            client.innerApiCalls.getContext = stubSimpleCall(expectedResponse);
-            const [response] = await client.getContext(request);
-            assert.deepStrictEqual(response, expectedResponse);
-            assert((client.innerApiCalls.getContext as SinonStub)
-                .getCall(0).calledWith(request, expectedOptions, undefined));
-        });
-
-        it('invokes getContext without error using callback', async () => {
-            const client = new contextsModule.v2beta1.ContextsClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            client.initialize();
-            const request = generateSampleMessage(new protos.google.cloud.dialogflow.v2beta1.GetContextRequest());
-            request.name = '';
-            const expectedHeaderRequestParams = "name=";
-            const expectedOptions = {
-                otherArgs: {
-                    headers: {
-                        'x-goog-request-params': expectedHeaderRequestParams,
-                    },
-                },
-            };
-            const expectedResponse = generateSampleMessage(new protos.google.cloud.dialogflow.v2beta1.Context());
-            client.innerApiCalls.getContext = stubSimpleCallWithCallback(expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.getContext(
-                    request,
-                    (err?: Error|null, result?: protos.google.cloud.dialogflow.v2beta1.IContext|null) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const response = await promise;
-            assert.deepStrictEqual(response, expectedResponse);
-            assert((client.innerApiCalls.getContext as SinonStub)
-                .getCall(0).calledWith(request, expectedOptions /*, callback defined above */));
-        });
-
-        it('invokes getContext with error', async () => {
-            const client = new contextsModule.v2beta1.ContextsClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            client.initialize();
-            const request = generateSampleMessage(new protos.google.cloud.dialogflow.v2beta1.GetContextRequest());
-            request.name = '';
-            const expectedHeaderRequestParams = "name=";
-            const expectedOptions = {
-                otherArgs: {
-                    headers: {
-                        'x-goog-request-params': expectedHeaderRequestParams,
-                    },
-                },
-            };
-            const expectedError = new Error('expected');
-            client.innerApiCalls.getContext = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(async () => { await client.getContext(request); }, expectedError);
-            assert((client.innerApiCalls.getContext as SinonStub)
-                .getCall(0).calledWith(request, expectedOptions, undefined));
-        });
-    });
-
-    describe('createContext', () => {
-        it('invokes createContext without error', async () => {
-            const client = new contextsModule.v2beta1.ContextsClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            client.initialize();
-            const request = generateSampleMessage(new protos.google.cloud.dialogflow.v2beta1.CreateContextRequest());
-            request.parent = '';
-            const expectedHeaderRequestParams = "parent=";
-            const expectedOptions = {
-                otherArgs: {
-                    headers: {
-                        'x-goog-request-params': expectedHeaderRequestParams,
-                    },
-                },
-            };
-            const expectedResponse = generateSampleMessage(new protos.google.cloud.dialogflow.v2beta1.Context());
-            client.innerApiCalls.createContext = stubSimpleCall(expectedResponse);
-            const [response] = await client.createContext(request);
-            assert.deepStrictEqual(response, expectedResponse);
-            assert((client.innerApiCalls.createContext as SinonStub)
-                .getCall(0).calledWith(request, expectedOptions, undefined));
-        });
-
-        it('invokes createContext without error using callback', async () => {
-            const client = new contextsModule.v2beta1.ContextsClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            client.initialize();
-            const request = generateSampleMessage(new protos.google.cloud.dialogflow.v2beta1.CreateContextRequest());
-            request.parent = '';
-            const expectedHeaderRequestParams = "parent=";
-            const expectedOptions = {
-                otherArgs: {
-                    headers: {
-                        'x-goog-request-params': expectedHeaderRequestParams,
-                    },
-                },
-            };
-            const expectedResponse = generateSampleMessage(new protos.google.cloud.dialogflow.v2beta1.Context());
-            client.innerApiCalls.createContext = stubSimpleCallWithCallback(expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.createContext(
-                    request,
-                    (err?: Error|null, result?: protos.google.cloud.dialogflow.v2beta1.IContext|null) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const response = await promise;
-            assert.deepStrictEqual(response, expectedResponse);
-            assert((client.innerApiCalls.createContext as SinonStub)
-                .getCall(0).calledWith(request, expectedOptions /*, callback defined above */));
-        });
-
-        it('invokes createContext with error', async () => {
-            const client = new contextsModule.v2beta1.ContextsClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            client.initialize();
-            const request = generateSampleMessage(new protos.google.cloud.dialogflow.v2beta1.CreateContextRequest());
-            request.parent = '';
-            const expectedHeaderRequestParams = "parent=";
-            const expectedOptions = {
-                otherArgs: {
-                    headers: {
-                        'x-goog-request-params': expectedHeaderRequestParams,
-                    },
-                },
-            };
-            const expectedError = new Error('expected');
-            client.innerApiCalls.createContext = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(async () => { await client.createContext(request); }, expectedError);
-            assert((client.innerApiCalls.createContext as SinonStub)
-                .getCall(0).calledWith(request, expectedOptions, undefined));
-        });
-    });
-
-    describe('updateContext', () => {
-        it('invokes updateContext without error', async () => {
-            const client = new contextsModule.v2beta1.ContextsClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            client.initialize();
-            const request = generateSampleMessage(new protos.google.cloud.dialogflow.v2beta1.UpdateContextRequest());
-            request.context = {};
-            request.context.name = '';
-            const expectedHeaderRequestParams = "context.name=";
-            const expectedOptions = {
-                otherArgs: {
-                    headers: {
-                        'x-goog-request-params': expectedHeaderRequestParams,
-                    },
-                },
-            };
-            const expectedResponse = generateSampleMessage(new protos.google.cloud.dialogflow.v2beta1.Context());
-            client.innerApiCalls.updateContext = stubSimpleCall(expectedResponse);
-            const [response] = await client.updateContext(request);
-            assert.deepStrictEqual(response, expectedResponse);
-            assert((client.innerApiCalls.updateContext as SinonStub)
-                .getCall(0).calledWith(request, expectedOptions, undefined));
-        });
-
-        it('invokes updateContext without error using callback', async () => {
-            const client = new contextsModule.v2beta1.ContextsClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            client.initialize();
-            const request = generateSampleMessage(new protos.google.cloud.dialogflow.v2beta1.UpdateContextRequest());
-            request.context = {};
-            request.context.name = '';
-            const expectedHeaderRequestParams = "context.name=";
-            const expectedOptions = {
-                otherArgs: {
-                    headers: {
-                        'x-goog-request-params': expectedHeaderRequestParams,
-                    },
-                },
-            };
-            const expectedResponse = generateSampleMessage(new protos.google.cloud.dialogflow.v2beta1.Context());
-            client.innerApiCalls.updateContext = stubSimpleCallWithCallback(expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.updateContext(
-                    request,
-                    (err?: Error|null, result?: protos.google.cloud.dialogflow.v2beta1.IContext|null) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const response = await promise;
-            assert.deepStrictEqual(response, expectedResponse);
-            assert((client.innerApiCalls.updateContext as SinonStub)
-                .getCall(0).calledWith(request, expectedOptions /*, callback defined above */));
-        });
-
-        it('invokes updateContext with error', async () => {
-            const client = new contextsModule.v2beta1.ContextsClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            client.initialize();
-            const request = generateSampleMessage(new protos.google.cloud.dialogflow.v2beta1.UpdateContextRequest());
-            request.context = {};
-            request.context.name = '';
-            const expectedHeaderRequestParams = "context.name=";
-            const expectedOptions = {
-                otherArgs: {
-                    headers: {
-                        'x-goog-request-params': expectedHeaderRequestParams,
-                    },
-                },
-            };
-            const expectedError = new Error('expected');
-            client.innerApiCalls.updateContext = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(async () => { await client.updateContext(request); }, expectedError);
-            assert((client.innerApiCalls.updateContext as SinonStub)
-                .getCall(0).calledWith(request, expectedOptions, undefined));
-        });
-    });
-
-    describe('deleteContext', () => {
-        it('invokes deleteContext without error', async () => {
-            const client = new contextsModule.v2beta1.ContextsClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            client.initialize();
-            const request = generateSampleMessage(new protos.google.cloud.dialogflow.v2beta1.DeleteContextRequest());
-            request.name = '';
-            const expectedHeaderRequestParams = "name=";
-            const expectedOptions = {
-                otherArgs: {
-                    headers: {
-                        'x-goog-request-params': expectedHeaderRequestParams,
-                    },
-                },
-            };
-            const expectedResponse = generateSampleMessage(new protos.google.protobuf.Empty());
-            client.innerApiCalls.deleteContext = stubSimpleCall(expectedResponse);
-            const [response] = await client.deleteContext(request);
-            assert.deepStrictEqual(response, expectedResponse);
-            assert((client.innerApiCalls.deleteContext as SinonStub)
-                .getCall(0).calledWith(request, expectedOptions, undefined));
-        });
-
-        it('invokes deleteContext without error using callback', async () => {
-            const client = new contextsModule.v2beta1.ContextsClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            client.initialize();
-            const request = generateSampleMessage(new protos.google.cloud.dialogflow.v2beta1.DeleteContextRequest());
-            request.name = '';
-            const expectedHeaderRequestParams = "name=";
-            const expectedOptions = {
-                otherArgs: {
-                    headers: {
-                        'x-goog-request-params': expectedHeaderRequestParams,
-                    },
-                },
-            };
-            const expectedResponse = generateSampleMessage(new protos.google.protobuf.Empty());
-            client.innerApiCalls.deleteContext = stubSimpleCallWithCallback(expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.deleteContext(
-                    request,
-                    (err?: Error|null, result?: protos.google.protobuf.IEmpty|null) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const response = await promise;
-            assert.deepStrictEqual(response, expectedResponse);
-            assert((client.innerApiCalls.deleteContext as SinonStub)
-                .getCall(0).calledWith(request, expectedOptions /*, callback defined above */));
-        });
-
-        it('invokes deleteContext with error', async () => {
-            const client = new contextsModule.v2beta1.ContextsClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            client.initialize();
-            const request = generateSampleMessage(new protos.google.cloud.dialogflow.v2beta1.DeleteContextRequest());
-            request.name = '';
-            const expectedHeaderRequestParams = "name=";
-            const expectedOptions = {
-                otherArgs: {
-                    headers: {
-                        'x-goog-request-params': expectedHeaderRequestParams,
-                    },
-                },
-            };
-            const expectedError = new Error('expected');
-            client.innerApiCalls.deleteContext = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(async () => { await client.deleteContext(request); }, expectedError);
-            assert((client.innerApiCalls.deleteContext as SinonStub)
-                .getCall(0).calledWith(request, expectedOptions, undefined));
-        });
-    });
-
-    describe('deleteAllContexts', () => {
-        it('invokes deleteAllContexts without error', async () => {
-            const client = new contextsModule.v2beta1.ContextsClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            client.initialize();
-            const request = generateSampleMessage(new protos.google.cloud.dialogflow.v2beta1.DeleteAllContextsRequest());
-            request.parent = '';
-            const expectedHeaderRequestParams = "parent=";
-            const expectedOptions = {
-                otherArgs: {
-                    headers: {
-                        'x-goog-request-params': expectedHeaderRequestParams,
-                    },
-                },
-            };
-            const expectedResponse = generateSampleMessage(new protos.google.protobuf.Empty());
-            client.innerApiCalls.deleteAllContexts = stubSimpleCall(expectedResponse);
-            const [response] = await client.deleteAllContexts(request);
-            assert.deepStrictEqual(response, expectedResponse);
-            assert((client.innerApiCalls.deleteAllContexts as SinonStub)
-                .getCall(0).calledWith(request, expectedOptions, undefined));
-        });
-
-        it('invokes deleteAllContexts without error using callback', async () => {
-            const client = new contextsModule.v2beta1.ContextsClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            client.initialize();
-            const request = generateSampleMessage(new protos.google.cloud.dialogflow.v2beta1.DeleteAllContextsRequest());
-            request.parent = '';
-            const expectedHeaderRequestParams = "parent=";
-            const expectedOptions = {
-                otherArgs: {
-                    headers: {
-                        'x-goog-request-params': expectedHeaderRequestParams,
-                    },
-                },
-            };
-            const expectedResponse = generateSampleMessage(new protos.google.protobuf.Empty());
-            client.innerApiCalls.deleteAllContexts = stubSimpleCallWithCallback(expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.deleteAllContexts(
-                    request,
-                    (err?: Error|null, result?: protos.google.protobuf.IEmpty|null) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const response = await promise;
-            assert.deepStrictEqual(response, expectedResponse);
-            assert((client.innerApiCalls.deleteAllContexts as SinonStub)
-                .getCall(0).calledWith(request, expectedOptions /*, callback defined above */));
-        });
-
-        it('invokes deleteAllContexts with error', async () => {
-            const client = new contextsModule.v2beta1.ContextsClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            client.initialize();
-            const request = generateSampleMessage(new protos.google.cloud.dialogflow.v2beta1.DeleteAllContextsRequest());
-            request.parent = '';
-            const expectedHeaderRequestParams = "parent=";
-            const expectedOptions = {
-                otherArgs: {
-                    headers: {
-                        'x-goog-request-params': expectedHeaderRequestParams,
-                    },
-                },
-            };
-            const expectedError = new Error('expected');
-            client.innerApiCalls.deleteAllContexts = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(async () => { await client.deleteAllContexts(request); }, expectedError);
-            assert((client.innerApiCalls.deleteAllContexts as SinonStub)
-                .getCall(0).calledWith(request, expectedOptions, undefined));
-        });
-    });
-
-    describe('listContexts', () => {
-        it('invokes listContexts without error', async () => {
-            const client = new contextsModule.v2beta1.ContextsClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            client.initialize();
-            const request = generateSampleMessage(new protos.google.cloud.dialogflow.v2beta1.ListContextsRequest());
-            request.parent = '';
-            const expectedHeaderRequestParams = "parent=";
-            const expectedOptions = {
-                otherArgs: {
-                    headers: {
-                        'x-goog-request-params': expectedHeaderRequestParams,
-                    },
-                },
-            };
-            const expectedResponse = [
-              generateSampleMessage(new protos.google.cloud.dialogflow.v2beta1.Context()),
-              generateSampleMessage(new protos.google.cloud.dialogflow.v2beta1.Context()),
-              generateSampleMessage(new protos.google.cloud.dialogflow.v2beta1.Context()),
-            ];
-            client.innerApiCalls.listContexts = stubSimpleCall(expectedResponse);
-            const [response] = await client.listContexts(request);
-            assert.deepStrictEqual(response, expectedResponse);
-            assert((client.innerApiCalls.listContexts as SinonStub)
-                .getCall(0).calledWith(request, expectedOptions, undefined));
-        });
-
-        it('invokes listContexts without error using callback', async () => {
-            const client = new contextsModule.v2beta1.ContextsClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            client.initialize();
-            const request = generateSampleMessage(new protos.google.cloud.dialogflow.v2beta1.ListContextsRequest());
-            request.parent = '';
-            const expectedHeaderRequestParams = "parent=";
-            const expectedOptions = {
-                otherArgs: {
-                    headers: {
-                        'x-goog-request-params': expectedHeaderRequestParams,
-                    },
-                },
-            };
-            const expectedResponse = [
-              generateSampleMessage(new protos.google.cloud.dialogflow.v2beta1.Context()),
-              generateSampleMessage(new protos.google.cloud.dialogflow.v2beta1.Context()),
-              generateSampleMessage(new protos.google.cloud.dialogflow.v2beta1.Context()),
-            ];
-            client.innerApiCalls.listContexts = stubSimpleCallWithCallback(expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.listContexts(
-                    request,
-                    (err?: Error|null, result?: protos.google.cloud.dialogflow.v2beta1.IContext[]|null) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const response = await promise;
-            assert.deepStrictEqual(response, expectedResponse);
-            assert((client.innerApiCalls.listContexts as SinonStub)
-                .getCall(0).calledWith(request, expectedOptions /*, callback defined above */));
-        });
-
-        it('invokes listContexts with error', async () => {
-            const client = new contextsModule.v2beta1.ContextsClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            client.initialize();
-            const request = generateSampleMessage(new protos.google.cloud.dialogflow.v2beta1.ListContextsRequest());
-            request.parent = '';
-            const expectedHeaderRequestParams = "parent=";
-            const expectedOptions = {
-                otherArgs: {
-                    headers: {
-                        'x-goog-request-params': expectedHeaderRequestParams,
-                    },
-                },
-            };
-            const expectedError = new Error('expected');
-            client.innerApiCalls.listContexts = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(async () => { await client.listContexts(request); }, expectedError);
-            assert((client.innerApiCalls.listContexts as SinonStub)
-                .getCall(0).calledWith(request, expectedOptions, undefined));
-        });
-
-        it('invokes listContextsStream without error', async () => {
-            const client = new contextsModule.v2beta1.ContextsClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            client.initialize();
-            const request = generateSampleMessage(new protos.google.cloud.dialogflow.v2beta1.ListContextsRequest());
-            request.parent = '';
-            const expectedHeaderRequestParams = "parent=";
-            const expectedResponse = [
-              generateSampleMessage(new protos.google.cloud.dialogflow.v2beta1.Context()),
-              generateSampleMessage(new protos.google.cloud.dialogflow.v2beta1.Context()),
-              generateSampleMessage(new protos.google.cloud.dialogflow.v2beta1.Context()),
-            ];
-            client.descriptors.page.listContexts.createStream = stubPageStreamingCall(expectedResponse);
-            const stream = client.listContextsStream(request);
-            const promise = new Promise((resolve, reject) => {
-                const responses: protos.google.cloud.dialogflow.v2beta1.Context[] = [];
-                stream.on('data', (response: protos.google.cloud.dialogflow.v2beta1.Context) => {
-                    responses.push(response);
-                });
-                stream.on('end', () => {
-                    resolve(responses);
-                });
-                stream.on('error', (err: Error) => {
-                    reject(err);
-                });
-            });
-            const responses = await promise;
-            assert.deepStrictEqual(responses, expectedResponse);
-            assert((client.descriptors.page.listContexts.createStream as SinonStub)
-                .getCall(0).calledWith(client.innerApiCalls.listContexts, request));
-            assert.strictEqual(
-                (client.descriptors.page.listContexts.createStream as SinonStub)
-                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-                expectedHeaderRequestParams
-            );
-        });
-
-        it('invokes listContextsStream with error', async () => {
-            const client = new contextsModule.v2beta1.ContextsClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            client.initialize();
-            const request = generateSampleMessage(new protos.google.cloud.dialogflow.v2beta1.ListContextsRequest());
-            request.parent = '';
-            const expectedHeaderRequestParams = "parent=";
-            const expectedError = new Error('expected');
-            client.descriptors.page.listContexts.createStream = stubPageStreamingCall(undefined, expectedError);
-            const stream = client.listContextsStream(request);
-            const promise = new Promise((resolve, reject) => {
-                const responses: protos.google.cloud.dialogflow.v2beta1.Context[] = [];
-                stream.on('data', (response: protos.google.cloud.dialogflow.v2beta1.Context) => {
-                    responses.push(response);
-                });
-                stream.on('end', () => {
-                    resolve(responses);
-                });
-                stream.on('error', (err: Error) => {
-                    reject(err);
-                });
-            });
-            await assert.rejects(async () => { await promise; }, expectedError);
-            assert((client.descriptors.page.listContexts.createStream as SinonStub)
-                .getCall(0).calledWith(client.innerApiCalls.listContexts, request));
-            assert.strictEqual(
-                (client.descriptors.page.listContexts.createStream as SinonStub)
-                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-                expectedHeaderRequestParams
-            );
-        });
-
-        it('uses async iteration with listContexts without error', async () => {
-            const client = new contextsModule.v2beta1.ContextsClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            client.initialize();
-            const request = generateSampleMessage(new protos.google.cloud.dialogflow.v2beta1.ListContextsRequest());
-            request.parent = '';
-            const expectedHeaderRequestParams = "parent=";const expectedResponse = [
-              generateSampleMessage(new protos.google.cloud.dialogflow.v2beta1.Context()),
-              generateSampleMessage(new protos.google.cloud.dialogflow.v2beta1.Context()),
-              generateSampleMessage(new protos.google.cloud.dialogflow.v2beta1.Context()),
-            ];
-            client.descriptors.page.listContexts.asyncIterate = stubAsyncIterationCall(expectedResponse);
-            const responses: protos.google.cloud.dialogflow.v2beta1.IContext[] = [];
-            const iterable = client.listContextsAsync(request);
-            for await (const resource of iterable) {
-                responses.push(resource!);
+    it('invokes getContext without error using callback', async () => {
+      const client = new contextsModule.v2beta1.ContextsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.v2beta1.GetContextRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.dialogflow.v2beta1.Context()
+      );
+      client.innerApiCalls.getContext = stubSimpleCallWithCallback(
+        expectedResponse
+      );
+      const promise = new Promise((resolve, reject) => {
+        client.getContext(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.dialogflow.v2beta1.IContext | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
             }
-            assert.deepStrictEqual(responses, expectedResponse);
-            assert.deepStrictEqual(
-                (client.descriptors.page.listContexts.asyncIterate as SinonStub)
-                    .getCall(0).args[1], request);
-            assert.strictEqual(
-                (client.descriptors.page.listContexts.asyncIterate as SinonStub)
-                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-                expectedHeaderRequestParams
-            );
-        });
-
-        it('uses async iteration with listContexts with error', async () => {
-            const client = new contextsModule.v2beta1.ContextsClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            client.initialize();
-            const request = generateSampleMessage(new protos.google.cloud.dialogflow.v2beta1.ListContextsRequest());
-            request.parent = '';
-            const expectedHeaderRequestParams = "parent=";const expectedError = new Error('expected');
-            client.descriptors.page.listContexts.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
-            const iterable = client.listContextsAsync(request);
-            await assert.rejects(async () => {
-                const responses: protos.google.cloud.dialogflow.v2beta1.IContext[] = [];
-                for await (const resource of iterable) {
-                    responses.push(resource!);
-                }
-            });
-            assert.deepStrictEqual(
-                (client.descriptors.page.listContexts.asyncIterate as SinonStub)
-                    .getCall(0).args[1], request);
-            assert.strictEqual(
-                (client.descriptors.page.listContexts.asyncIterate as SinonStub)
-                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-                expectedHeaderRequestParams
-            );
-        });
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.getContext as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
     });
 
-    describe('Path templates', () => {
-
-        describe('projectAgent', () => {
-            const fakePath = "/rendered/path/projectAgent";
-            const expectedParameters = {
-                project: "projectValue",
-            };
-            const client = new contextsModule.v2beta1.ContextsClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            client.initialize();
-            client.pathTemplates.projectAgentPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.projectAgentPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('projectAgentPath', () => {
-                const result = client.projectAgentPath("projectValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.projectAgentPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromProjectAgentName', () => {
-                const result = client.matchProjectFromProjectAgentName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.projectAgentPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('projectAgentIntent', () => {
-            const fakePath = "/rendered/path/projectAgentIntent";
-            const expectedParameters = {
-                project: "projectValue",
-                intent: "intentValue",
-            };
-            const client = new contextsModule.v2beta1.ContextsClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            client.initialize();
-            client.pathTemplates.projectAgentIntentPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.projectAgentIntentPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('projectAgentIntentPath', () => {
-                const result = client.projectAgentIntentPath("projectValue", "intentValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.projectAgentIntentPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromProjectAgentIntentName', () => {
-                const result = client.matchProjectFromProjectAgentIntentName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.projectAgentIntentPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchIntentFromProjectAgentIntentName', () => {
-                const result = client.matchIntentFromProjectAgentIntentName(fakePath);
-                assert.strictEqual(result, "intentValue");
-                assert((client.pathTemplates.projectAgentIntentPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('projectLocationAgent', () => {
-            const fakePath = "/rendered/path/projectLocationAgent";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-            };
-            const client = new contextsModule.v2beta1.ContextsClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            client.initialize();
-            client.pathTemplates.projectLocationAgentPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.projectLocationAgentPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('projectLocationAgentPath', () => {
-                const result = client.projectLocationAgentPath("projectValue", "locationValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.projectLocationAgentPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromProjectLocationAgentName', () => {
-                const result = client.matchProjectFromProjectLocationAgentName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.projectLocationAgentPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromProjectLocationAgentName', () => {
-                const result = client.matchLocationFromProjectLocationAgentName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.projectLocationAgentPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('projectLocationAgentIntent', () => {
-            const fakePath = "/rendered/path/projectLocationAgentIntent";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                intent: "intentValue",
-            };
-            const client = new contextsModule.v2beta1.ContextsClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            client.initialize();
-            client.pathTemplates.projectLocationAgentIntentPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.projectLocationAgentIntentPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('projectLocationAgentIntentPath', () => {
-                const result = client.projectLocationAgentIntentPath("projectValue", "locationValue", "intentValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.projectLocationAgentIntentPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromProjectLocationAgentIntentName', () => {
-                const result = client.matchProjectFromProjectLocationAgentIntentName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.projectLocationAgentIntentPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromProjectLocationAgentIntentName', () => {
-                const result = client.matchLocationFromProjectLocationAgentIntentName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.projectLocationAgentIntentPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchIntentFromProjectLocationAgentIntentName', () => {
-                const result = client.matchIntentFromProjectLocationAgentIntentName(fakePath);
-                assert.strictEqual(result, "intentValue");
-                assert((client.pathTemplates.projectLocationAgentIntentPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
+    it('invokes getContext with error', async () => {
+      const client = new contextsModule.v2beta1.ContextsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.v2beta1.GetContextRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getContext = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(async () => {
+        await client.getContext(request);
+      }, expectedError);
+      assert(
+        (client.innerApiCalls.getContext as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
     });
+  });
+
+  describe('createContext', () => {
+    it('invokes createContext without error', async () => {
+      const client = new contextsModule.v2beta1.ContextsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.v2beta1.CreateContextRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.dialogflow.v2beta1.Context()
+      );
+      client.innerApiCalls.createContext = stubSimpleCall(expectedResponse);
+      const [response] = await client.createContext(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.createContext as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes createContext without error using callback', async () => {
+      const client = new contextsModule.v2beta1.ContextsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.v2beta1.CreateContextRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.dialogflow.v2beta1.Context()
+      );
+      client.innerApiCalls.createContext = stubSimpleCallWithCallback(
+        expectedResponse
+      );
+      const promise = new Promise((resolve, reject) => {
+        client.createContext(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.dialogflow.v2beta1.IContext | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.createContext as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes createContext with error', async () => {
+      const client = new contextsModule.v2beta1.ContextsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.v2beta1.CreateContextRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createContext = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(async () => {
+        await client.createContext(request);
+      }, expectedError);
+      assert(
+        (client.innerApiCalls.createContext as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+  });
+
+  describe('updateContext', () => {
+    it('invokes updateContext without error', async () => {
+      const client = new contextsModule.v2beta1.ContextsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.v2beta1.UpdateContextRequest()
+      );
+      request.context = {};
+      request.context.name = '';
+      const expectedHeaderRequestParams = 'context.name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.dialogflow.v2beta1.Context()
+      );
+      client.innerApiCalls.updateContext = stubSimpleCall(expectedResponse);
+      const [response] = await client.updateContext(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.updateContext as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes updateContext without error using callback', async () => {
+      const client = new contextsModule.v2beta1.ContextsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.v2beta1.UpdateContextRequest()
+      );
+      request.context = {};
+      request.context.name = '';
+      const expectedHeaderRequestParams = 'context.name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.dialogflow.v2beta1.Context()
+      );
+      client.innerApiCalls.updateContext = stubSimpleCallWithCallback(
+        expectedResponse
+      );
+      const promise = new Promise((resolve, reject) => {
+        client.updateContext(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.dialogflow.v2beta1.IContext | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.updateContext as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes updateContext with error', async () => {
+      const client = new contextsModule.v2beta1.ContextsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.v2beta1.UpdateContextRequest()
+      );
+      request.context = {};
+      request.context.name = '';
+      const expectedHeaderRequestParams = 'context.name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateContext = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(async () => {
+        await client.updateContext(request);
+      }, expectedError);
+      assert(
+        (client.innerApiCalls.updateContext as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+  });
+
+  describe('deleteContext', () => {
+    it('invokes deleteContext without error', async () => {
+      const client = new contextsModule.v2beta1.ContextsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.v2beta1.DeleteContextRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty()
+      );
+      client.innerApiCalls.deleteContext = stubSimpleCall(expectedResponse);
+      const [response] = await client.deleteContext(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.deleteContext as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes deleteContext without error using callback', async () => {
+      const client = new contextsModule.v2beta1.ContextsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.v2beta1.DeleteContextRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty()
+      );
+      client.innerApiCalls.deleteContext = stubSimpleCallWithCallback(
+        expectedResponse
+      );
+      const promise = new Promise((resolve, reject) => {
+        client.deleteContext(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.protobuf.IEmpty | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.deleteContext as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes deleteContext with error', async () => {
+      const client = new contextsModule.v2beta1.ContextsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.v2beta1.DeleteContextRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteContext = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(async () => {
+        await client.deleteContext(request);
+      }, expectedError);
+      assert(
+        (client.innerApiCalls.deleteContext as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+  });
+
+  describe('deleteAllContexts', () => {
+    it('invokes deleteAllContexts without error', async () => {
+      const client = new contextsModule.v2beta1.ContextsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.v2beta1.DeleteAllContextsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty()
+      );
+      client.innerApiCalls.deleteAllContexts = stubSimpleCall(expectedResponse);
+      const [response] = await client.deleteAllContexts(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.deleteAllContexts as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes deleteAllContexts without error using callback', async () => {
+      const client = new contextsModule.v2beta1.ContextsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.v2beta1.DeleteAllContextsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty()
+      );
+      client.innerApiCalls.deleteAllContexts = stubSimpleCallWithCallback(
+        expectedResponse
+      );
+      const promise = new Promise((resolve, reject) => {
+        client.deleteAllContexts(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.protobuf.IEmpty | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.deleteAllContexts as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes deleteAllContexts with error', async () => {
+      const client = new contextsModule.v2beta1.ContextsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.v2beta1.DeleteAllContextsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteAllContexts = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(async () => {
+        await client.deleteAllContexts(request);
+      }, expectedError);
+      assert(
+        (client.innerApiCalls.deleteAllContexts as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+  });
+
+  describe('listContexts', () => {
+    it('invokes listContexts without error', async () => {
+      const client = new contextsModule.v2beta1.ContextsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.v2beta1.ListContextsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.dialogflow.v2beta1.Context()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.dialogflow.v2beta1.Context()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.dialogflow.v2beta1.Context()
+        ),
+      ];
+      client.innerApiCalls.listContexts = stubSimpleCall(expectedResponse);
+      const [response] = await client.listContexts(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.listContexts as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes listContexts without error using callback', async () => {
+      const client = new contextsModule.v2beta1.ContextsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.v2beta1.ListContextsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.dialogflow.v2beta1.Context()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.dialogflow.v2beta1.Context()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.dialogflow.v2beta1.Context()
+        ),
+      ];
+      client.innerApiCalls.listContexts = stubSimpleCallWithCallback(
+        expectedResponse
+      );
+      const promise = new Promise((resolve, reject) => {
+        client.listContexts(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.dialogflow.v2beta1.IContext[] | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.listContexts as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes listContexts with error', async () => {
+      const client = new contextsModule.v2beta1.ContextsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.v2beta1.ListContextsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listContexts = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(async () => {
+        await client.listContexts(request);
+      }, expectedError);
+      assert(
+        (client.innerApiCalls.listContexts as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes listContextsStream without error', async () => {
+      const client = new contextsModule.v2beta1.ContextsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.v2beta1.ListContextsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.dialogflow.v2beta1.Context()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.dialogflow.v2beta1.Context()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.dialogflow.v2beta1.Context()
+        ),
+      ];
+      client.descriptors.page.listContexts.createStream = stubPageStreamingCall(
+        expectedResponse
+      );
+      const stream = client.listContextsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.dialogflow.v2beta1.Context[] = [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.dialogflow.v2beta1.Context) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (client.descriptors.page.listContexts.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listContexts, request)
+      );
+      assert.strictEqual(
+        (client.descriptors.page.listContexts
+          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
+          'x-goog-request-params'
+        ],
+        expectedHeaderRequestParams
+      );
+    });
+
+    it('invokes listContextsStream with error', async () => {
+      const client = new contextsModule.v2beta1.ContextsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.v2beta1.ListContextsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('expected');
+      client.descriptors.page.listContexts.createStream = stubPageStreamingCall(
+        undefined,
+        expectedError
+      );
+      const stream = client.listContextsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.dialogflow.v2beta1.Context[] = [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.dialogflow.v2beta1.Context) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(async () => {
+        await promise;
+      }, expectedError);
+      assert(
+        (client.descriptors.page.listContexts.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listContexts, request)
+      );
+      assert.strictEqual(
+        (client.descriptors.page.listContexts
+          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
+          'x-goog-request-params'
+        ],
+        expectedHeaderRequestParams
+      );
+    });
+
+    it('uses async iteration with listContexts without error', async () => {
+      const client = new contextsModule.v2beta1.ContextsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.v2beta1.ListContextsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.dialogflow.v2beta1.Context()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.dialogflow.v2beta1.Context()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.dialogflow.v2beta1.Context()
+        ),
+      ];
+      client.descriptors.page.listContexts.asyncIterate = stubAsyncIterationCall(
+        expectedResponse
+      );
+      const responses: protos.google.cloud.dialogflow.v2beta1.IContext[] = [];
+      const iterable = client.listContextsAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (client.descriptors.page.listContexts
+          .asyncIterate as SinonStub).getCall(0).args[1],
+        request
+      );
+      assert.strictEqual(
+        (client.descriptors.page.listContexts
+          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
+          'x-goog-request-params'
+        ],
+        expectedHeaderRequestParams
+      );
+    });
+
+    it('uses async iteration with listContexts with error', async () => {
+      const client = new contextsModule.v2beta1.ContextsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.v2beta1.ListContextsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('expected');
+      client.descriptors.page.listContexts.asyncIterate = stubAsyncIterationCall(
+        undefined,
+        expectedError
+      );
+      const iterable = client.listContextsAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.cloud.dialogflow.v2beta1.IContext[] = [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (client.descriptors.page.listContexts
+          .asyncIterate as SinonStub).getCall(0).args[1],
+        request
+      );
+      assert.strictEqual(
+        (client.descriptors.page.listContexts
+          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
+          'x-goog-request-params'
+        ],
+        expectedHeaderRequestParams
+      );
+    });
+  });
+
+  describe('Path templates', () => {
+    describe('projectAgent', () => {
+      const fakePath = '/rendered/path/projectAgent';
+      const expectedParameters = {
+        project: 'projectValue',
+      };
+      const client = new contextsModule.v2beta1.ContextsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.projectAgentPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.projectAgentPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('projectAgentPath', () => {
+        const result = client.projectAgentPath('projectValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.projectAgentPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromProjectAgentName', () => {
+        const result = client.matchProjectFromProjectAgentName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.projectAgentPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('projectAgentIntent', () => {
+      const fakePath = '/rendered/path/projectAgentIntent';
+      const expectedParameters = {
+        project: 'projectValue',
+        intent: 'intentValue',
+      };
+      const client = new contextsModule.v2beta1.ContextsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.projectAgentIntentPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.projectAgentIntentPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('projectAgentIntentPath', () => {
+        const result = client.projectAgentIntentPath(
+          'projectValue',
+          'intentValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.projectAgentIntentPathTemplate
+            .render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromProjectAgentIntentName', () => {
+        const result = client.matchProjectFromProjectAgentIntentName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.projectAgentIntentPathTemplate
+            .match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchIntentFromProjectAgentIntentName', () => {
+        const result = client.matchIntentFromProjectAgentIntentName(fakePath);
+        assert.strictEqual(result, 'intentValue');
+        assert(
+          (client.pathTemplates.projectAgentIntentPathTemplate
+            .match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('projectLocationAgent', () => {
+      const fakePath = '/rendered/path/projectLocationAgent';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+      };
+      const client = new contextsModule.v2beta1.ContextsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.projectLocationAgentPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.projectLocationAgentPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('projectLocationAgentPath', () => {
+        const result = client.projectLocationAgentPath(
+          'projectValue',
+          'locationValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.projectLocationAgentPathTemplate
+            .render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromProjectLocationAgentName', () => {
+        const result = client.matchProjectFromProjectLocationAgentName(
+          fakePath
+        );
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.projectLocationAgentPathTemplate
+            .match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromProjectLocationAgentName', () => {
+        const result = client.matchLocationFromProjectLocationAgentName(
+          fakePath
+        );
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.projectLocationAgentPathTemplate
+            .match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('projectLocationAgentIntent', () => {
+      const fakePath = '/rendered/path/projectLocationAgentIntent';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        intent: 'intentValue',
+      };
+      const client = new contextsModule.v2beta1.ContextsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.projectLocationAgentIntentPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.projectLocationAgentIntentPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('projectLocationAgentIntentPath', () => {
+        const result = client.projectLocationAgentIntentPath(
+          'projectValue',
+          'locationValue',
+          'intentValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.projectLocationAgentIntentPathTemplate
+            .render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromProjectLocationAgentIntentName', () => {
+        const result = client.matchProjectFromProjectLocationAgentIntentName(
+          fakePath
+        );
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.projectLocationAgentIntentPathTemplate
+            .match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromProjectLocationAgentIntentName', () => {
+        const result = client.matchLocationFromProjectLocationAgentIntentName(
+          fakePath
+        );
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.projectLocationAgentIntentPathTemplate
+            .match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchIntentFromProjectLocationAgentIntentName', () => {
+        const result = client.matchIntentFromProjectLocationAgentIntentName(
+          fakePath
+        );
+        assert.strictEqual(result, 'intentValue');
+        assert(
+          (client.pathTemplates.projectLocationAgentIntentPathTemplate
+            .match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+  });
 });

@@ -20,7 +20,7 @@ import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
 import {SinonStub} from 'sinon';
-import { describe, it } from 'mocha';
+import {describe, it} from 'mocha';
 import * as intentsModule from '../src';
 
 import {PassThrough} from 'stream';
@@ -28,1296 +28,1813 @@ import {PassThrough} from 'stream';
 import {protobuf, LROperation} from 'google-gax';
 
 function generateSampleMessage<T extends object>(instance: T) {
-    const filledObject = (instance.constructor as typeof protobuf.Message)
-        .toObject(instance as protobuf.Message<T>, {defaults: true});
-    return (instance.constructor as typeof protobuf.Message).fromObject(filledObject) as T;
+  const filledObject = (instance.constructor as typeof protobuf.Message).toObject(
+    instance as protobuf.Message<T>,
+    {defaults: true}
+  );
+  return (instance.constructor as typeof protobuf.Message).fromObject(
+    filledObject
+  ) as T;
 }
 
 function stubSimpleCall<ResponseType>(response?: ResponseType, error?: Error) {
-    return error ? sinon.stub().rejects(error) : sinon.stub().resolves([response]);
+  return error
+    ? sinon.stub().rejects(error)
+    : sinon.stub().resolves([response]);
 }
 
-function stubSimpleCallWithCallback<ResponseType>(response?: ResponseType, error?: Error) {
-    return error ? sinon.stub().callsArgWith(2, error) : sinon.stub().callsArgWith(2, null, response);
+function stubSimpleCallWithCallback<ResponseType>(
+  response?: ResponseType,
+  error?: Error
+) {
+  return error
+    ? sinon.stub().callsArgWith(2, error)
+    : sinon.stub().callsArgWith(2, null, response);
 }
 
-function stubLongRunningCall<ResponseType>(response?: ResponseType, callError?: Error, lroError?: Error) {
-    const innerStub = lroError ? sinon.stub().rejects(lroError) : sinon.stub().resolves([response]);
-    const mockOperation = {
-        promise: innerStub,
-    };
-    return callError ? sinon.stub().rejects(callError) : sinon.stub().resolves([mockOperation]);
+function stubLongRunningCall<ResponseType>(
+  response?: ResponseType,
+  callError?: Error,
+  lroError?: Error
+) {
+  const innerStub = lroError
+    ? sinon.stub().rejects(lroError)
+    : sinon.stub().resolves([response]);
+  const mockOperation = {
+    promise: innerStub,
+  };
+  return callError
+    ? sinon.stub().rejects(callError)
+    : sinon.stub().resolves([mockOperation]);
 }
 
-function stubLongRunningCallWithCallback<ResponseType>(response?: ResponseType, callError?: Error, lroError?: Error) {
-    const innerStub = lroError ? sinon.stub().rejects(lroError) : sinon.stub().resolves([response]);
-    const mockOperation = {
-        promise: innerStub,
-    };
-    return callError ? sinon.stub().callsArgWith(2, callError) : sinon.stub().callsArgWith(2, null, mockOperation);
+function stubLongRunningCallWithCallback<ResponseType>(
+  response?: ResponseType,
+  callError?: Error,
+  lroError?: Error
+) {
+  const innerStub = lroError
+    ? sinon.stub().rejects(lroError)
+    : sinon.stub().resolves([response]);
+  const mockOperation = {
+    promise: innerStub,
+  };
+  return callError
+    ? sinon.stub().callsArgWith(2, callError)
+    : sinon.stub().callsArgWith(2, null, mockOperation);
 }
 
-function stubPageStreamingCall<ResponseType>(responses?: ResponseType[], error?: Error) {
-    const pagingStub = sinon.stub();
-    if (responses) {
-        for (let i = 0; i < responses.length; ++i) {
-            pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
-        }
+function stubPageStreamingCall<ResponseType>(
+  responses?: ResponseType[],
+  error?: Error
+) {
+  const pagingStub = sinon.stub();
+  if (responses) {
+    for (let i = 0; i < responses.length; ++i) {
+      pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
     }
-    const transformStub = error ? sinon.stub().callsArgWith(2, error) : pagingStub;
-    const mockStream = new PassThrough({
-        objectMode: true,
-        transform: transformStub,
+  }
+  const transformStub = error
+    ? sinon.stub().callsArgWith(2, error)
+    : pagingStub;
+  const mockStream = new PassThrough({
+    objectMode: true,
+    transform: transformStub,
+  });
+  // trigger as many responses as needed
+  if (responses) {
+    for (let i = 0; i < responses.length; ++i) {
+      setImmediate(() => {
+        mockStream.write({});
+      });
+    }
+    setImmediate(() => {
+      mockStream.end();
     });
-    // trigger as many responses as needed
-    if (responses) {
-        for (let i = 0; i < responses.length; ++i) {
-            setImmediate(() => { mockStream.write({}); });
-        }
-        setImmediate(() => { mockStream.end(); });
-    } else {
-        setImmediate(() => { mockStream.write({}); });
-        setImmediate(() => { mockStream.end(); });
-    }
-    return sinon.stub().returns(mockStream);
+  } else {
+    setImmediate(() => {
+      mockStream.write({});
+    });
+    setImmediate(() => {
+      mockStream.end();
+    });
+  }
+  return sinon.stub().returns(mockStream);
 }
 
-function stubAsyncIterationCall<ResponseType>(responses?: ResponseType[], error?: Error) {
-    let counter = 0;
-    const asyncIterable = {
-        [Symbol.asyncIterator]() {
-            return {
-                async next() {
-                    if (error) {
-                        return Promise.reject(error);
-                    }
-                    if (counter >= responses!.length) {
-                        return Promise.resolve({done: true, value: undefined});
-                    }
-                    return Promise.resolve({done: false, value: responses![counter++]});
-                }
-            };
-        }
-    };
-    return sinon.stub().returns(asyncIterable);
+function stubAsyncIterationCall<ResponseType>(
+  responses?: ResponseType[],
+  error?: Error
+) {
+  let counter = 0;
+  const asyncIterable = {
+    [Symbol.asyncIterator]() {
+      return {
+        async next() {
+          if (error) {
+            return Promise.reject(error);
+          }
+          if (counter >= responses!.length) {
+            return Promise.resolve({done: true, value: undefined});
+          }
+          return Promise.resolve({done: false, value: responses![counter++]});
+        },
+      };
+    },
+  };
+  return sinon.stub().returns(asyncIterable);
 }
 
 describe('v2.IntentsClient', () => {
-    it('has servicePath', () => {
-        const servicePath = intentsModule.v2.IntentsClient.servicePath;
-        assert(servicePath);
+  it('has servicePath', () => {
+    const servicePath = intentsModule.v2.IntentsClient.servicePath;
+    assert(servicePath);
+  });
+
+  it('has apiEndpoint', () => {
+    const apiEndpoint = intentsModule.v2.IntentsClient.apiEndpoint;
+    assert(apiEndpoint);
+  });
+
+  it('has port', () => {
+    const port = intentsModule.v2.IntentsClient.port;
+    assert(port);
+    assert(typeof port === 'number');
+  });
+
+  it('should create a client with no option', () => {
+    const client = new intentsModule.v2.IntentsClient();
+    assert(client);
+  });
+
+  it('should create a client with gRPC fallback', () => {
+    const client = new intentsModule.v2.IntentsClient({
+      fallback: true,
+    });
+    assert(client);
+  });
+
+  it('has initialize method and supports deferred initialization', async () => {
+    const client = new intentsModule.v2.IntentsClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    assert.strictEqual(client.intentsStub, undefined);
+    await client.initialize();
+    assert(client.intentsStub);
+  });
+
+  it('has close method', () => {
+    const client = new intentsModule.v2.IntentsClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    client.close();
+  });
+
+  it('has getProjectId method', async () => {
+    const fakeProjectId = 'fake-project-id';
+    const client = new intentsModule.v2.IntentsClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
+    const result = await client.getProjectId();
+    assert.strictEqual(result, fakeProjectId);
+    assert((client.auth.getProjectId as SinonStub).calledWithExactly());
+  });
+
+  it('has getProjectId method with callback', async () => {
+    const fakeProjectId = 'fake-project-id';
+    const client = new intentsModule.v2.IntentsClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    client.auth.getProjectId = sinon
+      .stub()
+      .callsArgWith(0, null, fakeProjectId);
+    const promise = new Promise((resolve, reject) => {
+      client.getProjectId((err?: Error | null, projectId?: string | null) => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve(projectId);
+        }
+      });
+    });
+    const result = await promise;
+    assert.strictEqual(result, fakeProjectId);
+  });
+
+  describe('getIntent', () => {
+    it('invokes getIntent without error', async () => {
+      const client = new intentsModule.v2.IntentsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.v2.GetIntentRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.dialogflow.v2.Intent()
+      );
+      client.innerApiCalls.getIntent = stubSimpleCall(expectedResponse);
+      const [response] = await client.getIntent(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.getIntent as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
     });
 
-    it('has apiEndpoint', () => {
-        const apiEndpoint = intentsModule.v2.IntentsClient.apiEndpoint;
-        assert(apiEndpoint);
-    });
-
-    it('has port', () => {
-        const port = intentsModule.v2.IntentsClient.port;
-        assert(port);
-        assert(typeof port === 'number');
-    });
-
-    it('should create a client with no option', () => {
-        const client = new intentsModule.v2.IntentsClient();
-        assert(client);
-    });
-
-    it('should create a client with gRPC fallback', () => {
-        const client = new intentsModule.v2.IntentsClient({
-            fallback: true,
-        });
-        assert(client);
-    });
-
-    it('has initialize method and supports deferred initialization', async () => {
-        const client = new intentsModule.v2.IntentsClient({
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
-            projectId: 'bogus',
-        });
-        assert.strictEqual(client.intentsStub, undefined);
-        await client.initialize();
-        assert(client.intentsStub);
-    });
-
-    it('has close method', () => {
-        const client = new intentsModule.v2.IntentsClient({
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
-            projectId: 'bogus',
-        });
-        client.close();
-    });
-
-    it('has getProjectId method', async () => {
-        const fakeProjectId = 'fake-project-id';
-        const client = new intentsModule.v2.IntentsClient({
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
-            projectId: 'bogus',
-        });
-        client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
-        const result = await client.getProjectId();
-        assert.strictEqual(result, fakeProjectId);
-        assert((client.auth.getProjectId as SinonStub).calledWithExactly());
-    });
-
-    it('has getProjectId method with callback', async () => {
-        const fakeProjectId = 'fake-project-id';
-        const client = new intentsModule.v2.IntentsClient({
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
-            projectId: 'bogus',
-        });
-        client.auth.getProjectId = sinon.stub().callsArgWith(0, null, fakeProjectId);
-        const promise = new Promise((resolve, reject) => {
-            client.getProjectId((err?: Error|null, projectId?: string|null) => {
-                if (err) {
-                    reject(err);
-                } else {
-                    resolve(projectId);
-                }
-            });
-        });
-        const result = await promise;
-        assert.strictEqual(result, fakeProjectId);
-    });
-
-    describe('getIntent', () => {
-        it('invokes getIntent without error', async () => {
-            const client = new intentsModule.v2.IntentsClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            client.initialize();
-            const request = generateSampleMessage(new protos.google.cloud.dialogflow.v2.GetIntentRequest());
-            request.name = '';
-            const expectedHeaderRequestParams = "name=";
-            const expectedOptions = {
-                otherArgs: {
-                    headers: {
-                        'x-goog-request-params': expectedHeaderRequestParams,
-                    },
-                },
-            };
-            const expectedResponse = generateSampleMessage(new protos.google.cloud.dialogflow.v2.Intent());
-            client.innerApiCalls.getIntent = stubSimpleCall(expectedResponse);
-            const [response] = await client.getIntent(request);
-            assert.deepStrictEqual(response, expectedResponse);
-            assert((client.innerApiCalls.getIntent as SinonStub)
-                .getCall(0).calledWith(request, expectedOptions, undefined));
-        });
-
-        it('invokes getIntent without error using callback', async () => {
-            const client = new intentsModule.v2.IntentsClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            client.initialize();
-            const request = generateSampleMessage(new protos.google.cloud.dialogflow.v2.GetIntentRequest());
-            request.name = '';
-            const expectedHeaderRequestParams = "name=";
-            const expectedOptions = {
-                otherArgs: {
-                    headers: {
-                        'x-goog-request-params': expectedHeaderRequestParams,
-                    },
-                },
-            };
-            const expectedResponse = generateSampleMessage(new protos.google.cloud.dialogflow.v2.Intent());
-            client.innerApiCalls.getIntent = stubSimpleCallWithCallback(expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.getIntent(
-                    request,
-                    (err?: Error|null, result?: protos.google.cloud.dialogflow.v2.IIntent|null) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const response = await promise;
-            assert.deepStrictEqual(response, expectedResponse);
-            assert((client.innerApiCalls.getIntent as SinonStub)
-                .getCall(0).calledWith(request, expectedOptions /*, callback defined above */));
-        });
-
-        it('invokes getIntent with error', async () => {
-            const client = new intentsModule.v2.IntentsClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            client.initialize();
-            const request = generateSampleMessage(new protos.google.cloud.dialogflow.v2.GetIntentRequest());
-            request.name = '';
-            const expectedHeaderRequestParams = "name=";
-            const expectedOptions = {
-                otherArgs: {
-                    headers: {
-                        'x-goog-request-params': expectedHeaderRequestParams,
-                    },
-                },
-            };
-            const expectedError = new Error('expected');
-            client.innerApiCalls.getIntent = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(async () => { await client.getIntent(request); }, expectedError);
-            assert((client.innerApiCalls.getIntent as SinonStub)
-                .getCall(0).calledWith(request, expectedOptions, undefined));
-        });
-    });
-
-    describe('createIntent', () => {
-        it('invokes createIntent without error', async () => {
-            const client = new intentsModule.v2.IntentsClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            client.initialize();
-            const request = generateSampleMessage(new protos.google.cloud.dialogflow.v2.CreateIntentRequest());
-            request.parent = '';
-            const expectedHeaderRequestParams = "parent=";
-            const expectedOptions = {
-                otherArgs: {
-                    headers: {
-                        'x-goog-request-params': expectedHeaderRequestParams,
-                    },
-                },
-            };
-            const expectedResponse = generateSampleMessage(new protos.google.cloud.dialogflow.v2.Intent());
-            client.innerApiCalls.createIntent = stubSimpleCall(expectedResponse);
-            const [response] = await client.createIntent(request);
-            assert.deepStrictEqual(response, expectedResponse);
-            assert((client.innerApiCalls.createIntent as SinonStub)
-                .getCall(0).calledWith(request, expectedOptions, undefined));
-        });
-
-        it('invokes createIntent without error using callback', async () => {
-            const client = new intentsModule.v2.IntentsClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            client.initialize();
-            const request = generateSampleMessage(new protos.google.cloud.dialogflow.v2.CreateIntentRequest());
-            request.parent = '';
-            const expectedHeaderRequestParams = "parent=";
-            const expectedOptions = {
-                otherArgs: {
-                    headers: {
-                        'x-goog-request-params': expectedHeaderRequestParams,
-                    },
-                },
-            };
-            const expectedResponse = generateSampleMessage(new protos.google.cloud.dialogflow.v2.Intent());
-            client.innerApiCalls.createIntent = stubSimpleCallWithCallback(expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.createIntent(
-                    request,
-                    (err?: Error|null, result?: protos.google.cloud.dialogflow.v2.IIntent|null) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const response = await promise;
-            assert.deepStrictEqual(response, expectedResponse);
-            assert((client.innerApiCalls.createIntent as SinonStub)
-                .getCall(0).calledWith(request, expectedOptions /*, callback defined above */));
-        });
-
-        it('invokes createIntent with error', async () => {
-            const client = new intentsModule.v2.IntentsClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            client.initialize();
-            const request = generateSampleMessage(new protos.google.cloud.dialogflow.v2.CreateIntentRequest());
-            request.parent = '';
-            const expectedHeaderRequestParams = "parent=";
-            const expectedOptions = {
-                otherArgs: {
-                    headers: {
-                        'x-goog-request-params': expectedHeaderRequestParams,
-                    },
-                },
-            };
-            const expectedError = new Error('expected');
-            client.innerApiCalls.createIntent = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(async () => { await client.createIntent(request); }, expectedError);
-            assert((client.innerApiCalls.createIntent as SinonStub)
-                .getCall(0).calledWith(request, expectedOptions, undefined));
-        });
-    });
-
-    describe('updateIntent', () => {
-        it('invokes updateIntent without error', async () => {
-            const client = new intentsModule.v2.IntentsClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            client.initialize();
-            const request = generateSampleMessage(new protos.google.cloud.dialogflow.v2.UpdateIntentRequest());
-            request.intent = {};
-            request.intent.name = '';
-            const expectedHeaderRequestParams = "intent.name=";
-            const expectedOptions = {
-                otherArgs: {
-                    headers: {
-                        'x-goog-request-params': expectedHeaderRequestParams,
-                    },
-                },
-            };
-            const expectedResponse = generateSampleMessage(new protos.google.cloud.dialogflow.v2.Intent());
-            client.innerApiCalls.updateIntent = stubSimpleCall(expectedResponse);
-            const [response] = await client.updateIntent(request);
-            assert.deepStrictEqual(response, expectedResponse);
-            assert((client.innerApiCalls.updateIntent as SinonStub)
-                .getCall(0).calledWith(request, expectedOptions, undefined));
-        });
-
-        it('invokes updateIntent without error using callback', async () => {
-            const client = new intentsModule.v2.IntentsClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            client.initialize();
-            const request = generateSampleMessage(new protos.google.cloud.dialogflow.v2.UpdateIntentRequest());
-            request.intent = {};
-            request.intent.name = '';
-            const expectedHeaderRequestParams = "intent.name=";
-            const expectedOptions = {
-                otherArgs: {
-                    headers: {
-                        'x-goog-request-params': expectedHeaderRequestParams,
-                    },
-                },
-            };
-            const expectedResponse = generateSampleMessage(new protos.google.cloud.dialogflow.v2.Intent());
-            client.innerApiCalls.updateIntent = stubSimpleCallWithCallback(expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.updateIntent(
-                    request,
-                    (err?: Error|null, result?: protos.google.cloud.dialogflow.v2.IIntent|null) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const response = await promise;
-            assert.deepStrictEqual(response, expectedResponse);
-            assert((client.innerApiCalls.updateIntent as SinonStub)
-                .getCall(0).calledWith(request, expectedOptions /*, callback defined above */));
-        });
-
-        it('invokes updateIntent with error', async () => {
-            const client = new intentsModule.v2.IntentsClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            client.initialize();
-            const request = generateSampleMessage(new protos.google.cloud.dialogflow.v2.UpdateIntentRequest());
-            request.intent = {};
-            request.intent.name = '';
-            const expectedHeaderRequestParams = "intent.name=";
-            const expectedOptions = {
-                otherArgs: {
-                    headers: {
-                        'x-goog-request-params': expectedHeaderRequestParams,
-                    },
-                },
-            };
-            const expectedError = new Error('expected');
-            client.innerApiCalls.updateIntent = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(async () => { await client.updateIntent(request); }, expectedError);
-            assert((client.innerApiCalls.updateIntent as SinonStub)
-                .getCall(0).calledWith(request, expectedOptions, undefined));
-        });
-    });
-
-    describe('deleteIntent', () => {
-        it('invokes deleteIntent without error', async () => {
-            const client = new intentsModule.v2.IntentsClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            client.initialize();
-            const request = generateSampleMessage(new protos.google.cloud.dialogflow.v2.DeleteIntentRequest());
-            request.name = '';
-            const expectedHeaderRequestParams = "name=";
-            const expectedOptions = {
-                otherArgs: {
-                    headers: {
-                        'x-goog-request-params': expectedHeaderRequestParams,
-                    },
-                },
-            };
-            const expectedResponse = generateSampleMessage(new protos.google.protobuf.Empty());
-            client.innerApiCalls.deleteIntent = stubSimpleCall(expectedResponse);
-            const [response] = await client.deleteIntent(request);
-            assert.deepStrictEqual(response, expectedResponse);
-            assert((client.innerApiCalls.deleteIntent as SinonStub)
-                .getCall(0).calledWith(request, expectedOptions, undefined));
-        });
-
-        it('invokes deleteIntent without error using callback', async () => {
-            const client = new intentsModule.v2.IntentsClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            client.initialize();
-            const request = generateSampleMessage(new protos.google.cloud.dialogflow.v2.DeleteIntentRequest());
-            request.name = '';
-            const expectedHeaderRequestParams = "name=";
-            const expectedOptions = {
-                otherArgs: {
-                    headers: {
-                        'x-goog-request-params': expectedHeaderRequestParams,
-                    },
-                },
-            };
-            const expectedResponse = generateSampleMessage(new protos.google.protobuf.Empty());
-            client.innerApiCalls.deleteIntent = stubSimpleCallWithCallback(expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.deleteIntent(
-                    request,
-                    (err?: Error|null, result?: protos.google.protobuf.IEmpty|null) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const response = await promise;
-            assert.deepStrictEqual(response, expectedResponse);
-            assert((client.innerApiCalls.deleteIntent as SinonStub)
-                .getCall(0).calledWith(request, expectedOptions /*, callback defined above */));
-        });
-
-        it('invokes deleteIntent with error', async () => {
-            const client = new intentsModule.v2.IntentsClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            client.initialize();
-            const request = generateSampleMessage(new protos.google.cloud.dialogflow.v2.DeleteIntentRequest());
-            request.name = '';
-            const expectedHeaderRequestParams = "name=";
-            const expectedOptions = {
-                otherArgs: {
-                    headers: {
-                        'x-goog-request-params': expectedHeaderRequestParams,
-                    },
-                },
-            };
-            const expectedError = new Error('expected');
-            client.innerApiCalls.deleteIntent = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(async () => { await client.deleteIntent(request); }, expectedError);
-            assert((client.innerApiCalls.deleteIntent as SinonStub)
-                .getCall(0).calledWith(request, expectedOptions, undefined));
-        });
-    });
-
-    describe('batchUpdateIntents', () => {
-        it('invokes batchUpdateIntents without error', async () => {
-            const client = new intentsModule.v2.IntentsClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            client.initialize();
-            const request = generateSampleMessage(new protos.google.cloud.dialogflow.v2.BatchUpdateIntentsRequest());
-            request.parent = '';
-            const expectedHeaderRequestParams = "parent=";
-            const expectedOptions = {
-                otherArgs: {
-                    headers: {
-                        'x-goog-request-params': expectedHeaderRequestParams,
-                    },
-                },
-            };
-            const expectedResponse = generateSampleMessage(new protos.google.longrunning.Operation());
-            client.innerApiCalls.batchUpdateIntents = stubLongRunningCall(expectedResponse);
-            const [operation] = await client.batchUpdateIntents(request);
-            const [response] = await operation.promise();
-            assert.deepStrictEqual(response, expectedResponse);
-            assert((client.innerApiCalls.batchUpdateIntents as SinonStub)
-                .getCall(0).calledWith(request, expectedOptions, undefined));
-        });
-
-        it('invokes batchUpdateIntents without error using callback', async () => {
-            const client = new intentsModule.v2.IntentsClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            client.initialize();
-            const request = generateSampleMessage(new protos.google.cloud.dialogflow.v2.BatchUpdateIntentsRequest());
-            request.parent = '';
-            const expectedHeaderRequestParams = "parent=";
-            const expectedOptions = {
-                otherArgs: {
-                    headers: {
-                        'x-goog-request-params': expectedHeaderRequestParams,
-                    },
-                },
-            };
-            const expectedResponse = generateSampleMessage(new protos.google.longrunning.Operation());
-            client.innerApiCalls.batchUpdateIntents = stubLongRunningCallWithCallback(expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.batchUpdateIntents(
-                    request,
-                    (err?: Error|null,
-                     result?: LROperation<protos.google.cloud.dialogflow.v2.IBatchUpdateIntentsResponse, protos.google.protobuf.IStruct>|null
-                    ) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const operation = await promise as LROperation<protos.google.cloud.dialogflow.v2.IBatchUpdateIntentsResponse, protos.google.protobuf.IStruct>;
-            const [response] = await operation.promise();
-            assert.deepStrictEqual(response, expectedResponse);
-            assert((client.innerApiCalls.batchUpdateIntents as SinonStub)
-                .getCall(0).calledWith(request, expectedOptions /*, callback defined above */));
-        });
-
-        it('invokes batchUpdateIntents with call error', async () => {
-            const client = new intentsModule.v2.IntentsClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            client.initialize();
-            const request = generateSampleMessage(new protos.google.cloud.dialogflow.v2.BatchUpdateIntentsRequest());
-            request.parent = '';
-            const expectedHeaderRequestParams = "parent=";
-            const expectedOptions = {
-                otherArgs: {
-                    headers: {
-                        'x-goog-request-params': expectedHeaderRequestParams,
-                    },
-                },
-            };
-            const expectedError = new Error('expected');
-            client.innerApiCalls.batchUpdateIntents = stubLongRunningCall(undefined, expectedError);
-            await assert.rejects(async () => { await client.batchUpdateIntents(request); }, expectedError);
-            assert((client.innerApiCalls.batchUpdateIntents as SinonStub)
-                .getCall(0).calledWith(request, expectedOptions, undefined));
-        });
-
-        it('invokes batchUpdateIntents with LRO error', async () => {
-            const client = new intentsModule.v2.IntentsClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            client.initialize();
-            const request = generateSampleMessage(new protos.google.cloud.dialogflow.v2.BatchUpdateIntentsRequest());
-            request.parent = '';
-            const expectedHeaderRequestParams = "parent=";
-            const expectedOptions = {
-                otherArgs: {
-                    headers: {
-                        'x-goog-request-params': expectedHeaderRequestParams,
-                    },
-                },
-            };
-            const expectedError = new Error('expected');
-            client.innerApiCalls.batchUpdateIntents = stubLongRunningCall(undefined, undefined, expectedError);
-            const [operation] = await client.batchUpdateIntents(request);
-            await assert.rejects(async () => { await operation.promise(); }, expectedError);
-            assert((client.innerApiCalls.batchUpdateIntents as SinonStub)
-                .getCall(0).calledWith(request, expectedOptions, undefined));
-        });
-    });
-
-    describe('batchDeleteIntents', () => {
-        it('invokes batchDeleteIntents without error', async () => {
-            const client = new intentsModule.v2.IntentsClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            client.initialize();
-            const request = generateSampleMessage(new protos.google.cloud.dialogflow.v2.BatchDeleteIntentsRequest());
-            request.parent = '';
-            const expectedHeaderRequestParams = "parent=";
-            const expectedOptions = {
-                otherArgs: {
-                    headers: {
-                        'x-goog-request-params': expectedHeaderRequestParams,
-                    },
-                },
-            };
-            const expectedResponse = generateSampleMessage(new protos.google.longrunning.Operation());
-            client.innerApiCalls.batchDeleteIntents = stubLongRunningCall(expectedResponse);
-            const [operation] = await client.batchDeleteIntents(request);
-            const [response] = await operation.promise();
-            assert.deepStrictEqual(response, expectedResponse);
-            assert((client.innerApiCalls.batchDeleteIntents as SinonStub)
-                .getCall(0).calledWith(request, expectedOptions, undefined));
-        });
-
-        it('invokes batchDeleteIntents without error using callback', async () => {
-            const client = new intentsModule.v2.IntentsClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            client.initialize();
-            const request = generateSampleMessage(new protos.google.cloud.dialogflow.v2.BatchDeleteIntentsRequest());
-            request.parent = '';
-            const expectedHeaderRequestParams = "parent=";
-            const expectedOptions = {
-                otherArgs: {
-                    headers: {
-                        'x-goog-request-params': expectedHeaderRequestParams,
-                    },
-                },
-            };
-            const expectedResponse = generateSampleMessage(new protos.google.longrunning.Operation());
-            client.innerApiCalls.batchDeleteIntents = stubLongRunningCallWithCallback(expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.batchDeleteIntents(
-                    request,
-                    (err?: Error|null,
-                     result?: LROperation<protos.google.protobuf.IEmpty, protos.google.protobuf.IStruct>|null
-                    ) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const operation = await promise as LROperation<protos.google.protobuf.IEmpty, protos.google.protobuf.IStruct>;
-            const [response] = await operation.promise();
-            assert.deepStrictEqual(response, expectedResponse);
-            assert((client.innerApiCalls.batchDeleteIntents as SinonStub)
-                .getCall(0).calledWith(request, expectedOptions /*, callback defined above */));
-        });
-
-        it('invokes batchDeleteIntents with call error', async () => {
-            const client = new intentsModule.v2.IntentsClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            client.initialize();
-            const request = generateSampleMessage(new protos.google.cloud.dialogflow.v2.BatchDeleteIntentsRequest());
-            request.parent = '';
-            const expectedHeaderRequestParams = "parent=";
-            const expectedOptions = {
-                otherArgs: {
-                    headers: {
-                        'x-goog-request-params': expectedHeaderRequestParams,
-                    },
-                },
-            };
-            const expectedError = new Error('expected');
-            client.innerApiCalls.batchDeleteIntents = stubLongRunningCall(undefined, expectedError);
-            await assert.rejects(async () => { await client.batchDeleteIntents(request); }, expectedError);
-            assert((client.innerApiCalls.batchDeleteIntents as SinonStub)
-                .getCall(0).calledWith(request, expectedOptions, undefined));
-        });
-
-        it('invokes batchDeleteIntents with LRO error', async () => {
-            const client = new intentsModule.v2.IntentsClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            client.initialize();
-            const request = generateSampleMessage(new protos.google.cloud.dialogflow.v2.BatchDeleteIntentsRequest());
-            request.parent = '';
-            const expectedHeaderRequestParams = "parent=";
-            const expectedOptions = {
-                otherArgs: {
-                    headers: {
-                        'x-goog-request-params': expectedHeaderRequestParams,
-                    },
-                },
-            };
-            const expectedError = new Error('expected');
-            client.innerApiCalls.batchDeleteIntents = stubLongRunningCall(undefined, undefined, expectedError);
-            const [operation] = await client.batchDeleteIntents(request);
-            await assert.rejects(async () => { await operation.promise(); }, expectedError);
-            assert((client.innerApiCalls.batchDeleteIntents as SinonStub)
-                .getCall(0).calledWith(request, expectedOptions, undefined));
-        });
-    });
-
-    describe('listIntents', () => {
-        it('invokes listIntents without error', async () => {
-            const client = new intentsModule.v2.IntentsClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            client.initialize();
-            const request = generateSampleMessage(new protos.google.cloud.dialogflow.v2.ListIntentsRequest());
-            request.parent = '';
-            const expectedHeaderRequestParams = "parent=";
-            const expectedOptions = {
-                otherArgs: {
-                    headers: {
-                        'x-goog-request-params': expectedHeaderRequestParams,
-                    },
-                },
-            };
-            const expectedResponse = [
-              generateSampleMessage(new protos.google.cloud.dialogflow.v2.Intent()),
-              generateSampleMessage(new protos.google.cloud.dialogflow.v2.Intent()),
-              generateSampleMessage(new protos.google.cloud.dialogflow.v2.Intent()),
-            ];
-            client.innerApiCalls.listIntents = stubSimpleCall(expectedResponse);
-            const [response] = await client.listIntents(request);
-            assert.deepStrictEqual(response, expectedResponse);
-            assert((client.innerApiCalls.listIntents as SinonStub)
-                .getCall(0).calledWith(request, expectedOptions, undefined));
-        });
-
-        it('invokes listIntents without error using callback', async () => {
-            const client = new intentsModule.v2.IntentsClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            client.initialize();
-            const request = generateSampleMessage(new protos.google.cloud.dialogflow.v2.ListIntentsRequest());
-            request.parent = '';
-            const expectedHeaderRequestParams = "parent=";
-            const expectedOptions = {
-                otherArgs: {
-                    headers: {
-                        'x-goog-request-params': expectedHeaderRequestParams,
-                    },
-                },
-            };
-            const expectedResponse = [
-              generateSampleMessage(new protos.google.cloud.dialogflow.v2.Intent()),
-              generateSampleMessage(new protos.google.cloud.dialogflow.v2.Intent()),
-              generateSampleMessage(new protos.google.cloud.dialogflow.v2.Intent()),
-            ];
-            client.innerApiCalls.listIntents = stubSimpleCallWithCallback(expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.listIntents(
-                    request,
-                    (err?: Error|null, result?: protos.google.cloud.dialogflow.v2.IIntent[]|null) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const response = await promise;
-            assert.deepStrictEqual(response, expectedResponse);
-            assert((client.innerApiCalls.listIntents as SinonStub)
-                .getCall(0).calledWith(request, expectedOptions /*, callback defined above */));
-        });
-
-        it('invokes listIntents with error', async () => {
-            const client = new intentsModule.v2.IntentsClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            client.initialize();
-            const request = generateSampleMessage(new protos.google.cloud.dialogflow.v2.ListIntentsRequest());
-            request.parent = '';
-            const expectedHeaderRequestParams = "parent=";
-            const expectedOptions = {
-                otherArgs: {
-                    headers: {
-                        'x-goog-request-params': expectedHeaderRequestParams,
-                    },
-                },
-            };
-            const expectedError = new Error('expected');
-            client.innerApiCalls.listIntents = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(async () => { await client.listIntents(request); }, expectedError);
-            assert((client.innerApiCalls.listIntents as SinonStub)
-                .getCall(0).calledWith(request, expectedOptions, undefined));
-        });
-
-        it('invokes listIntentsStream without error', async () => {
-            const client = new intentsModule.v2.IntentsClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            client.initialize();
-            const request = generateSampleMessage(new protos.google.cloud.dialogflow.v2.ListIntentsRequest());
-            request.parent = '';
-            const expectedHeaderRequestParams = "parent=";
-            const expectedResponse = [
-              generateSampleMessage(new protos.google.cloud.dialogflow.v2.Intent()),
-              generateSampleMessage(new protos.google.cloud.dialogflow.v2.Intent()),
-              generateSampleMessage(new protos.google.cloud.dialogflow.v2.Intent()),
-            ];
-            client.descriptors.page.listIntents.createStream = stubPageStreamingCall(expectedResponse);
-            const stream = client.listIntentsStream(request);
-            const promise = new Promise((resolve, reject) => {
-                const responses: protos.google.cloud.dialogflow.v2.Intent[] = [];
-                stream.on('data', (response: protos.google.cloud.dialogflow.v2.Intent) => {
-                    responses.push(response);
-                });
-                stream.on('end', () => {
-                    resolve(responses);
-                });
-                stream.on('error', (err: Error) => {
-                    reject(err);
-                });
-            });
-            const responses = await promise;
-            assert.deepStrictEqual(responses, expectedResponse);
-            assert((client.descriptors.page.listIntents.createStream as SinonStub)
-                .getCall(0).calledWith(client.innerApiCalls.listIntents, request));
-            assert.strictEqual(
-                (client.descriptors.page.listIntents.createStream as SinonStub)
-                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-                expectedHeaderRequestParams
-            );
-        });
-
-        it('invokes listIntentsStream with error', async () => {
-            const client = new intentsModule.v2.IntentsClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            client.initialize();
-            const request = generateSampleMessage(new protos.google.cloud.dialogflow.v2.ListIntentsRequest());
-            request.parent = '';
-            const expectedHeaderRequestParams = "parent=";
-            const expectedError = new Error('expected');
-            client.descriptors.page.listIntents.createStream = stubPageStreamingCall(undefined, expectedError);
-            const stream = client.listIntentsStream(request);
-            const promise = new Promise((resolve, reject) => {
-                const responses: protos.google.cloud.dialogflow.v2.Intent[] = [];
-                stream.on('data', (response: protos.google.cloud.dialogflow.v2.Intent) => {
-                    responses.push(response);
-                });
-                stream.on('end', () => {
-                    resolve(responses);
-                });
-                stream.on('error', (err: Error) => {
-                    reject(err);
-                });
-            });
-            await assert.rejects(async () => { await promise; }, expectedError);
-            assert((client.descriptors.page.listIntents.createStream as SinonStub)
-                .getCall(0).calledWith(client.innerApiCalls.listIntents, request));
-            assert.strictEqual(
-                (client.descriptors.page.listIntents.createStream as SinonStub)
-                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-                expectedHeaderRequestParams
-            );
-        });
-
-        it('uses async iteration with listIntents without error', async () => {
-            const client = new intentsModule.v2.IntentsClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            client.initialize();
-            const request = generateSampleMessage(new protos.google.cloud.dialogflow.v2.ListIntentsRequest());
-            request.parent = '';
-            const expectedHeaderRequestParams = "parent=";const expectedResponse = [
-              generateSampleMessage(new protos.google.cloud.dialogflow.v2.Intent()),
-              generateSampleMessage(new protos.google.cloud.dialogflow.v2.Intent()),
-              generateSampleMessage(new protos.google.cloud.dialogflow.v2.Intent()),
-            ];
-            client.descriptors.page.listIntents.asyncIterate = stubAsyncIterationCall(expectedResponse);
-            const responses: protos.google.cloud.dialogflow.v2.IIntent[] = [];
-            const iterable = client.listIntentsAsync(request);
-            for await (const resource of iterable) {
-                responses.push(resource!);
+    it('invokes getIntent without error using callback', async () => {
+      const client = new intentsModule.v2.IntentsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.v2.GetIntentRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.dialogflow.v2.Intent()
+      );
+      client.innerApiCalls.getIntent = stubSimpleCallWithCallback(
+        expectedResponse
+      );
+      const promise = new Promise((resolve, reject) => {
+        client.getIntent(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.dialogflow.v2.IIntent | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
             }
-            assert.deepStrictEqual(responses, expectedResponse);
-            assert.deepStrictEqual(
-                (client.descriptors.page.listIntents.asyncIterate as SinonStub)
-                    .getCall(0).args[1], request);
-            assert.strictEqual(
-                (client.descriptors.page.listIntents.asyncIterate as SinonStub)
-                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-                expectedHeaderRequestParams
-            );
-        });
-
-        it('uses async iteration with listIntents with error', async () => {
-            const client = new intentsModule.v2.IntentsClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            client.initialize();
-            const request = generateSampleMessage(new protos.google.cloud.dialogflow.v2.ListIntentsRequest());
-            request.parent = '';
-            const expectedHeaderRequestParams = "parent=";const expectedError = new Error('expected');
-            client.descriptors.page.listIntents.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
-            const iterable = client.listIntentsAsync(request);
-            await assert.rejects(async () => {
-                const responses: protos.google.cloud.dialogflow.v2.IIntent[] = [];
-                for await (const resource of iterable) {
-                    responses.push(resource!);
-                }
-            });
-            assert.deepStrictEqual(
-                (client.descriptors.page.listIntents.asyncIterate as SinonStub)
-                    .getCall(0).args[1], request);
-            assert.strictEqual(
-                (client.descriptors.page.listIntents.asyncIterate as SinonStub)
-                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-                expectedHeaderRequestParams
-            );
-        });
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.getIntent as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
     });
 
-    describe('Path templates', () => {
-
-        describe('agent', () => {
-            const fakePath = "/rendered/path/agent";
-            const expectedParameters = {
-                project: "projectValue",
-            };
-            const client = new intentsModule.v2.IntentsClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            client.initialize();
-            client.pathTemplates.agentPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.agentPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('agentPath', () => {
-                const result = client.agentPath("projectValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.agentPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromAgentName', () => {
-                const result = client.matchProjectFromAgentName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.agentPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('entityType', () => {
-            const fakePath = "/rendered/path/entityType";
-            const expectedParameters = {
-                project: "projectValue",
-                entity_type: "entityTypeValue",
-            };
-            const client = new intentsModule.v2.IntentsClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            client.initialize();
-            client.pathTemplates.entityTypePathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.entityTypePathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('entityTypePath', () => {
-                const result = client.entityTypePath("projectValue", "entityTypeValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.entityTypePathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromEntityTypeName', () => {
-                const result = client.matchProjectFromEntityTypeName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.entityTypePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchEntityTypeFromEntityTypeName', () => {
-                const result = client.matchEntityTypeFromEntityTypeName(fakePath);
-                assert.strictEqual(result, "entityTypeValue");
-                assert((client.pathTemplates.entityTypePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('intent', () => {
-            const fakePath = "/rendered/path/intent";
-            const expectedParameters = {
-                project: "projectValue",
-                intent: "intentValue",
-            };
-            const client = new intentsModule.v2.IntentsClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            client.initialize();
-            client.pathTemplates.intentPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.intentPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('intentPath', () => {
-                const result = client.intentPath("projectValue", "intentValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.intentPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromIntentName', () => {
-                const result = client.matchProjectFromIntentName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.intentPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchIntentFromIntentName', () => {
-                const result = client.matchIntentFromIntentName(fakePath);
-                assert.strictEqual(result, "intentValue");
-                assert((client.pathTemplates.intentPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('project', () => {
-            const fakePath = "/rendered/path/project";
-            const expectedParameters = {
-                project: "projectValue",
-            };
-            const client = new intentsModule.v2.IntentsClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            client.initialize();
-            client.pathTemplates.projectPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.projectPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('projectPath', () => {
-                const result = client.projectPath("projectValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.projectPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromProjectName', () => {
-                const result = client.matchProjectFromProjectName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.projectPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('projectAgentEnvironmentUserSessionContext', () => {
-            const fakePath = "/rendered/path/projectAgentEnvironmentUserSessionContext";
-            const expectedParameters = {
-                project: "projectValue",
-                environment: "environmentValue",
-                user: "userValue",
-                session: "sessionValue",
-                context: "contextValue",
-            };
-            const client = new intentsModule.v2.IntentsClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            client.initialize();
-            client.pathTemplates.projectAgentEnvironmentUserSessionContextPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.projectAgentEnvironmentUserSessionContextPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('projectAgentEnvironmentUserSessionContextPath', () => {
-                const result = client.projectAgentEnvironmentUserSessionContextPath("projectValue", "environmentValue", "userValue", "sessionValue", "contextValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.projectAgentEnvironmentUserSessionContextPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromProjectAgentEnvironmentUserSessionContextName', () => {
-                const result = client.matchProjectFromProjectAgentEnvironmentUserSessionContextName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.projectAgentEnvironmentUserSessionContextPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchEnvironmentFromProjectAgentEnvironmentUserSessionContextName', () => {
-                const result = client.matchEnvironmentFromProjectAgentEnvironmentUserSessionContextName(fakePath);
-                assert.strictEqual(result, "environmentValue");
-                assert((client.pathTemplates.projectAgentEnvironmentUserSessionContextPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchUserFromProjectAgentEnvironmentUserSessionContextName', () => {
-                const result = client.matchUserFromProjectAgentEnvironmentUserSessionContextName(fakePath);
-                assert.strictEqual(result, "userValue");
-                assert((client.pathTemplates.projectAgentEnvironmentUserSessionContextPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchSessionFromProjectAgentEnvironmentUserSessionContextName', () => {
-                const result = client.matchSessionFromProjectAgentEnvironmentUserSessionContextName(fakePath);
-                assert.strictEqual(result, "sessionValue");
-                assert((client.pathTemplates.projectAgentEnvironmentUserSessionContextPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchContextFromProjectAgentEnvironmentUserSessionContextName', () => {
-                const result = client.matchContextFromProjectAgentEnvironmentUserSessionContextName(fakePath);
-                assert.strictEqual(result, "contextValue");
-                assert((client.pathTemplates.projectAgentEnvironmentUserSessionContextPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('projectAgentEnvironmentUserSessionEntityType', () => {
-            const fakePath = "/rendered/path/projectAgentEnvironmentUserSessionEntityType";
-            const expectedParameters = {
-                project: "projectValue",
-                environment: "environmentValue",
-                user: "userValue",
-                session: "sessionValue",
-                entity_type: "entityTypeValue",
-            };
-            const client = new intentsModule.v2.IntentsClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            client.initialize();
-            client.pathTemplates.projectAgentEnvironmentUserSessionEntityTypePathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.projectAgentEnvironmentUserSessionEntityTypePathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('projectAgentEnvironmentUserSessionEntityTypePath', () => {
-                const result = client.projectAgentEnvironmentUserSessionEntityTypePath("projectValue", "environmentValue", "userValue", "sessionValue", "entityTypeValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.projectAgentEnvironmentUserSessionEntityTypePathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromProjectAgentEnvironmentUserSessionEntityTypeName', () => {
-                const result = client.matchProjectFromProjectAgentEnvironmentUserSessionEntityTypeName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.projectAgentEnvironmentUserSessionEntityTypePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchEnvironmentFromProjectAgentEnvironmentUserSessionEntityTypeName', () => {
-                const result = client.matchEnvironmentFromProjectAgentEnvironmentUserSessionEntityTypeName(fakePath);
-                assert.strictEqual(result, "environmentValue");
-                assert((client.pathTemplates.projectAgentEnvironmentUserSessionEntityTypePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchUserFromProjectAgentEnvironmentUserSessionEntityTypeName', () => {
-                const result = client.matchUserFromProjectAgentEnvironmentUserSessionEntityTypeName(fakePath);
-                assert.strictEqual(result, "userValue");
-                assert((client.pathTemplates.projectAgentEnvironmentUserSessionEntityTypePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchSessionFromProjectAgentEnvironmentUserSessionEntityTypeName', () => {
-                const result = client.matchSessionFromProjectAgentEnvironmentUserSessionEntityTypeName(fakePath);
-                assert.strictEqual(result, "sessionValue");
-                assert((client.pathTemplates.projectAgentEnvironmentUserSessionEntityTypePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchEntityTypeFromProjectAgentEnvironmentUserSessionEntityTypeName', () => {
-                const result = client.matchEntityTypeFromProjectAgentEnvironmentUserSessionEntityTypeName(fakePath);
-                assert.strictEqual(result, "entityTypeValue");
-                assert((client.pathTemplates.projectAgentEnvironmentUserSessionEntityTypePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('projectAgentSessionContext', () => {
-            const fakePath = "/rendered/path/projectAgentSessionContext";
-            const expectedParameters = {
-                project: "projectValue",
-                session: "sessionValue",
-                context: "contextValue",
-            };
-            const client = new intentsModule.v2.IntentsClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            client.initialize();
-            client.pathTemplates.projectAgentSessionContextPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.projectAgentSessionContextPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('projectAgentSessionContextPath', () => {
-                const result = client.projectAgentSessionContextPath("projectValue", "sessionValue", "contextValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.projectAgentSessionContextPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromProjectAgentSessionContextName', () => {
-                const result = client.matchProjectFromProjectAgentSessionContextName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.projectAgentSessionContextPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchSessionFromProjectAgentSessionContextName', () => {
-                const result = client.matchSessionFromProjectAgentSessionContextName(fakePath);
-                assert.strictEqual(result, "sessionValue");
-                assert((client.pathTemplates.projectAgentSessionContextPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchContextFromProjectAgentSessionContextName', () => {
-                const result = client.matchContextFromProjectAgentSessionContextName(fakePath);
-                assert.strictEqual(result, "contextValue");
-                assert((client.pathTemplates.projectAgentSessionContextPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('projectAgentSessionEntityType', () => {
-            const fakePath = "/rendered/path/projectAgentSessionEntityType";
-            const expectedParameters = {
-                project: "projectValue",
-                session: "sessionValue",
-                entity_type: "entityTypeValue",
-            };
-            const client = new intentsModule.v2.IntentsClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            client.initialize();
-            client.pathTemplates.projectAgentSessionEntityTypePathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.projectAgentSessionEntityTypePathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('projectAgentSessionEntityTypePath', () => {
-                const result = client.projectAgentSessionEntityTypePath("projectValue", "sessionValue", "entityTypeValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.projectAgentSessionEntityTypePathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromProjectAgentSessionEntityTypeName', () => {
-                const result = client.matchProjectFromProjectAgentSessionEntityTypeName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.projectAgentSessionEntityTypePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchSessionFromProjectAgentSessionEntityTypeName', () => {
-                const result = client.matchSessionFromProjectAgentSessionEntityTypeName(fakePath);
-                assert.strictEqual(result, "sessionValue");
-                assert((client.pathTemplates.projectAgentSessionEntityTypePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchEntityTypeFromProjectAgentSessionEntityTypeName', () => {
-                const result = client.matchEntityTypeFromProjectAgentSessionEntityTypeName(fakePath);
-                assert.strictEqual(result, "entityTypeValue");
-                assert((client.pathTemplates.projectAgentSessionEntityTypePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
+    it('invokes getIntent with error', async () => {
+      const client = new intentsModule.v2.IntentsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.v2.GetIntentRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getIntent = stubSimpleCall(undefined, expectedError);
+      await assert.rejects(async () => {
+        await client.getIntent(request);
+      }, expectedError);
+      assert(
+        (client.innerApiCalls.getIntent as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
     });
+  });
+
+  describe('createIntent', () => {
+    it('invokes createIntent without error', async () => {
+      const client = new intentsModule.v2.IntentsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.v2.CreateIntentRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.dialogflow.v2.Intent()
+      );
+      client.innerApiCalls.createIntent = stubSimpleCall(expectedResponse);
+      const [response] = await client.createIntent(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.createIntent as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes createIntent without error using callback', async () => {
+      const client = new intentsModule.v2.IntentsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.v2.CreateIntentRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.dialogflow.v2.Intent()
+      );
+      client.innerApiCalls.createIntent = stubSimpleCallWithCallback(
+        expectedResponse
+      );
+      const promise = new Promise((resolve, reject) => {
+        client.createIntent(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.dialogflow.v2.IIntent | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.createIntent as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes createIntent with error', async () => {
+      const client = new intentsModule.v2.IntentsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.v2.CreateIntentRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createIntent = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(async () => {
+        await client.createIntent(request);
+      }, expectedError);
+      assert(
+        (client.innerApiCalls.createIntent as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+  });
+
+  describe('updateIntent', () => {
+    it('invokes updateIntent without error', async () => {
+      const client = new intentsModule.v2.IntentsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.v2.UpdateIntentRequest()
+      );
+      request.intent = {};
+      request.intent.name = '';
+      const expectedHeaderRequestParams = 'intent.name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.dialogflow.v2.Intent()
+      );
+      client.innerApiCalls.updateIntent = stubSimpleCall(expectedResponse);
+      const [response] = await client.updateIntent(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.updateIntent as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes updateIntent without error using callback', async () => {
+      const client = new intentsModule.v2.IntentsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.v2.UpdateIntentRequest()
+      );
+      request.intent = {};
+      request.intent.name = '';
+      const expectedHeaderRequestParams = 'intent.name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.dialogflow.v2.Intent()
+      );
+      client.innerApiCalls.updateIntent = stubSimpleCallWithCallback(
+        expectedResponse
+      );
+      const promise = new Promise((resolve, reject) => {
+        client.updateIntent(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.dialogflow.v2.IIntent | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.updateIntent as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes updateIntent with error', async () => {
+      const client = new intentsModule.v2.IntentsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.v2.UpdateIntentRequest()
+      );
+      request.intent = {};
+      request.intent.name = '';
+      const expectedHeaderRequestParams = 'intent.name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateIntent = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(async () => {
+        await client.updateIntent(request);
+      }, expectedError);
+      assert(
+        (client.innerApiCalls.updateIntent as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+  });
+
+  describe('deleteIntent', () => {
+    it('invokes deleteIntent without error', async () => {
+      const client = new intentsModule.v2.IntentsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.v2.DeleteIntentRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty()
+      );
+      client.innerApiCalls.deleteIntent = stubSimpleCall(expectedResponse);
+      const [response] = await client.deleteIntent(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.deleteIntent as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes deleteIntent without error using callback', async () => {
+      const client = new intentsModule.v2.IntentsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.v2.DeleteIntentRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty()
+      );
+      client.innerApiCalls.deleteIntent = stubSimpleCallWithCallback(
+        expectedResponse
+      );
+      const promise = new Promise((resolve, reject) => {
+        client.deleteIntent(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.protobuf.IEmpty | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.deleteIntent as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes deleteIntent with error', async () => {
+      const client = new intentsModule.v2.IntentsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.v2.DeleteIntentRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteIntent = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(async () => {
+        await client.deleteIntent(request);
+      }, expectedError);
+      assert(
+        (client.innerApiCalls.deleteIntent as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+  });
+
+  describe('batchUpdateIntents', () => {
+    it('invokes batchUpdateIntents without error', async () => {
+      const client = new intentsModule.v2.IntentsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.v2.BatchUpdateIntentsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.batchUpdateIntents = stubLongRunningCall(
+        expectedResponse
+      );
+      const [operation] = await client.batchUpdateIntents(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.batchUpdateIntents as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes batchUpdateIntents without error using callback', async () => {
+      const client = new intentsModule.v2.IntentsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.v2.BatchUpdateIntentsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.batchUpdateIntents = stubLongRunningCallWithCallback(
+        expectedResponse
+      );
+      const promise = new Promise((resolve, reject) => {
+        client.batchUpdateIntents(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.dialogflow.v2.IBatchUpdateIntentsResponse,
+              protos.google.protobuf.IStruct
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.dialogflow.v2.IBatchUpdateIntentsResponse,
+        protos.google.protobuf.IStruct
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.batchUpdateIntents as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes batchUpdateIntents with call error', async () => {
+      const client = new intentsModule.v2.IntentsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.v2.BatchUpdateIntentsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.batchUpdateIntents = stubLongRunningCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(async () => {
+        await client.batchUpdateIntents(request);
+      }, expectedError);
+      assert(
+        (client.innerApiCalls.batchUpdateIntents as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes batchUpdateIntents with LRO error', async () => {
+      const client = new intentsModule.v2.IntentsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.v2.BatchUpdateIntentsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.batchUpdateIntents = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError
+      );
+      const [operation] = await client.batchUpdateIntents(request);
+      await assert.rejects(async () => {
+        await operation.promise();
+      }, expectedError);
+      assert(
+        (client.innerApiCalls.batchUpdateIntents as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+  });
+
+  describe('batchDeleteIntents', () => {
+    it('invokes batchDeleteIntents without error', async () => {
+      const client = new intentsModule.v2.IntentsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.v2.BatchDeleteIntentsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.batchDeleteIntents = stubLongRunningCall(
+        expectedResponse
+      );
+      const [operation] = await client.batchDeleteIntents(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.batchDeleteIntents as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes batchDeleteIntents without error using callback', async () => {
+      const client = new intentsModule.v2.IntentsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.v2.BatchDeleteIntentsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.batchDeleteIntents = stubLongRunningCallWithCallback(
+        expectedResponse
+      );
+      const promise = new Promise((resolve, reject) => {
+        client.batchDeleteIntents(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.protobuf.IEmpty,
+              protos.google.protobuf.IStruct
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.protobuf.IStruct
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.batchDeleteIntents as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes batchDeleteIntents with call error', async () => {
+      const client = new intentsModule.v2.IntentsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.v2.BatchDeleteIntentsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.batchDeleteIntents = stubLongRunningCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(async () => {
+        await client.batchDeleteIntents(request);
+      }, expectedError);
+      assert(
+        (client.innerApiCalls.batchDeleteIntents as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes batchDeleteIntents with LRO error', async () => {
+      const client = new intentsModule.v2.IntentsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.v2.BatchDeleteIntentsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.batchDeleteIntents = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError
+      );
+      const [operation] = await client.batchDeleteIntents(request);
+      await assert.rejects(async () => {
+        await operation.promise();
+      }, expectedError);
+      assert(
+        (client.innerApiCalls.batchDeleteIntents as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+  });
+
+  describe('listIntents', () => {
+    it('invokes listIntents without error', async () => {
+      const client = new intentsModule.v2.IntentsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.v2.ListIntentsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = [
+        generateSampleMessage(new protos.google.cloud.dialogflow.v2.Intent()),
+        generateSampleMessage(new protos.google.cloud.dialogflow.v2.Intent()),
+        generateSampleMessage(new protos.google.cloud.dialogflow.v2.Intent()),
+      ];
+      client.innerApiCalls.listIntents = stubSimpleCall(expectedResponse);
+      const [response] = await client.listIntents(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.listIntents as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes listIntents without error using callback', async () => {
+      const client = new intentsModule.v2.IntentsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.v2.ListIntentsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = [
+        generateSampleMessage(new protos.google.cloud.dialogflow.v2.Intent()),
+        generateSampleMessage(new protos.google.cloud.dialogflow.v2.Intent()),
+        generateSampleMessage(new protos.google.cloud.dialogflow.v2.Intent()),
+      ];
+      client.innerApiCalls.listIntents = stubSimpleCallWithCallback(
+        expectedResponse
+      );
+      const promise = new Promise((resolve, reject) => {
+        client.listIntents(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.dialogflow.v2.IIntent[] | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.listIntents as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes listIntents with error', async () => {
+      const client = new intentsModule.v2.IntentsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.v2.ListIntentsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listIntents = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(async () => {
+        await client.listIntents(request);
+      }, expectedError);
+      assert(
+        (client.innerApiCalls.listIntents as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes listIntentsStream without error', async () => {
+      const client = new intentsModule.v2.IntentsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.v2.ListIntentsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedResponse = [
+        generateSampleMessage(new protos.google.cloud.dialogflow.v2.Intent()),
+        generateSampleMessage(new protos.google.cloud.dialogflow.v2.Intent()),
+        generateSampleMessage(new protos.google.cloud.dialogflow.v2.Intent()),
+      ];
+      client.descriptors.page.listIntents.createStream = stubPageStreamingCall(
+        expectedResponse
+      );
+      const stream = client.listIntentsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.dialogflow.v2.Intent[] = [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.dialogflow.v2.Intent) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (client.descriptors.page.listIntents.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listIntents, request)
+      );
+      assert.strictEqual(
+        (client.descriptors.page.listIntents.createStream as SinonStub).getCall(
+          0
+        ).args[2].otherArgs.headers['x-goog-request-params'],
+        expectedHeaderRequestParams
+      );
+    });
+
+    it('invokes listIntentsStream with error', async () => {
+      const client = new intentsModule.v2.IntentsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.v2.ListIntentsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('expected');
+      client.descriptors.page.listIntents.createStream = stubPageStreamingCall(
+        undefined,
+        expectedError
+      );
+      const stream = client.listIntentsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.dialogflow.v2.Intent[] = [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.dialogflow.v2.Intent) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(async () => {
+        await promise;
+      }, expectedError);
+      assert(
+        (client.descriptors.page.listIntents.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listIntents, request)
+      );
+      assert.strictEqual(
+        (client.descriptors.page.listIntents.createStream as SinonStub).getCall(
+          0
+        ).args[2].otherArgs.headers['x-goog-request-params'],
+        expectedHeaderRequestParams
+      );
+    });
+
+    it('uses async iteration with listIntents without error', async () => {
+      const client = new intentsModule.v2.IntentsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.v2.ListIntentsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedResponse = [
+        generateSampleMessage(new protos.google.cloud.dialogflow.v2.Intent()),
+        generateSampleMessage(new protos.google.cloud.dialogflow.v2.Intent()),
+        generateSampleMessage(new protos.google.cloud.dialogflow.v2.Intent()),
+      ];
+      client.descriptors.page.listIntents.asyncIterate = stubAsyncIterationCall(
+        expectedResponse
+      );
+      const responses: protos.google.cloud.dialogflow.v2.IIntent[] = [];
+      const iterable = client.listIntentsAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (client.descriptors.page.listIntents.asyncIterate as SinonStub).getCall(
+          0
+        ).args[1],
+        request
+      );
+      assert.strictEqual(
+        (client.descriptors.page.listIntents.asyncIterate as SinonStub).getCall(
+          0
+        ).args[2].otherArgs.headers['x-goog-request-params'],
+        expectedHeaderRequestParams
+      );
+    });
+
+    it('uses async iteration with listIntents with error', async () => {
+      const client = new intentsModule.v2.IntentsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.v2.ListIntentsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('expected');
+      client.descriptors.page.listIntents.asyncIterate = stubAsyncIterationCall(
+        undefined,
+        expectedError
+      );
+      const iterable = client.listIntentsAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.cloud.dialogflow.v2.IIntent[] = [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (client.descriptors.page.listIntents.asyncIterate as SinonStub).getCall(
+          0
+        ).args[1],
+        request
+      );
+      assert.strictEqual(
+        (client.descriptors.page.listIntents.asyncIterate as SinonStub).getCall(
+          0
+        ).args[2].otherArgs.headers['x-goog-request-params'],
+        expectedHeaderRequestParams
+      );
+    });
+  });
+
+  describe('Path templates', () => {
+    describe('agent', () => {
+      const fakePath = '/rendered/path/agent';
+      const expectedParameters = {
+        project: 'projectValue',
+      };
+      const client = new intentsModule.v2.IntentsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.agentPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.agentPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('agentPath', () => {
+        const result = client.agentPath('projectValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.agentPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromAgentName', () => {
+        const result = client.matchProjectFromAgentName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.agentPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('entityType', () => {
+      const fakePath = '/rendered/path/entityType';
+      const expectedParameters = {
+        project: 'projectValue',
+        entity_type: 'entityTypeValue',
+      };
+      const client = new intentsModule.v2.IntentsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.entityTypePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.entityTypePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('entityTypePath', () => {
+        const result = client.entityTypePath('projectValue', 'entityTypeValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.entityTypePathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromEntityTypeName', () => {
+        const result = client.matchProjectFromEntityTypeName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.entityTypePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchEntityTypeFromEntityTypeName', () => {
+        const result = client.matchEntityTypeFromEntityTypeName(fakePath);
+        assert.strictEqual(result, 'entityTypeValue');
+        assert(
+          (client.pathTemplates.entityTypePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('intent', () => {
+      const fakePath = '/rendered/path/intent';
+      const expectedParameters = {
+        project: 'projectValue',
+        intent: 'intentValue',
+      };
+      const client = new intentsModule.v2.IntentsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.intentPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.intentPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('intentPath', () => {
+        const result = client.intentPath('projectValue', 'intentValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.intentPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromIntentName', () => {
+        const result = client.matchProjectFromIntentName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.intentPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchIntentFromIntentName', () => {
+        const result = client.matchIntentFromIntentName(fakePath);
+        assert.strictEqual(result, 'intentValue');
+        assert(
+          (client.pathTemplates.intentPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('project', () => {
+      const fakePath = '/rendered/path/project';
+      const expectedParameters = {
+        project: 'projectValue',
+      };
+      const client = new intentsModule.v2.IntentsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.projectPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.projectPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('projectPath', () => {
+        const result = client.projectPath('projectValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.projectPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromProjectName', () => {
+        const result = client.matchProjectFromProjectName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.projectPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('projectAgentEnvironmentUserSessionContext', () => {
+      const fakePath =
+        '/rendered/path/projectAgentEnvironmentUserSessionContext';
+      const expectedParameters = {
+        project: 'projectValue',
+        environment: 'environmentValue',
+        user: 'userValue',
+        session: 'sessionValue',
+        context: 'contextValue',
+      };
+      const client = new intentsModule.v2.IntentsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.projectAgentEnvironmentUserSessionContextPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.projectAgentEnvironmentUserSessionContextPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('projectAgentEnvironmentUserSessionContextPath', () => {
+        const result = client.projectAgentEnvironmentUserSessionContextPath(
+          'projectValue',
+          'environmentValue',
+          'userValue',
+          'sessionValue',
+          'contextValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates
+            .projectAgentEnvironmentUserSessionContextPathTemplate
+            .render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromProjectAgentEnvironmentUserSessionContextName', () => {
+        const result = client.matchProjectFromProjectAgentEnvironmentUserSessionContextName(
+          fakePath
+        );
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates
+            .projectAgentEnvironmentUserSessionContextPathTemplate
+            .match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchEnvironmentFromProjectAgentEnvironmentUserSessionContextName', () => {
+        const result = client.matchEnvironmentFromProjectAgentEnvironmentUserSessionContextName(
+          fakePath
+        );
+        assert.strictEqual(result, 'environmentValue');
+        assert(
+          (client.pathTemplates
+            .projectAgentEnvironmentUserSessionContextPathTemplate
+            .match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchUserFromProjectAgentEnvironmentUserSessionContextName', () => {
+        const result = client.matchUserFromProjectAgentEnvironmentUserSessionContextName(
+          fakePath
+        );
+        assert.strictEqual(result, 'userValue');
+        assert(
+          (client.pathTemplates
+            .projectAgentEnvironmentUserSessionContextPathTemplate
+            .match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchSessionFromProjectAgentEnvironmentUserSessionContextName', () => {
+        const result = client.matchSessionFromProjectAgentEnvironmentUserSessionContextName(
+          fakePath
+        );
+        assert.strictEqual(result, 'sessionValue');
+        assert(
+          (client.pathTemplates
+            .projectAgentEnvironmentUserSessionContextPathTemplate
+            .match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchContextFromProjectAgentEnvironmentUserSessionContextName', () => {
+        const result = client.matchContextFromProjectAgentEnvironmentUserSessionContextName(
+          fakePath
+        );
+        assert.strictEqual(result, 'contextValue');
+        assert(
+          (client.pathTemplates
+            .projectAgentEnvironmentUserSessionContextPathTemplate
+            .match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('projectAgentEnvironmentUserSessionEntityType', () => {
+      const fakePath =
+        '/rendered/path/projectAgentEnvironmentUserSessionEntityType';
+      const expectedParameters = {
+        project: 'projectValue',
+        environment: 'environmentValue',
+        user: 'userValue',
+        session: 'sessionValue',
+        entity_type: 'entityTypeValue',
+      };
+      const client = new intentsModule.v2.IntentsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.projectAgentEnvironmentUserSessionEntityTypePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.projectAgentEnvironmentUserSessionEntityTypePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('projectAgentEnvironmentUserSessionEntityTypePath', () => {
+        const result = client.projectAgentEnvironmentUserSessionEntityTypePath(
+          'projectValue',
+          'environmentValue',
+          'userValue',
+          'sessionValue',
+          'entityTypeValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates
+            .projectAgentEnvironmentUserSessionEntityTypePathTemplate
+            .render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromProjectAgentEnvironmentUserSessionEntityTypeName', () => {
+        const result = client.matchProjectFromProjectAgentEnvironmentUserSessionEntityTypeName(
+          fakePath
+        );
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates
+            .projectAgentEnvironmentUserSessionEntityTypePathTemplate
+            .match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchEnvironmentFromProjectAgentEnvironmentUserSessionEntityTypeName', () => {
+        const result = client.matchEnvironmentFromProjectAgentEnvironmentUserSessionEntityTypeName(
+          fakePath
+        );
+        assert.strictEqual(result, 'environmentValue');
+        assert(
+          (client.pathTemplates
+            .projectAgentEnvironmentUserSessionEntityTypePathTemplate
+            .match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchUserFromProjectAgentEnvironmentUserSessionEntityTypeName', () => {
+        const result = client.matchUserFromProjectAgentEnvironmentUserSessionEntityTypeName(
+          fakePath
+        );
+        assert.strictEqual(result, 'userValue');
+        assert(
+          (client.pathTemplates
+            .projectAgentEnvironmentUserSessionEntityTypePathTemplate
+            .match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchSessionFromProjectAgentEnvironmentUserSessionEntityTypeName', () => {
+        const result = client.matchSessionFromProjectAgentEnvironmentUserSessionEntityTypeName(
+          fakePath
+        );
+        assert.strictEqual(result, 'sessionValue');
+        assert(
+          (client.pathTemplates
+            .projectAgentEnvironmentUserSessionEntityTypePathTemplate
+            .match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchEntityTypeFromProjectAgentEnvironmentUserSessionEntityTypeName', () => {
+        const result = client.matchEntityTypeFromProjectAgentEnvironmentUserSessionEntityTypeName(
+          fakePath
+        );
+        assert.strictEqual(result, 'entityTypeValue');
+        assert(
+          (client.pathTemplates
+            .projectAgentEnvironmentUserSessionEntityTypePathTemplate
+            .match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('projectAgentSessionContext', () => {
+      const fakePath = '/rendered/path/projectAgentSessionContext';
+      const expectedParameters = {
+        project: 'projectValue',
+        session: 'sessionValue',
+        context: 'contextValue',
+      };
+      const client = new intentsModule.v2.IntentsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.projectAgentSessionContextPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.projectAgentSessionContextPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('projectAgentSessionContextPath', () => {
+        const result = client.projectAgentSessionContextPath(
+          'projectValue',
+          'sessionValue',
+          'contextValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.projectAgentSessionContextPathTemplate
+            .render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromProjectAgentSessionContextName', () => {
+        const result = client.matchProjectFromProjectAgentSessionContextName(
+          fakePath
+        );
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.projectAgentSessionContextPathTemplate
+            .match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchSessionFromProjectAgentSessionContextName', () => {
+        const result = client.matchSessionFromProjectAgentSessionContextName(
+          fakePath
+        );
+        assert.strictEqual(result, 'sessionValue');
+        assert(
+          (client.pathTemplates.projectAgentSessionContextPathTemplate
+            .match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchContextFromProjectAgentSessionContextName', () => {
+        const result = client.matchContextFromProjectAgentSessionContextName(
+          fakePath
+        );
+        assert.strictEqual(result, 'contextValue');
+        assert(
+          (client.pathTemplates.projectAgentSessionContextPathTemplate
+            .match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('projectAgentSessionEntityType', () => {
+      const fakePath = '/rendered/path/projectAgentSessionEntityType';
+      const expectedParameters = {
+        project: 'projectValue',
+        session: 'sessionValue',
+        entity_type: 'entityTypeValue',
+      };
+      const client = new intentsModule.v2.IntentsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.projectAgentSessionEntityTypePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.projectAgentSessionEntityTypePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('projectAgentSessionEntityTypePath', () => {
+        const result = client.projectAgentSessionEntityTypePath(
+          'projectValue',
+          'sessionValue',
+          'entityTypeValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.projectAgentSessionEntityTypePathTemplate
+            .render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromProjectAgentSessionEntityTypeName', () => {
+        const result = client.matchProjectFromProjectAgentSessionEntityTypeName(
+          fakePath
+        );
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.projectAgentSessionEntityTypePathTemplate
+            .match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchSessionFromProjectAgentSessionEntityTypeName', () => {
+        const result = client.matchSessionFromProjectAgentSessionEntityTypeName(
+          fakePath
+        );
+        assert.strictEqual(result, 'sessionValue');
+        assert(
+          (client.pathTemplates.projectAgentSessionEntityTypePathTemplate
+            .match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchEntityTypeFromProjectAgentSessionEntityTypeName', () => {
+        const result = client.matchEntityTypeFromProjectAgentSessionEntityTypeName(
+          fakePath
+        );
+        assert.strictEqual(result, 'entityTypeValue');
+        assert(
+          (client.pathTemplates.projectAgentSessionEntityTypePathTemplate
+            .match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+  });
 });
