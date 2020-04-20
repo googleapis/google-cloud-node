@@ -16,5 +16,4 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export {CloudBillingClient} from './cloud_billing_client';
-export {CloudCatalogClient} from './cloud_catalog_client';
+export {CloudBillingClient} from './cloud_billing_client';export {CloudCatalogClient} from './cloud_catalog_client';
