@@ -32,8 +32,8 @@ for version in versions:
         'iot',
         generator_args={
             "grpc-service-config": f"google/cloud/iot/{version}/cloudiot_grpc_service_config.json",
-            "package-name": f"@google-cloud/iot",
-            "main-service": f"iot"
+            "package-name": "@google-cloud/iot",
+            "main-service": "iot"
             },
         proto_path=f'/google/cloud/iot/{version}',
         extra_proto_files=['google/cloud/common_resources.proto'],
@@ -42,7 +42,7 @@ for version in versions:
 # skip index, protos, package.json, and README.md
 s.copy(
     library,
-    excludes=['package.json', 'README.md', 'src/index.ts'],
+    excludes=['package.json', 'README.md'],
 )
 
 # Copy common templated files
