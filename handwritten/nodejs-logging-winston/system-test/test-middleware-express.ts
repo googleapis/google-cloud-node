@@ -33,7 +33,7 @@ describe(__filename, () => {
   describe('global logger', () => {
     it('should properly write log entries', async () => {
       const logger = winston.createLogger();
-      const mw = await elb.makeMiddleware(logger, {
+      await elb.makeMiddleware(logger, {
         logName: LOG_NAME,
         level: 'info',
       });

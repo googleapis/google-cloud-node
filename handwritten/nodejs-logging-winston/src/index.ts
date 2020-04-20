@@ -1,16 +1,83 @@
+// Copyright 2017 Google LLC
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
 import {LEVEL} from 'triple-beam';
 import TransportStream = require('winston-transport');
 
 import {LOGGING_TRACE_KEY as COMMON_TRACE_KEY, LoggingCommon} from './common';
 import * as express from './middleware/express';
-import * as types from './types/core';
 import {getDefaultMetadataForTracing} from './default-metadata';
+import {
+  MonitoredResource,
+  ServiceContext,
+  LoggingOptions,
+} from '@google-cloud/logging';
 
 // Export the express middleware as 'express'.
 export {express};
 export {getDefaultMetadataForTracing};
 
-type Callback = (err: Error, apiResponse: {}) => void;
+type Callback = (err: Error | null, apiResponse?: {}) => void;
+
+export interface Options extends LoggingOptions {
+  /**
+   * The default log level. Winston will filter messages with a severity lower
+   * than this.
+   */
+  level?: string;
+  /**
+   * Custom logging levels as supported by winston. This list is used to
+   * translate your log level to the Stackdriver Logging level. Each property
+   * should have an integer value between 0 (most severe) and 7 (least severe).
+   * If you are passing a list of levels to your winston logger, you should
+   * provide the same list here.
+   */
+  levels?: {[name: string]: number};
+  /**
+   *  Serialize winston-provided log metadata using `util.inspect`.
+   */
+  inspectMetadata?: boolean;
+  /**
+   * The name of the log that will receive messages written to this transport.
+   */
+  logName?: string;
+  /**
+   * The monitored resource that the transport corresponds to. On Google Cloud
+   * Platform, this is detected automatically, but you may optionally specify a
+   * specific monitored resource. For more information see the
+   * [official documentation]{@link
+   * https://cloud.google.com/logging/docs/api/reference/rest/v2/MonitoredResource}.
+   */
+  resource?: MonitoredResource;
+  /**
+   * For logged errors, we provide this as the service context. For more
+   * information see [this guide]{@link
+   * https://cloud.google.com/error-reporting/docs/formatting-error-messages}
+   * and the [official documentation]{@link
+   * https://cloud.google.com/error-reporting/reference/rest/v1beta1/ServiceContext}.
+   */
+  serviceContext?: ServiceContext;
+
+  logname?: string;
+
+  prefix?: string;
+
+  labels?: {[key: string]: string};
+
+  // An attempt will be made to truncate messages larger than maxEntrySize.
+  maxEntrySize?: number;
+}
 
 /**
  * This module provides support for streaming your winston logs to
@@ -94,13 +161,12 @@ export class LoggingWinston extends TransportStream {
   static readonly LOGGING_TRACE_KEY = COMMON_TRACE_KEY;
 
   common: LoggingCommon;
-  constructor(options?: types.Options) {
-    options = options || {};
 
+  constructor(options?: Options) {
+    options = options || {};
     super({
       level: options.level,
     });
-
     this.common = new LoggingCommon(options);
   }
 

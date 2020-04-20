@@ -18,8 +18,8 @@ import {GCPEnv} from 'google-auth-library';
 import {LogEntry} from 'winston';
 import * as TransportStream from 'winston-transport';
 import * as winston from 'winston';
-import {Options} from '../../src/types/core';
 import * as proxyquire from 'proxyquire';
+import {Options} from '../../src';
 
 // types-only import. Actual require is done through proxyquire below.
 

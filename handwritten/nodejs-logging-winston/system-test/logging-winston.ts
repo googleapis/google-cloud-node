@@ -17,7 +17,6 @@
 import * as assert from 'assert';
 import {describe, it} from 'mocha';
 import * as uuid from 'uuid';
-import * as types from '../src/types/core';
 import {ErrorsApiTransport} from './errors-transport';
 import * as proxyquire from 'proxyquire';
 import * as winston from 'winston';
@@ -42,7 +41,7 @@ describe('LoggingWinston', function () {
     {
       args: ['first'],
       level: 'info',
-      verify: (entry: types.StackdriverEntry) => {
+      verify: (entry: Entry) => {
         assert.deepStrictEqual(entry.data, {
           message: 'first',
           metadata: {},
@@ -53,7 +52,7 @@ describe('LoggingWinston', function () {
     {
       args: ['second'],
       level: 'info',
-      verify: (entry: types.StackdriverEntry) => {
+      verify: (entry: Entry) => {
         assert.deepStrictEqual(entry.data, {
           message: 'second',
           metadata: {},
@@ -63,7 +62,7 @@ describe('LoggingWinston', function () {
     {
       args: ['third', {testTimestamp}],
       level: 'info',
-      verify: (entry: types.StackdriverEntry) => {
+      verify: (entry: Entry) => {
         assert.deepStrictEqual(entry.data, {
           message: 'third',
           metadata: {
@@ -78,7 +77,7 @@ describe('LoggingWinston', function () {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     args: any[];
     level: string;
-    verify: (entry: types.StackdriverEntry) => void;
+    verify: (entry: Entry) => void;
   }
 
   describe('log', () => {
@@ -89,7 +88,7 @@ describe('LoggingWinston', function () {
         {
           args: [new Error('fourth')],
           level: 'error',
-          verify: (entry: types.StackdriverEntry) => {
+          verify: (entry: Entry) => {
             assert(
               (entry.data as {
                 message: string;
@@ -106,7 +105,7 @@ describe('LoggingWinston', function () {
             },
           ],
           level: 'log',
-          verify: (entry: types.StackdriverEntry) => {
+          verify: (entry: Entry) => {
             assert(
               (entry.data as {
                 message: string;
@@ -138,7 +137,7 @@ describe('LoggingWinston', function () {
       assert.strictEqual(entries.length, testData.length);
       entries.reverse().forEach((entry, index) => {
         const test = testData[index];
-        test.verify((entry as {}) as types.StackdriverEntry);
+        test.verify((entry as {}) as Entry);
       });
     });
 

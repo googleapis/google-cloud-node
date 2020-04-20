@@ -21,9 +21,7 @@ import {GCPEnv} from 'google-auth-library';
 import * as winston from 'winston';
 
 import {LOGGING_TRACE_KEY} from '../common';
-import {LoggingWinston} from '../index';
-import * as types from '../types/core';
-
+import {LoggingWinston, Options} from '../index';
 import {makeChildLogger} from './make-child-logger';
 
 export const REQUEST_LOG_SUFFIX = '_reqlog';
@@ -36,11 +34,11 @@ export async function makeMiddleware(
 ): Promise<Middleware>;
 export async function makeMiddleware(
   logger: winston.Logger,
-  options?: types.Options
+  options?: Options
 ): Promise<Middleware>;
 export async function makeMiddleware(
   logger: winston.Logger,
-  optionsOrTransport?: types.Options | LoggingWinston
+  optionsOrTransport?: Options | LoggingWinston
 ): Promise<Middleware> {
   let transport: LoggingWinston;
 

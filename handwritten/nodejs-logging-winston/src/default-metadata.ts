@@ -14,6 +14,9 @@
 
 import {LOGGING_TRACE_KEY} from './common';
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+declare const global: {[index: string]: any};
+
 /**
  * Returns an object that can be passed to Winston.createLogger as defaultMeta
  * to allow log-trace correlation with Winston 3. Log-trace correlation with
