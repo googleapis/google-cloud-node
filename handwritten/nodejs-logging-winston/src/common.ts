@@ -13,11 +13,34 @@
 // limitations under the License.
 
 import * as util from 'util';
-import * as types from './types/core';
-import {Logging} from '@google-cloud/logging';
+import {
+  Logging,
+  protos,
+  ServiceContext,
+  SeverityNames,
+  Log,
+} from '@google-cloud/logging';
 import mapValues = require('lodash.mapvalues');
+import {Options} from '.';
+import {LogEntry} from '@google-cloud/logging/build/src/entry';
 
-type Callback = (err: Error, apiResponse: {}) => void;
+type Callback = (err: Error | null, apiResponse?: {}) => void;
+export type MonitoredResource = protos.google.api.MonitoredResource;
+
+export interface StackdriverData {
+  serviceContext?: ServiceContext;
+  message?: string;
+  metadata?: Metadata;
+}
+
+export interface Metadata {
+  stack?: string;
+  httpRequest?: protos.google.logging.type.IHttpRequest;
+  labels?: {};
+  // And arbitrary other properties.
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  [key: string]: any;
+}
 
 // Map of npm output levels to Stackdriver Logging levels.
 const NPM_LEVEL_NAME_TO_CODE = {
@@ -31,7 +54,7 @@ const NPM_LEVEL_NAME_TO_CODE = {
 
 // Map of Stackdriver Logging levels.
 const STACKDRIVER_LOGGING_LEVEL_CODE_TO_NAME: {
-  [key: number]: types.StackdriverLoggingLevelNames;
+  [key: number]: SeverityNames;
 } = {
   0: 'emergency',
   1: 'alert',
@@ -54,7 +77,8 @@ export const LOGGING_TRACE_KEY = 'logging.googleapis.com/trace';
  * "projects/[PROJECT-ID]/traces/[TRACE-ID]".
  */
 function getCurrentTraceFromAgent(): string | null {
-  const agent = global._google_trace_agent;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const agent = (global as any)._google_trace_agent;
   if (!agent || !agent.getCurrentContextId || !agent.getWriterProjectId) {
     return null;
   }
@@ -76,14 +100,14 @@ export class LoggingCommon {
   readonly logName: string;
   private inspectMetadata: boolean;
   private levels: {[name: string]: number};
-  stackdriverLog: types.StackdriverLog; // TODO: add type for @google-cloud/logging
-  private resource: types.MonitoredResource | undefined;
-  private serviceContext: types.ServiceContext | undefined;
+  stackdriverLog: Log;
+  private resource: protos.google.api.IMonitoredResource | undefined;
+  private serviceContext: ServiceContext | undefined;
   private prefix: string | undefined;
   private labels: object | undefined;
   static readonly LOGGING_TRACE_KEY = LOGGING_TRACE_KEY;
 
-  constructor(options?: types.Options) {
+  constructor(options?: Options) {
     options = Object.assign(
       {
         scopes: ['https://www.googleapis.com/auth/logging.write'],
@@ -94,15 +118,14 @@ export class LoggingCommon {
     this.logName = options.logName || 'winston_log';
     this.inspectMetadata = options.inspectMetadata === true;
     this.levels = options.levels || NPM_LEVEL_NAME_TO_CODE;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    this.stackdriverLog = new Logging(options as any).log(this.logName, {
+    this.stackdriverLog = new Logging(options).log(this.logName, {
       removeCircular: true,
       // See: https://cloud.google.com/logging/quotas, a log size of
       // 250,000 has been chosen to keep us comfortably within the
       // 256,000 limit.
       maxEntrySize: options.maxEntrySize || 250000,
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    }) as any;
+    });
     this.resource = options.resource;
     this.serviceContext = options.serviceContext;
     this.prefix = options.prefix;
@@ -126,7 +149,7 @@ export class LoggingCommon {
     const levelCode = this.levels[level];
     const stackdriverLevel = STACKDRIVER_LOGGING_LEVEL_CODE_TO_NAME[levelCode];
 
-    const data: types.StackdriverData = {};
+    const data: StackdriverData = {};
 
     // Stackdriver Logs Viewer picks up the summary line from the `message`
     // property of the jsonPayload.
@@ -148,7 +171,7 @@ export class LoggingCommon {
     data.message = this.prefix ? `[${this.prefix}] ` : '';
     data.message += message;
 
-    const entryMetadata: types.StackdriverEntryMetadata = {
+    const entryMetadata: LogEntry = {
       resource: this.resource,
     };
 
@@ -187,7 +210,7 @@ export class LoggingCommon {
 
     const trace = metadata[LOGGING_TRACE_KEY] || getCurrentTraceFromAgent();
     if (trace) {
-      entryMetadata.trace = trace;
+      entryMetadata.trace = trace as string;
     }
 
     // we have tests that assert that metadata is always passed.
@@ -216,7 +239,7 @@ type MetadataArg = {
   /**
    * set httpRequest to a http.clientRequest object to log it
    */
-  httpRequest?: types.HttpRequest;
+  httpRequest?: protos.google.logging.type.IHttpRequest;
   labels?: {};
   timestamp?: {};
   logName?: string;

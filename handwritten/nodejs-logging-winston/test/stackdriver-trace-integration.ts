@@ -18,6 +18,8 @@ import * as proxyquire from 'proxyquire';
 import * as winston from 'winston';
 import * as loggingWinstonLibTypes from '../src/index';
 
+declare const global: {[index: string]: {} | null};
+
 /**
  * Tests that ensure that getDefaultMetadataForTracing can be used for
  * trace-log correlation when Stackdriver Trace Agent is present. See
