@@ -4,23 +4,22 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/nodejs-dataproc.git",
-        "sha": "2eb5c2bfa756acf779ae0df1af1b6a6eb6cf740f"
+        "sha": "a9176affd078862361a5bda8ad1f07f6d23ca52a"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "26523a96798ce1a6caa1b3c912119059cfcc98a7",
-        "internalRef": "306320014"
+        "sha": "cdf13efacdea0649e940452f9c5d320b93735974",
+        "internalRef": "306783437"
       }
     },
     {
       "git": {
         "name": "synthtool",
         "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "52638600f387deb98efb5f9c85fec39e82aa9052",
-        "log": "52638600f387deb98efb5f9c85fec39e82aa9052\nbuild(java): set GOOGLE_CLOUD_PROJECT env for samples/integration tests (#484)\n\n* build(java): set GOOGLE_CLOUD_PROJECT env variable for samples/integration tests\n\n* ci: use java-docs-samples-testing for sample tests\n3df869dd6eb546ef13beeb7a9efa6ee0226afafd\nci: add dependency list completeness check (#490)\n\n\n682c0c37d1054966ca662a44259e96cc7aea4413\nbuild(nodejs): update lint ignore rules (#488)\n\n\n97c7ccfdceb927db1cbe6f3bb09616aa02bafd89\ndoc: document context-aware commit flags (#481)\n\nAlso, delete obsolete blurb about cleaning up old, dead files.\n\nCo-authored-by: Jeff Ching <chingor@google.com>\n8eff3790f88b50706a0c4b6a20b385f24e9ac4e7\nfeat: common postprocessing for node libraries (#485)\n\nCo-authored-by: Justin Beckwith <justin.beckwith@gmail.com>\n21c3b57ae54ae9db6a3a6b48b31c970c6ab56f19\nbuild(nodejs): remove unused codecov config (#486)\n\n\n"
+        "sha": "6980131905b652563280e4d2482384d4acc9eafc"
       }
     }
   ],

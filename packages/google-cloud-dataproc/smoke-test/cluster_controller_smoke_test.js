@@ -82,11 +82,7 @@ describe('ClusterControllerSmokeTest', () => {
         return client.listClusters(nextRequest, options).then(callback);
       }
     };
-    client
-      .listClusters(request, options)
-      .then(callback)
-      .then(done)
-      .catch(done);
+    client.listClusters(request, options).then(callback).then(done).catch(done);
   });
 
   it('successfully makes a call to the service using streaming', done => {
