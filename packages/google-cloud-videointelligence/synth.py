@@ -18,15 +18,14 @@ for version in versions:
         version,
         generator_args={
             "grpc-service-config": f"google/cloud/videointelligence/{version}/videointelligence_grpc_service_config.json",
-            "package-name": f"@google-cloud/video-intelligence",
-            "main-service": f"videointelligence",
+            "package-name": "@google-cloud/video-intelligence",
+            "main-service": "videointelligence",
         },
         proto_path=f'/google/cloud/videointelligence/{version}',
     )
 
     # skip index, protos, package.json, and README.md
-    s.copy(library, excludes=["package.json", "README.md", "src/index.ts",
-                              "smoke-test/video_intelligence_service_smoke_test.ts"])
+    s.copy(library, excludes=["package.json", "README.md", "src/index.ts"])
 
 templates = common_templates.node_library(source_location='build/src')
 s.copy(templates)
