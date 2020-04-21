@@ -47,12 +47,6 @@ common_templates = gcp.CommonTemplates()
 templates = common_templates.node_library(source_location='build/src')
 s.copy(templates, excludes=[])
 
-# Fix broken links to cloud.google.com documentation
-s.replace('src/v1beta1/*.ts', '/data-catalog/docs/', 'https://cloud.google.com/data-catalog/docs/')
-s.replace('src/v1beta1/*.ts',
-        '/compute/docs/regions-zones/',
-        'https://cloud.google.com/compute/docs/regions-zones/')
-
 # Node.js specific cleanup
 subprocess.run(['npm', 'install'])
 subprocess.run(['npm', 'run', 'fix'])

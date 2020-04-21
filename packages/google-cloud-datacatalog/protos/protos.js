@@ -28,7 +28,7 @@
     var $Reader = $protobuf.Reader, $Writer = $protobuf.Writer, $util = $protobuf.util;
     
     // Exported root namespace
-    var $root = $protobuf.roots._google_cloud_datacatalog_1_8_0_protos || ($protobuf.roots._google_cloud_datacatalog_1_8_0_protos = {});
+    var $root = $protobuf.roots._google_cloud_datacatalog_2_0_0_protos || ($protobuf.roots._google_cloud_datacatalog_2_0_0_protos = {});
     
     $root.google = (function() {
     
@@ -18377,26 +18377,6 @@
                         return CreateTagTemplateRequest;
                     })();
     
-                    /**
-                     * EntryType enum.
-                     * @name google.cloud.datacatalog.v1beta1.EntryType
-                     * @enum {string}
-                     * @property {number} ENTRY_TYPE_UNSPECIFIED=0 ENTRY_TYPE_UNSPECIFIED value
-                     * @property {number} TABLE=2 TABLE value
-                     * @property {number} MODEL=5 MODEL value
-                     * @property {number} DATA_STREAM=3 DATA_STREAM value
-                     * @property {number} FILESET=4 FILESET value
-                     */
-                    v1beta1.EntryType = (function() {
-                        var valuesById = {}, values = Object.create(valuesById);
-                        values[valuesById[0] = "ENTRY_TYPE_UNSPECIFIED"] = 0;
-                        values[valuesById[2] = "TABLE"] = 2;
-                        values[valuesById[5] = "MODEL"] = 5;
-                        values[valuesById[3] = "DATA_STREAM"] = 3;
-                        values[valuesById[4] = "FILESET"] = 4;
-                        return values;
-                    })();
-    
                     v1beta1.GetTagTemplateRequest = (function() {
     
                         /**
@@ -21488,6 +21468,26 @@
                         return ListEntriesResponse;
                     })();
     
+                    /**
+                     * EntryType enum.
+                     * @name google.cloud.datacatalog.v1beta1.EntryType
+                     * @enum {string}
+                     * @property {number} ENTRY_TYPE_UNSPECIFIED=0 ENTRY_TYPE_UNSPECIFIED value
+                     * @property {number} TABLE=2 TABLE value
+                     * @property {number} MODEL=5 MODEL value
+                     * @property {number} DATA_STREAM=3 DATA_STREAM value
+                     * @property {number} FILESET=4 FILESET value
+                     */
+                    v1beta1.EntryType = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "ENTRY_TYPE_UNSPECIFIED"] = 0;
+                        values[valuesById[2] = "TABLE"] = 2;
+                        values[valuesById[5] = "MODEL"] = 5;
+                        values[valuesById[3] = "DATA_STREAM"] = 3;
+                        values[valuesById[4] = "FILESET"] = 4;
+                        return values;
+                    })();
+    
                     v1beta1.GcsFilesetSpec = (function() {
     
                         /**
@@ -24292,6 +24292,7 @@
                          * @property {boolean|null} [boolValue] TagField boolValue
                          * @property {google.protobuf.ITimestamp|null} [timestampValue] TagField timestampValue
                          * @property {google.cloud.datacatalog.v1beta1.TagField.IEnumValue|null} [enumValue] TagField enumValue
+                         * @property {number|null} [order] TagField order
                          */
     
                         /**
@@ -24357,6 +24358,14 @@
                          */
                         TagField.prototype.enumValue = null;
     
+                        /**
+                         * TagField order.
+                         * @member {number} order
+                         * @memberof google.cloud.datacatalog.v1beta1.TagField
+                         * @instance
+                         */
+                        TagField.prototype.order = 0;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -24407,6 +24416,8 @@
                                 $root.google.protobuf.Timestamp.encode(message.timestampValue, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
                             if (message.enumValue != null && message.hasOwnProperty("enumValue"))
                                 $root.google.cloud.datacatalog.v1beta1.TagField.EnumValue.encode(message.enumValue, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                            if (message.order != null && message.hasOwnProperty("order"))
+                                writer.uint32(/* id 7, wireType 0 =*/56).int32(message.order);
                             return writer;
                         };
     
@@ -24458,6 +24469,9 @@
                                     break;
                                 case 6:
                                     message.enumValue = $root.google.cloud.datacatalog.v1beta1.TagField.EnumValue.decode(reader, reader.uint32());
+                                    break;
+                                case 7:
+                                    message.order = reader.int32();
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -24537,6 +24551,9 @@
                                         return "enumValue." + error;
                                 }
                             }
+                            if (message.order != null && message.hasOwnProperty("order"))
+                                if (!$util.isInteger(message.order))
+                                    return "order: integer expected";
                             return null;
                         };
     
@@ -24570,6 +24587,8 @@
                                     throw TypeError(".google.cloud.datacatalog.v1beta1.TagField.enumValue: object expected");
                                 message.enumValue = $root.google.cloud.datacatalog.v1beta1.TagField.EnumValue.fromObject(object.enumValue);
                             }
+                            if (object.order != null)
+                                message.order = object.order | 0;
                             return message;
                         };
     
@@ -24586,8 +24605,10 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.defaults)
+                            if (options.defaults) {
                                 object.displayName = "";
+                                object.order = 0;
+                            }
                             if (message.displayName != null && message.hasOwnProperty("displayName"))
                                 object.displayName = message.displayName;
                             if (message.doubleValue != null && message.hasOwnProperty("doubleValue")) {
@@ -24615,6 +24636,8 @@
                                 if (options.oneofs)
                                     object.kind = "enumValue";
                             }
+                            if (message.order != null && message.hasOwnProperty("order"))
+                                object.order = message.order;
                             return object;
                         };
     
@@ -25090,6 +25113,7 @@
                          * @property {string|null} [displayName] TagTemplateField displayName
                          * @property {google.cloud.datacatalog.v1beta1.IFieldType|null} [type] TagTemplateField type
                          * @property {boolean|null} [isRequired] TagTemplateField isRequired
+                         * @property {number|null} [order] TagTemplateField order
                          */
     
                         /**
@@ -25140,6 +25164,14 @@
                         TagTemplateField.prototype.isRequired = false;
     
                         /**
+                         * TagTemplateField order.
+                         * @member {number} order
+                         * @memberof google.cloud.datacatalog.v1beta1.TagTemplateField
+                         * @instance
+                         */
+                        TagTemplateField.prototype.order = 0;
+    
+                        /**
                          * Creates a new TagTemplateField instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.datacatalog.v1beta1.TagTemplateField
@@ -25169,6 +25201,8 @@
                                 $root.google.cloud.datacatalog.v1beta1.FieldType.encode(message.type, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                             if (message.isRequired != null && message.hasOwnProperty("isRequired"))
                                 writer.uint32(/* id 3, wireType 0 =*/24).bool(message.isRequired);
+                            if (message.order != null && message.hasOwnProperty("order"))
+                                writer.uint32(/* id 5, wireType 0 =*/40).int32(message.order);
                             if (message.name != null && message.hasOwnProperty("name"))
                                 writer.uint32(/* id 6, wireType 2 =*/50).string(message.name);
                             return writer;
@@ -25216,6 +25250,9 @@
                                     break;
                                 case 3:
                                     message.isRequired = reader.bool();
+                                    break;
+                                case 5:
+                                    message.order = reader.int32();
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -25266,6 +25303,9 @@
                             if (message.isRequired != null && message.hasOwnProperty("isRequired"))
                                 if (typeof message.isRequired !== "boolean")
                                     return "isRequired: boolean expected";
+                            if (message.order != null && message.hasOwnProperty("order"))
+                                if (!$util.isInteger(message.order))
+                                    return "order: integer expected";
                             return null;
                         };
     
@@ -25292,6 +25332,8 @@
                             }
                             if (object.isRequired != null)
                                 message.isRequired = Boolean(object.isRequired);
+                            if (object.order != null)
+                                message.order = object.order | 0;
                             return message;
                         };
     
@@ -25312,6 +25354,7 @@
                                 object.displayName = "";
                                 object.type = null;
                                 object.isRequired = false;
+                                object.order = 0;
                                 object.name = "";
                             }
                             if (message.displayName != null && message.hasOwnProperty("displayName"))
@@ -25320,6 +25363,8 @@
                                 object.type = $root.google.cloud.datacatalog.v1beta1.FieldType.toObject(message.type, options);
                             if (message.isRequired != null && message.hasOwnProperty("isRequired"))
                                 object.isRequired = message.isRequired;
+                            if (message.order != null && message.hasOwnProperty("order"))
+                                object.order = message.order;
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
                             return object;

@@ -1414,9 +1414,12 @@
                 "v1beta1": {
                   "options": {
                     "cc_enable_arenas": true,
+                    "csharp_namespace": "Google.Cloud.DataCatalog.V1Beta1",
                     "go_package": "google.golang.org/genproto/googleapis/cloud/datacatalog/v1beta1;datacatalog",
                     "java_multiple_files": true,
                     "java_package": "com.google.cloud.datacatalog.v1beta1",
+                    "php_namespace": "Google\\Cloud\\DataCatalog\\V1beta1",
+                    "ruby_package": "Google::Cloud::DataCatalog::V1beta1",
                     "java_outer_classname": "PolicyTagManagerSerializationProto"
                   },
                   "nested": {
@@ -2080,15 +2083,6 @@
                         }
                       }
                     },
-                    "EntryType": {
-                      "values": {
-                        "ENTRY_TYPE_UNSPECIFIED": 0,
-                        "TABLE": 2,
-                        "MODEL": 5,
-                        "DATA_STREAM": 3,
-                        "FILESET": 4
-                      }
-                    },
                     "GetTagTemplateRequest": {
                       "fields": {
                         "name": {
@@ -2339,6 +2333,15 @@
                           "type": "string",
                           "id": 2
                         }
+                      }
+                    },
+                    "EntryType": {
+                      "values": {
+                        "ENTRY_TYPE_UNSPECIFIED": 0,
+                        "TABLE": 2,
+                        "MODEL": 5,
+                        "DATA_STREAM": 3,
+                        "FILESET": 4
                       }
                     },
                     "GcsFilesetSpec": {
@@ -2652,6 +2655,13 @@
                         "enumValue": {
                           "type": "EnumValue",
                           "id": 6
+                        },
+                        "order": {
+                          "type": "int32",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       },
                       "nested": {
@@ -2716,6 +2726,10 @@
                         "isRequired": {
                           "type": "bool",
                           "id": 3
+                        },
+                        "order": {
+                          "type": "int32",
+                          "id": 5
                         }
                       }
                     },

@@ -8009,15 +8009,6 @@ export namespace google {
                     public toJSON(): { [k: string]: any };
                 }
 
-                /** EntryType enum. */
-                enum EntryType {
-                    ENTRY_TYPE_UNSPECIFIED = 0,
-                    TABLE = 2,
-                    MODEL = 5,
-                    DATA_STREAM = 3,
-                    FILESET = 4
-                }
-
                 /** Properties of a GetTagTemplateRequest. */
                 interface IGetTagTemplateRequest {
 
@@ -9380,6 +9371,15 @@ export namespace google {
                     public toJSON(): { [k: string]: any };
                 }
 
+                /** EntryType enum. */
+                enum EntryType {
+                    ENTRY_TYPE_UNSPECIFIED = 0,
+                    TABLE = 2,
+                    MODEL = 5,
+                    DATA_STREAM = 3,
+                    FILESET = 4
+                }
+
                 /** Properties of a GcsFilesetSpec. */
                 interface IGcsFilesetSpec {
 
@@ -10531,6 +10531,9 @@ export namespace google {
 
                     /** TagField enumValue */
                     enumValue?: (google.cloud.datacatalog.v1beta1.TagField.IEnumValue|null);
+
+                    /** TagField order */
+                    order?: (number|null);
                 }
 
                 /** Represents a TagField. */
@@ -10559,6 +10562,9 @@ export namespace google {
 
                     /** TagField enumValue. */
                     public enumValue?: (google.cloud.datacatalog.v1beta1.TagField.IEnumValue|null);
+
+                    /** TagField order. */
+                    public order: number;
 
                     /** TagField kind. */
                     public kind?: ("doubleValue"|"stringValue"|"boolValue"|"timestampValue"|"enumValue");
@@ -10843,6 +10849,9 @@ export namespace google {
 
                     /** TagTemplateField isRequired */
                     isRequired?: (boolean|null);
+
+                    /** TagTemplateField order */
+                    order?: (number|null);
                 }
 
                 /** Represents a TagTemplateField. */
@@ -10865,6 +10874,9 @@ export namespace google {
 
                     /** TagTemplateField isRequired. */
                     public isRequired: boolean;
+
+                    /** TagTemplateField order. */
+                    public order: number;
 
                     /**
                      * Creates a new TagTemplateField instance using the specified properties.
