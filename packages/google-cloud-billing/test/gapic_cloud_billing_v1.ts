@@ -20,7 +20,7 @@ import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
 import {SinonStub} from 'sinon';
-import { describe, it } from 'mocha';
+import {describe, it} from 'mocha';
 import * as cloudbillingModule from '../src';
 
 import {PassThrough} from 'stream';
@@ -28,1281 +28,1778 @@ import {PassThrough} from 'stream';
 import {protobuf} from 'google-gax';
 
 function generateSampleMessage<T extends object>(instance: T) {
-    const filledObject = (instance.constructor as typeof protobuf.Message)
-        .toObject(instance as protobuf.Message<T>, {defaults: true});
-    return (instance.constructor as typeof protobuf.Message).fromObject(filledObject) as T;
+  const filledObject = (instance.constructor as typeof protobuf.Message).toObject(
+    instance as protobuf.Message<T>,
+    {defaults: true}
+  );
+  return (instance.constructor as typeof protobuf.Message).fromObject(
+    filledObject
+  ) as T;
 }
 
 function stubSimpleCall<ResponseType>(response?: ResponseType, error?: Error) {
-    return error ? sinon.stub().rejects(error) : sinon.stub().resolves([response]);
+  return error
+    ? sinon.stub().rejects(error)
+    : sinon.stub().resolves([response]);
 }
 
-function stubSimpleCallWithCallback<ResponseType>(response?: ResponseType, error?: Error) {
-    return error ? sinon.stub().callsArgWith(2, error) : sinon.stub().callsArgWith(2, null, response);
+function stubSimpleCallWithCallback<ResponseType>(
+  response?: ResponseType,
+  error?: Error
+) {
+  return error
+    ? sinon.stub().callsArgWith(2, error)
+    : sinon.stub().callsArgWith(2, null, response);
 }
 
-function stubPageStreamingCall<ResponseType>(responses?: ResponseType[], error?: Error) {
-    const pagingStub = sinon.stub();
-    if (responses) {
-        for (let i = 0; i < responses.length; ++i) {
-            pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
-        }
+function stubPageStreamingCall<ResponseType>(
+  responses?: ResponseType[],
+  error?: Error
+) {
+  const pagingStub = sinon.stub();
+  if (responses) {
+    for (let i = 0; i < responses.length; ++i) {
+      pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
     }
-    const transformStub = error ? sinon.stub().callsArgWith(2, error) : pagingStub;
-    const mockStream = new PassThrough({
-        objectMode: true,
-        transform: transformStub,
+  }
+  const transformStub = error
+    ? sinon.stub().callsArgWith(2, error)
+    : pagingStub;
+  const mockStream = new PassThrough({
+    objectMode: true,
+    transform: transformStub,
+  });
+  // trigger as many responses as needed
+  if (responses) {
+    for (let i = 0; i < responses.length; ++i) {
+      setImmediate(() => {
+        mockStream.write({});
+      });
+    }
+    setImmediate(() => {
+      mockStream.end();
     });
-    // trigger as many responses as needed
-    if (responses) {
-        for (let i = 0; i < responses.length; ++i) {
-            setImmediate(() => { mockStream.write({}); });
-        }
-        setImmediate(() => { mockStream.end(); });
-    } else {
-        setImmediate(() => { mockStream.write({}); });
-        setImmediate(() => { mockStream.end(); });
-    }
-    return sinon.stub().returns(mockStream);
+  } else {
+    setImmediate(() => {
+      mockStream.write({});
+    });
+    setImmediate(() => {
+      mockStream.end();
+    });
+  }
+  return sinon.stub().returns(mockStream);
 }
 
-function stubAsyncIterationCall<ResponseType>(responses?: ResponseType[], error?: Error) {
-    let counter = 0;
-    const asyncIterable = {
-        [Symbol.asyncIterator]() {
-            return {
-                async next() {
-                    if (error) {
-                        return Promise.reject(error);
-                    }
-                    if (counter >= responses!.length) {
-                        return Promise.resolve({done: true, value: undefined});
-                    }
-                    return Promise.resolve({done: false, value: responses![counter++]});
-                }
-            };
-        }
-    };
-    return sinon.stub().returns(asyncIterable);
+function stubAsyncIterationCall<ResponseType>(
+  responses?: ResponseType[],
+  error?: Error
+) {
+  let counter = 0;
+  const asyncIterable = {
+    [Symbol.asyncIterator]() {
+      return {
+        async next() {
+          if (error) {
+            return Promise.reject(error);
+          }
+          if (counter >= responses!.length) {
+            return Promise.resolve({done: true, value: undefined});
+          }
+          return Promise.resolve({done: false, value: responses![counter++]});
+        },
+      };
+    },
+  };
+  return sinon.stub().returns(asyncIterable);
 }
 
 describe('v1.CloudBillingClient', () => {
-    it('has servicePath', () => {
-        const servicePath = cloudbillingModule.v1.CloudBillingClient.servicePath;
-        assert(servicePath);
+  it('has servicePath', () => {
+    const servicePath = cloudbillingModule.v1.CloudBillingClient.servicePath;
+    assert(servicePath);
+  });
+
+  it('has apiEndpoint', () => {
+    const apiEndpoint = cloudbillingModule.v1.CloudBillingClient.apiEndpoint;
+    assert(apiEndpoint);
+  });
+
+  it('has port', () => {
+    const port = cloudbillingModule.v1.CloudBillingClient.port;
+    assert(port);
+    assert(typeof port === 'number');
+  });
+
+  it('should create a client with no option', () => {
+    const client = new cloudbillingModule.v1.CloudBillingClient();
+    assert(client);
+  });
+
+  it('should create a client with gRPC fallback', () => {
+    const client = new cloudbillingModule.v1.CloudBillingClient({
+      fallback: true,
+    });
+    assert(client);
+  });
+
+  it('has initialize method and supports deferred initialization', async () => {
+    const client = new cloudbillingModule.v1.CloudBillingClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    assert.strictEqual(client.cloudBillingStub, undefined);
+    await client.initialize();
+    assert(client.cloudBillingStub);
+  });
+
+  it('has close method', () => {
+    const client = new cloudbillingModule.v1.CloudBillingClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    client.close();
+  });
+
+  it('has getProjectId method', async () => {
+    const fakeProjectId = 'fake-project-id';
+    const client = new cloudbillingModule.v1.CloudBillingClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
+    const result = await client.getProjectId();
+    assert.strictEqual(result, fakeProjectId);
+    assert((client.auth.getProjectId as SinonStub).calledWithExactly());
+  });
+
+  it('has getProjectId method with callback', async () => {
+    const fakeProjectId = 'fake-project-id';
+    const client = new cloudbillingModule.v1.CloudBillingClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    client.auth.getProjectId = sinon
+      .stub()
+      .callsArgWith(0, null, fakeProjectId);
+    const promise = new Promise((resolve, reject) => {
+      client.getProjectId((err?: Error | null, projectId?: string | null) => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve(projectId);
+        }
+      });
+    });
+    const result = await promise;
+    assert.strictEqual(result, fakeProjectId);
+  });
+
+  describe('getBillingAccount', () => {
+    it('invokes getBillingAccount without error', async () => {
+      const client = new cloudbillingModule.v1.CloudBillingClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.billing.v1.GetBillingAccountRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.billing.v1.BillingAccount()
+      );
+      client.innerApiCalls.getBillingAccount = stubSimpleCall(expectedResponse);
+      const [response] = await client.getBillingAccount(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.getBillingAccount as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
     });
 
-    it('has apiEndpoint', () => {
-        const apiEndpoint = cloudbillingModule.v1.CloudBillingClient.apiEndpoint;
-        assert(apiEndpoint);
-    });
-
-    it('has port', () => {
-        const port = cloudbillingModule.v1.CloudBillingClient.port;
-        assert(port);
-        assert(typeof port === 'number');
-    });
-
-    it('should create a client with no option', () => {
-        const client = new cloudbillingModule.v1.CloudBillingClient();
-        assert(client);
-    });
-
-    it('should create a client with gRPC fallback', () => {
-        const client = new cloudbillingModule.v1.CloudBillingClient({
-            fallback: true,
-        });
-        assert(client);
-    });
-
-    it('has initialize method and supports deferred initialization', async () => {
-        const client = new cloudbillingModule.v1.CloudBillingClient({
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
-            projectId: 'bogus',
-        });
-        assert.strictEqual(client.cloudBillingStub, undefined);
-        await client.initialize();
-        assert(client.cloudBillingStub);
-    });
-
-    it('has close method', () => {
-        const client = new cloudbillingModule.v1.CloudBillingClient({
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
-            projectId: 'bogus',
-        });
-        client.close();
-    });
-
-    it('has getProjectId method', async () => {
-        const fakeProjectId = 'fake-project-id';
-        const client = new cloudbillingModule.v1.CloudBillingClient({
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
-            projectId: 'bogus',
-        });
-        client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
-        const result = await client.getProjectId();
-        assert.strictEqual(result, fakeProjectId);
-        assert((client.auth.getProjectId as SinonStub).calledWithExactly());
-    });
-
-    it('has getProjectId method with callback', async () => {
-        const fakeProjectId = 'fake-project-id';
-        const client = new cloudbillingModule.v1.CloudBillingClient({
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
-            projectId: 'bogus',
-        });
-        client.auth.getProjectId = sinon.stub().callsArgWith(0, null, fakeProjectId);
-        const promise = new Promise((resolve, reject) => {
-            client.getProjectId((err?: Error|null, projectId?: string|null) => {
-                if (err) {
-                    reject(err);
-                } else {
-                    resolve(projectId);
-                }
-            });
-        });
-        const result = await promise;
-        assert.strictEqual(result, fakeProjectId);
-    });
-
-    describe('getBillingAccount', () => {
-        it('invokes getBillingAccount without error', async () => {
-            const client = new cloudbillingModule.v1.CloudBillingClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            client.initialize();
-            const request = generateSampleMessage(new protos.google.cloud.billing.v1.GetBillingAccountRequest());
-            request.name = '';
-            const expectedHeaderRequestParams = "name=";
-            const expectedOptions = {
-                otherArgs: {
-                    headers: {
-                        'x-goog-request-params': expectedHeaderRequestParams,
-                    },
-                },
-            };
-            const expectedResponse = generateSampleMessage(new protos.google.cloud.billing.v1.BillingAccount());
-            client.innerApiCalls.getBillingAccount = stubSimpleCall(expectedResponse);
-            const [response] = await client.getBillingAccount(request);
-            assert.deepStrictEqual(response, expectedResponse);
-            assert((client.innerApiCalls.getBillingAccount as SinonStub)
-                .getCall(0).calledWith(request, expectedOptions, undefined));
-        });
-
-        it('invokes getBillingAccount without error using callback', async () => {
-            const client = new cloudbillingModule.v1.CloudBillingClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            client.initialize();
-            const request = generateSampleMessage(new protos.google.cloud.billing.v1.GetBillingAccountRequest());
-            request.name = '';
-            const expectedHeaderRequestParams = "name=";
-            const expectedOptions = {
-                otherArgs: {
-                    headers: {
-                        'x-goog-request-params': expectedHeaderRequestParams,
-                    },
-                },
-            };
-            const expectedResponse = generateSampleMessage(new protos.google.cloud.billing.v1.BillingAccount());
-            client.innerApiCalls.getBillingAccount = stubSimpleCallWithCallback(expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.getBillingAccount(
-                    request,
-                    (err?: Error|null, result?: protos.google.cloud.billing.v1.IBillingAccount|null) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const response = await promise;
-            assert.deepStrictEqual(response, expectedResponse);
-            assert((client.innerApiCalls.getBillingAccount as SinonStub)
-                .getCall(0).calledWith(request, expectedOptions /*, callback defined above */));
-        });
-
-        it('invokes getBillingAccount with error', async () => {
-            const client = new cloudbillingModule.v1.CloudBillingClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            client.initialize();
-            const request = generateSampleMessage(new protos.google.cloud.billing.v1.GetBillingAccountRequest());
-            request.name = '';
-            const expectedHeaderRequestParams = "name=";
-            const expectedOptions = {
-                otherArgs: {
-                    headers: {
-                        'x-goog-request-params': expectedHeaderRequestParams,
-                    },
-                },
-            };
-            const expectedError = new Error('expected');
-            client.innerApiCalls.getBillingAccount = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(async () => { await client.getBillingAccount(request); }, expectedError);
-            assert((client.innerApiCalls.getBillingAccount as SinonStub)
-                .getCall(0).calledWith(request, expectedOptions, undefined));
-        });
-    });
-
-    describe('updateBillingAccount', () => {
-        it('invokes updateBillingAccount without error', async () => {
-            const client = new cloudbillingModule.v1.CloudBillingClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            client.initialize();
-            const request = generateSampleMessage(new protos.google.cloud.billing.v1.UpdateBillingAccountRequest());
-            request.name = '';
-            const expectedHeaderRequestParams = "name=";
-            const expectedOptions = {
-                otherArgs: {
-                    headers: {
-                        'x-goog-request-params': expectedHeaderRequestParams,
-                    },
-                },
-            };
-            const expectedResponse = generateSampleMessage(new protos.google.cloud.billing.v1.BillingAccount());
-            client.innerApiCalls.updateBillingAccount = stubSimpleCall(expectedResponse);
-            const [response] = await client.updateBillingAccount(request);
-            assert.deepStrictEqual(response, expectedResponse);
-            assert((client.innerApiCalls.updateBillingAccount as SinonStub)
-                .getCall(0).calledWith(request, expectedOptions, undefined));
-        });
-
-        it('invokes updateBillingAccount without error using callback', async () => {
-            const client = new cloudbillingModule.v1.CloudBillingClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            client.initialize();
-            const request = generateSampleMessage(new protos.google.cloud.billing.v1.UpdateBillingAccountRequest());
-            request.name = '';
-            const expectedHeaderRequestParams = "name=";
-            const expectedOptions = {
-                otherArgs: {
-                    headers: {
-                        'x-goog-request-params': expectedHeaderRequestParams,
-                    },
-                },
-            };
-            const expectedResponse = generateSampleMessage(new protos.google.cloud.billing.v1.BillingAccount());
-            client.innerApiCalls.updateBillingAccount = stubSimpleCallWithCallback(expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.updateBillingAccount(
-                    request,
-                    (err?: Error|null, result?: protos.google.cloud.billing.v1.IBillingAccount|null) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const response = await promise;
-            assert.deepStrictEqual(response, expectedResponse);
-            assert((client.innerApiCalls.updateBillingAccount as SinonStub)
-                .getCall(0).calledWith(request, expectedOptions /*, callback defined above */));
-        });
-
-        it('invokes updateBillingAccount with error', async () => {
-            const client = new cloudbillingModule.v1.CloudBillingClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            client.initialize();
-            const request = generateSampleMessage(new protos.google.cloud.billing.v1.UpdateBillingAccountRequest());
-            request.name = '';
-            const expectedHeaderRequestParams = "name=";
-            const expectedOptions = {
-                otherArgs: {
-                    headers: {
-                        'x-goog-request-params': expectedHeaderRequestParams,
-                    },
-                },
-            };
-            const expectedError = new Error('expected');
-            client.innerApiCalls.updateBillingAccount = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(async () => { await client.updateBillingAccount(request); }, expectedError);
-            assert((client.innerApiCalls.updateBillingAccount as SinonStub)
-                .getCall(0).calledWith(request, expectedOptions, undefined));
-        });
-    });
-
-    describe('createBillingAccount', () => {
-        it('invokes createBillingAccount without error', async () => {
-            const client = new cloudbillingModule.v1.CloudBillingClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            client.initialize();
-            const request = generateSampleMessage(new protos.google.cloud.billing.v1.CreateBillingAccountRequest());
-            const expectedOptions = {};
-            const expectedResponse = generateSampleMessage(new protos.google.cloud.billing.v1.BillingAccount());
-            client.innerApiCalls.createBillingAccount = stubSimpleCall(expectedResponse);
-            const [response] = await client.createBillingAccount(request);
-            assert.deepStrictEqual(response, expectedResponse);
-            assert((client.innerApiCalls.createBillingAccount as SinonStub)
-                .getCall(0).calledWith(request, expectedOptions, undefined));
-        });
-
-        it('invokes createBillingAccount without error using callback', async () => {
-            const client = new cloudbillingModule.v1.CloudBillingClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            client.initialize();
-            const request = generateSampleMessage(new protos.google.cloud.billing.v1.CreateBillingAccountRequest());
-            const expectedOptions = {};
-            const expectedResponse = generateSampleMessage(new protos.google.cloud.billing.v1.BillingAccount());
-            client.innerApiCalls.createBillingAccount = stubSimpleCallWithCallback(expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.createBillingAccount(
-                    request,
-                    (err?: Error|null, result?: protos.google.cloud.billing.v1.IBillingAccount|null) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const response = await promise;
-            assert.deepStrictEqual(response, expectedResponse);
-            assert((client.innerApiCalls.createBillingAccount as SinonStub)
-                .getCall(0).calledWith(request, expectedOptions /*, callback defined above */));
-        });
-
-        it('invokes createBillingAccount with error', async () => {
-            const client = new cloudbillingModule.v1.CloudBillingClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            client.initialize();
-            const request = generateSampleMessage(new protos.google.cloud.billing.v1.CreateBillingAccountRequest());
-            const expectedOptions = {};
-            const expectedError = new Error('expected');
-            client.innerApiCalls.createBillingAccount = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(async () => { await client.createBillingAccount(request); }, expectedError);
-            assert((client.innerApiCalls.createBillingAccount as SinonStub)
-                .getCall(0).calledWith(request, expectedOptions, undefined));
-        });
-    });
-
-    describe('getProjectBillingInfo', () => {
-        it('invokes getProjectBillingInfo without error', async () => {
-            const client = new cloudbillingModule.v1.CloudBillingClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            client.initialize();
-            const request = generateSampleMessage(new protos.google.cloud.billing.v1.GetProjectBillingInfoRequest());
-            request.name = '';
-            const expectedHeaderRequestParams = "name=";
-            const expectedOptions = {
-                otherArgs: {
-                    headers: {
-                        'x-goog-request-params': expectedHeaderRequestParams,
-                    },
-                },
-            };
-            const expectedResponse = generateSampleMessage(new protos.google.cloud.billing.v1.ProjectBillingInfo());
-            client.innerApiCalls.getProjectBillingInfo = stubSimpleCall(expectedResponse);
-            const [response] = await client.getProjectBillingInfo(request);
-            assert.deepStrictEqual(response, expectedResponse);
-            assert((client.innerApiCalls.getProjectBillingInfo as SinonStub)
-                .getCall(0).calledWith(request, expectedOptions, undefined));
-        });
-
-        it('invokes getProjectBillingInfo without error using callback', async () => {
-            const client = new cloudbillingModule.v1.CloudBillingClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            client.initialize();
-            const request = generateSampleMessage(new protos.google.cloud.billing.v1.GetProjectBillingInfoRequest());
-            request.name = '';
-            const expectedHeaderRequestParams = "name=";
-            const expectedOptions = {
-                otherArgs: {
-                    headers: {
-                        'x-goog-request-params': expectedHeaderRequestParams,
-                    },
-                },
-            };
-            const expectedResponse = generateSampleMessage(new protos.google.cloud.billing.v1.ProjectBillingInfo());
-            client.innerApiCalls.getProjectBillingInfo = stubSimpleCallWithCallback(expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.getProjectBillingInfo(
-                    request,
-                    (err?: Error|null, result?: protos.google.cloud.billing.v1.IProjectBillingInfo|null) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const response = await promise;
-            assert.deepStrictEqual(response, expectedResponse);
-            assert((client.innerApiCalls.getProjectBillingInfo as SinonStub)
-                .getCall(0).calledWith(request, expectedOptions /*, callback defined above */));
-        });
-
-        it('invokes getProjectBillingInfo with error', async () => {
-            const client = new cloudbillingModule.v1.CloudBillingClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            client.initialize();
-            const request = generateSampleMessage(new protos.google.cloud.billing.v1.GetProjectBillingInfoRequest());
-            request.name = '';
-            const expectedHeaderRequestParams = "name=";
-            const expectedOptions = {
-                otherArgs: {
-                    headers: {
-                        'x-goog-request-params': expectedHeaderRequestParams,
-                    },
-                },
-            };
-            const expectedError = new Error('expected');
-            client.innerApiCalls.getProjectBillingInfo = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(async () => { await client.getProjectBillingInfo(request); }, expectedError);
-            assert((client.innerApiCalls.getProjectBillingInfo as SinonStub)
-                .getCall(0).calledWith(request, expectedOptions, undefined));
-        });
-    });
-
-    describe('updateProjectBillingInfo', () => {
-        it('invokes updateProjectBillingInfo without error', async () => {
-            const client = new cloudbillingModule.v1.CloudBillingClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            client.initialize();
-            const request = generateSampleMessage(new protos.google.cloud.billing.v1.UpdateProjectBillingInfoRequest());
-            request.name = '';
-            const expectedHeaderRequestParams = "name=";
-            const expectedOptions = {
-                otherArgs: {
-                    headers: {
-                        'x-goog-request-params': expectedHeaderRequestParams,
-                    },
-                },
-            };
-            const expectedResponse = generateSampleMessage(new protos.google.cloud.billing.v1.ProjectBillingInfo());
-            client.innerApiCalls.updateProjectBillingInfo = stubSimpleCall(expectedResponse);
-            const [response] = await client.updateProjectBillingInfo(request);
-            assert.deepStrictEqual(response, expectedResponse);
-            assert((client.innerApiCalls.updateProjectBillingInfo as SinonStub)
-                .getCall(0).calledWith(request, expectedOptions, undefined));
-        });
-
-        it('invokes updateProjectBillingInfo without error using callback', async () => {
-            const client = new cloudbillingModule.v1.CloudBillingClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            client.initialize();
-            const request = generateSampleMessage(new protos.google.cloud.billing.v1.UpdateProjectBillingInfoRequest());
-            request.name = '';
-            const expectedHeaderRequestParams = "name=";
-            const expectedOptions = {
-                otherArgs: {
-                    headers: {
-                        'x-goog-request-params': expectedHeaderRequestParams,
-                    },
-                },
-            };
-            const expectedResponse = generateSampleMessage(new protos.google.cloud.billing.v1.ProjectBillingInfo());
-            client.innerApiCalls.updateProjectBillingInfo = stubSimpleCallWithCallback(expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.updateProjectBillingInfo(
-                    request,
-                    (err?: Error|null, result?: protos.google.cloud.billing.v1.IProjectBillingInfo|null) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const response = await promise;
-            assert.deepStrictEqual(response, expectedResponse);
-            assert((client.innerApiCalls.updateProjectBillingInfo as SinonStub)
-                .getCall(0).calledWith(request, expectedOptions /*, callback defined above */));
-        });
-
-        it('invokes updateProjectBillingInfo with error', async () => {
-            const client = new cloudbillingModule.v1.CloudBillingClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            client.initialize();
-            const request = generateSampleMessage(new protos.google.cloud.billing.v1.UpdateProjectBillingInfoRequest());
-            request.name = '';
-            const expectedHeaderRequestParams = "name=";
-            const expectedOptions = {
-                otherArgs: {
-                    headers: {
-                        'x-goog-request-params': expectedHeaderRequestParams,
-                    },
-                },
-            };
-            const expectedError = new Error('expected');
-            client.innerApiCalls.updateProjectBillingInfo = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(async () => { await client.updateProjectBillingInfo(request); }, expectedError);
-            assert((client.innerApiCalls.updateProjectBillingInfo as SinonStub)
-                .getCall(0).calledWith(request, expectedOptions, undefined));
-        });
-    });
-
-    describe('getIamPolicy', () => {
-        it('invokes getIamPolicy without error', async () => {
-            const client = new cloudbillingModule.v1.CloudBillingClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            client.initialize();
-            const request = generateSampleMessage(new protos.google.iam.v1.GetIamPolicyRequest());
-            request.resource = '';
-            const expectedHeaderRequestParams = "resource=";
-            const expectedOptions = {
-                otherArgs: {
-                    headers: {
-                        'x-goog-request-params': expectedHeaderRequestParams,
-                    },
-                },
-            };
-            const expectedResponse = generateSampleMessage(new protos.google.iam.v1.Policy());
-            client.innerApiCalls.getIamPolicy = stubSimpleCall(expectedResponse);
-            const [response] = await client.getIamPolicy(request);
-            assert.deepStrictEqual(response, expectedResponse);
-            assert((client.innerApiCalls.getIamPolicy as SinonStub)
-                .getCall(0).calledWith(request, expectedOptions, undefined));
-        });
-
-        it('invokes getIamPolicy without error using callback', async () => {
-            const client = new cloudbillingModule.v1.CloudBillingClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            client.initialize();
-            const request = generateSampleMessage(new protos.google.iam.v1.GetIamPolicyRequest());
-            request.resource = '';
-            const expectedHeaderRequestParams = "resource=";
-            const expectedOptions = {
-                otherArgs: {
-                    headers: {
-                        'x-goog-request-params': expectedHeaderRequestParams,
-                    },
-                },
-            };
-            const expectedResponse = generateSampleMessage(new protos.google.iam.v1.Policy());
-            client.innerApiCalls.getIamPolicy = stubSimpleCallWithCallback(expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.getIamPolicy(
-                    request,
-                    (err?: Error|null, result?: protos.google.iam.v1.IPolicy|null) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const response = await promise;
-            assert.deepStrictEqual(response, expectedResponse);
-            assert((client.innerApiCalls.getIamPolicy as SinonStub)
-                .getCall(0).calledWith(request, expectedOptions /*, callback defined above */));
-        });
-
-        it('invokes getIamPolicy with error', async () => {
-            const client = new cloudbillingModule.v1.CloudBillingClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            client.initialize();
-            const request = generateSampleMessage(new protos.google.iam.v1.GetIamPolicyRequest());
-            request.resource = '';
-            const expectedHeaderRequestParams = "resource=";
-            const expectedOptions = {
-                otherArgs: {
-                    headers: {
-                        'x-goog-request-params': expectedHeaderRequestParams,
-                    },
-                },
-            };
-            const expectedError = new Error('expected');
-            client.innerApiCalls.getIamPolicy = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(async () => { await client.getIamPolicy(request); }, expectedError);
-            assert((client.innerApiCalls.getIamPolicy as SinonStub)
-                .getCall(0).calledWith(request, expectedOptions, undefined));
-        });
-    });
-
-    describe('setIamPolicy', () => {
-        it('invokes setIamPolicy without error', async () => {
-            const client = new cloudbillingModule.v1.CloudBillingClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            client.initialize();
-            const request = generateSampleMessage(new protos.google.iam.v1.SetIamPolicyRequest());
-            request.resource = '';
-            const expectedHeaderRequestParams = "resource=";
-            const expectedOptions = {
-                otherArgs: {
-                    headers: {
-                        'x-goog-request-params': expectedHeaderRequestParams,
-                    },
-                },
-            };
-            const expectedResponse = generateSampleMessage(new protos.google.iam.v1.Policy());
-            client.innerApiCalls.setIamPolicy = stubSimpleCall(expectedResponse);
-            const [response] = await client.setIamPolicy(request);
-            assert.deepStrictEqual(response, expectedResponse);
-            assert((client.innerApiCalls.setIamPolicy as SinonStub)
-                .getCall(0).calledWith(request, expectedOptions, undefined));
-        });
-
-        it('invokes setIamPolicy without error using callback', async () => {
-            const client = new cloudbillingModule.v1.CloudBillingClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            client.initialize();
-            const request = generateSampleMessage(new protos.google.iam.v1.SetIamPolicyRequest());
-            request.resource = '';
-            const expectedHeaderRequestParams = "resource=";
-            const expectedOptions = {
-                otherArgs: {
-                    headers: {
-                        'x-goog-request-params': expectedHeaderRequestParams,
-                    },
-                },
-            };
-            const expectedResponse = generateSampleMessage(new protos.google.iam.v1.Policy());
-            client.innerApiCalls.setIamPolicy = stubSimpleCallWithCallback(expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.setIamPolicy(
-                    request,
-                    (err?: Error|null, result?: protos.google.iam.v1.IPolicy|null) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const response = await promise;
-            assert.deepStrictEqual(response, expectedResponse);
-            assert((client.innerApiCalls.setIamPolicy as SinonStub)
-                .getCall(0).calledWith(request, expectedOptions /*, callback defined above */));
-        });
-
-        it('invokes setIamPolicy with error', async () => {
-            const client = new cloudbillingModule.v1.CloudBillingClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            client.initialize();
-            const request = generateSampleMessage(new protos.google.iam.v1.SetIamPolicyRequest());
-            request.resource = '';
-            const expectedHeaderRequestParams = "resource=";
-            const expectedOptions = {
-                otherArgs: {
-                    headers: {
-                        'x-goog-request-params': expectedHeaderRequestParams,
-                    },
-                },
-            };
-            const expectedError = new Error('expected');
-            client.innerApiCalls.setIamPolicy = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(async () => { await client.setIamPolicy(request); }, expectedError);
-            assert((client.innerApiCalls.setIamPolicy as SinonStub)
-                .getCall(0).calledWith(request, expectedOptions, undefined));
-        });
-    });
-
-    describe('testIamPermissions', () => {
-        it('invokes testIamPermissions without error', async () => {
-            const client = new cloudbillingModule.v1.CloudBillingClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            client.initialize();
-            const request = generateSampleMessage(new protos.google.iam.v1.TestIamPermissionsRequest());
-            request.resource = '';
-            const expectedHeaderRequestParams = "resource=";
-            const expectedOptions = {
-                otherArgs: {
-                    headers: {
-                        'x-goog-request-params': expectedHeaderRequestParams,
-                    },
-                },
-            };
-            const expectedResponse = generateSampleMessage(new protos.google.iam.v1.TestIamPermissionsResponse());
-            client.innerApiCalls.testIamPermissions = stubSimpleCall(expectedResponse);
-            const [response] = await client.testIamPermissions(request);
-            assert.deepStrictEqual(response, expectedResponse);
-            assert((client.innerApiCalls.testIamPermissions as SinonStub)
-                .getCall(0).calledWith(request, expectedOptions, undefined));
-        });
-
-        it('invokes testIamPermissions without error using callback', async () => {
-            const client = new cloudbillingModule.v1.CloudBillingClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            client.initialize();
-            const request = generateSampleMessage(new protos.google.iam.v1.TestIamPermissionsRequest());
-            request.resource = '';
-            const expectedHeaderRequestParams = "resource=";
-            const expectedOptions = {
-                otherArgs: {
-                    headers: {
-                        'x-goog-request-params': expectedHeaderRequestParams,
-                    },
-                },
-            };
-            const expectedResponse = generateSampleMessage(new protos.google.iam.v1.TestIamPermissionsResponse());
-            client.innerApiCalls.testIamPermissions = stubSimpleCallWithCallback(expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.testIamPermissions(
-                    request,
-                    (err?: Error|null, result?: protos.google.iam.v1.ITestIamPermissionsResponse|null) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const response = await promise;
-            assert.deepStrictEqual(response, expectedResponse);
-            assert((client.innerApiCalls.testIamPermissions as SinonStub)
-                .getCall(0).calledWith(request, expectedOptions /*, callback defined above */));
-        });
-
-        it('invokes testIamPermissions with error', async () => {
-            const client = new cloudbillingModule.v1.CloudBillingClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            client.initialize();
-            const request = generateSampleMessage(new protos.google.iam.v1.TestIamPermissionsRequest());
-            request.resource = '';
-            const expectedHeaderRequestParams = "resource=";
-            const expectedOptions = {
-                otherArgs: {
-                    headers: {
-                        'x-goog-request-params': expectedHeaderRequestParams,
-                    },
-                },
-            };
-            const expectedError = new Error('expected');
-            client.innerApiCalls.testIamPermissions = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(async () => { await client.testIamPermissions(request); }, expectedError);
-            assert((client.innerApiCalls.testIamPermissions as SinonStub)
-                .getCall(0).calledWith(request, expectedOptions, undefined));
-        });
-    });
-
-    describe('listBillingAccounts', () => {
-        it('invokes listBillingAccounts without error', async () => {
-            const client = new cloudbillingModule.v1.CloudBillingClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            client.initialize();
-            const request = generateSampleMessage(new protos.google.cloud.billing.v1.ListBillingAccountsRequest());
-            const expectedOptions = {};
-            const expectedResponse = [
-              generateSampleMessage(new protos.google.cloud.billing.v1.BillingAccount()),
-              generateSampleMessage(new protos.google.cloud.billing.v1.BillingAccount()),
-              generateSampleMessage(new protos.google.cloud.billing.v1.BillingAccount()),
-            ];
-            client.innerApiCalls.listBillingAccounts = stubSimpleCall(expectedResponse);
-            const [response] = await client.listBillingAccounts(request);
-            assert.deepStrictEqual(response, expectedResponse);
-            assert((client.innerApiCalls.listBillingAccounts as SinonStub)
-                .getCall(0).calledWith(request, expectedOptions, undefined));
-        });
-
-        it('invokes listBillingAccounts without error using callback', async () => {
-            const client = new cloudbillingModule.v1.CloudBillingClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            client.initialize();
-            const request = generateSampleMessage(new protos.google.cloud.billing.v1.ListBillingAccountsRequest());
-            const expectedOptions = {};
-            const expectedResponse = [
-              generateSampleMessage(new protos.google.cloud.billing.v1.BillingAccount()),
-              generateSampleMessage(new protos.google.cloud.billing.v1.BillingAccount()),
-              generateSampleMessage(new protos.google.cloud.billing.v1.BillingAccount()),
-            ];
-            client.innerApiCalls.listBillingAccounts = stubSimpleCallWithCallback(expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.listBillingAccounts(
-                    request,
-                    (err?: Error|null, result?: protos.google.cloud.billing.v1.IBillingAccount[]|null) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const response = await promise;
-            assert.deepStrictEqual(response, expectedResponse);
-            assert((client.innerApiCalls.listBillingAccounts as SinonStub)
-                .getCall(0).calledWith(request, expectedOptions /*, callback defined above */));
-        });
-
-        it('invokes listBillingAccounts with error', async () => {
-            const client = new cloudbillingModule.v1.CloudBillingClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            client.initialize();
-            const request = generateSampleMessage(new protos.google.cloud.billing.v1.ListBillingAccountsRequest());
-            const expectedOptions = {};
-            const expectedError = new Error('expected');
-            client.innerApiCalls.listBillingAccounts = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(async () => { await client.listBillingAccounts(request); }, expectedError);
-            assert((client.innerApiCalls.listBillingAccounts as SinonStub)
-                .getCall(0).calledWith(request, expectedOptions, undefined));
-        });
-
-        it('invokes listBillingAccountsStream without error', async () => {
-            const client = new cloudbillingModule.v1.CloudBillingClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            client.initialize();
-            const request = generateSampleMessage(new protos.google.cloud.billing.v1.ListBillingAccountsRequest());
-            const expectedResponse = [
-              generateSampleMessage(new protos.google.cloud.billing.v1.BillingAccount()),
-              generateSampleMessage(new protos.google.cloud.billing.v1.BillingAccount()),
-              generateSampleMessage(new protos.google.cloud.billing.v1.BillingAccount()),
-            ];
-            client.descriptors.page.listBillingAccounts.createStream = stubPageStreamingCall(expectedResponse);
-            const stream = client.listBillingAccountsStream(request);
-            const promise = new Promise((resolve, reject) => {
-                const responses: protos.google.cloud.billing.v1.BillingAccount[] = [];
-                stream.on('data', (response: protos.google.cloud.billing.v1.BillingAccount) => {
-                    responses.push(response);
-                });
-                stream.on('end', () => {
-                    resolve(responses);
-                });
-                stream.on('error', (err: Error) => {
-                    reject(err);
-                });
-            });
-            const responses = await promise;
-            assert.deepStrictEqual(responses, expectedResponse);
-            assert((client.descriptors.page.listBillingAccounts.createStream as SinonStub)
-                .getCall(0).calledWith(client.innerApiCalls.listBillingAccounts, request));
-        });
-
-        it('invokes listBillingAccountsStream with error', async () => {
-            const client = new cloudbillingModule.v1.CloudBillingClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            client.initialize();
-            const request = generateSampleMessage(new protos.google.cloud.billing.v1.ListBillingAccountsRequest());
-            const expectedError = new Error('expected');
-            client.descriptors.page.listBillingAccounts.createStream = stubPageStreamingCall(undefined, expectedError);
-            const stream = client.listBillingAccountsStream(request);
-            const promise = new Promise((resolve, reject) => {
-                const responses: protos.google.cloud.billing.v1.BillingAccount[] = [];
-                stream.on('data', (response: protos.google.cloud.billing.v1.BillingAccount) => {
-                    responses.push(response);
-                });
-                stream.on('end', () => {
-                    resolve(responses);
-                });
-                stream.on('error', (err: Error) => {
-                    reject(err);
-                });
-            });
-            await assert.rejects(async () => { await promise; }, expectedError);
-            assert((client.descriptors.page.listBillingAccounts.createStream as SinonStub)
-                .getCall(0).calledWith(client.innerApiCalls.listBillingAccounts, request));
-        });
-
-        it('uses async iteration with listBillingAccounts without error', async () => {
-            const client = new cloudbillingModule.v1.CloudBillingClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            client.initialize();
-            const request = generateSampleMessage(new protos.google.cloud.billing.v1.ListBillingAccountsRequest());const expectedResponse = [
-              generateSampleMessage(new protos.google.cloud.billing.v1.BillingAccount()),
-              generateSampleMessage(new protos.google.cloud.billing.v1.BillingAccount()),
-              generateSampleMessage(new protos.google.cloud.billing.v1.BillingAccount()),
-            ];
-            client.descriptors.page.listBillingAccounts.asyncIterate = stubAsyncIterationCall(expectedResponse);
-            const responses: protos.google.cloud.billing.v1.IBillingAccount[] = [];
-            const iterable = client.listBillingAccountsAsync(request);
-            for await (const resource of iterable) {
-                responses.push(resource!);
+    it('invokes getBillingAccount without error using callback', async () => {
+      const client = new cloudbillingModule.v1.CloudBillingClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.billing.v1.GetBillingAccountRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.billing.v1.BillingAccount()
+      );
+      client.innerApiCalls.getBillingAccount = stubSimpleCallWithCallback(
+        expectedResponse
+      );
+      const promise = new Promise((resolve, reject) => {
+        client.getBillingAccount(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.billing.v1.IBillingAccount | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
             }
-            assert.deepStrictEqual(responses, expectedResponse);
-            assert.deepStrictEqual(
-                (client.descriptors.page.listBillingAccounts.asyncIterate as SinonStub)
-                    .getCall(0).args[1], request);
-        });
-
-        it('uses async iteration with listBillingAccounts with error', async () => {
-            const client = new cloudbillingModule.v1.CloudBillingClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            client.initialize();
-            const request = generateSampleMessage(new protos.google.cloud.billing.v1.ListBillingAccountsRequest());const expectedError = new Error('expected');
-            client.descriptors.page.listBillingAccounts.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
-            const iterable = client.listBillingAccountsAsync(request);
-            await assert.rejects(async () => {
-                const responses: protos.google.cloud.billing.v1.IBillingAccount[] = [];
-                for await (const resource of iterable) {
-                    responses.push(resource!);
-                }
-            });
-            assert.deepStrictEqual(
-                (client.descriptors.page.listBillingAccounts.asyncIterate as SinonStub)
-                    .getCall(0).args[1], request);
-        });
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.getBillingAccount as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
     });
 
-    describe('listProjectBillingInfo', () => {
-        it('invokes listProjectBillingInfo without error', async () => {
-            const client = new cloudbillingModule.v1.CloudBillingClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            client.initialize();
-            const request = generateSampleMessage(new protos.google.cloud.billing.v1.ListProjectBillingInfoRequest());
-            request.name = '';
-            const expectedHeaderRequestParams = "name=";
-            const expectedOptions = {
-                otherArgs: {
-                    headers: {
-                        'x-goog-request-params': expectedHeaderRequestParams,
-                    },
-                },
-            };
-            const expectedResponse = [
-              generateSampleMessage(new protos.google.cloud.billing.v1.ProjectBillingInfo()),
-              generateSampleMessage(new protos.google.cloud.billing.v1.ProjectBillingInfo()),
-              generateSampleMessage(new protos.google.cloud.billing.v1.ProjectBillingInfo()),
-            ];
-            client.innerApiCalls.listProjectBillingInfo = stubSimpleCall(expectedResponse);
-            const [response] = await client.listProjectBillingInfo(request);
-            assert.deepStrictEqual(response, expectedResponse);
-            assert((client.innerApiCalls.listProjectBillingInfo as SinonStub)
-                .getCall(0).calledWith(request, expectedOptions, undefined));
-        });
+    it('invokes getBillingAccount with error', async () => {
+      const client = new cloudbillingModule.v1.CloudBillingClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.billing.v1.GetBillingAccountRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getBillingAccount = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(async () => {
+        await client.getBillingAccount(request);
+      }, expectedError);
+      assert(
+        (client.innerApiCalls.getBillingAccount as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+  });
 
-        it('invokes listProjectBillingInfo without error using callback', async () => {
-            const client = new cloudbillingModule.v1.CloudBillingClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            client.initialize();
-            const request = generateSampleMessage(new protos.google.cloud.billing.v1.ListProjectBillingInfoRequest());
-            request.name = '';
-            const expectedHeaderRequestParams = "name=";
-            const expectedOptions = {
-                otherArgs: {
-                    headers: {
-                        'x-goog-request-params': expectedHeaderRequestParams,
-                    },
-                },
-            };
-            const expectedResponse = [
-              generateSampleMessage(new protos.google.cloud.billing.v1.ProjectBillingInfo()),
-              generateSampleMessage(new protos.google.cloud.billing.v1.ProjectBillingInfo()),
-              generateSampleMessage(new protos.google.cloud.billing.v1.ProjectBillingInfo()),
-            ];
-            client.innerApiCalls.listProjectBillingInfo = stubSimpleCallWithCallback(expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.listProjectBillingInfo(
-                    request,
-                    (err?: Error|null, result?: protos.google.cloud.billing.v1.IProjectBillingInfo[]|null) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const response = await promise;
-            assert.deepStrictEqual(response, expectedResponse);
-            assert((client.innerApiCalls.listProjectBillingInfo as SinonStub)
-                .getCall(0).calledWith(request, expectedOptions /*, callback defined above */));
-        });
+  describe('updateBillingAccount', () => {
+    it('invokes updateBillingAccount without error', async () => {
+      const client = new cloudbillingModule.v1.CloudBillingClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.billing.v1.UpdateBillingAccountRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.billing.v1.BillingAccount()
+      );
+      client.innerApiCalls.updateBillingAccount = stubSimpleCall(
+        expectedResponse
+      );
+      const [response] = await client.updateBillingAccount(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.updateBillingAccount as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
 
-        it('invokes listProjectBillingInfo with error', async () => {
-            const client = new cloudbillingModule.v1.CloudBillingClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            client.initialize();
-            const request = generateSampleMessage(new protos.google.cloud.billing.v1.ListProjectBillingInfoRequest());
-            request.name = '';
-            const expectedHeaderRequestParams = "name=";
-            const expectedOptions = {
-                otherArgs: {
-                    headers: {
-                        'x-goog-request-params': expectedHeaderRequestParams,
-                    },
-                },
-            };
-            const expectedError = new Error('expected');
-            client.innerApiCalls.listProjectBillingInfo = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(async () => { await client.listProjectBillingInfo(request); }, expectedError);
-            assert((client.innerApiCalls.listProjectBillingInfo as SinonStub)
-                .getCall(0).calledWith(request, expectedOptions, undefined));
-        });
-
-        it('invokes listProjectBillingInfoStream without error', async () => {
-            const client = new cloudbillingModule.v1.CloudBillingClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            client.initialize();
-            const request = generateSampleMessage(new protos.google.cloud.billing.v1.ListProjectBillingInfoRequest());
-            request.name = '';
-            const expectedHeaderRequestParams = "name=";
-            const expectedResponse = [
-              generateSampleMessage(new protos.google.cloud.billing.v1.ProjectBillingInfo()),
-              generateSampleMessage(new protos.google.cloud.billing.v1.ProjectBillingInfo()),
-              generateSampleMessage(new protos.google.cloud.billing.v1.ProjectBillingInfo()),
-            ];
-            client.descriptors.page.listProjectBillingInfo.createStream = stubPageStreamingCall(expectedResponse);
-            const stream = client.listProjectBillingInfoStream(request);
-            const promise = new Promise((resolve, reject) => {
-                const responses: protos.google.cloud.billing.v1.ProjectBillingInfo[] = [];
-                stream.on('data', (response: protos.google.cloud.billing.v1.ProjectBillingInfo) => {
-                    responses.push(response);
-                });
-                stream.on('end', () => {
-                    resolve(responses);
-                });
-                stream.on('error', (err: Error) => {
-                    reject(err);
-                });
-            });
-            const responses = await promise;
-            assert.deepStrictEqual(responses, expectedResponse);
-            assert((client.descriptors.page.listProjectBillingInfo.createStream as SinonStub)
-                .getCall(0).calledWith(client.innerApiCalls.listProjectBillingInfo, request));
-            assert.strictEqual(
-                (client.descriptors.page.listProjectBillingInfo.createStream as SinonStub)
-                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-                expectedHeaderRequestParams
-            );
-        });
-
-        it('invokes listProjectBillingInfoStream with error', async () => {
-            const client = new cloudbillingModule.v1.CloudBillingClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            client.initialize();
-            const request = generateSampleMessage(new protos.google.cloud.billing.v1.ListProjectBillingInfoRequest());
-            request.name = '';
-            const expectedHeaderRequestParams = "name=";
-            const expectedError = new Error('expected');
-            client.descriptors.page.listProjectBillingInfo.createStream = stubPageStreamingCall(undefined, expectedError);
-            const stream = client.listProjectBillingInfoStream(request);
-            const promise = new Promise((resolve, reject) => {
-                const responses: protos.google.cloud.billing.v1.ProjectBillingInfo[] = [];
-                stream.on('data', (response: protos.google.cloud.billing.v1.ProjectBillingInfo) => {
-                    responses.push(response);
-                });
-                stream.on('end', () => {
-                    resolve(responses);
-                });
-                stream.on('error', (err: Error) => {
-                    reject(err);
-                });
-            });
-            await assert.rejects(async () => { await promise; }, expectedError);
-            assert((client.descriptors.page.listProjectBillingInfo.createStream as SinonStub)
-                .getCall(0).calledWith(client.innerApiCalls.listProjectBillingInfo, request));
-            assert.strictEqual(
-                (client.descriptors.page.listProjectBillingInfo.createStream as SinonStub)
-                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-                expectedHeaderRequestParams
-            );
-        });
-
-        it('uses async iteration with listProjectBillingInfo without error', async () => {
-            const client = new cloudbillingModule.v1.CloudBillingClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            client.initialize();
-            const request = generateSampleMessage(new protos.google.cloud.billing.v1.ListProjectBillingInfoRequest());
-            request.name = '';
-            const expectedHeaderRequestParams = "name=";const expectedResponse = [
-              generateSampleMessage(new protos.google.cloud.billing.v1.ProjectBillingInfo()),
-              generateSampleMessage(new protos.google.cloud.billing.v1.ProjectBillingInfo()),
-              generateSampleMessage(new protos.google.cloud.billing.v1.ProjectBillingInfo()),
-            ];
-            client.descriptors.page.listProjectBillingInfo.asyncIterate = stubAsyncIterationCall(expectedResponse);
-            const responses: protos.google.cloud.billing.v1.IProjectBillingInfo[] = [];
-            const iterable = client.listProjectBillingInfoAsync(request);
-            for await (const resource of iterable) {
-                responses.push(resource!);
+    it('invokes updateBillingAccount without error using callback', async () => {
+      const client = new cloudbillingModule.v1.CloudBillingClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.billing.v1.UpdateBillingAccountRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.billing.v1.BillingAccount()
+      );
+      client.innerApiCalls.updateBillingAccount = stubSimpleCallWithCallback(
+        expectedResponse
+      );
+      const promise = new Promise((resolve, reject) => {
+        client.updateBillingAccount(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.billing.v1.IBillingAccount | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
             }
-            assert.deepStrictEqual(responses, expectedResponse);
-            assert.deepStrictEqual(
-                (client.descriptors.page.listProjectBillingInfo.asyncIterate as SinonStub)
-                    .getCall(0).args[1], request);
-            assert.strictEqual(
-                (client.descriptors.page.listProjectBillingInfo.asyncIterate as SinonStub)
-                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-                expectedHeaderRequestParams
-            );
-        });
-
-        it('uses async iteration with listProjectBillingInfo with error', async () => {
-            const client = new cloudbillingModule.v1.CloudBillingClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            client.initialize();
-            const request = generateSampleMessage(new protos.google.cloud.billing.v1.ListProjectBillingInfoRequest());
-            request.name = '';
-            const expectedHeaderRequestParams = "name=";const expectedError = new Error('expected');
-            client.descriptors.page.listProjectBillingInfo.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
-            const iterable = client.listProjectBillingInfoAsync(request);
-            await assert.rejects(async () => {
-                const responses: protos.google.cloud.billing.v1.IProjectBillingInfo[] = [];
-                for await (const resource of iterable) {
-                    responses.push(resource!);
-                }
-            });
-            assert.deepStrictEqual(
-                (client.descriptors.page.listProjectBillingInfo.asyncIterate as SinonStub)
-                    .getCall(0).args[1], request);
-            assert.strictEqual(
-                (client.descriptors.page.listProjectBillingInfo.asyncIterate as SinonStub)
-                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-                expectedHeaderRequestParams
-            );
-        });
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.updateBillingAccount as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
     });
 
-    describe('Path templates', () => {
-
-        describe('billingAccount', () => {
-            const fakePath = "/rendered/path/billingAccount";
-            const expectedParameters = {
-                billing_account: "billingAccountValue",
-            };
-            const client = new cloudbillingModule.v1.CloudBillingClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            client.initialize();
-            client.pathTemplates.billingAccountPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.billingAccountPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('billingAccountPath', () => {
-                const result = client.billingAccountPath("billingAccountValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.billingAccountPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchBillingAccountFromBillingAccountName', () => {
-                const result = client.matchBillingAccountFromBillingAccountName(fakePath);
-                assert.strictEqual(result, "billingAccountValue");
-                assert((client.pathTemplates.billingAccountPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('service', () => {
-            const fakePath = "/rendered/path/service";
-            const expectedParameters = {
-                service: "serviceValue",
-            };
-            const client = new cloudbillingModule.v1.CloudBillingClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            client.initialize();
-            client.pathTemplates.servicePathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.servicePathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('servicePath', () => {
-                const result = client.servicePath("serviceValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.servicePathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchServiceFromServiceName', () => {
-                const result = client.matchServiceFromServiceName(fakePath);
-                assert.strictEqual(result, "serviceValue");
-                assert((client.pathTemplates.servicePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('sku', () => {
-            const fakePath = "/rendered/path/sku";
-            const expectedParameters = {
-                service: "serviceValue",
-                sku: "skuValue",
-            };
-            const client = new cloudbillingModule.v1.CloudBillingClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            client.initialize();
-            client.pathTemplates.skuPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.skuPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('skuPath', () => {
-                const result = client.skuPath("serviceValue", "skuValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.skuPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchServiceFromSkuName', () => {
-                const result = client.matchServiceFromSkuName(fakePath);
-                assert.strictEqual(result, "serviceValue");
-                assert((client.pathTemplates.skuPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchSkuFromSkuName', () => {
-                const result = client.matchSkuFromSkuName(fakePath);
-                assert.strictEqual(result, "skuValue");
-                assert((client.pathTemplates.skuPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
+    it('invokes updateBillingAccount with error', async () => {
+      const client = new cloudbillingModule.v1.CloudBillingClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.billing.v1.UpdateBillingAccountRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateBillingAccount = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(async () => {
+        await client.updateBillingAccount(request);
+      }, expectedError);
+      assert(
+        (client.innerApiCalls.updateBillingAccount as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
     });
+  });
+
+  describe('createBillingAccount', () => {
+    it('invokes createBillingAccount without error', async () => {
+      const client = new cloudbillingModule.v1.CloudBillingClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.billing.v1.CreateBillingAccountRequest()
+      );
+      const expectedOptions = {};
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.billing.v1.BillingAccount()
+      );
+      client.innerApiCalls.createBillingAccount = stubSimpleCall(
+        expectedResponse
+      );
+      const [response] = await client.createBillingAccount(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.createBillingAccount as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes createBillingAccount without error using callback', async () => {
+      const client = new cloudbillingModule.v1.CloudBillingClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.billing.v1.CreateBillingAccountRequest()
+      );
+      const expectedOptions = {};
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.billing.v1.BillingAccount()
+      );
+      client.innerApiCalls.createBillingAccount = stubSimpleCallWithCallback(
+        expectedResponse
+      );
+      const promise = new Promise((resolve, reject) => {
+        client.createBillingAccount(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.billing.v1.IBillingAccount | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.createBillingAccount as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes createBillingAccount with error', async () => {
+      const client = new cloudbillingModule.v1.CloudBillingClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.billing.v1.CreateBillingAccountRequest()
+      );
+      const expectedOptions = {};
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createBillingAccount = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(async () => {
+        await client.createBillingAccount(request);
+      }, expectedError);
+      assert(
+        (client.innerApiCalls.createBillingAccount as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+  });
+
+  describe('getProjectBillingInfo', () => {
+    it('invokes getProjectBillingInfo without error', async () => {
+      const client = new cloudbillingModule.v1.CloudBillingClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.billing.v1.GetProjectBillingInfoRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.billing.v1.ProjectBillingInfo()
+      );
+      client.innerApiCalls.getProjectBillingInfo = stubSimpleCall(
+        expectedResponse
+      );
+      const [response] = await client.getProjectBillingInfo(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.getProjectBillingInfo as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes getProjectBillingInfo without error using callback', async () => {
+      const client = new cloudbillingModule.v1.CloudBillingClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.billing.v1.GetProjectBillingInfoRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.billing.v1.ProjectBillingInfo()
+      );
+      client.innerApiCalls.getProjectBillingInfo = stubSimpleCallWithCallback(
+        expectedResponse
+      );
+      const promise = new Promise((resolve, reject) => {
+        client.getProjectBillingInfo(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.billing.v1.IProjectBillingInfo | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.getProjectBillingInfo as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes getProjectBillingInfo with error', async () => {
+      const client = new cloudbillingModule.v1.CloudBillingClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.billing.v1.GetProjectBillingInfoRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getProjectBillingInfo = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(async () => {
+        await client.getProjectBillingInfo(request);
+      }, expectedError);
+      assert(
+        (client.innerApiCalls.getProjectBillingInfo as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+  });
+
+  describe('updateProjectBillingInfo', () => {
+    it('invokes updateProjectBillingInfo without error', async () => {
+      const client = new cloudbillingModule.v1.CloudBillingClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.billing.v1.UpdateProjectBillingInfoRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.billing.v1.ProjectBillingInfo()
+      );
+      client.innerApiCalls.updateProjectBillingInfo = stubSimpleCall(
+        expectedResponse
+      );
+      const [response] = await client.updateProjectBillingInfo(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.updateProjectBillingInfo as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes updateProjectBillingInfo without error using callback', async () => {
+      const client = new cloudbillingModule.v1.CloudBillingClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.billing.v1.UpdateProjectBillingInfoRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.billing.v1.ProjectBillingInfo()
+      );
+      client.innerApiCalls.updateProjectBillingInfo = stubSimpleCallWithCallback(
+        expectedResponse
+      );
+      const promise = new Promise((resolve, reject) => {
+        client.updateProjectBillingInfo(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.billing.v1.IProjectBillingInfo | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.updateProjectBillingInfo as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes updateProjectBillingInfo with error', async () => {
+      const client = new cloudbillingModule.v1.CloudBillingClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.billing.v1.UpdateProjectBillingInfoRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateProjectBillingInfo = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(async () => {
+        await client.updateProjectBillingInfo(request);
+      }, expectedError);
+      assert(
+        (client.innerApiCalls.updateProjectBillingInfo as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+  });
+
+  describe('getIamPolicy', () => {
+    it('invokes getIamPolicy without error', async () => {
+      const client = new cloudbillingModule.v1.CloudBillingClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.iam.v1.GetIamPolicyRequest()
+      );
+      request.resource = '';
+      const expectedHeaderRequestParams = 'resource=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.iam.v1.Policy()
+      );
+      client.innerApiCalls.getIamPolicy = stubSimpleCall(expectedResponse);
+      const [response] = await client.getIamPolicy(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.getIamPolicy as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes getIamPolicy without error using callback', async () => {
+      const client = new cloudbillingModule.v1.CloudBillingClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.iam.v1.GetIamPolicyRequest()
+      );
+      request.resource = '';
+      const expectedHeaderRequestParams = 'resource=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.iam.v1.Policy()
+      );
+      client.innerApiCalls.getIamPolicy = stubSimpleCallWithCallback(
+        expectedResponse
+      );
+      const promise = new Promise((resolve, reject) => {
+        client.getIamPolicy(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.iam.v1.IPolicy | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.getIamPolicy as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes getIamPolicy with error', async () => {
+      const client = new cloudbillingModule.v1.CloudBillingClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.iam.v1.GetIamPolicyRequest()
+      );
+      request.resource = '';
+      const expectedHeaderRequestParams = 'resource=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getIamPolicy = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(async () => {
+        await client.getIamPolicy(request);
+      }, expectedError);
+      assert(
+        (client.innerApiCalls.getIamPolicy as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+  });
+
+  describe('setIamPolicy', () => {
+    it('invokes setIamPolicy without error', async () => {
+      const client = new cloudbillingModule.v1.CloudBillingClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.iam.v1.SetIamPolicyRequest()
+      );
+      request.resource = '';
+      const expectedHeaderRequestParams = 'resource=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.iam.v1.Policy()
+      );
+      client.innerApiCalls.setIamPolicy = stubSimpleCall(expectedResponse);
+      const [response] = await client.setIamPolicy(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.setIamPolicy as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes setIamPolicy without error using callback', async () => {
+      const client = new cloudbillingModule.v1.CloudBillingClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.iam.v1.SetIamPolicyRequest()
+      );
+      request.resource = '';
+      const expectedHeaderRequestParams = 'resource=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.iam.v1.Policy()
+      );
+      client.innerApiCalls.setIamPolicy = stubSimpleCallWithCallback(
+        expectedResponse
+      );
+      const promise = new Promise((resolve, reject) => {
+        client.setIamPolicy(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.iam.v1.IPolicy | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.setIamPolicy as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes setIamPolicy with error', async () => {
+      const client = new cloudbillingModule.v1.CloudBillingClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.iam.v1.SetIamPolicyRequest()
+      );
+      request.resource = '';
+      const expectedHeaderRequestParams = 'resource=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.setIamPolicy = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(async () => {
+        await client.setIamPolicy(request);
+      }, expectedError);
+      assert(
+        (client.innerApiCalls.setIamPolicy as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+  });
+
+  describe('testIamPermissions', () => {
+    it('invokes testIamPermissions without error', async () => {
+      const client = new cloudbillingModule.v1.CloudBillingClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.iam.v1.TestIamPermissionsRequest()
+      );
+      request.resource = '';
+      const expectedHeaderRequestParams = 'resource=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.iam.v1.TestIamPermissionsResponse()
+      );
+      client.innerApiCalls.testIamPermissions = stubSimpleCall(
+        expectedResponse
+      );
+      const [response] = await client.testIamPermissions(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.testIamPermissions as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes testIamPermissions without error using callback', async () => {
+      const client = new cloudbillingModule.v1.CloudBillingClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.iam.v1.TestIamPermissionsRequest()
+      );
+      request.resource = '';
+      const expectedHeaderRequestParams = 'resource=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.iam.v1.TestIamPermissionsResponse()
+      );
+      client.innerApiCalls.testIamPermissions = stubSimpleCallWithCallback(
+        expectedResponse
+      );
+      const promise = new Promise((resolve, reject) => {
+        client.testIamPermissions(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.iam.v1.ITestIamPermissionsResponse | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.testIamPermissions as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes testIamPermissions with error', async () => {
+      const client = new cloudbillingModule.v1.CloudBillingClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.iam.v1.TestIamPermissionsRequest()
+      );
+      request.resource = '';
+      const expectedHeaderRequestParams = 'resource=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.testIamPermissions = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(async () => {
+        await client.testIamPermissions(request);
+      }, expectedError);
+      assert(
+        (client.innerApiCalls.testIamPermissions as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+  });
+
+  describe('listBillingAccounts', () => {
+    it('invokes listBillingAccounts without error', async () => {
+      const client = new cloudbillingModule.v1.CloudBillingClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.billing.v1.ListBillingAccountsRequest()
+      );
+      const expectedOptions = {};
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.billing.v1.BillingAccount()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.billing.v1.BillingAccount()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.billing.v1.BillingAccount()
+        ),
+      ];
+      client.innerApiCalls.listBillingAccounts = stubSimpleCall(
+        expectedResponse
+      );
+      const [response] = await client.listBillingAccounts(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.listBillingAccounts as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes listBillingAccounts without error using callback', async () => {
+      const client = new cloudbillingModule.v1.CloudBillingClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.billing.v1.ListBillingAccountsRequest()
+      );
+      const expectedOptions = {};
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.billing.v1.BillingAccount()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.billing.v1.BillingAccount()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.billing.v1.BillingAccount()
+        ),
+      ];
+      client.innerApiCalls.listBillingAccounts = stubSimpleCallWithCallback(
+        expectedResponse
+      );
+      const promise = new Promise((resolve, reject) => {
+        client.listBillingAccounts(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.billing.v1.IBillingAccount[] | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.listBillingAccounts as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes listBillingAccounts with error', async () => {
+      const client = new cloudbillingModule.v1.CloudBillingClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.billing.v1.ListBillingAccountsRequest()
+      );
+      const expectedOptions = {};
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listBillingAccounts = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(async () => {
+        await client.listBillingAccounts(request);
+      }, expectedError);
+      assert(
+        (client.innerApiCalls.listBillingAccounts as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes listBillingAccountsStream without error', async () => {
+      const client = new cloudbillingModule.v1.CloudBillingClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.billing.v1.ListBillingAccountsRequest()
+      );
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.billing.v1.BillingAccount()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.billing.v1.BillingAccount()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.billing.v1.BillingAccount()
+        ),
+      ];
+      client.descriptors.page.listBillingAccounts.createStream = stubPageStreamingCall(
+        expectedResponse
+      );
+      const stream = client.listBillingAccountsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.billing.v1.BillingAccount[] = [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.billing.v1.BillingAccount) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (client.descriptors.page.listBillingAccounts.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listBillingAccounts, request)
+      );
+    });
+
+    it('invokes listBillingAccountsStream with error', async () => {
+      const client = new cloudbillingModule.v1.CloudBillingClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.billing.v1.ListBillingAccountsRequest()
+      );
+      const expectedError = new Error('expected');
+      client.descriptors.page.listBillingAccounts.createStream = stubPageStreamingCall(
+        undefined,
+        expectedError
+      );
+      const stream = client.listBillingAccountsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.billing.v1.BillingAccount[] = [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.billing.v1.BillingAccount) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(async () => {
+        await promise;
+      }, expectedError);
+      assert(
+        (client.descriptors.page.listBillingAccounts.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listBillingAccounts, request)
+      );
+    });
+
+    it('uses async iteration with listBillingAccounts without error', async () => {
+      const client = new cloudbillingModule.v1.CloudBillingClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.billing.v1.ListBillingAccountsRequest()
+      );
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.billing.v1.BillingAccount()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.billing.v1.BillingAccount()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.billing.v1.BillingAccount()
+        ),
+      ];
+      client.descriptors.page.listBillingAccounts.asyncIterate = stubAsyncIterationCall(
+        expectedResponse
+      );
+      const responses: protos.google.cloud.billing.v1.IBillingAccount[] = [];
+      const iterable = client.listBillingAccountsAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (client.descriptors.page.listBillingAccounts
+          .asyncIterate as SinonStub).getCall(0).args[1],
+        request
+      );
+    });
+
+    it('uses async iteration with listBillingAccounts with error', async () => {
+      const client = new cloudbillingModule.v1.CloudBillingClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.billing.v1.ListBillingAccountsRequest()
+      );
+      const expectedError = new Error('expected');
+      client.descriptors.page.listBillingAccounts.asyncIterate = stubAsyncIterationCall(
+        undefined,
+        expectedError
+      );
+      const iterable = client.listBillingAccountsAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.cloud.billing.v1.IBillingAccount[] = [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (client.descriptors.page.listBillingAccounts
+          .asyncIterate as SinonStub).getCall(0).args[1],
+        request
+      );
+    });
+  });
+
+  describe('listProjectBillingInfo', () => {
+    it('invokes listProjectBillingInfo without error', async () => {
+      const client = new cloudbillingModule.v1.CloudBillingClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.billing.v1.ListProjectBillingInfoRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.billing.v1.ProjectBillingInfo()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.billing.v1.ProjectBillingInfo()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.billing.v1.ProjectBillingInfo()
+        ),
+      ];
+      client.innerApiCalls.listProjectBillingInfo = stubSimpleCall(
+        expectedResponse
+      );
+      const [response] = await client.listProjectBillingInfo(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.listProjectBillingInfo as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes listProjectBillingInfo without error using callback', async () => {
+      const client = new cloudbillingModule.v1.CloudBillingClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.billing.v1.ListProjectBillingInfoRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.billing.v1.ProjectBillingInfo()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.billing.v1.ProjectBillingInfo()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.billing.v1.ProjectBillingInfo()
+        ),
+      ];
+      client.innerApiCalls.listProjectBillingInfo = stubSimpleCallWithCallback(
+        expectedResponse
+      );
+      const promise = new Promise((resolve, reject) => {
+        client.listProjectBillingInfo(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.billing.v1.IProjectBillingInfo[] | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.listProjectBillingInfo as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes listProjectBillingInfo with error', async () => {
+      const client = new cloudbillingModule.v1.CloudBillingClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.billing.v1.ListProjectBillingInfoRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listProjectBillingInfo = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(async () => {
+        await client.listProjectBillingInfo(request);
+      }, expectedError);
+      assert(
+        (client.innerApiCalls.listProjectBillingInfo as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes listProjectBillingInfoStream without error', async () => {
+      const client = new cloudbillingModule.v1.CloudBillingClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.billing.v1.ListProjectBillingInfoRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.billing.v1.ProjectBillingInfo()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.billing.v1.ProjectBillingInfo()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.billing.v1.ProjectBillingInfo()
+        ),
+      ];
+      client.descriptors.page.listProjectBillingInfo.createStream = stubPageStreamingCall(
+        expectedResponse
+      );
+      const stream = client.listProjectBillingInfoStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.billing.v1.ProjectBillingInfo[] = [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.billing.v1.ProjectBillingInfo) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (client.descriptors.page.listProjectBillingInfo
+          .createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listProjectBillingInfo, request)
+      );
+      assert.strictEqual(
+        (client.descriptors.page.listProjectBillingInfo
+          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
+          'x-goog-request-params'
+        ],
+        expectedHeaderRequestParams
+      );
+    });
+
+    it('invokes listProjectBillingInfoStream with error', async () => {
+      const client = new cloudbillingModule.v1.CloudBillingClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.billing.v1.ListProjectBillingInfoRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('expected');
+      client.descriptors.page.listProjectBillingInfo.createStream = stubPageStreamingCall(
+        undefined,
+        expectedError
+      );
+      const stream = client.listProjectBillingInfoStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.billing.v1.ProjectBillingInfo[] = [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.billing.v1.ProjectBillingInfo) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(async () => {
+        await promise;
+      }, expectedError);
+      assert(
+        (client.descriptors.page.listProjectBillingInfo
+          .createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listProjectBillingInfo, request)
+      );
+      assert.strictEqual(
+        (client.descriptors.page.listProjectBillingInfo
+          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
+          'x-goog-request-params'
+        ],
+        expectedHeaderRequestParams
+      );
+    });
+
+    it('uses async iteration with listProjectBillingInfo without error', async () => {
+      const client = new cloudbillingModule.v1.CloudBillingClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.billing.v1.ListProjectBillingInfoRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.billing.v1.ProjectBillingInfo()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.billing.v1.ProjectBillingInfo()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.billing.v1.ProjectBillingInfo()
+        ),
+      ];
+      client.descriptors.page.listProjectBillingInfo.asyncIterate = stubAsyncIterationCall(
+        expectedResponse
+      );
+      const responses: protos.google.cloud.billing.v1.IProjectBillingInfo[] = [];
+      const iterable = client.listProjectBillingInfoAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (client.descriptors.page.listProjectBillingInfo
+          .asyncIterate as SinonStub).getCall(0).args[1],
+        request
+      );
+      assert.strictEqual(
+        (client.descriptors.page.listProjectBillingInfo
+          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
+          'x-goog-request-params'
+        ],
+        expectedHeaderRequestParams
+      );
+    });
+
+    it('uses async iteration with listProjectBillingInfo with error', async () => {
+      const client = new cloudbillingModule.v1.CloudBillingClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.billing.v1.ListProjectBillingInfoRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('expected');
+      client.descriptors.page.listProjectBillingInfo.asyncIterate = stubAsyncIterationCall(
+        undefined,
+        expectedError
+      );
+      const iterable = client.listProjectBillingInfoAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.cloud.billing.v1.IProjectBillingInfo[] = [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (client.descriptors.page.listProjectBillingInfo
+          .asyncIterate as SinonStub).getCall(0).args[1],
+        request
+      );
+      assert.strictEqual(
+        (client.descriptors.page.listProjectBillingInfo
+          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
+          'x-goog-request-params'
+        ],
+        expectedHeaderRequestParams
+      );
+    });
+  });
+
+  describe('Path templates', () => {
+    describe('billingAccount', () => {
+      const fakePath = '/rendered/path/billingAccount';
+      const expectedParameters = {
+        billing_account: 'billingAccountValue',
+      };
+      const client = new cloudbillingModule.v1.CloudBillingClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.billingAccountPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.billingAccountPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('billingAccountPath', () => {
+        const result = client.billingAccountPath('billingAccountValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.billingAccountPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchBillingAccountFromBillingAccountName', () => {
+        const result = client.matchBillingAccountFromBillingAccountName(
+          fakePath
+        );
+        assert.strictEqual(result, 'billingAccountValue');
+        assert(
+          (client.pathTemplates.billingAccountPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('service', () => {
+      const fakePath = '/rendered/path/service';
+      const expectedParameters = {
+        service: 'serviceValue',
+      };
+      const client = new cloudbillingModule.v1.CloudBillingClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.servicePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.servicePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('servicePath', () => {
+        const result = client.servicePath('serviceValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.servicePathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchServiceFromServiceName', () => {
+        const result = client.matchServiceFromServiceName(fakePath);
+        assert.strictEqual(result, 'serviceValue');
+        assert(
+          (client.pathTemplates.servicePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('sku', () => {
+      const fakePath = '/rendered/path/sku';
+      const expectedParameters = {
+        service: 'serviceValue',
+        sku: 'skuValue',
+      };
+      const client = new cloudbillingModule.v1.CloudBillingClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.skuPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.skuPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('skuPath', () => {
+        const result = client.skuPath('serviceValue', 'skuValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.skuPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchServiceFromSkuName', () => {
+        const result = client.matchServiceFromSkuName(fakePath);
+        assert.strictEqual(result, 'serviceValue');
+        assert(
+          (client.pathTemplates.skuPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchSkuFromSkuName', () => {
+        const result = client.matchSkuFromSkuName(fakePath);
+        assert.strictEqual(result, 'skuValue');
+        assert(
+          (client.pathTemplates.skuPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+  });
 });
