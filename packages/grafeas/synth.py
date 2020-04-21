@@ -32,24 +32,21 @@ for version in versions:
    version,
    generator_args={
      "grpc-service-config": f"grafeas/{version}/grafeas_grpc_service_config.json",
-     "package-name":f"@google-cloud/grafeas"
+     "package-name":"@google-cloud/grafeas"
      },
      proto_path=f'/grafeas/{version}',
      extra_proto_files=['google/cloud/common_resources.proto'],
      )
  s.copy(library, excludes=[
    "README.md",
-   "package.json",
-   "src/v1/gapic-grafeas-v1.ts",
-   "test/gapic-v1.ts",
-   "protos/google/*"
+   "package.json"
  ])
 
 
 # Copy common templates
 common_templates = gcp.CommonTemplates()
 templates = common_templates.node_library(source_location='build/src')
-s.copy(templates, excludes=['.nycrc'])
+s.copy(templates)
 
 # Node.js specific cleanup
 subprocess.run(['npm', 'install'])
