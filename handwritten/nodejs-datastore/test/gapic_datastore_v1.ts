@@ -141,7 +141,15 @@ describe('v1.DatastoreClient', () => {
       const request = generateSampleMessage(
         new protos.google.datastore.v1.LookupRequest()
       );
-      const expectedOptions = {};
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
       const expectedResponse = generateSampleMessage(
         new protos.google.datastore.v1.LookupResponse()
       );
@@ -164,7 +172,15 @@ describe('v1.DatastoreClient', () => {
       const request = generateSampleMessage(
         new protos.google.datastore.v1.LookupRequest()
       );
-      const expectedOptions = {};
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
       const expectedResponse = generateSampleMessage(
         new protos.google.datastore.v1.LookupResponse()
       );
@@ -204,7 +220,15 @@ describe('v1.DatastoreClient', () => {
       const request = generateSampleMessage(
         new protos.google.datastore.v1.LookupRequest()
       );
-      const expectedOptions = {};
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
       const expectedError = new Error('expected');
       client.innerApiCalls.lookup = stubSimpleCall(undefined, expectedError);
       await assert.rejects(async () => {
@@ -228,7 +252,15 @@ describe('v1.DatastoreClient', () => {
       const request = generateSampleMessage(
         new protos.google.datastore.v1.RunQueryRequest()
       );
-      const expectedOptions = {};
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
       const expectedResponse = generateSampleMessage(
         new protos.google.datastore.v1.RunQueryResponse()
       );
@@ -251,7 +283,15 @@ describe('v1.DatastoreClient', () => {
       const request = generateSampleMessage(
         new protos.google.datastore.v1.RunQueryRequest()
       );
-      const expectedOptions = {};
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
       const expectedResponse = generateSampleMessage(
         new protos.google.datastore.v1.RunQueryResponse()
       );
@@ -291,7 +331,15 @@ describe('v1.DatastoreClient', () => {
       const request = generateSampleMessage(
         new protos.google.datastore.v1.RunQueryRequest()
       );
-      const expectedOptions = {};
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
       const expectedError = new Error('expected');
       client.innerApiCalls.runQuery = stubSimpleCall(undefined, expectedError);
       await assert.rejects(async () => {
@@ -315,7 +363,15 @@ describe('v1.DatastoreClient', () => {
       const request = generateSampleMessage(
         new protos.google.datastore.v1.BeginTransactionRequest()
       );
-      const expectedOptions = {};
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
       const expectedResponse = generateSampleMessage(
         new protos.google.datastore.v1.BeginTransactionResponse()
       );
@@ -338,7 +394,15 @@ describe('v1.DatastoreClient', () => {
       const request = generateSampleMessage(
         new protos.google.datastore.v1.BeginTransactionRequest()
       );
-      const expectedOptions = {};
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
       const expectedResponse = generateSampleMessage(
         new protos.google.datastore.v1.BeginTransactionResponse()
       );
@@ -378,7 +442,15 @@ describe('v1.DatastoreClient', () => {
       const request = generateSampleMessage(
         new protos.google.datastore.v1.BeginTransactionRequest()
       );
-      const expectedOptions = {};
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
       const expectedError = new Error('expected');
       client.innerApiCalls.beginTransaction = stubSimpleCall(
         undefined,
@@ -405,7 +477,15 @@ describe('v1.DatastoreClient', () => {
       const request = generateSampleMessage(
         new protos.google.datastore.v1.CommitRequest()
       );
-      const expectedOptions = {};
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
       const expectedResponse = generateSampleMessage(
         new protos.google.datastore.v1.CommitResponse()
       );
@@ -428,7 +508,15 @@ describe('v1.DatastoreClient', () => {
       const request = generateSampleMessage(
         new protos.google.datastore.v1.CommitRequest()
       );
-      const expectedOptions = {};
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
       const expectedResponse = generateSampleMessage(
         new protos.google.datastore.v1.CommitResponse()
       );
@@ -468,7 +556,15 @@ describe('v1.DatastoreClient', () => {
       const request = generateSampleMessage(
         new protos.google.datastore.v1.CommitRequest()
       );
-      const expectedOptions = {};
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
       const expectedError = new Error('expected');
       client.innerApiCalls.commit = stubSimpleCall(undefined, expectedError);
       await assert.rejects(async () => {
@@ -492,7 +588,15 @@ describe('v1.DatastoreClient', () => {
       const request = generateSampleMessage(
         new protos.google.datastore.v1.RollbackRequest()
       );
-      const expectedOptions = {};
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
       const expectedResponse = generateSampleMessage(
         new protos.google.datastore.v1.RollbackResponse()
       );
@@ -515,7 +619,15 @@ describe('v1.DatastoreClient', () => {
       const request = generateSampleMessage(
         new protos.google.datastore.v1.RollbackRequest()
       );
-      const expectedOptions = {};
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
       const expectedResponse = generateSampleMessage(
         new protos.google.datastore.v1.RollbackResponse()
       );
@@ -555,7 +667,15 @@ describe('v1.DatastoreClient', () => {
       const request = generateSampleMessage(
         new protos.google.datastore.v1.RollbackRequest()
       );
-      const expectedOptions = {};
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
       const expectedError = new Error('expected');
       client.innerApiCalls.rollback = stubSimpleCall(undefined, expectedError);
       await assert.rejects(async () => {
@@ -579,7 +699,15 @@ describe('v1.DatastoreClient', () => {
       const request = generateSampleMessage(
         new protos.google.datastore.v1.AllocateIdsRequest()
       );
-      const expectedOptions = {};
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
       const expectedResponse = generateSampleMessage(
         new protos.google.datastore.v1.AllocateIdsResponse()
       );
@@ -602,7 +730,15 @@ describe('v1.DatastoreClient', () => {
       const request = generateSampleMessage(
         new protos.google.datastore.v1.AllocateIdsRequest()
       );
-      const expectedOptions = {};
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
       const expectedResponse = generateSampleMessage(
         new protos.google.datastore.v1.AllocateIdsResponse()
       );
@@ -642,7 +778,15 @@ describe('v1.DatastoreClient', () => {
       const request = generateSampleMessage(
         new protos.google.datastore.v1.AllocateIdsRequest()
       );
-      const expectedOptions = {};
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
       const expectedError = new Error('expected');
       client.innerApiCalls.allocateIds = stubSimpleCall(
         undefined,
@@ -669,7 +813,15 @@ describe('v1.DatastoreClient', () => {
       const request = generateSampleMessage(
         new protos.google.datastore.v1.ReserveIdsRequest()
       );
-      const expectedOptions = {};
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
       const expectedResponse = generateSampleMessage(
         new protos.google.datastore.v1.ReserveIdsResponse()
       );
@@ -692,7 +844,15 @@ describe('v1.DatastoreClient', () => {
       const request = generateSampleMessage(
         new protos.google.datastore.v1.ReserveIdsRequest()
       );
-      const expectedOptions = {};
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
       const expectedResponse = generateSampleMessage(
         new protos.google.datastore.v1.ReserveIdsResponse()
       );
@@ -732,7 +892,15 @@ describe('v1.DatastoreClient', () => {
       const request = generateSampleMessage(
         new protos.google.datastore.v1.ReserveIdsRequest()
       );
-      const expectedOptions = {};
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
       const expectedError = new Error('expected');
       client.innerApiCalls.reserveIds = stubSimpleCall(
         undefined,
