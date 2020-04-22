@@ -39,7 +39,12 @@ export class LanguageServiceClient {
   private _protos: {};
   private _defaults: {[method: string]: gax.CallSettings};
   auth: gax.GoogleAuth;
-  descriptors: Descriptors = {page: {}, stream: {}, longrunning: {}, batching: {}};
+  descriptors: Descriptors = {
+    page: {},
+    stream: {},
+    longrunning: {},
+    batching: {},
+  };
   innerApiCalls: {[name: string]: Function};
   languageServiceStub?: Promise<{[name: string]: Function}>;
 
@@ -72,10 +77,12 @@ export class LanguageServiceClient {
   constructor(opts?: ClientOptions) {
     // Ensure that options include the service address and port.
     const staticMembers = this.constructor as typeof LanguageServiceClient;
-    const servicePath = opts && opts.servicePath ?
-        opts.servicePath :
-        ((opts && opts.apiEndpoint) ? opts.apiEndpoint :
-                                      staticMembers.servicePath);
+    const servicePath =
+      opts && opts.servicePath
+        ? opts.servicePath
+        : opts && opts.apiEndpoint
+        ? opts.apiEndpoint
+        : staticMembers.servicePath;
     const port = opts && opts.port ? opts.port : staticMembers.port;
 
     if (!opts) {
@@ -85,8 +92,8 @@ export class LanguageServiceClient {
     opts.port = opts.port || port;
     opts.clientConfig = opts.clientConfig || {};
 
-    const isBrowser = (typeof window !== 'undefined');
-    if (isBrowser){
+    const isBrowser = typeof window !== 'undefined';
+    if (isBrowser) {
       opts.fallback = true;
     }
     // If we are in browser, we are already using fallback because of the
@@ -103,13 +110,10 @@ export class LanguageServiceClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
+    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
 
     // Determine the client header string.
-    const clientHeader = [
-      `gax/${this._gaxModule.version}`,
-      `gapic/${version}`,
-    ];
+    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
     if (typeof process !== 'undefined' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -125,18 +129,27 @@ export class LanguageServiceClient {
     // For Node.js, pass the path to JSON proto file.
     // For browsers, pass the JSON content.
 
-    const nodejsProtoPath = path.join(__dirname, '..', '..', 'protos', 'protos.json');
+    const nodejsProtoPath = path.join(
+      __dirname,
+      '..',
+      '..',
+      'protos',
+      'protos.json'
+    );
     this._protos = this._gaxGrpc.loadProto(
-      opts.fallback ?
-        // eslint-disable-next-line @typescript-eslint/no-var-requires
-        require("../../protos/protos.json") :
-        nodejsProtoPath
+      opts.fallback
+        ? // eslint-disable-next-line @typescript-eslint/no-var-requires
+          require('../../protos/protos.json')
+        : nodejsProtoPath
     );
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-        'google.cloud.language.v1.LanguageService', gapicConfig as gax.ClientConfig,
-        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
+      'google.cloud.language.v1.LanguageService',
+      gapicConfig as gax.ClientConfig,
+      opts.clientConfig || {},
+      {'x-goog-api-client': clientHeader.join(' ')}
+    );
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -164,16 +177,25 @@ export class LanguageServiceClient {
     // Put together the "service stub" for
     // google.cloud.language.v1.LanguageService.
     this.languageServiceStub = this._gaxGrpc.createStub(
-        this._opts.fallback ?
-          (this._protos as protobuf.Root).lookupService('google.cloud.language.v1.LanguageService') :
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      this._opts.fallback
+        ? (this._protos as protobuf.Root).lookupService(
+            'google.cloud.language.v1.LanguageService'
+          )
+        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.language.v1.LanguageService,
-        this._opts) as Promise<{[method: string]: Function}>;
+      this._opts
+    ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const languageServiceStubMethods =
-        ['analyzeSentiment', 'analyzeEntities', 'analyzeEntitySentiment', 'analyzeSyntax', 'classifyText', 'annotateText'];
+    const languageServiceStubMethods = [
+      'analyzeSentiment',
+      'analyzeEntities',
+      'analyzeEntitySentiment',
+      'analyzeSyntax',
+      'classifyText',
+      'annotateText',
+    ];
     for (const methodName of languageServiceStubMethods) {
       const callPromise = this.languageServiceStub.then(
         stub => (...args: Array<{}>) => {
@@ -183,16 +205,17 @@ export class LanguageServiceClient {
           const func = stub[methodName];
           return func.apply(stub, args);
         },
-        (err: Error|null|undefined) => () => {
+        (err: Error | null | undefined) => () => {
           throw err;
-        });
+        }
+      );
 
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
         this.descriptors.page[methodName] ||
-            this.descriptors.stream[methodName] ||
-            this.descriptors.longrunning[methodName]
+          this.descriptors.stream[methodName] ||
+          this.descriptors.longrunning[methodName]
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -230,7 +253,7 @@ export class LanguageServiceClient {
   static get scopes() {
     return [
       'https://www.googleapis.com/auth/cloud-language',
-      'https://www.googleapis.com/auth/cloud-platform'
+      'https://www.googleapis.com/auth/cloud-platform',
     ];
   }
 
@@ -241,8 +264,9 @@ export class LanguageServiceClient {
    * @param {function(Error, string)} callback - the callback to
    *   be called with the current project Id.
    */
-  getProjectId(callback?: Callback<string, undefined, undefined>):
-      Promise<string>|void {
+  getProjectId(
+    callback?: Callback<string, undefined, undefined>
+  ): Promise<string> | void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -254,61 +278,82 @@ export class LanguageServiceClient {
   // -- Service calls --
   // -------------------
   analyzeSentiment(
-      request: protos.google.cloud.language.v1.IAnalyzeSentimentRequest,
-      options?: gax.CallOptions):
-      Promise<[
-        protos.google.cloud.language.v1.IAnalyzeSentimentResponse,
-        protos.google.cloud.language.v1.IAnalyzeSentimentRequest|undefined, {}|undefined
-      ]>;
+    request: protos.google.cloud.language.v1.IAnalyzeSentimentRequest,
+    options?: gax.CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.language.v1.IAnalyzeSentimentResponse,
+      protos.google.cloud.language.v1.IAnalyzeSentimentRequest | undefined,
+      {} | undefined
+    ]
+  >;
   analyzeSentiment(
-      request: protos.google.cloud.language.v1.IAnalyzeSentimentRequest,
-      options: gax.CallOptions,
-      callback: Callback<
-          protos.google.cloud.language.v1.IAnalyzeSentimentResponse,
-          protos.google.cloud.language.v1.IAnalyzeSentimentRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.language.v1.IAnalyzeSentimentRequest,
+    options: gax.CallOptions,
+    callback: Callback<
+      protos.google.cloud.language.v1.IAnalyzeSentimentResponse,
+      | protos.google.cloud.language.v1.IAnalyzeSentimentRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
   analyzeSentiment(
-      request: protos.google.cloud.language.v1.IAnalyzeSentimentRequest,
-      callback: Callback<
-          protos.google.cloud.language.v1.IAnalyzeSentimentResponse,
-          protos.google.cloud.language.v1.IAnalyzeSentimentRequest|null|undefined,
-          {}|null|undefined>): void;
-/**
- * Analyzes the sentiment of the provided text.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {google.cloud.language.v1.Document} request.document
- *   Input document.
- * @param {google.cloud.language.v1.EncodingType} request.encodingType
- *   The encoding type used by the API to calculate sentence offsets.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing [AnalyzeSentimentResponse]{@link google.cloud.language.v1.AnalyzeSentimentResponse}.
- *   The promise has a method named "cancel" which cancels the ongoing API call.
- */
+    request: protos.google.cloud.language.v1.IAnalyzeSentimentRequest,
+    callback: Callback<
+      protos.google.cloud.language.v1.IAnalyzeSentimentResponse,
+      | protos.google.cloud.language.v1.IAnalyzeSentimentRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Analyzes the sentiment of the provided text.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.language.v1.Document} request.document
+   *   Input document.
+   * @param {google.cloud.language.v1.EncodingType} request.encodingType
+   *   The encoding type used by the API to calculate sentence offsets.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [AnalyzeSentimentResponse]{@link google.cloud.language.v1.AnalyzeSentimentResponse}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   */
   analyzeSentiment(
-      request: protos.google.cloud.language.v1.IAnalyzeSentimentRequest,
-      optionsOrCallback?: gax.CallOptions|Callback<
+    request: protos.google.cloud.language.v1.IAnalyzeSentimentRequest,
+    optionsOrCallback?:
+      | gax.CallOptions
+      | Callback<
           protos.google.cloud.language.v1.IAnalyzeSentimentResponse,
-          protos.google.cloud.language.v1.IAnalyzeSentimentRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.language.v1.IAnalyzeSentimentResponse,
-          protos.google.cloud.language.v1.IAnalyzeSentimentRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.language.v1.IAnalyzeSentimentResponse,
-        protos.google.cloud.language.v1.IAnalyzeSentimentRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.language.v1.IAnalyzeSentimentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.language.v1.IAnalyzeSentimentResponse,
+      | protos.google.cloud.language.v1.IAnalyzeSentimentRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.language.v1.IAnalyzeSentimentResponse,
+      protos.google.cloud.language.v1.IAnalyzeSentimentRequest | undefined,
+      {} | undefined
+    ]
+  > | void {
     request = request || {};
     let options: gax.CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as gax.CallOptions;
     }
     options = options || {};
@@ -316,63 +361,84 @@ export class LanguageServiceClient {
     return this.innerApiCalls.analyzeSentiment(request, options, callback);
   }
   analyzeEntities(
-      request: protos.google.cloud.language.v1.IAnalyzeEntitiesRequest,
-      options?: gax.CallOptions):
-      Promise<[
-        protos.google.cloud.language.v1.IAnalyzeEntitiesResponse,
-        protos.google.cloud.language.v1.IAnalyzeEntitiesRequest|undefined, {}|undefined
-      ]>;
+    request: protos.google.cloud.language.v1.IAnalyzeEntitiesRequest,
+    options?: gax.CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.language.v1.IAnalyzeEntitiesResponse,
+      protos.google.cloud.language.v1.IAnalyzeEntitiesRequest | undefined,
+      {} | undefined
+    ]
+  >;
   analyzeEntities(
-      request: protos.google.cloud.language.v1.IAnalyzeEntitiesRequest,
-      options: gax.CallOptions,
-      callback: Callback<
-          protos.google.cloud.language.v1.IAnalyzeEntitiesResponse,
-          protos.google.cloud.language.v1.IAnalyzeEntitiesRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.language.v1.IAnalyzeEntitiesRequest,
+    options: gax.CallOptions,
+    callback: Callback<
+      protos.google.cloud.language.v1.IAnalyzeEntitiesResponse,
+      | protos.google.cloud.language.v1.IAnalyzeEntitiesRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
   analyzeEntities(
-      request: protos.google.cloud.language.v1.IAnalyzeEntitiesRequest,
-      callback: Callback<
-          protos.google.cloud.language.v1.IAnalyzeEntitiesResponse,
-          protos.google.cloud.language.v1.IAnalyzeEntitiesRequest|null|undefined,
-          {}|null|undefined>): void;
-/**
- * Finds named entities (currently proper names and common nouns) in the text
- * along with entity types, salience, mentions for each entity, and
- * other properties.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {google.cloud.language.v1.Document} request.document
- *   Input document.
- * @param {google.cloud.language.v1.EncodingType} request.encodingType
- *   The encoding type used by the API to calculate offsets.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing [AnalyzeEntitiesResponse]{@link google.cloud.language.v1.AnalyzeEntitiesResponse}.
- *   The promise has a method named "cancel" which cancels the ongoing API call.
- */
+    request: protos.google.cloud.language.v1.IAnalyzeEntitiesRequest,
+    callback: Callback<
+      protos.google.cloud.language.v1.IAnalyzeEntitiesResponse,
+      | protos.google.cloud.language.v1.IAnalyzeEntitiesRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Finds named entities (currently proper names and common nouns) in the text
+   * along with entity types, salience, mentions for each entity, and
+   * other properties.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.language.v1.Document} request.document
+   *   Input document.
+   * @param {google.cloud.language.v1.EncodingType} request.encodingType
+   *   The encoding type used by the API to calculate offsets.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [AnalyzeEntitiesResponse]{@link google.cloud.language.v1.AnalyzeEntitiesResponse}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   */
   analyzeEntities(
-      request: protos.google.cloud.language.v1.IAnalyzeEntitiesRequest,
-      optionsOrCallback?: gax.CallOptions|Callback<
+    request: protos.google.cloud.language.v1.IAnalyzeEntitiesRequest,
+    optionsOrCallback?:
+      | gax.CallOptions
+      | Callback<
           protos.google.cloud.language.v1.IAnalyzeEntitiesResponse,
-          protos.google.cloud.language.v1.IAnalyzeEntitiesRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.language.v1.IAnalyzeEntitiesResponse,
-          protos.google.cloud.language.v1.IAnalyzeEntitiesRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.language.v1.IAnalyzeEntitiesResponse,
-        protos.google.cloud.language.v1.IAnalyzeEntitiesRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.language.v1.IAnalyzeEntitiesRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.language.v1.IAnalyzeEntitiesResponse,
+      | protos.google.cloud.language.v1.IAnalyzeEntitiesRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.language.v1.IAnalyzeEntitiesResponse,
+      protos.google.cloud.language.v1.IAnalyzeEntitiesRequest | undefined,
+      {} | undefined
+    ]
+  > | void {
     request = request || {};
     let options: gax.CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as gax.CallOptions;
     }
     options = options || {};
@@ -380,126 +446,172 @@ export class LanguageServiceClient {
     return this.innerApiCalls.analyzeEntities(request, options, callback);
   }
   analyzeEntitySentiment(
-      request: protos.google.cloud.language.v1.IAnalyzeEntitySentimentRequest,
-      options?: gax.CallOptions):
-      Promise<[
-        protos.google.cloud.language.v1.IAnalyzeEntitySentimentResponse,
-        protos.google.cloud.language.v1.IAnalyzeEntitySentimentRequest|undefined, {}|undefined
-      ]>;
+    request: protos.google.cloud.language.v1.IAnalyzeEntitySentimentRequest,
+    options?: gax.CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.language.v1.IAnalyzeEntitySentimentResponse,
+      (
+        | protos.google.cloud.language.v1.IAnalyzeEntitySentimentRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
   analyzeEntitySentiment(
-      request: protos.google.cloud.language.v1.IAnalyzeEntitySentimentRequest,
-      options: gax.CallOptions,
-      callback: Callback<
-          protos.google.cloud.language.v1.IAnalyzeEntitySentimentResponse,
-          protos.google.cloud.language.v1.IAnalyzeEntitySentimentRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.language.v1.IAnalyzeEntitySentimentRequest,
+    options: gax.CallOptions,
+    callback: Callback<
+      protos.google.cloud.language.v1.IAnalyzeEntitySentimentResponse,
+      | protos.google.cloud.language.v1.IAnalyzeEntitySentimentRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
   analyzeEntitySentiment(
-      request: protos.google.cloud.language.v1.IAnalyzeEntitySentimentRequest,
-      callback: Callback<
-          protos.google.cloud.language.v1.IAnalyzeEntitySentimentResponse,
-          protos.google.cloud.language.v1.IAnalyzeEntitySentimentRequest|null|undefined,
-          {}|null|undefined>): void;
-/**
- * Finds entities, similar to {@link google.cloud.language.v1.LanguageService.AnalyzeEntities|AnalyzeEntities} in the text and analyzes
- * sentiment associated with each entity and its mentions.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {google.cloud.language.v1.Document} request.document
- *   Input document.
- * @param {google.cloud.language.v1.EncodingType} request.encodingType
- *   The encoding type used by the API to calculate offsets.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing [AnalyzeEntitySentimentResponse]{@link google.cloud.language.v1.AnalyzeEntitySentimentResponse}.
- *   The promise has a method named "cancel" which cancels the ongoing API call.
- */
+    request: protos.google.cloud.language.v1.IAnalyzeEntitySentimentRequest,
+    callback: Callback<
+      protos.google.cloud.language.v1.IAnalyzeEntitySentimentResponse,
+      | protos.google.cloud.language.v1.IAnalyzeEntitySentimentRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Finds entities, similar to {@link google.cloud.language.v1.LanguageService.AnalyzeEntities|AnalyzeEntities} in the text and analyzes
+   * sentiment associated with each entity and its mentions.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.language.v1.Document} request.document
+   *   Input document.
+   * @param {google.cloud.language.v1.EncodingType} request.encodingType
+   *   The encoding type used by the API to calculate offsets.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [AnalyzeEntitySentimentResponse]{@link google.cloud.language.v1.AnalyzeEntitySentimentResponse}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   */
   analyzeEntitySentiment(
-      request: protos.google.cloud.language.v1.IAnalyzeEntitySentimentRequest,
-      optionsOrCallback?: gax.CallOptions|Callback<
+    request: protos.google.cloud.language.v1.IAnalyzeEntitySentimentRequest,
+    optionsOrCallback?:
+      | gax.CallOptions
+      | Callback<
           protos.google.cloud.language.v1.IAnalyzeEntitySentimentResponse,
-          protos.google.cloud.language.v1.IAnalyzeEntitySentimentRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.language.v1.IAnalyzeEntitySentimentResponse,
-          protos.google.cloud.language.v1.IAnalyzeEntitySentimentRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.language.v1.IAnalyzeEntitySentimentResponse,
-        protos.google.cloud.language.v1.IAnalyzeEntitySentimentRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.language.v1.IAnalyzeEntitySentimentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.language.v1.IAnalyzeEntitySentimentResponse,
+      | protos.google.cloud.language.v1.IAnalyzeEntitySentimentRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.language.v1.IAnalyzeEntitySentimentResponse,
+      (
+        | protos.google.cloud.language.v1.IAnalyzeEntitySentimentRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
     request = request || {};
     let options: gax.CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as gax.CallOptions;
     }
     options = options || {};
     this.initialize();
-    return this.innerApiCalls.analyzeEntitySentiment(request, options, callback);
+    return this.innerApiCalls.analyzeEntitySentiment(
+      request,
+      options,
+      callback
+    );
   }
   analyzeSyntax(
-      request: protos.google.cloud.language.v1.IAnalyzeSyntaxRequest,
-      options?: gax.CallOptions):
-      Promise<[
-        protos.google.cloud.language.v1.IAnalyzeSyntaxResponse,
-        protos.google.cloud.language.v1.IAnalyzeSyntaxRequest|undefined, {}|undefined
-      ]>;
+    request: protos.google.cloud.language.v1.IAnalyzeSyntaxRequest,
+    options?: gax.CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.language.v1.IAnalyzeSyntaxResponse,
+      protos.google.cloud.language.v1.IAnalyzeSyntaxRequest | undefined,
+      {} | undefined
+    ]
+  >;
   analyzeSyntax(
-      request: protos.google.cloud.language.v1.IAnalyzeSyntaxRequest,
-      options: gax.CallOptions,
-      callback: Callback<
-          protos.google.cloud.language.v1.IAnalyzeSyntaxResponse,
-          protos.google.cloud.language.v1.IAnalyzeSyntaxRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.language.v1.IAnalyzeSyntaxRequest,
+    options: gax.CallOptions,
+    callback: Callback<
+      protos.google.cloud.language.v1.IAnalyzeSyntaxResponse,
+      protos.google.cloud.language.v1.IAnalyzeSyntaxRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
   analyzeSyntax(
-      request: protos.google.cloud.language.v1.IAnalyzeSyntaxRequest,
-      callback: Callback<
-          protos.google.cloud.language.v1.IAnalyzeSyntaxResponse,
-          protos.google.cloud.language.v1.IAnalyzeSyntaxRequest|null|undefined,
-          {}|null|undefined>): void;
-/**
- * Analyzes the syntax of the text and provides sentence boundaries and
- * tokenization along with part of speech tags, dependency trees, and other
- * properties.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {google.cloud.language.v1.Document} request.document
- *   Input document.
- * @param {google.cloud.language.v1.EncodingType} request.encodingType
- *   The encoding type used by the API to calculate offsets.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing [AnalyzeSyntaxResponse]{@link google.cloud.language.v1.AnalyzeSyntaxResponse}.
- *   The promise has a method named "cancel" which cancels the ongoing API call.
- */
+    request: protos.google.cloud.language.v1.IAnalyzeSyntaxRequest,
+    callback: Callback<
+      protos.google.cloud.language.v1.IAnalyzeSyntaxResponse,
+      protos.google.cloud.language.v1.IAnalyzeSyntaxRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Analyzes the syntax of the text and provides sentence boundaries and
+   * tokenization along with part of speech tags, dependency trees, and other
+   * properties.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.language.v1.Document} request.document
+   *   Input document.
+   * @param {google.cloud.language.v1.EncodingType} request.encodingType
+   *   The encoding type used by the API to calculate offsets.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [AnalyzeSyntaxResponse]{@link google.cloud.language.v1.AnalyzeSyntaxResponse}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   */
   analyzeSyntax(
-      request: protos.google.cloud.language.v1.IAnalyzeSyntaxRequest,
-      optionsOrCallback?: gax.CallOptions|Callback<
+    request: protos.google.cloud.language.v1.IAnalyzeSyntaxRequest,
+    optionsOrCallback?:
+      | gax.CallOptions
+      | Callback<
           protos.google.cloud.language.v1.IAnalyzeSyntaxResponse,
-          protos.google.cloud.language.v1.IAnalyzeSyntaxRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.language.v1.IAnalyzeSyntaxResponse,
-          protos.google.cloud.language.v1.IAnalyzeSyntaxRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.language.v1.IAnalyzeSyntaxResponse,
-        protos.google.cloud.language.v1.IAnalyzeSyntaxRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.language.v1.IAnalyzeSyntaxRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.language.v1.IAnalyzeSyntaxResponse,
+      protos.google.cloud.language.v1.IAnalyzeSyntaxRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.language.v1.IAnalyzeSyntaxResponse,
+      protos.google.cloud.language.v1.IAnalyzeSyntaxRequest | undefined,
+      {} | undefined
+    ]
+  > | void {
     request = request || {};
     let options: gax.CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as gax.CallOptions;
     }
     options = options || {};
@@ -507,59 +619,74 @@ export class LanguageServiceClient {
     return this.innerApiCalls.analyzeSyntax(request, options, callback);
   }
   classifyText(
-      request: protos.google.cloud.language.v1.IClassifyTextRequest,
-      options?: gax.CallOptions):
-      Promise<[
-        protos.google.cloud.language.v1.IClassifyTextResponse,
-        protos.google.cloud.language.v1.IClassifyTextRequest|undefined, {}|undefined
-      ]>;
+    request: protos.google.cloud.language.v1.IClassifyTextRequest,
+    options?: gax.CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.language.v1.IClassifyTextResponse,
+      protos.google.cloud.language.v1.IClassifyTextRequest | undefined,
+      {} | undefined
+    ]
+  >;
   classifyText(
-      request: protos.google.cloud.language.v1.IClassifyTextRequest,
-      options: gax.CallOptions,
-      callback: Callback<
-          protos.google.cloud.language.v1.IClassifyTextResponse,
-          protos.google.cloud.language.v1.IClassifyTextRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.language.v1.IClassifyTextRequest,
+    options: gax.CallOptions,
+    callback: Callback<
+      protos.google.cloud.language.v1.IClassifyTextResponse,
+      protos.google.cloud.language.v1.IClassifyTextRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
   classifyText(
-      request: protos.google.cloud.language.v1.IClassifyTextRequest,
-      callback: Callback<
-          protos.google.cloud.language.v1.IClassifyTextResponse,
-          protos.google.cloud.language.v1.IClassifyTextRequest|null|undefined,
-          {}|null|undefined>): void;
-/**
- * Classifies a document into categories.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {google.cloud.language.v1.Document} request.document
- *   Input document.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing [ClassifyTextResponse]{@link google.cloud.language.v1.ClassifyTextResponse}.
- *   The promise has a method named "cancel" which cancels the ongoing API call.
- */
+    request: protos.google.cloud.language.v1.IClassifyTextRequest,
+    callback: Callback<
+      protos.google.cloud.language.v1.IClassifyTextResponse,
+      protos.google.cloud.language.v1.IClassifyTextRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Classifies a document into categories.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.language.v1.Document} request.document
+   *   Input document.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [ClassifyTextResponse]{@link google.cloud.language.v1.ClassifyTextResponse}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   */
   classifyText(
-      request: protos.google.cloud.language.v1.IClassifyTextRequest,
-      optionsOrCallback?: gax.CallOptions|Callback<
+    request: protos.google.cloud.language.v1.IClassifyTextRequest,
+    optionsOrCallback?:
+      | gax.CallOptions
+      | Callback<
           protos.google.cloud.language.v1.IClassifyTextResponse,
-          protos.google.cloud.language.v1.IClassifyTextRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.language.v1.IClassifyTextResponse,
-          protos.google.cloud.language.v1.IClassifyTextRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.language.v1.IClassifyTextResponse,
-        protos.google.cloud.language.v1.IClassifyTextRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.language.v1.IClassifyTextRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.language.v1.IClassifyTextResponse,
+      protos.google.cloud.language.v1.IClassifyTextRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.language.v1.IClassifyTextResponse,
+      protos.google.cloud.language.v1.IClassifyTextRequest | undefined,
+      {} | undefined
+    ]
+  > | void {
     request = request || {};
     let options: gax.CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as gax.CallOptions;
     }
     options = options || {};
@@ -567,71 +694,85 @@ export class LanguageServiceClient {
     return this.innerApiCalls.classifyText(request, options, callback);
   }
   annotateText(
-      request: protos.google.cloud.language.v1.IAnnotateTextRequest,
-      options?: gax.CallOptions):
-      Promise<[
-        protos.google.cloud.language.v1.IAnnotateTextResponse,
-        protos.google.cloud.language.v1.IAnnotateTextRequest|undefined, {}|undefined
-      ]>;
+    request: protos.google.cloud.language.v1.IAnnotateTextRequest,
+    options?: gax.CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.language.v1.IAnnotateTextResponse,
+      protos.google.cloud.language.v1.IAnnotateTextRequest | undefined,
+      {} | undefined
+    ]
+  >;
   annotateText(
-      request: protos.google.cloud.language.v1.IAnnotateTextRequest,
-      options: gax.CallOptions,
-      callback: Callback<
-          protos.google.cloud.language.v1.IAnnotateTextResponse,
-          protos.google.cloud.language.v1.IAnnotateTextRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.language.v1.IAnnotateTextRequest,
+    options: gax.CallOptions,
+    callback: Callback<
+      protos.google.cloud.language.v1.IAnnotateTextResponse,
+      protos.google.cloud.language.v1.IAnnotateTextRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
   annotateText(
-      request: protos.google.cloud.language.v1.IAnnotateTextRequest,
-      callback: Callback<
-          protos.google.cloud.language.v1.IAnnotateTextResponse,
-          protos.google.cloud.language.v1.IAnnotateTextRequest|null|undefined,
-          {}|null|undefined>): void;
-/**
- * A convenience method that provides all the features that analyzeSentiment,
- * analyzeEntities, and analyzeSyntax provide in one call.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {google.cloud.language.v1.Document} request.document
- *   Input document.
- * @param {google.cloud.language.v1.AnnotateTextRequest.Features} request.features
- *   The enabled features.
- * @param {google.cloud.language.v1.EncodingType} request.encodingType
- *   The encoding type used by the API to calculate offsets.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing [AnnotateTextResponse]{@link google.cloud.language.v1.AnnotateTextResponse}.
- *   The promise has a method named "cancel" which cancels the ongoing API call.
- */
+    request: protos.google.cloud.language.v1.IAnnotateTextRequest,
+    callback: Callback<
+      protos.google.cloud.language.v1.IAnnotateTextResponse,
+      protos.google.cloud.language.v1.IAnnotateTextRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * A convenience method that provides all the features that analyzeSentiment,
+   * analyzeEntities, and analyzeSyntax provide in one call.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.language.v1.Document} request.document
+   *   Input document.
+   * @param {google.cloud.language.v1.AnnotateTextRequest.Features} request.features
+   *   The enabled features.
+   * @param {google.cloud.language.v1.EncodingType} request.encodingType
+   *   The encoding type used by the API to calculate offsets.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [AnnotateTextResponse]{@link google.cloud.language.v1.AnnotateTextResponse}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   */
   annotateText(
-      request: protos.google.cloud.language.v1.IAnnotateTextRequest,
-      optionsOrCallback?: gax.CallOptions|Callback<
+    request: protos.google.cloud.language.v1.IAnnotateTextRequest,
+    optionsOrCallback?:
+      | gax.CallOptions
+      | Callback<
           protos.google.cloud.language.v1.IAnnotateTextResponse,
-          protos.google.cloud.language.v1.IAnnotateTextRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.language.v1.IAnnotateTextResponse,
-          protos.google.cloud.language.v1.IAnnotateTextRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.language.v1.IAnnotateTextResponse,
-        protos.google.cloud.language.v1.IAnnotateTextRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.language.v1.IAnnotateTextRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.language.v1.IAnnotateTextResponse,
+      protos.google.cloud.language.v1.IAnnotateTextRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.language.v1.IAnnotateTextResponse,
+      protos.google.cloud.language.v1.IAnnotateTextRequest | undefined,
+      {} | undefined
+    ]
+  > | void {
     request = request || {};
     let options: gax.CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as gax.CallOptions;
     }
     options = options || {};
     this.initialize();
     return this.innerApiCalls.annotateText(request, options, callback);
   }
-
 
   /**
    * Terminate the GRPC channel and close the client.
