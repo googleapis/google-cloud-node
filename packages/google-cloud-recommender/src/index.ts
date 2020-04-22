@@ -21,4 +21,4 @@ const RecommenderClient = v1.RecommenderClient;
 export {v1, RecommenderClient};
 export default {v1, RecommenderClient};
 import * as protos from '../protos/protos';
-export {protos}
+export {protos};
