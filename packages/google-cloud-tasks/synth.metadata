@@ -3,23 +3,23 @@
     {
       "git": {
         "name": ".",
-        "remote": "git@github.com:googleapis/nodejs-tasks.git",
-        "sha": "d5179da1598dbb7a3cebd67838825594d266973d"
+        "remote": "https://github.com/googleapis/nodejs-tasks.git",
+        "sha": "b6d37271e851b3b25de97cb66286b7b9fac0d924"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "26523a96798ce1a6caa1b3c912119059cfcc98a7",
-        "internalRef": "306320014"
+        "sha": "42ee97c1b93a0e3759bbba3013da309f670a90ab",
+        "internalRef": "307114445"
       }
     },
     {
       "git": {
         "name": "synthtool",
         "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "3df869dd6eb546ef13beeb7a9efa6ee0226afafd"
+        "sha": "19465d3ec5e5acdb01521d8f3bddd311bcbee28d"
       }
     }
   ],
