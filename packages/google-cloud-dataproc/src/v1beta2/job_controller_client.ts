@@ -435,6 +435,13 @@ export class JobControllerClient {
       options = optionsOrCallback as gax.CallOptions;
     }
     options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      project_id: request.projectId || '',
+    });
     this.initialize();
     return this.innerApiCalls.submitJob(request, options, callback);
   }
@@ -515,6 +522,13 @@ export class JobControllerClient {
       options = optionsOrCallback as gax.CallOptions;
     }
     options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      project_id: request.projectId || '',
+    });
     this.initialize();
     return this.innerApiCalls.getJob(request, options, callback);
   }
@@ -604,6 +618,13 @@ export class JobControllerClient {
       options = optionsOrCallback as gax.CallOptions;
     }
     options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      project_id: request.projectId || '',
+    });
     this.initialize();
     return this.innerApiCalls.updateJob(request, options, callback);
   }
@@ -688,6 +709,13 @@ export class JobControllerClient {
       options = optionsOrCallback as gax.CallOptions;
     }
     options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      project_id: request.projectId || '',
+    });
     this.initialize();
     return this.innerApiCalls.cancelJob(request, options, callback);
   }
@@ -769,6 +797,13 @@ export class JobControllerClient {
       options = optionsOrCallback as gax.CallOptions;
     }
     options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      project_id: request.projectId || '',
+    });
     this.initialize();
     return this.innerApiCalls.deleteJob(request, options, callback);
   }
@@ -878,6 +913,13 @@ export class JobControllerClient {
       options = optionsOrCallback as gax.CallOptions;
     }
     options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      project_id: request.projectId || '',
+    });
     this.initialize();
     return this.innerApiCalls.submitJobAsOperation(request, options, callback);
   }
@@ -996,6 +1038,13 @@ export class JobControllerClient {
       options = optionsOrCallback as gax.CallOptions;
     }
     options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      project_id: request.projectId || '',
+    });
     this.initialize();
     return this.innerApiCalls.listJobs(request, options, callback);
   }
@@ -1059,6 +1108,13 @@ export class JobControllerClient {
   ): Transform {
     request = request || {};
     options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      project_id: request.projectId || '',
+    });
     const callSettings = new gax.CallSettings(options);
     this.initialize();
     return this.descriptors.page.listJobs.createStream(
@@ -1119,6 +1175,13 @@ export class JobControllerClient {
   ): AsyncIterable<protos.google.cloud.dataproc.v1beta2.IJob> {
     request = request || {};
     options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      project_id: request.projectId || '',
+    });
     options = options || {};
     const callSettings = new gax.CallSettings(options);
     this.initialize();

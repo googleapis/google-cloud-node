@@ -240,7 +240,15 @@ describe('v1beta2.ClusterControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1beta2.GetClusterRequest()
       );
-      const expectedOptions = {};
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataproc.v1beta2.Cluster()
       );
@@ -265,7 +273,15 @@ describe('v1beta2.ClusterControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1beta2.GetClusterRequest()
       );
-      const expectedOptions = {};
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataproc.v1beta2.Cluster()
       );
@@ -307,7 +323,15 @@ describe('v1beta2.ClusterControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1beta2.GetClusterRequest()
       );
-      const expectedOptions = {};
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
       const expectedError = new Error('expected');
       client.innerApiCalls.getCluster = stubSimpleCall(
         undefined,
@@ -336,7 +360,15 @@ describe('v1beta2.ClusterControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1beta2.CreateClusterRequest()
       );
-      const expectedOptions = {};
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -364,7 +396,15 @@ describe('v1beta2.ClusterControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1beta2.CreateClusterRequest()
       );
-      const expectedOptions = {};
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -413,7 +453,15 @@ describe('v1beta2.ClusterControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1beta2.CreateClusterRequest()
       );
-      const expectedOptions = {};
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
       const expectedError = new Error('expected');
       client.innerApiCalls.createCluster = stubLongRunningCall(
         undefined,
@@ -440,7 +488,15 @@ describe('v1beta2.ClusterControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1beta2.CreateClusterRequest()
       );
-      const expectedOptions = {};
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
       const expectedError = new Error('expected');
       client.innerApiCalls.createCluster = stubLongRunningCall(
         undefined,
@@ -471,7 +527,15 @@ describe('v1beta2.ClusterControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1beta2.UpdateClusterRequest()
       );
-      const expectedOptions = {};
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -499,7 +563,15 @@ describe('v1beta2.ClusterControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1beta2.UpdateClusterRequest()
       );
-      const expectedOptions = {};
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -548,7 +620,15 @@ describe('v1beta2.ClusterControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1beta2.UpdateClusterRequest()
       );
-      const expectedOptions = {};
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
       const expectedError = new Error('expected');
       client.innerApiCalls.updateCluster = stubLongRunningCall(
         undefined,
@@ -575,7 +655,15 @@ describe('v1beta2.ClusterControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1beta2.UpdateClusterRequest()
       );
-      const expectedOptions = {};
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
       const expectedError = new Error('expected');
       client.innerApiCalls.updateCluster = stubLongRunningCall(
         undefined,
@@ -606,7 +694,15 @@ describe('v1beta2.ClusterControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1beta2.DeleteClusterRequest()
       );
-      const expectedOptions = {};
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -634,7 +730,15 @@ describe('v1beta2.ClusterControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1beta2.DeleteClusterRequest()
       );
-      const expectedOptions = {};
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -683,7 +787,15 @@ describe('v1beta2.ClusterControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1beta2.DeleteClusterRequest()
       );
-      const expectedOptions = {};
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteCluster = stubLongRunningCall(
         undefined,
@@ -710,7 +822,15 @@ describe('v1beta2.ClusterControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1beta2.DeleteClusterRequest()
       );
-      const expectedOptions = {};
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteCluster = stubLongRunningCall(
         undefined,
@@ -741,7 +861,15 @@ describe('v1beta2.ClusterControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1beta2.DiagnoseClusterRequest()
       );
-      const expectedOptions = {};
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -769,7 +897,15 @@ describe('v1beta2.ClusterControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1beta2.DiagnoseClusterRequest()
       );
-      const expectedOptions = {};
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -818,7 +954,15 @@ describe('v1beta2.ClusterControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1beta2.DiagnoseClusterRequest()
       );
-      const expectedOptions = {};
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
       const expectedError = new Error('expected');
       client.innerApiCalls.diagnoseCluster = stubLongRunningCall(
         undefined,
@@ -845,7 +989,15 @@ describe('v1beta2.ClusterControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1beta2.DiagnoseClusterRequest()
       );
-      const expectedOptions = {};
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
       const expectedError = new Error('expected');
       client.innerApiCalls.diagnoseCluster = stubLongRunningCall(
         undefined,
@@ -876,7 +1028,15 @@ describe('v1beta2.ClusterControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1beta2.ListClustersRequest()
       );
-      const expectedOptions = {};
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dataproc.v1beta2.Cluster()
@@ -909,7 +1069,15 @@ describe('v1beta2.ClusterControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1beta2.ListClustersRequest()
       );
-      const expectedOptions = {};
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dataproc.v1beta2.Cluster()
@@ -959,7 +1127,15 @@ describe('v1beta2.ClusterControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1beta2.ListClustersRequest()
       );
-      const expectedOptions = {};
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
       const expectedError = new Error('expected');
       client.innerApiCalls.listClusters = stubSimpleCall(
         undefined,
@@ -986,6 +1162,8 @@ describe('v1beta2.ClusterControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1beta2.ListClustersRequest()
       );
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dataproc.v1beta2.Cluster()
@@ -1023,6 +1201,13 @@ describe('v1beta2.ClusterControllerClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listClusters, request)
       );
+      assert.strictEqual(
+        (client.descriptors.page.listClusters
+          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
+          'x-goog-request-params'
+        ],
+        expectedHeaderRequestParams
+      );
     });
 
     it('invokes listClustersStream with error', async () => {
@@ -1036,6 +1221,8 @@ describe('v1beta2.ClusterControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1beta2.ListClustersRequest()
       );
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
       const expectedError = new Error('expected');
       client.descriptors.page.listClusters.createStream = stubPageStreamingCall(
         undefined,
@@ -1065,6 +1252,13 @@ describe('v1beta2.ClusterControllerClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listClusters, request)
       );
+      assert.strictEqual(
+        (client.descriptors.page.listClusters
+          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
+          'x-goog-request-params'
+        ],
+        expectedHeaderRequestParams
+      );
     });
 
     it('uses async iteration with listClusters without error', async () => {
@@ -1078,6 +1272,8 @@ describe('v1beta2.ClusterControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1beta2.ListClustersRequest()
       );
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dataproc.v1beta2.Cluster()
@@ -1103,6 +1299,13 @@ describe('v1beta2.ClusterControllerClient', () => {
           .asyncIterate as SinonStub).getCall(0).args[1],
         request
       );
+      assert.strictEqual(
+        (client.descriptors.page.listClusters
+          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
+          'x-goog-request-params'
+        ],
+        expectedHeaderRequestParams
+      );
     });
 
     it('uses async iteration with listClusters with error', async () => {
@@ -1116,6 +1319,8 @@ describe('v1beta2.ClusterControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1beta2.ListClustersRequest()
       );
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
       const expectedError = new Error('expected');
       client.descriptors.page.listClusters.asyncIterate = stubAsyncIterationCall(
         undefined,
@@ -1132,6 +1337,13 @@ describe('v1beta2.ClusterControllerClient', () => {
         (client.descriptors.page.listClusters
           .asyncIterate as SinonStub).getCall(0).args[1],
         request
+      );
+      assert.strictEqual(
+        (client.descriptors.page.listClusters
+          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
+          'x-goog-request-params'
+        ],
+        expectedHeaderRequestParams
       );
     });
   });

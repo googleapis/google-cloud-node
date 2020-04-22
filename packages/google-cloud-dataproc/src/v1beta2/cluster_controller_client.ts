@@ -462,6 +462,13 @@ export class ClusterControllerClient {
       options = optionsOrCallback as gax.CallOptions;
     }
     options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      project_id: request.projectId || '',
+    });
     this.initialize();
     return this.innerApiCalls.getCluster(request, options, callback);
   }
@@ -573,6 +580,13 @@ export class ClusterControllerClient {
       options = optionsOrCallback as gax.CallOptions;
     }
     options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      project_id: request.projectId || '',
+    });
     this.initialize();
     return this.innerApiCalls.createCluster(request, options, callback);
   }
@@ -756,6 +770,13 @@ export class ClusterControllerClient {
       options = optionsOrCallback as gax.CallOptions;
     }
     options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      project_id: request.projectId || '',
+    });
     this.initialize();
     return this.innerApiCalls.updateCluster(request, options, callback);
   }
@@ -869,6 +890,13 @@ export class ClusterControllerClient {
       options = optionsOrCallback as gax.CallOptions;
     }
     options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      project_id: request.projectId || '',
+    });
     this.initialize();
     return this.innerApiCalls.deleteCluster(request, options, callback);
   }
@@ -971,6 +999,13 @@ export class ClusterControllerClient {
       options = optionsOrCallback as gax.CallOptions;
     }
     options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      project_id: request.projectId || '',
+    });
     this.initialize();
     return this.innerApiCalls.diagnoseCluster(request, options, callback);
   }
@@ -1091,6 +1126,13 @@ export class ClusterControllerClient {
       options = optionsOrCallback as gax.CallOptions;
     }
     options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      project_id: request.projectId || '',
+    });
     this.initialize();
     return this.innerApiCalls.listClusters(request, options, callback);
   }
@@ -1150,6 +1192,13 @@ export class ClusterControllerClient {
   ): Transform {
     request = request || {};
     options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      project_id: request.projectId || '',
+    });
     const callSettings = new gax.CallSettings(options);
     this.initialize();
     return this.descriptors.page.listClusters.createStream(
@@ -1206,6 +1255,13 @@ export class ClusterControllerClient {
   ): AsyncIterable<protos.google.cloud.dataproc.v1beta2.ICluster> {
     request = request || {};
     options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      project_id: request.projectId || '',
+    });
     options = options || {};
     const callSettings = new gax.CallSettings(options);
     this.initialize();

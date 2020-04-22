@@ -236,7 +236,15 @@ describe('v1.JobControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.SubmitJobRequest()
       );
-      const expectedOptions = {};
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.Job()
       );
@@ -259,7 +267,15 @@ describe('v1.JobControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.SubmitJobRequest()
       );
-      const expectedOptions = {};
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.Job()
       );
@@ -299,7 +315,15 @@ describe('v1.JobControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.SubmitJobRequest()
       );
-      const expectedOptions = {};
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
       const expectedError = new Error('expected');
       client.innerApiCalls.submitJob = stubSimpleCall(undefined, expectedError);
       await assert.rejects(async () => {
@@ -323,7 +347,15 @@ describe('v1.JobControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.GetJobRequest()
       );
-      const expectedOptions = {};
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.Job()
       );
@@ -346,7 +378,15 @@ describe('v1.JobControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.GetJobRequest()
       );
-      const expectedOptions = {};
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.Job()
       );
@@ -386,7 +426,15 @@ describe('v1.JobControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.GetJobRequest()
       );
-      const expectedOptions = {};
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
       const expectedError = new Error('expected');
       client.innerApiCalls.getJob = stubSimpleCall(undefined, expectedError);
       await assert.rejects(async () => {
@@ -410,7 +458,15 @@ describe('v1.JobControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.UpdateJobRequest()
       );
-      const expectedOptions = {};
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.Job()
       );
@@ -433,7 +489,15 @@ describe('v1.JobControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.UpdateJobRequest()
       );
-      const expectedOptions = {};
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.Job()
       );
@@ -473,7 +537,15 @@ describe('v1.JobControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.UpdateJobRequest()
       );
-      const expectedOptions = {};
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
       const expectedError = new Error('expected');
       client.innerApiCalls.updateJob = stubSimpleCall(undefined, expectedError);
       await assert.rejects(async () => {
@@ -497,7 +569,15 @@ describe('v1.JobControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.CancelJobRequest()
       );
-      const expectedOptions = {};
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.Job()
       );
@@ -520,7 +600,15 @@ describe('v1.JobControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.CancelJobRequest()
       );
-      const expectedOptions = {};
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.Job()
       );
@@ -560,7 +648,15 @@ describe('v1.JobControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.CancelJobRequest()
       );
-      const expectedOptions = {};
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
       const expectedError = new Error('expected');
       client.innerApiCalls.cancelJob = stubSimpleCall(undefined, expectedError);
       await assert.rejects(async () => {
@@ -584,7 +680,15 @@ describe('v1.JobControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.DeleteJobRequest()
       );
-      const expectedOptions = {};
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -607,7 +711,15 @@ describe('v1.JobControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.DeleteJobRequest()
       );
-      const expectedOptions = {};
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -647,7 +759,15 @@ describe('v1.JobControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.DeleteJobRequest()
       );
-      const expectedOptions = {};
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteJob = stubSimpleCall(undefined, expectedError);
       await assert.rejects(async () => {
@@ -671,7 +791,15 @@ describe('v1.JobControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.SubmitJobRequest()
       );
-      const expectedOptions = {};
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -697,7 +825,15 @@ describe('v1.JobControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.SubmitJobRequest()
       );
-      const expectedOptions = {};
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -744,7 +880,15 @@ describe('v1.JobControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.SubmitJobRequest()
       );
-      const expectedOptions = {};
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
       const expectedError = new Error('expected');
       client.innerApiCalls.submitJobAsOperation = stubLongRunningCall(
         undefined,
@@ -769,7 +913,15 @@ describe('v1.JobControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.SubmitJobRequest()
       );
-      const expectedOptions = {};
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
       const expectedError = new Error('expected');
       client.innerApiCalls.submitJobAsOperation = stubLongRunningCall(
         undefined,
@@ -798,7 +950,15 @@ describe('v1.JobControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.ListJobsRequest()
       );
-      const expectedOptions = {};
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.dataproc.v1.Job()),
         generateSampleMessage(new protos.google.cloud.dataproc.v1.Job()),
@@ -823,7 +983,15 @@ describe('v1.JobControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.ListJobsRequest()
       );
-      const expectedOptions = {};
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.dataproc.v1.Job()),
         generateSampleMessage(new protos.google.cloud.dataproc.v1.Job()),
@@ -865,7 +1033,15 @@ describe('v1.JobControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.ListJobsRequest()
       );
-      const expectedOptions = {};
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
       const expectedError = new Error('expected');
       client.innerApiCalls.listJobs = stubSimpleCall(undefined, expectedError);
       await assert.rejects(async () => {
@@ -887,6 +1063,8 @@ describe('v1.JobControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.ListJobsRequest()
       );
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.dataproc.v1.Job()),
         generateSampleMessage(new protos.google.cloud.dataproc.v1.Job()),
@@ -915,6 +1093,11 @@ describe('v1.JobControllerClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listJobs, request)
       );
+      assert.strictEqual(
+        (client.descriptors.page.listJobs.createStream as SinonStub).getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'],
+        expectedHeaderRequestParams
+      );
     });
 
     it('invokes listJobsStream with error', async () => {
@@ -926,6 +1109,8 @@ describe('v1.JobControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.ListJobsRequest()
       );
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
       const expectedError = new Error('expected');
       client.descriptors.page.listJobs.createStream = stubPageStreamingCall(
         undefined,
@@ -952,6 +1137,11 @@ describe('v1.JobControllerClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listJobs, request)
       );
+      assert.strictEqual(
+        (client.descriptors.page.listJobs.createStream as SinonStub).getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'],
+        expectedHeaderRequestParams
+      );
     });
 
     it('uses async iteration with listJobs without error', async () => {
@@ -963,6 +1153,8 @@ describe('v1.JobControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.ListJobsRequest()
       );
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.dataproc.v1.Job()),
         generateSampleMessage(new protos.google.cloud.dataproc.v1.Job()),
@@ -982,6 +1174,11 @@ describe('v1.JobControllerClient', () => {
           .args[1],
         request
       );
+      assert.strictEqual(
+        (client.descriptors.page.listJobs.asyncIterate as SinonStub).getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'],
+        expectedHeaderRequestParams
+      );
     });
 
     it('uses async iteration with listJobs with error', async () => {
@@ -993,6 +1190,8 @@ describe('v1.JobControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.ListJobsRequest()
       );
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
       const expectedError = new Error('expected');
       client.descriptors.page.listJobs.asyncIterate = stubAsyncIterationCall(
         undefined,
@@ -1009,6 +1208,11 @@ describe('v1.JobControllerClient', () => {
         (client.descriptors.page.listJobs.asyncIterate as SinonStub).getCall(0)
           .args[1],
         request
+      );
+      assert.strictEqual(
+        (client.descriptors.page.listJobs.asyncIterate as SinonStub).getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'],
+        expectedHeaderRequestParams
       );
     });
   });
