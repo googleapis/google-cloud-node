@@ -236,7 +236,15 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.GetBuildRequest()
       );
-      const expectedOptions = {};
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
       const expectedResponse = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.Build()
       );
@@ -259,7 +267,15 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.GetBuildRequest()
       );
-      const expectedOptions = {};
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
       const expectedResponse = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.Build()
       );
@@ -299,7 +315,15 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.GetBuildRequest()
       );
-      const expectedOptions = {};
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
       const expectedError = new Error('expected');
       client.innerApiCalls.getBuild = stubSimpleCall(undefined, expectedError);
       await assert.rejects(async () => {
@@ -323,7 +347,15 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.CancelBuildRequest()
       );
-      const expectedOptions = {};
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
       const expectedResponse = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.Build()
       );
@@ -346,7 +378,15 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.CancelBuildRequest()
       );
-      const expectedOptions = {};
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
       const expectedResponse = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.Build()
       );
@@ -386,7 +426,15 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.CancelBuildRequest()
       );
-      const expectedOptions = {};
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
       const expectedError = new Error('expected');
       client.innerApiCalls.cancelBuild = stubSimpleCall(
         undefined,
@@ -413,7 +461,15 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.CreateBuildTriggerRequest()
       );
-      const expectedOptions = {};
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
       const expectedResponse = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.BuildTrigger()
       );
@@ -438,7 +494,15 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.CreateBuildTriggerRequest()
       );
-      const expectedOptions = {};
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
       const expectedResponse = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.BuildTrigger()
       );
@@ -478,7 +542,15 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.CreateBuildTriggerRequest()
       );
-      const expectedOptions = {};
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
       const expectedError = new Error('expected');
       client.innerApiCalls.createBuildTrigger = stubSimpleCall(
         undefined,
@@ -505,7 +577,15 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.GetBuildTriggerRequest()
       );
-      const expectedOptions = {};
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
       const expectedResponse = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.BuildTrigger()
       );
@@ -528,7 +608,15 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.GetBuildTriggerRequest()
       );
-      const expectedOptions = {};
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
       const expectedResponse = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.BuildTrigger()
       );
@@ -568,7 +656,15 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.GetBuildTriggerRequest()
       );
-      const expectedOptions = {};
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
       const expectedError = new Error('expected');
       client.innerApiCalls.getBuildTrigger = stubSimpleCall(
         undefined,
@@ -595,7 +691,15 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.DeleteBuildTriggerRequest()
       );
-      const expectedOptions = {};
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -620,7 +724,15 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.DeleteBuildTriggerRequest()
       );
-      const expectedOptions = {};
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -660,7 +772,15 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.DeleteBuildTriggerRequest()
       );
-      const expectedOptions = {};
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteBuildTrigger = stubSimpleCall(
         undefined,
@@ -687,7 +807,15 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.UpdateBuildTriggerRequest()
       );
-      const expectedOptions = {};
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
       const expectedResponse = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.BuildTrigger()
       );
@@ -712,7 +840,15 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.UpdateBuildTriggerRequest()
       );
-      const expectedOptions = {};
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
       const expectedResponse = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.BuildTrigger()
       );
@@ -752,7 +888,15 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.UpdateBuildTriggerRequest()
       );
-      const expectedOptions = {};
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
       const expectedError = new Error('expected');
       client.innerApiCalls.updateBuildTrigger = stubSimpleCall(
         undefined,
@@ -1229,7 +1373,15 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.CreateBuildRequest()
       );
-      const expectedOptions = {};
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1253,7 +1405,15 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.CreateBuildRequest()
       );
-      const expectedOptions = {};
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1300,7 +1460,15 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.CreateBuildRequest()
       );
-      const expectedOptions = {};
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
       const expectedError = new Error('expected');
       client.innerApiCalls.createBuild = stubLongRunningCall(
         undefined,
@@ -1325,7 +1493,15 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.CreateBuildRequest()
       );
-      const expectedOptions = {};
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
       const expectedError = new Error('expected');
       client.innerApiCalls.createBuild = stubLongRunningCall(
         undefined,
@@ -1354,7 +1530,15 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.RetryBuildRequest()
       );
-      const expectedOptions = {};
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1378,7 +1562,15 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.RetryBuildRequest()
       );
-      const expectedOptions = {};
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1425,7 +1617,15 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.RetryBuildRequest()
       );
-      const expectedOptions = {};
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
       const expectedError = new Error('expected');
       client.innerApiCalls.retryBuild = stubLongRunningCall(
         undefined,
@@ -1450,7 +1650,15 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.RetryBuildRequest()
       );
-      const expectedOptions = {};
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
       const expectedError = new Error('expected');
       client.innerApiCalls.retryBuild = stubLongRunningCall(
         undefined,
@@ -1479,7 +1687,15 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.RunBuildTriggerRequest()
       );
-      const expectedOptions = {};
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1505,7 +1721,15 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.RunBuildTriggerRequest()
       );
-      const expectedOptions = {};
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1552,7 +1776,15 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.RunBuildTriggerRequest()
       );
-      const expectedOptions = {};
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
       const expectedError = new Error('expected');
       client.innerApiCalls.runBuildTrigger = stubLongRunningCall(
         undefined,
@@ -1577,7 +1809,15 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.RunBuildTriggerRequest()
       );
-      const expectedOptions = {};
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
       const expectedError = new Error('expected');
       client.innerApiCalls.runBuildTrigger = stubLongRunningCall(
         undefined,
@@ -1606,7 +1846,15 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.ListBuildsRequest()
       );
-      const expectedOptions = {};
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
       const expectedResponse = [
         generateSampleMessage(new protos.google.devtools.cloudbuild.v1.Build()),
         generateSampleMessage(new protos.google.devtools.cloudbuild.v1.Build()),
@@ -1631,7 +1879,15 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.ListBuildsRequest()
       );
-      const expectedOptions = {};
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
       const expectedResponse = [
         generateSampleMessage(new protos.google.devtools.cloudbuild.v1.Build()),
         generateSampleMessage(new protos.google.devtools.cloudbuild.v1.Build()),
@@ -1673,7 +1929,15 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.ListBuildsRequest()
       );
-      const expectedOptions = {};
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
       const expectedError = new Error('expected');
       client.innerApiCalls.listBuilds = stubSimpleCall(
         undefined,
@@ -1698,6 +1962,8 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.ListBuildsRequest()
       );
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
       const expectedResponse = [
         generateSampleMessage(new protos.google.devtools.cloudbuild.v1.Build()),
         generateSampleMessage(new protos.google.devtools.cloudbuild.v1.Build()),
@@ -1729,6 +1995,12 @@ describe('v1.CloudBuildClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listBuilds, request)
       );
+      assert.strictEqual(
+        (client.descriptors.page.listBuilds.createStream as SinonStub).getCall(
+          0
+        ).args[2].otherArgs.headers['x-goog-request-params'],
+        expectedHeaderRequestParams
+      );
     });
 
     it('invokes listBuildsStream with error', async () => {
@@ -1740,6 +2012,8 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.ListBuildsRequest()
       );
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
       const expectedError = new Error('expected');
       client.descriptors.page.listBuilds.createStream = stubPageStreamingCall(
         undefined,
@@ -1769,6 +2043,12 @@ describe('v1.CloudBuildClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listBuilds, request)
       );
+      assert.strictEqual(
+        (client.descriptors.page.listBuilds.createStream as SinonStub).getCall(
+          0
+        ).args[2].otherArgs.headers['x-goog-request-params'],
+        expectedHeaderRequestParams
+      );
     });
 
     it('uses async iteration with listBuilds without error', async () => {
@@ -1780,6 +2060,8 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.ListBuildsRequest()
       );
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
       const expectedResponse = [
         generateSampleMessage(new protos.google.devtools.cloudbuild.v1.Build()),
         generateSampleMessage(new protos.google.devtools.cloudbuild.v1.Build()),
@@ -1800,6 +2082,12 @@ describe('v1.CloudBuildClient', () => {
         ).args[1],
         request
       );
+      assert.strictEqual(
+        (client.descriptors.page.listBuilds.asyncIterate as SinonStub).getCall(
+          0
+        ).args[2].otherArgs.headers['x-goog-request-params'],
+        expectedHeaderRequestParams
+      );
     });
 
     it('uses async iteration with listBuilds with error', async () => {
@@ -1811,6 +2099,8 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.ListBuildsRequest()
       );
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
       const expectedError = new Error('expected');
       client.descriptors.page.listBuilds.asyncIterate = stubAsyncIterationCall(
         undefined,
@@ -1829,6 +2119,12 @@ describe('v1.CloudBuildClient', () => {
         ).args[1],
         request
       );
+      assert.strictEqual(
+        (client.descriptors.page.listBuilds.asyncIterate as SinonStub).getCall(
+          0
+        ).args[2].otherArgs.headers['x-goog-request-params'],
+        expectedHeaderRequestParams
+      );
     });
   });
 
@@ -1842,7 +2138,15 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.ListBuildTriggersRequest()
       );
-      const expectedOptions = {};
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.devtools.cloudbuild.v1.BuildTrigger()
@@ -1873,7 +2177,15 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.ListBuildTriggersRequest()
       );
-      const expectedOptions = {};
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.devtools.cloudbuild.v1.BuildTrigger()
@@ -1921,7 +2233,15 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.ListBuildTriggersRequest()
       );
-      const expectedOptions = {};
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
       const expectedError = new Error('expected');
       client.innerApiCalls.listBuildTriggers = stubSimpleCall(
         undefined,
@@ -1946,6 +2266,8 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.ListBuildTriggersRequest()
       );
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.devtools.cloudbuild.v1.BuildTrigger()
@@ -1983,6 +2305,13 @@ describe('v1.CloudBuildClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listBuildTriggers, request)
       );
+      assert.strictEqual(
+        (client.descriptors.page.listBuildTriggers
+          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
+          'x-goog-request-params'
+        ],
+        expectedHeaderRequestParams
+      );
     });
 
     it('invokes listBuildTriggersStream with error', async () => {
@@ -1994,6 +2323,8 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.ListBuildTriggersRequest()
       );
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
       const expectedError = new Error('expected');
       client.descriptors.page.listBuildTriggers.createStream = stubPageStreamingCall(
         undefined,
@@ -2023,6 +2354,13 @@ describe('v1.CloudBuildClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listBuildTriggers, request)
       );
+      assert.strictEqual(
+        (client.descriptors.page.listBuildTriggers
+          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
+          'x-goog-request-params'
+        ],
+        expectedHeaderRequestParams
+      );
     });
 
     it('uses async iteration with listBuildTriggers without error', async () => {
@@ -2034,6 +2372,8 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.ListBuildTriggersRequest()
       );
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.devtools.cloudbuild.v1.BuildTrigger()
@@ -2059,6 +2399,13 @@ describe('v1.CloudBuildClient', () => {
           .asyncIterate as SinonStub).getCall(0).args[1],
         request
       );
+      assert.strictEqual(
+        (client.descriptors.page.listBuildTriggers
+          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
+          'x-goog-request-params'
+        ],
+        expectedHeaderRequestParams
+      );
     });
 
     it('uses async iteration with listBuildTriggers with error', async () => {
@@ -2070,6 +2417,8 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.ListBuildTriggersRequest()
       );
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
       const expectedError = new Error('expected');
       client.descriptors.page.listBuildTriggers.asyncIterate = stubAsyncIterationCall(
         undefined,
@@ -2086,6 +2435,13 @@ describe('v1.CloudBuildClient', () => {
         (client.descriptors.page.listBuildTriggers
           .asyncIterate as SinonStub).getCall(0).args[1],
         request
+      );
+      assert.strictEqual(
+        (client.descriptors.page.listBuildTriggers
+          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
+          'x-goog-request-params'
+        ],
+        expectedHeaderRequestParams
       );
     });
   });

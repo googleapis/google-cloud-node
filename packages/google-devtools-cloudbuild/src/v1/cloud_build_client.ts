@@ -447,6 +447,13 @@ export class CloudBuildClient {
       options = optionsOrCallback as gax.CallOptions;
     }
     options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      project_id: request.projectId || '',
+    });
     this.initialize();
     return this.innerApiCalls.getBuild(request, options, callback);
   }
@@ -530,6 +537,13 @@ export class CloudBuildClient {
       options = optionsOrCallback as gax.CallOptions;
     }
     options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      project_id: request.projectId || '',
+    });
     this.initialize();
     return this.innerApiCalls.cancelBuild(request, options, callback);
   }
@@ -621,6 +635,13 @@ export class CloudBuildClient {
       options = optionsOrCallback as gax.CallOptions;
     }
     options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      project_id: request.projectId || '',
+    });
     this.initialize();
     return this.innerApiCalls.createBuildTrigger(request, options, callback);
   }
@@ -706,6 +727,13 @@ export class CloudBuildClient {
       options = optionsOrCallback as gax.CallOptions;
     }
     options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      project_id: request.projectId || '',
+    });
     this.initialize();
     return this.innerApiCalls.getBuildTrigger(request, options, callback);
   }
@@ -797,6 +825,13 @@ export class CloudBuildClient {
       options = optionsOrCallback as gax.CallOptions;
     }
     options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      project_id: request.projectId || '',
+    });
     this.initialize();
     return this.innerApiCalls.deleteBuildTrigger(request, options, callback);
   }
@@ -890,6 +925,13 @@ export class CloudBuildClient {
       options = optionsOrCallback as gax.CallOptions;
     }
     options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      project_id: request.projectId || '',
+    });
     this.initialize();
     return this.innerApiCalls.updateBuildTrigger(request, options, callback);
   }
@@ -1410,6 +1452,13 @@ export class CloudBuildClient {
       options = optionsOrCallback as gax.CallOptions;
     }
     options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      project_id: request.projectId || '',
+    });
     this.initialize();
     return this.innerApiCalls.createBuild(request, options, callback);
   }
@@ -1529,6 +1578,13 @@ export class CloudBuildClient {
       options = optionsOrCallback as gax.CallOptions;
     }
     options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      project_id: request.projectId || '',
+    });
     this.initialize();
     return this.innerApiCalls.retryBuild(request, options, callback);
   }
@@ -1624,6 +1680,13 @@ export class CloudBuildClient {
       options = optionsOrCallback as gax.CallOptions;
     }
     options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      project_id: request.projectId || '',
+    });
     this.initialize();
     return this.innerApiCalls.runBuildTrigger(request, options, callback);
   }
@@ -1726,6 +1789,13 @@ export class CloudBuildClient {
       options = optionsOrCallback as gax.CallOptions;
     }
     options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      project_id: request.projectId || '',
+    });
     this.initialize();
     return this.innerApiCalls.listBuilds(request, options, callback);
   }
@@ -1764,6 +1834,13 @@ export class CloudBuildClient {
   ): Transform {
     request = request || {};
     options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      project_id: request.projectId || '',
+    });
     const callSettings = new gax.CallSettings(options);
     this.initialize();
     return this.descriptors.page.listBuilds.createStream(
@@ -1799,6 +1876,13 @@ export class CloudBuildClient {
   ): AsyncIterable<protos.google.devtools.cloudbuild.v1.IBuild> {
     request = request || {};
     options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      project_id: request.projectId || '',
+    });
     options = options || {};
     const callSettings = new gax.CallSettings(options);
     this.initialize();
@@ -1904,6 +1988,13 @@ export class CloudBuildClient {
       options = optionsOrCallback as gax.CallOptions;
     }
     options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      project_id: request.projectId || '',
+    });
     this.initialize();
     return this.innerApiCalls.listBuildTriggers(request, options, callback);
   }
@@ -1940,6 +2031,13 @@ export class CloudBuildClient {
   ): Transform {
     request = request || {};
     options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      project_id: request.projectId || '',
+    });
     const callSettings = new gax.CallSettings(options);
     this.initialize();
     return this.descriptors.page.listBuildTriggers.createStream(
@@ -1973,6 +2071,13 @@ export class CloudBuildClient {
   ): AsyncIterable<protos.google.devtools.cloudbuild.v1.IBuildTrigger> {
     request = request || {};
     options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      project_id: request.projectId || '',
+    });
     options = options || {};
     const callSettings = new gax.CallSettings(options);
     this.initialize();
