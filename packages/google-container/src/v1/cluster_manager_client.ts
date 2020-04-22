@@ -406,6 +406,7 @@ export class ClusterManagerClient {
       'x-goog-request-params'
     ] = gax.routingHeader.fromParams({
       parent: request.parent || '',
+      project_id: request.projectId || '',
     });
     this.initialize();
     return this.innerApiCalls.listClusters(request, options, callback);
@@ -499,6 +500,7 @@ export class ClusterManagerClient {
       'x-goog-request-params'
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
+      project_id: request.projectId || '',
     });
     this.initialize();
     return this.innerApiCalls.getCluster(request, options, callback);
@@ -604,6 +606,7 @@ export class ClusterManagerClient {
       'x-goog-request-params'
     ] = gax.routingHeader.fromParams({
       parent: request.parent || '',
+      project_id: request.projectId || '',
     });
     this.initialize();
     return this.innerApiCalls.createCluster(request, options, callback);
@@ -699,6 +702,7 @@ export class ClusterManagerClient {
       'x-goog-request-params'
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
+      project_id: request.projectId || '',
     });
     this.initialize();
     return this.innerApiCalls.updateCluster(request, options, callback);
@@ -810,6 +814,7 @@ export class ClusterManagerClient {
       'x-goog-request-params'
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
+      project_id: request.projectId || '',
     });
     this.initialize();
     return this.innerApiCalls.updateNodePool(request, options, callback);
@@ -917,6 +922,7 @@ export class ClusterManagerClient {
       'x-goog-request-params'
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
+      project_id: request.projectId || '',
     });
     this.initialize();
     return this.innerApiCalls.setNodePoolAutoscaling(
@@ -1022,6 +1028,7 @@ export class ClusterManagerClient {
       'x-goog-request-params'
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
+      project_id: request.projectId || '',
     });
     this.initialize();
     return this.innerApiCalls.setLoggingService(request, options, callback);
@@ -1131,6 +1138,7 @@ export class ClusterManagerClient {
       'x-goog-request-params'
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
+      project_id: request.projectId || '',
     });
     this.initialize();
     return this.innerApiCalls.setMonitoringService(request, options, callback);
@@ -1227,6 +1235,7 @@ export class ClusterManagerClient {
       'x-goog-request-params'
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
+      project_id: request.projectId || '',
     });
     this.initialize();
     return this.innerApiCalls.setAddonsConfig(request, options, callback);
@@ -1328,6 +1337,7 @@ export class ClusterManagerClient {
       'x-goog-request-params'
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
+      project_id: request.projectId || '',
     });
     this.initialize();
     return this.innerApiCalls.setLocations(request, options, callback);
@@ -1432,6 +1442,7 @@ export class ClusterManagerClient {
       'x-goog-request-params'
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
+      project_id: request.projectId || '',
     });
     this.initialize();
     return this.innerApiCalls.updateMaster(request, options, callback);
@@ -1531,6 +1542,7 @@ export class ClusterManagerClient {
       'x-goog-request-params'
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
+      project_id: request.projectId || '',
     });
     this.initialize();
     return this.innerApiCalls.setMasterAuth(request, options, callback);
@@ -1632,6 +1644,7 @@ export class ClusterManagerClient {
       'x-goog-request-params'
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
+      project_id: request.projectId || '',
     });
     this.initialize();
     return this.innerApiCalls.deleteCluster(request, options, callback);
@@ -1722,6 +1735,7 @@ export class ClusterManagerClient {
       'x-goog-request-params'
     ] = gax.routingHeader.fromParams({
       parent: request.parent || '',
+      project_id: request.projectId || '',
     });
     this.initialize();
     return this.innerApiCalls.listOperations(request, options, callback);
@@ -1815,6 +1829,7 @@ export class ClusterManagerClient {
       'x-goog-request-params'
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
+      project_id: request.projectId || '',
     });
     this.initialize();
     return this.innerApiCalls.getOperation(request, options, callback);
@@ -1907,6 +1922,7 @@ export class ClusterManagerClient {
       'x-goog-request-params'
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
+      project_id: request.projectId || '',
     });
     this.initialize();
     return this.innerApiCalls.cancelOperation(request, options, callback);
@@ -1996,6 +2012,7 @@ export class ClusterManagerClient {
       'x-goog-request-params'
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
+      project_id: request.projectId || '',
     });
     this.initialize();
     return this.innerApiCalls.getServerConfig(request, options, callback);
@@ -2089,6 +2106,7 @@ export class ClusterManagerClient {
       'x-goog-request-params'
     ] = gax.routingHeader.fromParams({
       parent: request.parent || '',
+      project_id: request.projectId || '',
     });
     this.initialize();
     return this.innerApiCalls.listNodePools(request, options, callback);
@@ -2186,6 +2204,7 @@ export class ClusterManagerClient {
       'x-goog-request-params'
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
+      project_id: request.projectId || '',
     });
     this.initialize();
     return this.innerApiCalls.getNodePool(request, options, callback);
@@ -2282,6 +2301,7 @@ export class ClusterManagerClient {
       'x-goog-request-params'
     ] = gax.routingHeader.fromParams({
       parent: request.parent || '',
+      project_id: request.projectId || '',
     });
     this.initialize();
     return this.innerApiCalls.createNodePool(request, options, callback);
@@ -2379,6 +2399,7 @@ export class ClusterManagerClient {
       'x-goog-request-params'
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
+      project_id: request.projectId || '',
     });
     this.initialize();
     return this.innerApiCalls.deleteNodePool(request, options, callback);
@@ -2485,6 +2506,7 @@ export class ClusterManagerClient {
       'x-goog-request-params'
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
+      project_id: request.projectId || '',
     });
     this.initialize();
     return this.innerApiCalls.rollbackNodePoolUpgrade(
@@ -2596,6 +2618,7 @@ export class ClusterManagerClient {
       'x-goog-request-params'
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
+      project_id: request.projectId || '',
     });
     this.initialize();
     return this.innerApiCalls.setNodePoolManagement(request, options, callback);
@@ -2698,6 +2721,7 @@ export class ClusterManagerClient {
       'x-goog-request-params'
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
+      project_id: request.projectId || '',
     });
     this.initialize();
     return this.innerApiCalls.setLabels(request, options, callback);
@@ -2793,6 +2817,7 @@ export class ClusterManagerClient {
       'x-goog-request-params'
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
+      project_id: request.projectId || '',
     });
     this.initialize();
     return this.innerApiCalls.setLegacyAbac(request, options, callback);
@@ -2888,6 +2913,7 @@ export class ClusterManagerClient {
       'x-goog-request-params'
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
+      project_id: request.projectId || '',
     });
     this.initialize();
     return this.innerApiCalls.startIPRotation(request, options, callback);
@@ -2983,6 +3009,7 @@ export class ClusterManagerClient {
       'x-goog-request-params'
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
+      project_id: request.projectId || '',
     });
     this.initialize();
     return this.innerApiCalls.completeIPRotation(request, options, callback);
@@ -3082,6 +3109,7 @@ export class ClusterManagerClient {
       'x-goog-request-params'
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
+      project_id: request.projectId || '',
     });
     this.initialize();
     return this.innerApiCalls.setNodePoolSize(request, options, callback);
@@ -3179,6 +3207,7 @@ export class ClusterManagerClient {
       'x-goog-request-params'
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
+      project_id: request.projectId || '',
     });
     this.initialize();
     return this.innerApiCalls.setNetworkPolicy(request, options, callback);
@@ -3281,6 +3310,7 @@ export class ClusterManagerClient {
       'x-goog-request-params'
     ] = gax.routingHeader.fromParams({
       name: request.name || '',
+      project_id: request.projectId || '',
     });
     this.initialize();
     return this.innerApiCalls.setMaintenancePolicy(request, options, callback);

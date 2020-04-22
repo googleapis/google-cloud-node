@@ -4,7 +4,7 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/nodejs-cloud-container.git",
-        "sha": "b9097123158bbe2314732e5a5b88842421f05326"
+        "sha": "e8fd828801edf9d153ff2bfe957858129fee383f"
       }
     },
     {

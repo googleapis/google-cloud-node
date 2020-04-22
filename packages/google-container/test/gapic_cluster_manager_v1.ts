@@ -207,7 +207,8 @@ describe('v1.ClusterManagerClient', () => {
         new protos.google.container.v1.ListClustersRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'parent=&project_id=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -238,7 +239,8 @@ describe('v1.ClusterManagerClient', () => {
         new protos.google.container.v1.ListClustersRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'parent=&project_id=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -286,7 +288,8 @@ describe('v1.ClusterManagerClient', () => {
         new protos.google.container.v1.ListClustersRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'parent=&project_id=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -321,7 +324,8 @@ describe('v1.ClusterManagerClient', () => {
         new protos.google.container.v1.GetClusterRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'name=&project_id=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -352,7 +356,8 @@ describe('v1.ClusterManagerClient', () => {
         new protos.google.container.v1.GetClusterRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'name=&project_id=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -400,7 +405,8 @@ describe('v1.ClusterManagerClient', () => {
         new protos.google.container.v1.GetClusterRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'name=&project_id=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -435,7 +441,8 @@ describe('v1.ClusterManagerClient', () => {
         new protos.google.container.v1.CreateClusterRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'parent=&project_id=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -466,7 +473,8 @@ describe('v1.ClusterManagerClient', () => {
         new protos.google.container.v1.CreateClusterRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'parent=&project_id=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -514,7 +522,8 @@ describe('v1.ClusterManagerClient', () => {
         new protos.google.container.v1.CreateClusterRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'parent=&project_id=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -549,7 +558,8 @@ describe('v1.ClusterManagerClient', () => {
         new protos.google.container.v1.UpdateClusterRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'name=&project_id=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -580,7 +590,8 @@ describe('v1.ClusterManagerClient', () => {
         new protos.google.container.v1.UpdateClusterRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'name=&project_id=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -628,7 +639,8 @@ describe('v1.ClusterManagerClient', () => {
         new protos.google.container.v1.UpdateClusterRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'name=&project_id=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -663,7 +675,8 @@ describe('v1.ClusterManagerClient', () => {
         new protos.google.container.v1.UpdateNodePoolRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'name=&project_id=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -694,7 +707,8 @@ describe('v1.ClusterManagerClient', () => {
         new protos.google.container.v1.UpdateNodePoolRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'name=&project_id=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -742,7 +756,8 @@ describe('v1.ClusterManagerClient', () => {
         new protos.google.container.v1.UpdateNodePoolRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'name=&project_id=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -777,7 +792,8 @@ describe('v1.ClusterManagerClient', () => {
         new protos.google.container.v1.SetNodePoolAutoscalingRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'name=&project_id=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -810,7 +826,8 @@ describe('v1.ClusterManagerClient', () => {
         new protos.google.container.v1.SetNodePoolAutoscalingRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'name=&project_id=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -858,7 +875,8 @@ describe('v1.ClusterManagerClient', () => {
         new protos.google.container.v1.SetNodePoolAutoscalingRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'name=&project_id=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -893,7 +911,8 @@ describe('v1.ClusterManagerClient', () => {
         new protos.google.container.v1.SetLoggingServiceRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'name=&project_id=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -924,7 +943,8 @@ describe('v1.ClusterManagerClient', () => {
         new protos.google.container.v1.SetLoggingServiceRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'name=&project_id=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -972,7 +992,8 @@ describe('v1.ClusterManagerClient', () => {
         new protos.google.container.v1.SetLoggingServiceRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'name=&project_id=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1007,7 +1028,8 @@ describe('v1.ClusterManagerClient', () => {
         new protos.google.container.v1.SetMonitoringServiceRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'name=&project_id=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1040,7 +1062,8 @@ describe('v1.ClusterManagerClient', () => {
         new protos.google.container.v1.SetMonitoringServiceRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'name=&project_id=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1088,7 +1111,8 @@ describe('v1.ClusterManagerClient', () => {
         new protos.google.container.v1.SetMonitoringServiceRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'name=&project_id=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1123,7 +1147,8 @@ describe('v1.ClusterManagerClient', () => {
         new protos.google.container.v1.SetAddonsConfigRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'name=&project_id=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1154,7 +1179,8 @@ describe('v1.ClusterManagerClient', () => {
         new protos.google.container.v1.SetAddonsConfigRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'name=&project_id=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1202,7 +1228,8 @@ describe('v1.ClusterManagerClient', () => {
         new protos.google.container.v1.SetAddonsConfigRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'name=&project_id=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1237,7 +1264,8 @@ describe('v1.ClusterManagerClient', () => {
         new protos.google.container.v1.SetLocationsRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'name=&project_id=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1268,7 +1296,8 @@ describe('v1.ClusterManagerClient', () => {
         new protos.google.container.v1.SetLocationsRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'name=&project_id=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1316,7 +1345,8 @@ describe('v1.ClusterManagerClient', () => {
         new protos.google.container.v1.SetLocationsRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'name=&project_id=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1351,7 +1381,8 @@ describe('v1.ClusterManagerClient', () => {
         new protos.google.container.v1.UpdateMasterRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'name=&project_id=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1382,7 +1413,8 @@ describe('v1.ClusterManagerClient', () => {
         new protos.google.container.v1.UpdateMasterRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'name=&project_id=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1430,7 +1462,8 @@ describe('v1.ClusterManagerClient', () => {
         new protos.google.container.v1.UpdateMasterRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'name=&project_id=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1465,7 +1498,8 @@ describe('v1.ClusterManagerClient', () => {
         new protos.google.container.v1.SetMasterAuthRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'name=&project_id=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1496,7 +1530,8 @@ describe('v1.ClusterManagerClient', () => {
         new protos.google.container.v1.SetMasterAuthRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'name=&project_id=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1544,7 +1579,8 @@ describe('v1.ClusterManagerClient', () => {
         new protos.google.container.v1.SetMasterAuthRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'name=&project_id=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1579,7 +1615,8 @@ describe('v1.ClusterManagerClient', () => {
         new protos.google.container.v1.DeleteClusterRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'name=&project_id=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1610,7 +1647,8 @@ describe('v1.ClusterManagerClient', () => {
         new protos.google.container.v1.DeleteClusterRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'name=&project_id=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1658,7 +1696,8 @@ describe('v1.ClusterManagerClient', () => {
         new protos.google.container.v1.DeleteClusterRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'name=&project_id=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1693,7 +1732,8 @@ describe('v1.ClusterManagerClient', () => {
         new protos.google.container.v1.ListOperationsRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'parent=&project_id=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1724,7 +1764,8 @@ describe('v1.ClusterManagerClient', () => {
         new protos.google.container.v1.ListOperationsRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'parent=&project_id=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1772,7 +1813,8 @@ describe('v1.ClusterManagerClient', () => {
         new protos.google.container.v1.ListOperationsRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'parent=&project_id=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1807,7 +1849,8 @@ describe('v1.ClusterManagerClient', () => {
         new protos.google.container.v1.GetOperationRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'name=&project_id=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1838,7 +1881,8 @@ describe('v1.ClusterManagerClient', () => {
         new protos.google.container.v1.GetOperationRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'name=&project_id=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1886,7 +1930,8 @@ describe('v1.ClusterManagerClient', () => {
         new protos.google.container.v1.GetOperationRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'name=&project_id=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1921,7 +1966,8 @@ describe('v1.ClusterManagerClient', () => {
         new protos.google.container.v1.CancelOperationRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'name=&project_id=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1952,7 +1998,8 @@ describe('v1.ClusterManagerClient', () => {
         new protos.google.container.v1.CancelOperationRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'name=&project_id=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -2000,7 +2047,8 @@ describe('v1.ClusterManagerClient', () => {
         new protos.google.container.v1.CancelOperationRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'name=&project_id=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -2035,7 +2083,8 @@ describe('v1.ClusterManagerClient', () => {
         new protos.google.container.v1.GetServerConfigRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'name=&project_id=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -2066,7 +2115,8 @@ describe('v1.ClusterManagerClient', () => {
         new protos.google.container.v1.GetServerConfigRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'name=&project_id=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -2114,7 +2164,8 @@ describe('v1.ClusterManagerClient', () => {
         new protos.google.container.v1.GetServerConfigRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'name=&project_id=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -2149,7 +2200,8 @@ describe('v1.ClusterManagerClient', () => {
         new protos.google.container.v1.ListNodePoolsRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'parent=&project_id=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -2180,7 +2232,8 @@ describe('v1.ClusterManagerClient', () => {
         new protos.google.container.v1.ListNodePoolsRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'parent=&project_id=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -2228,7 +2281,8 @@ describe('v1.ClusterManagerClient', () => {
         new protos.google.container.v1.ListNodePoolsRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'parent=&project_id=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -2263,7 +2317,8 @@ describe('v1.ClusterManagerClient', () => {
         new protos.google.container.v1.GetNodePoolRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'name=&project_id=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -2294,7 +2349,8 @@ describe('v1.ClusterManagerClient', () => {
         new protos.google.container.v1.GetNodePoolRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'name=&project_id=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -2342,7 +2398,8 @@ describe('v1.ClusterManagerClient', () => {
         new protos.google.container.v1.GetNodePoolRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'name=&project_id=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -2377,7 +2434,8 @@ describe('v1.ClusterManagerClient', () => {
         new protos.google.container.v1.CreateNodePoolRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'parent=&project_id=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -2408,7 +2466,8 @@ describe('v1.ClusterManagerClient', () => {
         new protos.google.container.v1.CreateNodePoolRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'parent=&project_id=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -2456,7 +2515,8 @@ describe('v1.ClusterManagerClient', () => {
         new protos.google.container.v1.CreateNodePoolRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'parent=&project_id=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -2491,7 +2551,8 @@ describe('v1.ClusterManagerClient', () => {
         new protos.google.container.v1.DeleteNodePoolRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'name=&project_id=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -2522,7 +2583,8 @@ describe('v1.ClusterManagerClient', () => {
         new protos.google.container.v1.DeleteNodePoolRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'name=&project_id=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -2570,7 +2632,8 @@ describe('v1.ClusterManagerClient', () => {
         new protos.google.container.v1.DeleteNodePoolRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'name=&project_id=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -2605,7 +2668,8 @@ describe('v1.ClusterManagerClient', () => {
         new protos.google.container.v1.RollbackNodePoolUpgradeRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'name=&project_id=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -2638,7 +2702,8 @@ describe('v1.ClusterManagerClient', () => {
         new protos.google.container.v1.RollbackNodePoolUpgradeRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'name=&project_id=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -2686,7 +2751,8 @@ describe('v1.ClusterManagerClient', () => {
         new protos.google.container.v1.RollbackNodePoolUpgradeRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'name=&project_id=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -2721,7 +2787,8 @@ describe('v1.ClusterManagerClient', () => {
         new protos.google.container.v1.SetNodePoolManagementRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'name=&project_id=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -2754,7 +2821,8 @@ describe('v1.ClusterManagerClient', () => {
         new protos.google.container.v1.SetNodePoolManagementRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'name=&project_id=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -2802,7 +2870,8 @@ describe('v1.ClusterManagerClient', () => {
         new protos.google.container.v1.SetNodePoolManagementRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'name=&project_id=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -2837,7 +2906,8 @@ describe('v1.ClusterManagerClient', () => {
         new protos.google.container.v1.SetLabelsRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'name=&project_id=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -2868,7 +2938,8 @@ describe('v1.ClusterManagerClient', () => {
         new protos.google.container.v1.SetLabelsRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'name=&project_id=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -2916,7 +2987,8 @@ describe('v1.ClusterManagerClient', () => {
         new protos.google.container.v1.SetLabelsRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'name=&project_id=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -2948,7 +3020,8 @@ describe('v1.ClusterManagerClient', () => {
         new protos.google.container.v1.SetLegacyAbacRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'name=&project_id=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -2979,7 +3052,8 @@ describe('v1.ClusterManagerClient', () => {
         new protos.google.container.v1.SetLegacyAbacRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'name=&project_id=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -3027,7 +3101,8 @@ describe('v1.ClusterManagerClient', () => {
         new protos.google.container.v1.SetLegacyAbacRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'name=&project_id=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -3062,7 +3137,8 @@ describe('v1.ClusterManagerClient', () => {
         new protos.google.container.v1.StartIPRotationRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'name=&project_id=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -3093,7 +3169,8 @@ describe('v1.ClusterManagerClient', () => {
         new protos.google.container.v1.StartIPRotationRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'name=&project_id=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -3141,7 +3218,8 @@ describe('v1.ClusterManagerClient', () => {
         new protos.google.container.v1.StartIPRotationRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'name=&project_id=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -3176,7 +3254,8 @@ describe('v1.ClusterManagerClient', () => {
         new protos.google.container.v1.CompleteIPRotationRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'name=&project_id=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -3209,7 +3288,8 @@ describe('v1.ClusterManagerClient', () => {
         new protos.google.container.v1.CompleteIPRotationRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'name=&project_id=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -3257,7 +3337,8 @@ describe('v1.ClusterManagerClient', () => {
         new protos.google.container.v1.CompleteIPRotationRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'name=&project_id=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -3292,7 +3373,8 @@ describe('v1.ClusterManagerClient', () => {
         new protos.google.container.v1.SetNodePoolSizeRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'name=&project_id=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -3323,7 +3405,8 @@ describe('v1.ClusterManagerClient', () => {
         new protos.google.container.v1.SetNodePoolSizeRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'name=&project_id=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -3371,7 +3454,8 @@ describe('v1.ClusterManagerClient', () => {
         new protos.google.container.v1.SetNodePoolSizeRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'name=&project_id=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -3406,7 +3490,8 @@ describe('v1.ClusterManagerClient', () => {
         new protos.google.container.v1.SetNetworkPolicyRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'name=&project_id=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -3437,7 +3522,8 @@ describe('v1.ClusterManagerClient', () => {
         new protos.google.container.v1.SetNetworkPolicyRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'name=&project_id=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -3485,7 +3571,8 @@ describe('v1.ClusterManagerClient', () => {
         new protos.google.container.v1.SetNetworkPolicyRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'name=&project_id=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -3520,7 +3607,8 @@ describe('v1.ClusterManagerClient', () => {
         new protos.google.container.v1.SetMaintenancePolicyRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'name=&project_id=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -3553,7 +3641,8 @@ describe('v1.ClusterManagerClient', () => {
         new protos.google.container.v1.SetMaintenancePolicyRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'name=&project_id=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -3601,7 +3690,8 @@ describe('v1.ClusterManagerClient', () => {
         new protos.google.container.v1.SetMaintenancePolicyRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'name=&project_id=';
       const expectedOptions = {
         otherArgs: {
           headers: {
