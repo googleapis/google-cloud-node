@@ -366,6 +366,8 @@ export class ContainerAnalysisV1Beta1Client {
    *
    * @param {Object} request
    *   The request object that will be sent.
+   * @param {} request.
+   * @param {} request.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -451,6 +453,8 @@ export class ContainerAnalysisV1Beta1Client {
    *
    * @param {Object} request
    *   The request object that will be sent.
+   * @param {} request.
+   * @param {} request.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -535,6 +539,8 @@ export class ContainerAnalysisV1Beta1Client {
    *
    * @param {Object} request
    *   The request object that will be sent.
+   * @param {} request.
+   * @param {} request.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
