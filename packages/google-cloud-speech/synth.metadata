@@ -4,22 +4,22 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/nodejs-speech.git",
-        "sha": "4abdb5ce8cde7477cc9a0785406ebcbfa5dd08af"
+        "sha": "016458a23a630b0fc0ce8251d7d043dfaf031a2c"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "bcc476396e799806d3355e87246c6becf6250a70",
-        "internalRef": "306974763"
+        "sha": "42ee97c1b93a0e3759bbba3013da309f670a90ab",
+        "internalRef": "307114445"
       }
     },
     {
       "git": {
         "name": "synthtool",
         "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "682c0c37d1054966ca662a44259e96cc7aea4413"
+        "sha": "19465d3ec5e5acdb01521d8f3bddd311bcbee28d"
       }
     }
   ],
