@@ -4,7 +4,7 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/nodejs-automl.git",
-        "sha": "6a119f80e08f8791a57eba20245656932d133445"
+        "sha": "2f0654f202a18f8d2cea1715e8969f46153ac023"
       }
     },
     {
