@@ -4,7 +4,7 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/nodejs-iot.git",
-        "sha": "7e088380505e8b3fcf37bbb9fac6b62ef66d4a64"
+        "sha": "73137b64bcd84cc7be2a0effee867e34e88f700e"
       }
     },
     {
