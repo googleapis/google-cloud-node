@@ -660,7 +660,15 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.ListInfoTypesRequest()
       );
-      const expectedOptions = {};
+      request.locationId = '';
+      const expectedHeaderRequestParams = 'location_id=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
       const expectedResponse = generateSampleMessage(
         new protos.google.privacy.dlp.v2.ListInfoTypesResponse()
       );
@@ -683,7 +691,15 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.ListInfoTypesRequest()
       );
-      const expectedOptions = {};
+      request.locationId = '';
+      const expectedHeaderRequestParams = 'location_id=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
       const expectedResponse = generateSampleMessage(
         new protos.google.privacy.dlp.v2.ListInfoTypesResponse()
       );
@@ -723,7 +739,15 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.ListInfoTypesRequest()
       );
-      const expectedOptions = {};
+      request.locationId = '';
+      const expectedHeaderRequestParams = 'location_id=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
       const expectedError = new Error('expected');
       client.innerApiCalls.listInfoTypes = stubSimpleCall(
         undefined,

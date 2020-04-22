@@ -926,6 +926,13 @@ export class DlpServiceClient {
       options = optionsOrCallback as gax.CallOptions;
     }
     options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      location_id: request.locationId || '',
+    });
     this.initialize();
     return this.innerApiCalls.listInfoTypes(request, options, callback);
   }
