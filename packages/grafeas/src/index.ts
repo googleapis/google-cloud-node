@@ -21,4 +21,4 @@ const GrafeasClient = v1.GrafeasClient;
 export {v1, GrafeasClient};
 export default {v1, GrafeasClient};
 import * as protos from '../protos/protos';
-export {protos}
+export {protos};

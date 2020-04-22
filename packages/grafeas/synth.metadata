@@ -3,8 +3,8 @@
     {
       "git": {
         "name": ".",
-        "remote": "git@github.com:googleapis/nodejs-grafeas.git",
-        "sha": "9a90cd186d1f9ffb2650a552e97e0617187fa85c"
+        "remote": "https://github.com/googleapis/nodejs-grafeas.git",
+        "sha": "a3b7e6c780d6ccda768818a6f803ea5b99c0376e"
       }
     },
     {
