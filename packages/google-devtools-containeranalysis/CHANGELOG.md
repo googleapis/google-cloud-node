@@ -4,6 +4,24 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/containeranalysis?activeTab=versions
 
+## [2.0.0](https://www.github.com/googleapis/nodejs-containeranalysis/compare/v1.10.0...v2.0.0) (2020-04-23)
+
+
+### ⚠ BREAKING CHANGES
+
+* The library now supports Node.js v10+. The last version to support Node.js v8 is tagged legacy-8 on NPM.
+
+### Features
+
+* drop node8 support, support for async iterators ([#167](https://www.github.com/googleapis/nodejs-containeranalysis/issues/167)) ([8990c34](https://www.github.com/googleapis/nodejs-containeranalysis/commit/8990c34e6b8f77fb7771f8f525a34e95cdaab104))
+
+
+### Bug Fixes
+
+* remove eslint, update gax, fix generated protos, run the generator ([#180](https://www.github.com/googleapis/nodejs-containeranalysis/issues/180)) ([1f75445](https://www.github.com/googleapis/nodejs-containeranalysis/commit/1f754450685c13b224de818052936a10d711e4fc))
+* **deps:** update dependency @google-cloud/grafeas to v3 ([#189](https://www.github.com/googleapis/nodejs-containeranalysis/issues/189)) ([df59146](https://www.github.com/googleapis/nodejs-containeranalysis/commit/df59146d4433b10953761989e9059e5a82d66832))
+* **samples:** should use effective_severity field ([#200](https://www.github.com/googleapis/nodejs-containeranalysis/issues/200)) ([7e6146d](https://www.github.com/googleapis/nodejs-containeranalysis/commit/7e6146d1c98b964564253f17cf953b1f422a9b56))
+
 ## [1.10.0](https://www.github.com/googleapis/nodejs-containeranalysis/compare/v1.9.0...v1.10.0) (2020-03-06)
 
 
