@@ -4,6 +4,34 @@
 
 [1]: https://www.npmjs.com/package/dialogflow?activeTab=versions
 
+## [2.0.0](https://www.github.com/googleapis/nodejs-dialogflow/compare/v1.2.0...v2.0.0) (2020-04-23)
+
+
+### ⚠ BREAKING CHANGES
+
+* regenerate library based on dialogflow/v2 proto changes (#569)
+* The library now supports Node.js v10+. The last version to support Node.js v8 is tagged legacy-8 on NPM.
+* updated protos and renamed path template helpers
+* move API to typescript code generation (#523)
+
+### Features
+
+* added getValidationResult and field mask override control for output audio config ([4fd6c71](https://www.github.com/googleapis/nodejs-dialogflow/commit/4fd6c71d979256850eb655a9f4554bee051e489c))
+* deferred client initialization ([#555](https://www.github.com/googleapis/nodejs-dialogflow/issues/555)) ([93ba86e](https://www.github.com/googleapis/nodejs-dialogflow/commit/93ba86e586ffd7d563da9118f96fa1b172c13d7d))
+* drop node8 support, support for async iterators ([#574](https://www.github.com/googleapis/nodejs-dialogflow/issues/574)) ([fe8073f](https://www.github.com/googleapis/nodejs-dialogflow/commit/fe8073f79e98211eb6790e9fef05dd9ea8159573))
+* export protos in src/index.ts ([92d805b](https://www.github.com/googleapis/nodejs-dialogflow/commit/92d805b452e7c61da6c87eb32ebe3e358e15a187))
+* move API to typescript code generation ([#523](https://www.github.com/googleapis/nodejs-dialogflow/issues/523)) ([19793a5](https://www.github.com/googleapis/nodejs-dialogflow/commit/19793a57250f22c9ea7ebde1d4553cbc5c93253c))
+* Publish ListEnvironments for Dialogflow v2/v2beta1 library. ([#598](https://www.github.com/googleapis/nodejs-dialogflow/issues/598)) ([de9e8f6](https://www.github.com/googleapis/nodejs-dialogflow/commit/de9e8f6bf4cf3c3a3d8b7ca27385e6c2f39afa3b))
+* regenerate library based on dialogflow/v2 proto changes ([#569](https://www.github.com/googleapis/nodejs-dialogflow/issues/569)) ([1610850](https://www.github.com/googleapis/nodejs-dialogflow/commit/16108501e3855f6b422c6e7be74d84922f710387))
+* updated protos and renamed path template helpers ([1c1b01c](https://www.github.com/googleapis/nodejs-dialogflow/commit/1c1b01ca4de61ca2ac77fedd4c5f33d9d5797c0d))
+
+
+### Bug Fixes
+
+* add missing resource annotations and additional_bindings ([#591](https://www.github.com/googleapis/nodejs-dialogflow/issues/591)) ([5a0e2ec](https://www.github.com/googleapis/nodejs-dialogflow/commit/5a0e2ec007dd717d8c18ab8d409c9a16c9589098))
+* bump min version of dependencies ([#589](https://www.github.com/googleapis/nodejs-dialogflow/issues/589)) ([d87e221](https://www.github.com/googleapis/nodejs-dialogflow/commit/d87e221ba9bb7231b4cb7ed989a7a7293133fcdb))
+* remove eslint, update gax, fix generated protos, run the generator ([#586](https://www.github.com/googleapis/nodejs-dialogflow/issues/586)) ([b9a88cf](https://www.github.com/googleapis/nodejs-dialogflow/commit/b9a88cfb66e9908d57660e3b5168e50b2cae1b9a))
+
 ## [1.2.0](https://www.github.com/googleapis/nodejs-dialogflow/compare/v1.1.2...v1.2.0) (2020-02-07)
 
 
