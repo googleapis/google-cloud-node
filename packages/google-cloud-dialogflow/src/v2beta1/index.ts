@@ -20,6 +20,7 @@ export {AgentsClient} from './agents_client';
 export {ContextsClient} from './contexts_client';
 export {DocumentsClient} from './documents_client';
 export {EntityTypesClient} from './entity_types_client';
+export {EnvironmentsClient} from './environments_client';
 export {IntentsClient} from './intents_client';
 export {KnowledgeBasesClient} from './knowledge_bases_client';
 export {SessionEntityTypesClient} from './session_entity_types_client';

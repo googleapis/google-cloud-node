@@ -5058,6 +5058,374 @@ export namespace google {
                     public toJSON(): { [k: string]: any };
                 }
 
+                /** Represents an Environments */
+                class Environments extends $protobuf.rpc.Service {
+
+                    /**
+                     * Constructs a new Environments service.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     */
+                    constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                    /**
+                     * Creates new Environments service using the specified rpc implementation.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     * @returns RPC service. Useful where requests and/or responses are streamed.
+                     */
+                    public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): Environments;
+
+                    /**
+                     * Calls ListEnvironments.
+                     * @param request ListEnvironmentsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListEnvironmentsResponse
+                     */
+                    public listEnvironments(request: google.cloud.dialogflow.v2.IListEnvironmentsRequest, callback: google.cloud.dialogflow.v2.Environments.ListEnvironmentsCallback): void;
+
+                    /**
+                     * Calls ListEnvironments.
+                     * @param request ListEnvironmentsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listEnvironments(request: google.cloud.dialogflow.v2.IListEnvironmentsRequest): Promise<google.cloud.dialogflow.v2.ListEnvironmentsResponse>;
+                }
+
+                namespace Environments {
+
+                    /**
+                     * Callback as used by {@link google.cloud.dialogflow.v2.Environments#listEnvironments}.
+                     * @param error Error, if any
+                     * @param [response] ListEnvironmentsResponse
+                     */
+                    type ListEnvironmentsCallback = (error: (Error|null), response?: google.cloud.dialogflow.v2.ListEnvironmentsResponse) => void;
+                }
+
+                /** Properties of an Environment. */
+                interface IEnvironment {
+
+                    /** Environment name */
+                    name?: (string|null);
+
+                    /** Environment description */
+                    description?: (string|null);
+
+                    /** Environment agentVersion */
+                    agentVersion?: (string|null);
+
+                    /** Environment state */
+                    state?: (google.cloud.dialogflow.v2.Environment.State|keyof typeof google.cloud.dialogflow.v2.Environment.State|null);
+
+                    /** Environment updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+                }
+
+                /** Represents an Environment. */
+                class Environment implements IEnvironment {
+
+                    /**
+                     * Constructs a new Environment.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dialogflow.v2.IEnvironment);
+
+                    /** Environment name. */
+                    public name: string;
+
+                    /** Environment description. */
+                    public description: string;
+
+                    /** Environment agentVersion. */
+                    public agentVersion: string;
+
+                    /** Environment state. */
+                    public state: (google.cloud.dialogflow.v2.Environment.State|keyof typeof google.cloud.dialogflow.v2.Environment.State);
+
+                    /** Environment updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /**
+                     * Creates a new Environment instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Environment instance
+                     */
+                    public static create(properties?: google.cloud.dialogflow.v2.IEnvironment): google.cloud.dialogflow.v2.Environment;
+
+                    /**
+                     * Encodes the specified Environment message. Does not implicitly {@link google.cloud.dialogflow.v2.Environment.verify|verify} messages.
+                     * @param message Environment message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dialogflow.v2.IEnvironment, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Environment message, length delimited. Does not implicitly {@link google.cloud.dialogflow.v2.Environment.verify|verify} messages.
+                     * @param message Environment message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dialogflow.v2.IEnvironment, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an Environment message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Environment
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.v2.Environment;
+
+                    /**
+                     * Decodes an Environment message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Environment
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.v2.Environment;
+
+                    /**
+                     * Verifies an Environment message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an Environment message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Environment
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.v2.Environment;
+
+                    /**
+                     * Creates a plain object from an Environment message. Also converts values to other types if specified.
+                     * @param message Environment
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dialogflow.v2.Environment, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Environment to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                namespace Environment {
+
+                    /** State enum. */
+                    enum State {
+                        STATE_UNSPECIFIED = 0,
+                        STOPPED = 1,
+                        LOADING = 2,
+                        RUNNING = 3
+                    }
+                }
+
+                /** Properties of a ListEnvironmentsRequest. */
+                interface IListEnvironmentsRequest {
+
+                    /** ListEnvironmentsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListEnvironmentsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListEnvironmentsRequest pageToken */
+                    pageToken?: (string|null);
+                }
+
+                /** Represents a ListEnvironmentsRequest. */
+                class ListEnvironmentsRequest implements IListEnvironmentsRequest {
+
+                    /**
+                     * Constructs a new ListEnvironmentsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dialogflow.v2.IListEnvironmentsRequest);
+
+                    /** ListEnvironmentsRequest parent. */
+                    public parent: string;
+
+                    /** ListEnvironmentsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListEnvironmentsRequest pageToken. */
+                    public pageToken: string;
+
+                    /**
+                     * Creates a new ListEnvironmentsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListEnvironmentsRequest instance
+                     */
+                    public static create(properties?: google.cloud.dialogflow.v2.IListEnvironmentsRequest): google.cloud.dialogflow.v2.ListEnvironmentsRequest;
+
+                    /**
+                     * Encodes the specified ListEnvironmentsRequest message. Does not implicitly {@link google.cloud.dialogflow.v2.ListEnvironmentsRequest.verify|verify} messages.
+                     * @param message ListEnvironmentsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dialogflow.v2.IListEnvironmentsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListEnvironmentsRequest message, length delimited. Does not implicitly {@link google.cloud.dialogflow.v2.ListEnvironmentsRequest.verify|verify} messages.
+                     * @param message ListEnvironmentsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dialogflow.v2.IListEnvironmentsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListEnvironmentsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListEnvironmentsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.v2.ListEnvironmentsRequest;
+
+                    /**
+                     * Decodes a ListEnvironmentsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListEnvironmentsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.v2.ListEnvironmentsRequest;
+
+                    /**
+                     * Verifies a ListEnvironmentsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListEnvironmentsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListEnvironmentsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.v2.ListEnvironmentsRequest;
+
+                    /**
+                     * Creates a plain object from a ListEnvironmentsRequest message. Also converts values to other types if specified.
+                     * @param message ListEnvironmentsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dialogflow.v2.ListEnvironmentsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListEnvironmentsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a ListEnvironmentsResponse. */
+                interface IListEnvironmentsResponse {
+
+                    /** ListEnvironmentsResponse environments */
+                    environments?: (google.cloud.dialogflow.v2.IEnvironment[]|null);
+
+                    /** ListEnvironmentsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListEnvironmentsResponse. */
+                class ListEnvironmentsResponse implements IListEnvironmentsResponse {
+
+                    /**
+                     * Constructs a new ListEnvironmentsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dialogflow.v2.IListEnvironmentsResponse);
+
+                    /** ListEnvironmentsResponse environments. */
+                    public environments: google.cloud.dialogflow.v2.IEnvironment[];
+
+                    /** ListEnvironmentsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListEnvironmentsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListEnvironmentsResponse instance
+                     */
+                    public static create(properties?: google.cloud.dialogflow.v2.IListEnvironmentsResponse): google.cloud.dialogflow.v2.ListEnvironmentsResponse;
+
+                    /**
+                     * Encodes the specified ListEnvironmentsResponse message. Does not implicitly {@link google.cloud.dialogflow.v2.ListEnvironmentsResponse.verify|verify} messages.
+                     * @param message ListEnvironmentsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dialogflow.v2.IListEnvironmentsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListEnvironmentsResponse message, length delimited. Does not implicitly {@link google.cloud.dialogflow.v2.ListEnvironmentsResponse.verify|verify} messages.
+                     * @param message ListEnvironmentsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dialogflow.v2.IListEnvironmentsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListEnvironmentsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListEnvironmentsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.v2.ListEnvironmentsResponse;
+
+                    /**
+                     * Decodes a ListEnvironmentsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListEnvironmentsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.v2.ListEnvironmentsResponse;
+
+                    /**
+                     * Verifies a ListEnvironmentsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListEnvironmentsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListEnvironmentsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.v2.ListEnvironmentsResponse;
+
+                    /**
+                     * Creates a plain object from a ListEnvironmentsResponse message. Also converts values to other types if specified.
+                     * @param message ListEnvironmentsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dialogflow.v2.ListEnvironmentsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListEnvironmentsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
                 /** Represents an Intents */
                 class Intents extends $protobuf.rpc.Service {
 
@@ -14103,205 +14471,369 @@ export namespace google {
                     public toJSON(): { [k: string]: any };
                 }
 
-                /** Properties of a ValidationError. */
-                interface IValidationError {
+                /** Represents an Environments */
+                class Environments extends $protobuf.rpc.Service {
 
-                    /** ValidationError severity */
-                    severity?: (google.cloud.dialogflow.v2beta1.ValidationError.Severity|keyof typeof google.cloud.dialogflow.v2beta1.ValidationError.Severity|null);
+                    /**
+                     * Constructs a new Environments service.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     */
+                    constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
 
-                    /** ValidationError entries */
-                    entries?: (string[]|null);
+                    /**
+                     * Creates new Environments service using the specified rpc implementation.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     * @returns RPC service. Useful where requests and/or responses are streamed.
+                     */
+                    public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): Environments;
 
-                    /** ValidationError errorMessage */
-                    errorMessage?: (string|null);
+                    /**
+                     * Calls ListEnvironments.
+                     * @param request ListEnvironmentsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListEnvironmentsResponse
+                     */
+                    public listEnvironments(request: google.cloud.dialogflow.v2beta1.IListEnvironmentsRequest, callback: google.cloud.dialogflow.v2beta1.Environments.ListEnvironmentsCallback): void;
+
+                    /**
+                     * Calls ListEnvironments.
+                     * @param request ListEnvironmentsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listEnvironments(request: google.cloud.dialogflow.v2beta1.IListEnvironmentsRequest): Promise<google.cloud.dialogflow.v2beta1.ListEnvironmentsResponse>;
                 }
 
-                /** Represents a ValidationError. */
-                class ValidationError implements IValidationError {
+                namespace Environments {
 
                     /**
-                     * Constructs a new ValidationError.
+                     * Callback as used by {@link google.cloud.dialogflow.v2beta1.Environments#listEnvironments}.
+                     * @param error Error, if any
+                     * @param [response] ListEnvironmentsResponse
+                     */
+                    type ListEnvironmentsCallback = (error: (Error|null), response?: google.cloud.dialogflow.v2beta1.ListEnvironmentsResponse) => void;
+                }
+
+                /** Properties of an Environment. */
+                interface IEnvironment {
+
+                    /** Environment name */
+                    name?: (string|null);
+
+                    /** Environment description */
+                    description?: (string|null);
+
+                    /** Environment agentVersion */
+                    agentVersion?: (string|null);
+
+                    /** Environment state */
+                    state?: (google.cloud.dialogflow.v2beta1.Environment.State|keyof typeof google.cloud.dialogflow.v2beta1.Environment.State|null);
+
+                    /** Environment updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+                }
+
+                /** Represents an Environment. */
+                class Environment implements IEnvironment {
+
+                    /**
+                     * Constructs a new Environment.
                      * @param [properties] Properties to set
                      */
-                    constructor(properties?: google.cloud.dialogflow.v2beta1.IValidationError);
+                    constructor(properties?: google.cloud.dialogflow.v2beta1.IEnvironment);
 
-                    /** ValidationError severity. */
-                    public severity: (google.cloud.dialogflow.v2beta1.ValidationError.Severity|keyof typeof google.cloud.dialogflow.v2beta1.ValidationError.Severity);
+                    /** Environment name. */
+                    public name: string;
 
-                    /** ValidationError entries. */
-                    public entries: string[];
+                    /** Environment description. */
+                    public description: string;
 
-                    /** ValidationError errorMessage. */
-                    public errorMessage: string;
+                    /** Environment agentVersion. */
+                    public agentVersion: string;
+
+                    /** Environment state. */
+                    public state: (google.cloud.dialogflow.v2beta1.Environment.State|keyof typeof google.cloud.dialogflow.v2beta1.Environment.State);
+
+                    /** Environment updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
 
                     /**
-                     * Creates a new ValidationError instance using the specified properties.
+                     * Creates a new Environment instance using the specified properties.
                      * @param [properties] Properties to set
-                     * @returns ValidationError instance
+                     * @returns Environment instance
                      */
-                    public static create(properties?: google.cloud.dialogflow.v2beta1.IValidationError): google.cloud.dialogflow.v2beta1.ValidationError;
+                    public static create(properties?: google.cloud.dialogflow.v2beta1.IEnvironment): google.cloud.dialogflow.v2beta1.Environment;
 
                     /**
-                     * Encodes the specified ValidationError message. Does not implicitly {@link google.cloud.dialogflow.v2beta1.ValidationError.verify|verify} messages.
-                     * @param message ValidationError message or plain object to encode
+                     * Encodes the specified Environment message. Does not implicitly {@link google.cloud.dialogflow.v2beta1.Environment.verify|verify} messages.
+                     * @param message Environment message or plain object to encode
                      * @param [writer] Writer to encode to
                      * @returns Writer
                      */
-                    public static encode(message: google.cloud.dialogflow.v2beta1.IValidationError, writer?: $protobuf.Writer): $protobuf.Writer;
+                    public static encode(message: google.cloud.dialogflow.v2beta1.IEnvironment, writer?: $protobuf.Writer): $protobuf.Writer;
 
                     /**
-                     * Encodes the specified ValidationError message, length delimited. Does not implicitly {@link google.cloud.dialogflow.v2beta1.ValidationError.verify|verify} messages.
-                     * @param message ValidationError message or plain object to encode
+                     * Encodes the specified Environment message, length delimited. Does not implicitly {@link google.cloud.dialogflow.v2beta1.Environment.verify|verify} messages.
+                     * @param message Environment message or plain object to encode
                      * @param [writer] Writer to encode to
                      * @returns Writer
                      */
-                    public static encodeDelimited(message: google.cloud.dialogflow.v2beta1.IValidationError, writer?: $protobuf.Writer): $protobuf.Writer;
+                    public static encodeDelimited(message: google.cloud.dialogflow.v2beta1.IEnvironment, writer?: $protobuf.Writer): $protobuf.Writer;
 
                     /**
-                     * Decodes a ValidationError message from the specified reader or buffer.
+                     * Decodes an Environment message from the specified reader or buffer.
                      * @param reader Reader or buffer to decode from
                      * @param [length] Message length if known beforehand
-                     * @returns ValidationError
+                     * @returns Environment
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.v2beta1.ValidationError;
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.v2beta1.Environment;
 
                     /**
-                     * Decodes a ValidationError message from the specified reader or buffer, length delimited.
+                     * Decodes an Environment message from the specified reader or buffer, length delimited.
                      * @param reader Reader or buffer to decode from
-                     * @returns ValidationError
+                     * @returns Environment
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.v2beta1.ValidationError;
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.v2beta1.Environment;
 
                     /**
-                     * Verifies a ValidationError message.
+                     * Verifies an Environment message.
                      * @param message Plain object to verify
                      * @returns `null` if valid, otherwise the reason why it is not
                      */
                     public static verify(message: { [k: string]: any }): (string|null);
 
                     /**
-                     * Creates a ValidationError message from a plain object. Also converts values to their respective internal types.
+                     * Creates an Environment message from a plain object. Also converts values to their respective internal types.
                      * @param object Plain object
-                     * @returns ValidationError
+                     * @returns Environment
                      */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.v2beta1.ValidationError;
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.v2beta1.Environment;
 
                     /**
-                     * Creates a plain object from a ValidationError message. Also converts values to other types if specified.
-                     * @param message ValidationError
+                     * Creates a plain object from an Environment message. Also converts values to other types if specified.
+                     * @param message Environment
                      * @param [options] Conversion options
                      * @returns Plain object
                      */
-                    public static toObject(message: google.cloud.dialogflow.v2beta1.ValidationError, options?: $protobuf.IConversionOptions): { [k: string]: any };
+                    public static toObject(message: google.cloud.dialogflow.v2beta1.Environment, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
                     /**
-                     * Converts this ValidationError to JSON.
+                     * Converts this Environment to JSON.
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
                 }
 
-                namespace ValidationError {
+                namespace Environment {
 
-                    /** Severity enum. */
-                    enum Severity {
-                        SEVERITY_UNSPECIFIED = 0,
-                        INFO = 1,
-                        WARNING = 2,
-                        ERROR = 3,
-                        CRITICAL = 4
+                    /** State enum. */
+                    enum State {
+                        STATE_UNSPECIFIED = 0,
+                        STOPPED = 1,
+                        LOADING = 2,
+                        RUNNING = 3
                     }
                 }
 
-                /** Properties of a ValidationResult. */
-                interface IValidationResult {
+                /** Properties of a ListEnvironmentsRequest. */
+                interface IListEnvironmentsRequest {
 
-                    /** ValidationResult validationErrors */
-                    validationErrors?: (google.cloud.dialogflow.v2beta1.IValidationError[]|null);
+                    /** ListEnvironmentsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListEnvironmentsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListEnvironmentsRequest pageToken */
+                    pageToken?: (string|null);
                 }
 
-                /** Represents a ValidationResult. */
-                class ValidationResult implements IValidationResult {
+                /** Represents a ListEnvironmentsRequest. */
+                class ListEnvironmentsRequest implements IListEnvironmentsRequest {
 
                     /**
-                     * Constructs a new ValidationResult.
+                     * Constructs a new ListEnvironmentsRequest.
                      * @param [properties] Properties to set
                      */
-                    constructor(properties?: google.cloud.dialogflow.v2beta1.IValidationResult);
+                    constructor(properties?: google.cloud.dialogflow.v2beta1.IListEnvironmentsRequest);
 
-                    /** ValidationResult validationErrors. */
-                    public validationErrors: google.cloud.dialogflow.v2beta1.IValidationError[];
+                    /** ListEnvironmentsRequest parent. */
+                    public parent: string;
+
+                    /** ListEnvironmentsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListEnvironmentsRequest pageToken. */
+                    public pageToken: string;
 
                     /**
-                     * Creates a new ValidationResult instance using the specified properties.
+                     * Creates a new ListEnvironmentsRequest instance using the specified properties.
                      * @param [properties] Properties to set
-                     * @returns ValidationResult instance
+                     * @returns ListEnvironmentsRequest instance
                      */
-                    public static create(properties?: google.cloud.dialogflow.v2beta1.IValidationResult): google.cloud.dialogflow.v2beta1.ValidationResult;
+                    public static create(properties?: google.cloud.dialogflow.v2beta1.IListEnvironmentsRequest): google.cloud.dialogflow.v2beta1.ListEnvironmentsRequest;
 
                     /**
-                     * Encodes the specified ValidationResult message. Does not implicitly {@link google.cloud.dialogflow.v2beta1.ValidationResult.verify|verify} messages.
-                     * @param message ValidationResult message or plain object to encode
+                     * Encodes the specified ListEnvironmentsRequest message. Does not implicitly {@link google.cloud.dialogflow.v2beta1.ListEnvironmentsRequest.verify|verify} messages.
+                     * @param message ListEnvironmentsRequest message or plain object to encode
                      * @param [writer] Writer to encode to
                      * @returns Writer
                      */
-                    public static encode(message: google.cloud.dialogflow.v2beta1.IValidationResult, writer?: $protobuf.Writer): $protobuf.Writer;
+                    public static encode(message: google.cloud.dialogflow.v2beta1.IListEnvironmentsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
 
                     /**
-                     * Encodes the specified ValidationResult message, length delimited. Does not implicitly {@link google.cloud.dialogflow.v2beta1.ValidationResult.verify|verify} messages.
-                     * @param message ValidationResult message or plain object to encode
+                     * Encodes the specified ListEnvironmentsRequest message, length delimited. Does not implicitly {@link google.cloud.dialogflow.v2beta1.ListEnvironmentsRequest.verify|verify} messages.
+                     * @param message ListEnvironmentsRequest message or plain object to encode
                      * @param [writer] Writer to encode to
                      * @returns Writer
                      */
-                    public static encodeDelimited(message: google.cloud.dialogflow.v2beta1.IValidationResult, writer?: $protobuf.Writer): $protobuf.Writer;
+                    public static encodeDelimited(message: google.cloud.dialogflow.v2beta1.IListEnvironmentsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
 
                     /**
-                     * Decodes a ValidationResult message from the specified reader or buffer.
+                     * Decodes a ListEnvironmentsRequest message from the specified reader or buffer.
                      * @param reader Reader or buffer to decode from
                      * @param [length] Message length if known beforehand
-                     * @returns ValidationResult
+                     * @returns ListEnvironmentsRequest
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.v2beta1.ValidationResult;
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.v2beta1.ListEnvironmentsRequest;
 
                     /**
-                     * Decodes a ValidationResult message from the specified reader or buffer, length delimited.
+                     * Decodes a ListEnvironmentsRequest message from the specified reader or buffer, length delimited.
                      * @param reader Reader or buffer to decode from
-                     * @returns ValidationResult
+                     * @returns ListEnvironmentsRequest
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.v2beta1.ValidationResult;
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.v2beta1.ListEnvironmentsRequest;
 
                     /**
-                     * Verifies a ValidationResult message.
+                     * Verifies a ListEnvironmentsRequest message.
                      * @param message Plain object to verify
                      * @returns `null` if valid, otherwise the reason why it is not
                      */
                     public static verify(message: { [k: string]: any }): (string|null);
 
                     /**
-                     * Creates a ValidationResult message from a plain object. Also converts values to their respective internal types.
+                     * Creates a ListEnvironmentsRequest message from a plain object. Also converts values to their respective internal types.
                      * @param object Plain object
-                     * @returns ValidationResult
+                     * @returns ListEnvironmentsRequest
                      */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.v2beta1.ValidationResult;
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.v2beta1.ListEnvironmentsRequest;
 
                     /**
-                     * Creates a plain object from a ValidationResult message. Also converts values to other types if specified.
-                     * @param message ValidationResult
+                     * Creates a plain object from a ListEnvironmentsRequest message. Also converts values to other types if specified.
+                     * @param message ListEnvironmentsRequest
                      * @param [options] Conversion options
                      * @returns Plain object
                      */
-                    public static toObject(message: google.cloud.dialogflow.v2beta1.ValidationResult, options?: $protobuf.IConversionOptions): { [k: string]: any };
+                    public static toObject(message: google.cloud.dialogflow.v2beta1.ListEnvironmentsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
                     /**
-                     * Converts this ValidationResult to JSON.
+                     * Converts this ListEnvironmentsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a ListEnvironmentsResponse. */
+                interface IListEnvironmentsResponse {
+
+                    /** ListEnvironmentsResponse environments */
+                    environments?: (google.cloud.dialogflow.v2beta1.IEnvironment[]|null);
+
+                    /** ListEnvironmentsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListEnvironmentsResponse. */
+                class ListEnvironmentsResponse implements IListEnvironmentsResponse {
+
+                    /**
+                     * Constructs a new ListEnvironmentsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dialogflow.v2beta1.IListEnvironmentsResponse);
+
+                    /** ListEnvironmentsResponse environments. */
+                    public environments: google.cloud.dialogflow.v2beta1.IEnvironment[];
+
+                    /** ListEnvironmentsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListEnvironmentsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListEnvironmentsResponse instance
+                     */
+                    public static create(properties?: google.cloud.dialogflow.v2beta1.IListEnvironmentsResponse): google.cloud.dialogflow.v2beta1.ListEnvironmentsResponse;
+
+                    /**
+                     * Encodes the specified ListEnvironmentsResponse message. Does not implicitly {@link google.cloud.dialogflow.v2beta1.ListEnvironmentsResponse.verify|verify} messages.
+                     * @param message ListEnvironmentsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dialogflow.v2beta1.IListEnvironmentsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListEnvironmentsResponse message, length delimited. Does not implicitly {@link google.cloud.dialogflow.v2beta1.ListEnvironmentsResponse.verify|verify} messages.
+                     * @param message ListEnvironmentsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dialogflow.v2beta1.IListEnvironmentsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListEnvironmentsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListEnvironmentsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.v2beta1.ListEnvironmentsResponse;
+
+                    /**
+                     * Decodes a ListEnvironmentsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListEnvironmentsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.v2beta1.ListEnvironmentsResponse;
+
+                    /**
+                     * Verifies a ListEnvironmentsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListEnvironmentsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListEnvironmentsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.v2beta1.ListEnvironmentsResponse;
+
+                    /**
+                     * Creates a plain object from a ListEnvironmentsResponse message. Also converts values to other types if specified.
+                     * @param message ListEnvironmentsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dialogflow.v2beta1.ListEnvironmentsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListEnvironmentsResponse to JSON.
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
@@ -14992,6 +15524,210 @@ export namespace google {
 
                     /**
                      * Converts this OutputAudioConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a ValidationError. */
+                interface IValidationError {
+
+                    /** ValidationError severity */
+                    severity?: (google.cloud.dialogflow.v2beta1.ValidationError.Severity|keyof typeof google.cloud.dialogflow.v2beta1.ValidationError.Severity|null);
+
+                    /** ValidationError entries */
+                    entries?: (string[]|null);
+
+                    /** ValidationError errorMessage */
+                    errorMessage?: (string|null);
+                }
+
+                /** Represents a ValidationError. */
+                class ValidationError implements IValidationError {
+
+                    /**
+                     * Constructs a new ValidationError.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dialogflow.v2beta1.IValidationError);
+
+                    /** ValidationError severity. */
+                    public severity: (google.cloud.dialogflow.v2beta1.ValidationError.Severity|keyof typeof google.cloud.dialogflow.v2beta1.ValidationError.Severity);
+
+                    /** ValidationError entries. */
+                    public entries: string[];
+
+                    /** ValidationError errorMessage. */
+                    public errorMessage: string;
+
+                    /**
+                     * Creates a new ValidationError instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ValidationError instance
+                     */
+                    public static create(properties?: google.cloud.dialogflow.v2beta1.IValidationError): google.cloud.dialogflow.v2beta1.ValidationError;
+
+                    /**
+                     * Encodes the specified ValidationError message. Does not implicitly {@link google.cloud.dialogflow.v2beta1.ValidationError.verify|verify} messages.
+                     * @param message ValidationError message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dialogflow.v2beta1.IValidationError, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ValidationError message, length delimited. Does not implicitly {@link google.cloud.dialogflow.v2beta1.ValidationError.verify|verify} messages.
+                     * @param message ValidationError message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dialogflow.v2beta1.IValidationError, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ValidationError message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ValidationError
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.v2beta1.ValidationError;
+
+                    /**
+                     * Decodes a ValidationError message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ValidationError
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.v2beta1.ValidationError;
+
+                    /**
+                     * Verifies a ValidationError message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ValidationError message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ValidationError
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.v2beta1.ValidationError;
+
+                    /**
+                     * Creates a plain object from a ValidationError message. Also converts values to other types if specified.
+                     * @param message ValidationError
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dialogflow.v2beta1.ValidationError, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ValidationError to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                namespace ValidationError {
+
+                    /** Severity enum. */
+                    enum Severity {
+                        SEVERITY_UNSPECIFIED = 0,
+                        INFO = 1,
+                        WARNING = 2,
+                        ERROR = 3,
+                        CRITICAL = 4
+                    }
+                }
+
+                /** Properties of a ValidationResult. */
+                interface IValidationResult {
+
+                    /** ValidationResult validationErrors */
+                    validationErrors?: (google.cloud.dialogflow.v2beta1.IValidationError[]|null);
+                }
+
+                /** Represents a ValidationResult. */
+                class ValidationResult implements IValidationResult {
+
+                    /**
+                     * Constructs a new ValidationResult.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dialogflow.v2beta1.IValidationResult);
+
+                    /** ValidationResult validationErrors. */
+                    public validationErrors: google.cloud.dialogflow.v2beta1.IValidationError[];
+
+                    /**
+                     * Creates a new ValidationResult instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ValidationResult instance
+                     */
+                    public static create(properties?: google.cloud.dialogflow.v2beta1.IValidationResult): google.cloud.dialogflow.v2beta1.ValidationResult;
+
+                    /**
+                     * Encodes the specified ValidationResult message. Does not implicitly {@link google.cloud.dialogflow.v2beta1.ValidationResult.verify|verify} messages.
+                     * @param message ValidationResult message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dialogflow.v2beta1.IValidationResult, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ValidationResult message, length delimited. Does not implicitly {@link google.cloud.dialogflow.v2beta1.ValidationResult.verify|verify} messages.
+                     * @param message ValidationResult message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dialogflow.v2beta1.IValidationResult, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ValidationResult message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ValidationResult
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.v2beta1.ValidationResult;
+
+                    /**
+                     * Decodes a ValidationResult message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ValidationResult
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.v2beta1.ValidationResult;
+
+                    /**
+                     * Verifies a ValidationResult message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ValidationResult message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ValidationResult
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.v2beta1.ValidationResult;
+
+                    /**
+                     * Creates a plain object from a ValidationResult message. Also converts values to other types if specified.
+                     * @param message ValidationResult
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dialogflow.v2beta1.ValidationResult, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ValidationResult to JSON.
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };

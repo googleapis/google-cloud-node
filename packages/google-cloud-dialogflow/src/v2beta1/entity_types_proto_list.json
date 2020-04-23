@@ -4,6 +4,7 @@
   "../../protos/google/cloud/dialogflow/v2beta1/context.proto",
   "../../protos/google/cloud/dialogflow/v2beta1/document.proto",
   "../../protos/google/cloud/dialogflow/v2beta1/entity_type.proto",
+  "../../protos/google/cloud/dialogflow/v2beta1/environment.proto",
   "../../protos/google/cloud/dialogflow/v2beta1/gcs.proto",
   "../../protos/google/cloud/dialogflow/v2beta1/intent.proto",
   "../../protos/google/cloud/dialogflow/v2beta1/knowledge_base.proto",

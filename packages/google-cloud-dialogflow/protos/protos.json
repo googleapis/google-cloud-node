@@ -1329,6 +1329,113 @@
                         }
                       }
                     },
+                    "Environments": {
+                      "options": {
+                        "(google.api.default_host)": "dialogflow.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/dialogflow"
+                      },
+                      "methods": {
+                        "ListEnvironments": {
+                          "requestType": "ListEnvironmentsRequest",
+                          "responseType": "ListEnvironmentsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v2/{parent=projects/*/agent}/environments"
+                          }
+                        }
+                      }
+                    },
+                    "Environment": {
+                      "options": {
+                        "(google.api.resource).type": "dialogflow.googleapis.com/Environment",
+                        "(google.api.resource).pattern": "projects/{project}/agent/environments/{environment}"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "agentVersion": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "state": {
+                          "type": "State",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "State": {
+                          "values": {
+                            "STATE_UNSPECIFIED": 0,
+                            "STOPPED": 1,
+                            "LOADING": 2,
+                            "RUNNING": 3
+                          }
+                        }
+                      }
+                    },
+                    "ListEnvironmentsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "dialogflow.googleapis.com/Environment"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListEnvironmentsResponse": {
+                      "fields": {
+                        "environments": {
+                          "rule": "repeated",
+                          "type": "Environment",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
                     "Intents": {
                       "options": {
                         "(google.api.default_host)": "dialogflow.googleapis.com",
@@ -3654,40 +3761,112 @@
                         }
                       }
                     },
-                    "ValidationError": {
-                      "fields": {
-                        "severity": {
-                          "type": "Severity",
-                          "id": 1
-                        },
-                        "entries": {
-                          "rule": "repeated",
-                          "type": "string",
-                          "id": 3
-                        },
-                        "errorMessage": {
-                          "type": "string",
-                          "id": 4
-                        }
+                    "Environments": {
+                      "options": {
+                        "(google.api.default_host)": "dialogflow.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/dialogflow"
                       },
-                      "nested": {
-                        "Severity": {
-                          "values": {
-                            "SEVERITY_UNSPECIFIED": 0,
-                            "INFO": 1,
-                            "WARNING": 2,
-                            "ERROR": 3,
-                            "CRITICAL": 4
+                      "methods": {
+                        "ListEnvironments": {
+                          "requestType": "ListEnvironmentsRequest",
+                          "responseType": "ListEnvironmentsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v2beta1/{parent=projects/*/agent}/environments",
+                            "(google.api.http).additional_bindings.get": "/v2beta1/{parent=projects/*/locations/*/agent}/environments"
                           }
                         }
                       }
                     },
-                    "ValidationResult": {
+                    "Environment": {
+                      "options": {
+                        "(google.api.resource).type": "dialogflow.googleapis.com/Environment",
+                        "(google.api.resource).pattern": "projects/{project}/agent/environments/{environment}"
+                      },
                       "fields": {
-                        "validationErrors": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "agentVersion": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "(google.api.resource_reference).type": "dialogflow.googleapis.com/Version"
+                          }
+                        },
+                        "state": {
+                          "type": "State",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "State": {
+                          "values": {
+                            "STATE_UNSPECIFIED": 0,
+                            "STOPPED": 1,
+                            "LOADING": 2,
+                            "RUNNING": 3
+                          }
+                        }
+                      }
+                    },
+                    "ListEnvironmentsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "dialogflow.googleapis.com/Environment"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListEnvironmentsResponse": {
+                      "fields": {
+                        "environments": {
                           "rule": "repeated",
-                          "type": "ValidationError",
+                          "type": "Environment",
                           "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
                         }
                       }
                     },
@@ -3858,6 +4037,43 @@
                         "synthesizeSpeechConfig": {
                           "type": "SynthesizeSpeechConfig",
                           "id": 3
+                        }
+                      }
+                    },
+                    "ValidationError": {
+                      "fields": {
+                        "severity": {
+                          "type": "Severity",
+                          "id": 1
+                        },
+                        "entries": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 3
+                        },
+                        "errorMessage": {
+                          "type": "string",
+                          "id": 4
+                        }
+                      },
+                      "nested": {
+                        "Severity": {
+                          "values": {
+                            "SEVERITY_UNSPECIFIED": 0,
+                            "INFO": 1,
+                            "WARNING": 2,
+                            "ERROR": 3,
+                            "CRITICAL": 4
+                          }
+                        }
+                      }
+                    },
+                    "ValidationResult": {
+                      "fields": {
+                        "validationErrors": {
+                          "rule": "repeated",
+                          "type": "ValidationError",
+                          "id": 1
                         }
                       }
                     },

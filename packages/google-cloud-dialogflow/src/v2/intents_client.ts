@@ -195,6 +195,9 @@ export class IntentsClient {
       entityTypePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/agent/entityTypes/{entity_type}'
       ),
+      environmentPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/agent/environments/{environment}'
+      ),
       intentPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/agent/intents/{intent}'
       ),
@@ -1265,6 +1268,44 @@ export class IntentsClient {
   matchEntityTypeFromEntityTypeName(entityTypeName: string) {
     return this.pathTemplates.entityTypePathTemplate.match(entityTypeName)
       .entity_type;
+  }
+
+  /**
+   * Return a fully-qualified environment resource name string.
+   *
+   * @param {string} project
+   * @param {string} environment
+   * @returns {string} Resource name string.
+   */
+  environmentPath(project: string, environment: string) {
+    return this.pathTemplates.environmentPathTemplate.render({
+      project: project,
+      environment: environment,
+    });
+  }
+
+  /**
+   * Parse the project from Environment resource.
+   *
+   * @param {string} environmentName
+   *   A fully-qualified path representing Environment resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromEnvironmentName(environmentName: string) {
+    return this.pathTemplates.environmentPathTemplate.match(environmentName)
+      .project;
+  }
+
+  /**
+   * Parse the environment from Environment resource.
+   *
+   * @param {string} environmentName
+   *   A fully-qualified path representing Environment resource.
+   * @returns {string} A string representing the environment.
+   */
+  matchEnvironmentFromEnvironmentName(environmentName: string) {
+    return this.pathTemplates.environmentPathTemplate.match(environmentName)
+      .environment;
   }
 
   /**

@@ -183,6 +183,9 @@ export class EntityTypesClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this.pathTemplates = {
+      environmentPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/agent/environments/{environment}'
+      ),
       projectAgentPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/agent'
       ),
@@ -1503,6 +1506,44 @@ export class EntityTypesClient {
   // --------------------
   // -- Path templates --
   // --------------------
+
+  /**
+   * Return a fully-qualified environment resource name string.
+   *
+   * @param {string} project
+   * @param {string} environment
+   * @returns {string} Resource name string.
+   */
+  environmentPath(project: string, environment: string) {
+    return this.pathTemplates.environmentPathTemplate.render({
+      project: project,
+      environment: environment,
+    });
+  }
+
+  /**
+   * Parse the project from Environment resource.
+   *
+   * @param {string} environmentName
+   *   A fully-qualified path representing Environment resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromEnvironmentName(environmentName: string) {
+    return this.pathTemplates.environmentPathTemplate.match(environmentName)
+      .project;
+  }
+
+  /**
+   * Parse the environment from Environment resource.
+   *
+   * @param {string} environmentName
+   *   A fully-qualified path representing Environment resource.
+   * @returns {string} A string representing the environment.
+   */
+  matchEnvironmentFromEnvironmentName(environmentName: string) {
+    return this.pathTemplates.environmentPathTemplate.match(environmentName)
+      .environment;
+  }
 
   /**
    * Return a fully-qualified projectAgent resource name string.
