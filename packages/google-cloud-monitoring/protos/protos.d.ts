@@ -11342,15 +11342,6 @@ export namespace google {
                 public toJSON(): { [k: string]: any };
             }
 
-            /** UptimeCheckRegion enum. */
-            enum UptimeCheckRegion {
-                REGION_UNSPECIFIED = 0,
-                USA = 1,
-                EUROPE = 2,
-                SOUTH_AMERICA = 3,
-                ASIA_PACIFIC = 4
-            }
-
             /** Properties of an InternalChecker. */
             interface IInternalChecker {
 
@@ -11479,6 +11470,15 @@ export namespace google {
                     CREATING = 1,
                     RUNNING = 2
                 }
+            }
+
+            /** UptimeCheckRegion enum. */
+            enum UptimeCheckRegion {
+                REGION_UNSPECIFIED = 0,
+                USA = 1,
+                EUROPE = 2,
+                SOUTH_AMERICA = 3,
+                ASIA_PACIFIC = 4
             }
 
             /** Properties of an UptimeCheckConfig. */
@@ -11744,6 +11744,9 @@ export namespace google {
                 /** Properties of a HttpCheck. */
                 interface IHttpCheck {
 
+                    /** HttpCheck requestMethod */
+                    requestMethod?: (google.monitoring.v3.UptimeCheckConfig.HttpCheck.RequestMethod|keyof typeof google.monitoring.v3.UptimeCheckConfig.HttpCheck.RequestMethod|null);
+
                     /** HttpCheck useSsl */
                     useSsl?: (boolean|null);
 
@@ -11762,8 +11765,14 @@ export namespace google {
                     /** HttpCheck headers */
                     headers?: ({ [k: string]: string }|null);
 
+                    /** HttpCheck contentType */
+                    contentType?: (google.monitoring.v3.UptimeCheckConfig.HttpCheck.ContentType|keyof typeof google.monitoring.v3.UptimeCheckConfig.HttpCheck.ContentType|null);
+
                     /** HttpCheck validateSsl */
                     validateSsl?: (boolean|null);
+
+                    /** HttpCheck body */
+                    body?: (Uint8Array|string|null);
                 }
 
                 /** Represents a HttpCheck. */
@@ -11774,6 +11783,9 @@ export namespace google {
                      * @param [properties] Properties to set
                      */
                     constructor(properties?: google.monitoring.v3.UptimeCheckConfig.IHttpCheck);
+
+                    /** HttpCheck requestMethod. */
+                    public requestMethod: (google.monitoring.v3.UptimeCheckConfig.HttpCheck.RequestMethod|keyof typeof google.monitoring.v3.UptimeCheckConfig.HttpCheck.RequestMethod);
 
                     /** HttpCheck useSsl. */
                     public useSsl: boolean;
@@ -11793,8 +11805,14 @@ export namespace google {
                     /** HttpCheck headers. */
                     public headers: { [k: string]: string };
 
+                    /** HttpCheck contentType. */
+                    public contentType: (google.monitoring.v3.UptimeCheckConfig.HttpCheck.ContentType|keyof typeof google.monitoring.v3.UptimeCheckConfig.HttpCheck.ContentType);
+
                     /** HttpCheck validateSsl. */
                     public validateSsl: boolean;
+
+                    /** HttpCheck body. */
+                    public body: (Uint8Array|string);
 
                     /**
                      * Creates a new HttpCheck instance using the specified properties.
@@ -11963,6 +11981,19 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+                    }
+
+                    /** RequestMethod enum. */
+                    enum RequestMethod {
+                        METHOD_UNSPECIFIED = 0,
+                        GET = 1,
+                        POST = 2
+                    }
+
+                    /** ContentType enum. */
+                    enum ContentType {
+                        TYPE_UNSPECIFIED = 0,
+                        URL_ENCODED = 1
                     }
                 }
 
@@ -12165,13 +12196,6 @@ export namespace google {
                 }
             }
 
-            /** GroupResourceType enum. */
-            enum GroupResourceType {
-                RESOURCE_TYPE_UNSPECIFIED = 0,
-                INSTANCE = 1,
-                AWS_ELB_LOAD_BALANCER = 2
-            }
-
             /** Properties of an UptimeCheckIp. */
             interface IUptimeCheckIp {
 
@@ -12272,6 +12296,13 @@ export namespace google {
                  * @returns JSON object
                  */
                 public toJSON(): { [k: string]: any };
+            }
+
+            /** GroupResourceType enum. */
+            enum GroupResourceType {
+                RESOURCE_TYPE_UNSPECIFIED = 0,
+                INSTANCE = 1,
+                AWS_ELB_LOAD_BALANCER = 2
             }
 
             /** Represents an UptimeCheckService */

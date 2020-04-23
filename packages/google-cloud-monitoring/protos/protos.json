@@ -2441,15 +2441,6 @@
                     }
                   }
                 },
-                "UptimeCheckRegion": {
-                  "values": {
-                    "REGION_UNSPECIFIED": 0,
-                    "USA": 1,
-                    "EUROPE": 2,
-                    "SOUTH_AMERICA": 3,
-                    "ASIA_PACIFIC": 4
-                  }
-                },
                 "InternalChecker": {
                   "options": {
                     "deprecated": true
@@ -2488,6 +2479,15 @@
                         "RUNNING": 2
                       }
                     }
+                  }
+                },
+                "UptimeCheckRegion": {
+                  "values": {
+                    "REGION_UNSPECIFIED": 0,
+                    "USA": 1,
+                    "EUROPE": 2,
+                    "SOUTH_AMERICA": 3,
+                    "ASIA_PACIFIC": 4
                   }
                 },
                 "UptimeCheckConfig": {
@@ -2583,6 +2583,10 @@
                     },
                     "HttpCheck": {
                       "fields": {
+                        "requestMethod": {
+                          "type": "RequestMethod",
+                          "id": 8
+                        },
                         "useSsl": {
                           "type": "bool",
                           "id": 1
@@ -2608,9 +2612,17 @@
                           "type": "string",
                           "id": 6
                         },
+                        "contentType": {
+                          "type": "ContentType",
+                          "id": 9
+                        },
                         "validateSsl": {
                           "type": "bool",
                           "id": 7
+                        },
+                        "body": {
+                          "type": "bytes",
+                          "id": 10
                         }
                       },
                       "nested": {
@@ -2624,6 +2636,19 @@
                               "type": "string",
                               "id": 2
                             }
+                          }
+                        },
+                        "RequestMethod": {
+                          "values": {
+                            "METHOD_UNSPECIFIED": 0,
+                            "GET": 1,
+                            "POST": 2
+                          }
+                        },
+                        "ContentType": {
+                          "values": {
+                            "TYPE_UNSPECIFIED": 0,
+                            "URL_ENCODED": 1
                           }
                         }
                       }
@@ -2661,13 +2686,6 @@
                     }
                   }
                 },
-                "GroupResourceType": {
-                  "values": {
-                    "RESOURCE_TYPE_UNSPECIFIED": 0,
-                    "INSTANCE": 1,
-                    "AWS_ELB_LOAD_BALANCER": 2
-                  }
-                },
                 "UptimeCheckIp": {
                   "fields": {
                     "region": {
@@ -2682,6 +2700,13 @@
                       "type": "string",
                       "id": 3
                     }
+                  }
+                },
+                "GroupResourceType": {
+                  "values": {
+                    "RESOURCE_TYPE_UNSPECIFIED": 0,
+                    "INSTANCE": 1,
+                    "AWS_ELB_LOAD_BALANCER": 2
                   }
                 },
                 "UptimeCheckService": {
