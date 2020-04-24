@@ -14,6 +14,7 @@
 
 import synthtool as s
 import synthtool.gcp as gcp
+import synthtool.languages.node as node
 import logging
 
 logging.basicConfig(level=logging.DEBUG)
@@ -30,3 +31,5 @@ s.replace(
     ".circleci/config.yml",
     "command: npm run system-test",
     "command: mkdir $HOME/.config && npm run system-test")
+node.install()
+node.fix()
