@@ -14,6 +14,6 @@
 """This script is used to synthesize generated parts of this library."""
 
 import subprocess
-
-subprocess.run(['npm', 'install'])
+import synthtool.languages.node as node
+node.install()
 subprocess.run(['npm', 'run', 'generate'])
