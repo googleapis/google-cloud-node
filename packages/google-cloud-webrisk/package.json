@@ -50,7 +50,7 @@
   "scripts": {
     "docs": "jsdoc -c .jsdoc.js",
     "fix": "gts fix",
-    "lint": "gts fix",
+    "lint": "gts check",
     "test": "c8 mocha build/test",
     "predocs-test": "npm run docs",
     "docs-test": "linkinator docs",
@@ -61,7 +61,8 @@
     "compile-protos": "compileProtos src",
     "prepare": "npm run compile",
     "pretest": "npm run compile",
-    "prelint": "cd samples; npm link ../; npm install"
+    "prelint": "cd samples; npm link ../; npm install",
+    "precompile": "gts clean"
   },
   "license": "Apache-2.0",
   "engines": {
