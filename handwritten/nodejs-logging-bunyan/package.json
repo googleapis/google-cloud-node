@@ -47,7 +47,8 @@
     "pretest": "npm run compile",
     "docs-test": "linkinator docs",
     "predocs-test": "npm run docs",
-    "prelint": "cd samples; npm link ../; npm i"
+    "prelint": "cd samples; npm link ../; npm install",
+    "precompile": "gts clean"
   },
   "dependencies": {
     "@google-cloud/logging": "^7.0.0",
