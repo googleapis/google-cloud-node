@@ -26,7 +26,7 @@
   "scripts": {
     "test": "c8 mocha build/test",
     "docs": "jsdoc -c .jsdoc.js",
-    "lint": "gts fix",
+    "lint": "gts check",
     "fix": "gts fix",
     "samples-test": "cd samples/ && npm link ../ && npm install && npm test && cd ../",
     "system-test": "mocha build/system-test",
@@ -37,7 +37,8 @@
     "predocs-test": "npm run docs",
     "prepare": "npm run compile",
     "pretest": "npm run compile",
-    "prelint": "cd samples; npm link ../; npm install"
+    "prelint": "cd samples; npm link ../; npm install",
+    "precompile": "gts clean"
   },
   "dependencies": {
     "google-gax": "^2.1.0",
