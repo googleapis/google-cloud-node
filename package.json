@@ -7,9 +7,12 @@
     "doc": "docs"
   },
   "scripts": {
-    "fix": "semistandard --fix",
+    "fix": "gts fix",
     "test": "semistandard",
-    "generate": "./bin/generate-readme.js"
+    "generate": "./bin/generate-readme.js",
+    "lint": "gts check",
+    "clean": "gts clean",
+    "precompile": "gts clean"
   },
   "repository": {
     "type": "git",
