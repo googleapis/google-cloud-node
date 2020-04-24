@@ -17,13 +17,14 @@
     "docs": "jsdoc -c .jsdoc.js",
     "docs-test": "linkinator docs",
     "fix": "gts fix",
-    "lint": "gts fix",
+    "lint": "gts check",
     "predocs-test": "npm run docs",
     "prepare": "npm run compile-protos && npm run compile",
     "system-test": "c8 mocha build/system-test",
     "test": "c8 mocha build/test",
     "samples-test": "cd samples/ && npm link ../ && npm test && cd ../",
-    "prelint": "cd samples; npm link ../; npm install"
+    "prelint": "cd samples; npm link ../; npm install",
+    "precompile": "gts clean"
   },
   "dependencies": {
     "google-gax": "^2.1.0"
