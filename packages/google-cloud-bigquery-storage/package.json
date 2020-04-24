@@ -19,11 +19,12 @@
     "docs-test": "linkinator docs",
     "fix": "gts fix",
     "prelint": "cd samples; npm link ../; npm install",
-    "lint": "gts fix",
+    "lint": "gts check",
     "prepare": "npm run compile-protos && npm run compile",
     "system-test": "c8 mocha build/system-test",
     "test": "c8 mocha build/test",
-    "samples-test": "cd samples/ && npm link ../ && npm test && cd ../"
+    "samples-test": "cd samples/ && npm link ../ && npm test && cd ../",
+    "precompile": "gts clean"
   },
   "dependencies": {
     "google-gax": "^2.1.0"
