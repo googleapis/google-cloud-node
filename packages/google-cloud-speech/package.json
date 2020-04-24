@@ -30,7 +30,7 @@
   ],
   "scripts": {
     "docs": "jsdoc -c .jsdoc.js",
-    "lint": "gts fix",
+    "lint": "gts check",
     "samples-test": "cd samples/ && npm link ../ && npm test && cd ../",
     "system-test": "c8 mocha build/system-test/*.js --timeout 600000",
     "test": "c8 mocha build/test/*.js",
@@ -40,7 +40,9 @@
     "compile": "tsc -p . && cp system-test/*.js build/system-test/ && cp -r protos build/",
     "prepare": "npm run compile",
     "pretest": "npm run compile",
-    "prelint": "cd samples; npm link ../; npm install"
+    "prelint": "cd samples; npm link ../; npm install",
+    "clean": "gts clean",
+    "precompile": "gts clean"
   },
   "dependencies": {
     "@google-cloud/common": "^3.0.0",
