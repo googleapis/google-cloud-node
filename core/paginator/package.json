@@ -9,7 +9,7 @@
     "test": "c8 mocha build/test",
     "compile": "tsc -p .",
     "fix": "gts fix",
-    "prelint": "cd samples; npm link ../; npm i",
+    "prelint": "cd samples; npm link ../; npm install",
     "lint": "gts check",
     "prepare": "npm run compile",
     "pretest": "npm run compile",
@@ -18,7 +18,9 @@
     "samples-test": "cd samples/ && npm link ../ && npm test && cd ../",
     "system-test": "mocha build/system-test",
     "docs-test": "linkinator docs",
-    "predocs-test": "npm run docs"
+    "predocs-test": "npm run docs",
+    "clean": "gts clean",
+    "precompile": "gts clean"
   },
   "keywords": [],
   "files": [
