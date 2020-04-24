@@ -21,9 +21,10 @@
     "system-test": "c8 mocha build/system-test",
     "test": "c8 mocha build/test",
     "fix": "gts fix",
-    "lint": "gts fix",
+    "lint": "gts check",
     "prelint": "cd samples; npm link ../; npm install",
-    "samples-test": "cd samples/ && npm link ../ && npm test && cd ../"
+    "samples-test": "cd samples/ && npm link ../ && npm test && cd ../",
+    "precompile": "gts clean"
   },
   "dependencies": {
     "google-gax": "^2.1.0"
