@@ -48,7 +48,7 @@
   "scripts": {
     "test": "c8 mocha build/test",
     "docs": "jsdoc -c .jsdoc.js",
-    "lint": "gts fix",
+    "lint": "gts check",
     "fix": "gts fix",
     "samples-test": "cd samples/ && npm link ../ && npm install && npm test && cd ../",
     "system-test": "mocha build/system-test",
@@ -58,7 +58,8 @@
     "compile": "tsc -p . && cp -r protos build/",
     "compile-protos": "compileProtos src",
     "prepare": "npm run compile",
-    "prelint": "cd samples; npm link ../; npm install"
+    "prelint": "cd samples; npm link ../; npm install",
+    "precompile": "gts clean"
   },
   "license": "Apache-2.0",
   "engines": {
