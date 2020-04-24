@@ -26,14 +26,16 @@
   ],
   "scripts": {
     "docs": "jsdoc -c .jsdoc.js",
-    "lint": "eslint '**/*.js'",
+    "lint": "gts check",
     "samples-test": "cd samples/ && npm link ../ && npm test && cd ../",
     "system-test": "mocha system-test/*.js --timeout 1200000",
     "test": "c8 mocha",
-    "fix": "eslint --fix '**/*.js'",
+    "fix": "gts fix",
     "docs-test": "linkinator docs",
     "predocs-test": "npm run docs",
-    "prelint": "cd samples; npm link ../; npm i"
+    "prelint": "cd samples; npm link ../; npm install",
+    "clean": "gts clean",
+    "precompile": "gts clean"
   },
   "dependencies": {
     "@google-cloud/common": "^3.0.0",
