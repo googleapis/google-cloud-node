@@ -16,8 +16,8 @@
 
 import synthtool as s
 import synthtool.gcp as gcp
+import synthtool.languages.node as node
 import logging
-import subprocess
 
 logging.basicConfig(level=logging.DEBUG)
 
@@ -51,7 +51,4 @@ s.replace('**/src/**/cloud_tasks_client_config.json',
         '"max_rpc_timeout_millis": 60000',
         '"max_rpc_timeout_millis": 20000')
 
-# Node.js specific cleanup
-subprocess.run(["npm", "install"])
-subprocess.run(["npm", "run", "fix"])
-subprocess.run(['npx', 'compileProtos', 'src'])
+node.postprocess_gapic_library()
