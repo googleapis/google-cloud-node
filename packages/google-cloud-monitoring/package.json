@@ -28,7 +28,7 @@
   ],
   "scripts": {
     "docs": "jsdoc -c .jsdoc.js",
-    "lint": "gts fix",
+    "lint": "gts check",
     "samples-test": "cd samples/ && npm link ../ && npm install && npm test && cd ../",
     "system-test": "mocha build/system-test",
     "test": "c8 mocha build/test",
@@ -39,7 +39,8 @@
     "clean": "gts clean",
     "compile": "tsc -p . && cp -r protos build/",
     "compile-protos": "compileProtos src",
-    "prepare": "npm run compile"
+    "prepare": "npm run compile",
+    "precompile": "gts clean"
   },
   "dependencies": {
     "google-gax": "^2.1.0"

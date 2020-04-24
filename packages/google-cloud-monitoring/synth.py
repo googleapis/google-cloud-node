@@ -16,7 +16,7 @@
 
 import synthtool as s
 import synthtool.gcp as gcp
-import subprocess
+import synthtool.languages.node as node
 import logging
 logging.basicConfig(level=logging.DEBUG)
 
@@ -43,6 +43,4 @@ common_templates = gcp.CommonTemplates()
 templates = common_templates.node_library(source_location='build/src')
 s.copy(templates)
 
-subprocess.run(["npm", "install"])
-subprocess.run(["npm", "run", "lint"])
-subprocess.run(['npx', 'compileProtos', 'src'])
+node.postprocess_gapic_library()
