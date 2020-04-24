@@ -16,7 +16,7 @@
 
 import synthtool as s
 import synthtool.gcp as gcp
-import subprocess
+import synthtool.languages.node as node
 
 # Run the gapic generator
 gapic = gcp.GAPICMicrogenerator()
@@ -37,7 +37,4 @@ common_templates = gcp.CommonTemplates()
 templates = common_templates.node_library(source_location='build/src')
 s.copy(templates)
 
-# Node.js specific cleanup
-subprocess.run(['npm', 'install'])
-subprocess.run(['npm', 'run', 'fix'])
-subprocess.run(['npx', 'compileProtos', 'src'])
+node.postprocess_gapic_library()
