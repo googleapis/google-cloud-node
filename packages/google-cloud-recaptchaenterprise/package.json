@@ -47,7 +47,7 @@
     "webpack-cli": "^3.3.10"
   },
   "scripts": {
-    "lint": "gts fix",
+    "lint": "gts check",
     "fix": "gts fix",
     "samples-test": "cd samples/ && npm link ../ && npm install && npm test && cd ../",
     "system-test": "mocha build/system-test",
@@ -59,7 +59,8 @@
     "compile-protos": "compileProtos src",
     "predocs-test": "npm run docs",
     "prepare": "npm run compile",
-    "prelint": "cd samples; npm link ../; npm install"
+    "prelint": "cd samples; npm link ../; npm install",
+    "precompile": "gts clean"
   },
   "license": "Apache-2.0",
   "engines": {
