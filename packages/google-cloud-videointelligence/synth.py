@@ -1,7 +1,7 @@
 import synthtool as s
 import synthtool.gcp as gcp
+import synthtool.languages.node as node
 import logging
-import subprocess
 
 logging.basicConfig(level=logging.DEBUG)
 
@@ -30,7 +30,4 @@ for version in versions:
 templates = common_templates.node_library(source_location='build/src')
 s.copy(templates)
 
-# Node.js specific cleanup
-subprocess.run(["npm", "install"])
-subprocess.run(["npm", "run", "lint"])
-subprocess.run(['npx', 'compileProtos', 'src'])
+node.postprocess_gapic_library()
