@@ -13,6 +13,7 @@
 # limitations under the License.
 """This script is used to synthesize generated parts of this library."""
 
+import subprocess
 
-node.install()
-node.fix()
+subprocess.run(['npm', 'install'])
+subprocess.run(['npm', 'run', 'generate'])
