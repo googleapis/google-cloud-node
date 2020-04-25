@@ -13,6 +13,7 @@
 # limitations under the License.
 """This script is used to synthesize generated parts of this library."""
 
-
+import subprocess
+import synthtool.languages.node as node
 node.install()
-node.fix()
+subprocess.run(['npm', 'run', 'generate'])
