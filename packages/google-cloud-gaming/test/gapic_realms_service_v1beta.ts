@@ -23,6 +23,8 @@ import {SinonStub} from 'sinon';
 import {describe, it} from 'mocha';
 import * as realmsserviceModule from '../src';
 
+import {PassThrough} from 'stream';
+
 import {protobuf, LROperation} from 'google-gax';
 
 function generateSampleMessage<T extends object>(instance: T) {
@@ -80,6 +82,67 @@ function stubLongRunningCallWithCallback<ResponseType>(
   return callError
     ? sinon.stub().callsArgWith(2, callError)
     : sinon.stub().callsArgWith(2, null, mockOperation);
+}
+
+function stubPageStreamingCall<ResponseType>(
+  responses?: ResponseType[],
+  error?: Error
+) {
+  const pagingStub = sinon.stub();
+  if (responses) {
+    for (let i = 0; i < responses.length; ++i) {
+      pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
+    }
+  }
+  const transformStub = error
+    ? sinon.stub().callsArgWith(2, error)
+    : pagingStub;
+  const mockStream = new PassThrough({
+    objectMode: true,
+    transform: transformStub,
+  });
+  // trigger as many responses as needed
+  if (responses) {
+    for (let i = 0; i < responses.length; ++i) {
+      setImmediate(() => {
+        mockStream.write({});
+      });
+    }
+    setImmediate(() => {
+      mockStream.end();
+    });
+  } else {
+    setImmediate(() => {
+      mockStream.write({});
+    });
+    setImmediate(() => {
+      mockStream.end();
+    });
+  }
+  return sinon.stub().returns(mockStream);
+}
+
+function stubAsyncIterationCall<ResponseType>(
+  responses?: ResponseType[],
+  error?: Error
+) {
+  let counter = 0;
+  const asyncIterable = {
+    [Symbol.asyncIterator]() {
+      return {
+        async next() {
+          if (error) {
+            return Promise.reject(error);
+          }
+          if (counter >= responses!.length) {
+            return Promise.resolve({done: true, value: undefined});
+          }
+          return Promise.resolve({done: false, value: responses![counter++]});
+        },
+      };
+    },
+  };
+  return sinon.stub().returns(asyncIterable);
 }
 
 describe('v1beta.RealmsServiceClient', () => {
@@ -163,120 +226,6 @@ describe('v1beta.RealmsServiceClient', () => {
     });
     const result = await promise;
     assert.strictEqual(result, fakeProjectId);
-  });
-
-  describe('listRealms', () => {
-    it('invokes listRealms without error', async () => {
-      const client = new realmsserviceModule.v1beta.RealmsServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gaming.v1beta.ListRealmsRequest()
-      );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.gaming.v1beta.ListRealmsResponse()
-      );
-      client.innerApiCalls.listRealms = stubSimpleCall(expectedResponse);
-      const [response] = await client.listRealms(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listRealms as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
-    });
-
-    it('invokes listRealms without error using callback', async () => {
-      const client = new realmsserviceModule.v1beta.RealmsServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gaming.v1beta.ListRealmsRequest()
-      );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.gaming.v1beta.ListRealmsResponse()
-      );
-      client.innerApiCalls.listRealms = stubSimpleCallWithCallback(
-        expectedResponse
-      );
-      const promise = new Promise((resolve, reject) => {
-        client.listRealms(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.gaming.v1beta.IListRealmsResponse | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listRealms as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
-    });
-
-    it('invokes listRealms with error', async () => {
-      const client = new realmsserviceModule.v1beta.RealmsServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gaming.v1beta.ListRealmsRequest()
-      );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listRealms = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(async () => {
-        await client.listRealms(request);
-      }, expectedError);
-      assert(
-        (client.innerApiCalls.listRealms as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
-    });
   });
 
   describe('getRealm', () => {
@@ -980,6 +929,298 @@ describe('v1beta.RealmsServiceClient', () => {
         (client.innerApiCalls.updateRealm as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
+      );
+    });
+  });
+
+  describe('listRealms', () => {
+    it('invokes listRealms without error', async () => {
+      const client = new realmsserviceModule.v1beta.RealmsServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.gaming.v1beta.ListRealmsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = [
+        generateSampleMessage(new protos.google.cloud.gaming.v1beta.Realm()),
+        generateSampleMessage(new protos.google.cloud.gaming.v1beta.Realm()),
+        generateSampleMessage(new protos.google.cloud.gaming.v1beta.Realm()),
+      ];
+      client.innerApiCalls.listRealms = stubSimpleCall(expectedResponse);
+      const [response] = await client.listRealms(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.listRealms as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes listRealms without error using callback', async () => {
+      const client = new realmsserviceModule.v1beta.RealmsServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.gaming.v1beta.ListRealmsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = [
+        generateSampleMessage(new protos.google.cloud.gaming.v1beta.Realm()),
+        generateSampleMessage(new protos.google.cloud.gaming.v1beta.Realm()),
+        generateSampleMessage(new protos.google.cloud.gaming.v1beta.Realm()),
+      ];
+      client.innerApiCalls.listRealms = stubSimpleCallWithCallback(
+        expectedResponse
+      );
+      const promise = new Promise((resolve, reject) => {
+        client.listRealms(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.gaming.v1beta.IRealm[] | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.listRealms as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes listRealms with error', async () => {
+      const client = new realmsserviceModule.v1beta.RealmsServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.gaming.v1beta.ListRealmsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listRealms = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(async () => {
+        await client.listRealms(request);
+      }, expectedError);
+      assert(
+        (client.innerApiCalls.listRealms as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes listRealmsStream without error', async () => {
+      const client = new realmsserviceModule.v1beta.RealmsServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.gaming.v1beta.ListRealmsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedResponse = [
+        generateSampleMessage(new protos.google.cloud.gaming.v1beta.Realm()),
+        generateSampleMessage(new protos.google.cloud.gaming.v1beta.Realm()),
+        generateSampleMessage(new protos.google.cloud.gaming.v1beta.Realm()),
+      ];
+      client.descriptors.page.listRealms.createStream = stubPageStreamingCall(
+        expectedResponse
+      );
+      const stream = client.listRealmsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.gaming.v1beta.Realm[] = [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.gaming.v1beta.Realm) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (client.descriptors.page.listRealms.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listRealms, request)
+      );
+      assert.strictEqual(
+        (client.descriptors.page.listRealms.createStream as SinonStub).getCall(
+          0
+        ).args[2].otherArgs.headers['x-goog-request-params'],
+        expectedHeaderRequestParams
+      );
+    });
+
+    it('invokes listRealmsStream with error', async () => {
+      const client = new realmsserviceModule.v1beta.RealmsServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.gaming.v1beta.ListRealmsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('expected');
+      client.descriptors.page.listRealms.createStream = stubPageStreamingCall(
+        undefined,
+        expectedError
+      );
+      const stream = client.listRealmsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.gaming.v1beta.Realm[] = [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.gaming.v1beta.Realm) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(async () => {
+        await promise;
+      }, expectedError);
+      assert(
+        (client.descriptors.page.listRealms.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listRealms, request)
+      );
+      assert.strictEqual(
+        (client.descriptors.page.listRealms.createStream as SinonStub).getCall(
+          0
+        ).args[2].otherArgs.headers['x-goog-request-params'],
+        expectedHeaderRequestParams
+      );
+    });
+
+    it('uses async iteration with listRealms without error', async () => {
+      const client = new realmsserviceModule.v1beta.RealmsServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.gaming.v1beta.ListRealmsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedResponse = [
+        generateSampleMessage(new protos.google.cloud.gaming.v1beta.Realm()),
+        generateSampleMessage(new protos.google.cloud.gaming.v1beta.Realm()),
+        generateSampleMessage(new protos.google.cloud.gaming.v1beta.Realm()),
+      ];
+      client.descriptors.page.listRealms.asyncIterate = stubAsyncIterationCall(
+        expectedResponse
+      );
+      const responses: protos.google.cloud.gaming.v1beta.IRealm[] = [];
+      const iterable = client.listRealmsAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (client.descriptors.page.listRealms.asyncIterate as SinonStub).getCall(
+          0
+        ).args[1],
+        request
+      );
+      assert.strictEqual(
+        (client.descriptors.page.listRealms.asyncIterate as SinonStub).getCall(
+          0
+        ).args[2].otherArgs.headers['x-goog-request-params'],
+        expectedHeaderRequestParams
+      );
+    });
+
+    it('uses async iteration with listRealms with error', async () => {
+      const client = new realmsserviceModule.v1beta.RealmsServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.gaming.v1beta.ListRealmsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('expected');
+      client.descriptors.page.listRealms.asyncIterate = stubAsyncIterationCall(
+        undefined,
+        expectedError
+      );
+      const iterable = client.listRealmsAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.cloud.gaming.v1beta.IRealm[] = [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (client.descriptors.page.listRealms.asyncIterate as SinonStub).getCall(
+          0
+        ).args[1],
+        request
+      );
+      assert.strictEqual(
+        (client.descriptors.page.listRealms.asyncIterate as SinonStub).getCall(
+          0
+        ).args[2].otherArgs.headers['x-goog-request-params'],
+        expectedHeaderRequestParams
       );
     });
   });

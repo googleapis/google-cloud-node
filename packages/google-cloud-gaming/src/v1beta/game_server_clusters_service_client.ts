@@ -23,9 +23,13 @@ import {
   Descriptors,
   ClientOptions,
   LROperation,
+  PaginationCallback,
+  GaxCall,
 } from 'google-gax';
 import * as path from 'path';
 
+import {Transform} from 'stream';
+import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
 import * as gapicConfig from './game_server_clusters_service_client_config.json';
 
@@ -171,6 +175,17 @@ export class GameServerClustersServiceClient {
       ),
       realmPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/realms/{realm}'
+      ),
+    };
+
+    // Some of the methods on this service return "paged" results,
+    // (e.g. 50 results at a time, with tokens to get subsequent
+    // pages). Denote the keys used for pagination and results.
+    this.descriptors.page = {
+      listGameServerClusters: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'gameServerClusters'
       ),
     };
 
@@ -373,102 +388,6 @@ export class GameServerClustersServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
-  listGameServerClusters(
-    request: protos.google.cloud.gaming.v1beta.IListGameServerClustersRequest,
-    options?: gax.CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.gaming.v1beta.IListGameServerClustersResponse,
-      (
-        | protos.google.cloud.gaming.v1beta.IListGameServerClustersRequest
-        | undefined
-      ),
-      {} | undefined
-    ]
-  >;
-  listGameServerClusters(
-    request: protos.google.cloud.gaming.v1beta.IListGameServerClustersRequest,
-    options: gax.CallOptions,
-    callback: Callback<
-      protos.google.cloud.gaming.v1beta.IListGameServerClustersResponse,
-      | protos.google.cloud.gaming.v1beta.IListGameServerClustersRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  listGameServerClusters(
-    request: protos.google.cloud.gaming.v1beta.IListGameServerClustersRequest,
-    callback: Callback<
-      protos.google.cloud.gaming.v1beta.IListGameServerClustersResponse,
-      | protos.google.cloud.gaming.v1beta.IListGameServerClustersRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  /**
-   * Lists Game Server Clusters in a given project and location.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [ListGameServerClustersResponse]{@link google.cloud.gaming.v1beta.ListGameServerClustersResponse}.
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
-   */
-  listGameServerClusters(
-    request: protos.google.cloud.gaming.v1beta.IListGameServerClustersRequest,
-    optionsOrCallback?:
-      | gax.CallOptions
-      | Callback<
-          protos.google.cloud.gaming.v1beta.IListGameServerClustersResponse,
-          | protos.google.cloud.gaming.v1beta.IListGameServerClustersRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.gaming.v1beta.IListGameServerClustersResponse,
-      | protos.google.cloud.gaming.v1beta.IListGameServerClustersRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.gaming.v1beta.IListGameServerClustersResponse,
-      (
-        | protos.google.cloud.gaming.v1beta.IListGameServerClustersRequest
-        | undefined
-      ),
-      {} | undefined
-    ]
-  > | void {
-    request = request || {};
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      parent: request.parent || '',
-    });
-    this.initialize();
-    return this.innerApiCalls.listGameServerClusters(
-      request,
-      options,
-      callback
-    );
-  }
   getGameServerCluster(
     request: protos.google.cloud.gaming.v1beta.IGetGameServerClusterRequest,
     options?: gax.CallOptions
@@ -508,6 +427,10 @@ export class GameServerClustersServiceClient {
    *
    * @param {Object} request
    *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the Game Server Cluster to retrieve. Uses the form:
+   *
+   *   `projects/{project}/locations/{location}/realms/{realm-id}/gameServerClusters/{cluster}`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -601,6 +524,15 @@ export class GameServerClustersServiceClient {
    *
    * @param {Object} request
    *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource name. Uses the form:
+   *   `projects/{project}/locations/{location}/realms/{realm}`.
+   * @param {string} request.gameServerClusterId
+   *   Required. The ID of the Game Server Cluster resource to be created.
+   * @param {google.cloud.gaming.v1beta.GameServerCluster} request.gameServerCluster
+   *   Required. The Game Server Cluster resource to be created.
+   * @param {google.protobuf.Timestamp} [request.previewTime]
+   *   Optional. The target timestamp to compute the preview.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -697,6 +629,11 @@ export class GameServerClustersServiceClient {
    *
    * @param {Object} request
    *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the Game Server Cluster to delete. Uses the form:
+   *   `projects/{project}/locations/{location}/gameServerClusters/{cluster}`.
+   * @param {google.protobuf.Timestamp} [request.previewTime]
+   *   Optional. The target timestamp to compute the preview.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -793,6 +730,18 @@ export class GameServerClustersServiceClient {
    *
    * @param {Object} request
    *   The request object that will be sent.
+   * @param {google.cloud.gaming.v1beta.GameServerCluster} request.gameServerCluster
+   *   Required. The Game Server Cluster to be updated.
+   *   Only fields specified in update_mask are updated.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Required. Mask of fields to update. At least one path must be supplied in
+   *   this field. For the `FieldMask` definition, see
+   *
+   *   https:
+   *   //developers.google.com/protocol-buffers
+   *   // /docs/reference/google.protobuf#fieldmask
+   * @param {google.protobuf.Timestamp} [request.previewTime]
+   *   Optional. The target timestamp to compute the preview.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -892,6 +841,13 @@ export class GameServerClustersServiceClient {
    *
    * @param {Object} request
    *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource name. Uses the form:
+   *   `projects/{project}/locations/{location}/realms/{realm-id}`.
+   * @param {string} request.gameServerClusterId
+   *   Required. The ID of the Game Server Cluster resource to be created.
+   * @param {google.cloud.gaming.v1beta.GameServerCluster} request.gameServerCluster
+   *   Required. The Game Server Cluster resource to be created.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -992,6 +948,9 @@ export class GameServerClustersServiceClient {
    *
    * @param {Object} request
    *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the Game Server Cluster to delete. Uses the form:
+   *   `projects/{project}/locations/{location}/gameServerClusters/{cluster}`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1092,6 +1051,16 @@ export class GameServerClustersServiceClient {
    *
    * @param {Object} request
    *   The request object that will be sent.
+   * @param {google.cloud.gaming.v1beta.GameServerCluster} request.gameServerCluster
+   *   Required. The Game Server Cluster to be updated.
+   *   Only fields specified in update_mask are updated.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Required. Mask of fields to update. At least one path must be supplied in
+   *   this field. For the `FieldMask` definition, see
+   *
+   *   https:
+   *   //developers.google.com/protocol-buffers
+   *   // /docs/reference/google.protobuf#fieldmask
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1150,6 +1119,233 @@ export class GameServerClustersServiceClient {
       options,
       callback
     );
+  }
+  listGameServerClusters(
+    request: protos.google.cloud.gaming.v1beta.IListGameServerClustersRequest,
+    options?: gax.CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.gaming.v1beta.IGameServerCluster[],
+      protos.google.cloud.gaming.v1beta.IListGameServerClustersRequest | null,
+      protos.google.cloud.gaming.v1beta.IListGameServerClustersResponse
+    ]
+  >;
+  listGameServerClusters(
+    request: protos.google.cloud.gaming.v1beta.IListGameServerClustersRequest,
+    options: gax.CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.gaming.v1beta.IListGameServerClustersRequest,
+      | protos.google.cloud.gaming.v1beta.IListGameServerClustersResponse
+      | null
+      | undefined,
+      protos.google.cloud.gaming.v1beta.IGameServerCluster
+    >
+  ): void;
+  listGameServerClusters(
+    request: protos.google.cloud.gaming.v1beta.IListGameServerClustersRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.gaming.v1beta.IListGameServerClustersRequest,
+      | protos.google.cloud.gaming.v1beta.IListGameServerClustersResponse
+      | null
+      | undefined,
+      protos.google.cloud.gaming.v1beta.IGameServerCluster
+    >
+  ): void;
+  /**
+   * Lists Game Server Clusters in a given project and location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource name. Uses the form:
+   *   "projects/{project}/locations/{location}/realms/{realm}".
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of items to return.  If unspecified, server
+   *   will pick an appropriate default. Server may return fewer items than
+   *   requested. A caller should only rely on response's
+   *   {@link google.cloud.gaming.v1beta.ListGameServerClustersResponse.next_page_token|next_page_token} to
+   *   determine if there are more GameServerClusters left to be queried.
+   * @param {string} [request.pageToken]
+   *   Optional. The next_page_token value returned from a previous List request, if any.
+   * @param {string} [request.filter]
+   *   Optional. The filter to apply to list results.
+   * @param {string} [request.orderBy]
+   *   Optional. Specifies the ordering of results following syntax at
+   *   https://cloud.google.com/apis/design/design_patterns#sorting_order.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of [GameServerCluster]{@link google.cloud.gaming.v1beta.GameServerCluster}.
+   *   The client library support auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *
+   *   When autoPaginate: false is specified through options, the array has three elements.
+   *   The first element is Array of [GameServerCluster]{@link google.cloud.gaming.v1beta.GameServerCluster} that corresponds to
+   *   the one page received from the API server.
+   *   If the second element is not null it contains the request object of type [ListGameServerClustersRequest]{@link google.cloud.gaming.v1beta.ListGameServerClustersRequest}
+   *   that can be used to obtain the next page of the results.
+   *   If it is null, the next page does not exist.
+   *   The third element contains the raw response received from the API server. Its type is
+   *   [ListGameServerClustersResponse]{@link google.cloud.gaming.v1beta.ListGameServerClustersResponse}.
+   *
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   */
+  listGameServerClusters(
+    request: protos.google.cloud.gaming.v1beta.IListGameServerClustersRequest,
+    optionsOrCallback?:
+      | gax.CallOptions
+      | PaginationCallback<
+          protos.google.cloud.gaming.v1beta.IListGameServerClustersRequest,
+          | protos.google.cloud.gaming.v1beta.IListGameServerClustersResponse
+          | null
+          | undefined,
+          protos.google.cloud.gaming.v1beta.IGameServerCluster
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.gaming.v1beta.IListGameServerClustersRequest,
+      | protos.google.cloud.gaming.v1beta.IListGameServerClustersResponse
+      | null
+      | undefined,
+      protos.google.cloud.gaming.v1beta.IGameServerCluster
+    >
+  ): Promise<
+    [
+      protos.google.cloud.gaming.v1beta.IGameServerCluster[],
+      protos.google.cloud.gaming.v1beta.IListGameServerClustersRequest | null,
+      protos.google.cloud.gaming.v1beta.IListGameServerClustersResponse
+    ]
+  > | void {
+    request = request || {};
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      parent: request.parent || '',
+    });
+    this.initialize();
+    return this.innerApiCalls.listGameServerClusters(
+      request,
+      options,
+      callback
+    );
+  }
+
+  /**
+   * Equivalent to {@link listGameServerClusters}, but returns a NodeJS Stream object.
+   *
+   * This fetches the paged responses for {@link listGameServerClusters} continuously
+   * and invokes the callback registered for 'data' event for each element in the
+   * responses.
+   *
+   * The returned object has 'end' method when no more elements are required.
+   *
+   * autoPaginate option will be ignored.
+   *
+   * @see {@link https://nodejs.org/api/stream.html}
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource name. Uses the form:
+   *   "projects/{project}/locations/{location}/realms/{realm}".
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of items to return.  If unspecified, server
+   *   will pick an appropriate default. Server may return fewer items than
+   *   requested. A caller should only rely on response's
+   *   {@link google.cloud.gaming.v1beta.ListGameServerClustersResponse.next_page_token|next_page_token} to
+   *   determine if there are more GameServerClusters left to be queried.
+   * @param {string} [request.pageToken]
+   *   Optional. The next_page_token value returned from a previous List request, if any.
+   * @param {string} [request.filter]
+   *   Optional. The filter to apply to list results.
+   * @param {string} [request.orderBy]
+   *   Optional. Specifies the ordering of results following syntax at
+   *   https://cloud.google.com/apis/design/design_patterns#sorting_order.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing [GameServerCluster]{@link google.cloud.gaming.v1beta.GameServerCluster} on 'data' event.
+   */
+  listGameServerClustersStream(
+    request?: protos.google.cloud.gaming.v1beta.IListGameServerClustersRequest,
+    options?: gax.CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      parent: request.parent || '',
+    });
+    const callSettings = new gax.CallSettings(options);
+    this.initialize();
+    return this.descriptors.page.listGameServerClusters.createStream(
+      this.innerApiCalls.listGameServerClusters as gax.GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to {@link listGameServerClusters}, but returns an iterable object.
+   *
+   * for-await-of syntax is used with the iterable to recursively get response element on-demand.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource name. Uses the form:
+   *   "projects/{project}/locations/{location}/realms/{realm}".
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of items to return.  If unspecified, server
+   *   will pick an appropriate default. Server may return fewer items than
+   *   requested. A caller should only rely on response's
+   *   {@link google.cloud.gaming.v1beta.ListGameServerClustersResponse.next_page_token|next_page_token} to
+   *   determine if there are more GameServerClusters left to be queried.
+   * @param {string} [request.pageToken]
+   *   Optional. The next_page_token value returned from a previous List request, if any.
+   * @param {string} [request.filter]
+   *   Optional. The filter to apply to list results.
+   * @param {string} [request.orderBy]
+   *   Optional. Specifies the ordering of results following syntax at
+   *   https://cloud.google.com/apis/design/design_patterns#sorting_order.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that conforms to @link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols.
+   */
+  listGameServerClustersAsync(
+    request?: protos.google.cloud.gaming.v1beta.IListGameServerClustersRequest,
+    options?: gax.CallOptions
+  ): AsyncIterable<protos.google.cloud.gaming.v1beta.IGameServerCluster> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      parent: request.parent || '',
+    });
+    options = options || {};
+    const callSettings = new gax.CallSettings(options);
+    this.initialize();
+    return this.descriptors.page.listGameServerClusters.asyncIterate(
+      this.innerApiCalls['listGameServerClusters'] as GaxCall,
+      (request as unknown) as RequestType,
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.gaming.v1beta.IGameServerCluster>;
   }
   // --------------------
   // -- Path templates --
