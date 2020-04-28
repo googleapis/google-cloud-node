@@ -1,4 +1,4 @@
-// Copyright 2018 Google LLC
+// Copyright 2020 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -14,32 +14,42 @@
 
 'use strict';
 
-// [START kms_quickstart]
-async function quickstart(
-  projectId = 'your-project-id' // Your GCP projectId
-) {
-  // Imports the @google-cloud/kms client library
-  const kms = require('@google-cloud/kms');
+async function main(projectId = 'my-project', locationId = 'us-east1') {
+  // [START kms_quickstart]
+  //
+  // TODO(developer): Uncomment these variables before running the sample.
+  //
+  // const projectId = 'my-project';
+  // const locationId = 'us-east1';
 
-  // Instantiates an authorized client
-  const client = new kms.KeyManagementServiceClient();
+  // Imports the Cloud KMS library
+  const {KeyManagementServiceClient} = require('@google-cloud/kms');
 
-  // Lists keys in the "global" location.
-  const locationId = 'global';
+  // Instantiates a client
+  const client = new KeyManagementServiceClient();
 
-  // Lists key rings
-  const parent = client.locationPath(projectId, locationId);
-  const [keyRings] = await client.listKeyRings({parent});
+  // Build the location name
+  const locationName = client.locationPath(projectId, locationId);
 
-  // Display the results
-  if (keyRings.length) {
-    console.log('Key rings:');
-    keyRings.forEach(keyRing => console.log(keyRing.name));
-  } else {
-    console.log('No key rings found.');
+  async function listKeyRings() {
+    const [keyRings] = await client.listKeyRings({
+      parent: locationName,
+    });
+
+    for (const keyRing of keyRings) {
+      console.log(keyRing.name);
+    }
+
+    return keyRings;
   }
-}
-// [END kms_quickstart]
 
-const args = process.argv.slice(2);
-quickstart(...args).catch(console.error);
+  return listKeyRings();
+  // [END kms_quickstart]
+}
+module.exports.main = main;
+
+/* c8 ignore next 4 */
+if (require.main === module) {
+  const args = process.argv.slice(2);
+  main(...args).catch(console.error);
+}

@@ -2,24 +2,24 @@
   "name": "nodejs-kms-samples",
   "private": true,
   "license": "Apache-2.0",
-  "author": "Google Inc.",
-  "repository": "googleapis/nodejs-kms",
   "files": [
     "*.js"
   ],
+  "author": "Google LLC",
+  "repository": "googleapis/nodejs-kms",
   "engines": {
     "node": ">=8"
   },
   "scripts": {
-    "test": "mocha system-test"
+    "test": "c8 mocha --recursive test/ --timeout=800000"
   },
   "dependencies": {
     "@google-cloud/kms": "^2.0.0"
   },
   "devDependencies": {
+    "c8": "^7.0.0",
     "chai": "^4.2.0",
     "mocha": "^7.0.0",
-    "uuid": "^7.0.2",
-    "yargs": "^15.0.0"
+    "uuid": "^3.3.3"
   }
 }
