@@ -358,42 +358,38 @@ export class PredictionServiceClient {
    * returned in the response.
    * Available for following ML scenarios, and their expected request payloads:
    *
-   * <table>
-   * <tr>
-   * <td>AutoML Vision Classification</td>
-   * <td>An image in .JPEG, .GIF or .PNG format, image_bytes up to 30MB.</td>
-   * </tr>
-   * <tr>
-   * <td>AutoML Vision Object Detection</td>
-   * <td>An image in .JPEG, .GIF or .PNG format, image_bytes up to 30MB.</td>
-   * </tr>
-   * <tr>
-   * <td>AutoML Natural Language Classification</td>
-   * <td>A TextSnippet up to 60,000 characters, UTF-8 encoded or a document in
-   * .PDF, .TIF or .TIFF format with size upto 2MB.</td>
-   * </tr>
-   * <tr>
-   * <td>AutoML Natural Language Entity Extraction</td>
-   * <td>A TextSnippet up to 10,000 characters, UTF-8 NFC encoded or a document
-   *  in .PDF, .TIF or .TIFF format with size upto 20MB.</td>
-   * </tr>
-   * <tr>
-   * <td>AutoML Natural Language Sentiment Analysis</td>
-   * <td>A TextSnippet up to 60,000 characters, UTF-8 encoded or a document in
-   * .PDF, .TIF or .TIFF format with size upto 2MB.</td>
-   * </tr>
-   * <tr>
-   * <td>AutoML Translation</td>
-   * <td>A TextSnippet up to 25,000 characters, UTF-8 encoded.</td>
-   * </tr>
-   * <tr>
-   * <td>AutoML Tables</td>
-   * <td>A row with column values matching
+   * AutoML Vision Classification
+   *
+   * * An image in .JPEG, .GIF or .PNG format, image_bytes up to 30MB.
+   *
+   * AutoML Vision Object Detection
+   *
+   * * An image in .JPEG, .GIF or .PNG format, image_bytes up to 30MB.
+   *
+   * AutoML Natural Language Classification
+   *
+   * * A TextSnippet up to 60,000 characters, UTF-8 encoded or a document in
+   * .PDF, .TIF or .TIFF format with size upto 2MB.
+   *
+   * AutoML Natural Language Entity Extraction
+   *
+   * * A TextSnippet up to 10,000 characters, UTF-8 NFC encoded or a document
+   *  in .PDF, .TIF or .TIFF format with size upto 20MB.
+   *
+   * AutoML Natural Language Sentiment Analysis
+   *
+   * * A TextSnippet up to 60,000 characters, UTF-8 encoded or a document in
+   * .PDF, .TIF or .TIFF format with size upto 2MB.
+   *
+   * AutoML Translation
+   *
+   * * A TextSnippet up to 25,000 characters, UTF-8 encoded.
+   *
+   * AutoML Tables
+   *
+   * * A row with column values matching
    *   the columns of the model, up to 5MB. Not available for FORECASTING
    *   `prediction_type`.
-   * </td>
-   * </tr>
-   * </table>
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -406,14 +402,14 @@ export class PredictionServiceClient {
    *   Additional domain-specific parameters, any string must be up to 25000
    *   characters long.
    *
-   *   <h4>AutoML Vision Classification</h4>
+   *   AutoML Vision Classification
    *
    *   `score_threshold`
    *   : (float) A value from 0.0 to 1.0. When the model
    *     makes predictions for an image, it will only produce results that have
    *     at least this confidence score. The default is 0.5.
    *
-   *   <h4>AutoML Vision Object Detection</h4>
+   *   AutoML Vision Object Detection
    *
    *   `score_threshold`
    *   : (float) When Model detects objects on the image,
@@ -425,7 +421,7 @@ export class PredictionServiceClient {
    *     boxes returned. The default is 100. The
    *     number of returned bounding boxes might be limited by the server.
    *
-   *   <h4>AutoML Tables</h4>
+   *   AutoML Tables
    *
    *   `feature_importance`
    *   : (boolean) Whether
@@ -547,7 +543,7 @@ export class PredictionServiceClient {
    *   Additional domain-specific parameters for the predictions, any string must
    *   be up to 25000 characters long.
    *
-   *   <h4>AutoML Natural Language Classification</h4>
+   *   AutoML Natural Language Classification
    *
    *   `score_threshold`
    *   : (float) A value from 0.0 to 1.0. When the model
@@ -555,14 +551,14 @@ export class PredictionServiceClient {
    *     that have at least this confidence score. The default is 0.5.
    *
    *
-   *   <h4>AutoML Vision Classification</h4>
+   *   AutoML Vision Classification
    *
    *   `score_threshold`
    *   : (float) A value from 0.0 to 1.0. When the model
    *     makes predictions for an image, it will only produce results that
    *     have at least this confidence score. The default is 0.5.
    *
-   *   <h4>AutoML Vision Object Detection</h4>
+   *   AutoML Vision Object Detection
    *
    *   `score_threshold`
    *   : (float) When Model detects objects on the image,
@@ -573,7 +569,7 @@ export class PredictionServiceClient {
    *   : (int64) The maximum number of bounding
    *     boxes returned per image. The default is 100, the
    *     number of bounding boxes returned might be limited by the server.
-   *   <h4>AutoML Video Intelligence Classification</h4>
+   *   AutoML Video Intelligence Classification
    *
    *   `score_threshold`
    *   : (float) A value from 0.0 to 1.0. When the model
@@ -611,7 +607,7 @@ export class PredictionServiceClient {
    *     type, the quality of it depends on training data, but there are no
    *     metrics provided to describe that quality.
    *
-   *   <h4>AutoML Video Intelligence Object Tracking</h4>
+   *   AutoML Video Intelligence Object Tracking
    *
    *   `score_threshold`
    *   : (float) When Model detects objects on video frames,
