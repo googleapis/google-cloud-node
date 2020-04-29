@@ -8088,6 +8088,7 @@
                          * @property {Array.<string>|null} [assetTypes] SearchAllResourcesRequest assetTypes
                          * @property {number|null} [pageSize] SearchAllResourcesRequest pageSize
                          * @property {string|null} [pageToken] SearchAllResourcesRequest pageToken
+                         * @property {string|null} [orderBy] SearchAllResourcesRequest orderBy
                          */
     
                         /**
@@ -8147,6 +8148,14 @@
                         SearchAllResourcesRequest.prototype.pageToken = "";
     
                         /**
+                         * SearchAllResourcesRequest orderBy.
+                         * @member {string} orderBy
+                         * @memberof google.cloud.asset.v1p1beta1.SearchAllResourcesRequest
+                         * @instance
+                         */
+                        SearchAllResourcesRequest.prototype.orderBy = "";
+    
+                        /**
                          * Creates a new SearchAllResourcesRequest instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.asset.v1p1beta1.SearchAllResourcesRequest
@@ -8181,6 +8190,8 @@
                                 writer.uint32(/* id 4, wireType 0 =*/32).int32(message.pageSize);
                             if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
                                 writer.uint32(/* id 5, wireType 2 =*/42).string(message.pageToken);
+                            if (message.orderBy != null && Object.hasOwnProperty.call(message, "orderBy"))
+                                writer.uint32(/* id 10, wireType 2 =*/82).string(message.orderBy);
                             return writer;
                         };
     
@@ -8231,6 +8242,9 @@
                                     break;
                                 case 5:
                                     message.pageToken = reader.string();
+                                    break;
+                                case 10:
+                                    message.orderBy = reader.string();
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -8286,6 +8300,9 @@
                             if (message.pageToken != null && message.hasOwnProperty("pageToken"))
                                 if (!$util.isString(message.pageToken))
                                     return "pageToken: string expected";
+                            if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                if (!$util.isString(message.orderBy))
+                                    return "orderBy: string expected";
                             return null;
                         };
     
@@ -8316,6 +8333,8 @@
                                 message.pageSize = object.pageSize | 0;
                             if (object.pageToken != null)
                                 message.pageToken = String(object.pageToken);
+                            if (object.orderBy != null)
+                                message.orderBy = String(object.orderBy);
                             return message;
                         };
     
@@ -8339,6 +8358,7 @@
                                 object.query = "";
                                 object.pageSize = 0;
                                 object.pageToken = "";
+                                object.orderBy = "";
                             }
                             if (message.scope != null && message.hasOwnProperty("scope"))
                                 object.scope = message.scope;
@@ -8353,6 +8373,8 @@
                                 object.pageSize = message.pageSize;
                             if (message.pageToken != null && message.hasOwnProperty("pageToken"))
                                 object.pageToken = message.pageToken;
+                            if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                object.orderBy = message.orderBy;
                             return object;
                         };
     
@@ -9098,6 +9120,9 @@
                          * @property {string|null} [displayName] StandardResourceMetadata displayName
                          * @property {string|null} [description] StandardResourceMetadata description
                          * @property {Array.<string>|null} [additionalAttributes] StandardResourceMetadata additionalAttributes
+                         * @property {string|null} [location] StandardResourceMetadata location
+                         * @property {Object.<string,string>|null} [labels] StandardResourceMetadata labels
+                         * @property {Array.<string>|null} [networkTags] StandardResourceMetadata networkTags
                          */
     
                         /**
@@ -9110,6 +9135,8 @@
                          */
                         function StandardResourceMetadata(properties) {
                             this.additionalAttributes = [];
+                            this.labels = {};
+                            this.networkTags = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -9165,6 +9192,30 @@
                         StandardResourceMetadata.prototype.additionalAttributes = $util.emptyArray;
     
                         /**
+                         * StandardResourceMetadata location.
+                         * @member {string} location
+                         * @memberof google.cloud.asset.v1p1beta1.StandardResourceMetadata
+                         * @instance
+                         */
+                        StandardResourceMetadata.prototype.location = "";
+    
+                        /**
+                         * StandardResourceMetadata labels.
+                         * @member {Object.<string,string>} labels
+                         * @memberof google.cloud.asset.v1p1beta1.StandardResourceMetadata
+                         * @instance
+                         */
+                        StandardResourceMetadata.prototype.labels = $util.emptyObject;
+    
+                        /**
+                         * StandardResourceMetadata networkTags.
+                         * @member {Array.<string>} networkTags
+                         * @memberof google.cloud.asset.v1p1beta1.StandardResourceMetadata
+                         * @instance
+                         */
+                        StandardResourceMetadata.prototype.networkTags = $util.emptyArray;
+    
+                        /**
                          * Creates a new StandardResourceMetadata instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.asset.v1p1beta1.StandardResourceMetadata
@@ -9201,6 +9252,14 @@
                             if (message.additionalAttributes != null && message.additionalAttributes.length)
                                 for (var i = 0; i < message.additionalAttributes.length; ++i)
                                     writer.uint32(/* id 10, wireType 2 =*/82).string(message.additionalAttributes[i]);
+                            if (message.location != null && Object.hasOwnProperty.call(message, "location"))
+                                writer.uint32(/* id 11, wireType 2 =*/90).string(message.location);
+                            if (message.labels != null && Object.hasOwnProperty.call(message, "labels"))
+                                for (var keys = Object.keys(message.labels), i = 0; i < keys.length; ++i)
+                                    writer.uint32(/* id 12, wireType 2 =*/98).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.labels[keys[i]]).ldelim();
+                            if (message.networkTags != null && message.networkTags.length)
+                                for (var i = 0; i < message.networkTags.length; ++i)
+                                    writer.uint32(/* id 13, wireType 2 =*/106).string(message.networkTags[i]);
                             return writer;
                         };
     
@@ -9231,7 +9290,7 @@
                         StandardResourceMetadata.decode = function decode(reader, length) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1p1beta1.StandardResourceMetadata();
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1p1beta1.StandardResourceMetadata(), key;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
@@ -9254,6 +9313,22 @@
                                     if (!(message.additionalAttributes && message.additionalAttributes.length))
                                         message.additionalAttributes = [];
                                     message.additionalAttributes.push(reader.string());
+                                    break;
+                                case 11:
+                                    message.location = reader.string();
+                                    break;
+                                case 12:
+                                    reader.skip().pos++;
+                                    if (message.labels === $util.emptyObject)
+                                        message.labels = {};
+                                    key = reader.string();
+                                    reader.pos++;
+                                    message.labels[key] = reader.string();
+                                    break;
+                                case 13:
+                                    if (!(message.networkTags && message.networkTags.length))
+                                        message.networkTags = [];
+                                    message.networkTags.push(reader.string());
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -9312,6 +9387,24 @@
                                     if (!$util.isString(message.additionalAttributes[i]))
                                         return "additionalAttributes: string[] expected";
                             }
+                            if (message.location != null && message.hasOwnProperty("location"))
+                                if (!$util.isString(message.location))
+                                    return "location: string expected";
+                            if (message.labels != null && message.hasOwnProperty("labels")) {
+                                if (!$util.isObject(message.labels))
+                                    return "labels: object expected";
+                                var key = Object.keys(message.labels);
+                                for (var i = 0; i < key.length; ++i)
+                                    if (!$util.isString(message.labels[key[i]]))
+                                        return "labels: string{k:string} expected";
+                            }
+                            if (message.networkTags != null && message.hasOwnProperty("networkTags")) {
+                                if (!Array.isArray(message.networkTags))
+                                    return "networkTags: array expected";
+                                for (var i = 0; i < message.networkTags.length; ++i)
+                                    if (!$util.isString(message.networkTags[i]))
+                                        return "networkTags: string[] expected";
+                            }
                             return null;
                         };
     
@@ -9344,6 +9437,22 @@
                                 for (var i = 0; i < object.additionalAttributes.length; ++i)
                                     message.additionalAttributes[i] = String(object.additionalAttributes[i]);
                             }
+                            if (object.location != null)
+                                message.location = String(object.location);
+                            if (object.labels) {
+                                if (typeof object.labels !== "object")
+                                    throw TypeError(".google.cloud.asset.v1p1beta1.StandardResourceMetadata.labels: object expected");
+                                message.labels = {};
+                                for (var keys = Object.keys(object.labels), i = 0; i < keys.length; ++i)
+                                    message.labels[keys[i]] = String(object.labels[keys[i]]);
+                            }
+                            if (object.networkTags) {
+                                if (!Array.isArray(object.networkTags))
+                                    throw TypeError(".google.cloud.asset.v1p1beta1.StandardResourceMetadata.networkTags: array expected");
+                                message.networkTags = [];
+                                for (var i = 0; i < object.networkTags.length; ++i)
+                                    message.networkTags[i] = String(object.networkTags[i]);
+                            }
                             return message;
                         };
     
@@ -9360,14 +9469,19 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.arrays || options.defaults)
+                            if (options.arrays || options.defaults) {
                                 object.additionalAttributes = [];
+                                object.networkTags = [];
+                            }
+                            if (options.objects || options.defaults)
+                                object.labels = {};
                             if (options.defaults) {
                                 object.name = "";
                                 object.assetType = "";
                                 object.project = "";
                                 object.displayName = "";
                                 object.description = "";
+                                object.location = "";
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -9383,6 +9497,19 @@
                                 object.additionalAttributes = [];
                                 for (var j = 0; j < message.additionalAttributes.length; ++j)
                                     object.additionalAttributes[j] = message.additionalAttributes[j];
+                            }
+                            if (message.location != null && message.hasOwnProperty("location"))
+                                object.location = message.location;
+                            var keys2;
+                            if (message.labels && (keys2 = Object.keys(message.labels)).length) {
+                                object.labels = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.labels[keys2[j]] = message.labels[keys2[j]];
+                            }
+                            if (message.networkTags && message.networkTags.length) {
+                                object.networkTags = [];
+                                for (var j = 0; j < message.networkTags.length; ++j)
+                                    object.networkTags[j] = message.networkTags[j];
                             }
                             return object;
                         };
@@ -9410,6 +9537,7 @@
                          * @property {string|null} [resource] IamPolicySearchResult resource
                          * @property {string|null} [project] IamPolicySearchResult project
                          * @property {google.iam.v1.IPolicy|null} [policy] IamPolicySearchResult policy
+                         * @property {google.cloud.asset.v1p1beta1.IamPolicySearchResult.IExplanation|null} [explanation] IamPolicySearchResult explanation
                          */
     
                         /**
@@ -9452,6 +9580,14 @@
                         IamPolicySearchResult.prototype.policy = null;
     
                         /**
+                         * IamPolicySearchResult explanation.
+                         * @member {google.cloud.asset.v1p1beta1.IamPolicySearchResult.IExplanation|null|undefined} explanation
+                         * @memberof google.cloud.asset.v1p1beta1.IamPolicySearchResult
+                         * @instance
+                         */
+                        IamPolicySearchResult.prototype.explanation = null;
+    
+                        /**
                          * Creates a new IamPolicySearchResult instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.asset.v1p1beta1.IamPolicySearchResult
@@ -9481,6 +9617,8 @@
                                 writer.uint32(/* id 3, wireType 2 =*/26).string(message.project);
                             if (message.policy != null && Object.hasOwnProperty.call(message, "policy"))
                                 $root.google.iam.v1.Policy.encode(message.policy, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.explanation != null && Object.hasOwnProperty.call(message, "explanation"))
+                                $root.google.cloud.asset.v1p1beta1.IamPolicySearchResult.Explanation.encode(message.explanation, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
                             return writer;
                         };
     
@@ -9523,6 +9661,9 @@
                                     break;
                                 case 4:
                                     message.policy = $root.google.iam.v1.Policy.decode(reader, reader.uint32());
+                                    break;
+                                case 5:
+                                    message.explanation = $root.google.cloud.asset.v1p1beta1.IamPolicySearchResult.Explanation.decode(reader, reader.uint32());
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -9570,6 +9711,11 @@
                                 if (error)
                                     return "policy." + error;
                             }
+                            if (message.explanation != null && message.hasOwnProperty("explanation")) {
+                                var error = $root.google.cloud.asset.v1p1beta1.IamPolicySearchResult.Explanation.verify(message.explanation);
+                                if (error)
+                                    return "explanation." + error;
+                            }
                             return null;
                         };
     
@@ -9594,6 +9740,11 @@
                                     throw TypeError(".google.cloud.asset.v1p1beta1.IamPolicySearchResult.policy: object expected");
                                 message.policy = $root.google.iam.v1.Policy.fromObject(object.policy);
                             }
+                            if (object.explanation != null) {
+                                if (typeof object.explanation !== "object")
+                                    throw TypeError(".google.cloud.asset.v1p1beta1.IamPolicySearchResult.explanation: object expected");
+                                message.explanation = $root.google.cloud.asset.v1p1beta1.IamPolicySearchResult.Explanation.fromObject(object.explanation);
+                            }
                             return message;
                         };
     
@@ -9614,6 +9765,7 @@
                                 object.resource = "";
                                 object.project = "";
                                 object.policy = null;
+                                object.explanation = null;
                             }
                             if (message.resource != null && message.hasOwnProperty("resource"))
                                 object.resource = message.resource;
@@ -9621,6 +9773,8 @@
                                 object.project = message.project;
                             if (message.policy != null && message.hasOwnProperty("policy"))
                                 object.policy = $root.google.iam.v1.Policy.toObject(message.policy, options);
+                            if (message.explanation != null && message.hasOwnProperty("explanation"))
+                                object.explanation = $root.google.cloud.asset.v1p1beta1.IamPolicySearchResult.Explanation.toObject(message.explanation, options);
                             return object;
                         };
     
@@ -9635,7 +9789,425 @@
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
     
+                        IamPolicySearchResult.Explanation = (function() {
+    
+                            /**
+                             * Properties of an Explanation.
+                             * @memberof google.cloud.asset.v1p1beta1.IamPolicySearchResult
+                             * @interface IExplanation
+                             * @property {Object.<string,google.cloud.asset.v1p1beta1.IPermissions>|null} [matchedPermissions] Explanation matchedPermissions
+                             */
+    
+                            /**
+                             * Constructs a new Explanation.
+                             * @memberof google.cloud.asset.v1p1beta1.IamPolicySearchResult
+                             * @classdesc Represents an Explanation.
+                             * @implements IExplanation
+                             * @constructor
+                             * @param {google.cloud.asset.v1p1beta1.IamPolicySearchResult.IExplanation=} [properties] Properties to set
+                             */
+                            function Explanation(properties) {
+                                this.matchedPermissions = {};
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * Explanation matchedPermissions.
+                             * @member {Object.<string,google.cloud.asset.v1p1beta1.IPermissions>} matchedPermissions
+                             * @memberof google.cloud.asset.v1p1beta1.IamPolicySearchResult.Explanation
+                             * @instance
+                             */
+                            Explanation.prototype.matchedPermissions = $util.emptyObject;
+    
+                            /**
+                             * Creates a new Explanation instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.asset.v1p1beta1.IamPolicySearchResult.Explanation
+                             * @static
+                             * @param {google.cloud.asset.v1p1beta1.IamPolicySearchResult.IExplanation=} [properties] Properties to set
+                             * @returns {google.cloud.asset.v1p1beta1.IamPolicySearchResult.Explanation} Explanation instance
+                             */
+                            Explanation.create = function create(properties) {
+                                return new Explanation(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified Explanation message. Does not implicitly {@link google.cloud.asset.v1p1beta1.IamPolicySearchResult.Explanation.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.asset.v1p1beta1.IamPolicySearchResult.Explanation
+                             * @static
+                             * @param {google.cloud.asset.v1p1beta1.IamPolicySearchResult.IExplanation} message Explanation message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Explanation.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.matchedPermissions != null && Object.hasOwnProperty.call(message, "matchedPermissions"))
+                                    for (var keys = Object.keys(message.matchedPermissions), i = 0; i < keys.length; ++i) {
+                                        writer.uint32(/* id 1, wireType 2 =*/10).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]);
+                                        $root.google.cloud.asset.v1p1beta1.Permissions.encode(message.matchedPermissions[keys[i]], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim().ldelim();
+                                    }
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified Explanation message, length delimited. Does not implicitly {@link google.cloud.asset.v1p1beta1.IamPolicySearchResult.Explanation.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.asset.v1p1beta1.IamPolicySearchResult.Explanation
+                             * @static
+                             * @param {google.cloud.asset.v1p1beta1.IamPolicySearchResult.IExplanation} message Explanation message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Explanation.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes an Explanation message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.asset.v1p1beta1.IamPolicySearchResult.Explanation
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.asset.v1p1beta1.IamPolicySearchResult.Explanation} Explanation
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Explanation.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1p1beta1.IamPolicySearchResult.Explanation(), key;
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1:
+                                        reader.skip().pos++;
+                                        if (message.matchedPermissions === $util.emptyObject)
+                                            message.matchedPermissions = {};
+                                        key = reader.string();
+                                        reader.pos++;
+                                        message.matchedPermissions[key] = $root.google.cloud.asset.v1p1beta1.Permissions.decode(reader, reader.uint32());
+                                        break;
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes an Explanation message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.asset.v1p1beta1.IamPolicySearchResult.Explanation
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.asset.v1p1beta1.IamPolicySearchResult.Explanation} Explanation
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Explanation.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies an Explanation message.
+                             * @function verify
+                             * @memberof google.cloud.asset.v1p1beta1.IamPolicySearchResult.Explanation
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            Explanation.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.matchedPermissions != null && message.hasOwnProperty("matchedPermissions")) {
+                                    if (!$util.isObject(message.matchedPermissions))
+                                        return "matchedPermissions: object expected";
+                                    var key = Object.keys(message.matchedPermissions);
+                                    for (var i = 0; i < key.length; ++i) {
+                                        var error = $root.google.cloud.asset.v1p1beta1.Permissions.verify(message.matchedPermissions[key[i]]);
+                                        if (error)
+                                            return "matchedPermissions." + error;
+                                    }
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates an Explanation message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.asset.v1p1beta1.IamPolicySearchResult.Explanation
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.asset.v1p1beta1.IamPolicySearchResult.Explanation} Explanation
+                             */
+                            Explanation.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.asset.v1p1beta1.IamPolicySearchResult.Explanation)
+                                    return object;
+                                var message = new $root.google.cloud.asset.v1p1beta1.IamPolicySearchResult.Explanation();
+                                if (object.matchedPermissions) {
+                                    if (typeof object.matchedPermissions !== "object")
+                                        throw TypeError(".google.cloud.asset.v1p1beta1.IamPolicySearchResult.Explanation.matchedPermissions: object expected");
+                                    message.matchedPermissions = {};
+                                    for (var keys = Object.keys(object.matchedPermissions), i = 0; i < keys.length; ++i) {
+                                        if (typeof object.matchedPermissions[keys[i]] !== "object")
+                                            throw TypeError(".google.cloud.asset.v1p1beta1.IamPolicySearchResult.Explanation.matchedPermissions: object expected");
+                                        message.matchedPermissions[keys[i]] = $root.google.cloud.asset.v1p1beta1.Permissions.fromObject(object.matchedPermissions[keys[i]]);
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from an Explanation message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.asset.v1p1beta1.IamPolicySearchResult.Explanation
+                             * @static
+                             * @param {google.cloud.asset.v1p1beta1.IamPolicySearchResult.Explanation} message Explanation
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            Explanation.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.objects || options.defaults)
+                                    object.matchedPermissions = {};
+                                var keys2;
+                                if (message.matchedPermissions && (keys2 = Object.keys(message.matchedPermissions)).length) {
+                                    object.matchedPermissions = {};
+                                    for (var j = 0; j < keys2.length; ++j)
+                                        object.matchedPermissions[keys2[j]] = $root.google.cloud.asset.v1p1beta1.Permissions.toObject(message.matchedPermissions[keys2[j]], options);
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this Explanation to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.asset.v1p1beta1.IamPolicySearchResult.Explanation
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            Explanation.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            return Explanation;
+                        })();
+    
                         return IamPolicySearchResult;
+                    })();
+    
+                    v1p1beta1.Permissions = (function() {
+    
+                        /**
+                         * Properties of a Permissions.
+                         * @memberof google.cloud.asset.v1p1beta1
+                         * @interface IPermissions
+                         * @property {Array.<string>|null} [permissions] Permissions permissions
+                         */
+    
+                        /**
+                         * Constructs a new Permissions.
+                         * @memberof google.cloud.asset.v1p1beta1
+                         * @classdesc Represents a Permissions.
+                         * @implements IPermissions
+                         * @constructor
+                         * @param {google.cloud.asset.v1p1beta1.IPermissions=} [properties] Properties to set
+                         */
+                        function Permissions(properties) {
+                            this.permissions = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Permissions permissions.
+                         * @member {Array.<string>} permissions
+                         * @memberof google.cloud.asset.v1p1beta1.Permissions
+                         * @instance
+                         */
+                        Permissions.prototype.permissions = $util.emptyArray;
+    
+                        /**
+                         * Creates a new Permissions instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.asset.v1p1beta1.Permissions
+                         * @static
+                         * @param {google.cloud.asset.v1p1beta1.IPermissions=} [properties] Properties to set
+                         * @returns {google.cloud.asset.v1p1beta1.Permissions} Permissions instance
+                         */
+                        Permissions.create = function create(properties) {
+                            return new Permissions(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified Permissions message. Does not implicitly {@link google.cloud.asset.v1p1beta1.Permissions.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.asset.v1p1beta1.Permissions
+                         * @static
+                         * @param {google.cloud.asset.v1p1beta1.IPermissions} message Permissions message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Permissions.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.permissions != null && message.permissions.length)
+                                for (var i = 0; i < message.permissions.length; ++i)
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.permissions[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified Permissions message, length delimited. Does not implicitly {@link google.cloud.asset.v1p1beta1.Permissions.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.asset.v1p1beta1.Permissions
+                         * @static
+                         * @param {google.cloud.asset.v1p1beta1.IPermissions} message Permissions message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Permissions.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a Permissions message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.asset.v1p1beta1.Permissions
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.asset.v1p1beta1.Permissions} Permissions
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Permissions.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1p1beta1.Permissions();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    if (!(message.permissions && message.permissions.length))
+                                        message.permissions = [];
+                                    message.permissions.push(reader.string());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a Permissions message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.asset.v1p1beta1.Permissions
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.asset.v1p1beta1.Permissions} Permissions
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Permissions.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a Permissions message.
+                         * @function verify
+                         * @memberof google.cloud.asset.v1p1beta1.Permissions
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        Permissions.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.permissions != null && message.hasOwnProperty("permissions")) {
+                                if (!Array.isArray(message.permissions))
+                                    return "permissions: array expected";
+                                for (var i = 0; i < message.permissions.length; ++i)
+                                    if (!$util.isString(message.permissions[i]))
+                                        return "permissions: string[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a Permissions message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.asset.v1p1beta1.Permissions
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.asset.v1p1beta1.Permissions} Permissions
+                         */
+                        Permissions.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.asset.v1p1beta1.Permissions)
+                                return object;
+                            var message = new $root.google.cloud.asset.v1p1beta1.Permissions();
+                            if (object.permissions) {
+                                if (!Array.isArray(object.permissions))
+                                    throw TypeError(".google.cloud.asset.v1p1beta1.Permissions.permissions: array expected");
+                                message.permissions = [];
+                                for (var i = 0; i < object.permissions.length; ++i)
+                                    message.permissions[i] = String(object.permissions[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a Permissions message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.asset.v1p1beta1.Permissions
+                         * @static
+                         * @param {google.cloud.asset.v1p1beta1.Permissions} message Permissions
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        Permissions.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.permissions = [];
+                            if (message.permissions && message.permissions.length) {
+                                object.permissions = [];
+                                for (var j = 0; j < message.permissions.length; ++j)
+                                    object.permissions[j] = message.permissions[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this Permissions to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.asset.v1p1beta1.Permissions
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        Permissions.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return Permissions;
                     })();
     
                     return v1p1beta1;
