@@ -342,6 +342,7 @@ export class AssetServiceClient {
    *   * Organization number (such as "organizations/123")
    *   * Folder number(such as "folders/1234")
    *   * Project number (such as "projects/12345")
+   *   * Project id (such as "projects/abc")
    * @param {string} [request.query]
    *   Optional. The query statement.
    * @param {string[]} [request.assetTypes]
@@ -357,6 +358,11 @@ export class AssetServiceClient {
    *   to this method.  `page_token` must be the value of `next_page_token` from
    *   the previous response. The values of all other method parameters, must be
    *   identical to those in the previous call.
+   * @param {string} [request.orderBy]
+   *   Optional. A comma separated list of fields specifying the sorting order of the
+   *   results. The default order is ascending. Add " desc" after the field name
+   *   to indicate descending order. Redundant space characters are ignored. For
+   *   example, "  foo ,  bar  desc  ".
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -441,6 +447,7 @@ export class AssetServiceClient {
    *   * Organization number (such as "organizations/123")
    *   * Folder number(such as "folders/1234")
    *   * Project number (such as "projects/12345")
+   *   * Project id (such as "projects/abc")
    * @param {string} [request.query]
    *   Optional. The query statement.
    * @param {string[]} [request.assetTypes]
@@ -456,6 +463,11 @@ export class AssetServiceClient {
    *   to this method.  `page_token` must be the value of `next_page_token` from
    *   the previous response. The values of all other method parameters, must be
    *   identical to those in the previous call.
+   * @param {string} [request.orderBy]
+   *   Optional. A comma separated list of fields specifying the sorting order of the
+   *   results. The default order is ascending. Add " desc" after the field name
+   *   to indicate descending order. Redundant space characters are ignored. For
+   *   example, "  foo ,  bar  desc  ".
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -496,6 +508,7 @@ export class AssetServiceClient {
    *   * Organization number (such as "organizations/123")
    *   * Folder number(such as "folders/1234")
    *   * Project number (such as "projects/12345")
+   *   * Project id (such as "projects/abc")
    * @param {string} [request.query]
    *   Optional. The query statement.
    * @param {string[]} [request.assetTypes]
@@ -511,6 +524,11 @@ export class AssetServiceClient {
    *   to this method.  `page_token` must be the value of `next_page_token` from
    *   the previous response. The values of all other method parameters, must be
    *   identical to those in the previous call.
+   * @param {string} [request.orderBy]
+   *   Optional. A comma separated list of fields specifying the sorting order of the
+   *   results. The default order is ascending. Add " desc" after the field name
+   *   to indicate descending order. Redundant space characters are ignored. For
+   *   example, "  foo ,  bar  desc  ".
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
@@ -589,6 +607,7 @@ export class AssetServiceClient {
    *   * Organization number (such as "organizations/123")
    *   * Folder number(such as "folders/1234")
    *   * Project number (such as "projects/12345")
+   *   * Project id (such as "projects/abc")
    * @param {string} [request.query]
    *   Optional. The query statement.
    *   Examples:
@@ -688,6 +707,7 @@ export class AssetServiceClient {
    *   * Organization number (such as "organizations/123")
    *   * Folder number(such as "folders/1234")
    *   * Project number (such as "projects/12345")
+   *   * Project id (such as "projects/abc")
    * @param {string} [request.query]
    *   Optional. The query statement.
    *   Examples:
@@ -743,6 +763,7 @@ export class AssetServiceClient {
    *   * Organization number (such as "organizations/123")
    *   * Folder number(such as "folders/1234")
    *   * Project number (such as "projects/12345")
+   *   * Project id (such as "projects/abc")
    * @param {string} [request.query]
    *   Optional. The query statement.
    *   Examples:

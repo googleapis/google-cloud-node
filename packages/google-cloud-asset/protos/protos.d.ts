@@ -3418,6 +3418,9 @@ export namespace google {
 
                     /** SearchAllResourcesRequest pageToken */
                     pageToken?: (string|null);
+
+                    /** SearchAllResourcesRequest orderBy */
+                    orderBy?: (string|null);
                 }
 
                 /** Represents a SearchAllResourcesRequest. */
@@ -3443,6 +3446,9 @@ export namespace google {
 
                     /** SearchAllResourcesRequest pageToken. */
                     public pageToken: string;
+
+                    /** SearchAllResourcesRequest orderBy. */
+                    public orderBy: string;
 
                     /**
                      * Creates a new SearchAllResourcesRequest instance using the specified properties.
@@ -3835,6 +3841,15 @@ export namespace google {
 
                     /** StandardResourceMetadata additionalAttributes */
                     additionalAttributes?: (string[]|null);
+
+                    /** StandardResourceMetadata location */
+                    location?: (string|null);
+
+                    /** StandardResourceMetadata labels */
+                    labels?: ({ [k: string]: string }|null);
+
+                    /** StandardResourceMetadata networkTags */
+                    networkTags?: (string[]|null);
                 }
 
                 /** Represents a StandardResourceMetadata. */
@@ -3863,6 +3878,15 @@ export namespace google {
 
                     /** StandardResourceMetadata additionalAttributes. */
                     public additionalAttributes: string[];
+
+                    /** StandardResourceMetadata location. */
+                    public location: string;
+
+                    /** StandardResourceMetadata labels. */
+                    public labels: { [k: string]: string };
+
+                    /** StandardResourceMetadata networkTags. */
+                    public networkTags: string[];
 
                     /**
                      * Creates a new StandardResourceMetadata instance using the specified properties.
@@ -3946,6 +3970,9 @@ export namespace google {
 
                     /** IamPolicySearchResult policy */
                     policy?: (google.iam.v1.IPolicy|null);
+
+                    /** IamPolicySearchResult explanation */
+                    explanation?: (google.cloud.asset.v1p1beta1.IamPolicySearchResult.IExplanation|null);
                 }
 
                 /** Represents an IamPolicySearchResult. */
@@ -3965,6 +3992,9 @@ export namespace google {
 
                     /** IamPolicySearchResult policy. */
                     public policy?: (google.iam.v1.IPolicy|null);
+
+                    /** IamPolicySearchResult explanation. */
+                    public explanation?: (google.cloud.asset.v1p1beta1.IamPolicySearchResult.IExplanation|null);
 
                     /**
                      * Creates a new IamPolicySearchResult instance using the specified properties.
@@ -4032,6 +4062,189 @@ export namespace google {
 
                     /**
                      * Converts this IamPolicySearchResult to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                namespace IamPolicySearchResult {
+
+                    /** Properties of an Explanation. */
+                    interface IExplanation {
+
+                        /** Explanation matchedPermissions */
+                        matchedPermissions?: ({ [k: string]: google.cloud.asset.v1p1beta1.IPermissions }|null);
+                    }
+
+                    /** Represents an Explanation. */
+                    class Explanation implements IExplanation {
+
+                        /**
+                         * Constructs a new Explanation.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.asset.v1p1beta1.IamPolicySearchResult.IExplanation);
+
+                        /** Explanation matchedPermissions. */
+                        public matchedPermissions: { [k: string]: google.cloud.asset.v1p1beta1.IPermissions };
+
+                        /**
+                         * Creates a new Explanation instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns Explanation instance
+                         */
+                        public static create(properties?: google.cloud.asset.v1p1beta1.IamPolicySearchResult.IExplanation): google.cloud.asset.v1p1beta1.IamPolicySearchResult.Explanation;
+
+                        /**
+                         * Encodes the specified Explanation message. Does not implicitly {@link google.cloud.asset.v1p1beta1.IamPolicySearchResult.Explanation.verify|verify} messages.
+                         * @param message Explanation message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.asset.v1p1beta1.IamPolicySearchResult.IExplanation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified Explanation message, length delimited. Does not implicitly {@link google.cloud.asset.v1p1beta1.IamPolicySearchResult.Explanation.verify|verify} messages.
+                         * @param message Explanation message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.asset.v1p1beta1.IamPolicySearchResult.IExplanation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an Explanation message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns Explanation
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.asset.v1p1beta1.IamPolicySearchResult.Explanation;
+
+                        /**
+                         * Decodes an Explanation message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns Explanation
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.asset.v1p1beta1.IamPolicySearchResult.Explanation;
+
+                        /**
+                         * Verifies an Explanation message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an Explanation message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns Explanation
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.asset.v1p1beta1.IamPolicySearchResult.Explanation;
+
+                        /**
+                         * Creates a plain object from an Explanation message. Also converts values to other types if specified.
+                         * @param message Explanation
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.asset.v1p1beta1.IamPolicySearchResult.Explanation, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this Explanation to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+                }
+
+                /** Properties of a Permissions. */
+                interface IPermissions {
+
+                    /** Permissions permissions */
+                    permissions?: (string[]|null);
+                }
+
+                /** Represents a Permissions. */
+                class Permissions implements IPermissions {
+
+                    /**
+                     * Constructs a new Permissions.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.asset.v1p1beta1.IPermissions);
+
+                    /** Permissions permissions. */
+                    public permissions: string[];
+
+                    /**
+                     * Creates a new Permissions instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Permissions instance
+                     */
+                    public static create(properties?: google.cloud.asset.v1p1beta1.IPermissions): google.cloud.asset.v1p1beta1.Permissions;
+
+                    /**
+                     * Encodes the specified Permissions message. Does not implicitly {@link google.cloud.asset.v1p1beta1.Permissions.verify|verify} messages.
+                     * @param message Permissions message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.asset.v1p1beta1.IPermissions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Permissions message, length delimited. Does not implicitly {@link google.cloud.asset.v1p1beta1.Permissions.verify|verify} messages.
+                     * @param message Permissions message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.asset.v1p1beta1.IPermissions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Permissions message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Permissions
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.asset.v1p1beta1.Permissions;
+
+                    /**
+                     * Decodes a Permissions message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Permissions
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.asset.v1p1beta1.Permissions;
+
+                    /**
+                     * Verifies a Permissions message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Permissions message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Permissions
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.asset.v1p1beta1.Permissions;
+
+                    /**
+                     * Creates a plain object from a Permissions message. Also converts values to other types if specified.
+                     * @param message Permissions
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.asset.v1p1beta1.Permissions, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Permissions to JSON.
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };

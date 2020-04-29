@@ -818,6 +818,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "orderBy": {
+                          "type": "string",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -905,6 +912,20 @@
                           "rule": "repeated",
                           "type": "string",
                           "id": 10
+                        },
+                        "location": {
+                          "type": "string",
+                          "id": 11
+                        },
+                        "labels": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 12
+                        },
+                        "networkTags": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 13
                         }
                       }
                     },
@@ -921,6 +942,30 @@
                         "policy": {
                           "type": "google.iam.v1.Policy",
                           "id": 4
+                        },
+                        "explanation": {
+                          "type": "Explanation",
+                          "id": 5
+                        }
+                      },
+                      "nested": {
+                        "Explanation": {
+                          "fields": {
+                            "matchedPermissions": {
+                              "keyType": "string",
+                              "type": "Permissions",
+                              "id": 1
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "Permissions": {
+                      "fields": {
+                        "permissions": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 1
                         }
                       }
                     }
