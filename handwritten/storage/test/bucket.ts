@@ -21,6 +21,8 @@ import {
 } from '@google-cloud/common';
 import arrify = require('arrify');
 import * as assert from 'assert';
+import * as extend from 'extend';
+import * as fs from 'fs';
 import {describe, it, before, beforeEach, after, afterEach} from 'mocha';
 import * as mime from 'mime-types';
 import pLimit from 'p-limit';
@@ -88,6 +90,13 @@ class FakeNotification {
     this.id = id;
   }
 }
+
+let fsStatOverride: Function | null;
+const fakeFs = extend(true, {}, fs, {
+  stat: (filePath: string, callback: Function) => {
+    return (fsStatOverride || fs.stat)(filePath, callback);
+  },
+});
 
 let pLimitOverride: Function | null;
 const fakePLimit = (limit: number) => (pLimitOverride || pLimit)(limit);
@@ -172,6 +181,7 @@ describe('Bucket', () => {
 
   before(() => {
     Bucket = proxyquire('../src/bucket.js', {
+      fs: fakeFs,
       'p-limit': {default: fakePLimit},
       '@google-cloud/promisify': fakePromisify,
       '@google-cloud/paginator': fakePaginator,
@@ -188,6 +198,7 @@ describe('Bucket', () => {
   });
 
   beforeEach(() => {
+    fsStatOverride = null;
     pLimitOverride = null;
     bucket = new Bucket(STORAGE, BUCKET_NAME);
   });
@@ -2381,19 +2392,61 @@ describe('Bucket', () => {
       bucket.upload(textFilepath, options, assert.ifError);
     });
 
-    it('should force a resumable upload', done => {
-      const fakeFile = new FakeFile(bucket, 'file-name');
-      const options = {destination: fakeFile, resumable: true};
-      fakeFile.createWriteStream = (options_: CreateWriteStreamOptions) => {
-        const ws = new stream.Writable();
-        ws.write = () => true;
-        setImmediate(() => {
-          assert.strictEqual(options_.resumable, options.resumable);
-          done();
-        });
-        return ws;
-      };
-      bucket.upload(filepath, options, assert.ifError);
+    describe('resumable uploads', () => {
+      beforeEach(() => {
+        fsStatOverride = (path: string, callback: Function) => {
+          callback(null, {size: 1}); // Small size to guarantee simple upload
+        };
+      });
+
+      it('should force a resumable upload', done => {
+        const fakeFile = new FakeFile(bucket, 'file-name');
+        const options = {destination: fakeFile, resumable: true};
+        fakeFile.createWriteStream = (options_: CreateWriteStreamOptions) => {
+          const ws = new stream.Writable();
+          ws.write = () => true;
+          setImmediate(() => {
+            assert.strictEqual(options_.resumable, options.resumable);
+            done();
+          });
+          return ws;
+        };
+        bucket.upload(filepath, options, assert.ifError);
+      });
+
+      it('should not pass resumable option to createWriteStream when file size is greater than minimum resumable threshold', done => {
+        const fakeFile = new FakeFile(bucket, 'file-name');
+        const options = {destination: fakeFile};
+        fsStatOverride = (path: string, callback: Function) => {
+          // Set size greater than threshold
+          callback(null, {size: 5000001});
+        };
+        fakeFile.createWriteStream = (options_: CreateWriteStreamOptions) => {
+          const ws = new stream.Writable();
+          ws.write = () => true;
+          setImmediate(() => {
+            assert.strictEqual(typeof options_.resumable, 'undefined');
+            done();
+          });
+          return ws;
+        };
+        bucket.upload(filepath, options, assert.ifError);
+      });
+
+      it('should prevent resumable when file size is less than minimum resumable threshold', done => {
+        const fakeFile = new FakeFile(bucket, 'file-name');
+        const options = {destination: fakeFile};
+        fakeFile.createWriteStream = (options_: CreateWriteStreamOptions) => {
+          const ws = new stream.Writable();
+          ws.write = () => true;
+          setImmediate(() => {
+            assert.strictEqual(options_.resumable, false);
+            done();
+          });
+          return ws;
+        };
+        bucket.upload(filepath, options, assert.ifError);
+      });
     });
 
     it('should allow overriding content type', done => {

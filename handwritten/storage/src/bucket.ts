@@ -3454,7 +3454,10 @@ class Bucket extends ServiceObject {
           return;
         }
 
-        options.resumable = fd.size > RESUMABLE_THRESHOLD;
+        if (fd.size <= RESUMABLE_THRESHOLD) {
+          // Only disable resumable uploads so createWriteStream still attempts them and falls back to simple upload.
+          options.resumable = false;
+        }
 
         upload();
       });
