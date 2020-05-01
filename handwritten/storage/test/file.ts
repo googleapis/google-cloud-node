@@ -2941,6 +2941,30 @@ describe('File', () => {
       );
     });
 
+    it('should encode special characters in policy', done => {
+      CONFIG = {
+        fields: {
+          'x-goog-meta-foo': 'bår',
+        },
+        ...CONFIG,
+      };
+
+      file.generateSignedPostPolicyV4(
+        CONFIG,
+        (err: Error, res: SignedPostPolicyV4Output) => {
+          assert.ifError(err);
+
+          assert.strictEqual(res.fields['x-goog-meta-foo'], 'bår');
+          const decodedPolicy = Buffer.from(
+            res.fields.policy,
+            'base64'
+          ).toString('utf-8');
+          assert(decodedPolicy.includes('"x-goog-meta-foo":"b\\u00e5r"'));
+          done();
+        }
+      );
+    });
+
     it('should not include fields with x-ignore- prefix in conditions', done => {
       CONFIG = {
         fields: {

@@ -63,7 +63,7 @@ import {
 } from '@google-cloud/common/build/src/util';
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const duplexify: DuplexifyConstructor = require('duplexify');
-import {normalize, objectKeyToLowercase} from './util';
+import {normalize, objectKeyToLowercase, unicodeJSONStringify} from './util';
 import {GaxiosError, Headers, request as gaxiosRequest} from 'gaxios';
 
 export type GetExpirationDateResponse = [Date];
@@ -2611,7 +2611,7 @@ class File extends ServiceObject<File> {
         expiration,
       };
 
-      const policyString = JSON.stringify(policy);
+      const policyString = unicodeJSONStringify(policy);
       const policyBase64 = Buffer.from(policyString).toString('base64');
 
       try {

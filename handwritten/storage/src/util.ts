@@ -90,3 +90,16 @@ export function objectKeyToLowercase<T>(object: {[key: string]: T}) {
   }
   return newObj;
 }
+
+/**
+ * JSON encode str, with unicode \u+ representation.
+ * @param {object} obj The object to encode.
+ * @return {string} Serialized string.
+ */
+export function unicodeJSONStringify(obj: object) {
+  return JSON.stringify(obj).replace(
+    /[\u0080-\uFFFF]/g,
+    (char: string) =>
+      '\\u' + ('0000' + char.charCodeAt(0).toString(16)).slice(-4)
+  );
+}

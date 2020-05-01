@@ -220,16 +220,15 @@ describe('v4 conformance test', () => {
 
         assert.strictEqual(policy.url, testCase.policyOutput.url);
         const outputFields = testCase.policyOutput.fields;
-        const decodedPolicy = Buffer.from(
-          policy.fields.policy,
-          'base64'
-        ).toString();
+        const decodedPolicy = JSON.parse(
+          Buffer.from(policy.fields.policy, 'base64').toString()
+        );
         assert.deepStrictEqual(
           decodedPolicy,
-          testCase.policyOutput.expectedDecodedPolicy
+          JSON.parse(testCase.policyOutput.expectedDecodedPolicy)
         );
 
-        assert.deepStrictEqual(outputFields, testCase.policyOutput.fields);
+        assert.deepStrictEqual(policy.fields, outputFields);
 
         fakeTimer.restore();
       });
