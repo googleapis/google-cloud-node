@@ -236,9 +236,7 @@ describe('v1p2beta1.AssetServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.createFeed(request);
-      }, expectedError);
+      await assert.rejects(client.createFeed(request), expectedError);
       assert(
         (client.innerApiCalls.createFeed as SinonStub)
           .getCall(0)
@@ -347,9 +345,7 @@ describe('v1p2beta1.AssetServiceClient', () => {
       };
       const expectedError = new Error('expected');
       client.innerApiCalls.getFeed = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(async () => {
-        await client.getFeed(request);
-      }, expectedError);
+      await assert.rejects(client.getFeed(request), expectedError);
       assert(
         (client.innerApiCalls.getFeed as SinonStub)
           .getCall(0)
@@ -458,9 +454,7 @@ describe('v1p2beta1.AssetServiceClient', () => {
       };
       const expectedError = new Error('expected');
       client.innerApiCalls.listFeeds = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(async () => {
-        await client.listFeeds(request);
-      }, expectedError);
+      await assert.rejects(client.listFeeds(request), expectedError);
       assert(
         (client.innerApiCalls.listFeeds as SinonStub)
           .getCall(0)
@@ -575,9 +569,7 @@ describe('v1p2beta1.AssetServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.updateFeed(request);
-      }, expectedError);
+      await assert.rejects(client.updateFeed(request), expectedError);
       assert(
         (client.innerApiCalls.updateFeed as SinonStub)
           .getCall(0)
@@ -689,9 +681,7 @@ describe('v1p2beta1.AssetServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.deleteFeed(request);
-      }, expectedError);
+      await assert.rejects(client.deleteFeed(request), expectedError);
       assert(
         (client.innerApiCalls.deleteFeed as SinonStub)
           .getCall(0)

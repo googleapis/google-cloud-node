@@ -23,7 +23,7 @@ import {SinonStub} from 'sinon';
 import {describe, it} from 'mocha';
 import * as assetserviceModule from '../src';
 
-import {protobuf, LROperation} from 'google-gax';
+import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (instance.constructor as typeof protobuf.Message).toObject(
@@ -268,9 +268,10 @@ describe('v1.AssetServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.batchGetAssetsHistory(request);
-      }, expectedError);
+      await assert.rejects(
+        client.batchGetAssetsHistory(request),
+        expectedError
+      );
       assert(
         (client.innerApiCalls.batchGetAssetsHistory as SinonStub)
           .getCall(0)
@@ -382,9 +383,7 @@ describe('v1.AssetServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.createFeed(request);
-      }, expectedError);
+      await assert.rejects(client.createFeed(request), expectedError);
       assert(
         (client.innerApiCalls.createFeed as SinonStub)
           .getCall(0)
@@ -493,9 +492,7 @@ describe('v1.AssetServiceClient', () => {
       };
       const expectedError = new Error('expected');
       client.innerApiCalls.getFeed = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(async () => {
-        await client.getFeed(request);
-      }, expectedError);
+      await assert.rejects(client.getFeed(request), expectedError);
       assert(
         (client.innerApiCalls.getFeed as SinonStub)
           .getCall(0)
@@ -604,9 +601,7 @@ describe('v1.AssetServiceClient', () => {
       };
       const expectedError = new Error('expected');
       client.innerApiCalls.listFeeds = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(async () => {
-        await client.listFeeds(request);
-      }, expectedError);
+      await assert.rejects(client.listFeeds(request), expectedError);
       assert(
         (client.innerApiCalls.listFeeds as SinonStub)
           .getCall(0)
@@ -721,9 +716,7 @@ describe('v1.AssetServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.updateFeed(request);
-      }, expectedError);
+      await assert.rejects(client.updateFeed(request), expectedError);
       assert(
         (client.innerApiCalls.updateFeed as SinonStub)
           .getCall(0)
@@ -835,9 +828,7 @@ describe('v1.AssetServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.deleteFeed(request);
-      }, expectedError);
+      await assert.rejects(client.deleteFeed(request), expectedError);
       assert(
         (client.innerApiCalls.deleteFeed as SinonStub)
           .getCall(0)
@@ -957,9 +948,7 @@ describe('v1.AssetServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.exportAssets(request);
-      }, expectedError);
+      await assert.rejects(client.exportAssets(request), expectedError);
       assert(
         (client.innerApiCalls.exportAssets as SinonStub)
           .getCall(0)
@@ -992,14 +981,50 @@ describe('v1.AssetServiceClient', () => {
         expectedError
       );
       const [operation] = await client.exportAssets(request);
-      await assert.rejects(async () => {
-        await operation.promise();
-      }, expectedError);
+      await assert.rejects(operation.promise(), expectedError);
       assert(
         (client.innerApiCalls.exportAssets as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes checkExportAssetsProgress without error', async () => {
+      const client = new assetserviceModule.v1.AssetServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkExportAssetsProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkExportAssetsProgress with error', async () => {
+      const client = new assetserviceModule.v1.AssetServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.checkExportAssetsProgress(''), expectedError);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
     });
   });
 
