@@ -319,9 +319,7 @@ describe('v1beta1.ContainerAnalysisV1Beta1Client', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.setIamPolicy(request);
-      }, expectedError);
+      await assert.rejects(client.setIamPolicy(request), expectedError);
       assert(
         (client.innerApiCalls.setIamPolicy as SinonStub)
           .getCall(0)
@@ -439,9 +437,7 @@ describe('v1beta1.ContainerAnalysisV1Beta1Client', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.getIamPolicy(request);
-      }, expectedError);
+      await assert.rejects(client.getIamPolicy(request), expectedError);
       assert(
         (client.innerApiCalls.getIamPolicy as SinonStub)
           .getCall(0)
@@ -561,9 +557,7 @@ describe('v1beta1.ContainerAnalysisV1Beta1Client', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.testIamPermissions(request);
-      }, expectedError);
+      await assert.rejects(client.testIamPermissions(request), expectedError);
       assert(
         (client.innerApiCalls.testIamPermissions as SinonStub)
           .getCall(0)
@@ -681,9 +675,7 @@ describe('v1beta1.ContainerAnalysisV1Beta1Client', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.getScanConfig(request);
-      }, expectedError);
+      await assert.rejects(client.getScanConfig(request), expectedError);
       assert(
         (client.innerApiCalls.getScanConfig as SinonStub)
           .getCall(0)
@@ -801,9 +793,7 @@ describe('v1beta1.ContainerAnalysisV1Beta1Client', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.updateScanConfig(request);
-      }, expectedError);
+      await assert.rejects(client.updateScanConfig(request), expectedError);
       assert(
         (client.innerApiCalls.updateScanConfig as SinonStub)
           .getCall(0)
@@ -939,9 +929,7 @@ describe('v1beta1.ContainerAnalysisV1Beta1Client', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.listScanConfigs(request);
-      }, expectedError);
+      await assert.rejects(client.listScanConfigs(request), expectedError);
       assert(
         (client.innerApiCalls.listScanConfigs as SinonStub)
           .getCall(0)
@@ -1046,9 +1034,7 @@ describe('v1beta1.ContainerAnalysisV1Beta1Client', () => {
           reject(err);
         });
       });
-      await assert.rejects(async () => {
-        await promise;
-      }, expectedError);
+      await assert.rejects(promise, expectedError);
       assert(
         (client.descriptors.page.listScanConfigs.createStream as SinonStub)
           .getCall(0)
