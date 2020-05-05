@@ -319,9 +319,7 @@ describe('v1p1beta1.AssetServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.searchAllResources(request);
-      }, expectedError);
+      await assert.rejects(client.searchAllResources(request), expectedError);
       assert(
         (client.innerApiCalls.searchAllResources as SinonStub)
           .getCall(0)
@@ -422,9 +420,7 @@ describe('v1p1beta1.AssetServiceClient', () => {
           reject(err);
         });
       });
-      await assert.rejects(async () => {
-        await promise;
-      }, expectedError);
+      await assert.rejects(promise, expectedError);
       assert(
         (client.descriptors.page.searchAllResources.createStream as SinonStub)
           .getCall(0)
@@ -645,9 +641,7 @@ describe('v1p1beta1.AssetServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.searchAllIamPolicies(request);
-      }, expectedError);
+      await assert.rejects(client.searchAllIamPolicies(request), expectedError);
       assert(
         (client.innerApiCalls.searchAllIamPolicies as SinonStub)
           .getCall(0)
@@ -748,9 +742,7 @@ describe('v1p1beta1.AssetServiceClient', () => {
           reject(err);
         });
       });
-      await assert.rejects(async () => {
-        await promise;
-      }, expectedError);
+      await assert.rejects(promise, expectedError);
       assert(
         (client.descriptors.page.searchAllIamPolicies.createStream as SinonStub)
           .getCall(0)

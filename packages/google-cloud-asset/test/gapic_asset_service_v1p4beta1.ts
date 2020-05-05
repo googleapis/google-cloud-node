@@ -23,7 +23,7 @@ import {SinonStub} from 'sinon';
 import {describe, it} from 'mocha';
 import * as assetserviceModule from '../src';
 
-import {protobuf, LROperation} from 'google-gax';
+import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (instance.constructor as typeof protobuf.Message).toObject(
@@ -271,9 +271,7 @@ describe('v1p4beta1.AssetServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.analyzeIamPolicy(request);
-      }, expectedError);
+      await assert.rejects(client.analyzeIamPolicy(request), expectedError);
       assert(
         (client.innerApiCalls.analyzeIamPolicy as SinonStub)
           .getCall(0)
@@ -398,9 +396,10 @@ describe('v1p4beta1.AssetServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.exportIamPolicyAnalysis(request);
-      }, expectedError);
+      await assert.rejects(
+        client.exportIamPolicyAnalysis(request),
+        expectedError
+      );
       assert(
         (client.innerApiCalls.exportIamPolicyAnalysis as SinonStub)
           .getCall(0)
@@ -434,14 +433,53 @@ describe('v1p4beta1.AssetServiceClient', () => {
         expectedError
       );
       const [operation] = await client.exportIamPolicyAnalysis(request);
-      await assert.rejects(async () => {
-        await operation.promise();
-      }, expectedError);
+      await assert.rejects(operation.promise(), expectedError);
       assert(
         (client.innerApiCalls.exportIamPolicyAnalysis as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes checkExportIamPolicyAnalysisProgress without error', async () => {
+      const client = new assetserviceModule.v1p4beta1.AssetServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkExportIamPolicyAnalysisProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkExportIamPolicyAnalysisProgress with error', async () => {
+      const client = new assetserviceModule.v1p4beta1.AssetServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkExportIamPolicyAnalysisProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
     });
   });
 });

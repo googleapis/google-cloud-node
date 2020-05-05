@@ -52,21 +52,4 @@ templates = common_templates.node_library(
     source_location='build/src', versions=versions, default_version='v1')
 s.copy(templates)
 
-# Extra proto dependencies make the *_proto_list.json have some common files
-# that conflict with the same common files imported from gax. This is likely
-# a generator problem that needs to be fixed when we start handling synth.py
-# custom fixes.
-proto_lists = [
-    f'src/{version}/asset_service_proto_list.json' for version in versions]
-remove_proto_keywords = ['/google/api',
-                         '/google/protobuf', '/google/rpc', '/google/type']
-for file in proto_lists:
-    with open(file, 'r') as f:
-        items = json.load(f)
-        content = [item for item in items if all(
-            [(x not in item) for x in remove_proto_keywords])]
-        new_file = json.dumps(content, indent=2) + '\n'
-    with open(file, 'w') as f:
-        f.write(new_file)
-
 node.postprocess_gapic_library()

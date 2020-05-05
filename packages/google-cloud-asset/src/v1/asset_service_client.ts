@@ -28,7 +28,7 @@ import * as path from 'path';
 
 import * as protos from '../../protos/protos';
 import * as gapicConfig from './asset_service_client_config.json';
-
+import {operationsProtos} from 'google-gax';
 const version = require('../../../package.json').version;
 
 /**
@@ -996,6 +996,42 @@ export class AssetServiceClient {
     });
     this.initialize();
     return this.innerApiCalls.exportAssets(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by the exportAssets() method.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *
+   * @example:
+   *   const decodedOperation = await checkExportAssetsProgress(name);
+   *   console.log(decodedOperation.result);
+   *   console.log(decodedOperation.done);
+   *   console.log(decodedOperation.metadata);
+   *
+   */
+  async checkExportAssetsProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.asset.v1.ExportAssetsResponse,
+      protos.google.cloud.asset.v1.ExportAssetsRequest
+    >
+  > {
+    const request = new operationsProtos.google.longrunning.GetOperationRequest(
+      {name}
+    );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new gax.Operation(
+      operation,
+      this.descriptors.longrunning.exportAssets,
+      gax.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.asset.v1.ExportAssetsResponse,
+      protos.google.cloud.asset.v1.ExportAssetsRequest
+    >;
   }
   // --------------------
   // -- Path templates --
