@@ -32,7 +32,7 @@ import {Transform} from 'stream';
 import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
 import * as gapicConfig from './cloud_memcache_client_config.json';
-
+import {operationsProtos} from 'google-gax';
 const version = require('../../../package.json').version;
 
 /**
@@ -600,6 +600,42 @@ export class CloudMemcacheClient {
     this.initialize();
     return this.innerApiCalls.createInstance(request, options, callback);
   }
+  /**
+   * Check the status of the long running operation returned by the createInstance() method.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *
+   * @example:
+   *   const decodedOperation = await checkCreateInstanceProgress(name);
+   *   console.log(decodedOperation.result);
+   *   console.log(decodedOperation.done);
+   *   console.log(decodedOperation.metadata);
+   *
+   */
+  async checkCreateInstanceProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.memcache.v1beta2.Instance,
+      protos.google.cloud.memcache.v1beta2.OperationMetadata
+    >
+  > {
+    const request = new operationsProtos.google.longrunning.GetOperationRequest(
+      {name}
+    );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new gax.Operation(
+      operation,
+      this.descriptors.longrunning.createInstance,
+      gax.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.memcache.v1beta2.Instance,
+      protos.google.cloud.memcache.v1beta2.OperationMetadata
+    >;
+  }
   updateInstance(
     request: protos.google.cloud.memcache.v1beta2.IUpdateInstanceRequest,
     options?: gax.CallOptions
@@ -701,6 +737,42 @@ export class CloudMemcacheClient {
     });
     this.initialize();
     return this.innerApiCalls.updateInstance(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by the updateInstance() method.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *
+   * @example:
+   *   const decodedOperation = await checkUpdateInstanceProgress(name);
+   *   console.log(decodedOperation.result);
+   *   console.log(decodedOperation.done);
+   *   console.log(decodedOperation.metadata);
+   *
+   */
+  async checkUpdateInstanceProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.memcache.v1beta2.Instance,
+      protos.google.cloud.memcache.v1beta2.OperationMetadata
+    >
+  > {
+    const request = new operationsProtos.google.longrunning.GetOperationRequest(
+      {name}
+    );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new gax.Operation(
+      operation,
+      this.descriptors.longrunning.updateInstance,
+      gax.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.memcache.v1beta2.Instance,
+      protos.google.cloud.memcache.v1beta2.OperationMetadata
+    >;
   }
   updateParameters(
     request: protos.google.cloud.memcache.v1beta2.IUpdateParametersRequest,
@@ -807,6 +879,42 @@ export class CloudMemcacheClient {
     this.initialize();
     return this.innerApiCalls.updateParameters(request, options, callback);
   }
+  /**
+   * Check the status of the long running operation returned by the updateParameters() method.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *
+   * @example:
+   *   const decodedOperation = await checkUpdateParametersProgress(name);
+   *   console.log(decodedOperation.result);
+   *   console.log(decodedOperation.done);
+   *   console.log(decodedOperation.metadata);
+   *
+   */
+  async checkUpdateParametersProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.memcache.v1beta2.Instance,
+      protos.google.cloud.memcache.v1beta2.OperationMetadata
+    >
+  > {
+    const request = new operationsProtos.google.longrunning.GetOperationRequest(
+      {name}
+    );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new gax.Operation(
+      operation,
+      this.descriptors.longrunning.updateParameters,
+      gax.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.memcache.v1beta2.Instance,
+      protos.google.cloud.memcache.v1beta2.OperationMetadata
+    >;
+  }
   deleteInstance(
     request: protos.google.cloud.memcache.v1beta2.IDeleteInstanceRequest,
     options?: gax.CallOptions
@@ -906,6 +1014,42 @@ export class CloudMemcacheClient {
     });
     this.initialize();
     return this.innerApiCalls.deleteInstance(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by the deleteInstance() method.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *
+   * @example:
+   *   const decodedOperation = await checkDeleteInstanceProgress(name);
+   *   console.log(decodedOperation.result);
+   *   console.log(decodedOperation.done);
+   *   console.log(decodedOperation.metadata);
+   *
+   */
+  async checkDeleteInstanceProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.memcache.v1beta2.OperationMetadata
+    >
+  > {
+    const request = new operationsProtos.google.longrunning.GetOperationRequest(
+      {name}
+    );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new gax.Operation(
+      operation,
+      this.descriptors.longrunning.deleteInstance,
+      gax.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.memcache.v1beta2.OperationMetadata
+    >;
   }
   applyParameters(
     request: protos.google.cloud.memcache.v1beta2.IApplyParametersRequest,
@@ -1012,6 +1156,42 @@ export class CloudMemcacheClient {
     });
     this.initialize();
     return this.innerApiCalls.applyParameters(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by the applyParameters() method.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *
+   * @example:
+   *   const decodedOperation = await checkApplyParametersProgress(name);
+   *   console.log(decodedOperation.result);
+   *   console.log(decodedOperation.done);
+   *   console.log(decodedOperation.metadata);
+   *
+   */
+  async checkApplyParametersProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.memcache.v1beta2.Instance,
+      protos.google.cloud.memcache.v1beta2.OperationMetadata
+    >
+  > {
+    const request = new operationsProtos.google.longrunning.GetOperationRequest(
+      {name}
+    );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new gax.Operation(
+      operation,
+      this.descriptors.longrunning.applyParameters,
+      gax.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.memcache.v1beta2.Instance,
+      protos.google.cloud.memcache.v1beta2.OperationMetadata
+    >;
   }
   listInstances(
     request: protos.google.cloud.memcache.v1beta2.IListInstancesRequest,
