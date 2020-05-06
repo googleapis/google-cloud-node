@@ -238,9 +238,7 @@ describe('v1.OsLoginServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.deletePosixAccount(request);
-      }, expectedError);
+      await assert.rejects(client.deletePosixAccount(request), expectedError);
       assert(
         (client.innerApiCalls.deletePosixAccount as SinonStub)
           .getCall(0)
@@ -354,9 +352,7 @@ describe('v1.OsLoginServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.deleteSshPublicKey(request);
-      }, expectedError);
+      await assert.rejects(client.deleteSshPublicKey(request), expectedError);
       assert(
         (client.innerApiCalls.deleteSshPublicKey as SinonStub)
           .getCall(0)
@@ -468,9 +464,7 @@ describe('v1.OsLoginServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.getLoginProfile(request);
-      }, expectedError);
+      await assert.rejects(client.getLoginProfile(request), expectedError);
       assert(
         (client.innerApiCalls.getLoginProfile as SinonStub)
           .getCall(0)
@@ -582,9 +576,7 @@ describe('v1.OsLoginServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.getSshPublicKey(request);
-      }, expectedError);
+      await assert.rejects(client.getSshPublicKey(request), expectedError);
       assert(
         (client.innerApiCalls.getSshPublicKey as SinonStub)
           .getCall(0)
@@ -698,9 +690,7 @@ describe('v1.OsLoginServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.importSshPublicKey(request);
-      }, expectedError);
+      await assert.rejects(client.importSshPublicKey(request), expectedError);
       assert(
         (client.innerApiCalls.importSshPublicKey as SinonStub)
           .getCall(0)
@@ -814,9 +804,7 @@ describe('v1.OsLoginServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.updateSshPublicKey(request);
-      }, expectedError);
+      await assert.rejects(client.updateSshPublicKey(request), expectedError);
       assert(
         (client.innerApiCalls.updateSshPublicKey as SinonStub)
           .getCall(0)
