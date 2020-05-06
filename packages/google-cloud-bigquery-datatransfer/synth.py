@@ -16,22 +16,22 @@ version = 'v1'
 library = gapic.typescript_library(
     'bigquerydatatransfer', version,
     generator_args={
-            "grpc-service-config": f"google/cloud/bigquery/datatransfer/{version}/bigquerydatatransfer_grpc_service_config.json",
-            "package-name": f"@google-cloud/bigquery-data-transfer"
-            },
-            proto_path=f'/google/cloud/bigquery/datatransfer/{version}',
-            extra_proto_files=['google/cloud/common_resources.proto'],
-            )
+        "grpc-service-config": f"google/cloud/bigquery/datatransfer/{version}/bigquerydatatransfer_grpc_service_config.json",
+        "package-name": f"@google-cloud/bigquery-data-transfer"
+    },
+    proto_path=f'/google/cloud/bigquery/datatransfer/{version}',
+    extra_proto_files=['google/cloud/common_resources.proto'],
+)
 
 # skip index, protos, package.json, and README.md
 s.copy(
     library,
-    excludes=['package.json', 'README.md', 'src/index.ts',
-              f'src/{version}/index.ts'])
+    excludes=['package.json', 'README.md'])
 
 # Copy over templated files
 common_templates = gcp.CommonTemplates()
-templates = common_templates.node_library(source_location='build/src')
+templates = common_templates.node_library(
+    source_location='build/src', versions=['v1'], default_version='v1')
 s.copy(templates)
 
 node.postprocess_gapic_library()
