@@ -3,8 +3,16 @@
     {
       "git": {
         "name": ".",
-        "remote": "git@github.com:googleapis/nodejs-scheduler.git",
-        "sha": "f4f399248513dca6952100af33ea0510a2a41aac"
+        "remote": "https://github.com/googleapis/nodejs-scheduler.git",
+        "sha": "367f922614d614d9bc169508ff00ece7dc31bfb2"
+      }
+    },
+    {
+      "git": {
+        "name": "googleapis",
+        "remote": "https://github.com/googleapis/googleapis.git",
+        "sha": "a3a0bf0f6291d69f2ff3df7fcd63d28ee20ac727",
+        "internalRef": "310060413"
       }
     },
     {
