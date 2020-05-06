@@ -305,9 +305,7 @@ describe('v1.DataTransferServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.getDataSource(request);
-      }, expectedError);
+      await assert.rejects(client.getDataSource(request), expectedError);
       assert(
         (client.innerApiCalls.getDataSource as SinonStub)
           .getCall(0)
@@ -427,9 +425,7 @@ describe('v1.DataTransferServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.createTransferConfig(request);
-      }, expectedError);
+      await assert.rejects(client.createTransferConfig(request), expectedError);
       assert(
         (client.innerApiCalls.createTransferConfig as SinonStub)
           .getCall(0)
@@ -552,9 +548,7 @@ describe('v1.DataTransferServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.updateTransferConfig(request);
-      }, expectedError);
+      await assert.rejects(client.updateTransferConfig(request), expectedError);
       assert(
         (client.innerApiCalls.updateTransferConfig as SinonStub)
           .getCall(0)
@@ -674,9 +668,7 @@ describe('v1.DataTransferServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.deleteTransferConfig(request);
-      }, expectedError);
+      await assert.rejects(client.deleteTransferConfig(request), expectedError);
       assert(
         (client.innerApiCalls.deleteTransferConfig as SinonStub)
           .getCall(0)
@@ -794,9 +786,7 @@ describe('v1.DataTransferServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.getTransferConfig(request);
-      }, expectedError);
+      await assert.rejects(client.getTransferConfig(request), expectedError);
       assert(
         (client.innerApiCalls.getTransferConfig as SinonStub)
           .getCall(0)
@@ -916,9 +906,7 @@ describe('v1.DataTransferServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.scheduleTransferRuns(request);
-      }, expectedError);
+      await assert.rejects(client.scheduleTransferRuns(request), expectedError);
       assert(
         (client.innerApiCalls.scheduleTransferRuns as SinonStub)
           .getCall(0)
@@ -1038,9 +1026,10 @@ describe('v1.DataTransferServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.startManualTransferRuns(request);
-      }, expectedError);
+      await assert.rejects(
+        client.startManualTransferRuns(request),
+        expectedError
+      );
       assert(
         (client.innerApiCalls.startManualTransferRuns as SinonStub)
           .getCall(0)
@@ -1158,9 +1147,7 @@ describe('v1.DataTransferServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.getTransferRun(request);
-      }, expectedError);
+      await assert.rejects(client.getTransferRun(request), expectedError);
       assert(
         (client.innerApiCalls.getTransferRun as SinonStub)
           .getCall(0)
@@ -1278,9 +1265,7 @@ describe('v1.DataTransferServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.deleteTransferRun(request);
-      }, expectedError);
+      await assert.rejects(client.deleteTransferRun(request), expectedError);
       assert(
         (client.innerApiCalls.deleteTransferRun as SinonStub)
           .getCall(0)
@@ -1398,9 +1383,7 @@ describe('v1.DataTransferServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.checkValidCreds(request);
-      }, expectedError);
+      await assert.rejects(client.checkValidCreds(request), expectedError);
       assert(
         (client.innerApiCalls.checkValidCreds as SinonStub)
           .getCall(0)
@@ -1536,9 +1519,7 @@ describe('v1.DataTransferServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.listDataSources(request);
-      }, expectedError);
+      await assert.rejects(client.listDataSources(request), expectedError);
       assert(
         (client.innerApiCalls.listDataSources as SinonStub)
           .getCall(0)
@@ -1643,9 +1624,7 @@ describe('v1.DataTransferServiceClient', () => {
           reject(err);
         });
       });
-      await assert.rejects(async () => {
-        await promise;
-      }, expectedError);
+      await assert.rejects(promise, expectedError);
       assert(
         (client.descriptors.page.listDataSources.createStream as SinonStub)
           .getCall(0)
@@ -1876,9 +1855,7 @@ describe('v1.DataTransferServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.listTransferConfigs(request);
-      }, expectedError);
+      await assert.rejects(client.listTransferConfigs(request), expectedError);
       assert(
         (client.innerApiCalls.listTransferConfigs as SinonStub)
           .getCall(0)
@@ -1983,9 +1960,7 @@ describe('v1.DataTransferServiceClient', () => {
           reject(err);
         });
       });
-      await assert.rejects(async () => {
-        await promise;
-      }, expectedError);
+      await assert.rejects(promise, expectedError);
       assert(
         (client.descriptors.page.listTransferConfigs.createStream as SinonStub)
           .getCall(0)
@@ -2214,9 +2189,7 @@ describe('v1.DataTransferServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.listTransferRuns(request);
-      }, expectedError);
+      await assert.rejects(client.listTransferRuns(request), expectedError);
       assert(
         (client.innerApiCalls.listTransferRuns as SinonStub)
           .getCall(0)
@@ -2321,9 +2294,7 @@ describe('v1.DataTransferServiceClient', () => {
           reject(err);
         });
       });
-      await assert.rejects(async () => {
-        await promise;
-      }, expectedError);
+      await assert.rejects(promise, expectedError);
       assert(
         (client.descriptors.page.listTransferRuns.createStream as SinonStub)
           .getCall(0)
@@ -2552,9 +2523,7 @@ describe('v1.DataTransferServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.listTransferLogs(request);
-      }, expectedError);
+      await assert.rejects(client.listTransferLogs(request), expectedError);
       assert(
         (client.innerApiCalls.listTransferLogs as SinonStub)
           .getCall(0)
@@ -2659,9 +2628,7 @@ describe('v1.DataTransferServiceClient', () => {
           reject(err);
         });
       });
-      await assert.rejects(async () => {
-        await promise;
-      }, expectedError);
+      await assert.rejects(promise, expectedError);
       assert(
         (client.descriptors.page.listTransferLogs.createStream as SinonStub)
           .getCall(0)
