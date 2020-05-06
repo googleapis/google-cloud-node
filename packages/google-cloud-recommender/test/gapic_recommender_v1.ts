@@ -297,9 +297,7 @@ describe('v1.RecommenderClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.getRecommendation(request);
-      }, expectedError);
+      await assert.rejects(client.getRecommendation(request), expectedError);
       assert(
         (client.innerApiCalls.getRecommendation as SinonStub)
           .getCall(0)
@@ -413,9 +411,10 @@ describe('v1.RecommenderClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.markRecommendationClaimed(request);
-      }, expectedError);
+      await assert.rejects(
+        client.markRecommendationClaimed(request),
+        expectedError
+      );
       assert(
         (client.innerApiCalls.markRecommendationClaimed as SinonStub)
           .getCall(0)
@@ -529,9 +528,10 @@ describe('v1.RecommenderClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.markRecommendationSucceeded(request);
-      }, expectedError);
+      await assert.rejects(
+        client.markRecommendationSucceeded(request),
+        expectedError
+      );
       assert(
         (client.innerApiCalls.markRecommendationSucceeded as SinonStub)
           .getCall(0)
@@ -645,9 +645,10 @@ describe('v1.RecommenderClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.markRecommendationFailed(request);
-      }, expectedError);
+      await assert.rejects(
+        client.markRecommendationFailed(request),
+        expectedError
+      );
       assert(
         (client.innerApiCalls.markRecommendationFailed as SinonStub)
           .getCall(0)
@@ -777,9 +778,7 @@ describe('v1.RecommenderClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.listRecommendations(request);
-      }, expectedError);
+      await assert.rejects(client.listRecommendations(request), expectedError);
       assert(
         (client.innerApiCalls.listRecommendations as SinonStub)
           .getCall(0)
@@ -876,9 +875,7 @@ describe('v1.RecommenderClient', () => {
           reject(err);
         });
       });
-      await assert.rejects(async () => {
-        await promise;
-      }, expectedError);
+      await assert.rejects(promise, expectedError);
       assert(
         (client.descriptors.page.listRecommendations.createStream as SinonStub)
           .getCall(0)
