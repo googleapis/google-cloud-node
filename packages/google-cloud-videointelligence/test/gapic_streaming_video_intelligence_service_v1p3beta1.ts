@@ -229,9 +229,7 @@ describe('v1p3beta1.StreamingVideoIntelligenceServiceClient', () => {
         stream.write(request);
         stream.end();
       });
-      await assert.rejects(async () => {
-        await promise;
-      }, expectedError);
+      await assert.rejects(promise, expectedError);
       assert(
         (client.innerApiCalls.streamingAnnotateVideo as SinonStub)
           .getCall(0)
