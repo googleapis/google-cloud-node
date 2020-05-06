@@ -231,9 +231,7 @@ describe('v1.DatastoreClient', () => {
       };
       const expectedError = new Error('expected');
       client.innerApiCalls.lookup = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(async () => {
-        await client.lookup(request);
-      }, expectedError);
+      await assert.rejects(client.lookup(request), expectedError);
       assert(
         (client.innerApiCalls.lookup as SinonStub)
           .getCall(0)
@@ -342,9 +340,7 @@ describe('v1.DatastoreClient', () => {
       };
       const expectedError = new Error('expected');
       client.innerApiCalls.runQuery = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(async () => {
-        await client.runQuery(request);
-      }, expectedError);
+      await assert.rejects(client.runQuery(request), expectedError);
       assert(
         (client.innerApiCalls.runQuery as SinonStub)
           .getCall(0)
@@ -456,9 +452,7 @@ describe('v1.DatastoreClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.beginTransaction(request);
-      }, expectedError);
+      await assert.rejects(client.beginTransaction(request), expectedError);
       assert(
         (client.innerApiCalls.beginTransaction as SinonStub)
           .getCall(0)
@@ -567,9 +561,7 @@ describe('v1.DatastoreClient', () => {
       };
       const expectedError = new Error('expected');
       client.innerApiCalls.commit = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(async () => {
-        await client.commit(request);
-      }, expectedError);
+      await assert.rejects(client.commit(request), expectedError);
       assert(
         (client.innerApiCalls.commit as SinonStub)
           .getCall(0)
@@ -678,9 +670,7 @@ describe('v1.DatastoreClient', () => {
       };
       const expectedError = new Error('expected');
       client.innerApiCalls.rollback = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(async () => {
-        await client.rollback(request);
-      }, expectedError);
+      await assert.rejects(client.rollback(request), expectedError);
       assert(
         (client.innerApiCalls.rollback as SinonStub)
           .getCall(0)
@@ -792,9 +782,7 @@ describe('v1.DatastoreClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.allocateIds(request);
-      }, expectedError);
+      await assert.rejects(client.allocateIds(request), expectedError);
       assert(
         (client.innerApiCalls.allocateIds as SinonStub)
           .getCall(0)
@@ -906,9 +894,7 @@ describe('v1.DatastoreClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.reserveIds(request);
-      }, expectedError);
+      await assert.rejects(client.reserveIds(request), expectedError);
       assert(
         (client.innerApiCalls.reserveIds as SinonStub)
           .getCall(0)
