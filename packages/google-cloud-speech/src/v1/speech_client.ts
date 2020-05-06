@@ -28,7 +28,7 @@ import * as path from 'path';
 
 import * as protos from '../../protos/protos';
 import * as gapicConfig from './speech_client_config.json';
-
+import {operationsProtos} from 'google-gax';
 const version = require('../../../package.json').version;
 
 /**
@@ -508,6 +508,42 @@ export class SpeechClient {
     options = options || {};
     this.initialize();
     return this.innerApiCalls.longRunningRecognize(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by the longRunningRecognize() method.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *
+   * @example:
+   *   const decodedOperation = await checkLongRunningRecognizeProgress(name);
+   *   console.log(decodedOperation.result);
+   *   console.log(decodedOperation.done);
+   *   console.log(decodedOperation.metadata);
+   *
+   */
+  async checkLongRunningRecognizeProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.speech.v1.LongRunningRecognizeResponse,
+      protos.google.cloud.speech.v1.LongRunningRecognizeMetadata
+    >
+  > {
+    const request = new operationsProtos.google.longrunning.GetOperationRequest(
+      {name}
+    );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new gax.Operation(
+      operation,
+      this.descriptors.longrunning.longRunningRecognize,
+      gax.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.speech.v1.LongRunningRecognizeResponse,
+      protos.google.cloud.speech.v1.LongRunningRecognizeMetadata
+    >;
   }
 
   /**

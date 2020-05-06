@@ -25,7 +25,7 @@ import * as speechModule from '../src';
 
 import {PassThrough} from 'stream';
 
-import {protobuf, LROperation} from 'google-gax';
+import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (instance.constructor as typeof protobuf.Message).toObject(
@@ -255,9 +255,7 @@ describe('v1p1beta1.SpeechClient', () => {
       const expectedOptions = {};
       const expectedError = new Error('expected');
       client.innerApiCalls.recognize = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(async () => {
-        await client.recognize(request);
-      }, expectedError);
+      await assert.rejects(client.recognize(request), expectedError);
       assert(
         (client.innerApiCalls.recognize as SinonStub)
           .getCall(0)
@@ -355,9 +353,7 @@ describe('v1p1beta1.SpeechClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.longRunningRecognize(request);
-      }, expectedError);
+      await assert.rejects(client.longRunningRecognize(request), expectedError);
       assert(
         (client.innerApiCalls.longRunningRecognize as SinonStub)
           .getCall(0)
@@ -382,14 +378,53 @@ describe('v1p1beta1.SpeechClient', () => {
         expectedError
       );
       const [operation] = await client.longRunningRecognize(request);
-      await assert.rejects(async () => {
-        await operation.promise();
-      }, expectedError);
+      await assert.rejects(operation.promise(), expectedError);
       assert(
         (client.innerApiCalls.longRunningRecognize as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes checkLongRunningRecognizeProgress without error', async () => {
+      const client = new speechModule.v1p1beta1.SpeechClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkLongRunningRecognizeProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkLongRunningRecognizeProgress with error', async () => {
+      const client = new speechModule.v1p1beta1.SpeechClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkLongRunningRecognizeProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
     });
   });
 
@@ -470,9 +505,7 @@ describe('v1p1beta1.SpeechClient', () => {
         stream.write(request);
         stream.end();
       });
-      await assert.rejects(async () => {
-        await promise;
-      }, expectedError);
+      await assert.rejects(promise, expectedError);
       assert(
         (client.innerApiCalls.streamingRecognize as SinonStub)
           .getCall(0)
