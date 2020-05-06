@@ -315,9 +315,7 @@ describe('v1.KeyManagementServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.getKeyRing(request);
-      }, expectedError);
+      await assert.rejects(client.getKeyRing(request), expectedError);
       assert(
         (client.innerApiCalls.getKeyRing as SinonStub)
           .getCall(0)
@@ -435,9 +433,7 @@ describe('v1.KeyManagementServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.getCryptoKey(request);
-      }, expectedError);
+      await assert.rejects(client.getCryptoKey(request), expectedError);
       assert(
         (client.innerApiCalls.getCryptoKey as SinonStub)
           .getCall(0)
@@ -557,9 +553,7 @@ describe('v1.KeyManagementServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.getCryptoKeyVersion(request);
-      }, expectedError);
+      await assert.rejects(client.getCryptoKeyVersion(request), expectedError);
       assert(
         (client.innerApiCalls.getCryptoKeyVersion as SinonStub)
           .getCall(0)
@@ -677,9 +671,7 @@ describe('v1.KeyManagementServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.getPublicKey(request);
-      }, expectedError);
+      await assert.rejects(client.getPublicKey(request), expectedError);
       assert(
         (client.innerApiCalls.getPublicKey as SinonStub)
           .getCall(0)
@@ -797,9 +789,7 @@ describe('v1.KeyManagementServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.getImportJob(request);
-      }, expectedError);
+      await assert.rejects(client.getImportJob(request), expectedError);
       assert(
         (client.innerApiCalls.getImportJob as SinonStub)
           .getCall(0)
@@ -917,9 +907,7 @@ describe('v1.KeyManagementServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.createKeyRing(request);
-      }, expectedError);
+      await assert.rejects(client.createKeyRing(request), expectedError);
       assert(
         (client.innerApiCalls.createKeyRing as SinonStub)
           .getCall(0)
@@ -1037,9 +1025,7 @@ describe('v1.KeyManagementServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.createCryptoKey(request);
-      }, expectedError);
+      await assert.rejects(client.createCryptoKey(request), expectedError);
       assert(
         (client.innerApiCalls.createCryptoKey as SinonStub)
           .getCall(0)
@@ -1159,9 +1145,10 @@ describe('v1.KeyManagementServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.createCryptoKeyVersion(request);
-      }, expectedError);
+      await assert.rejects(
+        client.createCryptoKeyVersion(request),
+        expectedError
+      );
       assert(
         (client.innerApiCalls.createCryptoKeyVersion as SinonStub)
           .getCall(0)
@@ -1281,9 +1268,10 @@ describe('v1.KeyManagementServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.importCryptoKeyVersion(request);
-      }, expectedError);
+      await assert.rejects(
+        client.importCryptoKeyVersion(request),
+        expectedError
+      );
       assert(
         (client.innerApiCalls.importCryptoKeyVersion as SinonStub)
           .getCall(0)
@@ -1401,9 +1389,7 @@ describe('v1.KeyManagementServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.createImportJob(request);
-      }, expectedError);
+      await assert.rejects(client.createImportJob(request), expectedError);
       assert(
         (client.innerApiCalls.createImportJob as SinonStub)
           .getCall(0)
@@ -1524,9 +1510,7 @@ describe('v1.KeyManagementServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.updateCryptoKey(request);
-      }, expectedError);
+      await assert.rejects(client.updateCryptoKey(request), expectedError);
       assert(
         (client.innerApiCalls.updateCryptoKey as SinonStub)
           .getCall(0)
@@ -1649,9 +1633,10 @@ describe('v1.KeyManagementServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.updateCryptoKeyVersion(request);
-      }, expectedError);
+      await assert.rejects(
+        client.updateCryptoKeyVersion(request),
+        expectedError
+      );
       assert(
         (client.innerApiCalls.updateCryptoKeyVersion as SinonStub)
           .getCall(0)
@@ -1766,9 +1751,7 @@ describe('v1.KeyManagementServiceClient', () => {
       };
       const expectedError = new Error('expected');
       client.innerApiCalls.encrypt = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(async () => {
-        await client.encrypt(request);
-      }, expectedError);
+      await assert.rejects(client.encrypt(request), expectedError);
       assert(
         (client.innerApiCalls.encrypt as SinonStub)
           .getCall(0)
@@ -1883,9 +1866,7 @@ describe('v1.KeyManagementServiceClient', () => {
       };
       const expectedError = new Error('expected');
       client.innerApiCalls.decrypt = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(async () => {
-        await client.decrypt(request);
-      }, expectedError);
+      await assert.rejects(client.decrypt(request), expectedError);
       assert(
         (client.innerApiCalls.decrypt as SinonStub)
           .getCall(0)
@@ -2003,9 +1984,7 @@ describe('v1.KeyManagementServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.asymmetricSign(request);
-      }, expectedError);
+      await assert.rejects(client.asymmetricSign(request), expectedError);
       assert(
         (client.innerApiCalls.asymmetricSign as SinonStub)
           .getCall(0)
@@ -2123,9 +2102,7 @@ describe('v1.KeyManagementServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.asymmetricDecrypt(request);
-      }, expectedError);
+      await assert.rejects(client.asymmetricDecrypt(request), expectedError);
       assert(
         (client.innerApiCalls.asymmetricDecrypt as SinonStub)
           .getCall(0)
@@ -2245,9 +2222,10 @@ describe('v1.KeyManagementServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.updateCryptoKeyPrimaryVersion(request);
-      }, expectedError);
+      await assert.rejects(
+        client.updateCryptoKeyPrimaryVersion(request),
+        expectedError
+      );
       assert(
         (client.innerApiCalls.updateCryptoKeyPrimaryVersion as SinonStub)
           .getCall(0)
@@ -2367,9 +2345,10 @@ describe('v1.KeyManagementServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.destroyCryptoKeyVersion(request);
-      }, expectedError);
+      await assert.rejects(
+        client.destroyCryptoKeyVersion(request),
+        expectedError
+      );
       assert(
         (client.innerApiCalls.destroyCryptoKeyVersion as SinonStub)
           .getCall(0)
@@ -2489,9 +2468,10 @@ describe('v1.KeyManagementServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.restoreCryptoKeyVersion(request);
-      }, expectedError);
+      await assert.rejects(
+        client.restoreCryptoKeyVersion(request),
+        expectedError
+      );
       assert(
         (client.innerApiCalls.restoreCryptoKeyVersion as SinonStub)
           .getCall(0)
@@ -2613,9 +2593,7 @@ describe('v1.KeyManagementServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.listKeyRings(request);
-      }, expectedError);
+      await assert.rejects(client.listKeyRings(request), expectedError);
       assert(
         (client.innerApiCalls.listKeyRings as SinonStub)
           .getCall(0)
@@ -2704,9 +2682,7 @@ describe('v1.KeyManagementServiceClient', () => {
           reject(err);
         });
       });
-      await assert.rejects(async () => {
-        await promise;
-      }, expectedError);
+      await assert.rejects(promise, expectedError);
       assert(
         (client.descriptors.page.listKeyRings.createStream as SinonStub)
           .getCall(0)
@@ -2915,9 +2891,7 @@ describe('v1.KeyManagementServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.listCryptoKeys(request);
-      }, expectedError);
+      await assert.rejects(client.listCryptoKeys(request), expectedError);
       assert(
         (client.innerApiCalls.listCryptoKeys as SinonStub)
           .getCall(0)
@@ -3006,9 +2980,7 @@ describe('v1.KeyManagementServiceClient', () => {
           reject(err);
         });
       });
-      await assert.rejects(async () => {
-        await promise;
-      }, expectedError);
+      await assert.rejects(promise, expectedError);
       assert(
         (client.descriptors.page.listCryptoKeys.createStream as SinonStub)
           .getCall(0)
@@ -3231,9 +3203,10 @@ describe('v1.KeyManagementServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.listCryptoKeyVersions(request);
-      }, expectedError);
+      await assert.rejects(
+        client.listCryptoKeyVersions(request),
+        expectedError
+      );
       assert(
         (client.innerApiCalls.listCryptoKeyVersions as SinonStub)
           .getCall(0)
@@ -3335,9 +3308,7 @@ describe('v1.KeyManagementServiceClient', () => {
           reject(err);
         });
       });
-      await assert.rejects(async () => {
-        await promise;
-      }, expectedError);
+      await assert.rejects(promise, expectedError);
       assert(
         (client.descriptors.page.listCryptoKeyVersions
           .createStream as SinonStub)
@@ -3553,9 +3524,7 @@ describe('v1.KeyManagementServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.listImportJobs(request);
-      }, expectedError);
+      await assert.rejects(client.listImportJobs(request), expectedError);
       assert(
         (client.innerApiCalls.listImportJobs as SinonStub)
           .getCall(0)
@@ -3644,9 +3613,7 @@ describe('v1.KeyManagementServiceClient', () => {
           reject(err);
         });
       });
-      await assert.rejects(async () => {
-        await promise;
-      }, expectedError);
+      await assert.rejects(promise, expectedError);
       assert(
         (client.descriptors.page.listImportJobs.createStream as SinonStub)
           .getCall(0)
@@ -3842,9 +3809,10 @@ describe('v1.KeyManagementServiceClient', () => {
       };
       const expectedError = new Error('expected');
       client.iamClient.getIamPolicy = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(async () => {
-        await client.getIamPolicy(request, expectedOptions);
-      }, expectedError);
+      await assert.rejects(
+        client.getIamPolicy(request, expectedOptions),
+        expectedError
+      );
       assert(
         (client.iamClient.getIamPolicy as SinonStub)
           .getCall(0)
@@ -3953,9 +3921,10 @@ describe('v1.KeyManagementServiceClient', () => {
       };
       const expectedError = new Error('expected');
       client.iamClient.setIamPolicy = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(async () => {
-        await client.setIamPolicy(request, expectedOptions);
-      }, expectedError);
+      await assert.rejects(
+        client.setIamPolicy(request, expectedOptions),
+        expectedError
+      );
       assert(
         (client.iamClient.setIamPolicy as SinonStub)
           .getCall(0)
@@ -4070,9 +4039,10 @@ describe('v1.KeyManagementServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.testIamPermissions(request, expectedOptions);
-      }, expectedError);
+      await assert.rejects(
+        client.testIamPermissions(request, expectedOptions),
+        expectedError
+      );
       assert(
         (client.iamClient.testIamPermissions as SinonStub)
           .getCall(0)
