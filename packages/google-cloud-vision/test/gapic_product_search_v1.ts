@@ -25,7 +25,7 @@ import * as productsearchModule from '../src';
 
 import {PassThrough} from 'stream';
 
-import {protobuf, LROperation} from 'google-gax';
+import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (instance.constructor as typeof protobuf.Message).toObject(
@@ -329,9 +329,7 @@ describe('v1.ProductSearchClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.createProductSet(request);
-      }, expectedError);
+      await assert.rejects(client.createProductSet(request), expectedError);
       assert(
         (client.innerApiCalls.createProductSet as SinonStub)
           .getCall(0)
@@ -443,9 +441,7 @@ describe('v1.ProductSearchClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.getProductSet(request);
-      }, expectedError);
+      await assert.rejects(client.getProductSet(request), expectedError);
       assert(
         (client.innerApiCalls.getProductSet as SinonStub)
           .getCall(0)
@@ -560,9 +556,7 @@ describe('v1.ProductSearchClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.updateProductSet(request);
-      }, expectedError);
+      await assert.rejects(client.updateProductSet(request), expectedError);
       assert(
         (client.innerApiCalls.updateProductSet as SinonStub)
           .getCall(0)
@@ -674,9 +668,7 @@ describe('v1.ProductSearchClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.deleteProductSet(request);
-      }, expectedError);
+      await assert.rejects(client.deleteProductSet(request), expectedError);
       assert(
         (client.innerApiCalls.deleteProductSet as SinonStub)
           .getCall(0)
@@ -788,9 +780,7 @@ describe('v1.ProductSearchClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.createProduct(request);
-      }, expectedError);
+      await assert.rejects(client.createProduct(request), expectedError);
       assert(
         (client.innerApiCalls.createProduct as SinonStub)
           .getCall(0)
@@ -902,9 +892,7 @@ describe('v1.ProductSearchClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.getProduct(request);
-      }, expectedError);
+      await assert.rejects(client.getProduct(request), expectedError);
       assert(
         (client.innerApiCalls.getProduct as SinonStub)
           .getCall(0)
@@ -1019,9 +1007,7 @@ describe('v1.ProductSearchClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.updateProduct(request);
-      }, expectedError);
+      await assert.rejects(client.updateProduct(request), expectedError);
       assert(
         (client.innerApiCalls.updateProduct as SinonStub)
           .getCall(0)
@@ -1133,9 +1119,7 @@ describe('v1.ProductSearchClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.deleteProduct(request);
-      }, expectedError);
+      await assert.rejects(client.deleteProduct(request), expectedError);
       assert(
         (client.innerApiCalls.deleteProduct as SinonStub)
           .getCall(0)
@@ -1249,9 +1233,7 @@ describe('v1.ProductSearchClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.createReferenceImage(request);
-      }, expectedError);
+      await assert.rejects(client.createReferenceImage(request), expectedError);
       assert(
         (client.innerApiCalls.createReferenceImage as SinonStub)
           .getCall(0)
@@ -1365,9 +1347,7 @@ describe('v1.ProductSearchClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.deleteReferenceImage(request);
-      }, expectedError);
+      await assert.rejects(client.deleteReferenceImage(request), expectedError);
       assert(
         (client.innerApiCalls.deleteReferenceImage as SinonStub)
           .getCall(0)
@@ -1479,9 +1459,7 @@ describe('v1.ProductSearchClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.getReferenceImage(request);
-      }, expectedError);
+      await assert.rejects(client.getReferenceImage(request), expectedError);
       assert(
         (client.innerApiCalls.getReferenceImage as SinonStub)
           .getCall(0)
@@ -1595,9 +1573,10 @@ describe('v1.ProductSearchClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.addProductToProductSet(request);
-      }, expectedError);
+      await assert.rejects(
+        client.addProductToProductSet(request),
+        expectedError
+      );
       assert(
         (client.innerApiCalls.addProductToProductSet as SinonStub)
           .getCall(0)
@@ -1711,9 +1690,10 @@ describe('v1.ProductSearchClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.removeProductFromProductSet(request);
-      }, expectedError);
+      await assert.rejects(
+        client.removeProductFromProductSet(request),
+        expectedError
+      );
       assert(
         (client.innerApiCalls.removeProductFromProductSet as SinonStub)
           .getCall(0)
@@ -1835,9 +1815,7 @@ describe('v1.ProductSearchClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.importProductSets(request);
-      }, expectedError);
+      await assert.rejects(client.importProductSets(request), expectedError);
       assert(
         (client.innerApiCalls.importProductSets as SinonStub)
           .getCall(0)
@@ -1870,14 +1848,53 @@ describe('v1.ProductSearchClient', () => {
         expectedError
       );
       const [operation] = await client.importProductSets(request);
-      await assert.rejects(async () => {
-        await operation.promise();
-      }, expectedError);
+      await assert.rejects(operation.promise(), expectedError);
       assert(
         (client.innerApiCalls.importProductSets as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes checkImportProductSetsProgress without error', async () => {
+      const client = new productsearchModule.v1.ProductSearchClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkImportProductSetsProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkImportProductSetsProgress with error', async () => {
+      const client = new productsearchModule.v1.ProductSearchClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkImportProductSetsProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
     });
   });
 
@@ -1994,9 +2011,7 @@ describe('v1.ProductSearchClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.purgeProducts(request);
-      }, expectedError);
+      await assert.rejects(client.purgeProducts(request), expectedError);
       assert(
         (client.innerApiCalls.purgeProducts as SinonStub)
           .getCall(0)
@@ -2029,14 +2044,53 @@ describe('v1.ProductSearchClient', () => {
         expectedError
       );
       const [operation] = await client.purgeProducts(request);
-      await assert.rejects(async () => {
-        await operation.promise();
-      }, expectedError);
+      await assert.rejects(operation.promise(), expectedError);
       assert(
         (client.innerApiCalls.purgeProducts as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes checkPurgeProductsProgress without error', async () => {
+      const client = new productsearchModule.v1.ProductSearchClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkPurgeProductsProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkPurgeProductsProgress with error', async () => {
+      const client = new productsearchModule.v1.ProductSearchClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkPurgeProductsProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
     });
   });
 
@@ -2147,9 +2201,7 @@ describe('v1.ProductSearchClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.listProductSets(request);
-      }, expectedError);
+      await assert.rejects(client.listProductSets(request), expectedError);
       assert(
         (client.innerApiCalls.listProductSets as SinonStub)
           .getCall(0)
@@ -2240,9 +2292,7 @@ describe('v1.ProductSearchClient', () => {
           reject(err);
         });
       });
-      await assert.rejects(async () => {
-        await promise;
-      }, expectedError);
+      await assert.rejects(promise, expectedError);
       assert(
         (client.descriptors.page.listProductSets.createStream as SinonStub)
           .getCall(0)
@@ -2441,9 +2491,7 @@ describe('v1.ProductSearchClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.listProducts(request);
-      }, expectedError);
+      await assert.rejects(client.listProducts(request), expectedError);
       assert(
         (client.innerApiCalls.listProducts as SinonStub)
           .getCall(0)
@@ -2528,9 +2576,7 @@ describe('v1.ProductSearchClient', () => {
           reject(err);
         });
       });
-      await assert.rejects(async () => {
-        await promise;
-      }, expectedError);
+      await assert.rejects(promise, expectedError);
       assert(
         (client.descriptors.page.listProducts.createStream as SinonStub)
           .getCall(0)
@@ -2743,9 +2789,7 @@ describe('v1.ProductSearchClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.listReferenceImages(request);
-      }, expectedError);
+      await assert.rejects(client.listReferenceImages(request), expectedError);
       assert(
         (client.innerApiCalls.listReferenceImages as SinonStub)
           .getCall(0)
@@ -2842,9 +2886,7 @@ describe('v1.ProductSearchClient', () => {
           reject(err);
         });
       });
-      await assert.rejects(async () => {
-        await promise;
-      }, expectedError);
+      await assert.rejects(promise, expectedError);
       assert(
         (client.descriptors.page.listReferenceImages.createStream as SinonStub)
           .getCall(0)
@@ -3051,9 +3093,10 @@ describe('v1.ProductSearchClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.listProductsInProductSet(request);
-      }, expectedError);
+      await assert.rejects(
+        client.listProductsInProductSet(request),
+        expectedError
+      );
       assert(
         (client.innerApiCalls.listProductsInProductSet as SinonStub)
           .getCall(0)
@@ -3139,9 +3182,7 @@ describe('v1.ProductSearchClient', () => {
           reject(err);
         });
       });
-      await assert.rejects(async () => {
-        await promise;
-      }, expectedError);
+      await assert.rejects(promise, expectedError);
       assert(
         (client.descriptors.page.listProductsInProductSet
           .createStream as SinonStub)

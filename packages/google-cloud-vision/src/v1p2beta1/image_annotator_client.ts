@@ -28,7 +28,7 @@ import * as path from 'path';
 
 import * as protos from '../../protos/protos';
 import * as gapicConfig from './image_annotator_client_config.json';
-
+import {operationsProtos} from 'google-gax';
 const version = require('../../../package.json').version;
 
 /**
@@ -503,6 +503,42 @@ export class ImageAnnotatorClient {
       options,
       callback
     );
+  }
+  /**
+   * Check the status of the long running operation returned by the asyncBatchAnnotateFiles() method.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *
+   * @example:
+   *   const decodedOperation = await checkAsyncBatchAnnotateFilesProgress(name);
+   *   console.log(decodedOperation.result);
+   *   console.log(decodedOperation.done);
+   *   console.log(decodedOperation.metadata);
+   *
+   */
+  async checkAsyncBatchAnnotateFilesProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.vision.v1p2beta1.AsyncBatchAnnotateFilesResponse,
+      protos.google.cloud.vision.v1p2beta1.OperationMetadata
+    >
+  > {
+    const request = new operationsProtos.google.longrunning.GetOperationRequest(
+      {name}
+    );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new gax.Operation(
+      operation,
+      this.descriptors.longrunning.asyncBatchAnnotateFiles,
+      gax.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.vision.v1p2beta1.AsyncBatchAnnotateFilesResponse,
+      protos.google.cloud.vision.v1p2beta1.OperationMetadata
+    >;
   }
 
   /**

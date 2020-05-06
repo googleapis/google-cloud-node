@@ -214,9 +214,7 @@ describe('v1p1beta1.ImageAnnotatorClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.batchAnnotateImages(request);
-      }, expectedError);
+      await assert.rejects(client.batchAnnotateImages(request), expectedError);
       assert(
         (client.innerApiCalls.batchAnnotateImages as SinonStub)
           .getCall(0)
