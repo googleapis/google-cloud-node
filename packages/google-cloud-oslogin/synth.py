@@ -25,14 +25,14 @@ AUTOSYNTH_MULTIPLE_COMMITS = True
 
 
 gapic = gcp.GAPICMicrogenerator()
-versions = ['v1beta', 'v1']
+versions = ['v1', 'v1beta']
 for version in versions:
     library = gapic.typescript_library(
         'os-login',
         generator_args={
             "grpc-service-config": f"google/cloud/oslogin/{version}/oslogin_grpc_service_config.json",
             "package-name": f"@google-cloud/os-login"
-            },
+        },
         proto_path=f'/google/cloud/oslogin/{version}',
         extra_proto_files=['google/cloud/oslogin/common/common.proto'],
         version=version)
@@ -40,12 +40,13 @@ for version in versions:
     # skip index, protos, package.json, and README.md
     s.copy(
         library,
-        excludes=['package.json', 'README.md', 'src/index.ts'],
+        excludes=['package.json', 'README.md'],
     )
 
 # Copy common templates
 common_templates = gcp.CommonTemplates()
-templates = common_templates.node_library(source_location='build/src')
+templates = common_templates.node_library(
+    source_location='build/src', versions=versions, default_version='v1')
 s.copy(templates)
 
 node.postprocess_gapic_library()
