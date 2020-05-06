@@ -16,7 +16,7 @@
 
 import synthtool as s
 import synthtool.gcp as gcp
-import subprocess
+import synthtool.languages.node as node
 import logging
 import os
 import json
@@ -75,21 +75,9 @@ r"""
   }
 }
 """)
-# Node.js specific cleanup
+
 to_remove=['src/v1/grafeas_client.ts', 'src/v1/grafeas_client_config.json', 'src/v1/grafeas_proto_list.json', 'src/v1beta1/grafeas_client.ts','src/v1beta1/grafeas_client_config.json', 'src/v1beta1/grafeas_proto_list.json', 'test/gapic_grafeas_v1_beta1_v1beta1.ts', 'test/gapic_grafeas_v1.ts', 'test/gapic_grafeas_v1beta1.ts']
 for filePath in to_remove:
     os.unlink(filePath)
-# remove unneeded protos in proto_list.json
-# proto_lists=['src/v1/container_analysis_proto_list.json', 'src/v1beta1/container_analysis_v1_beta1_proto_list.json', 'src/v1beta1/grafeas_v1_beta1_proto_list.json']
-# remove_proto_keywords=['/google/api', '/google/protobuf', '/google/rpc', '/google/type']
-# for file in proto_lists:
-#   with open(file, 'r') as f:
-#     items=json.load(f)
-#     content =[item for item in items if all([(x not in item) for x in remove_proto_keywords])]
-#     new_file=json.dumps(content, indent=2) + '\n'
-#   with open(file, 'w') as f:
-#     f.write(new_file)
 
-subprocess.run(['npm', 'install'])
-subprocess.run(['npm', 'run', 'fix'])
-subprocess.run(['npx', 'compileProtos', 'src'])
+node.postprocess_gapic_library()
