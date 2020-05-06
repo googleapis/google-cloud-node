@@ -4,14 +4,22 @@
       "git": {
         "name": ".",
         "remote": "git@github.com:googleapis/nodejs-os-login.git",
-        "sha": "59a874f2ad586f54b994e0ee8ed3c7920eb15126"
+        "sha": "579f1e48ef2a3f0fd1460b07592d5dc499cf8043"
+      }
+    },
+    {
+      "git": {
+        "name": "googleapis",
+        "remote": "https://github.com/googleapis/googleapis.git",
+        "sha": "6dfd72d028a0d0a43764e060f7b15e004385c3a1",
+        "internalRef": "310168181"
       }
     },
     {
       "git": {
         "name": "synthtool",
         "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "ab883569eb0257bbf16a6d825fd018b3adde3912"
+        "sha": "756bc4dfc24e8bc4c5dd4116daa41a0440ebf5a0"
       }
     }
   ],
@@ -20,7 +28,7 @@
       "client": {
         "source": "googleapis",
         "apiName": "os-login",
-        "apiVersion": "v1beta",
+        "apiVersion": "v1",
         "language": "typescript",
         "generator": "gapic-generator-typescript"
       }
@@ -29,7 +37,7 @@
       "client": {
         "source": "googleapis",
         "apiName": "os-login",
-        "apiVersion": "v1",
+        "apiVersion": "v1beta",
         "language": "typescript",
         "generator": "gapic-generator-typescript"
       }
