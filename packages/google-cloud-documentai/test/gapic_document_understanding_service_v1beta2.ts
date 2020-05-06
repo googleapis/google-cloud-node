@@ -23,7 +23,7 @@ import {SinonStub} from 'sinon';
 import {describe, it} from 'mocha';
 import * as documentunderstandingserviceModule from '../src';
 
-import {protobuf, LROperation} from 'google-gax';
+import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (instance.constructor as typeof protobuf.Message).toObject(
@@ -288,9 +288,7 @@ describe('v1beta2.DocumentUnderstandingServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.processDocument(request);
-      }, expectedError);
+      await assert.rejects(client.processDocument(request), expectedError);
       assert(
         (client.innerApiCalls.processDocument as SinonStub)
           .getCall(0)
@@ -418,9 +416,10 @@ describe('v1beta2.DocumentUnderstandingServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.batchProcessDocuments(request);
-      }, expectedError);
+      await assert.rejects(
+        client.batchProcessDocuments(request),
+        expectedError
+      );
       assert(
         (client.innerApiCalls.batchProcessDocuments as SinonStub)
           .getCall(0)
@@ -455,14 +454,57 @@ describe('v1beta2.DocumentUnderstandingServiceClient', () => {
         expectedError
       );
       const [operation] = await client.batchProcessDocuments(request);
-      await assert.rejects(async () => {
-        await operation.promise();
-      }, expectedError);
+      await assert.rejects(operation.promise(), expectedError);
       assert(
         (client.innerApiCalls.batchProcessDocuments as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes checkBatchProcessDocumentsProgress without error', async () => {
+      const client = new documentunderstandingserviceModule.v1beta2.DocumentUnderstandingServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkBatchProcessDocumentsProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkBatchProcessDocumentsProgress with error', async () => {
+      const client = new documentunderstandingserviceModule.v1beta2.DocumentUnderstandingServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkBatchProcessDocumentsProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
     });
   });
 });
