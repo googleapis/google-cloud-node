@@ -3,23 +3,15 @@
     {
       "git": {
         "name": ".",
-        "remote": "https://github.com/googleapis/nodejs-security-center.git",
-        "sha": "8ea195c2f3e83b30045943cd39ccb01a926eb535"
-      }
-    },
-    {
-      "git": {
-        "name": "googleapis",
-        "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "28e76243c23cc282efbb288cb558c174e3e5e9ee",
-        "internalRef": "308294748"
+        "remote": "git@github.com:googleapis/nodejs-security-center.git",
+        "sha": "073960395fdaafcbdd921fba26ba1ace5e303813"
       }
     },
     {
       "git": {
         "name": "synthtool",
         "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "19465d3ec5e5acdb01521d8f3bddd311bcbee28d"
+        "sha": "ab883569eb0257bbf16a6d825fd018b3adde3912"
       }
     }
   ],

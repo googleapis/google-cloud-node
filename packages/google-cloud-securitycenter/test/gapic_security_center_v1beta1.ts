@@ -25,7 +25,7 @@ import * as securitycenterModule from '../src';
 
 import {PassThrough} from 'stream';
 
-import {protobuf, LROperation} from 'google-gax';
+import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (instance.constructor as typeof protobuf.Message).toObject(
@@ -331,9 +331,7 @@ describe('v1beta1.SecurityCenterClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.createSource(request);
-      }, expectedError);
+      await assert.rejects(client.createSource(request), expectedError);
       assert(
         (client.innerApiCalls.createSource as SinonStub)
           .getCall(0)
@@ -445,9 +443,7 @@ describe('v1beta1.SecurityCenterClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.createFinding(request);
-      }, expectedError);
+      await assert.rejects(client.createFinding(request), expectedError);
       assert(
         (client.innerApiCalls.createFinding as SinonStub)
           .getCall(0)
@@ -559,9 +555,7 @@ describe('v1beta1.SecurityCenterClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.getIamPolicy(request);
-      }, expectedError);
+      await assert.rejects(client.getIamPolicy(request), expectedError);
       assert(
         (client.innerApiCalls.getIamPolicy as SinonStub)
           .getCall(0)
@@ -675,9 +669,10 @@ describe('v1beta1.SecurityCenterClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.getOrganizationSettings(request);
-      }, expectedError);
+      await assert.rejects(
+        client.getOrganizationSettings(request),
+        expectedError
+      );
       assert(
         (client.innerApiCalls.getOrganizationSettings as SinonStub)
           .getCall(0)
@@ -786,9 +781,7 @@ describe('v1beta1.SecurityCenterClient', () => {
       };
       const expectedError = new Error('expected');
       client.innerApiCalls.getSource = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(async () => {
-        await client.getSource(request);
-      }, expectedError);
+      await assert.rejects(client.getSource(request), expectedError);
       assert(
         (client.innerApiCalls.getSource as SinonStub)
           .getCall(0)
@@ -900,9 +893,7 @@ describe('v1beta1.SecurityCenterClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.setFindingState(request);
-      }, expectedError);
+      await assert.rejects(client.setFindingState(request), expectedError);
       assert(
         (client.innerApiCalls.setFindingState as SinonStub)
           .getCall(0)
@@ -1014,9 +1005,7 @@ describe('v1beta1.SecurityCenterClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.setIamPolicy(request);
-      }, expectedError);
+      await assert.rejects(client.setIamPolicy(request), expectedError);
       assert(
         (client.innerApiCalls.setIamPolicy as SinonStub)
           .getCall(0)
@@ -1130,9 +1119,7 @@ describe('v1beta1.SecurityCenterClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.testIamPermissions(request);
-      }, expectedError);
+      await assert.rejects(client.testIamPermissions(request), expectedError);
       assert(
         (client.innerApiCalls.testIamPermissions as SinonStub)
           .getCall(0)
@@ -1247,9 +1234,7 @@ describe('v1beta1.SecurityCenterClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.updateFinding(request);
-      }, expectedError);
+      await assert.rejects(client.updateFinding(request), expectedError);
       assert(
         (client.innerApiCalls.updateFinding as SinonStub)
           .getCall(0)
@@ -1366,9 +1351,10 @@ describe('v1beta1.SecurityCenterClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.updateOrganizationSettings(request);
-      }, expectedError);
+      await assert.rejects(
+        client.updateOrganizationSettings(request),
+        expectedError
+      );
       assert(
         (client.innerApiCalls.updateOrganizationSettings as SinonStub)
           .getCall(0)
@@ -1483,9 +1469,7 @@ describe('v1beta1.SecurityCenterClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.updateSource(request);
-      }, expectedError);
+      await assert.rejects(client.updateSource(request), expectedError);
       assert(
         (client.innerApiCalls.updateSource as SinonStub)
           .getCall(0)
@@ -1602,9 +1586,7 @@ describe('v1beta1.SecurityCenterClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.updateSecurityMarks(request);
-      }, expectedError);
+      await assert.rejects(client.updateSecurityMarks(request), expectedError);
       assert(
         (client.innerApiCalls.updateSecurityMarks as SinonStub)
           .getCall(0)
@@ -1726,9 +1708,7 @@ describe('v1beta1.SecurityCenterClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.runAssetDiscovery(request);
-      }, expectedError);
+      await assert.rejects(client.runAssetDiscovery(request), expectedError);
       assert(
         (client.innerApiCalls.runAssetDiscovery as SinonStub)
           .getCall(0)
@@ -1761,14 +1741,53 @@ describe('v1beta1.SecurityCenterClient', () => {
         expectedError
       );
       const [operation] = await client.runAssetDiscovery(request);
-      await assert.rejects(async () => {
-        await operation.promise();
-      }, expectedError);
+      await assert.rejects(operation.promise(), expectedError);
       assert(
         (client.innerApiCalls.runAssetDiscovery as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes checkRunAssetDiscoveryProgress without error', async () => {
+      const client = new securitycenterModule.v1beta1.SecurityCenterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkRunAssetDiscoveryProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkRunAssetDiscoveryProgress with error', async () => {
+      const client = new securitycenterModule.v1beta1.SecurityCenterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkRunAssetDiscoveryProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
     });
   });
 
@@ -1893,9 +1912,7 @@ describe('v1beta1.SecurityCenterClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.groupAssets(request);
-      }, expectedError);
+      await assert.rejects(client.groupAssets(request), expectedError);
       assert(
         (client.innerApiCalls.groupAssets as SinonStub)
           .getCall(0)
@@ -1995,9 +2012,7 @@ describe('v1beta1.SecurityCenterClient', () => {
           reject(err);
         });
       });
-      await assert.rejects(async () => {
-        await promise;
-      }, expectedError);
+      await assert.rejects(promise, expectedError);
       assert(
         (client.descriptors.page.groupAssets.createStream as SinonStub)
           .getCall(0)
@@ -2215,9 +2230,7 @@ describe('v1beta1.SecurityCenterClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.groupFindings(request);
-      }, expectedError);
+      await assert.rejects(client.groupFindings(request), expectedError);
       assert(
         (client.innerApiCalls.groupFindings as SinonStub)
           .getCall(0)
@@ -2318,9 +2331,7 @@ describe('v1beta1.SecurityCenterClient', () => {
           reject(err);
         });
       });
-      await assert.rejects(async () => {
-        await promise;
-      }, expectedError);
+      await assert.rejects(promise, expectedError);
       assert(
         (client.descriptors.page.groupFindings.createStream as SinonStub)
           .getCall(0)
@@ -2539,9 +2550,7 @@ describe('v1beta1.SecurityCenterClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.listAssets(request);
-      }, expectedError);
+      await assert.rejects(client.listAssets(request), expectedError);
       assert(
         (client.innerApiCalls.listAssets as SinonStub)
           .getCall(0)
@@ -2641,9 +2650,7 @@ describe('v1beta1.SecurityCenterClient', () => {
           reject(err);
         });
       });
-      await assert.rejects(async () => {
-        await promise;
-      }, expectedError);
+      await assert.rejects(promise, expectedError);
       assert(
         (client.descriptors.page.listAssets.createStream as SinonStub)
           .getCall(0)
@@ -2861,9 +2868,7 @@ describe('v1beta1.SecurityCenterClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.listFindings(request);
-      }, expectedError);
+      await assert.rejects(client.listFindings(request), expectedError);
       assert(
         (client.innerApiCalls.listFindings as SinonStub)
           .getCall(0)
@@ -2960,9 +2965,7 @@ describe('v1beta1.SecurityCenterClient', () => {
           reject(err);
         });
       });
-      await assert.rejects(async () => {
-        await promise;
-      }, expectedError);
+      await assert.rejects(promise, expectedError);
       assert(
         (client.descriptors.page.listFindings.createStream as SinonStub)
           .getCall(0)
@@ -3179,9 +3182,7 @@ describe('v1beta1.SecurityCenterClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.listSources(request);
-      }, expectedError);
+      await assert.rejects(client.listSources(request), expectedError);
       assert(
         (client.innerApiCalls.listSources as SinonStub)
           .getCall(0)
@@ -3277,9 +3278,7 @@ describe('v1beta1.SecurityCenterClient', () => {
           reject(err);
         });
       });
-      await assert.rejects(async () => {
-        await promise;
-      }, expectedError);
+      await assert.rejects(promise, expectedError);
       assert(
         (client.descriptors.page.listSources.createStream as SinonStub)
           .getCall(0)

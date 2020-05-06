@@ -32,7 +32,7 @@ import {Transform} from 'stream';
 import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
 import * as gapicConfig from './security_center_client_config.json';
-
+import {operationsProtos} from 'google-gax';
 const version = require('../../../package.json').version;
 
 /**
@@ -1616,6 +1616,39 @@ export class SecurityCenterClient {
     });
     this.initialize();
     return this.innerApiCalls.runAssetDiscovery(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by the runAssetDiscovery() method.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *
+   * @example:
+   *   const decodedOperation = await checkRunAssetDiscoveryProgress(name);
+   *   console.log(decodedOperation.result);
+   *   console.log(decodedOperation.done);
+   *   console.log(decodedOperation.metadata);
+   *
+   */
+  async checkRunAssetDiscoveryProgress(
+    name: string
+  ): Promise<
+    LROperation<protos.google.protobuf.Empty, protos.google.protobuf.Empty>
+  > {
+    const request = new operationsProtos.google.longrunning.GetOperationRequest(
+      {name}
+    );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new gax.Operation(
+      operation,
+      this.descriptors.longrunning.runAssetDiscovery,
+      gax.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.protobuf.Empty
+    >;
   }
   groupAssets(
     request: protos.google.cloud.securitycenter.v1beta1.IGroupAssetsRequest,
