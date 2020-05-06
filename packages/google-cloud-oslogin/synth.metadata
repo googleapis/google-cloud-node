@@ -3,23 +3,15 @@
     {
       "git": {
         "name": ".",
-        "remote": "https://github.com/googleapis/nodejs-os-login.git",
-        "sha": "7f6a0a74e526e7cc8f2283874915e231546c4ad2"
-      }
-    },
-    {
-      "git": {
-        "name": "googleapis",
-        "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "42ee97c1b93a0e3759bbba3013da309f670a90ab",
-        "internalRef": "307114445"
+        "remote": "git@github.com:googleapis/nodejs-os-login.git",
+        "sha": "59a874f2ad586f54b994e0ee8ed3c7920eb15126"
       }
     },
     {
       "git": {
         "name": "synthtool",
         "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "19465d3ec5e5acdb01521d8f3bddd311bcbee28d"
+        "sha": "ab883569eb0257bbf16a6d825fd018b3adde3912"
       }
     }
   ],
