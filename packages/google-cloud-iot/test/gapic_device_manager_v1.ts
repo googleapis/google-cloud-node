@@ -299,9 +299,7 @@ describe('v1.DeviceManagerClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.createDeviceRegistry(request);
-      }, expectedError);
+      await assert.rejects(client.createDeviceRegistry(request), expectedError);
       assert(
         (client.innerApiCalls.createDeviceRegistry as SinonStub)
           .getCall(0)
@@ -413,9 +411,7 @@ describe('v1.DeviceManagerClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.getDeviceRegistry(request);
-      }, expectedError);
+      await assert.rejects(client.getDeviceRegistry(request), expectedError);
       assert(
         (client.innerApiCalls.getDeviceRegistry as SinonStub)
           .getCall(0)
@@ -532,9 +528,7 @@ describe('v1.DeviceManagerClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.updateDeviceRegistry(request);
-      }, expectedError);
+      await assert.rejects(client.updateDeviceRegistry(request), expectedError);
       assert(
         (client.innerApiCalls.updateDeviceRegistry as SinonStub)
           .getCall(0)
@@ -648,9 +642,7 @@ describe('v1.DeviceManagerClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.deleteDeviceRegistry(request);
-      }, expectedError);
+      await assert.rejects(client.deleteDeviceRegistry(request), expectedError);
       assert(
         (client.innerApiCalls.deleteDeviceRegistry as SinonStub)
           .getCall(0)
@@ -762,9 +754,7 @@ describe('v1.DeviceManagerClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.createDevice(request);
-      }, expectedError);
+      await assert.rejects(client.createDevice(request), expectedError);
       assert(
         (client.innerApiCalls.createDevice as SinonStub)
           .getCall(0)
@@ -873,9 +863,7 @@ describe('v1.DeviceManagerClient', () => {
       };
       const expectedError = new Error('expected');
       client.innerApiCalls.getDevice = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(async () => {
-        await client.getDevice(request);
-      }, expectedError);
+      await assert.rejects(client.getDevice(request), expectedError);
       assert(
         (client.innerApiCalls.getDevice as SinonStub)
           .getCall(0)
@@ -990,9 +978,7 @@ describe('v1.DeviceManagerClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.updateDevice(request);
-      }, expectedError);
+      await assert.rejects(client.updateDevice(request), expectedError);
       assert(
         (client.innerApiCalls.updateDevice as SinonStub)
           .getCall(0)
@@ -1104,9 +1090,7 @@ describe('v1.DeviceManagerClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.deleteDevice(request);
-      }, expectedError);
+      await assert.rejects(client.deleteDevice(request), expectedError);
       assert(
         (client.innerApiCalls.deleteDevice as SinonStub)
           .getCall(0)
@@ -1220,9 +1204,10 @@ describe('v1.DeviceManagerClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.modifyCloudToDeviceConfig(request);
-      }, expectedError);
+      await assert.rejects(
+        client.modifyCloudToDeviceConfig(request),
+        expectedError
+      );
       assert(
         (client.innerApiCalls.modifyCloudToDeviceConfig as SinonStub)
           .getCall(0)
@@ -1336,9 +1321,10 @@ describe('v1.DeviceManagerClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.listDeviceConfigVersions(request);
-      }, expectedError);
+      await assert.rejects(
+        client.listDeviceConfigVersions(request),
+        expectedError
+      );
       assert(
         (client.innerApiCalls.listDeviceConfigVersions as SinonStub)
           .getCall(0)
@@ -1450,9 +1436,7 @@ describe('v1.DeviceManagerClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.listDeviceStates(request);
-      }, expectedError);
+      await assert.rejects(client.listDeviceStates(request), expectedError);
       assert(
         (client.innerApiCalls.listDeviceStates as SinonStub)
           .getCall(0)
@@ -1564,9 +1548,7 @@ describe('v1.DeviceManagerClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.setIamPolicy(request);
-      }, expectedError);
+      await assert.rejects(client.setIamPolicy(request), expectedError);
       assert(
         (client.innerApiCalls.setIamPolicy as SinonStub)
           .getCall(0)
@@ -1678,9 +1660,7 @@ describe('v1.DeviceManagerClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.getIamPolicy(request);
-      }, expectedError);
+      await assert.rejects(client.getIamPolicy(request), expectedError);
       assert(
         (client.innerApiCalls.getIamPolicy as SinonStub)
           .getCall(0)
@@ -1794,9 +1774,7 @@ describe('v1.DeviceManagerClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.testIamPermissions(request);
-      }, expectedError);
+      await assert.rejects(client.testIamPermissions(request), expectedError);
       assert(
         (client.innerApiCalls.testIamPermissions as SinonStub)
           .getCall(0)
@@ -1910,9 +1888,7 @@ describe('v1.DeviceManagerClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.sendCommandToDevice(request);
-      }, expectedError);
+      await assert.rejects(client.sendCommandToDevice(request), expectedError);
       assert(
         (client.innerApiCalls.sendCommandToDevice as SinonStub)
           .getCall(0)
@@ -2026,9 +2002,7 @@ describe('v1.DeviceManagerClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.bindDeviceToGateway(request);
-      }, expectedError);
+      await assert.rejects(client.bindDeviceToGateway(request), expectedError);
       assert(
         (client.innerApiCalls.bindDeviceToGateway as SinonStub)
           .getCall(0)
@@ -2142,9 +2116,10 @@ describe('v1.DeviceManagerClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.unbindDeviceFromGateway(request);
-      }, expectedError);
+      await assert.rejects(
+        client.unbindDeviceFromGateway(request),
+        expectedError
+      );
       assert(
         (client.innerApiCalls.unbindDeviceFromGateway as SinonStub)
           .getCall(0)
@@ -2262,9 +2237,7 @@ describe('v1.DeviceManagerClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.listDeviceRegistries(request);
-      }, expectedError);
+      await assert.rejects(client.listDeviceRegistries(request), expectedError);
       assert(
         (client.innerApiCalls.listDeviceRegistries as SinonStub)
           .getCall(0)
@@ -2355,9 +2328,7 @@ describe('v1.DeviceManagerClient', () => {
           reject(err);
         });
       });
-      await assert.rejects(async () => {
-        await promise;
-      }, expectedError);
+      await assert.rejects(promise, expectedError);
       assert(
         (client.descriptors.page.listDeviceRegistries.createStream as SinonStub)
           .getCall(0)
@@ -2556,9 +2527,7 @@ describe('v1.DeviceManagerClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.listDevices(request);
-      }, expectedError);
+      await assert.rejects(client.listDevices(request), expectedError);
       assert(
         (client.innerApiCalls.listDevices as SinonStub)
           .getCall(0)
@@ -2642,9 +2611,7 @@ describe('v1.DeviceManagerClient', () => {
           reject(err);
         });
       });
-      await assert.rejects(async () => {
-        await promise;
-      }, expectedError);
+      await assert.rejects(promise, expectedError);
       assert(
         (client.descriptors.page.listDevices.createStream as SinonStub)
           .getCall(0)
