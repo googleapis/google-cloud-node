@@ -297,9 +297,7 @@ describe('v1.GrafeasClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.getOccurrence(request);
-      }, expectedError);
+      await assert.rejects(client.getOccurrence(request), expectedError);
       assert(
         (client.innerApiCalls.getOccurrence as SinonStub)
           .getCall(0)
@@ -411,9 +409,7 @@ describe('v1.GrafeasClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.deleteOccurrence(request);
-      }, expectedError);
+      await assert.rejects(client.deleteOccurrence(request), expectedError);
       assert(
         (client.innerApiCalls.deleteOccurrence as SinonStub)
           .getCall(0)
@@ -525,9 +521,7 @@ describe('v1.GrafeasClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.createOccurrence(request);
-      }, expectedError);
+      await assert.rejects(client.createOccurrence(request), expectedError);
       assert(
         (client.innerApiCalls.createOccurrence as SinonStub)
           .getCall(0)
@@ -641,9 +635,10 @@ describe('v1.GrafeasClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.batchCreateOccurrences(request);
-      }, expectedError);
+      await assert.rejects(
+        client.batchCreateOccurrences(request),
+        expectedError
+      );
       assert(
         (client.innerApiCalls.batchCreateOccurrences as SinonStub)
           .getCall(0)
@@ -755,9 +750,7 @@ describe('v1.GrafeasClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.updateOccurrence(request);
-      }, expectedError);
+      await assert.rejects(client.updateOccurrence(request), expectedError);
       assert(
         (client.innerApiCalls.updateOccurrence as SinonStub)
           .getCall(0)
@@ -866,9 +859,7 @@ describe('v1.GrafeasClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.getOccurrenceNote(request);
-      }, expectedError);
+      await assert.rejects(client.getOccurrenceNote(request), expectedError);
       assert(
         (client.innerApiCalls.getOccurrenceNote as SinonStub)
           .getCall(0)
@@ -974,9 +965,7 @@ describe('v1.GrafeasClient', () => {
       };
       const expectedError = new Error('expected');
       client.innerApiCalls.getNote = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(async () => {
-        await client.getNote(request);
-      }, expectedError);
+      await assert.rejects(client.getNote(request), expectedError);
       assert(
         (client.innerApiCalls.getNote as SinonStub)
           .getCall(0)
@@ -1088,9 +1077,7 @@ describe('v1.GrafeasClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.deleteNote(request);
-      }, expectedError);
+      await assert.rejects(client.deleteNote(request), expectedError);
       assert(
         (client.innerApiCalls.deleteNote as SinonStub)
           .getCall(0)
@@ -1199,9 +1186,7 @@ describe('v1.GrafeasClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.createNote(request);
-      }, expectedError);
+      await assert.rejects(client.createNote(request), expectedError);
       assert(
         (client.innerApiCalls.createNote as SinonStub)
           .getCall(0)
@@ -1313,9 +1298,7 @@ describe('v1.GrafeasClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.batchCreateNotes(request);
-      }, expectedError);
+      await assert.rejects(client.batchCreateNotes(request), expectedError);
       assert(
         (client.innerApiCalls.batchCreateNotes as SinonStub)
           .getCall(0)
@@ -1424,9 +1407,7 @@ describe('v1.GrafeasClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.updateNote(request);
-      }, expectedError);
+      await assert.rejects(client.updateNote(request), expectedError);
       assert(
         (client.innerApiCalls.updateNote as SinonStub)
           .getCall(0)
@@ -1542,9 +1523,7 @@ describe('v1.GrafeasClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.listOccurrences(request);
-      }, expectedError);
+      await assert.rejects(client.listOccurrences(request), expectedError);
       assert(
         (client.innerApiCalls.listOccurrences as SinonStub)
           .getCall(0)
@@ -1629,9 +1608,7 @@ describe('v1.GrafeasClient', () => {
           reject(err);
         });
       });
-      await assert.rejects(async () => {
-        await promise;
-      }, expectedError);
+      await assert.rejects(promise, expectedError);
       assert(
         (client.descriptors.page.listOccurrences.createStream as SinonStub)
           .getCall(0)
@@ -1824,9 +1801,7 @@ describe('v1.GrafeasClient', () => {
       };
       const expectedError = new Error('expected');
       client.innerApiCalls.listNotes = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(async () => {
-        await client.listNotes(request);
-      }, expectedError);
+      await assert.rejects(client.listNotes(request), expectedError);
       assert(
         (client.innerApiCalls.listNotes as SinonStub)
           .getCall(0)
@@ -1909,9 +1884,7 @@ describe('v1.GrafeasClient', () => {
           reject(err);
         });
       });
-      await assert.rejects(async () => {
-        await promise;
-      }, expectedError);
+      await assert.rejects(promise, expectedError);
       assert(
         (client.descriptors.page.listNotes.createStream as SinonStub)
           .getCall(0)
@@ -2106,9 +2079,7 @@ describe('v1.GrafeasClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.listNoteOccurrences(request);
-      }, expectedError);
+      await assert.rejects(client.listNoteOccurrences(request), expectedError);
       assert(
         (client.innerApiCalls.listNoteOccurrences as SinonStub)
           .getCall(0)
@@ -2193,9 +2164,7 @@ describe('v1.GrafeasClient', () => {
           reject(err);
         });
       });
-      await assert.rejects(async () => {
-        await promise;
-      }, expectedError);
+      await assert.rejects(promise, expectedError);
       assert(
         (client.descriptors.page.listNoteOccurrences.createStream as SinonStub)
           .getCall(0)
