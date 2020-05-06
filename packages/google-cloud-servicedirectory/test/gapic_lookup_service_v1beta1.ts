@@ -236,9 +236,7 @@ describe('v1beta1.LookupServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.resolveService(request);
-      }, expectedError);
+      await assert.rejects(client.resolveService(request), expectedError);
       assert(
         (client.innerApiCalls.resolveService as SinonStub)
           .getCall(0)

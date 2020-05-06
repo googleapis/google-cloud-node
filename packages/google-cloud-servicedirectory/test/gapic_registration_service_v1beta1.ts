@@ -316,9 +316,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.createNamespace(request);
-      }, expectedError);
+      await assert.rejects(client.createNamespace(request), expectedError);
       assert(
         (client.innerApiCalls.createNamespace as SinonStub)
           .getCall(0)
@@ -436,9 +434,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.getNamespace(request);
-      }, expectedError);
+      await assert.rejects(client.getNamespace(request), expectedError);
       assert(
         (client.innerApiCalls.getNamespace as SinonStub)
           .getCall(0)
@@ -559,9 +555,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.updateNamespace(request);
-      }, expectedError);
+      await assert.rejects(client.updateNamespace(request), expectedError);
       assert(
         (client.innerApiCalls.updateNamespace as SinonStub)
           .getCall(0)
@@ -679,9 +673,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.deleteNamespace(request);
-      }, expectedError);
+      await assert.rejects(client.deleteNamespace(request), expectedError);
       assert(
         (client.innerApiCalls.deleteNamespace as SinonStub)
           .getCall(0)
@@ -799,9 +791,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.createService(request);
-      }, expectedError);
+      await assert.rejects(client.createService(request), expectedError);
       assert(
         (client.innerApiCalls.createService as SinonStub)
           .getCall(0)
@@ -919,9 +909,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.getService(request);
-      }, expectedError);
+      await assert.rejects(client.getService(request), expectedError);
       assert(
         (client.innerApiCalls.getService as SinonStub)
           .getCall(0)
@@ -1042,9 +1030,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.updateService(request);
-      }, expectedError);
+      await assert.rejects(client.updateService(request), expectedError);
       assert(
         (client.innerApiCalls.updateService as SinonStub)
           .getCall(0)
@@ -1162,9 +1148,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.deleteService(request);
-      }, expectedError);
+      await assert.rejects(client.deleteService(request), expectedError);
       assert(
         (client.innerApiCalls.deleteService as SinonStub)
           .getCall(0)
@@ -1282,9 +1266,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.createEndpoint(request);
-      }, expectedError);
+      await assert.rejects(client.createEndpoint(request), expectedError);
       assert(
         (client.innerApiCalls.createEndpoint as SinonStub)
           .getCall(0)
@@ -1402,9 +1384,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.getEndpoint(request);
-      }, expectedError);
+      await assert.rejects(client.getEndpoint(request), expectedError);
       assert(
         (client.innerApiCalls.getEndpoint as SinonStub)
           .getCall(0)
@@ -1525,9 +1505,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.updateEndpoint(request);
-      }, expectedError);
+      await assert.rejects(client.updateEndpoint(request), expectedError);
       assert(
         (client.innerApiCalls.updateEndpoint as SinonStub)
           .getCall(0)
@@ -1645,9 +1623,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.deleteEndpoint(request);
-      }, expectedError);
+      await assert.rejects(client.deleteEndpoint(request), expectedError);
       assert(
         (client.innerApiCalls.deleteEndpoint as SinonStub)
           .getCall(0)
@@ -1765,9 +1741,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.getIamPolicy(request);
-      }, expectedError);
+      await assert.rejects(client.getIamPolicy(request), expectedError);
       assert(
         (client.innerApiCalls.getIamPolicy as SinonStub)
           .getCall(0)
@@ -1885,9 +1859,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.setIamPolicy(request);
-      }, expectedError);
+      await assert.rejects(client.setIamPolicy(request), expectedError);
       assert(
         (client.innerApiCalls.setIamPolicy as SinonStub)
           .getCall(0)
@@ -2007,9 +1979,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.testIamPermissions(request);
-      }, expectedError);
+      await assert.rejects(client.testIamPermissions(request), expectedError);
       assert(
         (client.innerApiCalls.testIamPermissions as SinonStub)
           .getCall(0)
@@ -2145,9 +2115,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.listNamespaces(request);
-      }, expectedError);
+      await assert.rejects(client.listNamespaces(request), expectedError);
       assert(
         (client.innerApiCalls.listNamespaces as SinonStub)
           .getCall(0)
@@ -2252,9 +2220,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
           reject(err);
         });
       });
-      await assert.rejects(async () => {
-        await promise;
-      }, expectedError);
+      await assert.rejects(promise, expectedError);
       assert(
         (client.descriptors.page.listNamespaces.createStream as SinonStub)
           .getCall(0)
@@ -2483,9 +2449,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.listServices(request);
-      }, expectedError);
+      await assert.rejects(client.listServices(request), expectedError);
       assert(
         (client.innerApiCalls.listServices as SinonStub)
           .getCall(0)
@@ -2586,9 +2550,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
           reject(err);
         });
       });
-      await assert.rejects(async () => {
-        await promise;
-      }, expectedError);
+      await assert.rejects(promise, expectedError);
       assert(
         (client.descriptors.page.listServices.createStream as SinonStub)
           .getCall(0)
@@ -2817,9 +2779,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.listEndpoints(request);
-      }, expectedError);
+      await assert.rejects(client.listEndpoints(request), expectedError);
       assert(
         (client.innerApiCalls.listEndpoints as SinonStub)
           .getCall(0)
@@ -2920,9 +2880,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
           reject(err);
         });
       });
-      await assert.rejects(async () => {
-        await promise;
-      }, expectedError);
+      await assert.rejects(promise, expectedError);
       assert(
         (client.descriptors.page.listEndpoints.createStream as SinonStub)
           .getCall(0)
