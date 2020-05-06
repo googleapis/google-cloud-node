@@ -25,7 +25,7 @@ import * as translationserviceModule from '../src';
 
 import {PassThrough} from 'stream';
 
-import {protobuf, LROperation} from 'google-gax';
+import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (instance.constructor as typeof protobuf.Message).toObject(
@@ -347,9 +347,7 @@ describe('v3beta1.TranslationServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.translateText(request);
-      }, expectedError);
+      await assert.rejects(client.translateText(request), expectedError);
       assert(
         (client.innerApiCalls.translateText as SinonStub)
           .getCall(0)
@@ -467,9 +465,7 @@ describe('v3beta1.TranslationServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.detectLanguage(request);
-      }, expectedError);
+      await assert.rejects(client.detectLanguage(request), expectedError);
       assert(
         (client.innerApiCalls.detectLanguage as SinonStub)
           .getCall(0)
@@ -589,9 +585,10 @@ describe('v3beta1.TranslationServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.getSupportedLanguages(request);
-      }, expectedError);
+      await assert.rejects(
+        client.getSupportedLanguages(request),
+        expectedError
+      );
       assert(
         (client.innerApiCalls.getSupportedLanguages as SinonStub)
           .getCall(0)
@@ -709,9 +706,7 @@ describe('v3beta1.TranslationServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.getGlossary(request);
-      }, expectedError);
+      await assert.rejects(client.getGlossary(request), expectedError);
       assert(
         (client.innerApiCalls.getGlossary as SinonStub)
           .getCall(0)
@@ -839,9 +834,7 @@ describe('v3beta1.TranslationServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.batchTranslateText(request);
-      }, expectedError);
+      await assert.rejects(client.batchTranslateText(request), expectedError);
       assert(
         (client.innerApiCalls.batchTranslateText as SinonStub)
           .getCall(0)
@@ -876,14 +869,57 @@ describe('v3beta1.TranslationServiceClient', () => {
         expectedError
       );
       const [operation] = await client.batchTranslateText(request);
-      await assert.rejects(async () => {
-        await operation.promise();
-      }, expectedError);
+      await assert.rejects(operation.promise(), expectedError);
       assert(
         (client.innerApiCalls.batchTranslateText as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes checkBatchTranslateTextProgress without error', async () => {
+      const client = new translationserviceModule.v3beta1.TranslationServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkBatchTranslateTextProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkBatchTranslateTextProgress with error', async () => {
+      const client = new translationserviceModule.v3beta1.TranslationServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkBatchTranslateTextProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
     });
   });
 
@@ -1006,9 +1042,7 @@ describe('v3beta1.TranslationServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.createGlossary(request);
-      }, expectedError);
+      await assert.rejects(client.createGlossary(request), expectedError);
       assert(
         (client.innerApiCalls.createGlossary as SinonStub)
           .getCall(0)
@@ -1043,14 +1077,57 @@ describe('v3beta1.TranslationServiceClient', () => {
         expectedError
       );
       const [operation] = await client.createGlossary(request);
-      await assert.rejects(async () => {
-        await operation.promise();
-      }, expectedError);
+      await assert.rejects(operation.promise(), expectedError);
       assert(
         (client.innerApiCalls.createGlossary as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes checkCreateGlossaryProgress without error', async () => {
+      const client = new translationserviceModule.v3beta1.TranslationServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkCreateGlossaryProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkCreateGlossaryProgress with error', async () => {
+      const client = new translationserviceModule.v3beta1.TranslationServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkCreateGlossaryProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
     });
   });
 
@@ -1173,9 +1250,7 @@ describe('v3beta1.TranslationServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.deleteGlossary(request);
-      }, expectedError);
+      await assert.rejects(client.deleteGlossary(request), expectedError);
       assert(
         (client.innerApiCalls.deleteGlossary as SinonStub)
           .getCall(0)
@@ -1210,14 +1285,57 @@ describe('v3beta1.TranslationServiceClient', () => {
         expectedError
       );
       const [operation] = await client.deleteGlossary(request);
-      await assert.rejects(async () => {
-        await operation.promise();
-      }, expectedError);
+      await assert.rejects(operation.promise(), expectedError);
       assert(
         (client.innerApiCalls.deleteGlossary as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes checkDeleteGlossaryProgress without error', async () => {
+      const client = new translationserviceModule.v3beta1.TranslationServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkDeleteGlossaryProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkDeleteGlossaryProgress with error', async () => {
+      const client = new translationserviceModule.v3beta1.TranslationServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkDeleteGlossaryProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
     });
   });
 
@@ -1346,9 +1464,7 @@ describe('v3beta1.TranslationServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.listGlossaries(request);
-      }, expectedError);
+      await assert.rejects(client.listGlossaries(request), expectedError);
       assert(
         (client.innerApiCalls.listGlossaries as SinonStub)
           .getCall(0)
@@ -1449,9 +1565,7 @@ describe('v3beta1.TranslationServiceClient', () => {
           reject(err);
         });
       });
-      await assert.rejects(async () => {
-        await promise;
-      }, expectedError);
+      await assert.rejects(promise, expectedError);
       assert(
         (client.descriptors.page.listGlossaries.createStream as SinonStub)
           .getCall(0)

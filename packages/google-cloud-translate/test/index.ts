@@ -29,7 +29,7 @@ import * as orig from '../src';
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const pkgJson = require('../../package.json');
 
-// tslint:disable-next-line no-any
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 let makeRequestOverride: any;
 let promisified = false;
 const fakePromisify = extend({}, pfy, {
@@ -70,7 +70,7 @@ describe('Translate v2', () => {
 
   // tslint:disable-next-line variable-name
   let Translate: typeof orig.v2.Translate;
-  // tslint:disable-next-line no-any
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let translate: any;
 
   before(() => {
@@ -98,7 +98,7 @@ describe('Translate v2', () => {
     it('should inherit from Service', () => {
       assert(translate instanceof FakeService);
 
-      // tslint:disable-next-line no-any
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const calledWith = (translate as any).calledWith_[0];
       const baseUrl =
         'https://translation.googleapis.com/language/translate/v2';
@@ -144,7 +144,7 @@ describe('Translate v2', () => {
     describe('GOOGLE_CLOUD_TRANSLATE_ENDPOINT', () => {
       const CUSTOM_ENDPOINT = '...';
 
-      // tslint:disable-next-line no-any
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       let translate: any;
 
       before(() => {
@@ -167,7 +167,7 @@ describe('Translate v2', () => {
 
         process.env.GOOGLE_CLOUD_TRANSLATE_ENDPOINT = 'http://localhost:8080//';
 
-        // tslint:disable-next-line no-any
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const translate: any = new Translate(OPTIONS);
         const baseUrl = translate.calledWith_[0].baseUrl;
 

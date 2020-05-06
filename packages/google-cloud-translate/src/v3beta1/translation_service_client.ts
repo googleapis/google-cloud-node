@@ -32,7 +32,7 @@ import {Transform} from 'stream';
 import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
 import * as gapicConfig from './translation_service_client_config.json';
-
+import {operationsProtos} from 'google-gax';
 const version = require('../../../package.json').version;
 
 /**
@@ -1012,6 +1012,42 @@ export class TranslationServiceClient {
     this.initialize();
     return this.innerApiCalls.batchTranslateText(request, options, callback);
   }
+  /**
+   * Check the status of the long running operation returned by the batchTranslateText() method.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *
+   * @example:
+   *   const decodedOperation = await checkBatchTranslateTextProgress(name);
+   *   console.log(decodedOperation.result);
+   *   console.log(decodedOperation.done);
+   *   console.log(decodedOperation.metadata);
+   *
+   */
+  async checkBatchTranslateTextProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.translation.v3beta1.BatchTranslateResponse,
+      protos.google.cloud.translation.v3beta1.BatchTranslateMetadata
+    >
+  > {
+    const request = new operationsProtos.google.longrunning.GetOperationRequest(
+      {name}
+    );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new gax.Operation(
+      operation,
+      this.descriptors.longrunning.batchTranslateText,
+      gax.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.translation.v3beta1.BatchTranslateResponse,
+      protos.google.cloud.translation.v3beta1.BatchTranslateMetadata
+    >;
+  }
   createGlossary(
     request: protos.google.cloud.translation.v3beta1.ICreateGlossaryRequest,
     options?: gax.CallOptions
@@ -1113,6 +1149,42 @@ export class TranslationServiceClient {
     this.initialize();
     return this.innerApiCalls.createGlossary(request, options, callback);
   }
+  /**
+   * Check the status of the long running operation returned by the createGlossary() method.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *
+   * @example:
+   *   const decodedOperation = await checkCreateGlossaryProgress(name);
+   *   console.log(decodedOperation.result);
+   *   console.log(decodedOperation.done);
+   *   console.log(decodedOperation.metadata);
+   *
+   */
+  async checkCreateGlossaryProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.translation.v3beta1.Glossary,
+      protos.google.cloud.translation.v3beta1.CreateGlossaryMetadata
+    >
+  > {
+    const request = new operationsProtos.google.longrunning.GetOperationRequest(
+      {name}
+    );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new gax.Operation(
+      operation,
+      this.descriptors.longrunning.createGlossary,
+      gax.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.translation.v3beta1.Glossary,
+      protos.google.cloud.translation.v3beta1.CreateGlossaryMetadata
+    >;
+  }
   deleteGlossary(
     request: protos.google.cloud.translation.v3beta1.IDeleteGlossaryRequest,
     options?: gax.CallOptions
@@ -1212,6 +1284,42 @@ export class TranslationServiceClient {
     });
     this.initialize();
     return this.innerApiCalls.deleteGlossary(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by the deleteGlossary() method.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *
+   * @example:
+   *   const decodedOperation = await checkDeleteGlossaryProgress(name);
+   *   console.log(decodedOperation.result);
+   *   console.log(decodedOperation.done);
+   *   console.log(decodedOperation.metadata);
+   *
+   */
+  async checkDeleteGlossaryProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.translation.v3beta1.DeleteGlossaryResponse,
+      protos.google.cloud.translation.v3beta1.DeleteGlossaryMetadata
+    >
+  > {
+    const request = new operationsProtos.google.longrunning.GetOperationRequest(
+      {name}
+    );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new gax.Operation(
+      operation,
+      this.descriptors.longrunning.deleteGlossary,
+      gax.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.translation.v3beta1.DeleteGlossaryResponse,
+      protos.google.cloud.translation.v3beta1.DeleteGlossaryMetadata
+    >;
   }
   listGlossaries(
     request: protos.google.cloud.translation.v3beta1.IListGlossariesRequest,

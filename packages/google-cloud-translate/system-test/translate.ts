@@ -196,7 +196,7 @@ describe('translate', () => {
       let err: Error | null = null;
       try {
         const projectId = await translate.getProjectId();
-        const [result] = await translate.getSupportedLanguages({
+        await translate.getSupportedLanguages({
           parent: `projects/${projectId}`,
         });
       } catch (_err) {
