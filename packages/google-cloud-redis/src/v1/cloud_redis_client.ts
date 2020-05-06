@@ -32,7 +32,7 @@ import {Transform} from 'stream';
 import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
 import * as gapicConfig from './cloud_redis_client_config.json';
-
+import {operationsProtos} from 'google-gax';
 const version = require('../../../package.json').version;
 
 /**
@@ -615,6 +615,42 @@ export class CloudRedisClient {
     this.initialize();
     return this.innerApiCalls.createInstance(request, options, callback);
   }
+  /**
+   * Check the status of the long running operation returned by the createInstance() method.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *
+   * @example:
+   *   const decodedOperation = await checkCreateInstanceProgress(name);
+   *   console.log(decodedOperation.result);
+   *   console.log(decodedOperation.done);
+   *   console.log(decodedOperation.metadata);
+   *
+   */
+  async checkCreateInstanceProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.redis.v1.Instance,
+      protos.google.cloud.redis.v1.OperationMetadata
+    >
+  > {
+    const request = new operationsProtos.google.longrunning.GetOperationRequest(
+      {name}
+    );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new gax.Operation(
+      operation,
+      this.descriptors.longrunning.createInstance,
+      gax.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.redis.v1.Instance,
+      protos.google.cloud.redis.v1.OperationMetadata
+    >;
+  }
   updateInstance(
     request: protos.google.cloud.redis.v1.IUpdateInstanceRequest,
     options?: gax.CallOptions
@@ -727,6 +763,42 @@ export class CloudRedisClient {
     this.initialize();
     return this.innerApiCalls.updateInstance(request, options, callback);
   }
+  /**
+   * Check the status of the long running operation returned by the updateInstance() method.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *
+   * @example:
+   *   const decodedOperation = await checkUpdateInstanceProgress(name);
+   *   console.log(decodedOperation.result);
+   *   console.log(decodedOperation.done);
+   *   console.log(decodedOperation.metadata);
+   *
+   */
+  async checkUpdateInstanceProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.redis.v1.Instance,
+      protos.google.cloud.redis.v1.OperationMetadata
+    >
+  > {
+    const request = new operationsProtos.google.longrunning.GetOperationRequest(
+      {name}
+    );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new gax.Operation(
+      operation,
+      this.descriptors.longrunning.updateInstance,
+      gax.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.redis.v1.Instance,
+      protos.google.cloud.redis.v1.OperationMetadata
+    >;
+  }
   importInstance(
     request: protos.google.cloud.redis.v1.IImportInstanceRequest,
     options?: gax.CallOptions
@@ -836,6 +908,42 @@ export class CloudRedisClient {
     this.initialize();
     return this.innerApiCalls.importInstance(request, options, callback);
   }
+  /**
+   * Check the status of the long running operation returned by the importInstance() method.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *
+   * @example:
+   *   const decodedOperation = await checkImportInstanceProgress(name);
+   *   console.log(decodedOperation.result);
+   *   console.log(decodedOperation.done);
+   *   console.log(decodedOperation.metadata);
+   *
+   */
+  async checkImportInstanceProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.redis.v1.Instance,
+      protos.google.cloud.redis.v1.OperationMetadata
+    >
+  > {
+    const request = new operationsProtos.google.longrunning.GetOperationRequest(
+      {name}
+    );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new gax.Operation(
+      operation,
+      this.descriptors.longrunning.importInstance,
+      gax.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.redis.v1.Instance,
+      protos.google.cloud.redis.v1.OperationMetadata
+    >;
+  }
   exportInstance(
     request: protos.google.cloud.redis.v1.IExportInstanceRequest,
     options?: gax.CallOptions
@@ -943,6 +1051,42 @@ export class CloudRedisClient {
     this.initialize();
     return this.innerApiCalls.exportInstance(request, options, callback);
   }
+  /**
+   * Check the status of the long running operation returned by the exportInstance() method.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *
+   * @example:
+   *   const decodedOperation = await checkExportInstanceProgress(name);
+   *   console.log(decodedOperation.result);
+   *   console.log(decodedOperation.done);
+   *   console.log(decodedOperation.metadata);
+   *
+   */
+  async checkExportInstanceProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.redis.v1.Instance,
+      protos.google.cloud.redis.v1.OperationMetadata
+    >
+  > {
+    const request = new operationsProtos.google.longrunning.GetOperationRequest(
+      {name}
+    );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new gax.Operation(
+      operation,
+      this.descriptors.longrunning.exportInstance,
+      gax.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.redis.v1.Instance,
+      protos.google.cloud.redis.v1.OperationMetadata
+    >;
+  }
   failoverInstance(
     request: protos.google.cloud.redis.v1.IFailoverInstanceRequest,
     options?: gax.CallOptions
@@ -1047,6 +1191,42 @@ export class CloudRedisClient {
     this.initialize();
     return this.innerApiCalls.failoverInstance(request, options, callback);
   }
+  /**
+   * Check the status of the long running operation returned by the failoverInstance() method.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *
+   * @example:
+   *   const decodedOperation = await checkFailoverInstanceProgress(name);
+   *   console.log(decodedOperation.result);
+   *   console.log(decodedOperation.done);
+   *   console.log(decodedOperation.metadata);
+   *
+   */
+  async checkFailoverInstanceProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.redis.v1.Instance,
+      protos.google.cloud.redis.v1.OperationMetadata
+    >
+  > {
+    const request = new operationsProtos.google.longrunning.GetOperationRequest(
+      {name}
+    );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new gax.Operation(
+      operation,
+      this.descriptors.longrunning.failoverInstance,
+      gax.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.redis.v1.Instance,
+      protos.google.cloud.redis.v1.OperationMetadata
+    >;
+  }
   deleteInstance(
     request: protos.google.cloud.redis.v1.IDeleteInstanceRequest,
     options?: gax.CallOptions
@@ -1147,6 +1327,42 @@ export class CloudRedisClient {
     });
     this.initialize();
     return this.innerApiCalls.deleteInstance(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by the deleteInstance() method.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *
+   * @example:
+   *   const decodedOperation = await checkDeleteInstanceProgress(name);
+   *   console.log(decodedOperation.result);
+   *   console.log(decodedOperation.done);
+   *   console.log(decodedOperation.metadata);
+   *
+   */
+  async checkDeleteInstanceProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.redis.v1.OperationMetadata
+    >
+  > {
+    const request = new operationsProtos.google.longrunning.GetOperationRequest(
+      {name}
+    );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new gax.Operation(
+      operation,
+      this.descriptors.longrunning.deleteInstance,
+      gax.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.redis.v1.OperationMetadata
+    >;
   }
   listInstances(
     request: protos.google.cloud.redis.v1.IListInstancesRequest,

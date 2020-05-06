@@ -25,7 +25,7 @@ import * as cloudredisModule from '../src';
 
 import {PassThrough} from 'stream';
 
-import {protobuf, LROperation} from 'google-gax';
+import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (instance.constructor as typeof protobuf.Message).toObject(
@@ -329,9 +329,7 @@ describe('v1beta1.CloudRedisClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.getInstance(request);
-      }, expectedError);
+      await assert.rejects(client.getInstance(request), expectedError);
       assert(
         (client.innerApiCalls.getInstance as SinonStub)
           .getCall(0)
@@ -453,9 +451,7 @@ describe('v1beta1.CloudRedisClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.createInstance(request);
-      }, expectedError);
+      await assert.rejects(client.createInstance(request), expectedError);
       assert(
         (client.innerApiCalls.createInstance as SinonStub)
           .getCall(0)
@@ -488,14 +484,53 @@ describe('v1beta1.CloudRedisClient', () => {
         expectedError
       );
       const [operation] = await client.createInstance(request);
-      await assert.rejects(async () => {
-        await operation.promise();
-      }, expectedError);
+      await assert.rejects(operation.promise(), expectedError);
       assert(
         (client.innerApiCalls.createInstance as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes checkCreateInstanceProgress without error', async () => {
+      const client = new cloudredisModule.v1beta1.CloudRedisClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkCreateInstanceProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkCreateInstanceProgress with error', async () => {
+      const client = new cloudredisModule.v1beta1.CloudRedisClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkCreateInstanceProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
     });
   });
 
@@ -615,9 +650,7 @@ describe('v1beta1.CloudRedisClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.updateInstance(request);
-      }, expectedError);
+      await assert.rejects(client.updateInstance(request), expectedError);
       assert(
         (client.innerApiCalls.updateInstance as SinonStub)
           .getCall(0)
@@ -651,14 +684,53 @@ describe('v1beta1.CloudRedisClient', () => {
         expectedError
       );
       const [operation] = await client.updateInstance(request);
-      await assert.rejects(async () => {
-        await operation.promise();
-      }, expectedError);
+      await assert.rejects(operation.promise(), expectedError);
       assert(
         (client.innerApiCalls.updateInstance as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes checkUpdateInstanceProgress without error', async () => {
+      const client = new cloudredisModule.v1beta1.CloudRedisClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkUpdateInstanceProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkUpdateInstanceProgress with error', async () => {
+      const client = new cloudredisModule.v1beta1.CloudRedisClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkUpdateInstanceProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
     });
   });
 
@@ -775,9 +847,7 @@ describe('v1beta1.CloudRedisClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.upgradeInstance(request);
-      }, expectedError);
+      await assert.rejects(client.upgradeInstance(request), expectedError);
       assert(
         (client.innerApiCalls.upgradeInstance as SinonStub)
           .getCall(0)
@@ -810,14 +880,53 @@ describe('v1beta1.CloudRedisClient', () => {
         expectedError
       );
       const [operation] = await client.upgradeInstance(request);
-      await assert.rejects(async () => {
-        await operation.promise();
-      }, expectedError);
+      await assert.rejects(operation.promise(), expectedError);
       assert(
         (client.innerApiCalls.upgradeInstance as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes checkUpgradeInstanceProgress without error', async () => {
+      const client = new cloudredisModule.v1beta1.CloudRedisClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkUpgradeInstanceProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkUpgradeInstanceProgress with error', async () => {
+      const client = new cloudredisModule.v1beta1.CloudRedisClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkUpgradeInstanceProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
     });
   });
 
@@ -934,9 +1043,7 @@ describe('v1beta1.CloudRedisClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.importInstance(request);
-      }, expectedError);
+      await assert.rejects(client.importInstance(request), expectedError);
       assert(
         (client.innerApiCalls.importInstance as SinonStub)
           .getCall(0)
@@ -969,14 +1076,53 @@ describe('v1beta1.CloudRedisClient', () => {
         expectedError
       );
       const [operation] = await client.importInstance(request);
-      await assert.rejects(async () => {
-        await operation.promise();
-      }, expectedError);
+      await assert.rejects(operation.promise(), expectedError);
       assert(
         (client.innerApiCalls.importInstance as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes checkImportInstanceProgress without error', async () => {
+      const client = new cloudredisModule.v1beta1.CloudRedisClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkImportInstanceProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkImportInstanceProgress with error', async () => {
+      const client = new cloudredisModule.v1beta1.CloudRedisClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkImportInstanceProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
     });
   });
 
@@ -1093,9 +1239,7 @@ describe('v1beta1.CloudRedisClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.exportInstance(request);
-      }, expectedError);
+      await assert.rejects(client.exportInstance(request), expectedError);
       assert(
         (client.innerApiCalls.exportInstance as SinonStub)
           .getCall(0)
@@ -1128,14 +1272,53 @@ describe('v1beta1.CloudRedisClient', () => {
         expectedError
       );
       const [operation] = await client.exportInstance(request);
-      await assert.rejects(async () => {
-        await operation.promise();
-      }, expectedError);
+      await assert.rejects(operation.promise(), expectedError);
       assert(
         (client.innerApiCalls.exportInstance as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes checkExportInstanceProgress without error', async () => {
+      const client = new cloudredisModule.v1beta1.CloudRedisClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkExportInstanceProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkExportInstanceProgress with error', async () => {
+      const client = new cloudredisModule.v1beta1.CloudRedisClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkExportInstanceProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
     });
   });
 
@@ -1252,9 +1435,7 @@ describe('v1beta1.CloudRedisClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.failoverInstance(request);
-      }, expectedError);
+      await assert.rejects(client.failoverInstance(request), expectedError);
       assert(
         (client.innerApiCalls.failoverInstance as SinonStub)
           .getCall(0)
@@ -1287,14 +1468,53 @@ describe('v1beta1.CloudRedisClient', () => {
         expectedError
       );
       const [operation] = await client.failoverInstance(request);
-      await assert.rejects(async () => {
-        await operation.promise();
-      }, expectedError);
+      await assert.rejects(operation.promise(), expectedError);
       assert(
         (client.innerApiCalls.failoverInstance as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes checkFailoverInstanceProgress without error', async () => {
+      const client = new cloudredisModule.v1beta1.CloudRedisClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkFailoverInstanceProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkFailoverInstanceProgress with error', async () => {
+      const client = new cloudredisModule.v1beta1.CloudRedisClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkFailoverInstanceProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
     });
   });
 
@@ -1411,9 +1631,7 @@ describe('v1beta1.CloudRedisClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.deleteInstance(request);
-      }, expectedError);
+      await assert.rejects(client.deleteInstance(request), expectedError);
       assert(
         (client.innerApiCalls.deleteInstance as SinonStub)
           .getCall(0)
@@ -1446,14 +1664,53 @@ describe('v1beta1.CloudRedisClient', () => {
         expectedError
       );
       const [operation] = await client.deleteInstance(request);
-      await assert.rejects(async () => {
-        await operation.promise();
-      }, expectedError);
+      await assert.rejects(operation.promise(), expectedError);
       assert(
         (client.innerApiCalls.deleteInstance as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes checkDeleteInstanceProgress without error', async () => {
+      const client = new cloudredisModule.v1beta1.CloudRedisClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkDeleteInstanceProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkDeleteInstanceProgress with error', async () => {
+      const client = new cloudredisModule.v1beta1.CloudRedisClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkDeleteInstanceProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
     });
   });
 
@@ -1564,9 +1821,7 @@ describe('v1beta1.CloudRedisClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.listInstances(request);
-      }, expectedError);
+      await assert.rejects(client.listInstances(request), expectedError);
       assert(
         (client.innerApiCalls.listInstances as SinonStub)
           .getCall(0)
@@ -1657,9 +1912,7 @@ describe('v1beta1.CloudRedisClient', () => {
           reject(err);
         });
       });
-      await assert.rejects(async () => {
-        await promise;
-      }, expectedError);
+      await assert.rejects(promise, expectedError);
       assert(
         (client.descriptors.page.listInstances.createStream as SinonStub)
           .getCall(0)
