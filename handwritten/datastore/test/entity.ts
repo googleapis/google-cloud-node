@@ -1512,7 +1512,6 @@ describe('entity', () => {
       const ent = entity.formatArray(results)[0];
 
       assert.deepStrictEqual(ent, expectedResults);
-      assert.strictEqual(ent[entity.KEY_SYMBOL], key);
     });
 
     describe('should pass `wrapNumbers` to entityFromEntityProto', () => {
