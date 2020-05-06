@@ -32,7 +32,7 @@ import {Transform} from 'stream';
 import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
 import * as gapicConfig from './cluster_controller_client_config.json';
-
+import {operationsProtos} from 'google-gax';
 const version = require('../../../package.json').version;
 
 /**
@@ -582,6 +582,42 @@ export class ClusterControllerClient {
     this.initialize();
     return this.innerApiCalls.createCluster(request, options, callback);
   }
+  /**
+   * Check the status of the long running operation returned by the createCluster() method.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *
+   * @example:
+   *   const decodedOperation = await checkCreateClusterProgress(name);
+   *   console.log(decodedOperation.result);
+   *   console.log(decodedOperation.done);
+   *   console.log(decodedOperation.metadata);
+   *
+   */
+  async checkCreateClusterProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.dataproc.v1.Cluster,
+      protos.google.cloud.dataproc.v1.ClusterOperationMetadata
+    >
+  > {
+    const request = new operationsProtos.google.longrunning.GetOperationRequest(
+      {name}
+    );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new gax.Operation(
+      operation,
+      this.descriptors.longrunning.createCluster,
+      gax.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.dataproc.v1.Cluster,
+      protos.google.cloud.dataproc.v1.ClusterOperationMetadata
+    >;
+  }
   updateCluster(
     request: protos.google.cloud.dataproc.v1.IUpdateClusterRequest,
     options?: gax.CallOptions
@@ -763,6 +799,42 @@ export class ClusterControllerClient {
     this.initialize();
     return this.innerApiCalls.updateCluster(request, options, callback);
   }
+  /**
+   * Check the status of the long running operation returned by the updateCluster() method.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *
+   * @example:
+   *   const decodedOperation = await checkUpdateClusterProgress(name);
+   *   console.log(decodedOperation.result);
+   *   console.log(decodedOperation.done);
+   *   console.log(decodedOperation.metadata);
+   *
+   */
+  async checkUpdateClusterProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.dataproc.v1.Cluster,
+      protos.google.cloud.dataproc.v1.ClusterOperationMetadata
+    >
+  > {
+    const request = new operationsProtos.google.longrunning.GetOperationRequest(
+      {name}
+    );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new gax.Operation(
+      operation,
+      this.descriptors.longrunning.updateCluster,
+      gax.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.dataproc.v1.Cluster,
+      protos.google.cloud.dataproc.v1.ClusterOperationMetadata
+    >;
+  }
   deleteCluster(
     request: protos.google.cloud.dataproc.v1.IDeleteClusterRequest,
     options?: gax.CallOptions
@@ -883,6 +955,42 @@ export class ClusterControllerClient {
     this.initialize();
     return this.innerApiCalls.deleteCluster(request, options, callback);
   }
+  /**
+   * Check the status of the long running operation returned by the deleteCluster() method.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *
+   * @example:
+   *   const decodedOperation = await checkDeleteClusterProgress(name);
+   *   console.log(decodedOperation.result);
+   *   console.log(decodedOperation.done);
+   *   console.log(decodedOperation.metadata);
+   *
+   */
+  async checkDeleteClusterProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.dataproc.v1.ClusterOperationMetadata
+    >
+  > {
+    const request = new operationsProtos.google.longrunning.GetOperationRequest(
+      {name}
+    );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new gax.Operation(
+      operation,
+      this.descriptors.longrunning.deleteCluster,
+      gax.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.dataproc.v1.ClusterOperationMetadata
+    >;
+  }
   diagnoseCluster(
     request: protos.google.cloud.dataproc.v1.IDiagnoseClusterRequest,
     options?: gax.CallOptions
@@ -991,6 +1099,42 @@ export class ClusterControllerClient {
     });
     this.initialize();
     return this.innerApiCalls.diagnoseCluster(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by the diagnoseCluster() method.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *
+   * @example:
+   *   const decodedOperation = await checkDiagnoseClusterProgress(name);
+   *   console.log(decodedOperation.result);
+   *   console.log(decodedOperation.done);
+   *   console.log(decodedOperation.metadata);
+   *
+   */
+  async checkDiagnoseClusterProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.dataproc.v1.DiagnoseClusterResults
+    >
+  > {
+    const request = new operationsProtos.google.longrunning.GetOperationRequest(
+      {name}
+    );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new gax.Operation(
+      operation,
+      this.descriptors.longrunning.diagnoseCluster,
+      gax.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.dataproc.v1.DiagnoseClusterResults
+    >;
   }
   listClusters(
     request: protos.google.cloud.dataproc.v1.IListClustersRequest,

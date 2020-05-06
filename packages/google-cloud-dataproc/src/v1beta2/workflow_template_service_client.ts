@@ -32,7 +32,7 @@ import {Transform} from 'stream';
 import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
 import * as gapicConfig from './workflow_template_service_client_config.json';
-
+import {operationsProtos} from 'google-gax';
 const version = require('../../../package.json').version;
 
 /**
@@ -957,6 +957,42 @@ export class WorkflowTemplateServiceClient {
       callback
     );
   }
+  /**
+   * Check the status of the long running operation returned by the instantiateWorkflowTemplate() method.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *
+   * @example:
+   *   const decodedOperation = await checkInstantiateWorkflowTemplateProgress(name);
+   *   console.log(decodedOperation.result);
+   *   console.log(decodedOperation.done);
+   *   console.log(decodedOperation.metadata);
+   *
+   */
+  async checkInstantiateWorkflowTemplateProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.dataproc.v1beta2.WorkflowMetadata
+    >
+  > {
+    const request = new operationsProtos.google.longrunning.GetOperationRequest(
+      {name}
+    );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new gax.Operation(
+      operation,
+      this.descriptors.longrunning.instantiateWorkflowTemplate,
+      gax.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.dataproc.v1beta2.WorkflowMetadata
+    >;
+  }
   instantiateInlineWorkflowTemplate(
     request: protos.google.cloud.dataproc.v1beta2.IInstantiateInlineWorkflowTemplateRequest,
     options?: gax.CallOptions
@@ -1104,6 +1140,42 @@ export class WorkflowTemplateServiceClient {
       options,
       callback
     );
+  }
+  /**
+   * Check the status of the long running operation returned by the instantiateInlineWorkflowTemplate() method.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *
+   * @example:
+   *   const decodedOperation = await checkInstantiateInlineWorkflowTemplateProgress(name);
+   *   console.log(decodedOperation.result);
+   *   console.log(decodedOperation.done);
+   *   console.log(decodedOperation.metadata);
+   *
+   */
+  async checkInstantiateInlineWorkflowTemplateProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.dataproc.v1beta2.WorkflowMetadata
+    >
+  > {
+    const request = new operationsProtos.google.longrunning.GetOperationRequest(
+      {name}
+    );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new gax.Operation(
+      operation,
+      this.descriptors.longrunning.instantiateInlineWorkflowTemplate,
+      gax.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.dataproc.v1beta2.WorkflowMetadata
+    >;
   }
   listWorkflowTemplates(
     request: protos.google.cloud.dataproc.v1beta2.IListWorkflowTemplatesRequest,

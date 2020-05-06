@@ -25,7 +25,7 @@ import * as jobcontrollerModule from '../src';
 
 import {PassThrough} from 'stream';
 
-import {protobuf, LROperation} from 'google-gax';
+import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (instance.constructor as typeof protobuf.Message).toObject(
@@ -326,9 +326,7 @@ describe('v1.JobControllerClient', () => {
       };
       const expectedError = new Error('expected');
       client.innerApiCalls.submitJob = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(async () => {
-        await client.submitJob(request);
-      }, expectedError);
+      await assert.rejects(client.submitJob(request), expectedError);
       assert(
         (client.innerApiCalls.submitJob as SinonStub)
           .getCall(0)
@@ -437,9 +435,7 @@ describe('v1.JobControllerClient', () => {
       };
       const expectedError = new Error('expected');
       client.innerApiCalls.getJob = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(async () => {
-        await client.getJob(request);
-      }, expectedError);
+      await assert.rejects(client.getJob(request), expectedError);
       assert(
         (client.innerApiCalls.getJob as SinonStub)
           .getCall(0)
@@ -548,9 +544,7 @@ describe('v1.JobControllerClient', () => {
       };
       const expectedError = new Error('expected');
       client.innerApiCalls.updateJob = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(async () => {
-        await client.updateJob(request);
-      }, expectedError);
+      await assert.rejects(client.updateJob(request), expectedError);
       assert(
         (client.innerApiCalls.updateJob as SinonStub)
           .getCall(0)
@@ -659,9 +653,7 @@ describe('v1.JobControllerClient', () => {
       };
       const expectedError = new Error('expected');
       client.innerApiCalls.cancelJob = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(async () => {
-        await client.cancelJob(request);
-      }, expectedError);
+      await assert.rejects(client.cancelJob(request), expectedError);
       assert(
         (client.innerApiCalls.cancelJob as SinonStub)
           .getCall(0)
@@ -770,9 +762,7 @@ describe('v1.JobControllerClient', () => {
       };
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteJob = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(async () => {
-        await client.deleteJob(request);
-      }, expectedError);
+      await assert.rejects(client.deleteJob(request), expectedError);
       assert(
         (client.innerApiCalls.deleteJob as SinonStub)
           .getCall(0)
@@ -894,9 +884,7 @@ describe('v1.JobControllerClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.submitJobAsOperation(request);
-      }, expectedError);
+      await assert.rejects(client.submitJobAsOperation(request), expectedError);
       assert(
         (client.innerApiCalls.submitJobAsOperation as SinonStub)
           .getCall(0)
@@ -929,14 +917,53 @@ describe('v1.JobControllerClient', () => {
         expectedError
       );
       const [operation] = await client.submitJobAsOperation(request);
-      await assert.rejects(async () => {
-        await operation.promise();
-      }, expectedError);
+      await assert.rejects(operation.promise(), expectedError);
       assert(
         (client.innerApiCalls.submitJobAsOperation as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes checkSubmitJobAsOperationProgress without error', async () => {
+      const client = new jobcontrollerModule.v1.JobControllerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkSubmitJobAsOperationProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkSubmitJobAsOperationProgress with error', async () => {
+      const client = new jobcontrollerModule.v1.JobControllerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkSubmitJobAsOperationProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
     });
   });
 
@@ -1044,9 +1071,7 @@ describe('v1.JobControllerClient', () => {
       };
       const expectedError = new Error('expected');
       client.innerApiCalls.listJobs = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(async () => {
-        await client.listJobs(request);
-      }, expectedError);
+      await assert.rejects(client.listJobs(request), expectedError);
       assert(
         (client.innerApiCalls.listJobs as SinonStub)
           .getCall(0)
@@ -1129,9 +1154,7 @@ describe('v1.JobControllerClient', () => {
           reject(err);
         });
       });
-      await assert.rejects(async () => {
-        await promise;
-      }, expectedError);
+      await assert.rejects(promise, expectedError);
       assert(
         (client.descriptors.page.listJobs.createStream as SinonStub)
           .getCall(0)

@@ -321,9 +321,10 @@ describe('v1beta2.AutoscalingPolicyServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.createAutoscalingPolicy(request);
-      }, expectedError);
+      await assert.rejects(
+        client.createAutoscalingPolicy(request),
+        expectedError
+      );
       assert(
         (client.innerApiCalls.createAutoscalingPolicy as SinonStub)
           .getCall(0)
@@ -446,9 +447,10 @@ describe('v1beta2.AutoscalingPolicyServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.updateAutoscalingPolicy(request);
-      }, expectedError);
+      await assert.rejects(
+        client.updateAutoscalingPolicy(request),
+        expectedError
+      );
       assert(
         (client.innerApiCalls.updateAutoscalingPolicy as SinonStub)
           .getCall(0)
@@ -568,9 +570,7 @@ describe('v1beta2.AutoscalingPolicyServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.getAutoscalingPolicy(request);
-      }, expectedError);
+      await assert.rejects(client.getAutoscalingPolicy(request), expectedError);
       assert(
         (client.innerApiCalls.getAutoscalingPolicy as SinonStub)
           .getCall(0)
@@ -690,9 +690,10 @@ describe('v1beta2.AutoscalingPolicyServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.deleteAutoscalingPolicy(request);
-      }, expectedError);
+      await assert.rejects(
+        client.deleteAutoscalingPolicy(request),
+        expectedError
+      );
       assert(
         (client.innerApiCalls.deleteAutoscalingPolicy as SinonStub)
           .getCall(0)
@@ -830,9 +831,10 @@ describe('v1beta2.AutoscalingPolicyServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.listAutoscalingPolicies(request);
-      }, expectedError);
+      await assert.rejects(
+        client.listAutoscalingPolicies(request),
+        expectedError
+      );
       assert(
         (client.innerApiCalls.listAutoscalingPolicies as SinonStub)
           .getCall(0)
@@ -938,9 +940,7 @@ describe('v1beta2.AutoscalingPolicyServiceClient', () => {
           reject(err);
         });
       });
-      await assert.rejects(async () => {
-        await promise;
-      }, expectedError);
+      await assert.rejects(promise, expectedError);
       assert(
         (client.descriptors.page.listAutoscalingPolicies
           .createStream as SinonStub)

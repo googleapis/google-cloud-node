@@ -25,7 +25,7 @@ import * as workflowtemplateserviceModule from '../src';
 
 import {PassThrough} from 'stream';
 
-import {protobuf, LROperation} from 'google-gax';
+import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (instance.constructor as typeof protobuf.Message).toObject(
@@ -352,9 +352,10 @@ describe('v1.WorkflowTemplateServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.createWorkflowTemplate(request);
-      }, expectedError);
+      await assert.rejects(
+        client.createWorkflowTemplate(request),
+        expectedError
+      );
       assert(
         (client.innerApiCalls.createWorkflowTemplate as SinonStub)
           .getCall(0)
@@ -474,9 +475,7 @@ describe('v1.WorkflowTemplateServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.getWorkflowTemplate(request);
-      }, expectedError);
+      await assert.rejects(client.getWorkflowTemplate(request), expectedError);
       assert(
         (client.innerApiCalls.getWorkflowTemplate as SinonStub)
           .getCall(0)
@@ -599,9 +598,10 @@ describe('v1.WorkflowTemplateServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.updateWorkflowTemplate(request);
-      }, expectedError);
+      await assert.rejects(
+        client.updateWorkflowTemplate(request),
+        expectedError
+      );
       assert(
         (client.innerApiCalls.updateWorkflowTemplate as SinonStub)
           .getCall(0)
@@ -721,9 +721,10 @@ describe('v1.WorkflowTemplateServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.deleteWorkflowTemplate(request);
-      }, expectedError);
+      await assert.rejects(
+        client.deleteWorkflowTemplate(request),
+        expectedError
+      );
       assert(
         (client.innerApiCalls.deleteWorkflowTemplate as SinonStub)
           .getCall(0)
@@ -851,9 +852,10 @@ describe('v1.WorkflowTemplateServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.instantiateWorkflowTemplate(request);
-      }, expectedError);
+      await assert.rejects(
+        client.instantiateWorkflowTemplate(request),
+        expectedError
+      );
       assert(
         (client.innerApiCalls.instantiateWorkflowTemplate as SinonStub)
           .getCall(0)
@@ -888,14 +890,57 @@ describe('v1.WorkflowTemplateServiceClient', () => {
         expectedError
       );
       const [operation] = await client.instantiateWorkflowTemplate(request);
-      await assert.rejects(async () => {
-        await operation.promise();
-      }, expectedError);
+      await assert.rejects(operation.promise(), expectedError);
       assert(
         (client.innerApiCalls.instantiateWorkflowTemplate as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes checkInstantiateWorkflowTemplateProgress without error', async () => {
+      const client = new workflowtemplateserviceModule.v1.WorkflowTemplateServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkInstantiateWorkflowTemplateProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkInstantiateWorkflowTemplateProgress with error', async () => {
+      const client = new workflowtemplateserviceModule.v1.WorkflowTemplateServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkInstantiateWorkflowTemplateProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
     });
   });
 
@@ -1020,9 +1065,10 @@ describe('v1.WorkflowTemplateServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.instantiateInlineWorkflowTemplate(request);
-      }, expectedError);
+      await assert.rejects(
+        client.instantiateInlineWorkflowTemplate(request),
+        expectedError
+      );
       assert(
         (client.innerApiCalls.instantiateInlineWorkflowTemplate as SinonStub)
           .getCall(0)
@@ -1059,14 +1105,57 @@ describe('v1.WorkflowTemplateServiceClient', () => {
       const [operation] = await client.instantiateInlineWorkflowTemplate(
         request
       );
-      await assert.rejects(async () => {
-        await operation.promise();
-      }, expectedError);
+      await assert.rejects(operation.promise(), expectedError);
       assert(
         (client.innerApiCalls.instantiateInlineWorkflowTemplate as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes checkInstantiateInlineWorkflowTemplateProgress without error', async () => {
+      const client = new workflowtemplateserviceModule.v1.WorkflowTemplateServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkInstantiateInlineWorkflowTemplateProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkInstantiateInlineWorkflowTemplateProgress with error', async () => {
+      const client = new workflowtemplateserviceModule.v1.WorkflowTemplateServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkInstantiateInlineWorkflowTemplateProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
     });
   });
 
@@ -1197,9 +1286,10 @@ describe('v1.WorkflowTemplateServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.listWorkflowTemplates(request);
-      }, expectedError);
+      await assert.rejects(
+        client.listWorkflowTemplates(request),
+        expectedError
+      );
       assert(
         (client.innerApiCalls.listWorkflowTemplates as SinonStub)
           .getCall(0)
@@ -1301,9 +1391,7 @@ describe('v1.WorkflowTemplateServiceClient', () => {
           reject(err);
         });
       });
-      await assert.rejects(async () => {
-        await promise;
-      }, expectedError);
+      await assert.rejects(promise, expectedError);
       assert(
         (client.descriptors.page.listWorkflowTemplates
           .createStream as SinonStub)
