@@ -4,14 +4,22 @@
       "git": {
         "name": ".",
         "remote": "git@github.com:googleapis/nodejs-datalabeling.git",
-        "sha": "e5bf8c7c84777fc98449523ba84e4f0bb6a97d9c"
+        "sha": "914f99c2bbd4870ffbd7e4085dcd1e2d1284d77a"
+      }
+    },
+    {
+      "git": {
+        "name": "googleapis",
+        "remote": "https://github.com/googleapis/googleapis.git",
+        "sha": "6dfd72d028a0d0a43764e060f7b15e004385c3a1",
+        "internalRef": "310168181"
       }
     },
     {
       "git": {
         "name": "synthtool",
         "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "ab883569eb0257bbf16a6d825fd018b3adde3912"
+        "sha": "756bc4dfc24e8bc4c5dd4116daa41a0440ebf5a0"
       }
     }
   ],
