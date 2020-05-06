@@ -299,9 +299,10 @@ describe('v3.MetricServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.getMonitoredResourceDescriptor(request);
-      }, expectedError);
+      await assert.rejects(
+        client.getMonitoredResourceDescriptor(request),
+        expectedError
+      );
       assert(
         (client.innerApiCalls.getMonitoredResourceDescriptor as SinonStub)
           .getCall(0)
@@ -415,9 +416,7 @@ describe('v3.MetricServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.getMetricDescriptor(request);
-      }, expectedError);
+      await assert.rejects(client.getMetricDescriptor(request), expectedError);
       assert(
         (client.innerApiCalls.getMetricDescriptor as SinonStub)
           .getCall(0)
@@ -531,9 +530,10 @@ describe('v3.MetricServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.createMetricDescriptor(request);
-      }, expectedError);
+      await assert.rejects(
+        client.createMetricDescriptor(request),
+        expectedError
+      );
       assert(
         (client.innerApiCalls.createMetricDescriptor as SinonStub)
           .getCall(0)
@@ -647,9 +647,10 @@ describe('v3.MetricServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.deleteMetricDescriptor(request);
-      }, expectedError);
+      await assert.rejects(
+        client.deleteMetricDescriptor(request),
+        expectedError
+      );
       assert(
         (client.innerApiCalls.deleteMetricDescriptor as SinonStub)
           .getCall(0)
@@ -761,9 +762,7 @@ describe('v3.MetricServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.createTimeSeries(request);
-      }, expectedError);
+      await assert.rejects(client.createTimeSeries(request), expectedError);
       assert(
         (client.innerApiCalls.createTimeSeries as SinonStub)
           .getCall(0)
@@ -893,9 +892,10 @@ describe('v3.MetricServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.listMonitoredResourceDescriptors(request);
-      }, expectedError);
+      await assert.rejects(
+        client.listMonitoredResourceDescriptors(request),
+        expectedError
+      );
       assert(
         (client.innerApiCalls.listMonitoredResourceDescriptors as SinonStub)
           .getCall(0)
@@ -996,9 +996,7 @@ describe('v3.MetricServiceClient', () => {
           reject(err);
         });
       });
-      await assert.rejects(async () => {
-        await promise;
-      }, expectedError);
+      await assert.rejects(promise, expectedError);
       assert(
         (client.descriptors.page.listMonitoredResourceDescriptors
           .createStream as SinonStub)
@@ -1209,9 +1207,10 @@ describe('v3.MetricServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.listMetricDescriptors(request);
-      }, expectedError);
+      await assert.rejects(
+        client.listMetricDescriptors(request),
+        expectedError
+      );
       assert(
         (client.innerApiCalls.listMetricDescriptors as SinonStub)
           .getCall(0)
@@ -1297,9 +1296,7 @@ describe('v3.MetricServiceClient', () => {
           reject(err);
         });
       });
-      await assert.rejects(async () => {
-        await promise;
-      }, expectedError);
+      await assert.rejects(promise, expectedError);
       assert(
         (client.descriptors.page.listMetricDescriptors
           .createStream as SinonStub)
@@ -1499,9 +1496,7 @@ describe('v3.MetricServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.listTimeSeries(request);
-      }, expectedError);
+      await assert.rejects(client.listTimeSeries(request), expectedError);
       assert(
         (client.innerApiCalls.listTimeSeries as SinonStub)
           .getCall(0)
@@ -1592,9 +1587,7 @@ describe('v3.MetricServiceClient', () => {
           reject(err);
         });
       });
-      await assert.rejects(async () => {
-        await promise;
-      }, expectedError);
+      await assert.rejects(promise, expectedError);
       assert(
         (client.descriptors.page.listTimeSeries.createStream as SinonStub)
           .getCall(0)

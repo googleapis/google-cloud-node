@@ -294,9 +294,7 @@ describe('v3.GroupServiceClient', () => {
       };
       const expectedError = new Error('expected');
       client.innerApiCalls.getGroup = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(async () => {
-        await client.getGroup(request);
-      }, expectedError);
+      await assert.rejects(client.getGroup(request), expectedError);
       assert(
         (client.innerApiCalls.getGroup as SinonStub)
           .getCall(0)
@@ -408,9 +406,7 @@ describe('v3.GroupServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.createGroup(request);
-      }, expectedError);
+      await assert.rejects(client.createGroup(request), expectedError);
       assert(
         (client.innerApiCalls.createGroup as SinonStub)
           .getCall(0)
@@ -525,9 +521,7 @@ describe('v3.GroupServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.updateGroup(request);
-      }, expectedError);
+      await assert.rejects(client.updateGroup(request), expectedError);
       assert(
         (client.innerApiCalls.updateGroup as SinonStub)
           .getCall(0)
@@ -639,9 +633,7 @@ describe('v3.GroupServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.deleteGroup(request);
-      }, expectedError);
+      await assert.rejects(client.deleteGroup(request), expectedError);
       assert(
         (client.innerApiCalls.deleteGroup as SinonStub)
           .getCall(0)
@@ -757,9 +749,7 @@ describe('v3.GroupServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.listGroups(request);
-      }, expectedError);
+      await assert.rejects(client.listGroups(request), expectedError);
       assert(
         (client.innerApiCalls.listGroups as SinonStub)
           .getCall(0)
@@ -843,9 +833,7 @@ describe('v3.GroupServiceClient', () => {
           reject(err);
         });
       });
-      await assert.rejects(async () => {
-        await promise;
-      }, expectedError);
+      await assert.rejects(promise, expectedError);
       assert(
         (client.descriptors.page.listGroups.createStream as SinonStub)
           .getCall(0)
@@ -1043,9 +1031,7 @@ describe('v3.GroupServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.listGroupMembers(request);
-      }, expectedError);
+      await assert.rejects(client.listGroupMembers(request), expectedError);
       assert(
         (client.innerApiCalls.listGroupMembers as SinonStub)
           .getCall(0)
@@ -1130,9 +1116,7 @@ describe('v3.GroupServiceClient', () => {
           reject(err);
         });
       });
-      await assert.rejects(async () => {
-        await promise;
-      }, expectedError);
+      await assert.rejects(promise, expectedError);
       assert(
         (client.descriptors.page.listGroupMembers.createStream as SinonStub)
           .getCall(0)

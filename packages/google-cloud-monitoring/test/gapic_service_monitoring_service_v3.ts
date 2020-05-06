@@ -318,9 +318,7 @@ describe('v3.ServiceMonitoringServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.createService(request);
-      }, expectedError);
+      await assert.rejects(client.createService(request), expectedError);
       assert(
         (client.innerApiCalls.createService as SinonStub)
           .getCall(0)
@@ -438,9 +436,7 @@ describe('v3.ServiceMonitoringServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.getService(request);
-      }, expectedError);
+      await assert.rejects(client.getService(request), expectedError);
       assert(
         (client.innerApiCalls.getService as SinonStub)
           .getCall(0)
@@ -561,9 +557,7 @@ describe('v3.ServiceMonitoringServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.updateService(request);
-      }, expectedError);
+      await assert.rejects(client.updateService(request), expectedError);
       assert(
         (client.innerApiCalls.updateService as SinonStub)
           .getCall(0)
@@ -681,9 +675,7 @@ describe('v3.ServiceMonitoringServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.deleteService(request);
-      }, expectedError);
+      await assert.rejects(client.deleteService(request), expectedError);
       assert(
         (client.innerApiCalls.deleteService as SinonStub)
           .getCall(0)
@@ -803,9 +795,10 @@ describe('v3.ServiceMonitoringServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.createServiceLevelObjective(request);
-      }, expectedError);
+      await assert.rejects(
+        client.createServiceLevelObjective(request),
+        expectedError
+      );
       assert(
         (client.innerApiCalls.createServiceLevelObjective as SinonStub)
           .getCall(0)
@@ -925,9 +918,10 @@ describe('v3.ServiceMonitoringServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.getServiceLevelObjective(request);
-      }, expectedError);
+      await assert.rejects(
+        client.getServiceLevelObjective(request),
+        expectedError
+      );
       assert(
         (client.innerApiCalls.getServiceLevelObjective as SinonStub)
           .getCall(0)
@@ -1050,9 +1044,10 @@ describe('v3.ServiceMonitoringServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.updateServiceLevelObjective(request);
-      }, expectedError);
+      await assert.rejects(
+        client.updateServiceLevelObjective(request),
+        expectedError
+      );
       assert(
         (client.innerApiCalls.updateServiceLevelObjective as SinonStub)
           .getCall(0)
@@ -1172,9 +1167,10 @@ describe('v3.ServiceMonitoringServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.deleteServiceLevelObjective(request);
-      }, expectedError);
+      await assert.rejects(
+        client.deleteServiceLevelObjective(request),
+        expectedError
+      );
       assert(
         (client.innerApiCalls.deleteServiceLevelObjective as SinonStub)
           .getCall(0)
@@ -1296,9 +1292,7 @@ describe('v3.ServiceMonitoringServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.listServices(request);
-      }, expectedError);
+      await assert.rejects(client.listServices(request), expectedError);
       assert(
         (client.innerApiCalls.listServices as SinonStub)
           .getCall(0)
@@ -1387,9 +1381,7 @@ describe('v3.ServiceMonitoringServiceClient', () => {
           reject(err);
         });
       });
-      await assert.rejects(async () => {
-        await promise;
-      }, expectedError);
+      await assert.rejects(promise, expectedError);
       assert(
         (client.descriptors.page.listServices.createStream as SinonStub)
           .getCall(0)
@@ -1612,9 +1604,10 @@ describe('v3.ServiceMonitoringServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.listServiceLevelObjectives(request);
-      }, expectedError);
+      await assert.rejects(
+        client.listServiceLevelObjectives(request),
+        expectedError
+      );
       assert(
         (client.innerApiCalls.listServiceLevelObjectives as SinonStub)
           .getCall(0)
@@ -1716,9 +1709,7 @@ describe('v3.ServiceMonitoringServiceClient', () => {
           reject(err);
         });
       });
-      await assert.rejects(async () => {
-        await promise;
-      }, expectedError);
+      await assert.rejects(promise, expectedError);
       assert(
         (client.descriptors.page.listServiceLevelObjectives
           .createStream as SinonStub)

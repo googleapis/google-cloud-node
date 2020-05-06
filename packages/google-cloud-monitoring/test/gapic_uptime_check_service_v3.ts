@@ -301,9 +301,7 @@ describe('v3.UptimeCheckServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.getUptimeCheckConfig(request);
-      }, expectedError);
+      await assert.rejects(client.getUptimeCheckConfig(request), expectedError);
       assert(
         (client.innerApiCalls.getUptimeCheckConfig as SinonStub)
           .getCall(0)
@@ -417,9 +415,10 @@ describe('v3.UptimeCheckServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.createUptimeCheckConfig(request);
-      }, expectedError);
+      await assert.rejects(
+        client.createUptimeCheckConfig(request),
+        expectedError
+      );
       assert(
         (client.innerApiCalls.createUptimeCheckConfig as SinonStub)
           .getCall(0)
@@ -536,9 +535,10 @@ describe('v3.UptimeCheckServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.updateUptimeCheckConfig(request);
-      }, expectedError);
+      await assert.rejects(
+        client.updateUptimeCheckConfig(request),
+        expectedError
+      );
       assert(
         (client.innerApiCalls.updateUptimeCheckConfig as SinonStub)
           .getCall(0)
@@ -652,9 +652,10 @@ describe('v3.UptimeCheckServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.deleteUptimeCheckConfig(request);
-      }, expectedError);
+      await assert.rejects(
+        client.deleteUptimeCheckConfig(request),
+        expectedError
+      );
       assert(
         (client.innerApiCalls.deleteUptimeCheckConfig as SinonStub)
           .getCall(0)
@@ -784,9 +785,10 @@ describe('v3.UptimeCheckServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.listUptimeCheckConfigs(request);
-      }, expectedError);
+      await assert.rejects(
+        client.listUptimeCheckConfigs(request),
+        expectedError
+      );
       assert(
         (client.innerApiCalls.listUptimeCheckConfigs as SinonStub)
           .getCall(0)
@@ -884,9 +886,7 @@ describe('v3.UptimeCheckServiceClient', () => {
           reject(err);
         });
       });
-      await assert.rejects(async () => {
-        await promise;
-      }, expectedError);
+      await assert.rejects(promise, expectedError);
       assert(
         (client.descriptors.page.listUptimeCheckConfigs
           .createStream as SinonStub)
@@ -1070,9 +1070,7 @@ describe('v3.UptimeCheckServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.listUptimeCheckIps(request);
-      }, expectedError);
+      await assert.rejects(client.listUptimeCheckIps(request), expectedError);
       assert(
         (client.innerApiCalls.listUptimeCheckIps as SinonStub)
           .getCall(0)
@@ -1152,9 +1150,7 @@ describe('v3.UptimeCheckServiceClient', () => {
           reject(err);
         });
       });
-      await assert.rejects(async () => {
-        await promise;
-      }, expectedError);
+      await assert.rejects(promise, expectedError);
       assert(
         (client.descriptors.page.listUptimeCheckIps.createStream as SinonStub)
           .getCall(0)

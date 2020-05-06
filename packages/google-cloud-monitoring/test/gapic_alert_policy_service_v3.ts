@@ -299,9 +299,7 @@ describe('v3.AlertPolicyServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.getAlertPolicy(request);
-      }, expectedError);
+      await assert.rejects(client.getAlertPolicy(request), expectedError);
       assert(
         (client.innerApiCalls.getAlertPolicy as SinonStub)
           .getCall(0)
@@ -413,9 +411,7 @@ describe('v3.AlertPolicyServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.createAlertPolicy(request);
-      }, expectedError);
+      await assert.rejects(client.createAlertPolicy(request), expectedError);
       assert(
         (client.innerApiCalls.createAlertPolicy as SinonStub)
           .getCall(0)
@@ -527,9 +523,7 @@ describe('v3.AlertPolicyServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.deleteAlertPolicy(request);
-      }, expectedError);
+      await assert.rejects(client.deleteAlertPolicy(request), expectedError);
       assert(
         (client.innerApiCalls.deleteAlertPolicy as SinonStub)
           .getCall(0)
@@ -644,9 +638,7 @@ describe('v3.AlertPolicyServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.updateAlertPolicy(request);
-      }, expectedError);
+      await assert.rejects(client.updateAlertPolicy(request), expectedError);
       assert(
         (client.innerApiCalls.updateAlertPolicy as SinonStub)
           .getCall(0)
@@ -762,9 +754,7 @@ describe('v3.AlertPolicyServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.listAlertPolicies(request);
-      }, expectedError);
+      await assert.rejects(client.listAlertPolicies(request), expectedError);
       assert(
         (client.innerApiCalls.listAlertPolicies as SinonStub)
           .getCall(0)
@@ -855,9 +845,7 @@ describe('v3.AlertPolicyServiceClient', () => {
           reject(err);
         });
       });
-      await assert.rejects(async () => {
-        await promise;
-      }, expectedError);
+      await assert.rejects(promise, expectedError);
       assert(
         (client.descriptors.page.listAlertPolicies.createStream as SinonStub)
           .getCall(0)

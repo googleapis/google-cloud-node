@@ -320,9 +320,10 @@ describe('v3.NotificationChannelServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.getNotificationChannelDescriptor(request);
-      }, expectedError);
+      await assert.rejects(
+        client.getNotificationChannelDescriptor(request),
+        expectedError
+      );
       assert(
         (client.innerApiCalls.getNotificationChannelDescriptor as SinonStub)
           .getCall(0)
@@ -442,9 +443,10 @@ describe('v3.NotificationChannelServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.getNotificationChannel(request);
-      }, expectedError);
+      await assert.rejects(
+        client.getNotificationChannel(request),
+        expectedError
+      );
       assert(
         (client.innerApiCalls.getNotificationChannel as SinonStub)
           .getCall(0)
@@ -564,9 +566,10 @@ describe('v3.NotificationChannelServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.createNotificationChannel(request);
-      }, expectedError);
+      await assert.rejects(
+        client.createNotificationChannel(request),
+        expectedError
+      );
       assert(
         (client.innerApiCalls.createNotificationChannel as SinonStub)
           .getCall(0)
@@ -689,9 +692,10 @@ describe('v3.NotificationChannelServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.updateNotificationChannel(request);
-      }, expectedError);
+      await assert.rejects(
+        client.updateNotificationChannel(request),
+        expectedError
+      );
       assert(
         (client.innerApiCalls.updateNotificationChannel as SinonStub)
           .getCall(0)
@@ -811,9 +815,10 @@ describe('v3.NotificationChannelServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.deleteNotificationChannel(request);
-      }, expectedError);
+      await assert.rejects(
+        client.deleteNotificationChannel(request),
+        expectedError
+      );
       assert(
         (client.innerApiCalls.deleteNotificationChannel as SinonStub)
           .getCall(0)
@@ -937,9 +942,10 @@ describe('v3.NotificationChannelServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.sendNotificationChannelVerificationCode(request);
-      }, expectedError);
+      await assert.rejects(
+        client.sendNotificationChannelVerificationCode(request),
+        expectedError
+      );
       assert(
         (client.innerApiCalls
           .sendNotificationChannelVerificationCode as SinonStub)
@@ -1064,9 +1070,10 @@ describe('v3.NotificationChannelServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.getNotificationChannelVerificationCode(request);
-      }, expectedError);
+      await assert.rejects(
+        client.getNotificationChannelVerificationCode(request),
+        expectedError
+      );
       assert(
         (client.innerApiCalls
           .getNotificationChannelVerificationCode as SinonStub)
@@ -1187,9 +1194,10 @@ describe('v3.NotificationChannelServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.verifyNotificationChannel(request);
-      }, expectedError);
+      await assert.rejects(
+        client.verifyNotificationChannel(request),
+        expectedError
+      );
       assert(
         (client.innerApiCalls.verifyNotificationChannel as SinonStub)
           .getCall(0)
@@ -1329,9 +1337,10 @@ describe('v3.NotificationChannelServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.listNotificationChannelDescriptors(request);
-      }, expectedError);
+      await assert.rejects(
+        client.listNotificationChannelDescriptors(request),
+        expectedError
+      );
       assert(
         (client.innerApiCalls.listNotificationChannelDescriptors as SinonStub)
           .getCall(0)
@@ -1440,9 +1449,7 @@ describe('v3.NotificationChannelServiceClient', () => {
           reject(err);
         });
       });
-      await assert.rejects(async () => {
-        await promise;
-      }, expectedError);
+      await assert.rejects(promise, expectedError);
       assert(
         (client.descriptors.page.listNotificationChannelDescriptors
           .createStream as SinonStub)
@@ -1675,9 +1682,10 @@ describe('v3.NotificationChannelServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.listNotificationChannels(request);
-      }, expectedError);
+      await assert.rejects(
+        client.listNotificationChannels(request),
+        expectedError
+      );
       assert(
         (client.innerApiCalls.listNotificationChannels as SinonStub)
           .getCall(0)
@@ -1779,9 +1787,7 @@ describe('v3.NotificationChannelServiceClient', () => {
           reject(err);
         });
       });
-      await assert.rejects(async () => {
-        await promise;
-      }, expectedError);
+      await assert.rejects(promise, expectedError);
       assert(
         (client.descriptors.page.listNotificationChannels
           .createStream as SinonStub)
