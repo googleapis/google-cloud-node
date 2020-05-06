@@ -12,9 +12,7 @@
                     "java_multiple_files": true,
                     "java_outer_classname": "TargetProto",
                     "java_package": "com.google.cloud.scheduler.v1",
-                    "objc_class_prefix": "SCHEDULER",
-                    "(google.api.resource_definition).type": "pubsub.googleapis.com/Topic",
-                    "(google.api.resource_definition).pattern": "projects/{project}/topics/{topic}"
+                    "objc_class_prefix": "SCHEDULER"
                   },
                   "nested": {
                     "CloudScheduler": {
@@ -478,9 +476,7 @@
                     "java_multiple_files": true,
                     "java_outer_classname": "TargetProto",
                     "java_package": "com.google.cloud.scheduler.v1beta1",
-                    "objc_class_prefix": "SCHEDULER",
-                    "(google.api.resource_definition).type": "pubsub.googleapis.com/Topic",
-                    "(google.api.resource_definition).pattern": "projects/{project}/topics/{topic}"
+                    "objc_class_prefix": "SCHEDULER"
                   },
                   "nested": {
                     "CloudScheduler": {
@@ -2027,6 +2023,18 @@
                 }
               }
             },
+            "Empty": {
+              "fields": {}
+            },
+            "FieldMask": {
+              "fields": {
+                "paths": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 1
+                }
+              }
+            },
             "Duration": {
               "fields": {
                 "seconds": {
@@ -2060,18 +2068,6 @@
                 "value": {
                   "type": "bytes",
                   "id": 2
-                }
-              }
-            },
-            "Empty": {
-              "fields": {}
-            },
-            "FieldMask": {
-              "fields": {
-                "paths": {
-                  "rule": "repeated",
-                  "type": "string",
-                  "id": 1
                 }
               }
             }

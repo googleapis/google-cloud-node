@@ -296,9 +296,7 @@ describe('v1.CloudSchedulerClient', () => {
       };
       const expectedError = new Error('expected');
       client.innerApiCalls.getJob = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(async () => {
-        await client.getJob(request);
-      }, expectedError);
+      await assert.rejects(client.getJob(request), expectedError);
       assert(
         (client.innerApiCalls.getJob as SinonStub)
           .getCall(0)
@@ -407,9 +405,7 @@ describe('v1.CloudSchedulerClient', () => {
       };
       const expectedError = new Error('expected');
       client.innerApiCalls.createJob = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(async () => {
-        await client.createJob(request);
-      }, expectedError);
+      await assert.rejects(client.createJob(request), expectedError);
       assert(
         (client.innerApiCalls.createJob as SinonStub)
           .getCall(0)
@@ -521,9 +517,7 @@ describe('v1.CloudSchedulerClient', () => {
       };
       const expectedError = new Error('expected');
       client.innerApiCalls.updateJob = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(async () => {
-        await client.updateJob(request);
-      }, expectedError);
+      await assert.rejects(client.updateJob(request), expectedError);
       assert(
         (client.innerApiCalls.updateJob as SinonStub)
           .getCall(0)
@@ -632,9 +626,7 @@ describe('v1.CloudSchedulerClient', () => {
       };
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteJob = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(async () => {
-        await client.deleteJob(request);
-      }, expectedError);
+      await assert.rejects(client.deleteJob(request), expectedError);
       assert(
         (client.innerApiCalls.deleteJob as SinonStub)
           .getCall(0)
@@ -743,9 +735,7 @@ describe('v1.CloudSchedulerClient', () => {
       };
       const expectedError = new Error('expected');
       client.innerApiCalls.pauseJob = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(async () => {
-        await client.pauseJob(request);
-      }, expectedError);
+      await assert.rejects(client.pauseJob(request), expectedError);
       assert(
         (client.innerApiCalls.pauseJob as SinonStub)
           .getCall(0)
@@ -854,9 +844,7 @@ describe('v1.CloudSchedulerClient', () => {
       };
       const expectedError = new Error('expected');
       client.innerApiCalls.resumeJob = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(async () => {
-        await client.resumeJob(request);
-      }, expectedError);
+      await assert.rejects(client.resumeJob(request), expectedError);
       assert(
         (client.innerApiCalls.resumeJob as SinonStub)
           .getCall(0)
@@ -965,9 +953,7 @@ describe('v1.CloudSchedulerClient', () => {
       };
       const expectedError = new Error('expected');
       client.innerApiCalls.runJob = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(async () => {
-        await client.runJob(request);
-      }, expectedError);
+      await assert.rejects(client.runJob(request), expectedError);
       assert(
         (client.innerApiCalls.runJob as SinonStub)
           .getCall(0)
@@ -1080,9 +1066,7 @@ describe('v1.CloudSchedulerClient', () => {
       };
       const expectedError = new Error('expected');
       client.innerApiCalls.listJobs = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(async () => {
-        await client.listJobs(request);
-      }, expectedError);
+      await assert.rejects(client.listJobs(request), expectedError);
       assert(
         (client.innerApiCalls.listJobs as SinonStub)
           .getCall(0)
@@ -1165,9 +1149,7 @@ describe('v1.CloudSchedulerClient', () => {
           reject(err);
         });
       });
-      await assert.rejects(async () => {
-        await promise;
-      }, expectedError);
+      await assert.rejects(promise, expectedError);
       assert(
         (client.descriptors.page.listJobs.createStream as SinonStub)
           .getCall(0)
