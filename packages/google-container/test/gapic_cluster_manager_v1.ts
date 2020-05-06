@@ -302,9 +302,7 @@ describe('v1.ClusterManagerClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.listClusters(request);
-      }, expectedError);
+      await assert.rejects(client.listClusters(request), expectedError);
       assert(
         (client.innerApiCalls.listClusters as SinonStub)
           .getCall(0)
@@ -419,9 +417,7 @@ describe('v1.ClusterManagerClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.getCluster(request);
-      }, expectedError);
+      await assert.rejects(client.getCluster(request), expectedError);
       assert(
         (client.innerApiCalls.getCluster as SinonStub)
           .getCall(0)
@@ -536,9 +532,7 @@ describe('v1.ClusterManagerClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.createCluster(request);
-      }, expectedError);
+      await assert.rejects(client.createCluster(request), expectedError);
       assert(
         (client.innerApiCalls.createCluster as SinonStub)
           .getCall(0)
@@ -653,9 +647,7 @@ describe('v1.ClusterManagerClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.updateCluster(request);
-      }, expectedError);
+      await assert.rejects(client.updateCluster(request), expectedError);
       assert(
         (client.innerApiCalls.updateCluster as SinonStub)
           .getCall(0)
@@ -770,9 +762,7 @@ describe('v1.ClusterManagerClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.updateNodePool(request);
-      }, expectedError);
+      await assert.rejects(client.updateNodePool(request), expectedError);
       assert(
         (client.innerApiCalls.updateNodePool as SinonStub)
           .getCall(0)
@@ -889,9 +879,10 @@ describe('v1.ClusterManagerClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.setNodePoolAutoscaling(request);
-      }, expectedError);
+      await assert.rejects(
+        client.setNodePoolAutoscaling(request),
+        expectedError
+      );
       assert(
         (client.innerApiCalls.setNodePoolAutoscaling as SinonStub)
           .getCall(0)
@@ -1006,9 +997,7 @@ describe('v1.ClusterManagerClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.setLoggingService(request);
-      }, expectedError);
+      await assert.rejects(client.setLoggingService(request), expectedError);
       assert(
         (client.innerApiCalls.setLoggingService as SinonStub)
           .getCall(0)
@@ -1125,9 +1114,7 @@ describe('v1.ClusterManagerClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.setMonitoringService(request);
-      }, expectedError);
+      await assert.rejects(client.setMonitoringService(request), expectedError);
       assert(
         (client.innerApiCalls.setMonitoringService as SinonStub)
           .getCall(0)
@@ -1242,9 +1229,7 @@ describe('v1.ClusterManagerClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.setAddonsConfig(request);
-      }, expectedError);
+      await assert.rejects(client.setAddonsConfig(request), expectedError);
       assert(
         (client.innerApiCalls.setAddonsConfig as SinonStub)
           .getCall(0)
@@ -1359,9 +1344,7 @@ describe('v1.ClusterManagerClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.setLocations(request);
-      }, expectedError);
+      await assert.rejects(client.setLocations(request), expectedError);
       assert(
         (client.innerApiCalls.setLocations as SinonStub)
           .getCall(0)
@@ -1476,9 +1459,7 @@ describe('v1.ClusterManagerClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.updateMaster(request);
-      }, expectedError);
+      await assert.rejects(client.updateMaster(request), expectedError);
       assert(
         (client.innerApiCalls.updateMaster as SinonStub)
           .getCall(0)
@@ -1593,9 +1574,7 @@ describe('v1.ClusterManagerClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.setMasterAuth(request);
-      }, expectedError);
+      await assert.rejects(client.setMasterAuth(request), expectedError);
       assert(
         (client.innerApiCalls.setMasterAuth as SinonStub)
           .getCall(0)
@@ -1710,9 +1689,7 @@ describe('v1.ClusterManagerClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.deleteCluster(request);
-      }, expectedError);
+      await assert.rejects(client.deleteCluster(request), expectedError);
       assert(
         (client.innerApiCalls.deleteCluster as SinonStub)
           .getCall(0)
@@ -1827,9 +1804,7 @@ describe('v1.ClusterManagerClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.listOperations(request);
-      }, expectedError);
+      await assert.rejects(client.listOperations(request), expectedError);
       assert(
         (client.innerApiCalls.listOperations as SinonStub)
           .getCall(0)
@@ -1944,9 +1919,7 @@ describe('v1.ClusterManagerClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.getOperation(request);
-      }, expectedError);
+      await assert.rejects(client.getOperation(request), expectedError);
       assert(
         (client.innerApiCalls.getOperation as SinonStub)
           .getCall(0)
@@ -2061,9 +2034,7 @@ describe('v1.ClusterManagerClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.cancelOperation(request);
-      }, expectedError);
+      await assert.rejects(client.cancelOperation(request), expectedError);
       assert(
         (client.innerApiCalls.cancelOperation as SinonStub)
           .getCall(0)
@@ -2178,9 +2149,7 @@ describe('v1.ClusterManagerClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.getServerConfig(request);
-      }, expectedError);
+      await assert.rejects(client.getServerConfig(request), expectedError);
       assert(
         (client.innerApiCalls.getServerConfig as SinonStub)
           .getCall(0)
@@ -2295,9 +2264,7 @@ describe('v1.ClusterManagerClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.listNodePools(request);
-      }, expectedError);
+      await assert.rejects(client.listNodePools(request), expectedError);
       assert(
         (client.innerApiCalls.listNodePools as SinonStub)
           .getCall(0)
@@ -2412,9 +2379,7 @@ describe('v1.ClusterManagerClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.getNodePool(request);
-      }, expectedError);
+      await assert.rejects(client.getNodePool(request), expectedError);
       assert(
         (client.innerApiCalls.getNodePool as SinonStub)
           .getCall(0)
@@ -2529,9 +2494,7 @@ describe('v1.ClusterManagerClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.createNodePool(request);
-      }, expectedError);
+      await assert.rejects(client.createNodePool(request), expectedError);
       assert(
         (client.innerApiCalls.createNodePool as SinonStub)
           .getCall(0)
@@ -2646,9 +2609,7 @@ describe('v1.ClusterManagerClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.deleteNodePool(request);
-      }, expectedError);
+      await assert.rejects(client.deleteNodePool(request), expectedError);
       assert(
         (client.innerApiCalls.deleteNodePool as SinonStub)
           .getCall(0)
@@ -2765,9 +2726,10 @@ describe('v1.ClusterManagerClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.rollbackNodePoolUpgrade(request);
-      }, expectedError);
+      await assert.rejects(
+        client.rollbackNodePoolUpgrade(request),
+        expectedError
+      );
       assert(
         (client.innerApiCalls.rollbackNodePoolUpgrade as SinonStub)
           .getCall(0)
@@ -2884,9 +2846,10 @@ describe('v1.ClusterManagerClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.setNodePoolManagement(request);
-      }, expectedError);
+      await assert.rejects(
+        client.setNodePoolManagement(request),
+        expectedError
+      );
       assert(
         (client.innerApiCalls.setNodePoolManagement as SinonStub)
           .getCall(0)
@@ -2998,9 +2961,7 @@ describe('v1.ClusterManagerClient', () => {
       };
       const expectedError = new Error('expected');
       client.innerApiCalls.setLabels = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(async () => {
-        await client.setLabels(request);
-      }, expectedError);
+      await assert.rejects(client.setLabels(request), expectedError);
       assert(
         (client.innerApiCalls.setLabels as SinonStub)
           .getCall(0)
@@ -3115,9 +3076,7 @@ describe('v1.ClusterManagerClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.setLegacyAbac(request);
-      }, expectedError);
+      await assert.rejects(client.setLegacyAbac(request), expectedError);
       assert(
         (client.innerApiCalls.setLegacyAbac as SinonStub)
           .getCall(0)
@@ -3232,9 +3191,7 @@ describe('v1.ClusterManagerClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.startIPRotation(request);
-      }, expectedError);
+      await assert.rejects(client.startIPRotation(request), expectedError);
       assert(
         (client.innerApiCalls.startIPRotation as SinonStub)
           .getCall(0)
@@ -3351,9 +3308,7 @@ describe('v1.ClusterManagerClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.completeIPRotation(request);
-      }, expectedError);
+      await assert.rejects(client.completeIPRotation(request), expectedError);
       assert(
         (client.innerApiCalls.completeIPRotation as SinonStub)
           .getCall(0)
@@ -3468,9 +3423,7 @@ describe('v1.ClusterManagerClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.setNodePoolSize(request);
-      }, expectedError);
+      await assert.rejects(client.setNodePoolSize(request), expectedError);
       assert(
         (client.innerApiCalls.setNodePoolSize as SinonStub)
           .getCall(0)
@@ -3585,9 +3538,7 @@ describe('v1.ClusterManagerClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.setNetworkPolicy(request);
-      }, expectedError);
+      await assert.rejects(client.setNetworkPolicy(request), expectedError);
       assert(
         (client.innerApiCalls.setNetworkPolicy as SinonStub)
           .getCall(0)
@@ -3704,9 +3655,7 @@ describe('v1.ClusterManagerClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.setMaintenancePolicy(request);
-      }, expectedError);
+      await assert.rejects(client.setMaintenancePolicy(request), expectedError);
       assert(
         (client.innerApiCalls.setMaintenancePolicy as SinonStub)
           .getCall(0)
@@ -3836,9 +3785,10 @@ describe('v1.ClusterManagerClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.listUsableSubnetworks(request);
-      }, expectedError);
+      await assert.rejects(
+        client.listUsableSubnetworks(request),
+        expectedError
+      );
       assert(
         (client.innerApiCalls.listUsableSubnetworks as SinonStub)
           .getCall(0)
@@ -3936,9 +3886,7 @@ describe('v1.ClusterManagerClient', () => {
           reject(err);
         });
       });
-      await assert.rejects(async () => {
-        await promise;
-      }, expectedError);
+      await assert.rejects(promise, expectedError);
       assert(
         (client.descriptors.page.listUsableSubnetworks
           .createStream as SinonStub)
