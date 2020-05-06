@@ -212,9 +212,7 @@ describe('v1.LanguageServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.analyzeSentiment(request);
-      }, expectedError);
+      await assert.rejects(client.analyzeSentiment(request), expectedError);
       assert(
         (client.innerApiCalls.analyzeSentiment as SinonStub)
           .getCall(0)
@@ -302,9 +300,7 @@ describe('v1.LanguageServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.analyzeEntities(request);
-      }, expectedError);
+      await assert.rejects(client.analyzeEntities(request), expectedError);
       assert(
         (client.innerApiCalls.analyzeEntities as SinonStub)
           .getCall(0)
@@ -394,9 +390,10 @@ describe('v1.LanguageServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.analyzeEntitySentiment(request);
-      }, expectedError);
+      await assert.rejects(
+        client.analyzeEntitySentiment(request),
+        expectedError
+      );
       assert(
         (client.innerApiCalls.analyzeEntitySentiment as SinonStub)
           .getCall(0)
@@ -484,9 +481,7 @@ describe('v1.LanguageServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.analyzeSyntax(request);
-      }, expectedError);
+      await assert.rejects(client.analyzeSyntax(request), expectedError);
       assert(
         (client.innerApiCalls.analyzeSyntax as SinonStub)
           .getCall(0)
@@ -574,9 +569,7 @@ describe('v1.LanguageServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.classifyText(request);
-      }, expectedError);
+      await assert.rejects(client.classifyText(request), expectedError);
       assert(
         (client.innerApiCalls.classifyText as SinonStub)
           .getCall(0)
@@ -664,9 +657,7 @@ describe('v1.LanguageServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.annotateText(request);
-      }, expectedError);
+      await assert.rejects(client.annotateText(request), expectedError);
       assert(
         (client.innerApiCalls.annotateText as SinonStub)
           .getCall(0)
