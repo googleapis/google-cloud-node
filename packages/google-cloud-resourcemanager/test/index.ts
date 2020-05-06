@@ -137,7 +137,7 @@ describe('Resource', () => {
     it('should inherit from Service', () => {
       assert(resource instanceof FakeService);
 
-      const calledWith = resource.calledWith_[0];
+      const calledWith = (resource as any).calledWith_[0];
       const baseUrl = 'https://cloudresourcemanager.googleapis.com/v1';
       assert.strictEqual(calledWith.baseUrl, baseUrl);
       assert.deepStrictEqual(calledWith.scopes, [

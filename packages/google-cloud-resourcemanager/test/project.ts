@@ -82,7 +82,7 @@ describe('Project', () => {
       const project = new Project(resourceInstance, ID);
       assert(project instanceof ServiceObject);
 
-      const calledWith = project.calledWith_[0];
+      const calledWith = (project as any).calledWith_[0];
 
       assert.strictEqual(calledWith.parent, resourceInstance);
       assert.strictEqual(calledWith.baseUrl, '/projects');
