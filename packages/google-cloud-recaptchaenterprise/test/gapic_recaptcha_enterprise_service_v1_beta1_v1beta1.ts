@@ -319,9 +319,7 @@ describe('v1beta1.RecaptchaEnterpriseServiceV1Beta1Client', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.createAssessment(request);
-      }, expectedError);
+      await assert.rejects(client.createAssessment(request), expectedError);
       assert(
         (client.innerApiCalls.createAssessment as SinonStub)
           .getCall(0)
@@ -441,9 +439,7 @@ describe('v1beta1.RecaptchaEnterpriseServiceV1Beta1Client', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.annotateAssessment(request);
-      }, expectedError);
+      await assert.rejects(client.annotateAssessment(request), expectedError);
       assert(
         (client.innerApiCalls.annotateAssessment as SinonStub)
           .getCall(0)
@@ -558,9 +554,7 @@ describe('v1beta1.RecaptchaEnterpriseServiceV1Beta1Client', () => {
       };
       const expectedError = new Error('expected');
       client.innerApiCalls.createKey = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(async () => {
-        await client.createKey(request);
-      }, expectedError);
+      await assert.rejects(client.createKey(request), expectedError);
       assert(
         (client.innerApiCalls.createKey as SinonStub)
           .getCall(0)
@@ -675,9 +669,7 @@ describe('v1beta1.RecaptchaEnterpriseServiceV1Beta1Client', () => {
       };
       const expectedError = new Error('expected');
       client.innerApiCalls.getKey = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(async () => {
-        await client.getKey(request);
-      }, expectedError);
+      await assert.rejects(client.getKey(request), expectedError);
       assert(
         (client.innerApiCalls.getKey as SinonStub)
           .getCall(0)
@@ -795,9 +787,7 @@ describe('v1beta1.RecaptchaEnterpriseServiceV1Beta1Client', () => {
       };
       const expectedError = new Error('expected');
       client.innerApiCalls.updateKey = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(async () => {
-        await client.updateKey(request);
-      }, expectedError);
+      await assert.rejects(client.updateKey(request), expectedError);
       assert(
         (client.innerApiCalls.updateKey as SinonStub)
           .getCall(0)
@@ -912,9 +902,7 @@ describe('v1beta1.RecaptchaEnterpriseServiceV1Beta1Client', () => {
       };
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteKey = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(async () => {
-        await client.deleteKey(request);
-      }, expectedError);
+      await assert.rejects(client.deleteKey(request), expectedError);
       assert(
         (client.innerApiCalls.deleteKey as SinonStub)
           .getCall(0)
@@ -1047,9 +1035,7 @@ describe('v1beta1.RecaptchaEnterpriseServiceV1Beta1Client', () => {
       };
       const expectedError = new Error('expected');
       client.innerApiCalls.listKeys = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(async () => {
-        await client.listKeys(request);
-      }, expectedError);
+      await assert.rejects(client.listKeys(request), expectedError);
       assert(
         (client.innerApiCalls.listKeys as SinonStub)
           .getCall(0)
@@ -1148,9 +1134,7 @@ describe('v1beta1.RecaptchaEnterpriseServiceV1Beta1Client', () => {
           reject(err);
         });
       });
-      await assert.rejects(async () => {
-        await promise;
-      }, expectedError);
+      await assert.rejects(promise, expectedError);
       assert(
         (client.descriptors.page.listKeys.createStream as SinonStub)
           .getCall(0)
