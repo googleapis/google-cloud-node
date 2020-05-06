@@ -214,9 +214,10 @@ describe('v1.WebRiskServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.computeThreatListDiff(request);
-      }, expectedError);
+      await assert.rejects(
+        client.computeThreatListDiff(request),
+        expectedError
+      );
       assert(
         (client.innerApiCalls.computeThreatListDiff as SinonStub)
           .getCall(0)
@@ -304,9 +305,7 @@ describe('v1.WebRiskServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.searchUris(request);
-      }, expectedError);
+      await assert.rejects(client.searchUris(request), expectedError);
       assert(
         (client.innerApiCalls.searchUris as SinonStub)
           .getCall(0)
@@ -394,9 +393,7 @@ describe('v1.WebRiskServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.searchHashes(request);
-      }, expectedError);
+      await assert.rejects(client.searchHashes(request), expectedError);
       assert(
         (client.innerApiCalls.searchHashes as SinonStub)
           .getCall(0)
@@ -508,9 +505,7 @@ describe('v1.WebRiskServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.createSubmission(request);
-      }, expectedError);
+      await assert.rejects(client.createSubmission(request), expectedError);
       assert(
         (client.innerApiCalls.createSubmission as SinonStub)
           .getCall(0)
