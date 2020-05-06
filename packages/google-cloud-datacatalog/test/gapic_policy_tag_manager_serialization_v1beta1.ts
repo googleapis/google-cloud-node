@@ -256,9 +256,7 @@ describe('v1beta1.PolicyTagManagerSerializationClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.importTaxonomies(request);
-      }, expectedError);
+      await assert.rejects(client.importTaxonomies(request), expectedError);
       assert(
         (client.innerApiCalls.importTaxonomies as SinonStub)
           .getCall(0)
@@ -376,9 +374,7 @@ describe('v1beta1.PolicyTagManagerSerializationClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.exportTaxonomies(request);
-      }, expectedError);
+      await assert.rejects(client.exportTaxonomies(request), expectedError);
       assert(
         (client.innerApiCalls.exportTaxonomies as SinonStub)
           .getCall(0)

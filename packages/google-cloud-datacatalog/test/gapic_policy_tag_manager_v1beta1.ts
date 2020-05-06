@@ -299,9 +299,7 @@ describe('v1beta1.PolicyTagManagerClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.createTaxonomy(request);
-      }, expectedError);
+      await assert.rejects(client.createTaxonomy(request), expectedError);
       assert(
         (client.innerApiCalls.createTaxonomy as SinonStub)
           .getCall(0)
@@ -413,9 +411,7 @@ describe('v1beta1.PolicyTagManagerClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.deleteTaxonomy(request);
-      }, expectedError);
+      await assert.rejects(client.deleteTaxonomy(request), expectedError);
       assert(
         (client.innerApiCalls.deleteTaxonomy as SinonStub)
           .getCall(0)
@@ -530,9 +526,7 @@ describe('v1beta1.PolicyTagManagerClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.updateTaxonomy(request);
-      }, expectedError);
+      await assert.rejects(client.updateTaxonomy(request), expectedError);
       assert(
         (client.innerApiCalls.updateTaxonomy as SinonStub)
           .getCall(0)
@@ -644,9 +638,7 @@ describe('v1beta1.PolicyTagManagerClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.getTaxonomy(request);
-      }, expectedError);
+      await assert.rejects(client.getTaxonomy(request), expectedError);
       assert(
         (client.innerApiCalls.getTaxonomy as SinonStub)
           .getCall(0)
@@ -758,9 +750,7 @@ describe('v1beta1.PolicyTagManagerClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.createPolicyTag(request);
-      }, expectedError);
+      await assert.rejects(client.createPolicyTag(request), expectedError);
       assert(
         (client.innerApiCalls.createPolicyTag as SinonStub)
           .getCall(0)
@@ -872,9 +862,7 @@ describe('v1beta1.PolicyTagManagerClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.deletePolicyTag(request);
-      }, expectedError);
+      await assert.rejects(client.deletePolicyTag(request), expectedError);
       assert(
         (client.innerApiCalls.deletePolicyTag as SinonStub)
           .getCall(0)
@@ -989,9 +977,7 @@ describe('v1beta1.PolicyTagManagerClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.updatePolicyTag(request);
-      }, expectedError);
+      await assert.rejects(client.updatePolicyTag(request), expectedError);
       assert(
         (client.innerApiCalls.updatePolicyTag as SinonStub)
           .getCall(0)
@@ -1103,9 +1089,7 @@ describe('v1beta1.PolicyTagManagerClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.getPolicyTag(request);
-      }, expectedError);
+      await assert.rejects(client.getPolicyTag(request), expectedError);
       assert(
         (client.innerApiCalls.getPolicyTag as SinonStub)
           .getCall(0)
@@ -1217,9 +1201,7 @@ describe('v1beta1.PolicyTagManagerClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.getIamPolicy(request);
-      }, expectedError);
+      await assert.rejects(client.getIamPolicy(request), expectedError);
       assert(
         (client.innerApiCalls.getIamPolicy as SinonStub)
           .getCall(0)
@@ -1331,9 +1313,7 @@ describe('v1beta1.PolicyTagManagerClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.setIamPolicy(request);
-      }, expectedError);
+      await assert.rejects(client.setIamPolicy(request), expectedError);
       assert(
         (client.innerApiCalls.setIamPolicy as SinonStub)
           .getCall(0)
@@ -1447,9 +1427,7 @@ describe('v1beta1.PolicyTagManagerClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.testIamPermissions(request);
-      }, expectedError);
+      await assert.rejects(client.testIamPermissions(request), expectedError);
       assert(
         (client.innerApiCalls.testIamPermissions as SinonStub)
           .getCall(0)
@@ -1577,9 +1555,7 @@ describe('v1beta1.PolicyTagManagerClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.listTaxonomies(request);
-      }, expectedError);
+      await assert.rejects(client.listTaxonomies(request), expectedError);
       assert(
         (client.innerApiCalls.listTaxonomies as SinonStub)
           .getCall(0)
@@ -1676,9 +1652,7 @@ describe('v1beta1.PolicyTagManagerClient', () => {
           reject(err);
         });
       });
-      await assert.rejects(async () => {
-        await promise;
-      }, expectedError);
+      await assert.rejects(promise, expectedError);
       assert(
         (client.descriptors.page.listTaxonomies.createStream as SinonStub)
           .getCall(0)
@@ -1895,9 +1869,7 @@ describe('v1beta1.PolicyTagManagerClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.listPolicyTags(request);
-      }, expectedError);
+      await assert.rejects(client.listPolicyTags(request), expectedError);
       assert(
         (client.innerApiCalls.listPolicyTags as SinonStub)
           .getCall(0)
@@ -1994,9 +1966,7 @@ describe('v1beta1.PolicyTagManagerClient', () => {
           reject(err);
         });
       });
-      await assert.rejects(async () => {
-        await promise;
-      }, expectedError);
+      await assert.rejects(promise, expectedError);
       assert(
         (client.descriptors.page.listPolicyTags.createStream as SinonStub)
           .getCall(0)

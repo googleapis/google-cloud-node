@@ -297,9 +297,7 @@ describe('v1beta1.DataCatalogClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.createEntryGroup(request);
-      }, expectedError);
+      await assert.rejects(client.createEntryGroup(request), expectedError);
       assert(
         (client.innerApiCalls.createEntryGroup as SinonStub)
           .getCall(0)
@@ -414,9 +412,7 @@ describe('v1beta1.DataCatalogClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.updateEntryGroup(request);
-      }, expectedError);
+      await assert.rejects(client.updateEntryGroup(request), expectedError);
       assert(
         (client.innerApiCalls.updateEntryGroup as SinonStub)
           .getCall(0)
@@ -528,9 +524,7 @@ describe('v1beta1.DataCatalogClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.getEntryGroup(request);
-      }, expectedError);
+      await assert.rejects(client.getEntryGroup(request), expectedError);
       assert(
         (client.innerApiCalls.getEntryGroup as SinonStub)
           .getCall(0)
@@ -642,9 +636,7 @@ describe('v1beta1.DataCatalogClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.deleteEntryGroup(request);
-      }, expectedError);
+      await assert.rejects(client.deleteEntryGroup(request), expectedError);
       assert(
         (client.innerApiCalls.deleteEntryGroup as SinonStub)
           .getCall(0)
@@ -756,9 +748,7 @@ describe('v1beta1.DataCatalogClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.createEntry(request);
-      }, expectedError);
+      await assert.rejects(client.createEntry(request), expectedError);
       assert(
         (client.innerApiCalls.createEntry as SinonStub)
           .getCall(0)
@@ -873,9 +863,7 @@ describe('v1beta1.DataCatalogClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.updateEntry(request);
-      }, expectedError);
+      await assert.rejects(client.updateEntry(request), expectedError);
       assert(
         (client.innerApiCalls.updateEntry as SinonStub)
           .getCall(0)
@@ -987,9 +975,7 @@ describe('v1beta1.DataCatalogClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.deleteEntry(request);
-      }, expectedError);
+      await assert.rejects(client.deleteEntry(request), expectedError);
       assert(
         (client.innerApiCalls.deleteEntry as SinonStub)
           .getCall(0)
@@ -1098,9 +1084,7 @@ describe('v1beta1.DataCatalogClient', () => {
       };
       const expectedError = new Error('expected');
       client.innerApiCalls.getEntry = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(async () => {
-        await client.getEntry(request);
-      }, expectedError);
+      await assert.rejects(client.getEntry(request), expectedError);
       assert(
         (client.innerApiCalls.getEntry as SinonStub)
           .getCall(0)
@@ -1188,9 +1172,7 @@ describe('v1beta1.DataCatalogClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.lookupEntry(request);
-      }, expectedError);
+      await assert.rejects(client.lookupEntry(request), expectedError);
       assert(
         (client.innerApiCalls.lookupEntry as SinonStub)
           .getCall(0)
@@ -1302,9 +1284,7 @@ describe('v1beta1.DataCatalogClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.createTagTemplate(request);
-      }, expectedError);
+      await assert.rejects(client.createTagTemplate(request), expectedError);
       assert(
         (client.innerApiCalls.createTagTemplate as SinonStub)
           .getCall(0)
@@ -1416,9 +1396,7 @@ describe('v1beta1.DataCatalogClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.getTagTemplate(request);
-      }, expectedError);
+      await assert.rejects(client.getTagTemplate(request), expectedError);
       assert(
         (client.innerApiCalls.getTagTemplate as SinonStub)
           .getCall(0)
@@ -1533,9 +1511,7 @@ describe('v1beta1.DataCatalogClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.updateTagTemplate(request);
-      }, expectedError);
+      await assert.rejects(client.updateTagTemplate(request), expectedError);
       assert(
         (client.innerApiCalls.updateTagTemplate as SinonStub)
           .getCall(0)
@@ -1647,9 +1623,7 @@ describe('v1beta1.DataCatalogClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.deleteTagTemplate(request);
-      }, expectedError);
+      await assert.rejects(client.deleteTagTemplate(request), expectedError);
       assert(
         (client.innerApiCalls.deleteTagTemplate as SinonStub)
           .getCall(0)
@@ -1763,9 +1737,10 @@ describe('v1beta1.DataCatalogClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.createTagTemplateField(request);
-      }, expectedError);
+      await assert.rejects(
+        client.createTagTemplateField(request),
+        expectedError
+      );
       assert(
         (client.innerApiCalls.createTagTemplateField as SinonStub)
           .getCall(0)
@@ -1879,9 +1854,10 @@ describe('v1beta1.DataCatalogClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.updateTagTemplateField(request);
-      }, expectedError);
+      await assert.rejects(
+        client.updateTagTemplateField(request),
+        expectedError
+      );
       assert(
         (client.innerApiCalls.updateTagTemplateField as SinonStub)
           .getCall(0)
@@ -1995,9 +1971,10 @@ describe('v1beta1.DataCatalogClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.renameTagTemplateField(request);
-      }, expectedError);
+      await assert.rejects(
+        client.renameTagTemplateField(request),
+        expectedError
+      );
       assert(
         (client.innerApiCalls.renameTagTemplateField as SinonStub)
           .getCall(0)
@@ -2111,9 +2088,10 @@ describe('v1beta1.DataCatalogClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.deleteTagTemplateField(request);
-      }, expectedError);
+      await assert.rejects(
+        client.deleteTagTemplateField(request),
+        expectedError
+      );
       assert(
         (client.innerApiCalls.deleteTagTemplateField as SinonStub)
           .getCall(0)
@@ -2222,9 +2200,7 @@ describe('v1beta1.DataCatalogClient', () => {
       };
       const expectedError = new Error('expected');
       client.innerApiCalls.createTag = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(async () => {
-        await client.createTag(request);
-      }, expectedError);
+      await assert.rejects(client.createTag(request), expectedError);
       assert(
         (client.innerApiCalls.createTag as SinonStub)
           .getCall(0)
@@ -2336,9 +2312,7 @@ describe('v1beta1.DataCatalogClient', () => {
       };
       const expectedError = new Error('expected');
       client.innerApiCalls.updateTag = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(async () => {
-        await client.updateTag(request);
-      }, expectedError);
+      await assert.rejects(client.updateTag(request), expectedError);
       assert(
         (client.innerApiCalls.updateTag as SinonStub)
           .getCall(0)
@@ -2447,9 +2421,7 @@ describe('v1beta1.DataCatalogClient', () => {
       };
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteTag = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(async () => {
-        await client.deleteTag(request);
-      }, expectedError);
+      await assert.rejects(client.deleteTag(request), expectedError);
       assert(
         (client.innerApiCalls.deleteTag as SinonStub)
           .getCall(0)
@@ -2561,9 +2533,7 @@ describe('v1beta1.DataCatalogClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.setIamPolicy(request);
-      }, expectedError);
+      await assert.rejects(client.setIamPolicy(request), expectedError);
       assert(
         (client.innerApiCalls.setIamPolicy as SinonStub)
           .getCall(0)
@@ -2675,9 +2645,7 @@ describe('v1beta1.DataCatalogClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.getIamPolicy(request);
-      }, expectedError);
+      await assert.rejects(client.getIamPolicy(request), expectedError);
       assert(
         (client.innerApiCalls.getIamPolicy as SinonStub)
           .getCall(0)
@@ -2791,9 +2759,7 @@ describe('v1beta1.DataCatalogClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.testIamPermissions(request);
-      }, expectedError);
+      await assert.rejects(client.testIamPermissions(request), expectedError);
       assert(
         (client.innerApiCalls.testIamPermissions as SinonStub)
           .getCall(0)
@@ -2899,9 +2865,7 @@ describe('v1beta1.DataCatalogClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.searchCatalog(request);
-      }, expectedError);
+      await assert.rejects(client.searchCatalog(request), expectedError);
       assert(
         (client.innerApiCalls.searchCatalog as SinonStub)
           .getCall(0)
@@ -2991,9 +2955,7 @@ describe('v1beta1.DataCatalogClient', () => {
           reject(err);
         });
       });
-      await assert.rejects(async () => {
-        await promise;
-      }, expectedError);
+      await assert.rejects(promise, expectedError);
       assert(
         (client.descriptors.page.searchCatalog.createStream as SinonStub)
           .getCall(0)
@@ -3187,9 +3149,7 @@ describe('v1beta1.DataCatalogClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.listEntryGroups(request);
-      }, expectedError);
+      await assert.rejects(client.listEntryGroups(request), expectedError);
       assert(
         (client.innerApiCalls.listEntryGroups as SinonStub)
           .getCall(0)
@@ -3286,9 +3246,7 @@ describe('v1beta1.DataCatalogClient', () => {
           reject(err);
         });
       });
-      await assert.rejects(async () => {
-        await promise;
-      }, expectedError);
+      await assert.rejects(promise, expectedError);
       assert(
         (client.descriptors.page.listEntryGroups.createStream as SinonStub)
           .getCall(0)
@@ -3505,9 +3463,7 @@ describe('v1beta1.DataCatalogClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.listEntries(request);
-      }, expectedError);
+      await assert.rejects(client.listEntries(request), expectedError);
       assert(
         (client.innerApiCalls.listEntries as SinonStub)
           .getCall(0)
@@ -3603,9 +3559,7 @@ describe('v1beta1.DataCatalogClient', () => {
           reject(err);
         });
       });
-      await assert.rejects(async () => {
-        await promise;
-      }, expectedError);
+      await assert.rejects(promise, expectedError);
       assert(
         (client.descriptors.page.listEntries.createStream as SinonStub)
           .getCall(0)
@@ -3818,9 +3772,7 @@ describe('v1beta1.DataCatalogClient', () => {
       };
       const expectedError = new Error('expected');
       client.innerApiCalls.listTags = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(async () => {
-        await client.listTags(request);
-      }, expectedError);
+      await assert.rejects(client.listTags(request), expectedError);
       assert(
         (client.innerApiCalls.listTags as SinonStub)
           .getCall(0)
@@ -3915,9 +3867,7 @@ describe('v1beta1.DataCatalogClient', () => {
           reject(err);
         });
       });
-      await assert.rejects(async () => {
-        await promise;
-      }, expectedError);
+      await assert.rejects(promise, expectedError);
       assert(
         (client.descriptors.page.listTags.createStream as SinonStub)
           .getCall(0)
