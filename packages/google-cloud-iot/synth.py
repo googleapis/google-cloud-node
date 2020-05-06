@@ -34,7 +34,7 @@ for version in versions:
             "grpc-service-config": f"google/cloud/iot/{version}/cloudiot_grpc_service_config.json",
             "package-name": "@google-cloud/iot",
             "main-service": "iot"
-            },
+        },
         proto_path=f'/google/cloud/iot/{version}',
         extra_proto_files=['google/cloud/common_resources.proto'],
         version=version)
@@ -47,7 +47,8 @@ s.copy(
 
 # Copy common templated files
 common_templates = gcp.CommonTemplates()
-templates = common_templates.node_library(source_location='build/src')
+templates = common_templates.node_library(
+    source_location='build/src', versions=versions, default_version='v1')
 s.copy(templates)
 
 node.postprocess_gapic_library()
