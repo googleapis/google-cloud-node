@@ -4,14 +4,22 @@
       "git": {
         "name": ".",
         "remote": "git@github.com:googleapis/nodejs-language.git",
-        "sha": "51a2004bb353d2222a9783a0a9908cd86f200f9e"
+        "sha": "84b62fdebba9b81746d0bceb993ff0e967c9ce5e"
+      }
+    },
+    {
+      "git": {
+        "name": "googleapis",
+        "remote": "https://github.com/googleapis/googleapis.git",
+        "sha": "6dfd72d028a0d0a43764e060f7b15e004385c3a1",
+        "internalRef": "310168181"
       }
     },
     {
       "git": {
         "name": "synthtool",
         "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "ab883569eb0257bbf16a6d825fd018b3adde3912"
+        "sha": "756bc4dfc24e8bc4c5dd4116daa41a0440ebf5a0"
       }
     }
   ],
