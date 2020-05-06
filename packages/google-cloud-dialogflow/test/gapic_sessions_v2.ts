@@ -250,9 +250,7 @@ describe('v2.SessionsClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.detectIntent(request);
-      }, expectedError);
+      await assert.rejects(client.detectIntent(request), expectedError);
       assert(
         (client.innerApiCalls.detectIntent as SinonStub)
           .getCall(0)
@@ -338,9 +336,7 @@ describe('v2.SessionsClient', () => {
         stream.write(request);
         stream.end();
       });
-      await assert.rejects(async () => {
-        await promise;
-      }, expectedError);
+      await assert.rejects(promise, expectedError);
       assert(
         (client.innerApiCalls.streamingDetectIntent as SinonStub)
           .getCall(0)

@@ -313,9 +313,7 @@ describe('v2.EnvironmentsClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.listEnvironments(request);
-      }, expectedError);
+      await assert.rejects(client.listEnvironments(request), expectedError);
       assert(
         (client.innerApiCalls.listEnvironments as SinonStub)
           .getCall(0)
@@ -412,9 +410,7 @@ describe('v2.EnvironmentsClient', () => {
           reject(err);
         });
       });
-      await assert.rejects(async () => {
-        await promise;
-      }, expectedError);
+      await assert.rejects(promise, expectedError);
       assert(
         (client.descriptors.page.listEnvironments.createStream as SinonStub)
           .getCall(0)

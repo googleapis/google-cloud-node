@@ -25,7 +25,7 @@ import * as entitytypesModule from '../src';
 
 import {PassThrough} from 'stream';
 
-import {protobuf, LROperation} from 'google-gax';
+import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (instance.constructor as typeof protobuf.Message).toObject(
@@ -329,9 +329,7 @@ describe('v2.EntityTypesClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.getEntityType(request);
-      }, expectedError);
+      await assert.rejects(client.getEntityType(request), expectedError);
       assert(
         (client.innerApiCalls.getEntityType as SinonStub)
           .getCall(0)
@@ -443,9 +441,7 @@ describe('v2.EntityTypesClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.createEntityType(request);
-      }, expectedError);
+      await assert.rejects(client.createEntityType(request), expectedError);
       assert(
         (client.innerApiCalls.createEntityType as SinonStub)
           .getCall(0)
@@ -560,9 +556,7 @@ describe('v2.EntityTypesClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.updateEntityType(request);
-      }, expectedError);
+      await assert.rejects(client.updateEntityType(request), expectedError);
       assert(
         (client.innerApiCalls.updateEntityType as SinonStub)
           .getCall(0)
@@ -674,9 +668,7 @@ describe('v2.EntityTypesClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.deleteEntityType(request);
-      }, expectedError);
+      await assert.rejects(client.deleteEntityType(request), expectedError);
       assert(
         (client.innerApiCalls.deleteEntityType as SinonStub)
           .getCall(0)
@@ -798,9 +790,10 @@ describe('v2.EntityTypesClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.batchUpdateEntityTypes(request);
-      }, expectedError);
+      await assert.rejects(
+        client.batchUpdateEntityTypes(request),
+        expectedError
+      );
       assert(
         (client.innerApiCalls.batchUpdateEntityTypes as SinonStub)
           .getCall(0)
@@ -833,14 +826,53 @@ describe('v2.EntityTypesClient', () => {
         expectedError
       );
       const [operation] = await client.batchUpdateEntityTypes(request);
-      await assert.rejects(async () => {
-        await operation.promise();
-      }, expectedError);
+      await assert.rejects(operation.promise(), expectedError);
       assert(
         (client.innerApiCalls.batchUpdateEntityTypes as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes checkBatchUpdateEntityTypesProgress without error', async () => {
+      const client = new entitytypesModule.v2.EntityTypesClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkBatchUpdateEntityTypesProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkBatchUpdateEntityTypesProgress with error', async () => {
+      const client = new entitytypesModule.v2.EntityTypesClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkBatchUpdateEntityTypesProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
     });
   });
 
@@ -957,9 +989,10 @@ describe('v2.EntityTypesClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.batchDeleteEntityTypes(request);
-      }, expectedError);
+      await assert.rejects(
+        client.batchDeleteEntityTypes(request),
+        expectedError
+      );
       assert(
         (client.innerApiCalls.batchDeleteEntityTypes as SinonStub)
           .getCall(0)
@@ -992,14 +1025,53 @@ describe('v2.EntityTypesClient', () => {
         expectedError
       );
       const [operation] = await client.batchDeleteEntityTypes(request);
-      await assert.rejects(async () => {
-        await operation.promise();
-      }, expectedError);
+      await assert.rejects(operation.promise(), expectedError);
       assert(
         (client.innerApiCalls.batchDeleteEntityTypes as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes checkBatchDeleteEntityTypesProgress without error', async () => {
+      const client = new entitytypesModule.v2.EntityTypesClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkBatchDeleteEntityTypesProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkBatchDeleteEntityTypesProgress with error', async () => {
+      const client = new entitytypesModule.v2.EntityTypesClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkBatchDeleteEntityTypesProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
     });
   });
 
@@ -1116,9 +1188,7 @@ describe('v2.EntityTypesClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.batchCreateEntities(request);
-      }, expectedError);
+      await assert.rejects(client.batchCreateEntities(request), expectedError);
       assert(
         (client.innerApiCalls.batchCreateEntities as SinonStub)
           .getCall(0)
@@ -1151,14 +1221,53 @@ describe('v2.EntityTypesClient', () => {
         expectedError
       );
       const [operation] = await client.batchCreateEntities(request);
-      await assert.rejects(async () => {
-        await operation.promise();
-      }, expectedError);
+      await assert.rejects(operation.promise(), expectedError);
       assert(
         (client.innerApiCalls.batchCreateEntities as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes checkBatchCreateEntitiesProgress without error', async () => {
+      const client = new entitytypesModule.v2.EntityTypesClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkBatchCreateEntitiesProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkBatchCreateEntitiesProgress with error', async () => {
+      const client = new entitytypesModule.v2.EntityTypesClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkBatchCreateEntitiesProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
     });
   });
 
@@ -1275,9 +1384,7 @@ describe('v2.EntityTypesClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.batchUpdateEntities(request);
-      }, expectedError);
+      await assert.rejects(client.batchUpdateEntities(request), expectedError);
       assert(
         (client.innerApiCalls.batchUpdateEntities as SinonStub)
           .getCall(0)
@@ -1310,14 +1417,53 @@ describe('v2.EntityTypesClient', () => {
         expectedError
       );
       const [operation] = await client.batchUpdateEntities(request);
-      await assert.rejects(async () => {
-        await operation.promise();
-      }, expectedError);
+      await assert.rejects(operation.promise(), expectedError);
       assert(
         (client.innerApiCalls.batchUpdateEntities as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes checkBatchUpdateEntitiesProgress without error', async () => {
+      const client = new entitytypesModule.v2.EntityTypesClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkBatchUpdateEntitiesProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkBatchUpdateEntitiesProgress with error', async () => {
+      const client = new entitytypesModule.v2.EntityTypesClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkBatchUpdateEntitiesProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
     });
   });
 
@@ -1434,9 +1580,7 @@ describe('v2.EntityTypesClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.batchDeleteEntities(request);
-      }, expectedError);
+      await assert.rejects(client.batchDeleteEntities(request), expectedError);
       assert(
         (client.innerApiCalls.batchDeleteEntities as SinonStub)
           .getCall(0)
@@ -1469,14 +1613,53 @@ describe('v2.EntityTypesClient', () => {
         expectedError
       );
       const [operation] = await client.batchDeleteEntities(request);
-      await assert.rejects(async () => {
-        await operation.promise();
-      }, expectedError);
+      await assert.rejects(operation.promise(), expectedError);
       assert(
         (client.innerApiCalls.batchDeleteEntities as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes checkBatchDeleteEntitiesProgress without error', async () => {
+      const client = new entitytypesModule.v2.EntityTypesClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkBatchDeleteEntitiesProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkBatchDeleteEntitiesProgress with error', async () => {
+      const client = new entitytypesModule.v2.EntityTypesClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkBatchDeleteEntitiesProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
     });
   });
 
@@ -1599,9 +1782,7 @@ describe('v2.EntityTypesClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.listEntityTypes(request);
-      }, expectedError);
+      await assert.rejects(client.listEntityTypes(request), expectedError);
       assert(
         (client.innerApiCalls.listEntityTypes as SinonStub)
           .getCall(0)
@@ -1698,9 +1879,7 @@ describe('v2.EntityTypesClient', () => {
           reject(err);
         });
       });
-      await assert.rejects(async () => {
-        await promise;
-      }, expectedError);
+      await assert.rejects(promise, expectedError);
       assert(
         (client.descriptors.page.listEntityTypes.createStream as SinonStub)
           .getCall(0)

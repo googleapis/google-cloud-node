@@ -32,7 +32,7 @@ import {Transform} from 'stream';
 import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
 import * as gapicConfig from './agents_client_config.json';
-
+import {operationsProtos} from 'google-gax';
 const version = require('../../../package.json').version;
 
 /**
@@ -870,6 +870,39 @@ export class AgentsClient {
     this.initialize();
     return this.innerApiCalls.trainAgent(request, options, callback);
   }
+  /**
+   * Check the status of the long running operation returned by the trainAgent() method.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *
+   * @example:
+   *   const decodedOperation = await checkTrainAgentProgress(name);
+   *   console.log(decodedOperation.result);
+   *   console.log(decodedOperation.done);
+   *   console.log(decodedOperation.metadata);
+   *
+   */
+  async checkTrainAgentProgress(
+    name: string
+  ): Promise<
+    LROperation<protos.google.protobuf.Empty, protos.google.protobuf.Struct>
+  > {
+    const request = new operationsProtos.google.longrunning.GetOperationRequest(
+      {name}
+    );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new gax.Operation(
+      operation,
+      this.descriptors.longrunning.trainAgent,
+      gax.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.protobuf.Struct
+    >;
+  }
   exportAgent(
     request: protos.google.cloud.dialogflow.v2.IExportAgentRequest,
     options?: gax.CallOptions
@@ -975,6 +1008,42 @@ export class AgentsClient {
     });
     this.initialize();
     return this.innerApiCalls.exportAgent(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by the exportAgent() method.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *
+   * @example:
+   *   const decodedOperation = await checkExportAgentProgress(name);
+   *   console.log(decodedOperation.result);
+   *   console.log(decodedOperation.done);
+   *   console.log(decodedOperation.metadata);
+   *
+   */
+  async checkExportAgentProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.dialogflow.v2.ExportAgentResponse,
+      protos.google.protobuf.Struct
+    >
+  > {
+    const request = new operationsProtos.google.longrunning.GetOperationRequest(
+      {name}
+    );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new gax.Operation(
+      operation,
+      this.descriptors.longrunning.exportAgent,
+      gax.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.dialogflow.v2.ExportAgentResponse,
+      protos.google.protobuf.Struct
+    >;
   }
   importAgent(
     request: protos.google.cloud.dialogflow.v2.IImportAgentRequest,
@@ -1086,6 +1155,39 @@ export class AgentsClient {
     this.initialize();
     return this.innerApiCalls.importAgent(request, options, callback);
   }
+  /**
+   * Check the status of the long running operation returned by the importAgent() method.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *
+   * @example:
+   *   const decodedOperation = await checkImportAgentProgress(name);
+   *   console.log(decodedOperation.result);
+   *   console.log(decodedOperation.done);
+   *   console.log(decodedOperation.metadata);
+   *
+   */
+  async checkImportAgentProgress(
+    name: string
+  ): Promise<
+    LROperation<protos.google.protobuf.Empty, protos.google.protobuf.Struct>
+  > {
+    const request = new operationsProtos.google.longrunning.GetOperationRequest(
+      {name}
+    );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new gax.Operation(
+      operation,
+      this.descriptors.longrunning.importAgent,
+      gax.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.protobuf.Struct
+    >;
+  }
   restoreAgent(
     request: protos.google.cloud.dialogflow.v2.IRestoreAgentRequest,
     options?: gax.CallOptions
@@ -1194,6 +1296,39 @@ export class AgentsClient {
     });
     this.initialize();
     return this.innerApiCalls.restoreAgent(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by the restoreAgent() method.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *
+   * @example:
+   *   const decodedOperation = await checkRestoreAgentProgress(name);
+   *   console.log(decodedOperation.result);
+   *   console.log(decodedOperation.done);
+   *   console.log(decodedOperation.metadata);
+   *
+   */
+  async checkRestoreAgentProgress(
+    name: string
+  ): Promise<
+    LROperation<protos.google.protobuf.Empty, protos.google.protobuf.Struct>
+  > {
+    const request = new operationsProtos.google.longrunning.GetOperationRequest(
+      {name}
+    );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new gax.Operation(
+      operation,
+      this.descriptors.longrunning.restoreAgent,
+      gax.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.protobuf.Struct
+    >;
   }
   searchAgents(
     request: protos.google.cloud.dialogflow.v2.ISearchAgentsRequest,

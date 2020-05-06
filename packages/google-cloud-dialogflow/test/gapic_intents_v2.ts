@@ -25,7 +25,7 @@ import * as intentsModule from '../src';
 
 import {PassThrough} from 'stream';
 
-import {protobuf, LROperation} from 'google-gax';
+import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (instance.constructor as typeof protobuf.Message).toObject(
@@ -326,9 +326,7 @@ describe('v2.IntentsClient', () => {
       };
       const expectedError = new Error('expected');
       client.innerApiCalls.getIntent = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(async () => {
-        await client.getIntent(request);
-      }, expectedError);
+      await assert.rejects(client.getIntent(request), expectedError);
       assert(
         (client.innerApiCalls.getIntent as SinonStub)
           .getCall(0)
@@ -440,9 +438,7 @@ describe('v2.IntentsClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.createIntent(request);
-      }, expectedError);
+      await assert.rejects(client.createIntent(request), expectedError);
       assert(
         (client.innerApiCalls.createIntent as SinonStub)
           .getCall(0)
@@ -557,9 +553,7 @@ describe('v2.IntentsClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.updateIntent(request);
-      }, expectedError);
+      await assert.rejects(client.updateIntent(request), expectedError);
       assert(
         (client.innerApiCalls.updateIntent as SinonStub)
           .getCall(0)
@@ -671,9 +665,7 @@ describe('v2.IntentsClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.deleteIntent(request);
-      }, expectedError);
+      await assert.rejects(client.deleteIntent(request), expectedError);
       assert(
         (client.innerApiCalls.deleteIntent as SinonStub)
           .getCall(0)
@@ -795,9 +787,7 @@ describe('v2.IntentsClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.batchUpdateIntents(request);
-      }, expectedError);
+      await assert.rejects(client.batchUpdateIntents(request), expectedError);
       assert(
         (client.innerApiCalls.batchUpdateIntents as SinonStub)
           .getCall(0)
@@ -830,14 +820,53 @@ describe('v2.IntentsClient', () => {
         expectedError
       );
       const [operation] = await client.batchUpdateIntents(request);
-      await assert.rejects(async () => {
-        await operation.promise();
-      }, expectedError);
+      await assert.rejects(operation.promise(), expectedError);
       assert(
         (client.innerApiCalls.batchUpdateIntents as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes checkBatchUpdateIntentsProgress without error', async () => {
+      const client = new intentsModule.v2.IntentsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkBatchUpdateIntentsProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkBatchUpdateIntentsProgress with error', async () => {
+      const client = new intentsModule.v2.IntentsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkBatchUpdateIntentsProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
     });
   });
 
@@ -954,9 +983,7 @@ describe('v2.IntentsClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.batchDeleteIntents(request);
-      }, expectedError);
+      await assert.rejects(client.batchDeleteIntents(request), expectedError);
       assert(
         (client.innerApiCalls.batchDeleteIntents as SinonStub)
           .getCall(0)
@@ -989,14 +1016,53 @@ describe('v2.IntentsClient', () => {
         expectedError
       );
       const [operation] = await client.batchDeleteIntents(request);
-      await assert.rejects(async () => {
-        await operation.promise();
-      }, expectedError);
+      await assert.rejects(operation.promise(), expectedError);
       assert(
         (client.innerApiCalls.batchDeleteIntents as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes checkBatchDeleteIntentsProgress without error', async () => {
+      const client = new intentsModule.v2.IntentsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkBatchDeleteIntentsProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkBatchDeleteIntentsProgress with error', async () => {
+      const client = new intentsModule.v2.IntentsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkBatchDeleteIntentsProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
     });
   });
 
@@ -1107,9 +1173,7 @@ describe('v2.IntentsClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.listIntents(request);
-      }, expectedError);
+      await assert.rejects(client.listIntents(request), expectedError);
       assert(
         (client.innerApiCalls.listIntents as SinonStub)
           .getCall(0)
@@ -1199,9 +1263,7 @@ describe('v2.IntentsClient', () => {
           reject(err);
         });
       });
-      await assert.rejects(async () => {
-        await promise;
-      }, expectedError);
+      await assert.rejects(promise, expectedError);
       assert(
         (client.descriptors.page.listIntents.createStream as SinonStub)
           .getCall(0)

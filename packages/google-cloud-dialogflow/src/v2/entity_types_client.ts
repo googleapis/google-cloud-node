@@ -32,7 +32,7 @@ import {Transform} from 'stream';
 import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
 import * as gapicConfig from './entity_types_client_config.json';
-
+import {operationsProtos} from 'google-gax';
 const version = require('../../../package.json').version;
 
 /**
@@ -944,6 +944,42 @@ export class EntityTypesClient {
       callback
     );
   }
+  /**
+   * Check the status of the long running operation returned by the batchUpdateEntityTypes() method.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *
+   * @example:
+   *   const decodedOperation = await checkBatchUpdateEntityTypesProgress(name);
+   *   console.log(decodedOperation.result);
+   *   console.log(decodedOperation.done);
+   *   console.log(decodedOperation.metadata);
+   *
+   */
+  async checkBatchUpdateEntityTypesProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.dialogflow.v2.BatchUpdateEntityTypesResponse,
+      protos.google.protobuf.Struct
+    >
+  > {
+    const request = new operationsProtos.google.longrunning.GetOperationRequest(
+      {name}
+    );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new gax.Operation(
+      operation,
+      this.descriptors.longrunning.batchUpdateEntityTypes,
+      gax.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.dialogflow.v2.BatchUpdateEntityTypesResponse,
+      protos.google.protobuf.Struct
+    >;
+  }
   batchDeleteEntityTypes(
     request: protos.google.cloud.dialogflow.v2.IBatchDeleteEntityTypesRequest,
     options?: gax.CallOptions
@@ -1051,6 +1087,39 @@ export class EntityTypesClient {
       options,
       callback
     );
+  }
+  /**
+   * Check the status of the long running operation returned by the batchDeleteEntityTypes() method.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *
+   * @example:
+   *   const decodedOperation = await checkBatchDeleteEntityTypesProgress(name);
+   *   console.log(decodedOperation.result);
+   *   console.log(decodedOperation.done);
+   *   console.log(decodedOperation.metadata);
+   *
+   */
+  async checkBatchDeleteEntityTypesProgress(
+    name: string
+  ): Promise<
+    LROperation<protos.google.protobuf.Empty, protos.google.protobuf.Struct>
+  > {
+    const request = new operationsProtos.google.longrunning.GetOperationRequest(
+      {name}
+    );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new gax.Operation(
+      operation,
+      this.descriptors.longrunning.batchDeleteEntityTypes,
+      gax.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.protobuf.Struct
+    >;
   }
   batchCreateEntities(
     request: protos.google.cloud.dialogflow.v2.IBatchCreateEntitiesRequest,
@@ -1160,6 +1229,39 @@ export class EntityTypesClient {
     });
     this.initialize();
     return this.innerApiCalls.batchCreateEntities(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by the batchCreateEntities() method.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *
+   * @example:
+   *   const decodedOperation = await checkBatchCreateEntitiesProgress(name);
+   *   console.log(decodedOperation.result);
+   *   console.log(decodedOperation.done);
+   *   console.log(decodedOperation.metadata);
+   *
+   */
+  async checkBatchCreateEntitiesProgress(
+    name: string
+  ): Promise<
+    LROperation<protos.google.protobuf.Empty, protos.google.protobuf.Struct>
+  > {
+    const request = new operationsProtos.google.longrunning.GetOperationRequest(
+      {name}
+    );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new gax.Operation(
+      operation,
+      this.descriptors.longrunning.batchCreateEntities,
+      gax.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.protobuf.Struct
+    >;
   }
   batchUpdateEntities(
     request: protos.google.cloud.dialogflow.v2.IBatchUpdateEntitiesRequest,
@@ -1275,6 +1377,39 @@ export class EntityTypesClient {
     this.initialize();
     return this.innerApiCalls.batchUpdateEntities(request, options, callback);
   }
+  /**
+   * Check the status of the long running operation returned by the batchUpdateEntities() method.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *
+   * @example:
+   *   const decodedOperation = await checkBatchUpdateEntitiesProgress(name);
+   *   console.log(decodedOperation.result);
+   *   console.log(decodedOperation.done);
+   *   console.log(decodedOperation.metadata);
+   *
+   */
+  async checkBatchUpdateEntitiesProgress(
+    name: string
+  ): Promise<
+    LROperation<protos.google.protobuf.Empty, protos.google.protobuf.Struct>
+  > {
+    const request = new operationsProtos.google.longrunning.GetOperationRequest(
+      {name}
+    );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new gax.Operation(
+      operation,
+      this.descriptors.longrunning.batchUpdateEntities,
+      gax.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.protobuf.Struct
+    >;
+  }
   batchDeleteEntities(
     request: protos.google.cloud.dialogflow.v2.IBatchDeleteEntitiesRequest,
     options?: gax.CallOptions
@@ -1386,6 +1521,39 @@ export class EntityTypesClient {
     });
     this.initialize();
     return this.innerApiCalls.batchDeleteEntities(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by the batchDeleteEntities() method.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *
+   * @example:
+   *   const decodedOperation = await checkBatchDeleteEntitiesProgress(name);
+   *   console.log(decodedOperation.result);
+   *   console.log(decodedOperation.done);
+   *   console.log(decodedOperation.metadata);
+   *
+   */
+  async checkBatchDeleteEntitiesProgress(
+    name: string
+  ): Promise<
+    LROperation<protos.google.protobuf.Empty, protos.google.protobuf.Struct>
+  > {
+    const request = new operationsProtos.google.longrunning.GetOperationRequest(
+      {name}
+    );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new gax.Operation(
+      operation,
+      this.descriptors.longrunning.batchDeleteEntities,
+      gax.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.protobuf.Struct
+    >;
   }
   listEntityTypes(
     request: protos.google.cloud.dialogflow.v2.IListEntityTypesRequest,

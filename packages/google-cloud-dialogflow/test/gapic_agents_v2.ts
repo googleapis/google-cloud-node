@@ -25,7 +25,7 @@ import * as agentsModule from '../src';
 
 import {PassThrough} from 'stream';
 
-import {protobuf, LROperation} from 'google-gax';
+import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (instance.constructor as typeof protobuf.Message).toObject(
@@ -326,9 +326,7 @@ describe('v2.AgentsClient', () => {
       };
       const expectedError = new Error('expected');
       client.innerApiCalls.getAgent = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(async () => {
-        await client.getAgent(request);
-      }, expectedError);
+      await assert.rejects(client.getAgent(request), expectedError);
       assert(
         (client.innerApiCalls.getAgent as SinonStub)
           .getCall(0)
@@ -440,9 +438,7 @@ describe('v2.AgentsClient', () => {
       };
       const expectedError = new Error('expected');
       client.innerApiCalls.setAgent = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(async () => {
-        await client.setAgent(request);
-      }, expectedError);
+      await assert.rejects(client.setAgent(request), expectedError);
       assert(
         (client.innerApiCalls.setAgent as SinonStub)
           .getCall(0)
@@ -554,9 +550,7 @@ describe('v2.AgentsClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.deleteAgent(request);
-      }, expectedError);
+      await assert.rejects(client.deleteAgent(request), expectedError);
       assert(
         (client.innerApiCalls.deleteAgent as SinonStub)
           .getCall(0)
@@ -670,9 +664,7 @@ describe('v2.AgentsClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.getValidationResult(request);
-      }, expectedError);
+      await assert.rejects(client.getValidationResult(request), expectedError);
       assert(
         (client.innerApiCalls.getValidationResult as SinonStub)
           .getCall(0)
@@ -792,9 +784,7 @@ describe('v2.AgentsClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.trainAgent(request);
-      }, expectedError);
+      await assert.rejects(client.trainAgent(request), expectedError);
       assert(
         (client.innerApiCalls.trainAgent as SinonStub)
           .getCall(0)
@@ -827,14 +817,50 @@ describe('v2.AgentsClient', () => {
         expectedError
       );
       const [operation] = await client.trainAgent(request);
-      await assert.rejects(async () => {
-        await operation.promise();
-      }, expectedError);
+      await assert.rejects(operation.promise(), expectedError);
       assert(
         (client.innerApiCalls.trainAgent as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes checkTrainAgentProgress without error', async () => {
+      const client = new agentsModule.v2.AgentsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkTrainAgentProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkTrainAgentProgress with error', async () => {
+      const client = new agentsModule.v2.AgentsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.checkTrainAgentProgress(''), expectedError);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
     });
   });
 
@@ -949,9 +975,7 @@ describe('v2.AgentsClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.exportAgent(request);
-      }, expectedError);
+      await assert.rejects(client.exportAgent(request), expectedError);
       assert(
         (client.innerApiCalls.exportAgent as SinonStub)
           .getCall(0)
@@ -984,14 +1008,50 @@ describe('v2.AgentsClient', () => {
         expectedError
       );
       const [operation] = await client.exportAgent(request);
-      await assert.rejects(async () => {
-        await operation.promise();
-      }, expectedError);
+      await assert.rejects(operation.promise(), expectedError);
       assert(
         (client.innerApiCalls.exportAgent as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes checkExportAgentProgress without error', async () => {
+      const client = new agentsModule.v2.AgentsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkExportAgentProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkExportAgentProgress with error', async () => {
+      const client = new agentsModule.v2.AgentsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.checkExportAgentProgress(''), expectedError);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
     });
   });
 
@@ -1106,9 +1166,7 @@ describe('v2.AgentsClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.importAgent(request);
-      }, expectedError);
+      await assert.rejects(client.importAgent(request), expectedError);
       assert(
         (client.innerApiCalls.importAgent as SinonStub)
           .getCall(0)
@@ -1141,14 +1199,50 @@ describe('v2.AgentsClient', () => {
         expectedError
       );
       const [operation] = await client.importAgent(request);
-      await assert.rejects(async () => {
-        await operation.promise();
-      }, expectedError);
+      await assert.rejects(operation.promise(), expectedError);
       assert(
         (client.innerApiCalls.importAgent as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes checkImportAgentProgress without error', async () => {
+      const client = new agentsModule.v2.AgentsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkImportAgentProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkImportAgentProgress with error', async () => {
+      const client = new agentsModule.v2.AgentsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.checkImportAgentProgress(''), expectedError);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
     });
   });
 
@@ -1263,9 +1357,7 @@ describe('v2.AgentsClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.restoreAgent(request);
-      }, expectedError);
+      await assert.rejects(client.restoreAgent(request), expectedError);
       assert(
         (client.innerApiCalls.restoreAgent as SinonStub)
           .getCall(0)
@@ -1298,14 +1390,50 @@ describe('v2.AgentsClient', () => {
         expectedError
       );
       const [operation] = await client.restoreAgent(request);
-      await assert.rejects(async () => {
-        await operation.promise();
-      }, expectedError);
+      await assert.rejects(operation.promise(), expectedError);
       assert(
         (client.innerApiCalls.restoreAgent as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes checkRestoreAgentProgress without error', async () => {
+      const client = new agentsModule.v2.AgentsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkRestoreAgentProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkRestoreAgentProgress with error', async () => {
+      const client = new agentsModule.v2.AgentsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.checkRestoreAgentProgress(''), expectedError);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
     });
   });
 
@@ -1416,9 +1544,7 @@ describe('v2.AgentsClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.searchAgents(request);
-      }, expectedError);
+      await assert.rejects(client.searchAgents(request), expectedError);
       assert(
         (client.innerApiCalls.searchAgents as SinonStub)
           .getCall(0)
@@ -1509,9 +1635,7 @@ describe('v2.AgentsClient', () => {
           reject(err);
         });
       });
-      await assert.rejects(async () => {
-        await promise;
-      }, expectedError);
+      await assert.rejects(promise, expectedError);
       assert(
         (client.descriptors.page.searchAgents.createStream as SinonStub)
           .getCall(0)

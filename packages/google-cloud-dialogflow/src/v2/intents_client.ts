@@ -32,7 +32,7 @@ import {Transform} from 'stream';
 import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
 import * as gapicConfig from './intents_client_config.json';
-
+import {operationsProtos} from 'google-gax';
 const version = require('../../../package.json').version;
 
 /**
@@ -884,6 +884,42 @@ export class IntentsClient {
     this.initialize();
     return this.innerApiCalls.batchUpdateIntents(request, options, callback);
   }
+  /**
+   * Check the status of the long running operation returned by the batchUpdateIntents() method.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *
+   * @example:
+   *   const decodedOperation = await checkBatchUpdateIntentsProgress(name);
+   *   console.log(decodedOperation.result);
+   *   console.log(decodedOperation.done);
+   *   console.log(decodedOperation.metadata);
+   *
+   */
+  async checkBatchUpdateIntentsProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.dialogflow.v2.BatchUpdateIntentsResponse,
+      protos.google.protobuf.Struct
+    >
+  > {
+    const request = new operationsProtos.google.longrunning.GetOperationRequest(
+      {name}
+    );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new gax.Operation(
+      operation,
+      this.descriptors.longrunning.batchUpdateIntents,
+      gax.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.dialogflow.v2.BatchUpdateIntentsResponse,
+      protos.google.protobuf.Struct
+    >;
+  }
   batchDeleteIntents(
     request: protos.google.cloud.dialogflow.v2.IBatchDeleteIntentsRequest,
     options?: gax.CallOptions
@@ -987,6 +1023,39 @@ export class IntentsClient {
     });
     this.initialize();
     return this.innerApiCalls.batchDeleteIntents(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by the batchDeleteIntents() method.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *
+   * @example:
+   *   const decodedOperation = await checkBatchDeleteIntentsProgress(name);
+   *   console.log(decodedOperation.result);
+   *   console.log(decodedOperation.done);
+   *   console.log(decodedOperation.metadata);
+   *
+   */
+  async checkBatchDeleteIntentsProgress(
+    name: string
+  ): Promise<
+    LROperation<protos.google.protobuf.Empty, protos.google.protobuf.Struct>
+  > {
+    const request = new operationsProtos.google.longrunning.GetOperationRequest(
+      {name}
+    );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new gax.Operation(
+      operation,
+      this.descriptors.longrunning.batchDeleteIntents,
+      gax.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.protobuf.Struct
+    >;
   }
   listIntents(
     request: protos.google.cloud.dialogflow.v2.IListIntentsRequest,

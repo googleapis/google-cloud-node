@@ -301,9 +301,7 @@ describe('v2.SessionEntityTypesClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.getSessionEntityType(request);
-      }, expectedError);
+      await assert.rejects(client.getSessionEntityType(request), expectedError);
       assert(
         (client.innerApiCalls.getSessionEntityType as SinonStub)
           .getCall(0)
@@ -417,9 +415,10 @@ describe('v2.SessionEntityTypesClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.createSessionEntityType(request);
-      }, expectedError);
+      await assert.rejects(
+        client.createSessionEntityType(request),
+        expectedError
+      );
       assert(
         (client.innerApiCalls.createSessionEntityType as SinonStub)
           .getCall(0)
@@ -536,9 +535,10 @@ describe('v2.SessionEntityTypesClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.updateSessionEntityType(request);
-      }, expectedError);
+      await assert.rejects(
+        client.updateSessionEntityType(request),
+        expectedError
+      );
       assert(
         (client.innerApiCalls.updateSessionEntityType as SinonStub)
           .getCall(0)
@@ -652,9 +652,10 @@ describe('v2.SessionEntityTypesClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.deleteSessionEntityType(request);
-      }, expectedError);
+      await assert.rejects(
+        client.deleteSessionEntityType(request),
+        expectedError
+      );
       assert(
         (client.innerApiCalls.deleteSessionEntityType as SinonStub)
           .getCall(0)
@@ -786,9 +787,10 @@ describe('v2.SessionEntityTypesClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.listSessionEntityTypes(request);
-      }, expectedError);
+      await assert.rejects(
+        client.listSessionEntityTypes(request),
+        expectedError
+      );
       assert(
         (client.innerApiCalls.listSessionEntityTypes as SinonStub)
           .getCall(0)
@@ -886,9 +888,7 @@ describe('v2.SessionEntityTypesClient', () => {
           reject(err);
         });
       });
-      await assert.rejects(async () => {
-        await promise;
-      }, expectedError);
+      await assert.rejects(promise, expectedError);
       assert(
         (client.descriptors.page.listSessionEntityTypes
           .createStream as SinonStub)

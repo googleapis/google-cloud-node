@@ -297,9 +297,7 @@ describe('v2.ContextsClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.getContext(request);
-      }, expectedError);
+      await assert.rejects(client.getContext(request), expectedError);
       assert(
         (client.innerApiCalls.getContext as SinonStub)
           .getCall(0)
@@ -411,9 +409,7 @@ describe('v2.ContextsClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.createContext(request);
-      }, expectedError);
+      await assert.rejects(client.createContext(request), expectedError);
       assert(
         (client.innerApiCalls.createContext as SinonStub)
           .getCall(0)
@@ -528,9 +524,7 @@ describe('v2.ContextsClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.updateContext(request);
-      }, expectedError);
+      await assert.rejects(client.updateContext(request), expectedError);
       assert(
         (client.innerApiCalls.updateContext as SinonStub)
           .getCall(0)
@@ -642,9 +636,7 @@ describe('v2.ContextsClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.deleteContext(request);
-      }, expectedError);
+      await assert.rejects(client.deleteContext(request), expectedError);
       assert(
         (client.innerApiCalls.deleteContext as SinonStub)
           .getCall(0)
@@ -756,9 +748,7 @@ describe('v2.ContextsClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.deleteAllContexts(request);
-      }, expectedError);
+      await assert.rejects(client.deleteAllContexts(request), expectedError);
       assert(
         (client.innerApiCalls.deleteAllContexts as SinonStub)
           .getCall(0)
@@ -874,9 +864,7 @@ describe('v2.ContextsClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.listContexts(request);
-      }, expectedError);
+      await assert.rejects(client.listContexts(request), expectedError);
       assert(
         (client.innerApiCalls.listContexts as SinonStub)
           .getCall(0)
@@ -967,9 +955,7 @@ describe('v2.ContextsClient', () => {
           reject(err);
         });
       });
-      await assert.rejects(async () => {
-        await promise;
-      }, expectedError);
+      await assert.rejects(promise, expectedError);
       assert(
         (client.descriptors.page.listContexts.createStream as SinonStub)
           .getCall(0)
