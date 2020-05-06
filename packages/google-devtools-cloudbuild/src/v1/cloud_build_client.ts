@@ -32,7 +32,7 @@ import {Transform} from 'stream';
 import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
 import * as gapicConfig from './cloud_build_client_config.json';
-
+import {operationsProtos} from 'google-gax';
 const version = require('../../../package.json').version;
 
 /**
@@ -1462,6 +1462,42 @@ export class CloudBuildClient {
     this.initialize();
     return this.innerApiCalls.createBuild(request, options, callback);
   }
+  /**
+   * Check the status of the long running operation returned by the createBuild() method.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *
+   * @example:
+   *   const decodedOperation = await checkCreateBuildProgress(name);
+   *   console.log(decodedOperation.result);
+   *   console.log(decodedOperation.done);
+   *   console.log(decodedOperation.metadata);
+   *
+   */
+  async checkCreateBuildProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.devtools.cloudbuild.v1.Build,
+      protos.google.devtools.cloudbuild.v1.BuildOperationMetadata
+    >
+  > {
+    const request = new operationsProtos.google.longrunning.GetOperationRequest(
+      {name}
+    );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new gax.Operation(
+      operation,
+      this.descriptors.longrunning.createBuild,
+      gax.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.devtools.cloudbuild.v1.Build,
+      protos.google.devtools.cloudbuild.v1.BuildOperationMetadata
+    >;
+  }
   retryBuild(
     request: protos.google.devtools.cloudbuild.v1.IRetryBuildRequest,
     options?: gax.CallOptions
@@ -1588,6 +1624,42 @@ export class CloudBuildClient {
     this.initialize();
     return this.innerApiCalls.retryBuild(request, options, callback);
   }
+  /**
+   * Check the status of the long running operation returned by the retryBuild() method.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *
+   * @example:
+   *   const decodedOperation = await checkRetryBuildProgress(name);
+   *   console.log(decodedOperation.result);
+   *   console.log(decodedOperation.done);
+   *   console.log(decodedOperation.metadata);
+   *
+   */
+  async checkRetryBuildProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.devtools.cloudbuild.v1.Build,
+      protos.google.devtools.cloudbuild.v1.BuildOperationMetadata
+    >
+  > {
+    const request = new operationsProtos.google.longrunning.GetOperationRequest(
+      {name}
+    );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new gax.Operation(
+      operation,
+      this.descriptors.longrunning.retryBuild,
+      gax.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.devtools.cloudbuild.v1.Build,
+      protos.google.devtools.cloudbuild.v1.BuildOperationMetadata
+    >;
+  }
   runBuildTrigger(
     request: protos.google.devtools.cloudbuild.v1.IRunBuildTriggerRequest,
     options?: gax.CallOptions
@@ -1689,6 +1761,42 @@ export class CloudBuildClient {
     });
     this.initialize();
     return this.innerApiCalls.runBuildTrigger(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by the runBuildTrigger() method.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *
+   * @example:
+   *   const decodedOperation = await checkRunBuildTriggerProgress(name);
+   *   console.log(decodedOperation.result);
+   *   console.log(decodedOperation.done);
+   *   console.log(decodedOperation.metadata);
+   *
+   */
+  async checkRunBuildTriggerProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.devtools.cloudbuild.v1.Build,
+      protos.google.devtools.cloudbuild.v1.BuildOperationMetadata
+    >
+  > {
+    const request = new operationsProtos.google.longrunning.GetOperationRequest(
+      {name}
+    );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new gax.Operation(
+      operation,
+      this.descriptors.longrunning.runBuildTrigger,
+      gax.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.devtools.cloudbuild.v1.Build,
+      protos.google.devtools.cloudbuild.v1.BuildOperationMetadata
+    >;
   }
   listBuilds(
     request: protos.google.devtools.cloudbuild.v1.IListBuildsRequest,

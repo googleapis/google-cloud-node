@@ -25,7 +25,7 @@ import * as cloudbuildModule from '../src';
 
 import {PassThrough} from 'stream';
 
-import {protobuf, LROperation} from 'google-gax';
+import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (instance.constructor as typeof protobuf.Message).toObject(
@@ -326,9 +326,7 @@ describe('v1.CloudBuildClient', () => {
       };
       const expectedError = new Error('expected');
       client.innerApiCalls.getBuild = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(async () => {
-        await client.getBuild(request);
-      }, expectedError);
+      await assert.rejects(client.getBuild(request), expectedError);
       assert(
         (client.innerApiCalls.getBuild as SinonStub)
           .getCall(0)
@@ -440,9 +438,7 @@ describe('v1.CloudBuildClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.cancelBuild(request);
-      }, expectedError);
+      await assert.rejects(client.cancelBuild(request), expectedError);
       assert(
         (client.innerApiCalls.cancelBuild as SinonStub)
           .getCall(0)
@@ -556,9 +552,7 @@ describe('v1.CloudBuildClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.createBuildTrigger(request);
-      }, expectedError);
+      await assert.rejects(client.createBuildTrigger(request), expectedError);
       assert(
         (client.innerApiCalls.createBuildTrigger as SinonStub)
           .getCall(0)
@@ -670,9 +664,7 @@ describe('v1.CloudBuildClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.getBuildTrigger(request);
-      }, expectedError);
+      await assert.rejects(client.getBuildTrigger(request), expectedError);
       assert(
         (client.innerApiCalls.getBuildTrigger as SinonStub)
           .getCall(0)
@@ -786,9 +778,7 @@ describe('v1.CloudBuildClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.deleteBuildTrigger(request);
-      }, expectedError);
+      await assert.rejects(client.deleteBuildTrigger(request), expectedError);
       assert(
         (client.innerApiCalls.deleteBuildTrigger as SinonStub)
           .getCall(0)
@@ -902,9 +892,7 @@ describe('v1.CloudBuildClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.updateBuildTrigger(request);
-      }, expectedError);
+      await assert.rejects(client.updateBuildTrigger(request), expectedError);
       assert(
         (client.innerApiCalls.updateBuildTrigger as SinonStub)
           .getCall(0)
@@ -992,9 +980,7 @@ describe('v1.CloudBuildClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.createWorkerPool(request);
-      }, expectedError);
+      await assert.rejects(client.createWorkerPool(request), expectedError);
       assert(
         (client.innerApiCalls.createWorkerPool as SinonStub)
           .getCall(0)
@@ -1082,9 +1068,7 @@ describe('v1.CloudBuildClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.getWorkerPool(request);
-      }, expectedError);
+      await assert.rejects(client.getWorkerPool(request), expectedError);
       assert(
         (client.innerApiCalls.getWorkerPool as SinonStub)
           .getCall(0)
@@ -1172,9 +1156,7 @@ describe('v1.CloudBuildClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.deleteWorkerPool(request);
-      }, expectedError);
+      await assert.rejects(client.deleteWorkerPool(request), expectedError);
       assert(
         (client.innerApiCalls.deleteWorkerPool as SinonStub)
           .getCall(0)
@@ -1262,9 +1244,7 @@ describe('v1.CloudBuildClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.updateWorkerPool(request);
-      }, expectedError);
+      await assert.rejects(client.updateWorkerPool(request), expectedError);
       assert(
         (client.innerApiCalls.updateWorkerPool as SinonStub)
           .getCall(0)
@@ -1352,9 +1332,7 @@ describe('v1.CloudBuildClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.listWorkerPools(request);
-      }, expectedError);
+      await assert.rejects(client.listWorkerPools(request), expectedError);
       assert(
         (client.innerApiCalls.listWorkerPools as SinonStub)
           .getCall(0)
@@ -1474,9 +1452,7 @@ describe('v1.CloudBuildClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.createBuild(request);
-      }, expectedError);
+      await assert.rejects(client.createBuild(request), expectedError);
       assert(
         (client.innerApiCalls.createBuild as SinonStub)
           .getCall(0)
@@ -1509,14 +1485,50 @@ describe('v1.CloudBuildClient', () => {
         expectedError
       );
       const [operation] = await client.createBuild(request);
-      await assert.rejects(async () => {
-        await operation.promise();
-      }, expectedError);
+      await assert.rejects(operation.promise(), expectedError);
       assert(
         (client.innerApiCalls.createBuild as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes checkCreateBuildProgress without error', async () => {
+      const client = new cloudbuildModule.v1.CloudBuildClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkCreateBuildProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkCreateBuildProgress with error', async () => {
+      const client = new cloudbuildModule.v1.CloudBuildClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.checkCreateBuildProgress(''), expectedError);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
     });
   });
 
@@ -1631,9 +1643,7 @@ describe('v1.CloudBuildClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.retryBuild(request);
-      }, expectedError);
+      await assert.rejects(client.retryBuild(request), expectedError);
       assert(
         (client.innerApiCalls.retryBuild as SinonStub)
           .getCall(0)
@@ -1666,14 +1676,50 @@ describe('v1.CloudBuildClient', () => {
         expectedError
       );
       const [operation] = await client.retryBuild(request);
-      await assert.rejects(async () => {
-        await operation.promise();
-      }, expectedError);
+      await assert.rejects(operation.promise(), expectedError);
       assert(
         (client.innerApiCalls.retryBuild as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes checkRetryBuildProgress without error', async () => {
+      const client = new cloudbuildModule.v1.CloudBuildClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkRetryBuildProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkRetryBuildProgress with error', async () => {
+      const client = new cloudbuildModule.v1.CloudBuildClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.checkRetryBuildProgress(''), expectedError);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
     });
   });
 
@@ -1790,9 +1836,7 @@ describe('v1.CloudBuildClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.runBuildTrigger(request);
-      }, expectedError);
+      await assert.rejects(client.runBuildTrigger(request), expectedError);
       assert(
         (client.innerApiCalls.runBuildTrigger as SinonStub)
           .getCall(0)
@@ -1825,14 +1869,53 @@ describe('v1.CloudBuildClient', () => {
         expectedError
       );
       const [operation] = await client.runBuildTrigger(request);
-      await assert.rejects(async () => {
-        await operation.promise();
-      }, expectedError);
+      await assert.rejects(operation.promise(), expectedError);
       assert(
         (client.innerApiCalls.runBuildTrigger as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes checkRunBuildTriggerProgress without error', async () => {
+      const client = new cloudbuildModule.v1.CloudBuildClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkRunBuildTriggerProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkRunBuildTriggerProgress with error', async () => {
+      const client = new cloudbuildModule.v1.CloudBuildClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkRunBuildTriggerProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
     });
   });
 
@@ -1943,9 +2026,7 @@ describe('v1.CloudBuildClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.listBuilds(request);
-      }, expectedError);
+      await assert.rejects(client.listBuilds(request), expectedError);
       assert(
         (client.innerApiCalls.listBuilds as SinonStub)
           .getCall(0)
@@ -2035,9 +2116,7 @@ describe('v1.CloudBuildClient', () => {
           reject(err);
         });
       });
-      await assert.rejects(async () => {
-        await promise;
-      }, expectedError);
+      await assert.rejects(promise, expectedError);
       assert(
         (client.descriptors.page.listBuilds.createStream as SinonStub)
           .getCall(0)
@@ -2247,9 +2326,7 @@ describe('v1.CloudBuildClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.listBuildTriggers(request);
-      }, expectedError);
+      await assert.rejects(client.listBuildTriggers(request), expectedError);
       assert(
         (client.innerApiCalls.listBuildTriggers as SinonStub)
           .getCall(0)
@@ -2346,9 +2423,7 @@ describe('v1.CloudBuildClient', () => {
           reject(err);
         });
       });
-      await assert.rejects(async () => {
-        await promise;
-      }, expectedError);
+      await assert.rejects(promise, expectedError);
       assert(
         (client.descriptors.page.listBuildTriggers.createStream as SinonStub)
           .getCall(0)
