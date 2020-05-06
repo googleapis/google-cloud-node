@@ -299,9 +299,7 @@ describe('v1beta1.BudgetServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.createBudget(request);
-      }, expectedError);
+      await assert.rejects(client.createBudget(request), expectedError);
       assert(
         (client.innerApiCalls.createBudget as SinonStub)
           .getCall(0)
@@ -416,9 +414,7 @@ describe('v1beta1.BudgetServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.updateBudget(request);
-      }, expectedError);
+      await assert.rejects(client.updateBudget(request), expectedError);
       assert(
         (client.innerApiCalls.updateBudget as SinonStub)
           .getCall(0)
@@ -527,9 +523,7 @@ describe('v1beta1.BudgetServiceClient', () => {
       };
       const expectedError = new Error('expected');
       client.innerApiCalls.getBudget = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(async () => {
-        await client.getBudget(request);
-      }, expectedError);
+      await assert.rejects(client.getBudget(request), expectedError);
       assert(
         (client.innerApiCalls.getBudget as SinonStub)
           .getCall(0)
@@ -641,9 +635,7 @@ describe('v1beta1.BudgetServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.deleteBudget(request);
-      }, expectedError);
+      await assert.rejects(client.deleteBudget(request), expectedError);
       assert(
         (client.innerApiCalls.deleteBudget as SinonStub)
           .getCall(0)
@@ -773,9 +765,7 @@ describe('v1beta1.BudgetServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.listBudgets(request);
-      }, expectedError);
+      await assert.rejects(client.listBudgets(request), expectedError);
       assert(
         (client.innerApiCalls.listBudgets as SinonStub)
           .getCall(0)
@@ -871,9 +861,7 @@ describe('v1beta1.BudgetServiceClient', () => {
           reject(err);
         });
       });
-      await assert.rejects(async () => {
-        await promise;
-      }, expectedError);
+      await assert.rejects(promise, expectedError);
       assert(
         (client.descriptors.page.listBudgets.createStream as SinonStub)
           .getCall(0)
