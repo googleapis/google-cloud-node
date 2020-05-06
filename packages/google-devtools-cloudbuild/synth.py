@@ -27,19 +27,20 @@ AUTOSYNTH_MULTIPLE_COMMITS = True
 gapic = gcp.GAPICMicrogenerator()
 versions = ['v1']
 for version in versions:
-  library = gapic.typescript_library(
-    'cloudbuild',
-    generator_args={
-      "grpc-service-config": "google/devtools/cloudbuild/v1/cloudbuild_grpc_service_config.json",
-      "package-name": "@google-cloud/cloudbuild"
-    },
-    proto_path='/google/devtools/cloudbuild/v1',
-    version=version)
+    library = gapic.typescript_library(
+        'cloudbuild',
+        generator_args={
+            "grpc-service-config": "google/devtools/cloudbuild/v1/cloudbuild_grpc_service_config.json",
+            "package-name": "@google-cloud/cloudbuild"
+        },
+        proto_path='/google/devtools/cloudbuild/v1',
+        version=version)
 s.copy(library, excludes=['README.md', 'package.json'])
 
 # Copy common templates
 common_templates = gcp.CommonTemplates()
-templates = common_templates.node_library(source_location='build/src')
+templates = common_templates.node_library(
+    source_location='build/src', versions=versions, default_version='v1')
 s.copy(templates, excludes=[])
 
 node.postprocess_gapic_library()
