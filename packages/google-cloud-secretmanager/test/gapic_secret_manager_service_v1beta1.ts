@@ -316,9 +316,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.createSecret(request);
-      }, expectedError);
+      await assert.rejects(client.createSecret(request), expectedError);
       assert(
         (client.innerApiCalls.createSecret as SinonStub)
           .getCall(0)
@@ -436,9 +434,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.addSecretVersion(request);
-      }, expectedError);
+      await assert.rejects(client.addSecretVersion(request), expectedError);
       assert(
         (client.innerApiCalls.addSecretVersion as SinonStub)
           .getCall(0)
@@ -553,9 +549,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
       };
       const expectedError = new Error('expected');
       client.innerApiCalls.getSecret = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(async () => {
-        await client.getSecret(request);
-      }, expectedError);
+      await assert.rejects(client.getSecret(request), expectedError);
       assert(
         (client.innerApiCalls.getSecret as SinonStub)
           .getCall(0)
@@ -676,9 +670,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.updateSecret(request);
-      }, expectedError);
+      await assert.rejects(client.updateSecret(request), expectedError);
       assert(
         (client.innerApiCalls.updateSecret as SinonStub)
           .getCall(0)
@@ -796,9 +788,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.deleteSecret(request);
-      }, expectedError);
+      await assert.rejects(client.deleteSecret(request), expectedError);
       assert(
         (client.innerApiCalls.deleteSecret as SinonStub)
           .getCall(0)
@@ -916,9 +906,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.getSecretVersion(request);
-      }, expectedError);
+      await assert.rejects(client.getSecretVersion(request), expectedError);
       assert(
         (client.innerApiCalls.getSecretVersion as SinonStub)
           .getCall(0)
@@ -1038,9 +1026,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.accessSecretVersion(request);
-      }, expectedError);
+      await assert.rejects(client.accessSecretVersion(request), expectedError);
       assert(
         (client.innerApiCalls.accessSecretVersion as SinonStub)
           .getCall(0)
@@ -1160,9 +1146,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.disableSecretVersion(request);
-      }, expectedError);
+      await assert.rejects(client.disableSecretVersion(request), expectedError);
       assert(
         (client.innerApiCalls.disableSecretVersion as SinonStub)
           .getCall(0)
@@ -1282,9 +1266,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.enableSecretVersion(request);
-      }, expectedError);
+      await assert.rejects(client.enableSecretVersion(request), expectedError);
       assert(
         (client.innerApiCalls.enableSecretVersion as SinonStub)
           .getCall(0)
@@ -1404,9 +1386,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.destroySecretVersion(request);
-      }, expectedError);
+      await assert.rejects(client.destroySecretVersion(request), expectedError);
       assert(
         (client.innerApiCalls.destroySecretVersion as SinonStub)
           .getCall(0)
@@ -1524,9 +1504,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.setIamPolicy(request);
-      }, expectedError);
+      await assert.rejects(client.setIamPolicy(request), expectedError);
       assert(
         (client.innerApiCalls.setIamPolicy as SinonStub)
           .getCall(0)
@@ -1644,9 +1622,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.getIamPolicy(request);
-      }, expectedError);
+      await assert.rejects(client.getIamPolicy(request), expectedError);
       assert(
         (client.innerApiCalls.getIamPolicy as SinonStub)
           .getCall(0)
@@ -1766,9 +1742,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.testIamPermissions(request);
-      }, expectedError);
+      await assert.rejects(client.testIamPermissions(request), expectedError);
       assert(
         (client.innerApiCalls.testIamPermissions as SinonStub)
           .getCall(0)
@@ -1890,9 +1864,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.listSecrets(request);
-      }, expectedError);
+      await assert.rejects(client.listSecrets(request), expectedError);
       assert(
         (client.innerApiCalls.listSecrets as SinonStub)
           .getCall(0)
@@ -1986,9 +1958,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
           reject(err);
         });
       });
-      await assert.rejects(async () => {
-        await promise;
-      }, expectedError);
+      await assert.rejects(promise, expectedError);
       assert(
         (client.descriptors.page.listSecrets.createStream as SinonStub)
           .getCall(0)
@@ -2210,9 +2180,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.listSecretVersions(request);
-      }, expectedError);
+      await assert.rejects(client.listSecretVersions(request), expectedError);
       assert(
         (client.innerApiCalls.listSecretVersions as SinonStub)
           .getCall(0)
@@ -2313,9 +2281,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
           reject(err);
         });
       });
-      await assert.rejects(async () => {
-        await promise;
-      }, expectedError);
+      await assert.rejects(promise, expectedError);
       assert(
         (client.descriptors.page.listSecretVersions.createStream as SinonStub)
           .getCall(0)
