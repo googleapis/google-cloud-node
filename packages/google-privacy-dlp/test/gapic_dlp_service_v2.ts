@@ -297,9 +297,7 @@ describe('v2.DlpServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.inspectContent(request);
-      }, expectedError);
+      await assert.rejects(client.inspectContent(request), expectedError);
       assert(
         (client.innerApiCalls.inspectContent as SinonStub)
           .getCall(0)
@@ -411,9 +409,7 @@ describe('v2.DlpServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.redactImage(request);
-      }, expectedError);
+      await assert.rejects(client.redactImage(request), expectedError);
       assert(
         (client.innerApiCalls.redactImage as SinonStub)
           .getCall(0)
@@ -525,9 +521,7 @@ describe('v2.DlpServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.deidentifyContent(request);
-      }, expectedError);
+      await assert.rejects(client.deidentifyContent(request), expectedError);
       assert(
         (client.innerApiCalls.deidentifyContent as SinonStub)
           .getCall(0)
@@ -639,9 +633,7 @@ describe('v2.DlpServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.reidentifyContent(request);
-      }, expectedError);
+      await assert.rejects(client.reidentifyContent(request), expectedError);
       assert(
         (client.innerApiCalls.reidentifyContent as SinonStub)
           .getCall(0)
@@ -753,9 +745,7 @@ describe('v2.DlpServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.listInfoTypes(request);
-      }, expectedError);
+      await assert.rejects(client.listInfoTypes(request), expectedError);
       assert(
         (client.innerApiCalls.listInfoTypes as SinonStub)
           .getCall(0)
@@ -869,9 +859,10 @@ describe('v2.DlpServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.createInspectTemplate(request);
-      }, expectedError);
+      await assert.rejects(
+        client.createInspectTemplate(request),
+        expectedError
+      );
       assert(
         (client.innerApiCalls.createInspectTemplate as SinonStub)
           .getCall(0)
@@ -985,9 +976,10 @@ describe('v2.DlpServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.updateInspectTemplate(request);
-      }, expectedError);
+      await assert.rejects(
+        client.updateInspectTemplate(request),
+        expectedError
+      );
       assert(
         (client.innerApiCalls.updateInspectTemplate as SinonStub)
           .getCall(0)
@@ -1101,9 +1093,7 @@ describe('v2.DlpServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.getInspectTemplate(request);
-      }, expectedError);
+      await assert.rejects(client.getInspectTemplate(request), expectedError);
       assert(
         (client.innerApiCalls.getInspectTemplate as SinonStub)
           .getCall(0)
@@ -1217,9 +1207,10 @@ describe('v2.DlpServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.deleteInspectTemplate(request);
-      }, expectedError);
+      await assert.rejects(
+        client.deleteInspectTemplate(request),
+        expectedError
+      );
       assert(
         (client.innerApiCalls.deleteInspectTemplate as SinonStub)
           .getCall(0)
@@ -1333,9 +1324,10 @@ describe('v2.DlpServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.createDeidentifyTemplate(request);
-      }, expectedError);
+      await assert.rejects(
+        client.createDeidentifyTemplate(request),
+        expectedError
+      );
       assert(
         (client.innerApiCalls.createDeidentifyTemplate as SinonStub)
           .getCall(0)
@@ -1449,9 +1441,10 @@ describe('v2.DlpServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.updateDeidentifyTemplate(request);
-      }, expectedError);
+      await assert.rejects(
+        client.updateDeidentifyTemplate(request),
+        expectedError
+      );
       assert(
         (client.innerApiCalls.updateDeidentifyTemplate as SinonStub)
           .getCall(0)
@@ -1565,9 +1558,10 @@ describe('v2.DlpServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.getDeidentifyTemplate(request);
-      }, expectedError);
+      await assert.rejects(
+        client.getDeidentifyTemplate(request),
+        expectedError
+      );
       assert(
         (client.innerApiCalls.getDeidentifyTemplate as SinonStub)
           .getCall(0)
@@ -1681,9 +1675,10 @@ describe('v2.DlpServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.deleteDeidentifyTemplate(request);
-      }, expectedError);
+      await assert.rejects(
+        client.deleteDeidentifyTemplate(request),
+        expectedError
+      );
       assert(
         (client.innerApiCalls.deleteDeidentifyTemplate as SinonStub)
           .getCall(0)
@@ -1795,9 +1790,7 @@ describe('v2.DlpServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.createJobTrigger(request);
-      }, expectedError);
+      await assert.rejects(client.createJobTrigger(request), expectedError);
       assert(
         (client.innerApiCalls.createJobTrigger as SinonStub)
           .getCall(0)
@@ -1909,9 +1902,7 @@ describe('v2.DlpServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.updateJobTrigger(request);
-      }, expectedError);
+      await assert.rejects(client.updateJobTrigger(request), expectedError);
       assert(
         (client.innerApiCalls.updateJobTrigger as SinonStub)
           .getCall(0)
@@ -2025,9 +2016,10 @@ describe('v2.DlpServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.hybridInspectJobTrigger(request);
-      }, expectedError);
+      await assert.rejects(
+        client.hybridInspectJobTrigger(request),
+        expectedError
+      );
       assert(
         (client.innerApiCalls.hybridInspectJobTrigger as SinonStub)
           .getCall(0)
@@ -2139,9 +2131,7 @@ describe('v2.DlpServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.getJobTrigger(request);
-      }, expectedError);
+      await assert.rejects(client.getJobTrigger(request), expectedError);
       assert(
         (client.innerApiCalls.getJobTrigger as SinonStub)
           .getCall(0)
@@ -2253,9 +2243,7 @@ describe('v2.DlpServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.deleteJobTrigger(request);
-      }, expectedError);
+      await assert.rejects(client.deleteJobTrigger(request), expectedError);
       assert(
         (client.innerApiCalls.deleteJobTrigger as SinonStub)
           .getCall(0)
@@ -2369,9 +2357,7 @@ describe('v2.DlpServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.activateJobTrigger(request);
-      }, expectedError);
+      await assert.rejects(client.activateJobTrigger(request), expectedError);
       assert(
         (client.innerApiCalls.activateJobTrigger as SinonStub)
           .getCall(0)
@@ -2483,9 +2469,7 @@ describe('v2.DlpServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.createDlpJob(request);
-      }, expectedError);
+      await assert.rejects(client.createDlpJob(request), expectedError);
       assert(
         (client.innerApiCalls.createDlpJob as SinonStub)
           .getCall(0)
@@ -2594,9 +2578,7 @@ describe('v2.DlpServiceClient', () => {
       };
       const expectedError = new Error('expected');
       client.innerApiCalls.getDlpJob = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(async () => {
-        await client.getDlpJob(request);
-      }, expectedError);
+      await assert.rejects(client.getDlpJob(request), expectedError);
       assert(
         (client.innerApiCalls.getDlpJob as SinonStub)
           .getCall(0)
@@ -2708,9 +2690,7 @@ describe('v2.DlpServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.deleteDlpJob(request);
-      }, expectedError);
+      await assert.rejects(client.deleteDlpJob(request), expectedError);
       assert(
         (client.innerApiCalls.deleteDlpJob as SinonStub)
           .getCall(0)
@@ -2822,9 +2802,7 @@ describe('v2.DlpServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.cancelDlpJob(request);
-      }, expectedError);
+      await assert.rejects(client.cancelDlpJob(request), expectedError);
       assert(
         (client.innerApiCalls.cancelDlpJob as SinonStub)
           .getCall(0)
@@ -2938,9 +2916,7 @@ describe('v2.DlpServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.createStoredInfoType(request);
-      }, expectedError);
+      await assert.rejects(client.createStoredInfoType(request), expectedError);
       assert(
         (client.innerApiCalls.createStoredInfoType as SinonStub)
           .getCall(0)
@@ -3054,9 +3030,7 @@ describe('v2.DlpServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.updateStoredInfoType(request);
-      }, expectedError);
+      await assert.rejects(client.updateStoredInfoType(request), expectedError);
       assert(
         (client.innerApiCalls.updateStoredInfoType as SinonStub)
           .getCall(0)
@@ -3168,9 +3142,7 @@ describe('v2.DlpServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.getStoredInfoType(request);
-      }, expectedError);
+      await assert.rejects(client.getStoredInfoType(request), expectedError);
       assert(
         (client.innerApiCalls.getStoredInfoType as SinonStub)
           .getCall(0)
@@ -3284,9 +3256,7 @@ describe('v2.DlpServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.deleteStoredInfoType(request);
-      }, expectedError);
+      await assert.rejects(client.deleteStoredInfoType(request), expectedError);
       assert(
         (client.innerApiCalls.deleteStoredInfoType as SinonStub)
           .getCall(0)
@@ -3400,9 +3370,7 @@ describe('v2.DlpServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.hybridInspectDlpJob(request);
-      }, expectedError);
+      await assert.rejects(client.hybridInspectDlpJob(request), expectedError);
       assert(
         (client.innerApiCalls.hybridInspectDlpJob as SinonStub)
           .getCall(0)
@@ -3514,9 +3482,7 @@ describe('v2.DlpServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.finishDlpJob(request);
-      }, expectedError);
+      await assert.rejects(client.finishDlpJob(request), expectedError);
       assert(
         (client.innerApiCalls.finishDlpJob as SinonStub)
           .getCall(0)
@@ -3646,9 +3612,7 @@ describe('v2.DlpServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.listInspectTemplates(request);
-      }, expectedError);
+      await assert.rejects(client.listInspectTemplates(request), expectedError);
       assert(
         (client.innerApiCalls.listInspectTemplates as SinonStub)
           .getCall(0)
@@ -3745,9 +3709,7 @@ describe('v2.DlpServiceClient', () => {
           reject(err);
         });
       });
-      await assert.rejects(async () => {
-        await promise;
-      }, expectedError);
+      await assert.rejects(promise, expectedError);
       assert(
         (client.descriptors.page.listInspectTemplates.createStream as SinonStub)
           .getCall(0)
@@ -3966,9 +3928,10 @@ describe('v2.DlpServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.listDeidentifyTemplates(request);
-      }, expectedError);
+      await assert.rejects(
+        client.listDeidentifyTemplates(request),
+        expectedError
+      );
       assert(
         (client.innerApiCalls.listDeidentifyTemplates as SinonStub)
           .getCall(0)
@@ -4066,9 +4029,7 @@ describe('v2.DlpServiceClient', () => {
           reject(err);
         });
       });
-      await assert.rejects(async () => {
-        await promise;
-      }, expectedError);
+      await assert.rejects(promise, expectedError);
       assert(
         (client.descriptors.page.listDeidentifyTemplates
           .createStream as SinonStub)
@@ -4274,9 +4235,7 @@ describe('v2.DlpServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.listJobTriggers(request);
-      }, expectedError);
+      await assert.rejects(client.listJobTriggers(request), expectedError);
       assert(
         (client.innerApiCalls.listJobTriggers as SinonStub)
           .getCall(0)
@@ -4367,9 +4326,7 @@ describe('v2.DlpServiceClient', () => {
           reject(err);
         });
       });
-      await assert.rejects(async () => {
-        await promise;
-      }, expectedError);
+      await assert.rejects(promise, expectedError);
       assert(
         (client.descriptors.page.listJobTriggers.createStream as SinonStub)
           .getCall(0)
@@ -4568,9 +4525,7 @@ describe('v2.DlpServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.listDlpJobs(request);
-      }, expectedError);
+      await assert.rejects(client.listDlpJobs(request), expectedError);
       assert(
         (client.innerApiCalls.listDlpJobs as SinonStub)
           .getCall(0)
@@ -4654,9 +4609,7 @@ describe('v2.DlpServiceClient', () => {
           reject(err);
         });
       });
-      await assert.rejects(async () => {
-        await promise;
-      }, expectedError);
+      await assert.rejects(promise, expectedError);
       assert(
         (client.descriptors.page.listDlpJobs.createStream as SinonStub)
           .getCall(0)
@@ -4868,9 +4821,7 @@ describe('v2.DlpServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.listStoredInfoTypes(request);
-      }, expectedError);
+      await assert.rejects(client.listStoredInfoTypes(request), expectedError);
       assert(
         (client.innerApiCalls.listStoredInfoTypes as SinonStub)
           .getCall(0)
@@ -4967,9 +4918,7 @@ describe('v2.DlpServiceClient', () => {
           reject(err);
         });
       });
-      await assert.rejects(async () => {
-        await promise;
-      }, expectedError);
+      await assert.rejects(promise, expectedError);
       assert(
         (client.descriptors.page.listStoredInfoTypes.createStream as SinonStub)
           .getCall(0)
