@@ -18,7 +18,9 @@
     "system-test": "mocha build/system-test",
     "docs-test": "linkinator docs",
     "predocs-test": "npm run docs",
-    "prelint": "cd samples; npm link ../; npm i"
+    "prelint": "cd samples; npm link ../; npm install",
+    "clean": "gts clean",
+    "precompile": "gts clean"
   },
   "keywords": [],
   "files": [
