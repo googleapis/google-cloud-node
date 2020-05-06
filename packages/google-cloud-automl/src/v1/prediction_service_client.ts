@@ -28,7 +28,7 @@ import * as path from 'path';
 
 import * as protos from '../../protos/protos';
 import * as gapicConfig from './prediction_service_client_config.json';
-
+import {operationsProtos} from 'google-gax';
 const version = require('../../../package.json').version;
 
 /**
@@ -678,6 +678,42 @@ export class PredictionServiceClient {
     });
     this.initialize();
     return this.innerApiCalls.batchPredict(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by the batchPredict() method.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *
+   * @example:
+   *   const decodedOperation = await checkBatchPredictProgress(name);
+   *   console.log(decodedOperation.result);
+   *   console.log(decodedOperation.done);
+   *   console.log(decodedOperation.metadata);
+   *
+   */
+  async checkBatchPredictProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.automl.v1.BatchPredictResult,
+      protos.google.cloud.automl.v1.OperationMetadata
+    >
+  > {
+    const request = new operationsProtos.google.longrunning.GetOperationRequest(
+      {name}
+    );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new gax.Operation(
+      operation,
+      this.descriptors.longrunning.batchPredict,
+      gax.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.automl.v1.BatchPredictResult,
+      protos.google.cloud.automl.v1.OperationMetadata
+    >;
   }
   // --------------------
   // -- Path templates --

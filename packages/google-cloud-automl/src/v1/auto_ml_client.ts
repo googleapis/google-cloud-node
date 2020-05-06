@@ -32,7 +32,7 @@ import {Transform} from 'stream';
 import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
 import * as gapicConfig from './auto_ml_client_config.json';
-
+import {operationsProtos} from 'google-gax';
 const version = require('../../../package.json').version;
 
 /**
@@ -1074,6 +1074,42 @@ export class AutoMlClient {
     this.initialize();
     return this.innerApiCalls.createDataset(request, options, callback);
   }
+  /**
+   * Check the status of the long running operation returned by the createDataset() method.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *
+   * @example:
+   *   const decodedOperation = await checkCreateDatasetProgress(name);
+   *   console.log(decodedOperation.result);
+   *   console.log(decodedOperation.done);
+   *   console.log(decodedOperation.metadata);
+   *
+   */
+  async checkCreateDatasetProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.automl.v1.Dataset,
+      protos.google.cloud.automl.v1.OperationMetadata
+    >
+  > {
+    const request = new operationsProtos.google.longrunning.GetOperationRequest(
+      {name}
+    );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new gax.Operation(
+      operation,
+      this.descriptors.longrunning.createDataset,
+      gax.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.automl.v1.Dataset,
+      protos.google.cloud.automl.v1.OperationMetadata
+    >;
+  }
   deleteDataset(
     request: protos.google.cloud.automl.v1.IDeleteDatasetRequest,
     options?: gax.CallOptions
@@ -1175,6 +1211,42 @@ export class AutoMlClient {
     });
     this.initialize();
     return this.innerApiCalls.deleteDataset(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by the deleteDataset() method.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *
+   * @example:
+   *   const decodedOperation = await checkDeleteDatasetProgress(name);
+   *   console.log(decodedOperation.result);
+   *   console.log(decodedOperation.done);
+   *   console.log(decodedOperation.metadata);
+   *
+   */
+  async checkDeleteDatasetProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.automl.v1.OperationMetadata
+    >
+  > {
+    const request = new operationsProtos.google.longrunning.GetOperationRequest(
+      {name}
+    );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new gax.Operation(
+      operation,
+      this.descriptors.longrunning.deleteDataset,
+      gax.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.automl.v1.OperationMetadata
+    >;
   }
   importData(
     request: protos.google.cloud.automl.v1.IImportDataRequest,
@@ -1286,6 +1358,42 @@ export class AutoMlClient {
     this.initialize();
     return this.innerApiCalls.importData(request, options, callback);
   }
+  /**
+   * Check the status of the long running operation returned by the importData() method.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *
+   * @example:
+   *   const decodedOperation = await checkImportDataProgress(name);
+   *   console.log(decodedOperation.result);
+   *   console.log(decodedOperation.done);
+   *   console.log(decodedOperation.metadata);
+   *
+   */
+  async checkImportDataProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.automl.v1.OperationMetadata
+    >
+  > {
+    const request = new operationsProtos.google.longrunning.GetOperationRequest(
+      {name}
+    );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new gax.Operation(
+      operation,
+      this.descriptors.longrunning.importData,
+      gax.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.automl.v1.OperationMetadata
+    >;
+  }
   exportData(
     request: protos.google.cloud.automl.v1.IExportDataRequest,
     options?: gax.CallOptions
@@ -1387,6 +1495,42 @@ export class AutoMlClient {
     });
     this.initialize();
     return this.innerApiCalls.exportData(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by the exportData() method.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *
+   * @example:
+   *   const decodedOperation = await checkExportDataProgress(name);
+   *   console.log(decodedOperation.result);
+   *   console.log(decodedOperation.done);
+   *   console.log(decodedOperation.metadata);
+   *
+   */
+  async checkExportDataProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.automl.v1.OperationMetadata
+    >
+  > {
+    const request = new operationsProtos.google.longrunning.GetOperationRequest(
+      {name}
+    );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new gax.Operation(
+      operation,
+      this.descriptors.longrunning.exportData,
+      gax.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.automl.v1.OperationMetadata
+    >;
   }
   createModel(
     request: protos.google.cloud.automl.v1.ICreateModelRequest,
@@ -1492,6 +1636,42 @@ export class AutoMlClient {
     this.initialize();
     return this.innerApiCalls.createModel(request, options, callback);
   }
+  /**
+   * Check the status of the long running operation returned by the createModel() method.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *
+   * @example:
+   *   const decodedOperation = await checkCreateModelProgress(name);
+   *   console.log(decodedOperation.result);
+   *   console.log(decodedOperation.done);
+   *   console.log(decodedOperation.metadata);
+   *
+   */
+  async checkCreateModelProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.automl.v1.Model,
+      protos.google.cloud.automl.v1.OperationMetadata
+    >
+  > {
+    const request = new operationsProtos.google.longrunning.GetOperationRequest(
+      {name}
+    );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new gax.Operation(
+      operation,
+      this.descriptors.longrunning.createModel,
+      gax.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.automl.v1.Model,
+      protos.google.cloud.automl.v1.OperationMetadata
+    >;
+  }
   deleteModel(
     request: protos.google.cloud.automl.v1.IDeleteModelRequest,
     options?: gax.CallOptions
@@ -1593,6 +1773,42 @@ export class AutoMlClient {
     });
     this.initialize();
     return this.innerApiCalls.deleteModel(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by the deleteModel() method.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *
+   * @example:
+   *   const decodedOperation = await checkDeleteModelProgress(name);
+   *   console.log(decodedOperation.result);
+   *   console.log(decodedOperation.done);
+   *   console.log(decodedOperation.metadata);
+   *
+   */
+  async checkDeleteModelProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.automl.v1.OperationMetadata
+    >
+  > {
+    const request = new operationsProtos.google.longrunning.GetOperationRequest(
+      {name}
+    );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new gax.Operation(
+      operation,
+      this.descriptors.longrunning.deleteModel,
+      gax.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.automl.v1.OperationMetadata
+    >;
   }
   deployModel(
     request: protos.google.cloud.automl.v1.IDeployModelRequest,
@@ -1707,6 +1923,42 @@ export class AutoMlClient {
     this.initialize();
     return this.innerApiCalls.deployModel(request, options, callback);
   }
+  /**
+   * Check the status of the long running operation returned by the deployModel() method.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *
+   * @example:
+   *   const decodedOperation = await checkDeployModelProgress(name);
+   *   console.log(decodedOperation.result);
+   *   console.log(decodedOperation.done);
+   *   console.log(decodedOperation.metadata);
+   *
+   */
+  async checkDeployModelProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.automl.v1.OperationMetadata
+    >
+  > {
+    const request = new operationsProtos.google.longrunning.GetOperationRequest(
+      {name}
+    );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new gax.Operation(
+      operation,
+      this.descriptors.longrunning.deployModel,
+      gax.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.automl.v1.OperationMetadata
+    >;
+  }
   undeployModel(
     request: protos.google.cloud.automl.v1.IUndeployModelRequest,
     options?: gax.CallOptions
@@ -1810,6 +2062,42 @@ export class AutoMlClient {
     });
     this.initialize();
     return this.innerApiCalls.undeployModel(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by the undeployModel() method.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *
+   * @example:
+   *   const decodedOperation = await checkUndeployModelProgress(name);
+   *   console.log(decodedOperation.result);
+   *   console.log(decodedOperation.done);
+   *   console.log(decodedOperation.metadata);
+   *
+   */
+  async checkUndeployModelProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.automl.v1.OperationMetadata
+    >
+  > {
+    const request = new operationsProtos.google.longrunning.GetOperationRequest(
+      {name}
+    );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new gax.Operation(
+      operation,
+      this.descriptors.longrunning.undeployModel,
+      gax.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.automl.v1.OperationMetadata
+    >;
   }
   exportModel(
     request: protos.google.cloud.automl.v1.IExportModelRequest,
@@ -1916,6 +2204,42 @@ export class AutoMlClient {
     });
     this.initialize();
     return this.innerApiCalls.exportModel(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by the exportModel() method.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *
+   * @example:
+   *   const decodedOperation = await checkExportModelProgress(name);
+   *   console.log(decodedOperation.result);
+   *   console.log(decodedOperation.done);
+   *   console.log(decodedOperation.metadata);
+   *
+   */
+  async checkExportModelProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.automl.v1.OperationMetadata
+    >
+  > {
+    const request = new operationsProtos.google.longrunning.GetOperationRequest(
+      {name}
+    );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new gax.Operation(
+      operation,
+      this.descriptors.longrunning.exportModel,
+      gax.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.automl.v1.OperationMetadata
+    >;
   }
   listDatasets(
     request: protos.google.cloud.automl.v1.IListDatasetsRequest,

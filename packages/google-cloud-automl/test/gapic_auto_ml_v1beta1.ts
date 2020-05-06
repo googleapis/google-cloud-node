@@ -25,7 +25,7 @@ import * as automlModule from '../src';
 
 import {PassThrough} from 'stream';
 
-import {protobuf, LROperation} from 'google-gax';
+import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (instance.constructor as typeof protobuf.Message).toObject(
@@ -329,9 +329,7 @@ describe('v1beta1.AutoMlClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.createDataset(request);
-      }, expectedError);
+      await assert.rejects(client.createDataset(request), expectedError);
       assert(
         (client.innerApiCalls.createDataset as SinonStub)
           .getCall(0)
@@ -443,9 +441,7 @@ describe('v1beta1.AutoMlClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.getDataset(request);
-      }, expectedError);
+      await assert.rejects(client.getDataset(request), expectedError);
       assert(
         (client.innerApiCalls.getDataset as SinonStub)
           .getCall(0)
@@ -560,9 +556,7 @@ describe('v1beta1.AutoMlClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.updateDataset(request);
-      }, expectedError);
+      await assert.rejects(client.updateDataset(request), expectedError);
       assert(
         (client.innerApiCalls.updateDataset as SinonStub)
           .getCall(0)
@@ -674,9 +668,7 @@ describe('v1beta1.AutoMlClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.getAnnotationSpec(request);
-      }, expectedError);
+      await assert.rejects(client.getAnnotationSpec(request), expectedError);
       assert(
         (client.innerApiCalls.getAnnotationSpec as SinonStub)
           .getCall(0)
@@ -788,9 +780,7 @@ describe('v1beta1.AutoMlClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.getTableSpec(request);
-      }, expectedError);
+      await assert.rejects(client.getTableSpec(request), expectedError);
       assert(
         (client.innerApiCalls.getTableSpec as SinonStub)
           .getCall(0)
@@ -905,9 +895,7 @@ describe('v1beta1.AutoMlClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.updateTableSpec(request);
-      }, expectedError);
+      await assert.rejects(client.updateTableSpec(request), expectedError);
       assert(
         (client.innerApiCalls.updateTableSpec as SinonStub)
           .getCall(0)
@@ -1019,9 +1007,7 @@ describe('v1beta1.AutoMlClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.getColumnSpec(request);
-      }, expectedError);
+      await assert.rejects(client.getColumnSpec(request), expectedError);
       assert(
         (client.innerApiCalls.getColumnSpec as SinonStub)
           .getCall(0)
@@ -1136,9 +1122,7 @@ describe('v1beta1.AutoMlClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.updateColumnSpec(request);
-      }, expectedError);
+      await assert.rejects(client.updateColumnSpec(request), expectedError);
       assert(
         (client.innerApiCalls.updateColumnSpec as SinonStub)
           .getCall(0)
@@ -1247,9 +1231,7 @@ describe('v1beta1.AutoMlClient', () => {
       };
       const expectedError = new Error('expected');
       client.innerApiCalls.getModel = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(async () => {
-        await client.getModel(request);
-      }, expectedError);
+      await assert.rejects(client.getModel(request), expectedError);
       assert(
         (client.innerApiCalls.getModel as SinonStub)
           .getCall(0)
@@ -1363,9 +1345,7 @@ describe('v1beta1.AutoMlClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.getModelEvaluation(request);
-      }, expectedError);
+      await assert.rejects(client.getModelEvaluation(request), expectedError);
       assert(
         (client.innerApiCalls.getModelEvaluation as SinonStub)
           .getCall(0)
@@ -1487,9 +1467,7 @@ describe('v1beta1.AutoMlClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.deleteDataset(request);
-      }, expectedError);
+      await assert.rejects(client.deleteDataset(request), expectedError);
       assert(
         (client.innerApiCalls.deleteDataset as SinonStub)
           .getCall(0)
@@ -1522,14 +1500,53 @@ describe('v1beta1.AutoMlClient', () => {
         expectedError
       );
       const [operation] = await client.deleteDataset(request);
-      await assert.rejects(async () => {
-        await operation.promise();
-      }, expectedError);
+      await assert.rejects(operation.promise(), expectedError);
       assert(
         (client.innerApiCalls.deleteDataset as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes checkDeleteDatasetProgress without error', async () => {
+      const client = new automlModule.v1beta1.AutoMlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkDeleteDatasetProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkDeleteDatasetProgress with error', async () => {
+      const client = new automlModule.v1beta1.AutoMlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkDeleteDatasetProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
     });
   });
 
@@ -1644,9 +1661,7 @@ describe('v1beta1.AutoMlClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.importData(request);
-      }, expectedError);
+      await assert.rejects(client.importData(request), expectedError);
       assert(
         (client.innerApiCalls.importData as SinonStub)
           .getCall(0)
@@ -1679,14 +1694,50 @@ describe('v1beta1.AutoMlClient', () => {
         expectedError
       );
       const [operation] = await client.importData(request);
-      await assert.rejects(async () => {
-        await operation.promise();
-      }, expectedError);
+      await assert.rejects(operation.promise(), expectedError);
       assert(
         (client.innerApiCalls.importData as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes checkImportDataProgress without error', async () => {
+      const client = new automlModule.v1beta1.AutoMlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkImportDataProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkImportDataProgress with error', async () => {
+      const client = new automlModule.v1beta1.AutoMlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.checkImportDataProgress(''), expectedError);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
     });
   });
 
@@ -1801,9 +1852,7 @@ describe('v1beta1.AutoMlClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.exportData(request);
-      }, expectedError);
+      await assert.rejects(client.exportData(request), expectedError);
       assert(
         (client.innerApiCalls.exportData as SinonStub)
           .getCall(0)
@@ -1836,14 +1885,50 @@ describe('v1beta1.AutoMlClient', () => {
         expectedError
       );
       const [operation] = await client.exportData(request);
-      await assert.rejects(async () => {
-        await operation.promise();
-      }, expectedError);
+      await assert.rejects(operation.promise(), expectedError);
       assert(
         (client.innerApiCalls.exportData as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes checkExportDataProgress without error', async () => {
+      const client = new automlModule.v1beta1.AutoMlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkExportDataProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkExportDataProgress with error', async () => {
+      const client = new automlModule.v1beta1.AutoMlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.checkExportDataProgress(''), expectedError);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
     });
   });
 
@@ -1958,9 +2043,7 @@ describe('v1beta1.AutoMlClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.createModel(request);
-      }, expectedError);
+      await assert.rejects(client.createModel(request), expectedError);
       assert(
         (client.innerApiCalls.createModel as SinonStub)
           .getCall(0)
@@ -1993,14 +2076,50 @@ describe('v1beta1.AutoMlClient', () => {
         expectedError
       );
       const [operation] = await client.createModel(request);
-      await assert.rejects(async () => {
-        await operation.promise();
-      }, expectedError);
+      await assert.rejects(operation.promise(), expectedError);
       assert(
         (client.innerApiCalls.createModel as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes checkCreateModelProgress without error', async () => {
+      const client = new automlModule.v1beta1.AutoMlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkCreateModelProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkCreateModelProgress with error', async () => {
+      const client = new automlModule.v1beta1.AutoMlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.checkCreateModelProgress(''), expectedError);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
     });
   });
 
@@ -2115,9 +2234,7 @@ describe('v1beta1.AutoMlClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.deleteModel(request);
-      }, expectedError);
+      await assert.rejects(client.deleteModel(request), expectedError);
       assert(
         (client.innerApiCalls.deleteModel as SinonStub)
           .getCall(0)
@@ -2150,14 +2267,50 @@ describe('v1beta1.AutoMlClient', () => {
         expectedError
       );
       const [operation] = await client.deleteModel(request);
-      await assert.rejects(async () => {
-        await operation.promise();
-      }, expectedError);
+      await assert.rejects(operation.promise(), expectedError);
       assert(
         (client.innerApiCalls.deleteModel as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes checkDeleteModelProgress without error', async () => {
+      const client = new automlModule.v1beta1.AutoMlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkDeleteModelProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkDeleteModelProgress with error', async () => {
+      const client = new automlModule.v1beta1.AutoMlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.checkDeleteModelProgress(''), expectedError);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
     });
   });
 
@@ -2272,9 +2425,7 @@ describe('v1beta1.AutoMlClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.deployModel(request);
-      }, expectedError);
+      await assert.rejects(client.deployModel(request), expectedError);
       assert(
         (client.innerApiCalls.deployModel as SinonStub)
           .getCall(0)
@@ -2307,14 +2458,50 @@ describe('v1beta1.AutoMlClient', () => {
         expectedError
       );
       const [operation] = await client.deployModel(request);
-      await assert.rejects(async () => {
-        await operation.promise();
-      }, expectedError);
+      await assert.rejects(operation.promise(), expectedError);
       assert(
         (client.innerApiCalls.deployModel as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes checkDeployModelProgress without error', async () => {
+      const client = new automlModule.v1beta1.AutoMlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkDeployModelProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkDeployModelProgress with error', async () => {
+      const client = new automlModule.v1beta1.AutoMlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.checkDeployModelProgress(''), expectedError);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
     });
   });
 
@@ -2431,9 +2618,7 @@ describe('v1beta1.AutoMlClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.undeployModel(request);
-      }, expectedError);
+      await assert.rejects(client.undeployModel(request), expectedError);
       assert(
         (client.innerApiCalls.undeployModel as SinonStub)
           .getCall(0)
@@ -2466,14 +2651,53 @@ describe('v1beta1.AutoMlClient', () => {
         expectedError
       );
       const [operation] = await client.undeployModel(request);
-      await assert.rejects(async () => {
-        await operation.promise();
-      }, expectedError);
+      await assert.rejects(operation.promise(), expectedError);
       assert(
         (client.innerApiCalls.undeployModel as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes checkUndeployModelProgress without error', async () => {
+      const client = new automlModule.v1beta1.AutoMlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkUndeployModelProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkUndeployModelProgress with error', async () => {
+      const client = new automlModule.v1beta1.AutoMlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkUndeployModelProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
     });
   });
 
@@ -2588,9 +2812,7 @@ describe('v1beta1.AutoMlClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.exportModel(request);
-      }, expectedError);
+      await assert.rejects(client.exportModel(request), expectedError);
       assert(
         (client.innerApiCalls.exportModel as SinonStub)
           .getCall(0)
@@ -2623,14 +2845,50 @@ describe('v1beta1.AutoMlClient', () => {
         expectedError
       );
       const [operation] = await client.exportModel(request);
-      await assert.rejects(async () => {
-        await operation.promise();
-      }, expectedError);
+      await assert.rejects(operation.promise(), expectedError);
       assert(
         (client.innerApiCalls.exportModel as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes checkExportModelProgress without error', async () => {
+      const client = new automlModule.v1beta1.AutoMlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkExportModelProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkExportModelProgress with error', async () => {
+      const client = new automlModule.v1beta1.AutoMlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.checkExportModelProgress(''), expectedError);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
     });
   });
 
@@ -2747,9 +3005,10 @@ describe('v1beta1.AutoMlClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.exportEvaluatedExamples(request);
-      }, expectedError);
+      await assert.rejects(
+        client.exportEvaluatedExamples(request),
+        expectedError
+      );
       assert(
         (client.innerApiCalls.exportEvaluatedExamples as SinonStub)
           .getCall(0)
@@ -2782,14 +3041,53 @@ describe('v1beta1.AutoMlClient', () => {
         expectedError
       );
       const [operation] = await client.exportEvaluatedExamples(request);
-      await assert.rejects(async () => {
-        await operation.promise();
-      }, expectedError);
+      await assert.rejects(operation.promise(), expectedError);
       assert(
         (client.innerApiCalls.exportEvaluatedExamples as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes checkExportEvaluatedExamplesProgress without error', async () => {
+      const client = new automlModule.v1beta1.AutoMlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkExportEvaluatedExamplesProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkExportEvaluatedExamplesProgress with error', async () => {
+      const client = new automlModule.v1beta1.AutoMlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkExportEvaluatedExamplesProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
     });
   });
 
@@ -2900,9 +3198,7 @@ describe('v1beta1.AutoMlClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.listDatasets(request);
-      }, expectedError);
+      await assert.rejects(client.listDatasets(request), expectedError);
       assert(
         (client.innerApiCalls.listDatasets as SinonStub)
           .getCall(0)
@@ -2993,9 +3289,7 @@ describe('v1beta1.AutoMlClient', () => {
           reject(err);
         });
       });
-      await assert.rejects(async () => {
-        await promise;
-      }, expectedError);
+      await assert.rejects(promise, expectedError);
       assert(
         (client.descriptors.page.listDatasets.createStream as SinonStub)
           .getCall(0)
@@ -3206,9 +3500,7 @@ describe('v1beta1.AutoMlClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.listTableSpecs(request);
-      }, expectedError);
+      await assert.rejects(client.listTableSpecs(request), expectedError);
       assert(
         (client.innerApiCalls.listTableSpecs as SinonStub)
           .getCall(0)
@@ -3305,9 +3597,7 @@ describe('v1beta1.AutoMlClient', () => {
           reject(err);
         });
       });
-      await assert.rejects(async () => {
-        await promise;
-      }, expectedError);
+      await assert.rejects(promise, expectedError);
       assert(
         (client.descriptors.page.listTableSpecs.createStream as SinonStub)
           .getCall(0)
@@ -3524,9 +3814,7 @@ describe('v1beta1.AutoMlClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.listColumnSpecs(request);
-      }, expectedError);
+      await assert.rejects(client.listColumnSpecs(request), expectedError);
       assert(
         (client.innerApiCalls.listColumnSpecs as SinonStub)
           .getCall(0)
@@ -3623,9 +3911,7 @@ describe('v1beta1.AutoMlClient', () => {
           reject(err);
         });
       });
-      await assert.rejects(async () => {
-        await promise;
-      }, expectedError);
+      await assert.rejects(promise, expectedError);
       assert(
         (client.descriptors.page.listColumnSpecs.createStream as SinonStub)
           .getCall(0)
@@ -3830,9 +4116,7 @@ describe('v1beta1.AutoMlClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.listModels(request);
-      }, expectedError);
+      await assert.rejects(client.listModels(request), expectedError);
       assert(
         (client.innerApiCalls.listModels as SinonStub)
           .getCall(0)
@@ -3922,9 +4206,7 @@ describe('v1beta1.AutoMlClient', () => {
           reject(err);
         });
       });
-      await assert.rejects(async () => {
-        await promise;
-      }, expectedError);
+      await assert.rejects(promise, expectedError);
       assert(
         (client.descriptors.page.listModels.createStream as SinonStub)
           .getCall(0)
@@ -4138,9 +4420,7 @@ describe('v1beta1.AutoMlClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.listModelEvaluations(request);
-      }, expectedError);
+      await assert.rejects(client.listModelEvaluations(request), expectedError);
       assert(
         (client.innerApiCalls.listModelEvaluations as SinonStub)
           .getCall(0)
@@ -4237,9 +4517,7 @@ describe('v1beta1.AutoMlClient', () => {
           reject(err);
         });
       });
-      await assert.rejects(async () => {
-        await promise;
-      }, expectedError);
+      await assert.rejects(promise, expectedError);
       assert(
         (client.descriptors.page.listModelEvaluations.createStream as SinonStub)
           .getCall(0)
