@@ -25,7 +25,7 @@ import * as realmsserviceModule from '../src';
 
 import {PassThrough} from 'stream';
 
-import {protobuf, LROperation} from 'google-gax';
+import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (instance.constructor as typeof protobuf.Message).toObject(
@@ -328,9 +328,7 @@ describe('v1beta.RealmsServiceClient', () => {
       };
       const expectedError = new Error('expected');
       client.innerApiCalls.getRealm = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(async () => {
-        await client.getRealm(request);
-      }, expectedError);
+      await assert.rejects(client.getRealm(request), expectedError);
       assert(
         (client.innerApiCalls.getRealm as SinonStub)
           .getCall(0)
@@ -447,9 +445,7 @@ describe('v1beta.RealmsServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.previewRealmUpdate(request);
-      }, expectedError);
+      await assert.rejects(client.previewRealmUpdate(request), expectedError);
       assert(
         (client.innerApiCalls.previewRealmUpdate as SinonStub)
           .getCall(0)
@@ -569,9 +565,7 @@ describe('v1beta.RealmsServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.createRealm(request);
-      }, expectedError);
+      await assert.rejects(client.createRealm(request), expectedError);
       assert(
         (client.innerApiCalls.createRealm as SinonStub)
           .getCall(0)
@@ -604,14 +598,50 @@ describe('v1beta.RealmsServiceClient', () => {
         expectedError
       );
       const [operation] = await client.createRealm(request);
-      await assert.rejects(async () => {
-        await operation.promise();
-      }, expectedError);
+      await assert.rejects(operation.promise(), expectedError);
       assert(
         (client.innerApiCalls.createRealm as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes checkCreateRealmProgress without error', async () => {
+      const client = new realmsserviceModule.v1beta.RealmsServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkCreateRealmProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkCreateRealmProgress with error', async () => {
+      const client = new realmsserviceModule.v1beta.RealmsServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.checkCreateRealmProgress(''), expectedError);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
     });
   });
 
@@ -726,9 +756,7 @@ describe('v1beta.RealmsServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.deleteRealm(request);
-      }, expectedError);
+      await assert.rejects(client.deleteRealm(request), expectedError);
       assert(
         (client.innerApiCalls.deleteRealm as SinonStub)
           .getCall(0)
@@ -761,14 +789,50 @@ describe('v1beta.RealmsServiceClient', () => {
         expectedError
       );
       const [operation] = await client.deleteRealm(request);
-      await assert.rejects(async () => {
-        await operation.promise();
-      }, expectedError);
+      await assert.rejects(operation.promise(), expectedError);
       assert(
         (client.innerApiCalls.deleteRealm as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes checkDeleteRealmProgress without error', async () => {
+      const client = new realmsserviceModule.v1beta.RealmsServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkDeleteRealmProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkDeleteRealmProgress with error', async () => {
+      const client = new realmsserviceModule.v1beta.RealmsServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.checkDeleteRealmProgress(''), expectedError);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
     });
   });
 
@@ -886,9 +950,7 @@ describe('v1beta.RealmsServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.updateRealm(request);
-      }, expectedError);
+      await assert.rejects(client.updateRealm(request), expectedError);
       assert(
         (client.innerApiCalls.updateRealm as SinonStub)
           .getCall(0)
@@ -922,14 +984,50 @@ describe('v1beta.RealmsServiceClient', () => {
         expectedError
       );
       const [operation] = await client.updateRealm(request);
-      await assert.rejects(async () => {
-        await operation.promise();
-      }, expectedError);
+      await assert.rejects(operation.promise(), expectedError);
       assert(
         (client.innerApiCalls.updateRealm as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes checkUpdateRealmProgress without error', async () => {
+      const client = new realmsserviceModule.v1beta.RealmsServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkUpdateRealmProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkUpdateRealmProgress with error', async () => {
+      const client = new realmsserviceModule.v1beta.RealmsServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.checkUpdateRealmProgress(''), expectedError);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
     });
   });
 
@@ -1040,9 +1138,7 @@ describe('v1beta.RealmsServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.listRealms(request);
-      }, expectedError);
+      await assert.rejects(client.listRealms(request), expectedError);
       assert(
         (client.innerApiCalls.listRealms as SinonStub)
           .getCall(0)
@@ -1132,9 +1228,7 @@ describe('v1beta.RealmsServiceClient', () => {
           reject(err);
         });
       });
-      await assert.rejects(async () => {
-        await promise;
-      }, expectedError);
+      await assert.rejects(promise, expectedError);
       assert(
         (client.descriptors.page.listRealms.createStream as SinonStub)
           .getCall(0)

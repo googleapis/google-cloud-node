@@ -32,7 +32,7 @@ import {Transform} from 'stream';
 import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
 import * as gapicConfig from './game_server_configs_service_client_config.json';
-
+import {operationsProtos} from 'google-gax';
 const version = require('../../../package.json').version;
 
 /**
@@ -569,6 +569,42 @@ export class GameServerConfigsServiceClient {
       callback
     );
   }
+  /**
+   * Check the status of the long running operation returned by the createGameServerConfig() method.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *
+   * @example:
+   *   const decodedOperation = await checkCreateGameServerConfigProgress(name);
+   *   console.log(decodedOperation.result);
+   *   console.log(decodedOperation.done);
+   *   console.log(decodedOperation.metadata);
+   *
+   */
+  async checkCreateGameServerConfigProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.gaming.v1beta.GameServerConfig,
+      protos.google.cloud.gaming.v1beta.OperationMetadata
+    >
+  > {
+    const request = new operationsProtos.google.longrunning.GetOperationRequest(
+      {name}
+    );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new gax.Operation(
+      operation,
+      this.descriptors.longrunning.createGameServerConfig,
+      gax.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.gaming.v1beta.GameServerConfig,
+      protos.google.cloud.gaming.v1beta.OperationMetadata
+    >;
+  }
   deleteGameServerConfig(
     request: protos.google.cloud.gaming.v1beta.IDeleteGameServerConfigRequest,
     options?: gax.CallOptions
@@ -673,6 +709,42 @@ export class GameServerConfigsServiceClient {
       options,
       callback
     );
+  }
+  /**
+   * Check the status of the long running operation returned by the deleteGameServerConfig() method.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *
+   * @example:
+   *   const decodedOperation = await checkDeleteGameServerConfigProgress(name);
+   *   console.log(decodedOperation.result);
+   *   console.log(decodedOperation.done);
+   *   console.log(decodedOperation.metadata);
+   *
+   */
+  async checkDeleteGameServerConfigProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.gaming.v1beta.GameServerConfig,
+      protos.google.cloud.gaming.v1beta.OperationMetadata
+    >
+  > {
+    const request = new operationsProtos.google.longrunning.GetOperationRequest(
+      {name}
+    );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new gax.Operation(
+      operation,
+      this.descriptors.longrunning.deleteGameServerConfig,
+      gax.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.gaming.v1beta.GameServerConfig,
+      protos.google.cloud.gaming.v1beta.OperationMetadata
+    >;
   }
   listGameServerConfigs(
     request: protos.google.cloud.gaming.v1beta.IListGameServerConfigsRequest,

@@ -32,7 +32,7 @@ import {Transform} from 'stream';
 import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
 import * as gapicConfig from './game_server_clusters_service_client_config.json';
-
+import {operationsProtos} from 'google-gax';
 const version = require('../../../package.json').version;
 
 /**
@@ -907,6 +907,42 @@ export class GameServerClustersServiceClient {
       callback
     );
   }
+  /**
+   * Check the status of the long running operation returned by the createGameServerCluster() method.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *
+   * @example:
+   *   const decodedOperation = await checkCreateGameServerClusterProgress(name);
+   *   console.log(decodedOperation.result);
+   *   console.log(decodedOperation.done);
+   *   console.log(decodedOperation.metadata);
+   *
+   */
+  async checkCreateGameServerClusterProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.gaming.v1beta.GameServerCluster,
+      protos.google.cloud.gaming.v1beta.OperationMetadata
+    >
+  > {
+    const request = new operationsProtos.google.longrunning.GetOperationRequest(
+      {name}
+    );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new gax.Operation(
+      operation,
+      this.descriptors.longrunning.createGameServerCluster,
+      gax.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.gaming.v1beta.GameServerCluster,
+      protos.google.cloud.gaming.v1beta.OperationMetadata
+    >;
+  }
   deleteGameServerCluster(
     request: protos.google.cloud.gaming.v1beta.IDeleteGameServerClusterRequest,
     options?: gax.CallOptions
@@ -1009,6 +1045,42 @@ export class GameServerClustersServiceClient {
       options,
       callback
     );
+  }
+  /**
+   * Check the status of the long running operation returned by the deleteGameServerCluster() method.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *
+   * @example:
+   *   const decodedOperation = await checkDeleteGameServerClusterProgress(name);
+   *   console.log(decodedOperation.result);
+   *   console.log(decodedOperation.done);
+   *   console.log(decodedOperation.metadata);
+   *
+   */
+  async checkDeleteGameServerClusterProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.gaming.v1beta.GameServerCluster,
+      protos.google.cloud.gaming.v1beta.OperationMetadata
+    >
+  > {
+    const request = new operationsProtos.google.longrunning.GetOperationRequest(
+      {name}
+    );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new gax.Operation(
+      operation,
+      this.descriptors.longrunning.deleteGameServerCluster,
+      gax.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.gaming.v1beta.GameServerCluster,
+      protos.google.cloud.gaming.v1beta.OperationMetadata
+    >;
   }
   updateGameServerCluster(
     request: protos.google.cloud.gaming.v1beta.IUpdateGameServerClusterRequest,
@@ -1119,6 +1191,42 @@ export class GameServerClustersServiceClient {
       options,
       callback
     );
+  }
+  /**
+   * Check the status of the long running operation returned by the updateGameServerCluster() method.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *
+   * @example:
+   *   const decodedOperation = await checkUpdateGameServerClusterProgress(name);
+   *   console.log(decodedOperation.result);
+   *   console.log(decodedOperation.done);
+   *   console.log(decodedOperation.metadata);
+   *
+   */
+  async checkUpdateGameServerClusterProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.gaming.v1beta.GameServerCluster,
+      protos.google.cloud.gaming.v1beta.OperationMetadata
+    >
+  > {
+    const request = new operationsProtos.google.longrunning.GetOperationRequest(
+      {name}
+    );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new gax.Operation(
+      operation,
+      this.descriptors.longrunning.updateGameServerCluster,
+      gax.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.gaming.v1beta.GameServerCluster,
+      protos.google.cloud.gaming.v1beta.OperationMetadata
+    >;
   }
   listGameServerClusters(
     request: protos.google.cloud.gaming.v1beta.IListGameServerClustersRequest,

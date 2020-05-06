@@ -25,7 +25,7 @@ import * as gameserverclustersserviceModule from '../src';
 
 import {PassThrough} from 'stream';
 
-import {protobuf, LROperation} from 'google-gax';
+import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (instance.constructor as typeof protobuf.Message).toObject(
@@ -353,9 +353,7 @@ describe('v1beta.GameServerClustersServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.getGameServerCluster(request);
-      }, expectedError);
+      await assert.rejects(client.getGameServerCluster(request), expectedError);
       assert(
         (client.innerApiCalls.getGameServerCluster as SinonStub)
           .getCall(0)
@@ -475,9 +473,10 @@ describe('v1beta.GameServerClustersServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.previewCreateGameServerCluster(request);
-      }, expectedError);
+      await assert.rejects(
+        client.previewCreateGameServerCluster(request),
+        expectedError
+      );
       assert(
         (client.innerApiCalls.previewCreateGameServerCluster as SinonStub)
           .getCall(0)
@@ -597,9 +596,10 @@ describe('v1beta.GameServerClustersServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.previewDeleteGameServerCluster(request);
-      }, expectedError);
+      await assert.rejects(
+        client.previewDeleteGameServerCluster(request),
+        expectedError
+      );
       assert(
         (client.innerApiCalls.previewDeleteGameServerCluster as SinonStub)
           .getCall(0)
@@ -722,9 +722,10 @@ describe('v1beta.GameServerClustersServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.previewUpdateGameServerCluster(request);
-      }, expectedError);
+      await assert.rejects(
+        client.previewUpdateGameServerCluster(request),
+        expectedError
+      );
       assert(
         (client.innerApiCalls.previewUpdateGameServerCluster as SinonStub)
           .getCall(0)
@@ -852,9 +853,10 @@ describe('v1beta.GameServerClustersServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.createGameServerCluster(request);
-      }, expectedError);
+      await assert.rejects(
+        client.createGameServerCluster(request),
+        expectedError
+      );
       assert(
         (client.innerApiCalls.createGameServerCluster as SinonStub)
           .getCall(0)
@@ -889,14 +891,57 @@ describe('v1beta.GameServerClustersServiceClient', () => {
         expectedError
       );
       const [operation] = await client.createGameServerCluster(request);
-      await assert.rejects(async () => {
-        await operation.promise();
-      }, expectedError);
+      await assert.rejects(operation.promise(), expectedError);
       assert(
         (client.innerApiCalls.createGameServerCluster as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes checkCreateGameServerClusterProgress without error', async () => {
+      const client = new gameserverclustersserviceModule.v1beta.GameServerClustersServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkCreateGameServerClusterProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkCreateGameServerClusterProgress with error', async () => {
+      const client = new gameserverclustersserviceModule.v1beta.GameServerClustersServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkCreateGameServerClusterProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
     });
   });
 
@@ -1019,9 +1064,10 @@ describe('v1beta.GameServerClustersServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.deleteGameServerCluster(request);
-      }, expectedError);
+      await assert.rejects(
+        client.deleteGameServerCluster(request),
+        expectedError
+      );
       assert(
         (client.innerApiCalls.deleteGameServerCluster as SinonStub)
           .getCall(0)
@@ -1056,14 +1102,57 @@ describe('v1beta.GameServerClustersServiceClient', () => {
         expectedError
       );
       const [operation] = await client.deleteGameServerCluster(request);
-      await assert.rejects(async () => {
-        await operation.promise();
-      }, expectedError);
+      await assert.rejects(operation.promise(), expectedError);
       assert(
         (client.innerApiCalls.deleteGameServerCluster as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes checkDeleteGameServerClusterProgress without error', async () => {
+      const client = new gameserverclustersserviceModule.v1beta.GameServerClustersServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkDeleteGameServerClusterProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkDeleteGameServerClusterProgress with error', async () => {
+      const client = new gameserverclustersserviceModule.v1beta.GameServerClustersServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkDeleteGameServerClusterProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
     });
   });
 
@@ -1189,9 +1278,10 @@ describe('v1beta.GameServerClustersServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.updateGameServerCluster(request);
-      }, expectedError);
+      await assert.rejects(
+        client.updateGameServerCluster(request),
+        expectedError
+      );
       assert(
         (client.innerApiCalls.updateGameServerCluster as SinonStub)
           .getCall(0)
@@ -1227,14 +1317,57 @@ describe('v1beta.GameServerClustersServiceClient', () => {
         expectedError
       );
       const [operation] = await client.updateGameServerCluster(request);
-      await assert.rejects(async () => {
-        await operation.promise();
-      }, expectedError);
+      await assert.rejects(operation.promise(), expectedError);
       assert(
         (client.innerApiCalls.updateGameServerCluster as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes checkUpdateGameServerClusterProgress without error', async () => {
+      const client = new gameserverclustersserviceModule.v1beta.GameServerClustersServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkUpdateGameServerClusterProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkUpdateGameServerClusterProgress with error', async () => {
+      const client = new gameserverclustersserviceModule.v1beta.GameServerClustersServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkUpdateGameServerClusterProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
     });
   });
 
@@ -1367,9 +1500,10 @@ describe('v1beta.GameServerClustersServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.listGameServerClusters(request);
-      }, expectedError);
+      await assert.rejects(
+        client.listGameServerClusters(request),
+        expectedError
+      );
       assert(
         (client.innerApiCalls.listGameServerClusters as SinonStub)
           .getCall(0)
@@ -1471,9 +1605,7 @@ describe('v1beta.GameServerClustersServiceClient', () => {
           reject(err);
         });
       });
-      await assert.rejects(async () => {
-        await promise;
-      }, expectedError);
+      await assert.rejects(promise, expectedError);
       assert(
         (client.descriptors.page.listGameServerClusters
           .createStream as SinonStub)

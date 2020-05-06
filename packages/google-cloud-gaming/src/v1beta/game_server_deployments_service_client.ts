@@ -32,7 +32,7 @@ import {Transform} from 'stream';
 import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
 import * as gapicConfig from './game_server_deployments_service_client_config.json';
-
+import {operationsProtos} from 'google-gax';
 const version = require('../../../package.json').version;
 
 /**
@@ -920,6 +920,42 @@ export class GameServerDeploymentsServiceClient {
       callback
     );
   }
+  /**
+   * Check the status of the long running operation returned by the createGameServerDeployment() method.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *
+   * @example:
+   *   const decodedOperation = await checkCreateGameServerDeploymentProgress(name);
+   *   console.log(decodedOperation.result);
+   *   console.log(decodedOperation.done);
+   *   console.log(decodedOperation.metadata);
+   *
+   */
+  async checkCreateGameServerDeploymentProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.gaming.v1beta.GameServerDeployment,
+      protos.google.cloud.gaming.v1beta.OperationMetadata
+    >
+  > {
+    const request = new operationsProtos.google.longrunning.GetOperationRequest(
+      {name}
+    );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new gax.Operation(
+      operation,
+      this.descriptors.longrunning.createGameServerDeployment,
+      gax.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.gaming.v1beta.GameServerDeployment,
+      protos.google.cloud.gaming.v1beta.OperationMetadata
+    >;
+  }
   deleteGameServerDeployment(
     request: protos.google.cloud.gaming.v1beta.IDeleteGameServerDeploymentRequest,
     options?: gax.CallOptions
@@ -1023,6 +1059,42 @@ export class GameServerDeploymentsServiceClient {
       options,
       callback
     );
+  }
+  /**
+   * Check the status of the long running operation returned by the deleteGameServerDeployment() method.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *
+   * @example:
+   *   const decodedOperation = await checkDeleteGameServerDeploymentProgress(name);
+   *   console.log(decodedOperation.result);
+   *   console.log(decodedOperation.done);
+   *   console.log(decodedOperation.metadata);
+   *
+   */
+  async checkDeleteGameServerDeploymentProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.gaming.v1beta.GameServerDeployment,
+      protos.google.cloud.gaming.v1beta.OperationMetadata
+    >
+  > {
+    const request = new operationsProtos.google.longrunning.GetOperationRequest(
+      {name}
+    );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new gax.Operation(
+      operation,
+      this.descriptors.longrunning.deleteGameServerDeployment,
+      gax.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.gaming.v1beta.GameServerDeployment,
+      protos.google.cloud.gaming.v1beta.OperationMetadata
+    >;
   }
   updateGameServerDeployment(
     request: protos.google.cloud.gaming.v1beta.IUpdateGameServerDeploymentRequest,
@@ -1134,6 +1206,42 @@ export class GameServerDeploymentsServiceClient {
       callback
     );
   }
+  /**
+   * Check the status of the long running operation returned by the updateGameServerDeployment() method.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *
+   * @example:
+   *   const decodedOperation = await checkUpdateGameServerDeploymentProgress(name);
+   *   console.log(decodedOperation.result);
+   *   console.log(decodedOperation.done);
+   *   console.log(decodedOperation.metadata);
+   *
+   */
+  async checkUpdateGameServerDeploymentProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.gaming.v1beta.GameServerDeployment,
+      protos.google.cloud.gaming.v1beta.OperationMetadata
+    >
+  > {
+    const request = new operationsProtos.google.longrunning.GetOperationRequest(
+      {name}
+    );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new gax.Operation(
+      operation,
+      this.descriptors.longrunning.updateGameServerDeployment,
+      gax.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.gaming.v1beta.GameServerDeployment,
+      protos.google.cloud.gaming.v1beta.OperationMetadata
+    >;
+  }
   updateGameServerDeploymentRollout(
     request: protos.google.cloud.gaming.v1beta.IUpdateGameServerDeploymentRolloutRequest,
     options?: gax.CallOptions
@@ -1172,6 +1280,11 @@ export class GameServerDeploymentsServiceClient {
   ): void;
   /**
    * Patches a single Game Server Deployment Rollout.
+   * The method will not return an error if the update does not affect any
+   * existing realms. For example - if the default_game_server_config is changed
+   * but all existing realms use the override, that is valid. Similarly, if a
+   * non existing realm is explicitly called out in game_server_config_overrides
+   * field, that will also not result in an error.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1243,6 +1356,42 @@ export class GameServerDeploymentsServiceClient {
       options,
       callback
     );
+  }
+  /**
+   * Check the status of the long running operation returned by the updateGameServerDeploymentRollout() method.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *
+   * @example:
+   *   const decodedOperation = await checkUpdateGameServerDeploymentRolloutProgress(name);
+   *   console.log(decodedOperation.result);
+   *   console.log(decodedOperation.done);
+   *   console.log(decodedOperation.metadata);
+   *
+   */
+  async checkUpdateGameServerDeploymentRolloutProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.gaming.v1beta.GameServerDeployment,
+      protos.google.cloud.gaming.v1beta.OperationMetadata
+    >
+  > {
+    const request = new operationsProtos.google.longrunning.GetOperationRequest(
+      {name}
+    );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new gax.Operation(
+      operation,
+      this.descriptors.longrunning.updateGameServerDeploymentRollout,
+      gax.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.gaming.v1beta.GameServerDeployment,
+      protos.google.cloud.gaming.v1beta.OperationMetadata
+    >;
   }
   listGameServerDeployments(
     request: protos.google.cloud.gaming.v1beta.IListGameServerDeploymentsRequest,

@@ -25,7 +25,7 @@ import * as gameserverconfigsserviceModule from '../src';
 
 import {PassThrough} from 'stream';
 
-import {protobuf, LROperation} from 'google-gax';
+import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (instance.constructor as typeof protobuf.Message).toObject(
@@ -352,9 +352,7 @@ describe('v1beta.GameServerConfigsServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.getGameServerConfig(request);
-      }, expectedError);
+      await assert.rejects(client.getGameServerConfig(request), expectedError);
       assert(
         (client.innerApiCalls.getGameServerConfig as SinonStub)
           .getCall(0)
@@ -482,9 +480,10 @@ describe('v1beta.GameServerConfigsServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.createGameServerConfig(request);
-      }, expectedError);
+      await assert.rejects(
+        client.createGameServerConfig(request),
+        expectedError
+      );
       assert(
         (client.innerApiCalls.createGameServerConfig as SinonStub)
           .getCall(0)
@@ -519,14 +518,57 @@ describe('v1beta.GameServerConfigsServiceClient', () => {
         expectedError
       );
       const [operation] = await client.createGameServerConfig(request);
-      await assert.rejects(async () => {
-        await operation.promise();
-      }, expectedError);
+      await assert.rejects(operation.promise(), expectedError);
       assert(
         (client.innerApiCalls.createGameServerConfig as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes checkCreateGameServerConfigProgress without error', async () => {
+      const client = new gameserverconfigsserviceModule.v1beta.GameServerConfigsServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkCreateGameServerConfigProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkCreateGameServerConfigProgress with error', async () => {
+      const client = new gameserverconfigsserviceModule.v1beta.GameServerConfigsServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkCreateGameServerConfigProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
     });
   });
 
@@ -649,9 +691,10 @@ describe('v1beta.GameServerConfigsServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.deleteGameServerConfig(request);
-      }, expectedError);
+      await assert.rejects(
+        client.deleteGameServerConfig(request),
+        expectedError
+      );
       assert(
         (client.innerApiCalls.deleteGameServerConfig as SinonStub)
           .getCall(0)
@@ -686,14 +729,57 @@ describe('v1beta.GameServerConfigsServiceClient', () => {
         expectedError
       );
       const [operation] = await client.deleteGameServerConfig(request);
-      await assert.rejects(async () => {
-        await operation.promise();
-      }, expectedError);
+      await assert.rejects(operation.promise(), expectedError);
       assert(
         (client.innerApiCalls.deleteGameServerConfig as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes checkDeleteGameServerConfigProgress without error', async () => {
+      const client = new gameserverconfigsserviceModule.v1beta.GameServerConfigsServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkDeleteGameServerConfigProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkDeleteGameServerConfigProgress with error', async () => {
+      const client = new gameserverconfigsserviceModule.v1beta.GameServerConfigsServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkDeleteGameServerConfigProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
     });
   });
 
@@ -826,9 +912,10 @@ describe('v1beta.GameServerConfigsServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.listGameServerConfigs(request);
-      }, expectedError);
+      await assert.rejects(
+        client.listGameServerConfigs(request),
+        expectedError
+      );
       assert(
         (client.innerApiCalls.listGameServerConfigs as SinonStub)
           .getCall(0)
@@ -930,9 +1017,7 @@ describe('v1beta.GameServerConfigsServiceClient', () => {
           reject(err);
         });
       });
-      await assert.rejects(async () => {
-        await promise;
-      }, expectedError);
+      await assert.rejects(promise, expectedError);
       assert(
         (client.descriptors.page.listGameServerConfigs
           .createStream as SinonStub)

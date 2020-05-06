@@ -25,7 +25,7 @@ import * as gameserverdeploymentsserviceModule from '../src';
 
 import {PassThrough} from 'stream';
 
-import {protobuf, LROperation} from 'google-gax';
+import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (instance.constructor as typeof protobuf.Message).toObject(
@@ -353,9 +353,10 @@ describe('v1beta.GameServerDeploymentsServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.getGameServerDeployment(request);
-      }, expectedError);
+      await assert.rejects(
+        client.getGameServerDeployment(request),
+        expectedError
+      );
       assert(
         (client.innerApiCalls.getGameServerDeployment as SinonStub)
           .getCall(0)
@@ -475,9 +476,10 @@ describe('v1beta.GameServerDeploymentsServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.getGameServerDeploymentRollout(request);
-      }, expectedError);
+      await assert.rejects(
+        client.getGameServerDeploymentRollout(request),
+        expectedError
+      );
       assert(
         (client.innerApiCalls.getGameServerDeploymentRollout as SinonStub)
           .getCall(0)
@@ -602,9 +604,10 @@ describe('v1beta.GameServerDeploymentsServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.previewGameServerDeploymentRollout(request);
-      }, expectedError);
+      await assert.rejects(
+        client.previewGameServerDeploymentRollout(request),
+        expectedError
+      );
       assert(
         (client.innerApiCalls.previewGameServerDeploymentRollout as SinonStub)
           .getCall(0)
@@ -724,9 +727,7 @@ describe('v1beta.GameServerDeploymentsServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.fetchDeploymentState(request);
-      }, expectedError);
+      await assert.rejects(client.fetchDeploymentState(request), expectedError);
       assert(
         (client.innerApiCalls.fetchDeploymentState as SinonStub)
           .getCall(0)
@@ -854,9 +855,10 @@ describe('v1beta.GameServerDeploymentsServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.createGameServerDeployment(request);
-      }, expectedError);
+      await assert.rejects(
+        client.createGameServerDeployment(request),
+        expectedError
+      );
       assert(
         (client.innerApiCalls.createGameServerDeployment as SinonStub)
           .getCall(0)
@@ -891,14 +893,57 @@ describe('v1beta.GameServerDeploymentsServiceClient', () => {
         expectedError
       );
       const [operation] = await client.createGameServerDeployment(request);
-      await assert.rejects(async () => {
-        await operation.promise();
-      }, expectedError);
+      await assert.rejects(operation.promise(), expectedError);
       assert(
         (client.innerApiCalls.createGameServerDeployment as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes checkCreateGameServerDeploymentProgress without error', async () => {
+      const client = new gameserverdeploymentsserviceModule.v1beta.GameServerDeploymentsServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkCreateGameServerDeploymentProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkCreateGameServerDeploymentProgress with error', async () => {
+      const client = new gameserverdeploymentsserviceModule.v1beta.GameServerDeploymentsServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkCreateGameServerDeploymentProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
     });
   });
 
@@ -1021,9 +1066,10 @@ describe('v1beta.GameServerDeploymentsServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.deleteGameServerDeployment(request);
-      }, expectedError);
+      await assert.rejects(
+        client.deleteGameServerDeployment(request),
+        expectedError
+      );
       assert(
         (client.innerApiCalls.deleteGameServerDeployment as SinonStub)
           .getCall(0)
@@ -1058,14 +1104,57 @@ describe('v1beta.GameServerDeploymentsServiceClient', () => {
         expectedError
       );
       const [operation] = await client.deleteGameServerDeployment(request);
-      await assert.rejects(async () => {
-        await operation.promise();
-      }, expectedError);
+      await assert.rejects(operation.promise(), expectedError);
       assert(
         (client.innerApiCalls.deleteGameServerDeployment as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes checkDeleteGameServerDeploymentProgress without error', async () => {
+      const client = new gameserverdeploymentsserviceModule.v1beta.GameServerDeploymentsServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkDeleteGameServerDeploymentProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkDeleteGameServerDeploymentProgress with error', async () => {
+      const client = new gameserverdeploymentsserviceModule.v1beta.GameServerDeploymentsServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkDeleteGameServerDeploymentProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
     });
   });
 
@@ -1191,9 +1280,10 @@ describe('v1beta.GameServerDeploymentsServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.updateGameServerDeployment(request);
-      }, expectedError);
+      await assert.rejects(
+        client.updateGameServerDeployment(request),
+        expectedError
+      );
       assert(
         (client.innerApiCalls.updateGameServerDeployment as SinonStub)
           .getCall(0)
@@ -1229,14 +1319,57 @@ describe('v1beta.GameServerDeploymentsServiceClient', () => {
         expectedError
       );
       const [operation] = await client.updateGameServerDeployment(request);
-      await assert.rejects(async () => {
-        await operation.promise();
-      }, expectedError);
+      await assert.rejects(operation.promise(), expectedError);
       assert(
         (client.innerApiCalls.updateGameServerDeployment as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes checkUpdateGameServerDeploymentProgress without error', async () => {
+      const client = new gameserverdeploymentsserviceModule.v1beta.GameServerDeploymentsServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkUpdateGameServerDeploymentProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkUpdateGameServerDeploymentProgress with error', async () => {
+      const client = new gameserverdeploymentsserviceModule.v1beta.GameServerDeploymentsServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkUpdateGameServerDeploymentProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
     });
   });
 
@@ -1364,9 +1497,10 @@ describe('v1beta.GameServerDeploymentsServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.updateGameServerDeploymentRollout(request);
-      }, expectedError);
+      await assert.rejects(
+        client.updateGameServerDeploymentRollout(request),
+        expectedError
+      );
       assert(
         (client.innerApiCalls.updateGameServerDeploymentRollout as SinonStub)
           .getCall(0)
@@ -1404,14 +1538,57 @@ describe('v1beta.GameServerDeploymentsServiceClient', () => {
       const [operation] = await client.updateGameServerDeploymentRollout(
         request
       );
-      await assert.rejects(async () => {
-        await operation.promise();
-      }, expectedError);
+      await assert.rejects(operation.promise(), expectedError);
       assert(
         (client.innerApiCalls.updateGameServerDeploymentRollout as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes checkUpdateGameServerDeploymentRolloutProgress without error', async () => {
+      const client = new gameserverdeploymentsserviceModule.v1beta.GameServerDeploymentsServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkUpdateGameServerDeploymentRolloutProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkUpdateGameServerDeploymentRolloutProgress with error', async () => {
+      const client = new gameserverdeploymentsserviceModule.v1beta.GameServerDeploymentsServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkUpdateGameServerDeploymentRolloutProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
     });
   });
 
@@ -1544,9 +1721,10 @@ describe('v1beta.GameServerDeploymentsServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.listGameServerDeployments(request);
-      }, expectedError);
+      await assert.rejects(
+        client.listGameServerDeployments(request),
+        expectedError
+      );
       assert(
         (client.innerApiCalls.listGameServerDeployments as SinonStub)
           .getCall(0)
@@ -1652,9 +1830,7 @@ describe('v1beta.GameServerDeploymentsServiceClient', () => {
           reject(err);
         });
       });
-      await assert.rejects(async () => {
-        await promise;
-      }, expectedError);
+      await assert.rejects(promise, expectedError);
       assert(
         (client.descriptors.page.listGameServerDeployments
           .createStream as SinonStub)

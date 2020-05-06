@@ -32,7 +32,7 @@ import {Transform} from 'stream';
 import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
 import * as gapicConfig from './realms_service_client_config.json';
-
+import {operationsProtos} from 'google-gax';
 const version = require('../../../package.json').version;
 
 /**
@@ -654,6 +654,42 @@ export class RealmsServiceClient {
     this.initialize();
     return this.innerApiCalls.createRealm(request, options, callback);
   }
+  /**
+   * Check the status of the long running operation returned by the createRealm() method.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *
+   * @example:
+   *   const decodedOperation = await checkCreateRealmProgress(name);
+   *   console.log(decodedOperation.result);
+   *   console.log(decodedOperation.done);
+   *   console.log(decodedOperation.metadata);
+   *
+   */
+  async checkCreateRealmProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.gaming.v1beta.Realm,
+      protos.google.cloud.gaming.v1beta.OperationMetadata
+    >
+  > {
+    const request = new operationsProtos.google.longrunning.GetOperationRequest(
+      {name}
+    );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new gax.Operation(
+      operation,
+      this.descriptors.longrunning.createRealm,
+      gax.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.gaming.v1beta.Realm,
+      protos.google.cloud.gaming.v1beta.OperationMetadata
+    >;
+  }
   deleteRealm(
     request: protos.google.cloud.gaming.v1beta.IDeleteRealmRequest,
     options?: gax.CallOptions
@@ -752,6 +788,42 @@ export class RealmsServiceClient {
     });
     this.initialize();
     return this.innerApiCalls.deleteRealm(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by the deleteRealm() method.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *
+   * @example:
+   *   const decodedOperation = await checkDeleteRealmProgress(name);
+   *   console.log(decodedOperation.result);
+   *   console.log(decodedOperation.done);
+   *   console.log(decodedOperation.metadata);
+   *
+   */
+  async checkDeleteRealmProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.gaming.v1beta.Realm,
+      protos.google.cloud.gaming.v1beta.OperationMetadata
+    >
+  > {
+    const request = new operationsProtos.google.longrunning.GetOperationRequest(
+      {name}
+    );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new gax.Operation(
+      operation,
+      this.descriptors.longrunning.deleteRealm,
+      gax.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.gaming.v1beta.Realm,
+      protos.google.cloud.gaming.v1beta.OperationMetadata
+    >;
   }
   updateRealm(
     request: protos.google.cloud.gaming.v1beta.IUpdateRealmRequest,
@@ -858,6 +930,42 @@ export class RealmsServiceClient {
     });
     this.initialize();
     return this.innerApiCalls.updateRealm(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by the updateRealm() method.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *
+   * @example:
+   *   const decodedOperation = await checkUpdateRealmProgress(name);
+   *   console.log(decodedOperation.result);
+   *   console.log(decodedOperation.done);
+   *   console.log(decodedOperation.metadata);
+   *
+   */
+  async checkUpdateRealmProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.gaming.v1beta.Realm,
+      protos.google.cloud.gaming.v1beta.OperationMetadata
+    >
+  > {
+    const request = new operationsProtos.google.longrunning.GetOperationRequest(
+      {name}
+    );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new gax.Operation(
+      operation,
+      this.descriptors.longrunning.updateRealm,
+      gax.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.gaming.v1beta.Realm,
+      protos.google.cloud.gaming.v1beta.OperationMetadata
+    >;
   }
   listRealms(
     request: protos.google.cloud.gaming.v1beta.IListRealmsRequest,
