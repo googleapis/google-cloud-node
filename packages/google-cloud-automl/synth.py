@@ -23,7 +23,7 @@ AUTOSYNTH_MULTIPLE_COMMITS = True
 
 
 gapic = gcp.GAPICMicrogenerator()
-versions = ['v1beta1', 'v1']
+versions = ['v1', 'v1beta1']
 for version in versions:
     library = gapic.typescript_library(
         'automl', version,
@@ -31,14 +31,15 @@ for version in versions:
             "grpc-service-config": f"google/cloud/automl/{version}/automl_grpc_service_config.json",
             "package-name": "@google-cloud/automl",
             "main-service": "automl"
-            },
+        },
         proto_path=f'/google/cloud/automl/{version}',
         extra_proto_files=['google/cloud/common_resources.proto'],
     )
-    s.copy(library, excludes=['src/index.ts', 'README.md', 'package.json'])
+    s.copy(library, excludes=['README.md', 'package.json'])
 
 common_templates = gcp.CommonTemplates()
-templates = common_templates.node_library(source_location='build/src')
+templates = common_templates.node_library(
+    source_location='build/src', versions=versions, default_version='v1')
 s.copy(templates)
 
 node.postprocess_gapic_library()
