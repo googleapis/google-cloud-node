@@ -260,9 +260,7 @@ describe('v1.BigQueryReadClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.createReadSession(request);
-      }, expectedError);
+      await assert.rejects(client.createReadSession(request), expectedError);
       assert(
         (client.innerApiCalls.createReadSession as SinonStub)
           .getCall(0)
@@ -374,9 +372,7 @@ describe('v1.BigQueryReadClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.splitReadStream(request);
-      }, expectedError);
+      await assert.rejects(client.splitReadStream(request), expectedError);
       assert(
         (client.innerApiCalls.splitReadStream as SinonStub)
           .getCall(0)
@@ -468,9 +464,7 @@ describe('v1.BigQueryReadClient', () => {
           reject(err);
         });
       });
-      await assert.rejects(async () => {
-        await promise;
-      }, expectedError);
+      await assert.rejects(promise, expectedError);
       assert(
         (client.innerApiCalls.readRows as SinonStub)
           .getCall(0)

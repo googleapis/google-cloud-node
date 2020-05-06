@@ -271,9 +271,7 @@ describe('v1beta1.BigQueryStorageClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.createReadSession(request);
-      }, expectedError);
+      await assert.rejects(client.createReadSession(request), expectedError);
       assert(
         (client.innerApiCalls.createReadSession as SinonStub)
           .getCall(0)
@@ -390,9 +388,10 @@ describe('v1beta1.BigQueryStorageClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.batchCreateReadSessionStreams(request);
-      }, expectedError);
+      await assert.rejects(
+        client.batchCreateReadSessionStreams(request),
+        expectedError
+      );
       assert(
         (client.innerApiCalls.batchCreateReadSessionStreams as SinonStub)
           .getCall(0)
@@ -507,9 +506,7 @@ describe('v1beta1.BigQueryStorageClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.finalizeStream(request);
-      }, expectedError);
+      await assert.rejects(client.finalizeStream(request), expectedError);
       assert(
         (client.innerApiCalls.finalizeStream as SinonStub)
           .getCall(0)
@@ -624,9 +621,7 @@ describe('v1beta1.BigQueryStorageClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.splitReadStream(request);
-      }, expectedError);
+      await assert.rejects(client.splitReadStream(request), expectedError);
       assert(
         (client.innerApiCalls.splitReadStream as SinonStub)
           .getCall(0)
@@ -722,9 +717,7 @@ describe('v1beta1.BigQueryStorageClient', () => {
           reject(err);
         });
       });
-      await assert.rejects(async () => {
-        await promise;
-      }, expectedError);
+      await assert.rejects(promise, expectedError);
       assert(
         (client.innerApiCalls.readRows as SinonStub)
           .getCall(0)
