@@ -4,14 +4,22 @@
       "git": {
         "name": ".",
         "remote": "git@github.com:googleapis/nodejs-security-center.git",
-        "sha": "073960395fdaafcbdd921fba26ba1ace5e303813"
+        "sha": "dd0f4d1866ec61e37392c79cf7f148e339d04d1b"
+      }
+    },
+    {
+      "git": {
+        "name": "googleapis",
+        "remote": "https://github.com/googleapis/googleapis.git",
+        "sha": "839fae42335ee1bb1e70767f3e6c51738683892b",
+        "internalRef": "310213770"
       }
     },
     {
       "git": {
         "name": "synthtool",
         "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "ab883569eb0257bbf16a6d825fd018b3adde3912"
+        "sha": "be74d3e532faa47eb59f1a0eaebde0860d1d8ab4"
       }
     }
   ],
@@ -20,7 +28,7 @@
       "client": {
         "source": "googleapis",
         "apiName": "securitycenter",
-        "apiVersion": "v1beta1",
+        "apiVersion": "v1",
         "language": "typescript",
         "generator": "gapic-generator-typescript"
       }
@@ -29,7 +37,7 @@
       "client": {
         "source": "googleapis",
         "apiName": "securitycenter",
-        "apiVersion": "v1",
+        "apiVersion": "v1beta1",
         "language": "typescript",
         "generator": "gapic-generator-typescript"
       }

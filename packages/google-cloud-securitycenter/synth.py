@@ -24,7 +24,7 @@ AUTOSYNTH_MULTIPLE_COMMITS = True
 
 # Run the gapic generator
 gapic = gcp.GAPICMicrogenerator()
-versions = ['v1beta1', 'v1', 'v1p1beta1']
+versions = ['v1', 'v1beta1', 'v1p1beta1']
 name = 'securitycenter'
 for version in versions:
     library = gapic.typescript_library(
@@ -39,12 +39,14 @@ for version in versions:
     # skip index, protos, package.json, and README.md
     s.copy(
         library,
-        excludes=['package.json', 'src/index.ts', 'README.md']
+        excludes=['package.json', 'README.md']
     )
 
 # Copy common templates
 common_templates = gcp.CommonTemplates()
-templates = common_templates.node_library(source_location='build/src')
-s.copy(templates, excludes=['.kokoro/samples-test.sh', '.kokoro/samples-test.sh'])
+templates = common_templates.node_library(
+    source_location='build/src', versions=versions, default_version='v1')
+s.copy(templates, excludes=[
+       '.kokoro/samples-test.sh', '.kokoro/samples-test.sh'])
 
 node.postprocess_gapic_library()
