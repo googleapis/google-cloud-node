@@ -229,9 +229,7 @@ describe('v1beta1.SpeechTranslationServiceClient', () => {
         stream.write(request);
         stream.end();
       });
-      await assert.rejects(async () => {
-        await promise;
-      }, expectedError);
+      await assert.rejects(promise, expectedError);
       assert(
         (client.innerApiCalls.streamingTranslateSpeech as SinonStub)
           .getCall(0)
