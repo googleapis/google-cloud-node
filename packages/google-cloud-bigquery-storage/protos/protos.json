@@ -550,7 +550,8 @@
                               "type": "string",
                               "id": 6,
                               "options": {
-                                "(google.api.field_behavior)": "REQUIRED"
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "cloudresourcemanager.googleapis.com/Project"
                               }
                             },
                             "tableModifiers": {
@@ -703,7 +704,10 @@
                           "fields": {
                             "stream": {
                               "type": "Stream",
-                              "id": 2
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
                             }
                           }
                         },
@@ -711,7 +715,10 @@
                           "fields": {
                             "originalStream": {
                               "type": "Stream",
-                              "id": 1
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
                             },
                             "fraction": {
                               "type": "float",

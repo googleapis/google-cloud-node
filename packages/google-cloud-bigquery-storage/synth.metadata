@@ -3,8 +3,16 @@
     {
       "git": {
         "name": ".",
-        "remote": "git@github.com:googleapis/nodejs-bigquery-storage.git",
-        "sha": "775dd910ebac4fcc62f728c2d354ef503fb757f7"
+        "remote": "https://github.com/googleapis/nodejs-bigquery-storage.git",
+        "sha": "6293832961eedcdd57c24edc311f2c154781e34e"
+      }
+    },
+    {
+      "git": {
+        "name": "googleapis",
+        "remote": "https://github.com/googleapis/googleapis.git",
+        "sha": "a3a0bf0f6291d69f2ff3df7fcd63d28ee20ac727",
+        "internalRef": "310060413"
       }
     },
     {

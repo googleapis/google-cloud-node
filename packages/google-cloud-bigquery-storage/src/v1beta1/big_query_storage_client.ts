@@ -585,7 +585,7 @@ export class BigQueryStorageClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {google.cloud.bigquery.storage.v1beta1.Stream} request.stream
-   *   Stream to finalize.
+   *   Required. Stream to finalize.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -691,7 +691,7 @@ export class BigQueryStorageClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {google.cloud.bigquery.storage.v1beta1.Stream} request.originalStream
-   *   Stream to split.
+   *   Required. Stream to split.
    * @param {number} request.fraction
    *   A value in the range (0.0, 1.0) that specifies the fractional point at
    *   which the original stream should be split. The actual split point is
