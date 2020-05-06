@@ -210,9 +210,7 @@ describe('v1.TextToSpeechClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.listVoices(request);
-      }, expectedError);
+      await assert.rejects(client.listVoices(request), expectedError);
       assert(
         (client.innerApiCalls.listVoices as SinonStub)
           .getCall(0)
@@ -300,9 +298,7 @@ describe('v1.TextToSpeechClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.synthesizeSpeech(request);
-      }, expectedError);
+      await assert.rejects(client.synthesizeSpeech(request), expectedError);
       assert(
         (client.innerApiCalls.synthesizeSpeech as SinonStub)
           .getCall(0)
