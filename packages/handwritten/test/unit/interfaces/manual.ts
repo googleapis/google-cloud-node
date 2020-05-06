@@ -75,7 +75,6 @@ describe('Manual handler', () => {
       this.timeout(2000);
       const r = report(() => {
         assert(false, 'callback should not be called');
-        done();
       });
       assert(r instanceof ErrorMessage, 'should be an inst of ErrorMessage');
       setTimeout(() => {
