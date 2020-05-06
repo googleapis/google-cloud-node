@@ -299,9 +299,7 @@ describe('v1.DashboardsServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.createDashboard(request);
-      }, expectedError);
+      await assert.rejects(client.createDashboard(request), expectedError);
       assert(
         (client.innerApiCalls.createDashboard as SinonStub)
           .getCall(0)
@@ -413,9 +411,7 @@ describe('v1.DashboardsServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.getDashboard(request);
-      }, expectedError);
+      await assert.rejects(client.getDashboard(request), expectedError);
       assert(
         (client.innerApiCalls.getDashboard as SinonStub)
           .getCall(0)
@@ -527,9 +523,7 @@ describe('v1.DashboardsServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.deleteDashboard(request);
-      }, expectedError);
+      await assert.rejects(client.deleteDashboard(request), expectedError);
       assert(
         (client.innerApiCalls.deleteDashboard as SinonStub)
           .getCall(0)
@@ -644,9 +638,7 @@ describe('v1.DashboardsServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.updateDashboard(request);
-      }, expectedError);
+      await assert.rejects(client.updateDashboard(request), expectedError);
       assert(
         (client.innerApiCalls.updateDashboard as SinonStub)
           .getCall(0)
@@ -774,9 +766,7 @@ describe('v1.DashboardsServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.listDashboards(request);
-      }, expectedError);
+      await assert.rejects(client.listDashboards(request), expectedError);
       assert(
         (client.innerApiCalls.listDashboards as SinonStub)
           .getCall(0)
@@ -873,9 +863,7 @@ describe('v1.DashboardsServiceClient', () => {
           reject(err);
         });
       });
-      await assert.rejects(async () => {
-        await promise;
-      }, expectedError);
+      await assert.rejects(promise, expectedError);
       assert(
         (client.descriptors.page.listDashboards.createStream as SinonStub)
           .getCall(0)
