@@ -294,9 +294,7 @@ describe('v2beta2.CloudTasksClient', () => {
       };
       const expectedError = new Error('expected');
       client.innerApiCalls.getQueue = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(async () => {
-        await client.getQueue(request);
-      }, expectedError);
+      await assert.rejects(client.getQueue(request), expectedError);
       assert(
         (client.innerApiCalls.getQueue as SinonStub)
           .getCall(0)
@@ -408,9 +406,7 @@ describe('v2beta2.CloudTasksClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.createQueue(request);
-      }, expectedError);
+      await assert.rejects(client.createQueue(request), expectedError);
       assert(
         (client.innerApiCalls.createQueue as SinonStub)
           .getCall(0)
@@ -525,9 +521,7 @@ describe('v2beta2.CloudTasksClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.updateQueue(request);
-      }, expectedError);
+      await assert.rejects(client.updateQueue(request), expectedError);
       assert(
         (client.innerApiCalls.updateQueue as SinonStub)
           .getCall(0)
@@ -639,9 +633,7 @@ describe('v2beta2.CloudTasksClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.deleteQueue(request);
-      }, expectedError);
+      await assert.rejects(client.deleteQueue(request), expectedError);
       assert(
         (client.innerApiCalls.deleteQueue as SinonStub)
           .getCall(0)
@@ -753,9 +745,7 @@ describe('v2beta2.CloudTasksClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.purgeQueue(request);
-      }, expectedError);
+      await assert.rejects(client.purgeQueue(request), expectedError);
       assert(
         (client.innerApiCalls.purgeQueue as SinonStub)
           .getCall(0)
@@ -867,9 +857,7 @@ describe('v2beta2.CloudTasksClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.pauseQueue(request);
-      }, expectedError);
+      await assert.rejects(client.pauseQueue(request), expectedError);
       assert(
         (client.innerApiCalls.pauseQueue as SinonStub)
           .getCall(0)
@@ -981,9 +969,7 @@ describe('v2beta2.CloudTasksClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.resumeQueue(request);
-      }, expectedError);
+      await assert.rejects(client.resumeQueue(request), expectedError);
       assert(
         (client.innerApiCalls.resumeQueue as SinonStub)
           .getCall(0)
@@ -1095,9 +1081,7 @@ describe('v2beta2.CloudTasksClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.getIamPolicy(request);
-      }, expectedError);
+      await assert.rejects(client.getIamPolicy(request), expectedError);
       assert(
         (client.innerApiCalls.getIamPolicy as SinonStub)
           .getCall(0)
@@ -1209,9 +1193,7 @@ describe('v2beta2.CloudTasksClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.setIamPolicy(request);
-      }, expectedError);
+      await assert.rejects(client.setIamPolicy(request), expectedError);
       assert(
         (client.innerApiCalls.setIamPolicy as SinonStub)
           .getCall(0)
@@ -1325,9 +1307,7 @@ describe('v2beta2.CloudTasksClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.testIamPermissions(request);
-      }, expectedError);
+      await assert.rejects(client.testIamPermissions(request), expectedError);
       assert(
         (client.innerApiCalls.testIamPermissions as SinonStub)
           .getCall(0)
@@ -1436,9 +1416,7 @@ describe('v2beta2.CloudTasksClient', () => {
       };
       const expectedError = new Error('expected');
       client.innerApiCalls.getTask = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(async () => {
-        await client.getTask(request);
-      }, expectedError);
+      await assert.rejects(client.getTask(request), expectedError);
       assert(
         (client.innerApiCalls.getTask as SinonStub)
           .getCall(0)
@@ -1550,9 +1528,7 @@ describe('v2beta2.CloudTasksClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.createTask(request);
-      }, expectedError);
+      await assert.rejects(client.createTask(request), expectedError);
       assert(
         (client.innerApiCalls.createTask as SinonStub)
           .getCall(0)
@@ -1664,9 +1640,7 @@ describe('v2beta2.CloudTasksClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.deleteTask(request);
-      }, expectedError);
+      await assert.rejects(client.deleteTask(request), expectedError);
       assert(
         (client.innerApiCalls.deleteTask as SinonStub)
           .getCall(0)
@@ -1778,9 +1752,7 @@ describe('v2beta2.CloudTasksClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.leaseTasks(request);
-      }, expectedError);
+      await assert.rejects(client.leaseTasks(request), expectedError);
       assert(
         (client.innerApiCalls.leaseTasks as SinonStub)
           .getCall(0)
@@ -1892,9 +1864,7 @@ describe('v2beta2.CloudTasksClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.acknowledgeTask(request);
-      }, expectedError);
+      await assert.rejects(client.acknowledgeTask(request), expectedError);
       assert(
         (client.innerApiCalls.acknowledgeTask as SinonStub)
           .getCall(0)
@@ -2006,9 +1976,7 @@ describe('v2beta2.CloudTasksClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.renewLease(request);
-      }, expectedError);
+      await assert.rejects(client.renewLease(request), expectedError);
       assert(
         (client.innerApiCalls.renewLease as SinonStub)
           .getCall(0)
@@ -2120,9 +2088,7 @@ describe('v2beta2.CloudTasksClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.cancelLease(request);
-      }, expectedError);
+      await assert.rejects(client.cancelLease(request), expectedError);
       assert(
         (client.innerApiCalls.cancelLease as SinonStub)
           .getCall(0)
@@ -2231,9 +2197,7 @@ describe('v2beta2.CloudTasksClient', () => {
       };
       const expectedError = new Error('expected');
       client.innerApiCalls.runTask = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(async () => {
-        await client.runTask(request);
-      }, expectedError);
+      await assert.rejects(client.runTask(request), expectedError);
       assert(
         (client.innerApiCalls.runTask as SinonStub)
           .getCall(0)
@@ -2349,9 +2313,7 @@ describe('v2beta2.CloudTasksClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.listQueues(request);
-      }, expectedError);
+      await assert.rejects(client.listQueues(request), expectedError);
       assert(
         (client.innerApiCalls.listQueues as SinonStub)
           .getCall(0)
@@ -2441,9 +2403,7 @@ describe('v2beta2.CloudTasksClient', () => {
           reject(err);
         });
       });
-      await assert.rejects(async () => {
-        await promise;
-      }, expectedError);
+      await assert.rejects(promise, expectedError);
       assert(
         (client.descriptors.page.listQueues.createStream as SinonStub)
           .getCall(0)
@@ -2638,9 +2598,7 @@ describe('v2beta2.CloudTasksClient', () => {
       };
       const expectedError = new Error('expected');
       client.innerApiCalls.listTasks = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(async () => {
-        await client.listTasks(request);
-      }, expectedError);
+      await assert.rejects(client.listTasks(request), expectedError);
       assert(
         (client.innerApiCalls.listTasks as SinonStub)
           .getCall(0)
@@ -2729,9 +2687,7 @@ describe('v2beta2.CloudTasksClient', () => {
           reject(err);
         });
       });
-      await assert.rejects(async () => {
-        await promise;
-      }, expectedError);
+      await assert.rejects(promise, expectedError);
       assert(
         (client.descriptors.page.listTasks.createStream as SinonStub)
           .getCall(0)
