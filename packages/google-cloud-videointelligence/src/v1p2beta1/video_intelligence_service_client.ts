@@ -28,7 +28,7 @@ import * as path from 'path';
 
 import * as protos from '../../protos/protos';
 import * as gapicConfig from './video_intelligence_service_client_config.json';
-
+import {operationsProtos} from 'google-gax';
 const version = require('../../../package.json').version;
 
 /**
@@ -429,6 +429,42 @@ export class VideoIntelligenceServiceClient {
     options = options || {};
     this.initialize();
     return this.innerApiCalls.annotateVideo(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by the annotateVideo() method.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *
+   * @example:
+   *   const decodedOperation = await checkAnnotateVideoProgress(name);
+   *   console.log(decodedOperation.result);
+   *   console.log(decodedOperation.done);
+   *   console.log(decodedOperation.metadata);
+   *
+   */
+  async checkAnnotateVideoProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.videointelligence.v1p2beta1.AnnotateVideoResponse,
+      protos.google.cloud.videointelligence.v1p2beta1.AnnotateVideoProgress
+    >
+  > {
+    const request = new operationsProtos.google.longrunning.GetOperationRequest(
+      {name}
+    );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new gax.Operation(
+      operation,
+      this.descriptors.longrunning.annotateVideo,
+      gax.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.videointelligence.v1p2beta1.AnnotateVideoResponse,
+      protos.google.cloud.videointelligence.v1p2beta1.AnnotateVideoProgress
+    >;
   }
 
   /**
