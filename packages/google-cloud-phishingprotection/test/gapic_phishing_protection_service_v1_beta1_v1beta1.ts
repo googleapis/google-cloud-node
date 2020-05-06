@@ -256,9 +256,7 @@ describe('v1beta1.PhishingProtectionServiceV1Beta1Client', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.reportPhishing(request);
-      }, expectedError);
+      await assert.rejects(client.reportPhishing(request), expectedError);
       assert(
         (client.innerApiCalls.reportPhishing as SinonStub)
           .getCall(0)
