@@ -25,7 +25,7 @@ import * as datalabelingserviceModule from '../src';
 
 import {PassThrough} from 'stream';
 
-import {protobuf, LROperation} from 'google-gax';
+import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (instance.constructor as typeof protobuf.Message).toObject(
@@ -348,9 +348,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.createDataset(request);
-      }, expectedError);
+      await assert.rejects(client.createDataset(request), expectedError);
       assert(
         (client.innerApiCalls.createDataset as SinonStub)
           .getCall(0)
@@ -468,9 +466,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.getDataset(request);
-      }, expectedError);
+      await assert.rejects(client.getDataset(request), expectedError);
       assert(
         (client.innerApiCalls.getDataset as SinonStub)
           .getCall(0)
@@ -588,9 +584,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.deleteDataset(request);
-      }, expectedError);
+      await assert.rejects(client.deleteDataset(request), expectedError);
       assert(
         (client.innerApiCalls.deleteDataset as SinonStub)
           .getCall(0)
@@ -708,9 +702,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.getDataItem(request);
-      }, expectedError);
+      await assert.rejects(client.getDataItem(request), expectedError);
       assert(
         (client.innerApiCalls.getDataItem as SinonStub)
           .getCall(0)
@@ -830,9 +822,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.getAnnotatedDataset(request);
-      }, expectedError);
+      await assert.rejects(client.getAnnotatedDataset(request), expectedError);
       assert(
         (client.innerApiCalls.getAnnotatedDataset as SinonStub)
           .getCall(0)
@@ -952,9 +942,10 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.deleteAnnotatedDataset(request);
-      }, expectedError);
+      await assert.rejects(
+        client.deleteAnnotatedDataset(request),
+        expectedError
+      );
       assert(
         (client.innerApiCalls.deleteAnnotatedDataset as SinonStub)
           .getCall(0)
@@ -1072,9 +1063,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.getExample(request);
-      }, expectedError);
+      await assert.rejects(client.getExample(request), expectedError);
       assert(
         (client.innerApiCalls.getExample as SinonStub)
           .getCall(0)
@@ -1194,9 +1183,10 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.createAnnotationSpecSet(request);
-      }, expectedError);
+      await assert.rejects(
+        client.createAnnotationSpecSet(request),
+        expectedError
+      );
       assert(
         (client.innerApiCalls.createAnnotationSpecSet as SinonStub)
           .getCall(0)
@@ -1316,9 +1306,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.getAnnotationSpecSet(request);
-      }, expectedError);
+      await assert.rejects(client.getAnnotationSpecSet(request), expectedError);
       assert(
         (client.innerApiCalls.getAnnotationSpecSet as SinonStub)
           .getCall(0)
@@ -1438,9 +1426,10 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.deleteAnnotationSpecSet(request);
-      }, expectedError);
+      await assert.rejects(
+        client.deleteAnnotationSpecSet(request),
+        expectedError
+      );
       assert(
         (client.innerApiCalls.deleteAnnotationSpecSet as SinonStub)
           .getCall(0)
@@ -1558,9 +1547,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.getInstruction(request);
-      }, expectedError);
+      await assert.rejects(client.getInstruction(request), expectedError);
       assert(
         (client.innerApiCalls.getInstruction as SinonStub)
           .getCall(0)
@@ -1678,9 +1665,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.deleteInstruction(request);
-      }, expectedError);
+      await assert.rejects(client.deleteInstruction(request), expectedError);
       assert(
         (client.innerApiCalls.deleteInstruction as SinonStub)
           .getCall(0)
@@ -1798,9 +1783,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.getEvaluation(request);
-      }, expectedError);
+      await assert.rejects(client.getEvaluation(request), expectedError);
       assert(
         (client.innerApiCalls.getEvaluation as SinonStub)
           .getCall(0)
@@ -1920,9 +1903,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.createEvaluationJob(request);
-      }, expectedError);
+      await assert.rejects(client.createEvaluationJob(request), expectedError);
       assert(
         (client.innerApiCalls.createEvaluationJob as SinonStub)
           .getCall(0)
@@ -2045,9 +2026,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.updateEvaluationJob(request);
-      }, expectedError);
+      await assert.rejects(client.updateEvaluationJob(request), expectedError);
       assert(
         (client.innerApiCalls.updateEvaluationJob as SinonStub)
           .getCall(0)
@@ -2165,9 +2144,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.getEvaluationJob(request);
-      }, expectedError);
+      await assert.rejects(client.getEvaluationJob(request), expectedError);
       assert(
         (client.innerApiCalls.getEvaluationJob as SinonStub)
           .getCall(0)
@@ -2287,9 +2264,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.pauseEvaluationJob(request);
-      }, expectedError);
+      await assert.rejects(client.pauseEvaluationJob(request), expectedError);
       assert(
         (client.innerApiCalls.pauseEvaluationJob as SinonStub)
           .getCall(0)
@@ -2409,9 +2384,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.resumeEvaluationJob(request);
-      }, expectedError);
+      await assert.rejects(client.resumeEvaluationJob(request), expectedError);
       assert(
         (client.innerApiCalls.resumeEvaluationJob as SinonStub)
           .getCall(0)
@@ -2531,9 +2504,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.deleteEvaluationJob(request);
-      }, expectedError);
+      await assert.rejects(client.deleteEvaluationJob(request), expectedError);
       assert(
         (client.innerApiCalls.deleteEvaluationJob as SinonStub)
           .getCall(0)
@@ -2659,9 +2630,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.importData(request);
-      }, expectedError);
+      await assert.rejects(client.importData(request), expectedError);
       assert(
         (client.innerApiCalls.importData as SinonStub)
           .getCall(0)
@@ -2696,14 +2665,54 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         expectedError
       );
       const [operation] = await client.importData(request);
-      await assert.rejects(async () => {
-        await operation.promise();
-      }, expectedError);
+      await assert.rejects(operation.promise(), expectedError);
       assert(
         (client.innerApiCalls.importData as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes checkImportDataProgress without error', async () => {
+      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkImportDataProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkImportDataProgress with error', async () => {
+      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.checkImportDataProgress(''), expectedError);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
     });
   });
 
@@ -2824,9 +2833,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.exportData(request);
-      }, expectedError);
+      await assert.rejects(client.exportData(request), expectedError);
       assert(
         (client.innerApiCalls.exportData as SinonStub)
           .getCall(0)
@@ -2861,14 +2868,54 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         expectedError
       );
       const [operation] = await client.exportData(request);
-      await assert.rejects(async () => {
-        await operation.promise();
-      }, expectedError);
+      await assert.rejects(operation.promise(), expectedError);
       assert(
         (client.innerApiCalls.exportData as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes checkExportDataProgress without error', async () => {
+      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkExportDataProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkExportDataProgress with error', async () => {
+      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.checkExportDataProgress(''), expectedError);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
     });
   });
 
@@ -2989,9 +3036,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.labelImage(request);
-      }, expectedError);
+      await assert.rejects(client.labelImage(request), expectedError);
       assert(
         (client.innerApiCalls.labelImage as SinonStub)
           .getCall(0)
@@ -3026,14 +3071,54 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         expectedError
       );
       const [operation] = await client.labelImage(request);
-      await assert.rejects(async () => {
-        await operation.promise();
-      }, expectedError);
+      await assert.rejects(operation.promise(), expectedError);
       assert(
         (client.innerApiCalls.labelImage as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes checkLabelImageProgress without error', async () => {
+      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkLabelImageProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkLabelImageProgress with error', async () => {
+      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.checkLabelImageProgress(''), expectedError);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
     });
   });
 
@@ -3154,9 +3239,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.labelVideo(request);
-      }, expectedError);
+      await assert.rejects(client.labelVideo(request), expectedError);
       assert(
         (client.innerApiCalls.labelVideo as SinonStub)
           .getCall(0)
@@ -3191,14 +3274,54 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         expectedError
       );
       const [operation] = await client.labelVideo(request);
-      await assert.rejects(async () => {
-        await operation.promise();
-      }, expectedError);
+      await assert.rejects(operation.promise(), expectedError);
       assert(
         (client.innerApiCalls.labelVideo as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes checkLabelVideoProgress without error', async () => {
+      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkLabelVideoProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkLabelVideoProgress with error', async () => {
+      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.checkLabelVideoProgress(''), expectedError);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
     });
   });
 
@@ -3319,9 +3442,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.labelText(request);
-      }, expectedError);
+      await assert.rejects(client.labelText(request), expectedError);
       assert(
         (client.innerApiCalls.labelText as SinonStub)
           .getCall(0)
@@ -3356,14 +3477,54 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         expectedError
       );
       const [operation] = await client.labelText(request);
-      await assert.rejects(async () => {
-        await operation.promise();
-      }, expectedError);
+      await assert.rejects(operation.promise(), expectedError);
       assert(
         (client.innerApiCalls.labelText as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes checkLabelTextProgress without error', async () => {
+      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkLabelTextProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkLabelTextProgress with error', async () => {
+      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.checkLabelTextProgress(''), expectedError);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
     });
   });
 
@@ -3486,9 +3647,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.createInstruction(request);
-      }, expectedError);
+      await assert.rejects(client.createInstruction(request), expectedError);
       assert(
         (client.innerApiCalls.createInstruction as SinonStub)
           .getCall(0)
@@ -3523,14 +3682,57 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         expectedError
       );
       const [operation] = await client.createInstruction(request);
-      await assert.rejects(async () => {
-        await operation.promise();
-      }, expectedError);
+      await assert.rejects(operation.promise(), expectedError);
       assert(
         (client.innerApiCalls.createInstruction as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes checkCreateInstructionProgress without error', async () => {
+      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkCreateInstructionProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkCreateInstructionProgress with error', async () => {
+      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkCreateInstructionProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
     });
   });
 
@@ -3659,9 +3861,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.listDatasets(request);
-      }, expectedError);
+      await assert.rejects(client.listDatasets(request), expectedError);
       assert(
         (client.innerApiCalls.listDatasets as SinonStub)
           .getCall(0)
@@ -3762,9 +3962,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           reject(err);
         });
       });
-      await assert.rejects(async () => {
-        await promise;
-      }, expectedError);
+      await assert.rejects(promise, expectedError);
       assert(
         (client.descriptors.page.listDatasets.createStream as SinonStub)
           .getCall(0)
@@ -3991,9 +4189,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.listDataItems(request);
-      }, expectedError);
+      await assert.rejects(client.listDataItems(request), expectedError);
       assert(
         (client.innerApiCalls.listDataItems as SinonStub)
           .getCall(0)
@@ -4094,9 +4290,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           reject(err);
         });
       });
-      await assert.rejects(async () => {
-        await promise;
-      }, expectedError);
+      await assert.rejects(promise, expectedError);
       assert(
         (client.descriptors.page.listDataItems.createStream as SinonStub)
           .getCall(0)
@@ -4327,9 +4521,10 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.listAnnotatedDatasets(request);
-      }, expectedError);
+      await assert.rejects(
+        client.listAnnotatedDatasets(request),
+        expectedError
+      );
       assert(
         (client.innerApiCalls.listAnnotatedDatasets as SinonStub)
           .getCall(0)
@@ -4435,9 +4630,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           reject(err);
         });
       });
-      await assert.rejects(async () => {
-        await promise;
-      }, expectedError);
+      await assert.rejects(promise, expectedError);
       assert(
         (client.descriptors.page.listAnnotatedDatasets
           .createStream as SinonStub)
@@ -4665,9 +4858,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.listExamples(request);
-      }, expectedError);
+      await assert.rejects(client.listExamples(request), expectedError);
       assert(
         (client.innerApiCalls.listExamples as SinonStub)
           .getCall(0)
@@ -4768,9 +4959,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           reject(err);
         });
       });
-      await assert.rejects(async () => {
-        await promise;
-      }, expectedError);
+      await assert.rejects(promise, expectedError);
       assert(
         (client.descriptors.page.listExamples.createStream as SinonStub)
           .getCall(0)
@@ -5001,9 +5190,10 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.listAnnotationSpecSets(request);
-      }, expectedError);
+      await assert.rejects(
+        client.listAnnotationSpecSets(request),
+        expectedError
+      );
       assert(
         (client.innerApiCalls.listAnnotationSpecSets as SinonStub)
           .getCall(0)
@@ -5109,9 +5299,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           reject(err);
         });
       });
-      await assert.rejects(async () => {
-        await promise;
-      }, expectedError);
+      await assert.rejects(promise, expectedError);
       assert(
         (client.descriptors.page.listAnnotationSpecSets
           .createStream as SinonStub)
@@ -5341,9 +5529,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.listInstructions(request);
-      }, expectedError);
+      await assert.rejects(client.listInstructions(request), expectedError);
       assert(
         (client.innerApiCalls.listInstructions as SinonStub)
           .getCall(0)
@@ -5444,9 +5630,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           reject(err);
         });
       });
-      await assert.rejects(async () => {
-        await promise;
-      }, expectedError);
+      await assert.rejects(promise, expectedError);
       assert(
         (client.descriptors.page.listInstructions.createStream as SinonStub)
           .getCall(0)
@@ -5675,9 +5859,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.searchEvaluations(request);
-      }, expectedError);
+      await assert.rejects(client.searchEvaluations(request), expectedError);
       assert(
         (client.innerApiCalls.searchEvaluations as SinonStub)
           .getCall(0)
@@ -5778,9 +5960,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           reject(err);
         });
       });
-      await assert.rejects(async () => {
-        await promise;
-      }, expectedError);
+      await assert.rejects(promise, expectedError);
       assert(
         (client.descriptors.page.searchEvaluations.createStream as SinonStub)
           .getCall(0)
@@ -6011,9 +6191,10 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.searchExampleComparisons(request);
-      }, expectedError);
+      await assert.rejects(
+        client.searchExampleComparisons(request),
+        expectedError
+      );
       assert(
         (client.innerApiCalls.searchExampleComparisons as SinonStub)
           .getCall(0)
@@ -6119,9 +6300,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           reject(err);
         });
       });
-      await assert.rejects(async () => {
-        await promise;
-      }, expectedError);
+      await assert.rejects(promise, expectedError);
       assert(
         (client.descriptors.page.searchExampleComparisons
           .createStream as SinonStub)
@@ -6353,9 +6532,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.listEvaluationJobs(request);
-      }, expectedError);
+      await assert.rejects(client.listEvaluationJobs(request), expectedError);
       assert(
         (client.innerApiCalls.listEvaluationJobs as SinonStub)
           .getCall(0)
@@ -6460,9 +6637,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           reject(err);
         });
       });
-      await assert.rejects(async () => {
-        await promise;
-      }, expectedError);
+      await assert.rejects(promise, expectedError);
       assert(
         (client.descriptors.page.listEvaluationJobs.createStream as SinonStub)
           .getCall(0)

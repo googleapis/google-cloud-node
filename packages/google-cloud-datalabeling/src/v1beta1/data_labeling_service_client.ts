@@ -32,7 +32,7 @@ import {Transform} from 'stream';
 import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
 import * as gapicConfig from './data_labeling_service_client_config.json';
-
+import {operationsProtos} from 'google-gax';
 const version = require('../../../package.json').version;
 
 /**
@@ -2429,6 +2429,42 @@ export class DataLabelingServiceClient {
     this.initialize();
     return this.innerApiCalls.importData(request, options, callback);
   }
+  /**
+   * Check the status of the long running operation returned by the importData() method.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *
+   * @example:
+   *   const decodedOperation = await checkImportDataProgress(name);
+   *   console.log(decodedOperation.result);
+   *   console.log(decodedOperation.done);
+   *   console.log(decodedOperation.metadata);
+   *
+   */
+  async checkImportDataProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.datalabeling.v1beta1.ImportDataOperationResponse,
+      protos.google.cloud.datalabeling.v1beta1.ImportDataOperationMetadata
+    >
+  > {
+    const request = new operationsProtos.google.longrunning.GetOperationRequest(
+      {name}
+    );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new gax.Operation(
+      operation,
+      this.descriptors.longrunning.importData,
+      gax.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.datalabeling.v1beta1.ImportDataOperationResponse,
+      protos.google.cloud.datalabeling.v1beta1.ImportDataOperationMetadata
+    >;
+  }
   exportData(
     request: protos.google.cloud.datalabeling.v1beta1.IExportDataRequest,
     options?: gax.CallOptions
@@ -2540,6 +2576,42 @@ export class DataLabelingServiceClient {
     });
     this.initialize();
     return this.innerApiCalls.exportData(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by the exportData() method.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *
+   * @example:
+   *   const decodedOperation = await checkExportDataProgress(name);
+   *   console.log(decodedOperation.result);
+   *   console.log(decodedOperation.done);
+   *   console.log(decodedOperation.metadata);
+   *
+   */
+  async checkExportDataProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.datalabeling.v1beta1.ExportDataOperationResponse,
+      protos.google.cloud.datalabeling.v1beta1.ExportDataOperationMetadata
+    >
+  > {
+    const request = new operationsProtos.google.longrunning.GetOperationRequest(
+      {name}
+    );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new gax.Operation(
+      operation,
+      this.descriptors.longrunning.exportData,
+      gax.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.datalabeling.v1beta1.ExportDataOperationResponse,
+      protos.google.cloud.datalabeling.v1beta1.ExportDataOperationMetadata
+    >;
   }
   labelImage(
     request: protos.google.cloud.datalabeling.v1beta1.ILabelImageRequest,
@@ -2661,6 +2733,42 @@ export class DataLabelingServiceClient {
     this.initialize();
     return this.innerApiCalls.labelImage(request, options, callback);
   }
+  /**
+   * Check the status of the long running operation returned by the labelImage() method.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *
+   * @example:
+   *   const decodedOperation = await checkLabelImageProgress(name);
+   *   console.log(decodedOperation.result);
+   *   console.log(decodedOperation.done);
+   *   console.log(decodedOperation.metadata);
+   *
+   */
+  async checkLabelImageProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.datalabeling.v1beta1.AnnotatedDataset,
+      protos.google.cloud.datalabeling.v1beta1.LabelOperationMetadata
+    >
+  > {
+    const request = new operationsProtos.google.longrunning.GetOperationRequest(
+      {name}
+    );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new gax.Operation(
+      operation,
+      this.descriptors.longrunning.labelImage,
+      gax.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.datalabeling.v1beta1.AnnotatedDataset,
+      protos.google.cloud.datalabeling.v1beta1.LabelOperationMetadata
+    >;
+  }
   labelVideo(
     request: protos.google.cloud.datalabeling.v1beta1.ILabelVideoRequest,
     options?: gax.CallOptions
@@ -2781,6 +2889,42 @@ export class DataLabelingServiceClient {
     this.initialize();
     return this.innerApiCalls.labelVideo(request, options, callback);
   }
+  /**
+   * Check the status of the long running operation returned by the labelVideo() method.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *
+   * @example:
+   *   const decodedOperation = await checkLabelVideoProgress(name);
+   *   console.log(decodedOperation.result);
+   *   console.log(decodedOperation.done);
+   *   console.log(decodedOperation.metadata);
+   *
+   */
+  async checkLabelVideoProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.datalabeling.v1beta1.AnnotatedDataset,
+      protos.google.cloud.datalabeling.v1beta1.LabelOperationMetadata
+    >
+  > {
+    const request = new operationsProtos.google.longrunning.GetOperationRequest(
+      {name}
+    );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new gax.Operation(
+      operation,
+      this.descriptors.longrunning.labelVideo,
+      gax.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.datalabeling.v1beta1.AnnotatedDataset,
+      protos.google.cloud.datalabeling.v1beta1.LabelOperationMetadata
+    >;
+  }
   labelText(
     request: protos.google.cloud.datalabeling.v1beta1.ILabelTextRequest,
     options?: gax.CallOptions
@@ -2893,6 +3037,42 @@ export class DataLabelingServiceClient {
     this.initialize();
     return this.innerApiCalls.labelText(request, options, callback);
   }
+  /**
+   * Check the status of the long running operation returned by the labelText() method.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *
+   * @example:
+   *   const decodedOperation = await checkLabelTextProgress(name);
+   *   console.log(decodedOperation.result);
+   *   console.log(decodedOperation.done);
+   *   console.log(decodedOperation.metadata);
+   *
+   */
+  async checkLabelTextProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.datalabeling.v1beta1.AnnotatedDataset,
+      protos.google.cloud.datalabeling.v1beta1.LabelOperationMetadata
+    >
+  > {
+    const request = new operationsProtos.google.longrunning.GetOperationRequest(
+      {name}
+    );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new gax.Operation(
+      operation,
+      this.descriptors.longrunning.labelText,
+      gax.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.datalabeling.v1beta1.AnnotatedDataset,
+      protos.google.cloud.datalabeling.v1beta1.LabelOperationMetadata
+    >;
+  }
   createInstruction(
     request: protos.google.cloud.datalabeling.v1beta1.ICreateInstructionRequest,
     options?: gax.CallOptions
@@ -2993,6 +3173,42 @@ export class DataLabelingServiceClient {
     });
     this.initialize();
     return this.innerApiCalls.createInstruction(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by the createInstruction() method.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *
+   * @example:
+   *   const decodedOperation = await checkCreateInstructionProgress(name);
+   *   console.log(decodedOperation.result);
+   *   console.log(decodedOperation.done);
+   *   console.log(decodedOperation.metadata);
+   *
+   */
+  async checkCreateInstructionProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.datalabeling.v1beta1.Instruction,
+      protos.google.cloud.datalabeling.v1beta1.CreateInstructionMetadata
+    >
+  > {
+    const request = new operationsProtos.google.longrunning.GetOperationRequest(
+      {name}
+    );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new gax.Operation(
+      operation,
+      this.descriptors.longrunning.createInstruction,
+      gax.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.datalabeling.v1beta1.Instruction,
+      protos.google.cloud.datalabeling.v1beta1.CreateInstructionMetadata
+    >;
   }
   listDatasets(
     request: protos.google.cloud.datalabeling.v1beta1.IListDatasetsRequest,
