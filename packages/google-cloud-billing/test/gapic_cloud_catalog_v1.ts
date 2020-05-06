@@ -277,9 +277,7 @@ describe('v1.CloudCatalogClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.listServices(request);
-      }, expectedError);
+      await assert.rejects(client.listServices(request), expectedError);
       assert(
         (client.innerApiCalls.listServices as SinonStub)
           .getCall(0)
@@ -359,9 +357,7 @@ describe('v1.CloudCatalogClient', () => {
           reject(err);
         });
       });
-      await assert.rejects(async () => {
-        await promise;
-      }, expectedError);
+      await assert.rejects(promise, expectedError);
       assert(
         (client.descriptors.page.listServices.createStream as SinonStub)
           .getCall(0)
@@ -532,9 +528,7 @@ describe('v1.CloudCatalogClient', () => {
       };
       const expectedError = new Error('expected');
       client.innerApiCalls.listSkus = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(async () => {
-        await client.listSkus(request);
-      }, expectedError);
+      await assert.rejects(client.listSkus(request), expectedError);
       assert(
         (client.innerApiCalls.listSkus as SinonStub)
           .getCall(0)
@@ -617,9 +611,7 @@ describe('v1.CloudCatalogClient', () => {
           reject(err);
         });
       });
-      await assert.rejects(async () => {
-        await promise;
-      }, expectedError);
+      await assert.rejects(promise, expectedError);
       assert(
         (client.descriptors.page.listSkus.createStream as SinonStub)
           .getCall(0)

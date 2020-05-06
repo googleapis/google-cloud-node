@@ -297,9 +297,7 @@ describe('v1.CloudBillingClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.getBillingAccount(request);
-      }, expectedError);
+      await assert.rejects(client.getBillingAccount(request), expectedError);
       assert(
         (client.innerApiCalls.getBillingAccount as SinonStub)
           .getCall(0)
@@ -413,9 +411,7 @@ describe('v1.CloudBillingClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.updateBillingAccount(request);
-      }, expectedError);
+      await assert.rejects(client.updateBillingAccount(request), expectedError);
       assert(
         (client.innerApiCalls.updateBillingAccount as SinonStub)
           .getCall(0)
@@ -505,9 +501,7 @@ describe('v1.CloudBillingClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.createBillingAccount(request);
-      }, expectedError);
+      await assert.rejects(client.createBillingAccount(request), expectedError);
       assert(
         (client.innerApiCalls.createBillingAccount as SinonStub)
           .getCall(0)
@@ -621,9 +615,10 @@ describe('v1.CloudBillingClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.getProjectBillingInfo(request);
-      }, expectedError);
+      await assert.rejects(
+        client.getProjectBillingInfo(request),
+        expectedError
+      );
       assert(
         (client.innerApiCalls.getProjectBillingInfo as SinonStub)
           .getCall(0)
@@ -737,9 +732,10 @@ describe('v1.CloudBillingClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.updateProjectBillingInfo(request);
-      }, expectedError);
+      await assert.rejects(
+        client.updateProjectBillingInfo(request),
+        expectedError
+      );
       assert(
         (client.innerApiCalls.updateProjectBillingInfo as SinonStub)
           .getCall(0)
@@ -851,9 +847,7 @@ describe('v1.CloudBillingClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.getIamPolicy(request);
-      }, expectedError);
+      await assert.rejects(client.getIamPolicy(request), expectedError);
       assert(
         (client.innerApiCalls.getIamPolicy as SinonStub)
           .getCall(0)
@@ -965,9 +959,7 @@ describe('v1.CloudBillingClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.setIamPolicy(request);
-      }, expectedError);
+      await assert.rejects(client.setIamPolicy(request), expectedError);
       assert(
         (client.innerApiCalls.setIamPolicy as SinonStub)
           .getCall(0)
@@ -1081,9 +1073,7 @@ describe('v1.CloudBillingClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.testIamPermissions(request);
-      }, expectedError);
+      await assert.rejects(client.testIamPermissions(request), expectedError);
       assert(
         (client.innerApiCalls.testIamPermissions as SinonStub)
           .getCall(0)
@@ -1189,9 +1179,7 @@ describe('v1.CloudBillingClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.listBillingAccounts(request);
-      }, expectedError);
+      await assert.rejects(client.listBillingAccounts(request), expectedError);
       assert(
         (client.innerApiCalls.listBillingAccounts as SinonStub)
           .getCall(0)
@@ -1277,9 +1265,7 @@ describe('v1.CloudBillingClient', () => {
           reject(err);
         });
       });
-      await assert.rejects(async () => {
-        await promise;
-      }, expectedError);
+      await assert.rejects(promise, expectedError);
       assert(
         (client.descriptors.page.listBillingAccounts.createStream as SinonStub)
           .getCall(0)
@@ -1473,9 +1459,10 @@ describe('v1.CloudBillingClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.listProjectBillingInfo(request);
-      }, expectedError);
+      await assert.rejects(
+        client.listProjectBillingInfo(request),
+        expectedError
+      );
       assert(
         (client.innerApiCalls.listProjectBillingInfo as SinonStub)
           .getCall(0)
@@ -1573,9 +1560,7 @@ describe('v1.CloudBillingClient', () => {
           reject(err);
         });
       });
-      await assert.rejects(async () => {
-        await promise;
-      }, expectedError);
+      await assert.rejects(promise, expectedError);
       assert(
         (client.descriptors.page.listProjectBillingInfo
           .createStream as SinonStub)
