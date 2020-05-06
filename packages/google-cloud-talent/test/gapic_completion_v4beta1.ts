@@ -234,9 +234,7 @@ describe('v4beta1.CompletionClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.completeQuery(request);
-      }, expectedError);
+      await assert.rejects(client.completeQuery(request), expectedError);
       assert(
         (client.innerApiCalls.completeQuery as SinonStub)
           .getCall(0)

@@ -299,9 +299,7 @@ describe('v4beta1.ProfileServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.createProfile(request);
-      }, expectedError);
+      await assert.rejects(client.createProfile(request), expectedError);
       assert(
         (client.innerApiCalls.createProfile as SinonStub)
           .getCall(0)
@@ -413,9 +411,7 @@ describe('v4beta1.ProfileServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.getProfile(request);
-      }, expectedError);
+      await assert.rejects(client.getProfile(request), expectedError);
       assert(
         (client.innerApiCalls.getProfile as SinonStub)
           .getCall(0)
@@ -530,9 +526,7 @@ describe('v4beta1.ProfileServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.updateProfile(request);
-      }, expectedError);
+      await assert.rejects(client.updateProfile(request), expectedError);
       assert(
         (client.innerApiCalls.updateProfile as SinonStub)
           .getCall(0)
@@ -644,9 +638,7 @@ describe('v4beta1.ProfileServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.deleteProfile(request);
-      }, expectedError);
+      await assert.rejects(client.deleteProfile(request), expectedError);
       assert(
         (client.innerApiCalls.deleteProfile as SinonStub)
           .getCall(0)
@@ -758,9 +750,7 @@ describe('v4beta1.ProfileServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.searchProfiles(request);
-      }, expectedError);
+      await assert.rejects(client.searchProfiles(request), expectedError);
       assert(
         (client.innerApiCalls.searchProfiles as SinonStub)
           .getCall(0)
@@ -876,9 +866,7 @@ describe('v4beta1.ProfileServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.listProfiles(request);
-      }, expectedError);
+      await assert.rejects(client.listProfiles(request), expectedError);
       assert(
         (client.innerApiCalls.listProfiles as SinonStub)
           .getCall(0)
@@ -969,9 +957,7 @@ describe('v4beta1.ProfileServiceClient', () => {
           reject(err);
         });
       });
-      await assert.rejects(async () => {
-        await promise;
-      }, expectedError);
+      await assert.rejects(promise, expectedError);
       assert(
         (client.descriptors.page.listProfiles.createStream as SinonStub)
           .getCall(0)

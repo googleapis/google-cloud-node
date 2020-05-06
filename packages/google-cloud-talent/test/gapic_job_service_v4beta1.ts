@@ -25,7 +25,7 @@ import * as jobserviceModule from '../src';
 
 import {PassThrough} from 'stream';
 
-import {protobuf, LROperation} from 'google-gax';
+import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (instance.constructor as typeof protobuf.Message).toObject(
@@ -326,9 +326,7 @@ describe('v4beta1.JobServiceClient', () => {
       };
       const expectedError = new Error('expected');
       client.innerApiCalls.createJob = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(async () => {
-        await client.createJob(request);
-      }, expectedError);
+      await assert.rejects(client.createJob(request), expectedError);
       assert(
         (client.innerApiCalls.createJob as SinonStub)
           .getCall(0)
@@ -437,9 +435,7 @@ describe('v4beta1.JobServiceClient', () => {
       };
       const expectedError = new Error('expected');
       client.innerApiCalls.getJob = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(async () => {
-        await client.getJob(request);
-      }, expectedError);
+      await assert.rejects(client.getJob(request), expectedError);
       assert(
         (client.innerApiCalls.getJob as SinonStub)
           .getCall(0)
@@ -551,9 +547,7 @@ describe('v4beta1.JobServiceClient', () => {
       };
       const expectedError = new Error('expected');
       client.innerApiCalls.updateJob = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(async () => {
-        await client.updateJob(request);
-      }, expectedError);
+      await assert.rejects(client.updateJob(request), expectedError);
       assert(
         (client.innerApiCalls.updateJob as SinonStub)
           .getCall(0)
@@ -662,9 +656,7 @@ describe('v4beta1.JobServiceClient', () => {
       };
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteJob = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(async () => {
-        await client.deleteJob(request);
-      }, expectedError);
+      await assert.rejects(client.deleteJob(request), expectedError);
       assert(
         (client.innerApiCalls.deleteJob as SinonStub)
           .getCall(0)
@@ -776,9 +768,7 @@ describe('v4beta1.JobServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.batchDeleteJobs(request);
-      }, expectedError);
+      await assert.rejects(client.batchDeleteJobs(request), expectedError);
       assert(
         (client.innerApiCalls.batchDeleteJobs as SinonStub)
           .getCall(0)
@@ -890,11 +880,123 @@ describe('v4beta1.JobServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.searchJobs(request);
-      }, expectedError);
+      await assert.rejects(client.searchJobs(request), expectedError);
       assert(
         (client.innerApiCalls.searchJobs as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+  });
+
+  describe('searchJobsForAlert', () => {
+    it('invokes searchJobsForAlert without error', async () => {
+      const client = new jobserviceModule.v4beta1.JobServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.talent.v4beta1.SearchJobsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.talent.v4beta1.SearchJobsResponse()
+      );
+      client.innerApiCalls.searchJobsForAlert = stubSimpleCall(
+        expectedResponse
+      );
+      const [response] = await client.searchJobsForAlert(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.searchJobsForAlert as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes searchJobsForAlert without error using callback', async () => {
+      const client = new jobserviceModule.v4beta1.JobServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.talent.v4beta1.SearchJobsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.talent.v4beta1.SearchJobsResponse()
+      );
+      client.innerApiCalls.searchJobsForAlert = stubSimpleCallWithCallback(
+        expectedResponse
+      );
+      const promise = new Promise((resolve, reject) => {
+        client.searchJobsForAlert(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.talent.v4beta1.ISearchJobsResponse | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.searchJobsForAlert as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes searchJobsForAlert with error', async () => {
+      const client = new jobserviceModule.v4beta1.JobServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.talent.v4beta1.SearchJobsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.searchJobsForAlert = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.searchJobsForAlert(request), expectedError);
+      assert(
+        (client.innerApiCalls.searchJobsForAlert as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
@@ -1014,9 +1116,7 @@ describe('v4beta1.JobServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.batchCreateJobs(request);
-      }, expectedError);
+      await assert.rejects(client.batchCreateJobs(request), expectedError);
       assert(
         (client.innerApiCalls.batchCreateJobs as SinonStub)
           .getCall(0)
@@ -1049,14 +1149,53 @@ describe('v4beta1.JobServiceClient', () => {
         expectedError
       );
       const [operation] = await client.batchCreateJobs(request);
-      await assert.rejects(async () => {
-        await operation.promise();
-      }, expectedError);
+      await assert.rejects(operation.promise(), expectedError);
       assert(
         (client.innerApiCalls.batchCreateJobs as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes checkBatchCreateJobsProgress without error', async () => {
+      const client = new jobserviceModule.v4beta1.JobServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkBatchCreateJobsProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkBatchCreateJobsProgress with error', async () => {
+      const client = new jobserviceModule.v4beta1.JobServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkBatchCreateJobsProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
     });
   });
 
@@ -1173,9 +1312,7 @@ describe('v4beta1.JobServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.batchUpdateJobs(request);
-      }, expectedError);
+      await assert.rejects(client.batchUpdateJobs(request), expectedError);
       assert(
         (client.innerApiCalls.batchUpdateJobs as SinonStub)
           .getCall(0)
@@ -1208,14 +1345,53 @@ describe('v4beta1.JobServiceClient', () => {
         expectedError
       );
       const [operation] = await client.batchUpdateJobs(request);
-      await assert.rejects(async () => {
-        await operation.promise();
-      }, expectedError);
+      await assert.rejects(operation.promise(), expectedError);
       assert(
         (client.innerApiCalls.batchUpdateJobs as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes checkBatchUpdateJobsProgress without error', async () => {
+      const client = new jobserviceModule.v4beta1.JobServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkBatchUpdateJobsProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkBatchUpdateJobsProgress with error', async () => {
+      const client = new jobserviceModule.v4beta1.JobServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkBatchUpdateJobsProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
     });
   });
 
@@ -1323,9 +1499,7 @@ describe('v4beta1.JobServiceClient', () => {
       };
       const expectedError = new Error('expected');
       client.innerApiCalls.listJobs = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(async () => {
-        await client.listJobs(request);
-      }, expectedError);
+      await assert.rejects(client.listJobs(request), expectedError);
       assert(
         (client.innerApiCalls.listJobs as SinonStub)
           .getCall(0)
@@ -1414,9 +1588,7 @@ describe('v4beta1.JobServiceClient', () => {
           reject(err);
         });
       });
-      await assert.rejects(async () => {
-        await promise;
-      }, expectedError);
+      await assert.rejects(promise, expectedError);
       assert(
         (client.descriptors.page.listJobs.createStream as SinonStub)
           .getCall(0)
@@ -1497,332 +1669,6 @@ describe('v4beta1.JobServiceClient', () => {
       assert.strictEqual(
         (client.descriptors.page.listJobs.asyncIterate as SinonStub).getCall(0)
           .args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
-      );
-    });
-  });
-
-  describe('searchJobsForAlert', () => {
-    it('invokes searchJobsForAlert without error', async () => {
-      const client = new jobserviceModule.v4beta1.JobServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.talent.v4beta1.SearchJobsRequest()
-      );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.talent.v4beta1.SearchJobsResponse.MatchingJob()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.talent.v4beta1.SearchJobsResponse.MatchingJob()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.talent.v4beta1.SearchJobsResponse.MatchingJob()
-        ),
-      ];
-      client.innerApiCalls.searchJobsForAlert = stubSimpleCall(
-        expectedResponse
-      );
-      const [response] = await client.searchJobsForAlert(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.searchJobsForAlert as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
-    });
-
-    it('invokes searchJobsForAlert without error using callback', async () => {
-      const client = new jobserviceModule.v4beta1.JobServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.talent.v4beta1.SearchJobsRequest()
-      );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.talent.v4beta1.SearchJobsResponse.MatchingJob()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.talent.v4beta1.SearchJobsResponse.MatchingJob()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.talent.v4beta1.SearchJobsResponse.MatchingJob()
-        ),
-      ];
-      client.innerApiCalls.searchJobsForAlert = stubSimpleCallWithCallback(
-        expectedResponse
-      );
-      const promise = new Promise((resolve, reject) => {
-        client.searchJobsForAlert(
-          request,
-          (
-            err?: Error | null,
-            result?:
-              | protos.google.cloud.talent.v4beta1.SearchJobsResponse.IMatchingJob[]
-              | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.searchJobsForAlert as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
-    });
-
-    it('invokes searchJobsForAlert with error', async () => {
-      const client = new jobserviceModule.v4beta1.JobServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.talent.v4beta1.SearchJobsRequest()
-      );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedError = new Error('expected');
-      client.innerApiCalls.searchJobsForAlert = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(async () => {
-        await client.searchJobsForAlert(request);
-      }, expectedError);
-      assert(
-        (client.innerApiCalls.searchJobsForAlert as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
-    });
-
-    it('invokes searchJobsForAlertStream without error', async () => {
-      const client = new jobserviceModule.v4beta1.JobServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.talent.v4beta1.SearchJobsRequest()
-      );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.talent.v4beta1.SearchJobsResponse.MatchingJob()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.talent.v4beta1.SearchJobsResponse.MatchingJob()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.talent.v4beta1.SearchJobsResponse.MatchingJob()
-        ),
-      ];
-      client.descriptors.page.searchJobsForAlert.createStream = stubPageStreamingCall(
-        expectedResponse
-      );
-      const stream = client.searchJobsForAlertStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.talent.v4beta1.SearchJobsResponse.MatchingJob[] = [];
-        stream.on(
-          'data',
-          (
-            response: protos.google.cloud.talent.v4beta1.SearchJobsResponse.MatchingJob
-          ) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.searchJobsForAlert.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.searchJobsForAlert, request)
-      );
-      assert.strictEqual(
-        (client.descriptors.page.searchJobsForAlert
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
-        expectedHeaderRequestParams
-      );
-    });
-
-    it('invokes searchJobsForAlertStream with error', async () => {
-      const client = new jobserviceModule.v4beta1.JobServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.talent.v4beta1.SearchJobsRequest()
-      );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedError = new Error('expected');
-      client.descriptors.page.searchJobsForAlert.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
-      const stream = client.searchJobsForAlertStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.talent.v4beta1.SearchJobsResponse.MatchingJob[] = [];
-        stream.on(
-          'data',
-          (
-            response: protos.google.cloud.talent.v4beta1.SearchJobsResponse.MatchingJob
-          ) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      await assert.rejects(async () => {
-        await promise;
-      }, expectedError);
-      assert(
-        (client.descriptors.page.searchJobsForAlert.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.searchJobsForAlert, request)
-      );
-      assert.strictEqual(
-        (client.descriptors.page.searchJobsForAlert
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
-        expectedHeaderRequestParams
-      );
-    });
-
-    it('uses async iteration with searchJobsForAlert without error', async () => {
-      const client = new jobserviceModule.v4beta1.JobServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.talent.v4beta1.SearchJobsRequest()
-      );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.talent.v4beta1.SearchJobsResponse.MatchingJob()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.talent.v4beta1.SearchJobsResponse.MatchingJob()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.talent.v4beta1.SearchJobsResponse.MatchingJob()
-        ),
-      ];
-      client.descriptors.page.searchJobsForAlert.asyncIterate = stubAsyncIterationCall(
-        expectedResponse
-      );
-      const responses: protos.google.cloud.talent.v4beta1.SearchJobsResponse.IMatchingJob[] = [];
-      const iterable = client.searchJobsForAlertAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (client.descriptors.page.searchJobsForAlert
-          .asyncIterate as SinonStub).getCall(0).args[1],
-        request
-      );
-      assert.strictEqual(
-        (client.descriptors.page.searchJobsForAlert
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
-        expectedHeaderRequestParams
-      );
-    });
-
-    it('uses async iteration with searchJobsForAlert with error', async () => {
-      const client = new jobserviceModule.v4beta1.JobServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.talent.v4beta1.SearchJobsRequest()
-      );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedError = new Error('expected');
-      client.descriptors.page.searchJobsForAlert.asyncIterate = stubAsyncIterationCall(
-        undefined,
-        expectedError
-      );
-      const iterable = client.searchJobsForAlertAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.talent.v4beta1.SearchJobsResponse.IMatchingJob[] = [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (client.descriptors.page.searchJobsForAlert
-          .asyncIterate as SinonStub).getCall(0).args[1],
-        request
-      );
-      assert.strictEqual(
-        (client.descriptors.page.searchJobsForAlert
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
         expectedHeaderRequestParams
       );
     });

@@ -299,9 +299,7 @@ describe('v4beta1.CompanyServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.createCompany(request);
-      }, expectedError);
+      await assert.rejects(client.createCompany(request), expectedError);
       assert(
         (client.innerApiCalls.createCompany as SinonStub)
           .getCall(0)
@@ -413,9 +411,7 @@ describe('v4beta1.CompanyServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.getCompany(request);
-      }, expectedError);
+      await assert.rejects(client.getCompany(request), expectedError);
       assert(
         (client.innerApiCalls.getCompany as SinonStub)
           .getCall(0)
@@ -530,9 +526,7 @@ describe('v4beta1.CompanyServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.updateCompany(request);
-      }, expectedError);
+      await assert.rejects(client.updateCompany(request), expectedError);
       assert(
         (client.innerApiCalls.updateCompany as SinonStub)
           .getCall(0)
@@ -644,9 +638,7 @@ describe('v4beta1.CompanyServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.deleteCompany(request);
-      }, expectedError);
+      await assert.rejects(client.deleteCompany(request), expectedError);
       assert(
         (client.innerApiCalls.deleteCompany as SinonStub)
           .getCall(0)
@@ -762,9 +754,7 @@ describe('v4beta1.CompanyServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.listCompanies(request);
-      }, expectedError);
+      await assert.rejects(client.listCompanies(request), expectedError);
       assert(
         (client.innerApiCalls.listCompanies as SinonStub)
           .getCall(0)
@@ -855,9 +845,7 @@ describe('v4beta1.CompanyServiceClient', () => {
           reject(err);
         });
       });
-      await assert.rejects(async () => {
-        await promise;
-      }, expectedError);
+      await assert.rejects(promise, expectedError);
       assert(
         (client.descriptors.page.listCompanies.createStream as SinonStub)
           .getCall(0)

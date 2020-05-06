@@ -299,9 +299,7 @@ describe('v4beta1.TenantServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.createTenant(request);
-      }, expectedError);
+      await assert.rejects(client.createTenant(request), expectedError);
       assert(
         (client.innerApiCalls.createTenant as SinonStub)
           .getCall(0)
@@ -410,9 +408,7 @@ describe('v4beta1.TenantServiceClient', () => {
       };
       const expectedError = new Error('expected');
       client.innerApiCalls.getTenant = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(async () => {
-        await client.getTenant(request);
-      }, expectedError);
+      await assert.rejects(client.getTenant(request), expectedError);
       assert(
         (client.innerApiCalls.getTenant as SinonStub)
           .getCall(0)
@@ -527,9 +523,7 @@ describe('v4beta1.TenantServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.updateTenant(request);
-      }, expectedError);
+      await assert.rejects(client.updateTenant(request), expectedError);
       assert(
         (client.innerApiCalls.updateTenant as SinonStub)
           .getCall(0)
@@ -641,9 +635,7 @@ describe('v4beta1.TenantServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.deleteTenant(request);
-      }, expectedError);
+      await assert.rejects(client.deleteTenant(request), expectedError);
       assert(
         (client.innerApiCalls.deleteTenant as SinonStub)
           .getCall(0)
@@ -759,9 +751,7 @@ describe('v4beta1.TenantServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.listTenants(request);
-      }, expectedError);
+      await assert.rejects(client.listTenants(request), expectedError);
       assert(
         (client.innerApiCalls.listTenants as SinonStub)
           .getCall(0)
@@ -851,9 +841,7 @@ describe('v4beta1.TenantServiceClient', () => {
           reject(err);
         });
       });
-      await assert.rejects(async () => {
-        await promise;
-      }, expectedError);
+      await assert.rejects(promise, expectedError);
       assert(
         (client.descriptors.page.listTenants.createStream as SinonStub)
           .getCall(0)

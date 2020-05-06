@@ -315,9 +315,7 @@ describe('v4beta1.ApplicationServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.createApplication(request);
-      }, expectedError);
+      await assert.rejects(client.createApplication(request), expectedError);
       assert(
         (client.innerApiCalls.createApplication as SinonStub)
           .getCall(0)
@@ -435,9 +433,7 @@ describe('v4beta1.ApplicationServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.getApplication(request);
-      }, expectedError);
+      await assert.rejects(client.getApplication(request), expectedError);
       assert(
         (client.innerApiCalls.getApplication as SinonStub)
           .getCall(0)
@@ -558,9 +554,7 @@ describe('v4beta1.ApplicationServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.updateApplication(request);
-      }, expectedError);
+      await assert.rejects(client.updateApplication(request), expectedError);
       assert(
         (client.innerApiCalls.updateApplication as SinonStub)
           .getCall(0)
@@ -678,9 +672,7 @@ describe('v4beta1.ApplicationServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.deleteApplication(request);
-      }, expectedError);
+      await assert.rejects(client.deleteApplication(request), expectedError);
       assert(
         (client.innerApiCalls.deleteApplication as SinonStub)
           .getCall(0)
@@ -814,9 +806,7 @@ describe('v4beta1.ApplicationServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.listApplications(request);
-      }, expectedError);
+      await assert.rejects(client.listApplications(request), expectedError);
       assert(
         (client.innerApiCalls.listApplications as SinonStub)
           .getCall(0)
@@ -917,9 +907,7 @@ describe('v4beta1.ApplicationServiceClient', () => {
           reject(err);
         });
       });
-      await assert.rejects(async () => {
-        await promise;
-      }, expectedError);
+      await assert.rejects(promise, expectedError);
       assert(
         (client.descriptors.page.listApplications.createStream as SinonStub)
           .getCall(0)

@@ -236,9 +236,7 @@ describe('v4beta1.EventServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(async () => {
-        await client.createClientEvent(request);
-      }, expectedError);
+      await assert.rejects(client.createClientEvent(request), expectedError);
       assert(
         (client.innerApiCalls.createClientEvent as SinonStub)
           .getCall(0)
