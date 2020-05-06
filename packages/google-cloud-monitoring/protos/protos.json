@@ -94,8 +94,7 @@
                         "condition": {
                           "oneof": [
                             "conditionThreshold",
-                            "conditionAbsent",
-                            "conditionTimeSeriesQueryLanguage"
+                            "conditionAbsent"
                           ]
                         }
                       },
@@ -115,10 +114,6 @@
                         "conditionAbsent": {
                           "type": "MetricAbsence",
                           "id": 2
-                        },
-                        "conditionTimeSeriesQueryLanguage": {
-                          "type": "TimeSeriesQueryLanguageCondition",
-                          "id": 14
                         }
                       },
                       "nested": {
@@ -198,18 +193,6 @@
                             "trigger": {
                               "type": "Trigger",
                               "id": 3
-                            }
-                          }
-                        },
-                        "TimeSeriesQueryLanguageCondition": {
-                          "fields": {
-                            "query": {
-                              "type": "string",
-                              "id": 1
-                            },
-                            "summary": {
-                              "type": "string",
-                              "id": 2
                             }
                           }
                         }

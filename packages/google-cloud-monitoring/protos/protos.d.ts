@@ -285,9 +285,6 @@ export namespace google {
 
                     /** Condition conditionAbsent */
                     conditionAbsent?: (google.monitoring.v3.AlertPolicy.Condition.IMetricAbsence|null);
-
-                    /** Condition conditionTimeSeriesQueryLanguage */
-                    conditionTimeSeriesQueryLanguage?: (google.monitoring.v3.AlertPolicy.Condition.ITimeSeriesQueryLanguageCondition|null);
                 }
 
                 /** Represents a Condition. */
@@ -311,11 +308,8 @@ export namespace google {
                     /** Condition conditionAbsent. */
                     public conditionAbsent?: (google.monitoring.v3.AlertPolicy.Condition.IMetricAbsence|null);
 
-                    /** Condition conditionTimeSeriesQueryLanguage. */
-                    public conditionTimeSeriesQueryLanguage?: (google.monitoring.v3.AlertPolicy.Condition.ITimeSeriesQueryLanguageCondition|null);
-
                     /** Condition condition. */
-                    public condition?: ("conditionThreshold"|"conditionAbsent"|"conditionTimeSeriesQueryLanguage");
+                    public condition?: ("conditionThreshold"|"conditionAbsent");
 
                     /**
                      * Creates a new Condition instance using the specified properties.
@@ -724,102 +718,6 @@ export namespace google {
 
                         /**
                          * Converts this MetricAbsence to JSON.
-                         * @returns JSON object
-                         */
-                        public toJSON(): { [k: string]: any };
-                    }
-
-                    /** Properties of a TimeSeriesQueryLanguageCondition. */
-                    interface ITimeSeriesQueryLanguageCondition {
-
-                        /** TimeSeriesQueryLanguageCondition query */
-                        query?: (string|null);
-
-                        /** TimeSeriesQueryLanguageCondition summary */
-                        summary?: (string|null);
-                    }
-
-                    /** Represents a TimeSeriesQueryLanguageCondition. */
-                    class TimeSeriesQueryLanguageCondition implements ITimeSeriesQueryLanguageCondition {
-
-                        /**
-                         * Constructs a new TimeSeriesQueryLanguageCondition.
-                         * @param [properties] Properties to set
-                         */
-                        constructor(properties?: google.monitoring.v3.AlertPolicy.Condition.ITimeSeriesQueryLanguageCondition);
-
-                        /** TimeSeriesQueryLanguageCondition query. */
-                        public query: string;
-
-                        /** TimeSeriesQueryLanguageCondition summary. */
-                        public summary: string;
-
-                        /**
-                         * Creates a new TimeSeriesQueryLanguageCondition instance using the specified properties.
-                         * @param [properties] Properties to set
-                         * @returns TimeSeriesQueryLanguageCondition instance
-                         */
-                        public static create(properties?: google.monitoring.v3.AlertPolicy.Condition.ITimeSeriesQueryLanguageCondition): google.monitoring.v3.AlertPolicy.Condition.TimeSeriesQueryLanguageCondition;
-
-                        /**
-                         * Encodes the specified TimeSeriesQueryLanguageCondition message. Does not implicitly {@link google.monitoring.v3.AlertPolicy.Condition.TimeSeriesQueryLanguageCondition.verify|verify} messages.
-                         * @param message TimeSeriesQueryLanguageCondition message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encode(message: google.monitoring.v3.AlertPolicy.Condition.ITimeSeriesQueryLanguageCondition, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Encodes the specified TimeSeriesQueryLanguageCondition message, length delimited. Does not implicitly {@link google.monitoring.v3.AlertPolicy.Condition.TimeSeriesQueryLanguageCondition.verify|verify} messages.
-                         * @param message TimeSeriesQueryLanguageCondition message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encodeDelimited(message: google.monitoring.v3.AlertPolicy.Condition.ITimeSeriesQueryLanguageCondition, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Decodes a TimeSeriesQueryLanguageCondition message from the specified reader or buffer.
-                         * @param reader Reader or buffer to decode from
-                         * @param [length] Message length if known beforehand
-                         * @returns TimeSeriesQueryLanguageCondition
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.monitoring.v3.AlertPolicy.Condition.TimeSeriesQueryLanguageCondition;
-
-                        /**
-                         * Decodes a TimeSeriesQueryLanguageCondition message from the specified reader or buffer, length delimited.
-                         * @param reader Reader or buffer to decode from
-                         * @returns TimeSeriesQueryLanguageCondition
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.monitoring.v3.AlertPolicy.Condition.TimeSeriesQueryLanguageCondition;
-
-                        /**
-                         * Verifies a TimeSeriesQueryLanguageCondition message.
-                         * @param message Plain object to verify
-                         * @returns `null` if valid, otherwise the reason why it is not
-                         */
-                        public static verify(message: { [k: string]: any }): (string|null);
-
-                        /**
-                         * Creates a TimeSeriesQueryLanguageCondition message from a plain object. Also converts values to their respective internal types.
-                         * @param object Plain object
-                         * @returns TimeSeriesQueryLanguageCondition
-                         */
-                        public static fromObject(object: { [k: string]: any }): google.monitoring.v3.AlertPolicy.Condition.TimeSeriesQueryLanguageCondition;
-
-                        /**
-                         * Creates a plain object from a TimeSeriesQueryLanguageCondition message. Also converts values to other types if specified.
-                         * @param message TimeSeriesQueryLanguageCondition
-                         * @param [options] Conversion options
-                         * @returns Plain object
-                         */
-                        public static toObject(message: google.monitoring.v3.AlertPolicy.Condition.TimeSeriesQueryLanguageCondition, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                        /**
-                         * Converts this TimeSeriesQueryLanguageCondition to JSON.
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
