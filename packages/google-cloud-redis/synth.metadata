@@ -4,14 +4,22 @@
       "git": {
         "name": ".",
         "remote": "git@github.com:googleapis/nodejs-redis.git",
-        "sha": "d90016f4789801f246f4b7ef36168f8dbe71acf4"
+        "sha": "00ab9db418b076a9ab557f0008747ee5ecbc5636"
+      }
+    },
+    {
+      "git": {
+        "name": "googleapis",
+        "remote": "https://github.com/googleapis/googleapis.git",
+        "sha": "6dfd72d028a0d0a43764e060f7b15e004385c3a1",
+        "internalRef": "310168181"
       }
     },
     {
       "git": {
         "name": "synthtool",
         "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "ab883569eb0257bbf16a6d825fd018b3adde3912"
+        "sha": "558bb0d70fa98ea228483b44885704d8941a6a80"
       }
     }
   ],
@@ -20,7 +28,7 @@
       "client": {
         "source": "googleapis",
         "apiName": "redis",
-        "apiVersion": "v1beta1",
+        "apiVersion": "v1",
         "language": "typescript",
         "generator": "gapic-generator-typescript"
       }
@@ -29,7 +37,7 @@
       "client": {
         "source": "googleapis",
         "apiName": "redis",
-        "apiVersion": "v1",
+        "apiVersion": "v1beta1",
         "language": "typescript",
         "generator": "gapic-generator-typescript"
       }
