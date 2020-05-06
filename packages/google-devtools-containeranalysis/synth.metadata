@@ -4,15 +4,7 @@
       "git": {
         "name": ".",
         "remote": "git@github.com:googleapis/nodejs-containeranalysis.git",
-        "sha": "33cc13441237f0262ec6a8974a1beda1022cef90"
-      }
-    },
-    {
-      "git": {
-        "name": "googleapis",
-        "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "1b5a8d2bbb69c5a04db26bd546d2888e609c6bab",
-        "internalRef": "309845930"
+        "sha": "3cdfed35ea873951dd1eb8228707c412b2747b8d"
       }
     },
     {
