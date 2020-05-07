@@ -26,31 +26,32 @@ AUTOSYNTH_MULTIPLE_COMMITS = True
 gapic = gcp.GAPICMicrogenerator()
 # keep v1beta1 for the time being:
 library = gapic.typescript_library(
-  'secretmanager',
-  generator_args={
-    "grpc-service-config": "google/cloud/secrets/v1beta1/secretmanager_grpc_service_config.json",
-    "package-name": "@google-cloud/secret-manager",
-  },
-  proto_path='/google/cloud/secrets/v1beta1',
-  version='v1beta1')
-s.copy(library, excludes=['package.json', 'README.md', 'src/index.ts'])
+    'secretmanager',
+    generator_args={
+        "grpc-service-config": "google/cloud/secrets/v1beta1/secretmanager_grpc_service_config.json",
+        "package-name": "@google-cloud/secret-manager",
+    },
+    proto_path='/google/cloud/secrets/v1beta1',
+    version='v1beta1')
+s.copy(library, excludes=['package.json', 'README.md'])
 # run the gapic generator (for all versions except v1beta1):
 versions = ['v1']
 library = 'secretmanager'
 for version in versions:
-  library = gapic.typescript_library(
-    library,
-    generator_args={
-      "grpc-service-config": f"google/cloud/{library}/{version}/secretmanager_grpc_service_config.json",
-      "package-name": "@google-cloud/secret-manager",
-    },
-    proto_path=f'/google/cloud/{library}/{version}',
-    version=version)
-s.copy(library, excludes=['package.json', 'README.md', 'src/index.ts'])
+    library = gapic.typescript_library(
+        library,
+        generator_args={
+            "grpc-service-config": f"google/cloud/{library}/{version}/secretmanager_grpc_service_config.json",
+            "package-name": "@google-cloud/secret-manager",
+        },
+        proto_path=f'/google/cloud/{library}/{version}',
+        version=version)
+s.copy(library, excludes=['package.json', 'README.md'])
 
 # Copy common templates
 common_templates = gcp.CommonTemplates()
-templates = common_templates.node_library(source_location='build/src')
+templates = common_templates.node_library(
+    source_location='build/src', versions=['v1', 'v1beta1'], default_version='v1')
 s.copy(templates, excludes=[])
 
 node.postprocess_gapic_library()

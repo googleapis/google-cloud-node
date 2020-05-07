@@ -546,12 +546,12 @@
                     "cc_enable_arenas": true,
                     "csharp_namespace": "Google.Cloud.SecretManager.V1Beta1",
                     "go_package": "google.golang.org/genproto/googleapis/cloud/secretmanager/v1beta1;secretmanager",
-                    "ruby_package": "Google::Cloud::SecretManager::V1beta1",
                     "java_multiple_files": true,
                     "java_outer_classname": "ServiceProto",
                     "java_package": "com.google.cloud.secretmanager.v1beta1",
                     "objc_class_prefix": "GSM",
-                    "php_namespace": "Google\\Cloud\\SecretManager\\V1beta1"
+                    "php_namespace": "Google\\Cloud\\SecretManager\\V1beta1",
+                    "ruby_package": "Google::Cloud::SecretManager::V1beta1"
                   },
                   "nested": {
                     "Secret": {
@@ -884,7 +884,10 @@
                         },
                         "secret": {
                           "type": "Secret",
-                          "id": 3
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },

@@ -374,7 +374,7 @@ export class SecretManagerServiceClient {
    *   contain uppercase and lowercase letters, numerals, and the hyphen (`-`) and
    *   underscore (`_`) characters.
    * @param {google.cloud.secrets.v1beta1.Secret} request.secret
-   *   A {@link google.cloud.secrets.v1beta1.Secret|Secret} with initial field values.
+   *   Required. A {@link google.cloud.secrets.v1beta1.Secret|Secret} with initial field values.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
