@@ -3,8 +3,16 @@
     {
       "git": {
         "name": ".",
-        "remote": "git@github.com:googleapis/nodejs-text-to-speech.git",
-        "sha": "633e1b7b70bd5c19d49d8b19ccd2246e56fbb2ac"
+        "remote": "https://github.com/googleapis/nodejs-text-to-speech.git",
+        "sha": "6c7d38a0a217d6d7a7d77dcde3756b10e47fb220"
+      }
+    },
+    {
+      "git": {
+        "name": "googleapis",
+        "remote": "https://github.com/googleapis/googleapis.git",
+        "sha": "a3a0bf0f6291d69f2ff3df7fcd63d28ee20ac727",
+        "internalRef": "310060413"
       }
     },
     {
