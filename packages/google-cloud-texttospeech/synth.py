@@ -34,18 +34,19 @@ for version in versions:
         'texttospeech',
         generator_args={
             "grpc-service-config": f"google/cloud/texttospeech/{version}/texttospeech_grpc_service_config.json",
-            "package-name":f"@google-cloud/text-to-speech"
-            },
+            "package-name": f"@google-cloud/text-to-speech"
+        },
         proto_path=f'/google/cloud/texttospeech/{version}',
         version=version)
 
     # skip index, protos, package.json, and README.md
     s.copy(
         library,
-        excludes=['package.json', 'README.md', 'src/index.ts'],
+        excludes=['package.json', 'README.md'],
     )
 
-templates = common_templates.node_library(source_location='build/src')
+templates = common_templates.node_library(
+    source_location='build/src', versions=versions, default_version='v1')
 s.copy(templates)
 
 node.postprocess_gapic_library()
