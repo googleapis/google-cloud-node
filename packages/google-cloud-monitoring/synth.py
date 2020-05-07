@@ -37,10 +37,11 @@ library = gapic.typescript_library(
     extra_proto_files=['google/cloud/common_resources.proto']
 )
 
-s.copy(library, excludes=["src/index.ts", "README.md", "package.json"])
+s.copy(library, excludes=["README.md", "package.json"])
 
 common_templates = gcp.CommonTemplates()
-templates = common_templates.node_library(source_location='build/src')
+templates = common_templates.node_library(
+    source_location="build/src", versions=["v3"], default_version="v3")
 s.copy(templates)
 
 node.postprocess_gapic_library()
