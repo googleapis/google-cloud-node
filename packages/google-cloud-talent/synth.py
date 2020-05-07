@@ -29,19 +29,20 @@ gapic = gcp.GAPICMicrogenerator()
 versions = ["v4beta1"]
 for version in versions:
     library = gapic.typescript_library(
-        "talent", version, 
+        "talent", version,
         generator_args={
             "grpc-service-config": f"google/cloud/talent/{version}/talent_grpc_service_config.json",
             "package-name": "@google-cloud/talent",
             "main-service": "talent"
-            },
-            proto_path=f'/google/cloud/talent/{version}',
+        },
+        proto_path=f'/google/cloud/talent/{version}',
     )
     s.copy(library, excludes=['README.md', 'package.json'])
 
 # Copy common templates
 common_templates = gcp.CommonTemplates()
-templates = common_templates.node_library(source_location='build/src')
+templates = common_templates.node_library(
+    source_location='build/src', versions=versions, default_version='v4beta1')
 s.copy(templates)
 
 node.postprocess_gapic_library()
