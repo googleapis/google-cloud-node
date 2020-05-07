@@ -25,30 +25,31 @@ AUTOSYNTH_MULTIPLE_COMMITS = True
 
 # Run the gapic generator
 gapic = gcp.GAPICMicrogenerator()
-versions = ["v2beta2", "v2beta3", "v2"]
+versions = ["v2", "v2beta2", "v2beta3"]
 for version in versions:
     library = gapic.typescript_library(
         "tasks", version,
         generator_args={
             "grpc-service-config": f"google/cloud/tasks/{version}/cloudtasks_grpc_service_config.json",
-            "package-name":f"@google-cloud/tasks",
+            "package-name": f"@google-cloud/tasks",
             "main-service": f"tasks"
         },
         proto_path=f'/google/cloud/tasks/{version}',
         extra_proto_files=['google/cloud/common_resources.proto'],
     )
-    s.copy(library, excludes=["README.md", "package.json", "src/index.ts"])
+    s.copy(library, excludes=["README.md", "package.json"])
 
 # Copy common templates
 common_templates = gcp.CommonTemplates()
-templates = common_templates.node_library(source_location='build/src')
+templates = common_templates.node_library(
+    source_location='build/src', versions=versions, default_version='v2')
 s.copy(templates)
 
 s.replace('**/src/**/cloud_tasks_client_config.json',
-        '"initial_rpc_timeout_millis": 60000',
-        '"initial_rpc_timeout_millis": 20000')
+          '"initial_rpc_timeout_millis": 60000',
+          '"initial_rpc_timeout_millis": 20000')
 s.replace('**/src/**/cloud_tasks_client_config.json',
-        '"max_rpc_timeout_millis": 60000',
-        '"max_rpc_timeout_millis": 20000')
+          '"max_rpc_timeout_millis": 60000',
+          '"max_rpc_timeout_millis": 20000')
 
 node.postprocess_gapic_library()
