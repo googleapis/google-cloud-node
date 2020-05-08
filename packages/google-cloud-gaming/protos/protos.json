@@ -306,7 +306,7 @@
                           "id": 1,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).child_type": "gameservices.googleapis.com/GameServerCluster"
+                            "(google.api.resource_reference).type": "gameservices.googleapis.com/GameServerCluster"
                           }
                         },
                         "pageSize": {
@@ -376,7 +376,7 @@
                           "id": 1,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).child_type": "gameservices.googleapis.com/GameServerCluster"
+                            "(google.api.resource_reference).type": "gameservices.googleapis.com/GameServerCluster"
                           }
                         },
                         "gameServerClusterId": {
@@ -401,8 +401,7 @@
                           "type": "string",
                           "id": 1,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).child_type": "gameservices.googleapis.com/GameServerCluster"
+                            "(google.api.field_behavior)": "REQUIRED"
                           }
                         },
                         "gameServerClusterId": {
@@ -458,8 +457,7 @@
                           "type": "string",
                           "id": 1,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "gameservices.googleapis.com/GameServerCluster"
+                            "(google.api.field_behavior)": "REQUIRED"
                           }
                         },
                         "previewTime": {
@@ -697,7 +695,7 @@
                           "id": 1,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).child_type": "gameservices.googleapis.com/GameServerConfig"
+                            "(google.api.resource_reference).type": "gameservices.googleapis.com/GameServerConfig"
                           }
                         },
                         "pageSize": {
@@ -767,7 +765,7 @@
                           "id": 1,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).child_type": "gameservices.googleapis.com/GameServerConfig"
+                            "(google.api.resource_reference).type": "gameservices.googleapis.com/GameServerConfig"
                           }
                         },
                         "configId": {
@@ -935,7 +933,7 @@
                           "id": 1,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).child_type": "gameservices.googleapis.com/GameServerDeployment"
+                            "(google.api.resource_reference).type": "gameservices.googleapis.com/GameServerDeployment"
                           }
                         },
                         "pageSize": {
@@ -1017,7 +1015,7 @@
                           "id": 1,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).child_type": "gameservices.googleapis.com/GameServerDeployment"
+                            "(google.api.resource_reference).type": "gameservices.googleapis.com/GameServerDeployment"
                           }
                         },
                         "deploymentId": {
@@ -1366,7 +1364,7 @@
                           "id": 1,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).child_type": "gameservices.googleapis.com/Realm"
+                            "(google.api.resource_reference).type": "gameservices.googleapis.com/Realm"
                           }
                         },
                         "pageSize": {
@@ -1436,7 +1434,7 @@
                           "id": 1,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).child_type": "gameservices.googleapis.com/Realm"
+                            "(google.api.resource_reference).type": "gameservices.googleapis.com/Realm"
                           }
                         },
                         "realmId": {
