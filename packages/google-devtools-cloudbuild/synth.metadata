@@ -3,8 +3,8 @@
     {
       "git": {
         "name": ".",
-        "remote": "git@github.com:googleapis/nodejs-cloudbuild.git",
-        "sha": "7b50a74c098e782393f92140a37e3bd26f45e77d"
+        "remote": "https://github.com/googleapis/nodejs-cloudbuild.git",
+        "sha": "aa7d99b9c02267808cac07f7691f5ce62f06ca14"
       }
     },
     {
@@ -19,7 +19,7 @@
       "git": {
         "name": "synthtool",
         "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "ab883569eb0257bbf16a6d825fd018b3adde3912"
+        "sha": "be74d3e532faa47eb59f1a0eaebde0860d1d8ab4"
       }
     }
   ],
