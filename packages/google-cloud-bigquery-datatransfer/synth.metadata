@@ -3,8 +3,8 @@
     {
       "git": {
         "name": ".",
-        "remote": "git@github.com:googleapis/nodejs-bigquery-data-transfer.git",
-        "sha": "297b744e83a680b78ffa8a3270035b5e7bfd94e3"
+        "remote": "https://github.com/googleapis/nodejs-bigquery-data-transfer.git",
+        "sha": "458ea3a3e5adc964b5f695d8f68e3409a3f4d230"
       }
     },
     {
@@ -19,7 +19,7 @@
       "git": {
         "name": "synthtool",
         "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "ab883569eb0257bbf16a6d825fd018b3adde3912"
+        "sha": "be74d3e532faa47eb59f1a0eaebde0860d1d8ab4"
       }
     }
   ],
