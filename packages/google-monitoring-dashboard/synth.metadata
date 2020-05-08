@@ -3,15 +3,23 @@
     {
       "git": {
         "name": ".",
-        "remote": "git@github.com:googleapis/nodejs-monitoring-dashboards.git",
-        "sha": "21a5fc3779c513316cbc648f7aebfbfed41f2022"
+        "remote": "https://github.com/googleapis/nodejs-monitoring-dashboards.git",
+        "sha": "61314fe1099dfeab00d1392ffe1757880d398497"
+      }
+    },
+    {
+      "git": {
+        "name": "googleapis",
+        "remote": "https://github.com/googleapis/googleapis.git",
+        "sha": "83816bb3093686a28af2891db5b7506614a820b1",
+        "internalRef": "310509915"
       }
     },
     {
       "git": {
         "name": "synthtool",
         "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "ab883569eb0257bbf16a6d825fd018b3adde3912"
+        "sha": "be74d3e532faa47eb59f1a0eaebde0860d1d8ab4"
       }
     }
   ],
