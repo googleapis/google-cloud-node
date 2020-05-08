@@ -3,8 +3,8 @@
     {
       "git": {
         "name": ".",
-        "remote": "git@github.com:googleapis/nodejs-cloud-container.git",
-        "sha": "edbc1c99e4f50665066ed61593d632201f60e2f5"
+        "remote": "https://github.com/googleapis/nodejs-cloud-container.git",
+        "sha": "29b309db935655a6ab5add27e111f72f7d053c07"
       }
     },
     {
@@ -19,7 +19,7 @@
       "git": {
         "name": "synthtool",
         "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "ab883569eb0257bbf16a6d825fd018b3adde3912"
+        "sha": "be74d3e532faa47eb59f1a0eaebde0860d1d8ab4"
       }
     }
   ],
