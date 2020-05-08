@@ -3,8 +3,8 @@
     {
       "git": {
         "name": ".",
-        "remote": "git@github.com:googleapis/nodejs-language.git",
-        "sha": "84b62fdebba9b81746d0bceb993ff0e967c9ce5e"
+        "remote": "https://github.com/googleapis/nodejs-language.git",
+        "sha": "b63d9fc53a0287c5d4c4c626d91b520bd0b28cd4"
       }
     },
     {
@@ -19,7 +19,7 @@
       "git": {
         "name": "synthtool",
         "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "756bc4dfc24e8bc4c5dd4116daa41a0440ebf5a0"
+        "sha": "be74d3e532faa47eb59f1a0eaebde0860d1d8ab4"
       }
     }
   ],
