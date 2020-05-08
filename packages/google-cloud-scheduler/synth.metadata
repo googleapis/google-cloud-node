@@ -4,7 +4,7 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/nodejs-scheduler.git",
-        "sha": "367f922614d614d9bc169508ff00ece7dc31bfb2"
+        "sha": "d2ffc6e4c8775251eeeb8b6a49cdf3c86bf74fc2"
       }
     },
     {
@@ -19,7 +19,7 @@
       "git": {
         "name": "synthtool",
         "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "558bb0d70fa98ea228483b44885704d8941a6a80"
+        "sha": "be74d3e532faa47eb59f1a0eaebde0860d1d8ab4"
       }
     }
   ],
