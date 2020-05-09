@@ -71,7 +71,7 @@
     "express": "^4.17.1",
     "gts": "^2.0.0",
     "hapi": "^18.1.0",
-    "js-green-licenses": "^1.1.0",
+    "js-green-licenses": "^2.0.0",
     "json-stable-stringify": "^1.0.1",
     "koa": "^2.7.0",
     "linkinator": "^2.0.0",
