@@ -4,6 +4,34 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/dataproc?activeTab=versions
 
+## [2.0.0](https://www.github.com/googleapis/nodejs-dataproc/compare/v1.6.0...v2.0.0) (2020-05-09)
+
+
+### ⚠ BREAKING CHANGES
+
+* The library now supports Node.js v10+. The last version to support Node.js v8 is tagged legacy-8 on NPM.
+* convert dataproc to typescript (#310)
+
+### Features
+
+* add long running operation client ([#355](https://www.github.com/googleapis/nodejs-dataproc/issues/355)) ([74e0c24](https://www.github.com/googleapis/nodejs-dataproc/commit/74e0c24d1a90b661c589393a5f39eb2be749aa92))
+* adding sample for instantiate inline workflow template ([#335](https://www.github.com/googleapis/nodejs-dataproc/issues/335)) ([ecbcc45](https://www.github.com/googleapis/nodejs-dataproc/commit/ecbcc4590a5a92e9ca2c67837dd86523b537617a))
+* AutoscalingPolicy now marked as required field ([ac7ee82](https://www.github.com/googleapis/nodejs-dataproc/commit/ac7ee8243ad53964b9b9a2e99fe6068fb308e577))
+* check status of long running operation by its name ([#372](https://www.github.com/googleapis/nodejs-dataproc/issues/372)) ([6f22a66](https://www.github.com/googleapis/nodejs-dataproc/commit/6f22a66a6f73a758b59d26ced9985530ecc392a9))
+* convert dataproc to typescript ([#310](https://www.github.com/googleapis/nodejs-dataproc/issues/310)) ([2c1841e](https://www.github.com/googleapis/nodejs-dataproc/commit/2c1841ec1b93c83ffd033de0dea0910dceab4488))
+* deferred client initialization ([#323](https://www.github.com/googleapis/nodejs-dataproc/issues/323)) ([3fb48d3](https://www.github.com/googleapis/nodejs-dataproc/commit/3fb48d37715cdcfc16c09ff54bd5326b56ab40ab))
+* drop node8 support, support for async iterators ([#339](https://www.github.com/googleapis/nodejs-dataproc/issues/339)) ([e3650c5](https://www.github.com/googleapis/nodejs-dataproc/commit/e3650c55f4e57c65e01ff00649cf5592f72de88f))
+
+
+### Bug Fixes
+
+* dataproc v1 AutoscalingPolicy annotation ([943585d](https://www.github.com/googleapis/nodejs-dataproc/commit/943585d1d5fd9d1126dc2af7e9f7b769ef57fb38)), closes [#306](https://www.github.com/googleapis/nodejs-dataproc/issues/306) [#303](https://www.github.com/googleapis/nodejs-dataproc/issues/303) [#305](https://www.github.com/googleapis/nodejs-dataproc/issues/305)
+* export explicit version from protos.js ([#345](https://www.github.com/googleapis/nodejs-dataproc/issues/345)) ([07aed37](https://www.github.com/googleapis/nodejs-dataproc/commit/07aed377977fdb32271ad0a6aa80a33cfe463fc5))
+* reformat samples with sample-metadata ([#343](https://www.github.com/googleapis/nodejs-dataproc/issues/343)) ([97fdcf4](https://www.github.com/googleapis/nodejs-dataproc/commit/97fdcf44728771cb9b25b6d75b02c1025a91a98c))
+* remove eslint, update gax, fix generated protos, run the generator ([#350](https://www.github.com/googleapis/nodejs-dataproc/issues/350)) ([8546b3c](https://www.github.com/googleapis/nodejs-dataproc/commit/8546b3c960a1724a07fc861e90c72543972ddbc2))
+* support request params {key} with no =value  ([#366](https://www.github.com/googleapis/nodejs-dataproc/issues/366)) ([26c1795](https://www.github.com/googleapis/nodejs-dataproc/commit/26c179588ecc157521252307e1186ad94d36f81c))
+* synth.py clean up for multiple version ([#373](https://www.github.com/googleapis/nodejs-dataproc/issues/373)) ([7515b85](https://www.github.com/googleapis/nodejs-dataproc/commit/7515b856833fdde69ca454ccdad02c1188fe0134))
+
 ## [1.6.0](https://www.github.com/googleapis/nodejs-dataproc/compare/v1.5.0...v1.6.0) (2020-02-10)
 
 
