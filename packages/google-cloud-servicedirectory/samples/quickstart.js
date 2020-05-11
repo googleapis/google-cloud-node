@@ -15,16 +15,45 @@
 
 'use strict';
 
-async function quickstart() {
-  // [START service_directory_quickstart]
+async function quickstart(
+  projectId = 'my-project',
+  locationId = 'us-central1'
+) {
+  // [START servicedirectory_quickstart]
+  //
+  // TODO(developer): Uncomment these variables before running the sample.
+  //
+  // const projectId = 'my-project';
+  // const locationId = 'us-central1';
+
   // Imports the Google Cloud client library
-  const {LookupServiceClient} = require('@google-cloud/service-directory');
+  const {
+    RegistrationServiceClient,
+  } = require('@google-cloud/service-directory');
 
   // Creates a client
-  const ls = new LookupServiceClient();
+  const registrationServiceClient = new RegistrationServiceClient();
 
-  console.info(ls);
-  // [END service_directory_quickstart]
+  // Build the location name
+  const locationName = registrationServiceClient.locationPath(
+    projectId,
+    locationId
+  );
+
+  async function listNamespaces() {
+    const [namespaces] = await registrationServiceClient.listNamespaces({
+      parent: locationName,
+    });
+
+    console.log('Namespaces: ');
+    for (const n of namespaces) {
+      console.log(`${n.name}`);
+    }
+    return namespaces;
+  }
+
+  return listNamespaces();
+  // [END servicedirectory_quickstart]
 }
 
 const args = process.argv.slice(2);

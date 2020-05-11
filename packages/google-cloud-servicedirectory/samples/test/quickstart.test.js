@@ -24,9 +24,12 @@ const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
 
 const cwd = path.join(__dirname, '..');
 
-describe('Sample Integration Tests', () => {
+const projectId = process.env.GCLOUD_PROJECT;
+const locationId = 'us-central1';
+
+describe('Service Directory Quickstart', () => {
   it('should run quickstart.js', async () => {
-    const stdout = execSync('node ./quickstart.js', {
+    const stdout = execSync(`node quickstart.js ${projectId} ${locationId}`, {
       cwd,
     });
     // build should have exited with success status.
