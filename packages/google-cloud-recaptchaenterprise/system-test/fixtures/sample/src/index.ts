@@ -16,10 +16,10 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {RecaptchaEnterpriseServiceV1Beta1Client} from '@google-cloud/recaptcha-enterprise';
+import * as recaptchaenterprise from '@google-cloud/recaptcha-enterprise';
 
 function main() {
-  new RecaptchaEnterpriseServiceV1Beta1Client();
+  new recaptchaenterprise.v1beta1.RecaptchaEnterpriseServiceV1Beta1Client();
 }
 
 main();

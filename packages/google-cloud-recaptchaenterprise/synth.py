@@ -27,20 +27,21 @@ AUTOSYNTH_MULTIPLE_COMMITS = True
 gapic = gcp.GAPICMicrogenerator()
 versions = ['v1', 'v1beta1']
 for version in versions:
-  library = gapic.typescript_library(
-    'recaptchaenterprise', version,
-    generator_args={
-      "grpc-service-config": f"google/cloud/recaptchaenterprise/{version}/recaptchaenterprise_grpc_service_config.json",
-      "package-name": f"@google-cloud/recaptcha-enterprise",
-      },
-      proto_path=f'/google/cloud/recaptchaenterprise/{version}',
-      extra_proto_files=['google/cloud/common_resources.proto']
-      )
-  s.copy(library, excludes=['package.json', 'src/index.ts'])
+    library = gapic.typescript_library(
+        'recaptchaenterprise', version,
+        generator_args={
+            "grpc-service-config": f"google/cloud/recaptchaenterprise/{version}/recaptchaenterprise_grpc_service_config.json",
+            "package-name": f"@google-cloud/recaptcha-enterprise",
+        },
+        proto_path=f'/google/cloud/recaptchaenterprise/{version}',
+        extra_proto_files=['google/cloud/common_resources.proto']
+    )
+    s.copy(library, excludes=['package.json'])
 
 # Copy common templates
 common_templates = gcp.CommonTemplates()
-templates = common_templates.node_library(source_location='build/src')
+templates = common_templates.node_library(
+    source_location='build/src', versions=versions, default_version='v1')
 s.copy(templates)
 
 node.postprocess_gapic_library()
