@@ -1122,7 +1122,7 @@ class File extends ServiceObject<File> {
    * recourse is to try downloading the file again.
    *
    * For faster crc32c computation, you must manually install
-   * [`fast-crc32c`](http://www.gitnpm.com/fast-crc32c):
+   * [`fast-crc32c`](https://www.npmjs.com/package/fast-crc32c):
    *
    *     $ npm install --save fast-crc32c
    *
@@ -1608,21 +1608,21 @@ class File extends ServiceObject<File> {
    * by setting `options.resumable` to `false`.
    *
    * Resumable uploads require write access to the $HOME directory. Through
-   * [`config-store`](http://www.gitnpm.com/configstore), some metadata is
-   * stored. By default, if the directory is not writable, we will fall back to
-   * a simple upload. However, if you explicitly request a resumable upload, and
-   * we cannot write to the config directory, we will return a
+   * [`config-store`](https://www.npmjs.com/package/configstore), some metadata
+   * is stored. By default, if the directory is not writable, we will fall back
+   * to a simple upload. However, if you explicitly request a resumable upload,
+   * and we cannot write to the config directory, we will return a
    * `ResumableUploadError`.
    *
    * <p class="notice">
    *   There is some overhead when using a resumable upload that can cause
    *   noticeable performance degradation while uploading a series of small
-   * files. When uploading files less than 10MB, it is recommended that the
-   * resumable feature is disabled.
+   *   files. When uploading files less than 10MB, it is recommended that the
+   *   resumable feature is disabled.
    * </p>
    *
    * For faster crc32c computation, you must manually install
-   * [`fast-crc32c`](http://www.gitnpm.com/fast-crc32c):
+   * [`fast-crc32c`](https://www.npmjs.com/package/fast-crc32c):
    *
    *     $ npm install --save fast-crc32c
    *

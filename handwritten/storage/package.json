@@ -60,7 +60,7 @@
     "duplexify": "^3.5.0",
     "extend": "^3.0.2",
     "gaxios": "^3.0.0",
-    "gcs-resumable-upload": "^2.2.4",
+    "gcs-resumable-upload": "^3.0.0",
     "hash-stream-validation": "^0.2.2",
     "mime": "^2.2.0",
     "mime-types": "^2.0.8",
