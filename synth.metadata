@@ -3,8 +3,8 @@
     {
       "git": {
         "name": ".",
-        "remote": "git@github.com:googleapis/google-cloud-node.git",
-        "sha": "bf8f700992bc6c5dad0c49aa537e69efeaa2fda2"
+        "remote": "https://github.com/googleapis/google-cloud-node.git",
+        "sha": "5b7879c93af2231f0682aaaeab2a361c5ed0fcac"
       }
     }
   ]
