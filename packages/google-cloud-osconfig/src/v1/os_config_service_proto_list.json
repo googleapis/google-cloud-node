@@ -1,0 +1,5 @@
+[
+  "../../protos/google/cloud/osconfig/v1/osconfig_service.proto",
+  "../../protos/google/cloud/osconfig/v1/patch_deployments.proto",
+  "../../protos/google/cloud/osconfig/v1/patch_jobs.proto"
+]

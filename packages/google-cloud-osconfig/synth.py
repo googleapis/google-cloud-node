@@ -15,6 +15,7 @@
 
 import synthtool as s
 import synthtool.gcp as gcp
+import synthtool.languages.node as node
 import subprocess
 import logging
 
@@ -35,7 +36,7 @@ for version in versions:
     extra_proto_files=['google/cloud/common_resources.proto'],
     proto_path=f'/google/cloud/{name}/{version}',
     version=version)
-s.copy(library, excludes=['README.md'])
+s.copy(library, excludes=['README.md', 'package.json'])
 
 # Copy common templates
 common_templates = gcp.CommonTemplates()
@@ -43,8 +44,4 @@ templates = common_templates.node_library(
     source_location='build/src', versions=['v1'], default_version='v1')
 s.copy(templates, excludes=[])
 
-# Node.js specific cleanup
-subprocess.run(['npm', 'install'])
-subprocess.run(['npm', 'run', 'fix'])
-subprocess.run(['npx', 'compileProtos', 'src'])
-
+node.postprocess_gapic_library()
