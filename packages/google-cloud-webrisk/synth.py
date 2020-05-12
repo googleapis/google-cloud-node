@@ -26,19 +26,20 @@ AUTOSYNTH_MULTIPLE_COMMITS = True
 gapic = gcp.GAPICMicrogenerator()
 versions = ['v1', 'v1beta1']
 for version in versions:
-  library = gapic.typescript_library(
-    'webrisk',
-    generator_args={
-      "grpc-service-config": f"google/cloud/webrisk/{version}/webrisk_grpc_service_config.json",
-      "package-name": f"@google-cloud/web-risk"
-      },
-    proto_path=f'/google/cloud/webrisk/{version}',
-    version=version)
-  s.copy(library, excludes=['package.json', 'README.md', 'src/index.ts'])
+    library = gapic.typescript_library(
+        'webrisk',
+        generator_args={
+            "grpc-service-config": f"google/cloud/webrisk/{version}/webrisk_grpc_service_config.json",
+            "package-name": f"@google-cloud/web-risk"
+        },
+        proto_path=f'/google/cloud/webrisk/{version}',
+        version=version)
+    s.copy(library, excludes=['package.json', 'README.md'])
 
 # Copy common templates
 common_templates = gcp.CommonTemplates()
-templates = common_templates.node_library(source_location='build/src')
+templates = common_templates.node_library(
+    source_location='build/src', versions=versions, default_version='v1')
 s.copy(templates, excludes=['.nycrc'])
 
 node.postprocess_gapic_library()
