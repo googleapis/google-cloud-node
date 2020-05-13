@@ -347,6 +347,8 @@ export interface UploadOptions
   encryptionKey?: string | Buffer;
   kmsKeyName?: string;
   resumable?: boolean;
+  // tslint:disable-next-line:no-any
+  onUploadProgress?: (progressEvent: any) => void;
 }
 
 export interface MakeAllFilesPublicPrivateOptions {
@@ -3464,9 +3466,13 @@ class Bucket extends ServiceObject {
     }
 
     function upload() {
+      const writable = newFile.createWriteStream(options);
+      if (options.onUploadProgress) {
+        writable.on('progress', options.onUploadProgress);
+      }
       fs.createReadStream(pathString)
         .on('error', callback!)
-        .pipe(newFile.createWriteStream(options))
+        .pipe(writable)
         .on('error', callback!)
         .on('finish', () => {
           callback!(null, newFile, newFile.metadata);

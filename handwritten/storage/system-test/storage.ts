@@ -86,6 +86,7 @@ import {
   DeleteNotificationCallback,
 } from '../src';
 import * as nock from 'nock';
+import * as readline from 'readline';
 
 interface ErrorCallbackFunction {
   (err: Error | null): void;
@@ -2808,6 +2809,41 @@ describe('storage', () => {
       await file.setStorageClass('standard');
       const [metadata] = await file.getMetadata();
       assert.strictEqual(metadata.storageClass, 'STANDARD');
+    });
+  });
+
+  describe('bucket upload with progress', () => {
+    it('show bytes sent with resumable upload', async () => {
+      const fileSize = fs.statSync(FILES.big.path).size;
+      let called = false;
+      function onUploadProgress(evt: {bytesWritten: number}) {
+        called = true;
+        assert.strictEqual(typeof evt.bytesWritten, 'number');
+        assert.ok(evt.bytesWritten >= 0 && evt.bytesWritten <= fileSize);
+      }
+
+      await bucket.upload(FILES.big.path, {
+        resumable: true,
+        onUploadProgress,
+      });
+
+      assert.strictEqual(called, true);
+    });
+
+    it('show bytes sent with simple upload', async () => {
+      const fileSize = fs.statSync(FILES.big.path).size;
+      let called = false;
+      function onUploadProgress(evt: {bytesWritten: number}) {
+        called = true;
+        assert.strictEqual(typeof evt.bytesWritten, 'number');
+        assert.ok(evt.bytesWritten >= 0 && evt.bytesWritten <= fileSize);
+      }
+      await bucket.upload(FILES.big.path, {
+        resumable: false,
+        onUploadProgress,
+      });
+
+      assert.strictEqual(called, true);
     });
   });
 

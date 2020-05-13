@@ -1725,6 +1725,53 @@ describe('File', () => {
       writable.write('data');
     });
 
+    it('should emit progress via resumable upload', done => {
+      const progress = {};
+
+      resumableUploadOverride = {
+        upload() {
+          const uploadStream = new stream.PassThrough();
+          setImmediate(() => {
+            uploadStream.emit('progress', progress);
+          });
+
+          return uploadStream;
+        },
+      };
+
+      const writable = file.createWriteStream();
+
+      writable.on('progress', (evt: {}) => {
+        assert.strictEqual(evt, progress);
+        done();
+      });
+
+      writable.write('data');
+    });
+
+    it('should emit progress via simple upload', done => {
+      const progress = {};
+
+      makeWritableStreamOverride = (dup: duplexify.Duplexify) => {
+        const uploadStream = new stream.PassThrough();
+        uploadStream.on('progress', evt => dup.emit('progress', evt));
+
+        dup.setWritable(uploadStream);
+        setImmediate(() => {
+          uploadStream.emit('progress', progress);
+        });
+      };
+
+      const writable = file.createWriteStream({resumable: false});
+
+      writable.on('progress', (evt: {}) => {
+        assert.strictEqual(evt, progress);
+        done();
+      });
+
+      writable.write('data');
+    });
+
     it('should start a simple upload if specified', done => {
       const options = {
         metadata: METADATA,
@@ -3782,6 +3829,21 @@ describe('File', () => {
       file.save(DATA, assert.ifError);
     });
 
+    it('should register the progress listener if onUploadProgress is passed', done => {
+      const onUploadProgress = util.noop;
+      file.createWriteStream = () => {
+        const writeStream = new stream.PassThrough();
+        setImmediate(() => {
+          const [listener] = writeStream.listeners('progress');
+          assert.strictEqual(listener, onUploadProgress);
+          done();
+        });
+        return writeStream;
+      };
+
+      file.save(DATA, {onUploadProgress}, assert.ifError);
+    });
+
     it('should write the data', done => {
       file.createWriteStream = () => {
         const writeStream = new stream.PassThrough();
@@ -4074,6 +4136,28 @@ describe('File', () => {
 
         resumableUploadOverride = {
           upload() {
+            return uploadStream;
+          },
+        };
+
+        file.startResumableUpload_(dup);
+      });
+
+      it('should emit progress event', done => {
+        const progress = {};
+        const dup = duplexify();
+        dup.on('progress', evt => {
+          assert.strictEqual(evt, progress);
+          done();
+        });
+
+        resumableUploadOverride = {
+          upload() {
+            const uploadStream = new stream.Transform();
+            setImmediate(() => {
+              uploadStream.emit('progress', progress);
+            });
+
             return uploadStream;
           },
         };
