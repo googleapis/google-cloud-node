@@ -18,6 +18,7 @@
     "predocs-test": "npm run docs",
     "docs-test": "linkinator docs",
     "fix": "gts fix",
+    "prefix": "cd samples; npm link ../; npm install",
     "lint": "gts check",
     "prelint": "cd samples; npm link ../; npm install",
     "prepare": "npm run compile-protos && npm run compile",
