@@ -2246,10 +2246,6 @@ describe('Bucket', () => {
   describe('upload', () => {
     const basename = 'testfile.json';
     const filepath = path.join(__dirname, '../../test/testdata/' + basename);
-    const textFilepath = path.join(
-      __dirname,
-      '../../test/testdata/textfile.txt'
-    );
     const metadata = {
       metadata: {
         a: 'b',
@@ -2358,38 +2354,6 @@ describe('Bucket', () => {
         assert.deepStrictEqual(file.metadata, metadata);
         done();
       });
-    });
-
-    it('should guess at the content type', done => {
-      const fakeFile = new FakeFile(bucket, 'file-name');
-      const options = {destination: fakeFile};
-      fakeFile.createWriteStream = (options: CreateWriteStreamOptions) => {
-        const ws = new stream.Writable();
-        ws.write = () => true;
-        setImmediate(() => {
-          const expectedContentType = 'application/json; charset=utf-8';
-          assert.strictEqual(options.metadata.contentType, expectedContentType);
-          done();
-        });
-        return ws;
-      };
-      bucket.upload(filepath, options, assert.ifError);
-    });
-
-    it('should guess at the charset', done => {
-      const fakeFile = new FakeFile(bucket, 'file-name');
-      const options = {destination: fakeFile};
-      fakeFile.createWriteStream = (options: CreateWriteStreamOptions) => {
-        const ws = new stream.Writable();
-        ws.write = () => true;
-        setImmediate(() => {
-          const expectedContentType = 'text/plain; charset=utf-8';
-          assert.strictEqual(options.metadata.contentType, expectedContentType);
-          done();
-        });
-        return ws;
-      };
-      bucket.upload(textFilepath, options, assert.ifError);
     });
 
     describe('resumable uploads', () => {

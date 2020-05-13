@@ -1694,9 +1694,15 @@ class File extends ServiceObject<File> {
 
     if (options.contentType) {
       options.metadata.contentType = options.contentType;
+    }
 
-      if (options.metadata.contentType === 'auto') {
-        options.metadata.contentType = mime.getType(this.name);
+    if (
+      !options.metadata.contentType ||
+      options.metadata.contentType === 'auto'
+    ) {
+      const detectedContentType = mime.getType(this.name);
+      if (detectedContentType) {
+        options.metadata.contentType = detectedContentType;
       }
     }
 

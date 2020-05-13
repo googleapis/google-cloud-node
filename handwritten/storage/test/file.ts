@@ -1884,6 +1884,29 @@ describe('File', () => {
       writable.write('data');
     });
 
+    it('should detect contentType if not defined', done => {
+      const writable = file.createWriteStream();
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      file.startResumableUpload_ = (stream: {}, options: any) => {
+        assert.strictEqual(options.metadata.contentType, 'image/png');
+        done();
+      };
+
+      writable.write('data');
+    });
+
+    it('should not set a contentType if mime lookup failed', done => {
+      const file = new File('file-without-ext');
+      const writable = file.createWriteStream();
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      file.startResumableUpload_ = (stream: {}, options: any) => {
+        assert.strictEqual(typeof options.metadata.contentType, 'undefined');
+        done();
+      };
+
+      writable.write('data');
+    });
+
     it('should set encoding with gzip:true', done => {
       const writable = file.createWriteStream({gzip: true});
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
