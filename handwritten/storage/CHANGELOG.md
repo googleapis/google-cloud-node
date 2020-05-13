@@ -4,6 +4,45 @@
 
 [1]: https://www.npmjs.com/package/nodejs-storage?activeTab=versions
 
+## [5.0.0](https://www.github.com/googleapis/nodejs-storage/compare/v4.7.0...v5.0.0) (2020-05-13)
+
+
+### ⚠ BREAKING CHANGES
+
+* automatically detect contentType if not provided (#1190)
+* drop keepAcl parameter in file copy (#1166)
+* drop support for node.js 8.x
+
+### Features
+
+* automatically detect contentType if not provided ([#1190](https://www.github.com/googleapis/nodejs-storage/issues/1190)) ([b31ba4a](https://www.github.com/googleapis/nodejs-storage/commit/b31ba4a11399b57538ddf0d6ca2e10b2aa3fbc3a))
+* enable bytes read tracking ([#1074](https://www.github.com/googleapis/nodejs-storage/issues/1074)) ([0776a04](https://www.github.com/googleapis/nodejs-storage/commit/0776a044f3b2149b485e114369e952688df75645))
+
+
+### Bug Fixes
+
+* **bucket:** Only disable resumable uploads for bucket.upload (fixes [#1133](https://www.github.com/googleapis/nodejs-storage/issues/1133)) ([#1135](https://www.github.com/googleapis/nodejs-storage/issues/1135)) ([2c20148](https://www.github.com/googleapis/nodejs-storage/commit/2c201486b7b2d3146846ac96c877a904c4a674b0)), closes [/github.com/googleapis/nodejs-storage/pull/1135#issuecomment-620070038](https://www.github.com/googleapis//github.com/googleapis/nodejs-storage/pull/1135/issues/issuecomment-620070038)
+* add whitespace to generateV4SignedPolicy ([#1136](https://www.github.com/googleapis/nodejs-storage/issues/1136)) ([dcee78b](https://www.github.com/googleapis/nodejs-storage/commit/dcee78b98da23b02fe7d2f13a9270546bc07bba8))
+* apache license URL ([#468](https://www.github.com/googleapis/nodejs-storage/issues/468)) ([#1151](https://www.github.com/googleapis/nodejs-storage/issues/1151)) ([e8116d3](https://www.github.com/googleapis/nodejs-storage/commit/e8116d3c6fa7412858692e67745b514eef78850e))
+* Point to team in correct org ([#1185](https://www.github.com/googleapis/nodejs-storage/issues/1185)) ([0bb1909](https://www.github.com/googleapis/nodejs-storage/commit/0bb19098013acf71cc3842f78ff333a8e356331a))
+* **deps:** update dependency @google-cloud/common to v3 ([#1134](https://www.github.com/googleapis/nodejs-storage/issues/1134)) ([774ac5c](https://www.github.com/googleapis/nodejs-storage/commit/774ac5c75f02238418cc8ed7242297ea573ca9cb))
+* **deps:** update dependency @google-cloud/paginator to v3 ([#1131](https://www.github.com/googleapis/nodejs-storage/issues/1131)) ([c1614d9](https://www.github.com/googleapis/nodejs-storage/commit/c1614d98e3047db379e09299b1014e80d73ed52f))
+* **deps:** update dependency @google-cloud/promisify to v2 ([#1127](https://www.github.com/googleapis/nodejs-storage/issues/1127)) ([06624a5](https://www.github.com/googleapis/nodejs-storage/commit/06624a534cd1fdbc38455eee8d89f9f60ba75758))
+* **deps:** update dependency uuid to v8 ([#1170](https://www.github.com/googleapis/nodejs-storage/issues/1170)) ([6a98d64](https://www.github.com/googleapis/nodejs-storage/commit/6a98d64831baf1ca1ec2f03ecc4914745cba1c86))
+* **deps:** update gcs-resumable-upload, remove gitnpm usage ([#1186](https://www.github.com/googleapis/nodejs-storage/issues/1186)) ([c78c9cd](https://www.github.com/googleapis/nodejs-storage/commit/c78c9cde49dccb2fcd4ce10e4e9f8299d65f6838))
+* **v4-policy:** encode special characters ([#1169](https://www.github.com/googleapis/nodejs-storage/issues/1169)) ([6e48539](https://www.github.com/googleapis/nodejs-storage/commit/6e48539d76ca27e6f4c6cf2ac0872970f7391fed))
+* sync to googleapis/conformance-tests@fa559a1 ([#1167](https://www.github.com/googleapis/nodejs-storage/issues/1167)) ([5500446](https://www.github.com/googleapis/nodejs-storage/commit/550044619d2f17a1977c83bce5df915c6dc9578c)), closes [#1168](https://www.github.com/googleapis/nodejs-storage/issues/1168)
+
+
+### Miscellaneous Chores
+
+* drop keepAcl parameter in file copy ([#1166](https://www.github.com/googleapis/nodejs-storage/issues/1166)) ([5a4044a](https://www.github.com/googleapis/nodejs-storage/commit/5a4044a8ba13f248fc4f791248f797eb0f1f3c16))
+
+
+### Build System
+
+* drop support for node.js 8.x ([b80c025](https://www.github.com/googleapis/nodejs-storage/commit/b80c025f106052fd25554c64314b3b3520e829b5))
+
 ## [4.7.0](https://www.github.com/googleapis/nodejs-storage/compare/v4.6.0...v4.7.0) (2020-03-26)
 
 
