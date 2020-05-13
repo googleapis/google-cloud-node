@@ -3,8 +3,8 @@
     {
       "git": {
         "name": ".",
-        "remote": "sso://user/bencoe/nodejs-os-config",
-        "sha": "e819d0b69ae3314cb4ccd9272c89212c4309a325"
+        "remote": "https://github.com/googleapis/nodejs-os-config.git",
+        "sha": "b084af7ad1e1100a39564b6d076b374c7005c5e9"
       }
     },
     {
@@ -13,6 +13,13 @@
         "remote": "https://github.com/googleapis/googleapis.git",
         "sha": "aed11c01e52921613b9ee469c2d85f5f33175fb7",
         "internalRef": "310660461"
+      }
+    },
+    {
+      "git": {
+        "name": "synthtool",
+        "remote": "https://github.com/googleapis/synthtool.git",
+        "sha": "84c4156c49be9dcabacc8fd7b0585b6fd789ae47"
       }
     }
   ],
