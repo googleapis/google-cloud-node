@@ -3,23 +3,16 @@
     {
       "git": {
         "name": ".",
-        "remote": "https://github.com/googleapis/nodejs-billing.git",
-        "sha": "7cfa275d3f0bba5436dcfbfde806283b7168e024"
+        "remote": "git@github.com:googleapis/nodejs-billing.git",
+        "sha": "b5e92916efa69e68e76f0b028974565c5228bc31"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "2fc2caaacb15949c7f80426bfc7dafdd41dbc333",
-        "internalRef": "310239576"
-      }
-    },
-    {
-      "git": {
-        "name": "synthtool",
-        "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "be74d3e532faa47eb59f1a0eaebde0860d1d8ab4"
+        "sha": "57253ab4c0a78d2351cff0aa638ff81b89b19afc",
+        "internalRef": "311352758"
       }
     }
   ],
