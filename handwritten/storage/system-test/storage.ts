@@ -86,7 +86,6 @@ import {
   DeleteNotificationCallback,
 } from '../src';
 import * as nock from 'nock';
-import * as readline from 'readline';
 
 interface ErrorCallbackFunction {
   (err: Error | null): void;
