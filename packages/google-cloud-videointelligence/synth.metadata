@@ -3,8 +3,8 @@
     {
       "git": {
         "name": ".",
-        "remote": "git@github.com:googleapis/nodejs-video-intelligence.git",
-        "sha": "1c520fcba901d09902dc7f1fe73d150c8ddeee00"
+        "remote": "https://github.com/googleapis/nodejs-video-intelligence.git",
+        "sha": "be4793ebf71ce03c4855b9d3a29037070d11025e"
       }
     },
     {
@@ -19,7 +19,7 @@
       "git": {
         "name": "synthtool",
         "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "ab883569eb0257bbf16a6d825fd018b3adde3912"
+        "sha": "be74d3e532faa47eb59f1a0eaebde0860d1d8ab4"
       }
     }
   ],
