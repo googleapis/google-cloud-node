@@ -3,8 +3,16 @@
     {
       "git": {
         "name": ".",
-        "remote": "git@github.com:googleapis/nodejs-vision.git",
-        "sha": "44a8dcc389489829f927015a1070e516f2e786b0"
+        "remote": "https://github.com/googleapis/nodejs-vision.git",
+        "sha": "afdc8da5f4181b5d43c3dc0155294495d647645a"
+      }
+    },
+    {
+      "git": {
+        "name": "googleapis",
+        "remote": "https://github.com/googleapis/googleapis.git",
+        "sha": "7683d068453196e0f33366f6cc492649bfa750cc",
+        "internalRef": "311836104"
       }
     },
     {
