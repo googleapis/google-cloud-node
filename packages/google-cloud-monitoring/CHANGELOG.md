@@ -4,6 +4,37 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/monitoring?activeTab=versions
 
+## [2.0.0](https://www.github.com/googleapis/nodejs-monitoring/compare/v1.7.0...v2.0.0) (2020-05-08)
+
+
+### ⚠ BREAKING CHANGES
+
+* Drop support for TimeSeriesQueryLanguageCondition as an alert condition type 
+* The library now supports Node.js v10+. The last version to support Node.js v8 is tagged legacy-8 on NPM.
+* monitoring convert to typescript (#360)
+
+### Features
+
+* deferred client initialization ([#378](https://www.github.com/googleapis/nodejs-monitoring/issues/378)) ([61eca6a](https://www.github.com/googleapis/nodejs-monitoring/commit/61eca6a6f4447fe5a8d30ee6c40034fb1f7bbb60))
+* drop node8 support, support for async iterators ([#396](https://www.github.com/googleapis/nodejs-monitoring/issues/396)) ([d65e8fb](https://www.github.com/googleapis/nodejs-monitoring/commit/d65e8fb8e8901d7023dba3c226a09ec3782fc0c5))
+* export protos in src/index.ts ([#369](https://www.github.com/googleapis/nodejs-monitoring/issues/369)) ([b0af4b1](https://www.github.com/googleapis/nodejs-monitoring/commit/b0af4b1b48254f91ec9aa9cead1ff0a6714a6393))
+* monitoring convert to typescript ([#360](https://www.github.com/googleapis/nodejs-monitoring/issues/360)) ([5bbd963](https://www.github.com/googleapis/nodejs-monitoring/commit/5bbd96307cc47066b00048e494bfa566ea58650d))
+* refresh monitoring client libraries ([#401](https://www.github.com/googleapis/nodejs-monitoring/issues/401)) ([efd6e6f](https://www.github.com/googleapis/nodejs-monitoring/commit/efd6e6f4e1596ba4e5a3ba63f12c868735d4c571))
+* Update public client library for Cloud Monitoring to introduce new Uptime check feature. Uptime HTTP(S) checks can now be GET or POST ([#425](https://www.github.com/googleapis/nodejs-monitoring/issues/425)) ([103afde](https://www.github.com/googleapis/nodejs-monitoring/commit/103afdedfc6a874f71f866c9e07ef8cbfa70fb8b))
+
+
+### Bug Fixes
+
+* regen protos and tests, formatting ([#429](https://www.github.com/googleapis/nodejs-monitoring/issues/429)) ([9e6afc8](https://www.github.com/googleapis/nodejs-monitoring/commit/9e6afc87cc0fcc323539f3bf8dc8e15d66c144b7))
+* remove eslint, update gax, fix generated protos, run the generator ([#415](https://www.github.com/googleapis/nodejs-monitoring/issues/415)) ([ed8d95e](https://www.github.com/googleapis/nodejs-monitoring/commit/ed8d95efec1820a41d893273443172e3fbd2781c))
+* synth.py clean up for multiple version ([#431](https://www.github.com/googleapis/nodejs-monitoring/issues/431)) ([4e0e5bb](https://www.github.com/googleapis/nodejs-monitoring/commit/4e0e5bb3c6bc2cb3f3a368c3199f605f24c21dda))
+* updated proto files with new proto annotations ([cf8cc77](https://www.github.com/googleapis/nodejs-monitoring/commit/cf8cc770ec5fa17874fd67df1469ffa3b2724628))
+
+
+### Code Refactoring
+
+* Drop support for TimeSeriesQueryLanguageCondition as an alert condition type  ([866c028](https://www.github.com/googleapis/nodejs-monitoring/commit/866c0282ca2da53b0f9b42a2a1977446f7e368ae))
+
 ## [1.7.0](https://www.github.com/googleapis/nodejs-monitoring/compare/v1.6.1...v1.7.0) (2019-12-31)
 
 
