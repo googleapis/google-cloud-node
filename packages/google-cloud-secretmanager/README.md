@@ -96,7 +96,7 @@ async function createAndAccessSecret() {
     name: version.name,
   });
 
-  const responsePayload = accessResponse.payload.data.toString('utf8');
+  const responsePayload = accessResponse.payload.data.toString();
   console.info(`Payload: ${responsePayload}`);
 }
 createAndAccessSecret();
