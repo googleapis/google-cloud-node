@@ -68,7 +68,9 @@ describe('Channel', () => {
 
   describe('initialization', () => {
     it('should inherit from ServiceObject', () => {
-      assert(channel instanceof ServiceObject);
+      // Using assert.strictEqual instead of assert to prevent
+      // coercing of types.
+      assert.strictEqual(channel instanceof ServiceObject, true);
 
       const calledWith = channel.calledWith_[0];
 

@@ -264,7 +264,9 @@ describe('File', () => {
     });
 
     it('should inherit from ServiceObject', () => {
-      assert(file instanceof ServiceObject);
+      // Using assert.strictEqual instead of assert to prevent
+      // coercing of types.
+      assert.strictEqual(file instanceof ServiceObject, true);
 
       const calledWith = file.calledWith_[0];
 

@@ -123,7 +123,9 @@ describe('Storage', () => {
     });
 
     it('should inherit from Service', () => {
-      assert(storage instanceof Service);
+      // Using assert.strictEqual instead of assert to prevent
+      // coercing of types.
+      assert.strictEqual(storage instanceof Service, true);
 
       const calledWith = storage.calledWith_[0];
 
