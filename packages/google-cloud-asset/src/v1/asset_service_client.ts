@@ -23,9 +23,13 @@ import {
   Descriptors,
   ClientOptions,
   LROperation,
+  PaginationCallback,
+  GaxCall,
 } from 'google-gax';
 import * as path from 'path';
 
+import {Transform} from 'stream';
+import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
 import * as gapicConfig from './asset_service_client_config.json';
 import {operationsProtos} from 'google-gax';
@@ -165,6 +169,22 @@ export class AssetServiceClient {
       ),
     };
 
+    // Some of the methods on this service return "paged" results,
+    // (e.g. 50 results at a time, with tokens to get subsequent
+    // pages). Denote the keys used for pagination and results.
+    this.descriptors.page = {
+      searchAllResources: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'results'
+      ),
+      searchAllIamPolicies: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'results'
+      ),
+    };
+
     // This API contains "long-running operations", which return a
     // an Operation object that allows for tracking of the operation,
     // rather than holding a request open.
@@ -249,6 +269,8 @@ export class AssetServiceClient {
       'listFeeds',
       'updateFeed',
       'deleteFeed',
+      'searchAllResources',
+      'searchAllIamPolicies',
     ];
     for (const methodName of assetServiceStubMethods) {
       const callPromise = this.assetServiceStub.then(
@@ -487,9 +509,8 @@ export class AssetServiceClient {
    *   Required. This is the client-assigned asset feed identifier and it needs to
    *   be unique under a specific parent project/folder/organization.
    * @param {google.cloud.asset.v1.Feed} request.feed
-   *   Required. The feed details. The field `name` must be empty and it will be generated
-   *   in the format of:
-   *   projects/project_number/feeds/feed_id
+   *   Required. The feed details. The field `name` must be empty and it will be
+   *   generated in the format of: projects/project_number/feeds/feed_id
    *   folders/folder_number/feeds/feed_id
    *   organizations/organization_number/feeds/feed_id
    * @param {object} [options]
@@ -736,8 +757,8 @@ export class AssetServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {google.cloud.asset.v1.Feed} request.feed
-   *   Required. The new values of feed details. It must match an existing feed and the
-   *   field `name` must be in the format of:
+   *   Required. The new values of feed details. It must match an existing feed
+   *   and the field `name` must be in the format of:
    *   projects/project_number/feeds/feed_id or
    *   folders/folder_number/feeds/feed_id or
    *   organizations/organization_number/feeds/feed_id.
@@ -914,8 +935,9 @@ export class AssetServiceClient {
   /**
    * Exports assets with time and resource types to a given Cloud Storage
    * location. The output format is newline-delimited JSON.
-   * This API implements the {@link google.longrunning.Operation|google.longrunning.Operation} API allowing you
-   * to keep track of the export.
+   * This API implements the
+   * {@link google.longrunning.Operation|google.longrunning.Operation} API allowing
+   * you to keep track of the export.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1032,6 +1054,686 @@ export class AssetServiceClient {
       protos.google.cloud.asset.v1.ExportAssetsResponse,
       protos.google.cloud.asset.v1.ExportAssetsRequest
     >;
+  }
+  searchAllResources(
+    request: protos.google.cloud.asset.v1.ISearchAllResourcesRequest,
+    options?: gax.CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.asset.v1.IResourceSearchResult[],
+      protos.google.cloud.asset.v1.ISearchAllResourcesRequest | null,
+      protos.google.cloud.asset.v1.ISearchAllResourcesResponse
+    ]
+  >;
+  searchAllResources(
+    request: protos.google.cloud.asset.v1.ISearchAllResourcesRequest,
+    options: gax.CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.asset.v1.ISearchAllResourcesRequest,
+      | protos.google.cloud.asset.v1.ISearchAllResourcesResponse
+      | null
+      | undefined,
+      protos.google.cloud.asset.v1.IResourceSearchResult
+    >
+  ): void;
+  searchAllResources(
+    request: protos.google.cloud.asset.v1.ISearchAllResourcesRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.asset.v1.ISearchAllResourcesRequest,
+      | protos.google.cloud.asset.v1.ISearchAllResourcesResponse
+      | null
+      | undefined,
+      protos.google.cloud.asset.v1.IResourceSearchResult
+    >
+  ): void;
+  /**
+   * Searches all the resources within the given accessible scope (e.g., a
+   * project, a folder or an organization). Callers should have
+   * cloud.assets.SearchAllResources permission upon the requested scope,
+   * otherwise the request will be rejected.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.scope
+   *   Required. A scope can be a project, a folder or an organization. The search
+   *   is limited to the resources within the `scope`.
+   *
+   *   The allowed values are:
+   *
+   *   * projects/{PROJECT_ID}
+   *   * projects/{PROJECT_NUMBER}
+   *   * folders/{FOLDER_NUMBER}
+   *   * organizations/{ORGANIZATION_NUMBER}
+   * @param {string} [request.query]
+   *   Optional. The query statement. An empty query can be specified to search
+   *   all the resources of certain `asset_types` within the given `scope`.
+   *
+   *   Examples:
+   *
+   *   * `name : "Important"` to find Cloud resources whose name contains
+   *     "Important" as a word.
+   *   * `displayName : "Impor*"` to find Cloud resources whose display name
+   *     contains "Impor" as a word prefix.
+   *   * `description : "*por*"` to find Cloud resources whose description
+   *     contains "por" as a substring.
+   *   * `location : "us-west*"` to find Cloud resources whose location is
+   *     prefixed with "us-west".
+   *   * `labels : "prod"` to find Cloud resources whose labels contain "prod" as
+   *     a key or value.
+   *   * `labels.env : "prod"` to find Cloud resources which have a label "env"
+   *     and its value is "prod".
+   *   * `labels.env : *` to find Cloud resources which have a label "env".
+   *   * `"Important"` to find Cloud resources which contain "Important" as a word
+   *     in any of the searchable fields.
+   *   * `"Impor*"` to find Cloud resources which contain "Impor" as a word prefix
+   *     in any of the searchable fields.
+   *   * `"*por*"` to find Cloud resources which contain "por" as a substring in
+   *     any of the searchable fields.
+   *   * `("Important" AND location : ("us-west1" OR "global"))` to find Cloud
+   *     resources which contain "Important" as a word in any of the searchable
+   *     fields and are also located in the "us-west1" region or the "global"
+   *     location.
+   *
+   *   See [how to construct a
+   *   query](https://cloud.google.com/asset-inventory/docs/searching-resources#how_to_construct_a_query)
+   *   for more details.
+   * @param {string[]} [request.assetTypes]
+   *   Optional. A list of asset types that this request searches for. If empty,
+   *   it will search all the [searchable asset
+   *   types](https://cloud.google.com/asset-inventory/docs/supported-asset-types#searchable_asset_types).
+   * @param {number} [request.pageSize]
+   *   Optional. The page size for search result pagination. Page size is capped
+   *   at 500 even if a larger value is given. If set to zero, server will pick an
+   *   appropriate default. Returned results may be fewer than requested. When
+   *   this happens, there could be more results as long as `next_page_token` is
+   *   returned.
+   * @param {string} [request.pageToken]
+   *   Optional. If present, then retrieve the next batch of results from the
+   *   preceding call to this method. `page_token` must be the value of
+   *   `next_page_token` from the previous response. The values of all other
+   *   method parameters, must be identical to those in the previous call.
+   * @param {string} [request.orderBy]
+   *   Optional. A comma separated list of fields specifying the sorting order of
+   *   the results. The default order is ascending. Add " DESC" after the field
+   *   name to indicate descending order. Redundant space characters are ignored.
+   *   Example: "location DESC, name". See [supported resource metadata
+   *   fields](https://cloud.google.com/asset-inventory/docs/searching-resources#query_on_resource_metadata_fields)
+   *   for more details.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of [ResourceSearchResult]{@link google.cloud.asset.v1.ResourceSearchResult}.
+   *   The client library support auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *
+   *   When autoPaginate: false is specified through options, the array has three elements.
+   *   The first element is Array of [ResourceSearchResult]{@link google.cloud.asset.v1.ResourceSearchResult} that corresponds to
+   *   the one page received from the API server.
+   *   If the second element is not null it contains the request object of type [SearchAllResourcesRequest]{@link google.cloud.asset.v1.SearchAllResourcesRequest}
+   *   that can be used to obtain the next page of the results.
+   *   If it is null, the next page does not exist.
+   *   The third element contains the raw response received from the API server. Its type is
+   *   [SearchAllResourcesResponse]{@link google.cloud.asset.v1.SearchAllResourcesResponse}.
+   *
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   */
+  searchAllResources(
+    request: protos.google.cloud.asset.v1.ISearchAllResourcesRequest,
+    optionsOrCallback?:
+      | gax.CallOptions
+      | PaginationCallback<
+          protos.google.cloud.asset.v1.ISearchAllResourcesRequest,
+          | protos.google.cloud.asset.v1.ISearchAllResourcesResponse
+          | null
+          | undefined,
+          protos.google.cloud.asset.v1.IResourceSearchResult
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.asset.v1.ISearchAllResourcesRequest,
+      | protos.google.cloud.asset.v1.ISearchAllResourcesResponse
+      | null
+      | undefined,
+      protos.google.cloud.asset.v1.IResourceSearchResult
+    >
+  ): Promise<
+    [
+      protos.google.cloud.asset.v1.IResourceSearchResult[],
+      protos.google.cloud.asset.v1.ISearchAllResourcesRequest | null,
+      protos.google.cloud.asset.v1.ISearchAllResourcesResponse
+    ]
+  > | void {
+    request = request || {};
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      scope: request.scope || '',
+    });
+    this.initialize();
+    return this.innerApiCalls.searchAllResources(request, options, callback);
+  }
+
+  /**
+   * Equivalent to {@link searchAllResources}, but returns a NodeJS Stream object.
+   *
+   * This fetches the paged responses for {@link searchAllResources} continuously
+   * and invokes the callback registered for 'data' event for each element in the
+   * responses.
+   *
+   * The returned object has 'end' method when no more elements are required.
+   *
+   * autoPaginate option will be ignored.
+   *
+   * @see {@link https://nodejs.org/api/stream.html}
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.scope
+   *   Required. A scope can be a project, a folder or an organization. The search
+   *   is limited to the resources within the `scope`.
+   *
+   *   The allowed values are:
+   *
+   *   * projects/{PROJECT_ID}
+   *   * projects/{PROJECT_NUMBER}
+   *   * folders/{FOLDER_NUMBER}
+   *   * organizations/{ORGANIZATION_NUMBER}
+   * @param {string} [request.query]
+   *   Optional. The query statement. An empty query can be specified to search
+   *   all the resources of certain `asset_types` within the given `scope`.
+   *
+   *   Examples:
+   *
+   *   * `name : "Important"` to find Cloud resources whose name contains
+   *     "Important" as a word.
+   *   * `displayName : "Impor*"` to find Cloud resources whose display name
+   *     contains "Impor" as a word prefix.
+   *   * `description : "*por*"` to find Cloud resources whose description
+   *     contains "por" as a substring.
+   *   * `location : "us-west*"` to find Cloud resources whose location is
+   *     prefixed with "us-west".
+   *   * `labels : "prod"` to find Cloud resources whose labels contain "prod" as
+   *     a key or value.
+   *   * `labels.env : "prod"` to find Cloud resources which have a label "env"
+   *     and its value is "prod".
+   *   * `labels.env : *` to find Cloud resources which have a label "env".
+   *   * `"Important"` to find Cloud resources which contain "Important" as a word
+   *     in any of the searchable fields.
+   *   * `"Impor*"` to find Cloud resources which contain "Impor" as a word prefix
+   *     in any of the searchable fields.
+   *   * `"*por*"` to find Cloud resources which contain "por" as a substring in
+   *     any of the searchable fields.
+   *   * `("Important" AND location : ("us-west1" OR "global"))` to find Cloud
+   *     resources which contain "Important" as a word in any of the searchable
+   *     fields and are also located in the "us-west1" region or the "global"
+   *     location.
+   *
+   *   See [how to construct a
+   *   query](https://cloud.google.com/asset-inventory/docs/searching-resources#how_to_construct_a_query)
+   *   for more details.
+   * @param {string[]} [request.assetTypes]
+   *   Optional. A list of asset types that this request searches for. If empty,
+   *   it will search all the [searchable asset
+   *   types](https://cloud.google.com/asset-inventory/docs/supported-asset-types#searchable_asset_types).
+   * @param {number} [request.pageSize]
+   *   Optional. The page size for search result pagination. Page size is capped
+   *   at 500 even if a larger value is given. If set to zero, server will pick an
+   *   appropriate default. Returned results may be fewer than requested. When
+   *   this happens, there could be more results as long as `next_page_token` is
+   *   returned.
+   * @param {string} [request.pageToken]
+   *   Optional. If present, then retrieve the next batch of results from the
+   *   preceding call to this method. `page_token` must be the value of
+   *   `next_page_token` from the previous response. The values of all other
+   *   method parameters, must be identical to those in the previous call.
+   * @param {string} [request.orderBy]
+   *   Optional. A comma separated list of fields specifying the sorting order of
+   *   the results. The default order is ascending. Add " DESC" after the field
+   *   name to indicate descending order. Redundant space characters are ignored.
+   *   Example: "location DESC, name". See [supported resource metadata
+   *   fields](https://cloud.google.com/asset-inventory/docs/searching-resources#query_on_resource_metadata_fields)
+   *   for more details.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing [ResourceSearchResult]{@link google.cloud.asset.v1.ResourceSearchResult} on 'data' event.
+   */
+  searchAllResourcesStream(
+    request?: protos.google.cloud.asset.v1.ISearchAllResourcesRequest,
+    options?: gax.CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      scope: request.scope || '',
+    });
+    const callSettings = new gax.CallSettings(options);
+    this.initialize();
+    return this.descriptors.page.searchAllResources.createStream(
+      this.innerApiCalls.searchAllResources as gax.GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to {@link searchAllResources}, but returns an iterable object.
+   *
+   * for-await-of syntax is used with the iterable to recursively get response element on-demand.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.scope
+   *   Required. A scope can be a project, a folder or an organization. The search
+   *   is limited to the resources within the `scope`.
+   *
+   *   The allowed values are:
+   *
+   *   * projects/{PROJECT_ID}
+   *   * projects/{PROJECT_NUMBER}
+   *   * folders/{FOLDER_NUMBER}
+   *   * organizations/{ORGANIZATION_NUMBER}
+   * @param {string} [request.query]
+   *   Optional. The query statement. An empty query can be specified to search
+   *   all the resources of certain `asset_types` within the given `scope`.
+   *
+   *   Examples:
+   *
+   *   * `name : "Important"` to find Cloud resources whose name contains
+   *     "Important" as a word.
+   *   * `displayName : "Impor*"` to find Cloud resources whose display name
+   *     contains "Impor" as a word prefix.
+   *   * `description : "*por*"` to find Cloud resources whose description
+   *     contains "por" as a substring.
+   *   * `location : "us-west*"` to find Cloud resources whose location is
+   *     prefixed with "us-west".
+   *   * `labels : "prod"` to find Cloud resources whose labels contain "prod" as
+   *     a key or value.
+   *   * `labels.env : "prod"` to find Cloud resources which have a label "env"
+   *     and its value is "prod".
+   *   * `labels.env : *` to find Cloud resources which have a label "env".
+   *   * `"Important"` to find Cloud resources which contain "Important" as a word
+   *     in any of the searchable fields.
+   *   * `"Impor*"` to find Cloud resources which contain "Impor" as a word prefix
+   *     in any of the searchable fields.
+   *   * `"*por*"` to find Cloud resources which contain "por" as a substring in
+   *     any of the searchable fields.
+   *   * `("Important" AND location : ("us-west1" OR "global"))` to find Cloud
+   *     resources which contain "Important" as a word in any of the searchable
+   *     fields and are also located in the "us-west1" region or the "global"
+   *     location.
+   *
+   *   See [how to construct a
+   *   query](https://cloud.google.com/asset-inventory/docs/searching-resources#how_to_construct_a_query)
+   *   for more details.
+   * @param {string[]} [request.assetTypes]
+   *   Optional. A list of asset types that this request searches for. If empty,
+   *   it will search all the [searchable asset
+   *   types](https://cloud.google.com/asset-inventory/docs/supported-asset-types#searchable_asset_types).
+   * @param {number} [request.pageSize]
+   *   Optional. The page size for search result pagination. Page size is capped
+   *   at 500 even if a larger value is given. If set to zero, server will pick an
+   *   appropriate default. Returned results may be fewer than requested. When
+   *   this happens, there could be more results as long as `next_page_token` is
+   *   returned.
+   * @param {string} [request.pageToken]
+   *   Optional. If present, then retrieve the next batch of results from the
+   *   preceding call to this method. `page_token` must be the value of
+   *   `next_page_token` from the previous response. The values of all other
+   *   method parameters, must be identical to those in the previous call.
+   * @param {string} [request.orderBy]
+   *   Optional. A comma separated list of fields specifying the sorting order of
+   *   the results. The default order is ascending. Add " DESC" after the field
+   *   name to indicate descending order. Redundant space characters are ignored.
+   *   Example: "location DESC, name". See [supported resource metadata
+   *   fields](https://cloud.google.com/asset-inventory/docs/searching-resources#query_on_resource_metadata_fields)
+   *   for more details.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that conforms to @link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols.
+   */
+  searchAllResourcesAsync(
+    request?: protos.google.cloud.asset.v1.ISearchAllResourcesRequest,
+    options?: gax.CallOptions
+  ): AsyncIterable<protos.google.cloud.asset.v1.IResourceSearchResult> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      scope: request.scope || '',
+    });
+    options = options || {};
+    const callSettings = new gax.CallSettings(options);
+    this.initialize();
+    return this.descriptors.page.searchAllResources.asyncIterate(
+      this.innerApiCalls['searchAllResources'] as GaxCall,
+      (request as unknown) as RequestType,
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.asset.v1.IResourceSearchResult>;
+  }
+  searchAllIamPolicies(
+    request: protos.google.cloud.asset.v1.ISearchAllIamPoliciesRequest,
+    options?: gax.CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.asset.v1.IIamPolicySearchResult[],
+      protos.google.cloud.asset.v1.ISearchAllIamPoliciesRequest | null,
+      protos.google.cloud.asset.v1.ISearchAllIamPoliciesResponse
+    ]
+  >;
+  searchAllIamPolicies(
+    request: protos.google.cloud.asset.v1.ISearchAllIamPoliciesRequest,
+    options: gax.CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.asset.v1.ISearchAllIamPoliciesRequest,
+      | protos.google.cloud.asset.v1.ISearchAllIamPoliciesResponse
+      | null
+      | undefined,
+      protos.google.cloud.asset.v1.IIamPolicySearchResult
+    >
+  ): void;
+  searchAllIamPolicies(
+    request: protos.google.cloud.asset.v1.ISearchAllIamPoliciesRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.asset.v1.ISearchAllIamPoliciesRequest,
+      | protos.google.cloud.asset.v1.ISearchAllIamPoliciesResponse
+      | null
+      | undefined,
+      protos.google.cloud.asset.v1.IIamPolicySearchResult
+    >
+  ): void;
+  /**
+   * Searches all the IAM policies within the given accessible scope (e.g., a
+   * project, a folder or an organization). Callers should have
+   * cloud.assets.SearchAllIamPolicies permission upon the requested scope,
+   * otherwise the request will be rejected.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.scope
+   *   Required. A scope can be a project, a folder or an organization. The search
+   *   is limited to the IAM policies within the `scope`.
+   *
+   *   The allowed values are:
+   *
+   *   * projects/{PROJECT_ID}
+   *   * projects/{PROJECT_NUMBER}
+   *   * folders/{FOLDER_NUMBER}
+   *   * organizations/{ORGANIZATION_NUMBER}
+   * @param {string} [request.query]
+   *   Optional. The query statement. An empty query can be specified to search
+   *   all the IAM policies within the given `scope`.
+   *
+   *   Examples:
+   *
+   *   * `policy : "amy@gmail.com"` to find Cloud IAM policy bindings that
+   *     specify user "amy@gmail.com".
+   *   * `policy : "roles/compute.admin"` to find Cloud IAM policy bindings that
+   *     specify the Compute Admin role.
+   *   * `policy.role.permissions : "storage.buckets.update"` to find Cloud IAM
+   *     policy bindings that specify a role containing "storage.buckets.update"
+   *     permission.
+   *   * `resource : "organizations/123"` to find Cloud IAM policy bindings that
+   *     are set on "organizations/123".
+   *   * `(resource : ("organizations/123" OR "folders/1234") AND policy : "amy")`
+   *     to find Cloud IAM policy bindings that are set on "organizations/123" or
+   *     "folders/1234", and also specify user "amy".
+   *
+   *   See [how to construct a
+   *   query](https://cloud.google.com/asset-inventory/docs/searching-iam-policies#how_to_construct_a_query)
+   *   for more details.
+   * @param {number} [request.pageSize]
+   *   Optional. The page size for search result pagination. Page size is capped
+   *   at 500 even if a larger value is given. If set to zero, server will pick an
+   *   appropriate default. Returned results may be fewer than requested. When
+   *   this happens, there could be more results as long as `next_page_token` is
+   *   returned.
+   * @param {string} [request.pageToken]
+   *   Optional. If present, retrieve the next batch of results from the preceding
+   *   call to this method. `page_token` must be the value of `next_page_token`
+   *   from the previous response. The values of all other method parameters must
+   *   be identical to those in the previous call.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of [IamPolicySearchResult]{@link google.cloud.asset.v1.IamPolicySearchResult}.
+   *   The client library support auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *
+   *   When autoPaginate: false is specified through options, the array has three elements.
+   *   The first element is Array of [IamPolicySearchResult]{@link google.cloud.asset.v1.IamPolicySearchResult} that corresponds to
+   *   the one page received from the API server.
+   *   If the second element is not null it contains the request object of type [SearchAllIamPoliciesRequest]{@link google.cloud.asset.v1.SearchAllIamPoliciesRequest}
+   *   that can be used to obtain the next page of the results.
+   *   If it is null, the next page does not exist.
+   *   The third element contains the raw response received from the API server. Its type is
+   *   [SearchAllIamPoliciesResponse]{@link google.cloud.asset.v1.SearchAllIamPoliciesResponse}.
+   *
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   */
+  searchAllIamPolicies(
+    request: protos.google.cloud.asset.v1.ISearchAllIamPoliciesRequest,
+    optionsOrCallback?:
+      | gax.CallOptions
+      | PaginationCallback<
+          protos.google.cloud.asset.v1.ISearchAllIamPoliciesRequest,
+          | protos.google.cloud.asset.v1.ISearchAllIamPoliciesResponse
+          | null
+          | undefined,
+          protos.google.cloud.asset.v1.IIamPolicySearchResult
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.asset.v1.ISearchAllIamPoliciesRequest,
+      | protos.google.cloud.asset.v1.ISearchAllIamPoliciesResponse
+      | null
+      | undefined,
+      protos.google.cloud.asset.v1.IIamPolicySearchResult
+    >
+  ): Promise<
+    [
+      protos.google.cloud.asset.v1.IIamPolicySearchResult[],
+      protos.google.cloud.asset.v1.ISearchAllIamPoliciesRequest | null,
+      protos.google.cloud.asset.v1.ISearchAllIamPoliciesResponse
+    ]
+  > | void {
+    request = request || {};
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      scope: request.scope || '',
+    });
+    this.initialize();
+    return this.innerApiCalls.searchAllIamPolicies(request, options, callback);
+  }
+
+  /**
+   * Equivalent to {@link searchAllIamPolicies}, but returns a NodeJS Stream object.
+   *
+   * This fetches the paged responses for {@link searchAllIamPolicies} continuously
+   * and invokes the callback registered for 'data' event for each element in the
+   * responses.
+   *
+   * The returned object has 'end' method when no more elements are required.
+   *
+   * autoPaginate option will be ignored.
+   *
+   * @see {@link https://nodejs.org/api/stream.html}
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.scope
+   *   Required. A scope can be a project, a folder or an organization. The search
+   *   is limited to the IAM policies within the `scope`.
+   *
+   *   The allowed values are:
+   *
+   *   * projects/{PROJECT_ID}
+   *   * projects/{PROJECT_NUMBER}
+   *   * folders/{FOLDER_NUMBER}
+   *   * organizations/{ORGANIZATION_NUMBER}
+   * @param {string} [request.query]
+   *   Optional. The query statement. An empty query can be specified to search
+   *   all the IAM policies within the given `scope`.
+   *
+   *   Examples:
+   *
+   *   * `policy : "amy@gmail.com"` to find Cloud IAM policy bindings that
+   *     specify user "amy@gmail.com".
+   *   * `policy : "roles/compute.admin"` to find Cloud IAM policy bindings that
+   *     specify the Compute Admin role.
+   *   * `policy.role.permissions : "storage.buckets.update"` to find Cloud IAM
+   *     policy bindings that specify a role containing "storage.buckets.update"
+   *     permission.
+   *   * `resource : "organizations/123"` to find Cloud IAM policy bindings that
+   *     are set on "organizations/123".
+   *   * `(resource : ("organizations/123" OR "folders/1234") AND policy : "amy")`
+   *     to find Cloud IAM policy bindings that are set on "organizations/123" or
+   *     "folders/1234", and also specify user "amy".
+   *
+   *   See [how to construct a
+   *   query](https://cloud.google.com/asset-inventory/docs/searching-iam-policies#how_to_construct_a_query)
+   *   for more details.
+   * @param {number} [request.pageSize]
+   *   Optional. The page size for search result pagination. Page size is capped
+   *   at 500 even if a larger value is given. If set to zero, server will pick an
+   *   appropriate default. Returned results may be fewer than requested. When
+   *   this happens, there could be more results as long as `next_page_token` is
+   *   returned.
+   * @param {string} [request.pageToken]
+   *   Optional. If present, retrieve the next batch of results from the preceding
+   *   call to this method. `page_token` must be the value of `next_page_token`
+   *   from the previous response. The values of all other method parameters must
+   *   be identical to those in the previous call.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing [IamPolicySearchResult]{@link google.cloud.asset.v1.IamPolicySearchResult} on 'data' event.
+   */
+  searchAllIamPoliciesStream(
+    request?: protos.google.cloud.asset.v1.ISearchAllIamPoliciesRequest,
+    options?: gax.CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      scope: request.scope || '',
+    });
+    const callSettings = new gax.CallSettings(options);
+    this.initialize();
+    return this.descriptors.page.searchAllIamPolicies.createStream(
+      this.innerApiCalls.searchAllIamPolicies as gax.GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to {@link searchAllIamPolicies}, but returns an iterable object.
+   *
+   * for-await-of syntax is used with the iterable to recursively get response element on-demand.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.scope
+   *   Required. A scope can be a project, a folder or an organization. The search
+   *   is limited to the IAM policies within the `scope`.
+   *
+   *   The allowed values are:
+   *
+   *   * projects/{PROJECT_ID}
+   *   * projects/{PROJECT_NUMBER}
+   *   * folders/{FOLDER_NUMBER}
+   *   * organizations/{ORGANIZATION_NUMBER}
+   * @param {string} [request.query]
+   *   Optional. The query statement. An empty query can be specified to search
+   *   all the IAM policies within the given `scope`.
+   *
+   *   Examples:
+   *
+   *   * `policy : "amy@gmail.com"` to find Cloud IAM policy bindings that
+   *     specify user "amy@gmail.com".
+   *   * `policy : "roles/compute.admin"` to find Cloud IAM policy bindings that
+   *     specify the Compute Admin role.
+   *   * `policy.role.permissions : "storage.buckets.update"` to find Cloud IAM
+   *     policy bindings that specify a role containing "storage.buckets.update"
+   *     permission.
+   *   * `resource : "organizations/123"` to find Cloud IAM policy bindings that
+   *     are set on "organizations/123".
+   *   * `(resource : ("organizations/123" OR "folders/1234") AND policy : "amy")`
+   *     to find Cloud IAM policy bindings that are set on "organizations/123" or
+   *     "folders/1234", and also specify user "amy".
+   *
+   *   See [how to construct a
+   *   query](https://cloud.google.com/asset-inventory/docs/searching-iam-policies#how_to_construct_a_query)
+   *   for more details.
+   * @param {number} [request.pageSize]
+   *   Optional. The page size for search result pagination. Page size is capped
+   *   at 500 even if a larger value is given. If set to zero, server will pick an
+   *   appropriate default. Returned results may be fewer than requested. When
+   *   this happens, there could be more results as long as `next_page_token` is
+   *   returned.
+   * @param {string} [request.pageToken]
+   *   Optional. If present, retrieve the next batch of results from the preceding
+   *   call to this method. `page_token` must be the value of `next_page_token`
+   *   from the previous response. The values of all other method parameters must
+   *   be identical to those in the previous call.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that conforms to @link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols.
+   */
+  searchAllIamPoliciesAsync(
+    request?: protos.google.cloud.asset.v1.ISearchAllIamPoliciesRequest,
+    options?: gax.CallOptions
+  ): AsyncIterable<protos.google.cloud.asset.v1.IIamPolicySearchResult> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      scope: request.scope || '',
+    });
+    options = options || {};
+    const callSettings = new gax.CallSettings(options);
+    this.initialize();
+    return this.descriptors.page.searchAllIamPolicies.asyncIterate(
+      this.innerApiCalls['searchAllIamPolicies'] as GaxCall,
+      (request as unknown) as RequestType,
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.asset.v1.IIamPolicySearchResult>;
   }
   // --------------------
   // -- Path templates --

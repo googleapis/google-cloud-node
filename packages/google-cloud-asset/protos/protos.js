@@ -329,6 +329,72 @@
                          * @variation 2
                          */
     
+                        /**
+                         * Callback as used by {@link google.cloud.asset.v1.AssetService#searchAllResources}.
+                         * @memberof google.cloud.asset.v1.AssetService
+                         * @typedef SearchAllResourcesCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.asset.v1.SearchAllResourcesResponse} [response] SearchAllResourcesResponse
+                         */
+    
+                        /**
+                         * Calls SearchAllResources.
+                         * @function searchAllResources
+                         * @memberof google.cloud.asset.v1.AssetService
+                         * @instance
+                         * @param {google.cloud.asset.v1.ISearchAllResourcesRequest} request SearchAllResourcesRequest message or plain object
+                         * @param {google.cloud.asset.v1.AssetService.SearchAllResourcesCallback} callback Node-style callback called with the error, if any, and SearchAllResourcesResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(AssetService.prototype.searchAllResources = function searchAllResources(request, callback) {
+                            return this.rpcCall(searchAllResources, $root.google.cloud.asset.v1.SearchAllResourcesRequest, $root.google.cloud.asset.v1.SearchAllResourcesResponse, request, callback);
+                        }, "name", { value: "SearchAllResources" });
+    
+                        /**
+                         * Calls SearchAllResources.
+                         * @function searchAllResources
+                         * @memberof google.cloud.asset.v1.AssetService
+                         * @instance
+                         * @param {google.cloud.asset.v1.ISearchAllResourcesRequest} request SearchAllResourcesRequest message or plain object
+                         * @returns {Promise<google.cloud.asset.v1.SearchAllResourcesResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.asset.v1.AssetService#searchAllIamPolicies}.
+                         * @memberof google.cloud.asset.v1.AssetService
+                         * @typedef SearchAllIamPoliciesCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.asset.v1.SearchAllIamPoliciesResponse} [response] SearchAllIamPoliciesResponse
+                         */
+    
+                        /**
+                         * Calls SearchAllIamPolicies.
+                         * @function searchAllIamPolicies
+                         * @memberof google.cloud.asset.v1.AssetService
+                         * @instance
+                         * @param {google.cloud.asset.v1.ISearchAllIamPoliciesRequest} request SearchAllIamPoliciesRequest message or plain object
+                         * @param {google.cloud.asset.v1.AssetService.SearchAllIamPoliciesCallback} callback Node-style callback called with the error, if any, and SearchAllIamPoliciesResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(AssetService.prototype.searchAllIamPolicies = function searchAllIamPolicies(request, callback) {
+                            return this.rpcCall(searchAllIamPolicies, $root.google.cloud.asset.v1.SearchAllIamPoliciesRequest, $root.google.cloud.asset.v1.SearchAllIamPoliciesResponse, request, callback);
+                        }, "name", { value: "SearchAllIamPolicies" });
+    
+                        /**
+                         * Calls SearchAllIamPolicies.
+                         * @function searchAllIamPolicies
+                         * @memberof google.cloud.asset.v1.AssetService
+                         * @instance
+                         * @param {google.cloud.asset.v1.ISearchAllIamPoliciesRequest} request SearchAllIamPoliciesRequest message or plain object
+                         * @returns {Promise<google.cloud.asset.v1.SearchAllIamPoliciesResponse>} Promise
+                         * @variation 2
+                         */
+    
                         return AssetService;
                     })();
     
@@ -4072,6 +4138,1037 @@
                         return Feed;
                     })();
     
+                    v1.SearchAllResourcesRequest = (function() {
+    
+                        /**
+                         * Properties of a SearchAllResourcesRequest.
+                         * @memberof google.cloud.asset.v1
+                         * @interface ISearchAllResourcesRequest
+                         * @property {string|null} [scope] SearchAllResourcesRequest scope
+                         * @property {string|null} [query] SearchAllResourcesRequest query
+                         * @property {Array.<string>|null} [assetTypes] SearchAllResourcesRequest assetTypes
+                         * @property {number|null} [pageSize] SearchAllResourcesRequest pageSize
+                         * @property {string|null} [pageToken] SearchAllResourcesRequest pageToken
+                         * @property {string|null} [orderBy] SearchAllResourcesRequest orderBy
+                         */
+    
+                        /**
+                         * Constructs a new SearchAllResourcesRequest.
+                         * @memberof google.cloud.asset.v1
+                         * @classdesc Represents a SearchAllResourcesRequest.
+                         * @implements ISearchAllResourcesRequest
+                         * @constructor
+                         * @param {google.cloud.asset.v1.ISearchAllResourcesRequest=} [properties] Properties to set
+                         */
+                        function SearchAllResourcesRequest(properties) {
+                            this.assetTypes = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * SearchAllResourcesRequest scope.
+                         * @member {string} scope
+                         * @memberof google.cloud.asset.v1.SearchAllResourcesRequest
+                         * @instance
+                         */
+                        SearchAllResourcesRequest.prototype.scope = "";
+    
+                        /**
+                         * SearchAllResourcesRequest query.
+                         * @member {string} query
+                         * @memberof google.cloud.asset.v1.SearchAllResourcesRequest
+                         * @instance
+                         */
+                        SearchAllResourcesRequest.prototype.query = "";
+    
+                        /**
+                         * SearchAllResourcesRequest assetTypes.
+                         * @member {Array.<string>} assetTypes
+                         * @memberof google.cloud.asset.v1.SearchAllResourcesRequest
+                         * @instance
+                         */
+                        SearchAllResourcesRequest.prototype.assetTypes = $util.emptyArray;
+    
+                        /**
+                         * SearchAllResourcesRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.cloud.asset.v1.SearchAllResourcesRequest
+                         * @instance
+                         */
+                        SearchAllResourcesRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * SearchAllResourcesRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.cloud.asset.v1.SearchAllResourcesRequest
+                         * @instance
+                         */
+                        SearchAllResourcesRequest.prototype.pageToken = "";
+    
+                        /**
+                         * SearchAllResourcesRequest orderBy.
+                         * @member {string} orderBy
+                         * @memberof google.cloud.asset.v1.SearchAllResourcesRequest
+                         * @instance
+                         */
+                        SearchAllResourcesRequest.prototype.orderBy = "";
+    
+                        /**
+                         * Creates a new SearchAllResourcesRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.asset.v1.SearchAllResourcesRequest
+                         * @static
+                         * @param {google.cloud.asset.v1.ISearchAllResourcesRequest=} [properties] Properties to set
+                         * @returns {google.cloud.asset.v1.SearchAllResourcesRequest} SearchAllResourcesRequest instance
+                         */
+                        SearchAllResourcesRequest.create = function create(properties) {
+                            return new SearchAllResourcesRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified SearchAllResourcesRequest message. Does not implicitly {@link google.cloud.asset.v1.SearchAllResourcesRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.asset.v1.SearchAllResourcesRequest
+                         * @static
+                         * @param {google.cloud.asset.v1.ISearchAllResourcesRequest} message SearchAllResourcesRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SearchAllResourcesRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.scope != null && Object.hasOwnProperty.call(message, "scope"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.scope);
+                            if (message.query != null && Object.hasOwnProperty.call(message, "query"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.query);
+                            if (message.assetTypes != null && message.assetTypes.length)
+                                for (var i = 0; i < message.assetTypes.length; ++i)
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.assetTypes[i]);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.pageToken);
+                            if (message.orderBy != null && Object.hasOwnProperty.call(message, "orderBy"))
+                                writer.uint32(/* id 6, wireType 2 =*/50).string(message.orderBy);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified SearchAllResourcesRequest message, length delimited. Does not implicitly {@link google.cloud.asset.v1.SearchAllResourcesRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.asset.v1.SearchAllResourcesRequest
+                         * @static
+                         * @param {google.cloud.asset.v1.ISearchAllResourcesRequest} message SearchAllResourcesRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SearchAllResourcesRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a SearchAllResourcesRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.asset.v1.SearchAllResourcesRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.asset.v1.SearchAllResourcesRequest} SearchAllResourcesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SearchAllResourcesRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1.SearchAllResourcesRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.scope = reader.string();
+                                    break;
+                                case 2:
+                                    message.query = reader.string();
+                                    break;
+                                case 3:
+                                    if (!(message.assetTypes && message.assetTypes.length))
+                                        message.assetTypes = [];
+                                    message.assetTypes.push(reader.string());
+                                    break;
+                                case 4:
+                                    message.pageSize = reader.int32();
+                                    break;
+                                case 5:
+                                    message.pageToken = reader.string();
+                                    break;
+                                case 6:
+                                    message.orderBy = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a SearchAllResourcesRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.asset.v1.SearchAllResourcesRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.asset.v1.SearchAllResourcesRequest} SearchAllResourcesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SearchAllResourcesRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a SearchAllResourcesRequest message.
+                         * @function verify
+                         * @memberof google.cloud.asset.v1.SearchAllResourcesRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        SearchAllResourcesRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.scope != null && message.hasOwnProperty("scope"))
+                                if (!$util.isString(message.scope))
+                                    return "scope: string expected";
+                            if (message.query != null && message.hasOwnProperty("query"))
+                                if (!$util.isString(message.query))
+                                    return "query: string expected";
+                            if (message.assetTypes != null && message.hasOwnProperty("assetTypes")) {
+                                if (!Array.isArray(message.assetTypes))
+                                    return "assetTypes: array expected";
+                                for (var i = 0; i < message.assetTypes.length; ++i)
+                                    if (!$util.isString(message.assetTypes[i]))
+                                        return "assetTypes: string[] expected";
+                            }
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                if (!$util.isString(message.orderBy))
+                                    return "orderBy: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a SearchAllResourcesRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.asset.v1.SearchAllResourcesRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.asset.v1.SearchAllResourcesRequest} SearchAllResourcesRequest
+                         */
+                        SearchAllResourcesRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.asset.v1.SearchAllResourcesRequest)
+                                return object;
+                            var message = new $root.google.cloud.asset.v1.SearchAllResourcesRequest();
+                            if (object.scope != null)
+                                message.scope = String(object.scope);
+                            if (object.query != null)
+                                message.query = String(object.query);
+                            if (object.assetTypes) {
+                                if (!Array.isArray(object.assetTypes))
+                                    throw TypeError(".google.cloud.asset.v1.SearchAllResourcesRequest.assetTypes: array expected");
+                                message.assetTypes = [];
+                                for (var i = 0; i < object.assetTypes.length; ++i)
+                                    message.assetTypes[i] = String(object.assetTypes[i]);
+                            }
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            if (object.orderBy != null)
+                                message.orderBy = String(object.orderBy);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a SearchAllResourcesRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.asset.v1.SearchAllResourcesRequest
+                         * @static
+                         * @param {google.cloud.asset.v1.SearchAllResourcesRequest} message SearchAllResourcesRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        SearchAllResourcesRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.assetTypes = [];
+                            if (options.defaults) {
+                                object.scope = "";
+                                object.query = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                                object.orderBy = "";
+                            }
+                            if (message.scope != null && message.hasOwnProperty("scope"))
+                                object.scope = message.scope;
+                            if (message.query != null && message.hasOwnProperty("query"))
+                                object.query = message.query;
+                            if (message.assetTypes && message.assetTypes.length) {
+                                object.assetTypes = [];
+                                for (var j = 0; j < message.assetTypes.length; ++j)
+                                    object.assetTypes[j] = message.assetTypes[j];
+                            }
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                object.orderBy = message.orderBy;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this SearchAllResourcesRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.asset.v1.SearchAllResourcesRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        SearchAllResourcesRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return SearchAllResourcesRequest;
+                    })();
+    
+                    v1.SearchAllResourcesResponse = (function() {
+    
+                        /**
+                         * Properties of a SearchAllResourcesResponse.
+                         * @memberof google.cloud.asset.v1
+                         * @interface ISearchAllResourcesResponse
+                         * @property {Array.<google.cloud.asset.v1.IResourceSearchResult>|null} [results] SearchAllResourcesResponse results
+                         * @property {string|null} [nextPageToken] SearchAllResourcesResponse nextPageToken
+                         */
+    
+                        /**
+                         * Constructs a new SearchAllResourcesResponse.
+                         * @memberof google.cloud.asset.v1
+                         * @classdesc Represents a SearchAllResourcesResponse.
+                         * @implements ISearchAllResourcesResponse
+                         * @constructor
+                         * @param {google.cloud.asset.v1.ISearchAllResourcesResponse=} [properties] Properties to set
+                         */
+                        function SearchAllResourcesResponse(properties) {
+                            this.results = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * SearchAllResourcesResponse results.
+                         * @member {Array.<google.cloud.asset.v1.IResourceSearchResult>} results
+                         * @memberof google.cloud.asset.v1.SearchAllResourcesResponse
+                         * @instance
+                         */
+                        SearchAllResourcesResponse.prototype.results = $util.emptyArray;
+    
+                        /**
+                         * SearchAllResourcesResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.cloud.asset.v1.SearchAllResourcesResponse
+                         * @instance
+                         */
+                        SearchAllResourcesResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * Creates a new SearchAllResourcesResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.asset.v1.SearchAllResourcesResponse
+                         * @static
+                         * @param {google.cloud.asset.v1.ISearchAllResourcesResponse=} [properties] Properties to set
+                         * @returns {google.cloud.asset.v1.SearchAllResourcesResponse} SearchAllResourcesResponse instance
+                         */
+                        SearchAllResourcesResponse.create = function create(properties) {
+                            return new SearchAllResourcesResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified SearchAllResourcesResponse message. Does not implicitly {@link google.cloud.asset.v1.SearchAllResourcesResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.asset.v1.SearchAllResourcesResponse
+                         * @static
+                         * @param {google.cloud.asset.v1.ISearchAllResourcesResponse} message SearchAllResourcesResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SearchAllResourcesResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.results != null && message.results.length)
+                                for (var i = 0; i < message.results.length; ++i)
+                                    $root.google.cloud.asset.v1.ResourceSearchResult.encode(message.results[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified SearchAllResourcesResponse message, length delimited. Does not implicitly {@link google.cloud.asset.v1.SearchAllResourcesResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.asset.v1.SearchAllResourcesResponse
+                         * @static
+                         * @param {google.cloud.asset.v1.ISearchAllResourcesResponse} message SearchAllResourcesResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SearchAllResourcesResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a SearchAllResourcesResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.asset.v1.SearchAllResourcesResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.asset.v1.SearchAllResourcesResponse} SearchAllResourcesResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SearchAllResourcesResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1.SearchAllResourcesResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    if (!(message.results && message.results.length))
+                                        message.results = [];
+                                    message.results.push($root.google.cloud.asset.v1.ResourceSearchResult.decode(reader, reader.uint32()));
+                                    break;
+                                case 2:
+                                    message.nextPageToken = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a SearchAllResourcesResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.asset.v1.SearchAllResourcesResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.asset.v1.SearchAllResourcesResponse} SearchAllResourcesResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SearchAllResourcesResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a SearchAllResourcesResponse message.
+                         * @function verify
+                         * @memberof google.cloud.asset.v1.SearchAllResourcesResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        SearchAllResourcesResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.results != null && message.hasOwnProperty("results")) {
+                                if (!Array.isArray(message.results))
+                                    return "results: array expected";
+                                for (var i = 0; i < message.results.length; ++i) {
+                                    var error = $root.google.cloud.asset.v1.ResourceSearchResult.verify(message.results[i]);
+                                    if (error)
+                                        return "results." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a SearchAllResourcesResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.asset.v1.SearchAllResourcesResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.asset.v1.SearchAllResourcesResponse} SearchAllResourcesResponse
+                         */
+                        SearchAllResourcesResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.asset.v1.SearchAllResourcesResponse)
+                                return object;
+                            var message = new $root.google.cloud.asset.v1.SearchAllResourcesResponse();
+                            if (object.results) {
+                                if (!Array.isArray(object.results))
+                                    throw TypeError(".google.cloud.asset.v1.SearchAllResourcesResponse.results: array expected");
+                                message.results = [];
+                                for (var i = 0; i < object.results.length; ++i) {
+                                    if (typeof object.results[i] !== "object")
+                                        throw TypeError(".google.cloud.asset.v1.SearchAllResourcesResponse.results: object expected");
+                                    message.results[i] = $root.google.cloud.asset.v1.ResourceSearchResult.fromObject(object.results[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a SearchAllResourcesResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.asset.v1.SearchAllResourcesResponse
+                         * @static
+                         * @param {google.cloud.asset.v1.SearchAllResourcesResponse} message SearchAllResourcesResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        SearchAllResourcesResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.results = [];
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.results && message.results.length) {
+                                object.results = [];
+                                for (var j = 0; j < message.results.length; ++j)
+                                    object.results[j] = $root.google.cloud.asset.v1.ResourceSearchResult.toObject(message.results[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this SearchAllResourcesResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.asset.v1.SearchAllResourcesResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        SearchAllResourcesResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return SearchAllResourcesResponse;
+                    })();
+    
+                    v1.SearchAllIamPoliciesRequest = (function() {
+    
+                        /**
+                         * Properties of a SearchAllIamPoliciesRequest.
+                         * @memberof google.cloud.asset.v1
+                         * @interface ISearchAllIamPoliciesRequest
+                         * @property {string|null} [scope] SearchAllIamPoliciesRequest scope
+                         * @property {string|null} [query] SearchAllIamPoliciesRequest query
+                         * @property {number|null} [pageSize] SearchAllIamPoliciesRequest pageSize
+                         * @property {string|null} [pageToken] SearchAllIamPoliciesRequest pageToken
+                         */
+    
+                        /**
+                         * Constructs a new SearchAllIamPoliciesRequest.
+                         * @memberof google.cloud.asset.v1
+                         * @classdesc Represents a SearchAllIamPoliciesRequest.
+                         * @implements ISearchAllIamPoliciesRequest
+                         * @constructor
+                         * @param {google.cloud.asset.v1.ISearchAllIamPoliciesRequest=} [properties] Properties to set
+                         */
+                        function SearchAllIamPoliciesRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * SearchAllIamPoliciesRequest scope.
+                         * @member {string} scope
+                         * @memberof google.cloud.asset.v1.SearchAllIamPoliciesRequest
+                         * @instance
+                         */
+                        SearchAllIamPoliciesRequest.prototype.scope = "";
+    
+                        /**
+                         * SearchAllIamPoliciesRequest query.
+                         * @member {string} query
+                         * @memberof google.cloud.asset.v1.SearchAllIamPoliciesRequest
+                         * @instance
+                         */
+                        SearchAllIamPoliciesRequest.prototype.query = "";
+    
+                        /**
+                         * SearchAllIamPoliciesRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.cloud.asset.v1.SearchAllIamPoliciesRequest
+                         * @instance
+                         */
+                        SearchAllIamPoliciesRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * SearchAllIamPoliciesRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.cloud.asset.v1.SearchAllIamPoliciesRequest
+                         * @instance
+                         */
+                        SearchAllIamPoliciesRequest.prototype.pageToken = "";
+    
+                        /**
+                         * Creates a new SearchAllIamPoliciesRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.asset.v1.SearchAllIamPoliciesRequest
+                         * @static
+                         * @param {google.cloud.asset.v1.ISearchAllIamPoliciesRequest=} [properties] Properties to set
+                         * @returns {google.cloud.asset.v1.SearchAllIamPoliciesRequest} SearchAllIamPoliciesRequest instance
+                         */
+                        SearchAllIamPoliciesRequest.create = function create(properties) {
+                            return new SearchAllIamPoliciesRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified SearchAllIamPoliciesRequest message. Does not implicitly {@link google.cloud.asset.v1.SearchAllIamPoliciesRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.asset.v1.SearchAllIamPoliciesRequest
+                         * @static
+                         * @param {google.cloud.asset.v1.ISearchAllIamPoliciesRequest} message SearchAllIamPoliciesRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SearchAllIamPoliciesRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.scope != null && Object.hasOwnProperty.call(message, "scope"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.scope);
+                            if (message.query != null && Object.hasOwnProperty.call(message, "query"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.query);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.pageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified SearchAllIamPoliciesRequest message, length delimited. Does not implicitly {@link google.cloud.asset.v1.SearchAllIamPoliciesRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.asset.v1.SearchAllIamPoliciesRequest
+                         * @static
+                         * @param {google.cloud.asset.v1.ISearchAllIamPoliciesRequest} message SearchAllIamPoliciesRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SearchAllIamPoliciesRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a SearchAllIamPoliciesRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.asset.v1.SearchAllIamPoliciesRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.asset.v1.SearchAllIamPoliciesRequest} SearchAllIamPoliciesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SearchAllIamPoliciesRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1.SearchAllIamPoliciesRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.scope = reader.string();
+                                    break;
+                                case 2:
+                                    message.query = reader.string();
+                                    break;
+                                case 3:
+                                    message.pageSize = reader.int32();
+                                    break;
+                                case 4:
+                                    message.pageToken = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a SearchAllIamPoliciesRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.asset.v1.SearchAllIamPoliciesRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.asset.v1.SearchAllIamPoliciesRequest} SearchAllIamPoliciesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SearchAllIamPoliciesRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a SearchAllIamPoliciesRequest message.
+                         * @function verify
+                         * @memberof google.cloud.asset.v1.SearchAllIamPoliciesRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        SearchAllIamPoliciesRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.scope != null && message.hasOwnProperty("scope"))
+                                if (!$util.isString(message.scope))
+                                    return "scope: string expected";
+                            if (message.query != null && message.hasOwnProperty("query"))
+                                if (!$util.isString(message.query))
+                                    return "query: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a SearchAllIamPoliciesRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.asset.v1.SearchAllIamPoliciesRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.asset.v1.SearchAllIamPoliciesRequest} SearchAllIamPoliciesRequest
+                         */
+                        SearchAllIamPoliciesRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.asset.v1.SearchAllIamPoliciesRequest)
+                                return object;
+                            var message = new $root.google.cloud.asset.v1.SearchAllIamPoliciesRequest();
+                            if (object.scope != null)
+                                message.scope = String(object.scope);
+                            if (object.query != null)
+                                message.query = String(object.query);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a SearchAllIamPoliciesRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.asset.v1.SearchAllIamPoliciesRequest
+                         * @static
+                         * @param {google.cloud.asset.v1.SearchAllIamPoliciesRequest} message SearchAllIamPoliciesRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        SearchAllIamPoliciesRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.scope = "";
+                                object.query = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                            }
+                            if (message.scope != null && message.hasOwnProperty("scope"))
+                                object.scope = message.scope;
+                            if (message.query != null && message.hasOwnProperty("query"))
+                                object.query = message.query;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this SearchAllIamPoliciesRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.asset.v1.SearchAllIamPoliciesRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        SearchAllIamPoliciesRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return SearchAllIamPoliciesRequest;
+                    })();
+    
+                    v1.SearchAllIamPoliciesResponse = (function() {
+    
+                        /**
+                         * Properties of a SearchAllIamPoliciesResponse.
+                         * @memberof google.cloud.asset.v1
+                         * @interface ISearchAllIamPoliciesResponse
+                         * @property {Array.<google.cloud.asset.v1.IIamPolicySearchResult>|null} [results] SearchAllIamPoliciesResponse results
+                         * @property {string|null} [nextPageToken] SearchAllIamPoliciesResponse nextPageToken
+                         */
+    
+                        /**
+                         * Constructs a new SearchAllIamPoliciesResponse.
+                         * @memberof google.cloud.asset.v1
+                         * @classdesc Represents a SearchAllIamPoliciesResponse.
+                         * @implements ISearchAllIamPoliciesResponse
+                         * @constructor
+                         * @param {google.cloud.asset.v1.ISearchAllIamPoliciesResponse=} [properties] Properties to set
+                         */
+                        function SearchAllIamPoliciesResponse(properties) {
+                            this.results = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * SearchAllIamPoliciesResponse results.
+                         * @member {Array.<google.cloud.asset.v1.IIamPolicySearchResult>} results
+                         * @memberof google.cloud.asset.v1.SearchAllIamPoliciesResponse
+                         * @instance
+                         */
+                        SearchAllIamPoliciesResponse.prototype.results = $util.emptyArray;
+    
+                        /**
+                         * SearchAllIamPoliciesResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.cloud.asset.v1.SearchAllIamPoliciesResponse
+                         * @instance
+                         */
+                        SearchAllIamPoliciesResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * Creates a new SearchAllIamPoliciesResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.asset.v1.SearchAllIamPoliciesResponse
+                         * @static
+                         * @param {google.cloud.asset.v1.ISearchAllIamPoliciesResponse=} [properties] Properties to set
+                         * @returns {google.cloud.asset.v1.SearchAllIamPoliciesResponse} SearchAllIamPoliciesResponse instance
+                         */
+                        SearchAllIamPoliciesResponse.create = function create(properties) {
+                            return new SearchAllIamPoliciesResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified SearchAllIamPoliciesResponse message. Does not implicitly {@link google.cloud.asset.v1.SearchAllIamPoliciesResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.asset.v1.SearchAllIamPoliciesResponse
+                         * @static
+                         * @param {google.cloud.asset.v1.ISearchAllIamPoliciesResponse} message SearchAllIamPoliciesResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SearchAllIamPoliciesResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.results != null && message.results.length)
+                                for (var i = 0; i < message.results.length; ++i)
+                                    $root.google.cloud.asset.v1.IamPolicySearchResult.encode(message.results[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified SearchAllIamPoliciesResponse message, length delimited. Does not implicitly {@link google.cloud.asset.v1.SearchAllIamPoliciesResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.asset.v1.SearchAllIamPoliciesResponse
+                         * @static
+                         * @param {google.cloud.asset.v1.ISearchAllIamPoliciesResponse} message SearchAllIamPoliciesResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SearchAllIamPoliciesResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a SearchAllIamPoliciesResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.asset.v1.SearchAllIamPoliciesResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.asset.v1.SearchAllIamPoliciesResponse} SearchAllIamPoliciesResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SearchAllIamPoliciesResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1.SearchAllIamPoliciesResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    if (!(message.results && message.results.length))
+                                        message.results = [];
+                                    message.results.push($root.google.cloud.asset.v1.IamPolicySearchResult.decode(reader, reader.uint32()));
+                                    break;
+                                case 2:
+                                    message.nextPageToken = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a SearchAllIamPoliciesResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.asset.v1.SearchAllIamPoliciesResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.asset.v1.SearchAllIamPoliciesResponse} SearchAllIamPoliciesResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SearchAllIamPoliciesResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a SearchAllIamPoliciesResponse message.
+                         * @function verify
+                         * @memberof google.cloud.asset.v1.SearchAllIamPoliciesResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        SearchAllIamPoliciesResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.results != null && message.hasOwnProperty("results")) {
+                                if (!Array.isArray(message.results))
+                                    return "results: array expected";
+                                for (var i = 0; i < message.results.length; ++i) {
+                                    var error = $root.google.cloud.asset.v1.IamPolicySearchResult.verify(message.results[i]);
+                                    if (error)
+                                        return "results." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a SearchAllIamPoliciesResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.asset.v1.SearchAllIamPoliciesResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.asset.v1.SearchAllIamPoliciesResponse} SearchAllIamPoliciesResponse
+                         */
+                        SearchAllIamPoliciesResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.asset.v1.SearchAllIamPoliciesResponse)
+                                return object;
+                            var message = new $root.google.cloud.asset.v1.SearchAllIamPoliciesResponse();
+                            if (object.results) {
+                                if (!Array.isArray(object.results))
+                                    throw TypeError(".google.cloud.asset.v1.SearchAllIamPoliciesResponse.results: array expected");
+                                message.results = [];
+                                for (var i = 0; i < object.results.length; ++i) {
+                                    if (typeof object.results[i] !== "object")
+                                        throw TypeError(".google.cloud.asset.v1.SearchAllIamPoliciesResponse.results: object expected");
+                                    message.results[i] = $root.google.cloud.asset.v1.IamPolicySearchResult.fromObject(object.results[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a SearchAllIamPoliciesResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.asset.v1.SearchAllIamPoliciesResponse
+                         * @static
+                         * @param {google.cloud.asset.v1.SearchAllIamPoliciesResponse} message SearchAllIamPoliciesResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        SearchAllIamPoliciesResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.results = [];
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.results && message.results.length) {
+                                object.results = [];
+                                for (var j = 0; j < message.results.length; ++j)
+                                    object.results[j] = $root.google.cloud.asset.v1.IamPolicySearchResult.toObject(message.results[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this SearchAllIamPoliciesResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.asset.v1.SearchAllIamPoliciesResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        SearchAllIamPoliciesResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return SearchAllIamPoliciesResponse;
+                    })();
+    
                     /**
                      * ContentType enum.
                      * @name google.cloud.asset.v1.ContentType
@@ -5028,6 +6125,7 @@
                          * @property {string|null} [resourceUrl] Resource resourceUrl
                          * @property {string|null} [parent] Resource parent
                          * @property {google.protobuf.IStruct|null} [data] Resource data
+                         * @property {string|null} [location] Resource location
                          */
     
                         /**
@@ -5094,6 +6192,14 @@
                         Resource.prototype.data = null;
     
                         /**
+                         * Resource location.
+                         * @member {string} location
+                         * @memberof google.cloud.asset.v1.Resource
+                         * @instance
+                         */
+                        Resource.prototype.location = "";
+    
+                        /**
                          * Creates a new Resource instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.asset.v1.Resource
@@ -5129,6 +6235,8 @@
                                 writer.uint32(/* id 5, wireType 2 =*/42).string(message.parent);
                             if (message.data != null && Object.hasOwnProperty.call(message, "data"))
                                 $root.google.protobuf.Struct.encode(message.data, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                            if (message.location != null && Object.hasOwnProperty.call(message, "location"))
+                                writer.uint32(/* id 8, wireType 2 =*/66).string(message.location);
                             return writer;
                         };
     
@@ -5180,6 +6288,9 @@
                                     break;
                                 case 6:
                                     message.data = $root.google.protobuf.Struct.decode(reader, reader.uint32());
+                                    break;
+                                case 8:
+                                    message.location = reader.string();
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -5236,6 +6347,9 @@
                                 if (error)
                                     return "data." + error;
                             }
+                            if (message.location != null && message.hasOwnProperty("location"))
+                                if (!$util.isString(message.location))
+                                    return "location: string expected";
                             return null;
                         };
     
@@ -5266,6 +6380,8 @@
                                     throw TypeError(".google.cloud.asset.v1.Resource.data: object expected");
                                 message.data = $root.google.protobuf.Struct.fromObject(object.data);
                             }
+                            if (object.location != null)
+                                message.location = String(object.location);
                             return message;
                         };
     
@@ -5289,6 +6405,7 @@
                                 object.resourceUrl = "";
                                 object.parent = "";
                                 object.data = null;
+                                object.location = "";
                             }
                             if (message.version != null && message.hasOwnProperty("version"))
                                 object.version = message.version;
@@ -5302,6 +6419,8 @@
                                 object.parent = message.parent;
                             if (message.data != null && message.hasOwnProperty("data"))
                                 object.data = $root.google.protobuf.Struct.toObject(message.data, options);
+                            if (message.location != null && message.hasOwnProperty("location"))
+                                object.location = message.location;
                             return object;
                         };
     
@@ -5317,6 +6436,1096 @@
                         };
     
                         return Resource;
+                    })();
+    
+                    v1.ResourceSearchResult = (function() {
+    
+                        /**
+                         * Properties of a ResourceSearchResult.
+                         * @memberof google.cloud.asset.v1
+                         * @interface IResourceSearchResult
+                         * @property {string|null} [name] ResourceSearchResult name
+                         * @property {string|null} [assetType] ResourceSearchResult assetType
+                         * @property {string|null} [project] ResourceSearchResult project
+                         * @property {string|null} [displayName] ResourceSearchResult displayName
+                         * @property {string|null} [description] ResourceSearchResult description
+                         * @property {string|null} [location] ResourceSearchResult location
+                         * @property {Object.<string,string>|null} [labels] ResourceSearchResult labels
+                         * @property {Array.<string>|null} [networkTags] ResourceSearchResult networkTags
+                         * @property {google.protobuf.IStruct|null} [additionalAttributes] ResourceSearchResult additionalAttributes
+                         */
+    
+                        /**
+                         * Constructs a new ResourceSearchResult.
+                         * @memberof google.cloud.asset.v1
+                         * @classdesc Represents a ResourceSearchResult.
+                         * @implements IResourceSearchResult
+                         * @constructor
+                         * @param {google.cloud.asset.v1.IResourceSearchResult=} [properties] Properties to set
+                         */
+                        function ResourceSearchResult(properties) {
+                            this.labels = {};
+                            this.networkTags = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ResourceSearchResult name.
+                         * @member {string} name
+                         * @memberof google.cloud.asset.v1.ResourceSearchResult
+                         * @instance
+                         */
+                        ResourceSearchResult.prototype.name = "";
+    
+                        /**
+                         * ResourceSearchResult assetType.
+                         * @member {string} assetType
+                         * @memberof google.cloud.asset.v1.ResourceSearchResult
+                         * @instance
+                         */
+                        ResourceSearchResult.prototype.assetType = "";
+    
+                        /**
+                         * ResourceSearchResult project.
+                         * @member {string} project
+                         * @memberof google.cloud.asset.v1.ResourceSearchResult
+                         * @instance
+                         */
+                        ResourceSearchResult.prototype.project = "";
+    
+                        /**
+                         * ResourceSearchResult displayName.
+                         * @member {string} displayName
+                         * @memberof google.cloud.asset.v1.ResourceSearchResult
+                         * @instance
+                         */
+                        ResourceSearchResult.prototype.displayName = "";
+    
+                        /**
+                         * ResourceSearchResult description.
+                         * @member {string} description
+                         * @memberof google.cloud.asset.v1.ResourceSearchResult
+                         * @instance
+                         */
+                        ResourceSearchResult.prototype.description = "";
+    
+                        /**
+                         * ResourceSearchResult location.
+                         * @member {string} location
+                         * @memberof google.cloud.asset.v1.ResourceSearchResult
+                         * @instance
+                         */
+                        ResourceSearchResult.prototype.location = "";
+    
+                        /**
+                         * ResourceSearchResult labels.
+                         * @member {Object.<string,string>} labels
+                         * @memberof google.cloud.asset.v1.ResourceSearchResult
+                         * @instance
+                         */
+                        ResourceSearchResult.prototype.labels = $util.emptyObject;
+    
+                        /**
+                         * ResourceSearchResult networkTags.
+                         * @member {Array.<string>} networkTags
+                         * @memberof google.cloud.asset.v1.ResourceSearchResult
+                         * @instance
+                         */
+                        ResourceSearchResult.prototype.networkTags = $util.emptyArray;
+    
+                        /**
+                         * ResourceSearchResult additionalAttributes.
+                         * @member {google.protobuf.IStruct|null|undefined} additionalAttributes
+                         * @memberof google.cloud.asset.v1.ResourceSearchResult
+                         * @instance
+                         */
+                        ResourceSearchResult.prototype.additionalAttributes = null;
+    
+                        /**
+                         * Creates a new ResourceSearchResult instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.asset.v1.ResourceSearchResult
+                         * @static
+                         * @param {google.cloud.asset.v1.IResourceSearchResult=} [properties] Properties to set
+                         * @returns {google.cloud.asset.v1.ResourceSearchResult} ResourceSearchResult instance
+                         */
+                        ResourceSearchResult.create = function create(properties) {
+                            return new ResourceSearchResult(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ResourceSearchResult message. Does not implicitly {@link google.cloud.asset.v1.ResourceSearchResult.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.asset.v1.ResourceSearchResult
+                         * @static
+                         * @param {google.cloud.asset.v1.IResourceSearchResult} message ResourceSearchResult message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ResourceSearchResult.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.assetType != null && Object.hasOwnProperty.call(message, "assetType"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.assetType);
+                            if (message.project != null && Object.hasOwnProperty.call(message, "project"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.project);
+                            if (message.displayName != null && Object.hasOwnProperty.call(message, "displayName"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.displayName);
+                            if (message.description != null && Object.hasOwnProperty.call(message, "description"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.description);
+                            if (message.location != null && Object.hasOwnProperty.call(message, "location"))
+                                writer.uint32(/* id 6, wireType 2 =*/50).string(message.location);
+                            if (message.labels != null && Object.hasOwnProperty.call(message, "labels"))
+                                for (var keys = Object.keys(message.labels), i = 0; i < keys.length; ++i)
+                                    writer.uint32(/* id 7, wireType 2 =*/58).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.labels[keys[i]]).ldelim();
+                            if (message.networkTags != null && message.networkTags.length)
+                                for (var i = 0; i < message.networkTags.length; ++i)
+                                    writer.uint32(/* id 8, wireType 2 =*/66).string(message.networkTags[i]);
+                            if (message.additionalAttributes != null && Object.hasOwnProperty.call(message, "additionalAttributes"))
+                                $root.google.protobuf.Struct.encode(message.additionalAttributes, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ResourceSearchResult message, length delimited. Does not implicitly {@link google.cloud.asset.v1.ResourceSearchResult.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.asset.v1.ResourceSearchResult
+                         * @static
+                         * @param {google.cloud.asset.v1.IResourceSearchResult} message ResourceSearchResult message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ResourceSearchResult.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ResourceSearchResult message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.asset.v1.ResourceSearchResult
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.asset.v1.ResourceSearchResult} ResourceSearchResult
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ResourceSearchResult.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1.ResourceSearchResult(), key;
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                case 2:
+                                    message.assetType = reader.string();
+                                    break;
+                                case 3:
+                                    message.project = reader.string();
+                                    break;
+                                case 4:
+                                    message.displayName = reader.string();
+                                    break;
+                                case 5:
+                                    message.description = reader.string();
+                                    break;
+                                case 6:
+                                    message.location = reader.string();
+                                    break;
+                                case 7:
+                                    reader.skip().pos++;
+                                    if (message.labels === $util.emptyObject)
+                                        message.labels = {};
+                                    key = reader.string();
+                                    reader.pos++;
+                                    message.labels[key] = reader.string();
+                                    break;
+                                case 8:
+                                    if (!(message.networkTags && message.networkTags.length))
+                                        message.networkTags = [];
+                                    message.networkTags.push(reader.string());
+                                    break;
+                                case 9:
+                                    message.additionalAttributes = $root.google.protobuf.Struct.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ResourceSearchResult message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.asset.v1.ResourceSearchResult
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.asset.v1.ResourceSearchResult} ResourceSearchResult
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ResourceSearchResult.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ResourceSearchResult message.
+                         * @function verify
+                         * @memberof google.cloud.asset.v1.ResourceSearchResult
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ResourceSearchResult.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.assetType != null && message.hasOwnProperty("assetType"))
+                                if (!$util.isString(message.assetType))
+                                    return "assetType: string expected";
+                            if (message.project != null && message.hasOwnProperty("project"))
+                                if (!$util.isString(message.project))
+                                    return "project: string expected";
+                            if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                if (!$util.isString(message.displayName))
+                                    return "displayName: string expected";
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                if (!$util.isString(message.description))
+                                    return "description: string expected";
+                            if (message.location != null && message.hasOwnProperty("location"))
+                                if (!$util.isString(message.location))
+                                    return "location: string expected";
+                            if (message.labels != null && message.hasOwnProperty("labels")) {
+                                if (!$util.isObject(message.labels))
+                                    return "labels: object expected";
+                                var key = Object.keys(message.labels);
+                                for (var i = 0; i < key.length; ++i)
+                                    if (!$util.isString(message.labels[key[i]]))
+                                        return "labels: string{k:string} expected";
+                            }
+                            if (message.networkTags != null && message.hasOwnProperty("networkTags")) {
+                                if (!Array.isArray(message.networkTags))
+                                    return "networkTags: array expected";
+                                for (var i = 0; i < message.networkTags.length; ++i)
+                                    if (!$util.isString(message.networkTags[i]))
+                                        return "networkTags: string[] expected";
+                            }
+                            if (message.additionalAttributes != null && message.hasOwnProperty("additionalAttributes")) {
+                                var error = $root.google.protobuf.Struct.verify(message.additionalAttributes);
+                                if (error)
+                                    return "additionalAttributes." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ResourceSearchResult message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.asset.v1.ResourceSearchResult
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.asset.v1.ResourceSearchResult} ResourceSearchResult
+                         */
+                        ResourceSearchResult.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.asset.v1.ResourceSearchResult)
+                                return object;
+                            var message = new $root.google.cloud.asset.v1.ResourceSearchResult();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.assetType != null)
+                                message.assetType = String(object.assetType);
+                            if (object.project != null)
+                                message.project = String(object.project);
+                            if (object.displayName != null)
+                                message.displayName = String(object.displayName);
+                            if (object.description != null)
+                                message.description = String(object.description);
+                            if (object.location != null)
+                                message.location = String(object.location);
+                            if (object.labels) {
+                                if (typeof object.labels !== "object")
+                                    throw TypeError(".google.cloud.asset.v1.ResourceSearchResult.labels: object expected");
+                                message.labels = {};
+                                for (var keys = Object.keys(object.labels), i = 0; i < keys.length; ++i)
+                                    message.labels[keys[i]] = String(object.labels[keys[i]]);
+                            }
+                            if (object.networkTags) {
+                                if (!Array.isArray(object.networkTags))
+                                    throw TypeError(".google.cloud.asset.v1.ResourceSearchResult.networkTags: array expected");
+                                message.networkTags = [];
+                                for (var i = 0; i < object.networkTags.length; ++i)
+                                    message.networkTags[i] = String(object.networkTags[i]);
+                            }
+                            if (object.additionalAttributes != null) {
+                                if (typeof object.additionalAttributes !== "object")
+                                    throw TypeError(".google.cloud.asset.v1.ResourceSearchResult.additionalAttributes: object expected");
+                                message.additionalAttributes = $root.google.protobuf.Struct.fromObject(object.additionalAttributes);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ResourceSearchResult message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.asset.v1.ResourceSearchResult
+                         * @static
+                         * @param {google.cloud.asset.v1.ResourceSearchResult} message ResourceSearchResult
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ResourceSearchResult.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.networkTags = [];
+                            if (options.objects || options.defaults)
+                                object.labels = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.assetType = "";
+                                object.project = "";
+                                object.displayName = "";
+                                object.description = "";
+                                object.location = "";
+                                object.additionalAttributes = null;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.assetType != null && message.hasOwnProperty("assetType"))
+                                object.assetType = message.assetType;
+                            if (message.project != null && message.hasOwnProperty("project"))
+                                object.project = message.project;
+                            if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                object.displayName = message.displayName;
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                object.description = message.description;
+                            if (message.location != null && message.hasOwnProperty("location"))
+                                object.location = message.location;
+                            var keys2;
+                            if (message.labels && (keys2 = Object.keys(message.labels)).length) {
+                                object.labels = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.labels[keys2[j]] = message.labels[keys2[j]];
+                            }
+                            if (message.networkTags && message.networkTags.length) {
+                                object.networkTags = [];
+                                for (var j = 0; j < message.networkTags.length; ++j)
+                                    object.networkTags[j] = message.networkTags[j];
+                            }
+                            if (message.additionalAttributes != null && message.hasOwnProperty("additionalAttributes"))
+                                object.additionalAttributes = $root.google.protobuf.Struct.toObject(message.additionalAttributes, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ResourceSearchResult to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.asset.v1.ResourceSearchResult
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ResourceSearchResult.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ResourceSearchResult;
+                    })();
+    
+                    v1.IamPolicySearchResult = (function() {
+    
+                        /**
+                         * Properties of an IamPolicySearchResult.
+                         * @memberof google.cloud.asset.v1
+                         * @interface IIamPolicySearchResult
+                         * @property {string|null} [resource] IamPolicySearchResult resource
+                         * @property {string|null} [project] IamPolicySearchResult project
+                         * @property {google.iam.v1.IPolicy|null} [policy] IamPolicySearchResult policy
+                         * @property {google.cloud.asset.v1.IamPolicySearchResult.IExplanation|null} [explanation] IamPolicySearchResult explanation
+                         */
+    
+                        /**
+                         * Constructs a new IamPolicySearchResult.
+                         * @memberof google.cloud.asset.v1
+                         * @classdesc Represents an IamPolicySearchResult.
+                         * @implements IIamPolicySearchResult
+                         * @constructor
+                         * @param {google.cloud.asset.v1.IIamPolicySearchResult=} [properties] Properties to set
+                         */
+                        function IamPolicySearchResult(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * IamPolicySearchResult resource.
+                         * @member {string} resource
+                         * @memberof google.cloud.asset.v1.IamPolicySearchResult
+                         * @instance
+                         */
+                        IamPolicySearchResult.prototype.resource = "";
+    
+                        /**
+                         * IamPolicySearchResult project.
+                         * @member {string} project
+                         * @memberof google.cloud.asset.v1.IamPolicySearchResult
+                         * @instance
+                         */
+                        IamPolicySearchResult.prototype.project = "";
+    
+                        /**
+                         * IamPolicySearchResult policy.
+                         * @member {google.iam.v1.IPolicy|null|undefined} policy
+                         * @memberof google.cloud.asset.v1.IamPolicySearchResult
+                         * @instance
+                         */
+                        IamPolicySearchResult.prototype.policy = null;
+    
+                        /**
+                         * IamPolicySearchResult explanation.
+                         * @member {google.cloud.asset.v1.IamPolicySearchResult.IExplanation|null|undefined} explanation
+                         * @memberof google.cloud.asset.v1.IamPolicySearchResult
+                         * @instance
+                         */
+                        IamPolicySearchResult.prototype.explanation = null;
+    
+                        /**
+                         * Creates a new IamPolicySearchResult instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.asset.v1.IamPolicySearchResult
+                         * @static
+                         * @param {google.cloud.asset.v1.IIamPolicySearchResult=} [properties] Properties to set
+                         * @returns {google.cloud.asset.v1.IamPolicySearchResult} IamPolicySearchResult instance
+                         */
+                        IamPolicySearchResult.create = function create(properties) {
+                            return new IamPolicySearchResult(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified IamPolicySearchResult message. Does not implicitly {@link google.cloud.asset.v1.IamPolicySearchResult.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.asset.v1.IamPolicySearchResult
+                         * @static
+                         * @param {google.cloud.asset.v1.IIamPolicySearchResult} message IamPolicySearchResult message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        IamPolicySearchResult.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.resource != null && Object.hasOwnProperty.call(message, "resource"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.resource);
+                            if (message.project != null && Object.hasOwnProperty.call(message, "project"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.project);
+                            if (message.policy != null && Object.hasOwnProperty.call(message, "policy"))
+                                $root.google.iam.v1.Policy.encode(message.policy, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.explanation != null && Object.hasOwnProperty.call(message, "explanation"))
+                                $root.google.cloud.asset.v1.IamPolicySearchResult.Explanation.encode(message.explanation, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified IamPolicySearchResult message, length delimited. Does not implicitly {@link google.cloud.asset.v1.IamPolicySearchResult.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.asset.v1.IamPolicySearchResult
+                         * @static
+                         * @param {google.cloud.asset.v1.IIamPolicySearchResult} message IamPolicySearchResult message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        IamPolicySearchResult.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an IamPolicySearchResult message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.asset.v1.IamPolicySearchResult
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.asset.v1.IamPolicySearchResult} IamPolicySearchResult
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        IamPolicySearchResult.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1.IamPolicySearchResult();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.resource = reader.string();
+                                    break;
+                                case 2:
+                                    message.project = reader.string();
+                                    break;
+                                case 3:
+                                    message.policy = $root.google.iam.v1.Policy.decode(reader, reader.uint32());
+                                    break;
+                                case 4:
+                                    message.explanation = $root.google.cloud.asset.v1.IamPolicySearchResult.Explanation.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an IamPolicySearchResult message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.asset.v1.IamPolicySearchResult
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.asset.v1.IamPolicySearchResult} IamPolicySearchResult
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        IamPolicySearchResult.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an IamPolicySearchResult message.
+                         * @function verify
+                         * @memberof google.cloud.asset.v1.IamPolicySearchResult
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        IamPolicySearchResult.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.resource != null && message.hasOwnProperty("resource"))
+                                if (!$util.isString(message.resource))
+                                    return "resource: string expected";
+                            if (message.project != null && message.hasOwnProperty("project"))
+                                if (!$util.isString(message.project))
+                                    return "project: string expected";
+                            if (message.policy != null && message.hasOwnProperty("policy")) {
+                                var error = $root.google.iam.v1.Policy.verify(message.policy);
+                                if (error)
+                                    return "policy." + error;
+                            }
+                            if (message.explanation != null && message.hasOwnProperty("explanation")) {
+                                var error = $root.google.cloud.asset.v1.IamPolicySearchResult.Explanation.verify(message.explanation);
+                                if (error)
+                                    return "explanation." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an IamPolicySearchResult message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.asset.v1.IamPolicySearchResult
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.asset.v1.IamPolicySearchResult} IamPolicySearchResult
+                         */
+                        IamPolicySearchResult.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.asset.v1.IamPolicySearchResult)
+                                return object;
+                            var message = new $root.google.cloud.asset.v1.IamPolicySearchResult();
+                            if (object.resource != null)
+                                message.resource = String(object.resource);
+                            if (object.project != null)
+                                message.project = String(object.project);
+                            if (object.policy != null) {
+                                if (typeof object.policy !== "object")
+                                    throw TypeError(".google.cloud.asset.v1.IamPolicySearchResult.policy: object expected");
+                                message.policy = $root.google.iam.v1.Policy.fromObject(object.policy);
+                            }
+                            if (object.explanation != null) {
+                                if (typeof object.explanation !== "object")
+                                    throw TypeError(".google.cloud.asset.v1.IamPolicySearchResult.explanation: object expected");
+                                message.explanation = $root.google.cloud.asset.v1.IamPolicySearchResult.Explanation.fromObject(object.explanation);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an IamPolicySearchResult message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.asset.v1.IamPolicySearchResult
+                         * @static
+                         * @param {google.cloud.asset.v1.IamPolicySearchResult} message IamPolicySearchResult
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        IamPolicySearchResult.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.resource = "";
+                                object.project = "";
+                                object.policy = null;
+                                object.explanation = null;
+                            }
+                            if (message.resource != null && message.hasOwnProperty("resource"))
+                                object.resource = message.resource;
+                            if (message.project != null && message.hasOwnProperty("project"))
+                                object.project = message.project;
+                            if (message.policy != null && message.hasOwnProperty("policy"))
+                                object.policy = $root.google.iam.v1.Policy.toObject(message.policy, options);
+                            if (message.explanation != null && message.hasOwnProperty("explanation"))
+                                object.explanation = $root.google.cloud.asset.v1.IamPolicySearchResult.Explanation.toObject(message.explanation, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this IamPolicySearchResult to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.asset.v1.IamPolicySearchResult
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        IamPolicySearchResult.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        IamPolicySearchResult.Explanation = (function() {
+    
+                            /**
+                             * Properties of an Explanation.
+                             * @memberof google.cloud.asset.v1.IamPolicySearchResult
+                             * @interface IExplanation
+                             * @property {Object.<string,google.cloud.asset.v1.IamPolicySearchResult.Explanation.IPermissions>|null} [matchedPermissions] Explanation matchedPermissions
+                             */
+    
+                            /**
+                             * Constructs a new Explanation.
+                             * @memberof google.cloud.asset.v1.IamPolicySearchResult
+                             * @classdesc Represents an Explanation.
+                             * @implements IExplanation
+                             * @constructor
+                             * @param {google.cloud.asset.v1.IamPolicySearchResult.IExplanation=} [properties] Properties to set
+                             */
+                            function Explanation(properties) {
+                                this.matchedPermissions = {};
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * Explanation matchedPermissions.
+                             * @member {Object.<string,google.cloud.asset.v1.IamPolicySearchResult.Explanation.IPermissions>} matchedPermissions
+                             * @memberof google.cloud.asset.v1.IamPolicySearchResult.Explanation
+                             * @instance
+                             */
+                            Explanation.prototype.matchedPermissions = $util.emptyObject;
+    
+                            /**
+                             * Creates a new Explanation instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.asset.v1.IamPolicySearchResult.Explanation
+                             * @static
+                             * @param {google.cloud.asset.v1.IamPolicySearchResult.IExplanation=} [properties] Properties to set
+                             * @returns {google.cloud.asset.v1.IamPolicySearchResult.Explanation} Explanation instance
+                             */
+                            Explanation.create = function create(properties) {
+                                return new Explanation(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified Explanation message. Does not implicitly {@link google.cloud.asset.v1.IamPolicySearchResult.Explanation.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.asset.v1.IamPolicySearchResult.Explanation
+                             * @static
+                             * @param {google.cloud.asset.v1.IamPolicySearchResult.IExplanation} message Explanation message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Explanation.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.matchedPermissions != null && Object.hasOwnProperty.call(message, "matchedPermissions"))
+                                    for (var keys = Object.keys(message.matchedPermissions), i = 0; i < keys.length; ++i) {
+                                        writer.uint32(/* id 1, wireType 2 =*/10).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]);
+                                        $root.google.cloud.asset.v1.IamPolicySearchResult.Explanation.Permissions.encode(message.matchedPermissions[keys[i]], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim().ldelim();
+                                    }
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified Explanation message, length delimited. Does not implicitly {@link google.cloud.asset.v1.IamPolicySearchResult.Explanation.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.asset.v1.IamPolicySearchResult.Explanation
+                             * @static
+                             * @param {google.cloud.asset.v1.IamPolicySearchResult.IExplanation} message Explanation message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Explanation.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes an Explanation message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.asset.v1.IamPolicySearchResult.Explanation
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.asset.v1.IamPolicySearchResult.Explanation} Explanation
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Explanation.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1.IamPolicySearchResult.Explanation(), key;
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1:
+                                        reader.skip().pos++;
+                                        if (message.matchedPermissions === $util.emptyObject)
+                                            message.matchedPermissions = {};
+                                        key = reader.string();
+                                        reader.pos++;
+                                        message.matchedPermissions[key] = $root.google.cloud.asset.v1.IamPolicySearchResult.Explanation.Permissions.decode(reader, reader.uint32());
+                                        break;
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes an Explanation message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.asset.v1.IamPolicySearchResult.Explanation
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.asset.v1.IamPolicySearchResult.Explanation} Explanation
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Explanation.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies an Explanation message.
+                             * @function verify
+                             * @memberof google.cloud.asset.v1.IamPolicySearchResult.Explanation
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            Explanation.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.matchedPermissions != null && message.hasOwnProperty("matchedPermissions")) {
+                                    if (!$util.isObject(message.matchedPermissions))
+                                        return "matchedPermissions: object expected";
+                                    var key = Object.keys(message.matchedPermissions);
+                                    for (var i = 0; i < key.length; ++i) {
+                                        var error = $root.google.cloud.asset.v1.IamPolicySearchResult.Explanation.Permissions.verify(message.matchedPermissions[key[i]]);
+                                        if (error)
+                                            return "matchedPermissions." + error;
+                                    }
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates an Explanation message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.asset.v1.IamPolicySearchResult.Explanation
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.asset.v1.IamPolicySearchResult.Explanation} Explanation
+                             */
+                            Explanation.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.asset.v1.IamPolicySearchResult.Explanation)
+                                    return object;
+                                var message = new $root.google.cloud.asset.v1.IamPolicySearchResult.Explanation();
+                                if (object.matchedPermissions) {
+                                    if (typeof object.matchedPermissions !== "object")
+                                        throw TypeError(".google.cloud.asset.v1.IamPolicySearchResult.Explanation.matchedPermissions: object expected");
+                                    message.matchedPermissions = {};
+                                    for (var keys = Object.keys(object.matchedPermissions), i = 0; i < keys.length; ++i) {
+                                        if (typeof object.matchedPermissions[keys[i]] !== "object")
+                                            throw TypeError(".google.cloud.asset.v1.IamPolicySearchResult.Explanation.matchedPermissions: object expected");
+                                        message.matchedPermissions[keys[i]] = $root.google.cloud.asset.v1.IamPolicySearchResult.Explanation.Permissions.fromObject(object.matchedPermissions[keys[i]]);
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from an Explanation message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.asset.v1.IamPolicySearchResult.Explanation
+                             * @static
+                             * @param {google.cloud.asset.v1.IamPolicySearchResult.Explanation} message Explanation
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            Explanation.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.objects || options.defaults)
+                                    object.matchedPermissions = {};
+                                var keys2;
+                                if (message.matchedPermissions && (keys2 = Object.keys(message.matchedPermissions)).length) {
+                                    object.matchedPermissions = {};
+                                    for (var j = 0; j < keys2.length; ++j)
+                                        object.matchedPermissions[keys2[j]] = $root.google.cloud.asset.v1.IamPolicySearchResult.Explanation.Permissions.toObject(message.matchedPermissions[keys2[j]], options);
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this Explanation to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.asset.v1.IamPolicySearchResult.Explanation
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            Explanation.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            Explanation.Permissions = (function() {
+    
+                                /**
+                                 * Properties of a Permissions.
+                                 * @memberof google.cloud.asset.v1.IamPolicySearchResult.Explanation
+                                 * @interface IPermissions
+                                 * @property {Array.<string>|null} [permissions] Permissions permissions
+                                 */
+    
+                                /**
+                                 * Constructs a new Permissions.
+                                 * @memberof google.cloud.asset.v1.IamPolicySearchResult.Explanation
+                                 * @classdesc Represents a Permissions.
+                                 * @implements IPermissions
+                                 * @constructor
+                                 * @param {google.cloud.asset.v1.IamPolicySearchResult.Explanation.IPermissions=} [properties] Properties to set
+                                 */
+                                function Permissions(properties) {
+                                    this.permissions = [];
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * Permissions permissions.
+                                 * @member {Array.<string>} permissions
+                                 * @memberof google.cloud.asset.v1.IamPolicySearchResult.Explanation.Permissions
+                                 * @instance
+                                 */
+                                Permissions.prototype.permissions = $util.emptyArray;
+    
+                                /**
+                                 * Creates a new Permissions instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.asset.v1.IamPolicySearchResult.Explanation.Permissions
+                                 * @static
+                                 * @param {google.cloud.asset.v1.IamPolicySearchResult.Explanation.IPermissions=} [properties] Properties to set
+                                 * @returns {google.cloud.asset.v1.IamPolicySearchResult.Explanation.Permissions} Permissions instance
+                                 */
+                                Permissions.create = function create(properties) {
+                                    return new Permissions(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified Permissions message. Does not implicitly {@link google.cloud.asset.v1.IamPolicySearchResult.Explanation.Permissions.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.asset.v1.IamPolicySearchResult.Explanation.Permissions
+                                 * @static
+                                 * @param {google.cloud.asset.v1.IamPolicySearchResult.Explanation.IPermissions} message Permissions message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                Permissions.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.permissions != null && message.permissions.length)
+                                        for (var i = 0; i < message.permissions.length; ++i)
+                                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.permissions[i]);
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified Permissions message, length delimited. Does not implicitly {@link google.cloud.asset.v1.IamPolicySearchResult.Explanation.Permissions.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.asset.v1.IamPolicySearchResult.Explanation.Permissions
+                                 * @static
+                                 * @param {google.cloud.asset.v1.IamPolicySearchResult.Explanation.IPermissions} message Permissions message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                Permissions.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a Permissions message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.asset.v1.IamPolicySearchResult.Explanation.Permissions
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.asset.v1.IamPolicySearchResult.Explanation.Permissions} Permissions
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                Permissions.decode = function decode(reader, length) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1.IamPolicySearchResult.Explanation.Permissions();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        switch (tag >>> 3) {
+                                        case 1:
+                                            if (!(message.permissions && message.permissions.length))
+                                                message.permissions = [];
+                                            message.permissions.push(reader.string());
+                                            break;
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a Permissions message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.asset.v1.IamPolicySearchResult.Explanation.Permissions
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.asset.v1.IamPolicySearchResult.Explanation.Permissions} Permissions
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                Permissions.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a Permissions message.
+                                 * @function verify
+                                 * @memberof google.cloud.asset.v1.IamPolicySearchResult.Explanation.Permissions
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                Permissions.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.permissions != null && message.hasOwnProperty("permissions")) {
+                                        if (!Array.isArray(message.permissions))
+                                            return "permissions: array expected";
+                                        for (var i = 0; i < message.permissions.length; ++i)
+                                            if (!$util.isString(message.permissions[i]))
+                                                return "permissions: string[] expected";
+                                    }
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a Permissions message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.asset.v1.IamPolicySearchResult.Explanation.Permissions
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.asset.v1.IamPolicySearchResult.Explanation.Permissions} Permissions
+                                 */
+                                Permissions.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.asset.v1.IamPolicySearchResult.Explanation.Permissions)
+                                        return object;
+                                    var message = new $root.google.cloud.asset.v1.IamPolicySearchResult.Explanation.Permissions();
+                                    if (object.permissions) {
+                                        if (!Array.isArray(object.permissions))
+                                            throw TypeError(".google.cloud.asset.v1.IamPolicySearchResult.Explanation.Permissions.permissions: array expected");
+                                        message.permissions = [];
+                                        for (var i = 0; i < object.permissions.length; ++i)
+                                            message.permissions[i] = String(object.permissions[i]);
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a Permissions message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.asset.v1.IamPolicySearchResult.Explanation.Permissions
+                                 * @static
+                                 * @param {google.cloud.asset.v1.IamPolicySearchResult.Explanation.Permissions} message Permissions
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                Permissions.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.arrays || options.defaults)
+                                        object.permissions = [];
+                                    if (message.permissions && message.permissions.length) {
+                                        object.permissions = [];
+                                        for (var j = 0; j < message.permissions.length; ++j)
+                                            object.permissions[j] = message.permissions[j];
+                                    }
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this Permissions to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.asset.v1.IamPolicySearchResult.Explanation.Permissions
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                Permissions.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                return Permissions;
+                            })();
+    
+                            return Explanation;
+                        })();
+    
+                        return IamPolicySearchResult;
                     })();
     
                     return v1;
