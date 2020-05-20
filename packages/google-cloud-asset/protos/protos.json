@@ -81,6 +81,22 @@
                             "(google.api.http).delete": "/v1/{name=*/*/feeds/*}",
                             "(google.api.method_signature)": "name"
                           }
+                        },
+                        "SearchAllResources": {
+                          "requestType": "SearchAllResourcesRequest",
+                          "responseType": "SearchAllResourcesResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{scope=*/*}:searchAllResources",
+                            "(google.api.method_signature)": "scope,query,asset_types"
+                          }
+                        },
+                        "SearchAllIamPolicies": {
+                          "requestType": "SearchAllIamPoliciesRequest",
+                          "responseType": "SearchAllIamPoliciesResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{scope=*/*}:searchAllIamPolicies",
+                            "(google.api.method_signature)": "scope,query"
+                          }
                         }
                       }
                     },
@@ -377,6 +393,111 @@
                         }
                       }
                     },
+                    "SearchAllResourcesRequest": {
+                      "fields": {
+                        "scope": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "query": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "assetTypes": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "orderBy": {
+                          "type": "string",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "SearchAllResourcesResponse": {
+                      "fields": {
+                        "results": {
+                          "rule": "repeated",
+                          "type": "ResourceSearchResult",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "SearchAllIamPoliciesRequest": {
+                      "fields": {
+                        "scope": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "query": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "SearchAllIamPoliciesResponse": {
+                      "fields": {
+                        "results": {
+                          "rule": "repeated",
+                          "type": "IamPolicySearchResult",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
                     "ContentType": {
                       "values": {
                         "CONTENT_TYPE_UNSPECIFIED": 0,
@@ -494,6 +615,94 @@
                         "data": {
                           "type": "google.protobuf.Struct",
                           "id": 6
+                        },
+                        "location": {
+                          "type": "string",
+                          "id": 8
+                        }
+                      }
+                    },
+                    "ResourceSearchResult": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "assetType": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 5
+                        },
+                        "location": {
+                          "type": "string",
+                          "id": 6
+                        },
+                        "labels": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 7
+                        },
+                        "networkTags": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 8
+                        },
+                        "additionalAttributes": {
+                          "type": "google.protobuf.Struct",
+                          "id": 9
+                        }
+                      }
+                    },
+                    "IamPolicySearchResult": {
+                      "fields": {
+                        "resource": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "policy": {
+                          "type": "google.iam.v1.Policy",
+                          "id": 3
+                        },
+                        "explanation": {
+                          "type": "Explanation",
+                          "id": 4
+                        }
+                      },
+                      "nested": {
+                        "Explanation": {
+                          "fields": {
+                            "matchedPermissions": {
+                              "keyType": "string",
+                              "type": "Permissions",
+                              "id": 1
+                            }
+                          },
+                          "nested": {
+                            "Permissions": {
+                              "fields": {
+                                "permissions": {
+                                  "rule": "repeated",
+                                  "type": "string",
+                                  "id": 1
+                                }
+                              }
+                            }
+                          }
                         }
                       }
                     }

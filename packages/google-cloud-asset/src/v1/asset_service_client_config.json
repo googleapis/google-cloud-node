@@ -47,6 +47,14 @@
         "DeleteFeed": {
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
+        },
+        "SearchAllResources": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "SearchAllIamPolicies": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
         }
       }
     }
