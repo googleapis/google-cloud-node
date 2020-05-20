@@ -32,7 +32,7 @@ cd "system-test"
 # dependencies breaking this test.
 go version
 go mod init e2e
-retry go test -c -tags=integration .
+retry go test -c -tags=integration -timeout=30m -run=TestAgentIntegration .
 
 if [ "$KOKORO_GITHUB_PULL_REQUEST_NUMBER" = "" ]; then
   ./e2e.test -commit="$COMMIT" -branch="$BRANCH" -repo="$REPO"
