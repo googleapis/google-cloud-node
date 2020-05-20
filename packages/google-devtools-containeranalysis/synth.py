@@ -31,36 +31,44 @@ gapic = gcp.GAPICMicrogenerator()
 versions = ['v1beta1', 'v1']
 for version in versions:
     library = gapic.typescript_library(
-      'containeranalysis', version,
-      generator_args={
+        'containeranalysis', version,
+        generator_args={
             "grpc-service-config": f"google/devtools/containeranalysis/{version}/containeranalysis_grpc_service_config.json",
             "package-name": f"@google-cloud/containeranalysis",
             "main-service": f"containeranalysis"
-            },
+        },
         proto_path=f'/google/devtools/containeranalysis/{version}',
         extra_proto_files=["google/cloud/common_resources.proto", "grafeas/v1"]
-        )
-    s.copy(library, excludes=['package.json', 'README.md', 'src/index.ts', 'src/v1beta1/index.ts', 'src/v1/index.ts', 'tslint.json'])
+    )
+    s.copy(library, excludes=['package.json', 'README.md',
+                              'src/v1beta1/index.ts', 'src/v1/index.ts', 'tslint.json'])
 
 # Copy common templates
 common_templates = gcp.CommonTemplates()
-templates = common_templates.node_library(source_location='build/src')
+templates = common_templates.node_library(
+    source_location='build/src', versions=versions, default_version='v1')
 s.copy(templates)
+
+# Add beta version GrafeasClient to export
+s.replace('src/index.ts',
+          '\nexport \{v1beta1\, v1\, ContainerAnalysisClient\}\;\nexport default \{v1beta1\, v1\, ContainerAnalysisClient\}\;',
+          'const GrafeasClient = v1beta1.GrafeasV1Beta1Client;\n\nexport {v1, v1beta1, ContainerAnalysisClient, GrafeasClient};\nexport default {v1, v1beta1, ContainerAnalysisClient, GrafeasClient};')
+
 
 # # fix the URL of grafeas.io (this is already fixed upstream).
 s.replace('src/v1beta1/*.ts',
-        'grafeas.io',
-        'https://grafeas.io')
+          'grafeas.io',
+          'https://grafeas.io')
 
 # perform surgery inserting the Grafeas client.
 s.replace("src/v1/container_analysis_client.ts",
-"""import \* as path from \'path\';
+          """import \* as path from \'path\';
 """,
-"""import * as path from 'path';
+          """import * as path from 'path';
 import {GrafeasClient} from '@google-cloud/grafeas';
 """)
 s.replace("src/v1/container_analysis_client.ts", "^}",
-r"""
+          r"""
   /**
    * Returns an instance of a @google-cloud/grafeas client, configured to
    * connect to Google Cloud's Container Analysis API. For documentation
@@ -76,7 +84,8 @@ r"""
 }
 """)
 
-to_remove=['src/v1/grafeas_client.ts', 'src/v1/grafeas_client_config.json', 'src/v1/grafeas_proto_list.json', 'src/v1beta1/grafeas_client.ts','src/v1beta1/grafeas_client_config.json', 'src/v1beta1/grafeas_proto_list.json', 'test/gapic_grafeas_v1_beta1_v1beta1.ts', 'test/gapic_grafeas_v1.ts', 'test/gapic_grafeas_v1beta1.ts']
+to_remove = ['src/v1/grafeas_client.ts', 'src/v1/grafeas_client_config.json', 'src/v1/grafeas_proto_list.json', 'src/v1beta1/grafeas_client.ts',
+             'src/v1beta1/grafeas_client_config.json', 'src/v1beta1/grafeas_proto_list.json', 'test/gapic_grafeas_v1_beta1_v1beta1.ts', 'test/gapic_grafeas_v1.ts', 'test/gapic_grafeas_v1beta1.ts']
 for filePath in to_remove:
     os.unlink(filePath)
 
