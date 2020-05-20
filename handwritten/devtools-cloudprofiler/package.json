@@ -54,7 +54,7 @@
     "c8": "^7.0.0",
     "codecov": "^3.0.0",
     "gts": "^2.0.0",
-    "js-green-licenses": "^1.0.0",
+    "js-green-licenses": "^2.0.0",
     "jsdoc": "^3.6.2",
     "jsdoc-fresh": "^1.0.1",
     "jsdoc-region-tag": "^1.0.2",
