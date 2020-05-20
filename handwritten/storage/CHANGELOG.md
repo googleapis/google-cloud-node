@@ -4,6 +4,14 @@
 
 [1]: https://www.npmjs.com/package/nodejs-storage?activeTab=versions
 
+### [5.0.1](https://www.github.com/googleapis/nodejs-storage/compare/v5.0.0...v5.0.1) (2020-05-20)
+
+
+### Bug Fixes
+
+* StorageOptions.apiEndpoint overrides simple and resumable uploads ([#1161](https://www.github.com/googleapis/nodejs-storage/issues/1161)) ([cf8ea5c](https://www.github.com/googleapis/nodejs-storage/commit/cf8ea5cbbecea50233b1681c7f8aba121ec37a1a))
+* **types:** assert in typescript 3.7 ([#1198](https://www.github.com/googleapis/nodejs-storage/issues/1198)) ([d5aa8b7](https://www.github.com/googleapis/nodejs-storage/commit/d5aa8b7892366c9fbbdc33dd001f644da61bb22e))
+
 ## [5.0.0](https://www.github.com/googleapis/nodejs-storage/compare/v4.7.0...v5.0.0) (2020-05-13)
 
 
