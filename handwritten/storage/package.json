@@ -74,7 +74,7 @@
     "xdg-basedir": "^4.0.0"
   },
   "devDependencies": {
-    "@google-cloud/pubsub": "^1.0.0",
+    "@google-cloud/pubsub": "^2.0.0",
     "@grpc/grpc-js": "^1.0.3",
     "@grpc/proto-loader": "^0.5.1",
     "@types/compressible": "^2.0.0",
