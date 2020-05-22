@@ -3366,6 +3366,8 @@
                                 case 3:
                                 case 4:
                                 case 5:
+                                case 7:
+                                case 8:
                                 case 11:
                                     break;
                                 }
@@ -3415,6 +3417,14 @@
                             case "TEXT_UTF8":
                             case 5:
                                 message.type = 5;
+                                break;
+                            case "WORD_DOCUMENT":
+                            case 7:
+                                message.type = 7;
+                                break;
+                            case "PDF":
+                            case 8:
+                                message.type = 8;
                                 break;
                             case "AVRO":
                             case 11:
@@ -3481,6 +3491,8 @@
                          * @property {number} IMAGE_PNG=3 IMAGE_PNG value
                          * @property {number} IMAGE_SVG=4 IMAGE_SVG value
                          * @property {number} TEXT_UTF8=5 TEXT_UTF8 value
+                         * @property {number} WORD_DOCUMENT=7 WORD_DOCUMENT value
+                         * @property {number} PDF=8 PDF value
                          * @property {number} AVRO=11 AVRO value
                          */
                         ByteContentItem.BytesType = (function() {
@@ -3492,6 +3504,8 @@
                             values[valuesById[3] = "IMAGE_PNG"] = 3;
                             values[valuesById[4] = "IMAGE_SVG"] = 4;
                             values[valuesById[5] = "TEXT_UTF8"] = 5;
+                            values[valuesById[7] = "WORD_DOCUMENT"] = 7;
+                            values[valuesById[8] = "PDF"] = 8;
                             values[valuesById[11] = "AVRO"] = 11;
                             return values;
                         })();
@@ -5274,6 +5288,7 @@
                          * @property {google.privacy.dlp.v2.IRecordLocation|null} [recordLocation] ContentLocation recordLocation
                          * @property {google.privacy.dlp.v2.IImageLocation|null} [imageLocation] ContentLocation imageLocation
                          * @property {google.privacy.dlp.v2.IDocumentLocation|null} [documentLocation] ContentLocation documentLocation
+                         * @property {google.privacy.dlp.v2.IMetadataLocation|null} [metadataLocation] ContentLocation metadataLocation
                          * @property {google.protobuf.ITimestamp|null} [containerTimestamp] ContentLocation containerTimestamp
                          * @property {string|null} [containerVersion] ContentLocation containerVersion
                          */
@@ -5326,6 +5341,14 @@
                         ContentLocation.prototype.documentLocation = null;
     
                         /**
+                         * ContentLocation metadataLocation.
+                         * @member {google.privacy.dlp.v2.IMetadataLocation|null|undefined} metadataLocation
+                         * @memberof google.privacy.dlp.v2.ContentLocation
+                         * @instance
+                         */
+                        ContentLocation.prototype.metadataLocation = null;
+    
+                        /**
                          * ContentLocation containerTimestamp.
                          * @member {google.protobuf.ITimestamp|null|undefined} containerTimestamp
                          * @memberof google.privacy.dlp.v2.ContentLocation
@@ -5346,12 +5369,12 @@
     
                         /**
                          * ContentLocation location.
-                         * @member {"recordLocation"|"imageLocation"|"documentLocation"|undefined} location
+                         * @member {"recordLocation"|"imageLocation"|"documentLocation"|"metadataLocation"|undefined} location
                          * @memberof google.privacy.dlp.v2.ContentLocation
                          * @instance
                          */
                         Object.defineProperty(ContentLocation.prototype, "location", {
-                            get: $util.oneOfGetter($oneOfFields = ["recordLocation", "imageLocation", "documentLocation"]),
+                            get: $util.oneOfGetter($oneOfFields = ["recordLocation", "imageLocation", "documentLocation", "metadataLocation"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -5391,6 +5414,8 @@
                                 $root.google.protobuf.Timestamp.encode(message.containerTimestamp, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
                             if (message.containerVersion != null && Object.hasOwnProperty.call(message, "containerVersion"))
                                 writer.uint32(/* id 7, wireType 2 =*/58).string(message.containerVersion);
+                            if (message.metadataLocation != null && Object.hasOwnProperty.call(message, "metadataLocation"))
+                                $root.google.privacy.dlp.v2.MetadataLocation.encode(message.metadataLocation, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
                             return writer;
                         };
     
@@ -5436,6 +5461,9 @@
                                     break;
                                 case 5:
                                     message.documentLocation = $root.google.privacy.dlp.v2.DocumentLocation.decode(reader, reader.uint32());
+                                    break;
+                                case 8:
+                                    message.metadataLocation = $root.google.privacy.dlp.v2.MetadataLocation.decode(reader, reader.uint32());
                                     break;
                                 case 6:
                                     message.containerTimestamp = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
@@ -5510,6 +5538,16 @@
                                         return "documentLocation." + error;
                                 }
                             }
+                            if (message.metadataLocation != null && message.hasOwnProperty("metadataLocation")) {
+                                if (properties.location === 1)
+                                    return "location: multiple values";
+                                properties.location = 1;
+                                {
+                                    var error = $root.google.privacy.dlp.v2.MetadataLocation.verify(message.metadataLocation);
+                                    if (error)
+                                        return "metadataLocation." + error;
+                                }
+                            }
                             if (message.containerTimestamp != null && message.hasOwnProperty("containerTimestamp")) {
                                 var error = $root.google.protobuf.Timestamp.verify(message.containerTimestamp);
                                 if (error)
@@ -5549,6 +5587,11 @@
                                 if (typeof object.documentLocation !== "object")
                                     throw TypeError(".google.privacy.dlp.v2.ContentLocation.documentLocation: object expected");
                                 message.documentLocation = $root.google.privacy.dlp.v2.DocumentLocation.fromObject(object.documentLocation);
+                            }
+                            if (object.metadataLocation != null) {
+                                if (typeof object.metadataLocation !== "object")
+                                    throw TypeError(".google.privacy.dlp.v2.ContentLocation.metadataLocation: object expected");
+                                message.metadataLocation = $root.google.privacy.dlp.v2.MetadataLocation.fromObject(object.metadataLocation);
                             }
                             if (object.containerTimestamp != null) {
                                 if (typeof object.containerTimestamp !== "object")
@@ -5599,6 +5642,11 @@
                                 object.containerTimestamp = $root.google.protobuf.Timestamp.toObject(message.containerTimestamp, options);
                             if (message.containerVersion != null && message.hasOwnProperty("containerVersion"))
                                 object.containerVersion = message.containerVersion;
+                            if (message.metadataLocation != null && message.hasOwnProperty("metadataLocation")) {
+                                object.metadataLocation = $root.google.privacy.dlp.v2.MetadataLocation.toObject(message.metadataLocation, options);
+                                if (options.oneofs)
+                                    object.location = "metadataLocation";
+                            }
                             return object;
                         };
     
@@ -5614,6 +5662,440 @@
                         };
     
                         return ContentLocation;
+                    })();
+    
+                    v2.MetadataLocation = (function() {
+    
+                        /**
+                         * Properties of a MetadataLocation.
+                         * @memberof google.privacy.dlp.v2
+                         * @interface IMetadataLocation
+                         * @property {google.privacy.dlp.v2.MetadataType|null} [type] MetadataLocation type
+                         * @property {google.privacy.dlp.v2.IStorageMetadataLabel|null} [storageLabel] MetadataLocation storageLabel
+                         */
+    
+                        /**
+                         * Constructs a new MetadataLocation.
+                         * @memberof google.privacy.dlp.v2
+                         * @classdesc Represents a MetadataLocation.
+                         * @implements IMetadataLocation
+                         * @constructor
+                         * @param {google.privacy.dlp.v2.IMetadataLocation=} [properties] Properties to set
+                         */
+                        function MetadataLocation(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * MetadataLocation type.
+                         * @member {google.privacy.dlp.v2.MetadataType} type
+                         * @memberof google.privacy.dlp.v2.MetadataLocation
+                         * @instance
+                         */
+                        MetadataLocation.prototype.type = 0;
+    
+                        /**
+                         * MetadataLocation storageLabel.
+                         * @member {google.privacy.dlp.v2.IStorageMetadataLabel|null|undefined} storageLabel
+                         * @memberof google.privacy.dlp.v2.MetadataLocation
+                         * @instance
+                         */
+                        MetadataLocation.prototype.storageLabel = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * MetadataLocation label.
+                         * @member {"storageLabel"|undefined} label
+                         * @memberof google.privacy.dlp.v2.MetadataLocation
+                         * @instance
+                         */
+                        Object.defineProperty(MetadataLocation.prototype, "label", {
+                            get: $util.oneOfGetter($oneOfFields = ["storageLabel"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new MetadataLocation instance using the specified properties.
+                         * @function create
+                         * @memberof google.privacy.dlp.v2.MetadataLocation
+                         * @static
+                         * @param {google.privacy.dlp.v2.IMetadataLocation=} [properties] Properties to set
+                         * @returns {google.privacy.dlp.v2.MetadataLocation} MetadataLocation instance
+                         */
+                        MetadataLocation.create = function create(properties) {
+                            return new MetadataLocation(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified MetadataLocation message. Does not implicitly {@link google.privacy.dlp.v2.MetadataLocation.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.privacy.dlp.v2.MetadataLocation
+                         * @static
+                         * @param {google.privacy.dlp.v2.IMetadataLocation} message MetadataLocation message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        MetadataLocation.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.type != null && Object.hasOwnProperty.call(message, "type"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.type);
+                            if (message.storageLabel != null && Object.hasOwnProperty.call(message, "storageLabel"))
+                                $root.google.privacy.dlp.v2.StorageMetadataLabel.encode(message.storageLabel, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified MetadataLocation message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.MetadataLocation.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.privacy.dlp.v2.MetadataLocation
+                         * @static
+                         * @param {google.privacy.dlp.v2.IMetadataLocation} message MetadataLocation message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        MetadataLocation.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a MetadataLocation message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.privacy.dlp.v2.MetadataLocation
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.privacy.dlp.v2.MetadataLocation} MetadataLocation
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        MetadataLocation.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.MetadataLocation();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.type = reader.int32();
+                                    break;
+                                case 3:
+                                    message.storageLabel = $root.google.privacy.dlp.v2.StorageMetadataLabel.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a MetadataLocation message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.privacy.dlp.v2.MetadataLocation
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.privacy.dlp.v2.MetadataLocation} MetadataLocation
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        MetadataLocation.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a MetadataLocation message.
+                         * @function verify
+                         * @memberof google.privacy.dlp.v2.MetadataLocation
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        MetadataLocation.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.type != null && message.hasOwnProperty("type"))
+                                switch (message.type) {
+                                default:
+                                    return "type: enum value expected";
+                                case 0:
+                                case 2:
+                                    break;
+                                }
+                            if (message.storageLabel != null && message.hasOwnProperty("storageLabel")) {
+                                properties.label = 1;
+                                {
+                                    var error = $root.google.privacy.dlp.v2.StorageMetadataLabel.verify(message.storageLabel);
+                                    if (error)
+                                        return "storageLabel." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a MetadataLocation message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.privacy.dlp.v2.MetadataLocation
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.privacy.dlp.v2.MetadataLocation} MetadataLocation
+                         */
+                        MetadataLocation.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.privacy.dlp.v2.MetadataLocation)
+                                return object;
+                            var message = new $root.google.privacy.dlp.v2.MetadataLocation();
+                            switch (object.type) {
+                            case "METADATATYPE_UNSPECIFIED":
+                            case 0:
+                                message.type = 0;
+                                break;
+                            case "STORAGE_METADATA":
+                            case 2:
+                                message.type = 2;
+                                break;
+                            }
+                            if (object.storageLabel != null) {
+                                if (typeof object.storageLabel !== "object")
+                                    throw TypeError(".google.privacy.dlp.v2.MetadataLocation.storageLabel: object expected");
+                                message.storageLabel = $root.google.privacy.dlp.v2.StorageMetadataLabel.fromObject(object.storageLabel);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a MetadataLocation message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.privacy.dlp.v2.MetadataLocation
+                         * @static
+                         * @param {google.privacy.dlp.v2.MetadataLocation} message MetadataLocation
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        MetadataLocation.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.type = options.enums === String ? "METADATATYPE_UNSPECIFIED" : 0;
+                            if (message.type != null && message.hasOwnProperty("type"))
+                                object.type = options.enums === String ? $root.google.privacy.dlp.v2.MetadataType[message.type] : message.type;
+                            if (message.storageLabel != null && message.hasOwnProperty("storageLabel")) {
+                                object.storageLabel = $root.google.privacy.dlp.v2.StorageMetadataLabel.toObject(message.storageLabel, options);
+                                if (options.oneofs)
+                                    object.label = "storageLabel";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this MetadataLocation to JSON.
+                         * @function toJSON
+                         * @memberof google.privacy.dlp.v2.MetadataLocation
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        MetadataLocation.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return MetadataLocation;
+                    })();
+    
+                    v2.StorageMetadataLabel = (function() {
+    
+                        /**
+                         * Properties of a StorageMetadataLabel.
+                         * @memberof google.privacy.dlp.v2
+                         * @interface IStorageMetadataLabel
+                         * @property {string|null} [key] StorageMetadataLabel key
+                         */
+    
+                        /**
+                         * Constructs a new StorageMetadataLabel.
+                         * @memberof google.privacy.dlp.v2
+                         * @classdesc Represents a StorageMetadataLabel.
+                         * @implements IStorageMetadataLabel
+                         * @constructor
+                         * @param {google.privacy.dlp.v2.IStorageMetadataLabel=} [properties] Properties to set
+                         */
+                        function StorageMetadataLabel(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * StorageMetadataLabel key.
+                         * @member {string} key
+                         * @memberof google.privacy.dlp.v2.StorageMetadataLabel
+                         * @instance
+                         */
+                        StorageMetadataLabel.prototype.key = "";
+    
+                        /**
+                         * Creates a new StorageMetadataLabel instance using the specified properties.
+                         * @function create
+                         * @memberof google.privacy.dlp.v2.StorageMetadataLabel
+                         * @static
+                         * @param {google.privacy.dlp.v2.IStorageMetadataLabel=} [properties] Properties to set
+                         * @returns {google.privacy.dlp.v2.StorageMetadataLabel} StorageMetadataLabel instance
+                         */
+                        StorageMetadataLabel.create = function create(properties) {
+                            return new StorageMetadataLabel(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified StorageMetadataLabel message. Does not implicitly {@link google.privacy.dlp.v2.StorageMetadataLabel.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.privacy.dlp.v2.StorageMetadataLabel
+                         * @static
+                         * @param {google.privacy.dlp.v2.IStorageMetadataLabel} message StorageMetadataLabel message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        StorageMetadataLabel.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.key != null && Object.hasOwnProperty.call(message, "key"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.key);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified StorageMetadataLabel message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.StorageMetadataLabel.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.privacy.dlp.v2.StorageMetadataLabel
+                         * @static
+                         * @param {google.privacy.dlp.v2.IStorageMetadataLabel} message StorageMetadataLabel message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        StorageMetadataLabel.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a StorageMetadataLabel message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.privacy.dlp.v2.StorageMetadataLabel
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.privacy.dlp.v2.StorageMetadataLabel} StorageMetadataLabel
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        StorageMetadataLabel.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.StorageMetadataLabel();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.key = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a StorageMetadataLabel message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.privacy.dlp.v2.StorageMetadataLabel
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.privacy.dlp.v2.StorageMetadataLabel} StorageMetadataLabel
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        StorageMetadataLabel.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a StorageMetadataLabel message.
+                         * @function verify
+                         * @memberof google.privacy.dlp.v2.StorageMetadataLabel
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        StorageMetadataLabel.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.key != null && message.hasOwnProperty("key"))
+                                if (!$util.isString(message.key))
+                                    return "key: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a StorageMetadataLabel message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.privacy.dlp.v2.StorageMetadataLabel
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.privacy.dlp.v2.StorageMetadataLabel} StorageMetadataLabel
+                         */
+                        StorageMetadataLabel.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.privacy.dlp.v2.StorageMetadataLabel)
+                                return object;
+                            var message = new $root.google.privacy.dlp.v2.StorageMetadataLabel();
+                            if (object.key != null)
+                                message.key = String(object.key);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a StorageMetadataLabel message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.privacy.dlp.v2.StorageMetadataLabel
+                         * @static
+                         * @param {google.privacy.dlp.v2.StorageMetadataLabel} message StorageMetadataLabel
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        StorageMetadataLabel.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.key = "";
+                            if (message.key != null && message.hasOwnProperty("key"))
+                                object.key = message.key;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this StorageMetadataLabel to JSON.
+                         * @function toJSON
+                         * @memberof google.privacy.dlp.v2.StorageMetadataLabel
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        StorageMetadataLabel.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return StorageMetadataLabel;
                     })();
     
                     v2.DocumentLocation = (function() {
@@ -11799,6 +12281,7 @@
                          * Properties of a ListInfoTypesRequest.
                          * @memberof google.privacy.dlp.v2
                          * @interface IListInfoTypesRequest
+                         * @property {string|null} [parent] ListInfoTypesRequest parent
                          * @property {string|null} [languageCode] ListInfoTypesRequest languageCode
                          * @property {string|null} [filter] ListInfoTypesRequest filter
                          * @property {string|null} [locationId] ListInfoTypesRequest locationId
@@ -11818,6 +12301,14 @@
                                     if (properties[keys[i]] != null)
                                         this[keys[i]] = properties[keys[i]];
                         }
+    
+                        /**
+                         * ListInfoTypesRequest parent.
+                         * @member {string} parent
+                         * @memberof google.privacy.dlp.v2.ListInfoTypesRequest
+                         * @instance
+                         */
+                        ListInfoTypesRequest.prototype.parent = "";
     
                         /**
                          * ListInfoTypesRequest languageCode.
@@ -11873,6 +12364,8 @@
                                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.filter);
                             if (message.locationId != null && Object.hasOwnProperty.call(message, "locationId"))
                                 writer.uint32(/* id 3, wireType 2 =*/26).string(message.locationId);
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.parent);
                             return writer;
                         };
     
@@ -11907,6 +12400,9 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
+                                case 4:
+                                    message.parent = reader.string();
+                                    break;
                                 case 1:
                                     message.languageCode = reader.string();
                                     break;
@@ -11951,6 +12447,9 @@
                         ListInfoTypesRequest.verify = function verify(message) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
                             if (message.languageCode != null && message.hasOwnProperty("languageCode"))
                                 if (!$util.isString(message.languageCode))
                                     return "languageCode: string expected";
@@ -11975,6 +12474,8 @@
                             if (object instanceof $root.google.privacy.dlp.v2.ListInfoTypesRequest)
                                 return object;
                             var message = new $root.google.privacy.dlp.v2.ListInfoTypesRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
                             if (object.languageCode != null)
                                 message.languageCode = String(object.languageCode);
                             if (object.filter != null)
@@ -12001,6 +12502,7 @@
                                 object.languageCode = "";
                                 object.filter = "";
                                 object.locationId = "";
+                                object.parent = "";
                             }
                             if (message.languageCode != null && message.hasOwnProperty("languageCode"))
                                 object.languageCode = message.languageCode;
@@ -12008,6 +12510,8 @@
                                 object.filter = message.filter;
                             if (message.locationId != null && message.hasOwnProperty("locationId"))
                                 object.locationId = message.locationId;
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
                             return object;
                         };
     
@@ -44665,6 +45169,20 @@
                     })();
     
                     /**
+                     * MetadataType enum.
+                     * @name google.privacy.dlp.v2.MetadataType
+                     * @enum {number}
+                     * @property {number} METADATATYPE_UNSPECIFIED=0 METADATATYPE_UNSPECIFIED value
+                     * @property {number} STORAGE_METADATA=2 STORAGE_METADATA value
+                     */
+                    v2.MetadataType = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "METADATATYPE_UNSPECIFIED"] = 0;
+                        values[valuesById[2] = "STORAGE_METADATA"] = 2;
+                        return values;
+                    })();
+    
+                    /**
                      * InfoTypeSupportedBy enum.
                      * @name google.privacy.dlp.v2.InfoTypeSupportedBy
                      * @enum {number}
@@ -48709,6 +49227,8 @@
                                     case 1:
                                     case 2:
                                     case 3:
+                                    case 5:
+                                    case 6:
                                     case 7:
                                         break;
                                     }
@@ -48778,6 +49298,14 @@
                                     case "IMAGE":
                                     case 3:
                                         message.fileTypes[i] = 3;
+                                        break;
+                                    case "WORD":
+                                    case 5:
+                                        message.fileTypes[i] = 5;
+                                        break;
+                                    case "PDF":
+                                    case 6:
+                                        message.fileTypes[i] = 6;
                                         break;
                                     case "AVRO":
                                     case 7:
@@ -50483,6 +51011,8 @@
                      * @property {number} BINARY_FILE=1 BINARY_FILE value
                      * @property {number} TEXT_FILE=2 TEXT_FILE value
                      * @property {number} IMAGE=3 IMAGE value
+                     * @property {number} WORD=5 WORD value
+                     * @property {number} PDF=6 PDF value
                      * @property {number} AVRO=7 AVRO value
                      */
                     v2.FileType = (function() {
@@ -50491,6 +51021,8 @@
                         values[valuesById[1] = "BINARY_FILE"] = 1;
                         values[valuesById[2] = "TEXT_FILE"] = 2;
                         values[valuesById[3] = "IMAGE"] = 3;
+                        values[valuesById[5] = "WORD"] = 5;
+                        values[valuesById[6] = "PDF"] = 6;
                         values[valuesById[7] = "AVRO"] = 7;
                         return values;
                     })();

@@ -1603,6 +1603,8 @@ export namespace google {
                         IMAGE_PNG = 3,
                         IMAGE_SVG = 4,
                         TEXT_UTF8 = 5,
+                        WORD_DOCUMENT = 7,
+                        PDF = 8,
                         AVRO = 11
                     }
                 }
@@ -2276,6 +2278,9 @@ export namespace google {
                     /** ContentLocation documentLocation */
                     documentLocation?: (google.privacy.dlp.v2.IDocumentLocation|null);
 
+                    /** ContentLocation metadataLocation */
+                    metadataLocation?: (google.privacy.dlp.v2.IMetadataLocation|null);
+
                     /** ContentLocation containerTimestamp */
                     containerTimestamp?: (google.protobuf.ITimestamp|null);
 
@@ -2304,6 +2309,9 @@ export namespace google {
                     /** ContentLocation documentLocation. */
                     public documentLocation?: (google.privacy.dlp.v2.IDocumentLocation|null);
 
+                    /** ContentLocation metadataLocation. */
+                    public metadataLocation?: (google.privacy.dlp.v2.IMetadataLocation|null);
+
                     /** ContentLocation containerTimestamp. */
                     public containerTimestamp?: (google.protobuf.ITimestamp|null);
 
@@ -2311,7 +2319,7 @@ export namespace google {
                     public containerVersion: string;
 
                     /** ContentLocation location. */
-                    public location?: ("recordLocation"|"imageLocation"|"documentLocation");
+                    public location?: ("recordLocation"|"imageLocation"|"documentLocation"|"metadataLocation");
 
                     /**
                      * Creates a new ContentLocation instance using the specified properties.
@@ -2379,6 +2387,195 @@ export namespace google {
 
                     /**
                      * Converts this ContentLocation to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a MetadataLocation. */
+                interface IMetadataLocation {
+
+                    /** MetadataLocation type */
+                    type?: (google.privacy.dlp.v2.MetadataType|keyof typeof google.privacy.dlp.v2.MetadataType|null);
+
+                    /** MetadataLocation storageLabel */
+                    storageLabel?: (google.privacy.dlp.v2.IStorageMetadataLabel|null);
+                }
+
+                /** Represents a MetadataLocation. */
+                class MetadataLocation implements IMetadataLocation {
+
+                    /**
+                     * Constructs a new MetadataLocation.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.privacy.dlp.v2.IMetadataLocation);
+
+                    /** MetadataLocation type. */
+                    public type: (google.privacy.dlp.v2.MetadataType|keyof typeof google.privacy.dlp.v2.MetadataType);
+
+                    /** MetadataLocation storageLabel. */
+                    public storageLabel?: (google.privacy.dlp.v2.IStorageMetadataLabel|null);
+
+                    /** MetadataLocation label. */
+                    public label?: "storageLabel";
+
+                    /**
+                     * Creates a new MetadataLocation instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns MetadataLocation instance
+                     */
+                    public static create(properties?: google.privacy.dlp.v2.IMetadataLocation): google.privacy.dlp.v2.MetadataLocation;
+
+                    /**
+                     * Encodes the specified MetadataLocation message. Does not implicitly {@link google.privacy.dlp.v2.MetadataLocation.verify|verify} messages.
+                     * @param message MetadataLocation message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.privacy.dlp.v2.IMetadataLocation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified MetadataLocation message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.MetadataLocation.verify|verify} messages.
+                     * @param message MetadataLocation message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.privacy.dlp.v2.IMetadataLocation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a MetadataLocation message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns MetadataLocation
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.privacy.dlp.v2.MetadataLocation;
+
+                    /**
+                     * Decodes a MetadataLocation message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns MetadataLocation
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.privacy.dlp.v2.MetadataLocation;
+
+                    /**
+                     * Verifies a MetadataLocation message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a MetadataLocation message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns MetadataLocation
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.privacy.dlp.v2.MetadataLocation;
+
+                    /**
+                     * Creates a plain object from a MetadataLocation message. Also converts values to other types if specified.
+                     * @param message MetadataLocation
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.privacy.dlp.v2.MetadataLocation, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this MetadataLocation to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a StorageMetadataLabel. */
+                interface IStorageMetadataLabel {
+
+                    /** StorageMetadataLabel key */
+                    key?: (string|null);
+                }
+
+                /** Represents a StorageMetadataLabel. */
+                class StorageMetadataLabel implements IStorageMetadataLabel {
+
+                    /**
+                     * Constructs a new StorageMetadataLabel.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.privacy.dlp.v2.IStorageMetadataLabel);
+
+                    /** StorageMetadataLabel key. */
+                    public key: string;
+
+                    /**
+                     * Creates a new StorageMetadataLabel instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns StorageMetadataLabel instance
+                     */
+                    public static create(properties?: google.privacy.dlp.v2.IStorageMetadataLabel): google.privacy.dlp.v2.StorageMetadataLabel;
+
+                    /**
+                     * Encodes the specified StorageMetadataLabel message. Does not implicitly {@link google.privacy.dlp.v2.StorageMetadataLabel.verify|verify} messages.
+                     * @param message StorageMetadataLabel message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.privacy.dlp.v2.IStorageMetadataLabel, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified StorageMetadataLabel message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.StorageMetadataLabel.verify|verify} messages.
+                     * @param message StorageMetadataLabel message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.privacy.dlp.v2.IStorageMetadataLabel, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a StorageMetadataLabel message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns StorageMetadataLabel
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.privacy.dlp.v2.StorageMetadataLabel;
+
+                    /**
+                     * Decodes a StorageMetadataLabel message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns StorageMetadataLabel
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.privacy.dlp.v2.StorageMetadataLabel;
+
+                    /**
+                     * Verifies a StorageMetadataLabel message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a StorageMetadataLabel message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns StorageMetadataLabel
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.privacy.dlp.v2.StorageMetadataLabel;
+
+                    /**
+                     * Creates a plain object from a StorageMetadataLabel message. Also converts values to other types if specified.
+                     * @param message StorageMetadataLabel
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.privacy.dlp.v2.StorageMetadataLabel, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this StorageMetadataLabel to JSON.
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
@@ -4890,6 +5087,9 @@ export namespace google {
                 /** Properties of a ListInfoTypesRequest. */
                 interface IListInfoTypesRequest {
 
+                    /** ListInfoTypesRequest parent */
+                    parent?: (string|null);
+
                     /** ListInfoTypesRequest languageCode */
                     languageCode?: (string|null);
 
@@ -4908,6 +5108,9 @@ export namespace google {
                      * @param [properties] Properties to set
                      */
                     constructor(properties?: google.privacy.dlp.v2.IListInfoTypesRequest);
+
+                    /** ListInfoTypesRequest parent. */
+                    public parent: string;
 
                     /** ListInfoTypesRequest languageCode. */
                     public languageCode: string;
@@ -18155,6 +18358,12 @@ export namespace google {
                     CONTENT_IMAGE = 2
                 }
 
+                /** MetadataType enum. */
+                enum MetadataType {
+                    METADATATYPE_UNSPECIFIED = 0,
+                    STORAGE_METADATA = 2
+                }
+
                 /** InfoTypeSupportedBy enum. */
                 enum InfoTypeSupportedBy {
                     ENUM_TYPE_UNSPECIFIED = 0,
@@ -20527,6 +20736,8 @@ export namespace google {
                     BINARY_FILE = 1,
                     TEXT_FILE = 2,
                     IMAGE = 3,
+                    WORD = 5,
+                    PDF = 6,
                     AVRO = 7
                 }
 

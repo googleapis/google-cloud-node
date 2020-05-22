@@ -164,7 +164,7 @@ export class DlpServiceClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this.pathTemplates = {
-      inspectFindingPathTemplate: new this._gaxModule.PathTemplate(
+      findingPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/findings/{finding}'
       ),
       organizationPathTemplate: new this._gaxModule.PathTemplate(
@@ -454,7 +454,8 @@ export class DlpServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   The parent resource name, for example projects/my-project-id.
+   *   The parent resource name, for example projects/my-project-id
+   *   or projects/my-project-id/locations/{location_id}
    * @param {google.privacy.dlp.v2.InspectConfig} request.inspectConfig
    *   Configuration for the inspector. What specified here will override
    *   the template referenced by the inspect_template_name argument.
@@ -467,8 +468,7 @@ export class DlpServiceClient {
    *   template. Repeated fields are appended. Singular sub-messages and groups
    *   are recursively merged.
    * @param {string} request.locationId
-   *   The geographic location to process content inspection. Reserved for future
-   *   extensions.
+   *   Deprecated. This field has no effect.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -557,10 +557,10 @@ export class DlpServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   The parent resource name, for example projects/my-project-id.
+   *   The parent resource name, for example projects/my-project-id
+   *   or projects/my-project-id/locations/{location_id}.
    * @param {string} request.locationId
-   *   The geographic location to process the request. Reserved for future
-   *   extensions.
+   *   Deprecated. This field has no effect.
    * @param {google.privacy.dlp.v2.InspectConfig} request.inspectConfig
    *   Configuration for the inspector.
    * @param {number[]} request.imageRedactionConfigs
@@ -656,7 +656,8 @@ export class DlpServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   The parent resource name, for example projects/my-project-id.
+   *   The parent resource name, for example projects/my-project-id
+   *   or projects/my-project-id/locations/{location_id}.
    * @param {google.privacy.dlp.v2.DeidentifyConfig} request.deidentifyConfig
    *   Configuration for the de-identification of the content item.
    *   Items specified here will override the template referenced by the
@@ -680,8 +681,7 @@ export class DlpServiceClient {
    *   template. Repeated fields are appended. Singular sub-messages and groups
    *   are recursively merged.
    * @param {string} request.locationId
-   *   The geographic location to process de-identification. Reserved for future
-   *   extensions.
+   *   Deprecated. This field has no effect.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -796,8 +796,7 @@ export class DlpServiceClient {
    *   template. Repeated fields are appended. Singular sub-messages and groups
    *   are recursively merged.
    * @param {string} request.locationId
-   *   The geographic location to process content reidentification.  Reserved for
-   *   future extensions.
+   *   Deprecated. This field has no effect.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -880,6 +879,8 @@ export class DlpServiceClient {
    *
    * @param {Object} request
    *   The request object that will be sent.
+   * @param {string} request.parent
+   *   The parent resource name, for example locations/{location_id}
    * @param {string} request.languageCode
    *   BCP-47 language code for localized infoType friendly
    *   names. If omitted, or if localized strings are not available,
@@ -888,8 +889,7 @@ export class DlpServiceClient {
    *   filter to only return infoTypes supported by certain parts of the
    *   API. Defaults to supported_by=INSPECT.
    * @param {string} request.locationId
-   *   The geographic location to list info types. Reserved for future
-   *   extensions.
+   *   Deprecated. This field has no effect.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -931,7 +931,7 @@ export class DlpServiceClient {
     options.otherArgs.headers[
       'x-goog-request-params'
     ] = gax.routingHeader.fromParams({
-      location_id: request.locationId || '',
+      parent: request.parent || '',
     });
     this.initialize();
     return this.innerApiCalls.listInfoTypes(request, options, callback);
@@ -976,7 +976,7 @@ export class DlpServiceClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The parent resource name, for example projects/my-project-id or
-   *   organizations/my-org-id.
+   *   organizations/my-org-id or projects/my-project-id/locations/{location-id}.
    * @param {google.privacy.dlp.v2.InspectTemplate} request.inspectTemplate
    *   Required. The InspectTemplate to create.
    * @param {string} request.templateId
@@ -985,8 +985,7 @@ export class DlpServiceClient {
    *   expression: `[a-zA-Z\\d-_]+`. The maximum length is 100
    *   characters. Can be empty to allow the system to generate one.
    * @param {string} request.locationId
-   *   The geographic location to store the inspection template. Reserved for
-   *   future extensions.
+   *   Deprecated. This field has no effect.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1355,7 +1354,7 @@ export class DlpServiceClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The parent resource name, for example projects/my-project-id or
-   *   organizations/my-org-id.
+   *   organizations/my-org-id or projects/my-project-id/locations/{location_id}.
    * @param {google.privacy.dlp.v2.DeidentifyTemplate} request.deidentifyTemplate
    *   Required. The DeidentifyTemplate to create.
    * @param {string} request.templateId
@@ -1364,8 +1363,7 @@ export class DlpServiceClient {
    *   expression: `[a-zA-Z\\d-_]+`. The maximum length is 100
    *   characters. Can be empty to allow the system to generate one.
    * @param {string} request.locationId
-   *   The geographic location to store the deidentification template. Reserved
-   *   for future extensions.
+   *   Deprecated. This field has no effect.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1745,7 +1743,8 @@ export class DlpServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The parent resource name, for example projects/my-project-id.
+   *   Required. The parent resource name, for example projects/my-project-id
+   *   or projects/my-project-id/locations/{location_id}.
    * @param {google.privacy.dlp.v2.JobTrigger} request.jobTrigger
    *   Required. The JobTrigger to create.
    * @param {string} request.triggerId
@@ -1754,8 +1753,7 @@ export class DlpServiceClient {
    *   expression: `[a-zA-Z\\d-_]+`. The maximum length is 100
    *   characters. Can be empty to allow the system to generate one.
    * @param {string} request.locationId
-   *   The geographic location to store the job trigger. Reserved for
-   *   future extensions.
+   *   Deprecated. This field has no effect.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2287,7 +2285,8 @@ export class DlpServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The parent resource name, for example projects/my-project-id.
+   *   Required. The parent resource name, for example projects/my-project-id
+   *   or projects/my-project-id/locations/{location_id}.
    * @param {google.privacy.dlp.v2.InspectJobConfig} request.inspectJob
    *   Set to control what and how to inspect.
    * @param {google.privacy.dlp.v2.RiskAnalysisJobConfig} request.riskJob
@@ -2298,8 +2297,7 @@ export class DlpServiceClient {
    *   expression: `[a-zA-Z\\d-_]+`. The maximum length is 100
    *   characters. Can be empty to allow the system to generate one.
    * @param {string} request.locationId
-   *   The geographic location to store and process the job. Reserved for
-   *   future extensions.
+   *   Deprecated. This field has no effect.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2636,7 +2634,7 @@ export class DlpServiceClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The parent resource name, for example projects/my-project-id or
-   *   organizations/my-org-id.
+   *   organizations/my-org-id or projects/my-project-id/locations/{location_id}
    * @param {google.privacy.dlp.v2.StoredInfoTypeConfig} request.config
    *   Required. Configuration of the storedInfoType to create.
    * @param {string} request.storedInfoTypeId
@@ -2645,8 +2643,7 @@ export class DlpServiceClient {
    *   expression: `[a-zA-Z\\d-_]+`. The maximum length is 100
    *   characters. Can be empty to allow the system to generate one.
    * @param {string} request.locationId
-   *   The geographic location to store the stored infoType. Reserved for
-   *   future extensions.
+   *   Deprecated. This field has no effect.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2737,8 +2734,8 @@ export class DlpServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. Resource name of organization and storedInfoType to be updated,
-   *   for example `organizations/433245324/storedInfoTypes/432452342` or
+   *   Required. Resource name of organization and storedInfoType to be updated, for
+   *   example `organizations/433245324/storedInfoTypes/432452342` or
    *   projects/project-id/storedInfoTypes/432452342.
    * @param {google.privacy.dlp.v2.StoredInfoTypeConfig} request.config
    *   Updated configuration for the storedInfoType. If not provided, a new
@@ -3194,7 +3191,7 @@ export class DlpServiceClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The parent resource name, for example projects/my-project-id or
-   *   organizations/my-org-id.
+   *   organizations/my-org-id or projects/my-project-id/locations/{location_id}.
    * @param {string} request.pageToken
    *   Page token to continue retrieval. Comes from previous call
    *   to `ListInspectTemplates`.
@@ -3216,8 +3213,7 @@ export class DlpServiceClient {
    *   - `name`: corresponds to template's name.
    *   - `display_name`: corresponds to template's display name.
    * @param {string} request.locationId
-   *   The geographic location where inspection templates will be retrieved from.
-   *   Use `-` for all locations. Reserved for future extensions.
+   *   Deprecated. This field has no effect.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -3298,7 +3294,7 @@ export class DlpServiceClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The parent resource name, for example projects/my-project-id or
-   *   organizations/my-org-id.
+   *   organizations/my-org-id or projects/my-project-id/locations/{location_id}.
    * @param {string} request.pageToken
    *   Page token to continue retrieval. Comes from previous call
    *   to `ListInspectTemplates`.
@@ -3320,8 +3316,7 @@ export class DlpServiceClient {
    *   - `name`: corresponds to template's name.
    *   - `display_name`: corresponds to template's display name.
    * @param {string} request.locationId
-   *   The geographic location where inspection templates will be retrieved from.
-   *   Use `-` for all locations. Reserved for future extensions.
+   *   Deprecated. This field has no effect.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -3358,7 +3353,7 @@ export class DlpServiceClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The parent resource name, for example projects/my-project-id or
-   *   organizations/my-org-id.
+   *   organizations/my-org-id or projects/my-project-id/locations/{location_id}.
    * @param {string} request.pageToken
    *   Page token to continue retrieval. Comes from previous call
    *   to `ListInspectTemplates`.
@@ -3380,8 +3375,7 @@ export class DlpServiceClient {
    *   - `name`: corresponds to template's name.
    *   - `display_name`: corresponds to template's display name.
    * @param {string} request.locationId
-   *   The geographic location where inspection templates will be retrieved from.
-   *   Use `-` for all locations. Reserved for future extensions.
+   *   Deprecated. This field has no effect.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
@@ -3449,7 +3443,7 @@ export class DlpServiceClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The parent resource name, for example projects/my-project-id or
-   *   organizations/my-org-id.
+   *   organizations/my-org-id or projects/my-project-id/locations/{location_id}.
    * @param {string} request.pageToken
    *   Page token to continue retrieval. Comes from previous call
    *   to `ListDeidentifyTemplates`.
@@ -3471,8 +3465,7 @@ export class DlpServiceClient {
    *   - `name`: corresponds to template's name.
    *   - `display_name`: corresponds to template's display name.
    * @param {string} request.locationId
-   *   The geographic location where deidentifications templates will be retrieved
-   *   from. Use `-` for all locations. Reserved for future extensions.
+   *   Deprecated. This field has no effect.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -3557,7 +3550,7 @@ export class DlpServiceClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The parent resource name, for example projects/my-project-id or
-   *   organizations/my-org-id.
+   *   organizations/my-org-id or projects/my-project-id/locations/{location_id}.
    * @param {string} request.pageToken
    *   Page token to continue retrieval. Comes from previous call
    *   to `ListDeidentifyTemplates`.
@@ -3579,8 +3572,7 @@ export class DlpServiceClient {
    *   - `name`: corresponds to template's name.
    *   - `display_name`: corresponds to template's display name.
    * @param {string} request.locationId
-   *   The geographic location where deidentifications templates will be retrieved
-   *   from. Use `-` for all locations. Reserved for future extensions.
+   *   Deprecated. This field has no effect.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -3617,7 +3609,7 @@ export class DlpServiceClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The parent resource name, for example projects/my-project-id or
-   *   organizations/my-org-id.
+   *   organizations/my-org-id or projects/my-project-id/locations/{location_id}.
    * @param {string} request.pageToken
    *   Page token to continue retrieval. Comes from previous call
    *   to `ListDeidentifyTemplates`.
@@ -3639,8 +3631,7 @@ export class DlpServiceClient {
    *   - `name`: corresponds to template's name.
    *   - `display_name`: corresponds to template's display name.
    * @param {string} request.locationId
-   *   The geographic location where deidentifications templates will be retrieved
-   *   from. Use `-` for all locations. Reserved for future extensions.
+   *   Deprecated. This field has no effect.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
@@ -3702,7 +3693,8 @@ export class DlpServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The parent resource name, for example `projects/my-project-id`.
+   *   Required. The parent resource name, for example `projects/my-project-id`
+   *   or projects/my-project-id/locations/{location_id}.
    * @param {string} request.pageToken
    *   Page token to continue retrieval. Comes from previous call
    *   to ListJobTriggers. `order_by` field must not
@@ -3751,8 +3743,7 @@ export class DlpServiceClient {
    *
    *   The length of this field should be no more than 500 characters.
    * @param {string} request.locationId
-   *   The geographic location where job triggers will be retrieved from.
-   *   Use `-` for all locations. Reserved for future extensions.
+   *   Deprecated. This field has no effect.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -3830,7 +3821,8 @@ export class DlpServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The parent resource name, for example `projects/my-project-id`.
+   *   Required. The parent resource name, for example `projects/my-project-id`
+   *   or projects/my-project-id/locations/{location_id}.
    * @param {string} request.pageToken
    *   Page token to continue retrieval. Comes from previous call
    *   to ListJobTriggers. `order_by` field must not
@@ -3879,8 +3871,7 @@ export class DlpServiceClient {
    *
    *   The length of this field should be no more than 500 characters.
    * @param {string} request.locationId
-   *   The geographic location where job triggers will be retrieved from.
-   *   Use `-` for all locations. Reserved for future extensions.
+   *   Deprecated. This field has no effect.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -3916,7 +3907,8 @@ export class DlpServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The parent resource name, for example `projects/my-project-id`.
+   *   Required. The parent resource name, for example `projects/my-project-id`
+   *   or projects/my-project-id/locations/{location_id}.
    * @param {string} request.pageToken
    *   Page token to continue retrieval. Comes from previous call
    *   to ListJobTriggers. `order_by` field must not
@@ -3965,8 +3957,7 @@ export class DlpServiceClient {
    *
    *   The length of this field should be no more than 500 characters.
    * @param {string} request.locationId
-   *   The geographic location where job triggers will be retrieved from.
-   *   Use `-` for all locations. Reserved for future extensions.
+   *   Deprecated. This field has no effect.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
@@ -4029,7 +4020,8 @@ export class DlpServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The parent resource name, for example projects/my-project-id.
+   *   Required. The parent resource name, for example projects/my-project-id
+   *   or projects/my-project-id/locations/{location_id}.
    * @param {string} request.filter
    *   Allows filtering.
    *
@@ -4080,8 +4072,7 @@ export class DlpServiceClient {
    *   - `name`: corresponds to job's name.
    *   - `state`: corresponds to `state`
    * @param {string} request.locationId
-   *   The geographic location where jobs will be retrieved from.
-   *   Use `-` for all locations. Reserved for future extensions.
+   *   Deprecated. This field has no effect.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -4157,7 +4148,8 @@ export class DlpServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The parent resource name, for example projects/my-project-id.
+   *   Required. The parent resource name, for example projects/my-project-id
+   *   or projects/my-project-id/locations/{location_id}.
    * @param {string} request.filter
    *   Allows filtering.
    *
@@ -4208,8 +4200,7 @@ export class DlpServiceClient {
    *   - `name`: corresponds to job's name.
    *   - `state`: corresponds to `state`
    * @param {string} request.locationId
-   *   The geographic location where jobs will be retrieved from.
-   *   Use `-` for all locations. Reserved for future extensions.
+   *   Deprecated. This field has no effect.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -4245,7 +4236,8 @@ export class DlpServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The parent resource name, for example projects/my-project-id.
+   *   Required. The parent resource name, for example projects/my-project-id
+   *   or projects/my-project-id/locations/{location_id}.
    * @param {string} request.filter
    *   Allows filtering.
    *
@@ -4296,8 +4288,7 @@ export class DlpServiceClient {
    *   - `name`: corresponds to job's name.
    *   - `state`: corresponds to `state`
    * @param {string} request.locationId
-   *   The geographic location where jobs will be retrieved from.
-   *   Use `-` for all locations. Reserved for future extensions.
+   *   Deprecated. This field has no effect.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
@@ -4365,7 +4356,7 @@ export class DlpServiceClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The parent resource name, for example projects/my-project-id or
-   *   organizations/my-org-id.
+   *   organizations/my-org-id or projects/my-project-id/locations/{location_id}.
    * @param {string} request.pageToken
    *   Page token to continue retrieval. Comes from previous call
    *   to `ListStoredInfoTypes`.
@@ -4388,8 +4379,7 @@ export class DlpServiceClient {
    *   - `name`: corresponds to resource name.
    *   - `display_name`: corresponds to info type's display name.
    * @param {string} request.locationId
-   *   The geographic location where stored infoTypes will be retrieved from.
-   *   Use `-` for all locations. Reserved for future extensions.
+   *   Deprecated. This field has no effect.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -4470,7 +4460,7 @@ export class DlpServiceClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The parent resource name, for example projects/my-project-id or
-   *   organizations/my-org-id.
+   *   organizations/my-org-id or projects/my-project-id/locations/{location_id}.
    * @param {string} request.pageToken
    *   Page token to continue retrieval. Comes from previous call
    *   to `ListStoredInfoTypes`.
@@ -4493,8 +4483,7 @@ export class DlpServiceClient {
    *   - `name`: corresponds to resource name.
    *   - `display_name`: corresponds to info type's display name.
    * @param {string} request.locationId
-   *   The geographic location where stored infoTypes will be retrieved from.
-   *   Use `-` for all locations. Reserved for future extensions.
+   *   Deprecated. This field has no effect.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -4531,7 +4520,7 @@ export class DlpServiceClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The parent resource name, for example projects/my-project-id or
-   *   organizations/my-org-id.
+   *   organizations/my-org-id or projects/my-project-id/locations/{location_id}.
    * @param {string} request.pageToken
    *   Page token to continue retrieval. Comes from previous call
    *   to `ListStoredInfoTypes`.
@@ -4554,8 +4543,7 @@ export class DlpServiceClient {
    *   - `name`: corresponds to resource name.
    *   - `display_name`: corresponds to info type's display name.
    * @param {string} request.locationId
-   *   The geographic location where stored infoTypes will be retrieved from.
-   *   Use `-` for all locations. Reserved for future extensions.
+   *   Deprecated. This field has no effect.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
@@ -4588,15 +4576,15 @@ export class DlpServiceClient {
   // --------------------
 
   /**
-   * Return a fully-qualified inspectFinding resource name string.
+   * Return a fully-qualified finding resource name string.
    *
    * @param {string} project
    * @param {string} location
    * @param {string} finding
    * @returns {string} Resource name string.
    */
-  inspectFindingPath(project: string, location: string, finding: string) {
-    return this.pathTemplates.inspectFindingPathTemplate.render({
+  findingPath(project: string, location: string, finding: string) {
+    return this.pathTemplates.findingPathTemplate.render({
       project: project,
       location: location,
       finding: finding,
@@ -4604,42 +4592,36 @@ export class DlpServiceClient {
   }
 
   /**
-   * Parse the project from InspectFinding resource.
+   * Parse the project from Finding resource.
    *
-   * @param {string} inspectFindingName
-   *   A fully-qualified path representing InspectFinding resource.
+   * @param {string} findingName
+   *   A fully-qualified path representing Finding resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromInspectFindingName(inspectFindingName: string) {
-    return this.pathTemplates.inspectFindingPathTemplate.match(
-      inspectFindingName
-    ).project;
+  matchProjectFromFindingName(findingName: string) {
+    return this.pathTemplates.findingPathTemplate.match(findingName).project;
   }
 
   /**
-   * Parse the location from InspectFinding resource.
+   * Parse the location from Finding resource.
    *
-   * @param {string} inspectFindingName
-   *   A fully-qualified path representing InspectFinding resource.
+   * @param {string} findingName
+   *   A fully-qualified path representing Finding resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromInspectFindingName(inspectFindingName: string) {
-    return this.pathTemplates.inspectFindingPathTemplate.match(
-      inspectFindingName
-    ).location;
+  matchLocationFromFindingName(findingName: string) {
+    return this.pathTemplates.findingPathTemplate.match(findingName).location;
   }
 
   /**
-   * Parse the finding from InspectFinding resource.
+   * Parse the finding from Finding resource.
    *
-   * @param {string} inspectFindingName
-   *   A fully-qualified path representing InspectFinding resource.
+   * @param {string} findingName
+   *   A fully-qualified path representing Finding resource.
    * @returns {string} A string representing the finding.
    */
-  matchFindingFromInspectFindingName(inspectFindingName: string) {
-    return this.pathTemplates.inspectFindingPathTemplate.match(
-      inspectFindingName
-    ).finding;
+  matchFindingFromFindingName(findingName: string) {
+    return this.pathTemplates.findingPathTemplate.match(findingName).finding;
   }
 
   /**

@@ -31,7 +31,7 @@
                           "options": {
                             "(google.api.http).post": "/v2/{parent=projects/*}/content:inspect",
                             "(google.api.http).body": "*",
-                            "(google.api.http).additional_bindings.post": "/v2/{parent=projects/*}/locations/{location_id}/content:inspect",
+                            "(google.api.http).additional_bindings.post": "/v2/{parent=projects/*/locations/*}/content:inspect",
                             "(google.api.http).additional_bindings.body": "*"
                           }
                         },
@@ -41,7 +41,7 @@
                           "options": {
                             "(google.api.http).post": "/v2/{parent=projects/*}/image:redact",
                             "(google.api.http).body": "*",
-                            "(google.api.http).additional_bindings.post": "/v2/{parent=projects/*}/locations/{location_id}/image:redact",
+                            "(google.api.http).additional_bindings.post": "/v2/{parent=projects/*/locations/*}/image:redact",
                             "(google.api.http).additional_bindings.body": "*"
                           }
                         },
@@ -51,7 +51,7 @@
                           "options": {
                             "(google.api.http).post": "/v2/{parent=projects/*}/content:deidentify",
                             "(google.api.http).body": "*",
-                            "(google.api.http).additional_bindings.post": "/v2/{parent=projects/*}/locations/{location_id}/content:deidentify",
+                            "(google.api.http).additional_bindings.post": "/v2/{parent=projects/*/locations/*}/content:deidentify",
                             "(google.api.http).additional_bindings.body": "*"
                           }
                         },
@@ -61,7 +61,7 @@
                           "options": {
                             "(google.api.http).post": "/v2/{parent=projects/*}/content:reidentify",
                             "(google.api.http).body": "*",
-                            "(google.api.http).additional_bindings.post": "/v2/{parent=projects/*}/locations/{location_id}/content:reidentify",
+                            "(google.api.http).additional_bindings.post": "/v2/{parent=projects/*/locations/*}/content:reidentify",
                             "(google.api.http).additional_bindings.body": "*"
                           }
                         },
@@ -70,8 +70,8 @@
                           "responseType": "ListInfoTypesResponse",
                           "options": {
                             "(google.api.http).get": "/v2/infoTypes",
-                            "(google.api.http).additional_bindings.get": "/v2/locations/{location_id}/infoTypes",
-                            "(google.api.method_signature)": "location_id"
+                            "(google.api.http).additional_bindings.get": "/v2/{parent=locations/*}/infoTypes",
+                            "(google.api.method_signature)": "parent"
                           }
                         },
                         "CreateInspectTemplate": {
@@ -80,9 +80,9 @@
                           "options": {
                             "(google.api.http).post": "/v2/{parent=organizations/*}/inspectTemplates",
                             "(google.api.http).body": "*",
-                            "(google.api.http).additional_bindings.post": "/v2/{parent=projects/*}/locations/{location_id}/inspectTemplates",
+                            "(google.api.http).additional_bindings.post": "/v2/{parent=projects/*/locations/*}/inspectTemplates",
                             "(google.api.http).additional_bindings.body": "*",
-                            "(google.api.method_signature)": "parent,inspect_template,location_id"
+                            "(google.api.method_signature)": "parent,inspect_template"
                           }
                         },
                         "UpdateInspectTemplate": {
@@ -110,7 +110,7 @@
                           "responseType": "ListInspectTemplatesResponse",
                           "options": {
                             "(google.api.http).get": "/v2/{parent=organizations/*}/inspectTemplates",
-                            "(google.api.http).additional_bindings.get": "/v2/{parent=projects/*}/locations/{location_id}/inspectTemplates",
+                            "(google.api.http).additional_bindings.get": "/v2/{parent=projects/*/locations/*}/inspectTemplates",
                             "(google.api.method_signature)": "parent"
                           }
                         },
@@ -129,9 +129,9 @@
                           "options": {
                             "(google.api.http).post": "/v2/{parent=organizations/*}/deidentifyTemplates",
                             "(google.api.http).body": "*",
-                            "(google.api.http).additional_bindings.post": "/v2/{parent=projects/*}/locations/{location_id}/deidentifyTemplates",
+                            "(google.api.http).additional_bindings.post": "/v2/{parent=projects/*/locations/*}/deidentifyTemplates",
                             "(google.api.http).additional_bindings.body": "*",
-                            "(google.api.method_signature)": "parent,deidentify_template,location_id"
+                            "(google.api.method_signature)": "parent,deidentify_template"
                           }
                         },
                         "UpdateDeidentifyTemplate": {
@@ -159,7 +159,7 @@
                           "responseType": "ListDeidentifyTemplatesResponse",
                           "options": {
                             "(google.api.http).get": "/v2/{parent=organizations/*}/deidentifyTemplates",
-                            "(google.api.http).additional_bindings.get": "/v2/{parent=projects/*}/locations/{location_id}/deidentifyTemplates",
+                            "(google.api.http).additional_bindings.get": "/v2/{parent=projects/*/locations/*}/deidentifyTemplates",
                             "(google.api.method_signature)": "parent"
                           }
                         },
@@ -178,9 +178,9 @@
                           "options": {
                             "(google.api.http).post": "/v2/{parent=projects/*}/jobTriggers",
                             "(google.api.http).body": "*",
-                            "(google.api.http).additional_bindings.post": "/v2/{parent=projects/*}/locations/{location_id}/jobTriggers",
+                            "(google.api.http).additional_bindings.post": "/v2/{parent=projects/*/locations/*}/jobTriggers",
                             "(google.api.http).additional_bindings.body": "*",
-                            "(google.api.method_signature)": "parent,job_trigger,location_id"
+                            "(google.api.method_signature)": "parent,job_trigger"
                           }
                         },
                         "UpdateJobTrigger": {
@@ -217,7 +217,7 @@
                           "responseType": "ListJobTriggersResponse",
                           "options": {
                             "(google.api.http).get": "/v2/{parent=projects/*}/jobTriggers",
-                            "(google.api.http).additional_bindings.get": "/v2/{parent=projects/*}/locations/{location_id}/jobTriggers",
+                            "(google.api.http).additional_bindings.get": "/v2/{parent=projects/*/locations/*}/jobTriggers",
                             "(google.api.method_signature)": "parent"
                           }
                         },
@@ -246,9 +246,9 @@
                           "options": {
                             "(google.api.http).post": "/v2/{parent=projects/*}/dlpJobs",
                             "(google.api.http).body": "*",
-                            "(google.api.http).additional_bindings.post": "/v2/{parent=projects/*}/locations/{location_id}/dlpJobs",
+                            "(google.api.http).additional_bindings.post": "/v2/{parent=projects/*/locations/*}/dlpJobs",
                             "(google.api.http).additional_bindings.body": "*",
-                            "(google.api.method_signature)": "parent,risk_job,location_id"
+                            "(google.api.method_signature)": "parent,risk_job"
                           }
                         },
                         "ListDlpJobs": {
@@ -256,7 +256,7 @@
                           "responseType": "ListDlpJobsResponse",
                           "options": {
                             "(google.api.http).get": "/v2/{parent=projects/*}/dlpJobs",
-                            "(google.api.http).additional_bindings.get": "/v2/{parent=projects/*}/locations/{location_id}/dlpJobs",
+                            "(google.api.http).additional_bindings.get": "/v2/{parent=projects/*/locations/*}/dlpJobs",
                             "(google.api.method_signature)": "parent"
                           }
                         },
@@ -294,9 +294,9 @@
                           "options": {
                             "(google.api.http).post": "/v2/{parent=organizations/*}/storedInfoTypes",
                             "(google.api.http).body": "*",
-                            "(google.api.http).additional_bindings.post": "/v2/{parent=projects/*}/locations/{location_id}/storedInfoTypes",
+                            "(google.api.http).additional_bindings.post": "/v2/{parent=projects/*/locations/*}/storedInfoTypes",
                             "(google.api.http).additional_bindings.body": "*",
-                            "(google.api.method_signature)": "parent,config,location_id"
+                            "(google.api.method_signature)": "parent,config"
                           }
                         },
                         "UpdateStoredInfoType": {
@@ -324,7 +324,7 @@
                           "responseType": "ListStoredInfoTypesResponse",
                           "options": {
                             "(google.api.http).get": "/v2/{parent=organizations/*}/storedInfoTypes",
-                            "(google.api.http).additional_bindings.get": "/v2/{parent=projects/*}/locations/{location_id}/storedInfoTypes",
+                            "(google.api.http).additional_bindings.get": "/v2/{parent=projects/*/locations/*}/storedInfoTypes",
                             "(google.api.method_signature)": "parent"
                           }
                         },
@@ -522,6 +522,8 @@
                             "IMAGE_PNG": 3,
                             "IMAGE_SVG": 4,
                             "TEXT_UTF8": 5,
+                            "WORD_DOCUMENT": 7,
+                            "PDF": 8,
                             "AVRO": 11
                           }
                         }
@@ -592,7 +594,7 @@
                     },
                     "Finding": {
                       "options": {
-                        "(google.api.resource).type": "dlp.googleapis.com/InspectFinding",
+                        "(google.api.resource).type": "dlp.googleapis.com/Finding",
                         "(google.api.resource).pattern": "projects/{project}/locations/{location}/findings/{finding}"
                       },
                       "fields": {
@@ -683,7 +685,8 @@
                           "oneof": [
                             "recordLocation",
                             "imageLocation",
-                            "documentLocation"
+                            "documentLocation",
+                            "metadataLocation"
                           ]
                         }
                       },
@@ -704,6 +707,10 @@
                           "type": "DocumentLocation",
                           "id": 5
                         },
+                        "metadataLocation": {
+                          "type": "MetadataLocation",
+                          "id": 8
+                        },
                         "containerTimestamp": {
                           "type": "google.protobuf.Timestamp",
                           "id": 6
@@ -711,6 +718,33 @@
                         "containerVersion": {
                           "type": "string",
                           "id": 7
+                        }
+                      }
+                    },
+                    "MetadataLocation": {
+                      "oneofs": {
+                        "label": {
+                          "oneof": [
+                            "storageLabel"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "type": {
+                          "type": "MetadataType",
+                          "id": 1
+                        },
+                        "storageLabel": {
+                          "type": "StorageMetadataLabel",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "StorageMetadataLabel": {
+                      "fields": {
+                        "key": {
+                          "type": "string",
+                          "id": 1
                         }
                       }
                     },
@@ -1168,6 +1202,10 @@
                     },
                     "ListInfoTypesRequest": {
                       "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 4
+                        },
                         "languageCode": {
                           "type": "string",
                           "id": 1
@@ -3747,6 +3785,12 @@
                         "CONTENT_IMAGE": 2
                       }
                     },
+                    "MetadataType": {
+                      "values": {
+                        "METADATATYPE_UNSPECIFIED": 0,
+                        "STORAGE_METADATA": 2
+                      }
+                    },
                     "InfoTypeSupportedBy": {
                       "values": {
                         "ENUM_TYPE_UNSPECIFIED": 0,
@@ -4192,6 +4236,8 @@
                         "BINARY_FILE": 1,
                         "TEXT_FILE": 2,
                         "IMAGE": 3,
+                        "WORD": 5,
+                        "PDF": 6,
                         "AVRO": 7
                       }
                     },

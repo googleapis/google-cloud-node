@@ -652,8 +652,8 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.ListInfoTypesRequest()
       );
-      request.locationId = '';
-      const expectedHeaderRequestParams = 'location_id=';
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -683,8 +683,8 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.ListInfoTypesRequest()
       );
-      request.locationId = '';
-      const expectedHeaderRequestParams = 'location_id=';
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -731,8 +731,8 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.ListInfoTypesRequest()
       );
-      request.locationId = '';
-      const expectedHeaderRequestParams = 'location_id=';
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -5017,8 +5017,8 @@ describe('v2.DlpServiceClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('inspectFinding', () => {
-      const fakePath = '/rendered/path/inspectFinding';
+    describe('finding', () => {
+      const fakePath = '/rendered/path/finding';
       const expectedParameters = {
         project: 'projectValue',
         location: 'locationValue',
@@ -5029,52 +5029,52 @@ describe('v2.DlpServiceClient', () => {
         projectId: 'bogus',
       });
       client.initialize();
-      client.pathTemplates.inspectFindingPathTemplate.render = sinon
+      client.pathTemplates.findingPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
-      client.pathTemplates.inspectFindingPathTemplate.match = sinon
+      client.pathTemplates.findingPathTemplate.match = sinon
         .stub()
         .returns(expectedParameters);
 
-      it('inspectFindingPath', () => {
-        const result = client.inspectFindingPath(
+      it('findingPath', () => {
+        const result = client.findingPath(
           'projectValue',
           'locationValue',
           'findingValue'
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.inspectFindingPathTemplate.render as SinonStub)
+          (client.pathTemplates.findingPathTemplate.render as SinonStub)
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
-      it('matchProjectFromInspectFindingName', () => {
-        const result = client.matchProjectFromInspectFindingName(fakePath);
+      it('matchProjectFromFindingName', () => {
+        const result = client.matchProjectFromFindingName(fakePath);
         assert.strictEqual(result, 'projectValue');
         assert(
-          (client.pathTemplates.inspectFindingPathTemplate.match as SinonStub)
+          (client.pathTemplates.findingPathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
-      it('matchLocationFromInspectFindingName', () => {
-        const result = client.matchLocationFromInspectFindingName(fakePath);
+      it('matchLocationFromFindingName', () => {
+        const result = client.matchLocationFromFindingName(fakePath);
         assert.strictEqual(result, 'locationValue');
         assert(
-          (client.pathTemplates.inspectFindingPathTemplate.match as SinonStub)
+          (client.pathTemplates.findingPathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
-      it('matchFindingFromInspectFindingName', () => {
-        const result = client.matchFindingFromInspectFindingName(fakePath);
+      it('matchFindingFromFindingName', () => {
+        const result = client.matchFindingFromFindingName(fakePath);
         assert.strictEqual(result, 'findingValue');
         assert(
-          (client.pathTemplates.inspectFindingPathTemplate.match as SinonStub)
+          (client.pathTemplates.findingPathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
