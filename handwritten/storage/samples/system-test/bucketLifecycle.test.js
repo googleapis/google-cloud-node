@@ -53,4 +53,28 @@ describe('Bucket lifecycle management', () => {
       condition: {age: 100},
     });
   });
+
+  it('should disable all lifecycle rules', async () => {
+    // Add a lifecycle rule in order for the sample to delete.
+    await bucket.addLifecycleRule({
+      action: 'delete',
+      condition: {age: 100},
+    });
+
+    const [metadata] = await bucket.getMetadata();
+    assert.deepStrictEqual(metadata.lifecycle.rule[0], {
+      action: {type: 'Delete'},
+      condition: {age: 100},
+    });
+
+    const output = execSync(
+      `node disableBucketLifecycleManagement.js ${bucketName}`
+    );
+    assert.include(
+      output,
+      `Lifecycle management is disabled for bucket ${bucketName}.`
+    );
+    const [newMetadata] = await bucket.getMetadata();
+    assert.isUndefined(newMetadata.lifecycle);
+  });
 });
