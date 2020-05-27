@@ -166,7 +166,7 @@ describe('Zone', () => {
       const zone = new Zone(dnsInstance, ZONE_NAME);
       assert(zone instanceof ServiceObject);
 
-      const calledWith = zone.calledWith_[0];
+      const calledWith = (zone as any).calledWith_[0];
 
       assert.strictEqual(calledWith.parent, dnsInstance);
       assert.strictEqual(calledWith.baseUrl, '/managedZones');

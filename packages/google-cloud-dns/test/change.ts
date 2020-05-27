@@ -73,7 +73,7 @@ describe('Change', () => {
     it('should inherit from ServiceObject', () => {
       assert(change instanceof ServiceObject);
 
-      const calledWith = change.calledWith_[0];
+      const calledWith = (change as any).calledWith_[0];
 
       assert.strictEqual(calledWith.parent, ZONE);
       assert.strictEqual(calledWith.baseUrl, '/changes');

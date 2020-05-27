@@ -123,7 +123,7 @@ describe('DNS', () => {
     it('should inherit from Service', () => {
       assert(dns instanceof Service);
 
-      const calledWith = dns.calledWith_[0];
+      const calledWith = (dns as any).calledWith_[0];
 
       const baseUrl = 'https://dns.googleapis.com/dns/v1';
       assert.strictEqual(calledWith.baseUrl, baseUrl);
