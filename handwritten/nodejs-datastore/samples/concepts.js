@@ -1102,7 +1102,7 @@ class Transaction extends TestHelper {
         const [task] = await transaction.get(taskKey);
         if (task) {
           // The task entity already exists.
-          transaction.rollback();
+          await transaction.rollback();
         } else {
           // Create the task entity.
           transaction.save(taskEntity);
@@ -1110,7 +1110,7 @@ class Transaction extends TestHelper {
         }
         return taskEntity;
       } catch (err) {
-        transaction.rollback();
+        await transaction.rollback();
       }
     }
     // [END datastore_transactional_get_or_create]
