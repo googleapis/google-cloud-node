@@ -44,7 +44,7 @@ async function main(taskId) {
       await transaction.commit();
       console.log(`Task ${taskId} updated successfully.`);
     } catch (err) {
-      transaction.rollback();
+      await transaction.rollback();
       throw err;
     }
   }

@@ -1301,7 +1301,13 @@ class DatastoreRequest {
     const transaction = this.datastore.transaction();
     transaction.run(async err => {
       if (err) {
-        transaction.rollback();
+        try {
+          await transaction.rollback();
+        } catch (error) {
+          // Provide the error & API response from the failed run to the user.
+          // Even a failed rollback should be transparent.
+          // RE: https://github.com/GoogleCloudPlatform/gcloud-node/pull/1369#discussion_r66833976
+        }
         callback!(err);
         return;
       }
@@ -1321,7 +1327,13 @@ class DatastoreRequest {
         const [response] = await transaction.commit();
         callback!(null, response);
       } catch (err) {
-        transaction.rollback();
+        try {
+          await transaction.rollback();
+        } catch (error) {
+          // Provide the error & API response from the failed commit to the user.
+          // Even a failed rollback should be transparent.
+          // RE: https://github.com/GoogleCloudPlatform/gcloud-node/pull/1369#discussion_r66833976
+        }
         callback!(err);
       }
     });

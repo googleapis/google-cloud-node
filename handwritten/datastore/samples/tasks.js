@@ -112,7 +112,7 @@ async function markDone(taskId) {
     await transaction.commit();
     console.log(`Task ${taskId} updated successfully.`);
   } catch (err) {
-    transaction.rollback();
+    await transaction.rollback();
   }
 }
 // [END datastore_update_entity]
