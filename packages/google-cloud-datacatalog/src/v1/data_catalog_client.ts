@@ -1909,7 +1909,8 @@ export class DataCatalogClient {
    *
    *   * projects/{project_id}/locations/{location}/tagTemplates/{tag_template_id}/fields/{tag_template_field_id}
    * @param {string} request.newTagTemplateFieldId
-   *   Required. The new ID of this tag template field. For example, `my_new_field`.
+   *   Required. The new ID of this tag template field. For example,
+   *   `my_new_field`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2114,8 +2115,8 @@ export class DataCatalogClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The name of the resource to attach this tag to. Tags can be attached to
-   *   Entries. Example:
+   *   Required. The name of the resource to attach this tag to. Tags can be
+   *   attached to Entries. Example:
    *
    *   * projects/{project_id}/locations/{location}/entryGroups/{entry_group_id}/entries/{entry_id}
    *
@@ -2694,7 +2695,8 @@ export class DataCatalogClient {
    *   `include_gcp_public_datasets` is considered invalid. Data Catalog will
    *   return an error in such a case.
    * @param {string} request.query
-   *   Required. The query string in search query syntax. The query must be non-empty.
+   *   Required. The query string in search query syntax. The query must be
+   *   non-empty.
    *
    *   Query strings can be simple as "x" or more qualified as:
    *
@@ -2711,8 +2713,8 @@ export class DataCatalogClient {
    *   for page_size is 1000. Throws an invalid argument for page_size > 1000.
    * @param {string} [request.pageToken]
    *   Optional. Pagination token returned in an earlier
-   *   {@link google.cloud.datacatalog.v1.SearchCatalogResponse.next_page_token|SearchCatalogResponse.next_page_token}, which
-   *   indicates that this is a continuation of a prior
+   *   {@link google.cloud.datacatalog.v1.SearchCatalogResponse.next_page_token|SearchCatalogResponse.next_page_token},
+   *   which indicates that this is a continuation of a prior
    *   {@link google.cloud.datacatalog.v1.DataCatalog.SearchCatalog|SearchCatalogRequest}
    *   call, and that the system should return the next page of data. If empty,
    *   the first page is returned.
@@ -2802,7 +2804,8 @@ export class DataCatalogClient {
    *   `include_gcp_public_datasets` is considered invalid. Data Catalog will
    *   return an error in such a case.
    * @param {string} request.query
-   *   Required. The query string in search query syntax. The query must be non-empty.
+   *   Required. The query string in search query syntax. The query must be
+   *   non-empty.
    *
    *   Query strings can be simple as "x" or more qualified as:
    *
@@ -2819,8 +2822,8 @@ export class DataCatalogClient {
    *   for page_size is 1000. Throws an invalid argument for page_size > 1000.
    * @param {string} [request.pageToken]
    *   Optional. Pagination token returned in an earlier
-   *   {@link google.cloud.datacatalog.v1.SearchCatalogResponse.next_page_token|SearchCatalogResponse.next_page_token}, which
-   *   indicates that this is a continuation of a prior
+   *   {@link google.cloud.datacatalog.v1.SearchCatalogResponse.next_page_token|SearchCatalogResponse.next_page_token},
+   *   which indicates that this is a continuation of a prior
    *   {@link google.cloud.datacatalog.v1.DataCatalog.SearchCatalog|SearchCatalogRequest}
    *   call, and that the system should return the next page of data. If empty,
    *   the first page is returned.
@@ -2866,7 +2869,8 @@ export class DataCatalogClient {
    *   `include_gcp_public_datasets` is considered invalid. Data Catalog will
    *   return an error in such a case.
    * @param {string} request.query
-   *   Required. The query string in search query syntax. The query must be non-empty.
+   *   Required. The query string in search query syntax. The query must be
+   *   non-empty.
    *
    *   Query strings can be simple as "x" or more qualified as:
    *
@@ -2883,8 +2887,8 @@ export class DataCatalogClient {
    *   for page_size is 1000. Throws an invalid argument for page_size > 1000.
    * @param {string} [request.pageToken]
    *   Optional. Pagination token returned in an earlier
-   *   {@link google.cloud.datacatalog.v1.SearchCatalogResponse.next_page_token|SearchCatalogResponse.next_page_token}, which
-   *   indicates that this is a continuation of a prior
+   *   {@link google.cloud.datacatalog.v1.SearchCatalogResponse.next_page_token|SearchCatalogResponse.next_page_token},
+   *   which indicates that this is a continuation of a prior
    *   {@link google.cloud.datacatalog.v1.DataCatalog.SearchCatalog|SearchCatalogRequest}
    *   call, and that the system should return the next page of data. If empty,
    *   the first page is returned.
@@ -2954,16 +2958,16 @@ export class DataCatalogClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The name of the location that contains the entry groups, which can be
-   *   provided in URL format. Example:
+   *   Required. The name of the location that contains the entry groups, which
+   *   can be provided in URL format. Example:
    *
    *   * projects/{project_id}/locations/{location}
    * @param {number} [request.pageSize]
-   *   Optional. The maximum number of items to return. Default is 10. Max limit is 1000.
-   *   Throws an invalid argument for `page_size > 1000`.
+   *   Optional. The maximum number of items to return. Default is 10. Max limit
+   *   is 1000. Throws an invalid argument for `page_size > 1000`.
    * @param {string} [request.pageToken]
-   *   Optional. Token that specifies which page is requested. If empty, the first page is
-   *   returned.
+   *   Optional. Token that specifies which page is requested. If empty, the first
+   *   page is returned.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -3043,16 +3047,16 @@ export class DataCatalogClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The name of the location that contains the entry groups, which can be
-   *   provided in URL format. Example:
+   *   Required. The name of the location that contains the entry groups, which
+   *   can be provided in URL format. Example:
    *
    *   * projects/{project_id}/locations/{location}
    * @param {number} [request.pageSize]
-   *   Optional. The maximum number of items to return. Default is 10. Max limit is 1000.
-   *   Throws an invalid argument for `page_size > 1000`.
+   *   Optional. The maximum number of items to return. Default is 10. Max limit
+   *   is 1000. Throws an invalid argument for `page_size > 1000`.
    * @param {string} [request.pageToken]
-   *   Optional. Token that specifies which page is requested. If empty, the first page is
-   *   returned.
+   *   Optional. Token that specifies which page is requested. If empty, the first
+   *   page is returned.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -3088,16 +3092,16 @@ export class DataCatalogClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The name of the location that contains the entry groups, which can be
-   *   provided in URL format. Example:
+   *   Required. The name of the location that contains the entry groups, which
+   *   can be provided in URL format. Example:
    *
    *   * projects/{project_id}/locations/{location}
    * @param {number} [request.pageSize]
-   *   Optional. The maximum number of items to return. Default is 10. Max limit is 1000.
-   *   Throws an invalid argument for `page_size > 1000`.
+   *   Optional. The maximum number of items to return. Default is 10. Max limit
+   *   is 1000. Throws an invalid argument for `page_size > 1000`.
    * @param {string} [request.pageToken]
-   *   Optional. Token that specifies which page is requested. If empty, the first page is
-   *   returned.
+   *   Optional. Token that specifies which page is requested. If empty, the first
+   *   page is returned.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
@@ -3381,8 +3385,8 @@ export class DataCatalogClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The name of the Data Catalog resource to list the tags of. The resource
-   *   could be an {@link google.cloud.datacatalog.v1.Entry|Entry} or an
+   *   Required. The name of the Data Catalog resource to list the tags of. The
+   *   resource could be an {@link google.cloud.datacatalog.v1.Entry|Entry} or an
    *   {@link google.cloud.datacatalog.v1.EntryGroup|EntryGroup}.
    *
    *   Examples:
@@ -3471,8 +3475,8 @@ export class DataCatalogClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The name of the Data Catalog resource to list the tags of. The resource
-   *   could be an {@link google.cloud.datacatalog.v1.Entry|Entry} or an
+   *   Required. The name of the Data Catalog resource to list the tags of. The
+   *   resource could be an {@link google.cloud.datacatalog.v1.Entry|Entry} or an
    *   {@link google.cloud.datacatalog.v1.EntryGroup|EntryGroup}.
    *
    *   Examples:
@@ -3519,8 +3523,8 @@ export class DataCatalogClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The name of the Data Catalog resource to list the tags of. The resource
-   *   could be an {@link google.cloud.datacatalog.v1.Entry|Entry} or an
+   *   Required. The name of the Data Catalog resource to list the tags of. The
+   *   resource could be an {@link google.cloud.datacatalog.v1.Entry|Entry} or an
    *   {@link google.cloud.datacatalog.v1.EntryGroup|EntryGroup}.
    *
    *   Examples:
