@@ -97,7 +97,7 @@ export class RequestHandler extends Service {
     const serviceOptions: ServiceOptions = Object.assign(config, {
       projectId: pid !== null ? pid : undefined,
       customEndpoint: !tryAuthenticate,
-    });
+    }) as ServiceOptions;
     super(
       {
         packageJson: pkg,
