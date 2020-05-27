@@ -3,8 +3,7 @@
   "skip": [
     "https://codecov.io/gh/googleapis/",
     "www.googleapis.com",
-    "img.shields.io",
-    ".*directory/blob/master/samples/.*"
+    "img.shields.io"
   ],
   "silent": true,
   "concurrency": 10
