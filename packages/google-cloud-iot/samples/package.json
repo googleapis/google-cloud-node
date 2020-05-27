@@ -16,7 +16,7 @@
   },
   "dependencies": {
     "@google-cloud/iot": "^2.0.1",
-    "@google-cloud/pubsub": "^1.6.0",
+    "@google-cloud/pubsub": "^2.0.0",
     "googleapis": "^51.0.0",
     "util.promisify": "^1.0.1"
   },
