@@ -15,7 +15,7 @@
   },
   "dependencies": {
     "@google-cloud/containeranalysis": "^2.0.0",
-    "@google-cloud/pubsub": "^1.0.0",
+    "@google-cloud/pubsub": "^2.0.0",
     "p-retry": "^4.1.0"
   },
   "devDependencies": {
