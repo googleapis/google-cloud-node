@@ -11564,6 +11564,24 @@ export namespace google {
                     public toJSON(): { [k: string]: any };
                 }
 
+                /** LabelDetectionMode enum. */
+                enum LabelDetectionMode {
+                    LABEL_DETECTION_MODE_UNSPECIFIED = 0,
+                    SHOT_MODE = 1,
+                    FRAME_MODE = 2,
+                    SHOT_AND_FRAME_MODE = 3
+                }
+
+                /** Likelihood enum. */
+                enum Likelihood {
+                    LIKELIHOOD_UNSPECIFIED = 0,
+                    VERY_UNLIKELY = 1,
+                    UNLIKELY = 2,
+                    POSSIBLE = 3,
+                    LIKELY = 4,
+                    VERY_LIKELY = 5
+                }
+
                 /** Properties of a LabelDetectionConfig. */
                 interface ILabelDetectionConfig {
 
@@ -11676,6 +11694,33 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+                }
+
+                /** StreamingFeature enum. */
+                enum StreamingFeature {
+                    STREAMING_FEATURE_UNSPECIFIED = 0,
+                    STREAMING_LABEL_DETECTION = 1,
+                    STREAMING_SHOT_CHANGE_DETECTION = 2,
+                    STREAMING_EXPLICIT_CONTENT_DETECTION = 3,
+                    STREAMING_OBJECT_TRACKING = 4,
+                    STREAMING_AUTOML_ACTION_RECOGNITION = 23,
+                    STREAMING_AUTOML_CLASSIFICATION = 21,
+                    STREAMING_AUTOML_OBJECT_TRACKING = 22
+                }
+
+                /** Feature enum. */
+                enum Feature {
+                    FEATURE_UNSPECIFIED = 0,
+                    LABEL_DETECTION = 1,
+                    SHOT_CHANGE_DETECTION = 2,
+                    EXPLICIT_CONTENT_DETECTION = 3,
+                    FACE_DETECTION = 4,
+                    SPEECH_TRANSCRIPTION = 6,
+                    TEXT_DETECTION = 7,
+                    OBJECT_TRACKING = 9,
+                    LOGO_RECOGNITION = 12,
+                    CELEBRITY_RECOGNITION = 13,
+                    PERSON_DETECTION = 14
                 }
 
                 /** Properties of a ShotChangeDetectionConfig. */
@@ -15638,6 +15683,12 @@ export namespace google {
                 /** Properties of an ObjectTrackingAnnotation. */
                 interface IObjectTrackingAnnotation {
 
+                    /** ObjectTrackingAnnotation segment */
+                    segment?: (google.cloud.videointelligence.v1p3beta1.IVideoSegment|null);
+
+                    /** ObjectTrackingAnnotation trackId */
+                    trackId?: (number|Long|string|null);
+
                     /** ObjectTrackingAnnotation entity */
                     entity?: (google.cloud.videointelligence.v1p3beta1.IEntity|null);
 
@@ -15646,12 +15697,6 @@ export namespace google {
 
                     /** ObjectTrackingAnnotation frames */
                     frames?: (google.cloud.videointelligence.v1p3beta1.IObjectTrackingFrame[]|null);
-
-                    /** ObjectTrackingAnnotation segment */
-                    segment?: (google.cloud.videointelligence.v1p3beta1.IVideoSegment|null);
-
-                    /** ObjectTrackingAnnotation trackId */
-                    trackId?: (number|Long|string|null);
                 }
 
                 /** Represents an ObjectTrackingAnnotation. */
@@ -15663,6 +15708,12 @@ export namespace google {
                      */
                     constructor(properties?: google.cloud.videointelligence.v1p3beta1.IObjectTrackingAnnotation);
 
+                    /** ObjectTrackingAnnotation segment. */
+                    public segment?: (google.cloud.videointelligence.v1p3beta1.IVideoSegment|null);
+
+                    /** ObjectTrackingAnnotation trackId. */
+                    public trackId: (number|Long|string);
+
                     /** ObjectTrackingAnnotation entity. */
                     public entity?: (google.cloud.videointelligence.v1p3beta1.IEntity|null);
 
@@ -15671,12 +15722,6 @@ export namespace google {
 
                     /** ObjectTrackingAnnotation frames. */
                     public frames: google.cloud.videointelligence.v1p3beta1.IObjectTrackingFrame[];
-
-                    /** ObjectTrackingAnnotation segment. */
-                    public segment?: (google.cloud.videointelligence.v1p3beta1.IVideoSegment|null);
-
-                    /** ObjectTrackingAnnotation trackId. */
-                    public trackId: (number|Long|string);
 
                     /** ObjectTrackingAnnotation trackInfo. */
                     public trackInfo?: ("segment"|"trackId");
@@ -15953,6 +15998,147 @@ export namespace google {
                     public toJSON(): { [k: string]: any };
                 }
 
+                /** Properties of a StreamingVideoConfig. */
+                interface IStreamingVideoConfig {
+
+                    /** StreamingVideoConfig shotChangeDetectionConfig */
+                    shotChangeDetectionConfig?: (google.cloud.videointelligence.v1p3beta1.IStreamingShotChangeDetectionConfig|null);
+
+                    /** StreamingVideoConfig labelDetectionConfig */
+                    labelDetectionConfig?: (google.cloud.videointelligence.v1p3beta1.IStreamingLabelDetectionConfig|null);
+
+                    /** StreamingVideoConfig explicitContentDetectionConfig */
+                    explicitContentDetectionConfig?: (google.cloud.videointelligence.v1p3beta1.IStreamingExplicitContentDetectionConfig|null);
+
+                    /** StreamingVideoConfig objectTrackingConfig */
+                    objectTrackingConfig?: (google.cloud.videointelligence.v1p3beta1.IStreamingObjectTrackingConfig|null);
+
+                    /** StreamingVideoConfig automlActionRecognitionConfig */
+                    automlActionRecognitionConfig?: (google.cloud.videointelligence.v1p3beta1.IStreamingAutomlActionRecognitionConfig|null);
+
+                    /** StreamingVideoConfig automlClassificationConfig */
+                    automlClassificationConfig?: (google.cloud.videointelligence.v1p3beta1.IStreamingAutomlClassificationConfig|null);
+
+                    /** StreamingVideoConfig automlObjectTrackingConfig */
+                    automlObjectTrackingConfig?: (google.cloud.videointelligence.v1p3beta1.IStreamingAutomlObjectTrackingConfig|null);
+
+                    /** StreamingVideoConfig feature */
+                    feature?: (google.cloud.videointelligence.v1p3beta1.StreamingFeature|keyof typeof google.cloud.videointelligence.v1p3beta1.StreamingFeature|null);
+
+                    /** StreamingVideoConfig storageConfig */
+                    storageConfig?: (google.cloud.videointelligence.v1p3beta1.IStreamingStorageConfig|null);
+                }
+
+                /** Represents a StreamingVideoConfig. */
+                class StreamingVideoConfig implements IStreamingVideoConfig {
+
+                    /**
+                     * Constructs a new StreamingVideoConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.videointelligence.v1p3beta1.IStreamingVideoConfig);
+
+                    /** StreamingVideoConfig shotChangeDetectionConfig. */
+                    public shotChangeDetectionConfig?: (google.cloud.videointelligence.v1p3beta1.IStreamingShotChangeDetectionConfig|null);
+
+                    /** StreamingVideoConfig labelDetectionConfig. */
+                    public labelDetectionConfig?: (google.cloud.videointelligence.v1p3beta1.IStreamingLabelDetectionConfig|null);
+
+                    /** StreamingVideoConfig explicitContentDetectionConfig. */
+                    public explicitContentDetectionConfig?: (google.cloud.videointelligence.v1p3beta1.IStreamingExplicitContentDetectionConfig|null);
+
+                    /** StreamingVideoConfig objectTrackingConfig. */
+                    public objectTrackingConfig?: (google.cloud.videointelligence.v1p3beta1.IStreamingObjectTrackingConfig|null);
+
+                    /** StreamingVideoConfig automlActionRecognitionConfig. */
+                    public automlActionRecognitionConfig?: (google.cloud.videointelligence.v1p3beta1.IStreamingAutomlActionRecognitionConfig|null);
+
+                    /** StreamingVideoConfig automlClassificationConfig. */
+                    public automlClassificationConfig?: (google.cloud.videointelligence.v1p3beta1.IStreamingAutomlClassificationConfig|null);
+
+                    /** StreamingVideoConfig automlObjectTrackingConfig. */
+                    public automlObjectTrackingConfig?: (google.cloud.videointelligence.v1p3beta1.IStreamingAutomlObjectTrackingConfig|null);
+
+                    /** StreamingVideoConfig feature. */
+                    public feature: (google.cloud.videointelligence.v1p3beta1.StreamingFeature|keyof typeof google.cloud.videointelligence.v1p3beta1.StreamingFeature);
+
+                    /** StreamingVideoConfig storageConfig. */
+                    public storageConfig?: (google.cloud.videointelligence.v1p3beta1.IStreamingStorageConfig|null);
+
+                    /** StreamingVideoConfig streamingConfig. */
+                    public streamingConfig?: ("shotChangeDetectionConfig"|"labelDetectionConfig"|"explicitContentDetectionConfig"|"objectTrackingConfig"|"automlActionRecognitionConfig"|"automlClassificationConfig"|"automlObjectTrackingConfig");
+
+                    /**
+                     * Creates a new StreamingVideoConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns StreamingVideoConfig instance
+                     */
+                    public static create(properties?: google.cloud.videointelligence.v1p3beta1.IStreamingVideoConfig): google.cloud.videointelligence.v1p3beta1.StreamingVideoConfig;
+
+                    /**
+                     * Encodes the specified StreamingVideoConfig message. Does not implicitly {@link google.cloud.videointelligence.v1p3beta1.StreamingVideoConfig.verify|verify} messages.
+                     * @param message StreamingVideoConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.videointelligence.v1p3beta1.IStreamingVideoConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified StreamingVideoConfig message, length delimited. Does not implicitly {@link google.cloud.videointelligence.v1p3beta1.StreamingVideoConfig.verify|verify} messages.
+                     * @param message StreamingVideoConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.videointelligence.v1p3beta1.IStreamingVideoConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a StreamingVideoConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns StreamingVideoConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.videointelligence.v1p3beta1.StreamingVideoConfig;
+
+                    /**
+                     * Decodes a StreamingVideoConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns StreamingVideoConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.videointelligence.v1p3beta1.StreamingVideoConfig;
+
+                    /**
+                     * Verifies a StreamingVideoConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a StreamingVideoConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns StreamingVideoConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.videointelligence.v1p3beta1.StreamingVideoConfig;
+
+                    /**
+                     * Creates a plain object from a StreamingVideoConfig message. Also converts values to other types if specified.
+                     * @param message StreamingVideoConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.videointelligence.v1p3beta1.StreamingVideoConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this StreamingVideoConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
                 /** Properties of a StreamingAnnotateVideoResponse. */
                 interface IStreamingAnnotateVideoResponse {
 
@@ -16050,6 +16236,546 @@ export namespace google {
 
                     /**
                      * Converts this StreamingAnnotateVideoResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a StreamingVideoAnnotationResults. */
+                interface IStreamingVideoAnnotationResults {
+
+                    /** StreamingVideoAnnotationResults shotAnnotations */
+                    shotAnnotations?: (google.cloud.videointelligence.v1p3beta1.IVideoSegment[]|null);
+
+                    /** StreamingVideoAnnotationResults labelAnnotations */
+                    labelAnnotations?: (google.cloud.videointelligence.v1p3beta1.ILabelAnnotation[]|null);
+
+                    /** StreamingVideoAnnotationResults explicitAnnotation */
+                    explicitAnnotation?: (google.cloud.videointelligence.v1p3beta1.IExplicitContentAnnotation|null);
+
+                    /** StreamingVideoAnnotationResults objectAnnotations */
+                    objectAnnotations?: (google.cloud.videointelligence.v1p3beta1.IObjectTrackingAnnotation[]|null);
+                }
+
+                /** Represents a StreamingVideoAnnotationResults. */
+                class StreamingVideoAnnotationResults implements IStreamingVideoAnnotationResults {
+
+                    /**
+                     * Constructs a new StreamingVideoAnnotationResults.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.videointelligence.v1p3beta1.IStreamingVideoAnnotationResults);
+
+                    /** StreamingVideoAnnotationResults shotAnnotations. */
+                    public shotAnnotations: google.cloud.videointelligence.v1p3beta1.IVideoSegment[];
+
+                    /** StreamingVideoAnnotationResults labelAnnotations. */
+                    public labelAnnotations: google.cloud.videointelligence.v1p3beta1.ILabelAnnotation[];
+
+                    /** StreamingVideoAnnotationResults explicitAnnotation. */
+                    public explicitAnnotation?: (google.cloud.videointelligence.v1p3beta1.IExplicitContentAnnotation|null);
+
+                    /** StreamingVideoAnnotationResults objectAnnotations. */
+                    public objectAnnotations: google.cloud.videointelligence.v1p3beta1.IObjectTrackingAnnotation[];
+
+                    /**
+                     * Creates a new StreamingVideoAnnotationResults instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns StreamingVideoAnnotationResults instance
+                     */
+                    public static create(properties?: google.cloud.videointelligence.v1p3beta1.IStreamingVideoAnnotationResults): google.cloud.videointelligence.v1p3beta1.StreamingVideoAnnotationResults;
+
+                    /**
+                     * Encodes the specified StreamingVideoAnnotationResults message. Does not implicitly {@link google.cloud.videointelligence.v1p3beta1.StreamingVideoAnnotationResults.verify|verify} messages.
+                     * @param message StreamingVideoAnnotationResults message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.videointelligence.v1p3beta1.IStreamingVideoAnnotationResults, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified StreamingVideoAnnotationResults message, length delimited. Does not implicitly {@link google.cloud.videointelligence.v1p3beta1.StreamingVideoAnnotationResults.verify|verify} messages.
+                     * @param message StreamingVideoAnnotationResults message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.videointelligence.v1p3beta1.IStreamingVideoAnnotationResults, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a StreamingVideoAnnotationResults message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns StreamingVideoAnnotationResults
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.videointelligence.v1p3beta1.StreamingVideoAnnotationResults;
+
+                    /**
+                     * Decodes a StreamingVideoAnnotationResults message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns StreamingVideoAnnotationResults
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.videointelligence.v1p3beta1.StreamingVideoAnnotationResults;
+
+                    /**
+                     * Verifies a StreamingVideoAnnotationResults message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a StreamingVideoAnnotationResults message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns StreamingVideoAnnotationResults
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.videointelligence.v1p3beta1.StreamingVideoAnnotationResults;
+
+                    /**
+                     * Creates a plain object from a StreamingVideoAnnotationResults message. Also converts values to other types if specified.
+                     * @param message StreamingVideoAnnotationResults
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.videointelligence.v1p3beta1.StreamingVideoAnnotationResults, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this StreamingVideoAnnotationResults to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a StreamingShotChangeDetectionConfig. */
+                interface IStreamingShotChangeDetectionConfig {
+                }
+
+                /** Represents a StreamingShotChangeDetectionConfig. */
+                class StreamingShotChangeDetectionConfig implements IStreamingShotChangeDetectionConfig {
+
+                    /**
+                     * Constructs a new StreamingShotChangeDetectionConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.videointelligence.v1p3beta1.IStreamingShotChangeDetectionConfig);
+
+                    /**
+                     * Creates a new StreamingShotChangeDetectionConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns StreamingShotChangeDetectionConfig instance
+                     */
+                    public static create(properties?: google.cloud.videointelligence.v1p3beta1.IStreamingShotChangeDetectionConfig): google.cloud.videointelligence.v1p3beta1.StreamingShotChangeDetectionConfig;
+
+                    /**
+                     * Encodes the specified StreamingShotChangeDetectionConfig message. Does not implicitly {@link google.cloud.videointelligence.v1p3beta1.StreamingShotChangeDetectionConfig.verify|verify} messages.
+                     * @param message StreamingShotChangeDetectionConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.videointelligence.v1p3beta1.IStreamingShotChangeDetectionConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified StreamingShotChangeDetectionConfig message, length delimited. Does not implicitly {@link google.cloud.videointelligence.v1p3beta1.StreamingShotChangeDetectionConfig.verify|verify} messages.
+                     * @param message StreamingShotChangeDetectionConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.videointelligence.v1p3beta1.IStreamingShotChangeDetectionConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a StreamingShotChangeDetectionConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns StreamingShotChangeDetectionConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.videointelligence.v1p3beta1.StreamingShotChangeDetectionConfig;
+
+                    /**
+                     * Decodes a StreamingShotChangeDetectionConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns StreamingShotChangeDetectionConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.videointelligence.v1p3beta1.StreamingShotChangeDetectionConfig;
+
+                    /**
+                     * Verifies a StreamingShotChangeDetectionConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a StreamingShotChangeDetectionConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns StreamingShotChangeDetectionConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.videointelligence.v1p3beta1.StreamingShotChangeDetectionConfig;
+
+                    /**
+                     * Creates a plain object from a StreamingShotChangeDetectionConfig message. Also converts values to other types if specified.
+                     * @param message StreamingShotChangeDetectionConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.videointelligence.v1p3beta1.StreamingShotChangeDetectionConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this StreamingShotChangeDetectionConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a StreamingLabelDetectionConfig. */
+                interface IStreamingLabelDetectionConfig {
+
+                    /** StreamingLabelDetectionConfig stationaryCamera */
+                    stationaryCamera?: (boolean|null);
+                }
+
+                /** Represents a StreamingLabelDetectionConfig. */
+                class StreamingLabelDetectionConfig implements IStreamingLabelDetectionConfig {
+
+                    /**
+                     * Constructs a new StreamingLabelDetectionConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.videointelligence.v1p3beta1.IStreamingLabelDetectionConfig);
+
+                    /** StreamingLabelDetectionConfig stationaryCamera. */
+                    public stationaryCamera: boolean;
+
+                    /**
+                     * Creates a new StreamingLabelDetectionConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns StreamingLabelDetectionConfig instance
+                     */
+                    public static create(properties?: google.cloud.videointelligence.v1p3beta1.IStreamingLabelDetectionConfig): google.cloud.videointelligence.v1p3beta1.StreamingLabelDetectionConfig;
+
+                    /**
+                     * Encodes the specified StreamingLabelDetectionConfig message. Does not implicitly {@link google.cloud.videointelligence.v1p3beta1.StreamingLabelDetectionConfig.verify|verify} messages.
+                     * @param message StreamingLabelDetectionConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.videointelligence.v1p3beta1.IStreamingLabelDetectionConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified StreamingLabelDetectionConfig message, length delimited. Does not implicitly {@link google.cloud.videointelligence.v1p3beta1.StreamingLabelDetectionConfig.verify|verify} messages.
+                     * @param message StreamingLabelDetectionConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.videointelligence.v1p3beta1.IStreamingLabelDetectionConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a StreamingLabelDetectionConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns StreamingLabelDetectionConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.videointelligence.v1p3beta1.StreamingLabelDetectionConfig;
+
+                    /**
+                     * Decodes a StreamingLabelDetectionConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns StreamingLabelDetectionConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.videointelligence.v1p3beta1.StreamingLabelDetectionConfig;
+
+                    /**
+                     * Verifies a StreamingLabelDetectionConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a StreamingLabelDetectionConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns StreamingLabelDetectionConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.videointelligence.v1p3beta1.StreamingLabelDetectionConfig;
+
+                    /**
+                     * Creates a plain object from a StreamingLabelDetectionConfig message. Also converts values to other types if specified.
+                     * @param message StreamingLabelDetectionConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.videointelligence.v1p3beta1.StreamingLabelDetectionConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this StreamingLabelDetectionConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a StreamingExplicitContentDetectionConfig. */
+                interface IStreamingExplicitContentDetectionConfig {
+                }
+
+                /** Represents a StreamingExplicitContentDetectionConfig. */
+                class StreamingExplicitContentDetectionConfig implements IStreamingExplicitContentDetectionConfig {
+
+                    /**
+                     * Constructs a new StreamingExplicitContentDetectionConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.videointelligence.v1p3beta1.IStreamingExplicitContentDetectionConfig);
+
+                    /**
+                     * Creates a new StreamingExplicitContentDetectionConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns StreamingExplicitContentDetectionConfig instance
+                     */
+                    public static create(properties?: google.cloud.videointelligence.v1p3beta1.IStreamingExplicitContentDetectionConfig): google.cloud.videointelligence.v1p3beta1.StreamingExplicitContentDetectionConfig;
+
+                    /**
+                     * Encodes the specified StreamingExplicitContentDetectionConfig message. Does not implicitly {@link google.cloud.videointelligence.v1p3beta1.StreamingExplicitContentDetectionConfig.verify|verify} messages.
+                     * @param message StreamingExplicitContentDetectionConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.videointelligence.v1p3beta1.IStreamingExplicitContentDetectionConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified StreamingExplicitContentDetectionConfig message, length delimited. Does not implicitly {@link google.cloud.videointelligence.v1p3beta1.StreamingExplicitContentDetectionConfig.verify|verify} messages.
+                     * @param message StreamingExplicitContentDetectionConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.videointelligence.v1p3beta1.IStreamingExplicitContentDetectionConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a StreamingExplicitContentDetectionConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns StreamingExplicitContentDetectionConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.videointelligence.v1p3beta1.StreamingExplicitContentDetectionConfig;
+
+                    /**
+                     * Decodes a StreamingExplicitContentDetectionConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns StreamingExplicitContentDetectionConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.videointelligence.v1p3beta1.StreamingExplicitContentDetectionConfig;
+
+                    /**
+                     * Verifies a StreamingExplicitContentDetectionConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a StreamingExplicitContentDetectionConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns StreamingExplicitContentDetectionConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.videointelligence.v1p3beta1.StreamingExplicitContentDetectionConfig;
+
+                    /**
+                     * Creates a plain object from a StreamingExplicitContentDetectionConfig message. Also converts values to other types if specified.
+                     * @param message StreamingExplicitContentDetectionConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.videointelligence.v1p3beta1.StreamingExplicitContentDetectionConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this StreamingExplicitContentDetectionConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a StreamingObjectTrackingConfig. */
+                interface IStreamingObjectTrackingConfig {
+                }
+
+                /** Represents a StreamingObjectTrackingConfig. */
+                class StreamingObjectTrackingConfig implements IStreamingObjectTrackingConfig {
+
+                    /**
+                     * Constructs a new StreamingObjectTrackingConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.videointelligence.v1p3beta1.IStreamingObjectTrackingConfig);
+
+                    /**
+                     * Creates a new StreamingObjectTrackingConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns StreamingObjectTrackingConfig instance
+                     */
+                    public static create(properties?: google.cloud.videointelligence.v1p3beta1.IStreamingObjectTrackingConfig): google.cloud.videointelligence.v1p3beta1.StreamingObjectTrackingConfig;
+
+                    /**
+                     * Encodes the specified StreamingObjectTrackingConfig message. Does not implicitly {@link google.cloud.videointelligence.v1p3beta1.StreamingObjectTrackingConfig.verify|verify} messages.
+                     * @param message StreamingObjectTrackingConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.videointelligence.v1p3beta1.IStreamingObjectTrackingConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified StreamingObjectTrackingConfig message, length delimited. Does not implicitly {@link google.cloud.videointelligence.v1p3beta1.StreamingObjectTrackingConfig.verify|verify} messages.
+                     * @param message StreamingObjectTrackingConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.videointelligence.v1p3beta1.IStreamingObjectTrackingConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a StreamingObjectTrackingConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns StreamingObjectTrackingConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.videointelligence.v1p3beta1.StreamingObjectTrackingConfig;
+
+                    /**
+                     * Decodes a StreamingObjectTrackingConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns StreamingObjectTrackingConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.videointelligence.v1p3beta1.StreamingObjectTrackingConfig;
+
+                    /**
+                     * Verifies a StreamingObjectTrackingConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a StreamingObjectTrackingConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns StreamingObjectTrackingConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.videointelligence.v1p3beta1.StreamingObjectTrackingConfig;
+
+                    /**
+                     * Creates a plain object from a StreamingObjectTrackingConfig message. Also converts values to other types if specified.
+                     * @param message StreamingObjectTrackingConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.videointelligence.v1p3beta1.StreamingObjectTrackingConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this StreamingObjectTrackingConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a StreamingAutomlActionRecognitionConfig. */
+                interface IStreamingAutomlActionRecognitionConfig {
+
+                    /** StreamingAutomlActionRecognitionConfig modelName */
+                    modelName?: (string|null);
+                }
+
+                /** Represents a StreamingAutomlActionRecognitionConfig. */
+                class StreamingAutomlActionRecognitionConfig implements IStreamingAutomlActionRecognitionConfig {
+
+                    /**
+                     * Constructs a new StreamingAutomlActionRecognitionConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.videointelligence.v1p3beta1.IStreamingAutomlActionRecognitionConfig);
+
+                    /** StreamingAutomlActionRecognitionConfig modelName. */
+                    public modelName: string;
+
+                    /**
+                     * Creates a new StreamingAutomlActionRecognitionConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns StreamingAutomlActionRecognitionConfig instance
+                     */
+                    public static create(properties?: google.cloud.videointelligence.v1p3beta1.IStreamingAutomlActionRecognitionConfig): google.cloud.videointelligence.v1p3beta1.StreamingAutomlActionRecognitionConfig;
+
+                    /**
+                     * Encodes the specified StreamingAutomlActionRecognitionConfig message. Does not implicitly {@link google.cloud.videointelligence.v1p3beta1.StreamingAutomlActionRecognitionConfig.verify|verify} messages.
+                     * @param message StreamingAutomlActionRecognitionConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.videointelligence.v1p3beta1.IStreamingAutomlActionRecognitionConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified StreamingAutomlActionRecognitionConfig message, length delimited. Does not implicitly {@link google.cloud.videointelligence.v1p3beta1.StreamingAutomlActionRecognitionConfig.verify|verify} messages.
+                     * @param message StreamingAutomlActionRecognitionConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.videointelligence.v1p3beta1.IStreamingAutomlActionRecognitionConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a StreamingAutomlActionRecognitionConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns StreamingAutomlActionRecognitionConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.videointelligence.v1p3beta1.StreamingAutomlActionRecognitionConfig;
+
+                    /**
+                     * Decodes a StreamingAutomlActionRecognitionConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns StreamingAutomlActionRecognitionConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.videointelligence.v1p3beta1.StreamingAutomlActionRecognitionConfig;
+
+                    /**
+                     * Verifies a StreamingAutomlActionRecognitionConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a StreamingAutomlActionRecognitionConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns StreamingAutomlActionRecognitionConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.videointelligence.v1p3beta1.StreamingAutomlActionRecognitionConfig;
+
+                    /**
+                     * Creates a plain object from a StreamingAutomlActionRecognitionConfig message. Also converts values to other types if specified.
+                     * @param message StreamingAutomlActionRecognitionConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.videointelligence.v1p3beta1.StreamingAutomlActionRecognitionConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this StreamingAutomlActionRecognitionConfig to JSON.
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
@@ -16235,348 +16961,6 @@ export namespace google {
                     public toJSON(): { [k: string]: any };
                 }
 
-                /** Properties of a StreamingExplicitContentDetectionConfig. */
-                interface IStreamingExplicitContentDetectionConfig {
-                }
-
-                /** Represents a StreamingExplicitContentDetectionConfig. */
-                class StreamingExplicitContentDetectionConfig implements IStreamingExplicitContentDetectionConfig {
-
-                    /**
-                     * Constructs a new StreamingExplicitContentDetectionConfig.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.videointelligence.v1p3beta1.IStreamingExplicitContentDetectionConfig);
-
-                    /**
-                     * Creates a new StreamingExplicitContentDetectionConfig instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns StreamingExplicitContentDetectionConfig instance
-                     */
-                    public static create(properties?: google.cloud.videointelligence.v1p3beta1.IStreamingExplicitContentDetectionConfig): google.cloud.videointelligence.v1p3beta1.StreamingExplicitContentDetectionConfig;
-
-                    /**
-                     * Encodes the specified StreamingExplicitContentDetectionConfig message. Does not implicitly {@link google.cloud.videointelligence.v1p3beta1.StreamingExplicitContentDetectionConfig.verify|verify} messages.
-                     * @param message StreamingExplicitContentDetectionConfig message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.videointelligence.v1p3beta1.IStreamingExplicitContentDetectionConfig, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified StreamingExplicitContentDetectionConfig message, length delimited. Does not implicitly {@link google.cloud.videointelligence.v1p3beta1.StreamingExplicitContentDetectionConfig.verify|verify} messages.
-                     * @param message StreamingExplicitContentDetectionConfig message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.videointelligence.v1p3beta1.IStreamingExplicitContentDetectionConfig, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a StreamingExplicitContentDetectionConfig message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns StreamingExplicitContentDetectionConfig
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.videointelligence.v1p3beta1.StreamingExplicitContentDetectionConfig;
-
-                    /**
-                     * Decodes a StreamingExplicitContentDetectionConfig message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns StreamingExplicitContentDetectionConfig
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.videointelligence.v1p3beta1.StreamingExplicitContentDetectionConfig;
-
-                    /**
-                     * Verifies a StreamingExplicitContentDetectionConfig message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a StreamingExplicitContentDetectionConfig message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns StreamingExplicitContentDetectionConfig
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.videointelligence.v1p3beta1.StreamingExplicitContentDetectionConfig;
-
-                    /**
-                     * Creates a plain object from a StreamingExplicitContentDetectionConfig message. Also converts values to other types if specified.
-                     * @param message StreamingExplicitContentDetectionConfig
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.videointelligence.v1p3beta1.StreamingExplicitContentDetectionConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this StreamingExplicitContentDetectionConfig to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
-                /** Properties of a StreamingLabelDetectionConfig. */
-                interface IStreamingLabelDetectionConfig {
-
-                    /** StreamingLabelDetectionConfig stationaryCamera */
-                    stationaryCamera?: (boolean|null);
-                }
-
-                /** Represents a StreamingLabelDetectionConfig. */
-                class StreamingLabelDetectionConfig implements IStreamingLabelDetectionConfig {
-
-                    /**
-                     * Constructs a new StreamingLabelDetectionConfig.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.videointelligence.v1p3beta1.IStreamingLabelDetectionConfig);
-
-                    /** StreamingLabelDetectionConfig stationaryCamera. */
-                    public stationaryCamera: boolean;
-
-                    /**
-                     * Creates a new StreamingLabelDetectionConfig instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns StreamingLabelDetectionConfig instance
-                     */
-                    public static create(properties?: google.cloud.videointelligence.v1p3beta1.IStreamingLabelDetectionConfig): google.cloud.videointelligence.v1p3beta1.StreamingLabelDetectionConfig;
-
-                    /**
-                     * Encodes the specified StreamingLabelDetectionConfig message. Does not implicitly {@link google.cloud.videointelligence.v1p3beta1.StreamingLabelDetectionConfig.verify|verify} messages.
-                     * @param message StreamingLabelDetectionConfig message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.videointelligence.v1p3beta1.IStreamingLabelDetectionConfig, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified StreamingLabelDetectionConfig message, length delimited. Does not implicitly {@link google.cloud.videointelligence.v1p3beta1.StreamingLabelDetectionConfig.verify|verify} messages.
-                     * @param message StreamingLabelDetectionConfig message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.videointelligence.v1p3beta1.IStreamingLabelDetectionConfig, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a StreamingLabelDetectionConfig message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns StreamingLabelDetectionConfig
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.videointelligence.v1p3beta1.StreamingLabelDetectionConfig;
-
-                    /**
-                     * Decodes a StreamingLabelDetectionConfig message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns StreamingLabelDetectionConfig
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.videointelligence.v1p3beta1.StreamingLabelDetectionConfig;
-
-                    /**
-                     * Verifies a StreamingLabelDetectionConfig message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a StreamingLabelDetectionConfig message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns StreamingLabelDetectionConfig
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.videointelligence.v1p3beta1.StreamingLabelDetectionConfig;
-
-                    /**
-                     * Creates a plain object from a StreamingLabelDetectionConfig message. Also converts values to other types if specified.
-                     * @param message StreamingLabelDetectionConfig
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.videointelligence.v1p3beta1.StreamingLabelDetectionConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this StreamingLabelDetectionConfig to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
-                /** Properties of a StreamingObjectTrackingConfig. */
-                interface IStreamingObjectTrackingConfig {
-                }
-
-                /** Represents a StreamingObjectTrackingConfig. */
-                class StreamingObjectTrackingConfig implements IStreamingObjectTrackingConfig {
-
-                    /**
-                     * Constructs a new StreamingObjectTrackingConfig.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.videointelligence.v1p3beta1.IStreamingObjectTrackingConfig);
-
-                    /**
-                     * Creates a new StreamingObjectTrackingConfig instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns StreamingObjectTrackingConfig instance
-                     */
-                    public static create(properties?: google.cloud.videointelligence.v1p3beta1.IStreamingObjectTrackingConfig): google.cloud.videointelligence.v1p3beta1.StreamingObjectTrackingConfig;
-
-                    /**
-                     * Encodes the specified StreamingObjectTrackingConfig message. Does not implicitly {@link google.cloud.videointelligence.v1p3beta1.StreamingObjectTrackingConfig.verify|verify} messages.
-                     * @param message StreamingObjectTrackingConfig message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.videointelligence.v1p3beta1.IStreamingObjectTrackingConfig, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified StreamingObjectTrackingConfig message, length delimited. Does not implicitly {@link google.cloud.videointelligence.v1p3beta1.StreamingObjectTrackingConfig.verify|verify} messages.
-                     * @param message StreamingObjectTrackingConfig message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.videointelligence.v1p3beta1.IStreamingObjectTrackingConfig, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a StreamingObjectTrackingConfig message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns StreamingObjectTrackingConfig
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.videointelligence.v1p3beta1.StreamingObjectTrackingConfig;
-
-                    /**
-                     * Decodes a StreamingObjectTrackingConfig message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns StreamingObjectTrackingConfig
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.videointelligence.v1p3beta1.StreamingObjectTrackingConfig;
-
-                    /**
-                     * Verifies a StreamingObjectTrackingConfig message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a StreamingObjectTrackingConfig message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns StreamingObjectTrackingConfig
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.videointelligence.v1p3beta1.StreamingObjectTrackingConfig;
-
-                    /**
-                     * Creates a plain object from a StreamingObjectTrackingConfig message. Also converts values to other types if specified.
-                     * @param message StreamingObjectTrackingConfig
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.videointelligence.v1p3beta1.StreamingObjectTrackingConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this StreamingObjectTrackingConfig to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
-                /** Properties of a StreamingShotChangeDetectionConfig. */
-                interface IStreamingShotChangeDetectionConfig {
-                }
-
-                /** Represents a StreamingShotChangeDetectionConfig. */
-                class StreamingShotChangeDetectionConfig implements IStreamingShotChangeDetectionConfig {
-
-                    /**
-                     * Constructs a new StreamingShotChangeDetectionConfig.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.videointelligence.v1p3beta1.IStreamingShotChangeDetectionConfig);
-
-                    /**
-                     * Creates a new StreamingShotChangeDetectionConfig instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns StreamingShotChangeDetectionConfig instance
-                     */
-                    public static create(properties?: google.cloud.videointelligence.v1p3beta1.IStreamingShotChangeDetectionConfig): google.cloud.videointelligence.v1p3beta1.StreamingShotChangeDetectionConfig;
-
-                    /**
-                     * Encodes the specified StreamingShotChangeDetectionConfig message. Does not implicitly {@link google.cloud.videointelligence.v1p3beta1.StreamingShotChangeDetectionConfig.verify|verify} messages.
-                     * @param message StreamingShotChangeDetectionConfig message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.videointelligence.v1p3beta1.IStreamingShotChangeDetectionConfig, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified StreamingShotChangeDetectionConfig message, length delimited. Does not implicitly {@link google.cloud.videointelligence.v1p3beta1.StreamingShotChangeDetectionConfig.verify|verify} messages.
-                     * @param message StreamingShotChangeDetectionConfig message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.videointelligence.v1p3beta1.IStreamingShotChangeDetectionConfig, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a StreamingShotChangeDetectionConfig message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns StreamingShotChangeDetectionConfig
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.videointelligence.v1p3beta1.StreamingShotChangeDetectionConfig;
-
-                    /**
-                     * Decodes a StreamingShotChangeDetectionConfig message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns StreamingShotChangeDetectionConfig
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.videointelligence.v1p3beta1.StreamingShotChangeDetectionConfig;
-
-                    /**
-                     * Verifies a StreamingShotChangeDetectionConfig message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a StreamingShotChangeDetectionConfig message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns StreamingShotChangeDetectionConfig
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.videointelligence.v1p3beta1.StreamingShotChangeDetectionConfig;
-
-                    /**
-                     * Creates a plain object from a StreamingShotChangeDetectionConfig message. Also converts values to other types if specified.
-                     * @param message StreamingShotChangeDetectionConfig
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.videointelligence.v1p3beta1.StreamingShotChangeDetectionConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this StreamingShotChangeDetectionConfig to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
                 /** Properties of a StreamingStorageConfig. */
                 interface IStreamingStorageConfig {
 
@@ -16671,293 +17055,6 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
-                }
-
-                /** Properties of a StreamingVideoAnnotationResults. */
-                interface IStreamingVideoAnnotationResults {
-
-                    /** StreamingVideoAnnotationResults shotAnnotations */
-                    shotAnnotations?: (google.cloud.videointelligence.v1p3beta1.IVideoSegment[]|null);
-
-                    /** StreamingVideoAnnotationResults labelAnnotations */
-                    labelAnnotations?: (google.cloud.videointelligence.v1p3beta1.ILabelAnnotation[]|null);
-
-                    /** StreamingVideoAnnotationResults explicitAnnotation */
-                    explicitAnnotation?: (google.cloud.videointelligence.v1p3beta1.IExplicitContentAnnotation|null);
-
-                    /** StreamingVideoAnnotationResults objectAnnotations */
-                    objectAnnotations?: (google.cloud.videointelligence.v1p3beta1.IObjectTrackingAnnotation[]|null);
-                }
-
-                /** Represents a StreamingVideoAnnotationResults. */
-                class StreamingVideoAnnotationResults implements IStreamingVideoAnnotationResults {
-
-                    /**
-                     * Constructs a new StreamingVideoAnnotationResults.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.videointelligence.v1p3beta1.IStreamingVideoAnnotationResults);
-
-                    /** StreamingVideoAnnotationResults shotAnnotations. */
-                    public shotAnnotations: google.cloud.videointelligence.v1p3beta1.IVideoSegment[];
-
-                    /** StreamingVideoAnnotationResults labelAnnotations. */
-                    public labelAnnotations: google.cloud.videointelligence.v1p3beta1.ILabelAnnotation[];
-
-                    /** StreamingVideoAnnotationResults explicitAnnotation. */
-                    public explicitAnnotation?: (google.cloud.videointelligence.v1p3beta1.IExplicitContentAnnotation|null);
-
-                    /** StreamingVideoAnnotationResults objectAnnotations. */
-                    public objectAnnotations: google.cloud.videointelligence.v1p3beta1.IObjectTrackingAnnotation[];
-
-                    /**
-                     * Creates a new StreamingVideoAnnotationResults instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns StreamingVideoAnnotationResults instance
-                     */
-                    public static create(properties?: google.cloud.videointelligence.v1p3beta1.IStreamingVideoAnnotationResults): google.cloud.videointelligence.v1p3beta1.StreamingVideoAnnotationResults;
-
-                    /**
-                     * Encodes the specified StreamingVideoAnnotationResults message. Does not implicitly {@link google.cloud.videointelligence.v1p3beta1.StreamingVideoAnnotationResults.verify|verify} messages.
-                     * @param message StreamingVideoAnnotationResults message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.videointelligence.v1p3beta1.IStreamingVideoAnnotationResults, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified StreamingVideoAnnotationResults message, length delimited. Does not implicitly {@link google.cloud.videointelligence.v1p3beta1.StreamingVideoAnnotationResults.verify|verify} messages.
-                     * @param message StreamingVideoAnnotationResults message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.videointelligence.v1p3beta1.IStreamingVideoAnnotationResults, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a StreamingVideoAnnotationResults message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns StreamingVideoAnnotationResults
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.videointelligence.v1p3beta1.StreamingVideoAnnotationResults;
-
-                    /**
-                     * Decodes a StreamingVideoAnnotationResults message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns StreamingVideoAnnotationResults
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.videointelligence.v1p3beta1.StreamingVideoAnnotationResults;
-
-                    /**
-                     * Verifies a StreamingVideoAnnotationResults message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a StreamingVideoAnnotationResults message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns StreamingVideoAnnotationResults
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.videointelligence.v1p3beta1.StreamingVideoAnnotationResults;
-
-                    /**
-                     * Creates a plain object from a StreamingVideoAnnotationResults message. Also converts values to other types if specified.
-                     * @param message StreamingVideoAnnotationResults
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.videointelligence.v1p3beta1.StreamingVideoAnnotationResults, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this StreamingVideoAnnotationResults to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
-                /** Properties of a StreamingVideoConfig. */
-                interface IStreamingVideoConfig {
-
-                    /** StreamingVideoConfig feature */
-                    feature?: (google.cloud.videointelligence.v1p3beta1.StreamingFeature|keyof typeof google.cloud.videointelligence.v1p3beta1.StreamingFeature|null);
-
-                    /** StreamingVideoConfig shotChangeDetectionConfig */
-                    shotChangeDetectionConfig?: (google.cloud.videointelligence.v1p3beta1.IStreamingShotChangeDetectionConfig|null);
-
-                    /** StreamingVideoConfig labelDetectionConfig */
-                    labelDetectionConfig?: (google.cloud.videointelligence.v1p3beta1.IStreamingLabelDetectionConfig|null);
-
-                    /** StreamingVideoConfig explicitContentDetectionConfig */
-                    explicitContentDetectionConfig?: (google.cloud.videointelligence.v1p3beta1.IStreamingExplicitContentDetectionConfig|null);
-
-                    /** StreamingVideoConfig objectTrackingConfig */
-                    objectTrackingConfig?: (google.cloud.videointelligence.v1p3beta1.IStreamingObjectTrackingConfig|null);
-
-                    /** StreamingVideoConfig automlClassificationConfig */
-                    automlClassificationConfig?: (google.cloud.videointelligence.v1p3beta1.IStreamingAutomlClassificationConfig|null);
-
-                    /** StreamingVideoConfig automlObjectTrackingConfig */
-                    automlObjectTrackingConfig?: (google.cloud.videointelligence.v1p3beta1.IStreamingAutomlObjectTrackingConfig|null);
-
-                    /** StreamingVideoConfig storageConfig */
-                    storageConfig?: (google.cloud.videointelligence.v1p3beta1.IStreamingStorageConfig|null);
-                }
-
-                /** Represents a StreamingVideoConfig. */
-                class StreamingVideoConfig implements IStreamingVideoConfig {
-
-                    /**
-                     * Constructs a new StreamingVideoConfig.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.videointelligence.v1p3beta1.IStreamingVideoConfig);
-
-                    /** StreamingVideoConfig feature. */
-                    public feature: (google.cloud.videointelligence.v1p3beta1.StreamingFeature|keyof typeof google.cloud.videointelligence.v1p3beta1.StreamingFeature);
-
-                    /** StreamingVideoConfig shotChangeDetectionConfig. */
-                    public shotChangeDetectionConfig?: (google.cloud.videointelligence.v1p3beta1.IStreamingShotChangeDetectionConfig|null);
-
-                    /** StreamingVideoConfig labelDetectionConfig. */
-                    public labelDetectionConfig?: (google.cloud.videointelligence.v1p3beta1.IStreamingLabelDetectionConfig|null);
-
-                    /** StreamingVideoConfig explicitContentDetectionConfig. */
-                    public explicitContentDetectionConfig?: (google.cloud.videointelligence.v1p3beta1.IStreamingExplicitContentDetectionConfig|null);
-
-                    /** StreamingVideoConfig objectTrackingConfig. */
-                    public objectTrackingConfig?: (google.cloud.videointelligence.v1p3beta1.IStreamingObjectTrackingConfig|null);
-
-                    /** StreamingVideoConfig automlClassificationConfig. */
-                    public automlClassificationConfig?: (google.cloud.videointelligence.v1p3beta1.IStreamingAutomlClassificationConfig|null);
-
-                    /** StreamingVideoConfig automlObjectTrackingConfig. */
-                    public automlObjectTrackingConfig?: (google.cloud.videointelligence.v1p3beta1.IStreamingAutomlObjectTrackingConfig|null);
-
-                    /** StreamingVideoConfig storageConfig. */
-                    public storageConfig?: (google.cloud.videointelligence.v1p3beta1.IStreamingStorageConfig|null);
-
-                    /** StreamingVideoConfig streamingConfig. */
-                    public streamingConfig?: ("shotChangeDetectionConfig"|"labelDetectionConfig"|"explicitContentDetectionConfig"|"objectTrackingConfig"|"automlClassificationConfig"|"automlObjectTrackingConfig");
-
-                    /**
-                     * Creates a new StreamingVideoConfig instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns StreamingVideoConfig instance
-                     */
-                    public static create(properties?: google.cloud.videointelligence.v1p3beta1.IStreamingVideoConfig): google.cloud.videointelligence.v1p3beta1.StreamingVideoConfig;
-
-                    /**
-                     * Encodes the specified StreamingVideoConfig message. Does not implicitly {@link google.cloud.videointelligence.v1p3beta1.StreamingVideoConfig.verify|verify} messages.
-                     * @param message StreamingVideoConfig message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.videointelligence.v1p3beta1.IStreamingVideoConfig, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified StreamingVideoConfig message, length delimited. Does not implicitly {@link google.cloud.videointelligence.v1p3beta1.StreamingVideoConfig.verify|verify} messages.
-                     * @param message StreamingVideoConfig message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.videointelligence.v1p3beta1.IStreamingVideoConfig, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a StreamingVideoConfig message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns StreamingVideoConfig
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.videointelligence.v1p3beta1.StreamingVideoConfig;
-
-                    /**
-                     * Decodes a StreamingVideoConfig message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns StreamingVideoConfig
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.videointelligence.v1p3beta1.StreamingVideoConfig;
-
-                    /**
-                     * Verifies a StreamingVideoConfig message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a StreamingVideoConfig message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns StreamingVideoConfig
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.videointelligence.v1p3beta1.StreamingVideoConfig;
-
-                    /**
-                     * Creates a plain object from a StreamingVideoConfig message. Also converts values to other types if specified.
-                     * @param message StreamingVideoConfig
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.videointelligence.v1p3beta1.StreamingVideoConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this StreamingVideoConfig to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
-                /** Feature enum. */
-                enum Feature {
-                    FEATURE_UNSPECIFIED = 0,
-                    LABEL_DETECTION = 1,
-                    SHOT_CHANGE_DETECTION = 2,
-                    EXPLICIT_CONTENT_DETECTION = 3,
-                    FACE_DETECTION = 4,
-                    SPEECH_TRANSCRIPTION = 6,
-                    TEXT_DETECTION = 7,
-                    OBJECT_TRACKING = 9,
-                    LOGO_RECOGNITION = 12,
-                    CELEBRITY_RECOGNITION = 13,
-                    PERSON_DETECTION = 14
-                }
-
-                /** LabelDetectionMode enum. */
-                enum LabelDetectionMode {
-                    LABEL_DETECTION_MODE_UNSPECIFIED = 0,
-                    SHOT_MODE = 1,
-                    FRAME_MODE = 2,
-                    SHOT_AND_FRAME_MODE = 3
-                }
-
-                /** Likelihood enum. */
-                enum Likelihood {
-                    LIKELIHOOD_UNSPECIFIED = 0,
-                    VERY_UNLIKELY = 1,
-                    UNLIKELY = 2,
-                    POSSIBLE = 3,
-                    LIKELY = 4,
-                    VERY_LIKELY = 5
-                }
-
-                /** StreamingFeature enum. */
-                enum StreamingFeature {
-                    STREAMING_FEATURE_UNSPECIFIED = 0,
-                    STREAMING_LABEL_DETECTION = 1,
-                    STREAMING_SHOT_CHANGE_DETECTION = 2,
-                    STREAMING_EXPLICIT_CONTENT_DETECTION = 3,
-                    STREAMING_OBJECT_TRACKING = 4,
-                    STREAMING_AUTOML_CLASSIFICATION = 21,
-                    STREAMING_AUTOML_OBJECT_TRACKING = 22
                 }
             }
         }

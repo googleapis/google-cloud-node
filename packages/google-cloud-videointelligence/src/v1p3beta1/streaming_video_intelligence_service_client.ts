@@ -26,7 +26,7 @@ import * as gapicConfig from './streaming_video_intelligence_service_client_conf
 const version = require('../../../package.json').version;
 
 /**
- *  Service that implements streaming Google Cloud Video Intelligence API.
+ *  Service that implements streaming Video Intelligence API.
  * @class
  * @memberof v1p3beta1
  */

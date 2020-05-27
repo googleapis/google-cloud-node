@@ -2273,6 +2273,24 @@
                         }
                       }
                     },
+                    "LabelDetectionMode": {
+                      "values": {
+                        "LABEL_DETECTION_MODE_UNSPECIFIED": 0,
+                        "SHOT_MODE": 1,
+                        "FRAME_MODE": 2,
+                        "SHOT_AND_FRAME_MODE": 3
+                      }
+                    },
+                    "Likelihood": {
+                      "values": {
+                        "LIKELIHOOD_UNSPECIFIED": 0,
+                        "VERY_UNLIKELY": 1,
+                        "UNLIKELY": 2,
+                        "POSSIBLE": 3,
+                        "LIKELY": 4,
+                        "VERY_LIKELY": 5
+                      }
+                    },
                     "LabelDetectionConfig": {
                       "fields": {
                         "labelDetectionMode": {
@@ -2295,6 +2313,33 @@
                           "type": "float",
                           "id": 5
                         }
+                      }
+                    },
+                    "StreamingFeature": {
+                      "values": {
+                        "STREAMING_FEATURE_UNSPECIFIED": 0,
+                        "STREAMING_LABEL_DETECTION": 1,
+                        "STREAMING_SHOT_CHANGE_DETECTION": 2,
+                        "STREAMING_EXPLICIT_CONTENT_DETECTION": 3,
+                        "STREAMING_OBJECT_TRACKING": 4,
+                        "STREAMING_AUTOML_ACTION_RECOGNITION": 23,
+                        "STREAMING_AUTOML_CLASSIFICATION": 21,
+                        "STREAMING_AUTOML_OBJECT_TRACKING": 22
+                      }
+                    },
+                    "Feature": {
+                      "values": {
+                        "FEATURE_UNSPECIFIED": 0,
+                        "LABEL_DETECTION": 1,
+                        "SHOT_CHANGE_DETECTION": 2,
+                        "EXPLICIT_CONTENT_DETECTION": 3,
+                        "FACE_DETECTION": 4,
+                        "SPEECH_TRANSCRIPTION": 6,
+                        "TEXT_DETECTION": 7,
+                        "OBJECT_TRACKING": 9,
+                        "LOGO_RECOGNITION": 12,
+                        "CELEBRITY_RECOGNITION": 13,
+                        "PERSON_DETECTION": 14
                       }
                     },
                     "ShotChangeDetectionConfig": {
@@ -3009,6 +3054,14 @@
                         }
                       },
                       "fields": {
+                        "segment": {
+                          "type": "VideoSegment",
+                          "id": 3
+                        },
+                        "trackId": {
+                          "type": "int64",
+                          "id": 5
+                        },
                         "entity": {
                           "type": "Entity",
                           "id": 1
@@ -3021,14 +3074,6 @@
                           "rule": "repeated",
                           "type": "ObjectTrackingFrame",
                           "id": 2
-                        },
-                        "segment": {
-                          "type": "VideoSegment",
-                          "id": 3
-                        },
-                        "trackId": {
-                          "type": "int64",
-                          "id": 5
                         }
                       }
                     },
@@ -3070,6 +3115,59 @@
                         }
                       }
                     },
+                    "StreamingVideoConfig": {
+                      "oneofs": {
+                        "streamingConfig": {
+                          "oneof": [
+                            "shotChangeDetectionConfig",
+                            "labelDetectionConfig",
+                            "explicitContentDetectionConfig",
+                            "objectTrackingConfig",
+                            "automlActionRecognitionConfig",
+                            "automlClassificationConfig",
+                            "automlObjectTrackingConfig"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "shotChangeDetectionConfig": {
+                          "type": "StreamingShotChangeDetectionConfig",
+                          "id": 2
+                        },
+                        "labelDetectionConfig": {
+                          "type": "StreamingLabelDetectionConfig",
+                          "id": 3
+                        },
+                        "explicitContentDetectionConfig": {
+                          "type": "StreamingExplicitContentDetectionConfig",
+                          "id": 4
+                        },
+                        "objectTrackingConfig": {
+                          "type": "StreamingObjectTrackingConfig",
+                          "id": 5
+                        },
+                        "automlActionRecognitionConfig": {
+                          "type": "StreamingAutomlActionRecognitionConfig",
+                          "id": 23
+                        },
+                        "automlClassificationConfig": {
+                          "type": "StreamingAutomlClassificationConfig",
+                          "id": 21
+                        },
+                        "automlObjectTrackingConfig": {
+                          "type": "StreamingAutomlObjectTrackingConfig",
+                          "id": 22
+                        },
+                        "feature": {
+                          "type": "StreamingFeature",
+                          "id": 1
+                        },
+                        "storageConfig": {
+                          "type": "StreamingStorageConfig",
+                          "id": 30
+                        }
+                      }
+                    },
                     "StreamingAnnotateVideoResponse": {
                       "fields": {
                         "error": {
@@ -3081,51 +3179,6 @@
                           "id": 2
                         },
                         "annotationResultsUri": {
-                          "type": "string",
-                          "id": 3
-                        }
-                      }
-                    },
-                    "StreamingAutomlClassificationConfig": {
-                      "fields": {
-                        "modelName": {
-                          "type": "string",
-                          "id": 1
-                        }
-                      }
-                    },
-                    "StreamingAutomlObjectTrackingConfig": {
-                      "fields": {
-                        "modelName": {
-                          "type": "string",
-                          "id": 1
-                        }
-                      }
-                    },
-                    "StreamingExplicitContentDetectionConfig": {
-                      "fields": {}
-                    },
-                    "StreamingLabelDetectionConfig": {
-                      "fields": {
-                        "stationaryCamera": {
-                          "type": "bool",
-                          "id": 1
-                        }
-                      }
-                    },
-                    "StreamingObjectTrackingConfig": {
-                      "fields": {}
-                    },
-                    "StreamingShotChangeDetectionConfig": {
-                      "fields": {}
-                    },
-                    "StreamingStorageConfig": {
-                      "fields": {
-                        "enableStorageAnnotationResult": {
-                          "type": "bool",
-                          "id": 1
-                        },
-                        "annotationResultStorageDirectory": {
                           "type": "string",
                           "id": 3
                         }
@@ -3154,96 +3207,57 @@
                         }
                       }
                     },
-                    "StreamingVideoConfig": {
-                      "oneofs": {
-                        "streamingConfig": {
-                          "oneof": [
-                            "shotChangeDetectionConfig",
-                            "labelDetectionConfig",
-                            "explicitContentDetectionConfig",
-                            "objectTrackingConfig",
-                            "automlClassificationConfig",
-                            "automlObjectTrackingConfig"
-                          ]
-                        }
-                      },
+                    "StreamingShotChangeDetectionConfig": {
+                      "fields": {}
+                    },
+                    "StreamingLabelDetectionConfig": {
                       "fields": {
-                        "feature": {
-                          "type": "StreamingFeature",
+                        "stationaryCamera": {
+                          "type": "bool",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "StreamingExplicitContentDetectionConfig": {
+                      "fields": {}
+                    },
+                    "StreamingObjectTrackingConfig": {
+                      "fields": {}
+                    },
+                    "StreamingAutomlActionRecognitionConfig": {
+                      "fields": {
+                        "modelName": {
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "StreamingAutomlClassificationConfig": {
+                      "fields": {
+                        "modelName": {
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "StreamingAutomlObjectTrackingConfig": {
+                      "fields": {
+                        "modelName": {
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "StreamingStorageConfig": {
+                      "fields": {
+                        "enableStorageAnnotationResult": {
+                          "type": "bool",
                           "id": 1
                         },
-                        "shotChangeDetectionConfig": {
-                          "type": "StreamingShotChangeDetectionConfig",
-                          "id": 2
-                        },
-                        "labelDetectionConfig": {
-                          "type": "StreamingLabelDetectionConfig",
+                        "annotationResultStorageDirectory": {
+                          "type": "string",
                           "id": 3
-                        },
-                        "explicitContentDetectionConfig": {
-                          "type": "StreamingExplicitContentDetectionConfig",
-                          "id": 4
-                        },
-                        "objectTrackingConfig": {
-                          "type": "StreamingObjectTrackingConfig",
-                          "id": 5
-                        },
-                        "automlClassificationConfig": {
-                          "type": "StreamingAutomlClassificationConfig",
-                          "id": 21
-                        },
-                        "automlObjectTrackingConfig": {
-                          "type": "StreamingAutomlObjectTrackingConfig",
-                          "id": 22
-                        },
-                        "storageConfig": {
-                          "type": "StreamingStorageConfig",
-                          "id": 30
                         }
-                      }
-                    },
-                    "Feature": {
-                      "values": {
-                        "FEATURE_UNSPECIFIED": 0,
-                        "LABEL_DETECTION": 1,
-                        "SHOT_CHANGE_DETECTION": 2,
-                        "EXPLICIT_CONTENT_DETECTION": 3,
-                        "FACE_DETECTION": 4,
-                        "SPEECH_TRANSCRIPTION": 6,
-                        "TEXT_DETECTION": 7,
-                        "OBJECT_TRACKING": 9,
-                        "LOGO_RECOGNITION": 12,
-                        "CELEBRITY_RECOGNITION": 13,
-                        "PERSON_DETECTION": 14
-                      }
-                    },
-                    "LabelDetectionMode": {
-                      "values": {
-                        "LABEL_DETECTION_MODE_UNSPECIFIED": 0,
-                        "SHOT_MODE": 1,
-                        "FRAME_MODE": 2,
-                        "SHOT_AND_FRAME_MODE": 3
-                      }
-                    },
-                    "Likelihood": {
-                      "values": {
-                        "LIKELIHOOD_UNSPECIFIED": 0,
-                        "VERY_UNLIKELY": 1,
-                        "UNLIKELY": 2,
-                        "POSSIBLE": 3,
-                        "LIKELY": 4,
-                        "VERY_LIKELY": 5
-                      }
-                    },
-                    "StreamingFeature": {
-                      "values": {
-                        "STREAMING_FEATURE_UNSPECIFIED": 0,
-                        "STREAMING_LABEL_DETECTION": 1,
-                        "STREAMING_SHOT_CHANGE_DETECTION": 2,
-                        "STREAMING_EXPLICIT_CONTENT_DETECTION": 3,
-                        "STREAMING_OBJECT_TRACKING": 4,
-                        "STREAMING_AUTOML_CLASSIFICATION": 21,
-                        "STREAMING_AUTOML_OBJECT_TRACKING": 22
                       }
                     }
                   }
