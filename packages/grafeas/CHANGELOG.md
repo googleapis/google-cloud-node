@@ -4,6 +4,20 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/grafeas?activeTab=versions
 
+## [3.1.0](https://www.github.com/googleapis/nodejs-grafeas/compare/v3.0.0...v3.1.0) (2020-05-08)
+
+
+### Features
+
+* change export in protos.js to google_cloud_grafeas_3_0_0_protos ([#150](https://www.github.com/googleapis/nodejs-grafeas/issues/150)) ([364f9c9](https://www.github.com/googleapis/nodejs-grafeas/commit/364f9c9c012bbd5bf60d6cd3288b06ba7a46155b))
+
+
+### Bug Fixes
+
+* **deps:** update dependency @grpc/grpc-js to ^0.8.0 ([#143](https://www.github.com/googleapis/nodejs-grafeas/issues/143)) ([13be859](https://www.github.com/googleapis/nodejs-grafeas/commit/13be859361752c50a08b86614320fc8ef61ff125))
+* regenerate unit tests ([#157](https://www.github.com/googleapis/nodejs-grafeas/issues/157)) ([4d05016](https://www.github.com/googleapis/nodejs-grafeas/commit/4d05016a71c6e1244fee1c189ff799d85a634636))
+* synth.py clean up for multiple version ([#158](https://www.github.com/googleapis/nodejs-grafeas/issues/158)) ([526d686](https://www.github.com/googleapis/nodejs-grafeas/commit/526d6862a8d80453d55c2577555af15e9e0c7f55))
+
 ## [3.0.0](https://www.github.com/googleapis/nodejs-grafeas/compare/v2.7.0...v3.0.0) (2020-04-12)
 
 
