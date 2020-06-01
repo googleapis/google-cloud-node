@@ -28,10 +28,14 @@ describe('subscriptions', () => {
   const runId = uuid.v4();
   const topicNameOne = `topic1-${runId}`;
   const topicNameTwo = `topic2-${runId}`;
+  const topicNameThree = `topic3-${runId}`;
   const subscriptionNameOne = `sub1-${runId}`;
   const subscriptionNameTwo = `sub2-${runId}`;
   const subscriptionNameThree = `sub3-${runId}`;
   const subscriptionNameFour = `sub4-${runId}`;
+  const subscriptionNameFive = `sub5-${runId}`;
+  const subscriptionNameSix = `sub6-${runId}`;
+  const subscriptionNameSeven = `sub7-${runId}`;
   const fullTopicNameOne = `projects/${projectId}/topics/${topicNameOne}`;
   const fullSubscriptionNameOne = `projects/${projectId}/subscriptions/${subscriptionNameOne}`;
   const fullSubscriptionNameTwo = `projects/${projectId}/subscriptions/${subscriptionNameTwo}`;
@@ -45,6 +49,7 @@ describe('subscriptions', () => {
     return Promise.all([
       pubsub.createTopic(topicNameOne),
       pubsub.createTopic(topicNameTwo),
+      pubsub.createTopic(topicNameThree),
     ]);
   });
 
@@ -284,5 +289,94 @@ describe('subscriptions', () => {
     const [subscriptions] = await pubsub.getSubscriptions();
     assert.ok(subscriptions);
     assert(subscriptions.every(s => s.name !== fullSubscriptionNameOne));
+  });
+
+  it('should create a subscription with dead letter policy.', async () => {
+    const output = execSync(
+      `${commandFor(
+        'createSubscriptionWithDeadLetterPolicy'
+      )} ${topicNameTwo} ${subscriptionNameFive} ${topicNameThree}`
+    );
+    assert.include(
+      output,
+      `Created subscription ${subscriptionNameFive} with dead letter topic ${topicNameThree}.`
+    );
+    const [subscription] = await pubsub
+      .topic(topicNameTwo)
+      .subscription(subscriptionNameFive)
+      .get();
+    assert.strictEqual(
+      subscription.metadata.deadLetterPolicy.maxDeliveryAttempts,
+      10
+    );
+  });
+
+  it('should listen for messages synchronously with delivery attempts.', async () => {
+    await pubsub.topic(topicNameOne).createSubscription(subscriptionNameSix, {
+      deadLetterPolicy: {
+        deadLetterTopic: pubsub.topic(topicNameThree).name,
+        maxDeliveryAttempts: 10,
+      },
+    });
+
+    await pubsub.topic(topicNameOne).publish(Buffer.from('Hello, world!'));
+    const output = execSync(
+      `${commandFor(
+        'synchronousPullWithDeliveryAttempts'
+      )} ${projectId} ${subscriptionNameSix}`
+    );
+    assert.match(output, /Hello/);
+    assert.match(output, /Delivery Attempt: 1/);
+  });
+
+  it('should update a subscription with dead lettter policy.', async () => {
+    await pubsub
+      .topic(topicNameOne)
+      .subscription(subscriptionNameSeven, {
+        deadLetterPolicy: {
+          deadLetterTopic: pubsub.topic(topicNameThree).name,
+          maxDeliveryAttempts: 10,
+        },
+      })
+      .get({autoCreate: true});
+
+    execSync(
+      `${commandFor(
+        'updateDeadLetterPolicy'
+      )} ${topicNameOne} ${subscriptionNameSeven}`
+    );
+
+    const [subscription] = await pubsub
+      .topic(topicNameOne)
+      .subscription(subscriptionNameSeven)
+      .get();
+    assert.equal(
+      subscription.metadata.deadLetterPolicy.maxDeliveryAttempts,
+      15
+    );
+  });
+
+  it('should remove dead lettter policy.', async () => {
+    await pubsub
+      .topic(topicNameOne)
+      .subscription(subscriptionNameSeven, {
+        deadLetterPolicy: {
+          deadLetterTopic: pubsub.topic(topicNameThree).name,
+          maxDeliveryAttempts: 10,
+        },
+      })
+      .get({autoCreate: true});
+
+    execSync(
+      `${commandFor(
+        'removeDeadLetterPolicy'
+      )} ${topicNameOne} ${subscriptionNameSeven}`
+    );
+
+    const [subscription] = await pubsub
+      .topic(topicNameOne)
+      .subscription(subscriptionNameSeven)
+      .get();
+    assert.isNull(subscription.metadata.deadLetterPolicy);
   });
 });
