@@ -30,8 +30,9 @@ for version in versions:
         generator_args={
             "grpc-service-config": f"google/cloud/dialogflow/{version}/dialogflow_grpc_service_config.json",
             "package-name": f"@google-cloud/dialogflow",
-            "main-service": f"dialogflow"
-            },
+            "main-service": f"dialogflow",
+            "validation": "false",
+        },
         proto_path=f'/google/cloud/dialogflow/{version}',
         extra_proto_files=["google/cloud/common_resources.proto"]
         )
