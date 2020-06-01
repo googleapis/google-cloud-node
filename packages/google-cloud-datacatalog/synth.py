@@ -40,11 +40,20 @@ for version in versions:
         },
         extra_proto_files=['google/cloud/common_resources.proto'],
     )
-    s.copy(library, excludes=['README.md', 'linkinator.config.json', '.mocharc.json', 'package.json', 'src/index.ts'])
+    s.copy(library, excludes=[
+           'README.md', 'linkinator.config.json', '.mocharc.json', 'package.json'])
 
 # Copy common templates
 common_templates = gcp.CommonTemplates()
-templates = common_templates.node_library(source_location='build/src')
+templates = common_templates.node_library(
+    source_location='build/src', versions=versions, default_version='v1')
 s.copy(templates, excludes=[])
+
+# TODO: Remove the following replace once Datacatalog is ready to release a break change
+# Users should use beta Client with explicitly specify the beta version
+# Add beta version PolicyTagManagerClient, PolicyTagManagerSerializationClient to export
+s.replace('src/index.ts',
+          '\nexport \{v1\, v1beta1\, DataCatalogClient\}\;\nexport default \{v1\, v1beta1\, DataCatalogClient\}\;',
+          'const PolicyTagManagerClient = v1beta1.PolicyTagManagerClient;\nconst PolicyTagManagerSerializationClient = v1beta1.PolicyTagManagerSerializationClient\n\nexport {v1, v1beta1, DataCatalogClient, PolicyTagManagerClient, PolicyTagManagerSerializationClient};\nexport default {v1, v1beta1, DataCatalogClient, PolicyTagManagerClient, PolicyTagManagerSerializationClient};')
 
 node.postprocess_gapic_library()
