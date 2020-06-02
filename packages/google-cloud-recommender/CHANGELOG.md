@@ -1,5 +1,24 @@
 # Changelog
 
+## [3.0.0](https://www.github.com/googleapis/nodejs-recommender/compare/v2.2.0...v3.0.0) (2020-05-14)
+
+
+### ⚠ BREAKING CHANGES
+
+* The library now supports Node.js v10+. The last version to support Node.js v8 is tagged legacy-8 on NPM.
+
+### Features
+
+* drop node8 support, support for async iterators ([#53](https://www.github.com/googleapis/nodejs-recommender/issues/53)) ([71ad927](https://www.github.com/googleapis/nodejs-recommender/commit/71ad9276016222d46e4b30c43fbe1196e2731485))
+* promote to GA ([#78](https://www.github.com/googleapis/nodejs-recommender/issues/78)) ([fa7e7b8](https://www.github.com/googleapis/nodejs-recommender/commit/fa7e7b86018346768e83caea64ee02048efb50ee)), closes [#10](https://www.github.com/googleapis/nodejs-recommender/issues/10)
+
+
+### Bug Fixes
+
+* export explicit version from protos.js ([#58](https://www.github.com/googleapis/nodejs-recommender/issues/58)) ([d1608ef](https://www.github.com/googleapis/nodejs-recommender/commit/d1608ef4d2642fd4f067f58eafb53c8998c7f1db))
+* regen protos and tests, formatting ([#75](https://www.github.com/googleapis/nodejs-recommender/issues/75)) ([76f952f](https://www.github.com/googleapis/nodejs-recommender/commit/76f952f57c1c3467b959ca4700a07a320e1e2f31))
+* remove eslint, update gax, fix generated protos, run the generator ([#63](https://www.github.com/googleapis/nodejs-recommender/issues/63)) ([0095142](https://www.github.com/googleapis/nodejs-recommender/commit/0095142c26068397aa2cf84f65e8fe2c2da0bd26))
+
 ## [2.2.0](https://www.github.com/googleapis/nodejs-recommender/compare/v2.1.0...v2.2.0) (2020-03-06)
 
 
