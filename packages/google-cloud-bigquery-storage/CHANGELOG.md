@@ -1,5 +1,24 @@
 # Changelog
 
+## [2.0.0](https://www.github.com/googleapis/nodejs-bigquery-storage/compare/v1.1.0...v2.0.0) (2020-05-18)
+
+
+### ⚠ BREAKING CHANGES
+
+* The library now supports Node.js v10+. The last version to support Node.js v8 is tagged legacy-8 on NPM.
+
+### Features
+
+* add V1 client ([#28](https://www.github.com/googleapis/nodejs-bigquery-storage/issues/28)) ([da10a33](https://www.github.com/googleapis/nodejs-bigquery-storage/commit/da10a33ee30a6fa0b447ef16c8b755e3ac05a87c))
+* additional type annotation ([#64](https://www.github.com/googleapis/nodejs-bigquery-storage/issues/64)) ([2d76c0e](https://www.github.com/googleapis/nodejs-bigquery-storage/commit/2d76c0e16abedfaf106db063dc00f79e38166dad))
+* drop node8 support ([#39](https://www.github.com/googleapis/nodejs-bigquery-storage/issues/39)) ([2f66ded](https://www.github.com/googleapis/nodejs-bigquery-storage/commit/2f66ded8db03f71d3f2b37a1d91e4f3f232d5eaf))
+
+
+### Bug Fixes
+
+* regen protos and tests ([#63](https://www.github.com/googleapis/nodejs-bigquery-storage/issues/63)) ([6293832](https://www.github.com/googleapis/nodejs-bigquery-storage/commit/6293832961eedcdd57c24edc311f2c154781e34e))
+* remove eslint, update gax, fix generated protos, run the generator ([#49](https://www.github.com/googleapis/nodejs-bigquery-storage/issues/49)) ([b5b9492](https://www.github.com/googleapis/nodejs-bigquery-storage/commit/b5b9492a0c4b86b868a2b33c5c350301db29cc65))
+
 ## [1.1.0](https://www.github.com/googleapis/nodejs-bigquery-storage/compare/v1.0.0...v1.1.0) (2020-03-06)
 
 
