@@ -4,6 +4,27 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/scheduler?activeTab=versions
 
+## [2.0.0](https://www.github.com/googleapis/nodejs-scheduler/compare/v1.6.0...v2.0.0) (2020-05-08)
+
+
+### ⚠ BREAKING CHANGES
+
+* The library now supports Node.js v10+. The last version to support Node.js v8 is tagged legacy-8 on NPM.
+
+### Features
+
+* drop node8 support, support for async iterators ([#227](https://www.github.com/googleapis/nodejs-scheduler/issues/227)) ([ab2bf25](https://www.github.com/googleapis/nodejs-scheduler/commit/ab2bf258d78b5d5eacad133daef45344cbd63b68))
+
+
+### Bug Fixes
+
+* drop unused files from package ([#242](https://www.github.com/googleapis/nodejs-scheduler/issues/242)) ([afcfbb9](https://www.github.com/googleapis/nodejs-scheduler/commit/afcfbb9a2885030f49efab84a29e6b041f2d2ac6))
+* export explicit version from protos.js ([#232](https://www.github.com/googleapis/nodejs-scheduler/issues/232)) ([6f74338](https://www.github.com/googleapis/nodejs-scheduler/commit/6f7433805445a7e5467bb14feef481810397a267))
+* regen protos and tests, formatting ([#248](https://www.github.com/googleapis/nodejs-scheduler/issues/248)) ([367f922](https://www.github.com/googleapis/nodejs-scheduler/commit/367f922614d614d9bc169508ff00ece7dc31bfb2))
+* remove eslint, update gax, fix generated protos, run the generator ([#237](https://www.github.com/googleapis/nodejs-scheduler/issues/237)) ([ecda164](https://www.github.com/googleapis/nodejs-scheduler/commit/ecda16434c53cda59f87e2919eab64efb1ad8375))
+* synth.py clean up for multiple version ([#250](https://www.github.com/googleapis/nodejs-scheduler/issues/250)) ([d2ffc6e](https://www.github.com/googleapis/nodejs-scheduler/commit/d2ffc6e4c8775251eeeb8b6a49cdf3c86bf74fc2))
+* update types for PubSub integration ([#246](https://www.github.com/googleapis/nodejs-scheduler/issues/246)) ([d55e509](https://www.github.com/googleapis/nodejs-scheduler/commit/d55e509bcb892fcad7ca22aabb58e013453cd16d))
+
 ## [1.6.0](https://www.github.com/googleapis/nodejs-scheduler/compare/v1.5.0...v1.6.0) (2020-03-06)
 
 
