@@ -1,5 +1,23 @@
 # Changelog
 
+## [2.0.0](https://www.github.com/googleapis/nodejs-monitoring-dashboards/compare/v1.3.0...v2.0.0) (2020-05-08)
+
+
+### ⚠ BREAKING CHANGES
+
+* The library now supports Node.js v10+. The last version to support Node.js v8 is tagged legacy-8 on NPM.
+
+### Features
+
+* drop node8 support, support for async iterators ([#58](https://www.github.com/googleapis/nodejs-monitoring-dashboards/issues/58)) ([0891dab](https://www.github.com/googleapis/nodejs-monitoring-dashboards/commit/0891dab8f977cdb8825e12b3faf8d45caeea4ba4))
+
+
+### Bug Fixes
+
+* export explicit version from protos.js ([#63](https://www.github.com/googleapis/nodejs-monitoring-dashboards/issues/63)) ([a1ef68f](https://www.github.com/googleapis/nodejs-monitoring-dashboards/commit/a1ef68f0f3f6366d41ac4de23e31cca67d232c50))
+* regen protos and tests, formatting ([#81](https://www.github.com/googleapis/nodejs-monitoring-dashboards/issues/81)) ([61314fe](https://www.github.com/googleapis/nodejs-monitoring-dashboards/commit/61314fe1099dfeab00d1392ffe1757880d398497))
+* remove eslint, update gax, fix generated protos, run the generator ([#68](https://www.github.com/googleapis/nodejs-monitoring-dashboards/issues/68)) ([8c33d58](https://www.github.com/googleapis/nodejs-monitoring-dashboards/commit/8c33d5811fbf60adc7c9dd15be4e64e59630e058))
+
 ## [1.3.0](https://www.github.com/googleapis/nodejs-monitoring-dashboards/compare/v1.2.0...v1.3.0) (2020-03-06)
 
 
