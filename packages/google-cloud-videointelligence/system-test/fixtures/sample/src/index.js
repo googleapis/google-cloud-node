@@ -20,7 +20,6 @@
 const videointelligence = require('@google-cloud/video-intelligence');
 
 function main() {
-  const streamingVideoIntelligenceServiceClient = new videointelligence.StreamingVideoIntelligenceServiceClient();
   const videoIntelligenceServiceClient = new videointelligence.VideoIntelligenceServiceClient();
 }
 
