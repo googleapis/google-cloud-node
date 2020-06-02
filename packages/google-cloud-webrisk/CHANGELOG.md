@@ -4,6 +4,27 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/web-risk?activeTab=versions
 
+## [2.0.0](https://www.github.com/googleapis/nodejs-web-risk/compare/v1.7.0...v2.0.0) (2020-05-12)
+
+
+### ⚠ BREAKING CHANGES
+
+* synth.py clean up for multiple version (#160)
+* The library now supports Node.js v10+. The last version to support Node.js v8 is tagged legacy-8 on NPM.
+
+### Features
+
+* drop node8 support ([#139](https://www.github.com/googleapis/nodejs-web-risk/issues/139)) ([f6fa067](https://www.github.com/googleapis/nodejs-web-risk/commit/f6fa067f6f45c12b58986511bb8dcba0aa1c56cb))
+
+
+### Bug Fixes
+
+* export explicit version from protos.js ([#144](https://www.github.com/googleapis/nodejs-web-risk/issues/144)) ([c6d1391](https://www.github.com/googleapis/nodejs-web-risk/commit/c6d13916395a28e0304ad3bb06cc1d597cb55a55))
+* regen protos and tests, formatting ([#157](https://www.github.com/googleapis/nodejs-web-risk/issues/157)) ([d53c859](https://www.github.com/googleapis/nodejs-web-risk/commit/d53c85997cbe5aa1d354c487614480e6a516eefa))
+* remove eslint, update gax, fix generated protos, run the generator ([#148](https://www.github.com/googleapis/nodejs-web-risk/issues/148)) ([f23b8fd](https://www.github.com/googleapis/nodejs-web-risk/commit/f23b8fd6f2952fe36c4398585eeefa78ee11360b))
+* remove unused files ([#151](https://www.github.com/googleapis/nodejs-web-risk/issues/151)) ([72134c3](https://www.github.com/googleapis/nodejs-web-risk/commit/72134c312f78bb141c9244cf9f49f23eb828252d))
+* synth.py clean up for multiple version ([#160](https://www.github.com/googleapis/nodejs-web-risk/issues/160)) ([c1d0bb7](https://www.github.com/googleapis/nodejs-web-risk/commit/c1d0bb781ff10e959217f3630eaa0872fa0d9694))
+
 ## [1.7.0](https://www.github.com/googleapis/nodejs-web-risk/compare/v1.6.0...v1.7.0) (2020-03-24)
 
 
