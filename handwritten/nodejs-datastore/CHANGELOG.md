@@ -4,6 +4,37 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/datastore?activeTab=versions
 
+## [6.0.0](https://www.github.com/googleapis/nodejs-datastore/compare/v5.1.0...v6.0.0) (2020-05-27)
+
+
+### ⚠ BREAKING CHANGES
+
+* The `Datastore.projectId` property has been removed, and replaced with an asynchronous `getProjectid()` method.  The projectId cannot be determined synchronously, so the previous approach was to use a `{{projectId}}` string placeholder if the projectId had not yet been acquired.  This made it difficult to know exactly when the property would be defined.  
+* The library now supports Node.js v10+. The last version to support Node.js v8 is tagged legacy-8 on NPM.
+
+### Features
+
+* add async getProjectId method ([#657](https://www.github.com/googleapis/nodejs-datastore/issues/657)) ([2a7e034](https://www.github.com/googleapis/nodejs-datastore/commit/2a7e034e60f54100c5773d2d4dbe4dec6a721689))
+* add options param to query#runStream ([#611](https://www.github.com/googleapis/nodejs-datastore/issues/611)) ([7429c9d](https://www.github.com/googleapis/nodejs-datastore/commit/7429c9dbbdf4ed6715f04fa87cffec9bda8a97be))
+* drop node8 support ([#637](https://www.github.com/googleapis/nodejs-datastore/issues/637)) ([7ef38c1](https://www.github.com/googleapis/nodejs-datastore/commit/7ef38c1ade25f19f328290a3f69370676c80f021))
+
+
+### Bug Fixes
+
+* **deps:** update dependency @google-cloud/projectify to v2 ([#626](https://www.github.com/googleapis/nodejs-datastore/issues/626)) ([27fa23f](https://www.github.com/googleapis/nodejs-datastore/commit/27fa23fee0c0daa2e60ddd476aaad43877a05ea4))
+* **deps:** update dependency @google-cloud/promisify to v2 ([#625](https://www.github.com/googleapis/nodejs-datastore/issues/625)) ([1d64bc1](https://www.github.com/googleapis/nodejs-datastore/commit/1d64bc1bed7561bc93371cb7ca785fa1cc176f1f))
+* remove eslint, update gax, fix generated protos, run the generator ([#644](https://www.github.com/googleapis/nodejs-datastore/issues/644)) ([fcc5309](https://www.github.com/googleapis/nodejs-datastore/commit/fcc530933af25f1c40cfe0a7186a7e5f25a3f6bd))
+* **deps:** update dependency @grpc/grpc-js to v0.7.1 ([#615](https://www.github.com/googleapis/nodejs-datastore/issues/615)) ([3e83981](https://www.github.com/googleapis/nodejs-datastore/commit/3e83981f3da83143eb9b76f32e563683704f8d99))
+* identify propertyName ([#614](https://www.github.com/googleapis/nodejs-datastore/issues/614)) ([3635e13](https://www.github.com/googleapis/nodejs-datastore/commit/3635e138f3673eaff75ac30d25a2f21b3eecc5f9))
+* missing await in rollback ([#671](https://www.github.com/googleapis/nodejs-datastore/issues/671)) ([7cb353e](https://www.github.com/googleapis/nodejs-datastore/commit/7cb353e14e534a221e337f4ca2c30dd7ab01b469))
+* **deps:** update dependency @grpc/grpc-js to v0.7.4 ([#620](https://www.github.com/googleapis/nodejs-datastore/issues/620)) ([1d36be1](https://www.github.com/googleapis/nodejs-datastore/commit/1d36be1f11f4604f5c5170a06d7156e858a4748c))
+* **deps:** update dependency @grpc/grpc-js to v0.7.8 ([#638](https://www.github.com/googleapis/nodejs-datastore/issues/638)) ([a98ee1a](https://www.github.com/googleapis/nodejs-datastore/commit/a98ee1a9144415aef4788f7eb2b052c864f5370c))
+* regenerate files and fixed formatting, lint ([#664](https://www.github.com/googleapis/nodejs-datastore/issues/664)) ([34e9135](https://www.github.com/googleapis/nodejs-datastore/commit/34e91359aa7cd246799a651fa5f441ed8956b930))
+* support request params {key} with no =value  ([#660](https://www.github.com/googleapis/nodejs-datastore/issues/660)) ([1faba1f](https://www.github.com/googleapis/nodejs-datastore/commit/1faba1f86fe31ff5898f897b640738987c55193d))
+* trim the dependency tree ([#651](https://www.github.com/googleapis/nodejs-datastore/issues/651)) ([1fd412e](https://www.github.com/googleapis/nodejs-datastore/commit/1fd412ef972c45ffefa96292c33389196a945338))
+* **deps:** update dependency @grpc/grpc-js to v0.7.9 ([#645](https://www.github.com/googleapis/nodejs-datastore/issues/645)) ([04b2ab2](https://www.github.com/googleapis/nodejs-datastore/commit/04b2ab29e9a0b4e4feef57641a5e5960a8bb88b8))
+* **deps:** update dependency google-auth-library to v6 ([#628](https://www.github.com/googleapis/nodejs-datastore/issues/628)) ([eb5f87b](https://www.github.com/googleapis/nodejs-datastore/commit/eb5f87b0037cad27b45653a0246a197ca4a0b33b))
+
 ## [5.1.0](https://www.github.com/googleapis/nodejs-datastore/compare/v5.0.6...v5.1.0) (2020-03-11)
 
 
