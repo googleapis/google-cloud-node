@@ -4,6 +4,29 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/speech?activeTab=versions
 
+## [4.0.0](https://www.github.com/googleapis/nodejs-speech/compare/v3.6.0...v4.0.0) (2020-05-15)
+
+
+### ⚠ BREAKING CHANGES
+
+* The library now supports Node.js v10+. The last version to support Node.js v8 is tagged legacy-8 on NPM.
+
+### Features
+
+* check status of long running operation by its name ([#590](https://www.github.com/googleapis/nodejs-speech/issues/590)) ([8581497](https://www.github.com/googleapis/nodejs-speech/commit/8581497419041d85b74d388a10b75c05c5e71ee7))
+* deferred client initialization ([#548](https://www.github.com/googleapis/nodejs-speech/issues/548)) ([ef931e7](https://www.github.com/googleapis/nodejs-speech/commit/ef931e790c83d17a5037e71e67d82af3ec65c701))
+* drop node8 support ([#562](https://www.github.com/googleapis/nodejs-speech/issues/562)) ([29d0f3f](https://www.github.com/googleapis/nodejs-speech/commit/29d0f3ffb4d8243391df44547a0df5740e0b33ce))
+* export protos in src/index.ts ([7c33510](https://www.github.com/googleapis/nodejs-speech/commit/7c335100bd86fc0beba7ca00334373819caf7cbe))
+
+
+### Bug Fixes
+
+* **deps:** update dependency @google-cloud/common to v3 ([#561](https://www.github.com/googleapis/nodejs-speech/issues/561)) ([ac55d63](https://www.github.com/googleapis/nodejs-speech/commit/ac55d634fb43de788dfb6ac6a3df5476c7ebc04e))
+* remove eslint, update gax, fix generated protos, run the generator ([#573](https://www.github.com/googleapis/nodejs-speech/issues/573)) ([4be282e](https://www.github.com/googleapis/nodejs-speech/commit/4be282e727ee353597822f7c4d16072c367f1693))
+* **deps:** update dependency @google-cloud/storage to v5 ([#595](https://www.github.com/googleapis/nodejs-speech/issues/595)) ([076d0be](https://www.github.com/googleapis/nodejs-speech/commit/076d0be6f7a62b94b6422c1064db8fda2342d183))
+* **deps:** update dependency chalk to v4 ([#567](https://www.github.com/googleapis/nodejs-speech/issues/567)) ([cda7977](https://www.github.com/googleapis/nodejs-speech/commit/cda7977140e719474694e93cb1801a4aa1c8ed58))
+* **samples:** use writable stream ([#597](https://www.github.com/googleapis/nodejs-speech/issues/597)) ([8f73071](https://www.github.com/googleapis/nodejs-speech/commit/8f7307109a24cc709d8f987c8f32a25d14bed2e4))
+
 ## [3.6.0](https://www.github.com/googleapis/nodejs-speech/compare/v3.5.4...v3.6.0) (2020-02-04)
 
 
