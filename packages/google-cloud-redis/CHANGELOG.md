@@ -4,6 +4,26 @@
 
 [1]: https://www.npmjs.com/package/nodejs-redis?activeTab=versions
 
+## [2.0.0](https://www.github.com/googleapis/nodejs-redis/compare/v1.6.0...v2.0.0) (2020-05-08)
+
+
+### ⚠ BREAKING CHANGES
+
+* The library now supports Node.js v10+. The last version to support Node.js v8 is tagged legacy-8 on NPM.
+
+### Features
+
+* check status of long running operation by its name ([#390](https://www.github.com/googleapis/nodejs-redis/issues/390)) ([00ab9db](https://www.github.com/googleapis/nodejs-redis/commit/00ab9db418b076a9ab557f0008747ee5ecbc5636))
+* deferred client initialization ([#285](https://www.github.com/googleapis/nodejs-redis/issues/285)) ([78a25a0](https://www.github.com/googleapis/nodejs-redis/commit/78a25a089b76f7205b637805d423ced0b9c9aa6d))
+* drop node8 support, support for async iterators ([#298](https://www.github.com/googleapis/nodejs-redis/issues/298)) ([ed069a4](https://www.github.com/googleapis/nodejs-redis/commit/ed069a4e666a8bfc93f1a4782840d348566541db))
+* export protos in src/index.ts ([47a7020](https://www.github.com/googleapis/nodejs-redis/commit/47a70200b1d5d9bf584c70e275c0adc2c3739802))
+
+
+### Bug Fixes
+
+* remove eslint, update gax, fix generated protos, run the generator ([#376](https://www.github.com/googleapis/nodejs-redis/issues/376)) ([c408da0](https://www.github.com/googleapis/nodejs-redis/commit/c408da00aa8229675038abab6d00e440b2f1fb7e))
+* synth.py clean up for multiple version ([#392](https://www.github.com/googleapis/nodejs-redis/issues/392)) ([1d0e304](https://www.github.com/googleapis/nodejs-redis/commit/1d0e304c9800c8ae5af75d9c6284d57a163fe25d))
+
 ## [1.6.0](https://www.github.com/googleapis/nodejs-redis/compare/v1.5.1...v1.6.0) (2020-02-10)
 
 
