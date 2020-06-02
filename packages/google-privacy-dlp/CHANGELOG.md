@@ -4,6 +4,29 @@
 
 [1]: https://www.npmjs.com/package/PACKAGE NAME?activeTab=versions
 
+## [3.0.0](https://www.github.com/googleapis/nodejs-dlp/compare/v2.2.0...v3.0.0) (2020-05-26)
+
+
+### ⚠ BREAKING CHANGES
+
+* The library now supports Node.js v10+. The last version to support Node.js v8 is tagged legacy-8 on NPM.
+
+### Features
+
+* adds missing fields to Finding and adds support for hybrid jobs ([#435](https://www.github.com/googleapis/nodejs-dlp/issues/435)) ([3643d02](https://www.github.com/googleapis/nodejs-dlp/commit/3643d0218cabecd40bd04c86bc51d3fa3be21666))
+* drop node8 support, support for async iterators ([#440](https://www.github.com/googleapis/nodejs-dlp/issues/440)) ([82a2091](https://www.github.com/googleapis/nodejs-dlp/commit/82a2091f8c948b303c03629ecf77dc8cefb3248c))
+
+
+### Bug Fixes
+
+* embedding location into parent ([#476](https://www.github.com/googleapis/nodejs-dlp/issues/476)) ([9308a6a](https://www.github.com/googleapis/nodejs-dlp/commit/9308a6ace48a4128def4a408f18a75b0d74a359a)), closes [#474](https://www.github.com/googleapis/nodejs-dlp/issues/474)
+* regen protos and tests, fix formatting ([#467](https://www.github.com/googleapis/nodejs-dlp/issues/467)) ([9924817](https://www.github.com/googleapis/nodejs-dlp/commit/9924817d39a4eec302d461092c3d8f3c292dcc17))
+* remove eslint, update gax, fix generated protos, run the generator ([#449](https://www.github.com/googleapis/nodejs-dlp/issues/449)) ([e00c5da](https://www.github.com/googleapis/nodejs-dlp/commit/e00c5dac055785dd361bf51d587e2a174f3d40a6))
+* sample inspect customInfoTypes infoType name ([#439](https://www.github.com/googleapis/nodejs-dlp/issues/439)) ([07ef721](https://www.github.com/googleapis/nodejs-dlp/commit/07ef72156567d3fe8318fc95fe187dd2f3868516))
+* support request params {key} with no =value  ([#463](https://www.github.com/googleapis/nodejs-dlp/issues/463)) ([e3ef1c6](https://www.github.com/googleapis/nodejs-dlp/commit/e3ef1c69529775d16984fc381e6af47a13264b99))
+* synth.py clean up for multiple version ([#469](https://www.github.com/googleapis/nodejs-dlp/issues/469)) ([5f2cb9b](https://www.github.com/googleapis/nodejs-dlp/commit/5f2cb9ba9e6d8957cda0bd8495a72f96dcabd9c2))
+* **deps:** update dependency @google-cloud/pubsub to v2 ([#475](https://www.github.com/googleapis/nodejs-dlp/issues/475)) ([b6ce129](https://www.github.com/googleapis/nodejs-dlp/commit/b6ce1297fa179dc0a8cc9b97797acb2e05d22574))
+
 ## [2.2.0](https://www.github.com/googleapis/nodejs-dlp/compare/v2.1.0...v2.2.0) (2020-03-06)
 
 
