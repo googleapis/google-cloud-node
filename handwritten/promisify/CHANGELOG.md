@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-promisify?activeTab=versions
 
+### [2.0.1](https://www.github.com/googleapis/nodejs-promisify/compare/v2.0.0...v2.0.1) (2020-05-08)
+
+
+### Bug Fixes
+
+* apache license URL ([#468](https://www.github.com/googleapis/nodejs-promisify/issues/468)) ([#191](https://www.github.com/googleapis/nodejs-promisify/issues/191)) ([0edc724](https://www.github.com/googleapis/nodejs-promisify/commit/0edc7246c53d25d9dd220b813561bcee97250783))
+
 ## [2.0.0](https://www.github.com/googleapis/nodejs-promisify/compare/v1.0.4...v2.0.0) (2020-03-23)
 
 
