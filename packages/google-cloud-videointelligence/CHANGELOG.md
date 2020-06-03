@@ -4,6 +4,26 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/video-intelligence?activeTab=versions
 
+## [3.0.0](https://www.github.com/googleapis/nodejs-video-intelligence/compare/v2.10.0...v3.0.0) (2020-06-02)
+
+
+### ⚠ BREAKING CHANGES
+
+* synth.py clean up for multiple version (#436)
+* drop node8, remove eslint, update gax, fix generated protos, run the generator (#423)
+
+### Features
+
+* check status of long running operation by its name ([#435](https://www.github.com/googleapis/nodejs-video-intelligence/issues/435)) ([be4793e](https://www.github.com/googleapis/nodejs-video-intelligence/commit/be4793ebf71ce03c4855b9d3a29037070d11025e))
+* drop node8, remove eslint, update gax, fix generated protos, run the generator ([#423](https://www.github.com/googleapis/nodejs-video-intelligence/issues/423)) ([d13bb42](https://www.github.com/googleapis/nodejs-video-intelligence/commit/d13bb4268f3cc6a1c58e3d53cece92db26df4ef2))
+* logo recognition update to GA ([7f02d63](https://www.github.com/googleapis/nodejs-video-intelligence/commit/7f02d6315771b37e4ad473f16a955c4c845b1a83))
+* **v1p3beta1:** added support for streaming automl action recognition. ([#439](https://www.github.com/googleapis/nodejs-video-intelligence/issues/439)) ([2d5809d](https://www.github.com/googleapis/nodejs-video-intelligence/commit/2d5809df5293114a20752317dcf34dd2b86629e0))
+
+
+### Bug Fixes
+
+* synth.py clean up for multiple version ([#436](https://www.github.com/googleapis/nodejs-video-intelligence/issues/436)) ([fc4d36c](https://www.github.com/googleapis/nodejs-video-intelligence/commit/fc4d36c4d112ed75d5c38dd6cad76073e9234253))
+
 ## [2.10.0](https://www.github.com/googleapis/nodejs-video-intelligence/compare/v2.9.0...v2.10.0) (2020-03-18)
 
 
