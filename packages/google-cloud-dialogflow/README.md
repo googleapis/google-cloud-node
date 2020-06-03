@@ -55,7 +55,7 @@ npm install dialogflow
 
 ```javascript
 
-const dialogflow = require('dialogflow');
+const dialogflow = require('@google-cloud/dialogflow');
 const uuid = require('uuid');
 
 /**
@@ -68,7 +68,7 @@ async function runSample(projectId = 'your-project-id') {
 
   // Create a new session
   const sessionClient = new dialogflow.SessionsClient();
-  const sessionPath = sessionClient.sessionPath(projectId, sessionId);
+  const sessionPath = sessionClient.projectAgentSessionPath(projectId, sessionId);
 
   // The text query request.
   const request = {
