@@ -4,22 +4,22 @@
       "git": {
         "name": ".",
         "remote": "git@github.com:googleapis/nodejs-web-risk.git",
-        "sha": "acc862922b55578929cee8171066d703bcd10ae7"
+        "sha": "0e33c96b6d551673e8ab584bb0b33ddd7d3672fa"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "edd3b80fb770548d6ad780105f1782de6ff73ea0",
-        "internalRef": "311053644"
+        "sha": "f72c3a53fe6705cd705b4fc4e464bed4dbd1f18f",
+        "internalRef": "314606371"
       }
     },
     {
       "git": {
         "name": "synthtool",
         "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "98c50772ec23295c64cf0d2ddf199ea52961fd4c"
+        "sha": "f06a850db98490bf90c6a476d3f4c6c7cdfb1e5e"
       }
     }
   ],
@@ -28,7 +28,7 @@
       "client": {
         "source": "googleapis",
         "apiName": "webrisk",
-        "apiVersion": "v1",
+        "apiVersion": "v1beta1",
         "language": "typescript",
         "generator": "gapic-generator-typescript"
       }
@@ -37,7 +37,7 @@
       "client": {
         "source": "googleapis",
         "apiName": "webrisk",
-        "apiVersion": "v1beta1",
+        "apiVersion": "v1",
         "language": "typescript",
         "generator": "gapic-generator-typescript"
       }

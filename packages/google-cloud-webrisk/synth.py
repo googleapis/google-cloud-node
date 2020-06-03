@@ -25,7 +25,14 @@ AUTOSYNTH_MULTIPLE_COMMITS = True
 # run the gapic generator
 gapic = gcp.GAPICMicrogenerator()
 versions = ['v1', 'v1beta1']
-for version in versions:
+default_version = 'v1'
+
+# Rearrange the default version to the last item in the array, to generate appropriate system-test
+order_versions = versions.copy()
+order_versions.append(order_versions.pop(
+    order_versions.index(default_version)))
+
+for version in order_versions:
     library = gapic.typescript_library(
         'webrisk',
         generator_args={
@@ -39,7 +46,7 @@ for version in versions:
 # Copy common templates
 common_templates = gcp.CommonTemplates()
 templates = common_templates.node_library(
-    source_location='build/src', versions=versions, default_version='v1')
+    source_location='build/src', versions=versions, default_version=default_version)
 s.copy(templates, excludes=['.nycrc'])
 
 node.postprocess_gapic_library()

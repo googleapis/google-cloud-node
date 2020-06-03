@@ -20,7 +20,7 @@
 const webrisk = require('@google-cloud/web-risk');
 
 function main() {
-  const webRiskServiceV1Beta1Client = new webrisk.v1beta1.WebRiskServiceV1Beta1Client();
+  const webRiskServiceClient = new webrisk.WebRiskServiceClient();
 }
 
 main();

@@ -17,8 +17,8 @@ const path = require('path');
 module.exports = {
   entry: './src/index.ts',
   output: {
-    library: 'WebRiskServiceV1Beta1',
-    filename: './web-risk-service-v1-beta1.js',
+    library: 'WebRiskService',
+    filename: './web-risk-service.js',
   },
   node: {
     child_process: 'empty',
