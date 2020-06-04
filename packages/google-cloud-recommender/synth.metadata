@@ -3,8 +3,8 @@
     {
       "git": {
         "name": ".",
-        "remote": "git@github.com:googleapis/nodejs-recommender.git",
-        "sha": "d157c995a095f64d3f8805cc3942da91c106b95a"
+        "remote": "https://github.com/googleapis/nodejs-recommender.git",
+        "sha": "0d5fff4f4b2893a91e20b7b7561c4912547cfbfc"
       }
     },
     {
@@ -13,6 +13,13 @@
         "remote": "https://github.com/googleapis/googleapis.git",
         "sha": "123873dc7e2be35252d172205f67a375e70e9747",
         "internalRef": "311581003"
+      }
+    },
+    {
+      "git": {
+        "name": "synthtool",
+        "remote": "https://github.com/googleapis/synthtool.git",
+        "sha": "cb3c683e958a4b5c016bb3734436fc1cb887eb7b"
       }
     }
   ],
