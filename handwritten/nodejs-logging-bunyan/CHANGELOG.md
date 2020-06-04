@@ -4,6 +4,24 @@
 
 [1]: https://www.npmjs.com/package/nodejs-logging-bunyan?activeTab=versions
 
+## [3.0.0](https://www.github.com/googleapis/nodejs-logging-bunyan/compare/v2.0.3...v3.0.0) (2020-05-20)
+
+
+### ⚠ BREAKING CHANGES
+
+* drop support for node.js 8.x (#440)
+
+### Bug Fixes
+
+* apache license URL ([#468](https://www.github.com/googleapis/nodejs-logging-bunyan/issues/468)) ([#436](https://www.github.com/googleapis/nodejs-logging-bunyan/issues/436)) ([51f5182](https://www.github.com/googleapis/nodejs-logging-bunyan/commit/51f518206f52fdc31773e9625a289f9d25f03abb))
+* update HttpRequest to match @google-cloud/logging ([#412](https://www.github.com/googleapis/nodejs-logging-bunyan/issues/412)) ([0c32a6c](https://www.github.com/googleapis/nodejs-logging-bunyan/commit/0c32a6c5014ac1c4ec54103bd610eae75ef2426a))
+* **deps:** update dependency google-auth-library to v6 ([#427](https://www.github.com/googleapis/nodejs-logging-bunyan/issues/427)) ([03c6c8a](https://www.github.com/googleapis/nodejs-logging-bunyan/commit/03c6c8a9ff9003e906aeea8bec806a87fadef2c3))
+
+
+### Build System
+
+* drop support for node.js 8.x ([#440](https://www.github.com/googleapis/nodejs-logging-bunyan/issues/440)) ([b816566](https://www.github.com/googleapis/nodejs-logging-bunyan/commit/b81656645e7a17adfdb1fb78de8e2153128fe2a5))
+
 ### [2.0.3](https://www.github.com/googleapis/nodejs-logging-bunyan/compare/v2.0.2...v2.0.3) (2020-01-24)
 
 
