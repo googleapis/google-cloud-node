@@ -4,6 +4,29 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/nodejs-vision?activeTab=versions
 
+## [2.0.0](https://www.github.com/googleapis/nodejs-vision/compare/v1.11.0...v2.0.0) (2020-06-04)
+
+
+### ⚠ BREAKING CHANGES
+
+* The library now supports Node.js v10+. The last version to support Node.js v8 is tagged legacy-8 on NPM.
+
+### Features
+
+* check status of long running operation by its name ([#773](https://www.github.com/googleapis/nodejs-vision/issues/773)) ([2b3becf](https://www.github.com/googleapis/nodejs-vision/commit/2b3becf530294202d361d7a8f35601973332eafe))
+* drop node8 support, support for async iterators ([#568](https://www.github.com/googleapis/nodejs-vision/issues/568)) ([e2dccd0](https://www.github.com/googleapis/nodejs-vision/commit/e2dccd02d20ed82ed679fff629b5a4aab47b39b6))
+
+
+### Bug Fixes
+
+* **deps:** update dependency @google-cloud/promisify to v2 ([#565](https://www.github.com/googleapis/nodejs-vision/issues/565)) ([c71a709](https://www.github.com/googleapis/nodejs-vision/commit/c71a70926568367fa89fbbf4226e40fcb44f679e))
+* **deps:** update dependency mathjs to v7 ([#775](https://www.github.com/googleapis/nodejs-vision/issues/775)) ([d64d99f](https://www.github.com/googleapis/nodejs-vision/commit/d64d99fe615a7048a5537fbcb8fbf3364e1c53c0))
+* **deps:** update dependency natural to v1 ([#768](https://www.github.com/googleapis/nodejs-vision/issues/768)) ([44a8dcc](https://www.github.com/googleapis/nodejs-vision/commit/44a8dcc389489829f927015a1070e516f2e786b0))
+* **deps:** update dependency natural to v2 ([#772](https://www.github.com/googleapis/nodejs-vision/issues/772)) ([afdc8da](https://www.github.com/googleapis/nodejs-vision/commit/afdc8da5f4181b5d43c3dc0155294495d647645a))
+* **samples:** use pureimage instead of canvas ([#774](https://www.github.com/googleapis/nodejs-vision/issues/774)) ([a352338](https://www.github.com/googleapis/nodejs-vision/commit/a3523388bace85f19041202c74be4beb705d620d))
+* mocha tests ([#784](https://www.github.com/googleapis/nodejs-vision/issues/784)) ([319c98e](https://www.github.com/googleapis/nodejs-vision/commit/319c98e284a622876e055cfd7a249750d600ce76))
+* remove eslint, update gax, fix generated protos, run the generator ([#756](https://www.github.com/googleapis/nodejs-vision/issues/756)) ([72f22b6](https://www.github.com/googleapis/nodejs-vision/commit/72f22b60e1491963ea1d22a4f96feabe07be0376))
+
 ## [1.11.0](https://www.github.com/googleapis/nodejs-vision/compare/v1.10.0...v1.11.0) (2020-03-11)
 
 
