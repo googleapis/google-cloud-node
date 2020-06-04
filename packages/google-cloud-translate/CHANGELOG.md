@@ -4,6 +4,27 @@
 
 [1]: https://www.npmjs.com/package/nodejs-translate?activeTab=versions
 
+## [6.0.0](https://www.github.com/googleapis/nodejs-translate/compare/v5.3.0...v6.0.0) (2020-06-03)
+
+
+### ⚠ BREAKING CHANGES
+
+* The library now supports Node.js v10+. The last version to support Node.js v8 is tagged legacy-8 on NPM.
+
+### Features
+
+* check status of long running operation by its name; fix linting ([#531](https://www.github.com/googleapis/nodejs-translate/issues/531)) ([6e6907d](https://www.github.com/googleapis/nodejs-translate/commit/6e6907da0187d05797967b80d2d75c25125658aa))
+* drop node8 support, support for async iterators ([#482](https://www.github.com/googleapis/nodejs-translate/issues/482)) ([4a5f047](https://www.github.com/googleapis/nodejs-translate/commit/4a5f047f141dbe5dd0d6979351a36d9c2232f22e))
+
+
+### Bug Fixes
+
+* ensure scoped protobuf ([#500](https://www.github.com/googleapis/nodejs-translate/issues/500)) ([5793c23](https://www.github.com/googleapis/nodejs-translate/commit/5793c2306f7c028be093465a08d41824e48ed492))
+* remove eslint, update gax, fix generated protos, run the generator ([#507](https://www.github.com/googleapis/nodejs-translate/issues/507)) ([8f43605](https://www.github.com/googleapis/nodejs-translate/commit/8f4360505e4b86fe6729f96f34488aec84a5a1b6))
+* **deps:** update dependency @google-cloud/automl to v2 ([#503](https://www.github.com/googleapis/nodejs-translate/issues/503)) ([8ba77fe](https://www.github.com/googleapis/nodejs-translate/commit/8ba77fe702fef017b9f59678f9503705d16efe75))
+* **deps:** update dependency @google-cloud/common to v3 ([#481](https://www.github.com/googleapis/nodejs-translate/issues/481)) ([fc719f0](https://www.github.com/googleapis/nodejs-translate/commit/fc719f08804299a3c8086a3eff393fbf8f1fde80))
+* **deps:** update dependency @google-cloud/promisify to v2 ([#476](https://www.github.com/googleapis/nodejs-translate/issues/476)) ([bbbfa9f](https://www.github.com/googleapis/nodejs-translate/commit/bbbfa9f3223d39b5b78b9972d61eb8fb77bddafa))
+
 ## [5.3.0](https://www.github.com/googleapis/nodejs-translate/compare/v5.2.0...v5.3.0) (2020-03-06)
 
 
