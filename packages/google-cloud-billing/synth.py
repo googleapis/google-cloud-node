@@ -34,6 +34,7 @@ for version in versions:
     generator_args={
       "grpc-service-config": f"google/cloud/{name}/{version}/cloud_{name}_grpc_service_config.json",
       "package-name": f"@google-cloud/{name}",
+      "validation": "false",
     },
     extra_proto_files=['google/cloud/common_resources.proto'],
     version=version)
