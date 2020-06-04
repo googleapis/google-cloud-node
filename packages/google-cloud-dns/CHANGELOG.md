@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/dns?activeTab=versions
 
+### [2.0.1](https://www.github.com/googleapis/nodejs-dns/compare/v2.0.0...v2.0.1) (2020-06-04)
+
+
+### Bug Fixes
+
+* **autosynth:** synthesis was failing due to breaking TypeScript changes ([#392](https://www.github.com/googleapis/nodejs-dns/issues/392)) ([cf32c50](https://www.github.com/googleapis/nodejs-dns/commit/cf32c506c878052867abbc148818f1f3e2747c1c))
+
 ## [2.0.0](https://www.github.com/googleapis/nodejs-dns/compare/v1.2.9...v2.0.0) (2020-04-14)
 
 
