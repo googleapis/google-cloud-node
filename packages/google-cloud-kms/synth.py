@@ -34,7 +34,8 @@ for version in versions:
         generator_args={
             "grpc-service-config": f"google/cloud/kms/{version}/cloudkms_grpc_service_config.json",
             "package-name": "@google-cloud/kms",
-            "iam-service": "true"
+            "iam-service": "true",
+            "validation": "false",
         },
         proto_path=f'/google/cloud/kms/{version}',
         extra_proto_files=['google/cloud/common_resources.proto']
