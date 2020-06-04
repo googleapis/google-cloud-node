@@ -4,6 +4,28 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/container?activeTab=versions
 
+## [2.0.0](https://www.github.com/googleapis/nodejs-cloud-container/compare/v1.7.0...v2.0.0) (2020-06-04)
+
+
+### ⚠ BREAKING CHANGES
+
+* The library now supports Node.js v10+. The last version to support Node.js v8 is tagged legacy-8 on NPM.
+
+### Features
+
+* drop node8 support, support for async iterators ([#318](https://www.github.com/googleapis/nodejs-cloud-container/issues/318)) ([e6338eb](https://www.github.com/googleapis/nodejs-cloud-container/commit/e6338eb9e080a80e3b8361ae13b1c74039974f32))
+
+
+### Bug Fixes
+
+* **test:** don't assign unused variable ([#323](https://www.github.com/googleapis/nodejs-cloud-container/issues/323)) ([671a4b8](https://www.github.com/googleapis/nodejs-cloud-container/commit/671a4b8bc4e49ba6705af418f3bc427485f912ed))
+* export explicit version from protos.js ([#324](https://www.github.com/googleapis/nodejs-cloud-container/issues/324)) ([896c658](https://www.github.com/googleapis/nodejs-cloud-container/commit/896c658e0c7c811c2e71909d138e2e38b431b9e8))
+* regen protos and tests ([#340](https://www.github.com/googleapis/nodejs-cloud-container/issues/340)) ([edbc1c9](https://www.github.com/googleapis/nodejs-cloud-container/commit/edbc1c99e4f50665066ed61593d632201f60e2f5))
+* remove eslint, update gax, fix generated protos, run the generator ([#329](https://www.github.com/googleapis/nodejs-cloud-container/issues/329)) ([c66f3ed](https://www.github.com/googleapis/nodejs-cloud-container/commit/c66f3ed896cd99108f980133205505aa0b49131e))
+* remove unused files from package ([#333](https://www.github.com/googleapis/nodejs-cloud-container/issues/333)) ([ac4c07a](https://www.github.com/googleapis/nodejs-cloud-container/commit/ac4c07a6cb48423f2f3b35b485841e88aa189a22))
+* support request params {key} with no =value ([#338](https://www.github.com/googleapis/nodejs-cloud-container/issues/338)) ([adf4a60](https://www.github.com/googleapis/nodejs-cloud-container/commit/adf4a601a870c0ce961f4011318606e4b29c266f))
+* synth.py clean up for multiple version ([#341](https://www.github.com/googleapis/nodejs-cloud-container/issues/341)) ([29b309d](https://www.github.com/googleapis/nodejs-cloud-container/commit/29b309db935655a6ab5add27e111f72f7d053c07))
+
 ## [1.7.0](https://www.github.com/googleapis/nodejs-cloud-container/compare/v1.6.2...v1.7.0) (2020-03-06)
 
 
