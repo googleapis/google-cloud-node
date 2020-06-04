@@ -4,6 +4,26 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/security-center?activeTab=versions
 
+## [4.0.0](https://www.github.com/googleapis/nodejs-security-center/compare/v3.1.0...v4.0.0) (2020-06-04)
+
+
+### ⚠ BREAKING CHANGES
+
+* The library now supports Node.js v10+. The last version to support Node.js v8 is tagged legacy-8 on NPM.
+
+### Features
+
+* check status of long running operation by its name ([#273](https://www.github.com/googleapis/nodejs-security-center/issues/273)) ([dd0f4d1](https://www.github.com/googleapis/nodejs-security-center/commit/dd0f4d1866ec61e37392c79cf7f148e339d04d1b))
+* drop node8 support, support for async iterators ([#248](https://www.github.com/googleapis/nodejs-security-center/issues/248)) ([686f741](https://www.github.com/googleapis/nodejs-security-center/commit/686f7418517e6d827bfcbe483d7b1bb014385e10))
+
+
+### Bug Fixes
+
+* export explicit version from protos.js ([#253](https://www.github.com/googleapis/nodejs-security-center/issues/253)) ([aa62575](https://www.github.com/googleapis/nodejs-security-center/commit/aa6257554e5b401ba7b7613f0bf78d6233ef300b))
+* remove eslint, update gax, fix generated protos, run the generator ([#258](https://www.github.com/googleapis/nodejs-security-center/issues/258)) ([38e64d7](https://www.github.com/googleapis/nodejs-security-center/commit/38e64d77317870caa81122fa2a9c449dcbe714e0))
+* synth.py clean up for multiple version ([#274](https://www.github.com/googleapis/nodejs-security-center/issues/274)) ([e50061a](https://www.github.com/googleapis/nodejs-security-center/commit/e50061a5f834a356b0221ff01d8de4ed02089260))
+* **deps:** update dependency @google-cloud/pubsub to v2 ([#276](https://www.github.com/googleapis/nodejs-security-center/issues/276)) ([6ce252e](https://www.github.com/googleapis/nodejs-security-center/commit/6ce252eb770d1a4304301bfbaeacb9d165f8a3e9))
+
 ## [3.1.0](https://www.github.com/googleapis/nodejs-security-center/compare/v3.0.1...v3.1.0) (2020-03-06)
 
 
