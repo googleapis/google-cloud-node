@@ -4,6 +4,25 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/text-to-speech?activeTab=versions
 
+## [3.0.0](https://www.github.com/googleapis/nodejs-text-to-speech/compare/v2.3.0...v3.0.0) (2020-06-04)
+
+
+### ⚠ BREAKING CHANGES
+
+* The library now supports Node.js v10+. The last version to support Node.js v8 is tagged legacy-8 on NPM.
+
+### Features
+
+* drop node8 support ([#373](https://www.github.com/googleapis/nodejs-text-to-speech/issues/373)) ([21e3598](https://www.github.com/googleapis/nodejs-text-to-speech/commit/21e359885c39d4dfc6ed0a231fd66d35628fa0cb))
+
+
+### Bug Fixes
+
+* regen protos and tests, formatting ([#401](https://www.github.com/googleapis/nodejs-text-to-speech/issues/401)) ([6c7d38a](https://www.github.com/googleapis/nodejs-text-to-speech/commit/6c7d38a0a217d6d7a7d77dcde3756b10e47fb220))
+* remove eslint, update gax, fix generated protos, run the generator ([#385](https://www.github.com/googleapis/nodejs-text-to-speech/issues/385)) ([f035747](https://www.github.com/googleapis/nodejs-text-to-speech/commit/f0357470f152c97a8203edeff2a8385068e3e316))
+* remove unused files in package ([#389](https://www.github.com/googleapis/nodejs-text-to-speech/issues/389)) ([7b1e5e4](https://www.github.com/googleapis/nodejs-text-to-speech/commit/7b1e5e4abe442e54219b53a7e17ab20c0c277995))
+* synth.py clean up for multiple version ([#403](https://www.github.com/googleapis/nodejs-text-to-speech/issues/403)) ([1b36546](https://www.github.com/googleapis/nodejs-text-to-speech/commit/1b36546437ec40e882d771c238a2926a5c18eee9))
+
 ## [2.3.0](https://www.github.com/googleapis/nodejs-text-to-speech/compare/v2.2.0...v2.3.0) (2020-03-06)
 
 
