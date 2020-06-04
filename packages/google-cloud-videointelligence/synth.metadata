@@ -3,8 +3,8 @@
     {
       "git": {
         "name": ".",
-        "remote": "git@github.com:googleapis/nodejs-video-intelligence.git",
-        "sha": "920a31d31edb068cd70db427698cd3b7b8620da5"
+        "remote": "https://github.com/googleapis/nodejs-video-intelligence.git",
+        "sha": "fc4d36c4d112ed75d5c38dd6cad76073e9234253"
       }
     },
     {
