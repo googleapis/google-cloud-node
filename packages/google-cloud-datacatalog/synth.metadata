@@ -3,8 +3,8 @@
     {
       "git": {
         "name": ".",
-        "remote": "git@github.com:googleapis/nodejs-datacatalog.git",
-        "sha": "db30953897d8e8f28080014be8cee116242eb0ed"
+        "remote": "https://github.com/googleapis/nodejs-datacatalog.git",
+        "sha": "c799604b2d29269006ff39748afb78302ce46ca2"
       }
     },
     {
