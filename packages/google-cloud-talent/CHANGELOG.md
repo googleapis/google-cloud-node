@@ -4,6 +4,36 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/talent?activeTab=versions
 
+## [2.0.0](https://www.github.com/googleapis/nodejs-talent/compare/v1.7.1...v2.0.0) (2020-06-04)
+
+
+### ⚠ BREAKING CHANGES
+
+* The library now supports Node.js v10+. The last version to support Node.js v8 is tagged legacy-8 on NPM.
+* remove the ProjectOrTenant resource and its references
+* removed auto-pagination from searchJobs
+* move API to Typescript code generation (#163)
+
+### Features
+
+* check status of long running operation by its name ([#205](https://www.github.com/googleapis/nodejs-talent/issues/205)) ([66d3b2e](https://www.github.com/googleapis/nodejs-talent/commit/66d3b2e6c5c6293733a6aa209eb30d940b73dd8d))
+* deferred client initialization ([#171](https://www.github.com/googleapis/nodejs-talent/issues/171)) ([f5b2220](https://www.github.com/googleapis/nodejs-talent/commit/f5b222001c9510ccc0857322c6d9f9c67ec8c00c))
+* drop node8 support, support for async iterators ([#185](https://www.github.com/googleapis/nodejs-talent/issues/185)) ([cf2af92](https://www.github.com/googleapis/nodejs-talent/commit/cf2af92fef92ebf2e93a934117aed1c87a85ab6e))
+* move API to Typescript code generation ([#163](https://www.github.com/googleapis/nodejs-talent/issues/163)) ([81e9639](https://www.github.com/googleapis/nodejs-talent/commit/81e963990013ce0d0b6909243621befac1a15e75))
+* removed auto-pagination from searchJobs ([28c9234](https://www.github.com/googleapis/nodejs-talent/commit/28c92340ffa1c5f3800d85247cda578608a7125e))
+
+
+### Bug Fixes
+
+* export explicit version from protos.js ([#189](https://www.github.com/googleapis/nodejs-talent/issues/189)) ([64d8de6](https://www.github.com/googleapis/nodejs-talent/commit/64d8de6ea8a5fd3fc9128e8ec21408f9fa65408e))
+* remove eslint, update gax, fix generated protos, run the generator ([#194](https://www.github.com/googleapis/nodejs-talent/issues/194)) ([cbef571](https://www.github.com/googleapis/nodejs-talent/commit/cbef5715a1d85ac19bbad76b3a5ebfecbb9f2ee5))
+* synth.py clean up for multiple version ([#207](https://www.github.com/googleapis/nodejs-talent/issues/207)) ([49c403a](https://www.github.com/googleapis/nodejs-talent/commit/49c403a44748d52bd4bf663c016b7584afab6b3a))
+
+
+### Code Refactoring
+
+* remove the ProjectOrTenant resource and its references ([3784e63](https://www.github.com/googleapis/nodejs-talent/commit/3784e63807b9c102b10b2f1d608ec9601bcc59e3))
+
 ### [1.7.1](https://www.github.com/googleapis/nodejs-talent/compare/v1.7.0...v1.7.1) (2020-01-29)
 
 
