@@ -4,6 +4,14 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/phishing-protection?activeTab=versions
 
+### [2.0.1](https://www.github.com/googleapis/nodejs-phishing-protection/compare/v2.0.0...v2.0.1) (2020-06-04)
+
+
+### Bug Fixes
+
+* regenerate unit tests ([#144](https://www.github.com/googleapis/nodejs-phishing-protection/issues/144)) ([04040e7](https://www.github.com/googleapis/nodejs-phishing-protection/commit/04040e7ad95097e91239b16fca19be2ec8198dae))
+* synth.py clean up for multiple version ([#146](https://www.github.com/googleapis/nodejs-phishing-protection/issues/146)) ([fb742da](https://www.github.com/googleapis/nodejs-phishing-protection/commit/fb742da98a4dfce28925b3cc0c903da0df816fab))
+
 ## [2.0.0](https://www.github.com/googleapis/nodejs-phishing-protection/compare/v1.7.0...v2.0.0) (2020-04-14)
 
 
