@@ -4,7 +4,7 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/nodejs-billing-budgets.git",
-        "sha": "7e71c33293322409ca52261cae493b4491c45e6c"
+        "sha": "c99c037eca16eabec3663a74fe0e84da3c73731b"
       }
     },
     {
