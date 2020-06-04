@@ -4,6 +4,24 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/asset?activeTab=versions
 
+## [3.1.0](https://www.github.com/googleapis/nodejs-asset/compare/v3.0.0...v3.1.0) (2020-06-04)
+
+
+### Features
+
+* add `SearchAllResources` and `SearchAllIamPolicies` rpcs in asset service proto ([#332](https://www.github.com/googleapis/nodejs-asset/issues/332)) ([2f896c4](https://www.github.com/googleapis/nodejs-asset/commit/2f896c4fc347823549bd0b38df39fa30c25663bc))
+* added support for project id, order_by in SearchAllResources, search on location, labels and networkTags field ([321bc3a](https://www.github.com/googleapis/nodejs-asset/commit/321bc3ae0c187f29231037705a52ca4b805659ba))
+* check status of long running operation by its name ([#328](https://www.github.com/googleapis/nodejs-asset/issues/328)) ([488a18b](https://www.github.com/googleapis/nodejs-asset/commit/488a18ba934dbd3902595a5d4ea783033486b040))
+* clean proto list, add decoded function for longrunning method ([#327](https://www.github.com/googleapis/nodejs-asset/issues/327)) ([9e710b7](https://www.github.com/googleapis/nodejs-asset/commit/9e710b7a58132d2004ea8de0d1afdf2497ff702a))
+
+
+### Bug Fixes
+
+* remove eslint, update gax, fix generated protos, run the generator ([#311](https://www.github.com/googleapis/nodejs-asset/issues/311)) ([999b782](https://www.github.com/googleapis/nodejs-asset/commit/999b7824a2acb1538b1502029d7055aef930206c))
+* synth.py clean up for multiple version ([#326](https://www.github.com/googleapis/nodejs-asset/issues/326)) ([00e33b0](https://www.github.com/googleapis/nodejs-asset/commit/00e33b008089c8c1f7b8fba2eadef9ab744a75a6))
+* **deps:** update dependency @google-cloud/storage to v5 ([#330](https://www.github.com/googleapis/nodejs-asset/issues/330)) ([238c11a](https://www.github.com/googleapis/nodejs-asset/commit/238c11abedd65bc896762383a753e3c9bc4acddf))
+* **deps:** update dependency uuid to v8 ([#325](https://www.github.com/googleapis/nodejs-asset/issues/325)) ([dba0675](https://www.github.com/googleapis/nodejs-asset/commit/dba06757cbbcdcc244ae88197f01447176fc2ee3))
+
 ## [3.0.0](https://www.github.com/googleapis/nodejs-asset/compare/v2.2.0...v3.0.0) (2020-04-10)
 
 
