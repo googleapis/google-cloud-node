@@ -4,6 +4,20 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/automl?activeTab=versions
 
+## [2.1.0](https://www.github.com/googleapis/nodejs-automl/compare/v2.0.0...v2.1.0) (2020-06-04)
+
+
+### Features
+
+* check status of long running operation by its name ([#397](https://www.github.com/googleapis/nodejs-automl/issues/397)) ([3edf825](https://www.github.com/googleapis/nodejs-automl/commit/3edf82526f57ff4ba60df39ea56956886cd6a123))
+
+
+### Bug Fixes
+
+* clean up synth.py for multiple version ([#396](https://www.github.com/googleapis/nodejs-automl/issues/396)) ([a356064](https://www.github.com/googleapis/nodejs-automl/commit/a35606438799b2ad25d6bd0ed84691a28e0a00d6))
+* remove eslint, update gax, fix generated protos, run the generator ([#377](https://www.github.com/googleapis/nodejs-automl/issues/377)) ([7889f29](https://www.github.com/googleapis/nodejs-automl/commit/7889f29cb2ebaf0ac96d68cd9ca1f74122449fcd))
+* **deps:** update dependency mathjs to v7 ([#400](https://www.github.com/googleapis/nodejs-automl/issues/400)) ([8cdcd80](https://www.github.com/googleapis/nodejs-automl/commit/8cdcd80f2a4d6cd9cb64b39e7f1b153dc36e8a2f))
+
 ## [2.0.0](https://www.github.com/googleapis/nodejs-automl/compare/v1.11.0...v2.0.0) (2020-04-07)
 
 
