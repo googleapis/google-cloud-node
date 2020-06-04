@@ -1,5 +1,19 @@
 # Changelog
 
+## [2.1.0](https://www.github.com/googleapis/nodejs-media-translation/compare/v2.0.0...v2.1.0) (2020-06-04)
+
+
+### Features
+
+* adds 'single_utterance' to stream from file sample ([#20](https://www.github.com/googleapis/nodejs-media-translation/issues/20)) ([9455e20](https://www.github.com/googleapis/nodejs-media-translation/commit/9455e207de7ff9c9f72936dd3a908b694eee59fe))
+
+
+### Bug Fixes
+
+* regen protos and tests, formatting ([#39](https://www.github.com/googleapis/nodejs-media-translation/issues/39)) ([684f355](https://www.github.com/googleapis/nodejs-media-translation/commit/684f355cbecec36c18763b59ddec613c0ea097a9))
+* remove eslint, update gax, fix generated protos, run the generator ([#24](https://www.github.com/googleapis/nodejs-media-translation/issues/24)) ([3aca62a](https://www.github.com/googleapis/nodejs-media-translation/commit/3aca62aed3a4e49e4892f9ad29c3d0166c57fa56))
+* streaming mic sample ([488c235](https://www.github.com/googleapis/nodejs-media-translation/commit/488c23522b31e26b419c9a4cb5829969e9050928))
+
 ## [2.0.0](https://www.github.com/googleapis/nodejs-media-translation/compare/v1.0.0...v2.0.0) (2020-04-05)
 
 
