@@ -1,5 +1,13 @@
 # Changelog
 
+### [2.0.2](https://www.github.com/googleapis/nodejs-iot/compare/v2.0.1...v2.0.2) (2020-06-04)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @google-cloud/pubsub to v2 ([#341](https://www.github.com/googleapis/nodejs-iot/issues/341)) ([81609b8](https://www.github.com/googleapis/nodejs-iot/commit/81609b84406077532f58af70028ccf675fa838f3))
+* **deps:** update dependency googleapis to v52 ([#343](https://www.github.com/googleapis/nodejs-iot/issues/343)) ([d26347e](https://www.github.com/googleapis/nodejs-iot/commit/d26347e4b80ac6bff4270442dc9f8e24c7245316))
+
 ### [2.0.1](https://www.github.com/googleapis/nodejs-iot/compare/v2.0.0...v2.0.1) (2020-05-18)
 
 
