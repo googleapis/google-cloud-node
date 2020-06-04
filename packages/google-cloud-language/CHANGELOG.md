@@ -4,6 +4,16 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/language?activeTab=versions
 
+### [4.0.1](https://www.github.com/googleapis/nodejs-language/compare/v4.0.0...v4.0.1) (2020-06-04)
+
+
+### Bug Fixes
+
+* regenerate unit tests ([#461](https://www.github.com/googleapis/nodejs-language/issues/461)) ([84b62fd](https://www.github.com/googleapis/nodejs-language/commit/84b62fdebba9b81746d0bceb993ff0e967c9ce5e))
+* synth.py clean up for multiple version ([#463](https://www.github.com/googleapis/nodejs-language/issues/463)) ([b63d9fc](https://www.github.com/googleapis/nodejs-language/commit/b63d9fc53a0287c5d4c4c626d91b520bd0b28cd4))
+* **deps:** update dependency @google-cloud/storage to v5 ([#466](https://www.github.com/googleapis/nodejs-language/issues/466)) ([552a560](https://www.github.com/googleapis/nodejs-language/commit/552a5603738ac73b6d6018272efa5697ad01aa10))
+* **deps:** update dependency mathjs to v7 ([#464](https://www.github.com/googleapis/nodejs-language/issues/464)) ([0d706b2](https://www.github.com/googleapis/nodejs-language/commit/0d706b2080a6e8a4026e425e7c4b7e5e1968e359))
+
 ## [4.0.0](https://www.github.com/googleapis/nodejs-language/compare/v3.8.0...v4.0.0) (2020-04-13)
 
 
