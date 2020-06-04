@@ -169,7 +169,7 @@ describe('dns', () => {
       });
 
       tmp.setGracefulCleanup();
-      tmp.file((err: Error, tmpFilePath: string) => {
+      tmp.file((err, tmpFilePath) => {
         assert.ifError(err);
         fs.writeFileSync(tmpFilePath, zoneFileTemplate, 'utf-8');
         ZONE.empty(err => {
