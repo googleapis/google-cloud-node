@@ -4,6 +4,22 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/kms?activeTab=versions
 
+## [2.1.0](https://www.github.com/googleapis/nodejs-kms/compare/v2.0.0...v2.1.0) (2020-06-04)
+
+
+### Features
+
+* clean up synth.py by using IAM service option from generator ([#305](https://www.github.com/googleapis/nodejs-kms/issues/305)) ([797ee55](https://www.github.com/googleapis/nodejs-kms/commit/797ee5581a60b66f841951a90bbd2ba3995da58d))
+* **samples:** add new samples ([#324](https://www.github.com/googleapis/nodejs-kms/issues/324)) ([eb1c213](https://www.github.com/googleapis/nodejs-kms/commit/eb1c2137195137858b344e6d2ebace3005d87fe2))
+
+
+### Bug Fixes
+
+* regen protos and tests, fix formatting ([#329](https://www.github.com/googleapis/nodejs-kms/issues/329)) ([e6083a9](https://www.github.com/googleapis/nodejs-kms/commit/e6083a9c3d1e3c97785faee3bdfbe8bcce14d3ee))
+* remove eslint, update gax, fix generated protos, run the generator ([#309](https://www.github.com/googleapis/nodejs-kms/issues/309)) ([54fccb6](https://www.github.com/googleapis/nodejs-kms/commit/54fccb61a01d31fc1e5bec3b73a300fd8fed502e))
+* synth.py clean up for multiple version ([#330](https://www.github.com/googleapis/nodejs-kms/issues/330)) ([50de8d0](https://www.github.com/googleapis/nodejs-kms/commit/50de8d069c95b12e10daed40f1743d710fac7eff))
+* update common protos and fix synth ([#336](https://www.github.com/googleapis/nodejs-kms/issues/336)) ([3ed7e67](https://www.github.com/googleapis/nodejs-kms/commit/3ed7e67e5fbb459b478afb38770fb217ee6f81f4))
+
 ## [2.0.0](https://www.github.com/googleapis/nodejs-kms/compare/v1.6.3...v2.0.0) (2020-04-07)
 
 
