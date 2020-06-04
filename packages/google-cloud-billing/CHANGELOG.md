@@ -1,5 +1,25 @@
 # Changelog
 
+## [2.0.0](https://www.github.com/googleapis/nodejs-billing/compare/v1.2.0...v2.0.0) (2020-06-04)
+
+
+### ⚠ BREAKING CHANGES
+
+* The library now supports Node.js v10+. The last version to support Node.js v8 is tagged legacy-8 on NPM.
+
+### Features
+
+* drop node8 support, support for async iterators ([#27](https://www.github.com/googleapis/nodejs-billing/issues/27)) ([fb95727](https://www.github.com/googleapis/nodejs-billing/commit/fb9572795d02572feb8c465df01445c1d425c0e6))
+* promote release level to GA ([#52](https://www.github.com/googleapis/nodejs-billing/issues/52)) ([079a4a0](https://www.github.com/googleapis/nodejs-billing/commit/079a4a03fcf161c2f8b84706b7b5d9481deba829)), closes [#3](https://www.github.com/googleapis/nodejs-billing/issues/3)
+
+
+### Bug Fixes
+
+* export explicit version from protos.js ([#33](https://www.github.com/googleapis/nodejs-billing/issues/33)) ([6c2863e](https://www.github.com/googleapis/nodejs-billing/commit/6c2863e520fdeb541ebe65a5edb3c70c18830936))
+* regen protos and tests ([#50](https://www.github.com/googleapis/nodejs-billing/issues/50)) ([7cfa275](https://www.github.com/googleapis/nodejs-billing/commit/7cfa275d3f0bba5436dcfbfde806283b7168e024))
+* remove eslint, update gax, fix generated protos, run the generator ([#37](https://www.github.com/googleapis/nodejs-billing/issues/37)) ([5107cef](https://www.github.com/googleapis/nodejs-billing/commit/5107cef41905344ab25f73a474b27098e15b9f98))
+* update common protos and fix synth ([#56](https://www.github.com/googleapis/nodejs-billing/issues/56)) ([ac7d6b1](https://www.github.com/googleapis/nodejs-billing/commit/ac7d6b1f447d978b0c2c04841a512b8f7218bbae))
+
 ## [1.2.0](https://www.github.com/googleapis/nodejs-billing/compare/v1.1.0...v1.2.0) (2020-03-06)
 
 
