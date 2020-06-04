@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/grafeas?activeTab=versions
 
+## [3.2.0](https://www.github.com/googleapis/nodejs-grafeas/compare/v3.1.0...v3.2.0) (2020-06-04)
+
+
+### Features
+
+* add proto3Optional field ([#161](https://www.github.com/googleapis/nodejs-grafeas/issues/161)) ([1ff0ef4](https://www.github.com/googleapis/nodejs-grafeas/commit/1ff0ef472b1907b2ca0e2b2efc1f5f2087e9d747))
+
 ## [3.1.0](https://www.github.com/googleapis/nodejs-grafeas/compare/v3.0.0...v3.1.0) (2020-05-08)
 
 
