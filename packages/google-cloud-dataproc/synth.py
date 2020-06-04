@@ -26,6 +26,7 @@ for version in versions:
             "grpc-service-config": f"google/cloud/dataproc/{version}/dataproc_grpc_service_config.json",
             "package-name": "@google-cloud/dataproc",
             "main-service": "dataproc",
+            "validation": "false",
         },
         proto_path=f'/google/cloud/dataproc/{version}',
     )
