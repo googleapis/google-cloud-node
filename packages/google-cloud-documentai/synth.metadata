@@ -4,7 +4,7 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/nodejs-document-ai.git",
-        "sha": "d88c23cb6722e8b4cac710f87bf1cfee1061a5e3"
+        "sha": "52c0977a7a0f41276f24debf9ed9282719fa3472"
       }
     },
     {
