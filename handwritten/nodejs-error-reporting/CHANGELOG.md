@@ -4,6 +4,30 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/error-reporting?activeTab=versions
 
+## [2.0.0](https://www.github.com/googleapis/nodejs-error-reporting/compare/v1.1.3...v2.0.0) (2020-05-27)
+
+
+### ⚠ BREAKING CHANGES
+
+* update to latest version of gts and typescript (#467)
+* require node 10 in engines field (#465)
+
+### Features
+
+* require node 10 in engines field ([#465](https://www.github.com/googleapis/nodejs-error-reporting/issues/465)) ([f7d1164](https://www.github.com/googleapis/nodejs-error-reporting/commit/f7d11649329cd33aa992f156c0379f457758cd45))
+
+
+### Bug Fixes
+
+* apache license URL ([#468](https://www.github.com/googleapis/nodejs-error-reporting/issues/468)) ([#463](https://www.github.com/googleapis/nodejs-error-reporting/issues/463)) ([191326c](https://www.github.com/googleapis/nodejs-error-reporting/commit/191326c7e29197eb3f09d68d2a89d72e0229f3b4))
+* **deps:** update dependency @google-cloud/common to v3 ([#459](https://www.github.com/googleapis/nodejs-error-reporting/issues/459)) ([0ce41a8](https://www.github.com/googleapis/nodejs-error-reporting/commit/0ce41a854ed4bc2971b535b86efda5593dc2d232))
+* **typescript:** cast Object.assign value to ServiceOptions ([#483](https://www.github.com/googleapis/nodejs-error-reporting/issues/483)) ([cfee918](https://www.github.com/googleapis/nodejs-error-reporting/commit/cfee9187fdb553bca5e290c6b17e42a57ce5a291))
+
+
+### Build System
+
+* update to latest version of gts and typescript ([#467](https://www.github.com/googleapis/nodejs-error-reporting/issues/467)) ([454f76b](https://www.github.com/googleapis/nodejs-error-reporting/commit/454f76b33abc5775af64289e41b83e460f6bc519))
+
 ### [1.1.3](https://www.github.com/googleapis/nodejs-error-reporting/compare/v1.1.2...v1.1.3) (2019-12-05)
 
 
