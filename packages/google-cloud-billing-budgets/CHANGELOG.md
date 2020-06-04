@@ -1,5 +1,23 @@
 # Changelog
 
+## [2.0.0](https://www.github.com/googleapis/nodejs-billing-budgets/compare/v1.3.0...v2.0.0) (2020-06-04)
+
+
+### ⚠ BREAKING CHANGES
+
+* The library now supports Node.js v10+. The last version to support Node.js v8 is tagged legacy-8 on NPM.
+
+### Features
+
+* drop node8 support, support for async iterators ([#65](https://www.github.com/googleapis/nodejs-billing-budgets/issues/65)) ([c80b893](https://www.github.com/googleapis/nodejs-billing-budgets/commit/c80b8934865409e9dda05b04fbbf38530c821680))
+* updates Cloud Billing Budget API v1beta1 ([c99c037](https://www.github.com/googleapis/nodejs-billing-budgets/commit/c99c037eca16eabec3663a74fe0e84da3c73731b))
+
+
+### Bug Fixes
+
+* regen protos and tests ([#122](https://www.github.com/googleapis/nodejs-billing-budgets/issues/122)) ([05a973a](https://www.github.com/googleapis/nodejs-billing-budgets/commit/05a973af00159e796f413ffea2dcef14082a8b6c))
+* remove eslint, update gax, fix generated protos, run the generator ([#112](https://www.github.com/googleapis/nodejs-billing-budgets/issues/112)) ([fde765b](https://www.github.com/googleapis/nodejs-billing-budgets/commit/fde765baf193f6a9498e2e9afc36dcfd8b62acde))
+
 ## [1.3.0](https://www.github.com/googleapis/nodejs-billing-budgets/compare/v1.2.0...v1.3.0) (2020-03-06)
 
 
