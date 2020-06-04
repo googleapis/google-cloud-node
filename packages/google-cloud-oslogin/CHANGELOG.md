@@ -4,6 +4,15 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/os-login?activeTab=versions
 
+### [3.0.1](https://www.github.com/googleapis/nodejs-os-login/compare/v3.0.0...v3.0.1) (2020-06-04)
+
+
+### Bug Fixes
+
+* regen protos and tests, formatting ([#342](https://www.github.com/googleapis/nodejs-os-login/issues/342)) ([579f1e4](https://www.github.com/googleapis/nodejs-os-login/commit/579f1e48ef2a3f0fd1460b07592d5dc499cf8043))
+* synth.py clean up for multiple version ([#343](https://www.github.com/googleapis/nodejs-os-login/issues/343)) ([d270479](https://www.github.com/googleapis/nodejs-os-login/commit/d270479f7ee2b9d4874a1282c13c049015b15510))
+* use unique proto root ([#332](https://www.github.com/googleapis/nodejs-os-login/issues/332)) ([cb42aa4](https://www.github.com/googleapis/nodejs-os-login/commit/cb42aa413c55c374ccac9ae42c6dd666a2aab3ca))
+
 ## [3.0.0](https://www.github.com/googleapis/nodejs-os-login/compare/v2.0.1...v3.0.0) (2020-04-13)
 
 
