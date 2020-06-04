@@ -4,6 +4,26 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/datalabeling?activeTab=versions
 
+## [2.0.0](https://www.github.com/googleapis/nodejs-datalabeling/compare/v1.6.0...v2.0.0) (2020-06-04)
+
+
+### ⚠ BREAKING CHANGES
+
+* The library now supports Node.js v10+. The last version to support Node.js v8 is tagged legacy-8 on NPM.
+
+### Features
+
+* check status of long running operation by its name ([#180](https://www.github.com/googleapis/nodejs-datalabeling/issues/180)) ([914f99c](https://www.github.com/googleapis/nodejs-datalabeling/commit/914f99c2bbd4870ffbd7e4085dcd1e2d1284d77a))
+* drop node8 support, support for async iterators ([#161](https://www.github.com/googleapis/nodejs-datalabeling/issues/161)) ([8f6cfa8](https://www.github.com/googleapis/nodejs-datalabeling/commit/8f6cfa8bef7ac591d3432d5a6480305524bf96c9))
+
+
+### Bug Fixes
+
+* export explicit version from protos.js ([#166](https://www.github.com/googleapis/nodejs-datalabeling/issues/166)) ([7096188](https://www.github.com/googleapis/nodejs-datalabeling/commit/709618898603d50c8c92b01e8bb26a866ed47e3e))
+* remove eslint, update gax, fix generated protos, run the generator ([#170](https://www.github.com/googleapis/nodejs-datalabeling/issues/170)) ([35d38b2](https://www.github.com/googleapis/nodejs-datalabeling/commit/35d38b2cde5d19b4c00c88a4a3907e81997f6e35))
+* remove unused files from package ([#173](https://www.github.com/googleapis/nodejs-datalabeling/issues/173)) ([7d43739](https://www.github.com/googleapis/nodejs-datalabeling/commit/7d437395f993774eaab20bff1d58cda025e20a54))
+* synth.py clean up for multiple version ([#182](https://www.github.com/googleapis/nodejs-datalabeling/issues/182)) ([67f56a1](https://www.github.com/googleapis/nodejs-datalabeling/commit/67f56a18588c3e12615b6ad630b906d745ae6093))
+
 ## [1.6.0](https://www.github.com/googleapis/nodejs-datalabeling/compare/v1.5.0...v1.6.0) (2020-03-06)
 
 
