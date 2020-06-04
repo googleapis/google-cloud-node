@@ -4,6 +4,26 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/recaptcha-enterprise?activeTab=versions
 
+## [2.0.0](https://www.github.com/googleapis/nodejs-recaptcha-enterprise/compare/v1.8.0...v2.0.0) (2020-05-12)
+
+
+### ⚠ BREAKING CHANGES
+
+* Remove RecaptchaEnterpriseServiceV1Beta1Client.
+* The library now supports Node.js v10+. The last version to support Node.js v8 is tagged legacy-8 on NPM.
+
+### Features
+
+* drop node8 support, support for async iterators ([#145](https://www.github.com/googleapis/nodejs-recaptcha-enterprise/issues/145)) ([cc4cc51](https://www.github.com/googleapis/nodejs-recaptcha-enterprise/commit/cc4cc51ec7b1ff8d5078b8524a9e7240639d72c3))
+
+
+### Bug Fixes
+
+* export explicit version from protos.js ([#150](https://www.github.com/googleapis/nodejs-recaptcha-enterprise/issues/150)) ([0bfb3c7](https://www.github.com/googleapis/nodejs-recaptcha-enterprise/commit/0bfb3c74a6eaaa906ee34224675ea8dad2e5a055))
+* regen protos and tests, formatting ([#169](https://www.github.com/googleapis/nodejs-recaptcha-enterprise/issues/169)) ([731fe3b](https://www.github.com/googleapis/nodejs-recaptcha-enterprise/commit/731fe3b8236478772a7cc311d0c26ee804080184))
+* remove eslint, update gax, fix generated protos, run the generator ([#155](https://www.github.com/googleapis/nodejs-recaptcha-enterprise/issues/155)) ([21b09f5](https://www.github.com/googleapis/nodejs-recaptcha-enterprise/commit/21b09f555632c6f36d1a487ccac3567064077a49))
+* synth.py clean up for multiple version ([#172](https://www.github.com/googleapis/nodejs-recaptcha-enterprise/issues/172)) ([ee1c250](https://www.github.com/googleapis/nodejs-recaptcha-enterprise/commit/ee1c2509b43b340a731aa98674ebceeab5ccdb2a))
+
 ## [1.8.0](https://www.github.com/googleapis/nodejs-recaptcha-enterprise/compare/v1.7.0...v1.8.0) (2020-03-25)
 
 
