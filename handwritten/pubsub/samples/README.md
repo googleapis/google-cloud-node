@@ -22,6 +22,7 @@ guides.
 * [Samples](#samples)
   * [Create Push Subscription](#create-push-subscription)
   * [Create Subscription](#create-subscription)
+  * [Create Subscription With Dead Letter Policy](#create-subscription-with-dead-letter-policy)
   * [Create Topic](#create-topic)
   * [Delete Subscription](#delete-subscription)
   * [Delete Topic](#delete-topic)
@@ -41,13 +42,16 @@ guides.
   * [Publish Ordered Message](#publish-ordered-message)
   * [Publish With Retry Settings](#publish-with-retry-settings)
   * [Quickstart](#quickstart)
+  * [Remove Dead Letter Policy](#remove-dead-letter-policy)
   * [Set Subscription IAM Policy](#set-subscription-iam-policy)
   * [Set Topic IAM Policy](#set-topic-iam-policy)
   * [Subscribe With Flow Control Settings](#subscribe-with-flow-control-settings)
   * [Synchronous Pull](#synchronous-pull)
+  * [Synchronous Pull with delivery attempt.](#synchronous-pull-with-delivery-attempt.)
   * [Synchronous Pull With Lease Management](#synchronous-pull-with-lease-management)
   * [Test Subscription Permissions](#test-subscription-permissions)
   * [Test Topic Permissions](#test-topic-permissions)
+  * [Update Dead Letter Policy](#update-dead-letter-policy)
 
 ## Before you begin
 
@@ -95,6 +99,25 @@ __Usage:__
 
 
 `node createSubscription.js <topic-name> <subscription-name>`
+
+
+-----
+
+
+
+
+### Create Subscription With Dead Letter Policy
+
+Creates a new subscription With Dead Letter Policy.
+
+View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/master/samples/createSubscriptionWithDeadLetterPolicy.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-pubsub&page=editor&open_in_editor=samples/createSubscriptionWithDeadLetterPolicy.js,samples/README.md)
+
+__Usage:__
+
+
+`node createSubscriptionWithDeadLetterPolicy.js <topic-name> <subscription-name> <dead-letter-topic-name>`
 
 
 -----
@@ -463,6 +486,25 @@ __Usage:__
 
 
 
+### Remove Dead Letter Policy
+
+Remove Dead Letter Policy from subscription.
+
+View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/master/samples/removeDeadLetterPolicy.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-pubsub&page=editor&open_in_editor=samples/removeDeadLetterPolicy.js,samples/README.md)
+
+__Usage:__
+
+
+`node removeDeadLetterPolicy.js <topic-name> <subscription-name>`
+
+
+-----
+
+
+
+
 ### Set Subscription IAM Policy
 
 Sets the IAM policy for a subscription.
@@ -539,6 +581,25 @@ __Usage:__
 
 
 
+### Synchronous Pull with delivery attempt.
+
+Receive messages synchronously with delivery attempt.
+
+View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/master/samples/synchronousPullWithDeliveryAttempts.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-pubsub&page=editor&open_in_editor=samples/synchronousPullWithDeliveryAttempts.js,samples/README.md)
+
+__Usage:__
+
+
+`node synchronousPullWithDeliveryAttempts.js <project-id> <subscription-name>`
+
+
+-----
+
+
+
+
 ### Synchronous Pull With Lease Management
 
 Receive messages synchronously, setting lease management properties.
@@ -589,6 +650,25 @@ __Usage:__
 
 
 `node testTopicPermissions.js <topic-name>`
+
+
+-----
+
+
+
+
+### Update Dead Letter Policy
+
+Update Dead Letter Policy in subscription.
+
+View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/master/samples/updateDeadLetterPolicy.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-pubsub&page=editor&open_in_editor=samples/updateDeadLetterPolicy.js,samples/README.md)
+
+__Usage:__
+
+
+`node updateDeadLetterPolicy.js <topic-name> <subscription-name>`
 
 
 
