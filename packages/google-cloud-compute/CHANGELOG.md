@@ -4,6 +4,33 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/compute?activeTab=versions
 
+## [2.0.0](https://www.github.com/googleapis/nodejs-compute/compare/v1.2.0...v2.0.0) (2020-05-08)
+
+
+### ⚠ BREAKING CHANGES
+
+* update to latest version of gts and typescript (#433)
+* require node 10 in engines field (#431)
+
+### Features
+
+* require node 10 in engines field ([#431](https://www.github.com/googleapis/nodejs-compute/issues/431)) ([fe2897f](https://www.github.com/googleapis/nodejs-compute/commit/fe2897fd1d625df0ccf5b910ec850e761c2ed6d3))
+
+
+### Bug Fixes
+
+* apache license URL ([#468](https://www.github.com/googleapis/nodejs-compute/issues/468)) ([#427](https://www.github.com/googleapis/nodejs-compute/issues/427)) ([02d63ed](https://www.github.com/googleapis/nodejs-compute/commit/02d63ed5a5a3559be0b5e49ed4c771b3661518a1))
+* **deps:** update dependency @google-cloud/common to v3 ([#421](https://www.github.com/googleapis/nodejs-compute/issues/421)) ([d4469b6](https://www.github.com/googleapis/nodejs-compute/commit/d4469b693745df5a8a36b6988b7dba98f7d55142))
+* **deps:** update dependency @google-cloud/paginator to v3 ([#419](https://www.github.com/googleapis/nodejs-compute/issues/419)) ([e667aee](https://www.github.com/googleapis/nodejs-compute/commit/e667aeecf7b9f51875c06cb6a885040828dc1181))
+* **deps:** update dependency @google-cloud/projectify to v2 ([#418](https://www.github.com/googleapis/nodejs-compute/issues/418)) ([b861540](https://www.github.com/googleapis/nodejs-compute/commit/b861540aa17118a7508c7c970d84864a9028f588))
+* **deps:** update dependency @google-cloud/promisify to v2 ([#417](https://www.github.com/googleapis/nodejs-compute/issues/417)) ([eedce75](https://www.github.com/googleapis/nodejs-compute/commit/eedce75e0d3f10dfed8151f12150d38d032f6a27))
+* **deps:** update dependency @sendgrid/mail to v7 ([#424](https://www.github.com/googleapis/nodejs-compute/issues/424)) ([17af0f4](https://www.github.com/googleapis/nodejs-compute/commit/17af0f425354b261f9afc8ab30e16e66b7193fec))
+
+
+### Build System
+
+* update to latest version of gts and typescript ([#433](https://www.github.com/googleapis/nodejs-compute/issues/433)) ([a4fa8cc](https://www.github.com/googleapis/nodejs-compute/commit/a4fa8cc21df7a894486832b05449fa7afc02b7ee))
+
 ## [1.2.0](https://www.github.com/googleapis/nodejs-compute/compare/v1.1.8...v1.2.0) (2020-01-23)
 
 
