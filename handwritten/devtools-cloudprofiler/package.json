@@ -40,7 +40,7 @@
     "pretty-ms": "^7.0.0",
     "protobufjs": "~6.9.0",
     "semver": "^7.0.0",
-    "teeny-request": "^6.0.3"
+    "teeny-request": "^7.0.0"
   },
   "devDependencies": {
     "@types/extend": "^3.0.0",
