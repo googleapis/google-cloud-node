@@ -3,23 +3,23 @@
     {
       "git": {
         "name": ".",
-        "remote": "https://github.com/googleapis/nodejs-secret-manager.git",
-        "sha": "e4f228efc81bc6d9e7953ce0bfabdf2503967b27"
+        "remote": "git@github.com:googleapis/nodejs-secret-manager.git",
+        "sha": "1de0fe72391e422357a0874bf51fb1b1d93ab462"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "358c09c45c681c6773b49aeb136f0a7ccbf7720c",
-        "internalRef": "311216074"
+        "sha": "40a354b0f47454be4986f9db504cca4d4371c8c3",
+        "internalRef": "314951681"
       }
     },
     {
       "git": {
         "name": "synthtool",
         "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "be74d3e532faa47eb59f1a0eaebde0860d1d8ab4"
+        "sha": "a3e2bce15a6673c041296f3bf04f7455d385403b"
       }
     }
   ],
