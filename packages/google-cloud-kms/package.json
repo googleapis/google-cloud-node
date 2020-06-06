@@ -38,7 +38,7 @@
     "predocs-test": "npm run docs",
     "prelint": "cd samples; npm link ../; npm install",
     "prepare": "npm run compile-protos && npm run compile",
-    "samples-test": "cd samples/ && npm link ../ && npm test && cd ../",
+    "samples-test": "cd samples/ && npm link ../ && npm install && npm test && cd ../",
     "system-test": "c8 mocha build/system-test",
     "test": "c8 mocha build/test"
   },
