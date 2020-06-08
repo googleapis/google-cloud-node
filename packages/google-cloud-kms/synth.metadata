@@ -3,8 +3,8 @@
     {
       "git": {
         "name": ".",
-        "remote": "git@github.com:googleapis/nodejs-kms.git",
-        "sha": "4f2a201f7e86cd4cdefa0b5f62d43cefd0898afa"
+        "remote": "https://github.com/googleapis/nodejs-kms.git",
+        "sha": "b3b0c70b082e4cc7de3063428b20a9b43d1844a5"
       }
     },
     {
