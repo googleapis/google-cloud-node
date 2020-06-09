@@ -4,7 +4,7 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/nodejs-kms.git",
-        "sha": "b3b0c70b082e4cc7de3063428b20a9b43d1844a5"
+        "sha": "c0e3eae6c0305068f2bc46199835a06cec51d9e2"
       }
     },
     {
@@ -19,7 +19,7 @@
       "git": {
         "name": "synthtool",
         "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "8b65daa222d193b689279162781baf0aa1f0ffd2"
+        "sha": "1c92077459db3dc50741e878f98b08c6261181e0"
       }
     }
   ],
