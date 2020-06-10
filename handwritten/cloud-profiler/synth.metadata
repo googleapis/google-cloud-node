@@ -3,15 +3,15 @@
     {
       "git": {
         "name": ".",
-        "remote": "git@github.com:GoogleCloudPlatform/cloud-profiler-nodejs.git",
-        "sha": "29267e805727fbb5fe052fffdc88bd6aa1dead7a"
+        "remote": "https://github.com/googleapis/cloud-profiler-nodejs.git",
+        "sha": "b46eb4f2552871f405579100e4e916dbde5c60d8"
       }
     },
     {
       "git": {
         "name": "synthtool",
         "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "85cbc7f954f4c4c3534f0caafbaed22a8f80f602"
+        "sha": "1c92077459db3dc50741e878f98b08c6261181e0"
       }
     }
   ]
