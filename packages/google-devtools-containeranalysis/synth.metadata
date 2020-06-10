@@ -4,7 +4,7 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/nodejs-containeranalysis.git",
-        "sha": "83cf2460b925c3f287dbb643eeea83d7ba958322"
+        "sha": "4ff3afc3b90307585a89c8d192c636562c4193fd"
       }
     },
     {
@@ -19,7 +19,7 @@
       "git": {
         "name": "synthtool",
         "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "7ee92820e64c0aea379781b82399d6b3f3c8655f"
+        "sha": "1c92077459db3dc50741e878f98b08c6261181e0"
       }
     }
   ],
