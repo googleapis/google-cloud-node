@@ -4,7 +4,7 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/nodejs-dataproc.git",
-        "sha": "3e8ef8b4f77eee8fa99b62d75c5770cd753bfc3a"
+        "sha": "0812cfab24d68a0d1d6659dff03ea396259c99d0"
       }
     },
     {
@@ -19,7 +19,7 @@
       "git": {
         "name": "synthtool",
         "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "8b65daa222d193b689279162781baf0aa1f0ffd2"
+        "sha": "1c92077459db3dc50741e878f98b08c6261181e0"
       }
     }
   ],
