@@ -40,7 +40,7 @@
     "gts": "^2.0.0",
     "hard-rejection": "^2.1.0",
     "linkinator": "^2.0.0",
-    "mocha": "^7.1.1",
+    "mocha": "^8.0.0",
     "sinon": "^9.0.0",
     "typescript": "^3.8.3"
   },
