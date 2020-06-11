@@ -30,12 +30,14 @@ objects to users via direct download.
   * [Delete Bucket](#delete-bucket)
   * [Delete File](#delete-file)
   * [Delete Notification](#delete-notification)
+  * [Disable Bucket Lifecycle Management](#disable-bucket-lifecycle-management)
   * [Disable Default Event Based Hold](#disable-default-event-based-hold)
   * [Disable Requester Pays](#disable-requester-pays)
   * [Disable Uniform Bucket Level Access](#disable-uniform-bucket-level-access)
   * [Download Encrypted File](#download-encrypted-file)
   * [Download File](#download-file)
   * [Download File Using Requester Pays](#download-file-using-requester-pays)
+  * [Enable Bucket Lifecycle Management](#enable-bucket-lifecycle-management)
   * [Enable Default Event Based Hold](#enable-default-event-based-hold)
   * [Enable Default KMS Key](#enable-default-kms-key)
   * [Enable Requester Pays](#enable-requester-pays)
@@ -310,6 +312,23 @@ __Usage:__
 
 
 
+### Disable Bucket Lifecycle Management
+
+View the [source code](https://github.com/googleapis/nodejs-storage/blob/master/samples/disableBucketLifecycleManagement.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-storage&page=editor&open_in_editor=samples/disableBucketLifecycleManagement.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/disableBucketLifecycleManagement.js`
+
+
+-----
+
+
+
+
 ### Disable Default Event Based Hold
 
 View the [source code](https://github.com/googleapis/nodejs-storage/blob/master/samples/disableDefaultEventBasedHold.js).
@@ -405,6 +424,23 @@ __Usage:__
 
 
 `node samples/downloadFileUsingRequesterPays.js`
+
+
+-----
+
+
+
+
+### Enable Bucket Lifecycle Management
+
+View the [source code](https://github.com/googleapis/nodejs-storage/blob/master/samples/enableBucketLifecycleManagement.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-storage&page=editor&open_in_editor=samples/enableBucketLifecycleManagement.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/enableBucketLifecycleManagement.js`
 
 
 -----
