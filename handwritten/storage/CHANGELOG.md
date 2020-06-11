@@ -4,6 +4,19 @@
 
 [1]: https://www.npmjs.com/package/nodejs-storage?activeTab=versions
 
+## [5.1.0](https://www.github.com/googleapis/nodejs-storage/compare/v5.0.1...v5.1.0) (2020-06-11)
+
+
+### Features
+
+* **secrets:** begin migration to secret manager from keystore ([#1211](https://www.github.com/googleapis/nodejs-storage/issues/1211)) ([11b16ae](https://www.github.com/googleapis/nodejs-storage/commit/11b16ae1b06273ab169d7b1f65a54196956ef4ea))
+* allow setting timeouts on uploads ([#1208](https://www.github.com/googleapis/nodejs-storage/issues/1208)) ([01b3691](https://www.github.com/googleapis/nodejs-storage/commit/01b3691bbfc4a93e2229ea07184637479c515183))
+
+
+### Bug Fixes
+
+* **deps:** update dependency @google-cloud/pubsub to v2 ([#1201](https://www.github.com/googleapis/nodejs-storage/issues/1201)) ([c684b2a](https://www.github.com/googleapis/nodejs-storage/commit/c684b2abe99169a8801d76fda38a4cbfba91f417))
+
 ### [5.0.1](https://www.github.com/googleapis/nodejs-storage/compare/v5.0.0...v5.0.1) (2020-05-20)
 
 
