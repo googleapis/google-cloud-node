@@ -4,14 +4,14 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/nodejs-paginator.git",
-        "sha": "a7f67587933268ac8959897267fcb58f753cc559"
+        "sha": "1935d08060a79fc76787223c8daeaf4085ec9004"
       }
     },
     {
       "git": {
         "name": "synthtool",
         "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "1c92077459db3dc50741e878f98b08c6261181e0"
+        "sha": "e7034945fbdc0e79d3c57f6e299e5c90b0f11469"
       }
     }
   ]
