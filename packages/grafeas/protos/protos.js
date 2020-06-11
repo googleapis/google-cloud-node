@@ -28,7 +28,7 @@
     var $Reader = $protobuf.Reader, $Writer = $protobuf.Writer, $util = $protobuf.util;
     
     // Exported root namespace
-    var $root = $protobuf.roots._google_cloud_grafeas_3_1_0_protos || ($protobuf.roots._google_cloud_grafeas_3_1_0_protos = {});
+    var $root = $protobuf.roots._google_cloud_grafeas_protos || ($protobuf.roots._google_cloud_grafeas_protos = {});
     
     $root.grafeas = (function() {
     
