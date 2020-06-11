@@ -60,7 +60,7 @@
     "jsdoc-fresh": "^1.0.1",
     "jsdoc-region-tag": "^1.0.2",
     "linkinator": "^2.0.0",
-    "mocha": "^7.0.0",
+    "mocha": "^8.0.0",
     "nock": "^12.0.0",
     "sinon": "^9.0.0",
     "source-map": "^0.7.0",
