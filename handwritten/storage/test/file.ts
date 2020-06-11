@@ -4151,6 +4151,7 @@ describe('File', () => {
         predefinedAcl: 'allUsers',
         private: true,
         public: true,
+        timeout: 99,
       };
 
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -4161,6 +4162,7 @@ describe('File', () => {
             name: file.name,
             predefinedAcl: options.predefinedAcl,
           },
+          timeout: options.timeout,
           uri:
             'https://storage.googleapis.com/upload/storage/v1/b/' +
             file.bucket.name +

@@ -211,6 +211,7 @@ export interface CreateWriteStreamOptions extends CreateResumableUploadOptions {
   contentType?: string;
   gzip?: string | boolean;
   resumable?: boolean;
+  timeout?: number;
   validation?: string | boolean;
 }
 
@@ -1573,6 +1574,9 @@ class File extends ServiceObject<File> {
    *     working with streams, the file format and size is unknown until it's
    *     completely consumed. Because of this, it's best for you to be explicit
    *     for what makes sense given your input.
+   * @param {number} [timeout=60000] Set the HTTP request timeout in
+   *     milliseconds. This option is not available for resumable uploads.
+   *     Default: `60000`
    * @property {string} [uri] The URI for an already-created resumable
    *     upload. See {@link File#createResumableUpload}.
    * @property {string} [userProject] The ID of the project which will be
@@ -3564,10 +3568,7 @@ class File extends ServiceObject<File> {
    *
    * @private
    */
-  startSimpleUpload_(
-    dup: Duplexify,
-    options?: CreateResumableUploadOptions
-  ): void {
+  startSimpleUpload_(dup: Duplexify, options?: CreateWriteStreamOptions): void {
     options = Object.assign(
       {
         metadata: {},
@@ -3592,6 +3593,10 @@ class File extends ServiceObject<File> {
 
     if (this.kmsKeyName !== undefined) {
       reqOpts.qs.kmsKeyName = this.kmsKeyName;
+    }
+
+    if (typeof options.timeout === 'number') {
+      reqOpts.timeout = options.timeout;
     }
 
     if (options.userProject || this.userProject) {

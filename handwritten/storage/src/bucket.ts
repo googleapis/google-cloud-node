@@ -347,6 +347,7 @@ export interface UploadOptions
   encryptionKey?: string | Buffer;
   kmsKeyName?: string;
   resumable?: boolean;
+  timeout?: number;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   onUploadProgress?: (progressEvent: any) => void;
 }
@@ -3239,6 +3240,9 @@ class Bucket extends ServiceObject {
    *     `options.predefinedAcl = 'publicRead'`)
    * @param {boolean} [options.resumable] Force a resumable upload. (default:
    *     true for files larger than 5 MB).
+   * @param {number} [options.timeout=60000] Set the HTTP request timeout in
+   *     milliseconds. This option is not available for resumable uploads.
+   *     Default: `60000`
    * @param {string} [options.uri] The URI for an already-created resumable
    *     upload. See {@link File#createResumableUpload}.
    * @param {string} [options.userProject] The ID of the project which will be
