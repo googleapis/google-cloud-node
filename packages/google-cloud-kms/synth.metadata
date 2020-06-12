@@ -4,7 +4,7 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/nodejs-kms.git",
-        "sha": "e1eb0ecbd70a743982467edec52c7229cbd93309"
+        "sha": "6d0c833dc53e8b361500415513a3900d90c24a79"
       }
     },
     {
