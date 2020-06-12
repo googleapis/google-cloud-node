@@ -3,8 +3,8 @@
     {
       "git": {
         "name": ".",
-        "remote": "git@github.com:googleapis/nodejs-dlp.git",
-        "sha": "5f2cb9ba9e6d8957cda0bd8495a72f96dcabd9c2"
+        "remote": "https://github.com/googleapis/nodejs-dlp.git",
+        "sha": "6711f62738058efaf3e565ce6e36b00e0347267c"
       }
     },
     {
