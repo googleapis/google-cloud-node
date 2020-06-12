@@ -65,7 +65,7 @@
     "mime": "^2.2.0",
     "mime-types": "^2.0.8",
     "onetime": "^5.1.0",
-    "p-limit": "^2.2.0",
+    "p-limit": "^3.0.1",
     "pumpify": "^2.0.0",
     "readable-stream": "^3.4.0",
     "snakeize": "^0.1.0",

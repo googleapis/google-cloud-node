@@ -32,7 +32,7 @@ import * as fs from 'fs';
 import * as http from 'http';
 import * as mime from 'mime-types';
 import * as path from 'path';
-import pLimit from 'p-limit';
+import pLimit = require('p-limit');
 import {promisify} from 'util';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires

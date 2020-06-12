@@ -20,7 +20,7 @@ import fetch from 'node-fetch';
 import * as FormData from 'form-data';
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const normalizeNewline = require('normalize-newline');
-import pLimit from 'p-limit';
+import pLimit = require('p-limit');
 import {promisify} from 'util';
 import * as path from 'path';
 import * as through from 'through2';

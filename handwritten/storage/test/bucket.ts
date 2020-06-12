@@ -25,7 +25,7 @@ import * as extend from 'extend';
 import * as fs from 'fs';
 import {describe, it, before, beforeEach, after, afterEach} from 'mocha';
 import * as mime from 'mime-types';
-import pLimit from 'p-limit';
+import pLimit = require('p-limit');
 import * as path from 'path';
 import * as proxyquire from 'proxyquire';
 
@@ -182,7 +182,7 @@ describe('Bucket', () => {
   before(() => {
     Bucket = proxyquire('../src/bucket.js', {
       fs: fakeFs,
-      'p-limit': {default: fakePLimit},
+      'p-limit': fakePLimit,
       '@google-cloud/promisify': fakePromisify,
       '@google-cloud/paginator': fakePaginator,
       '@google-cloud/common': {
