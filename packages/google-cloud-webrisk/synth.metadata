@@ -3,8 +3,8 @@
     {
       "git": {
         "name": ".",
-        "remote": "git@github.com:googleapis/nodejs-web-risk.git",
-        "sha": "0e33c96b6d551673e8ab584bb0b33ddd7d3672fa"
+        "remote": "https://github.com/googleapis/nodejs-web-risk.git",
+        "sha": "934b63aa0163c84aceb27d306e1f656bcb2d8afd"
       }
     },
     {
@@ -19,7 +19,7 @@
       "git": {
         "name": "synthtool",
         "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "f06a850db98490bf90c6a476d3f4c6c7cdfb1e5e"
+        "sha": "1c92077459db3dc50741e878f98b08c6261181e0"
       }
     }
   ],
