@@ -24,6 +24,8 @@ function main(bucketName = 'my-bucket', filename = 'test.txt') {
   // [START storage_generate_signed_url_v4]
   /**
    * TODO(developer): Uncomment the following lines before running the sample.
+   * Note: when creating a signed URL, unless running in a GCP environment,
+   * a service account must be used for authorization.
    */
   // const bucketName = 'Name of a bucket, e.g. my-bucket';
   // const filename = 'File to access, e.g. file.txt';
