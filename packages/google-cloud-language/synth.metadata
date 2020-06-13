@@ -4,7 +4,7 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/nodejs-language.git",
-        "sha": "df4d71c7a3c6a4b02fb48ee5cfed76f795a446ea"
+        "sha": "3c67c269d13636e9e645e4fdca50d312202abcfd"
       }
     },
     {
