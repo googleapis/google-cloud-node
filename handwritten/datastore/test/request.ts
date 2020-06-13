@@ -1498,6 +1498,52 @@ describe('Request', () => {
       );
     });
 
+    it('should save null value when excludeLargeProperties enabled', done => {
+      const expectedProperties = {
+        stringField: {
+          stringValue: 'string value',
+        },
+        nullField: {
+          nullValue: 0,
+        },
+        arrayField: {
+          arrayValue: {
+            values: [
+              {
+                integerValue: '0',
+              },
+              {
+                nullValue: 0,
+              },
+            ],
+          },
+        },
+        objectField: {
+          nullValue: 0,
+        },
+      };
+
+      request.request_ = (config: RequestConfig, callback: Function) => {
+        assert.deepStrictEqual(
+          config.reqOpts!.mutations![0].upsert!.properties,
+          expectedProperties
+        );
+        callback();
+      };
+
+      const entities = {
+        key: key,
+        data: {
+          stringField: 'string value',
+          nullField: null,
+          arrayField: [0, null],
+          objectField: null,
+        },
+        excludeLargeProperties: true,
+      };
+      request.save(entities, done);
+    });
+
     it('should allow customization of GAX options', done => {
       const gaxOptions = {};
 
