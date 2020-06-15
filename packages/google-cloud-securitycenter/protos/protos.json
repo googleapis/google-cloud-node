@@ -14,7 +14,7 @@
                     "java_package": "com.google.cloud.securitycenter.v1",
                     "php_namespace": "Google\\Cloud\\SecurityCenter\\V1",
                     "ruby_package": "Google::Cloud::SecurityCenter::V1",
-                    "java_outer_classname": "NotificationMessageProto",
+                    "java_outer_classname": "ResourceProto",
                     "(google.api.resource_definition).type": "pubsub.googleapis.com/Topic",
                     "(google.api.resource_definition).pattern": "projects/{project}/topics/{topic}"
                   },
@@ -248,6 +248,34 @@
                         "finding": {
                           "type": "Finding",
                           "id": 2
+                        },
+                        "resource": {
+                          "type": "Resource",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "Resource": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "projectDisplayName": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "parent": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "parentDisplayName": {
+                          "type": "string",
+                          "id": 5
                         }
                       }
                     },
@@ -2071,7 +2099,8 @@
                     "php_namespace": "Google\\Cloud\\SecurityCenter\\V1p1beta1",
                     "ruby_package": "Google::Cloud::SecurityCenter::V1p1beta1",
                     "(google.api.resource_definition).type": "pubsub.googleapis.com/Topic",
-                    "(google.api.resource_definition).pattern": "projects/{project}/topics/{topic}"
+                    "(google.api.resource_definition).pattern": "projects/{project}/topics/{topic}",
+                    "java_outer_classname": "ResourceProto"
                   },
                   "nested": {
                     "Asset": {
@@ -2313,6 +2342,34 @@
                         "finding": {
                           "type": "Finding",
                           "id": 2
+                        },
+                        "resource": {
+                          "type": "Resource",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "Resource": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "projectDisplayName": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "parent": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "parentDisplayName": {
+                          "type": "string",
+                          "id": 5
                         }
                       }
                     },
@@ -2740,10 +2797,6 @@
                           "type": "google.protobuf.Timestamp",
                           "id": 5
                         },
-                        "having": {
-                          "type": "string",
-                          "id": 6
-                        },
                         "pageToken": {
                           "type": "string",
                           "id": 7
@@ -2803,10 +2856,6 @@
                         "compareDuration": {
                           "type": "google.protobuf.Duration",
                           "id": 5
-                        },
-                        "having": {
-                          "type": "string",
-                          "id": 6
                         },
                         "pageToken": {
                           "type": "string",
@@ -2944,10 +2993,6 @@
                           "type": "google.protobuf.Duration",
                           "id": 5
                         },
-                        "having": {
-                          "type": "string",
-                          "id": 6
-                        },
                         "fieldMask": {
                           "type": "google.protobuf.FieldMask",
                           "id": 7,
@@ -3035,10 +3080,6 @@
                         "compareDuration": {
                           "type": "google.protobuf.Duration",
                           "id": 5
-                        },
-                        "having": {
-                          "type": "string",
-                          "id": 6
                         },
                         "fieldMask": {
                           "type": "google.protobuf.FieldMask",
