@@ -4,6 +4,19 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/nodejs-vision?activeTab=versions
 
+## [2.1.0](https://www.github.com/googleapis/nodejs-vision/compare/v2.0.0...v2.1.0) (2020-06-12)
+
+
+### Features
+
+* **secrets:** begin migration to secret manager from keystore ([#790](https://www.github.com/googleapis/nodejs-vision/issues/790)) ([4d9e334](https://www.github.com/googleapis/nodejs-vision/commit/4d9e334bdf6bc479779541b31d26055199dcdbff))
+* switch to es2018 target for TypeScript ([#788](https://www.github.com/googleapis/nodejs-vision/issues/788)) ([7df91d4](https://www.github.com/googleapis/nodejs-vision/commit/7df91d4fc15f64aa9e462af45136ae5a361cc162))
+
+
+### Bug Fixes
+
+* handle fallback option properly ([#793](https://www.github.com/googleapis/nodejs-vision/issues/793)) ([43b45bf](https://www.github.com/googleapis/nodejs-vision/commit/43b45bf1b41976f0628cae227d7f7fab29359632))
+
 ## [2.0.0](https://www.github.com/googleapis/nodejs-vision/compare/v1.11.0...v2.0.0) (2020-06-04)
 
 
