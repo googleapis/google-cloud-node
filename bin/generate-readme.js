@@ -85,6 +85,7 @@ function generateReadme (repoMetadata) {
   libraries.sort((a, b) => {
     return a.name_pretty.localeCompare(b.name_pretty);
   });
+  writeFileSync('./libraries.json', JSON.stringify(libraries, null, 2), 'utf8');
 
   let partial = '';
   libraries.forEach((lib) => {
