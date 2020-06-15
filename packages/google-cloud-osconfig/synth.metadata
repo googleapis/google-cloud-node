@@ -4,7 +4,7 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/nodejs-os-config.git",
-        "sha": "eec48b072d3eeb802b0736494ffba6f39d23ae19"
+        "sha": "9776d1507de387bcc35c188f21748fd42780c833"
       }
     },
     {
