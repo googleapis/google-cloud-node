@@ -108,14 +108,11 @@ export class DashboardsServiceClient {
     // const showcaseClient = new showcaseClient({ projectId, customConfig });
     opts.clientConfig = opts.clientConfig || {};
 
-    const isBrowser = typeof window !== 'undefined';
-    if (isBrowser) {
-      opts.fallback = true;
-    }
-    // If we are in browser, we are already using fallback because of the
-    // "browser" field in package.json.
-    // But if we were explicitly requested to use fallback, let's do it now.
-    this._gaxModule = !isBrowser && opts.fallback ? gax.fallback : gax;
+    // If we're running in browser, it's OK to omit `fallback` since
+    // google-gax has `browser` field in its `package.json`.
+    // For Electron (which does not respect `browser` field),
+    // pass `{fallback: true}` to the DashboardsServiceClient constructor.
+    this._gaxModule = opts.fallback ? gax.fallback : gax;
 
     // Create a `gaxGrpc` object, with any grpc-specific options
     // sent to the client.
