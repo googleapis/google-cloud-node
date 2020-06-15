@@ -4,6 +4,18 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/speech?activeTab=versions
 
+## [4.1.0](https://www.github.com/googleapis/nodejs-speech/compare/v4.0.0...v4.1.0) (2020-06-12)
+
+
+### Features
+
+* **secrets:** begin migration to secret manager from keystore ([#605](https://www.github.com/googleapis/nodejs-speech/issues/605)) ([e3ac050](https://www.github.com/googleapis/nodejs-speech/commit/e3ac050fc99adf0907b29fe8ef54c24037dc7229))
+
+
+### Bug Fixes
+
+* handle fallback option properly ([#608](https://www.github.com/googleapis/nodejs-speech/issues/608)) ([2e8558c](https://www.github.com/googleapis/nodejs-speech/commit/2e8558c1a01d6924c3f443306bfa29f5bd87ad3b))
+
 ## [4.0.0](https://www.github.com/googleapis/nodejs-speech/compare/v3.6.0...v4.0.0) (2020-05-15)
 
 
