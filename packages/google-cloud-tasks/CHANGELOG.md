@@ -4,6 +4,17 @@
 
 [1]: https://www.npmjs.com/package/nodejs-tasks?activeTab=versions
 
+### [2.0.1](https://www.github.com/googleapis/nodejs-tasks/compare/v2.0.0...v2.0.1) (2020-06-12)
+
+
+### Bug Fixes
+
+* handle fallback option properly ([#425](https://www.github.com/googleapis/nodejs-tasks/issues/425)) ([0d4e8c9](https://www.github.com/googleapis/nodejs-tasks/commit/0d4e8c90f265d1275b6844eb91251eefc8e991be))
+* regen protos and tests, formatting ([#413](https://www.github.com/googleapis/nodejs-tasks/issues/413)) ([b05145e](https://www.github.com/googleapis/nodejs-tasks/commit/b05145eacbee28c7ca7f801f1c250269a3ab91b2))
+* remove eslint, update gax, fix generated protos, run the generator ([#400](https://www.github.com/googleapis/nodejs-tasks/issues/400)) ([45a3425](https://www.github.com/googleapis/nodejs-tasks/commit/45a3425f008286bc81fc577a1eb7ba8e625c62c0))
+* remove unused files from package ([#404](https://www.github.com/googleapis/nodejs-tasks/issues/404)) ([803bc49](https://www.github.com/googleapis/nodejs-tasks/commit/803bc499ca3b36955bbba009b072ee59660ef3de))
+* synth.py clean up for multiple version ([#415](https://www.github.com/googleapis/nodejs-tasks/issues/415)) ([b860452](https://www.github.com/googleapis/nodejs-tasks/commit/b860452e4e8c164bc118273c4e615f3ad91845b5))
+
 ## [2.0.0](https://www.github.com/googleapis/nodejs-tasks/compare/v1.9.0...v2.0.0) (2020-04-07)
 
 
