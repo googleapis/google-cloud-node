@@ -4,6 +4,18 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/asset?activeTab=versions
 
+## [3.2.0](https://www.github.com/googleapis/nodejs-asset/compare/v3.1.0...v3.2.0) (2020-06-16)
+
+
+### Features
+
+* move ts target to es2018 from es2016 ([#337](https://www.github.com/googleapis/nodejs-asset/issues/337)) ([0590785](https://www.github.com/googleapis/nodejs-asset/commit/0590785ac09c2459bc7c6eb77653a1a0696c27fe))
+
+
+### Bug Fixes
+
+* handle fallback option properly ([77f9ca7](https://www.github.com/googleapis/nodejs-asset/commit/77f9ca77f9e2d0ea13964ba61d69e2fac7c5e969))
+
 ## [3.1.0](https://www.github.com/googleapis/nodejs-asset/compare/v3.0.0...v3.1.0) (2020-06-04)
 
 
