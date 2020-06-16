@@ -1,5 +1,17 @@
 # Changelog
 
+## [2.1.0](https://www.github.com/googleapis/nodejs-bigquery-storage/compare/v2.0.0...v2.1.0) (2020-06-12)
+
+
+### Features
+
+* **secrets:** begin migration to secret manager from keystore ([#70](https://www.github.com/googleapis/nodejs-bigquery-storage/issues/70)) ([6513e8c](https://www.github.com/googleapis/nodejs-bigquery-storage/commit/6513e8cf6195740b570b39fb645d8a1adafc0580))
+
+
+### Bug Fixes
+
+* handle fallback option properly ([#73](https://www.github.com/googleapis/nodejs-bigquery-storage/issues/73)) ([ec6b88c](https://www.github.com/googleapis/nodejs-bigquery-storage/commit/ec6b88cf87bf45e0f16935b8b27f15447aa385b9))
+
 ## [2.0.0](https://www.github.com/googleapis/nodejs-bigquery-storage/compare/v1.1.0...v2.0.0) (2020-05-18)
 
 
