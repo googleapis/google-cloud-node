@@ -4,6 +4,18 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/scheduler?activeTab=versions
 
+## [2.1.0](https://www.github.com/googleapis/nodejs-scheduler/compare/v2.0.0...v2.1.0) (2020-06-12)
+
+
+### Features
+
+* **secrets:** begin migration to secret manager from keystore ([#258](https://www.github.com/googleapis/nodejs-scheduler/issues/258)) ([d7fed7b](https://www.github.com/googleapis/nodejs-scheduler/commit/d7fed7b81bdeef1e848a61f83ad23c1593c53615))
+
+
+### Bug Fixes
+
+* handle fallback option properly ([#261](https://www.github.com/googleapis/nodejs-scheduler/issues/261)) ([b1693a2](https://www.github.com/googleapis/nodejs-scheduler/commit/b1693a2268560ea2085ee48896dff4b32fc81bdb))
+
 ## [2.0.0](https://www.github.com/googleapis/nodejs-scheduler/compare/v1.6.0...v2.0.0) (2020-05-08)
 
 
