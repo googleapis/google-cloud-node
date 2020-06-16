@@ -10,7 +10,8 @@
     "repo": "googleapis/nodejs-asset",
     "distribution_name": "@google-cloud/asset",
     "api_id": "cloudasset.googleapis.com",
-    "requires_billing": true
+    "requires_billing": true,
+    "support_documentation": "https://cloud.google.com/resource-manager/docs/getting-support"
   },
   {
     "name": "automl",
@@ -23,7 +24,8 @@
     "repo": "googleapis/nodejs-automl",
     "distribution_name": "@google-cloud/automl",
     "api_id": "automl.googleapis.com",
-    "requires_billing": true
+    "requires_billing": true,
+    "support_documentation": "https://cloud.google.com/automl/docs/"
   },
   {
     "name": "bigquery",
@@ -36,7 +38,8 @@
     "repo": "googleapis/nodejs-bigquery",
     "distribution_name": "@google-cloud/bigquery",
     "api_id": "bigquery.googleapis.com",
-    "requires_billing": false
+    "requires_billing": false,
+    "support_documentation": "https://cloud.google.com/bigquery/docs/getting-support"
   },
   {
     "name": "bigtable",
@@ -49,7 +52,8 @@
     "repo": "googleapis/nodejs-bigtable",
     "distribution_name": "@google-cloud/bigtable",
     "api_id": "bigtable.googleapis.com",
-    "requires_billing": true
+    "requires_billing": true,
+    "support_documentation": "https://cloud.google.com/bigtable"
   },
   {
     "name": "billing",
@@ -62,7 +66,8 @@
     "repo": "googleapis/nodejs-billing",
     "distribution_name": "@google-cloud/billing",
     "api_id": "cloudbilling.googleapis.com",
-    "requires_billing": true
+    "requires_billing": true,
+    "support_documentation": "https://cloud.google.com/billing/docs"
   },
   {
     "name": "billingbudgets",
@@ -75,7 +80,8 @@
     "repo": "googleapis/nodejs-billing-budgets",
     "distribution_name": "@google-cloud/billing-budgets",
     "api_id": "billingbudgets.googleapis.com",
-    "requires_billing": true
+    "requires_billing": true,
+    "support_documentation": "https://cloud.google.com/billing/docs/how-to/budget-api-overview "
   },
   {
     "name": "cloudbuild",
@@ -88,7 +94,8 @@
     "repo": "googleapis/nodejs-cloudbuild",
     "distribution_name": "@google-cloud/cloudbuild",
     "api_id": "cloudbuild.googleapis.com",
-    "requires_billing": true
+    "requires_billing": true,
+    "support_documentation": "https://cloud.google.com/cloud-build/docs/getting-support"
   },
   {
     "name": "datacatalog",
@@ -96,12 +103,13 @@
     "product_documentation": "https://cloud.google.com/data-catalog/",
     "client_documentation": "https://googleapis.dev/nodejs/datacatalog/latest",
     "issue_tracker": "",
-    "release_level": "beta",
+    "release_level": "ga",
     "language": "nodejs",
     "repo": "googleapis/nodejs-datacatalog",
     "distribution_name": "@google-cloud/datacatalog",
     "api_id": "datacatalog.googleapis.com",
-    "requires_billing": true
+    "requires_billing": true,
+    "support_documentation": "https://cloud.google.com/data-catalog/docs/getting-support"
   },
   {
     "name": "datalabeling",
@@ -114,7 +122,8 @@
     "repo": "googleapis/nodejs-datalabeling",
     "distribution_name": "@google-cloud/datalabeling",
     "api_id": "datalabeling.googleapis.com",
-    "requires_billing": true
+    "requires_billing": true,
+    "support_documentation": "https://cloud.google.com/data-labeling/docs/getting-support"
   },
   {
     "name": "dlp",
@@ -127,7 +136,8 @@
     "repo": "googleapis/nodejs-dlp",
     "distribution_name": "@google-cloud/dlp",
     "api_id": "dlp.googleapis.com",
-    "requires_billing": true
+    "requires_billing": true,
+    "support_documentation": "https://cloud.google.com/dlp/docs/"
   },
   {
     "name": "dataproc",
@@ -140,7 +150,8 @@
     "repo": "googleapis/nodejs-dataproc",
     "distribution_name": "@google-cloud/dataproc",
     "api_id": "dataproc.googleapis.com",
-    "requires_billing": true
+    "requires_billing": true,
+    "support_documentation": "https://cloud.google.com/dataproc"
   },
   {
     "name": "datastore",
@@ -152,7 +163,8 @@
     "language": "nodejs",
     "repo": "googleapis/nodejs-datastore",
     "distribution_name": "@google-cloud/datastore",
-    "api_id": "datastore.googleapis.com"
+    "api_id": "datastore.googleapis.com",
+    "support_documentation": "https://cloud.google.com/datastore/docs/getting-support"
   },
   {
     "name": "connect-datastore",
@@ -163,7 +175,8 @@
     "language": "nodejs",
     "repo": "googleapis/nodejs-datastore-session",
     "distribution_name": "@google-cloud/connect-datastore",
-    "api_id": "datastore.googleapis.com"
+    "api_id": "datastore.googleapis.com",
+    "support_documentation": "https://cloud.google.com/datastore/docs/getting-support"
   },
   {
     "name": "dialogflow",
@@ -176,7 +189,8 @@
     "repo": "googleapis/nodejs-dialogflow",
     "distribution_name": "dialogflow",
     "api_id": "dialogflow.googleapis.com",
-    "requires_billing": true
+    "requires_billing": true,
+    "support_documentation": "https://cloud.google.com/dialogflow-enterprise/docs/getting-support"
   },
   {
     "name": "dns",
@@ -189,7 +203,8 @@
     "repo": "googleapis/nodejs-dns",
     "distribution_name": "@google-cloud/dns",
     "api_id": "dns.googleapis.com",
-    "requires_billing": true
+    "requires_billing": true,
+    "support_documentation": "https://cloud.google.com/dns/docs/getting-support"
   },
   {
     "name": "documentai",
@@ -202,7 +217,8 @@
     "repo": "googleapis/nodejs-document-ai",
     "distribution_name": "@google-cloud/documentai",
     "api_id": "documentai.googleapis.com",
-    "requires_billing": true
+    "requires_billing": true,
+    "support_documentation": "https://cloud.google.com/document-understanding/docs/"
   },
   {
     "name": "firestore",
@@ -215,7 +231,8 @@
     "repo": "googleapis/nodejs-firestore",
     "distribution_name": "@google-cloud/firestore",
     "api_id": "firestore.googleapis.com",
-    "requires_billing ": false
+    "requires_billing ": false,
+    "support_documentation": "https://cloud.google.com/firestore/docs/getting-support"
   },
   {
     "name": "firestore-session",
@@ -228,7 +245,8 @@
     "repo": "googleapis/nodejs-firestore-session",
     "distribution_name": "@google-cloud/firestore-session",
     "api_id": "firestore.googleapis.com",
-    "requires_billing": false
+    "requires_billing": false,
+    "support_documentation": "https://cloud.google.com/firestore/docs/getting-support"
   },
   {
     "name": "game-servers",
@@ -241,7 +259,8 @@
     "repo": "googleapis/nodejs-game-servers",
     "distribution_name": "@google-cloud/game-servers",
     "api_id": "gameservices.googleapis.com",
-    "requires_billing": true
+    "requires_billing": true,
+    "support_documentation": "https://cloud.google.com/game-servers/docs/getting-support"
   },
   {
     "name": "bigquery-data-transfer",
@@ -254,7 +273,8 @@
     "repo": "googleapis/nodejs-bigquery-data-transfer",
     "distribution_name": "@google-cloud/bigquery-data-transfer",
     "api_id": "bigquerydatatransfer.googleapis.com",
-    "requires_billing": true
+    "requires_billing": true,
+    "support_documentation": "https://cloud.google.com/bigquery/transfer/"
   },
   {
     "name": "bigquerystorage",
@@ -267,7 +287,8 @@
     "repo": "googleapis/nodejs-bigquery-storage",
     "distribution_name": "@google-cloud/bigquery-storage",
     "api_id": "bigquerystorage.googleapis.com",
-    "requires_billing": true
+    "requires_billing": true,
+    "support_documentation": "https://cloud.google.com/bigquery/docs/getting-support"
   },
   {
     "name": "compute",
@@ -280,7 +301,8 @@
     "repo": "googleapis/nodejs-compute",
     "distribution_name": "@google-cloud/compute",
     "api_id": "compute.googleapis.com",
-    "requires_billing": true
+    "requires_billing": true,
+    "support_documentation": "https://cloud.google.com/compute/docs/getting-support"
   },
   {
     "name": "containeranalysis",
@@ -293,7 +315,8 @@
     "repo": "googleapis/nodejs-containeranalysis",
     "distribution_name": "@google-cloud/containeranalysis",
     "api_id": "containeranalysis.googleapis.com",
-    "requires_billing": true
+    "requires_billing": true,
+    "support_documentation": "https://cloud.google.com/container-registry/docs/getting-support"
   },
   {
     "name": "grafeas",
@@ -306,7 +329,8 @@
     "repo": "googleapis/nodejs-grafeas",
     "distribution_name": "@google-cloud/grafeas",
     "api_id": "containeranalysis.googleapis.com",
-    "requires_billing": false
+    "requires_billing": false,
+    "support_documentation": "https://cloud.google.com/container-registry/docs/getting-support"
   },
   {
     "name": "iot",
@@ -318,7 +342,8 @@
     "repo": "googleapis/nodejs-iot",
     "distribution_name": "@google-cloud/iot",
     "api_id": "cloudiot.googleapis.com",
-    "requires_billing": true
+    "requires_billing": true,
+    "support_documentation": "https://cloud.google.com/iot/docs/getting-support"
   },
   {
     "name": "kms",
@@ -331,7 +356,8 @@
     "repo": "googleapis/nodejs-kms",
     "distribution_name": "@google-cloud/kms",
     "api_id": "kms.googleapis.com",
-    "requires_billing": true
+    "requires_billing": true,
+    "support_documentation": "https://cloud.google.com/kms/docs/getting-support"
   },
   {
     "name": "container",
@@ -344,7 +370,8 @@
     "repo": "googleapis/nodejs-cloud-container",
     "distribution_name": "@google-cloud/container",
     "api_id": "container.googleapis.com",
-    "requires_billing": true
+    "requires_billing": true,
+    "support_documentation": "https://cloud.google.com/kubernetes-engine/docs/getting-support"
   },
   {
     "name": "mediatranslation",
@@ -357,7 +384,8 @@
     "repo": "googleapis/nodejs-media-translation",
     "distribution_name": "@google-cloud/media-translation",
     "api_id": "mediatranslation.googleapis.com",
-    "requires_billing": true
+    "requires_billing": true,
+    "support_documentation": "https://cloud.google.com/translate/media/docs/"
   },
   {
     "name": "memcache",
@@ -370,7 +398,8 @@
     "repo": "googleapis/nodejs-memcache",
     "distribution_name": "@google-cloud/memcache",
     "api_id": "memcache.googleapis.com",
-    "requires_billing": true
+    "requires_billing": true,
+    "support_documentation": "https://cloud.google.com/memorystore/docs/memcached"
   },
   {
     "name": "monitoring-dashboards",
@@ -383,7 +412,8 @@
     "repo": "googleapis/nodejs-monitoring-dashboards",
     "distribution_name": "@google-cloud/monitoring-dashboards",
     "api_id": "monitoring.googleapis.com",
-    "requires_billing": true
+    "requires_billing": true,
+    "support_documentation": "https://cloud.google.com/monitoring/docs"
   },
   {
     "name": "language",
@@ -396,7 +426,8 @@
     "repo": "googleapis/nodejs-language",
     "distribution_name": "@google-cloud/language",
     "api_id": "language.googleapis.com",
-    "requires_billing": true
+    "requires_billing": true,
+    "support_documentation": "https://cloud.google.com/natural-language/docs/getting-support"
   },
   {
     "name": "osconfig",
@@ -404,12 +435,13 @@
     "product_documentation": "https://cloud.google.com/compute/docs/os-patch-management",
     "api_description": "provides OS management tools that can be used for patch management, patch compliance, and configuration management on VM instances.",
     "client_documentation": "https://googleapis.dev/nodejs/osconfig/latest/index.html",
-    "release_level": "beta",
+    "release_level": "ga",
     "language": "nodejs",
     "repo": "googleapis/nodejs-os-config",
     "repo_short": "nodejs-os-config",
     "distribution_name": "@google-cloud/os-config",
-    "api_id": "osconfig.googleapis.com"
+    "api_id": "osconfig.googleapis.com",
+    "support_documentation": "https://cloud.google.com/compute/docs/getting-support"
   },
   {
     "name": "oslogin",
@@ -422,7 +454,8 @@
     "repo": "googleapis/nodejs-os-login",
     "distribution_name": "@google-cloud/os-login",
     "api_id": "oslogin.googleapis.com",
-    "requires_billing": true
+    "requires_billing": true,
+    "support_documentation": "https://cloud.google.com/compute/docs/getting-support"
   },
   {
     "name": "phishing-protection",
@@ -435,7 +468,8 @@
     "repo": "googleapis/nodejs-phishing-protection",
     "distribution_name": "@google-cloud/phishing-protection",
     "api_id": "phishingprotection.googleapis.com",
-    "requires_billing": true
+    "requires_billing": true,
+    "support_documentation": "https://cloud.google.com/phishing-protection/docs/getting-support"
   },
   {
     "name": "pubsub",
@@ -448,7 +482,8 @@
     "repo": "googleapis/nodejs-pubsub",
     "distribution_name": "@google-cloud/pubsub",
     "api_id": "pubsub.googleapis.com",
-    "requires_billing": true
+    "requires_billing": true,
+    "support_documentation": "https://cloud.google.com/pubsub/docs/getting-support"
   },
   {
     "name": "recaptcha-enterprise",
@@ -461,7 +496,8 @@
     "repo": "googleapis/nodejs-recaptcha-enterprise",
     "distribution_name": "@google-cloud/recaptcha-enterprise",
     "api_id": "recaptchaenterprise.googleapis.com",
-    "requires_billing": true
+    "requires_billing": true,
+    "support_documentation": "https://cloud.google.com/recaptcha-enterprise/docs/getting-support"
   },
   {
     "name": "recommender",
@@ -474,7 +510,8 @@
     "repo": "googleapis/nodejs-recommender",
     "distribution_name": "@google-cloud/recommender",
     "api_id": "recommender.googleapis.com",
-    "requires_billing": true
+    "requires_billing": true,
+    "support_documentation": "https://cloud.google.com/recommender/docs"
   },
   {
     "name": "redis",
@@ -487,7 +524,8 @@
     "repo": "googleapis/nodejs-redis",
     "distribution_name": "@google-cloud/redis",
     "api_id": "redis.googleapis.com",
-    "requires_billing": true
+    "requires_billing": true,
+    "support_documentation": "https://cloud.google.com/memorystore/docs/redis/"
   },
   {
     "name": "resource",
@@ -500,7 +538,8 @@
     "repo": "googleapis/nodejs-resource",
     "distribution_name": "@google-cloud/resource",
     "api_id": "cloudresourcemanager.googleapis.com",
-    "requires_billing": true
+    "requires_billing": true,
+    "support_documentation": "https://cloud.google.com/resource-manager/docs/getting-support"
   },
   {
     "name": "rcloadenv",
@@ -510,7 +549,8 @@
     "language": "nodejs",
     "repo": "googleapis/nodejs-rcloadenv",
     "distribution_name": "@google-cloud/rcloadenv",
-    "api_id": "runtimeconfig.googleapis.com"
+    "api_id": "runtimeconfig.googleapis.com",
+    "support_documentation": "https://cloud.google.com/deployment-manager/runtime-configurator/"
   },
   {
     "name": "scheduler",
@@ -523,7 +563,8 @@
     "repo": "googleapis/nodejs-scheduler",
     "distribution_name": "@google-cloud/scheduler",
     "api_id": "cloudscheduler.googleapis.com",
-    "requires_billing": false
+    "requires_billing": false,
+    "support_documentation": "https://cloud.google.com/scheduler"
   },
   {
     "name": "secretmanager",
@@ -536,7 +577,8 @@
     "repo": "googleapis/nodejs-secret-manager",
     "distribution_name": "@google-cloud/secret-manager",
     "api_id": "secretmanager.googleapis.com",
-    "requires_billing": true
+    "requires_billing": true,
+    "support_documentation": "https://cloud.google.com/secret-manager/docs/getting-support"
   },
   {
     "name": "security-center",
@@ -549,7 +591,8 @@
     "repo": "googleapis/nodejs-security-center",
     "distribution_name": "@google-cloud/security-center",
     "api_id": "securitycenter.googleapis.com",
-    "requires_billing": true
+    "requires_billing": true,
+    "support_documentation": "https://cloud.google.com/security-command-center/docs/getting-support"
   },
   {
     "name": "servicedirectory",
@@ -575,7 +618,8 @@
     "repo": "googleapis/nodejs-spanner",
     "distribution_name": "@google-cloud/spanner",
     "api_id": "spanner.googleapis.com",
-    "requires_billing": true
+    "requires_billing": true,
+    "support_documentation": "https://cloud.google.com/spanner/docs/getting-support"
   },
   {
     "name": "speech",
@@ -588,7 +632,8 @@
     "repo": "googleapis/nodejs-speech",
     "distribution_name": "@google-cloud/speech",
     "api_id": "speech.googleapis.com",
-    "requires_billing": false
+    "requires_billing": false,
+    "support_documentation": "https://cloud.google.com/speech-to-text/docs/getting-support"
   },
   {
     "name": "debugger",
@@ -600,7 +645,8 @@
     "language": "nodejs",
     "repo": "googleapis/cloud-debug-nodejs",
     "distribution_name": "@google-cloud/debug-agent",
-    "api_id": "clouddebugger.googleapis.com"
+    "api_id": "clouddebugger.googleapis.com",
+    "support_documentation": "https://cloud.google.com/stackdriver/docs/getting-support"
   },
   {
     "name": "error-reporting",
@@ -612,7 +658,8 @@
     "language": "nodejs",
     "repo": "googleapis/nodejs-error-reporting",
     "distribution_name": "@google-cloud/error-reporting",
-    "api_id": "clouderrorreporting.googleapis.com"
+    "api_id": "clouderrorreporting.googleapis.com",
+    "support_documentation": "https://cloud.google.com/stackdriver/docs/getting-support"
   },
   {
     "name": "irm",
@@ -625,7 +672,8 @@
     "distribution_name": "@google-cloud/irm",
     "api_id": "irm.googleapis.com",
     "requires_billing": true,
-    "client_documentation": "https://googleapis.dev/nodejs/irm/latest"
+    "client_documentation": "https://googleapis.dev/nodejs/irm/latest",
+    "support_documentation": "https://cloud.google.com/stackdriver/docs/getting-support"
   },
   {
     "name": "logging",
@@ -637,7 +685,8 @@
     "language": "nodejs",
     "repo": "googleapis/nodejs-logging",
     "distribution_name": "@google-cloud/logging",
-    "api_id": "logging.googleapis.com"
+    "api_id": "logging.googleapis.com",
+    "support_documentation": "https://cloud.google.com/stackdriver/docs/getting-support"
   },
   {
     "name": "logging-bunyan",
@@ -649,7 +698,8 @@
     "language": "nodejs",
     "repo": "googleapis/nodejs-logging-bunyan",
     "distribution_name": "@google-cloud/logging-bunyan",
-    "api_id": "logging.googleapis.com"
+    "api_id": "logging.googleapis.com",
+    "support_documentation": "https://cloud.google.com/stackdriver/docs/getting-support"
   },
   {
     "name": "logging-winston",
@@ -661,7 +711,8 @@
     "language": "nodejs",
     "repo": "googleapis/nodejs-logging-winston",
     "distribution_name": "@google-cloud/logging-winston",
-    "api_id": "logging.googleapis.com"
+    "api_id": "logging.googleapis.com",
+    "support_documentation": "https://cloud.google.com/stackdriver/docs/getting-support"
   },
   {
     "name": "monitoring",
@@ -674,7 +725,8 @@
     "repo": "googleapis/nodejs-monitoring",
     "distribution_name": "@google-cloud/monitoring",
     "api_id": "monitoring.googleapis.com",
-    "requires_billing": true
+    "requires_billing": true,
+    "support_documentation": "https://cloud.google.com/stackdriver/docs/getting-support"
   },
   {
     "name": "profiler",
@@ -686,7 +738,8 @@
     "language": "nodejs",
     "repo": "googleapis/cloud-profiler-nodejs",
     "distribution_name": "@google-cloud/profiler",
-    "api_id": "cloudprofiler.googleapis.com"
+    "api_id": "cloudprofiler.googleapis.com",
+    "support_documentation": "https://cloud.google.com/stackdriver/docs/getting-support"
   },
   {
     "name": "trace",
@@ -698,7 +751,8 @@
     "language": "nodejs",
     "repo": "googleapis/cloud-trace-nodejs",
     "distribution_name": "@google-cloud/trace-agent",
-    "api_id": "cloudtrace.googleapis.com"
+    "api_id": "cloudtrace.googleapis.com",
+    "support_documentation": "https://cloud.google.com/stackdriver/docs/getting-support"
   },
   {
     "name": "storage",
@@ -711,7 +765,8 @@
     "repo": "googleapis/nodejs-storage",
     "distribution_name": "@google-cloud/storage",
     "api_id": "storage-api.googleapis.com",
-    "requires_billing": true
+    "requires_billing": true,
+    "support_documentation": "https://cloud.google.com/storage/docs/getting-support"
   },
   {
     "name": "talent",
@@ -724,7 +779,8 @@
     "repo": "googleapis/nodejs-talent",
     "distribution_name": "@google-cloud/talent",
     "api_id": "jobs.googleapis.com",
-    "requires_billing": true
+    "requires_billing": true,
+    "support_documentation": "https://cloud.google.com/solutions/talent-solution/"
   },
   {
     "name": "tasks",
@@ -737,7 +793,8 @@
     "repo": "googleapis/nodejs-tasks",
     "distribution_name": "@google-cloud/tasks",
     "api_id": "tasks.googleapis.com",
-    "requires_billing": true
+    "requires_billing": true,
+    "support_documentation": "https://cloud.google.com/tasks/docs/getting-support"
   },
   {
     "name": "text-to-speech",
@@ -750,7 +807,8 @@
     "repo": "googleapis/nodejs-text-to-speech",
     "distribution_name": "@google-cloud/text-to-speech",
     "api_id": "texttospeech.googleapis.com",
-    "requires_billing": true
+    "requires_billing": true,
+    "support_documentation": "https://cloud.google.com/text-to-speech/docs/getting-support"
   },
   {
     "name": "translate",
@@ -763,7 +821,8 @@
     "repo": "googleapis/nodejs-translate",
     "distribution_name": "@google-cloud/translate",
     "api_id": "translate.googleapis.com",
-    "requires_billing": true
+    "requires_billing": true,
+    "support_documentation": "https://cloud.google.com/translate/docs/getting-support"
   },
   {
     "name": "video",
@@ -776,7 +835,8 @@
     "repo": "googleapis/nodejs-video-intelligence",
     "distribution_name": "@google-cloud/video-intelligence",
     "api_id": "videointelligence.googleapis.com",
-    "requires_billing": true
+    "requires_billing": true,
+    "support_documentation": "https://cloud.google.com/video-intelligence/docs/getting-support"
   },
   {
     "name": "vision",
@@ -789,7 +849,8 @@
     "repo": "googleapis/nodejs-vision",
     "distribution_name": "@google-cloud/vision",
     "api_id": "vision.googleapis.com",
-    "requires_billing": true
+    "requires_billing": true,
+    "support_documentation": "https://cloud.google.com/vision/docs/getting-support"
   },
   {
     "name": "web-risk",
@@ -802,6 +863,7 @@
     "repo": "googleapis/nodejs-web-risk",
     "distribution_name": "@google-cloud/web-risk",
     "api_id": "webrisk.googleapis.com",
-    "requires_billing": true
+    "requires_billing": true,
+    "support_documentation": "https://cloud.google.com/web-risk/docs/getting-support"
   }
 ]
