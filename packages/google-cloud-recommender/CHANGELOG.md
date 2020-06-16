@@ -1,5 +1,17 @@
 # Changelog
 
+## [3.1.0](https://www.github.com/googleapis/nodejs-recommender/compare/v3.0.0...v3.1.0) (2020-06-12)
+
+
+### Features
+
+* **secrets:** begin migration to secret manager from keystore ([#82](https://www.github.com/googleapis/nodejs-recommender/issues/82)) ([40a4cc3](https://www.github.com/googleapis/nodejs-recommender/commit/40a4cc30711eef85439b538f4da62091777bd79c))
+
+
+### Bug Fixes
+
+* handle fallback option properly ([#85](https://www.github.com/googleapis/nodejs-recommender/issues/85)) ([21a6a00](https://www.github.com/googleapis/nodejs-recommender/commit/21a6a00b7283a8761e412a5a1b005359d0470e37))
+
 ## [3.0.0](https://www.github.com/googleapis/nodejs-recommender/compare/v2.2.0...v3.0.0) (2020-05-14)
 
 
