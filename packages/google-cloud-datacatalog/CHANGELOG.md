@@ -4,6 +4,22 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/datacatalog?activeTab=versions
 
+## [2.1.0](https://www.github.com/googleapis/nodejs-datacatalog/compare/v2.0.0...v2.1.0) (2020-06-16)
+
+
+### Features
+
+* add order field to TagField and TagTemplateField ([#157](https://www.github.com/googleapis/nodejs-datacatalog/issues/157)) ([70c23c2](https://www.github.com/googleapis/nodejs-datacatalog/commit/70c23c2b609bd24901dc902090e23fbf92b55895))
+* move ts target to es2018 from es2016 ([#172](https://www.github.com/googleapis/nodejs-datacatalog/issues/172)) ([e354dde](https://www.github.com/googleapis/nodejs-datacatalog/commit/e354ddeeeedd3e106c50ed579075f23c9d9c5bb5))
+* promote library to GA ([#177](https://www.github.com/googleapis/nodejs-datacatalog/issues/177)) ([ac11090](https://www.github.com/googleapis/nodejs-datacatalog/commit/ac110906b723f362024318295e3de6743c905b7e))
+
+
+### Bug Fixes
+
+* proper fallback option handling ([51df672](https://www.github.com/googleapis/nodejs-datacatalog/commit/51df6721306ab6d2d9bf6919b0f3f432ca85b4ab))
+* regenerate unit tests ([#163](https://www.github.com/googleapis/nodejs-datacatalog/issues/163)) ([4593117](https://www.github.com/googleapis/nodejs-datacatalog/commit/45931176d266d364e0508039cf6a4e284ad2923d))
+* synth.py clean up for multiple version ([#167](https://www.github.com/googleapis/nodejs-datacatalog/issues/167)) ([c799604](https://www.github.com/googleapis/nodejs-datacatalog/commit/c799604b2d29269006ff39748afb78302ce46ca2))
+
 ## [2.0.0](https://www.github.com/googleapis/nodejs-datacatalog/compare/v1.8.0...v2.0.0) (2020-04-15)
 
 
