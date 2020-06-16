@@ -4,6 +4,18 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/phishing-protection?activeTab=versions
 
+## [2.1.0](https://www.github.com/googleapis/nodejs-phishing-protection/compare/v2.0.1...v2.1.0) (2020-06-15)
+
+
+### Features
+
+* move ts target to es2018 from es2016 ([#151](https://www.github.com/googleapis/nodejs-phishing-protection/issues/151)) ([f30f164](https://www.github.com/googleapis/nodejs-phishing-protection/commit/f30f164139c18728e33a997d16c900867831389f))
+
+
+### Bug Fixes
+
+* proper fallback option handling ([1ed6184](https://www.github.com/googleapis/nodejs-phishing-protection/commit/1ed618420da99608c90b762c94f8a33c79fa2634))
+
 ### [2.0.1](https://www.github.com/googleapis/nodejs-phishing-protection/compare/v2.0.0...v2.0.1) (2020-06-04)
 
 
