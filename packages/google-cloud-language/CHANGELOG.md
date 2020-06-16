@@ -4,6 +4,18 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/language?activeTab=versions
 
+## [4.1.0](https://www.github.com/googleapis/nodejs-language/compare/v4.0.1...v4.1.0) (2020-06-13)
+
+
+### Features
+
+* move ts target to es2018 from es2016 ([#471](https://www.github.com/googleapis/nodejs-language/issues/471)) ([df4d71c](https://www.github.com/googleapis/nodejs-language/commit/df4d71c7a3c6a4b02fb48ee5cfed76f795a446ea))
+
+
+### Bug Fixes
+
+* ensure gax is usable from electron ([#475](https://www.github.com/googleapis/nodejs-language/issues/475)) ([6fb93c9](https://www.github.com/googleapis/nodejs-language/commit/6fb93c9158aefc2be3541c6cb753621960314daf))
+
 ### [4.0.1](https://www.github.com/googleapis/nodejs-language/compare/v4.0.0...v4.0.1) (2020-06-04)
 
 
