@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/kms?activeTab=versions
 
+### [2.1.2](https://www.github.com/googleapis/nodejs-kms/compare/v2.1.1...v2.1.2) (2020-06-12)
+
+
+### Bug Fixes
+
+* handle fallback option properly ([753a5b5](https://www.github.com/googleapis/nodejs-kms/commit/753a5b546a69131fe2627236871d4aa2cf5b1012))
+
 ### [2.1.1](https://www.github.com/googleapis/nodejs-kms/compare/v2.1.0...v2.1.1) (2020-06-08)
 
 
