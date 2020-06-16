@@ -4,6 +4,22 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/security-center?activeTab=versions
 
+## [5.0.0](https://www.github.com/googleapis/nodejs-security-center/compare/v4.0.0...v5.0.0) (2020-06-15)
+
+
+### ⚠ BREAKING CHANGES
+
+* Removed 'having' as a field in the List and Group Finding and Asset requests.
+
+### Features
+
+* add Resource to the v1 NotificationMessage, update protos ([#286](https://www.github.com/googleapis/nodejs-security-center/issues/286)) ([f810e5e](https://www.github.com/googleapis/nodejs-security-center/commit/f810e5e9f0791050616273f06bebc3ea05617e7f))
+
+
+### Bug Fixes
+
+* handle fallback option properly ([#284](https://www.github.com/googleapis/nodejs-security-center/issues/284)) ([f714260](https://www.github.com/googleapis/nodejs-security-center/commit/f71426053da4eb2416ebd593862e89c0d5557827))
+
 ## [4.0.0](https://www.github.com/googleapis/nodejs-security-center/compare/v3.1.0...v4.0.0) (2020-06-04)
 
 
