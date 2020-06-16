@@ -25,7 +25,7 @@ AUTOSYNTH_MULTIPLE_COMMITS = True
 
 # run the gapic generator
 gapic = gcp.GAPICMicrogenerator()
-versions = ['v1', 'v1beta1']
+versions = ['v1beta1', 'v1']
 for version in versions:
     library = gapic.typescript_library(
         'recaptchaenterprise', version,

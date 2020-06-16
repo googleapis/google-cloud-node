@@ -17,8 +17,8 @@ const path = require('path');
 module.exports = {
   entry: './src/index.ts',
   output: {
-    library: 'RecaptchaEnterpriseServiceV1Beta1',
-    filename: './recaptcha-enterprise-service-v1-beta1.js',
+    library: 'RecaptchaEnterpriseService',
+    filename: './recaptcha-enterprise-service.js',
   },
   node: {
     child_process: 'empty',

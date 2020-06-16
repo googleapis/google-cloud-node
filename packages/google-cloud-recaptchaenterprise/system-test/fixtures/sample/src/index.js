@@ -20,7 +20,7 @@
 const recaptchaenterprise = require('@google-cloud/recaptcha-enterprise');
 
 function main() {
-  const recaptchaEnterpriseServiceV1Beta1Client = new recaptchaenterprise.v1beta1.RecaptchaEnterpriseServiceV1Beta1Client();
+  const recaptchaEnterpriseServiceClient = new recaptchaenterprise.RecaptchaEnterpriseServiceClient();
 }
 
 main();
