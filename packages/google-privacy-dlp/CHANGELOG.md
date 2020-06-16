@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/PACKAGE NAME?activeTab=versions
 
+### [3.0.1](https://www.github.com/googleapis/nodejs-dlp/compare/v3.0.0...v3.0.1) (2020-06-15)
+
+
+### Bug Fixes
+
+* proper fallback option handling ([#486](https://www.github.com/googleapis/nodejs-dlp/issues/486)) ([11cd656](https://www.github.com/googleapis/nodejs-dlp/commit/11cd656e3d980d8bf87f045f4cd22379134b6e44))
+
 ## [3.0.0](https://www.github.com/googleapis/nodejs-dlp/compare/v2.2.0...v3.0.0) (2020-05-26)
 
 
