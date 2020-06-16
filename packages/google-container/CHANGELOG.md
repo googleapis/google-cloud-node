@@ -4,6 +4,18 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/container?activeTab=versions
 
+## [2.1.0](https://www.github.com/googleapis/nodejs-cloud-container/compare/v2.0.0...v2.1.0) (2020-06-15)
+
+
+### Features
+
+* move ts target to es2018 from es2016 ([#347](https://www.github.com/googleapis/nodejs-cloud-container/issues/347)) ([67b6724](https://www.github.com/googleapis/nodejs-cloud-container/commit/67b6724ebbb1e9587ccbb1e845e5ffce3144eab6))
+
+
+### Bug Fixes
+
+* proper fallback option handling ([c087af4](https://www.github.com/googleapis/nodejs-cloud-container/commit/c087af449cc24492b58f686f05bcef90a00deeca))
+
 ## [2.0.0](https://www.github.com/googleapis/nodejs-cloud-container/compare/v1.7.0...v2.0.0) (2020-06-04)
 
 
