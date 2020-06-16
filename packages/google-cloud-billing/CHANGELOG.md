@@ -1,5 +1,17 @@
 # Changelog
 
+## [2.1.0](https://www.github.com/googleapis/nodejs-billing/compare/v2.0.0...v2.1.0) (2020-06-15)
+
+
+### Features
+
+* move ts target to es2018 from es2016 ([#59](https://www.github.com/googleapis/nodejs-billing/issues/59)) ([68749b4](https://www.github.com/googleapis/nodejs-billing/commit/68749b419b70eec762479b938f96727ccdc2b49d))
+
+
+### Bug Fixes
+
+* proper fallback option handling ([25a0c07](https://www.github.com/googleapis/nodejs-billing/commit/25a0c0723a87c13b55565bdfd3ad98703f6d5e44))
+
 ## [2.0.0](https://www.github.com/googleapis/nodejs-billing/compare/v1.2.0...v2.0.0) (2020-06-04)
 
 
