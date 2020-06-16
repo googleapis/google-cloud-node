@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.0](https://www.github.com/googleapis/nodejs-os-config/compare/v1.1.0...v1.2.0) (2020-06-16)
+
+
+### Features
+
+* promote library to GA ([#16](https://www.github.com/googleapis/nodejs-os-config/issues/16)) ([04b3c63](https://www.github.com/googleapis/nodejs-os-config/commit/04b3c63d188e2b8da10594bae80b4e47b7a89390))
+
 ## [1.1.0](https://www.github.com/googleapis/nodejs-os-config/compare/v1.0.0...v1.1.0) (2020-06-15)
 
 
