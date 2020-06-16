@@ -1,5 +1,26 @@
 # Changelog
 
+## [2.0.0](https://www.github.com/googleapis/nodejs-cloudbuild/compare/v1.5.0...v2.0.0) (2020-06-11)
+
+
+### ⚠ BREAKING CHANGES
+
+* The library now supports Node.js v10+. The last version to support Node.js v8 is tagged legacy-8 on NPM.
+
+### Features
+
+* add time-to-live in a queue for builds ([04e3387](https://www.github.com/googleapis/nodejs-cloudbuild/commit/04e3387af33a7ab39eb0c4df47ce08026507b499))
+* check status of long running operation by its name ([#114](https://www.github.com/googleapis/nodejs-cloudbuild/issues/114)) ([7b50a74](https://www.github.com/googleapis/nodejs-cloudbuild/commit/7b50a74c098e782393f92140a37e3bd26f45e77d))
+* drop node8 support, support for async iterators ([#91](https://www.github.com/googleapis/nodejs-cloudbuild/issues/91)) ([74a195d](https://www.github.com/googleapis/nodejs-cloudbuild/commit/74a195d5cdf63dab1ac3d0d52ef42e1254ab3a2e))
+* improve support for x-goog-request-params ([#111](https://www.github.com/googleapis/nodejs-cloudbuild/issues/111)) ([e08d640](https://www.github.com/googleapis/nodejs-cloudbuild/commit/e08d64017e059c911ebe55055c26a0ab76481d86))
+* move ts target to es2018 from es2016 ([#121](https://www.github.com/googleapis/nodejs-cloudbuild/issues/121)) ([59c5477](https://www.github.com/googleapis/nodejs-cloudbuild/commit/59c547744519ef9e8d073ea3ecdb81248176a71a))
+
+
+### Bug Fixes
+
+* remove eslint, update gax, fix generated protos, run the generator ([#100](https://www.github.com/googleapis/nodejs-cloudbuild/issues/100)) ([aafb9cc](https://www.github.com/googleapis/nodejs-cloudbuild/commit/aafb9cc7745b4d5d6dce58f17763f76379af733f))
+* synth.py clean up for multiple version ([#115](https://www.github.com/googleapis/nodejs-cloudbuild/issues/115)) ([aa7d99b](https://www.github.com/googleapis/nodejs-cloudbuild/commit/aa7d99b9c02267808cac07f7691f5ce62f06ca14))
+
 ## [1.5.0](https://www.github.com/googleapis/nodejs-cloudbuild/compare/v1.4.0...v1.5.0) (2020-03-09)
 
 
