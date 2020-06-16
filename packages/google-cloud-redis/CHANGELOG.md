@@ -4,6 +4,18 @@
 
 [1]: https://www.npmjs.com/package/nodejs-redis?activeTab=versions
 
+## [2.1.0](https://www.github.com/googleapis/nodejs-redis/compare/v2.0.0...v2.1.0) (2020-06-12)
+
+
+### Features
+
+* **secrets:** begin migration to secret manager from keystore ([#399](https://www.github.com/googleapis/nodejs-redis/issues/399)) ([55a1e13](https://www.github.com/googleapis/nodejs-redis/commit/55a1e1375a27aa016fcdbe8b7b32ada072f4927a))
+
+
+### Bug Fixes
+
+* handle fallback option properly ([#402](https://www.github.com/googleapis/nodejs-redis/issues/402)) ([65eded7](https://www.github.com/googleapis/nodejs-redis/commit/65eded7aea3b857a84ace8c6394e66b345440a27))
+
 ## [2.0.0](https://www.github.com/googleapis/nodejs-redis/compare/v1.6.0...v2.0.0) (2020-05-08)
 
 
