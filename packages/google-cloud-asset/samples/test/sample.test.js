@@ -26,6 +26,12 @@ const storage = new Storage();
 const bucketName = `asset-nodejs-${uuid.v4()}`;
 const bucket = storage.bucket(bucketName);
 
+const Compute = require('@google-cloud/compute');
+const zone = new Compute().zone('us-central1-c');
+const vmName = `asset-nodejs-${uuid.v4()}`;
+
+let vm;
+
 // Some of these tests can take an extremely long time, and occasionally
 // timeout, see:
 // "Timeout of 180000ms exceeded. For async tests and hooks".
@@ -43,10 +49,12 @@ const delay = async test => {
 describe('quickstart sample tests', () => {
   before(async () => {
     await bucket.create();
+    [vm] = await zone.createVM(vmName, {os: 'ubuntu'});
   });
 
   after(async () => {
     await bucket.delete();
+    await vm.delete();
   });
 
   it('should export assets to specified path', async function () {
@@ -70,5 +78,17 @@ describe('quickstart sample tests', () => {
     const assetName = `//storage.googleapis.com/${bucketName}`;
     const stdout = execSync(`node quickstart ${assetName}`);
     assert.include(stdout, assetName);
+  });
+
+  it('should search all resources successfully', async () => {
+    const query = `name:${vmName}`;
+    const stdout = execSync(`node searchAllResources '' ${query}`);
+    assert.include(stdout, vmName);
+  });
+
+  it('should search all iam policies successfully', async () => {
+    const query = 'policy:roles/owner';
+    const stdout = execSync(`node searchAllIamPolicies '' ${query}`);
+    assert.include(stdout, 'roles/owner');
   });
 });
