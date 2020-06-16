@@ -1,5 +1,17 @@
 # Changelog
 
+## [2.1.0](https://www.github.com/googleapis/nodejs-service-directory/compare/v2.0.0...v2.1.0) (2020-06-12)
+
+
+### Features
+
+* **secrets:** begin migration to secret manager from keystore ([#49](https://www.github.com/googleapis/nodejs-service-directory/issues/49)) ([bf9dc4e](https://www.github.com/googleapis/nodejs-service-directory/commit/bf9dc4ed47c1ba57b91d18859abdad8640bbe240))
+
+
+### Bug Fixes
+
+* handle fallback option properly ([#52](https://www.github.com/googleapis/nodejs-service-directory/issues/52)) ([11478aa](https://www.github.com/googleapis/nodejs-service-directory/commit/11478aaaaba0b10a715e37a54fabd4adca436aa8))
+
 ## [2.0.0](https://www.github.com/googleapis/nodejs-service-directory/compare/v1.0.1...v2.0.0) (2020-05-27)
 
 
