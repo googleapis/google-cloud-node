@@ -1,5 +1,12 @@
 # Changelog
 
+### [2.0.1](https://www.github.com/googleapis/nodejs-game-servers/compare/v2.0.0...v2.0.1) (2020-06-15)
+
+
+### Bug Fixes
+
+* proper fallback option handling ([#74](https://www.github.com/googleapis/nodejs-game-servers/issues/74)) ([75a2648](https://www.github.com/googleapis/nodejs-game-servers/commit/75a2648469520772a7e8e3c1477176574f537fb0))
+
 ## [2.0.0](https://www.github.com/googleapis/nodejs-game-servers/compare/v1.1.0...v2.0.0) (2020-06-04)
 
 
