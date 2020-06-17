@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/asset?activeTab=versions
 
+## [3.3.0](https://www.github.com/googleapis/nodejs-asset/compare/v3.2.0...v3.3.0) (2020-06-17)
+
+
+### Features
+
+* added support for condition in Feed ([#346](https://www.github.com/googleapis/nodejs-asset/issues/346)) ([3508ee5](https://www.github.com/googleapis/nodejs-asset/commit/3508ee5a7cf7eead10e6d3e2c3df91487898d40e))
+
 ## [3.2.0](https://www.github.com/googleapis/nodejs-asset/compare/v3.1.0...v3.2.0) (2020-06-16)
 
 
