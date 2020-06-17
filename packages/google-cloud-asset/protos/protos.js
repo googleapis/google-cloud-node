@@ -3806,6 +3806,7 @@
                          * @property {Array.<string>|null} [assetTypes] Feed assetTypes
                          * @property {google.cloud.asset.v1.ContentType|null} [contentType] Feed contentType
                          * @property {google.cloud.asset.v1.IFeedOutputConfig|null} [feedOutputConfig] Feed feedOutputConfig
+                         * @property {google.type.IExpr|null} [condition] Feed condition
                          */
     
                         /**
@@ -3866,6 +3867,14 @@
                         Feed.prototype.feedOutputConfig = null;
     
                         /**
+                         * Feed condition.
+                         * @member {google.type.IExpr|null|undefined} condition
+                         * @memberof google.cloud.asset.v1.Feed
+                         * @instance
+                         */
+                        Feed.prototype.condition = null;
+    
+                        /**
                          * Creates a new Feed instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.asset.v1.Feed
@@ -3901,6 +3910,8 @@
                                 writer.uint32(/* id 4, wireType 0 =*/32).int32(message.contentType);
                             if (message.feedOutputConfig != null && Object.hasOwnProperty.call(message, "feedOutputConfig"))
                                 $root.google.cloud.asset.v1.FeedOutputConfig.encode(message.feedOutputConfig, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.condition != null && Object.hasOwnProperty.call(message, "condition"))
+                                $root.google.type.Expr.encode(message.condition, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
                             return writer;
                         };
     
@@ -3953,6 +3964,9 @@
                                     break;
                                 case 5:
                                     message.feedOutputConfig = $root.google.cloud.asset.v1.FeedOutputConfig.decode(reader, reader.uint32());
+                                    break;
+                                case 6:
+                                    message.condition = $root.google.type.Expr.decode(reader, reader.uint32());
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -4022,6 +4036,11 @@
                                 if (error)
                                     return "feedOutputConfig." + error;
                             }
+                            if (message.condition != null && message.hasOwnProperty("condition")) {
+                                var error = $root.google.type.Expr.verify(message.condition);
+                                if (error)
+                                    return "condition." + error;
+                            }
                             return null;
                         };
     
@@ -4080,6 +4099,11 @@
                                     throw TypeError(".google.cloud.asset.v1.Feed.feedOutputConfig: object expected");
                                 message.feedOutputConfig = $root.google.cloud.asset.v1.FeedOutputConfig.fromObject(object.feedOutputConfig);
                             }
+                            if (object.condition != null) {
+                                if (typeof object.condition !== "object")
+                                    throw TypeError(".google.cloud.asset.v1.Feed.condition: object expected");
+                                message.condition = $root.google.type.Expr.fromObject(object.condition);
+                            }
                             return message;
                         };
     
@@ -4104,6 +4128,7 @@
                                 object.name = "";
                                 object.contentType = options.enums === String ? "CONTENT_TYPE_UNSPECIFIED" : 0;
                                 object.feedOutputConfig = null;
+                                object.condition = null;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -4121,6 +4146,8 @@
                                 object.contentType = options.enums === String ? $root.google.cloud.asset.v1.ContentType[message.contentType] : message.contentType;
                             if (message.feedOutputConfig != null && message.hasOwnProperty("feedOutputConfig"))
                                 object.feedOutputConfig = $root.google.cloud.asset.v1.FeedOutputConfig.toObject(message.feedOutputConfig, options);
+                            if (message.condition != null && message.hasOwnProperty("condition"))
+                                object.condition = $root.google.type.Expr.toObject(message.condition, options);
                             return object;
                         };
     
@@ -5198,6 +5225,8 @@
                          * @property {google.cloud.asset.v1.ITimeWindow|null} [window] TemporalAsset window
                          * @property {boolean|null} [deleted] TemporalAsset deleted
                          * @property {google.cloud.asset.v1.IAsset|null} [asset] TemporalAsset asset
+                         * @property {google.cloud.asset.v1.TemporalAsset.PriorAssetState|null} [priorAssetState] TemporalAsset priorAssetState
+                         * @property {google.cloud.asset.v1.IAsset|null} [priorAsset] TemporalAsset priorAsset
                          */
     
                         /**
@@ -5240,6 +5269,22 @@
                         TemporalAsset.prototype.asset = null;
     
                         /**
+                         * TemporalAsset priorAssetState.
+                         * @member {google.cloud.asset.v1.TemporalAsset.PriorAssetState} priorAssetState
+                         * @memberof google.cloud.asset.v1.TemporalAsset
+                         * @instance
+                         */
+                        TemporalAsset.prototype.priorAssetState = 0;
+    
+                        /**
+                         * TemporalAsset priorAsset.
+                         * @member {google.cloud.asset.v1.IAsset|null|undefined} priorAsset
+                         * @memberof google.cloud.asset.v1.TemporalAsset
+                         * @instance
+                         */
+                        TemporalAsset.prototype.priorAsset = null;
+    
+                        /**
                          * Creates a new TemporalAsset instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.asset.v1.TemporalAsset
@@ -5269,6 +5314,10 @@
                                 writer.uint32(/* id 2, wireType 0 =*/16).bool(message.deleted);
                             if (message.asset != null && Object.hasOwnProperty.call(message, "asset"))
                                 $root.google.cloud.asset.v1.Asset.encode(message.asset, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.priorAssetState != null && Object.hasOwnProperty.call(message, "priorAssetState"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.priorAssetState);
+                            if (message.priorAsset != null && Object.hasOwnProperty.call(message, "priorAsset"))
+                                $root.google.cloud.asset.v1.Asset.encode(message.priorAsset, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
                             return writer;
                         };
     
@@ -5311,6 +5360,12 @@
                                     break;
                                 case 3:
                                     message.asset = $root.google.cloud.asset.v1.Asset.decode(reader, reader.uint32());
+                                    break;
+                                case 4:
+                                    message.priorAssetState = reader.int32();
+                                    break;
+                                case 5:
+                                    message.priorAsset = $root.google.cloud.asset.v1.Asset.decode(reader, reader.uint32());
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -5360,6 +5415,22 @@
                                 if (error)
                                     return "asset." + error;
                             }
+                            if (message.priorAssetState != null && message.hasOwnProperty("priorAssetState"))
+                                switch (message.priorAssetState) {
+                                default:
+                                    return "priorAssetState: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                    break;
+                                }
+                            if (message.priorAsset != null && message.hasOwnProperty("priorAsset")) {
+                                var error = $root.google.cloud.asset.v1.Asset.verify(message.priorAsset);
+                                if (error)
+                                    return "priorAsset." + error;
+                            }
                             return null;
                         };
     
@@ -5387,6 +5458,33 @@
                                     throw TypeError(".google.cloud.asset.v1.TemporalAsset.asset: object expected");
                                 message.asset = $root.google.cloud.asset.v1.Asset.fromObject(object.asset);
                             }
+                            switch (object.priorAssetState) {
+                            case "PRIOR_ASSET_STATE_UNSPECIFIED":
+                            case 0:
+                                message.priorAssetState = 0;
+                                break;
+                            case "PRESENT":
+                            case 1:
+                                message.priorAssetState = 1;
+                                break;
+                            case "INVALID":
+                            case 2:
+                                message.priorAssetState = 2;
+                                break;
+                            case "DOES_NOT_EXIST":
+                            case 3:
+                                message.priorAssetState = 3;
+                                break;
+                            case "DELETED":
+                            case 4:
+                                message.priorAssetState = 4;
+                                break;
+                            }
+                            if (object.priorAsset != null) {
+                                if (typeof object.priorAsset !== "object")
+                                    throw TypeError(".google.cloud.asset.v1.TemporalAsset.priorAsset: object expected");
+                                message.priorAsset = $root.google.cloud.asset.v1.Asset.fromObject(object.priorAsset);
+                            }
                             return message;
                         };
     
@@ -5407,6 +5505,8 @@
                                 object.window = null;
                                 object.deleted = false;
                                 object.asset = null;
+                                object.priorAssetState = options.enums === String ? "PRIOR_ASSET_STATE_UNSPECIFIED" : 0;
+                                object.priorAsset = null;
                             }
                             if (message.window != null && message.hasOwnProperty("window"))
                                 object.window = $root.google.cloud.asset.v1.TimeWindow.toObject(message.window, options);
@@ -5414,6 +5514,10 @@
                                 object.deleted = message.deleted;
                             if (message.asset != null && message.hasOwnProperty("asset"))
                                 object.asset = $root.google.cloud.asset.v1.Asset.toObject(message.asset, options);
+                            if (message.priorAssetState != null && message.hasOwnProperty("priorAssetState"))
+                                object.priorAssetState = options.enums === String ? $root.google.cloud.asset.v1.TemporalAsset.PriorAssetState[message.priorAssetState] : message.priorAssetState;
+                            if (message.priorAsset != null && message.hasOwnProperty("priorAsset"))
+                                object.priorAsset = $root.google.cloud.asset.v1.Asset.toObject(message.priorAsset, options);
                             return object;
                         };
     
@@ -5427,6 +5531,26 @@
                         TemporalAsset.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
+    
+                        /**
+                         * PriorAssetState enum.
+                         * @name google.cloud.asset.v1.TemporalAsset.PriorAssetState
+                         * @enum {number}
+                         * @property {number} PRIOR_ASSET_STATE_UNSPECIFIED=0 PRIOR_ASSET_STATE_UNSPECIFIED value
+                         * @property {number} PRESENT=1 PRESENT value
+                         * @property {number} INVALID=2 INVALID value
+                         * @property {number} DOES_NOT_EXIST=3 DOES_NOT_EXIST value
+                         * @property {number} DELETED=4 DELETED value
+                         */
+                        TemporalAsset.PriorAssetState = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "PRIOR_ASSET_STATE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "PRESENT"] = 1;
+                            values[valuesById[2] = "INVALID"] = 2;
+                            values[valuesById[3] = "DOES_NOT_EXIST"] = 3;
+                            values[valuesById[4] = "DELETED"] = 4;
+                            return values;
+                        })();
     
                         return TemporalAsset;
                     })();
@@ -5657,6 +5781,7 @@
                          * Properties of an Asset.
                          * @memberof google.cloud.asset.v1
                          * @interface IAsset
+                         * @property {google.protobuf.ITimestamp|null} [updateTime] Asset updateTime
                          * @property {string|null} [name] Asset name
                          * @property {string|null} [assetType] Asset assetType
                          * @property {google.cloud.asset.v1.IResource|null} [resource] Asset resource
@@ -5684,6 +5809,14 @@
                                     if (properties[keys[i]] != null)
                                         this[keys[i]] = properties[keys[i]];
                         }
+    
+                        /**
+                         * Asset updateTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} updateTime
+                         * @memberof google.cloud.asset.v1.Asset
+                         * @instance
+                         */
+                        Asset.prototype.updateTime = null;
     
                         /**
                          * Asset name.
@@ -5815,6 +5948,8 @@
                             if (message.ancestors != null && message.ancestors.length)
                                 for (var i = 0; i < message.ancestors.length; ++i)
                                     writer.uint32(/* id 10, wireType 2 =*/82).string(message.ancestors[i]);
+                            if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
+                                $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
                             return writer;
                         };
     
@@ -5849,6 +5984,9 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
+                                case 11:
+                                    message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
                                 case 1:
                                     message.name = reader.string();
                                     break;
@@ -5916,6 +6054,11 @@
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
                             var properties = {};
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.updateTime);
+                                if (error)
+                                    return "updateTime." + error;
+                            }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 if (!$util.isString(message.name))
                                     return "name: string expected";
@@ -5991,6 +6134,11 @@
                             if (object instanceof $root.google.cloud.asset.v1.Asset)
                                 return object;
                             var message = new $root.google.cloud.asset.v1.Asset();
+                            if (object.updateTime != null) {
+                                if (typeof object.updateTime !== "object")
+                                    throw TypeError(".google.cloud.asset.v1.Asset.updateTime: object expected");
+                                message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime);
+                            }
                             if (object.name != null)
                                 message.name = String(object.name);
                             if (object.assetType != null)
@@ -6062,6 +6210,7 @@
                                 object.assetType = "";
                                 object.resource = null;
                                 object.iamPolicy = null;
+                                object.updateTime = null;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -6096,6 +6245,8 @@
                                 for (var j = 0; j < message.ancestors.length; ++j)
                                     object.ancestors[j] = message.ancestors[j];
                             }
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime"))
+                                object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
                             return object;
                         };
     
@@ -39406,6 +39557,316 @@
             return identity;
         })();
     
+        google.rpc = (function() {
+    
+            /**
+             * Namespace rpc.
+             * @memberof google
+             * @namespace
+             */
+            var rpc = {};
+    
+            /**
+             * Code enum.
+             * @name google.rpc.Code
+             * @enum {number}
+             * @property {number} OK=0 OK value
+             * @property {number} CANCELLED=1 CANCELLED value
+             * @property {number} UNKNOWN=2 UNKNOWN value
+             * @property {number} INVALID_ARGUMENT=3 INVALID_ARGUMENT value
+             * @property {number} DEADLINE_EXCEEDED=4 DEADLINE_EXCEEDED value
+             * @property {number} NOT_FOUND=5 NOT_FOUND value
+             * @property {number} ALREADY_EXISTS=6 ALREADY_EXISTS value
+             * @property {number} PERMISSION_DENIED=7 PERMISSION_DENIED value
+             * @property {number} UNAUTHENTICATED=16 UNAUTHENTICATED value
+             * @property {number} RESOURCE_EXHAUSTED=8 RESOURCE_EXHAUSTED value
+             * @property {number} FAILED_PRECONDITION=9 FAILED_PRECONDITION value
+             * @property {number} ABORTED=10 ABORTED value
+             * @property {number} OUT_OF_RANGE=11 OUT_OF_RANGE value
+             * @property {number} UNIMPLEMENTED=12 UNIMPLEMENTED value
+             * @property {number} INTERNAL=13 INTERNAL value
+             * @property {number} UNAVAILABLE=14 UNAVAILABLE value
+             * @property {number} DATA_LOSS=15 DATA_LOSS value
+             */
+            rpc.Code = (function() {
+                var valuesById = {}, values = Object.create(valuesById);
+                values[valuesById[0] = "OK"] = 0;
+                values[valuesById[1] = "CANCELLED"] = 1;
+                values[valuesById[2] = "UNKNOWN"] = 2;
+                values[valuesById[3] = "INVALID_ARGUMENT"] = 3;
+                values[valuesById[4] = "DEADLINE_EXCEEDED"] = 4;
+                values[valuesById[5] = "NOT_FOUND"] = 5;
+                values[valuesById[6] = "ALREADY_EXISTS"] = 6;
+                values[valuesById[7] = "PERMISSION_DENIED"] = 7;
+                values[valuesById[16] = "UNAUTHENTICATED"] = 16;
+                values[valuesById[8] = "RESOURCE_EXHAUSTED"] = 8;
+                values[valuesById[9] = "FAILED_PRECONDITION"] = 9;
+                values[valuesById[10] = "ABORTED"] = 10;
+                values[valuesById[11] = "OUT_OF_RANGE"] = 11;
+                values[valuesById[12] = "UNIMPLEMENTED"] = 12;
+                values[valuesById[13] = "INTERNAL"] = 13;
+                values[valuesById[14] = "UNAVAILABLE"] = 14;
+                values[valuesById[15] = "DATA_LOSS"] = 15;
+                return values;
+            })();
+    
+            rpc.Status = (function() {
+    
+                /**
+                 * Properties of a Status.
+                 * @memberof google.rpc
+                 * @interface IStatus
+                 * @property {number|null} [code] Status code
+                 * @property {string|null} [message] Status message
+                 * @property {Array.<google.protobuf.IAny>|null} [details] Status details
+                 */
+    
+                /**
+                 * Constructs a new Status.
+                 * @memberof google.rpc
+                 * @classdesc Represents a Status.
+                 * @implements IStatus
+                 * @constructor
+                 * @param {google.rpc.IStatus=} [properties] Properties to set
+                 */
+                function Status(properties) {
+                    this.details = [];
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * Status code.
+                 * @member {number} code
+                 * @memberof google.rpc.Status
+                 * @instance
+                 */
+                Status.prototype.code = 0;
+    
+                /**
+                 * Status message.
+                 * @member {string} message
+                 * @memberof google.rpc.Status
+                 * @instance
+                 */
+                Status.prototype.message = "";
+    
+                /**
+                 * Status details.
+                 * @member {Array.<google.protobuf.IAny>} details
+                 * @memberof google.rpc.Status
+                 * @instance
+                 */
+                Status.prototype.details = $util.emptyArray;
+    
+                /**
+                 * Creates a new Status instance using the specified properties.
+                 * @function create
+                 * @memberof google.rpc.Status
+                 * @static
+                 * @param {google.rpc.IStatus=} [properties] Properties to set
+                 * @returns {google.rpc.Status} Status instance
+                 */
+                Status.create = function create(properties) {
+                    return new Status(properties);
+                };
+    
+                /**
+                 * Encodes the specified Status message. Does not implicitly {@link google.rpc.Status.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.rpc.Status
+                 * @static
+                 * @param {google.rpc.IStatus} message Status message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Status.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.code != null && Object.hasOwnProperty.call(message, "code"))
+                        writer.uint32(/* id 1, wireType 0 =*/8).int32(message.code);
+                    if (message.message != null && Object.hasOwnProperty.call(message, "message"))
+                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.message);
+                    if (message.details != null && message.details.length)
+                        for (var i = 0; i < message.details.length; ++i)
+                            $root.google.protobuf.Any.encode(message.details[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified Status message, length delimited. Does not implicitly {@link google.rpc.Status.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.rpc.Status
+                 * @static
+                 * @param {google.rpc.IStatus} message Status message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Status.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a Status message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.rpc.Status
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.rpc.Status} Status
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Status.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.rpc.Status();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            message.code = reader.int32();
+                            break;
+                        case 2:
+                            message.message = reader.string();
+                            break;
+                        case 3:
+                            if (!(message.details && message.details.length))
+                                message.details = [];
+                            message.details.push($root.google.protobuf.Any.decode(reader, reader.uint32()));
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a Status message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.rpc.Status
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.rpc.Status} Status
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Status.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a Status message.
+                 * @function verify
+                 * @memberof google.rpc.Status
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                Status.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.code != null && message.hasOwnProperty("code"))
+                        if (!$util.isInteger(message.code))
+                            return "code: integer expected";
+                    if (message.message != null && message.hasOwnProperty("message"))
+                        if (!$util.isString(message.message))
+                            return "message: string expected";
+                    if (message.details != null && message.hasOwnProperty("details")) {
+                        if (!Array.isArray(message.details))
+                            return "details: array expected";
+                        for (var i = 0; i < message.details.length; ++i) {
+                            var error = $root.google.protobuf.Any.verify(message.details[i]);
+                            if (error)
+                                return "details." + error;
+                        }
+                    }
+                    return null;
+                };
+    
+                /**
+                 * Creates a Status message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.rpc.Status
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.rpc.Status} Status
+                 */
+                Status.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.rpc.Status)
+                        return object;
+                    var message = new $root.google.rpc.Status();
+                    if (object.code != null)
+                        message.code = object.code | 0;
+                    if (object.message != null)
+                        message.message = String(object.message);
+                    if (object.details) {
+                        if (!Array.isArray(object.details))
+                            throw TypeError(".google.rpc.Status.details: array expected");
+                        message.details = [];
+                        for (var i = 0; i < object.details.length; ++i) {
+                            if (typeof object.details[i] !== "object")
+                                throw TypeError(".google.rpc.Status.details: object expected");
+                            message.details[i] = $root.google.protobuf.Any.fromObject(object.details[i]);
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a Status message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.rpc.Status
+                 * @static
+                 * @param {google.rpc.Status} message Status
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                Status.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.arrays || options.defaults)
+                        object.details = [];
+                    if (options.defaults) {
+                        object.code = 0;
+                        object.message = "";
+                    }
+                    if (message.code != null && message.hasOwnProperty("code"))
+                        object.code = message.code;
+                    if (message.message != null && message.hasOwnProperty("message"))
+                        object.message = message.message;
+                    if (message.details && message.details.length) {
+                        object.details = [];
+                        for (var j = 0; j < message.details.length; ++j)
+                            object.details[j] = $root.google.protobuf.Any.toObject(message.details[j], options);
+                    }
+                    return object;
+                };
+    
+                /**
+                 * Converts this Status to JSON.
+                 * @function toJSON
+                 * @memberof google.rpc.Status
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                Status.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                return Status;
+            })();
+    
+            return rpc;
+        })();
+    
         google.longrunning = (function() {
     
             /**
@@ -41405,316 +41866,6 @@
             })();
     
             return longrunning;
-        })();
-    
-        google.rpc = (function() {
-    
-            /**
-             * Namespace rpc.
-             * @memberof google
-             * @namespace
-             */
-            var rpc = {};
-    
-            rpc.Status = (function() {
-    
-                /**
-                 * Properties of a Status.
-                 * @memberof google.rpc
-                 * @interface IStatus
-                 * @property {number|null} [code] Status code
-                 * @property {string|null} [message] Status message
-                 * @property {Array.<google.protobuf.IAny>|null} [details] Status details
-                 */
-    
-                /**
-                 * Constructs a new Status.
-                 * @memberof google.rpc
-                 * @classdesc Represents a Status.
-                 * @implements IStatus
-                 * @constructor
-                 * @param {google.rpc.IStatus=} [properties] Properties to set
-                 */
-                function Status(properties) {
-                    this.details = [];
-                    if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
-                                this[keys[i]] = properties[keys[i]];
-                }
-    
-                /**
-                 * Status code.
-                 * @member {number} code
-                 * @memberof google.rpc.Status
-                 * @instance
-                 */
-                Status.prototype.code = 0;
-    
-                /**
-                 * Status message.
-                 * @member {string} message
-                 * @memberof google.rpc.Status
-                 * @instance
-                 */
-                Status.prototype.message = "";
-    
-                /**
-                 * Status details.
-                 * @member {Array.<google.protobuf.IAny>} details
-                 * @memberof google.rpc.Status
-                 * @instance
-                 */
-                Status.prototype.details = $util.emptyArray;
-    
-                /**
-                 * Creates a new Status instance using the specified properties.
-                 * @function create
-                 * @memberof google.rpc.Status
-                 * @static
-                 * @param {google.rpc.IStatus=} [properties] Properties to set
-                 * @returns {google.rpc.Status} Status instance
-                 */
-                Status.create = function create(properties) {
-                    return new Status(properties);
-                };
-    
-                /**
-                 * Encodes the specified Status message. Does not implicitly {@link google.rpc.Status.verify|verify} messages.
-                 * @function encode
-                 * @memberof google.rpc.Status
-                 * @static
-                 * @param {google.rpc.IStatus} message Status message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                Status.encode = function encode(message, writer) {
-                    if (!writer)
-                        writer = $Writer.create();
-                    if (message.code != null && Object.hasOwnProperty.call(message, "code"))
-                        writer.uint32(/* id 1, wireType 0 =*/8).int32(message.code);
-                    if (message.message != null && Object.hasOwnProperty.call(message, "message"))
-                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.message);
-                    if (message.details != null && message.details.length)
-                        for (var i = 0; i < message.details.length; ++i)
-                            $root.google.protobuf.Any.encode(message.details[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
-                    return writer;
-                };
-    
-                /**
-                 * Encodes the specified Status message, length delimited. Does not implicitly {@link google.rpc.Status.verify|verify} messages.
-                 * @function encodeDelimited
-                 * @memberof google.rpc.Status
-                 * @static
-                 * @param {google.rpc.IStatus} message Status message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                Status.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
-                };
-    
-                /**
-                 * Decodes a Status message from the specified reader or buffer.
-                 * @function decode
-                 * @memberof google.rpc.Status
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @param {number} [length] Message length if known beforehand
-                 * @returns {google.rpc.Status} Status
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                Status.decode = function decode(reader, length) {
-                    if (!(reader instanceof $Reader))
-                        reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.rpc.Status();
-                    while (reader.pos < end) {
-                        var tag = reader.uint32();
-                        switch (tag >>> 3) {
-                        case 1:
-                            message.code = reader.int32();
-                            break;
-                        case 2:
-                            message.message = reader.string();
-                            break;
-                        case 3:
-                            if (!(message.details && message.details.length))
-                                message.details = [];
-                            message.details.push($root.google.protobuf.Any.decode(reader, reader.uint32()));
-                            break;
-                        default:
-                            reader.skipType(tag & 7);
-                            break;
-                        }
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Decodes a Status message from the specified reader or buffer, length delimited.
-                 * @function decodeDelimited
-                 * @memberof google.rpc.Status
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {google.rpc.Status} Status
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                Status.decodeDelimited = function decodeDelimited(reader) {
-                    if (!(reader instanceof $Reader))
-                        reader = new $Reader(reader);
-                    return this.decode(reader, reader.uint32());
-                };
-    
-                /**
-                 * Verifies a Status message.
-                 * @function verify
-                 * @memberof google.rpc.Status
-                 * @static
-                 * @param {Object.<string,*>} message Plain object to verify
-                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                 */
-                Status.verify = function verify(message) {
-                    if (typeof message !== "object" || message === null)
-                        return "object expected";
-                    if (message.code != null && message.hasOwnProperty("code"))
-                        if (!$util.isInteger(message.code))
-                            return "code: integer expected";
-                    if (message.message != null && message.hasOwnProperty("message"))
-                        if (!$util.isString(message.message))
-                            return "message: string expected";
-                    if (message.details != null && message.hasOwnProperty("details")) {
-                        if (!Array.isArray(message.details))
-                            return "details: array expected";
-                        for (var i = 0; i < message.details.length; ++i) {
-                            var error = $root.google.protobuf.Any.verify(message.details[i]);
-                            if (error)
-                                return "details." + error;
-                        }
-                    }
-                    return null;
-                };
-    
-                /**
-                 * Creates a Status message from a plain object. Also converts values to their respective internal types.
-                 * @function fromObject
-                 * @memberof google.rpc.Status
-                 * @static
-                 * @param {Object.<string,*>} object Plain object
-                 * @returns {google.rpc.Status} Status
-                 */
-                Status.fromObject = function fromObject(object) {
-                    if (object instanceof $root.google.rpc.Status)
-                        return object;
-                    var message = new $root.google.rpc.Status();
-                    if (object.code != null)
-                        message.code = object.code | 0;
-                    if (object.message != null)
-                        message.message = String(object.message);
-                    if (object.details) {
-                        if (!Array.isArray(object.details))
-                            throw TypeError(".google.rpc.Status.details: array expected");
-                        message.details = [];
-                        for (var i = 0; i < object.details.length; ++i) {
-                            if (typeof object.details[i] !== "object")
-                                throw TypeError(".google.rpc.Status.details: object expected");
-                            message.details[i] = $root.google.protobuf.Any.fromObject(object.details[i]);
-                        }
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Creates a plain object from a Status message. Also converts values to other types if specified.
-                 * @function toObject
-                 * @memberof google.rpc.Status
-                 * @static
-                 * @param {google.rpc.Status} message Status
-                 * @param {$protobuf.IConversionOptions} [options] Conversion options
-                 * @returns {Object.<string,*>} Plain object
-                 */
-                Status.toObject = function toObject(message, options) {
-                    if (!options)
-                        options = {};
-                    var object = {};
-                    if (options.arrays || options.defaults)
-                        object.details = [];
-                    if (options.defaults) {
-                        object.code = 0;
-                        object.message = "";
-                    }
-                    if (message.code != null && message.hasOwnProperty("code"))
-                        object.code = message.code;
-                    if (message.message != null && message.hasOwnProperty("message"))
-                        object.message = message.message;
-                    if (message.details && message.details.length) {
-                        object.details = [];
-                        for (var j = 0; j < message.details.length; ++j)
-                            object.details[j] = $root.google.protobuf.Any.toObject(message.details[j], options);
-                    }
-                    return object;
-                };
-    
-                /**
-                 * Converts this Status to JSON.
-                 * @function toJSON
-                 * @memberof google.rpc.Status
-                 * @instance
-                 * @returns {Object.<string,*>} JSON object
-                 */
-                Status.prototype.toJSON = function toJSON() {
-                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                };
-    
-                return Status;
-            })();
-    
-            /**
-             * Code enum.
-             * @name google.rpc.Code
-             * @enum {number}
-             * @property {number} OK=0 OK value
-             * @property {number} CANCELLED=1 CANCELLED value
-             * @property {number} UNKNOWN=2 UNKNOWN value
-             * @property {number} INVALID_ARGUMENT=3 INVALID_ARGUMENT value
-             * @property {number} DEADLINE_EXCEEDED=4 DEADLINE_EXCEEDED value
-             * @property {number} NOT_FOUND=5 NOT_FOUND value
-             * @property {number} ALREADY_EXISTS=6 ALREADY_EXISTS value
-             * @property {number} PERMISSION_DENIED=7 PERMISSION_DENIED value
-             * @property {number} UNAUTHENTICATED=16 UNAUTHENTICATED value
-             * @property {number} RESOURCE_EXHAUSTED=8 RESOURCE_EXHAUSTED value
-             * @property {number} FAILED_PRECONDITION=9 FAILED_PRECONDITION value
-             * @property {number} ABORTED=10 ABORTED value
-             * @property {number} OUT_OF_RANGE=11 OUT_OF_RANGE value
-             * @property {number} UNIMPLEMENTED=12 UNIMPLEMENTED value
-             * @property {number} INTERNAL=13 INTERNAL value
-             * @property {number} UNAVAILABLE=14 UNAVAILABLE value
-             * @property {number} DATA_LOSS=15 DATA_LOSS value
-             */
-            rpc.Code = (function() {
-                var valuesById = {}, values = Object.create(valuesById);
-                values[valuesById[0] = "OK"] = 0;
-                values[valuesById[1] = "CANCELLED"] = 1;
-                values[valuesById[2] = "UNKNOWN"] = 2;
-                values[valuesById[3] = "INVALID_ARGUMENT"] = 3;
-                values[valuesById[4] = "DEADLINE_EXCEEDED"] = 4;
-                values[valuesById[5] = "NOT_FOUND"] = 5;
-                values[valuesById[6] = "ALREADY_EXISTS"] = 6;
-                values[valuesById[7] = "PERMISSION_DENIED"] = 7;
-                values[valuesById[16] = "UNAUTHENTICATED"] = 16;
-                values[valuesById[8] = "RESOURCE_EXHAUSTED"] = 8;
-                values[valuesById[9] = "FAILED_PRECONDITION"] = 9;
-                values[valuesById[10] = "ABORTED"] = 10;
-                values[valuesById[11] = "OUT_OF_RANGE"] = 11;
-                values[valuesById[12] = "UNIMPLEMENTED"] = 12;
-                values[valuesById[13] = "INTERNAL"] = 13;
-                values[valuesById[14] = "UNAVAILABLE"] = 14;
-                values[valuesById[15] = "DATA_LOSS"] = 15;
-                return values;
-            })();
-    
-            return rpc;
         })();
     
         return google;

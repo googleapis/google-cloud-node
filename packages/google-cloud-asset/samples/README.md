@@ -19,6 +19,8 @@
   * [Get Feed](#get-feed)
   * [List Feeds](#list-feeds)
   * [Asset History Quickstart](#asset-history-quickstart)
+  * [Search All Iam Policies](#search-all-iam-policies)
+  * [Search All Resources](#search-all-resources)
   * [Update Feed](#update-feed)
 
 ## Before you begin
@@ -162,6 +164,44 @@ __Usage:__
 
 
 `node getBatchAssetHistory "storage.googleapis.com/<BUCKET_NAME>"`
+
+
+-----
+
+
+
+
+### Search All Iam Policies
+
+Search All Iam Policies.
+
+View the [source code](https://github.com/googleapis/nodejs-asset/blob/master/samples/searchAllIamPolicies.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-asset&page=editor&open_in_editor=samples/searchAllIamPolicies.js,samples/README.md)
+
+__Usage:__
+
+
+`node searchAllIamPolicies <SCOPE> <QUERY> <PAGE_SIZE> <PAGE_TOKEN>`
+
+
+-----
+
+
+
+
+### Search All Resources
+
+Search All Resources.
+
+View the [source code](https://github.com/googleapis/nodejs-asset/blob/master/samples/searchAllResources.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-asset&page=editor&open_in_editor=samples/searchAllResources.js,samples/README.md)
+
+__Usage:__
+
+
+`node searchAllResources <SCOPE> <QUERY> <ASSET_TYPES> <PAGE_SIZE> <PAGE_TOKEN> <ORDER_BY>`
 
 
 -----
