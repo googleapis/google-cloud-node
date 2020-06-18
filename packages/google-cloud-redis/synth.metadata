@@ -4,7 +4,7 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/nodejs-redis.git",
-        "sha": "55a1e1375a27aa016fcdbe8b7b32ada072f4927a"
+        "sha": "c68c4e55c8c7b8ae2813fe2c585cbfa6cab91787"
       }
     },
     {
@@ -19,7 +19,7 @@
       "git": {
         "name": "synthtool",
         "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "e7034945fbdc0e79d3c57f6e299e5c90b0f11469"
+        "sha": "b10590a4a1568548dd13cfcea9aa11d40898144b"
       }
     }
   ],
