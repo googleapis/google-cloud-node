@@ -1603,7 +1603,8 @@ export class SecurityCenterClient {
     >
   ): void;
   /**
-   * Updates a notification config.
+   * Updates a notification config. The following update
+   * fields are allowed: description, pubsub_topic, streaming_config.filter
    *
    * @param {Object} request
    *   The request object that will be sent.

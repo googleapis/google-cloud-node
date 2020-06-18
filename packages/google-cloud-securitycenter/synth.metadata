@@ -4,15 +4,15 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/nodejs-security-center.git",
-        "sha": "f71426053da4eb2416ebd593862e89c0d5557827"
+        "sha": "b1644df15866ac91d2ea7b4cec43c835b3f9e5c8"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "b789f790565ad7cc473571b0cf35dfbe6707f6a8",
-        "internalRef": "315933871"
+        "sha": "714a5f10f22d932bf4365dfdd57ced2c819e0ade",
+        "internalRef": "316714521"
       }
     },
     {
