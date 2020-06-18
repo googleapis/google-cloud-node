@@ -5,7 +5,7 @@
   "license": "Apache-2.0",
   "author": "Google Inc.",
   "engines": {
-    "node": ">10"
+    "node": ">=10"
   },
   "repository": "googleapis/nodejs-compute",
   "main": "./src/index.js",
