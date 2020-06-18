@@ -1114,16 +1114,20 @@ describe('Compute', () => {
 
   async function deleteAllTestObjects(opts) {
     opts.name = opts.expiredOnly ? TESTS_PREFIX : FULL_PREFIX;
-    await deleteRegionalRules(opts);
-    await callAndDeleteGcloudTestObject('Rules', opts);
-    await deleteTargetProxies(opts);
-    await deleteUrlMaps(opts);
-    await callAndDeleteGcloudTestObject('Services', opts);
-    await deleteHttpsHealthChecks(opts);
-    await deleteInstanceGroupManagers(opts);
-    await deleteInstanceTemplates(opts);
-    await deleteTargetInstances(opts);
-    await deleteAllGcloudTestObjects(opts);
+    try {
+      await deleteRegionalRules(opts);
+      await callAndDeleteGcloudTestObject('Rules', opts);
+      await deleteTargetProxies(opts);
+      await deleteUrlMaps(opts);
+      await callAndDeleteGcloudTestObject('Services', opts);
+      await deleteHttpsHealthChecks(opts);
+      await deleteInstanceGroupManagers(opts);
+      await deleteInstanceTemplates(opts);
+      await deleteTargetInstances(opts);
+      await deleteAllGcloudTestObjects(opts);
+    } catch (err) {
+      console.warn(err);
+    }
   }
 
   async function deleteAllGcloudTestObjects(opts) {
