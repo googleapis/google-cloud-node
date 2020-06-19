@@ -3,8 +3,8 @@
     {
       "git": {
         "name": ".",
-        "remote": "git@github.com:googleapis/nodejs-recaptcha-enterprise.git",
-        "sha": "f548f0270d13a5195c345e209ffeb75a1d038344"
+        "remote": "https://github.com/googleapis/nodejs-recaptcha-enterprise.git",
+        "sha": "52fe53d93402d247036b31badde5d57fa4f1ee78"
       }
     },
     {
@@ -13,6 +13,33 @@
         "remote": "https://github.com/googleapis/googleapis.git",
         "sha": "c1ba5ba3f24307ca5a6df350d0137c29d69983d5",
         "internalRef": "316715576"
+      }
+    },
+    {
+      "git": {
+        "name": "synthtool",
+        "remote": "https://github.com/googleapis/synthtool.git",
+        "sha": "b10590a4a1568548dd13cfcea9aa11d40898144b"
+      }
+    }
+  ],
+  "destinations": [
+    {
+      "client": {
+        "source": "googleapis",
+        "apiName": "recaptchaenterprise",
+        "apiVersion": "v1beta1",
+        "language": "typescript",
+        "generator": "gapic-generator-typescript"
+      }
+    },
+    {
+      "client": {
+        "source": "googleapis",
+        "apiName": "recaptchaenterprise",
+        "apiVersion": "v1",
+        "language": "typescript",
+        "generator": "gapic-generator-typescript"
       }
     }
   ]
