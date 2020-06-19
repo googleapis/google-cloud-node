@@ -19408,6 +19408,7 @@
                          * @property {google.cloud.tasks.v2beta3.Queue.State|null} [state] Queue state
                          * @property {google.protobuf.ITimestamp|null} [purgeTime] Queue purgeTime
                          * @property {google.cloud.tasks.v2beta3.IStackdriverLoggingConfig|null} [stackdriverLoggingConfig] Queue stackdriverLoggingConfig
+                         * @property {google.cloud.tasks.v2beta3.Queue.Type|null} [type] Queue type
                          */
     
                         /**
@@ -19481,6 +19482,14 @@
                          */
                         Queue.prototype.stackdriverLoggingConfig = null;
     
+                        /**
+                         * Queue type.
+                         * @member {google.cloud.tasks.v2beta3.Queue.Type} type
+                         * @memberof google.cloud.tasks.v2beta3.Queue
+                         * @instance
+                         */
+                        Queue.prototype.type = 0;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -19533,6 +19542,8 @@
                                 $root.google.protobuf.Timestamp.encode(message.purgeTime, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
                             if (message.stackdriverLoggingConfig != null && Object.hasOwnProperty.call(message, "stackdriverLoggingConfig"))
                                 $root.google.cloud.tasks.v2beta3.StackdriverLoggingConfig.encode(message.stackdriverLoggingConfig, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
+                            if (message.type != null && Object.hasOwnProperty.call(message, "type"))
+                                writer.uint32(/* id 11, wireType 0 =*/88).int32(message.type);
                             return writer;
                         };
     
@@ -19587,6 +19598,9 @@
                                     break;
                                 case 10:
                                     message.stackdriverLoggingConfig = $root.google.cloud.tasks.v2beta3.StackdriverLoggingConfig.decode(reader, reader.uint32());
+                                    break;
+                                case 11:
+                                    message.type = reader.int32();
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -19665,6 +19679,15 @@
                                 if (error)
                                     return "stackdriverLoggingConfig." + error;
                             }
+                            if (message.type != null && message.hasOwnProperty("type"))
+                                switch (message.type) {
+                                default:
+                                    return "type: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
                             return null;
                         };
     
@@ -19725,6 +19748,20 @@
                                     throw TypeError(".google.cloud.tasks.v2beta3.Queue.stackdriverLoggingConfig: object expected");
                                 message.stackdriverLoggingConfig = $root.google.cloud.tasks.v2beta3.StackdriverLoggingConfig.fromObject(object.stackdriverLoggingConfig);
                             }
+                            switch (object.type) {
+                            case "TYPE_UNSPECIFIED":
+                            case 0:
+                                message.type = 0;
+                                break;
+                            case "PULL":
+                            case 1:
+                                message.type = 1;
+                                break;
+                            case "PUSH":
+                            case 2:
+                                message.type = 2;
+                                break;
+                            }
                             return message;
                         };
     
@@ -19748,6 +19785,7 @@
                                 object.state = options.enums === String ? "STATE_UNSPECIFIED" : 0;
                                 object.purgeTime = null;
                                 object.stackdriverLoggingConfig = null;
+                                object.type = options.enums === String ? "TYPE_UNSPECIFIED" : 0;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -19766,6 +19804,8 @@
                                 object.purgeTime = $root.google.protobuf.Timestamp.toObject(message.purgeTime, options);
                             if (message.stackdriverLoggingConfig != null && message.hasOwnProperty("stackdriverLoggingConfig"))
                                 object.stackdriverLoggingConfig = $root.google.cloud.tasks.v2beta3.StackdriverLoggingConfig.toObject(message.stackdriverLoggingConfig, options);
+                            if (message.type != null && message.hasOwnProperty("type"))
+                                object.type = options.enums === String ? $root.google.cloud.tasks.v2beta3.Queue.Type[message.type] : message.type;
                             return object;
                         };
     
@@ -19795,6 +19835,22 @@
                             values[valuesById[1] = "RUNNING"] = 1;
                             values[valuesById[2] = "PAUSED"] = 2;
                             values[valuesById[3] = "DISABLED"] = 3;
+                            return values;
+                        })();
+    
+                        /**
+                         * Type enum.
+                         * @name google.cloud.tasks.v2beta3.Queue.Type
+                         * @enum {number}
+                         * @property {number} TYPE_UNSPECIFIED=0 TYPE_UNSPECIFIED value
+                         * @property {number} PULL=1 PULL value
+                         * @property {number} PUSH=2 PUSH value
+                         */
+                        Queue.Type = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "TYPE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "PULL"] = 1;
+                            values[valuesById[2] = "PUSH"] = 2;
                             return values;
                         })();
     

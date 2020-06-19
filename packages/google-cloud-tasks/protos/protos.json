@@ -1949,6 +1949,13 @@
                         "stackdriverLoggingConfig": {
                           "type": "StackdriverLoggingConfig",
                           "id": 10
+                        },
+                        "type": {
+                          "type": "Type",
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
                         }
                       },
                       "nested": {
@@ -1958,6 +1965,13 @@
                             "RUNNING": 1,
                             "PAUSED": 2,
                             "DISABLED": 3
+                          }
+                        },
+                        "Type": {
+                          "values": {
+                            "TYPE_UNSPECIFIED": 0,
+                            "PULL": 1,
+                            "PUSH": 2
                           }
                         }
                       }

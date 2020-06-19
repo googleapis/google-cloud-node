@@ -8518,6 +8518,9 @@ export namespace google {
 
                     /** Queue stackdriverLoggingConfig */
                     stackdriverLoggingConfig?: (google.cloud.tasks.v2beta3.IStackdriverLoggingConfig|null);
+
+                    /** Queue type */
+                    type?: (google.cloud.tasks.v2beta3.Queue.Type|keyof typeof google.cloud.tasks.v2beta3.Queue.Type|null);
                 }
 
                 /** Represents a Queue. */
@@ -8549,6 +8552,9 @@ export namespace google {
 
                     /** Queue stackdriverLoggingConfig. */
                     public stackdriverLoggingConfig?: (google.cloud.tasks.v2beta3.IStackdriverLoggingConfig|null);
+
+                    /** Queue type. */
+                    public type: (google.cloud.tasks.v2beta3.Queue.Type|keyof typeof google.cloud.tasks.v2beta3.Queue.Type);
 
                     /** Queue queueType. */
                     public queueType?: "appEngineHttpQueue";
@@ -8632,6 +8638,13 @@ export namespace google {
                         RUNNING = 1,
                         PAUSED = 2,
                         DISABLED = 3
+                    }
+
+                    /** Type enum. */
+                    enum Type {
+                        TYPE_UNSPECIFIED = 0,
+                        PULL = 1,
+                        PUSH = 2
                     }
                 }
 
