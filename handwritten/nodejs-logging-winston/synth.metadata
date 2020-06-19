@@ -4,14 +4,14 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/nodejs-logging-winston.git",
-        "sha": "064ba6fb6fd97bf8fe0d1d7d11b8a87d6fcc5bbb"
+        "sha": "953eadfbe83a125be0f3240e0d7001d89d0fc53f"
       }
     },
     {
       "git": {
         "name": "synthtool",
         "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "be74d3e532faa47eb59f1a0eaebde0860d1d8ab4"
+        "sha": "1c92077459db3dc50741e878f98b08c6261181e0"
       }
     }
   ]
