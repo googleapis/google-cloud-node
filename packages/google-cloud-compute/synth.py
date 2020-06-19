@@ -9,6 +9,8 @@ AUTOSYNTH_MULTIPLE_COMMITS = True
 
 common_templates = gcp.CommonTemplates()
 templates = common_templates.node_library()
-s.copy(templates)
+s.copy(templates, exclude=[
+  '.mocharc.js'
+])
 node.install()
 node.fix()
