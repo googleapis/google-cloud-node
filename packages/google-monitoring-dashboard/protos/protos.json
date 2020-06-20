@@ -13,6 +13,30 @@
             "optimize_for": "SPEED"
           },
           "nested": {
+            "Any": {
+              "fields": {
+                "type_url": {
+                  "type": "string",
+                  "id": 1
+                },
+                "value": {
+                  "type": "bytes",
+                  "id": 2
+                }
+              }
+            },
+            "Timestamp": {
+              "fields": {
+                "seconds": {
+                  "type": "int64",
+                  "id": 1
+                },
+                "nanos": {
+                  "type": "int32",
+                  "id": 2
+                }
+              }
+            },
             "Duration": {
               "fields": {
                 "seconds": {
@@ -930,10 +954,10 @@
                 "v1": {
                   "options": {
                     "go_package": "google.golang.org/genproto/googleapis/monitoring/dashboard/v1;dashboard",
-                    "ruby_package": "Google::Cloud::Monitoring::Dashboard::V1",
                     "java_multiple_files": true,
                     "java_outer_classname": "ServiceMonitoringProto",
-                    "java_package": "com.google.monitoring.dashboard.v1"
+                    "java_package": "com.google.monitoring.dashboard.v1",
+                    "ruby_package": "Google::Cloud::Monitoring::Dashboard::V1"
                   },
                   "nested": {
                     "Aggregation": {
@@ -1056,6 +1080,10 @@
                       }
                     },
                     "Dashboard": {
+                      "options": {
+                        "(google.api.resource).type": "monitoring.googleapis.com/Dashboard",
+                        "(google.api.resource).pattern": "projects/{project}/dashboards/{dashboard}"
+                      },
                       "oneofs": {
                         "layout": {
                           "oneof": [
@@ -1068,11 +1096,17 @@
                       "fields": {
                         "name": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
                         },
                         "displayName": {
                           "type": "string",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "etag": {
                           "type": "string",
@@ -1202,7 +1236,10 @@
                       "fields": {
                         "timeSeriesQuery": {
                           "type": "TimeSeriesQuery",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "gaugeView": {
                           "type": "GaugeView",
@@ -1235,7 +1272,10 @@
                           "fields": {
                             "sparkChartType": {
                               "type": "SparkChartType",
-                              "id": 1
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
                             },
                             "minAlignmentPeriod": {
                               "type": "google.protobuf.Duration",
@@ -1250,7 +1290,8 @@
                         "source": {
                           "oneof": [
                             "timeSeriesFilter",
-                            "timeSeriesFilterRatio"
+                            "timeSeriesFilterRatio",
+                            "timeSeriesQueryLanguage"
                           ]
                         }
                       },
@@ -1262,6 +1303,10 @@
                         "timeSeriesFilterRatio": {
                           "type": "TimeSeriesFilterRatio",
                           "id": 2
+                        },
+                        "timeSeriesQueryLanguage": {
+                          "type": "string",
+                          "id": 3
                         },
                         "unitOverride": {
                           "type": "string",
@@ -1290,13 +1335,20 @@
                           "type": "Aggregation",
                           "id": 2
                         },
+                        "secondaryAggregation": {
+                          "type": "Aggregation",
+                          "id": 3
+                        },
                         "pickTimeSeriesFilter": {
                           "type": "PickTimeSeriesFilter",
                           "id": 4
                         },
                         "statisticalTimeSeriesFilter": {
                           "type": "StatisticalTimeSeriesFilter",
-                          "id": 5
+                          "id": 5,
+                          "options": {
+                            "deprecated": true
+                          }
                         }
                       }
                     },
@@ -1328,7 +1380,10 @@
                         },
                         "statisticalTimeSeriesFilter": {
                           "type": "StatisticalTimeSeriesFilter",
-                          "id": 5
+                          "id": 5,
+                          "options": {
+                            "deprecated": true
+                          }
                         }
                       },
                       "nested": {
@@ -1418,7 +1473,10 @@
                         "dataSets": {
                           "rule": "repeated",
                           "type": "DataSet",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "timeshiftDuration": {
                           "type": "google.protobuf.Duration",
@@ -1447,7 +1505,10 @@
                           "fields": {
                             "timeSeriesQuery": {
                               "type": "TimeSeriesQuery",
-                              "id": 1
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
                             },
                             "plotType": {
                               "type": "PlotType",
@@ -1587,7 +1648,8 @@
                           "type": "string",
                           "id": 1,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudresourcemanager.googleapis.com/Project"
                           }
                         },
                         "pageSize": {
@@ -1619,7 +1681,8 @@
                           "type": "string",
                           "id": 1,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "monitoring.googleapis.com/Dashboard"
                           }
                         }
                       }
@@ -1630,7 +1693,8 @@
                           "type": "string",
                           "id": 1,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "monitoring.googleapis.com/Dashboard"
                           }
                         }
                       }
@@ -1662,6 +1726,139 @@
             "cc_enable_arenas": true
           },
           "nested": {
+            "Distribution": {
+              "fields": {
+                "count": {
+                  "type": "int64",
+                  "id": 1
+                },
+                "mean": {
+                  "type": "double",
+                  "id": 2
+                },
+                "sumOfSquaredDeviation": {
+                  "type": "double",
+                  "id": 3
+                },
+                "range": {
+                  "type": "Range",
+                  "id": 4
+                },
+                "bucketOptions": {
+                  "type": "BucketOptions",
+                  "id": 6
+                },
+                "bucketCounts": {
+                  "rule": "repeated",
+                  "type": "int64",
+                  "id": 7
+                },
+                "exemplars": {
+                  "rule": "repeated",
+                  "type": "Exemplar",
+                  "id": 10
+                }
+              },
+              "nested": {
+                "Range": {
+                  "fields": {
+                    "min": {
+                      "type": "double",
+                      "id": 1
+                    },
+                    "max": {
+                      "type": "double",
+                      "id": 2
+                    }
+                  }
+                },
+                "BucketOptions": {
+                  "oneofs": {
+                    "options": {
+                      "oneof": [
+                        "linearBuckets",
+                        "exponentialBuckets",
+                        "explicitBuckets"
+                      ]
+                    }
+                  },
+                  "fields": {
+                    "linearBuckets": {
+                      "type": "Linear",
+                      "id": 1
+                    },
+                    "exponentialBuckets": {
+                      "type": "Exponential",
+                      "id": 2
+                    },
+                    "explicitBuckets": {
+                      "type": "Explicit",
+                      "id": 3
+                    }
+                  },
+                  "nested": {
+                    "Linear": {
+                      "fields": {
+                        "numFiniteBuckets": {
+                          "type": "int32",
+                          "id": 1
+                        },
+                        "width": {
+                          "type": "double",
+                          "id": 2
+                        },
+                        "offset": {
+                          "type": "double",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "Exponential": {
+                      "fields": {
+                        "numFiniteBuckets": {
+                          "type": "int32",
+                          "id": 1
+                        },
+                        "growthFactor": {
+                          "type": "double",
+                          "id": 2
+                        },
+                        "scale": {
+                          "type": "double",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "Explicit": {
+                      "fields": {
+                        "bounds": {
+                          "rule": "repeated",
+                          "type": "double",
+                          "id": 1
+                        }
+                      }
+                    }
+                  }
+                },
+                "Exemplar": {
+                  "fields": {
+                    "value": {
+                      "type": "double",
+                      "id": 1
+                    },
+                    "timestamp": {
+                      "type": "google.protobuf.Timestamp",
+                      "id": 2
+                    },
+                    "attachments": {
+                      "rule": "repeated",
+                      "type": "google.protobuf.Any",
+                      "id": 3
+                    }
+                  }
+                }
+              }
+            },
             "fieldBehavior": {
               "rule": "repeated",
               "type": "google.api.FieldBehavior",
@@ -1676,6 +1873,72 @@
                 "OUTPUT_ONLY": 3,
                 "INPUT_ONLY": 4,
                 "IMMUTABLE": 5
+              }
+            },
+            "resourceReference": {
+              "type": "google.api.ResourceReference",
+              "id": 1055,
+              "extend": "google.protobuf.FieldOptions"
+            },
+            "resourceDefinition": {
+              "rule": "repeated",
+              "type": "google.api.ResourceDescriptor",
+              "id": 1053,
+              "extend": "google.protobuf.FileOptions"
+            },
+            "resource": {
+              "type": "google.api.ResourceDescriptor",
+              "id": 1053,
+              "extend": "google.protobuf.MessageOptions"
+            },
+            "ResourceDescriptor": {
+              "fields": {
+                "type": {
+                  "type": "string",
+                  "id": 1
+                },
+                "pattern": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 2
+                },
+                "nameField": {
+                  "type": "string",
+                  "id": 3
+                },
+                "history": {
+                  "type": "History",
+                  "id": 4
+                },
+                "plural": {
+                  "type": "string",
+                  "id": 5
+                },
+                "singular": {
+                  "type": "string",
+                  "id": 6
+                }
+              },
+              "nested": {
+                "History": {
+                  "values": {
+                    "HISTORY_UNSPECIFIED": 0,
+                    "ORIGINALLY_SINGLE_PATTERN": 1,
+                    "FUTURE_MULTI_PATTERN": 2
+                  }
+                }
+              }
+            },
+            "ResourceReference": {
+              "fields": {
+                "type": {
+                  "type": "string",
+                  "id": 1
+                },
+                "childType": {
+                  "type": "string",
+                  "id": 2
+                }
               }
             },
             "http": {

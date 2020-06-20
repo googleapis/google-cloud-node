@@ -55,6 +55,7 @@ export class DashboardsServiceClient {
     batching: {},
   };
   innerApiCalls: {[name: string]: Function};
+  pathTemplates: {[name: string]: gax.PathTemplate};
   dashboardsServiceStub?: Promise<{[name: string]: Function}>;
 
   /**
@@ -155,6 +156,15 @@ export class DashboardsServiceClient {
           require('../../protos/protos.json')
         : nodejsProtoPath
     );
+
+    // This API contains "path templates"; forward-slash-separated
+    // identifiers to uniquely identify resources within the API.
+    // Create useful helper objects for these.
+    this.pathTemplates = {
+      dashboardPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/dashboards/{dashboard}'
+      ),
+    };
 
     // Some of the methods on this service return "paged" results,
     // (e.g. 50 results at a time, with tokens to get subsequent
@@ -344,9 +354,11 @@ export class DashboardsServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The project on which to execute the request. The format is
-   *   `"projects/{project_id_or_number}"`. The {project_id_or_number} must match
-   *   the dashboard resource name.
+   *   Required. The project on which to execute the request. The format is:
+   *
+   *       projects/[PROJECT_ID_OR_NUMBER]
+   *
+   *   The `[PROJECT_ID_OR_NUMBER]` must match the dashboard resource name.
    * @param {google.monitoring.dashboard.v1.Dashboard} request.dashboard
    *   Required. The initial dashboard specification.
    * @param {object} [options]
@@ -440,10 +452,11 @@ export class DashboardsServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The resource name of the Dashboard. The format is one of
-   *   `"dashboards/{dashboard_id}"` (for system dashboards) or
-   *   `"projects/{project_id_or_number}/dashboards/{dashboard_id}"`
-   *   (for custom dashboards).
+   *   Required. The resource name of the Dashboard. The format is one of:
+   *
+   *    -  `dashboards/[DASHBOARD_ID]` (for system dashboards)
+   *    -  `projects/[PROJECT_ID_OR_NUMBER]/dashboards/[DASHBOARD_ID]`
+   *         (for custom dashboards).
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -535,8 +548,9 @@ export class DashboardsServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The resource name of the Dashboard. The format is
-   *   `"projects/{project_id_or_number}/dashboards/{dashboard_id}"`.
+   *   Required. The resource name of the Dashboard. The format is:
+   *
+   *       projects/[PROJECT_ID_OR_NUMBER]/dashboards/[DASHBOARD_ID]
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -721,8 +735,9 @@ export class DashboardsServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The scope of the dashboards to list. A project scope must be
-   *   specified in the form of `"projects/{project_id_or_number}"`.
+   *   Required. The scope of the dashboards to list. The format is:
+   *
+   *       projects/[PROJECT_ID_OR_NUMBER]
    * @param {number} request.pageSize
    *   A positive number that is the maximum number of results to return.
    *   If unspecified, a default of 1000 is used.
@@ -809,8 +824,9 @@ export class DashboardsServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The scope of the dashboards to list. A project scope must be
-   *   specified in the form of `"projects/{project_id_or_number}"`.
+   *   Required. The scope of the dashboards to list. The format is:
+   *
+   *       projects/[PROJECT_ID_OR_NUMBER]
    * @param {number} request.pageSize
    *   A positive number that is the maximum number of results to return.
    *   If unspecified, a default of 1000 is used.
@@ -853,8 +869,9 @@ export class DashboardsServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The scope of the dashboards to list. A project scope must be
-   *   specified in the form of `"projects/{project_id_or_number}"`.
+   *   Required. The scope of the dashboards to list. The format is:
+   *
+   *       projects/[PROJECT_ID_OR_NUMBER]
    * @param {number} request.pageSize
    *   A positive number that is the maximum number of results to return.
    *   If unspecified, a default of 1000 is used.
@@ -888,6 +905,47 @@ export class DashboardsServiceClient {
       (request as unknown) as RequestType,
       callSettings
     ) as AsyncIterable<protos.google.monitoring.dashboard.v1.IDashboard>;
+  }
+  // --------------------
+  // -- Path templates --
+  // --------------------
+
+  /**
+   * Return a fully-qualified dashboard resource name string.
+   *
+   * @param {string} project
+   * @param {string} dashboard
+   * @returns {string} Resource name string.
+   */
+  dashboardPath(project: string, dashboard: string) {
+    return this.pathTemplates.dashboardPathTemplate.render({
+      project: project,
+      dashboard: dashboard,
+    });
+  }
+
+  /**
+   * Parse the project from Dashboard resource.
+   *
+   * @param {string} dashboardName
+   *   A fully-qualified path representing Dashboard resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromDashboardName(dashboardName: string) {
+    return this.pathTemplates.dashboardPathTemplate.match(dashboardName)
+      .project;
+  }
+
+  /**
+   * Parse the dashboard from Dashboard resource.
+   *
+   * @param {string} dashboardName
+   *   A fully-qualified path representing Dashboard resource.
+   * @returns {string} A string representing the dashboard.
+   */
+  matchDashboardFromDashboardName(dashboardName: string) {
+    return this.pathTemplates.dashboardPathTemplate.match(dashboardName)
+      .dashboard;
   }
 
   /**

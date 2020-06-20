@@ -960,4 +960,55 @@ describe('v1.DashboardsServiceClient', () => {
       );
     });
   });
+
+  describe('Path templates', () => {
+    describe('dashboard', () => {
+      const fakePath = '/rendered/path/dashboard';
+      const expectedParameters = {
+        project: 'projectValue',
+        dashboard: 'dashboardValue',
+      };
+      const client = new dashboardsserviceModule.v1.DashboardsServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.dashboardPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.dashboardPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('dashboardPath', () => {
+        const result = client.dashboardPath('projectValue', 'dashboardValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.dashboardPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromDashboardName', () => {
+        const result = client.matchProjectFromDashboardName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.dashboardPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchDashboardFromDashboardName', () => {
+        const result = client.matchDashboardFromDashboardName(fakePath);
+        assert.strictEqual(result, 'dashboardValue');
+        assert(
+          (client.pathTemplates.dashboardPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+  });
 });
