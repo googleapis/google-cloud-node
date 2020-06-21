@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.2.0](https://www.github.com/googleapis/nodejs-bigquery-storage/compare/v2.1.0...v2.2.0) (2020-06-19)
+
+
+### Features
+
+* promote library to GA ([#75](https://www.github.com/googleapis/nodejs-bigquery-storage/issues/75)) ([7d7a67e](https://www.github.com/googleapis/nodejs-bigquery-storage/commit/7d7a67e9198e87cdcc4911d9505a121f1a1d9549))
+
 ## [2.1.0](https://www.github.com/googleapis/nodejs-bigquery-storage/compare/v2.0.0...v2.1.0) (2020-06-12)
 
 
