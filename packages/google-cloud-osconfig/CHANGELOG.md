@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.2.1](https://www.github.com/googleapis/nodejs-os-config/compare/v1.2.0...v1.2.1) (2020-06-18)
+
+
+### Bug Fixes
+
+* update node issue template ([#18](https://www.github.com/googleapis/nodejs-os-config/issues/18)) ([3d03605](https://www.github.com/googleapis/nodejs-os-config/commit/3d0360512d98ecdc11fd0267a0d4bfed5bc52900))
+
 ## [1.2.0](https://www.github.com/googleapis/nodejs-os-config/compare/v1.1.0...v1.2.0) (2020-06-16)
 
 
