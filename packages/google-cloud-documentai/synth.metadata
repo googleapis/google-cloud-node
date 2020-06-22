@@ -4,15 +4,15 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/nodejs-document-ai.git",
-        "sha": "b4aef1014338767666f05de59f04fb60b3600be6"
+        "sha": "69a7715a8ca0718f426ce64833a281eef4a18f92"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "2fc2caaacb15949c7f80426bfc7dafdd41dbc333",
-        "internalRef": "310239576"
+        "sha": "ed1174659dc748903dbb635c7e01e38c3f812fbb",
+        "internalRef": "315627096"
       }
     },
     {

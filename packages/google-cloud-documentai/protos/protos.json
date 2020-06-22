@@ -8,10 +8,13 @@
               "nested": {
                 "v1beta2": {
                   "options": {
+                    "csharp_namespace": "Google.Cloud.DocumentAI.V1Beta2",
                     "go_package": "google.golang.org/genproto/googleapis/cloud/documentai/v1beta2;documentai",
                     "java_multiple_files": true,
                     "java_outer_classname": "DocumentAiProto",
-                    "java_package": "com.google.cloud.documentai.v1beta2"
+                    "java_package": "com.google.cloud.documentai.v1beta2",
+                    "php_namespace": "Google\\Cloud\\DocumentAi\\V1beta2",
+                    "ruby_package": "Google::Cloud::DocumentAI::V1beta2"
                   },
                   "nested": {
                     "Document": {
