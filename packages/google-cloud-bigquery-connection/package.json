@@ -2,7 +2,7 @@
   "name": "@google-cloud/bigquery-connection",
   "version": "0.1.0",
   "description": "BigQuery Connection client for Node.js",
-  "repository": "googleapis/nodejs-connection",
+  "repository": "googleapis/nodejs-bigquery-connection",
   "license": "Apache-2.0",
   "author": "Google LLC",
   "main": "build/src/index.js",
