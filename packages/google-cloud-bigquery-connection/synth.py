@@ -31,7 +31,7 @@ for version in versions:
         },
         proto_path='/google/cloud/bigquery/connection/v1',
         version=version)
-    s.copy(library, excludes=[])
+    s.copy(library, excludes=['README.md', 'package.json'])
 
 # Copy common templates
 common_templates = gcp.CommonTemplates()
