@@ -17,13 +17,14 @@ const chalk = require('chalk');
 const { request, Gaxios } = require('gaxios');
 const figures = require('figures');
 const { readFileSync, writeFileSync } = require('fs');
+const parseLinkHeader = require('parse-link-header');
 
 const token = process.env.GITHUB_TOKEN;
 if (!token) {
   throw new Error('Please include a GITHUB_TOKEN env var.');
 }
+const baseUrl = 'https://api.github.com';
 const github = new Gaxios({
-  baseURL: 'https://api.github.com',
   headers: {
     authorization: `token ${token}`
   }
@@ -38,7 +39,7 @@ async function collectRepoMetadata (repos) {
   const repoMetadata = {};
   for (const repo of repos) {
     try {
-      const url = `/repos/${repo}/contents/.repo-metadata.json`;
+      const url = `${baseUrl}/repos/${repo}/contents/.repo-metadata.json`;
       const res = await github.request({ url });
       repoMetadata[repo] = JSON.parse(
         Buffer.from(res.data.content, 'base64').toString('utf8')
@@ -123,14 +124,23 @@ async function generateReadme (repoMetadata) {
 }
 
 async function getRepos () {
-  const res = await github.request({
-    url: '/search/repositories',
-    params: {
-      per_page: 100,
-      q: 'nodejs in:.repo-metadata.json org:googleapis is:public archived:false'
+  const q = 'nodejs in:.repo-metadata.json org:googleapis is:public archived:false';
+  let url = new URL('/search/repositories', baseUrl);
+  url.searchParams.set('q', q);
+  url.searchParams.set('per_page', 100);
+  const repos = [];
+  while (url) {
+    const res = await github.request({ url: url.href });
+    repos.push(...res.data.items.map(r => r.full_name));
+    url = null;
+    if (res.headers['link']) {
+      const link = parseLinkHeader(res.headers['link']);
+      if (link.next) {
+        url = new URL(link.next.url);
+      }
     }
-  });
-  return res.data.items.map(repo => repo.full_name);
+  }
+  return repos;
 }
 
 async function main () {
