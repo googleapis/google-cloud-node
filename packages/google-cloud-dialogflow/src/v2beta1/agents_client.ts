@@ -22,6 +22,7 @@ import {
   CallOptions,
   Descriptors,
   ClientOptions,
+  LROperation,
   PaginationCallback,
   GaxCall,
 } from 'google-gax';
@@ -31,7 +32,7 @@ import {Transform} from 'stream';
 import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
 import * as gapicConfig from './agents_client_config.json';
-
+import {operationsProtos} from 'google-gax';
 const version = require('../../../package.json').version;
 
 /**
@@ -82,6 +83,7 @@ export class AgentsClient {
   };
   innerApiCalls: {[name: string]: Function};
   pathTemplates: {[name: string]: gax.PathTemplate};
+  operationsClient: gax.OperationsClient;
   agentsStub?: Promise<{[name: string]: Function}>;
 
   /**
@@ -126,6 +128,13 @@ export class AgentsClient {
     }
     opts.servicePath = opts.servicePath || servicePath;
     opts.port = opts.port || port;
+
+    // users can override the config from client side, like retry codes name.
+    // The detailed structure of the clientConfig can be found here: https://github.com/googleapis/gax-nodejs/blob/master/src/gax.ts#L546
+    // The way to override client config for Showcase API:
+    //
+    // const customConfig = {"interfaces": {"google.showcase.v1beta1.Echo": {"methods": {"Echo": {"retry_codes_name": "idempotent", "retry_params_name": "default"}}}}}
+    // const showcaseClient = new showcaseClient({ projectId, customConfig });
     opts.clientConfig = opts.clientConfig || {};
 
     const isBrowser = typeof window !== 'undefined';
@@ -183,20 +192,53 @@ export class AgentsClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this.pathTemplates = {
+      documentPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/knowledgeBases/{knowledge_base}/documents/{document}'
+      ),
       environmentPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/agent/environments/{environment}'
+      ),
+      knowledgeBasePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/knowledgeBases/{knowledge_base}'
+      ),
+      projectPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}'
       ),
       projectAgentPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/agent'
       ),
+      projectAgentEntityTypePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/agent/entityTypes/{entity_type}'
+      ),
+      projectAgentEnvironmentUserSessionContextPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/agent/environments/{environment}/users/{user}/sessions/{session}/contexts/{context}'
+      ),
+      projectAgentEnvironmentUserSessionEntityTypePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/agent/environments/{environment}/users/{user}/sessions/{session}/entityTypes/{entity_type}'
+      ),
       projectAgentIntentPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/agent/intents/{intent}'
+      ),
+      projectAgentSessionContextPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/agent/sessions/{session}/contexts/{context}'
+      ),
+      projectAgentSessionEntityTypePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/agent/sessions/{session}/entityTypes/{entity_type}'
       ),
       projectLocationAgentPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/agent'
       ),
+      projectLocationAgentEntityTypePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/agent/entityTypes/{entity_type}'
+      ),
       projectLocationAgentIntentPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/agent/intents/{intent}'
+      ),
+      projectLocationAgentSessionContextPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/agent/sessions/{session}/contexts/{context}'
+      ),
+      projectLocationAgentSessionEntityTypePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/agent/sessions/{session}/entityTypes/{entity_type}'
       ),
     };
 
@@ -208,6 +250,70 @@ export class AgentsClient {
         'pageToken',
         'nextPageToken',
         'agents'
+      ),
+    };
+
+    // This API contains "long-running operations", which return a
+    // an Operation object that allows for tracking of the operation,
+    // rather than holding a request open.
+    const protoFilesRoot = opts.fallback
+      ? this._gaxModule.protobuf.Root.fromJSON(
+          // eslint-disable-next-line @typescript-eslint/no-var-requires
+          require('../../protos/protos.json')
+        )
+      : this._gaxModule.protobuf.loadSync(nodejsProtoPath);
+
+    this.operationsClient = this._gaxModule
+      .lro({
+        auth: this.auth,
+        grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
+      })
+      .operationsClient(opts);
+    const trainAgentResponse = protoFilesRoot.lookup(
+      '.google.protobuf.Empty'
+    ) as gax.protobuf.Type;
+    const trainAgentMetadata = protoFilesRoot.lookup(
+      '.google.protobuf.Struct'
+    ) as gax.protobuf.Type;
+    const exportAgentResponse = protoFilesRoot.lookup(
+      '.google.cloud.dialogflow.v2beta1.ExportAgentResponse'
+    ) as gax.protobuf.Type;
+    const exportAgentMetadata = protoFilesRoot.lookup(
+      '.google.protobuf.Struct'
+    ) as gax.protobuf.Type;
+    const importAgentResponse = protoFilesRoot.lookup(
+      '.google.protobuf.Empty'
+    ) as gax.protobuf.Type;
+    const importAgentMetadata = protoFilesRoot.lookup(
+      '.google.protobuf.Struct'
+    ) as gax.protobuf.Type;
+    const restoreAgentResponse = protoFilesRoot.lookup(
+      '.google.protobuf.Empty'
+    ) as gax.protobuf.Type;
+    const restoreAgentMetadata = protoFilesRoot.lookup(
+      '.google.protobuf.Struct'
+    ) as gax.protobuf.Type;
+
+    this.descriptors.longrunning = {
+      trainAgent: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        trainAgentResponse.decode.bind(trainAgentResponse),
+        trainAgentMetadata.decode.bind(trainAgentMetadata)
+      ),
+      exportAgent: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        exportAgentResponse.decode.bind(exportAgentResponse),
+        exportAgentMetadata.decode.bind(exportAgentMetadata)
+      ),
+      importAgent: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        importAgentResponse.decode.bind(importAgentResponse),
+        importAgentMetadata.decode.bind(importAgentMetadata)
+      ),
+      restoreAgent: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        restoreAgentResponse.decode.bind(restoreAgentResponse),
+        restoreAgentMetadata.decode.bind(restoreAgentMetadata)
       ),
     };
 
@@ -616,397 +722,6 @@ export class AgentsClient {
     this.initialize();
     return this.innerApiCalls.deleteAgent(request, options, callback);
   }
-  trainAgent(
-    request: protos.google.cloud.dialogflow.v2beta1.ITrainAgentRequest,
-    options?: gax.CallOptions
-  ): Promise<
-    [
-      protos.google.longrunning.IOperation,
-      protos.google.cloud.dialogflow.v2beta1.ITrainAgentRequest | undefined,
-      {} | undefined
-    ]
-  >;
-  trainAgent(
-    request: protos.google.cloud.dialogflow.v2beta1.ITrainAgentRequest,
-    options: gax.CallOptions,
-    callback: Callback<
-      protos.google.longrunning.IOperation,
-      | protos.google.cloud.dialogflow.v2beta1.ITrainAgentRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  trainAgent(
-    request: protos.google.cloud.dialogflow.v2beta1.ITrainAgentRequest,
-    callback: Callback<
-      protos.google.longrunning.IOperation,
-      | protos.google.cloud.dialogflow.v2beta1.ITrainAgentRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  /**
-   * Trains the specified agent.
-   *
-   *
-   * Operation <response: {@link google.protobuf.Empty|google.protobuf.Empty}>
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The project that the agent to train is associated with.
-   *   Format: `projects/<Project ID>`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Operation]{@link google.longrunning.Operation}.
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
-   */
-  trainAgent(
-    request: protos.google.cloud.dialogflow.v2beta1.ITrainAgentRequest,
-    optionsOrCallback?:
-      | gax.CallOptions
-      | Callback<
-          protos.google.longrunning.IOperation,
-          | protos.google.cloud.dialogflow.v2beta1.ITrainAgentRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.longrunning.IOperation,
-      | protos.google.cloud.dialogflow.v2beta1.ITrainAgentRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.longrunning.IOperation,
-      protos.google.cloud.dialogflow.v2beta1.ITrainAgentRequest | undefined,
-      {} | undefined
-    ]
-  > | void {
-    request = request || {};
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      parent: request.parent || '',
-    });
-    this.initialize();
-    return this.innerApiCalls.trainAgent(request, options, callback);
-  }
-  exportAgent(
-    request: protos.google.cloud.dialogflow.v2beta1.IExportAgentRequest,
-    options?: gax.CallOptions
-  ): Promise<
-    [
-      protos.google.longrunning.IOperation,
-      protos.google.cloud.dialogflow.v2beta1.IExportAgentRequest | undefined,
-      {} | undefined
-    ]
-  >;
-  exportAgent(
-    request: protos.google.cloud.dialogflow.v2beta1.IExportAgentRequest,
-    options: gax.CallOptions,
-    callback: Callback<
-      protos.google.longrunning.IOperation,
-      | protos.google.cloud.dialogflow.v2beta1.IExportAgentRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  exportAgent(
-    request: protos.google.cloud.dialogflow.v2beta1.IExportAgentRequest,
-    callback: Callback<
-      protos.google.longrunning.IOperation,
-      | protos.google.cloud.dialogflow.v2beta1.IExportAgentRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  /**
-   * Exports the specified agent to a ZIP file.
-   *
-   *
-   * Operation <response: {@link google.cloud.dialogflow.v2beta1.ExportAgentResponse|ExportAgentResponse}>
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The project that the agent to export is associated with.
-   *   Format: `projects/<Project ID>`.
-   * @param {string} request.agentUri
-   *   Optional. The
-   *   [Google Cloud Storage](https://cloud.google.com/storage/docs/)
-   *   URI to export the agent to.
-   *   The format of this URI must be `gs://<bucket-name>/<object-name>`.
-   *   If left unspecified, the serialized agent is returned inline.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Operation]{@link google.longrunning.Operation}.
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
-   */
-  exportAgent(
-    request: protos.google.cloud.dialogflow.v2beta1.IExportAgentRequest,
-    optionsOrCallback?:
-      | gax.CallOptions
-      | Callback<
-          protos.google.longrunning.IOperation,
-          | protos.google.cloud.dialogflow.v2beta1.IExportAgentRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.longrunning.IOperation,
-      | protos.google.cloud.dialogflow.v2beta1.IExportAgentRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.longrunning.IOperation,
-      protos.google.cloud.dialogflow.v2beta1.IExportAgentRequest | undefined,
-      {} | undefined
-    ]
-  > | void {
-    request = request || {};
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      parent: request.parent || '',
-    });
-    this.initialize();
-    return this.innerApiCalls.exportAgent(request, options, callback);
-  }
-  importAgent(
-    request: protos.google.cloud.dialogflow.v2beta1.IImportAgentRequest,
-    options?: gax.CallOptions
-  ): Promise<
-    [
-      protos.google.longrunning.IOperation,
-      protos.google.cloud.dialogflow.v2beta1.IImportAgentRequest | undefined,
-      {} | undefined
-    ]
-  >;
-  importAgent(
-    request: protos.google.cloud.dialogflow.v2beta1.IImportAgentRequest,
-    options: gax.CallOptions,
-    callback: Callback<
-      protos.google.longrunning.IOperation,
-      | protos.google.cloud.dialogflow.v2beta1.IImportAgentRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  importAgent(
-    request: protos.google.cloud.dialogflow.v2beta1.IImportAgentRequest,
-    callback: Callback<
-      protos.google.longrunning.IOperation,
-      | protos.google.cloud.dialogflow.v2beta1.IImportAgentRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  /**
-   * Imports the specified agent from a ZIP file.
-   *
-   * Uploads new intents and entity types without deleting the existing ones.
-   * Intents and entity types with the same name are replaced with the new
-   * versions from ImportAgentRequest.
-   *
-   *
-   * Operation <response: {@link google.protobuf.Empty|google.protobuf.Empty}>
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The project that the agent to import is associated with.
-   *   Format: `projects/<Project ID>`.
-   * @param {string} request.agentUri
-   *   The URI to a Google Cloud Storage file containing the agent to import.
-   *   Note: The URI must start with "gs://".
-   * @param {Buffer} request.agentContent
-   *   Zip compressed raw byte content for agent.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Operation]{@link google.longrunning.Operation}.
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
-   */
-  importAgent(
-    request: protos.google.cloud.dialogflow.v2beta1.IImportAgentRequest,
-    optionsOrCallback?:
-      | gax.CallOptions
-      | Callback<
-          protos.google.longrunning.IOperation,
-          | protos.google.cloud.dialogflow.v2beta1.IImportAgentRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.longrunning.IOperation,
-      | protos.google.cloud.dialogflow.v2beta1.IImportAgentRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.longrunning.IOperation,
-      protos.google.cloud.dialogflow.v2beta1.IImportAgentRequest | undefined,
-      {} | undefined
-    ]
-  > | void {
-    request = request || {};
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      parent: request.parent || '',
-    });
-    this.initialize();
-    return this.innerApiCalls.importAgent(request, options, callback);
-  }
-  restoreAgent(
-    request: protos.google.cloud.dialogflow.v2beta1.IRestoreAgentRequest,
-    options?: gax.CallOptions
-  ): Promise<
-    [
-      protos.google.longrunning.IOperation,
-      protos.google.cloud.dialogflow.v2beta1.IRestoreAgentRequest | undefined,
-      {} | undefined
-    ]
-  >;
-  restoreAgent(
-    request: protos.google.cloud.dialogflow.v2beta1.IRestoreAgentRequest,
-    options: gax.CallOptions,
-    callback: Callback<
-      protos.google.longrunning.IOperation,
-      | protos.google.cloud.dialogflow.v2beta1.IRestoreAgentRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  restoreAgent(
-    request: protos.google.cloud.dialogflow.v2beta1.IRestoreAgentRequest,
-    callback: Callback<
-      protos.google.longrunning.IOperation,
-      | protos.google.cloud.dialogflow.v2beta1.IRestoreAgentRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  /**
-   * Restores the specified agent from a ZIP file.
-   *
-   * Replaces the current agent version with a new one. All the intents and
-   * entity types in the older version are deleted.
-   *
-   *
-   * Operation <response: {@link google.protobuf.Empty|google.protobuf.Empty}>
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The project that the agent to restore is associated with.
-   *   Format: `projects/<Project ID>`.
-   * @param {string} request.agentUri
-   *   The URI to a Google Cloud Storage file containing the agent to restore.
-   *   Note: The URI must start with "gs://".
-   * @param {Buffer} request.agentContent
-   *   Zip compressed raw byte content for agent.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Operation]{@link google.longrunning.Operation}.
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
-   */
-  restoreAgent(
-    request: protos.google.cloud.dialogflow.v2beta1.IRestoreAgentRequest,
-    optionsOrCallback?:
-      | gax.CallOptions
-      | Callback<
-          protos.google.longrunning.IOperation,
-          | protos.google.cloud.dialogflow.v2beta1.IRestoreAgentRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.longrunning.IOperation,
-      | protos.google.cloud.dialogflow.v2beta1.IRestoreAgentRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.longrunning.IOperation,
-      protos.google.cloud.dialogflow.v2beta1.IRestoreAgentRequest | undefined,
-      {} | undefined
-    ]
-  > | void {
-    request = request || {};
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      parent: request.parent || '',
-    });
-    this.initialize();
-    return this.innerApiCalls.restoreAgent(request, options, callback);
-  }
   getValidationResult(
     request: protos.google.cloud.dialogflow.v2beta1.IGetValidationResultRequest,
     options?: gax.CallOptions
@@ -1110,6 +825,572 @@ export class AgentsClient {
     return this.innerApiCalls.getValidationResult(request, options, callback);
   }
 
+  trainAgent(
+    request: protos.google.cloud.dialogflow.v2beta1.ITrainAgentRequest,
+    options?: gax.CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.protobuf.IStruct
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
+  trainAgent(
+    request: protos.google.cloud.dialogflow.v2beta1.ITrainAgentRequest,
+    options: gax.CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.protobuf.IStruct
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  trainAgent(
+    request: protos.google.cloud.dialogflow.v2beta1.ITrainAgentRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.protobuf.IStruct
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Trains the specified agent.
+   *
+   *
+   * Operation <response: {@link google.protobuf.Empty|google.protobuf.Empty}>
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The project that the agent to train is associated with.
+   *   Format: `projects/<Project ID>`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Operation]{@link google.longrunning.Operation}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   */
+  trainAgent(
+    request: protos.google.cloud.dialogflow.v2beta1.ITrainAgentRequest,
+    optionsOrCallback?:
+      | gax.CallOptions
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.protobuf.IStruct
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.protobuf.IStruct
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.protobuf.IStruct
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      parent: request.parent || '',
+    });
+    this.initialize();
+    return this.innerApiCalls.trainAgent(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by the trainAgent() method.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *
+   * @example:
+   *   const decodedOperation = await checkTrainAgentProgress(name);
+   *   console.log(decodedOperation.result);
+   *   console.log(decodedOperation.done);
+   *   console.log(decodedOperation.metadata);
+   *
+   */
+  async checkTrainAgentProgress(
+    name: string
+  ): Promise<
+    LROperation<protos.google.protobuf.Empty, protos.google.protobuf.Struct>
+  > {
+    const request = new operationsProtos.google.longrunning.GetOperationRequest(
+      {name}
+    );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new gax.Operation(
+      operation,
+      this.descriptors.longrunning.trainAgent,
+      gax.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.protobuf.Struct
+    >;
+  }
+  exportAgent(
+    request: protos.google.cloud.dialogflow.v2beta1.IExportAgentRequest,
+    options?: gax.CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.dialogflow.v2beta1.IExportAgentResponse,
+        protos.google.protobuf.IStruct
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
+  exportAgent(
+    request: protos.google.cloud.dialogflow.v2beta1.IExportAgentRequest,
+    options: gax.CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.dialogflow.v2beta1.IExportAgentResponse,
+        protos.google.protobuf.IStruct
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  exportAgent(
+    request: protos.google.cloud.dialogflow.v2beta1.IExportAgentRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.dialogflow.v2beta1.IExportAgentResponse,
+        protos.google.protobuf.IStruct
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Exports the specified agent to a ZIP file.
+   *
+   *
+   * Operation <response: {@link google.cloud.dialogflow.v2beta1.ExportAgentResponse|ExportAgentResponse}>
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The project that the agent to export is associated with.
+   *   Format: `projects/<Project ID>`.
+   * @param {string} request.agentUri
+   *   Optional. The
+   *   [Google Cloud Storage](https://cloud.google.com/storage/docs/)
+   *   URI to export the agent to.
+   *   The format of this URI must be `gs://<bucket-name>/<object-name>`.
+   *   If left unspecified, the serialized agent is returned inline.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Operation]{@link google.longrunning.Operation}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   */
+  exportAgent(
+    request: protos.google.cloud.dialogflow.v2beta1.IExportAgentRequest,
+    optionsOrCallback?:
+      | gax.CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.dialogflow.v2beta1.IExportAgentResponse,
+            protos.google.protobuf.IStruct
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.dialogflow.v2beta1.IExportAgentResponse,
+        protos.google.protobuf.IStruct
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.dialogflow.v2beta1.IExportAgentResponse,
+        protos.google.protobuf.IStruct
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      parent: request.parent || '',
+    });
+    this.initialize();
+    return this.innerApiCalls.exportAgent(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by the exportAgent() method.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *
+   * @example:
+   *   const decodedOperation = await checkExportAgentProgress(name);
+   *   console.log(decodedOperation.result);
+   *   console.log(decodedOperation.done);
+   *   console.log(decodedOperation.metadata);
+   *
+   */
+  async checkExportAgentProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.dialogflow.v2beta1.ExportAgentResponse,
+      protos.google.protobuf.Struct
+    >
+  > {
+    const request = new operationsProtos.google.longrunning.GetOperationRequest(
+      {name}
+    );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new gax.Operation(
+      operation,
+      this.descriptors.longrunning.exportAgent,
+      gax.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.dialogflow.v2beta1.ExportAgentResponse,
+      protos.google.protobuf.Struct
+    >;
+  }
+  importAgent(
+    request: protos.google.cloud.dialogflow.v2beta1.IImportAgentRequest,
+    options?: gax.CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.protobuf.IStruct
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
+  importAgent(
+    request: protos.google.cloud.dialogflow.v2beta1.IImportAgentRequest,
+    options: gax.CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.protobuf.IStruct
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  importAgent(
+    request: protos.google.cloud.dialogflow.v2beta1.IImportAgentRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.protobuf.IStruct
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Imports the specified agent from a ZIP file.
+   *
+   * Uploads new intents and entity types without deleting the existing ones.
+   * Intents and entity types with the same name are replaced with the new
+   * versions from ImportAgentRequest.
+   *
+   *
+   * Operation <response: {@link google.protobuf.Empty|google.protobuf.Empty}>
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The project that the agent to import is associated with.
+   *   Format: `projects/<Project ID>`.
+   * @param {string} request.agentUri
+   *   The URI to a Google Cloud Storage file containing the agent to import.
+   *   Note: The URI must start with "gs://".
+   * @param {Buffer} request.agentContent
+   *   Zip compressed raw byte content for agent.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Operation]{@link google.longrunning.Operation}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   */
+  importAgent(
+    request: protos.google.cloud.dialogflow.v2beta1.IImportAgentRequest,
+    optionsOrCallback?:
+      | gax.CallOptions
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.protobuf.IStruct
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.protobuf.IStruct
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.protobuf.IStruct
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      parent: request.parent || '',
+    });
+    this.initialize();
+    return this.innerApiCalls.importAgent(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by the importAgent() method.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *
+   * @example:
+   *   const decodedOperation = await checkImportAgentProgress(name);
+   *   console.log(decodedOperation.result);
+   *   console.log(decodedOperation.done);
+   *   console.log(decodedOperation.metadata);
+   *
+   */
+  async checkImportAgentProgress(
+    name: string
+  ): Promise<
+    LROperation<protos.google.protobuf.Empty, protos.google.protobuf.Struct>
+  > {
+    const request = new operationsProtos.google.longrunning.GetOperationRequest(
+      {name}
+    );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new gax.Operation(
+      operation,
+      this.descriptors.longrunning.importAgent,
+      gax.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.protobuf.Struct
+    >;
+  }
+  restoreAgent(
+    request: protos.google.cloud.dialogflow.v2beta1.IRestoreAgentRequest,
+    options?: gax.CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.protobuf.IStruct
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
+  restoreAgent(
+    request: protos.google.cloud.dialogflow.v2beta1.IRestoreAgentRequest,
+    options: gax.CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.protobuf.IStruct
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  restoreAgent(
+    request: protos.google.cloud.dialogflow.v2beta1.IRestoreAgentRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.protobuf.IStruct
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Restores the specified agent from a ZIP file.
+   *
+   * Replaces the current agent version with a new one. All the intents and
+   * entity types in the older version are deleted.
+   *
+   *
+   * Operation <response: {@link google.protobuf.Empty|google.protobuf.Empty}>
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The project that the agent to restore is associated with.
+   *   Format: `projects/<Project ID>`.
+   * @param {string} request.agentUri
+   *   The URI to a Google Cloud Storage file containing the agent to restore.
+   *   Note: The URI must start with "gs://".
+   * @param {Buffer} request.agentContent
+   *   Zip compressed raw byte content for agent.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Operation]{@link google.longrunning.Operation}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   */
+  restoreAgent(
+    request: protos.google.cloud.dialogflow.v2beta1.IRestoreAgentRequest,
+    optionsOrCallback?:
+      | gax.CallOptions
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.protobuf.IStruct
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.protobuf.IStruct
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.protobuf.IStruct
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      parent: request.parent || '',
+    });
+    this.initialize();
+    return this.innerApiCalls.restoreAgent(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by the restoreAgent() method.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *
+   * @example:
+   *   const decodedOperation = await checkRestoreAgentProgress(name);
+   *   console.log(decodedOperation.result);
+   *   console.log(decodedOperation.done);
+   *   console.log(decodedOperation.metadata);
+   *
+   */
+  async checkRestoreAgentProgress(
+    name: string
+  ): Promise<
+    LROperation<protos.google.protobuf.Empty, protos.google.protobuf.Struct>
+  > {
+    const request = new operationsProtos.google.longrunning.GetOperationRequest(
+      {name}
+    );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new gax.Operation(
+      operation,
+      this.descriptors.longrunning.restoreAgent,
+      gax.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.protobuf.Struct
+    >;
+  }
   searchAgents(
     request: protos.google.cloud.dialogflow.v2beta1.ISearchAgentsRequest,
     options?: gax.CallOptions
@@ -1143,7 +1424,6 @@ export class AgentsClient {
   ): void;
   /**
    * Returns the list of agents.
-   *
    * Since there is at most one conversational agent per project, this method is
    * useful primarily for listing all agents across projects the caller has
    * access to. One can achieve that with a wildcard project collection id "-".
@@ -1320,6 +1600,56 @@ export class AgentsClient {
   // --------------------
 
   /**
+   * Return a fully-qualified document resource name string.
+   *
+   * @param {string} project
+   * @param {string} knowledge_base
+   * @param {string} document
+   * @returns {string} Resource name string.
+   */
+  documentPath(project: string, knowledgeBase: string, document: string) {
+    return this.pathTemplates.documentPathTemplate.render({
+      project: project,
+      knowledge_base: knowledgeBase,
+      document: document,
+    });
+  }
+
+  /**
+   * Parse the project from Document resource.
+   *
+   * @param {string} documentName
+   *   A fully-qualified path representing Document resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromDocumentName(documentName: string) {
+    return this.pathTemplates.documentPathTemplate.match(documentName).project;
+  }
+
+  /**
+   * Parse the knowledge_base from Document resource.
+   *
+   * @param {string} documentName
+   *   A fully-qualified path representing Document resource.
+   * @returns {string} A string representing the knowledge_base.
+   */
+  matchKnowledgeBaseFromDocumentName(documentName: string) {
+    return this.pathTemplates.documentPathTemplate.match(documentName)
+      .knowledge_base;
+  }
+
+  /**
+   * Parse the document from Document resource.
+   *
+   * @param {string} documentName
+   *   A fully-qualified path representing Document resource.
+   * @returns {string} A string representing the document.
+   */
+  matchDocumentFromDocumentName(documentName: string) {
+    return this.pathTemplates.documentPathTemplate.match(documentName).document;
+  }
+
+  /**
    * Return a fully-qualified environment resource name string.
    *
    * @param {string} project
@@ -1358,6 +1688,67 @@ export class AgentsClient {
   }
 
   /**
+   * Return a fully-qualified knowledgeBase resource name string.
+   *
+   * @param {string} project
+   * @param {string} knowledge_base
+   * @returns {string} Resource name string.
+   */
+  knowledgeBasePath(project: string, knowledgeBase: string) {
+    return this.pathTemplates.knowledgeBasePathTemplate.render({
+      project: project,
+      knowledge_base: knowledgeBase,
+    });
+  }
+
+  /**
+   * Parse the project from KnowledgeBase resource.
+   *
+   * @param {string} knowledgeBaseName
+   *   A fully-qualified path representing KnowledgeBase resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromKnowledgeBaseName(knowledgeBaseName: string) {
+    return this.pathTemplates.knowledgeBasePathTemplate.match(knowledgeBaseName)
+      .project;
+  }
+
+  /**
+   * Parse the knowledge_base from KnowledgeBase resource.
+   *
+   * @param {string} knowledgeBaseName
+   *   A fully-qualified path representing KnowledgeBase resource.
+   * @returns {string} A string representing the knowledge_base.
+   */
+  matchKnowledgeBaseFromKnowledgeBaseName(knowledgeBaseName: string) {
+    return this.pathTemplates.knowledgeBasePathTemplate.match(knowledgeBaseName)
+      .knowledge_base;
+  }
+
+  /**
+   * Return a fully-qualified project resource name string.
+   *
+   * @param {string} project
+   * @returns {string} Resource name string.
+   */
+  projectPath(project: string) {
+    return this.pathTemplates.projectPathTemplate.render({
+      project: project,
+    });
+  }
+
+  /**
+   * Parse the project from Project resource.
+   *
+   * @param {string} projectName
+   *   A fully-qualified path representing Project resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectName(projectName: string) {
+    return this.pathTemplates.projectPathTemplate.match(projectName).project;
+  }
+
+  /**
    * Return a fully-qualified projectAgent resource name string.
    *
    * @param {string} project
@@ -1379,6 +1770,256 @@ export class AgentsClient {
   matchProjectFromProjectAgentName(projectAgentName: string) {
     return this.pathTemplates.projectAgentPathTemplate.match(projectAgentName)
       .project;
+  }
+
+  /**
+   * Return a fully-qualified projectAgentEntityType resource name string.
+   *
+   * @param {string} project
+   * @param {string} entity_type
+   * @returns {string} Resource name string.
+   */
+  projectAgentEntityTypePath(project: string, entityType: string) {
+    return this.pathTemplates.projectAgentEntityTypePathTemplate.render({
+      project: project,
+      entity_type: entityType,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectAgentEntityType resource.
+   *
+   * @param {string} projectAgentEntityTypeName
+   *   A fully-qualified path representing project_agent_entity_type resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectAgentEntityTypeName(
+    projectAgentEntityTypeName: string
+  ) {
+    return this.pathTemplates.projectAgentEntityTypePathTemplate.match(
+      projectAgentEntityTypeName
+    ).project;
+  }
+
+  /**
+   * Parse the entity_type from ProjectAgentEntityType resource.
+   *
+   * @param {string} projectAgentEntityTypeName
+   *   A fully-qualified path representing project_agent_entity_type resource.
+   * @returns {string} A string representing the entity_type.
+   */
+  matchEntityTypeFromProjectAgentEntityTypeName(
+    projectAgentEntityTypeName: string
+  ) {
+    return this.pathTemplates.projectAgentEntityTypePathTemplate.match(
+      projectAgentEntityTypeName
+    ).entity_type;
+  }
+
+  /**
+   * Return a fully-qualified projectAgentEnvironmentUserSessionContext resource name string.
+   *
+   * @param {string} project
+   * @param {string} environment
+   * @param {string} user
+   * @param {string} session
+   * @param {string} context
+   * @returns {string} Resource name string.
+   */
+  projectAgentEnvironmentUserSessionContextPath(
+    project: string,
+    environment: string,
+    user: string,
+    session: string,
+    context: string
+  ) {
+    return this.pathTemplates.projectAgentEnvironmentUserSessionContextPathTemplate.render(
+      {
+        project: project,
+        environment: environment,
+        user: user,
+        session: session,
+        context: context,
+      }
+    );
+  }
+
+  /**
+   * Parse the project from ProjectAgentEnvironmentUserSessionContext resource.
+   *
+   * @param {string} projectAgentEnvironmentUserSessionContextName
+   *   A fully-qualified path representing project_agent_environment_user_session_context resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectAgentEnvironmentUserSessionContextName(
+    projectAgentEnvironmentUserSessionContextName: string
+  ) {
+    return this.pathTemplates.projectAgentEnvironmentUserSessionContextPathTemplate.match(
+      projectAgentEnvironmentUserSessionContextName
+    ).project;
+  }
+
+  /**
+   * Parse the environment from ProjectAgentEnvironmentUserSessionContext resource.
+   *
+   * @param {string} projectAgentEnvironmentUserSessionContextName
+   *   A fully-qualified path representing project_agent_environment_user_session_context resource.
+   * @returns {string} A string representing the environment.
+   */
+  matchEnvironmentFromProjectAgentEnvironmentUserSessionContextName(
+    projectAgentEnvironmentUserSessionContextName: string
+  ) {
+    return this.pathTemplates.projectAgentEnvironmentUserSessionContextPathTemplate.match(
+      projectAgentEnvironmentUserSessionContextName
+    ).environment;
+  }
+
+  /**
+   * Parse the user from ProjectAgentEnvironmentUserSessionContext resource.
+   *
+   * @param {string} projectAgentEnvironmentUserSessionContextName
+   *   A fully-qualified path representing project_agent_environment_user_session_context resource.
+   * @returns {string} A string representing the user.
+   */
+  matchUserFromProjectAgentEnvironmentUserSessionContextName(
+    projectAgentEnvironmentUserSessionContextName: string
+  ) {
+    return this.pathTemplates.projectAgentEnvironmentUserSessionContextPathTemplate.match(
+      projectAgentEnvironmentUserSessionContextName
+    ).user;
+  }
+
+  /**
+   * Parse the session from ProjectAgentEnvironmentUserSessionContext resource.
+   *
+   * @param {string} projectAgentEnvironmentUserSessionContextName
+   *   A fully-qualified path representing project_agent_environment_user_session_context resource.
+   * @returns {string} A string representing the session.
+   */
+  matchSessionFromProjectAgentEnvironmentUserSessionContextName(
+    projectAgentEnvironmentUserSessionContextName: string
+  ) {
+    return this.pathTemplates.projectAgentEnvironmentUserSessionContextPathTemplate.match(
+      projectAgentEnvironmentUserSessionContextName
+    ).session;
+  }
+
+  /**
+   * Parse the context from ProjectAgentEnvironmentUserSessionContext resource.
+   *
+   * @param {string} projectAgentEnvironmentUserSessionContextName
+   *   A fully-qualified path representing project_agent_environment_user_session_context resource.
+   * @returns {string} A string representing the context.
+   */
+  matchContextFromProjectAgentEnvironmentUserSessionContextName(
+    projectAgentEnvironmentUserSessionContextName: string
+  ) {
+    return this.pathTemplates.projectAgentEnvironmentUserSessionContextPathTemplate.match(
+      projectAgentEnvironmentUserSessionContextName
+    ).context;
+  }
+
+  /**
+   * Return a fully-qualified projectAgentEnvironmentUserSessionEntityType resource name string.
+   *
+   * @param {string} project
+   * @param {string} environment
+   * @param {string} user
+   * @param {string} session
+   * @param {string} entity_type
+   * @returns {string} Resource name string.
+   */
+  projectAgentEnvironmentUserSessionEntityTypePath(
+    project: string,
+    environment: string,
+    user: string,
+    session: string,
+    entityType: string
+  ) {
+    return this.pathTemplates.projectAgentEnvironmentUserSessionEntityTypePathTemplate.render(
+      {
+        project: project,
+        environment: environment,
+        user: user,
+        session: session,
+        entity_type: entityType,
+      }
+    );
+  }
+
+  /**
+   * Parse the project from ProjectAgentEnvironmentUserSessionEntityType resource.
+   *
+   * @param {string} projectAgentEnvironmentUserSessionEntityTypeName
+   *   A fully-qualified path representing project_agent_environment_user_session_entity_type resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectAgentEnvironmentUserSessionEntityTypeName(
+    projectAgentEnvironmentUserSessionEntityTypeName: string
+  ) {
+    return this.pathTemplates.projectAgentEnvironmentUserSessionEntityTypePathTemplate.match(
+      projectAgentEnvironmentUserSessionEntityTypeName
+    ).project;
+  }
+
+  /**
+   * Parse the environment from ProjectAgentEnvironmentUserSessionEntityType resource.
+   *
+   * @param {string} projectAgentEnvironmentUserSessionEntityTypeName
+   *   A fully-qualified path representing project_agent_environment_user_session_entity_type resource.
+   * @returns {string} A string representing the environment.
+   */
+  matchEnvironmentFromProjectAgentEnvironmentUserSessionEntityTypeName(
+    projectAgentEnvironmentUserSessionEntityTypeName: string
+  ) {
+    return this.pathTemplates.projectAgentEnvironmentUserSessionEntityTypePathTemplate.match(
+      projectAgentEnvironmentUserSessionEntityTypeName
+    ).environment;
+  }
+
+  /**
+   * Parse the user from ProjectAgentEnvironmentUserSessionEntityType resource.
+   *
+   * @param {string} projectAgentEnvironmentUserSessionEntityTypeName
+   *   A fully-qualified path representing project_agent_environment_user_session_entity_type resource.
+   * @returns {string} A string representing the user.
+   */
+  matchUserFromProjectAgentEnvironmentUserSessionEntityTypeName(
+    projectAgentEnvironmentUserSessionEntityTypeName: string
+  ) {
+    return this.pathTemplates.projectAgentEnvironmentUserSessionEntityTypePathTemplate.match(
+      projectAgentEnvironmentUserSessionEntityTypeName
+    ).user;
+  }
+
+  /**
+   * Parse the session from ProjectAgentEnvironmentUserSessionEntityType resource.
+   *
+   * @param {string} projectAgentEnvironmentUserSessionEntityTypeName
+   *   A fully-qualified path representing project_agent_environment_user_session_entity_type resource.
+   * @returns {string} A string representing the session.
+   */
+  matchSessionFromProjectAgentEnvironmentUserSessionEntityTypeName(
+    projectAgentEnvironmentUserSessionEntityTypeName: string
+  ) {
+    return this.pathTemplates.projectAgentEnvironmentUserSessionEntityTypePathTemplate.match(
+      projectAgentEnvironmentUserSessionEntityTypeName
+    ).session;
+  }
+
+  /**
+   * Parse the entity_type from ProjectAgentEnvironmentUserSessionEntityType resource.
+   *
+   * @param {string} projectAgentEnvironmentUserSessionEntityTypeName
+   *   A fully-qualified path representing project_agent_environment_user_session_entity_type resource.
+   * @returns {string} A string representing the entity_type.
+   */
+  matchEntityTypeFromProjectAgentEnvironmentUserSessionEntityTypeName(
+    projectAgentEnvironmentUserSessionEntityTypeName: string
+  ) {
+    return this.pathTemplates.projectAgentEnvironmentUserSessionEntityTypePathTemplate.match(
+      projectAgentEnvironmentUserSessionEntityTypeName
+    ).entity_type;
   }
 
   /**
@@ -1422,6 +2063,136 @@ export class AgentsClient {
   }
 
   /**
+   * Return a fully-qualified projectAgentSessionContext resource name string.
+   *
+   * @param {string} project
+   * @param {string} session
+   * @param {string} context
+   * @returns {string} Resource name string.
+   */
+  projectAgentSessionContextPath(
+    project: string,
+    session: string,
+    context: string
+  ) {
+    return this.pathTemplates.projectAgentSessionContextPathTemplate.render({
+      project: project,
+      session: session,
+      context: context,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectAgentSessionContext resource.
+   *
+   * @param {string} projectAgentSessionContextName
+   *   A fully-qualified path representing project_agent_session_context resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectAgentSessionContextName(
+    projectAgentSessionContextName: string
+  ) {
+    return this.pathTemplates.projectAgentSessionContextPathTemplate.match(
+      projectAgentSessionContextName
+    ).project;
+  }
+
+  /**
+   * Parse the session from ProjectAgentSessionContext resource.
+   *
+   * @param {string} projectAgentSessionContextName
+   *   A fully-qualified path representing project_agent_session_context resource.
+   * @returns {string} A string representing the session.
+   */
+  matchSessionFromProjectAgentSessionContextName(
+    projectAgentSessionContextName: string
+  ) {
+    return this.pathTemplates.projectAgentSessionContextPathTemplate.match(
+      projectAgentSessionContextName
+    ).session;
+  }
+
+  /**
+   * Parse the context from ProjectAgentSessionContext resource.
+   *
+   * @param {string} projectAgentSessionContextName
+   *   A fully-qualified path representing project_agent_session_context resource.
+   * @returns {string} A string representing the context.
+   */
+  matchContextFromProjectAgentSessionContextName(
+    projectAgentSessionContextName: string
+  ) {
+    return this.pathTemplates.projectAgentSessionContextPathTemplate.match(
+      projectAgentSessionContextName
+    ).context;
+  }
+
+  /**
+   * Return a fully-qualified projectAgentSessionEntityType resource name string.
+   *
+   * @param {string} project
+   * @param {string} session
+   * @param {string} entity_type
+   * @returns {string} Resource name string.
+   */
+  projectAgentSessionEntityTypePath(
+    project: string,
+    session: string,
+    entityType: string
+  ) {
+    return this.pathTemplates.projectAgentSessionEntityTypePathTemplate.render({
+      project: project,
+      session: session,
+      entity_type: entityType,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectAgentSessionEntityType resource.
+   *
+   * @param {string} projectAgentSessionEntityTypeName
+   *   A fully-qualified path representing project_agent_session_entity_type resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectAgentSessionEntityTypeName(
+    projectAgentSessionEntityTypeName: string
+  ) {
+    return this.pathTemplates.projectAgentSessionEntityTypePathTemplate.match(
+      projectAgentSessionEntityTypeName
+    ).project;
+  }
+
+  /**
+   * Parse the session from ProjectAgentSessionEntityType resource.
+   *
+   * @param {string} projectAgentSessionEntityTypeName
+   *   A fully-qualified path representing project_agent_session_entity_type resource.
+   * @returns {string} A string representing the session.
+   */
+  matchSessionFromProjectAgentSessionEntityTypeName(
+    projectAgentSessionEntityTypeName: string
+  ) {
+    return this.pathTemplates.projectAgentSessionEntityTypePathTemplate.match(
+      projectAgentSessionEntityTypeName
+    ).session;
+  }
+
+  /**
+   * Parse the entity_type from ProjectAgentSessionEntityType resource.
+   *
+   * @param {string} projectAgentSessionEntityTypeName
+   *   A fully-qualified path representing project_agent_session_entity_type resource.
+   * @returns {string} A string representing the entity_type.
+   */
+  matchEntityTypeFromProjectAgentSessionEntityTypeName(
+    projectAgentSessionEntityTypeName: string
+  ) {
+    return this.pathTemplates.projectAgentSessionEntityTypePathTemplate.match(
+      projectAgentSessionEntityTypeName
+    ).entity_type;
+  }
+
+  /**
    * Return a fully-qualified projectLocationAgent resource name string.
    *
    * @param {string} project
@@ -1459,6 +2230,73 @@ export class AgentsClient {
     return this.pathTemplates.projectLocationAgentPathTemplate.match(
       projectLocationAgentName
     ).location;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationAgentEntityType resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} entity_type
+   * @returns {string} Resource name string.
+   */
+  projectLocationAgentEntityTypePath(
+    project: string,
+    location: string,
+    entityType: string
+  ) {
+    return this.pathTemplates.projectLocationAgentEntityTypePathTemplate.render(
+      {
+        project: project,
+        location: location,
+        entity_type: entityType,
+      }
+    );
+  }
+
+  /**
+   * Parse the project from ProjectLocationAgentEntityType resource.
+   *
+   * @param {string} projectLocationAgentEntityTypeName
+   *   A fully-qualified path representing project_location_agent_entity_type resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationAgentEntityTypeName(
+    projectLocationAgentEntityTypeName: string
+  ) {
+    return this.pathTemplates.projectLocationAgentEntityTypePathTemplate.match(
+      projectLocationAgentEntityTypeName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationAgentEntityType resource.
+   *
+   * @param {string} projectLocationAgentEntityTypeName
+   *   A fully-qualified path representing project_location_agent_entity_type resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationAgentEntityTypeName(
+    projectLocationAgentEntityTypeName: string
+  ) {
+    return this.pathTemplates.projectLocationAgentEntityTypePathTemplate.match(
+      projectLocationAgentEntityTypeName
+    ).location;
+  }
+
+  /**
+   * Parse the entity_type from ProjectLocationAgentEntityType resource.
+   *
+   * @param {string} projectLocationAgentEntityTypeName
+   *   A fully-qualified path representing project_location_agent_entity_type resource.
+   * @returns {string} A string representing the entity_type.
+   */
+  matchEntityTypeFromProjectLocationAgentEntityTypeName(
+    projectLocationAgentEntityTypeName: string
+  ) {
+    return this.pathTemplates.projectLocationAgentEntityTypePathTemplate.match(
+      projectLocationAgentEntityTypeName
+    ).entity_type;
   }
 
   /**
@@ -1524,6 +2362,176 @@ export class AgentsClient {
     return this.pathTemplates.projectLocationAgentIntentPathTemplate.match(
       projectLocationAgentIntentName
     ).intent;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationAgentSessionContext resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} session
+   * @param {string} context
+   * @returns {string} Resource name string.
+   */
+  projectLocationAgentSessionContextPath(
+    project: string,
+    location: string,
+    session: string,
+    context: string
+  ) {
+    return this.pathTemplates.projectLocationAgentSessionContextPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        session: session,
+        context: context,
+      }
+    );
+  }
+
+  /**
+   * Parse the project from ProjectLocationAgentSessionContext resource.
+   *
+   * @param {string} projectLocationAgentSessionContextName
+   *   A fully-qualified path representing project_location_agent_session_context resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationAgentSessionContextName(
+    projectLocationAgentSessionContextName: string
+  ) {
+    return this.pathTemplates.projectLocationAgentSessionContextPathTemplate.match(
+      projectLocationAgentSessionContextName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationAgentSessionContext resource.
+   *
+   * @param {string} projectLocationAgentSessionContextName
+   *   A fully-qualified path representing project_location_agent_session_context resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationAgentSessionContextName(
+    projectLocationAgentSessionContextName: string
+  ) {
+    return this.pathTemplates.projectLocationAgentSessionContextPathTemplate.match(
+      projectLocationAgentSessionContextName
+    ).location;
+  }
+
+  /**
+   * Parse the session from ProjectLocationAgentSessionContext resource.
+   *
+   * @param {string} projectLocationAgentSessionContextName
+   *   A fully-qualified path representing project_location_agent_session_context resource.
+   * @returns {string} A string representing the session.
+   */
+  matchSessionFromProjectLocationAgentSessionContextName(
+    projectLocationAgentSessionContextName: string
+  ) {
+    return this.pathTemplates.projectLocationAgentSessionContextPathTemplate.match(
+      projectLocationAgentSessionContextName
+    ).session;
+  }
+
+  /**
+   * Parse the context from ProjectLocationAgentSessionContext resource.
+   *
+   * @param {string} projectLocationAgentSessionContextName
+   *   A fully-qualified path representing project_location_agent_session_context resource.
+   * @returns {string} A string representing the context.
+   */
+  matchContextFromProjectLocationAgentSessionContextName(
+    projectLocationAgentSessionContextName: string
+  ) {
+    return this.pathTemplates.projectLocationAgentSessionContextPathTemplate.match(
+      projectLocationAgentSessionContextName
+    ).context;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationAgentSessionEntityType resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} session
+   * @param {string} entity_type
+   * @returns {string} Resource name string.
+   */
+  projectLocationAgentSessionEntityTypePath(
+    project: string,
+    location: string,
+    session: string,
+    entityType: string
+  ) {
+    return this.pathTemplates.projectLocationAgentSessionEntityTypePathTemplate.render(
+      {
+        project: project,
+        location: location,
+        session: session,
+        entity_type: entityType,
+      }
+    );
+  }
+
+  /**
+   * Parse the project from ProjectLocationAgentSessionEntityType resource.
+   *
+   * @param {string} projectLocationAgentSessionEntityTypeName
+   *   A fully-qualified path representing project_location_agent_session_entity_type resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationAgentSessionEntityTypeName(
+    projectLocationAgentSessionEntityTypeName: string
+  ) {
+    return this.pathTemplates.projectLocationAgentSessionEntityTypePathTemplate.match(
+      projectLocationAgentSessionEntityTypeName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationAgentSessionEntityType resource.
+   *
+   * @param {string} projectLocationAgentSessionEntityTypeName
+   *   A fully-qualified path representing project_location_agent_session_entity_type resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationAgentSessionEntityTypeName(
+    projectLocationAgentSessionEntityTypeName: string
+  ) {
+    return this.pathTemplates.projectLocationAgentSessionEntityTypePathTemplate.match(
+      projectLocationAgentSessionEntityTypeName
+    ).location;
+  }
+
+  /**
+   * Parse the session from ProjectLocationAgentSessionEntityType resource.
+   *
+   * @param {string} projectLocationAgentSessionEntityTypeName
+   *   A fully-qualified path representing project_location_agent_session_entity_type resource.
+   * @returns {string} A string representing the session.
+   */
+  matchSessionFromProjectLocationAgentSessionEntityTypeName(
+    projectLocationAgentSessionEntityTypeName: string
+  ) {
+    return this.pathTemplates.projectLocationAgentSessionEntityTypePathTemplate.match(
+      projectLocationAgentSessionEntityTypeName
+    ).session;
+  }
+
+  /**
+   * Parse the entity_type from ProjectLocationAgentSessionEntityType resource.
+   *
+   * @param {string} projectLocationAgentSessionEntityTypeName
+   *   A fully-qualified path representing project_location_agent_session_entity_type resource.
+   * @returns {string} A string representing the entity_type.
+   */
+  matchEntityTypeFromProjectLocationAgentSessionEntityTypeName(
+    projectLocationAgentSessionEntityTypeName: string
+  ) {
+    return this.pathTemplates.projectLocationAgentSessionEntityTypePathTemplate.match(
+      projectLocationAgentSessionEntityTypeName
+    ).entity_type;
   }
 
   /**

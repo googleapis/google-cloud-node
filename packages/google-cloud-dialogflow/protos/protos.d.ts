@@ -1690,18 +1690,6 @@ export namespace google {
                     public toJSON(): { [k: string]: any };
                 }
 
-                /** AudioEncoding enum. */
-                enum AudioEncoding {
-                    AUDIO_ENCODING_UNSPECIFIED = 0,
-                    AUDIO_ENCODING_LINEAR_16 = 1,
-                    AUDIO_ENCODING_FLAC = 2,
-                    AUDIO_ENCODING_MULAW = 3,
-                    AUDIO_ENCODING_AMR = 4,
-                    AUDIO_ENCODING_AMR_WB = 5,
-                    AUDIO_ENCODING_OGG_OPUS = 6,
-                    AUDIO_ENCODING_SPEEX_WITH_HEADER_BYTE = 7
-                }
-
                 /** Properties of a SpeechContext. */
                 interface ISpeechContext {
 
@@ -1798,12 +1786,16 @@ export namespace google {
                     public toJSON(): { [k: string]: any };
                 }
 
-                /** SpeechModelVariant enum. */
-                enum SpeechModelVariant {
-                    SPEECH_MODEL_VARIANT_UNSPECIFIED = 0,
-                    USE_BEST_AVAILABLE = 1,
-                    USE_STANDARD = 2,
-                    USE_ENHANCED = 3
+                /** AudioEncoding enum. */
+                enum AudioEncoding {
+                    AUDIO_ENCODING_UNSPECIFIED = 0,
+                    AUDIO_ENCODING_LINEAR_16 = 1,
+                    AUDIO_ENCODING_FLAC = 2,
+                    AUDIO_ENCODING_MULAW = 3,
+                    AUDIO_ENCODING_AMR = 4,
+                    AUDIO_ENCODING_AMR_WB = 5,
+                    AUDIO_ENCODING_OGG_OPUS = 6,
+                    AUDIO_ENCODING_SPEEX_WITH_HEADER_BYTE = 7
                 }
 
                 /** Properties of a SpeechWordInfo. */
@@ -1912,6 +1904,14 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+                }
+
+                /** SpeechModelVariant enum. */
+                enum SpeechModelVariant {
+                    SPEECH_MODEL_VARIANT_UNSPECIFIED = 0,
+                    USE_BEST_AVAILABLE = 1,
+                    USE_STANDARD = 2,
+                    USE_ENHANCED = 3
                 }
 
                 /** Properties of an InputAudioConfig. */
@@ -2052,14 +2052,6 @@ export namespace google {
                     public toJSON(): { [k: string]: any };
                 }
 
-                /** SsmlVoiceGender enum. */
-                enum SsmlVoiceGender {
-                    SSML_VOICE_GENDER_UNSPECIFIED = 0,
-                    SSML_VOICE_GENDER_MALE = 1,
-                    SSML_VOICE_GENDER_FEMALE = 2,
-                    SSML_VOICE_GENDER_NEUTRAL = 3
-                }
-
                 /** Properties of a VoiceSelectionParams. */
                 interface IVoiceSelectionParams {
 
@@ -2154,6 +2146,14 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+                }
+
+                /** SsmlVoiceGender enum. */
+                enum SsmlVoiceGender {
+                    SSML_VOICE_GENDER_UNSPECIFIED = 0,
+                    SSML_VOICE_GENDER_MALE = 1,
+                    SSML_VOICE_GENDER_FEMALE = 2,
+                    SSML_VOICE_GENDER_NEUTRAL = 3
                 }
 
                 /** Properties of a SynthesizeSpeechConfig. */
@@ -2270,14 +2270,6 @@ export namespace google {
                     public toJSON(): { [k: string]: any };
                 }
 
-                /** OutputAudioEncoding enum. */
-                enum OutputAudioEncoding {
-                    OUTPUT_AUDIO_ENCODING_UNSPECIFIED = 0,
-                    OUTPUT_AUDIO_ENCODING_LINEAR_16 = 1,
-                    OUTPUT_AUDIO_ENCODING_MP3 = 2,
-                    OUTPUT_AUDIO_ENCODING_OGG_OPUS = 3
-                }
-
                 /** Properties of an OutputAudioConfig. */
                 interface IOutputAudioConfig {
 
@@ -2378,6 +2370,14 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+                }
+
+                /** OutputAudioEncoding enum. */
+                enum OutputAudioEncoding {
+                    OUTPUT_AUDIO_ENCODING_UNSPECIFIED = 0,
+                    OUTPUT_AUDIO_ENCODING_LINEAR_16 = 1,
+                    OUTPUT_AUDIO_ENCODING_MP3 = 2,
+                    OUTPUT_AUDIO_ENCODING_OGG_OPUS = 3
                 }
 
                 /** Represents a Contexts */
@@ -14839,18 +14839,6 @@ export namespace google {
                     public toJSON(): { [k: string]: any };
                 }
 
-                /** AudioEncoding enum. */
-                enum AudioEncoding {
-                    AUDIO_ENCODING_UNSPECIFIED = 0,
-                    AUDIO_ENCODING_LINEAR_16 = 1,
-                    AUDIO_ENCODING_FLAC = 2,
-                    AUDIO_ENCODING_MULAW = 3,
-                    AUDIO_ENCODING_AMR = 4,
-                    AUDIO_ENCODING_AMR_WB = 5,
-                    AUDIO_ENCODING_OGG_OPUS = 6,
-                    AUDIO_ENCODING_SPEEX_WITH_HEADER_BYTE = 7
-                }
-
                 /** Properties of a SpeechContext. */
                 interface ISpeechContext {
 
@@ -14947,12 +14935,16 @@ export namespace google {
                     public toJSON(): { [k: string]: any };
                 }
 
-                /** SpeechModelVariant enum. */
-                enum SpeechModelVariant {
-                    SPEECH_MODEL_VARIANT_UNSPECIFIED = 0,
-                    USE_BEST_AVAILABLE = 1,
-                    USE_STANDARD = 2,
-                    USE_ENHANCED = 3
+                /** AudioEncoding enum. */
+                enum AudioEncoding {
+                    AUDIO_ENCODING_UNSPECIFIED = 0,
+                    AUDIO_ENCODING_LINEAR_16 = 1,
+                    AUDIO_ENCODING_FLAC = 2,
+                    AUDIO_ENCODING_MULAW = 3,
+                    AUDIO_ENCODING_AMR = 4,
+                    AUDIO_ENCODING_AMR_WB = 5,
+                    AUDIO_ENCODING_OGG_OPUS = 6,
+                    AUDIO_ENCODING_SPEEX_WITH_HEADER_BYTE = 7
                 }
 
                 /** Properties of a SpeechWordInfo. */
@@ -15061,6 +15053,14 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+                }
+
+                /** SpeechModelVariant enum. */
+                enum SpeechModelVariant {
+                    SPEECH_MODEL_VARIANT_UNSPECIFIED = 0,
+                    USE_BEST_AVAILABLE = 1,
+                    USE_STANDARD = 2,
+                    USE_ENHANCED = 3
                 }
 
                 /** Properties of an InputAudioConfig. */
@@ -15201,14 +15201,6 @@ export namespace google {
                     public toJSON(): { [k: string]: any };
                 }
 
-                /** SsmlVoiceGender enum. */
-                enum SsmlVoiceGender {
-                    SSML_VOICE_GENDER_UNSPECIFIED = 0,
-                    SSML_VOICE_GENDER_MALE = 1,
-                    SSML_VOICE_GENDER_FEMALE = 2,
-                    SSML_VOICE_GENDER_NEUTRAL = 3
-                }
-
                 /** Properties of a VoiceSelectionParams. */
                 interface IVoiceSelectionParams {
 
@@ -15303,6 +15295,14 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+                }
+
+                /** SsmlVoiceGender enum. */
+                enum SsmlVoiceGender {
+                    SSML_VOICE_GENDER_UNSPECIFIED = 0,
+                    SSML_VOICE_GENDER_MALE = 1,
+                    SSML_VOICE_GENDER_FEMALE = 2,
+                    SSML_VOICE_GENDER_NEUTRAL = 3
                 }
 
                 /** Properties of a SynthesizeSpeechConfig. */
@@ -15419,14 +15419,6 @@ export namespace google {
                     public toJSON(): { [k: string]: any };
                 }
 
-                /** OutputAudioEncoding enum. */
-                enum OutputAudioEncoding {
-                    OUTPUT_AUDIO_ENCODING_UNSPECIFIED = 0,
-                    OUTPUT_AUDIO_ENCODING_LINEAR_16 = 1,
-                    OUTPUT_AUDIO_ENCODING_MP3 = 2,
-                    OUTPUT_AUDIO_ENCODING_OGG_OPUS = 3
-                }
-
                 /** Properties of an OutputAudioConfig. */
                 interface IOutputAudioConfig {
 
@@ -15527,6 +15519,14 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+                }
+
+                /** OutputAudioEncoding enum. */
+                enum OutputAudioEncoding {
+                    OUTPUT_AUDIO_ENCODING_UNSPECIFIED = 0,
+                    OUTPUT_AUDIO_ENCODING_LINEAR_16 = 1,
+                    OUTPUT_AUDIO_ENCODING_MP3 = 2,
+                    OUTPUT_AUDIO_ENCODING_OGG_OPUS = 3
                 }
 
                 /** Properties of a ValidationError. */
@@ -16818,6 +16818,12 @@ export namespace google {
 
                     /** Document rawContent */
                     rawContent?: (Uint8Array|string|null);
+
+                    /** Document enableAutoReload */
+                    enableAutoReload?: (boolean|null);
+
+                    /** Document latestReloadStatus */
+                    latestReloadStatus?: (google.cloud.dialogflow.v2beta1.Document.IReloadStatus|null);
                 }
 
                 /** Represents a Document. */
@@ -16849,6 +16855,12 @@ export namespace google {
 
                     /** Document rawContent. */
                     public rawContent: (Uint8Array|string);
+
+                    /** Document enableAutoReload. */
+                    public enableAutoReload: boolean;
+
+                    /** Document latestReloadStatus. */
+                    public latestReloadStatus?: (google.cloud.dialogflow.v2beta1.Document.IReloadStatus|null);
 
                     /** Document source. */
                     public source?: ("contentUri"|"content"|"rawContent");
@@ -16926,12 +16938,198 @@ export namespace google {
 
                 namespace Document {
 
+                    /** Properties of a ReloadStatus. */
+                    interface IReloadStatus {
+
+                        /** ReloadStatus time */
+                        time?: (google.protobuf.ITimestamp|null);
+
+                        /** ReloadStatus status */
+                        status?: (google.rpc.IStatus|null);
+                    }
+
+                    /** Represents a ReloadStatus. */
+                    class ReloadStatus implements IReloadStatus {
+
+                        /**
+                         * Constructs a new ReloadStatus.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dialogflow.v2beta1.Document.IReloadStatus);
+
+                        /** ReloadStatus time. */
+                        public time?: (google.protobuf.ITimestamp|null);
+
+                        /** ReloadStatus status. */
+                        public status?: (google.rpc.IStatus|null);
+
+                        /**
+                         * Creates a new ReloadStatus instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ReloadStatus instance
+                         */
+                        public static create(properties?: google.cloud.dialogflow.v2beta1.Document.IReloadStatus): google.cloud.dialogflow.v2beta1.Document.ReloadStatus;
+
+                        /**
+                         * Encodes the specified ReloadStatus message. Does not implicitly {@link google.cloud.dialogflow.v2beta1.Document.ReloadStatus.verify|verify} messages.
+                         * @param message ReloadStatus message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dialogflow.v2beta1.Document.IReloadStatus, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ReloadStatus message, length delimited. Does not implicitly {@link google.cloud.dialogflow.v2beta1.Document.ReloadStatus.verify|verify} messages.
+                         * @param message ReloadStatus message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dialogflow.v2beta1.Document.IReloadStatus, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ReloadStatus message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ReloadStatus
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.v2beta1.Document.ReloadStatus;
+
+                        /**
+                         * Decodes a ReloadStatus message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ReloadStatus
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.v2beta1.Document.ReloadStatus;
+
+                        /**
+                         * Verifies a ReloadStatus message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ReloadStatus message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ReloadStatus
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.v2beta1.Document.ReloadStatus;
+
+                        /**
+                         * Creates a plain object from a ReloadStatus message. Also converts values to other types if specified.
+                         * @param message ReloadStatus
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dialogflow.v2beta1.Document.ReloadStatus, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ReloadStatus to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
                     /** KnowledgeType enum. */
                     enum KnowledgeType {
                         KNOWLEDGE_TYPE_UNSPECIFIED = 0,
                         FAQ = 1,
                         EXTRACTIVE_QA = 2
                     }
+                }
+
+                /** Properties of a GetDocumentRequest. */
+                interface IGetDocumentRequest {
+
+                    /** GetDocumentRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetDocumentRequest. */
+                class GetDocumentRequest implements IGetDocumentRequest {
+
+                    /**
+                     * Constructs a new GetDocumentRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dialogflow.v2beta1.IGetDocumentRequest);
+
+                    /** GetDocumentRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetDocumentRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetDocumentRequest instance
+                     */
+                    public static create(properties?: google.cloud.dialogflow.v2beta1.IGetDocumentRequest): google.cloud.dialogflow.v2beta1.GetDocumentRequest;
+
+                    /**
+                     * Encodes the specified GetDocumentRequest message. Does not implicitly {@link google.cloud.dialogflow.v2beta1.GetDocumentRequest.verify|verify} messages.
+                     * @param message GetDocumentRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dialogflow.v2beta1.IGetDocumentRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetDocumentRequest message, length delimited. Does not implicitly {@link google.cloud.dialogflow.v2beta1.GetDocumentRequest.verify|verify} messages.
+                     * @param message GetDocumentRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dialogflow.v2beta1.IGetDocumentRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetDocumentRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetDocumentRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.v2beta1.GetDocumentRequest;
+
+                    /**
+                     * Decodes a GetDocumentRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetDocumentRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.v2beta1.GetDocumentRequest;
+
+                    /**
+                     * Verifies a GetDocumentRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetDocumentRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetDocumentRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.v2beta1.GetDocumentRequest;
+
+                    /**
+                     * Creates a plain object from a GetDocumentRequest message. Also converts values to other types if specified.
+                     * @param message GetDocumentRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dialogflow.v2beta1.GetDocumentRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetDocumentRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
                 }
 
                 /** Properties of a ListDocumentsRequest. */
@@ -17127,96 +17325,6 @@ export namespace google {
 
                     /**
                      * Converts this ListDocumentsResponse to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
-                /** Properties of a GetDocumentRequest. */
-                interface IGetDocumentRequest {
-
-                    /** GetDocumentRequest name */
-                    name?: (string|null);
-                }
-
-                /** Represents a GetDocumentRequest. */
-                class GetDocumentRequest implements IGetDocumentRequest {
-
-                    /**
-                     * Constructs a new GetDocumentRequest.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.dialogflow.v2beta1.IGetDocumentRequest);
-
-                    /** GetDocumentRequest name. */
-                    public name: string;
-
-                    /**
-                     * Creates a new GetDocumentRequest instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns GetDocumentRequest instance
-                     */
-                    public static create(properties?: google.cloud.dialogflow.v2beta1.IGetDocumentRequest): google.cloud.dialogflow.v2beta1.GetDocumentRequest;
-
-                    /**
-                     * Encodes the specified GetDocumentRequest message. Does not implicitly {@link google.cloud.dialogflow.v2beta1.GetDocumentRequest.verify|verify} messages.
-                     * @param message GetDocumentRequest message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.dialogflow.v2beta1.IGetDocumentRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified GetDocumentRequest message, length delimited. Does not implicitly {@link google.cloud.dialogflow.v2beta1.GetDocumentRequest.verify|verify} messages.
-                     * @param message GetDocumentRequest message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.dialogflow.v2beta1.IGetDocumentRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a GetDocumentRequest message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns GetDocumentRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.v2beta1.GetDocumentRequest;
-
-                    /**
-                     * Decodes a GetDocumentRequest message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns GetDocumentRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.v2beta1.GetDocumentRequest;
-
-                    /**
-                     * Verifies a GetDocumentRequest message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a GetDocumentRequest message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns GetDocumentRequest
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.v2beta1.GetDocumentRequest;
-
-                    /**
-                     * Creates a plain object from a GetDocumentRequest message. Also converts values to other types if specified.
-                     * @param message GetDocumentRequest
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.dialogflow.v2beta1.GetDocumentRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this GetDocumentRequest to JSON.
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
@@ -30874,6 +30982,9 @@ export namespace google {
 
             /** FieldDescriptorProto options */
             options?: (google.protobuf.IFieldOptions|null);
+
+            /** FieldDescriptorProto proto3Optional */
+            proto3Optional?: (boolean|null);
         }
 
         /** Represents a FieldDescriptorProto. */
@@ -30914,6 +31025,9 @@ export namespace google {
 
             /** FieldDescriptorProto options. */
             public options?: (google.protobuf.IFieldOptions|null);
+
+            /** FieldDescriptorProto proto3Optional. */
+            public proto3Optional: boolean;
 
             /**
              * Creates a new FieldDescriptorProto instance using the specified properties.
