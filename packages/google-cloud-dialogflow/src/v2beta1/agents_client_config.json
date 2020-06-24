@@ -6,6 +6,9 @@
         "idempotent": [
           "DEADLINE_EXCEEDED",
           "UNAVAILABLE"
+        ],
+        "unavailable": [
+          "UNAVAILABLE"
         ]
       },
       "retry_params": {
@@ -22,46 +25,47 @@
       "methods": {
         "GetAgent": {
           "timeout_millis": 60000,
-          "retry_codes_name": "idempotent",
+          "retry_codes_name": "unavailable",
           "retry_params_name": "default"
         },
         "SetAgent": {
           "timeout_millis": 60000,
-          "retry_codes_name": "idempotent",
+          "retry_codes_name": "unavailable",
           "retry_params_name": "default"
         },
         "DeleteAgent": {
           "timeout_millis": 60000,
-          "retry_codes_name": "idempotent",
+          "retry_codes_name": "unavailable",
           "retry_params_name": "default"
         },
         "SearchAgents": {
           "timeout_millis": 60000,
-          "retry_codes_name": "idempotent",
+          "retry_codes_name": "unavailable",
           "retry_params_name": "default"
         },
         "TrainAgent": {
           "timeout_millis": 60000,
-          "retry_codes_name": "idempotent",
+          "retry_codes_name": "unavailable",
           "retry_params_name": "default"
         },
         "ExportAgent": {
           "timeout_millis": 60000,
-          "retry_codes_name": "idempotent",
+          "retry_codes_name": "unavailable",
           "retry_params_name": "default"
         },
         "ImportAgent": {
           "timeout_millis": 60000,
-          "retry_codes_name": "non_idempotent",
+          "retry_codes_name": "unavailable",
           "retry_params_name": "default"
         },
         "RestoreAgent": {
           "timeout_millis": 60000,
-          "retry_codes_name": "idempotent",
+          "retry_codes_name": "unavailable",
           "retry_params_name": "default"
         },
         "GetValidationResult": {
-          "retry_codes_name": "non_idempotent",
+          "timeout_millis": 60000,
+          "retry_codes_name": "unavailable",
           "retry_params_name": "default"
         }
       }

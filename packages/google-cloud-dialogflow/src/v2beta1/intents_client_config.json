@@ -6,6 +6,9 @@
         "idempotent": [
           "DEADLINE_EXCEEDED",
           "UNAVAILABLE"
+        ],
+        "unavailable": [
+          "UNAVAILABLE"
         ]
       },
       "retry_params": {
@@ -22,37 +25,37 @@
       "methods": {
         "ListIntents": {
           "timeout_millis": 60000,
-          "retry_codes_name": "idempotent",
+          "retry_codes_name": "unavailable",
           "retry_params_name": "default"
         },
         "GetIntent": {
           "timeout_millis": 60000,
-          "retry_codes_name": "idempotent",
+          "retry_codes_name": "unavailable",
           "retry_params_name": "default"
         },
         "CreateIntent": {
           "timeout_millis": 60000,
-          "retry_codes_name": "non_idempotent",
+          "retry_codes_name": "unavailable",
           "retry_params_name": "default"
         },
         "UpdateIntent": {
           "timeout_millis": 60000,
-          "retry_codes_name": "non_idempotent",
+          "retry_codes_name": "unavailable",
           "retry_params_name": "default"
         },
         "DeleteIntent": {
           "timeout_millis": 60000,
-          "retry_codes_name": "idempotent",
+          "retry_codes_name": "unavailable",
           "retry_params_name": "default"
         },
         "BatchUpdateIntents": {
           "timeout_millis": 60000,
-          "retry_codes_name": "non_idempotent",
+          "retry_codes_name": "unavailable",
           "retry_params_name": "default"
         },
         "BatchDeleteIntents": {
           "timeout_millis": 60000,
-          "retry_codes_name": "idempotent",
+          "retry_codes_name": "unavailable",
           "retry_params_name": "default"
         }
       }

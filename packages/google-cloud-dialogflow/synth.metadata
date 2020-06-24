@@ -3,23 +3,23 @@
     {
       "git": {
         "name": ".",
-        "remote": "https://github.com/googleapis/nodejs-dialogflow.git",
-        "sha": "fd599471f3a5477fe7ca45f47f5952d2ddfdd76a"
+        "remote": "git@github.com:googleapis/nodejs-dialogflow",
+        "sha": "b767667304fa81d14fd64509118109d7fe81f788"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "cd804bab06e46dd1a4f16c32155fd3cddb931b52",
-        "internalRef": "314879617"
+        "sha": "927ff51dcfbdf092d469083dc3964173851f5575",
+        "internalRef": "317983262"
       }
     },
     {
       "git": {
         "name": "synthtool",
         "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "d53a5b45c46920932dbe7d0a95e10d8b58933dae"
+        "sha": "2a29860e484695a07aa8670f9e750bfeeb308a43"
       }
     }
   ],
@@ -28,7 +28,7 @@
       "client": {
         "source": "googleapis",
         "apiName": "dialogflow",
-        "apiVersion": "v2",
+        "apiVersion": "v2beta1",
         "language": "typescript",
         "generator": "gapic-generator-typescript"
       }
@@ -37,7 +37,7 @@
       "client": {
         "source": "googleapis",
         "apiName": "dialogflow",
-        "apiVersion": "v2beta1",
+        "apiVersion": "v2",
         "language": "typescript",
         "generator": "gapic-generator-typescript"
       }

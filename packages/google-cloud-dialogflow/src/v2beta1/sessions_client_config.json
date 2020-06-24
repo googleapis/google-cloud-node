@@ -6,6 +6,9 @@
         "idempotent": [
           "DEADLINE_EXCEEDED",
           "UNAVAILABLE"
+        ],
+        "unavailable": [
+          "UNAVAILABLE"
         ]
       },
       "retry_params": {
@@ -22,7 +25,7 @@
       "methods": {
         "DetectIntent": {
           "timeout_millis": 220000,
-          "retry_codes_name": "non_idempotent",
+          "retry_codes_name": "unavailable",
           "retry_params_name": "default"
         },
         "StreamingDetectIntent": {

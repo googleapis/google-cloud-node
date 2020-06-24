@@ -6,6 +6,9 @@
         "idempotent": [
           "DEADLINE_EXCEEDED",
           "UNAVAILABLE"
+        ],
+        "unavailable": [
+          "UNAVAILABLE"
         ]
       },
       "retry_params": {
@@ -22,32 +25,32 @@
       "methods": {
         "ListDocuments": {
           "timeout_millis": 60000,
-          "retry_codes_name": "idempotent",
+          "retry_codes_name": "unavailable",
           "retry_params_name": "default"
         },
         "GetDocument": {
           "timeout_millis": 60000,
-          "retry_codes_name": "idempotent",
+          "retry_codes_name": "unavailable",
           "retry_params_name": "default"
         },
         "CreateDocument": {
           "timeout_millis": 60000,
-          "retry_codes_name": "idempotent",
+          "retry_codes_name": "unavailable",
           "retry_params_name": "default"
         },
         "DeleteDocument": {
           "timeout_millis": 60000,
-          "retry_codes_name": "idempotent",
+          "retry_codes_name": "unavailable",
           "retry_params_name": "default"
         },
         "UpdateDocument": {
           "timeout_millis": 60000,
-          "retry_codes_name": "idempotent",
+          "retry_codes_name": "unavailable",
           "retry_params_name": "default"
         },
         "ReloadDocument": {
           "timeout_millis": 60000,
-          "retry_codes_name": "idempotent",
+          "retry_codes_name": "unavailable",
           "retry_params_name": "default"
         }
       }

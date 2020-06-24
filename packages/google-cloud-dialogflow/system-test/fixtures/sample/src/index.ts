@@ -1,4 +1,4 @@
-// Copyright 2019 Google LLC
+// Copyright 2020 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -20,22 +20,20 @@ import {
   AgentsClient,
   ContextsClient,
   EntityTypesClient,
+  EnvironmentsClient,
   IntentsClient,
   SessionEntityTypesClient,
   SessionsClient,
-  DocumentsClient,
-  KnowledgeBasesClient,
 } from '@google-cloud/dialogflow';
 
 function main() {
   new AgentsClient();
   new ContextsClient();
   new EntityTypesClient();
+  new EnvironmentsClient();
   new IntentsClient();
   new SessionEntityTypesClient();
   new SessionsClient();
-  new DocumentsClient();
-  new KnowledgeBasesClient();
 }
 
 main();

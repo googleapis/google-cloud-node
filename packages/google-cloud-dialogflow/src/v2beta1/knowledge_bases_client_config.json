@@ -6,6 +6,9 @@
         "idempotent": [
           "DEADLINE_EXCEEDED",
           "UNAVAILABLE"
+        ],
+        "unavailable": [
+          "UNAVAILABLE"
         ]
       },
       "retry_params": {
@@ -22,27 +25,27 @@
       "methods": {
         "ListKnowledgeBases": {
           "timeout_millis": 60000,
-          "retry_codes_name": "idempotent",
+          "retry_codes_name": "unavailable",
           "retry_params_name": "default"
         },
         "GetKnowledgeBase": {
           "timeout_millis": 60000,
-          "retry_codes_name": "idempotent",
+          "retry_codes_name": "unavailable",
           "retry_params_name": "default"
         },
         "CreateKnowledgeBase": {
           "timeout_millis": 60000,
-          "retry_codes_name": "idempotent",
+          "retry_codes_name": "unavailable",
           "retry_params_name": "default"
         },
         "DeleteKnowledgeBase": {
           "timeout_millis": 60000,
-          "retry_codes_name": "idempotent",
+          "retry_codes_name": "unavailable",
           "retry_params_name": "default"
         },
         "UpdateKnowledgeBase": {
           "timeout_millis": 60000,
-          "retry_codes_name": "idempotent",
+          "retry_codes_name": "unavailable",
           "retry_params_name": "default"
         }
       }

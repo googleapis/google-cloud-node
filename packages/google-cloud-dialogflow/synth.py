@@ -23,7 +23,10 @@ AUTOSYNTH_MULTIPLE_COMMITS = True
 
 
 gapic = gcp.GAPICMicrogenerator()
-versions = ['v2', 'v2beta1']
+# note: default version must be the last one to generate the correct system test
+versions = ['v2beta1', 'v2'] 
+default_version = 'v2'
+
 for version in versions:
     library = gapic.typescript_library(
         'dialogflow', version,
@@ -35,11 +38,12 @@ for version in versions:
         },
         proto_path=f'/google/cloud/dialogflow/{version}',
         extra_proto_files=["google/cloud/common_resources.proto"]
-        )
-    s.copy(library, excludes=['package.json', 'README.md', 'src/index.ts', 'system-test/fixtures/sample/src'])
+    )
+    s.copy(library, excludes=['package.json', 'README.md'])
 
 common_templates = gcp.CommonTemplates()
-templates = common_templates.node_library(source_location='build/src')
+templates = common_templates.node_library(
+    source_location='build/src', versions=versions, default_version=default_version)
 s.copy(templates, excludes=["README.md", "samples/README.md"])
 
 node.postprocess_gapic_library()

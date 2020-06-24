@@ -137,14 +137,11 @@ export class AgentsClient {
     // const showcaseClient = new showcaseClient({ projectId, customConfig });
     opts.clientConfig = opts.clientConfig || {};
 
-    const isBrowser = typeof window !== 'undefined';
-    if (isBrowser) {
-      opts.fallback = true;
-    }
-    // If we are in browser, we are already using fallback because of the
-    // "browser" field in package.json.
-    // But if we were explicitly requested to use fallback, let's do it now.
-    this._gaxModule = !isBrowser && opts.fallback ? gax.fallback : gax;
+    // If we're running in browser, it's OK to omit `fallback` since
+    // google-gax has `browser` field in its `package.json`.
+    // For Electron (which does not respect `browser` field),
+    // pass `{fallback: true}` to the AgentsClient constructor.
+    this._gaxModule = opts.fallback ? gax.fallback : gax;
 
     // Create a `gaxGrpc` object, with any grpc-specific options
     // sent to the client.
@@ -1145,10 +1142,16 @@ export class AgentsClient {
    *
    * Uploads new intents and entity types without deleting the existing ones.
    * Intents and entity types with the same name are replaced with the new
-   * versions from ImportAgentRequest.
+   * versions from {@link google.cloud.dialogflow.v2beta1.ImportAgentRequest|ImportAgentRequest}. After the import, the imported draft
+   * agent will be trained automatically (unless disabled in agent settings).
+   * However, once the import is done, training may not be completed yet. Please
+   * call {@link google.cloud.dialogflow.v2beta1.Agents.TrainAgent|TrainAgent} and wait for the operation it returns in order to train
+   * explicitly.
    *
    *
    * Operation <response: {@link google.protobuf.Empty|google.protobuf.Empty}>
+   * An operation which tracks when importing is complete. It only tracks
+   * when the draft agent is updated not when it is done training.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1288,10 +1291,16 @@ export class AgentsClient {
    * Restores the specified agent from a ZIP file.
    *
    * Replaces the current agent version with a new one. All the intents and
-   * entity types in the older version are deleted.
+   * entity types in the older version are deleted. After the restore, the
+   * restored draft agent will be trained automatically (unless disabled in
+   * agent settings). However, once the restore is done, training may not be
+   * completed yet. Please call {@link google.cloud.dialogflow.v2beta1.Agents.TrainAgent|TrainAgent} and wait for the operation it
+   * returns in order to train explicitly.
    *
    *
    * Operation <response: {@link google.protobuf.Empty|google.protobuf.Empty}>
+   * An operation which tracks when restoring is complete. It only tracks
+   * when the draft agent is updated not when it is done training.
    *
    * @param {Object} request
    *   The request object that will be sent.

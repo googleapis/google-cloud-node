@@ -1,4 +1,4 @@
-// Copyright 2019 Google LLC
+// Copyright 2020 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -20,14 +20,13 @@
 const dialogflow = require('@google-cloud/dialogflow');
 
 function main() {
-  new dialogflow.AgentsClient();
-  new dialogflow.ContextsClient();
-  new dialogflow.EntityTypesClient();
-  new dialogflow.IntentsClient();
-  new dialogflow.SessionEntityTypesClient();
-  new dialogflow.SessionsClient();
-  new dialogflow.DocumentsClient();
-  new dialogflow.KnowledgeBasesClient();
+  const agentsClient = new dialogflow.AgentsClient();
+  const contextsClient = new dialogflow.ContextsClient();
+  const entityTypesClient = new dialogflow.EntityTypesClient();
+  const environmentsClient = new dialogflow.EnvironmentsClient();
+  const intentsClient = new dialogflow.IntentsClient();
+  const sessionEntityTypesClient = new dialogflow.SessionEntityTypesClient();
+  const sessionsClient = new dialogflow.SessionsClient();
 }
 
 main();

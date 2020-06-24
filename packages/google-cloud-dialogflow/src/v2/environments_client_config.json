@@ -7,8 +7,7 @@
           "DEADLINE_EXCEEDED",
           "UNAVAILABLE"
         ],
-        "internal_unavailable": [
-          "INTERNAL",
+        "unavailable": [
           "UNAVAILABLE"
         ]
       },
@@ -26,7 +25,7 @@
       "methods": {
         "ListEnvironments": {
           "timeout_millis": 60000,
-          "retry_codes_name": "internal_unavailable",
+          "retry_codes_name": "unavailable",
           "retry_params_name": "default"
         }
       }
