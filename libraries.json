@@ -263,6 +263,20 @@
     "support_documentation": "https://cloud.google.com/game-servers/docs/getting-support"
   },
   {
+    "name": "bigqueryconnection",
+    "name_pretty": "Google BigQuery Connection",
+    "product_documentation": "https://cloud.google.com/bigquery/docs/reference/bigqueryconnection",
+    "client_documentation": "https://googleapis.dev/nodejs/bigqueryconnection/latest",
+    "issue_tracker": "https://b.corp.google.com/savedsearches/559654",
+    "release_level": "ga",
+    "language": "nodejs",
+    "repo": "googleapis/nodejs-bigquery-connection",
+    "distribution_name": "@google-cloud/bigquery-connection",
+    "api_id": "bigqueryconnection.googleapis.com",
+    "requires_billing": true,
+    "support_documentation": "https://cloud.google.com/bigquery/docs/getting-support"
+  },
+  {
     "name": "bigquery-data-transfer",
     "name_pretty": "Google BigQuery Data Transfer Service",
     "product_documentation": "https://cloud.google.com/bigquery/transfer/",
