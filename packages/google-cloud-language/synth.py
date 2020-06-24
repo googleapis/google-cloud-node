@@ -8,20 +8,13 @@ logging.basicConfig(level=logging.DEBUG)
 AUTOSYNTH_MULTIPLE_COMMITS = True
 
 
-gapic = gcp.GAPICMicrogenerator()
+gapic = gcp.GAPICBazel()
 versions = ['v1', 'v1beta2']
-# tasks has two product names, and a poorly named artman yaml
 for version in versions:
-    library = gapic.typescript_library(
+    library = gapic.node_library(
         'language',
-        generator_args={
-            "grpc-service-config": f"google/cloud/language/{version}/language_grpc_service_config.json",
-            "package-name": f"@google-cloud/language"
-        },
-        proto_path=f'/google/cloud/language/{version}',
-        version=version)
-
-    # skip index, protos, package.json, and README.md
+        version,
+    )
     s.copy(
         library,
         excludes=['package.json', 'README.md'])
