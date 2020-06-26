@@ -8999,6 +8999,547 @@ export namespace google {
                     }
                 }
             }
+
+            /** Namespace v1p5beta1. */
+            namespace v1p5beta1 {
+
+                /** Represents an AssetService */
+                class AssetService extends $protobuf.rpc.Service {
+
+                    /**
+                     * Constructs a new AssetService service.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     */
+                    constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                    /**
+                     * Creates new AssetService service using the specified rpc implementation.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     * @returns RPC service. Useful where requests and/or responses are streamed.
+                     */
+                    public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): AssetService;
+
+                    /**
+                     * Calls ListAssets.
+                     * @param request ListAssetsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListAssetsResponse
+                     */
+                    public listAssets(request: google.cloud.asset.v1p5beta1.IListAssetsRequest, callback: google.cloud.asset.v1p5beta1.AssetService.ListAssetsCallback): void;
+
+                    /**
+                     * Calls ListAssets.
+                     * @param request ListAssetsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listAssets(request: google.cloud.asset.v1p5beta1.IListAssetsRequest): Promise<google.cloud.asset.v1p5beta1.ListAssetsResponse>;
+                }
+
+                namespace AssetService {
+
+                    /**
+                     * Callback as used by {@link google.cloud.asset.v1p5beta1.AssetService#listAssets}.
+                     * @param error Error, if any
+                     * @param [response] ListAssetsResponse
+                     */
+                    type ListAssetsCallback = (error: (Error|null), response?: google.cloud.asset.v1p5beta1.ListAssetsResponse) => void;
+                }
+
+                /** Properties of a ListAssetsRequest. */
+                interface IListAssetsRequest {
+
+                    /** ListAssetsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListAssetsRequest readTime */
+                    readTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ListAssetsRequest assetTypes */
+                    assetTypes?: (string[]|null);
+
+                    /** ListAssetsRequest contentType */
+                    contentType?: (google.cloud.asset.v1p5beta1.ContentType|keyof typeof google.cloud.asset.v1p5beta1.ContentType|null);
+
+                    /** ListAssetsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListAssetsRequest pageToken */
+                    pageToken?: (string|null);
+                }
+
+                /** Represents a ListAssetsRequest. */
+                class ListAssetsRequest implements IListAssetsRequest {
+
+                    /**
+                     * Constructs a new ListAssetsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.asset.v1p5beta1.IListAssetsRequest);
+
+                    /** ListAssetsRequest parent. */
+                    public parent: string;
+
+                    /** ListAssetsRequest readTime. */
+                    public readTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ListAssetsRequest assetTypes. */
+                    public assetTypes: string[];
+
+                    /** ListAssetsRequest contentType. */
+                    public contentType: (google.cloud.asset.v1p5beta1.ContentType|keyof typeof google.cloud.asset.v1p5beta1.ContentType);
+
+                    /** ListAssetsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListAssetsRequest pageToken. */
+                    public pageToken: string;
+
+                    /**
+                     * Creates a new ListAssetsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListAssetsRequest instance
+                     */
+                    public static create(properties?: google.cloud.asset.v1p5beta1.IListAssetsRequest): google.cloud.asset.v1p5beta1.ListAssetsRequest;
+
+                    /**
+                     * Encodes the specified ListAssetsRequest message. Does not implicitly {@link google.cloud.asset.v1p5beta1.ListAssetsRequest.verify|verify} messages.
+                     * @param message ListAssetsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.asset.v1p5beta1.IListAssetsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListAssetsRequest message, length delimited. Does not implicitly {@link google.cloud.asset.v1p5beta1.ListAssetsRequest.verify|verify} messages.
+                     * @param message ListAssetsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.asset.v1p5beta1.IListAssetsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListAssetsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListAssetsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.asset.v1p5beta1.ListAssetsRequest;
+
+                    /**
+                     * Decodes a ListAssetsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListAssetsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.asset.v1p5beta1.ListAssetsRequest;
+
+                    /**
+                     * Verifies a ListAssetsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListAssetsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListAssetsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.asset.v1p5beta1.ListAssetsRequest;
+
+                    /**
+                     * Creates a plain object from a ListAssetsRequest message. Also converts values to other types if specified.
+                     * @param message ListAssetsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.asset.v1p5beta1.ListAssetsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListAssetsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** ContentType enum. */
+                enum ContentType {
+                    CONTENT_TYPE_UNSPECIFIED = 0,
+                    RESOURCE = 1,
+                    IAM_POLICY = 2,
+                    ORG_POLICY = 4,
+                    ACCESS_POLICY = 5
+                }
+
+                /** Properties of a ListAssetsResponse. */
+                interface IListAssetsResponse {
+
+                    /** ListAssetsResponse readTime */
+                    readTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ListAssetsResponse assets */
+                    assets?: (google.cloud.asset.v1p5beta1.IAsset[]|null);
+
+                    /** ListAssetsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListAssetsResponse. */
+                class ListAssetsResponse implements IListAssetsResponse {
+
+                    /**
+                     * Constructs a new ListAssetsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.asset.v1p5beta1.IListAssetsResponse);
+
+                    /** ListAssetsResponse readTime. */
+                    public readTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ListAssetsResponse assets. */
+                    public assets: google.cloud.asset.v1p5beta1.IAsset[];
+
+                    /** ListAssetsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListAssetsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListAssetsResponse instance
+                     */
+                    public static create(properties?: google.cloud.asset.v1p5beta1.IListAssetsResponse): google.cloud.asset.v1p5beta1.ListAssetsResponse;
+
+                    /**
+                     * Encodes the specified ListAssetsResponse message. Does not implicitly {@link google.cloud.asset.v1p5beta1.ListAssetsResponse.verify|verify} messages.
+                     * @param message ListAssetsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.asset.v1p5beta1.IListAssetsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListAssetsResponse message, length delimited. Does not implicitly {@link google.cloud.asset.v1p5beta1.ListAssetsResponse.verify|verify} messages.
+                     * @param message ListAssetsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.asset.v1p5beta1.IListAssetsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListAssetsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListAssetsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.asset.v1p5beta1.ListAssetsResponse;
+
+                    /**
+                     * Decodes a ListAssetsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListAssetsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.asset.v1p5beta1.ListAssetsResponse;
+
+                    /**
+                     * Verifies a ListAssetsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListAssetsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListAssetsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.asset.v1p5beta1.ListAssetsResponse;
+
+                    /**
+                     * Creates a plain object from a ListAssetsResponse message. Also converts values to other types if specified.
+                     * @param message ListAssetsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.asset.v1p5beta1.ListAssetsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListAssetsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of an Asset. */
+                interface IAsset {
+
+                    /** Asset name */
+                    name?: (string|null);
+
+                    /** Asset assetType */
+                    assetType?: (string|null);
+
+                    /** Asset resource */
+                    resource?: (google.cloud.asset.v1p5beta1.IResource|null);
+
+                    /** Asset iamPolicy */
+                    iamPolicy?: (google.iam.v1.IPolicy|null);
+
+                    /** Asset orgPolicy */
+                    orgPolicy?: (google.cloud.orgpolicy.v1.IPolicy[]|null);
+
+                    /** Asset accessPolicy */
+                    accessPolicy?: (google.identity.accesscontextmanager.v1.IAccessPolicy|null);
+
+                    /** Asset accessLevel */
+                    accessLevel?: (google.identity.accesscontextmanager.v1.IAccessLevel|null);
+
+                    /** Asset servicePerimeter */
+                    servicePerimeter?: (google.identity.accesscontextmanager.v1.IServicePerimeter|null);
+
+                    /** Asset ancestors */
+                    ancestors?: (string[]|null);
+                }
+
+                /** Represents an Asset. */
+                class Asset implements IAsset {
+
+                    /**
+                     * Constructs a new Asset.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.asset.v1p5beta1.IAsset);
+
+                    /** Asset name. */
+                    public name: string;
+
+                    /** Asset assetType. */
+                    public assetType: string;
+
+                    /** Asset resource. */
+                    public resource?: (google.cloud.asset.v1p5beta1.IResource|null);
+
+                    /** Asset iamPolicy. */
+                    public iamPolicy?: (google.iam.v1.IPolicy|null);
+
+                    /** Asset orgPolicy. */
+                    public orgPolicy: google.cloud.orgpolicy.v1.IPolicy[];
+
+                    /** Asset accessPolicy. */
+                    public accessPolicy?: (google.identity.accesscontextmanager.v1.IAccessPolicy|null);
+
+                    /** Asset accessLevel. */
+                    public accessLevel?: (google.identity.accesscontextmanager.v1.IAccessLevel|null);
+
+                    /** Asset servicePerimeter. */
+                    public servicePerimeter?: (google.identity.accesscontextmanager.v1.IServicePerimeter|null);
+
+                    /** Asset ancestors. */
+                    public ancestors: string[];
+
+                    /** Asset accessContextPolicy. */
+                    public accessContextPolicy?: ("accessPolicy"|"accessLevel"|"servicePerimeter");
+
+                    /**
+                     * Creates a new Asset instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Asset instance
+                     */
+                    public static create(properties?: google.cloud.asset.v1p5beta1.IAsset): google.cloud.asset.v1p5beta1.Asset;
+
+                    /**
+                     * Encodes the specified Asset message. Does not implicitly {@link google.cloud.asset.v1p5beta1.Asset.verify|verify} messages.
+                     * @param message Asset message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.asset.v1p5beta1.IAsset, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Asset message, length delimited. Does not implicitly {@link google.cloud.asset.v1p5beta1.Asset.verify|verify} messages.
+                     * @param message Asset message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.asset.v1p5beta1.IAsset, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an Asset message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Asset
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.asset.v1p5beta1.Asset;
+
+                    /**
+                     * Decodes an Asset message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Asset
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.asset.v1p5beta1.Asset;
+
+                    /**
+                     * Verifies an Asset message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an Asset message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Asset
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.asset.v1p5beta1.Asset;
+
+                    /**
+                     * Creates a plain object from an Asset message. Also converts values to other types if specified.
+                     * @param message Asset
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.asset.v1p5beta1.Asset, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Asset to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a Resource. */
+                interface IResource {
+
+                    /** Resource version */
+                    version?: (string|null);
+
+                    /** Resource discoveryDocumentUri */
+                    discoveryDocumentUri?: (string|null);
+
+                    /** Resource discoveryName */
+                    discoveryName?: (string|null);
+
+                    /** Resource resourceUrl */
+                    resourceUrl?: (string|null);
+
+                    /** Resource parent */
+                    parent?: (string|null);
+
+                    /** Resource data */
+                    data?: (google.protobuf.IStruct|null);
+                }
+
+                /** Represents a Resource. */
+                class Resource implements IResource {
+
+                    /**
+                     * Constructs a new Resource.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.asset.v1p5beta1.IResource);
+
+                    /** Resource version. */
+                    public version: string;
+
+                    /** Resource discoveryDocumentUri. */
+                    public discoveryDocumentUri: string;
+
+                    /** Resource discoveryName. */
+                    public discoveryName: string;
+
+                    /** Resource resourceUrl. */
+                    public resourceUrl: string;
+
+                    /** Resource parent. */
+                    public parent: string;
+
+                    /** Resource data. */
+                    public data?: (google.protobuf.IStruct|null);
+
+                    /**
+                     * Creates a new Resource instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Resource instance
+                     */
+                    public static create(properties?: google.cloud.asset.v1p5beta1.IResource): google.cloud.asset.v1p5beta1.Resource;
+
+                    /**
+                     * Encodes the specified Resource message. Does not implicitly {@link google.cloud.asset.v1p5beta1.Resource.verify|verify} messages.
+                     * @param message Resource message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.asset.v1p5beta1.IResource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Resource message, length delimited. Does not implicitly {@link google.cloud.asset.v1p5beta1.Resource.verify|verify} messages.
+                     * @param message Resource message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.asset.v1p5beta1.IResource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Resource message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Resource
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.asset.v1p5beta1.Resource;
+
+                    /**
+                     * Decodes a Resource message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Resource
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.asset.v1p5beta1.Resource;
+
+                    /**
+                     * Verifies a Resource message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Resource message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Resource
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.asset.v1p5beta1.Resource;
+
+                    /**
+                     * Creates a plain object from a Resource message. Also converts values to other types if specified.
+                     * @param message Resource
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.asset.v1p5beta1.Resource, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Resource to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+            }
         }
 
         /** Namespace orgpolicy. */
