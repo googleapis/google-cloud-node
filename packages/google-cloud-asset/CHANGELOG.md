@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/asset?activeTab=versions
 
+## [3.4.0](https://www.github.com/googleapis/nodejs-asset/compare/v3.3.0...v3.4.0) (2020-06-26)
+
+
+### Features
+
+* add v1p5beta1 API surface ([#349](https://www.github.com/googleapis/nodejs-asset/issues/349)) ([12b8ade](https://www.github.com/googleapis/nodejs-asset/commit/12b8ade2dee42b8578b0364d8876a6932288970c))
+
 ## [3.3.0](https://www.github.com/googleapis/nodejs-asset/compare/v3.2.0...v3.3.0) (2020-06-17)
 
 
