@@ -48,6 +48,4026 @@
              */
             var datastore = {};
     
+            datastore.admin = (function() {
+    
+                /**
+                 * Namespace admin.
+                 * @memberof google.datastore
+                 * @namespace
+                 */
+                var admin = {};
+    
+                admin.v1 = (function() {
+    
+                    /**
+                     * Namespace v1.
+                     * @memberof google.datastore.admin
+                     * @namespace
+                     */
+                    var v1 = {};
+    
+                    v1.DatastoreAdmin = (function() {
+    
+                        /**
+                         * Constructs a new DatastoreAdmin service.
+                         * @memberof google.datastore.admin.v1
+                         * @classdesc Represents a DatastoreAdmin
+                         * @extends $protobuf.rpc.Service
+                         * @constructor
+                         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                         */
+                        function DatastoreAdmin(rpcImpl, requestDelimited, responseDelimited) {
+                            $protobuf.rpc.Service.call(this, rpcImpl, requestDelimited, responseDelimited);
+                        }
+    
+                        (DatastoreAdmin.prototype = Object.create($protobuf.rpc.Service.prototype)).constructor = DatastoreAdmin;
+    
+                        /**
+                         * Creates new DatastoreAdmin service using the specified rpc implementation.
+                         * @function create
+                         * @memberof google.datastore.admin.v1.DatastoreAdmin
+                         * @static
+                         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                         * @returns {DatastoreAdmin} RPC service. Useful where requests and/or responses are streamed.
+                         */
+                        DatastoreAdmin.create = function create(rpcImpl, requestDelimited, responseDelimited) {
+                            return new this(rpcImpl, requestDelimited, responseDelimited);
+                        };
+    
+                        /**
+                         * Callback as used by {@link google.datastore.admin.v1.DatastoreAdmin#exportEntities}.
+                         * @memberof google.datastore.admin.v1.DatastoreAdmin
+                         * @typedef ExportEntitiesCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls ExportEntities.
+                         * @function exportEntities
+                         * @memberof google.datastore.admin.v1.DatastoreAdmin
+                         * @instance
+                         * @param {google.datastore.admin.v1.IExportEntitiesRequest} request ExportEntitiesRequest message or plain object
+                         * @param {google.datastore.admin.v1.DatastoreAdmin.ExportEntitiesCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(DatastoreAdmin.prototype.exportEntities = function exportEntities(request, callback) {
+                            return this.rpcCall(exportEntities, $root.google.datastore.admin.v1.ExportEntitiesRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "ExportEntities" });
+    
+                        /**
+                         * Calls ExportEntities.
+                         * @function exportEntities
+                         * @memberof google.datastore.admin.v1.DatastoreAdmin
+                         * @instance
+                         * @param {google.datastore.admin.v1.IExportEntitiesRequest} request ExportEntitiesRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.datastore.admin.v1.DatastoreAdmin#importEntities}.
+                         * @memberof google.datastore.admin.v1.DatastoreAdmin
+                         * @typedef ImportEntitiesCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls ImportEntities.
+                         * @function importEntities
+                         * @memberof google.datastore.admin.v1.DatastoreAdmin
+                         * @instance
+                         * @param {google.datastore.admin.v1.IImportEntitiesRequest} request ImportEntitiesRequest message or plain object
+                         * @param {google.datastore.admin.v1.DatastoreAdmin.ImportEntitiesCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(DatastoreAdmin.prototype.importEntities = function importEntities(request, callback) {
+                            return this.rpcCall(importEntities, $root.google.datastore.admin.v1.ImportEntitiesRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "ImportEntities" });
+    
+                        /**
+                         * Calls ImportEntities.
+                         * @function importEntities
+                         * @memberof google.datastore.admin.v1.DatastoreAdmin
+                         * @instance
+                         * @param {google.datastore.admin.v1.IImportEntitiesRequest} request ImportEntitiesRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.datastore.admin.v1.DatastoreAdmin#getIndex}.
+                         * @memberof google.datastore.admin.v1.DatastoreAdmin
+                         * @typedef GetIndexCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.datastore.admin.v1.Index} [response] Index
+                         */
+    
+                        /**
+                         * Calls GetIndex.
+                         * @function getIndex
+                         * @memberof google.datastore.admin.v1.DatastoreAdmin
+                         * @instance
+                         * @param {google.datastore.admin.v1.IGetIndexRequest} request GetIndexRequest message or plain object
+                         * @param {google.datastore.admin.v1.DatastoreAdmin.GetIndexCallback} callback Node-style callback called with the error, if any, and Index
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(DatastoreAdmin.prototype.getIndex = function getIndex(request, callback) {
+                            return this.rpcCall(getIndex, $root.google.datastore.admin.v1.GetIndexRequest, $root.google.datastore.admin.v1.Index, request, callback);
+                        }, "name", { value: "GetIndex" });
+    
+                        /**
+                         * Calls GetIndex.
+                         * @function getIndex
+                         * @memberof google.datastore.admin.v1.DatastoreAdmin
+                         * @instance
+                         * @param {google.datastore.admin.v1.IGetIndexRequest} request GetIndexRequest message or plain object
+                         * @returns {Promise<google.datastore.admin.v1.Index>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.datastore.admin.v1.DatastoreAdmin#listIndexes}.
+                         * @memberof google.datastore.admin.v1.DatastoreAdmin
+                         * @typedef ListIndexesCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.datastore.admin.v1.ListIndexesResponse} [response] ListIndexesResponse
+                         */
+    
+                        /**
+                         * Calls ListIndexes.
+                         * @function listIndexes
+                         * @memberof google.datastore.admin.v1.DatastoreAdmin
+                         * @instance
+                         * @param {google.datastore.admin.v1.IListIndexesRequest} request ListIndexesRequest message or plain object
+                         * @param {google.datastore.admin.v1.DatastoreAdmin.ListIndexesCallback} callback Node-style callback called with the error, if any, and ListIndexesResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(DatastoreAdmin.prototype.listIndexes = function listIndexes(request, callback) {
+                            return this.rpcCall(listIndexes, $root.google.datastore.admin.v1.ListIndexesRequest, $root.google.datastore.admin.v1.ListIndexesResponse, request, callback);
+                        }, "name", { value: "ListIndexes" });
+    
+                        /**
+                         * Calls ListIndexes.
+                         * @function listIndexes
+                         * @memberof google.datastore.admin.v1.DatastoreAdmin
+                         * @instance
+                         * @param {google.datastore.admin.v1.IListIndexesRequest} request ListIndexesRequest message or plain object
+                         * @returns {Promise<google.datastore.admin.v1.ListIndexesResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        return DatastoreAdmin;
+                    })();
+    
+                    v1.CommonMetadata = (function() {
+    
+                        /**
+                         * Properties of a CommonMetadata.
+                         * @memberof google.datastore.admin.v1
+                         * @interface ICommonMetadata
+                         * @property {google.protobuf.ITimestamp|null} [startTime] CommonMetadata startTime
+                         * @property {google.protobuf.ITimestamp|null} [endTime] CommonMetadata endTime
+                         * @property {google.datastore.admin.v1.OperationType|null} [operationType] CommonMetadata operationType
+                         * @property {Object.<string,string>|null} [labels] CommonMetadata labels
+                         * @property {google.datastore.admin.v1.CommonMetadata.State|null} [state] CommonMetadata state
+                         */
+    
+                        /**
+                         * Constructs a new CommonMetadata.
+                         * @memberof google.datastore.admin.v1
+                         * @classdesc Represents a CommonMetadata.
+                         * @implements ICommonMetadata
+                         * @constructor
+                         * @param {google.datastore.admin.v1.ICommonMetadata=} [properties] Properties to set
+                         */
+                        function CommonMetadata(properties) {
+                            this.labels = {};
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CommonMetadata startTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} startTime
+                         * @memberof google.datastore.admin.v1.CommonMetadata
+                         * @instance
+                         */
+                        CommonMetadata.prototype.startTime = null;
+    
+                        /**
+                         * CommonMetadata endTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} endTime
+                         * @memberof google.datastore.admin.v1.CommonMetadata
+                         * @instance
+                         */
+                        CommonMetadata.prototype.endTime = null;
+    
+                        /**
+                         * CommonMetadata operationType.
+                         * @member {google.datastore.admin.v1.OperationType} operationType
+                         * @memberof google.datastore.admin.v1.CommonMetadata
+                         * @instance
+                         */
+                        CommonMetadata.prototype.operationType = 0;
+    
+                        /**
+                         * CommonMetadata labels.
+                         * @member {Object.<string,string>} labels
+                         * @memberof google.datastore.admin.v1.CommonMetadata
+                         * @instance
+                         */
+                        CommonMetadata.prototype.labels = $util.emptyObject;
+    
+                        /**
+                         * CommonMetadata state.
+                         * @member {google.datastore.admin.v1.CommonMetadata.State} state
+                         * @memberof google.datastore.admin.v1.CommonMetadata
+                         * @instance
+                         */
+                        CommonMetadata.prototype.state = 0;
+    
+                        /**
+                         * Creates a new CommonMetadata instance using the specified properties.
+                         * @function create
+                         * @memberof google.datastore.admin.v1.CommonMetadata
+                         * @static
+                         * @param {google.datastore.admin.v1.ICommonMetadata=} [properties] Properties to set
+                         * @returns {google.datastore.admin.v1.CommonMetadata} CommonMetadata instance
+                         */
+                        CommonMetadata.create = function create(properties) {
+                            return new CommonMetadata(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CommonMetadata message. Does not implicitly {@link google.datastore.admin.v1.CommonMetadata.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.datastore.admin.v1.CommonMetadata
+                         * @static
+                         * @param {google.datastore.admin.v1.ICommonMetadata} message CommonMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CommonMetadata.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.startTime != null && Object.hasOwnProperty.call(message, "startTime"))
+                                $root.google.protobuf.Timestamp.encode(message.startTime, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.endTime != null && Object.hasOwnProperty.call(message, "endTime"))
+                                $root.google.protobuf.Timestamp.encode(message.endTime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.operationType != null && Object.hasOwnProperty.call(message, "operationType"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.operationType);
+                            if (message.labels != null && Object.hasOwnProperty.call(message, "labels"))
+                                for (var keys = Object.keys(message.labels), i = 0; i < keys.length; ++i)
+                                    writer.uint32(/* id 4, wireType 2 =*/34).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.labels[keys[i]]).ldelim();
+                            if (message.state != null && Object.hasOwnProperty.call(message, "state"))
+                                writer.uint32(/* id 5, wireType 0 =*/40).int32(message.state);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CommonMetadata message, length delimited. Does not implicitly {@link google.datastore.admin.v1.CommonMetadata.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.datastore.admin.v1.CommonMetadata
+                         * @static
+                         * @param {google.datastore.admin.v1.ICommonMetadata} message CommonMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CommonMetadata.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CommonMetadata message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.datastore.admin.v1.CommonMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.datastore.admin.v1.CommonMetadata} CommonMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CommonMetadata.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.datastore.admin.v1.CommonMetadata(), key;
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.startTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                case 2:
+                                    message.endTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                case 3:
+                                    message.operationType = reader.int32();
+                                    break;
+                                case 4:
+                                    reader.skip().pos++;
+                                    if (message.labels === $util.emptyObject)
+                                        message.labels = {};
+                                    key = reader.string();
+                                    reader.pos++;
+                                    message.labels[key] = reader.string();
+                                    break;
+                                case 5:
+                                    message.state = reader.int32();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CommonMetadata message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.datastore.admin.v1.CommonMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.datastore.admin.v1.CommonMetadata} CommonMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CommonMetadata.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CommonMetadata message.
+                         * @function verify
+                         * @memberof google.datastore.admin.v1.CommonMetadata
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CommonMetadata.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.startTime != null && message.hasOwnProperty("startTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.startTime);
+                                if (error)
+                                    return "startTime." + error;
+                            }
+                            if (message.endTime != null && message.hasOwnProperty("endTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.endTime);
+                                if (error)
+                                    return "endTime." + error;
+                            }
+                            if (message.operationType != null && message.hasOwnProperty("operationType"))
+                                switch (message.operationType) {
+                                default:
+                                    return "operationType: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                    break;
+                                }
+                            if (message.labels != null && message.hasOwnProperty("labels")) {
+                                if (!$util.isObject(message.labels))
+                                    return "labels: object expected";
+                                var key = Object.keys(message.labels);
+                                for (var i = 0; i < key.length; ++i)
+                                    if (!$util.isString(message.labels[key[i]]))
+                                        return "labels: string{k:string} expected";
+                            }
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                switch (message.state) {
+                                default:
+                                    return "state: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                case 5:
+                                case 6:
+                                case 7:
+                                    break;
+                                }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CommonMetadata message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.datastore.admin.v1.CommonMetadata
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.datastore.admin.v1.CommonMetadata} CommonMetadata
+                         */
+                        CommonMetadata.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.datastore.admin.v1.CommonMetadata)
+                                return object;
+                            var message = new $root.google.datastore.admin.v1.CommonMetadata();
+                            if (object.startTime != null) {
+                                if (typeof object.startTime !== "object")
+                                    throw TypeError(".google.datastore.admin.v1.CommonMetadata.startTime: object expected");
+                                message.startTime = $root.google.protobuf.Timestamp.fromObject(object.startTime);
+                            }
+                            if (object.endTime != null) {
+                                if (typeof object.endTime !== "object")
+                                    throw TypeError(".google.datastore.admin.v1.CommonMetadata.endTime: object expected");
+                                message.endTime = $root.google.protobuf.Timestamp.fromObject(object.endTime);
+                            }
+                            switch (object.operationType) {
+                            case "OPERATION_TYPE_UNSPECIFIED":
+                            case 0:
+                                message.operationType = 0;
+                                break;
+                            case "EXPORT_ENTITIES":
+                            case 1:
+                                message.operationType = 1;
+                                break;
+                            case "IMPORT_ENTITIES":
+                            case 2:
+                                message.operationType = 2;
+                                break;
+                            case "CREATE_INDEX":
+                            case 3:
+                                message.operationType = 3;
+                                break;
+                            case "DELETE_INDEX":
+                            case 4:
+                                message.operationType = 4;
+                                break;
+                            }
+                            if (object.labels) {
+                                if (typeof object.labels !== "object")
+                                    throw TypeError(".google.datastore.admin.v1.CommonMetadata.labels: object expected");
+                                message.labels = {};
+                                for (var keys = Object.keys(object.labels), i = 0; i < keys.length; ++i)
+                                    message.labels[keys[i]] = String(object.labels[keys[i]]);
+                            }
+                            switch (object.state) {
+                            case "STATE_UNSPECIFIED":
+                            case 0:
+                                message.state = 0;
+                                break;
+                            case "INITIALIZING":
+                            case 1:
+                                message.state = 1;
+                                break;
+                            case "PROCESSING":
+                            case 2:
+                                message.state = 2;
+                                break;
+                            case "CANCELLING":
+                            case 3:
+                                message.state = 3;
+                                break;
+                            case "FINALIZING":
+                            case 4:
+                                message.state = 4;
+                                break;
+                            case "SUCCESSFUL":
+                            case 5:
+                                message.state = 5;
+                                break;
+                            case "FAILED":
+                            case 6:
+                                message.state = 6;
+                                break;
+                            case "CANCELLED":
+                            case 7:
+                                message.state = 7;
+                                break;
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CommonMetadata message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.datastore.admin.v1.CommonMetadata
+                         * @static
+                         * @param {google.datastore.admin.v1.CommonMetadata} message CommonMetadata
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CommonMetadata.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.objects || options.defaults)
+                                object.labels = {};
+                            if (options.defaults) {
+                                object.startTime = null;
+                                object.endTime = null;
+                                object.operationType = options.enums === String ? "OPERATION_TYPE_UNSPECIFIED" : 0;
+                                object.state = options.enums === String ? "STATE_UNSPECIFIED" : 0;
+                            }
+                            if (message.startTime != null && message.hasOwnProperty("startTime"))
+                                object.startTime = $root.google.protobuf.Timestamp.toObject(message.startTime, options);
+                            if (message.endTime != null && message.hasOwnProperty("endTime"))
+                                object.endTime = $root.google.protobuf.Timestamp.toObject(message.endTime, options);
+                            if (message.operationType != null && message.hasOwnProperty("operationType"))
+                                object.operationType = options.enums === String ? $root.google.datastore.admin.v1.OperationType[message.operationType] : message.operationType;
+                            var keys2;
+                            if (message.labels && (keys2 = Object.keys(message.labels)).length) {
+                                object.labels = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.labels[keys2[j]] = message.labels[keys2[j]];
+                            }
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                object.state = options.enums === String ? $root.google.datastore.admin.v1.CommonMetadata.State[message.state] : message.state;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CommonMetadata to JSON.
+                         * @function toJSON
+                         * @memberof google.datastore.admin.v1.CommonMetadata
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CommonMetadata.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * State enum.
+                         * @name google.datastore.admin.v1.CommonMetadata.State
+                         * @enum {number}
+                         * @property {number} STATE_UNSPECIFIED=0 STATE_UNSPECIFIED value
+                         * @property {number} INITIALIZING=1 INITIALIZING value
+                         * @property {number} PROCESSING=2 PROCESSING value
+                         * @property {number} CANCELLING=3 CANCELLING value
+                         * @property {number} FINALIZING=4 FINALIZING value
+                         * @property {number} SUCCESSFUL=5 SUCCESSFUL value
+                         * @property {number} FAILED=6 FAILED value
+                         * @property {number} CANCELLED=7 CANCELLED value
+                         */
+                        CommonMetadata.State = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "STATE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "INITIALIZING"] = 1;
+                            values[valuesById[2] = "PROCESSING"] = 2;
+                            values[valuesById[3] = "CANCELLING"] = 3;
+                            values[valuesById[4] = "FINALIZING"] = 4;
+                            values[valuesById[5] = "SUCCESSFUL"] = 5;
+                            values[valuesById[6] = "FAILED"] = 6;
+                            values[valuesById[7] = "CANCELLED"] = 7;
+                            return values;
+                        })();
+    
+                        return CommonMetadata;
+                    })();
+    
+                    /**
+                     * OperationType enum.
+                     * @name google.datastore.admin.v1.OperationType
+                     * @enum {number}
+                     * @property {number} OPERATION_TYPE_UNSPECIFIED=0 OPERATION_TYPE_UNSPECIFIED value
+                     * @property {number} EXPORT_ENTITIES=1 EXPORT_ENTITIES value
+                     * @property {number} IMPORT_ENTITIES=2 IMPORT_ENTITIES value
+                     * @property {number} CREATE_INDEX=3 CREATE_INDEX value
+                     * @property {number} DELETE_INDEX=4 DELETE_INDEX value
+                     */
+                    v1.OperationType = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "OPERATION_TYPE_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "EXPORT_ENTITIES"] = 1;
+                        values[valuesById[2] = "IMPORT_ENTITIES"] = 2;
+                        values[valuesById[3] = "CREATE_INDEX"] = 3;
+                        values[valuesById[4] = "DELETE_INDEX"] = 4;
+                        return values;
+                    })();
+    
+                    v1.Progress = (function() {
+    
+                        /**
+                         * Properties of a Progress.
+                         * @memberof google.datastore.admin.v1
+                         * @interface IProgress
+                         * @property {number|Long|null} [workCompleted] Progress workCompleted
+                         * @property {number|Long|null} [workEstimated] Progress workEstimated
+                         */
+    
+                        /**
+                         * Constructs a new Progress.
+                         * @memberof google.datastore.admin.v1
+                         * @classdesc Represents a Progress.
+                         * @implements IProgress
+                         * @constructor
+                         * @param {google.datastore.admin.v1.IProgress=} [properties] Properties to set
+                         */
+                        function Progress(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Progress workCompleted.
+                         * @member {number|Long} workCompleted
+                         * @memberof google.datastore.admin.v1.Progress
+                         * @instance
+                         */
+                        Progress.prototype.workCompleted = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                        /**
+                         * Progress workEstimated.
+                         * @member {number|Long} workEstimated
+                         * @memberof google.datastore.admin.v1.Progress
+                         * @instance
+                         */
+                        Progress.prototype.workEstimated = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                        /**
+                         * Creates a new Progress instance using the specified properties.
+                         * @function create
+                         * @memberof google.datastore.admin.v1.Progress
+                         * @static
+                         * @param {google.datastore.admin.v1.IProgress=} [properties] Properties to set
+                         * @returns {google.datastore.admin.v1.Progress} Progress instance
+                         */
+                        Progress.create = function create(properties) {
+                            return new Progress(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified Progress message. Does not implicitly {@link google.datastore.admin.v1.Progress.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.datastore.admin.v1.Progress
+                         * @static
+                         * @param {google.datastore.admin.v1.IProgress} message Progress message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Progress.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.workCompleted != null && Object.hasOwnProperty.call(message, "workCompleted"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int64(message.workCompleted);
+                            if (message.workEstimated != null && Object.hasOwnProperty.call(message, "workEstimated"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int64(message.workEstimated);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified Progress message, length delimited. Does not implicitly {@link google.datastore.admin.v1.Progress.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.datastore.admin.v1.Progress
+                         * @static
+                         * @param {google.datastore.admin.v1.IProgress} message Progress message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Progress.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a Progress message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.datastore.admin.v1.Progress
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.datastore.admin.v1.Progress} Progress
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Progress.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.datastore.admin.v1.Progress();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.workCompleted = reader.int64();
+                                    break;
+                                case 2:
+                                    message.workEstimated = reader.int64();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a Progress message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.datastore.admin.v1.Progress
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.datastore.admin.v1.Progress} Progress
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Progress.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a Progress message.
+                         * @function verify
+                         * @memberof google.datastore.admin.v1.Progress
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        Progress.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.workCompleted != null && message.hasOwnProperty("workCompleted"))
+                                if (!$util.isInteger(message.workCompleted) && !(message.workCompleted && $util.isInteger(message.workCompleted.low) && $util.isInteger(message.workCompleted.high)))
+                                    return "workCompleted: integer|Long expected";
+                            if (message.workEstimated != null && message.hasOwnProperty("workEstimated"))
+                                if (!$util.isInteger(message.workEstimated) && !(message.workEstimated && $util.isInteger(message.workEstimated.low) && $util.isInteger(message.workEstimated.high)))
+                                    return "workEstimated: integer|Long expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a Progress message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.datastore.admin.v1.Progress
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.datastore.admin.v1.Progress} Progress
+                         */
+                        Progress.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.datastore.admin.v1.Progress)
+                                return object;
+                            var message = new $root.google.datastore.admin.v1.Progress();
+                            if (object.workCompleted != null)
+                                if ($util.Long)
+                                    (message.workCompleted = $util.Long.fromValue(object.workCompleted)).unsigned = false;
+                                else if (typeof object.workCompleted === "string")
+                                    message.workCompleted = parseInt(object.workCompleted, 10);
+                                else if (typeof object.workCompleted === "number")
+                                    message.workCompleted = object.workCompleted;
+                                else if (typeof object.workCompleted === "object")
+                                    message.workCompleted = new $util.LongBits(object.workCompleted.low >>> 0, object.workCompleted.high >>> 0).toNumber();
+                            if (object.workEstimated != null)
+                                if ($util.Long)
+                                    (message.workEstimated = $util.Long.fromValue(object.workEstimated)).unsigned = false;
+                                else if (typeof object.workEstimated === "string")
+                                    message.workEstimated = parseInt(object.workEstimated, 10);
+                                else if (typeof object.workEstimated === "number")
+                                    message.workEstimated = object.workEstimated;
+                                else if (typeof object.workEstimated === "object")
+                                    message.workEstimated = new $util.LongBits(object.workEstimated.low >>> 0, object.workEstimated.high >>> 0).toNumber();
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a Progress message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.datastore.admin.v1.Progress
+                         * @static
+                         * @param {google.datastore.admin.v1.Progress} message Progress
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        Progress.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                if ($util.Long) {
+                                    var long = new $util.Long(0, 0, false);
+                                    object.workCompleted = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                } else
+                                    object.workCompleted = options.longs === String ? "0" : 0;
+                                if ($util.Long) {
+                                    var long = new $util.Long(0, 0, false);
+                                    object.workEstimated = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                } else
+                                    object.workEstimated = options.longs === String ? "0" : 0;
+                            }
+                            if (message.workCompleted != null && message.hasOwnProperty("workCompleted"))
+                                if (typeof message.workCompleted === "number")
+                                    object.workCompleted = options.longs === String ? String(message.workCompleted) : message.workCompleted;
+                                else
+                                    object.workCompleted = options.longs === String ? $util.Long.prototype.toString.call(message.workCompleted) : options.longs === Number ? new $util.LongBits(message.workCompleted.low >>> 0, message.workCompleted.high >>> 0).toNumber() : message.workCompleted;
+                            if (message.workEstimated != null && message.hasOwnProperty("workEstimated"))
+                                if (typeof message.workEstimated === "number")
+                                    object.workEstimated = options.longs === String ? String(message.workEstimated) : message.workEstimated;
+                                else
+                                    object.workEstimated = options.longs === String ? $util.Long.prototype.toString.call(message.workEstimated) : options.longs === Number ? new $util.LongBits(message.workEstimated.low >>> 0, message.workEstimated.high >>> 0).toNumber() : message.workEstimated;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this Progress to JSON.
+                         * @function toJSON
+                         * @memberof google.datastore.admin.v1.Progress
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        Progress.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return Progress;
+                    })();
+    
+                    v1.ExportEntitiesRequest = (function() {
+    
+                        /**
+                         * Properties of an ExportEntitiesRequest.
+                         * @memberof google.datastore.admin.v1
+                         * @interface IExportEntitiesRequest
+                         * @property {string|null} [projectId] ExportEntitiesRequest projectId
+                         * @property {Object.<string,string>|null} [labels] ExportEntitiesRequest labels
+                         * @property {google.datastore.admin.v1.IEntityFilter|null} [entityFilter] ExportEntitiesRequest entityFilter
+                         * @property {string|null} [outputUrlPrefix] ExportEntitiesRequest outputUrlPrefix
+                         */
+    
+                        /**
+                         * Constructs a new ExportEntitiesRequest.
+                         * @memberof google.datastore.admin.v1
+                         * @classdesc Represents an ExportEntitiesRequest.
+                         * @implements IExportEntitiesRequest
+                         * @constructor
+                         * @param {google.datastore.admin.v1.IExportEntitiesRequest=} [properties] Properties to set
+                         */
+                        function ExportEntitiesRequest(properties) {
+                            this.labels = {};
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ExportEntitiesRequest projectId.
+                         * @member {string} projectId
+                         * @memberof google.datastore.admin.v1.ExportEntitiesRequest
+                         * @instance
+                         */
+                        ExportEntitiesRequest.prototype.projectId = "";
+    
+                        /**
+                         * ExportEntitiesRequest labels.
+                         * @member {Object.<string,string>} labels
+                         * @memberof google.datastore.admin.v1.ExportEntitiesRequest
+                         * @instance
+                         */
+                        ExportEntitiesRequest.prototype.labels = $util.emptyObject;
+    
+                        /**
+                         * ExportEntitiesRequest entityFilter.
+                         * @member {google.datastore.admin.v1.IEntityFilter|null|undefined} entityFilter
+                         * @memberof google.datastore.admin.v1.ExportEntitiesRequest
+                         * @instance
+                         */
+                        ExportEntitiesRequest.prototype.entityFilter = null;
+    
+                        /**
+                         * ExportEntitiesRequest outputUrlPrefix.
+                         * @member {string} outputUrlPrefix
+                         * @memberof google.datastore.admin.v1.ExportEntitiesRequest
+                         * @instance
+                         */
+                        ExportEntitiesRequest.prototype.outputUrlPrefix = "";
+    
+                        /**
+                         * Creates a new ExportEntitiesRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.datastore.admin.v1.ExportEntitiesRequest
+                         * @static
+                         * @param {google.datastore.admin.v1.IExportEntitiesRequest=} [properties] Properties to set
+                         * @returns {google.datastore.admin.v1.ExportEntitiesRequest} ExportEntitiesRequest instance
+                         */
+                        ExportEntitiesRequest.create = function create(properties) {
+                            return new ExportEntitiesRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ExportEntitiesRequest message. Does not implicitly {@link google.datastore.admin.v1.ExportEntitiesRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.datastore.admin.v1.ExportEntitiesRequest
+                         * @static
+                         * @param {google.datastore.admin.v1.IExportEntitiesRequest} message ExportEntitiesRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ExportEntitiesRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.projectId != null && Object.hasOwnProperty.call(message, "projectId"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.projectId);
+                            if (message.labels != null && Object.hasOwnProperty.call(message, "labels"))
+                                for (var keys = Object.keys(message.labels), i = 0; i < keys.length; ++i)
+                                    writer.uint32(/* id 2, wireType 2 =*/18).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.labels[keys[i]]).ldelim();
+                            if (message.entityFilter != null && Object.hasOwnProperty.call(message, "entityFilter"))
+                                $root.google.datastore.admin.v1.EntityFilter.encode(message.entityFilter, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.outputUrlPrefix != null && Object.hasOwnProperty.call(message, "outputUrlPrefix"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.outputUrlPrefix);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ExportEntitiesRequest message, length delimited. Does not implicitly {@link google.datastore.admin.v1.ExportEntitiesRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.datastore.admin.v1.ExportEntitiesRequest
+                         * @static
+                         * @param {google.datastore.admin.v1.IExportEntitiesRequest} message ExportEntitiesRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ExportEntitiesRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an ExportEntitiesRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.datastore.admin.v1.ExportEntitiesRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.datastore.admin.v1.ExportEntitiesRequest} ExportEntitiesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ExportEntitiesRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.datastore.admin.v1.ExportEntitiesRequest(), key;
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.projectId = reader.string();
+                                    break;
+                                case 2:
+                                    reader.skip().pos++;
+                                    if (message.labels === $util.emptyObject)
+                                        message.labels = {};
+                                    key = reader.string();
+                                    reader.pos++;
+                                    message.labels[key] = reader.string();
+                                    break;
+                                case 3:
+                                    message.entityFilter = $root.google.datastore.admin.v1.EntityFilter.decode(reader, reader.uint32());
+                                    break;
+                                case 4:
+                                    message.outputUrlPrefix = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an ExportEntitiesRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.datastore.admin.v1.ExportEntitiesRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.datastore.admin.v1.ExportEntitiesRequest} ExportEntitiesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ExportEntitiesRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an ExportEntitiesRequest message.
+                         * @function verify
+                         * @memberof google.datastore.admin.v1.ExportEntitiesRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ExportEntitiesRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.projectId != null && message.hasOwnProperty("projectId"))
+                                if (!$util.isString(message.projectId))
+                                    return "projectId: string expected";
+                            if (message.labels != null && message.hasOwnProperty("labels")) {
+                                if (!$util.isObject(message.labels))
+                                    return "labels: object expected";
+                                var key = Object.keys(message.labels);
+                                for (var i = 0; i < key.length; ++i)
+                                    if (!$util.isString(message.labels[key[i]]))
+                                        return "labels: string{k:string} expected";
+                            }
+                            if (message.entityFilter != null && message.hasOwnProperty("entityFilter")) {
+                                var error = $root.google.datastore.admin.v1.EntityFilter.verify(message.entityFilter);
+                                if (error)
+                                    return "entityFilter." + error;
+                            }
+                            if (message.outputUrlPrefix != null && message.hasOwnProperty("outputUrlPrefix"))
+                                if (!$util.isString(message.outputUrlPrefix))
+                                    return "outputUrlPrefix: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an ExportEntitiesRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.datastore.admin.v1.ExportEntitiesRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.datastore.admin.v1.ExportEntitiesRequest} ExportEntitiesRequest
+                         */
+                        ExportEntitiesRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.datastore.admin.v1.ExportEntitiesRequest)
+                                return object;
+                            var message = new $root.google.datastore.admin.v1.ExportEntitiesRequest();
+                            if (object.projectId != null)
+                                message.projectId = String(object.projectId);
+                            if (object.labels) {
+                                if (typeof object.labels !== "object")
+                                    throw TypeError(".google.datastore.admin.v1.ExportEntitiesRequest.labels: object expected");
+                                message.labels = {};
+                                for (var keys = Object.keys(object.labels), i = 0; i < keys.length; ++i)
+                                    message.labels[keys[i]] = String(object.labels[keys[i]]);
+                            }
+                            if (object.entityFilter != null) {
+                                if (typeof object.entityFilter !== "object")
+                                    throw TypeError(".google.datastore.admin.v1.ExportEntitiesRequest.entityFilter: object expected");
+                                message.entityFilter = $root.google.datastore.admin.v1.EntityFilter.fromObject(object.entityFilter);
+                            }
+                            if (object.outputUrlPrefix != null)
+                                message.outputUrlPrefix = String(object.outputUrlPrefix);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an ExportEntitiesRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.datastore.admin.v1.ExportEntitiesRequest
+                         * @static
+                         * @param {google.datastore.admin.v1.ExportEntitiesRequest} message ExportEntitiesRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ExportEntitiesRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.objects || options.defaults)
+                                object.labels = {};
+                            if (options.defaults) {
+                                object.projectId = "";
+                                object.entityFilter = null;
+                                object.outputUrlPrefix = "";
+                            }
+                            if (message.projectId != null && message.hasOwnProperty("projectId"))
+                                object.projectId = message.projectId;
+                            var keys2;
+                            if (message.labels && (keys2 = Object.keys(message.labels)).length) {
+                                object.labels = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.labels[keys2[j]] = message.labels[keys2[j]];
+                            }
+                            if (message.entityFilter != null && message.hasOwnProperty("entityFilter"))
+                                object.entityFilter = $root.google.datastore.admin.v1.EntityFilter.toObject(message.entityFilter, options);
+                            if (message.outputUrlPrefix != null && message.hasOwnProperty("outputUrlPrefix"))
+                                object.outputUrlPrefix = message.outputUrlPrefix;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ExportEntitiesRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.datastore.admin.v1.ExportEntitiesRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ExportEntitiesRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ExportEntitiesRequest;
+                    })();
+    
+                    v1.ImportEntitiesRequest = (function() {
+    
+                        /**
+                         * Properties of an ImportEntitiesRequest.
+                         * @memberof google.datastore.admin.v1
+                         * @interface IImportEntitiesRequest
+                         * @property {string|null} [projectId] ImportEntitiesRequest projectId
+                         * @property {Object.<string,string>|null} [labels] ImportEntitiesRequest labels
+                         * @property {string|null} [inputUrl] ImportEntitiesRequest inputUrl
+                         * @property {google.datastore.admin.v1.IEntityFilter|null} [entityFilter] ImportEntitiesRequest entityFilter
+                         */
+    
+                        /**
+                         * Constructs a new ImportEntitiesRequest.
+                         * @memberof google.datastore.admin.v1
+                         * @classdesc Represents an ImportEntitiesRequest.
+                         * @implements IImportEntitiesRequest
+                         * @constructor
+                         * @param {google.datastore.admin.v1.IImportEntitiesRequest=} [properties] Properties to set
+                         */
+                        function ImportEntitiesRequest(properties) {
+                            this.labels = {};
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ImportEntitiesRequest projectId.
+                         * @member {string} projectId
+                         * @memberof google.datastore.admin.v1.ImportEntitiesRequest
+                         * @instance
+                         */
+                        ImportEntitiesRequest.prototype.projectId = "";
+    
+                        /**
+                         * ImportEntitiesRequest labels.
+                         * @member {Object.<string,string>} labels
+                         * @memberof google.datastore.admin.v1.ImportEntitiesRequest
+                         * @instance
+                         */
+                        ImportEntitiesRequest.prototype.labels = $util.emptyObject;
+    
+                        /**
+                         * ImportEntitiesRequest inputUrl.
+                         * @member {string} inputUrl
+                         * @memberof google.datastore.admin.v1.ImportEntitiesRequest
+                         * @instance
+                         */
+                        ImportEntitiesRequest.prototype.inputUrl = "";
+    
+                        /**
+                         * ImportEntitiesRequest entityFilter.
+                         * @member {google.datastore.admin.v1.IEntityFilter|null|undefined} entityFilter
+                         * @memberof google.datastore.admin.v1.ImportEntitiesRequest
+                         * @instance
+                         */
+                        ImportEntitiesRequest.prototype.entityFilter = null;
+    
+                        /**
+                         * Creates a new ImportEntitiesRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.datastore.admin.v1.ImportEntitiesRequest
+                         * @static
+                         * @param {google.datastore.admin.v1.IImportEntitiesRequest=} [properties] Properties to set
+                         * @returns {google.datastore.admin.v1.ImportEntitiesRequest} ImportEntitiesRequest instance
+                         */
+                        ImportEntitiesRequest.create = function create(properties) {
+                            return new ImportEntitiesRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ImportEntitiesRequest message. Does not implicitly {@link google.datastore.admin.v1.ImportEntitiesRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.datastore.admin.v1.ImportEntitiesRequest
+                         * @static
+                         * @param {google.datastore.admin.v1.IImportEntitiesRequest} message ImportEntitiesRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ImportEntitiesRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.projectId != null && Object.hasOwnProperty.call(message, "projectId"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.projectId);
+                            if (message.labels != null && Object.hasOwnProperty.call(message, "labels"))
+                                for (var keys = Object.keys(message.labels), i = 0; i < keys.length; ++i)
+                                    writer.uint32(/* id 2, wireType 2 =*/18).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.labels[keys[i]]).ldelim();
+                            if (message.inputUrl != null && Object.hasOwnProperty.call(message, "inputUrl"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.inputUrl);
+                            if (message.entityFilter != null && Object.hasOwnProperty.call(message, "entityFilter"))
+                                $root.google.datastore.admin.v1.EntityFilter.encode(message.entityFilter, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ImportEntitiesRequest message, length delimited. Does not implicitly {@link google.datastore.admin.v1.ImportEntitiesRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.datastore.admin.v1.ImportEntitiesRequest
+                         * @static
+                         * @param {google.datastore.admin.v1.IImportEntitiesRequest} message ImportEntitiesRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ImportEntitiesRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an ImportEntitiesRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.datastore.admin.v1.ImportEntitiesRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.datastore.admin.v1.ImportEntitiesRequest} ImportEntitiesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ImportEntitiesRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.datastore.admin.v1.ImportEntitiesRequest(), key;
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.projectId = reader.string();
+                                    break;
+                                case 2:
+                                    reader.skip().pos++;
+                                    if (message.labels === $util.emptyObject)
+                                        message.labels = {};
+                                    key = reader.string();
+                                    reader.pos++;
+                                    message.labels[key] = reader.string();
+                                    break;
+                                case 3:
+                                    message.inputUrl = reader.string();
+                                    break;
+                                case 4:
+                                    message.entityFilter = $root.google.datastore.admin.v1.EntityFilter.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an ImportEntitiesRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.datastore.admin.v1.ImportEntitiesRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.datastore.admin.v1.ImportEntitiesRequest} ImportEntitiesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ImportEntitiesRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an ImportEntitiesRequest message.
+                         * @function verify
+                         * @memberof google.datastore.admin.v1.ImportEntitiesRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ImportEntitiesRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.projectId != null && message.hasOwnProperty("projectId"))
+                                if (!$util.isString(message.projectId))
+                                    return "projectId: string expected";
+                            if (message.labels != null && message.hasOwnProperty("labels")) {
+                                if (!$util.isObject(message.labels))
+                                    return "labels: object expected";
+                                var key = Object.keys(message.labels);
+                                for (var i = 0; i < key.length; ++i)
+                                    if (!$util.isString(message.labels[key[i]]))
+                                        return "labels: string{k:string} expected";
+                            }
+                            if (message.inputUrl != null && message.hasOwnProperty("inputUrl"))
+                                if (!$util.isString(message.inputUrl))
+                                    return "inputUrl: string expected";
+                            if (message.entityFilter != null && message.hasOwnProperty("entityFilter")) {
+                                var error = $root.google.datastore.admin.v1.EntityFilter.verify(message.entityFilter);
+                                if (error)
+                                    return "entityFilter." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an ImportEntitiesRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.datastore.admin.v1.ImportEntitiesRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.datastore.admin.v1.ImportEntitiesRequest} ImportEntitiesRequest
+                         */
+                        ImportEntitiesRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.datastore.admin.v1.ImportEntitiesRequest)
+                                return object;
+                            var message = new $root.google.datastore.admin.v1.ImportEntitiesRequest();
+                            if (object.projectId != null)
+                                message.projectId = String(object.projectId);
+                            if (object.labels) {
+                                if (typeof object.labels !== "object")
+                                    throw TypeError(".google.datastore.admin.v1.ImportEntitiesRequest.labels: object expected");
+                                message.labels = {};
+                                for (var keys = Object.keys(object.labels), i = 0; i < keys.length; ++i)
+                                    message.labels[keys[i]] = String(object.labels[keys[i]]);
+                            }
+                            if (object.inputUrl != null)
+                                message.inputUrl = String(object.inputUrl);
+                            if (object.entityFilter != null) {
+                                if (typeof object.entityFilter !== "object")
+                                    throw TypeError(".google.datastore.admin.v1.ImportEntitiesRequest.entityFilter: object expected");
+                                message.entityFilter = $root.google.datastore.admin.v1.EntityFilter.fromObject(object.entityFilter);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an ImportEntitiesRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.datastore.admin.v1.ImportEntitiesRequest
+                         * @static
+                         * @param {google.datastore.admin.v1.ImportEntitiesRequest} message ImportEntitiesRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ImportEntitiesRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.objects || options.defaults)
+                                object.labels = {};
+                            if (options.defaults) {
+                                object.projectId = "";
+                                object.inputUrl = "";
+                                object.entityFilter = null;
+                            }
+                            if (message.projectId != null && message.hasOwnProperty("projectId"))
+                                object.projectId = message.projectId;
+                            var keys2;
+                            if (message.labels && (keys2 = Object.keys(message.labels)).length) {
+                                object.labels = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.labels[keys2[j]] = message.labels[keys2[j]];
+                            }
+                            if (message.inputUrl != null && message.hasOwnProperty("inputUrl"))
+                                object.inputUrl = message.inputUrl;
+                            if (message.entityFilter != null && message.hasOwnProperty("entityFilter"))
+                                object.entityFilter = $root.google.datastore.admin.v1.EntityFilter.toObject(message.entityFilter, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ImportEntitiesRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.datastore.admin.v1.ImportEntitiesRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ImportEntitiesRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ImportEntitiesRequest;
+                    })();
+    
+                    v1.ExportEntitiesResponse = (function() {
+    
+                        /**
+                         * Properties of an ExportEntitiesResponse.
+                         * @memberof google.datastore.admin.v1
+                         * @interface IExportEntitiesResponse
+                         * @property {string|null} [outputUrl] ExportEntitiesResponse outputUrl
+                         */
+    
+                        /**
+                         * Constructs a new ExportEntitiesResponse.
+                         * @memberof google.datastore.admin.v1
+                         * @classdesc Represents an ExportEntitiesResponse.
+                         * @implements IExportEntitiesResponse
+                         * @constructor
+                         * @param {google.datastore.admin.v1.IExportEntitiesResponse=} [properties] Properties to set
+                         */
+                        function ExportEntitiesResponse(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ExportEntitiesResponse outputUrl.
+                         * @member {string} outputUrl
+                         * @memberof google.datastore.admin.v1.ExportEntitiesResponse
+                         * @instance
+                         */
+                        ExportEntitiesResponse.prototype.outputUrl = "";
+    
+                        /**
+                         * Creates a new ExportEntitiesResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.datastore.admin.v1.ExportEntitiesResponse
+                         * @static
+                         * @param {google.datastore.admin.v1.IExportEntitiesResponse=} [properties] Properties to set
+                         * @returns {google.datastore.admin.v1.ExportEntitiesResponse} ExportEntitiesResponse instance
+                         */
+                        ExportEntitiesResponse.create = function create(properties) {
+                            return new ExportEntitiesResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ExportEntitiesResponse message. Does not implicitly {@link google.datastore.admin.v1.ExportEntitiesResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.datastore.admin.v1.ExportEntitiesResponse
+                         * @static
+                         * @param {google.datastore.admin.v1.IExportEntitiesResponse} message ExportEntitiesResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ExportEntitiesResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.outputUrl != null && Object.hasOwnProperty.call(message, "outputUrl"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.outputUrl);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ExportEntitiesResponse message, length delimited. Does not implicitly {@link google.datastore.admin.v1.ExportEntitiesResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.datastore.admin.v1.ExportEntitiesResponse
+                         * @static
+                         * @param {google.datastore.admin.v1.IExportEntitiesResponse} message ExportEntitiesResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ExportEntitiesResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an ExportEntitiesResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.datastore.admin.v1.ExportEntitiesResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.datastore.admin.v1.ExportEntitiesResponse} ExportEntitiesResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ExportEntitiesResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.datastore.admin.v1.ExportEntitiesResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.outputUrl = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an ExportEntitiesResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.datastore.admin.v1.ExportEntitiesResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.datastore.admin.v1.ExportEntitiesResponse} ExportEntitiesResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ExportEntitiesResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an ExportEntitiesResponse message.
+                         * @function verify
+                         * @memberof google.datastore.admin.v1.ExportEntitiesResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ExportEntitiesResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.outputUrl != null && message.hasOwnProperty("outputUrl"))
+                                if (!$util.isString(message.outputUrl))
+                                    return "outputUrl: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an ExportEntitiesResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.datastore.admin.v1.ExportEntitiesResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.datastore.admin.v1.ExportEntitiesResponse} ExportEntitiesResponse
+                         */
+                        ExportEntitiesResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.datastore.admin.v1.ExportEntitiesResponse)
+                                return object;
+                            var message = new $root.google.datastore.admin.v1.ExportEntitiesResponse();
+                            if (object.outputUrl != null)
+                                message.outputUrl = String(object.outputUrl);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an ExportEntitiesResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.datastore.admin.v1.ExportEntitiesResponse
+                         * @static
+                         * @param {google.datastore.admin.v1.ExportEntitiesResponse} message ExportEntitiesResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ExportEntitiesResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.outputUrl = "";
+                            if (message.outputUrl != null && message.hasOwnProperty("outputUrl"))
+                                object.outputUrl = message.outputUrl;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ExportEntitiesResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.datastore.admin.v1.ExportEntitiesResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ExportEntitiesResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ExportEntitiesResponse;
+                    })();
+    
+                    v1.ExportEntitiesMetadata = (function() {
+    
+                        /**
+                         * Properties of an ExportEntitiesMetadata.
+                         * @memberof google.datastore.admin.v1
+                         * @interface IExportEntitiesMetadata
+                         * @property {google.datastore.admin.v1.ICommonMetadata|null} [common] ExportEntitiesMetadata common
+                         * @property {google.datastore.admin.v1.IProgress|null} [progressEntities] ExportEntitiesMetadata progressEntities
+                         * @property {google.datastore.admin.v1.IProgress|null} [progressBytes] ExportEntitiesMetadata progressBytes
+                         * @property {google.datastore.admin.v1.IEntityFilter|null} [entityFilter] ExportEntitiesMetadata entityFilter
+                         * @property {string|null} [outputUrlPrefix] ExportEntitiesMetadata outputUrlPrefix
+                         */
+    
+                        /**
+                         * Constructs a new ExportEntitiesMetadata.
+                         * @memberof google.datastore.admin.v1
+                         * @classdesc Represents an ExportEntitiesMetadata.
+                         * @implements IExportEntitiesMetadata
+                         * @constructor
+                         * @param {google.datastore.admin.v1.IExportEntitiesMetadata=} [properties] Properties to set
+                         */
+                        function ExportEntitiesMetadata(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ExportEntitiesMetadata common.
+                         * @member {google.datastore.admin.v1.ICommonMetadata|null|undefined} common
+                         * @memberof google.datastore.admin.v1.ExportEntitiesMetadata
+                         * @instance
+                         */
+                        ExportEntitiesMetadata.prototype.common = null;
+    
+                        /**
+                         * ExportEntitiesMetadata progressEntities.
+                         * @member {google.datastore.admin.v1.IProgress|null|undefined} progressEntities
+                         * @memberof google.datastore.admin.v1.ExportEntitiesMetadata
+                         * @instance
+                         */
+                        ExportEntitiesMetadata.prototype.progressEntities = null;
+    
+                        /**
+                         * ExportEntitiesMetadata progressBytes.
+                         * @member {google.datastore.admin.v1.IProgress|null|undefined} progressBytes
+                         * @memberof google.datastore.admin.v1.ExportEntitiesMetadata
+                         * @instance
+                         */
+                        ExportEntitiesMetadata.prototype.progressBytes = null;
+    
+                        /**
+                         * ExportEntitiesMetadata entityFilter.
+                         * @member {google.datastore.admin.v1.IEntityFilter|null|undefined} entityFilter
+                         * @memberof google.datastore.admin.v1.ExportEntitiesMetadata
+                         * @instance
+                         */
+                        ExportEntitiesMetadata.prototype.entityFilter = null;
+    
+                        /**
+                         * ExportEntitiesMetadata outputUrlPrefix.
+                         * @member {string} outputUrlPrefix
+                         * @memberof google.datastore.admin.v1.ExportEntitiesMetadata
+                         * @instance
+                         */
+                        ExportEntitiesMetadata.prototype.outputUrlPrefix = "";
+    
+                        /**
+                         * Creates a new ExportEntitiesMetadata instance using the specified properties.
+                         * @function create
+                         * @memberof google.datastore.admin.v1.ExportEntitiesMetadata
+                         * @static
+                         * @param {google.datastore.admin.v1.IExportEntitiesMetadata=} [properties] Properties to set
+                         * @returns {google.datastore.admin.v1.ExportEntitiesMetadata} ExportEntitiesMetadata instance
+                         */
+                        ExportEntitiesMetadata.create = function create(properties) {
+                            return new ExportEntitiesMetadata(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ExportEntitiesMetadata message. Does not implicitly {@link google.datastore.admin.v1.ExportEntitiesMetadata.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.datastore.admin.v1.ExportEntitiesMetadata
+                         * @static
+                         * @param {google.datastore.admin.v1.IExportEntitiesMetadata} message ExportEntitiesMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ExportEntitiesMetadata.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.common != null && Object.hasOwnProperty.call(message, "common"))
+                                $root.google.datastore.admin.v1.CommonMetadata.encode(message.common, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.progressEntities != null && Object.hasOwnProperty.call(message, "progressEntities"))
+                                $root.google.datastore.admin.v1.Progress.encode(message.progressEntities, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.progressBytes != null && Object.hasOwnProperty.call(message, "progressBytes"))
+                                $root.google.datastore.admin.v1.Progress.encode(message.progressBytes, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.entityFilter != null && Object.hasOwnProperty.call(message, "entityFilter"))
+                                $root.google.datastore.admin.v1.EntityFilter.encode(message.entityFilter, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.outputUrlPrefix != null && Object.hasOwnProperty.call(message, "outputUrlPrefix"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.outputUrlPrefix);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ExportEntitiesMetadata message, length delimited. Does not implicitly {@link google.datastore.admin.v1.ExportEntitiesMetadata.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.datastore.admin.v1.ExportEntitiesMetadata
+                         * @static
+                         * @param {google.datastore.admin.v1.IExportEntitiesMetadata} message ExportEntitiesMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ExportEntitiesMetadata.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an ExportEntitiesMetadata message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.datastore.admin.v1.ExportEntitiesMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.datastore.admin.v1.ExportEntitiesMetadata} ExportEntitiesMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ExportEntitiesMetadata.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.datastore.admin.v1.ExportEntitiesMetadata();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.common = $root.google.datastore.admin.v1.CommonMetadata.decode(reader, reader.uint32());
+                                    break;
+                                case 2:
+                                    message.progressEntities = $root.google.datastore.admin.v1.Progress.decode(reader, reader.uint32());
+                                    break;
+                                case 3:
+                                    message.progressBytes = $root.google.datastore.admin.v1.Progress.decode(reader, reader.uint32());
+                                    break;
+                                case 4:
+                                    message.entityFilter = $root.google.datastore.admin.v1.EntityFilter.decode(reader, reader.uint32());
+                                    break;
+                                case 5:
+                                    message.outputUrlPrefix = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an ExportEntitiesMetadata message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.datastore.admin.v1.ExportEntitiesMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.datastore.admin.v1.ExportEntitiesMetadata} ExportEntitiesMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ExportEntitiesMetadata.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an ExportEntitiesMetadata message.
+                         * @function verify
+                         * @memberof google.datastore.admin.v1.ExportEntitiesMetadata
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ExportEntitiesMetadata.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.common != null && message.hasOwnProperty("common")) {
+                                var error = $root.google.datastore.admin.v1.CommonMetadata.verify(message.common);
+                                if (error)
+                                    return "common." + error;
+                            }
+                            if (message.progressEntities != null && message.hasOwnProperty("progressEntities")) {
+                                var error = $root.google.datastore.admin.v1.Progress.verify(message.progressEntities);
+                                if (error)
+                                    return "progressEntities." + error;
+                            }
+                            if (message.progressBytes != null && message.hasOwnProperty("progressBytes")) {
+                                var error = $root.google.datastore.admin.v1.Progress.verify(message.progressBytes);
+                                if (error)
+                                    return "progressBytes." + error;
+                            }
+                            if (message.entityFilter != null && message.hasOwnProperty("entityFilter")) {
+                                var error = $root.google.datastore.admin.v1.EntityFilter.verify(message.entityFilter);
+                                if (error)
+                                    return "entityFilter." + error;
+                            }
+                            if (message.outputUrlPrefix != null && message.hasOwnProperty("outputUrlPrefix"))
+                                if (!$util.isString(message.outputUrlPrefix))
+                                    return "outputUrlPrefix: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an ExportEntitiesMetadata message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.datastore.admin.v1.ExportEntitiesMetadata
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.datastore.admin.v1.ExportEntitiesMetadata} ExportEntitiesMetadata
+                         */
+                        ExportEntitiesMetadata.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.datastore.admin.v1.ExportEntitiesMetadata)
+                                return object;
+                            var message = new $root.google.datastore.admin.v1.ExportEntitiesMetadata();
+                            if (object.common != null) {
+                                if (typeof object.common !== "object")
+                                    throw TypeError(".google.datastore.admin.v1.ExportEntitiesMetadata.common: object expected");
+                                message.common = $root.google.datastore.admin.v1.CommonMetadata.fromObject(object.common);
+                            }
+                            if (object.progressEntities != null) {
+                                if (typeof object.progressEntities !== "object")
+                                    throw TypeError(".google.datastore.admin.v1.ExportEntitiesMetadata.progressEntities: object expected");
+                                message.progressEntities = $root.google.datastore.admin.v1.Progress.fromObject(object.progressEntities);
+                            }
+                            if (object.progressBytes != null) {
+                                if (typeof object.progressBytes !== "object")
+                                    throw TypeError(".google.datastore.admin.v1.ExportEntitiesMetadata.progressBytes: object expected");
+                                message.progressBytes = $root.google.datastore.admin.v1.Progress.fromObject(object.progressBytes);
+                            }
+                            if (object.entityFilter != null) {
+                                if (typeof object.entityFilter !== "object")
+                                    throw TypeError(".google.datastore.admin.v1.ExportEntitiesMetadata.entityFilter: object expected");
+                                message.entityFilter = $root.google.datastore.admin.v1.EntityFilter.fromObject(object.entityFilter);
+                            }
+                            if (object.outputUrlPrefix != null)
+                                message.outputUrlPrefix = String(object.outputUrlPrefix);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an ExportEntitiesMetadata message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.datastore.admin.v1.ExportEntitiesMetadata
+                         * @static
+                         * @param {google.datastore.admin.v1.ExportEntitiesMetadata} message ExportEntitiesMetadata
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ExportEntitiesMetadata.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.common = null;
+                                object.progressEntities = null;
+                                object.progressBytes = null;
+                                object.entityFilter = null;
+                                object.outputUrlPrefix = "";
+                            }
+                            if (message.common != null && message.hasOwnProperty("common"))
+                                object.common = $root.google.datastore.admin.v1.CommonMetadata.toObject(message.common, options);
+                            if (message.progressEntities != null && message.hasOwnProperty("progressEntities"))
+                                object.progressEntities = $root.google.datastore.admin.v1.Progress.toObject(message.progressEntities, options);
+                            if (message.progressBytes != null && message.hasOwnProperty("progressBytes"))
+                                object.progressBytes = $root.google.datastore.admin.v1.Progress.toObject(message.progressBytes, options);
+                            if (message.entityFilter != null && message.hasOwnProperty("entityFilter"))
+                                object.entityFilter = $root.google.datastore.admin.v1.EntityFilter.toObject(message.entityFilter, options);
+                            if (message.outputUrlPrefix != null && message.hasOwnProperty("outputUrlPrefix"))
+                                object.outputUrlPrefix = message.outputUrlPrefix;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ExportEntitiesMetadata to JSON.
+                         * @function toJSON
+                         * @memberof google.datastore.admin.v1.ExportEntitiesMetadata
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ExportEntitiesMetadata.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ExportEntitiesMetadata;
+                    })();
+    
+                    v1.ImportEntitiesMetadata = (function() {
+    
+                        /**
+                         * Properties of an ImportEntitiesMetadata.
+                         * @memberof google.datastore.admin.v1
+                         * @interface IImportEntitiesMetadata
+                         * @property {google.datastore.admin.v1.ICommonMetadata|null} [common] ImportEntitiesMetadata common
+                         * @property {google.datastore.admin.v1.IProgress|null} [progressEntities] ImportEntitiesMetadata progressEntities
+                         * @property {google.datastore.admin.v1.IProgress|null} [progressBytes] ImportEntitiesMetadata progressBytes
+                         * @property {google.datastore.admin.v1.IEntityFilter|null} [entityFilter] ImportEntitiesMetadata entityFilter
+                         * @property {string|null} [inputUrl] ImportEntitiesMetadata inputUrl
+                         */
+    
+                        /**
+                         * Constructs a new ImportEntitiesMetadata.
+                         * @memberof google.datastore.admin.v1
+                         * @classdesc Represents an ImportEntitiesMetadata.
+                         * @implements IImportEntitiesMetadata
+                         * @constructor
+                         * @param {google.datastore.admin.v1.IImportEntitiesMetadata=} [properties] Properties to set
+                         */
+                        function ImportEntitiesMetadata(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ImportEntitiesMetadata common.
+                         * @member {google.datastore.admin.v1.ICommonMetadata|null|undefined} common
+                         * @memberof google.datastore.admin.v1.ImportEntitiesMetadata
+                         * @instance
+                         */
+                        ImportEntitiesMetadata.prototype.common = null;
+    
+                        /**
+                         * ImportEntitiesMetadata progressEntities.
+                         * @member {google.datastore.admin.v1.IProgress|null|undefined} progressEntities
+                         * @memberof google.datastore.admin.v1.ImportEntitiesMetadata
+                         * @instance
+                         */
+                        ImportEntitiesMetadata.prototype.progressEntities = null;
+    
+                        /**
+                         * ImportEntitiesMetadata progressBytes.
+                         * @member {google.datastore.admin.v1.IProgress|null|undefined} progressBytes
+                         * @memberof google.datastore.admin.v1.ImportEntitiesMetadata
+                         * @instance
+                         */
+                        ImportEntitiesMetadata.prototype.progressBytes = null;
+    
+                        /**
+                         * ImportEntitiesMetadata entityFilter.
+                         * @member {google.datastore.admin.v1.IEntityFilter|null|undefined} entityFilter
+                         * @memberof google.datastore.admin.v1.ImportEntitiesMetadata
+                         * @instance
+                         */
+                        ImportEntitiesMetadata.prototype.entityFilter = null;
+    
+                        /**
+                         * ImportEntitiesMetadata inputUrl.
+                         * @member {string} inputUrl
+                         * @memberof google.datastore.admin.v1.ImportEntitiesMetadata
+                         * @instance
+                         */
+                        ImportEntitiesMetadata.prototype.inputUrl = "";
+    
+                        /**
+                         * Creates a new ImportEntitiesMetadata instance using the specified properties.
+                         * @function create
+                         * @memberof google.datastore.admin.v1.ImportEntitiesMetadata
+                         * @static
+                         * @param {google.datastore.admin.v1.IImportEntitiesMetadata=} [properties] Properties to set
+                         * @returns {google.datastore.admin.v1.ImportEntitiesMetadata} ImportEntitiesMetadata instance
+                         */
+                        ImportEntitiesMetadata.create = function create(properties) {
+                            return new ImportEntitiesMetadata(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ImportEntitiesMetadata message. Does not implicitly {@link google.datastore.admin.v1.ImportEntitiesMetadata.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.datastore.admin.v1.ImportEntitiesMetadata
+                         * @static
+                         * @param {google.datastore.admin.v1.IImportEntitiesMetadata} message ImportEntitiesMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ImportEntitiesMetadata.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.common != null && Object.hasOwnProperty.call(message, "common"))
+                                $root.google.datastore.admin.v1.CommonMetadata.encode(message.common, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.progressEntities != null && Object.hasOwnProperty.call(message, "progressEntities"))
+                                $root.google.datastore.admin.v1.Progress.encode(message.progressEntities, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.progressBytes != null && Object.hasOwnProperty.call(message, "progressBytes"))
+                                $root.google.datastore.admin.v1.Progress.encode(message.progressBytes, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.entityFilter != null && Object.hasOwnProperty.call(message, "entityFilter"))
+                                $root.google.datastore.admin.v1.EntityFilter.encode(message.entityFilter, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.inputUrl != null && Object.hasOwnProperty.call(message, "inputUrl"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.inputUrl);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ImportEntitiesMetadata message, length delimited. Does not implicitly {@link google.datastore.admin.v1.ImportEntitiesMetadata.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.datastore.admin.v1.ImportEntitiesMetadata
+                         * @static
+                         * @param {google.datastore.admin.v1.IImportEntitiesMetadata} message ImportEntitiesMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ImportEntitiesMetadata.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an ImportEntitiesMetadata message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.datastore.admin.v1.ImportEntitiesMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.datastore.admin.v1.ImportEntitiesMetadata} ImportEntitiesMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ImportEntitiesMetadata.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.datastore.admin.v1.ImportEntitiesMetadata();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.common = $root.google.datastore.admin.v1.CommonMetadata.decode(reader, reader.uint32());
+                                    break;
+                                case 2:
+                                    message.progressEntities = $root.google.datastore.admin.v1.Progress.decode(reader, reader.uint32());
+                                    break;
+                                case 3:
+                                    message.progressBytes = $root.google.datastore.admin.v1.Progress.decode(reader, reader.uint32());
+                                    break;
+                                case 4:
+                                    message.entityFilter = $root.google.datastore.admin.v1.EntityFilter.decode(reader, reader.uint32());
+                                    break;
+                                case 5:
+                                    message.inputUrl = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an ImportEntitiesMetadata message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.datastore.admin.v1.ImportEntitiesMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.datastore.admin.v1.ImportEntitiesMetadata} ImportEntitiesMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ImportEntitiesMetadata.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an ImportEntitiesMetadata message.
+                         * @function verify
+                         * @memberof google.datastore.admin.v1.ImportEntitiesMetadata
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ImportEntitiesMetadata.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.common != null && message.hasOwnProperty("common")) {
+                                var error = $root.google.datastore.admin.v1.CommonMetadata.verify(message.common);
+                                if (error)
+                                    return "common." + error;
+                            }
+                            if (message.progressEntities != null && message.hasOwnProperty("progressEntities")) {
+                                var error = $root.google.datastore.admin.v1.Progress.verify(message.progressEntities);
+                                if (error)
+                                    return "progressEntities." + error;
+                            }
+                            if (message.progressBytes != null && message.hasOwnProperty("progressBytes")) {
+                                var error = $root.google.datastore.admin.v1.Progress.verify(message.progressBytes);
+                                if (error)
+                                    return "progressBytes." + error;
+                            }
+                            if (message.entityFilter != null && message.hasOwnProperty("entityFilter")) {
+                                var error = $root.google.datastore.admin.v1.EntityFilter.verify(message.entityFilter);
+                                if (error)
+                                    return "entityFilter." + error;
+                            }
+                            if (message.inputUrl != null && message.hasOwnProperty("inputUrl"))
+                                if (!$util.isString(message.inputUrl))
+                                    return "inputUrl: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an ImportEntitiesMetadata message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.datastore.admin.v1.ImportEntitiesMetadata
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.datastore.admin.v1.ImportEntitiesMetadata} ImportEntitiesMetadata
+                         */
+                        ImportEntitiesMetadata.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.datastore.admin.v1.ImportEntitiesMetadata)
+                                return object;
+                            var message = new $root.google.datastore.admin.v1.ImportEntitiesMetadata();
+                            if (object.common != null) {
+                                if (typeof object.common !== "object")
+                                    throw TypeError(".google.datastore.admin.v1.ImportEntitiesMetadata.common: object expected");
+                                message.common = $root.google.datastore.admin.v1.CommonMetadata.fromObject(object.common);
+                            }
+                            if (object.progressEntities != null) {
+                                if (typeof object.progressEntities !== "object")
+                                    throw TypeError(".google.datastore.admin.v1.ImportEntitiesMetadata.progressEntities: object expected");
+                                message.progressEntities = $root.google.datastore.admin.v1.Progress.fromObject(object.progressEntities);
+                            }
+                            if (object.progressBytes != null) {
+                                if (typeof object.progressBytes !== "object")
+                                    throw TypeError(".google.datastore.admin.v1.ImportEntitiesMetadata.progressBytes: object expected");
+                                message.progressBytes = $root.google.datastore.admin.v1.Progress.fromObject(object.progressBytes);
+                            }
+                            if (object.entityFilter != null) {
+                                if (typeof object.entityFilter !== "object")
+                                    throw TypeError(".google.datastore.admin.v1.ImportEntitiesMetadata.entityFilter: object expected");
+                                message.entityFilter = $root.google.datastore.admin.v1.EntityFilter.fromObject(object.entityFilter);
+                            }
+                            if (object.inputUrl != null)
+                                message.inputUrl = String(object.inputUrl);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an ImportEntitiesMetadata message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.datastore.admin.v1.ImportEntitiesMetadata
+                         * @static
+                         * @param {google.datastore.admin.v1.ImportEntitiesMetadata} message ImportEntitiesMetadata
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ImportEntitiesMetadata.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.common = null;
+                                object.progressEntities = null;
+                                object.progressBytes = null;
+                                object.entityFilter = null;
+                                object.inputUrl = "";
+                            }
+                            if (message.common != null && message.hasOwnProperty("common"))
+                                object.common = $root.google.datastore.admin.v1.CommonMetadata.toObject(message.common, options);
+                            if (message.progressEntities != null && message.hasOwnProperty("progressEntities"))
+                                object.progressEntities = $root.google.datastore.admin.v1.Progress.toObject(message.progressEntities, options);
+                            if (message.progressBytes != null && message.hasOwnProperty("progressBytes"))
+                                object.progressBytes = $root.google.datastore.admin.v1.Progress.toObject(message.progressBytes, options);
+                            if (message.entityFilter != null && message.hasOwnProperty("entityFilter"))
+                                object.entityFilter = $root.google.datastore.admin.v1.EntityFilter.toObject(message.entityFilter, options);
+                            if (message.inputUrl != null && message.hasOwnProperty("inputUrl"))
+                                object.inputUrl = message.inputUrl;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ImportEntitiesMetadata to JSON.
+                         * @function toJSON
+                         * @memberof google.datastore.admin.v1.ImportEntitiesMetadata
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ImportEntitiesMetadata.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ImportEntitiesMetadata;
+                    })();
+    
+                    v1.EntityFilter = (function() {
+    
+                        /**
+                         * Properties of an EntityFilter.
+                         * @memberof google.datastore.admin.v1
+                         * @interface IEntityFilter
+                         * @property {Array.<string>|null} [kinds] EntityFilter kinds
+                         * @property {Array.<string>|null} [namespaceIds] EntityFilter namespaceIds
+                         */
+    
+                        /**
+                         * Constructs a new EntityFilter.
+                         * @memberof google.datastore.admin.v1
+                         * @classdesc Represents an EntityFilter.
+                         * @implements IEntityFilter
+                         * @constructor
+                         * @param {google.datastore.admin.v1.IEntityFilter=} [properties] Properties to set
+                         */
+                        function EntityFilter(properties) {
+                            this.kinds = [];
+                            this.namespaceIds = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * EntityFilter kinds.
+                         * @member {Array.<string>} kinds
+                         * @memberof google.datastore.admin.v1.EntityFilter
+                         * @instance
+                         */
+                        EntityFilter.prototype.kinds = $util.emptyArray;
+    
+                        /**
+                         * EntityFilter namespaceIds.
+                         * @member {Array.<string>} namespaceIds
+                         * @memberof google.datastore.admin.v1.EntityFilter
+                         * @instance
+                         */
+                        EntityFilter.prototype.namespaceIds = $util.emptyArray;
+    
+                        /**
+                         * Creates a new EntityFilter instance using the specified properties.
+                         * @function create
+                         * @memberof google.datastore.admin.v1.EntityFilter
+                         * @static
+                         * @param {google.datastore.admin.v1.IEntityFilter=} [properties] Properties to set
+                         * @returns {google.datastore.admin.v1.EntityFilter} EntityFilter instance
+                         */
+                        EntityFilter.create = function create(properties) {
+                            return new EntityFilter(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified EntityFilter message. Does not implicitly {@link google.datastore.admin.v1.EntityFilter.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.datastore.admin.v1.EntityFilter
+                         * @static
+                         * @param {google.datastore.admin.v1.IEntityFilter} message EntityFilter message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        EntityFilter.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.kinds != null && message.kinds.length)
+                                for (var i = 0; i < message.kinds.length; ++i)
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.kinds[i]);
+                            if (message.namespaceIds != null && message.namespaceIds.length)
+                                for (var i = 0; i < message.namespaceIds.length; ++i)
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.namespaceIds[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified EntityFilter message, length delimited. Does not implicitly {@link google.datastore.admin.v1.EntityFilter.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.datastore.admin.v1.EntityFilter
+                         * @static
+                         * @param {google.datastore.admin.v1.IEntityFilter} message EntityFilter message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        EntityFilter.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an EntityFilter message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.datastore.admin.v1.EntityFilter
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.datastore.admin.v1.EntityFilter} EntityFilter
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        EntityFilter.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.datastore.admin.v1.EntityFilter();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    if (!(message.kinds && message.kinds.length))
+                                        message.kinds = [];
+                                    message.kinds.push(reader.string());
+                                    break;
+                                case 2:
+                                    if (!(message.namespaceIds && message.namespaceIds.length))
+                                        message.namespaceIds = [];
+                                    message.namespaceIds.push(reader.string());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an EntityFilter message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.datastore.admin.v1.EntityFilter
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.datastore.admin.v1.EntityFilter} EntityFilter
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        EntityFilter.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an EntityFilter message.
+                         * @function verify
+                         * @memberof google.datastore.admin.v1.EntityFilter
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        EntityFilter.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.kinds != null && message.hasOwnProperty("kinds")) {
+                                if (!Array.isArray(message.kinds))
+                                    return "kinds: array expected";
+                                for (var i = 0; i < message.kinds.length; ++i)
+                                    if (!$util.isString(message.kinds[i]))
+                                        return "kinds: string[] expected";
+                            }
+                            if (message.namespaceIds != null && message.hasOwnProperty("namespaceIds")) {
+                                if (!Array.isArray(message.namespaceIds))
+                                    return "namespaceIds: array expected";
+                                for (var i = 0; i < message.namespaceIds.length; ++i)
+                                    if (!$util.isString(message.namespaceIds[i]))
+                                        return "namespaceIds: string[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an EntityFilter message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.datastore.admin.v1.EntityFilter
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.datastore.admin.v1.EntityFilter} EntityFilter
+                         */
+                        EntityFilter.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.datastore.admin.v1.EntityFilter)
+                                return object;
+                            var message = new $root.google.datastore.admin.v1.EntityFilter();
+                            if (object.kinds) {
+                                if (!Array.isArray(object.kinds))
+                                    throw TypeError(".google.datastore.admin.v1.EntityFilter.kinds: array expected");
+                                message.kinds = [];
+                                for (var i = 0; i < object.kinds.length; ++i)
+                                    message.kinds[i] = String(object.kinds[i]);
+                            }
+                            if (object.namespaceIds) {
+                                if (!Array.isArray(object.namespaceIds))
+                                    throw TypeError(".google.datastore.admin.v1.EntityFilter.namespaceIds: array expected");
+                                message.namespaceIds = [];
+                                for (var i = 0; i < object.namespaceIds.length; ++i)
+                                    message.namespaceIds[i] = String(object.namespaceIds[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an EntityFilter message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.datastore.admin.v1.EntityFilter
+                         * @static
+                         * @param {google.datastore.admin.v1.EntityFilter} message EntityFilter
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        EntityFilter.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.kinds = [];
+                                object.namespaceIds = [];
+                            }
+                            if (message.kinds && message.kinds.length) {
+                                object.kinds = [];
+                                for (var j = 0; j < message.kinds.length; ++j)
+                                    object.kinds[j] = message.kinds[j];
+                            }
+                            if (message.namespaceIds && message.namespaceIds.length) {
+                                object.namespaceIds = [];
+                                for (var j = 0; j < message.namespaceIds.length; ++j)
+                                    object.namespaceIds[j] = message.namespaceIds[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this EntityFilter to JSON.
+                         * @function toJSON
+                         * @memberof google.datastore.admin.v1.EntityFilter
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        EntityFilter.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return EntityFilter;
+                    })();
+    
+                    v1.GetIndexRequest = (function() {
+    
+                        /**
+                         * Properties of a GetIndexRequest.
+                         * @memberof google.datastore.admin.v1
+                         * @interface IGetIndexRequest
+                         * @property {string|null} [projectId] GetIndexRequest projectId
+                         * @property {string|null} [indexId] GetIndexRequest indexId
+                         */
+    
+                        /**
+                         * Constructs a new GetIndexRequest.
+                         * @memberof google.datastore.admin.v1
+                         * @classdesc Represents a GetIndexRequest.
+                         * @implements IGetIndexRequest
+                         * @constructor
+                         * @param {google.datastore.admin.v1.IGetIndexRequest=} [properties] Properties to set
+                         */
+                        function GetIndexRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetIndexRequest projectId.
+                         * @member {string} projectId
+                         * @memberof google.datastore.admin.v1.GetIndexRequest
+                         * @instance
+                         */
+                        GetIndexRequest.prototype.projectId = "";
+    
+                        /**
+                         * GetIndexRequest indexId.
+                         * @member {string} indexId
+                         * @memberof google.datastore.admin.v1.GetIndexRequest
+                         * @instance
+                         */
+                        GetIndexRequest.prototype.indexId = "";
+    
+                        /**
+                         * Creates a new GetIndexRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.datastore.admin.v1.GetIndexRequest
+                         * @static
+                         * @param {google.datastore.admin.v1.IGetIndexRequest=} [properties] Properties to set
+                         * @returns {google.datastore.admin.v1.GetIndexRequest} GetIndexRequest instance
+                         */
+                        GetIndexRequest.create = function create(properties) {
+                            return new GetIndexRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetIndexRequest message. Does not implicitly {@link google.datastore.admin.v1.GetIndexRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.datastore.admin.v1.GetIndexRequest
+                         * @static
+                         * @param {google.datastore.admin.v1.IGetIndexRequest} message GetIndexRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetIndexRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.projectId != null && Object.hasOwnProperty.call(message, "projectId"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.projectId);
+                            if (message.indexId != null && Object.hasOwnProperty.call(message, "indexId"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.indexId);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetIndexRequest message, length delimited. Does not implicitly {@link google.datastore.admin.v1.GetIndexRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.datastore.admin.v1.GetIndexRequest
+                         * @static
+                         * @param {google.datastore.admin.v1.IGetIndexRequest} message GetIndexRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetIndexRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetIndexRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.datastore.admin.v1.GetIndexRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.datastore.admin.v1.GetIndexRequest} GetIndexRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetIndexRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.datastore.admin.v1.GetIndexRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.projectId = reader.string();
+                                    break;
+                                case 3:
+                                    message.indexId = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetIndexRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.datastore.admin.v1.GetIndexRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.datastore.admin.v1.GetIndexRequest} GetIndexRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetIndexRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetIndexRequest message.
+                         * @function verify
+                         * @memberof google.datastore.admin.v1.GetIndexRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetIndexRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.projectId != null && message.hasOwnProperty("projectId"))
+                                if (!$util.isString(message.projectId))
+                                    return "projectId: string expected";
+                            if (message.indexId != null && message.hasOwnProperty("indexId"))
+                                if (!$util.isString(message.indexId))
+                                    return "indexId: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetIndexRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.datastore.admin.v1.GetIndexRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.datastore.admin.v1.GetIndexRequest} GetIndexRequest
+                         */
+                        GetIndexRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.datastore.admin.v1.GetIndexRequest)
+                                return object;
+                            var message = new $root.google.datastore.admin.v1.GetIndexRequest();
+                            if (object.projectId != null)
+                                message.projectId = String(object.projectId);
+                            if (object.indexId != null)
+                                message.indexId = String(object.indexId);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetIndexRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.datastore.admin.v1.GetIndexRequest
+                         * @static
+                         * @param {google.datastore.admin.v1.GetIndexRequest} message GetIndexRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetIndexRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.projectId = "";
+                                object.indexId = "";
+                            }
+                            if (message.projectId != null && message.hasOwnProperty("projectId"))
+                                object.projectId = message.projectId;
+                            if (message.indexId != null && message.hasOwnProperty("indexId"))
+                                object.indexId = message.indexId;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetIndexRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.datastore.admin.v1.GetIndexRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetIndexRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return GetIndexRequest;
+                    })();
+    
+                    v1.ListIndexesRequest = (function() {
+    
+                        /**
+                         * Properties of a ListIndexesRequest.
+                         * @memberof google.datastore.admin.v1
+                         * @interface IListIndexesRequest
+                         * @property {string|null} [projectId] ListIndexesRequest projectId
+                         * @property {string|null} [filter] ListIndexesRequest filter
+                         * @property {number|null} [pageSize] ListIndexesRequest pageSize
+                         * @property {string|null} [pageToken] ListIndexesRequest pageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListIndexesRequest.
+                         * @memberof google.datastore.admin.v1
+                         * @classdesc Represents a ListIndexesRequest.
+                         * @implements IListIndexesRequest
+                         * @constructor
+                         * @param {google.datastore.admin.v1.IListIndexesRequest=} [properties] Properties to set
+                         */
+                        function ListIndexesRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListIndexesRequest projectId.
+                         * @member {string} projectId
+                         * @memberof google.datastore.admin.v1.ListIndexesRequest
+                         * @instance
+                         */
+                        ListIndexesRequest.prototype.projectId = "";
+    
+                        /**
+                         * ListIndexesRequest filter.
+                         * @member {string} filter
+                         * @memberof google.datastore.admin.v1.ListIndexesRequest
+                         * @instance
+                         */
+                        ListIndexesRequest.prototype.filter = "";
+    
+                        /**
+                         * ListIndexesRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.datastore.admin.v1.ListIndexesRequest
+                         * @instance
+                         */
+                        ListIndexesRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListIndexesRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.datastore.admin.v1.ListIndexesRequest
+                         * @instance
+                         */
+                        ListIndexesRequest.prototype.pageToken = "";
+    
+                        /**
+                         * Creates a new ListIndexesRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.datastore.admin.v1.ListIndexesRequest
+                         * @static
+                         * @param {google.datastore.admin.v1.IListIndexesRequest=} [properties] Properties to set
+                         * @returns {google.datastore.admin.v1.ListIndexesRequest} ListIndexesRequest instance
+                         */
+                        ListIndexesRequest.create = function create(properties) {
+                            return new ListIndexesRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListIndexesRequest message. Does not implicitly {@link google.datastore.admin.v1.ListIndexesRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.datastore.admin.v1.ListIndexesRequest
+                         * @static
+                         * @param {google.datastore.admin.v1.IListIndexesRequest} message ListIndexesRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListIndexesRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.projectId != null && Object.hasOwnProperty.call(message, "projectId"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.projectId);
+                            if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.filter);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.pageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListIndexesRequest message, length delimited. Does not implicitly {@link google.datastore.admin.v1.ListIndexesRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.datastore.admin.v1.ListIndexesRequest
+                         * @static
+                         * @param {google.datastore.admin.v1.IListIndexesRequest} message ListIndexesRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListIndexesRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListIndexesRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.datastore.admin.v1.ListIndexesRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.datastore.admin.v1.ListIndexesRequest} ListIndexesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListIndexesRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.datastore.admin.v1.ListIndexesRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.projectId = reader.string();
+                                    break;
+                                case 3:
+                                    message.filter = reader.string();
+                                    break;
+                                case 4:
+                                    message.pageSize = reader.int32();
+                                    break;
+                                case 5:
+                                    message.pageToken = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListIndexesRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.datastore.admin.v1.ListIndexesRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.datastore.admin.v1.ListIndexesRequest} ListIndexesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListIndexesRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListIndexesRequest message.
+                         * @function verify
+                         * @memberof google.datastore.admin.v1.ListIndexesRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListIndexesRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.projectId != null && message.hasOwnProperty("projectId"))
+                                if (!$util.isString(message.projectId))
+                                    return "projectId: string expected";
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                if (!$util.isString(message.filter))
+                                    return "filter: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListIndexesRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.datastore.admin.v1.ListIndexesRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.datastore.admin.v1.ListIndexesRequest} ListIndexesRequest
+                         */
+                        ListIndexesRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.datastore.admin.v1.ListIndexesRequest)
+                                return object;
+                            var message = new $root.google.datastore.admin.v1.ListIndexesRequest();
+                            if (object.projectId != null)
+                                message.projectId = String(object.projectId);
+                            if (object.filter != null)
+                                message.filter = String(object.filter);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListIndexesRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.datastore.admin.v1.ListIndexesRequest
+                         * @static
+                         * @param {google.datastore.admin.v1.ListIndexesRequest} message ListIndexesRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListIndexesRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.projectId = "";
+                                object.filter = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                            }
+                            if (message.projectId != null && message.hasOwnProperty("projectId"))
+                                object.projectId = message.projectId;
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                object.filter = message.filter;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListIndexesRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.datastore.admin.v1.ListIndexesRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListIndexesRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ListIndexesRequest;
+                    })();
+    
+                    v1.ListIndexesResponse = (function() {
+    
+                        /**
+                         * Properties of a ListIndexesResponse.
+                         * @memberof google.datastore.admin.v1
+                         * @interface IListIndexesResponse
+                         * @property {Array.<google.datastore.admin.v1.IIndex>|null} [indexes] ListIndexesResponse indexes
+                         * @property {string|null} [nextPageToken] ListIndexesResponse nextPageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListIndexesResponse.
+                         * @memberof google.datastore.admin.v1
+                         * @classdesc Represents a ListIndexesResponse.
+                         * @implements IListIndexesResponse
+                         * @constructor
+                         * @param {google.datastore.admin.v1.IListIndexesResponse=} [properties] Properties to set
+                         */
+                        function ListIndexesResponse(properties) {
+                            this.indexes = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListIndexesResponse indexes.
+                         * @member {Array.<google.datastore.admin.v1.IIndex>} indexes
+                         * @memberof google.datastore.admin.v1.ListIndexesResponse
+                         * @instance
+                         */
+                        ListIndexesResponse.prototype.indexes = $util.emptyArray;
+    
+                        /**
+                         * ListIndexesResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.datastore.admin.v1.ListIndexesResponse
+                         * @instance
+                         */
+                        ListIndexesResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * Creates a new ListIndexesResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.datastore.admin.v1.ListIndexesResponse
+                         * @static
+                         * @param {google.datastore.admin.v1.IListIndexesResponse=} [properties] Properties to set
+                         * @returns {google.datastore.admin.v1.ListIndexesResponse} ListIndexesResponse instance
+                         */
+                        ListIndexesResponse.create = function create(properties) {
+                            return new ListIndexesResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListIndexesResponse message. Does not implicitly {@link google.datastore.admin.v1.ListIndexesResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.datastore.admin.v1.ListIndexesResponse
+                         * @static
+                         * @param {google.datastore.admin.v1.IListIndexesResponse} message ListIndexesResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListIndexesResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.indexes != null && message.indexes.length)
+                                for (var i = 0; i < message.indexes.length; ++i)
+                                    $root.google.datastore.admin.v1.Index.encode(message.indexes[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListIndexesResponse message, length delimited. Does not implicitly {@link google.datastore.admin.v1.ListIndexesResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.datastore.admin.v1.ListIndexesResponse
+                         * @static
+                         * @param {google.datastore.admin.v1.IListIndexesResponse} message ListIndexesResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListIndexesResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListIndexesResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.datastore.admin.v1.ListIndexesResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.datastore.admin.v1.ListIndexesResponse} ListIndexesResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListIndexesResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.datastore.admin.v1.ListIndexesResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    if (!(message.indexes && message.indexes.length))
+                                        message.indexes = [];
+                                    message.indexes.push($root.google.datastore.admin.v1.Index.decode(reader, reader.uint32()));
+                                    break;
+                                case 2:
+                                    message.nextPageToken = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListIndexesResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.datastore.admin.v1.ListIndexesResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.datastore.admin.v1.ListIndexesResponse} ListIndexesResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListIndexesResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListIndexesResponse message.
+                         * @function verify
+                         * @memberof google.datastore.admin.v1.ListIndexesResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListIndexesResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.indexes != null && message.hasOwnProperty("indexes")) {
+                                if (!Array.isArray(message.indexes))
+                                    return "indexes: array expected";
+                                for (var i = 0; i < message.indexes.length; ++i) {
+                                    var error = $root.google.datastore.admin.v1.Index.verify(message.indexes[i]);
+                                    if (error)
+                                        return "indexes." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListIndexesResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.datastore.admin.v1.ListIndexesResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.datastore.admin.v1.ListIndexesResponse} ListIndexesResponse
+                         */
+                        ListIndexesResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.datastore.admin.v1.ListIndexesResponse)
+                                return object;
+                            var message = new $root.google.datastore.admin.v1.ListIndexesResponse();
+                            if (object.indexes) {
+                                if (!Array.isArray(object.indexes))
+                                    throw TypeError(".google.datastore.admin.v1.ListIndexesResponse.indexes: array expected");
+                                message.indexes = [];
+                                for (var i = 0; i < object.indexes.length; ++i) {
+                                    if (typeof object.indexes[i] !== "object")
+                                        throw TypeError(".google.datastore.admin.v1.ListIndexesResponse.indexes: object expected");
+                                    message.indexes[i] = $root.google.datastore.admin.v1.Index.fromObject(object.indexes[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListIndexesResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.datastore.admin.v1.ListIndexesResponse
+                         * @static
+                         * @param {google.datastore.admin.v1.ListIndexesResponse} message ListIndexesResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListIndexesResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.indexes = [];
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.indexes && message.indexes.length) {
+                                object.indexes = [];
+                                for (var j = 0; j < message.indexes.length; ++j)
+                                    object.indexes[j] = $root.google.datastore.admin.v1.Index.toObject(message.indexes[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListIndexesResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.datastore.admin.v1.ListIndexesResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListIndexesResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ListIndexesResponse;
+                    })();
+    
+                    v1.IndexOperationMetadata = (function() {
+    
+                        /**
+                         * Properties of an IndexOperationMetadata.
+                         * @memberof google.datastore.admin.v1
+                         * @interface IIndexOperationMetadata
+                         * @property {google.datastore.admin.v1.ICommonMetadata|null} [common] IndexOperationMetadata common
+                         * @property {google.datastore.admin.v1.IProgress|null} [progressEntities] IndexOperationMetadata progressEntities
+                         * @property {string|null} [indexId] IndexOperationMetadata indexId
+                         */
+    
+                        /**
+                         * Constructs a new IndexOperationMetadata.
+                         * @memberof google.datastore.admin.v1
+                         * @classdesc Represents an IndexOperationMetadata.
+                         * @implements IIndexOperationMetadata
+                         * @constructor
+                         * @param {google.datastore.admin.v1.IIndexOperationMetadata=} [properties] Properties to set
+                         */
+                        function IndexOperationMetadata(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * IndexOperationMetadata common.
+                         * @member {google.datastore.admin.v1.ICommonMetadata|null|undefined} common
+                         * @memberof google.datastore.admin.v1.IndexOperationMetadata
+                         * @instance
+                         */
+                        IndexOperationMetadata.prototype.common = null;
+    
+                        /**
+                         * IndexOperationMetadata progressEntities.
+                         * @member {google.datastore.admin.v1.IProgress|null|undefined} progressEntities
+                         * @memberof google.datastore.admin.v1.IndexOperationMetadata
+                         * @instance
+                         */
+                        IndexOperationMetadata.prototype.progressEntities = null;
+    
+                        /**
+                         * IndexOperationMetadata indexId.
+                         * @member {string} indexId
+                         * @memberof google.datastore.admin.v1.IndexOperationMetadata
+                         * @instance
+                         */
+                        IndexOperationMetadata.prototype.indexId = "";
+    
+                        /**
+                         * Creates a new IndexOperationMetadata instance using the specified properties.
+                         * @function create
+                         * @memberof google.datastore.admin.v1.IndexOperationMetadata
+                         * @static
+                         * @param {google.datastore.admin.v1.IIndexOperationMetadata=} [properties] Properties to set
+                         * @returns {google.datastore.admin.v1.IndexOperationMetadata} IndexOperationMetadata instance
+                         */
+                        IndexOperationMetadata.create = function create(properties) {
+                            return new IndexOperationMetadata(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified IndexOperationMetadata message. Does not implicitly {@link google.datastore.admin.v1.IndexOperationMetadata.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.datastore.admin.v1.IndexOperationMetadata
+                         * @static
+                         * @param {google.datastore.admin.v1.IIndexOperationMetadata} message IndexOperationMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        IndexOperationMetadata.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.common != null && Object.hasOwnProperty.call(message, "common"))
+                                $root.google.datastore.admin.v1.CommonMetadata.encode(message.common, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.progressEntities != null && Object.hasOwnProperty.call(message, "progressEntities"))
+                                $root.google.datastore.admin.v1.Progress.encode(message.progressEntities, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.indexId != null && Object.hasOwnProperty.call(message, "indexId"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.indexId);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified IndexOperationMetadata message, length delimited. Does not implicitly {@link google.datastore.admin.v1.IndexOperationMetadata.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.datastore.admin.v1.IndexOperationMetadata
+                         * @static
+                         * @param {google.datastore.admin.v1.IIndexOperationMetadata} message IndexOperationMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        IndexOperationMetadata.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an IndexOperationMetadata message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.datastore.admin.v1.IndexOperationMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.datastore.admin.v1.IndexOperationMetadata} IndexOperationMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        IndexOperationMetadata.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.datastore.admin.v1.IndexOperationMetadata();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.common = $root.google.datastore.admin.v1.CommonMetadata.decode(reader, reader.uint32());
+                                    break;
+                                case 2:
+                                    message.progressEntities = $root.google.datastore.admin.v1.Progress.decode(reader, reader.uint32());
+                                    break;
+                                case 3:
+                                    message.indexId = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an IndexOperationMetadata message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.datastore.admin.v1.IndexOperationMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.datastore.admin.v1.IndexOperationMetadata} IndexOperationMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        IndexOperationMetadata.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an IndexOperationMetadata message.
+                         * @function verify
+                         * @memberof google.datastore.admin.v1.IndexOperationMetadata
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        IndexOperationMetadata.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.common != null && message.hasOwnProperty("common")) {
+                                var error = $root.google.datastore.admin.v1.CommonMetadata.verify(message.common);
+                                if (error)
+                                    return "common." + error;
+                            }
+                            if (message.progressEntities != null && message.hasOwnProperty("progressEntities")) {
+                                var error = $root.google.datastore.admin.v1.Progress.verify(message.progressEntities);
+                                if (error)
+                                    return "progressEntities." + error;
+                            }
+                            if (message.indexId != null && message.hasOwnProperty("indexId"))
+                                if (!$util.isString(message.indexId))
+                                    return "indexId: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an IndexOperationMetadata message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.datastore.admin.v1.IndexOperationMetadata
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.datastore.admin.v1.IndexOperationMetadata} IndexOperationMetadata
+                         */
+                        IndexOperationMetadata.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.datastore.admin.v1.IndexOperationMetadata)
+                                return object;
+                            var message = new $root.google.datastore.admin.v1.IndexOperationMetadata();
+                            if (object.common != null) {
+                                if (typeof object.common !== "object")
+                                    throw TypeError(".google.datastore.admin.v1.IndexOperationMetadata.common: object expected");
+                                message.common = $root.google.datastore.admin.v1.CommonMetadata.fromObject(object.common);
+                            }
+                            if (object.progressEntities != null) {
+                                if (typeof object.progressEntities !== "object")
+                                    throw TypeError(".google.datastore.admin.v1.IndexOperationMetadata.progressEntities: object expected");
+                                message.progressEntities = $root.google.datastore.admin.v1.Progress.fromObject(object.progressEntities);
+                            }
+                            if (object.indexId != null)
+                                message.indexId = String(object.indexId);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an IndexOperationMetadata message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.datastore.admin.v1.IndexOperationMetadata
+                         * @static
+                         * @param {google.datastore.admin.v1.IndexOperationMetadata} message IndexOperationMetadata
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        IndexOperationMetadata.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.common = null;
+                                object.progressEntities = null;
+                                object.indexId = "";
+                            }
+                            if (message.common != null && message.hasOwnProperty("common"))
+                                object.common = $root.google.datastore.admin.v1.CommonMetadata.toObject(message.common, options);
+                            if (message.progressEntities != null && message.hasOwnProperty("progressEntities"))
+                                object.progressEntities = $root.google.datastore.admin.v1.Progress.toObject(message.progressEntities, options);
+                            if (message.indexId != null && message.hasOwnProperty("indexId"))
+                                object.indexId = message.indexId;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this IndexOperationMetadata to JSON.
+                         * @function toJSON
+                         * @memberof google.datastore.admin.v1.IndexOperationMetadata
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        IndexOperationMetadata.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return IndexOperationMetadata;
+                    })();
+    
+                    v1.Index = (function() {
+    
+                        /**
+                         * Properties of an Index.
+                         * @memberof google.datastore.admin.v1
+                         * @interface IIndex
+                         * @property {string|null} [projectId] Index projectId
+                         * @property {string|null} [indexId] Index indexId
+                         * @property {string|null} [kind] Index kind
+                         * @property {google.datastore.admin.v1.Index.AncestorMode|null} [ancestor] Index ancestor
+                         * @property {Array.<google.datastore.admin.v1.Index.IIndexedProperty>|null} [properties] Index properties
+                         * @property {google.datastore.admin.v1.Index.State|null} [state] Index state
+                         */
+    
+                        /**
+                         * Constructs a new Index.
+                         * @memberof google.datastore.admin.v1
+                         * @classdesc Represents an Index.
+                         * @implements IIndex
+                         * @constructor
+                         * @param {google.datastore.admin.v1.IIndex=} [properties] Properties to set
+                         */
+                        function Index(properties) {
+                            this.properties = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Index projectId.
+                         * @member {string} projectId
+                         * @memberof google.datastore.admin.v1.Index
+                         * @instance
+                         */
+                        Index.prototype.projectId = "";
+    
+                        /**
+                         * Index indexId.
+                         * @member {string} indexId
+                         * @memberof google.datastore.admin.v1.Index
+                         * @instance
+                         */
+                        Index.prototype.indexId = "";
+    
+                        /**
+                         * Index kind.
+                         * @member {string} kind
+                         * @memberof google.datastore.admin.v1.Index
+                         * @instance
+                         */
+                        Index.prototype.kind = "";
+    
+                        /**
+                         * Index ancestor.
+                         * @member {google.datastore.admin.v1.Index.AncestorMode} ancestor
+                         * @memberof google.datastore.admin.v1.Index
+                         * @instance
+                         */
+                        Index.prototype.ancestor = 0;
+    
+                        /**
+                         * Index properties.
+                         * @member {Array.<google.datastore.admin.v1.Index.IIndexedProperty>} properties
+                         * @memberof google.datastore.admin.v1.Index
+                         * @instance
+                         */
+                        Index.prototype.properties = $util.emptyArray;
+    
+                        /**
+                         * Index state.
+                         * @member {google.datastore.admin.v1.Index.State} state
+                         * @memberof google.datastore.admin.v1.Index
+                         * @instance
+                         */
+                        Index.prototype.state = 0;
+    
+                        /**
+                         * Creates a new Index instance using the specified properties.
+                         * @function create
+                         * @memberof google.datastore.admin.v1.Index
+                         * @static
+                         * @param {google.datastore.admin.v1.IIndex=} [properties] Properties to set
+                         * @returns {google.datastore.admin.v1.Index} Index instance
+                         */
+                        Index.create = function create(properties) {
+                            return new Index(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified Index message. Does not implicitly {@link google.datastore.admin.v1.Index.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.datastore.admin.v1.Index
+                         * @static
+                         * @param {google.datastore.admin.v1.IIndex} message Index message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Index.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.projectId != null && Object.hasOwnProperty.call(message, "projectId"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.projectId);
+                            if (message.indexId != null && Object.hasOwnProperty.call(message, "indexId"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.indexId);
+                            if (message.kind != null && Object.hasOwnProperty.call(message, "kind"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.kind);
+                            if (message.ancestor != null && Object.hasOwnProperty.call(message, "ancestor"))
+                                writer.uint32(/* id 5, wireType 0 =*/40).int32(message.ancestor);
+                            if (message.properties != null && message.properties.length)
+                                for (var i = 0; i < message.properties.length; ++i)
+                                    $root.google.datastore.admin.v1.Index.IndexedProperty.encode(message.properties[i], writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                            if (message.state != null && Object.hasOwnProperty.call(message, "state"))
+                                writer.uint32(/* id 7, wireType 0 =*/56).int32(message.state);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified Index message, length delimited. Does not implicitly {@link google.datastore.admin.v1.Index.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.datastore.admin.v1.Index
+                         * @static
+                         * @param {google.datastore.admin.v1.IIndex} message Index message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Index.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an Index message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.datastore.admin.v1.Index
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.datastore.admin.v1.Index} Index
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Index.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.datastore.admin.v1.Index();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.projectId = reader.string();
+                                    break;
+                                case 3:
+                                    message.indexId = reader.string();
+                                    break;
+                                case 4:
+                                    message.kind = reader.string();
+                                    break;
+                                case 5:
+                                    message.ancestor = reader.int32();
+                                    break;
+                                case 6:
+                                    if (!(message.properties && message.properties.length))
+                                        message.properties = [];
+                                    message.properties.push($root.google.datastore.admin.v1.Index.IndexedProperty.decode(reader, reader.uint32()));
+                                    break;
+                                case 7:
+                                    message.state = reader.int32();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an Index message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.datastore.admin.v1.Index
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.datastore.admin.v1.Index} Index
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Index.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an Index message.
+                         * @function verify
+                         * @memberof google.datastore.admin.v1.Index
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        Index.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.projectId != null && message.hasOwnProperty("projectId"))
+                                if (!$util.isString(message.projectId))
+                                    return "projectId: string expected";
+                            if (message.indexId != null && message.hasOwnProperty("indexId"))
+                                if (!$util.isString(message.indexId))
+                                    return "indexId: string expected";
+                            if (message.kind != null && message.hasOwnProperty("kind"))
+                                if (!$util.isString(message.kind))
+                                    return "kind: string expected";
+                            if (message.ancestor != null && message.hasOwnProperty("ancestor"))
+                                switch (message.ancestor) {
+                                default:
+                                    return "ancestor: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            if (message.properties != null && message.hasOwnProperty("properties")) {
+                                if (!Array.isArray(message.properties))
+                                    return "properties: array expected";
+                                for (var i = 0; i < message.properties.length; ++i) {
+                                    var error = $root.google.datastore.admin.v1.Index.IndexedProperty.verify(message.properties[i]);
+                                    if (error)
+                                        return "properties." + error;
+                                }
+                            }
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                switch (message.state) {
+                                default:
+                                    return "state: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                    break;
+                                }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an Index message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.datastore.admin.v1.Index
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.datastore.admin.v1.Index} Index
+                         */
+                        Index.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.datastore.admin.v1.Index)
+                                return object;
+                            var message = new $root.google.datastore.admin.v1.Index();
+                            if (object.projectId != null)
+                                message.projectId = String(object.projectId);
+                            if (object.indexId != null)
+                                message.indexId = String(object.indexId);
+                            if (object.kind != null)
+                                message.kind = String(object.kind);
+                            switch (object.ancestor) {
+                            case "ANCESTOR_MODE_UNSPECIFIED":
+                            case 0:
+                                message.ancestor = 0;
+                                break;
+                            case "NONE":
+                            case 1:
+                                message.ancestor = 1;
+                                break;
+                            case "ALL_ANCESTORS":
+                            case 2:
+                                message.ancestor = 2;
+                                break;
+                            }
+                            if (object.properties) {
+                                if (!Array.isArray(object.properties))
+                                    throw TypeError(".google.datastore.admin.v1.Index.properties: array expected");
+                                message.properties = [];
+                                for (var i = 0; i < object.properties.length; ++i) {
+                                    if (typeof object.properties[i] !== "object")
+                                        throw TypeError(".google.datastore.admin.v1.Index.properties: object expected");
+                                    message.properties[i] = $root.google.datastore.admin.v1.Index.IndexedProperty.fromObject(object.properties[i]);
+                                }
+                            }
+                            switch (object.state) {
+                            case "STATE_UNSPECIFIED":
+                            case 0:
+                                message.state = 0;
+                                break;
+                            case "CREATING":
+                            case 1:
+                                message.state = 1;
+                                break;
+                            case "READY":
+                            case 2:
+                                message.state = 2;
+                                break;
+                            case "DELETING":
+                            case 3:
+                                message.state = 3;
+                                break;
+                            case "ERROR":
+                            case 4:
+                                message.state = 4;
+                                break;
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an Index message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.datastore.admin.v1.Index
+                         * @static
+                         * @param {google.datastore.admin.v1.Index} message Index
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        Index.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.properties = [];
+                            if (options.defaults) {
+                                object.projectId = "";
+                                object.indexId = "";
+                                object.kind = "";
+                                object.ancestor = options.enums === String ? "ANCESTOR_MODE_UNSPECIFIED" : 0;
+                                object.state = options.enums === String ? "STATE_UNSPECIFIED" : 0;
+                            }
+                            if (message.projectId != null && message.hasOwnProperty("projectId"))
+                                object.projectId = message.projectId;
+                            if (message.indexId != null && message.hasOwnProperty("indexId"))
+                                object.indexId = message.indexId;
+                            if (message.kind != null && message.hasOwnProperty("kind"))
+                                object.kind = message.kind;
+                            if (message.ancestor != null && message.hasOwnProperty("ancestor"))
+                                object.ancestor = options.enums === String ? $root.google.datastore.admin.v1.Index.AncestorMode[message.ancestor] : message.ancestor;
+                            if (message.properties && message.properties.length) {
+                                object.properties = [];
+                                for (var j = 0; j < message.properties.length; ++j)
+                                    object.properties[j] = $root.google.datastore.admin.v1.Index.IndexedProperty.toObject(message.properties[j], options);
+                            }
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                object.state = options.enums === String ? $root.google.datastore.admin.v1.Index.State[message.state] : message.state;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this Index to JSON.
+                         * @function toJSON
+                         * @memberof google.datastore.admin.v1.Index
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        Index.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        Index.IndexedProperty = (function() {
+    
+                            /**
+                             * Properties of an IndexedProperty.
+                             * @memberof google.datastore.admin.v1.Index
+                             * @interface IIndexedProperty
+                             * @property {string|null} [name] IndexedProperty name
+                             * @property {google.datastore.admin.v1.Index.Direction|null} [direction] IndexedProperty direction
+                             */
+    
+                            /**
+                             * Constructs a new IndexedProperty.
+                             * @memberof google.datastore.admin.v1.Index
+                             * @classdesc Represents an IndexedProperty.
+                             * @implements IIndexedProperty
+                             * @constructor
+                             * @param {google.datastore.admin.v1.Index.IIndexedProperty=} [properties] Properties to set
+                             */
+                            function IndexedProperty(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * IndexedProperty name.
+                             * @member {string} name
+                             * @memberof google.datastore.admin.v1.Index.IndexedProperty
+                             * @instance
+                             */
+                            IndexedProperty.prototype.name = "";
+    
+                            /**
+                             * IndexedProperty direction.
+                             * @member {google.datastore.admin.v1.Index.Direction} direction
+                             * @memberof google.datastore.admin.v1.Index.IndexedProperty
+                             * @instance
+                             */
+                            IndexedProperty.prototype.direction = 0;
+    
+                            /**
+                             * Creates a new IndexedProperty instance using the specified properties.
+                             * @function create
+                             * @memberof google.datastore.admin.v1.Index.IndexedProperty
+                             * @static
+                             * @param {google.datastore.admin.v1.Index.IIndexedProperty=} [properties] Properties to set
+                             * @returns {google.datastore.admin.v1.Index.IndexedProperty} IndexedProperty instance
+                             */
+                            IndexedProperty.create = function create(properties) {
+                                return new IndexedProperty(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified IndexedProperty message. Does not implicitly {@link google.datastore.admin.v1.Index.IndexedProperty.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.datastore.admin.v1.Index.IndexedProperty
+                             * @static
+                             * @param {google.datastore.admin.v1.Index.IIndexedProperty} message IndexedProperty message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            IndexedProperty.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                                if (message.direction != null && Object.hasOwnProperty.call(message, "direction"))
+                                    writer.uint32(/* id 2, wireType 0 =*/16).int32(message.direction);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified IndexedProperty message, length delimited. Does not implicitly {@link google.datastore.admin.v1.Index.IndexedProperty.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.datastore.admin.v1.Index.IndexedProperty
+                             * @static
+                             * @param {google.datastore.admin.v1.Index.IIndexedProperty} message IndexedProperty message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            IndexedProperty.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes an IndexedProperty message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.datastore.admin.v1.Index.IndexedProperty
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.datastore.admin.v1.Index.IndexedProperty} IndexedProperty
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            IndexedProperty.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.datastore.admin.v1.Index.IndexedProperty();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1:
+                                        message.name = reader.string();
+                                        break;
+                                    case 2:
+                                        message.direction = reader.int32();
+                                        break;
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes an IndexedProperty message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.datastore.admin.v1.Index.IndexedProperty
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.datastore.admin.v1.Index.IndexedProperty} IndexedProperty
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            IndexedProperty.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies an IndexedProperty message.
+                             * @function verify
+                             * @memberof google.datastore.admin.v1.Index.IndexedProperty
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            IndexedProperty.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    if (!$util.isString(message.name))
+                                        return "name: string expected";
+                                if (message.direction != null && message.hasOwnProperty("direction"))
+                                    switch (message.direction) {
+                                    default:
+                                        return "direction: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                        break;
+                                    }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates an IndexedProperty message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.datastore.admin.v1.Index.IndexedProperty
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.datastore.admin.v1.Index.IndexedProperty} IndexedProperty
+                             */
+                            IndexedProperty.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.datastore.admin.v1.Index.IndexedProperty)
+                                    return object;
+                                var message = new $root.google.datastore.admin.v1.Index.IndexedProperty();
+                                if (object.name != null)
+                                    message.name = String(object.name);
+                                switch (object.direction) {
+                                case "DIRECTION_UNSPECIFIED":
+                                case 0:
+                                    message.direction = 0;
+                                    break;
+                                case "ASCENDING":
+                                case 1:
+                                    message.direction = 1;
+                                    break;
+                                case "DESCENDING":
+                                case 2:
+                                    message.direction = 2;
+                                    break;
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from an IndexedProperty message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.datastore.admin.v1.Index.IndexedProperty
+                             * @static
+                             * @param {google.datastore.admin.v1.Index.IndexedProperty} message IndexedProperty
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            IndexedProperty.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.name = "";
+                                    object.direction = options.enums === String ? "DIRECTION_UNSPECIFIED" : 0;
+                                }
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    object.name = message.name;
+                                if (message.direction != null && message.hasOwnProperty("direction"))
+                                    object.direction = options.enums === String ? $root.google.datastore.admin.v1.Index.Direction[message.direction] : message.direction;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this IndexedProperty to JSON.
+                             * @function toJSON
+                             * @memberof google.datastore.admin.v1.Index.IndexedProperty
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            IndexedProperty.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            return IndexedProperty;
+                        })();
+    
+                        /**
+                         * AncestorMode enum.
+                         * @name google.datastore.admin.v1.Index.AncestorMode
+                         * @enum {number}
+                         * @property {number} ANCESTOR_MODE_UNSPECIFIED=0 ANCESTOR_MODE_UNSPECIFIED value
+                         * @property {number} NONE=1 NONE value
+                         * @property {number} ALL_ANCESTORS=2 ALL_ANCESTORS value
+                         */
+                        Index.AncestorMode = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "ANCESTOR_MODE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "NONE"] = 1;
+                            values[valuesById[2] = "ALL_ANCESTORS"] = 2;
+                            return values;
+                        })();
+    
+                        /**
+                         * Direction enum.
+                         * @name google.datastore.admin.v1.Index.Direction
+                         * @enum {number}
+                         * @property {number} DIRECTION_UNSPECIFIED=0 DIRECTION_UNSPECIFIED value
+                         * @property {number} ASCENDING=1 ASCENDING value
+                         * @property {number} DESCENDING=2 DESCENDING value
+                         */
+                        Index.Direction = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "DIRECTION_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "ASCENDING"] = 1;
+                            values[valuesById[2] = "DESCENDING"] = 2;
+                            return values;
+                        })();
+    
+                        /**
+                         * State enum.
+                         * @name google.datastore.admin.v1.Index.State
+                         * @enum {number}
+                         * @property {number} STATE_UNSPECIFIED=0 STATE_UNSPECIFIED value
+                         * @property {number} CREATING=1 CREATING value
+                         * @property {number} READY=2 READY value
+                         * @property {number} DELETING=3 DELETING value
+                         * @property {number} ERROR=4 ERROR value
+                         */
+                        Index.State = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "STATE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "CREATING"] = 1;
+                            values[valuesById[2] = "READY"] = 2;
+                            values[valuesById[3] = "DELETING"] = 3;
+                            values[valuesById[4] = "ERROR"] = 4;
+                            return values;
+                        })();
+    
+                        return Index;
+                    })();
+    
+                    return v1;
+                })();
+    
+                return admin;
+            })();
+    
             datastore.v1 = (function() {
     
                 /**
@@ -17784,6 +21804,7 @@
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] MethodOptions uninterpretedOption
                  * @property {google.api.IHttpRule|null} [".google.api.http"] MethodOptions .google.api.http
                  * @property {Array.<string>|null} [".google.api.methodSignature"] MethodOptions .google.api.methodSignature
+                 * @property {google.longrunning.IOperationInfo|null} [".google.longrunning.operationInfo"] MethodOptions .google.longrunning.operationInfo
                  */
     
                 /**
@@ -17844,6 +21865,14 @@
                 MethodOptions.prototype[".google.api.methodSignature"] = $util.emptyArray;
     
                 /**
+                 * MethodOptions .google.longrunning.operationInfo.
+                 * @member {google.longrunning.IOperationInfo|null|undefined} .google.longrunning.operationInfo
+                 * @memberof google.protobuf.MethodOptions
+                 * @instance
+                 */
+                MethodOptions.prototype[".google.longrunning.operationInfo"] = null;
+    
+                /**
                  * Creates a new MethodOptions instance using the specified properties.
                  * @function create
                  * @memberof google.protobuf.MethodOptions
@@ -17874,6 +21903,8 @@
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
+                    if (message[".google.longrunning.operationInfo"] != null && Object.hasOwnProperty.call(message, ".google.longrunning.operationInfo"))
+                        $root.google.longrunning.OperationInfo.encode(message[".google.longrunning.operationInfo"], writer.uint32(/* id 1049, wireType 2 =*/8394).fork()).ldelim();
                     if (message[".google.api.methodSignature"] != null && message[".google.api.methodSignature"].length)
                         for (var i = 0; i < message[".google.api.methodSignature"].length; ++i)
                             writer.uint32(/* id 1051, wireType 2 =*/8410).string(message[".google.api.methodSignature"][i]);
@@ -17931,6 +21962,9 @@
                             if (!(message[".google.api.methodSignature"] && message[".google.api.methodSignature"].length))
                                 message[".google.api.methodSignature"] = [];
                             message[".google.api.methodSignature"].push(reader.string());
+                            break;
+                        case 1049:
+                            message[".google.longrunning.operationInfo"] = $root.google.longrunning.OperationInfo.decode(reader, reader.uint32());
                             break;
                         default:
                             reader.skipType(tag & 7);
@@ -18000,6 +22034,11 @@
                             if (!$util.isString(message[".google.api.methodSignature"][i]))
                                 return ".google.api.methodSignature: string[] expected";
                     }
+                    if (message[".google.longrunning.operationInfo"] != null && message.hasOwnProperty(".google.longrunning.operationInfo")) {
+                        var error = $root.google.longrunning.OperationInfo.verify(message[".google.longrunning.operationInfo"]);
+                        if (error)
+                            return ".google.longrunning.operationInfo." + error;
+                    }
                     return null;
                 };
     
@@ -18053,6 +22092,11 @@
                         for (var i = 0; i < object[".google.api.methodSignature"].length; ++i)
                             message[".google.api.methodSignature"][i] = String(object[".google.api.methodSignature"][i]);
                     }
+                    if (object[".google.longrunning.operationInfo"] != null) {
+                        if (typeof object[".google.longrunning.operationInfo"] !== "object")
+                            throw TypeError(".google.protobuf.MethodOptions..google.longrunning.operationInfo: object expected");
+                        message[".google.longrunning.operationInfo"] = $root.google.longrunning.OperationInfo.fromObject(object[".google.longrunning.operationInfo"]);
+                    }
                     return message;
                 };
     
@@ -18076,6 +22120,7 @@
                     if (options.defaults) {
                         object.deprecated = false;
                         object.idempotencyLevel = options.enums === String ? "IDEMPOTENCY_UNKNOWN" : 0;
+                        object[".google.longrunning.operationInfo"] = null;
                         object[".google.api.http"] = null;
                     }
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
@@ -18087,6 +22132,8 @@
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
                             object.uninterpretedOption[j] = $root.google.protobuf.UninterpretedOption.toObject(message.uninterpretedOption[j], options);
                     }
+                    if (message[".google.longrunning.operationInfo"] != null && message.hasOwnProperty(".google.longrunning.operationInfo"))
+                        object[".google.longrunning.operationInfo"] = $root.google.longrunning.OperationInfo.toObject(message[".google.longrunning.operationInfo"], options);
                     if (message[".google.api.methodSignature"] && message[".google.api.methodSignature"].length) {
                         object[".google.api.methodSignature"] = [];
                         for (var j = 0; j < message[".google.api.methodSignature"].length; ++j)
@@ -19753,6 +23800,833 @@
                 return GeneratedCodeInfo;
             })();
     
+            protobuf.Any = (function() {
+    
+                /**
+                 * Properties of an Any.
+                 * @memberof google.protobuf
+                 * @interface IAny
+                 * @property {string|null} [type_url] Any type_url
+                 * @property {Uint8Array|null} [value] Any value
+                 */
+    
+                /**
+                 * Constructs a new Any.
+                 * @memberof google.protobuf
+                 * @classdesc Represents an Any.
+                 * @implements IAny
+                 * @constructor
+                 * @param {google.protobuf.IAny=} [properties] Properties to set
+                 */
+                function Any(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * Any type_url.
+                 * @member {string} type_url
+                 * @memberof google.protobuf.Any
+                 * @instance
+                 */
+                Any.prototype.type_url = "";
+    
+                /**
+                 * Any value.
+                 * @member {Uint8Array} value
+                 * @memberof google.protobuf.Any
+                 * @instance
+                 */
+                Any.prototype.value = $util.newBuffer([]);
+    
+                /**
+                 * Creates a new Any instance using the specified properties.
+                 * @function create
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {google.protobuf.IAny=} [properties] Properties to set
+                 * @returns {google.protobuf.Any} Any instance
+                 */
+                Any.create = function create(properties) {
+                    return new Any(properties);
+                };
+    
+                /**
+                 * Encodes the specified Any message. Does not implicitly {@link google.protobuf.Any.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {google.protobuf.IAny} message Any message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Any.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.type_url != null && Object.hasOwnProperty.call(message, "type_url"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.type_url);
+                    if (message.value != null && Object.hasOwnProperty.call(message, "value"))
+                        writer.uint32(/* id 2, wireType 2 =*/18).bytes(message.value);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified Any message, length delimited. Does not implicitly {@link google.protobuf.Any.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {google.protobuf.IAny} message Any message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Any.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes an Any message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.protobuf.Any} Any
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Any.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Any();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            message.type_url = reader.string();
+                            break;
+                        case 2:
+                            message.value = reader.bytes();
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes an Any message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.protobuf.Any} Any
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Any.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies an Any message.
+                 * @function verify
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                Any.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.type_url != null && message.hasOwnProperty("type_url"))
+                        if (!$util.isString(message.type_url))
+                            return "type_url: string expected";
+                    if (message.value != null && message.hasOwnProperty("value"))
+                        if (!(message.value && typeof message.value.length === "number" || $util.isString(message.value)))
+                            return "value: buffer expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates an Any message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.protobuf.Any} Any
+                 */
+                Any.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.protobuf.Any)
+                        return object;
+                    var message = new $root.google.protobuf.Any();
+                    if (object.type_url != null)
+                        message.type_url = String(object.type_url);
+                    if (object.value != null)
+                        if (typeof object.value === "string")
+                            $util.base64.decode(object.value, message.value = $util.newBuffer($util.base64.length(object.value)), 0);
+                        else if (object.value.length)
+                            message.value = object.value;
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from an Any message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {google.protobuf.Any} message Any
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                Any.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults) {
+                        object.type_url = "";
+                        if (options.bytes === String)
+                            object.value = "";
+                        else {
+                            object.value = [];
+                            if (options.bytes !== Array)
+                                object.value = $util.newBuffer(object.value);
+                        }
+                    }
+                    if (message.type_url != null && message.hasOwnProperty("type_url"))
+                        object.type_url = message.type_url;
+                    if (message.value != null && message.hasOwnProperty("value"))
+                        object.value = options.bytes === String ? $util.base64.encode(message.value, 0, message.value.length) : options.bytes === Array ? Array.prototype.slice.call(message.value) : message.value;
+                    return object;
+                };
+    
+                /**
+                 * Converts this Any to JSON.
+                 * @function toJSON
+                 * @memberof google.protobuf.Any
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                Any.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                return Any;
+            })();
+    
+            protobuf.Duration = (function() {
+    
+                /**
+                 * Properties of a Duration.
+                 * @memberof google.protobuf
+                 * @interface IDuration
+                 * @property {number|Long|null} [seconds] Duration seconds
+                 * @property {number|null} [nanos] Duration nanos
+                 */
+    
+                /**
+                 * Constructs a new Duration.
+                 * @memberof google.protobuf
+                 * @classdesc Represents a Duration.
+                 * @implements IDuration
+                 * @constructor
+                 * @param {google.protobuf.IDuration=} [properties] Properties to set
+                 */
+                function Duration(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * Duration seconds.
+                 * @member {number|Long} seconds
+                 * @memberof google.protobuf.Duration
+                 * @instance
+                 */
+                Duration.prototype.seconds = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                /**
+                 * Duration nanos.
+                 * @member {number} nanos
+                 * @memberof google.protobuf.Duration
+                 * @instance
+                 */
+                Duration.prototype.nanos = 0;
+    
+                /**
+                 * Creates a new Duration instance using the specified properties.
+                 * @function create
+                 * @memberof google.protobuf.Duration
+                 * @static
+                 * @param {google.protobuf.IDuration=} [properties] Properties to set
+                 * @returns {google.protobuf.Duration} Duration instance
+                 */
+                Duration.create = function create(properties) {
+                    return new Duration(properties);
+                };
+    
+                /**
+                 * Encodes the specified Duration message. Does not implicitly {@link google.protobuf.Duration.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.protobuf.Duration
+                 * @static
+                 * @param {google.protobuf.IDuration} message Duration message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Duration.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.seconds != null && Object.hasOwnProperty.call(message, "seconds"))
+                        writer.uint32(/* id 1, wireType 0 =*/8).int64(message.seconds);
+                    if (message.nanos != null && Object.hasOwnProperty.call(message, "nanos"))
+                        writer.uint32(/* id 2, wireType 0 =*/16).int32(message.nanos);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified Duration message, length delimited. Does not implicitly {@link google.protobuf.Duration.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.protobuf.Duration
+                 * @static
+                 * @param {google.protobuf.IDuration} message Duration message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Duration.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a Duration message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.protobuf.Duration
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.protobuf.Duration} Duration
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Duration.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Duration();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            message.seconds = reader.int64();
+                            break;
+                        case 2:
+                            message.nanos = reader.int32();
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a Duration message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.protobuf.Duration
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.protobuf.Duration} Duration
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Duration.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a Duration message.
+                 * @function verify
+                 * @memberof google.protobuf.Duration
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                Duration.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.seconds != null && message.hasOwnProperty("seconds"))
+                        if (!$util.isInteger(message.seconds) && !(message.seconds && $util.isInteger(message.seconds.low) && $util.isInteger(message.seconds.high)))
+                            return "seconds: integer|Long expected";
+                    if (message.nanos != null && message.hasOwnProperty("nanos"))
+                        if (!$util.isInteger(message.nanos))
+                            return "nanos: integer expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a Duration message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.protobuf.Duration
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.protobuf.Duration} Duration
+                 */
+                Duration.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.protobuf.Duration)
+                        return object;
+                    var message = new $root.google.protobuf.Duration();
+                    if (object.seconds != null)
+                        if ($util.Long)
+                            (message.seconds = $util.Long.fromValue(object.seconds)).unsigned = false;
+                        else if (typeof object.seconds === "string")
+                            message.seconds = parseInt(object.seconds, 10);
+                        else if (typeof object.seconds === "number")
+                            message.seconds = object.seconds;
+                        else if (typeof object.seconds === "object")
+                            message.seconds = new $util.LongBits(object.seconds.low >>> 0, object.seconds.high >>> 0).toNumber();
+                    if (object.nanos != null)
+                        message.nanos = object.nanos | 0;
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a Duration message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.protobuf.Duration
+                 * @static
+                 * @param {google.protobuf.Duration} message Duration
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                Duration.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults) {
+                        if ($util.Long) {
+                            var long = new $util.Long(0, 0, false);
+                            object.seconds = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                        } else
+                            object.seconds = options.longs === String ? "0" : 0;
+                        object.nanos = 0;
+                    }
+                    if (message.seconds != null && message.hasOwnProperty("seconds"))
+                        if (typeof message.seconds === "number")
+                            object.seconds = options.longs === String ? String(message.seconds) : message.seconds;
+                        else
+                            object.seconds = options.longs === String ? $util.Long.prototype.toString.call(message.seconds) : options.longs === Number ? new $util.LongBits(message.seconds.low >>> 0, message.seconds.high >>> 0).toNumber() : message.seconds;
+                    if (message.nanos != null && message.hasOwnProperty("nanos"))
+                        object.nanos = message.nanos;
+                    return object;
+                };
+    
+                /**
+                 * Converts this Duration to JSON.
+                 * @function toJSON
+                 * @memberof google.protobuf.Duration
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                Duration.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                return Duration;
+            })();
+    
+            protobuf.Empty = (function() {
+    
+                /**
+                 * Properties of an Empty.
+                 * @memberof google.protobuf
+                 * @interface IEmpty
+                 */
+    
+                /**
+                 * Constructs a new Empty.
+                 * @memberof google.protobuf
+                 * @classdesc Represents an Empty.
+                 * @implements IEmpty
+                 * @constructor
+                 * @param {google.protobuf.IEmpty=} [properties] Properties to set
+                 */
+                function Empty(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * Creates a new Empty instance using the specified properties.
+                 * @function create
+                 * @memberof google.protobuf.Empty
+                 * @static
+                 * @param {google.protobuf.IEmpty=} [properties] Properties to set
+                 * @returns {google.protobuf.Empty} Empty instance
+                 */
+                Empty.create = function create(properties) {
+                    return new Empty(properties);
+                };
+    
+                /**
+                 * Encodes the specified Empty message. Does not implicitly {@link google.protobuf.Empty.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.protobuf.Empty
+                 * @static
+                 * @param {google.protobuf.IEmpty} message Empty message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Empty.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified Empty message, length delimited. Does not implicitly {@link google.protobuf.Empty.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.protobuf.Empty
+                 * @static
+                 * @param {google.protobuf.IEmpty} message Empty message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Empty.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes an Empty message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.protobuf.Empty
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.protobuf.Empty} Empty
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Empty.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Empty();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes an Empty message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.protobuf.Empty
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.protobuf.Empty} Empty
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Empty.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies an Empty message.
+                 * @function verify
+                 * @memberof google.protobuf.Empty
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                Empty.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates an Empty message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.protobuf.Empty
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.protobuf.Empty} Empty
+                 */
+                Empty.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.protobuf.Empty)
+                        return object;
+                    return new $root.google.protobuf.Empty();
+                };
+    
+                /**
+                 * Creates a plain object from an Empty message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.protobuf.Empty
+                 * @static
+                 * @param {google.protobuf.Empty} message Empty
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                Empty.toObject = function toObject() {
+                    return {};
+                };
+    
+                /**
+                 * Converts this Empty to JSON.
+                 * @function toJSON
+                 * @memberof google.protobuf.Empty
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                Empty.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                return Empty;
+            })();
+    
+            protobuf.Timestamp = (function() {
+    
+                /**
+                 * Properties of a Timestamp.
+                 * @memberof google.protobuf
+                 * @interface ITimestamp
+                 * @property {number|Long|null} [seconds] Timestamp seconds
+                 * @property {number|null} [nanos] Timestamp nanos
+                 */
+    
+                /**
+                 * Constructs a new Timestamp.
+                 * @memberof google.protobuf
+                 * @classdesc Represents a Timestamp.
+                 * @implements ITimestamp
+                 * @constructor
+                 * @param {google.protobuf.ITimestamp=} [properties] Properties to set
+                 */
+                function Timestamp(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * Timestamp seconds.
+                 * @member {number|Long} seconds
+                 * @memberof google.protobuf.Timestamp
+                 * @instance
+                 */
+                Timestamp.prototype.seconds = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                /**
+                 * Timestamp nanos.
+                 * @member {number} nanos
+                 * @memberof google.protobuf.Timestamp
+                 * @instance
+                 */
+                Timestamp.prototype.nanos = 0;
+    
+                /**
+                 * Creates a new Timestamp instance using the specified properties.
+                 * @function create
+                 * @memberof google.protobuf.Timestamp
+                 * @static
+                 * @param {google.protobuf.ITimestamp=} [properties] Properties to set
+                 * @returns {google.protobuf.Timestamp} Timestamp instance
+                 */
+                Timestamp.create = function create(properties) {
+                    return new Timestamp(properties);
+                };
+    
+                /**
+                 * Encodes the specified Timestamp message. Does not implicitly {@link google.protobuf.Timestamp.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.protobuf.Timestamp
+                 * @static
+                 * @param {google.protobuf.ITimestamp} message Timestamp message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Timestamp.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.seconds != null && Object.hasOwnProperty.call(message, "seconds"))
+                        writer.uint32(/* id 1, wireType 0 =*/8).int64(message.seconds);
+                    if (message.nanos != null && Object.hasOwnProperty.call(message, "nanos"))
+                        writer.uint32(/* id 2, wireType 0 =*/16).int32(message.nanos);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified Timestamp message, length delimited. Does not implicitly {@link google.protobuf.Timestamp.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.protobuf.Timestamp
+                 * @static
+                 * @param {google.protobuf.ITimestamp} message Timestamp message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Timestamp.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a Timestamp message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.protobuf.Timestamp
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.protobuf.Timestamp} Timestamp
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Timestamp.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Timestamp();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            message.seconds = reader.int64();
+                            break;
+                        case 2:
+                            message.nanos = reader.int32();
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a Timestamp message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.protobuf.Timestamp
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.protobuf.Timestamp} Timestamp
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Timestamp.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a Timestamp message.
+                 * @function verify
+                 * @memberof google.protobuf.Timestamp
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                Timestamp.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.seconds != null && message.hasOwnProperty("seconds"))
+                        if (!$util.isInteger(message.seconds) && !(message.seconds && $util.isInteger(message.seconds.low) && $util.isInteger(message.seconds.high)))
+                            return "seconds: integer|Long expected";
+                    if (message.nanos != null && message.hasOwnProperty("nanos"))
+                        if (!$util.isInteger(message.nanos))
+                            return "nanos: integer expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a Timestamp message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.protobuf.Timestamp
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.protobuf.Timestamp} Timestamp
+                 */
+                Timestamp.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.protobuf.Timestamp)
+                        return object;
+                    var message = new $root.google.protobuf.Timestamp();
+                    if (object.seconds != null)
+                        if ($util.Long)
+                            (message.seconds = $util.Long.fromValue(object.seconds)).unsigned = false;
+                        else if (typeof object.seconds === "string")
+                            message.seconds = parseInt(object.seconds, 10);
+                        else if (typeof object.seconds === "number")
+                            message.seconds = object.seconds;
+                        else if (typeof object.seconds === "object")
+                            message.seconds = new $util.LongBits(object.seconds.low >>> 0, object.seconds.high >>> 0).toNumber();
+                    if (object.nanos != null)
+                        message.nanos = object.nanos | 0;
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a Timestamp message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.protobuf.Timestamp
+                 * @static
+                 * @param {google.protobuf.Timestamp} message Timestamp
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                Timestamp.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults) {
+                        if ($util.Long) {
+                            var long = new $util.Long(0, 0, false);
+                            object.seconds = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                        } else
+                            object.seconds = options.longs === String ? "0" : 0;
+                        object.nanos = 0;
+                    }
+                    if (message.seconds != null && message.hasOwnProperty("seconds"))
+                        if (typeof message.seconds === "number")
+                            object.seconds = options.longs === String ? String(message.seconds) : message.seconds;
+                        else
+                            object.seconds = options.longs === String ? $util.Long.prototype.toString.call(message.seconds) : options.longs === Number ? new $util.LongBits(message.seconds.low >>> 0, message.seconds.high >>> 0).toNumber() : message.seconds;
+                    if (message.nanos != null && message.hasOwnProperty("nanos"))
+                        object.nanos = message.nanos;
+                    return object;
+                };
+    
+                /**
+                 * Converts this Timestamp to JSON.
+                 * @function toJSON
+                 * @memberof google.protobuf.Timestamp
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                Timestamp.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                return Timestamp;
+            })();
+    
             protobuf.Struct = (function() {
     
                 /**
@@ -20551,230 +25425,6 @@
                 };
     
                 return ListValue;
-            })();
-    
-            protobuf.Timestamp = (function() {
-    
-                /**
-                 * Properties of a Timestamp.
-                 * @memberof google.protobuf
-                 * @interface ITimestamp
-                 * @property {number|Long|null} [seconds] Timestamp seconds
-                 * @property {number|null} [nanos] Timestamp nanos
-                 */
-    
-                /**
-                 * Constructs a new Timestamp.
-                 * @memberof google.protobuf
-                 * @classdesc Represents a Timestamp.
-                 * @implements ITimestamp
-                 * @constructor
-                 * @param {google.protobuf.ITimestamp=} [properties] Properties to set
-                 */
-                function Timestamp(properties) {
-                    if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
-                                this[keys[i]] = properties[keys[i]];
-                }
-    
-                /**
-                 * Timestamp seconds.
-                 * @member {number|Long} seconds
-                 * @memberof google.protobuf.Timestamp
-                 * @instance
-                 */
-                Timestamp.prototype.seconds = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-    
-                /**
-                 * Timestamp nanos.
-                 * @member {number} nanos
-                 * @memberof google.protobuf.Timestamp
-                 * @instance
-                 */
-                Timestamp.prototype.nanos = 0;
-    
-                /**
-                 * Creates a new Timestamp instance using the specified properties.
-                 * @function create
-                 * @memberof google.protobuf.Timestamp
-                 * @static
-                 * @param {google.protobuf.ITimestamp=} [properties] Properties to set
-                 * @returns {google.protobuf.Timestamp} Timestamp instance
-                 */
-                Timestamp.create = function create(properties) {
-                    return new Timestamp(properties);
-                };
-    
-                /**
-                 * Encodes the specified Timestamp message. Does not implicitly {@link google.protobuf.Timestamp.verify|verify} messages.
-                 * @function encode
-                 * @memberof google.protobuf.Timestamp
-                 * @static
-                 * @param {google.protobuf.ITimestamp} message Timestamp message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                Timestamp.encode = function encode(message, writer) {
-                    if (!writer)
-                        writer = $Writer.create();
-                    if (message.seconds != null && Object.hasOwnProperty.call(message, "seconds"))
-                        writer.uint32(/* id 1, wireType 0 =*/8).int64(message.seconds);
-                    if (message.nanos != null && Object.hasOwnProperty.call(message, "nanos"))
-                        writer.uint32(/* id 2, wireType 0 =*/16).int32(message.nanos);
-                    return writer;
-                };
-    
-                /**
-                 * Encodes the specified Timestamp message, length delimited. Does not implicitly {@link google.protobuf.Timestamp.verify|verify} messages.
-                 * @function encodeDelimited
-                 * @memberof google.protobuf.Timestamp
-                 * @static
-                 * @param {google.protobuf.ITimestamp} message Timestamp message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                Timestamp.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
-                };
-    
-                /**
-                 * Decodes a Timestamp message from the specified reader or buffer.
-                 * @function decode
-                 * @memberof google.protobuf.Timestamp
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @param {number} [length] Message length if known beforehand
-                 * @returns {google.protobuf.Timestamp} Timestamp
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                Timestamp.decode = function decode(reader, length) {
-                    if (!(reader instanceof $Reader))
-                        reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Timestamp();
-                    while (reader.pos < end) {
-                        var tag = reader.uint32();
-                        switch (tag >>> 3) {
-                        case 1:
-                            message.seconds = reader.int64();
-                            break;
-                        case 2:
-                            message.nanos = reader.int32();
-                            break;
-                        default:
-                            reader.skipType(tag & 7);
-                            break;
-                        }
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Decodes a Timestamp message from the specified reader or buffer, length delimited.
-                 * @function decodeDelimited
-                 * @memberof google.protobuf.Timestamp
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {google.protobuf.Timestamp} Timestamp
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                Timestamp.decodeDelimited = function decodeDelimited(reader) {
-                    if (!(reader instanceof $Reader))
-                        reader = new $Reader(reader);
-                    return this.decode(reader, reader.uint32());
-                };
-    
-                /**
-                 * Verifies a Timestamp message.
-                 * @function verify
-                 * @memberof google.protobuf.Timestamp
-                 * @static
-                 * @param {Object.<string,*>} message Plain object to verify
-                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                 */
-                Timestamp.verify = function verify(message) {
-                    if (typeof message !== "object" || message === null)
-                        return "object expected";
-                    if (message.seconds != null && message.hasOwnProperty("seconds"))
-                        if (!$util.isInteger(message.seconds) && !(message.seconds && $util.isInteger(message.seconds.low) && $util.isInteger(message.seconds.high)))
-                            return "seconds: integer|Long expected";
-                    if (message.nanos != null && message.hasOwnProperty("nanos"))
-                        if (!$util.isInteger(message.nanos))
-                            return "nanos: integer expected";
-                    return null;
-                };
-    
-                /**
-                 * Creates a Timestamp message from a plain object. Also converts values to their respective internal types.
-                 * @function fromObject
-                 * @memberof google.protobuf.Timestamp
-                 * @static
-                 * @param {Object.<string,*>} object Plain object
-                 * @returns {google.protobuf.Timestamp} Timestamp
-                 */
-                Timestamp.fromObject = function fromObject(object) {
-                    if (object instanceof $root.google.protobuf.Timestamp)
-                        return object;
-                    var message = new $root.google.protobuf.Timestamp();
-                    if (object.seconds != null)
-                        if ($util.Long)
-                            (message.seconds = $util.Long.fromValue(object.seconds)).unsigned = false;
-                        else if (typeof object.seconds === "string")
-                            message.seconds = parseInt(object.seconds, 10);
-                        else if (typeof object.seconds === "number")
-                            message.seconds = object.seconds;
-                        else if (typeof object.seconds === "object")
-                            message.seconds = new $util.LongBits(object.seconds.low >>> 0, object.seconds.high >>> 0).toNumber();
-                    if (object.nanos != null)
-                        message.nanos = object.nanos | 0;
-                    return message;
-                };
-    
-                /**
-                 * Creates a plain object from a Timestamp message. Also converts values to other types if specified.
-                 * @function toObject
-                 * @memberof google.protobuf.Timestamp
-                 * @static
-                 * @param {google.protobuf.Timestamp} message Timestamp
-                 * @param {$protobuf.IConversionOptions} [options] Conversion options
-                 * @returns {Object.<string,*>} Plain object
-                 */
-                Timestamp.toObject = function toObject(message, options) {
-                    if (!options)
-                        options = {};
-                    var object = {};
-                    if (options.defaults) {
-                        if ($util.Long) {
-                            var long = new $util.Long(0, 0, false);
-                            object.seconds = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                        } else
-                            object.seconds = options.longs === String ? "0" : 0;
-                        object.nanos = 0;
-                    }
-                    if (message.seconds != null && message.hasOwnProperty("seconds"))
-                        if (typeof message.seconds === "number")
-                            object.seconds = options.longs === String ? String(message.seconds) : message.seconds;
-                        else
-                            object.seconds = options.longs === String ? $util.Long.prototype.toString.call(message.seconds) : options.longs === Number ? new $util.LongBits(message.seconds.low >>> 0, message.seconds.high >>> 0).toNumber() : message.seconds;
-                    if (message.nanos != null && message.hasOwnProperty("nanos"))
-                        object.nanos = message.nanos;
-                    return object;
-                };
-    
-                /**
-                 * Converts this Timestamp to JSON.
-                 * @function toJSON
-                 * @memberof google.protobuf.Timestamp
-                 * @instance
-                 * @returns {Object.<string,*>} JSON object
-                 */
-                Timestamp.prototype.toJSON = function toJSON() {
-                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                };
-    
-                return Timestamp;
             })();
     
             protobuf.DoubleValue = (function() {
@@ -22498,6 +27148,2273 @@
             })();
     
             return protobuf;
+        })();
+    
+        google.longrunning = (function() {
+    
+            /**
+             * Namespace longrunning.
+             * @memberof google
+             * @namespace
+             */
+            var longrunning = {};
+    
+            longrunning.Operations = (function() {
+    
+                /**
+                 * Constructs a new Operations service.
+                 * @memberof google.longrunning
+                 * @classdesc Represents an Operations
+                 * @extends $protobuf.rpc.Service
+                 * @constructor
+                 * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                 * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                 * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                 */
+                function Operations(rpcImpl, requestDelimited, responseDelimited) {
+                    $protobuf.rpc.Service.call(this, rpcImpl, requestDelimited, responseDelimited);
+                }
+    
+                (Operations.prototype = Object.create($protobuf.rpc.Service.prototype)).constructor = Operations;
+    
+                /**
+                 * Creates new Operations service using the specified rpc implementation.
+                 * @function create
+                 * @memberof google.longrunning.Operations
+                 * @static
+                 * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                 * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                 * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                 * @returns {Operations} RPC service. Useful where requests and/or responses are streamed.
+                 */
+                Operations.create = function create(rpcImpl, requestDelimited, responseDelimited) {
+                    return new this(rpcImpl, requestDelimited, responseDelimited);
+                };
+    
+                /**
+                 * Callback as used by {@link google.longrunning.Operations#listOperations}.
+                 * @memberof google.longrunning.Operations
+                 * @typedef ListOperationsCallback
+                 * @type {function}
+                 * @param {Error|null} error Error, if any
+                 * @param {google.longrunning.ListOperationsResponse} [response] ListOperationsResponse
+                 */
+    
+                /**
+                 * Calls ListOperations.
+                 * @function listOperations
+                 * @memberof google.longrunning.Operations
+                 * @instance
+                 * @param {google.longrunning.IListOperationsRequest} request ListOperationsRequest message or plain object
+                 * @param {google.longrunning.Operations.ListOperationsCallback} callback Node-style callback called with the error, if any, and ListOperationsResponse
+                 * @returns {undefined}
+                 * @variation 1
+                 */
+                Object.defineProperty(Operations.prototype.listOperations = function listOperations(request, callback) {
+                    return this.rpcCall(listOperations, $root.google.longrunning.ListOperationsRequest, $root.google.longrunning.ListOperationsResponse, request, callback);
+                }, "name", { value: "ListOperations" });
+    
+                /**
+                 * Calls ListOperations.
+                 * @function listOperations
+                 * @memberof google.longrunning.Operations
+                 * @instance
+                 * @param {google.longrunning.IListOperationsRequest} request ListOperationsRequest message or plain object
+                 * @returns {Promise<google.longrunning.ListOperationsResponse>} Promise
+                 * @variation 2
+                 */
+    
+                /**
+                 * Callback as used by {@link google.longrunning.Operations#getOperation}.
+                 * @memberof google.longrunning.Operations
+                 * @typedef GetOperationCallback
+                 * @type {function}
+                 * @param {Error|null} error Error, if any
+                 * @param {google.longrunning.Operation} [response] Operation
+                 */
+    
+                /**
+                 * Calls GetOperation.
+                 * @function getOperation
+                 * @memberof google.longrunning.Operations
+                 * @instance
+                 * @param {google.longrunning.IGetOperationRequest} request GetOperationRequest message or plain object
+                 * @param {google.longrunning.Operations.GetOperationCallback} callback Node-style callback called with the error, if any, and Operation
+                 * @returns {undefined}
+                 * @variation 1
+                 */
+                Object.defineProperty(Operations.prototype.getOperation = function getOperation(request, callback) {
+                    return this.rpcCall(getOperation, $root.google.longrunning.GetOperationRequest, $root.google.longrunning.Operation, request, callback);
+                }, "name", { value: "GetOperation" });
+    
+                /**
+                 * Calls GetOperation.
+                 * @function getOperation
+                 * @memberof google.longrunning.Operations
+                 * @instance
+                 * @param {google.longrunning.IGetOperationRequest} request GetOperationRequest message or plain object
+                 * @returns {Promise<google.longrunning.Operation>} Promise
+                 * @variation 2
+                 */
+    
+                /**
+                 * Callback as used by {@link google.longrunning.Operations#deleteOperation}.
+                 * @memberof google.longrunning.Operations
+                 * @typedef DeleteOperationCallback
+                 * @type {function}
+                 * @param {Error|null} error Error, if any
+                 * @param {google.protobuf.Empty} [response] Empty
+                 */
+    
+                /**
+                 * Calls DeleteOperation.
+                 * @function deleteOperation
+                 * @memberof google.longrunning.Operations
+                 * @instance
+                 * @param {google.longrunning.IDeleteOperationRequest} request DeleteOperationRequest message or plain object
+                 * @param {google.longrunning.Operations.DeleteOperationCallback} callback Node-style callback called with the error, if any, and Empty
+                 * @returns {undefined}
+                 * @variation 1
+                 */
+                Object.defineProperty(Operations.prototype.deleteOperation = function deleteOperation(request, callback) {
+                    return this.rpcCall(deleteOperation, $root.google.longrunning.DeleteOperationRequest, $root.google.protobuf.Empty, request, callback);
+                }, "name", { value: "DeleteOperation" });
+    
+                /**
+                 * Calls DeleteOperation.
+                 * @function deleteOperation
+                 * @memberof google.longrunning.Operations
+                 * @instance
+                 * @param {google.longrunning.IDeleteOperationRequest} request DeleteOperationRequest message or plain object
+                 * @returns {Promise<google.protobuf.Empty>} Promise
+                 * @variation 2
+                 */
+    
+                /**
+                 * Callback as used by {@link google.longrunning.Operations#cancelOperation}.
+                 * @memberof google.longrunning.Operations
+                 * @typedef CancelOperationCallback
+                 * @type {function}
+                 * @param {Error|null} error Error, if any
+                 * @param {google.protobuf.Empty} [response] Empty
+                 */
+    
+                /**
+                 * Calls CancelOperation.
+                 * @function cancelOperation
+                 * @memberof google.longrunning.Operations
+                 * @instance
+                 * @param {google.longrunning.ICancelOperationRequest} request CancelOperationRequest message or plain object
+                 * @param {google.longrunning.Operations.CancelOperationCallback} callback Node-style callback called with the error, if any, and Empty
+                 * @returns {undefined}
+                 * @variation 1
+                 */
+                Object.defineProperty(Operations.prototype.cancelOperation = function cancelOperation(request, callback) {
+                    return this.rpcCall(cancelOperation, $root.google.longrunning.CancelOperationRequest, $root.google.protobuf.Empty, request, callback);
+                }, "name", { value: "CancelOperation" });
+    
+                /**
+                 * Calls CancelOperation.
+                 * @function cancelOperation
+                 * @memberof google.longrunning.Operations
+                 * @instance
+                 * @param {google.longrunning.ICancelOperationRequest} request CancelOperationRequest message or plain object
+                 * @returns {Promise<google.protobuf.Empty>} Promise
+                 * @variation 2
+                 */
+    
+                /**
+                 * Callback as used by {@link google.longrunning.Operations#waitOperation}.
+                 * @memberof google.longrunning.Operations
+                 * @typedef WaitOperationCallback
+                 * @type {function}
+                 * @param {Error|null} error Error, if any
+                 * @param {google.longrunning.Operation} [response] Operation
+                 */
+    
+                /**
+                 * Calls WaitOperation.
+                 * @function waitOperation
+                 * @memberof google.longrunning.Operations
+                 * @instance
+                 * @param {google.longrunning.IWaitOperationRequest} request WaitOperationRequest message or plain object
+                 * @param {google.longrunning.Operations.WaitOperationCallback} callback Node-style callback called with the error, if any, and Operation
+                 * @returns {undefined}
+                 * @variation 1
+                 */
+                Object.defineProperty(Operations.prototype.waitOperation = function waitOperation(request, callback) {
+                    return this.rpcCall(waitOperation, $root.google.longrunning.WaitOperationRequest, $root.google.longrunning.Operation, request, callback);
+                }, "name", { value: "WaitOperation" });
+    
+                /**
+                 * Calls WaitOperation.
+                 * @function waitOperation
+                 * @memberof google.longrunning.Operations
+                 * @instance
+                 * @param {google.longrunning.IWaitOperationRequest} request WaitOperationRequest message or plain object
+                 * @returns {Promise<google.longrunning.Operation>} Promise
+                 * @variation 2
+                 */
+    
+                return Operations;
+            })();
+    
+            longrunning.Operation = (function() {
+    
+                /**
+                 * Properties of an Operation.
+                 * @memberof google.longrunning
+                 * @interface IOperation
+                 * @property {string|null} [name] Operation name
+                 * @property {google.protobuf.IAny|null} [metadata] Operation metadata
+                 * @property {boolean|null} [done] Operation done
+                 * @property {google.rpc.IStatus|null} [error] Operation error
+                 * @property {google.protobuf.IAny|null} [response] Operation response
+                 */
+    
+                /**
+                 * Constructs a new Operation.
+                 * @memberof google.longrunning
+                 * @classdesc Represents an Operation.
+                 * @implements IOperation
+                 * @constructor
+                 * @param {google.longrunning.IOperation=} [properties] Properties to set
+                 */
+                function Operation(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * Operation name.
+                 * @member {string} name
+                 * @memberof google.longrunning.Operation
+                 * @instance
+                 */
+                Operation.prototype.name = "";
+    
+                /**
+                 * Operation metadata.
+                 * @member {google.protobuf.IAny|null|undefined} metadata
+                 * @memberof google.longrunning.Operation
+                 * @instance
+                 */
+                Operation.prototype.metadata = null;
+    
+                /**
+                 * Operation done.
+                 * @member {boolean} done
+                 * @memberof google.longrunning.Operation
+                 * @instance
+                 */
+                Operation.prototype.done = false;
+    
+                /**
+                 * Operation error.
+                 * @member {google.rpc.IStatus|null|undefined} error
+                 * @memberof google.longrunning.Operation
+                 * @instance
+                 */
+                Operation.prototype.error = null;
+    
+                /**
+                 * Operation response.
+                 * @member {google.protobuf.IAny|null|undefined} response
+                 * @memberof google.longrunning.Operation
+                 * @instance
+                 */
+                Operation.prototype.response = null;
+    
+                // OneOf field names bound to virtual getters and setters
+                var $oneOfFields;
+    
+                /**
+                 * Operation result.
+                 * @member {"error"|"response"|undefined} result
+                 * @memberof google.longrunning.Operation
+                 * @instance
+                 */
+                Object.defineProperty(Operation.prototype, "result", {
+                    get: $util.oneOfGetter($oneOfFields = ["error", "response"]),
+                    set: $util.oneOfSetter($oneOfFields)
+                });
+    
+                /**
+                 * Creates a new Operation instance using the specified properties.
+                 * @function create
+                 * @memberof google.longrunning.Operation
+                 * @static
+                 * @param {google.longrunning.IOperation=} [properties] Properties to set
+                 * @returns {google.longrunning.Operation} Operation instance
+                 */
+                Operation.create = function create(properties) {
+                    return new Operation(properties);
+                };
+    
+                /**
+                 * Encodes the specified Operation message. Does not implicitly {@link google.longrunning.Operation.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.longrunning.Operation
+                 * @static
+                 * @param {google.longrunning.IOperation} message Operation message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Operation.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                    if (message.metadata != null && Object.hasOwnProperty.call(message, "metadata"))
+                        $root.google.protobuf.Any.encode(message.metadata, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                    if (message.done != null && Object.hasOwnProperty.call(message, "done"))
+                        writer.uint32(/* id 3, wireType 0 =*/24).bool(message.done);
+                    if (message.error != null && Object.hasOwnProperty.call(message, "error"))
+                        $root.google.rpc.Status.encode(message.error, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                    if (message.response != null && Object.hasOwnProperty.call(message, "response"))
+                        $root.google.protobuf.Any.encode(message.response, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified Operation message, length delimited. Does not implicitly {@link google.longrunning.Operation.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.longrunning.Operation
+                 * @static
+                 * @param {google.longrunning.IOperation} message Operation message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Operation.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes an Operation message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.longrunning.Operation
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.longrunning.Operation} Operation
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Operation.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.longrunning.Operation();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            message.name = reader.string();
+                            break;
+                        case 2:
+                            message.metadata = $root.google.protobuf.Any.decode(reader, reader.uint32());
+                            break;
+                        case 3:
+                            message.done = reader.bool();
+                            break;
+                        case 4:
+                            message.error = $root.google.rpc.Status.decode(reader, reader.uint32());
+                            break;
+                        case 5:
+                            message.response = $root.google.protobuf.Any.decode(reader, reader.uint32());
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes an Operation message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.longrunning.Operation
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.longrunning.Operation} Operation
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Operation.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies an Operation message.
+                 * @function verify
+                 * @memberof google.longrunning.Operation
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                Operation.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    var properties = {};
+                    if (message.name != null && message.hasOwnProperty("name"))
+                        if (!$util.isString(message.name))
+                            return "name: string expected";
+                    if (message.metadata != null && message.hasOwnProperty("metadata")) {
+                        var error = $root.google.protobuf.Any.verify(message.metadata);
+                        if (error)
+                            return "metadata." + error;
+                    }
+                    if (message.done != null && message.hasOwnProperty("done"))
+                        if (typeof message.done !== "boolean")
+                            return "done: boolean expected";
+                    if (message.error != null && message.hasOwnProperty("error")) {
+                        properties.result = 1;
+                        {
+                            var error = $root.google.rpc.Status.verify(message.error);
+                            if (error)
+                                return "error." + error;
+                        }
+                    }
+                    if (message.response != null && message.hasOwnProperty("response")) {
+                        if (properties.result === 1)
+                            return "result: multiple values";
+                        properties.result = 1;
+                        {
+                            var error = $root.google.protobuf.Any.verify(message.response);
+                            if (error)
+                                return "response." + error;
+                        }
+                    }
+                    return null;
+                };
+    
+                /**
+                 * Creates an Operation message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.longrunning.Operation
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.longrunning.Operation} Operation
+                 */
+                Operation.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.longrunning.Operation)
+                        return object;
+                    var message = new $root.google.longrunning.Operation();
+                    if (object.name != null)
+                        message.name = String(object.name);
+                    if (object.metadata != null) {
+                        if (typeof object.metadata !== "object")
+                            throw TypeError(".google.longrunning.Operation.metadata: object expected");
+                        message.metadata = $root.google.protobuf.Any.fromObject(object.metadata);
+                    }
+                    if (object.done != null)
+                        message.done = Boolean(object.done);
+                    if (object.error != null) {
+                        if (typeof object.error !== "object")
+                            throw TypeError(".google.longrunning.Operation.error: object expected");
+                        message.error = $root.google.rpc.Status.fromObject(object.error);
+                    }
+                    if (object.response != null) {
+                        if (typeof object.response !== "object")
+                            throw TypeError(".google.longrunning.Operation.response: object expected");
+                        message.response = $root.google.protobuf.Any.fromObject(object.response);
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from an Operation message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.longrunning.Operation
+                 * @static
+                 * @param {google.longrunning.Operation} message Operation
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                Operation.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults) {
+                        object.name = "";
+                        object.metadata = null;
+                        object.done = false;
+                    }
+                    if (message.name != null && message.hasOwnProperty("name"))
+                        object.name = message.name;
+                    if (message.metadata != null && message.hasOwnProperty("metadata"))
+                        object.metadata = $root.google.protobuf.Any.toObject(message.metadata, options);
+                    if (message.done != null && message.hasOwnProperty("done"))
+                        object.done = message.done;
+                    if (message.error != null && message.hasOwnProperty("error")) {
+                        object.error = $root.google.rpc.Status.toObject(message.error, options);
+                        if (options.oneofs)
+                            object.result = "error";
+                    }
+                    if (message.response != null && message.hasOwnProperty("response")) {
+                        object.response = $root.google.protobuf.Any.toObject(message.response, options);
+                        if (options.oneofs)
+                            object.result = "response";
+                    }
+                    return object;
+                };
+    
+                /**
+                 * Converts this Operation to JSON.
+                 * @function toJSON
+                 * @memberof google.longrunning.Operation
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                Operation.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                return Operation;
+            })();
+    
+            longrunning.GetOperationRequest = (function() {
+    
+                /**
+                 * Properties of a GetOperationRequest.
+                 * @memberof google.longrunning
+                 * @interface IGetOperationRequest
+                 * @property {string|null} [name] GetOperationRequest name
+                 */
+    
+                /**
+                 * Constructs a new GetOperationRequest.
+                 * @memberof google.longrunning
+                 * @classdesc Represents a GetOperationRequest.
+                 * @implements IGetOperationRequest
+                 * @constructor
+                 * @param {google.longrunning.IGetOperationRequest=} [properties] Properties to set
+                 */
+                function GetOperationRequest(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * GetOperationRequest name.
+                 * @member {string} name
+                 * @memberof google.longrunning.GetOperationRequest
+                 * @instance
+                 */
+                GetOperationRequest.prototype.name = "";
+    
+                /**
+                 * Creates a new GetOperationRequest instance using the specified properties.
+                 * @function create
+                 * @memberof google.longrunning.GetOperationRequest
+                 * @static
+                 * @param {google.longrunning.IGetOperationRequest=} [properties] Properties to set
+                 * @returns {google.longrunning.GetOperationRequest} GetOperationRequest instance
+                 */
+                GetOperationRequest.create = function create(properties) {
+                    return new GetOperationRequest(properties);
+                };
+    
+                /**
+                 * Encodes the specified GetOperationRequest message. Does not implicitly {@link google.longrunning.GetOperationRequest.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.longrunning.GetOperationRequest
+                 * @static
+                 * @param {google.longrunning.IGetOperationRequest} message GetOperationRequest message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                GetOperationRequest.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified GetOperationRequest message, length delimited. Does not implicitly {@link google.longrunning.GetOperationRequest.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.longrunning.GetOperationRequest
+                 * @static
+                 * @param {google.longrunning.IGetOperationRequest} message GetOperationRequest message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                GetOperationRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a GetOperationRequest message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.longrunning.GetOperationRequest
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.longrunning.GetOperationRequest} GetOperationRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                GetOperationRequest.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.longrunning.GetOperationRequest();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            message.name = reader.string();
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a GetOperationRequest message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.longrunning.GetOperationRequest
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.longrunning.GetOperationRequest} GetOperationRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                GetOperationRequest.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a GetOperationRequest message.
+                 * @function verify
+                 * @memberof google.longrunning.GetOperationRequest
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                GetOperationRequest.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.name != null && message.hasOwnProperty("name"))
+                        if (!$util.isString(message.name))
+                            return "name: string expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a GetOperationRequest message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.longrunning.GetOperationRequest
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.longrunning.GetOperationRequest} GetOperationRequest
+                 */
+                GetOperationRequest.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.longrunning.GetOperationRequest)
+                        return object;
+                    var message = new $root.google.longrunning.GetOperationRequest();
+                    if (object.name != null)
+                        message.name = String(object.name);
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a GetOperationRequest message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.longrunning.GetOperationRequest
+                 * @static
+                 * @param {google.longrunning.GetOperationRequest} message GetOperationRequest
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                GetOperationRequest.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults)
+                        object.name = "";
+                    if (message.name != null && message.hasOwnProperty("name"))
+                        object.name = message.name;
+                    return object;
+                };
+    
+                /**
+                 * Converts this GetOperationRequest to JSON.
+                 * @function toJSON
+                 * @memberof google.longrunning.GetOperationRequest
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                GetOperationRequest.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                return GetOperationRequest;
+            })();
+    
+            longrunning.ListOperationsRequest = (function() {
+    
+                /**
+                 * Properties of a ListOperationsRequest.
+                 * @memberof google.longrunning
+                 * @interface IListOperationsRequest
+                 * @property {string|null} [name] ListOperationsRequest name
+                 * @property {string|null} [filter] ListOperationsRequest filter
+                 * @property {number|null} [pageSize] ListOperationsRequest pageSize
+                 * @property {string|null} [pageToken] ListOperationsRequest pageToken
+                 */
+    
+                /**
+                 * Constructs a new ListOperationsRequest.
+                 * @memberof google.longrunning
+                 * @classdesc Represents a ListOperationsRequest.
+                 * @implements IListOperationsRequest
+                 * @constructor
+                 * @param {google.longrunning.IListOperationsRequest=} [properties] Properties to set
+                 */
+                function ListOperationsRequest(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * ListOperationsRequest name.
+                 * @member {string} name
+                 * @memberof google.longrunning.ListOperationsRequest
+                 * @instance
+                 */
+                ListOperationsRequest.prototype.name = "";
+    
+                /**
+                 * ListOperationsRequest filter.
+                 * @member {string} filter
+                 * @memberof google.longrunning.ListOperationsRequest
+                 * @instance
+                 */
+                ListOperationsRequest.prototype.filter = "";
+    
+                /**
+                 * ListOperationsRequest pageSize.
+                 * @member {number} pageSize
+                 * @memberof google.longrunning.ListOperationsRequest
+                 * @instance
+                 */
+                ListOperationsRequest.prototype.pageSize = 0;
+    
+                /**
+                 * ListOperationsRequest pageToken.
+                 * @member {string} pageToken
+                 * @memberof google.longrunning.ListOperationsRequest
+                 * @instance
+                 */
+                ListOperationsRequest.prototype.pageToken = "";
+    
+                /**
+                 * Creates a new ListOperationsRequest instance using the specified properties.
+                 * @function create
+                 * @memberof google.longrunning.ListOperationsRequest
+                 * @static
+                 * @param {google.longrunning.IListOperationsRequest=} [properties] Properties to set
+                 * @returns {google.longrunning.ListOperationsRequest} ListOperationsRequest instance
+                 */
+                ListOperationsRequest.create = function create(properties) {
+                    return new ListOperationsRequest(properties);
+                };
+    
+                /**
+                 * Encodes the specified ListOperationsRequest message. Does not implicitly {@link google.longrunning.ListOperationsRequest.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.longrunning.ListOperationsRequest
+                 * @static
+                 * @param {google.longrunning.IListOperationsRequest} message ListOperationsRequest message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ListOperationsRequest.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.filter);
+                    if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                        writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                    if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                        writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                    if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                        writer.uint32(/* id 4, wireType 2 =*/34).string(message.name);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified ListOperationsRequest message, length delimited. Does not implicitly {@link google.longrunning.ListOperationsRequest.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.longrunning.ListOperationsRequest
+                 * @static
+                 * @param {google.longrunning.IListOperationsRequest} message ListOperationsRequest message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ListOperationsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a ListOperationsRequest message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.longrunning.ListOperationsRequest
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.longrunning.ListOperationsRequest} ListOperationsRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ListOperationsRequest.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.longrunning.ListOperationsRequest();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 4:
+                            message.name = reader.string();
+                            break;
+                        case 1:
+                            message.filter = reader.string();
+                            break;
+                        case 2:
+                            message.pageSize = reader.int32();
+                            break;
+                        case 3:
+                            message.pageToken = reader.string();
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a ListOperationsRequest message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.longrunning.ListOperationsRequest
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.longrunning.ListOperationsRequest} ListOperationsRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ListOperationsRequest.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a ListOperationsRequest message.
+                 * @function verify
+                 * @memberof google.longrunning.ListOperationsRequest
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                ListOperationsRequest.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.name != null && message.hasOwnProperty("name"))
+                        if (!$util.isString(message.name))
+                            return "name: string expected";
+                    if (message.filter != null && message.hasOwnProperty("filter"))
+                        if (!$util.isString(message.filter))
+                            return "filter: string expected";
+                    if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                        if (!$util.isInteger(message.pageSize))
+                            return "pageSize: integer expected";
+                    if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                        if (!$util.isString(message.pageToken))
+                            return "pageToken: string expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a ListOperationsRequest message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.longrunning.ListOperationsRequest
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.longrunning.ListOperationsRequest} ListOperationsRequest
+                 */
+                ListOperationsRequest.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.longrunning.ListOperationsRequest)
+                        return object;
+                    var message = new $root.google.longrunning.ListOperationsRequest();
+                    if (object.name != null)
+                        message.name = String(object.name);
+                    if (object.filter != null)
+                        message.filter = String(object.filter);
+                    if (object.pageSize != null)
+                        message.pageSize = object.pageSize | 0;
+                    if (object.pageToken != null)
+                        message.pageToken = String(object.pageToken);
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a ListOperationsRequest message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.longrunning.ListOperationsRequest
+                 * @static
+                 * @param {google.longrunning.ListOperationsRequest} message ListOperationsRequest
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                ListOperationsRequest.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults) {
+                        object.filter = "";
+                        object.pageSize = 0;
+                        object.pageToken = "";
+                        object.name = "";
+                    }
+                    if (message.filter != null && message.hasOwnProperty("filter"))
+                        object.filter = message.filter;
+                    if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                        object.pageSize = message.pageSize;
+                    if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                        object.pageToken = message.pageToken;
+                    if (message.name != null && message.hasOwnProperty("name"))
+                        object.name = message.name;
+                    return object;
+                };
+    
+                /**
+                 * Converts this ListOperationsRequest to JSON.
+                 * @function toJSON
+                 * @memberof google.longrunning.ListOperationsRequest
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                ListOperationsRequest.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                return ListOperationsRequest;
+            })();
+    
+            longrunning.ListOperationsResponse = (function() {
+    
+                /**
+                 * Properties of a ListOperationsResponse.
+                 * @memberof google.longrunning
+                 * @interface IListOperationsResponse
+                 * @property {Array.<google.longrunning.IOperation>|null} [operations] ListOperationsResponse operations
+                 * @property {string|null} [nextPageToken] ListOperationsResponse nextPageToken
+                 */
+    
+                /**
+                 * Constructs a new ListOperationsResponse.
+                 * @memberof google.longrunning
+                 * @classdesc Represents a ListOperationsResponse.
+                 * @implements IListOperationsResponse
+                 * @constructor
+                 * @param {google.longrunning.IListOperationsResponse=} [properties] Properties to set
+                 */
+                function ListOperationsResponse(properties) {
+                    this.operations = [];
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * ListOperationsResponse operations.
+                 * @member {Array.<google.longrunning.IOperation>} operations
+                 * @memberof google.longrunning.ListOperationsResponse
+                 * @instance
+                 */
+                ListOperationsResponse.prototype.operations = $util.emptyArray;
+    
+                /**
+                 * ListOperationsResponse nextPageToken.
+                 * @member {string} nextPageToken
+                 * @memberof google.longrunning.ListOperationsResponse
+                 * @instance
+                 */
+                ListOperationsResponse.prototype.nextPageToken = "";
+    
+                /**
+                 * Creates a new ListOperationsResponse instance using the specified properties.
+                 * @function create
+                 * @memberof google.longrunning.ListOperationsResponse
+                 * @static
+                 * @param {google.longrunning.IListOperationsResponse=} [properties] Properties to set
+                 * @returns {google.longrunning.ListOperationsResponse} ListOperationsResponse instance
+                 */
+                ListOperationsResponse.create = function create(properties) {
+                    return new ListOperationsResponse(properties);
+                };
+    
+                /**
+                 * Encodes the specified ListOperationsResponse message. Does not implicitly {@link google.longrunning.ListOperationsResponse.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.longrunning.ListOperationsResponse
+                 * @static
+                 * @param {google.longrunning.IListOperationsResponse} message ListOperationsResponse message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ListOperationsResponse.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.operations != null && message.operations.length)
+                        for (var i = 0; i < message.operations.length; ++i)
+                            $root.google.longrunning.Operation.encode(message.operations[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                    if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified ListOperationsResponse message, length delimited. Does not implicitly {@link google.longrunning.ListOperationsResponse.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.longrunning.ListOperationsResponse
+                 * @static
+                 * @param {google.longrunning.IListOperationsResponse} message ListOperationsResponse message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ListOperationsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a ListOperationsResponse message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.longrunning.ListOperationsResponse
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.longrunning.ListOperationsResponse} ListOperationsResponse
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ListOperationsResponse.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.longrunning.ListOperationsResponse();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            if (!(message.operations && message.operations.length))
+                                message.operations = [];
+                            message.operations.push($root.google.longrunning.Operation.decode(reader, reader.uint32()));
+                            break;
+                        case 2:
+                            message.nextPageToken = reader.string();
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a ListOperationsResponse message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.longrunning.ListOperationsResponse
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.longrunning.ListOperationsResponse} ListOperationsResponse
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ListOperationsResponse.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a ListOperationsResponse message.
+                 * @function verify
+                 * @memberof google.longrunning.ListOperationsResponse
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                ListOperationsResponse.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.operations != null && message.hasOwnProperty("operations")) {
+                        if (!Array.isArray(message.operations))
+                            return "operations: array expected";
+                        for (var i = 0; i < message.operations.length; ++i) {
+                            var error = $root.google.longrunning.Operation.verify(message.operations[i]);
+                            if (error)
+                                return "operations." + error;
+                        }
+                    }
+                    if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                        if (!$util.isString(message.nextPageToken))
+                            return "nextPageToken: string expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a ListOperationsResponse message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.longrunning.ListOperationsResponse
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.longrunning.ListOperationsResponse} ListOperationsResponse
+                 */
+                ListOperationsResponse.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.longrunning.ListOperationsResponse)
+                        return object;
+                    var message = new $root.google.longrunning.ListOperationsResponse();
+                    if (object.operations) {
+                        if (!Array.isArray(object.operations))
+                            throw TypeError(".google.longrunning.ListOperationsResponse.operations: array expected");
+                        message.operations = [];
+                        for (var i = 0; i < object.operations.length; ++i) {
+                            if (typeof object.operations[i] !== "object")
+                                throw TypeError(".google.longrunning.ListOperationsResponse.operations: object expected");
+                            message.operations[i] = $root.google.longrunning.Operation.fromObject(object.operations[i]);
+                        }
+                    }
+                    if (object.nextPageToken != null)
+                        message.nextPageToken = String(object.nextPageToken);
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a ListOperationsResponse message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.longrunning.ListOperationsResponse
+                 * @static
+                 * @param {google.longrunning.ListOperationsResponse} message ListOperationsResponse
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                ListOperationsResponse.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.arrays || options.defaults)
+                        object.operations = [];
+                    if (options.defaults)
+                        object.nextPageToken = "";
+                    if (message.operations && message.operations.length) {
+                        object.operations = [];
+                        for (var j = 0; j < message.operations.length; ++j)
+                            object.operations[j] = $root.google.longrunning.Operation.toObject(message.operations[j], options);
+                    }
+                    if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                        object.nextPageToken = message.nextPageToken;
+                    return object;
+                };
+    
+                /**
+                 * Converts this ListOperationsResponse to JSON.
+                 * @function toJSON
+                 * @memberof google.longrunning.ListOperationsResponse
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                ListOperationsResponse.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                return ListOperationsResponse;
+            })();
+    
+            longrunning.CancelOperationRequest = (function() {
+    
+                /**
+                 * Properties of a CancelOperationRequest.
+                 * @memberof google.longrunning
+                 * @interface ICancelOperationRequest
+                 * @property {string|null} [name] CancelOperationRequest name
+                 */
+    
+                /**
+                 * Constructs a new CancelOperationRequest.
+                 * @memberof google.longrunning
+                 * @classdesc Represents a CancelOperationRequest.
+                 * @implements ICancelOperationRequest
+                 * @constructor
+                 * @param {google.longrunning.ICancelOperationRequest=} [properties] Properties to set
+                 */
+                function CancelOperationRequest(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * CancelOperationRequest name.
+                 * @member {string} name
+                 * @memberof google.longrunning.CancelOperationRequest
+                 * @instance
+                 */
+                CancelOperationRequest.prototype.name = "";
+    
+                /**
+                 * Creates a new CancelOperationRequest instance using the specified properties.
+                 * @function create
+                 * @memberof google.longrunning.CancelOperationRequest
+                 * @static
+                 * @param {google.longrunning.ICancelOperationRequest=} [properties] Properties to set
+                 * @returns {google.longrunning.CancelOperationRequest} CancelOperationRequest instance
+                 */
+                CancelOperationRequest.create = function create(properties) {
+                    return new CancelOperationRequest(properties);
+                };
+    
+                /**
+                 * Encodes the specified CancelOperationRequest message. Does not implicitly {@link google.longrunning.CancelOperationRequest.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.longrunning.CancelOperationRequest
+                 * @static
+                 * @param {google.longrunning.ICancelOperationRequest} message CancelOperationRequest message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                CancelOperationRequest.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified CancelOperationRequest message, length delimited. Does not implicitly {@link google.longrunning.CancelOperationRequest.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.longrunning.CancelOperationRequest
+                 * @static
+                 * @param {google.longrunning.ICancelOperationRequest} message CancelOperationRequest message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                CancelOperationRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a CancelOperationRequest message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.longrunning.CancelOperationRequest
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.longrunning.CancelOperationRequest} CancelOperationRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                CancelOperationRequest.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.longrunning.CancelOperationRequest();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            message.name = reader.string();
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a CancelOperationRequest message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.longrunning.CancelOperationRequest
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.longrunning.CancelOperationRequest} CancelOperationRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                CancelOperationRequest.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a CancelOperationRequest message.
+                 * @function verify
+                 * @memberof google.longrunning.CancelOperationRequest
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                CancelOperationRequest.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.name != null && message.hasOwnProperty("name"))
+                        if (!$util.isString(message.name))
+                            return "name: string expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a CancelOperationRequest message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.longrunning.CancelOperationRequest
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.longrunning.CancelOperationRequest} CancelOperationRequest
+                 */
+                CancelOperationRequest.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.longrunning.CancelOperationRequest)
+                        return object;
+                    var message = new $root.google.longrunning.CancelOperationRequest();
+                    if (object.name != null)
+                        message.name = String(object.name);
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a CancelOperationRequest message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.longrunning.CancelOperationRequest
+                 * @static
+                 * @param {google.longrunning.CancelOperationRequest} message CancelOperationRequest
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                CancelOperationRequest.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults)
+                        object.name = "";
+                    if (message.name != null && message.hasOwnProperty("name"))
+                        object.name = message.name;
+                    return object;
+                };
+    
+                /**
+                 * Converts this CancelOperationRequest to JSON.
+                 * @function toJSON
+                 * @memberof google.longrunning.CancelOperationRequest
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                CancelOperationRequest.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                return CancelOperationRequest;
+            })();
+    
+            longrunning.DeleteOperationRequest = (function() {
+    
+                /**
+                 * Properties of a DeleteOperationRequest.
+                 * @memberof google.longrunning
+                 * @interface IDeleteOperationRequest
+                 * @property {string|null} [name] DeleteOperationRequest name
+                 */
+    
+                /**
+                 * Constructs a new DeleteOperationRequest.
+                 * @memberof google.longrunning
+                 * @classdesc Represents a DeleteOperationRequest.
+                 * @implements IDeleteOperationRequest
+                 * @constructor
+                 * @param {google.longrunning.IDeleteOperationRequest=} [properties] Properties to set
+                 */
+                function DeleteOperationRequest(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * DeleteOperationRequest name.
+                 * @member {string} name
+                 * @memberof google.longrunning.DeleteOperationRequest
+                 * @instance
+                 */
+                DeleteOperationRequest.prototype.name = "";
+    
+                /**
+                 * Creates a new DeleteOperationRequest instance using the specified properties.
+                 * @function create
+                 * @memberof google.longrunning.DeleteOperationRequest
+                 * @static
+                 * @param {google.longrunning.IDeleteOperationRequest=} [properties] Properties to set
+                 * @returns {google.longrunning.DeleteOperationRequest} DeleteOperationRequest instance
+                 */
+                DeleteOperationRequest.create = function create(properties) {
+                    return new DeleteOperationRequest(properties);
+                };
+    
+                /**
+                 * Encodes the specified DeleteOperationRequest message. Does not implicitly {@link google.longrunning.DeleteOperationRequest.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.longrunning.DeleteOperationRequest
+                 * @static
+                 * @param {google.longrunning.IDeleteOperationRequest} message DeleteOperationRequest message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                DeleteOperationRequest.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified DeleteOperationRequest message, length delimited. Does not implicitly {@link google.longrunning.DeleteOperationRequest.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.longrunning.DeleteOperationRequest
+                 * @static
+                 * @param {google.longrunning.IDeleteOperationRequest} message DeleteOperationRequest message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                DeleteOperationRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a DeleteOperationRequest message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.longrunning.DeleteOperationRequest
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.longrunning.DeleteOperationRequest} DeleteOperationRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                DeleteOperationRequest.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.longrunning.DeleteOperationRequest();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            message.name = reader.string();
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a DeleteOperationRequest message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.longrunning.DeleteOperationRequest
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.longrunning.DeleteOperationRequest} DeleteOperationRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                DeleteOperationRequest.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a DeleteOperationRequest message.
+                 * @function verify
+                 * @memberof google.longrunning.DeleteOperationRequest
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                DeleteOperationRequest.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.name != null && message.hasOwnProperty("name"))
+                        if (!$util.isString(message.name))
+                            return "name: string expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a DeleteOperationRequest message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.longrunning.DeleteOperationRequest
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.longrunning.DeleteOperationRequest} DeleteOperationRequest
+                 */
+                DeleteOperationRequest.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.longrunning.DeleteOperationRequest)
+                        return object;
+                    var message = new $root.google.longrunning.DeleteOperationRequest();
+                    if (object.name != null)
+                        message.name = String(object.name);
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a DeleteOperationRequest message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.longrunning.DeleteOperationRequest
+                 * @static
+                 * @param {google.longrunning.DeleteOperationRequest} message DeleteOperationRequest
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                DeleteOperationRequest.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults)
+                        object.name = "";
+                    if (message.name != null && message.hasOwnProperty("name"))
+                        object.name = message.name;
+                    return object;
+                };
+    
+                /**
+                 * Converts this DeleteOperationRequest to JSON.
+                 * @function toJSON
+                 * @memberof google.longrunning.DeleteOperationRequest
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                DeleteOperationRequest.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                return DeleteOperationRequest;
+            })();
+    
+            longrunning.WaitOperationRequest = (function() {
+    
+                /**
+                 * Properties of a WaitOperationRequest.
+                 * @memberof google.longrunning
+                 * @interface IWaitOperationRequest
+                 * @property {string|null} [name] WaitOperationRequest name
+                 * @property {google.protobuf.IDuration|null} [timeout] WaitOperationRequest timeout
+                 */
+    
+                /**
+                 * Constructs a new WaitOperationRequest.
+                 * @memberof google.longrunning
+                 * @classdesc Represents a WaitOperationRequest.
+                 * @implements IWaitOperationRequest
+                 * @constructor
+                 * @param {google.longrunning.IWaitOperationRequest=} [properties] Properties to set
+                 */
+                function WaitOperationRequest(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * WaitOperationRequest name.
+                 * @member {string} name
+                 * @memberof google.longrunning.WaitOperationRequest
+                 * @instance
+                 */
+                WaitOperationRequest.prototype.name = "";
+    
+                /**
+                 * WaitOperationRequest timeout.
+                 * @member {google.protobuf.IDuration|null|undefined} timeout
+                 * @memberof google.longrunning.WaitOperationRequest
+                 * @instance
+                 */
+                WaitOperationRequest.prototype.timeout = null;
+    
+                /**
+                 * Creates a new WaitOperationRequest instance using the specified properties.
+                 * @function create
+                 * @memberof google.longrunning.WaitOperationRequest
+                 * @static
+                 * @param {google.longrunning.IWaitOperationRequest=} [properties] Properties to set
+                 * @returns {google.longrunning.WaitOperationRequest} WaitOperationRequest instance
+                 */
+                WaitOperationRequest.create = function create(properties) {
+                    return new WaitOperationRequest(properties);
+                };
+    
+                /**
+                 * Encodes the specified WaitOperationRequest message. Does not implicitly {@link google.longrunning.WaitOperationRequest.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.longrunning.WaitOperationRequest
+                 * @static
+                 * @param {google.longrunning.IWaitOperationRequest} message WaitOperationRequest message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                WaitOperationRequest.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                    if (message.timeout != null && Object.hasOwnProperty.call(message, "timeout"))
+                        $root.google.protobuf.Duration.encode(message.timeout, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified WaitOperationRequest message, length delimited. Does not implicitly {@link google.longrunning.WaitOperationRequest.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.longrunning.WaitOperationRequest
+                 * @static
+                 * @param {google.longrunning.IWaitOperationRequest} message WaitOperationRequest message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                WaitOperationRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a WaitOperationRequest message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.longrunning.WaitOperationRequest
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.longrunning.WaitOperationRequest} WaitOperationRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                WaitOperationRequest.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.longrunning.WaitOperationRequest();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            message.name = reader.string();
+                            break;
+                        case 2:
+                            message.timeout = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a WaitOperationRequest message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.longrunning.WaitOperationRequest
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.longrunning.WaitOperationRequest} WaitOperationRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                WaitOperationRequest.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a WaitOperationRequest message.
+                 * @function verify
+                 * @memberof google.longrunning.WaitOperationRequest
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                WaitOperationRequest.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.name != null && message.hasOwnProperty("name"))
+                        if (!$util.isString(message.name))
+                            return "name: string expected";
+                    if (message.timeout != null && message.hasOwnProperty("timeout")) {
+                        var error = $root.google.protobuf.Duration.verify(message.timeout);
+                        if (error)
+                            return "timeout." + error;
+                    }
+                    return null;
+                };
+    
+                /**
+                 * Creates a WaitOperationRequest message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.longrunning.WaitOperationRequest
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.longrunning.WaitOperationRequest} WaitOperationRequest
+                 */
+                WaitOperationRequest.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.longrunning.WaitOperationRequest)
+                        return object;
+                    var message = new $root.google.longrunning.WaitOperationRequest();
+                    if (object.name != null)
+                        message.name = String(object.name);
+                    if (object.timeout != null) {
+                        if (typeof object.timeout !== "object")
+                            throw TypeError(".google.longrunning.WaitOperationRequest.timeout: object expected");
+                        message.timeout = $root.google.protobuf.Duration.fromObject(object.timeout);
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a WaitOperationRequest message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.longrunning.WaitOperationRequest
+                 * @static
+                 * @param {google.longrunning.WaitOperationRequest} message WaitOperationRequest
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                WaitOperationRequest.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults) {
+                        object.name = "";
+                        object.timeout = null;
+                    }
+                    if (message.name != null && message.hasOwnProperty("name"))
+                        object.name = message.name;
+                    if (message.timeout != null && message.hasOwnProperty("timeout"))
+                        object.timeout = $root.google.protobuf.Duration.toObject(message.timeout, options);
+                    return object;
+                };
+    
+                /**
+                 * Converts this WaitOperationRequest to JSON.
+                 * @function toJSON
+                 * @memberof google.longrunning.WaitOperationRequest
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                WaitOperationRequest.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                return WaitOperationRequest;
+            })();
+    
+            longrunning.OperationInfo = (function() {
+    
+                /**
+                 * Properties of an OperationInfo.
+                 * @memberof google.longrunning
+                 * @interface IOperationInfo
+                 * @property {string|null} [responseType] OperationInfo responseType
+                 * @property {string|null} [metadataType] OperationInfo metadataType
+                 */
+    
+                /**
+                 * Constructs a new OperationInfo.
+                 * @memberof google.longrunning
+                 * @classdesc Represents an OperationInfo.
+                 * @implements IOperationInfo
+                 * @constructor
+                 * @param {google.longrunning.IOperationInfo=} [properties] Properties to set
+                 */
+                function OperationInfo(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * OperationInfo responseType.
+                 * @member {string} responseType
+                 * @memberof google.longrunning.OperationInfo
+                 * @instance
+                 */
+                OperationInfo.prototype.responseType = "";
+    
+                /**
+                 * OperationInfo metadataType.
+                 * @member {string} metadataType
+                 * @memberof google.longrunning.OperationInfo
+                 * @instance
+                 */
+                OperationInfo.prototype.metadataType = "";
+    
+                /**
+                 * Creates a new OperationInfo instance using the specified properties.
+                 * @function create
+                 * @memberof google.longrunning.OperationInfo
+                 * @static
+                 * @param {google.longrunning.IOperationInfo=} [properties] Properties to set
+                 * @returns {google.longrunning.OperationInfo} OperationInfo instance
+                 */
+                OperationInfo.create = function create(properties) {
+                    return new OperationInfo(properties);
+                };
+    
+                /**
+                 * Encodes the specified OperationInfo message. Does not implicitly {@link google.longrunning.OperationInfo.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.longrunning.OperationInfo
+                 * @static
+                 * @param {google.longrunning.IOperationInfo} message OperationInfo message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                OperationInfo.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.responseType != null && Object.hasOwnProperty.call(message, "responseType"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.responseType);
+                    if (message.metadataType != null && Object.hasOwnProperty.call(message, "metadataType"))
+                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.metadataType);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified OperationInfo message, length delimited. Does not implicitly {@link google.longrunning.OperationInfo.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.longrunning.OperationInfo
+                 * @static
+                 * @param {google.longrunning.IOperationInfo} message OperationInfo message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                OperationInfo.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes an OperationInfo message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.longrunning.OperationInfo
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.longrunning.OperationInfo} OperationInfo
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                OperationInfo.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.longrunning.OperationInfo();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            message.responseType = reader.string();
+                            break;
+                        case 2:
+                            message.metadataType = reader.string();
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes an OperationInfo message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.longrunning.OperationInfo
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.longrunning.OperationInfo} OperationInfo
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                OperationInfo.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies an OperationInfo message.
+                 * @function verify
+                 * @memberof google.longrunning.OperationInfo
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                OperationInfo.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.responseType != null && message.hasOwnProperty("responseType"))
+                        if (!$util.isString(message.responseType))
+                            return "responseType: string expected";
+                    if (message.metadataType != null && message.hasOwnProperty("metadataType"))
+                        if (!$util.isString(message.metadataType))
+                            return "metadataType: string expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates an OperationInfo message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.longrunning.OperationInfo
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.longrunning.OperationInfo} OperationInfo
+                 */
+                OperationInfo.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.longrunning.OperationInfo)
+                        return object;
+                    var message = new $root.google.longrunning.OperationInfo();
+                    if (object.responseType != null)
+                        message.responseType = String(object.responseType);
+                    if (object.metadataType != null)
+                        message.metadataType = String(object.metadataType);
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from an OperationInfo message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.longrunning.OperationInfo
+                 * @static
+                 * @param {google.longrunning.OperationInfo} message OperationInfo
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                OperationInfo.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults) {
+                        object.responseType = "";
+                        object.metadataType = "";
+                    }
+                    if (message.responseType != null && message.hasOwnProperty("responseType"))
+                        object.responseType = message.responseType;
+                    if (message.metadataType != null && message.hasOwnProperty("metadataType"))
+                        object.metadataType = message.metadataType;
+                    return object;
+                };
+    
+                /**
+                 * Converts this OperationInfo to JSON.
+                 * @function toJSON
+                 * @memberof google.longrunning.OperationInfo
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                OperationInfo.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                return OperationInfo;
+            })();
+    
+            return longrunning;
+        })();
+    
+        google.rpc = (function() {
+    
+            /**
+             * Namespace rpc.
+             * @memberof google
+             * @namespace
+             */
+            var rpc = {};
+    
+            rpc.Status = (function() {
+    
+                /**
+                 * Properties of a Status.
+                 * @memberof google.rpc
+                 * @interface IStatus
+                 * @property {number|null} [code] Status code
+                 * @property {string|null} [message] Status message
+                 * @property {Array.<google.protobuf.IAny>|null} [details] Status details
+                 */
+    
+                /**
+                 * Constructs a new Status.
+                 * @memberof google.rpc
+                 * @classdesc Represents a Status.
+                 * @implements IStatus
+                 * @constructor
+                 * @param {google.rpc.IStatus=} [properties] Properties to set
+                 */
+                function Status(properties) {
+                    this.details = [];
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * Status code.
+                 * @member {number} code
+                 * @memberof google.rpc.Status
+                 * @instance
+                 */
+                Status.prototype.code = 0;
+    
+                /**
+                 * Status message.
+                 * @member {string} message
+                 * @memberof google.rpc.Status
+                 * @instance
+                 */
+                Status.prototype.message = "";
+    
+                /**
+                 * Status details.
+                 * @member {Array.<google.protobuf.IAny>} details
+                 * @memberof google.rpc.Status
+                 * @instance
+                 */
+                Status.prototype.details = $util.emptyArray;
+    
+                /**
+                 * Creates a new Status instance using the specified properties.
+                 * @function create
+                 * @memberof google.rpc.Status
+                 * @static
+                 * @param {google.rpc.IStatus=} [properties] Properties to set
+                 * @returns {google.rpc.Status} Status instance
+                 */
+                Status.create = function create(properties) {
+                    return new Status(properties);
+                };
+    
+                /**
+                 * Encodes the specified Status message. Does not implicitly {@link google.rpc.Status.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.rpc.Status
+                 * @static
+                 * @param {google.rpc.IStatus} message Status message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Status.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.code != null && Object.hasOwnProperty.call(message, "code"))
+                        writer.uint32(/* id 1, wireType 0 =*/8).int32(message.code);
+                    if (message.message != null && Object.hasOwnProperty.call(message, "message"))
+                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.message);
+                    if (message.details != null && message.details.length)
+                        for (var i = 0; i < message.details.length; ++i)
+                            $root.google.protobuf.Any.encode(message.details[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified Status message, length delimited. Does not implicitly {@link google.rpc.Status.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.rpc.Status
+                 * @static
+                 * @param {google.rpc.IStatus} message Status message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Status.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a Status message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.rpc.Status
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.rpc.Status} Status
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Status.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.rpc.Status();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            message.code = reader.int32();
+                            break;
+                        case 2:
+                            message.message = reader.string();
+                            break;
+                        case 3:
+                            if (!(message.details && message.details.length))
+                                message.details = [];
+                            message.details.push($root.google.protobuf.Any.decode(reader, reader.uint32()));
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a Status message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.rpc.Status
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.rpc.Status} Status
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Status.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a Status message.
+                 * @function verify
+                 * @memberof google.rpc.Status
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                Status.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.code != null && message.hasOwnProperty("code"))
+                        if (!$util.isInteger(message.code))
+                            return "code: integer expected";
+                    if (message.message != null && message.hasOwnProperty("message"))
+                        if (!$util.isString(message.message))
+                            return "message: string expected";
+                    if (message.details != null && message.hasOwnProperty("details")) {
+                        if (!Array.isArray(message.details))
+                            return "details: array expected";
+                        for (var i = 0; i < message.details.length; ++i) {
+                            var error = $root.google.protobuf.Any.verify(message.details[i]);
+                            if (error)
+                                return "details." + error;
+                        }
+                    }
+                    return null;
+                };
+    
+                /**
+                 * Creates a Status message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.rpc.Status
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.rpc.Status} Status
+                 */
+                Status.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.rpc.Status)
+                        return object;
+                    var message = new $root.google.rpc.Status();
+                    if (object.code != null)
+                        message.code = object.code | 0;
+                    if (object.message != null)
+                        message.message = String(object.message);
+                    if (object.details) {
+                        if (!Array.isArray(object.details))
+                            throw TypeError(".google.rpc.Status.details: array expected");
+                        message.details = [];
+                        for (var i = 0; i < object.details.length; ++i) {
+                            if (typeof object.details[i] !== "object")
+                                throw TypeError(".google.rpc.Status.details: object expected");
+                            message.details[i] = $root.google.protobuf.Any.fromObject(object.details[i]);
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a Status message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.rpc.Status
+                 * @static
+                 * @param {google.rpc.Status} message Status
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                Status.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.arrays || options.defaults)
+                        object.details = [];
+                    if (options.defaults) {
+                        object.code = 0;
+                        object.message = "";
+                    }
+                    if (message.code != null && message.hasOwnProperty("code"))
+                        object.code = message.code;
+                    if (message.message != null && message.hasOwnProperty("message"))
+                        object.message = message.message;
+                    if (message.details && message.details.length) {
+                        object.details = [];
+                        for (var j = 0; j < message.details.length; ++j)
+                            object.details[j] = $root.google.protobuf.Any.toObject(message.details[j], options);
+                    }
+                    return object;
+                };
+    
+                /**
+                 * Converts this Status to JSON.
+                 * @function toJSON
+                 * @memberof google.rpc.Status
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                Status.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                return Status;
+            })();
+    
+            return rpc;
         })();
     
         google.type = (function() {

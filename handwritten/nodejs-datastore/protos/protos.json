@@ -4,6 +4,401 @@
       "nested": {
         "datastore": {
           "nested": {
+            "admin": {
+              "nested": {
+                "v1": {
+                  "options": {
+                    "csharp_namespace": "Google.Cloud.Datastore.Admin.V1",
+                    "go_package": "google.golang.org/genproto/googleapis/datastore/admin/v1;admin",
+                    "java_multiple_files": true,
+                    "java_outer_classname": "IndexProto",
+                    "java_package": "com.google.datastore.admin.v1",
+                    "ruby_package": "Google::Cloud::Datastore::Admin::V1"
+                  },
+                  "nested": {
+                    "DatastoreAdmin": {
+                      "options": {
+                        "(google.api.default_host)": "datastore.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/datastore"
+                      },
+                      "methods": {
+                        "ExportEntities": {
+                          "requestType": "ExportEntitiesRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/projects/{project_id}:export",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "project_id,labels,entity_filter,output_url_prefix",
+                            "(google.longrunning.operation_info).response_type": "ExportEntitiesResponse",
+                            "(google.longrunning.operation_info).metadata_type": "ExportEntitiesMetadata"
+                          }
+                        },
+                        "ImportEntities": {
+                          "requestType": "ImportEntitiesRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/projects/{project_id}:import",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "project_id,labels,input_url,entity_filter",
+                            "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
+                            "(google.longrunning.operation_info).metadata_type": "ImportEntitiesMetadata"
+                          }
+                        },
+                        "GetIndex": {
+                          "requestType": "GetIndexRequest",
+                          "responseType": "Index",
+                          "options": {
+                            "(google.api.http).get": "/v1/projects/{project_id}/indexes/{index_id}"
+                          }
+                        },
+                        "ListIndexes": {
+                          "requestType": "ListIndexesRequest",
+                          "responseType": "ListIndexesResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/projects/{project_id}/indexes"
+                          }
+                        }
+                      }
+                    },
+                    "CommonMetadata": {
+                      "fields": {
+                        "startTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 1
+                        },
+                        "endTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2
+                        },
+                        "operationType": {
+                          "type": "OperationType",
+                          "id": 3
+                        },
+                        "labels": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 4
+                        },
+                        "state": {
+                          "type": "State",
+                          "id": 5
+                        }
+                      },
+                      "nested": {
+                        "State": {
+                          "values": {
+                            "STATE_UNSPECIFIED": 0,
+                            "INITIALIZING": 1,
+                            "PROCESSING": 2,
+                            "CANCELLING": 3,
+                            "FINALIZING": 4,
+                            "SUCCESSFUL": 5,
+                            "FAILED": 6,
+                            "CANCELLED": 7
+                          }
+                        }
+                      }
+                    },
+                    "OperationType": {
+                      "values": {
+                        "OPERATION_TYPE_UNSPECIFIED": 0,
+                        "EXPORT_ENTITIES": 1,
+                        "IMPORT_ENTITIES": 2,
+                        "CREATE_INDEX": 3,
+                        "DELETE_INDEX": 4
+                      }
+                    },
+                    "Progress": {
+                      "fields": {
+                        "workCompleted": {
+                          "type": "int64",
+                          "id": 1
+                        },
+                        "workEstimated": {
+                          "type": "int64",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "ExportEntitiesRequest": {
+                      "fields": {
+                        "projectId": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "labels": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 2
+                        },
+                        "entityFilter": {
+                          "type": "EntityFilter",
+                          "id": 3
+                        },
+                        "outputUrlPrefix": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "ImportEntitiesRequest": {
+                      "fields": {
+                        "projectId": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "labels": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 2
+                        },
+                        "inputUrl": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "entityFilter": {
+                          "type": "EntityFilter",
+                          "id": 4
+                        }
+                      }
+                    },
+                    "ExportEntitiesResponse": {
+                      "fields": {
+                        "outputUrl": {
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "ExportEntitiesMetadata": {
+                      "fields": {
+                        "common": {
+                          "type": "CommonMetadata",
+                          "id": 1
+                        },
+                        "progressEntities": {
+                          "type": "Progress",
+                          "id": 2
+                        },
+                        "progressBytes": {
+                          "type": "Progress",
+                          "id": 3
+                        },
+                        "entityFilter": {
+                          "type": "EntityFilter",
+                          "id": 4
+                        },
+                        "outputUrlPrefix": {
+                          "type": "string",
+                          "id": 5
+                        }
+                      }
+                    },
+                    "ImportEntitiesMetadata": {
+                      "fields": {
+                        "common": {
+                          "type": "CommonMetadata",
+                          "id": 1
+                        },
+                        "progressEntities": {
+                          "type": "Progress",
+                          "id": 2
+                        },
+                        "progressBytes": {
+                          "type": "Progress",
+                          "id": 3
+                        },
+                        "entityFilter": {
+                          "type": "EntityFilter",
+                          "id": 4
+                        },
+                        "inputUrl": {
+                          "type": "string",
+                          "id": 5
+                        }
+                      }
+                    },
+                    "EntityFilter": {
+                      "fields": {
+                        "kinds": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 1
+                        },
+                        "namespaceIds": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "GetIndexRequest": {
+                      "fields": {
+                        "projectId": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "indexId": {
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "ListIndexesRequest": {
+                      "fields": {
+                        "projectId": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 4
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 5
+                        }
+                      }
+                    },
+                    "ListIndexesResponse": {
+                      "fields": {
+                        "indexes": {
+                          "rule": "repeated",
+                          "type": "Index",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "IndexOperationMetadata": {
+                      "fields": {
+                        "common": {
+                          "type": "CommonMetadata",
+                          "id": 1
+                        },
+                        "progressEntities": {
+                          "type": "Progress",
+                          "id": 2
+                        },
+                        "indexId": {
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "Index": {
+                      "fields": {
+                        "projectId": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "indexId": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "kind": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "ancestor": {
+                          "type": "AncestorMode",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "properties": {
+                          "rule": "repeated",
+                          "type": "IndexedProperty",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "state": {
+                          "type": "State",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "IndexedProperty": {
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "direction": {
+                              "type": "Direction",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            }
+                          }
+                        },
+                        "AncestorMode": {
+                          "values": {
+                            "ANCESTOR_MODE_UNSPECIFIED": 0,
+                            "NONE": 1,
+                            "ALL_ANCESTORS": 2
+                          }
+                        },
+                        "Direction": {
+                          "values": {
+                            "DIRECTION_UNSPECIFIED": 0,
+                            "ASCENDING": 1,
+                            "DESCENDING": 2
+                          }
+                        },
+                        "State": {
+                          "values": {
+                            "STATE_UNSPECIFIED": 0,
+                            "CREATING": 1,
+                            "READY": 2,
+                            "DELETING": 3,
+                            "ERROR": 4
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
             "v1": {
               "options": {
                 "csharp_namespace": "Google.Cloud.Datastore.V1",
@@ -1889,6 +2284,45 @@
                 }
               }
             },
+            "Any": {
+              "fields": {
+                "type_url": {
+                  "type": "string",
+                  "id": 1
+                },
+                "value": {
+                  "type": "bytes",
+                  "id": 2
+                }
+              }
+            },
+            "Duration": {
+              "fields": {
+                "seconds": {
+                  "type": "int64",
+                  "id": 1
+                },
+                "nanos": {
+                  "type": "int32",
+                  "id": 2
+                }
+              }
+            },
+            "Empty": {
+              "fields": {}
+            },
+            "Timestamp": {
+              "fields": {
+                "seconds": {
+                  "type": "int64",
+                  "id": 1
+                },
+                "nanos": {
+                  "type": "int32",
+                  "id": 2
+                }
+              }
+            },
             "Struct": {
               "fields": {
                 "fields": {
@@ -1949,18 +2383,6 @@
                   "rule": "repeated",
                   "type": "Value",
                   "id": 1
-                }
-              }
-            },
-            "Timestamp": {
-              "fields": {
-                "seconds": {
-                  "type": "int64",
-                  "id": 1
-                },
-                "nanos": {
-                  "type": "int32",
-                  "id": 2
                 }
               }
             },
@@ -2033,6 +2455,210 @@
                 "value": {
                   "type": "bytes",
                   "id": 1
+                }
+              }
+            }
+          }
+        },
+        "longrunning": {
+          "options": {
+            "cc_enable_arenas": true,
+            "csharp_namespace": "Google.LongRunning",
+            "go_package": "google.golang.org/genproto/googleapis/longrunning;longrunning",
+            "java_multiple_files": true,
+            "java_outer_classname": "OperationsProto",
+            "java_package": "com.google.longrunning",
+            "php_namespace": "Google\\LongRunning"
+          },
+          "nested": {
+            "operationInfo": {
+              "type": "google.longrunning.OperationInfo",
+              "id": 1049,
+              "extend": "google.protobuf.MethodOptions"
+            },
+            "Operations": {
+              "options": {
+                "(google.api.default_host)": "longrunning.googleapis.com"
+              },
+              "methods": {
+                "ListOperations": {
+                  "requestType": "ListOperationsRequest",
+                  "responseType": "ListOperationsResponse",
+                  "options": {
+                    "(google.api.http).get": "/v1/{name=operations}",
+                    "(google.api.method_signature)": "name,filter"
+                  }
+                },
+                "GetOperation": {
+                  "requestType": "GetOperationRequest",
+                  "responseType": "Operation",
+                  "options": {
+                    "(google.api.http).get": "/v1/{name=operations/**}",
+                    "(google.api.method_signature)": "name"
+                  }
+                },
+                "DeleteOperation": {
+                  "requestType": "DeleteOperationRequest",
+                  "responseType": "google.protobuf.Empty",
+                  "options": {
+                    "(google.api.http).delete": "/v1/{name=operations/**}",
+                    "(google.api.method_signature)": "name"
+                  }
+                },
+                "CancelOperation": {
+                  "requestType": "CancelOperationRequest",
+                  "responseType": "google.protobuf.Empty",
+                  "options": {
+                    "(google.api.http).post": "/v1/{name=operations/**}:cancel",
+                    "(google.api.http).body": "*",
+                    "(google.api.method_signature)": "name"
+                  }
+                },
+                "WaitOperation": {
+                  "requestType": "WaitOperationRequest",
+                  "responseType": "Operation"
+                }
+              }
+            },
+            "Operation": {
+              "oneofs": {
+                "result": {
+                  "oneof": [
+                    "error",
+                    "response"
+                  ]
+                }
+              },
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "metadata": {
+                  "type": "google.protobuf.Any",
+                  "id": 2
+                },
+                "done": {
+                  "type": "bool",
+                  "id": 3
+                },
+                "error": {
+                  "type": "google.rpc.Status",
+                  "id": 4
+                },
+                "response": {
+                  "type": "google.protobuf.Any",
+                  "id": 5
+                }
+              }
+            },
+            "GetOperationRequest": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                }
+              }
+            },
+            "ListOperationsRequest": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 4
+                },
+                "filter": {
+                  "type": "string",
+                  "id": 1
+                },
+                "pageSize": {
+                  "type": "int32",
+                  "id": 2
+                },
+                "pageToken": {
+                  "type": "string",
+                  "id": 3
+                }
+              }
+            },
+            "ListOperationsResponse": {
+              "fields": {
+                "operations": {
+                  "rule": "repeated",
+                  "type": "Operation",
+                  "id": 1
+                },
+                "nextPageToken": {
+                  "type": "string",
+                  "id": 2
+                }
+              }
+            },
+            "CancelOperationRequest": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                }
+              }
+            },
+            "DeleteOperationRequest": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                }
+              }
+            },
+            "WaitOperationRequest": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "timeout": {
+                  "type": "google.protobuf.Duration",
+                  "id": 2
+                }
+              }
+            },
+            "OperationInfo": {
+              "fields": {
+                "responseType": {
+                  "type": "string",
+                  "id": 1
+                },
+                "metadataType": {
+                  "type": "string",
+                  "id": 2
+                }
+              }
+            }
+          }
+        },
+        "rpc": {
+          "options": {
+            "cc_enable_arenas": true,
+            "go_package": "google.golang.org/genproto/googleapis/rpc/status;status",
+            "java_multiple_files": true,
+            "java_outer_classname": "StatusProto",
+            "java_package": "com.google.rpc",
+            "objc_class_prefix": "RPC"
+          },
+          "nested": {
+            "Status": {
+              "fields": {
+                "code": {
+                  "type": "int32",
+                  "id": 1
+                },
+                "message": {
+                  "type": "string",
+                  "id": 2
+                },
+                "details": {
+                  "rule": "repeated",
+                  "type": "google.protobuf.Any",
+                  "id": 3
                 }
               }
             }

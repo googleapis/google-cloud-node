@@ -20,6 +20,1630 @@ export namespace google {
     /** Namespace datastore. */
     namespace datastore {
 
+        /** Namespace admin. */
+        namespace admin {
+
+            /** Namespace v1. */
+            namespace v1 {
+
+                /** Represents a DatastoreAdmin */
+                class DatastoreAdmin extends $protobuf.rpc.Service {
+
+                    /**
+                     * Constructs a new DatastoreAdmin service.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     */
+                    constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                    /**
+                     * Creates new DatastoreAdmin service using the specified rpc implementation.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     * @returns RPC service. Useful where requests and/or responses are streamed.
+                     */
+                    public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): DatastoreAdmin;
+
+                    /**
+                     * Calls ExportEntities.
+                     * @param request ExportEntitiesRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public exportEntities(request: google.datastore.admin.v1.IExportEntitiesRequest, callback: google.datastore.admin.v1.DatastoreAdmin.ExportEntitiesCallback): void;
+
+                    /**
+                     * Calls ExportEntities.
+                     * @param request ExportEntitiesRequest message or plain object
+                     * @returns Promise
+                     */
+                    public exportEntities(request: google.datastore.admin.v1.IExportEntitiesRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls ImportEntities.
+                     * @param request ImportEntitiesRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public importEntities(request: google.datastore.admin.v1.IImportEntitiesRequest, callback: google.datastore.admin.v1.DatastoreAdmin.ImportEntitiesCallback): void;
+
+                    /**
+                     * Calls ImportEntities.
+                     * @param request ImportEntitiesRequest message or plain object
+                     * @returns Promise
+                     */
+                    public importEntities(request: google.datastore.admin.v1.IImportEntitiesRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls GetIndex.
+                     * @param request GetIndexRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Index
+                     */
+                    public getIndex(request: google.datastore.admin.v1.IGetIndexRequest, callback: google.datastore.admin.v1.DatastoreAdmin.GetIndexCallback): void;
+
+                    /**
+                     * Calls GetIndex.
+                     * @param request GetIndexRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getIndex(request: google.datastore.admin.v1.IGetIndexRequest): Promise<google.datastore.admin.v1.Index>;
+
+                    /**
+                     * Calls ListIndexes.
+                     * @param request ListIndexesRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListIndexesResponse
+                     */
+                    public listIndexes(request: google.datastore.admin.v1.IListIndexesRequest, callback: google.datastore.admin.v1.DatastoreAdmin.ListIndexesCallback): void;
+
+                    /**
+                     * Calls ListIndexes.
+                     * @param request ListIndexesRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listIndexes(request: google.datastore.admin.v1.IListIndexesRequest): Promise<google.datastore.admin.v1.ListIndexesResponse>;
+                }
+
+                namespace DatastoreAdmin {
+
+                    /**
+                     * Callback as used by {@link google.datastore.admin.v1.DatastoreAdmin#exportEntities}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type ExportEntitiesCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.datastore.admin.v1.DatastoreAdmin#importEntities}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type ImportEntitiesCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.datastore.admin.v1.DatastoreAdmin#getIndex}.
+                     * @param error Error, if any
+                     * @param [response] Index
+                     */
+                    type GetIndexCallback = (error: (Error|null), response?: google.datastore.admin.v1.Index) => void;
+
+                    /**
+                     * Callback as used by {@link google.datastore.admin.v1.DatastoreAdmin#listIndexes}.
+                     * @param error Error, if any
+                     * @param [response] ListIndexesResponse
+                     */
+                    type ListIndexesCallback = (error: (Error|null), response?: google.datastore.admin.v1.ListIndexesResponse) => void;
+                }
+
+                /** Properties of a CommonMetadata. */
+                interface ICommonMetadata {
+
+                    /** CommonMetadata startTime */
+                    startTime?: (google.protobuf.ITimestamp|null);
+
+                    /** CommonMetadata endTime */
+                    endTime?: (google.protobuf.ITimestamp|null);
+
+                    /** CommonMetadata operationType */
+                    operationType?: (google.datastore.admin.v1.OperationType|keyof typeof google.datastore.admin.v1.OperationType|null);
+
+                    /** CommonMetadata labels */
+                    labels?: ({ [k: string]: string }|null);
+
+                    /** CommonMetadata state */
+                    state?: (google.datastore.admin.v1.CommonMetadata.State|keyof typeof google.datastore.admin.v1.CommonMetadata.State|null);
+                }
+
+                /** Represents a CommonMetadata. */
+                class CommonMetadata implements ICommonMetadata {
+
+                    /**
+                     * Constructs a new CommonMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.datastore.admin.v1.ICommonMetadata);
+
+                    /** CommonMetadata startTime. */
+                    public startTime?: (google.protobuf.ITimestamp|null);
+
+                    /** CommonMetadata endTime. */
+                    public endTime?: (google.protobuf.ITimestamp|null);
+
+                    /** CommonMetadata operationType. */
+                    public operationType: (google.datastore.admin.v1.OperationType|keyof typeof google.datastore.admin.v1.OperationType);
+
+                    /** CommonMetadata labels. */
+                    public labels: { [k: string]: string };
+
+                    /** CommonMetadata state. */
+                    public state: (google.datastore.admin.v1.CommonMetadata.State|keyof typeof google.datastore.admin.v1.CommonMetadata.State);
+
+                    /**
+                     * Creates a new CommonMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CommonMetadata instance
+                     */
+                    public static create(properties?: google.datastore.admin.v1.ICommonMetadata): google.datastore.admin.v1.CommonMetadata;
+
+                    /**
+                     * Encodes the specified CommonMetadata message. Does not implicitly {@link google.datastore.admin.v1.CommonMetadata.verify|verify} messages.
+                     * @param message CommonMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.datastore.admin.v1.ICommonMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CommonMetadata message, length delimited. Does not implicitly {@link google.datastore.admin.v1.CommonMetadata.verify|verify} messages.
+                     * @param message CommonMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.datastore.admin.v1.ICommonMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CommonMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CommonMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.datastore.admin.v1.CommonMetadata;
+
+                    /**
+                     * Decodes a CommonMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CommonMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.datastore.admin.v1.CommonMetadata;
+
+                    /**
+                     * Verifies a CommonMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CommonMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CommonMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.datastore.admin.v1.CommonMetadata;
+
+                    /**
+                     * Creates a plain object from a CommonMetadata message. Also converts values to other types if specified.
+                     * @param message CommonMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.datastore.admin.v1.CommonMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CommonMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                namespace CommonMetadata {
+
+                    /** State enum. */
+                    enum State {
+                        STATE_UNSPECIFIED = 0,
+                        INITIALIZING = 1,
+                        PROCESSING = 2,
+                        CANCELLING = 3,
+                        FINALIZING = 4,
+                        SUCCESSFUL = 5,
+                        FAILED = 6,
+                        CANCELLED = 7
+                    }
+                }
+
+                /** OperationType enum. */
+                enum OperationType {
+                    OPERATION_TYPE_UNSPECIFIED = 0,
+                    EXPORT_ENTITIES = 1,
+                    IMPORT_ENTITIES = 2,
+                    CREATE_INDEX = 3,
+                    DELETE_INDEX = 4
+                }
+
+                /** Properties of a Progress. */
+                interface IProgress {
+
+                    /** Progress workCompleted */
+                    workCompleted?: (number|Long|string|null);
+
+                    /** Progress workEstimated */
+                    workEstimated?: (number|Long|string|null);
+                }
+
+                /** Represents a Progress. */
+                class Progress implements IProgress {
+
+                    /**
+                     * Constructs a new Progress.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.datastore.admin.v1.IProgress);
+
+                    /** Progress workCompleted. */
+                    public workCompleted: (number|Long|string);
+
+                    /** Progress workEstimated. */
+                    public workEstimated: (number|Long|string);
+
+                    /**
+                     * Creates a new Progress instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Progress instance
+                     */
+                    public static create(properties?: google.datastore.admin.v1.IProgress): google.datastore.admin.v1.Progress;
+
+                    /**
+                     * Encodes the specified Progress message. Does not implicitly {@link google.datastore.admin.v1.Progress.verify|verify} messages.
+                     * @param message Progress message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.datastore.admin.v1.IProgress, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Progress message, length delimited. Does not implicitly {@link google.datastore.admin.v1.Progress.verify|verify} messages.
+                     * @param message Progress message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.datastore.admin.v1.IProgress, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Progress message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Progress
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.datastore.admin.v1.Progress;
+
+                    /**
+                     * Decodes a Progress message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Progress
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.datastore.admin.v1.Progress;
+
+                    /**
+                     * Verifies a Progress message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Progress message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Progress
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.datastore.admin.v1.Progress;
+
+                    /**
+                     * Creates a plain object from a Progress message. Also converts values to other types if specified.
+                     * @param message Progress
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.datastore.admin.v1.Progress, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Progress to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of an ExportEntitiesRequest. */
+                interface IExportEntitiesRequest {
+
+                    /** ExportEntitiesRequest projectId */
+                    projectId?: (string|null);
+
+                    /** ExportEntitiesRequest labels */
+                    labels?: ({ [k: string]: string }|null);
+
+                    /** ExportEntitiesRequest entityFilter */
+                    entityFilter?: (google.datastore.admin.v1.IEntityFilter|null);
+
+                    /** ExportEntitiesRequest outputUrlPrefix */
+                    outputUrlPrefix?: (string|null);
+                }
+
+                /** Represents an ExportEntitiesRequest. */
+                class ExportEntitiesRequest implements IExportEntitiesRequest {
+
+                    /**
+                     * Constructs a new ExportEntitiesRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.datastore.admin.v1.IExportEntitiesRequest);
+
+                    /** ExportEntitiesRequest projectId. */
+                    public projectId: string;
+
+                    /** ExportEntitiesRequest labels. */
+                    public labels: { [k: string]: string };
+
+                    /** ExportEntitiesRequest entityFilter. */
+                    public entityFilter?: (google.datastore.admin.v1.IEntityFilter|null);
+
+                    /** ExportEntitiesRequest outputUrlPrefix. */
+                    public outputUrlPrefix: string;
+
+                    /**
+                     * Creates a new ExportEntitiesRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ExportEntitiesRequest instance
+                     */
+                    public static create(properties?: google.datastore.admin.v1.IExportEntitiesRequest): google.datastore.admin.v1.ExportEntitiesRequest;
+
+                    /**
+                     * Encodes the specified ExportEntitiesRequest message. Does not implicitly {@link google.datastore.admin.v1.ExportEntitiesRequest.verify|verify} messages.
+                     * @param message ExportEntitiesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.datastore.admin.v1.IExportEntitiesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ExportEntitiesRequest message, length delimited. Does not implicitly {@link google.datastore.admin.v1.ExportEntitiesRequest.verify|verify} messages.
+                     * @param message ExportEntitiesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.datastore.admin.v1.IExportEntitiesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ExportEntitiesRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ExportEntitiesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.datastore.admin.v1.ExportEntitiesRequest;
+
+                    /**
+                     * Decodes an ExportEntitiesRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ExportEntitiesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.datastore.admin.v1.ExportEntitiesRequest;
+
+                    /**
+                     * Verifies an ExportEntitiesRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ExportEntitiesRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ExportEntitiesRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.datastore.admin.v1.ExportEntitiesRequest;
+
+                    /**
+                     * Creates a plain object from an ExportEntitiesRequest message. Also converts values to other types if specified.
+                     * @param message ExportEntitiesRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.datastore.admin.v1.ExportEntitiesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ExportEntitiesRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of an ImportEntitiesRequest. */
+                interface IImportEntitiesRequest {
+
+                    /** ImportEntitiesRequest projectId */
+                    projectId?: (string|null);
+
+                    /** ImportEntitiesRequest labels */
+                    labels?: ({ [k: string]: string }|null);
+
+                    /** ImportEntitiesRequest inputUrl */
+                    inputUrl?: (string|null);
+
+                    /** ImportEntitiesRequest entityFilter */
+                    entityFilter?: (google.datastore.admin.v1.IEntityFilter|null);
+                }
+
+                /** Represents an ImportEntitiesRequest. */
+                class ImportEntitiesRequest implements IImportEntitiesRequest {
+
+                    /**
+                     * Constructs a new ImportEntitiesRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.datastore.admin.v1.IImportEntitiesRequest);
+
+                    /** ImportEntitiesRequest projectId. */
+                    public projectId: string;
+
+                    /** ImportEntitiesRequest labels. */
+                    public labels: { [k: string]: string };
+
+                    /** ImportEntitiesRequest inputUrl. */
+                    public inputUrl: string;
+
+                    /** ImportEntitiesRequest entityFilter. */
+                    public entityFilter?: (google.datastore.admin.v1.IEntityFilter|null);
+
+                    /**
+                     * Creates a new ImportEntitiesRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ImportEntitiesRequest instance
+                     */
+                    public static create(properties?: google.datastore.admin.v1.IImportEntitiesRequest): google.datastore.admin.v1.ImportEntitiesRequest;
+
+                    /**
+                     * Encodes the specified ImportEntitiesRequest message. Does not implicitly {@link google.datastore.admin.v1.ImportEntitiesRequest.verify|verify} messages.
+                     * @param message ImportEntitiesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.datastore.admin.v1.IImportEntitiesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ImportEntitiesRequest message, length delimited. Does not implicitly {@link google.datastore.admin.v1.ImportEntitiesRequest.verify|verify} messages.
+                     * @param message ImportEntitiesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.datastore.admin.v1.IImportEntitiesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ImportEntitiesRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ImportEntitiesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.datastore.admin.v1.ImportEntitiesRequest;
+
+                    /**
+                     * Decodes an ImportEntitiesRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ImportEntitiesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.datastore.admin.v1.ImportEntitiesRequest;
+
+                    /**
+                     * Verifies an ImportEntitiesRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ImportEntitiesRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ImportEntitiesRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.datastore.admin.v1.ImportEntitiesRequest;
+
+                    /**
+                     * Creates a plain object from an ImportEntitiesRequest message. Also converts values to other types if specified.
+                     * @param message ImportEntitiesRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.datastore.admin.v1.ImportEntitiesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ImportEntitiesRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of an ExportEntitiesResponse. */
+                interface IExportEntitiesResponse {
+
+                    /** ExportEntitiesResponse outputUrl */
+                    outputUrl?: (string|null);
+                }
+
+                /** Represents an ExportEntitiesResponse. */
+                class ExportEntitiesResponse implements IExportEntitiesResponse {
+
+                    /**
+                     * Constructs a new ExportEntitiesResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.datastore.admin.v1.IExportEntitiesResponse);
+
+                    /** ExportEntitiesResponse outputUrl. */
+                    public outputUrl: string;
+
+                    /**
+                     * Creates a new ExportEntitiesResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ExportEntitiesResponse instance
+                     */
+                    public static create(properties?: google.datastore.admin.v1.IExportEntitiesResponse): google.datastore.admin.v1.ExportEntitiesResponse;
+
+                    /**
+                     * Encodes the specified ExportEntitiesResponse message. Does not implicitly {@link google.datastore.admin.v1.ExportEntitiesResponse.verify|verify} messages.
+                     * @param message ExportEntitiesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.datastore.admin.v1.IExportEntitiesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ExportEntitiesResponse message, length delimited. Does not implicitly {@link google.datastore.admin.v1.ExportEntitiesResponse.verify|verify} messages.
+                     * @param message ExportEntitiesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.datastore.admin.v1.IExportEntitiesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ExportEntitiesResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ExportEntitiesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.datastore.admin.v1.ExportEntitiesResponse;
+
+                    /**
+                     * Decodes an ExportEntitiesResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ExportEntitiesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.datastore.admin.v1.ExportEntitiesResponse;
+
+                    /**
+                     * Verifies an ExportEntitiesResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ExportEntitiesResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ExportEntitiesResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.datastore.admin.v1.ExportEntitiesResponse;
+
+                    /**
+                     * Creates a plain object from an ExportEntitiesResponse message. Also converts values to other types if specified.
+                     * @param message ExportEntitiesResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.datastore.admin.v1.ExportEntitiesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ExportEntitiesResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of an ExportEntitiesMetadata. */
+                interface IExportEntitiesMetadata {
+
+                    /** ExportEntitiesMetadata common */
+                    common?: (google.datastore.admin.v1.ICommonMetadata|null);
+
+                    /** ExportEntitiesMetadata progressEntities */
+                    progressEntities?: (google.datastore.admin.v1.IProgress|null);
+
+                    /** ExportEntitiesMetadata progressBytes */
+                    progressBytes?: (google.datastore.admin.v1.IProgress|null);
+
+                    /** ExportEntitiesMetadata entityFilter */
+                    entityFilter?: (google.datastore.admin.v1.IEntityFilter|null);
+
+                    /** ExportEntitiesMetadata outputUrlPrefix */
+                    outputUrlPrefix?: (string|null);
+                }
+
+                /** Represents an ExportEntitiesMetadata. */
+                class ExportEntitiesMetadata implements IExportEntitiesMetadata {
+
+                    /**
+                     * Constructs a new ExportEntitiesMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.datastore.admin.v1.IExportEntitiesMetadata);
+
+                    /** ExportEntitiesMetadata common. */
+                    public common?: (google.datastore.admin.v1.ICommonMetadata|null);
+
+                    /** ExportEntitiesMetadata progressEntities. */
+                    public progressEntities?: (google.datastore.admin.v1.IProgress|null);
+
+                    /** ExportEntitiesMetadata progressBytes. */
+                    public progressBytes?: (google.datastore.admin.v1.IProgress|null);
+
+                    /** ExportEntitiesMetadata entityFilter. */
+                    public entityFilter?: (google.datastore.admin.v1.IEntityFilter|null);
+
+                    /** ExportEntitiesMetadata outputUrlPrefix. */
+                    public outputUrlPrefix: string;
+
+                    /**
+                     * Creates a new ExportEntitiesMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ExportEntitiesMetadata instance
+                     */
+                    public static create(properties?: google.datastore.admin.v1.IExportEntitiesMetadata): google.datastore.admin.v1.ExportEntitiesMetadata;
+
+                    /**
+                     * Encodes the specified ExportEntitiesMetadata message. Does not implicitly {@link google.datastore.admin.v1.ExportEntitiesMetadata.verify|verify} messages.
+                     * @param message ExportEntitiesMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.datastore.admin.v1.IExportEntitiesMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ExportEntitiesMetadata message, length delimited. Does not implicitly {@link google.datastore.admin.v1.ExportEntitiesMetadata.verify|verify} messages.
+                     * @param message ExportEntitiesMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.datastore.admin.v1.IExportEntitiesMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ExportEntitiesMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ExportEntitiesMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.datastore.admin.v1.ExportEntitiesMetadata;
+
+                    /**
+                     * Decodes an ExportEntitiesMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ExportEntitiesMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.datastore.admin.v1.ExportEntitiesMetadata;
+
+                    /**
+                     * Verifies an ExportEntitiesMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ExportEntitiesMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ExportEntitiesMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.datastore.admin.v1.ExportEntitiesMetadata;
+
+                    /**
+                     * Creates a plain object from an ExportEntitiesMetadata message. Also converts values to other types if specified.
+                     * @param message ExportEntitiesMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.datastore.admin.v1.ExportEntitiesMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ExportEntitiesMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of an ImportEntitiesMetadata. */
+                interface IImportEntitiesMetadata {
+
+                    /** ImportEntitiesMetadata common */
+                    common?: (google.datastore.admin.v1.ICommonMetadata|null);
+
+                    /** ImportEntitiesMetadata progressEntities */
+                    progressEntities?: (google.datastore.admin.v1.IProgress|null);
+
+                    /** ImportEntitiesMetadata progressBytes */
+                    progressBytes?: (google.datastore.admin.v1.IProgress|null);
+
+                    /** ImportEntitiesMetadata entityFilter */
+                    entityFilter?: (google.datastore.admin.v1.IEntityFilter|null);
+
+                    /** ImportEntitiesMetadata inputUrl */
+                    inputUrl?: (string|null);
+                }
+
+                /** Represents an ImportEntitiesMetadata. */
+                class ImportEntitiesMetadata implements IImportEntitiesMetadata {
+
+                    /**
+                     * Constructs a new ImportEntitiesMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.datastore.admin.v1.IImportEntitiesMetadata);
+
+                    /** ImportEntitiesMetadata common. */
+                    public common?: (google.datastore.admin.v1.ICommonMetadata|null);
+
+                    /** ImportEntitiesMetadata progressEntities. */
+                    public progressEntities?: (google.datastore.admin.v1.IProgress|null);
+
+                    /** ImportEntitiesMetadata progressBytes. */
+                    public progressBytes?: (google.datastore.admin.v1.IProgress|null);
+
+                    /** ImportEntitiesMetadata entityFilter. */
+                    public entityFilter?: (google.datastore.admin.v1.IEntityFilter|null);
+
+                    /** ImportEntitiesMetadata inputUrl. */
+                    public inputUrl: string;
+
+                    /**
+                     * Creates a new ImportEntitiesMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ImportEntitiesMetadata instance
+                     */
+                    public static create(properties?: google.datastore.admin.v1.IImportEntitiesMetadata): google.datastore.admin.v1.ImportEntitiesMetadata;
+
+                    /**
+                     * Encodes the specified ImportEntitiesMetadata message. Does not implicitly {@link google.datastore.admin.v1.ImportEntitiesMetadata.verify|verify} messages.
+                     * @param message ImportEntitiesMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.datastore.admin.v1.IImportEntitiesMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ImportEntitiesMetadata message, length delimited. Does not implicitly {@link google.datastore.admin.v1.ImportEntitiesMetadata.verify|verify} messages.
+                     * @param message ImportEntitiesMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.datastore.admin.v1.IImportEntitiesMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ImportEntitiesMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ImportEntitiesMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.datastore.admin.v1.ImportEntitiesMetadata;
+
+                    /**
+                     * Decodes an ImportEntitiesMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ImportEntitiesMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.datastore.admin.v1.ImportEntitiesMetadata;
+
+                    /**
+                     * Verifies an ImportEntitiesMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ImportEntitiesMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ImportEntitiesMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.datastore.admin.v1.ImportEntitiesMetadata;
+
+                    /**
+                     * Creates a plain object from an ImportEntitiesMetadata message. Also converts values to other types if specified.
+                     * @param message ImportEntitiesMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.datastore.admin.v1.ImportEntitiesMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ImportEntitiesMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of an EntityFilter. */
+                interface IEntityFilter {
+
+                    /** EntityFilter kinds */
+                    kinds?: (string[]|null);
+
+                    /** EntityFilter namespaceIds */
+                    namespaceIds?: (string[]|null);
+                }
+
+                /** Represents an EntityFilter. */
+                class EntityFilter implements IEntityFilter {
+
+                    /**
+                     * Constructs a new EntityFilter.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.datastore.admin.v1.IEntityFilter);
+
+                    /** EntityFilter kinds. */
+                    public kinds: string[];
+
+                    /** EntityFilter namespaceIds. */
+                    public namespaceIds: string[];
+
+                    /**
+                     * Creates a new EntityFilter instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns EntityFilter instance
+                     */
+                    public static create(properties?: google.datastore.admin.v1.IEntityFilter): google.datastore.admin.v1.EntityFilter;
+
+                    /**
+                     * Encodes the specified EntityFilter message. Does not implicitly {@link google.datastore.admin.v1.EntityFilter.verify|verify} messages.
+                     * @param message EntityFilter message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.datastore.admin.v1.IEntityFilter, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified EntityFilter message, length delimited. Does not implicitly {@link google.datastore.admin.v1.EntityFilter.verify|verify} messages.
+                     * @param message EntityFilter message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.datastore.admin.v1.IEntityFilter, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an EntityFilter message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns EntityFilter
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.datastore.admin.v1.EntityFilter;
+
+                    /**
+                     * Decodes an EntityFilter message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns EntityFilter
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.datastore.admin.v1.EntityFilter;
+
+                    /**
+                     * Verifies an EntityFilter message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an EntityFilter message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns EntityFilter
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.datastore.admin.v1.EntityFilter;
+
+                    /**
+                     * Creates a plain object from an EntityFilter message. Also converts values to other types if specified.
+                     * @param message EntityFilter
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.datastore.admin.v1.EntityFilter, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this EntityFilter to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a GetIndexRequest. */
+                interface IGetIndexRequest {
+
+                    /** GetIndexRequest projectId */
+                    projectId?: (string|null);
+
+                    /** GetIndexRequest indexId */
+                    indexId?: (string|null);
+                }
+
+                /** Represents a GetIndexRequest. */
+                class GetIndexRequest implements IGetIndexRequest {
+
+                    /**
+                     * Constructs a new GetIndexRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.datastore.admin.v1.IGetIndexRequest);
+
+                    /** GetIndexRequest projectId. */
+                    public projectId: string;
+
+                    /** GetIndexRequest indexId. */
+                    public indexId: string;
+
+                    /**
+                     * Creates a new GetIndexRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetIndexRequest instance
+                     */
+                    public static create(properties?: google.datastore.admin.v1.IGetIndexRequest): google.datastore.admin.v1.GetIndexRequest;
+
+                    /**
+                     * Encodes the specified GetIndexRequest message. Does not implicitly {@link google.datastore.admin.v1.GetIndexRequest.verify|verify} messages.
+                     * @param message GetIndexRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.datastore.admin.v1.IGetIndexRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetIndexRequest message, length delimited. Does not implicitly {@link google.datastore.admin.v1.GetIndexRequest.verify|verify} messages.
+                     * @param message GetIndexRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.datastore.admin.v1.IGetIndexRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetIndexRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetIndexRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.datastore.admin.v1.GetIndexRequest;
+
+                    /**
+                     * Decodes a GetIndexRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetIndexRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.datastore.admin.v1.GetIndexRequest;
+
+                    /**
+                     * Verifies a GetIndexRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetIndexRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetIndexRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.datastore.admin.v1.GetIndexRequest;
+
+                    /**
+                     * Creates a plain object from a GetIndexRequest message. Also converts values to other types if specified.
+                     * @param message GetIndexRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.datastore.admin.v1.GetIndexRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetIndexRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a ListIndexesRequest. */
+                interface IListIndexesRequest {
+
+                    /** ListIndexesRequest projectId */
+                    projectId?: (string|null);
+
+                    /** ListIndexesRequest filter */
+                    filter?: (string|null);
+
+                    /** ListIndexesRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListIndexesRequest pageToken */
+                    pageToken?: (string|null);
+                }
+
+                /** Represents a ListIndexesRequest. */
+                class ListIndexesRequest implements IListIndexesRequest {
+
+                    /**
+                     * Constructs a new ListIndexesRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.datastore.admin.v1.IListIndexesRequest);
+
+                    /** ListIndexesRequest projectId. */
+                    public projectId: string;
+
+                    /** ListIndexesRequest filter. */
+                    public filter: string;
+
+                    /** ListIndexesRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListIndexesRequest pageToken. */
+                    public pageToken: string;
+
+                    /**
+                     * Creates a new ListIndexesRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListIndexesRequest instance
+                     */
+                    public static create(properties?: google.datastore.admin.v1.IListIndexesRequest): google.datastore.admin.v1.ListIndexesRequest;
+
+                    /**
+                     * Encodes the specified ListIndexesRequest message. Does not implicitly {@link google.datastore.admin.v1.ListIndexesRequest.verify|verify} messages.
+                     * @param message ListIndexesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.datastore.admin.v1.IListIndexesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListIndexesRequest message, length delimited. Does not implicitly {@link google.datastore.admin.v1.ListIndexesRequest.verify|verify} messages.
+                     * @param message ListIndexesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.datastore.admin.v1.IListIndexesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListIndexesRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListIndexesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.datastore.admin.v1.ListIndexesRequest;
+
+                    /**
+                     * Decodes a ListIndexesRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListIndexesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.datastore.admin.v1.ListIndexesRequest;
+
+                    /**
+                     * Verifies a ListIndexesRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListIndexesRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListIndexesRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.datastore.admin.v1.ListIndexesRequest;
+
+                    /**
+                     * Creates a plain object from a ListIndexesRequest message. Also converts values to other types if specified.
+                     * @param message ListIndexesRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.datastore.admin.v1.ListIndexesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListIndexesRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a ListIndexesResponse. */
+                interface IListIndexesResponse {
+
+                    /** ListIndexesResponse indexes */
+                    indexes?: (google.datastore.admin.v1.IIndex[]|null);
+
+                    /** ListIndexesResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListIndexesResponse. */
+                class ListIndexesResponse implements IListIndexesResponse {
+
+                    /**
+                     * Constructs a new ListIndexesResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.datastore.admin.v1.IListIndexesResponse);
+
+                    /** ListIndexesResponse indexes. */
+                    public indexes: google.datastore.admin.v1.IIndex[];
+
+                    /** ListIndexesResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListIndexesResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListIndexesResponse instance
+                     */
+                    public static create(properties?: google.datastore.admin.v1.IListIndexesResponse): google.datastore.admin.v1.ListIndexesResponse;
+
+                    /**
+                     * Encodes the specified ListIndexesResponse message. Does not implicitly {@link google.datastore.admin.v1.ListIndexesResponse.verify|verify} messages.
+                     * @param message ListIndexesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.datastore.admin.v1.IListIndexesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListIndexesResponse message, length delimited. Does not implicitly {@link google.datastore.admin.v1.ListIndexesResponse.verify|verify} messages.
+                     * @param message ListIndexesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.datastore.admin.v1.IListIndexesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListIndexesResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListIndexesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.datastore.admin.v1.ListIndexesResponse;
+
+                    /**
+                     * Decodes a ListIndexesResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListIndexesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.datastore.admin.v1.ListIndexesResponse;
+
+                    /**
+                     * Verifies a ListIndexesResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListIndexesResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListIndexesResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.datastore.admin.v1.ListIndexesResponse;
+
+                    /**
+                     * Creates a plain object from a ListIndexesResponse message. Also converts values to other types if specified.
+                     * @param message ListIndexesResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.datastore.admin.v1.ListIndexesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListIndexesResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of an IndexOperationMetadata. */
+                interface IIndexOperationMetadata {
+
+                    /** IndexOperationMetadata common */
+                    common?: (google.datastore.admin.v1.ICommonMetadata|null);
+
+                    /** IndexOperationMetadata progressEntities */
+                    progressEntities?: (google.datastore.admin.v1.IProgress|null);
+
+                    /** IndexOperationMetadata indexId */
+                    indexId?: (string|null);
+                }
+
+                /** Represents an IndexOperationMetadata. */
+                class IndexOperationMetadata implements IIndexOperationMetadata {
+
+                    /**
+                     * Constructs a new IndexOperationMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.datastore.admin.v1.IIndexOperationMetadata);
+
+                    /** IndexOperationMetadata common. */
+                    public common?: (google.datastore.admin.v1.ICommonMetadata|null);
+
+                    /** IndexOperationMetadata progressEntities. */
+                    public progressEntities?: (google.datastore.admin.v1.IProgress|null);
+
+                    /** IndexOperationMetadata indexId. */
+                    public indexId: string;
+
+                    /**
+                     * Creates a new IndexOperationMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns IndexOperationMetadata instance
+                     */
+                    public static create(properties?: google.datastore.admin.v1.IIndexOperationMetadata): google.datastore.admin.v1.IndexOperationMetadata;
+
+                    /**
+                     * Encodes the specified IndexOperationMetadata message. Does not implicitly {@link google.datastore.admin.v1.IndexOperationMetadata.verify|verify} messages.
+                     * @param message IndexOperationMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.datastore.admin.v1.IIndexOperationMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified IndexOperationMetadata message, length delimited. Does not implicitly {@link google.datastore.admin.v1.IndexOperationMetadata.verify|verify} messages.
+                     * @param message IndexOperationMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.datastore.admin.v1.IIndexOperationMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an IndexOperationMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns IndexOperationMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.datastore.admin.v1.IndexOperationMetadata;
+
+                    /**
+                     * Decodes an IndexOperationMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns IndexOperationMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.datastore.admin.v1.IndexOperationMetadata;
+
+                    /**
+                     * Verifies an IndexOperationMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an IndexOperationMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns IndexOperationMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.datastore.admin.v1.IndexOperationMetadata;
+
+                    /**
+                     * Creates a plain object from an IndexOperationMetadata message. Also converts values to other types if specified.
+                     * @param message IndexOperationMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.datastore.admin.v1.IndexOperationMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this IndexOperationMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of an Index. */
+                interface IIndex {
+
+                    /** Index projectId */
+                    projectId?: (string|null);
+
+                    /** Index indexId */
+                    indexId?: (string|null);
+
+                    /** Index kind */
+                    kind?: (string|null);
+
+                    /** Index ancestor */
+                    ancestor?: (google.datastore.admin.v1.Index.AncestorMode|keyof typeof google.datastore.admin.v1.Index.AncestorMode|null);
+
+                    /** Index properties */
+                    properties?: (google.datastore.admin.v1.Index.IIndexedProperty[]|null);
+
+                    /** Index state */
+                    state?: (google.datastore.admin.v1.Index.State|keyof typeof google.datastore.admin.v1.Index.State|null);
+                }
+
+                /** Represents an Index. */
+                class Index implements IIndex {
+
+                    /**
+                     * Constructs a new Index.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.datastore.admin.v1.IIndex);
+
+                    /** Index projectId. */
+                    public projectId: string;
+
+                    /** Index indexId. */
+                    public indexId: string;
+
+                    /** Index kind. */
+                    public kind: string;
+
+                    /** Index ancestor. */
+                    public ancestor: (google.datastore.admin.v1.Index.AncestorMode|keyof typeof google.datastore.admin.v1.Index.AncestorMode);
+
+                    /** Index properties. */
+                    public properties: google.datastore.admin.v1.Index.IIndexedProperty[];
+
+                    /** Index state. */
+                    public state: (google.datastore.admin.v1.Index.State|keyof typeof google.datastore.admin.v1.Index.State);
+
+                    /**
+                     * Creates a new Index instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Index instance
+                     */
+                    public static create(properties?: google.datastore.admin.v1.IIndex): google.datastore.admin.v1.Index;
+
+                    /**
+                     * Encodes the specified Index message. Does not implicitly {@link google.datastore.admin.v1.Index.verify|verify} messages.
+                     * @param message Index message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.datastore.admin.v1.IIndex, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Index message, length delimited. Does not implicitly {@link google.datastore.admin.v1.Index.verify|verify} messages.
+                     * @param message Index message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.datastore.admin.v1.IIndex, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an Index message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Index
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.datastore.admin.v1.Index;
+
+                    /**
+                     * Decodes an Index message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Index
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.datastore.admin.v1.Index;
+
+                    /**
+                     * Verifies an Index message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an Index message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Index
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.datastore.admin.v1.Index;
+
+                    /**
+                     * Creates a plain object from an Index message. Also converts values to other types if specified.
+                     * @param message Index
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.datastore.admin.v1.Index, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Index to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                namespace Index {
+
+                    /** Properties of an IndexedProperty. */
+                    interface IIndexedProperty {
+
+                        /** IndexedProperty name */
+                        name?: (string|null);
+
+                        /** IndexedProperty direction */
+                        direction?: (google.datastore.admin.v1.Index.Direction|keyof typeof google.datastore.admin.v1.Index.Direction|null);
+                    }
+
+                    /** Represents an IndexedProperty. */
+                    class IndexedProperty implements IIndexedProperty {
+
+                        /**
+                         * Constructs a new IndexedProperty.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.datastore.admin.v1.Index.IIndexedProperty);
+
+                        /** IndexedProperty name. */
+                        public name: string;
+
+                        /** IndexedProperty direction. */
+                        public direction: (google.datastore.admin.v1.Index.Direction|keyof typeof google.datastore.admin.v1.Index.Direction);
+
+                        /**
+                         * Creates a new IndexedProperty instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns IndexedProperty instance
+                         */
+                        public static create(properties?: google.datastore.admin.v1.Index.IIndexedProperty): google.datastore.admin.v1.Index.IndexedProperty;
+
+                        /**
+                         * Encodes the specified IndexedProperty message. Does not implicitly {@link google.datastore.admin.v1.Index.IndexedProperty.verify|verify} messages.
+                         * @param message IndexedProperty message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.datastore.admin.v1.Index.IIndexedProperty, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified IndexedProperty message, length delimited. Does not implicitly {@link google.datastore.admin.v1.Index.IndexedProperty.verify|verify} messages.
+                         * @param message IndexedProperty message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.datastore.admin.v1.Index.IIndexedProperty, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an IndexedProperty message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns IndexedProperty
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.datastore.admin.v1.Index.IndexedProperty;
+
+                        /**
+                         * Decodes an IndexedProperty message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns IndexedProperty
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.datastore.admin.v1.Index.IndexedProperty;
+
+                        /**
+                         * Verifies an IndexedProperty message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an IndexedProperty message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns IndexedProperty
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.datastore.admin.v1.Index.IndexedProperty;
+
+                        /**
+                         * Creates a plain object from an IndexedProperty message. Also converts values to other types if specified.
+                         * @param message IndexedProperty
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.datastore.admin.v1.Index.IndexedProperty, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this IndexedProperty to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    /** AncestorMode enum. */
+                    enum AncestorMode {
+                        ANCESTOR_MODE_UNSPECIFIED = 0,
+                        NONE = 1,
+                        ALL_ANCESTORS = 2
+                    }
+
+                    /** Direction enum. */
+                    enum Direction {
+                        DIRECTION_UNSPECIFIED = 0,
+                        ASCENDING = 1,
+                        DESCENDING = 2
+                    }
+
+                    /** State enum. */
+                    enum State {
+                        STATE_UNSPECIFIED = 0,
+                        CREATING = 1,
+                        READY = 2,
+                        DELETING = 3,
+                        ERROR = 4
+                    }
+                }
+            }
+        }
+
         /** Namespace v1. */
         namespace v1 {
 
@@ -6857,6 +8481,9 @@ export namespace google {
 
             /** MethodOptions .google.api.methodSignature */
             ".google.api.methodSignature"?: (string[]|null);
+
+            /** MethodOptions .google.longrunning.operationInfo */
+            ".google.longrunning.operationInfo"?: (google.longrunning.IOperationInfo|null);
         }
 
         /** Represents a MethodOptions. */
@@ -7591,6 +9218,378 @@ export namespace google {
             }
         }
 
+        /** Properties of an Any. */
+        interface IAny {
+
+            /** Any type_url */
+            type_url?: (string|null);
+
+            /** Any value */
+            value?: (Uint8Array|string|null);
+        }
+
+        /** Represents an Any. */
+        class Any implements IAny {
+
+            /**
+             * Constructs a new Any.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.protobuf.IAny);
+
+            /** Any type_url. */
+            public type_url: string;
+
+            /** Any value. */
+            public value: (Uint8Array|string);
+
+            /**
+             * Creates a new Any instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns Any instance
+             */
+            public static create(properties?: google.protobuf.IAny): google.protobuf.Any;
+
+            /**
+             * Encodes the specified Any message. Does not implicitly {@link google.protobuf.Any.verify|verify} messages.
+             * @param message Any message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.protobuf.IAny, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified Any message, length delimited. Does not implicitly {@link google.protobuf.Any.verify|verify} messages.
+             * @param message Any message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.protobuf.IAny, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes an Any message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns Any
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.Any;
+
+            /**
+             * Decodes an Any message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns Any
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.Any;
+
+            /**
+             * Verifies an Any message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates an Any message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns Any
+             */
+            public static fromObject(object: { [k: string]: any }): google.protobuf.Any;
+
+            /**
+             * Creates a plain object from an Any message. Also converts values to other types if specified.
+             * @param message Any
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.protobuf.Any, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this Any to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+        }
+
+        /** Properties of a Duration. */
+        interface IDuration {
+
+            /** Duration seconds */
+            seconds?: (number|Long|string|null);
+
+            /** Duration nanos */
+            nanos?: (number|null);
+        }
+
+        /** Represents a Duration. */
+        class Duration implements IDuration {
+
+            /**
+             * Constructs a new Duration.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.protobuf.IDuration);
+
+            /** Duration seconds. */
+            public seconds: (number|Long|string);
+
+            /** Duration nanos. */
+            public nanos: number;
+
+            /**
+             * Creates a new Duration instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns Duration instance
+             */
+            public static create(properties?: google.protobuf.IDuration): google.protobuf.Duration;
+
+            /**
+             * Encodes the specified Duration message. Does not implicitly {@link google.protobuf.Duration.verify|verify} messages.
+             * @param message Duration message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.protobuf.IDuration, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified Duration message, length delimited. Does not implicitly {@link google.protobuf.Duration.verify|verify} messages.
+             * @param message Duration message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.protobuf.IDuration, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a Duration message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns Duration
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.Duration;
+
+            /**
+             * Decodes a Duration message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns Duration
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.Duration;
+
+            /**
+             * Verifies a Duration message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a Duration message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns Duration
+             */
+            public static fromObject(object: { [k: string]: any }): google.protobuf.Duration;
+
+            /**
+             * Creates a plain object from a Duration message. Also converts values to other types if specified.
+             * @param message Duration
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.protobuf.Duration, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this Duration to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+        }
+
+        /** Properties of an Empty. */
+        interface IEmpty {
+        }
+
+        /** Represents an Empty. */
+        class Empty implements IEmpty {
+
+            /**
+             * Constructs a new Empty.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.protobuf.IEmpty);
+
+            /**
+             * Creates a new Empty instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns Empty instance
+             */
+            public static create(properties?: google.protobuf.IEmpty): google.protobuf.Empty;
+
+            /**
+             * Encodes the specified Empty message. Does not implicitly {@link google.protobuf.Empty.verify|verify} messages.
+             * @param message Empty message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.protobuf.IEmpty, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified Empty message, length delimited. Does not implicitly {@link google.protobuf.Empty.verify|verify} messages.
+             * @param message Empty message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.protobuf.IEmpty, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes an Empty message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns Empty
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.Empty;
+
+            /**
+             * Decodes an Empty message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns Empty
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.Empty;
+
+            /**
+             * Verifies an Empty message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates an Empty message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns Empty
+             */
+            public static fromObject(object: { [k: string]: any }): google.protobuf.Empty;
+
+            /**
+             * Creates a plain object from an Empty message. Also converts values to other types if specified.
+             * @param message Empty
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.protobuf.Empty, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this Empty to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+        }
+
+        /** Properties of a Timestamp. */
+        interface ITimestamp {
+
+            /** Timestamp seconds */
+            seconds?: (number|Long|string|null);
+
+            /** Timestamp nanos */
+            nanos?: (number|null);
+        }
+
+        /** Represents a Timestamp. */
+        class Timestamp implements ITimestamp {
+
+            /**
+             * Constructs a new Timestamp.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.protobuf.ITimestamp);
+
+            /** Timestamp seconds. */
+            public seconds: (number|Long|string);
+
+            /** Timestamp nanos. */
+            public nanos: number;
+
+            /**
+             * Creates a new Timestamp instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns Timestamp instance
+             */
+            public static create(properties?: google.protobuf.ITimestamp): google.protobuf.Timestamp;
+
+            /**
+             * Encodes the specified Timestamp message. Does not implicitly {@link google.protobuf.Timestamp.verify|verify} messages.
+             * @param message Timestamp message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.protobuf.ITimestamp, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified Timestamp message, length delimited. Does not implicitly {@link google.protobuf.Timestamp.verify|verify} messages.
+             * @param message Timestamp message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.protobuf.ITimestamp, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a Timestamp message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns Timestamp
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.Timestamp;
+
+            /**
+             * Decodes a Timestamp message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns Timestamp
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.Timestamp;
+
+            /**
+             * Verifies a Timestamp message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a Timestamp message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns Timestamp
+             */
+            public static fromObject(object: { [k: string]: any }): google.protobuf.Timestamp;
+
+            /**
+             * Creates a plain object from a Timestamp message. Also converts values to other types if specified.
+             * @param message Timestamp
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.protobuf.Timestamp, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this Timestamp to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+        }
+
         /** Properties of a Struct. */
         interface IStruct {
 
@@ -7894,102 +9893,6 @@ export namespace google {
 
             /**
              * Converts this ListValue to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-        }
-
-        /** Properties of a Timestamp. */
-        interface ITimestamp {
-
-            /** Timestamp seconds */
-            seconds?: (number|Long|string|null);
-
-            /** Timestamp nanos */
-            nanos?: (number|null);
-        }
-
-        /** Represents a Timestamp. */
-        class Timestamp implements ITimestamp {
-
-            /**
-             * Constructs a new Timestamp.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.protobuf.ITimestamp);
-
-            /** Timestamp seconds. */
-            public seconds: (number|Long|string);
-
-            /** Timestamp nanos. */
-            public nanos: number;
-
-            /**
-             * Creates a new Timestamp instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns Timestamp instance
-             */
-            public static create(properties?: google.protobuf.ITimestamp): google.protobuf.Timestamp;
-
-            /**
-             * Encodes the specified Timestamp message. Does not implicitly {@link google.protobuf.Timestamp.verify|verify} messages.
-             * @param message Timestamp message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: google.protobuf.ITimestamp, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified Timestamp message, length delimited. Does not implicitly {@link google.protobuf.Timestamp.verify|verify} messages.
-             * @param message Timestamp message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: google.protobuf.ITimestamp, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a Timestamp message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns Timestamp
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.Timestamp;
-
-            /**
-             * Decodes a Timestamp message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns Timestamp
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.Timestamp;
-
-            /**
-             * Verifies a Timestamp message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a Timestamp message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns Timestamp
-             */
-            public static fromObject(object: { [k: string]: any }): google.protobuf.Timestamp;
-
-            /**
-             * Creates a plain object from a Timestamp message. Also converts values to other types if specified.
-             * @param message Timestamp
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.protobuf.Timestamp, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this Timestamp to JSON.
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
@@ -8800,6 +10703,1028 @@ export namespace google {
 
             /**
              * Converts this BytesValue to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+        }
+    }
+
+    /** Namespace longrunning. */
+    namespace longrunning {
+
+        /** Represents an Operations */
+        class Operations extends $protobuf.rpc.Service {
+
+            /**
+             * Constructs a new Operations service.
+             * @param rpcImpl RPC implementation
+             * @param [requestDelimited=false] Whether requests are length-delimited
+             * @param [responseDelimited=false] Whether responses are length-delimited
+             */
+            constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+            /**
+             * Creates new Operations service using the specified rpc implementation.
+             * @param rpcImpl RPC implementation
+             * @param [requestDelimited=false] Whether requests are length-delimited
+             * @param [responseDelimited=false] Whether responses are length-delimited
+             * @returns RPC service. Useful where requests and/or responses are streamed.
+             */
+            public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): Operations;
+
+            /**
+             * Calls ListOperations.
+             * @param request ListOperationsRequest message or plain object
+             * @param callback Node-style callback called with the error, if any, and ListOperationsResponse
+             */
+            public listOperations(request: google.longrunning.IListOperationsRequest, callback: google.longrunning.Operations.ListOperationsCallback): void;
+
+            /**
+             * Calls ListOperations.
+             * @param request ListOperationsRequest message or plain object
+             * @returns Promise
+             */
+            public listOperations(request: google.longrunning.IListOperationsRequest): Promise<google.longrunning.ListOperationsResponse>;
+
+            /**
+             * Calls GetOperation.
+             * @param request GetOperationRequest message or plain object
+             * @param callback Node-style callback called with the error, if any, and Operation
+             */
+            public getOperation(request: google.longrunning.IGetOperationRequest, callback: google.longrunning.Operations.GetOperationCallback): void;
+
+            /**
+             * Calls GetOperation.
+             * @param request GetOperationRequest message or plain object
+             * @returns Promise
+             */
+            public getOperation(request: google.longrunning.IGetOperationRequest): Promise<google.longrunning.Operation>;
+
+            /**
+             * Calls DeleteOperation.
+             * @param request DeleteOperationRequest message or plain object
+             * @param callback Node-style callback called with the error, if any, and Empty
+             */
+            public deleteOperation(request: google.longrunning.IDeleteOperationRequest, callback: google.longrunning.Operations.DeleteOperationCallback): void;
+
+            /**
+             * Calls DeleteOperation.
+             * @param request DeleteOperationRequest message or plain object
+             * @returns Promise
+             */
+            public deleteOperation(request: google.longrunning.IDeleteOperationRequest): Promise<google.protobuf.Empty>;
+
+            /**
+             * Calls CancelOperation.
+             * @param request CancelOperationRequest message or plain object
+             * @param callback Node-style callback called with the error, if any, and Empty
+             */
+            public cancelOperation(request: google.longrunning.ICancelOperationRequest, callback: google.longrunning.Operations.CancelOperationCallback): void;
+
+            /**
+             * Calls CancelOperation.
+             * @param request CancelOperationRequest message or plain object
+             * @returns Promise
+             */
+            public cancelOperation(request: google.longrunning.ICancelOperationRequest): Promise<google.protobuf.Empty>;
+
+            /**
+             * Calls WaitOperation.
+             * @param request WaitOperationRequest message or plain object
+             * @param callback Node-style callback called with the error, if any, and Operation
+             */
+            public waitOperation(request: google.longrunning.IWaitOperationRequest, callback: google.longrunning.Operations.WaitOperationCallback): void;
+
+            /**
+             * Calls WaitOperation.
+             * @param request WaitOperationRequest message or plain object
+             * @returns Promise
+             */
+            public waitOperation(request: google.longrunning.IWaitOperationRequest): Promise<google.longrunning.Operation>;
+        }
+
+        namespace Operations {
+
+            /**
+             * Callback as used by {@link google.longrunning.Operations#listOperations}.
+             * @param error Error, if any
+             * @param [response] ListOperationsResponse
+             */
+            type ListOperationsCallback = (error: (Error|null), response?: google.longrunning.ListOperationsResponse) => void;
+
+            /**
+             * Callback as used by {@link google.longrunning.Operations#getOperation}.
+             * @param error Error, if any
+             * @param [response] Operation
+             */
+            type GetOperationCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+            /**
+             * Callback as used by {@link google.longrunning.Operations#deleteOperation}.
+             * @param error Error, if any
+             * @param [response] Empty
+             */
+            type DeleteOperationCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
+
+            /**
+             * Callback as used by {@link google.longrunning.Operations#cancelOperation}.
+             * @param error Error, if any
+             * @param [response] Empty
+             */
+            type CancelOperationCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
+
+            /**
+             * Callback as used by {@link google.longrunning.Operations#waitOperation}.
+             * @param error Error, if any
+             * @param [response] Operation
+             */
+            type WaitOperationCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+        }
+
+        /** Properties of an Operation. */
+        interface IOperation {
+
+            /** Operation name */
+            name?: (string|null);
+
+            /** Operation metadata */
+            metadata?: (google.protobuf.IAny|null);
+
+            /** Operation done */
+            done?: (boolean|null);
+
+            /** Operation error */
+            error?: (google.rpc.IStatus|null);
+
+            /** Operation response */
+            response?: (google.protobuf.IAny|null);
+        }
+
+        /** Represents an Operation. */
+        class Operation implements IOperation {
+
+            /**
+             * Constructs a new Operation.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.longrunning.IOperation);
+
+            /** Operation name. */
+            public name: string;
+
+            /** Operation metadata. */
+            public metadata?: (google.protobuf.IAny|null);
+
+            /** Operation done. */
+            public done: boolean;
+
+            /** Operation error. */
+            public error?: (google.rpc.IStatus|null);
+
+            /** Operation response. */
+            public response?: (google.protobuf.IAny|null);
+
+            /** Operation result. */
+            public result?: ("error"|"response");
+
+            /**
+             * Creates a new Operation instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns Operation instance
+             */
+            public static create(properties?: google.longrunning.IOperation): google.longrunning.Operation;
+
+            /**
+             * Encodes the specified Operation message. Does not implicitly {@link google.longrunning.Operation.verify|verify} messages.
+             * @param message Operation message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.longrunning.IOperation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified Operation message, length delimited. Does not implicitly {@link google.longrunning.Operation.verify|verify} messages.
+             * @param message Operation message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.longrunning.IOperation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes an Operation message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns Operation
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.longrunning.Operation;
+
+            /**
+             * Decodes an Operation message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns Operation
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.longrunning.Operation;
+
+            /**
+             * Verifies an Operation message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates an Operation message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns Operation
+             */
+            public static fromObject(object: { [k: string]: any }): google.longrunning.Operation;
+
+            /**
+             * Creates a plain object from an Operation message. Also converts values to other types if specified.
+             * @param message Operation
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.longrunning.Operation, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this Operation to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+        }
+
+        /** Properties of a GetOperationRequest. */
+        interface IGetOperationRequest {
+
+            /** GetOperationRequest name */
+            name?: (string|null);
+        }
+
+        /** Represents a GetOperationRequest. */
+        class GetOperationRequest implements IGetOperationRequest {
+
+            /**
+             * Constructs a new GetOperationRequest.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.longrunning.IGetOperationRequest);
+
+            /** GetOperationRequest name. */
+            public name: string;
+
+            /**
+             * Creates a new GetOperationRequest instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns GetOperationRequest instance
+             */
+            public static create(properties?: google.longrunning.IGetOperationRequest): google.longrunning.GetOperationRequest;
+
+            /**
+             * Encodes the specified GetOperationRequest message. Does not implicitly {@link google.longrunning.GetOperationRequest.verify|verify} messages.
+             * @param message GetOperationRequest message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.longrunning.IGetOperationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified GetOperationRequest message, length delimited. Does not implicitly {@link google.longrunning.GetOperationRequest.verify|verify} messages.
+             * @param message GetOperationRequest message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.longrunning.IGetOperationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a GetOperationRequest message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns GetOperationRequest
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.longrunning.GetOperationRequest;
+
+            /**
+             * Decodes a GetOperationRequest message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns GetOperationRequest
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.longrunning.GetOperationRequest;
+
+            /**
+             * Verifies a GetOperationRequest message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a GetOperationRequest message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns GetOperationRequest
+             */
+            public static fromObject(object: { [k: string]: any }): google.longrunning.GetOperationRequest;
+
+            /**
+             * Creates a plain object from a GetOperationRequest message. Also converts values to other types if specified.
+             * @param message GetOperationRequest
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.longrunning.GetOperationRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this GetOperationRequest to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+        }
+
+        /** Properties of a ListOperationsRequest. */
+        interface IListOperationsRequest {
+
+            /** ListOperationsRequest name */
+            name?: (string|null);
+
+            /** ListOperationsRequest filter */
+            filter?: (string|null);
+
+            /** ListOperationsRequest pageSize */
+            pageSize?: (number|null);
+
+            /** ListOperationsRequest pageToken */
+            pageToken?: (string|null);
+        }
+
+        /** Represents a ListOperationsRequest. */
+        class ListOperationsRequest implements IListOperationsRequest {
+
+            /**
+             * Constructs a new ListOperationsRequest.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.longrunning.IListOperationsRequest);
+
+            /** ListOperationsRequest name. */
+            public name: string;
+
+            /** ListOperationsRequest filter. */
+            public filter: string;
+
+            /** ListOperationsRequest pageSize. */
+            public pageSize: number;
+
+            /** ListOperationsRequest pageToken. */
+            public pageToken: string;
+
+            /**
+             * Creates a new ListOperationsRequest instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns ListOperationsRequest instance
+             */
+            public static create(properties?: google.longrunning.IListOperationsRequest): google.longrunning.ListOperationsRequest;
+
+            /**
+             * Encodes the specified ListOperationsRequest message. Does not implicitly {@link google.longrunning.ListOperationsRequest.verify|verify} messages.
+             * @param message ListOperationsRequest message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.longrunning.IListOperationsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified ListOperationsRequest message, length delimited. Does not implicitly {@link google.longrunning.ListOperationsRequest.verify|verify} messages.
+             * @param message ListOperationsRequest message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.longrunning.IListOperationsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a ListOperationsRequest message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns ListOperationsRequest
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.longrunning.ListOperationsRequest;
+
+            /**
+             * Decodes a ListOperationsRequest message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns ListOperationsRequest
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.longrunning.ListOperationsRequest;
+
+            /**
+             * Verifies a ListOperationsRequest message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a ListOperationsRequest message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns ListOperationsRequest
+             */
+            public static fromObject(object: { [k: string]: any }): google.longrunning.ListOperationsRequest;
+
+            /**
+             * Creates a plain object from a ListOperationsRequest message. Also converts values to other types if specified.
+             * @param message ListOperationsRequest
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.longrunning.ListOperationsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this ListOperationsRequest to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+        }
+
+        /** Properties of a ListOperationsResponse. */
+        interface IListOperationsResponse {
+
+            /** ListOperationsResponse operations */
+            operations?: (google.longrunning.IOperation[]|null);
+
+            /** ListOperationsResponse nextPageToken */
+            nextPageToken?: (string|null);
+        }
+
+        /** Represents a ListOperationsResponse. */
+        class ListOperationsResponse implements IListOperationsResponse {
+
+            /**
+             * Constructs a new ListOperationsResponse.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.longrunning.IListOperationsResponse);
+
+            /** ListOperationsResponse operations. */
+            public operations: google.longrunning.IOperation[];
+
+            /** ListOperationsResponse nextPageToken. */
+            public nextPageToken: string;
+
+            /**
+             * Creates a new ListOperationsResponse instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns ListOperationsResponse instance
+             */
+            public static create(properties?: google.longrunning.IListOperationsResponse): google.longrunning.ListOperationsResponse;
+
+            /**
+             * Encodes the specified ListOperationsResponse message. Does not implicitly {@link google.longrunning.ListOperationsResponse.verify|verify} messages.
+             * @param message ListOperationsResponse message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.longrunning.IListOperationsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified ListOperationsResponse message, length delimited. Does not implicitly {@link google.longrunning.ListOperationsResponse.verify|verify} messages.
+             * @param message ListOperationsResponse message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.longrunning.IListOperationsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a ListOperationsResponse message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns ListOperationsResponse
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.longrunning.ListOperationsResponse;
+
+            /**
+             * Decodes a ListOperationsResponse message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns ListOperationsResponse
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.longrunning.ListOperationsResponse;
+
+            /**
+             * Verifies a ListOperationsResponse message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a ListOperationsResponse message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns ListOperationsResponse
+             */
+            public static fromObject(object: { [k: string]: any }): google.longrunning.ListOperationsResponse;
+
+            /**
+             * Creates a plain object from a ListOperationsResponse message. Also converts values to other types if specified.
+             * @param message ListOperationsResponse
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.longrunning.ListOperationsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this ListOperationsResponse to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+        }
+
+        /** Properties of a CancelOperationRequest. */
+        interface ICancelOperationRequest {
+
+            /** CancelOperationRequest name */
+            name?: (string|null);
+        }
+
+        /** Represents a CancelOperationRequest. */
+        class CancelOperationRequest implements ICancelOperationRequest {
+
+            /**
+             * Constructs a new CancelOperationRequest.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.longrunning.ICancelOperationRequest);
+
+            /** CancelOperationRequest name. */
+            public name: string;
+
+            /**
+             * Creates a new CancelOperationRequest instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns CancelOperationRequest instance
+             */
+            public static create(properties?: google.longrunning.ICancelOperationRequest): google.longrunning.CancelOperationRequest;
+
+            /**
+             * Encodes the specified CancelOperationRequest message. Does not implicitly {@link google.longrunning.CancelOperationRequest.verify|verify} messages.
+             * @param message CancelOperationRequest message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.longrunning.ICancelOperationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified CancelOperationRequest message, length delimited. Does not implicitly {@link google.longrunning.CancelOperationRequest.verify|verify} messages.
+             * @param message CancelOperationRequest message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.longrunning.ICancelOperationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a CancelOperationRequest message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns CancelOperationRequest
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.longrunning.CancelOperationRequest;
+
+            /**
+             * Decodes a CancelOperationRequest message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns CancelOperationRequest
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.longrunning.CancelOperationRequest;
+
+            /**
+             * Verifies a CancelOperationRequest message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a CancelOperationRequest message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns CancelOperationRequest
+             */
+            public static fromObject(object: { [k: string]: any }): google.longrunning.CancelOperationRequest;
+
+            /**
+             * Creates a plain object from a CancelOperationRequest message. Also converts values to other types if specified.
+             * @param message CancelOperationRequest
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.longrunning.CancelOperationRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this CancelOperationRequest to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+        }
+
+        /** Properties of a DeleteOperationRequest. */
+        interface IDeleteOperationRequest {
+
+            /** DeleteOperationRequest name */
+            name?: (string|null);
+        }
+
+        /** Represents a DeleteOperationRequest. */
+        class DeleteOperationRequest implements IDeleteOperationRequest {
+
+            /**
+             * Constructs a new DeleteOperationRequest.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.longrunning.IDeleteOperationRequest);
+
+            /** DeleteOperationRequest name. */
+            public name: string;
+
+            /**
+             * Creates a new DeleteOperationRequest instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns DeleteOperationRequest instance
+             */
+            public static create(properties?: google.longrunning.IDeleteOperationRequest): google.longrunning.DeleteOperationRequest;
+
+            /**
+             * Encodes the specified DeleteOperationRequest message. Does not implicitly {@link google.longrunning.DeleteOperationRequest.verify|verify} messages.
+             * @param message DeleteOperationRequest message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.longrunning.IDeleteOperationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified DeleteOperationRequest message, length delimited. Does not implicitly {@link google.longrunning.DeleteOperationRequest.verify|verify} messages.
+             * @param message DeleteOperationRequest message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.longrunning.IDeleteOperationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a DeleteOperationRequest message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns DeleteOperationRequest
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.longrunning.DeleteOperationRequest;
+
+            /**
+             * Decodes a DeleteOperationRequest message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns DeleteOperationRequest
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.longrunning.DeleteOperationRequest;
+
+            /**
+             * Verifies a DeleteOperationRequest message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a DeleteOperationRequest message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns DeleteOperationRequest
+             */
+            public static fromObject(object: { [k: string]: any }): google.longrunning.DeleteOperationRequest;
+
+            /**
+             * Creates a plain object from a DeleteOperationRequest message. Also converts values to other types if specified.
+             * @param message DeleteOperationRequest
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.longrunning.DeleteOperationRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this DeleteOperationRequest to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+        }
+
+        /** Properties of a WaitOperationRequest. */
+        interface IWaitOperationRequest {
+
+            /** WaitOperationRequest name */
+            name?: (string|null);
+
+            /** WaitOperationRequest timeout */
+            timeout?: (google.protobuf.IDuration|null);
+        }
+
+        /** Represents a WaitOperationRequest. */
+        class WaitOperationRequest implements IWaitOperationRequest {
+
+            /**
+             * Constructs a new WaitOperationRequest.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.longrunning.IWaitOperationRequest);
+
+            /** WaitOperationRequest name. */
+            public name: string;
+
+            /** WaitOperationRequest timeout. */
+            public timeout?: (google.protobuf.IDuration|null);
+
+            /**
+             * Creates a new WaitOperationRequest instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns WaitOperationRequest instance
+             */
+            public static create(properties?: google.longrunning.IWaitOperationRequest): google.longrunning.WaitOperationRequest;
+
+            /**
+             * Encodes the specified WaitOperationRequest message. Does not implicitly {@link google.longrunning.WaitOperationRequest.verify|verify} messages.
+             * @param message WaitOperationRequest message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.longrunning.IWaitOperationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified WaitOperationRequest message, length delimited. Does not implicitly {@link google.longrunning.WaitOperationRequest.verify|verify} messages.
+             * @param message WaitOperationRequest message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.longrunning.IWaitOperationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a WaitOperationRequest message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns WaitOperationRequest
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.longrunning.WaitOperationRequest;
+
+            /**
+             * Decodes a WaitOperationRequest message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns WaitOperationRequest
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.longrunning.WaitOperationRequest;
+
+            /**
+             * Verifies a WaitOperationRequest message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a WaitOperationRequest message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns WaitOperationRequest
+             */
+            public static fromObject(object: { [k: string]: any }): google.longrunning.WaitOperationRequest;
+
+            /**
+             * Creates a plain object from a WaitOperationRequest message. Also converts values to other types if specified.
+             * @param message WaitOperationRequest
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.longrunning.WaitOperationRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this WaitOperationRequest to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+        }
+
+        /** Properties of an OperationInfo. */
+        interface IOperationInfo {
+
+            /** OperationInfo responseType */
+            responseType?: (string|null);
+
+            /** OperationInfo metadataType */
+            metadataType?: (string|null);
+        }
+
+        /** Represents an OperationInfo. */
+        class OperationInfo implements IOperationInfo {
+
+            /**
+             * Constructs a new OperationInfo.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.longrunning.IOperationInfo);
+
+            /** OperationInfo responseType. */
+            public responseType: string;
+
+            /** OperationInfo metadataType. */
+            public metadataType: string;
+
+            /**
+             * Creates a new OperationInfo instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns OperationInfo instance
+             */
+            public static create(properties?: google.longrunning.IOperationInfo): google.longrunning.OperationInfo;
+
+            /**
+             * Encodes the specified OperationInfo message. Does not implicitly {@link google.longrunning.OperationInfo.verify|verify} messages.
+             * @param message OperationInfo message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.longrunning.IOperationInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified OperationInfo message, length delimited. Does not implicitly {@link google.longrunning.OperationInfo.verify|verify} messages.
+             * @param message OperationInfo message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.longrunning.IOperationInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes an OperationInfo message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns OperationInfo
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.longrunning.OperationInfo;
+
+            /**
+             * Decodes an OperationInfo message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns OperationInfo
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.longrunning.OperationInfo;
+
+            /**
+             * Verifies an OperationInfo message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates an OperationInfo message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns OperationInfo
+             */
+            public static fromObject(object: { [k: string]: any }): google.longrunning.OperationInfo;
+
+            /**
+             * Creates a plain object from an OperationInfo message. Also converts values to other types if specified.
+             * @param message OperationInfo
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.longrunning.OperationInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this OperationInfo to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+        }
+    }
+
+    /** Namespace rpc. */
+    namespace rpc {
+
+        /** Properties of a Status. */
+        interface IStatus {
+
+            /** Status code */
+            code?: (number|null);
+
+            /** Status message */
+            message?: (string|null);
+
+            /** Status details */
+            details?: (google.protobuf.IAny[]|null);
+        }
+
+        /** Represents a Status. */
+        class Status implements IStatus {
+
+            /**
+             * Constructs a new Status.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.rpc.IStatus);
+
+            /** Status code. */
+            public code: number;
+
+            /** Status message. */
+            public message: string;
+
+            /** Status details. */
+            public details: google.protobuf.IAny[];
+
+            /**
+             * Creates a new Status instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns Status instance
+             */
+            public static create(properties?: google.rpc.IStatus): google.rpc.Status;
+
+            /**
+             * Encodes the specified Status message. Does not implicitly {@link google.rpc.Status.verify|verify} messages.
+             * @param message Status message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.rpc.IStatus, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified Status message, length delimited. Does not implicitly {@link google.rpc.Status.verify|verify} messages.
+             * @param message Status message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.rpc.IStatus, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a Status message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns Status
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.rpc.Status;
+
+            /**
+             * Decodes a Status message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns Status
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.rpc.Status;
+
+            /**
+             * Verifies a Status message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a Status message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns Status
+             */
+            public static fromObject(object: { [k: string]: any }): google.rpc.Status;
+
+            /**
+             * Creates a plain object from a Status message. Also converts values to other types if specified.
+             * @param message Status
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.rpc.Status, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this Status to JSON.
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
