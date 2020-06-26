@@ -1,5 +1,24 @@
 # Changelog
 
+## [3.1.0](https://www.github.com/googleapis/nodejs-secret-manager/compare/v3.0.0...v3.1.0) (2020-06-18)
+
+
+### Features
+
+* add Blunderbuss config ([#111](https://www.github.com/googleapis/nodejs-secret-manager/issues/111)) ([312543e](https://www.github.com/googleapis/nodejs-secret-manager/commit/312543e03b19bb9b77ae3dcbccadadc63b5cf66f))
+* upgrade library to GA ([#123](https://www.github.com/googleapis/nodejs-secret-manager/issues/123)) ([aa89efa](https://www.github.com/googleapis/nodejs-secret-manager/commit/aa89efaaf93b8d94f2bf9fa1d96725d49552dad2))
+* **secrets:** begin migration to secret manager from keystore ([#125](https://www.github.com/googleapis/nodejs-secret-manager/issues/125)) ([a4f483e](https://www.github.com/googleapis/nodejs-secret-manager/commit/a4f483e9eb9122661bc42a1185076af169363d75))
+
+
+### Bug Fixes
+
+* **samples:** correct usage of toString() ([#117](https://www.github.com/googleapis/nodejs-secret-manager/issues/117)) ([e4f228e](https://www.github.com/googleapis/nodejs-secret-manager/commit/e4f228efc81bc6d9e7953ce0bfabdf2503967b27))
+* handle fallback option properly ([#128](https://www.github.com/googleapis/nodejs-secret-manager/issues/128)) ([be15ac1](https://www.github.com/googleapis/nodejs-secret-manager/commit/be15ac1a15787a42f3681b171833e2bfdfeb4e51))
+* regen protos and tests, formatting ([#115](https://www.github.com/googleapis/nodejs-secret-manager/issues/115)) ([85539e3](https://www.github.com/googleapis/nodejs-secret-manager/commit/85539e3b6b0d00dcf6e11f6e79b86f447b5bd185))
+* remove eslint, update gax, fix generated protos, run the generator ([#94](https://www.github.com/googleapis/nodejs-secret-manager/issues/94)) ([aa90072](https://www.github.com/googleapis/nodejs-secret-manager/commit/aa900721808f45a29091aca61052c08d352a8bc2))
+* synth.py clean up for multiple version ([#116](https://www.github.com/googleapis/nodejs-secret-manager/issues/116)) ([783524d](https://www.github.com/googleapis/nodejs-secret-manager/commit/783524d5925029f130a8787f02319d14a0a8dc59))
+* update node issue template ([#130](https://www.github.com/googleapis/nodejs-secret-manager/issues/130)) ([1ef393b](https://www.github.com/googleapis/nodejs-secret-manager/commit/1ef393b48c29557d557b0481641dd1b72a7a2b2e))
+
 ## [3.0.0](https://www.github.com/googleapis/nodejs-secret-manager/compare/v2.1.0...v3.0.0) (2020-04-10)
 
 
