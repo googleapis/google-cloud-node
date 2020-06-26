@@ -3,23 +3,16 @@
     {
       "git": {
         "name": ".",
-        "remote": "https://github.com/googleapis/nodejs-asset.git",
-        "sha": "77722620bce763a1f2e92afb8af6dfb5a507cad2"
+        "remote": "git@github.com:googleapis/nodejs-asset.git",
+        "sha": "38548856357b8de69f86c8d127d6f2e876f35b2f"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "3dcb344dd2a03043708b3ba40c4df141a3d5b06b",
-        "internalRef": "316789767"
-      }
-    },
-    {
-      "git": {
-        "name": "synthtool",
-        "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "b10590a4a1568548dd13cfcea9aa11d40898144b"
+        "sha": "7c577e89f1c84545113b393b7d7964473251d123",
+        "internalRef": "318542700"
       }
     }
   ],
@@ -65,6 +58,15 @@
         "source": "googleapis",
         "apiName": "asset",
         "apiVersion": "v1p4beta1",
+        "language": "typescript",
+        "generator": "gapic-generator-typescript"
+      }
+    },
+    {
+      "client": {
+        "source": "googleapis",
+        "apiName": "asset",
+        "apiVersion": "v1p5beta1",
         "language": "typescript",
         "generator": "gapic-generator-typescript"
       }
