@@ -1,5 +1,17 @@
 # Changelog
 
+## [2.1.0](https://www.github.com/googleapis/nodejs-document-ai/compare/v2.0.0...v2.1.0) (2020-06-28)
+
+
+### Features
+
+* move ts target to es2018 from es2016 ([#60](https://www.github.com/googleapis/nodejs-document-ai/issues/60)) ([73ab3b1](https://www.github.com/googleapis/nodejs-document-ai/commit/73ab3b1a98286293b0c639ed0690914de0582987))
+
+
+### Bug Fixes
+
+* proper fallback option handling ([b4aef10](https://www.github.com/googleapis/nodejs-document-ai/commit/b4aef1014338767666f05de59f04fb60b3600be6))
+
 ## [2.0.0](https://www.github.com/googleapis/nodejs-document-ai/compare/v1.0.0...v2.0.0) (2020-05-15)
 
 
