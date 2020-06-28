@@ -4,22 +4,22 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/nodejs-cloud-container.git",
-        "sha": "1a23a4afcdc5cc97952edcf7e12feae50473aa55"
+        "sha": "3899eb4b6fc50c9b8943b623ba59a94c9874c6eb"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "dd244bb3a5023a4a9290b21dae6b99020c026123",
-        "internalRef": "315023125"
+        "sha": "7c577e89f1c84545113b393b7d7964473251d123",
+        "internalRef": "318542700"
       }
     },
     {
       "git": {
         "name": "synthtool",
         "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "b10590a4a1568548dd13cfcea9aa11d40898144b"
+        "sha": "dc9caca650c77b7039e2bbc3339ffb34ae78e5b7"
       }
     }
   ],
