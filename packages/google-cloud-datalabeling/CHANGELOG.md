@@ -4,6 +4,18 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/datalabeling?activeTab=versions
 
+## [2.1.0](https://www.github.com/googleapis/nodejs-datalabeling/compare/v2.0.0...v2.1.0) (2020-06-28)
+
+
+### Features
+
+* move ts target to es2018 from es2016 ([#187](https://www.github.com/googleapis/nodejs-datalabeling/issues/187)) ([c221d20](https://www.github.com/googleapis/nodejs-datalabeling/commit/c221d20ca6db52d9c42940bd37efba8e04130fe2))
+
+
+### Bug Fixes
+
+* proper fallback option handling ([180d2e2](https://www.github.com/googleapis/nodejs-datalabeling/commit/180d2e2a9f5385e4befd1ebaa78fdac3237d6a71))
+
 ## [2.0.0](https://www.github.com/googleapis/nodejs-datalabeling/compare/v1.6.0...v2.0.0) (2020-06-04)
 
 
