@@ -4,6 +4,19 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/os-login?activeTab=versions
 
+## [3.1.0](https://www.github.com/googleapis/nodejs-os-login/compare/v3.0.1...v3.1.0) (2020-06-29)
+
+
+### Features
+
+* move ts target to es2018 from es2016 ([#348](https://www.github.com/googleapis/nodejs-os-login/issues/348)) ([3f4dce8](https://www.github.com/googleapis/nodejs-os-login/commit/3f4dce8ec3f1c601885858eb90dcec73e3d31fa5))
+
+
+### Bug Fixes
+
+* proper fallback option handling ([45d50b2](https://www.github.com/googleapis/nodejs-os-login/commit/45d50b2c13268fbe907f01945f75f2f4c7e301c4))
+* update node issue template ([#353](https://www.github.com/googleapis/nodejs-os-login/issues/353)) ([ca3ca7d](https://www.github.com/googleapis/nodejs-os-login/commit/ca3ca7d647ce15583a925970fa2ffb07e2c601ca))
+
 ### [3.0.1](https://www.github.com/googleapis/nodejs-os-login/compare/v3.0.0...v3.0.1) (2020-06-04)
 
 
