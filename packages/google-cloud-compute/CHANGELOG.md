@@ -4,6 +4,15 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/compute?activeTab=versions
 
+### [2.0.1](https://www.github.com/googleapis/nodejs-compute/compare/v2.0.0...v2.0.1) (2020-06-28)
+
+
+### Bug Fixes
+
+* **deps:** update dependency gce-images to v3 ([#443](https://www.github.com/googleapis/nodejs-compute/issues/443)) ([c861b8c](https://www.github.com/googleapis/nodejs-compute/commit/c861b8c0754cecfa15cef22be3c030bb146ce987))
+* correct engines range to include node v10 ([#451](https://www.github.com/googleapis/nodejs-compute/issues/451)) ([c8a2b29](https://www.github.com/googleapis/nodejs-compute/commit/c8a2b29a12b8d5b2061b6979d2b8ffb2d96e208a))
+* update node issue template ([#456](https://www.github.com/googleapis/nodejs-compute/issues/456)) ([65ab831](https://www.github.com/googleapis/nodejs-compute/commit/65ab8312edceee2316a2b2ba6cfa294b218cf164))
+
 ## [2.0.0](https://www.github.com/googleapis/nodejs-compute/compare/v1.2.0...v2.0.0) (2020-05-08)
 
 
