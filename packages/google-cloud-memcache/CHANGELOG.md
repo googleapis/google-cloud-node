@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.2.0](https://www.github.com/googleapis/nodejs-memcache/compare/v1.1.0...v1.2.0) (2020-06-28)
+
+
+### Features
+
+* move ts target to es2018 from es2016 ([#30](https://www.github.com/googleapis/nodejs-memcache/issues/30)) ([086b37f](https://www.github.com/googleapis/nodejs-memcache/commit/086b37f5d49f26c137bcc0941d6ec80f7ceb17fb))
+
+
+### Bug Fixes
+
+* proper fallback option handling ([7515a7e](https://www.github.com/googleapis/nodejs-memcache/commit/7515a7e680ee87f63e344eab63a74522f4cf1720))
+
 ## [1.1.0](https://www.github.com/googleapis/nodejs-memcache/compare/v1.0.0...v1.1.0) (2020-06-04)
 
 
