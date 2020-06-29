@@ -4,6 +4,19 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/dataproc?activeTab=versions
 
+## [2.1.0](https://www.github.com/googleapis/nodejs-dataproc/compare/v2.0.0...v2.1.0) (2020-06-28)
+
+
+### Features
+
+* move ts target to es2018 from es2016 ([#388](https://www.github.com/googleapis/nodejs-dataproc/issues/388)) ([e66a465](https://www.github.com/googleapis/nodejs-dataproc/commit/e66a4653f52f29211177c8f5c68b1f3d1be74de5))
+
+
+### Bug Fixes
+
+* **deps:** update dependency @google-cloud/storage to v5 ([#380](https://www.github.com/googleapis/nodejs-dataproc/issues/380)) ([6f5a2a4](https://www.github.com/googleapis/nodejs-dataproc/commit/6f5a2a4de59410837f7bfeec525d7492dda01dd7))
+* proper fallback option handling ([143ec68](https://www.github.com/googleapis/nodejs-dataproc/commit/143ec68253dbec99af755191688f93867832c3d3))
+
 ## [2.0.0](https://www.github.com/googleapis/nodejs-dataproc/compare/v1.6.0...v2.0.0) (2020-05-09)
 
 
