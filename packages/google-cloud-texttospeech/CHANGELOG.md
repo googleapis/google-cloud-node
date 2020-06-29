@@ -4,6 +4,14 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/text-to-speech?activeTab=versions
 
+### [3.0.1](https://www.github.com/googleapis/nodejs-text-to-speech/compare/v3.0.0...v3.0.1) (2020-06-29)
+
+
+### Bug Fixes
+
+* handle fallback option properly ([#413](https://www.github.com/googleapis/nodejs-text-to-speech/issues/413)) ([9ca230e](https://www.github.com/googleapis/nodejs-text-to-speech/commit/9ca230ea459b5c385ab259af943ba7efdc8437ec))
+* update node issue template ([#415](https://www.github.com/googleapis/nodejs-text-to-speech/issues/415)) ([5f506f0](https://www.github.com/googleapis/nodejs-text-to-speech/commit/5f506f013f46c734fef6fbeb38ed1827f0648514))
+
 ## [3.0.0](https://www.github.com/googleapis/nodejs-text-to-speech/compare/v2.3.0...v3.0.0) (2020-06-04)
 
 
