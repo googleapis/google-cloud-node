@@ -1,5 +1,18 @@
 # Changelog
 
+## [2.2.0](https://www.github.com/googleapis/nodejs-media-translation/compare/v2.1.0...v2.2.0) (2020-06-28)
+
+
+### Features
+
+* move ts target to es2018 from es2016 ([#46](https://www.github.com/googleapis/nodejs-media-translation/issues/46)) ([2e5065b](https://www.github.com/googleapis/nodejs-media-translation/commit/2e5065b0ecb6c38148ec31bf8966617bf7d024d9))
+* **samples:** demonstrate real-time conversation translation ([#48](https://www.github.com/googleapis/nodejs-media-translation/issues/48)) ([6331d9d](https://www.github.com/googleapis/nodejs-media-translation/commit/6331d9dd361a003c66ab532f904e1ae298ae296f))
+
+
+### Bug Fixes
+
+* proper fallback option handling ([e0a5f7d](https://www.github.com/googleapis/nodejs-media-translation/commit/e0a5f7de5bd279e302b597ab73406de651d9937b))
+
 ## [2.1.0](https://www.github.com/googleapis/nodejs-media-translation/compare/v2.0.0...v2.1.0) (2020-06-04)
 
 
