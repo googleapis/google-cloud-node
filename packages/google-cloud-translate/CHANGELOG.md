@@ -4,6 +4,17 @@
 
 [1]: https://www.npmjs.com/package/nodejs-translate?activeTab=versions
 
+### [6.0.1](https://www.github.com/googleapis/nodejs-translate/compare/v6.0.0...v6.0.1) (2020-06-29)
+
+
+### Bug Fixes
+
+* handle fallback option properly ([#547](https://www.github.com/googleapis/nodejs-translate/issues/547)) ([9146de2](https://www.github.com/googleapis/nodejs-translate/commit/9146de2a08565418dc118d1c8f3034f90ef9778e))
+* **deps:** update dependency @google-cloud/text-to-speech to v3 ([#538](https://www.github.com/googleapis/nodejs-translate/issues/538)) ([423dba3](https://www.github.com/googleapis/nodejs-translate/commit/423dba36a2c82ac6335c279edb1d246add55b754))
+* **deps:** update dependency @google-cloud/vision to v2 ([#539](https://www.github.com/googleapis/nodejs-translate/issues/539)) ([5dbeac4](https://www.github.com/googleapis/nodejs-translate/commit/5dbeac4e9a3133a6008cd8fb882046fe4a9946bc))
+* **samples:** typo in CLI invocation ([9755e2d](https://www.github.com/googleapis/nodejs-translate/commit/9755e2deff080d8a250ecbd251c7810288cd92d9))
+* update node issue template ([#551](https://www.github.com/googleapis/nodejs-translate/issues/551)) ([548d1e5](https://www.github.com/googleapis/nodejs-translate/commit/548d1e5219141b293631087723ee111382a8e857))
+
 ## [6.0.0](https://www.github.com/googleapis/nodejs-translate/compare/v5.3.0...v6.0.0) (2020-06-03)
 
 
