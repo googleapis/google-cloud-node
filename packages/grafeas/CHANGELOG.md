@@ -4,6 +4,18 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/grafeas?activeTab=versions
 
+## [3.3.0](https://www.github.com/googleapis/nodejs-grafeas/compare/v3.2.0...v3.3.0) (2020-06-28)
+
+
+### Features
+
+* move ts target to es2018 from es2016 ([#165](https://www.github.com/googleapis/nodejs-grafeas/issues/165)) ([b65bb34](https://www.github.com/googleapis/nodejs-grafeas/commit/b65bb3426c839f6514826d87c7a65ae7dcb85b8d))
+
+
+### Bug Fixes
+
+* handle fallback option properly ([#169](https://www.github.com/googleapis/nodejs-grafeas/issues/169)) ([466c05c](https://www.github.com/googleapis/nodejs-grafeas/commit/466c05ce28351b276a6a890997a8c1da743be650))
+
 ## [3.2.0](https://www.github.com/googleapis/nodejs-grafeas/compare/v3.1.0...v3.2.0) (2020-06-04)
 
 
