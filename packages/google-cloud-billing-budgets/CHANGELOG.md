@@ -1,5 +1,17 @@
 # Changelog
 
+## [2.1.0](https://www.github.com/googleapis/nodejs-billing-budgets/compare/v2.0.0...v2.1.0) (2020-06-28)
+
+
+### Features
+
+* move ts target to es2018 from es2016 ([#129](https://www.github.com/googleapis/nodejs-billing-budgets/issues/129)) ([387c57e](https://www.github.com/googleapis/nodejs-billing-budgets/commit/387c57ed72137d945b47af48dc650480101353a1))
+
+
+### Bug Fixes
+
+* proper fallback option handling ([3c69ffa](https://www.github.com/googleapis/nodejs-billing-budgets/commit/3c69ffa90f1ea2debe5356630525f7030fbc3b81))
+
 ## [2.0.0](https://www.github.com/googleapis/nodejs-billing-budgets/compare/v1.3.0...v2.0.0) (2020-06-04)
 
 
