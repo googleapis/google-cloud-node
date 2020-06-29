@@ -1,5 +1,19 @@
 # Changelog
 
+## [2.1.0](https://www.github.com/googleapis/nodejs-monitoring-dashboards/compare/v2.0.0...v2.1.0) (2020-06-28)
+
+
+### Features
+
+* Add support for secondary_aggregation and Monitoring Query Language ([#92](https://www.github.com/googleapis/nodejs-monitoring-dashboards/issues/92)) ([af186dc](https://www.github.com/googleapis/nodejs-monitoring-dashboards/commit/af186dc51be796e8c8ce83cfdc75e8b7f8017694))
+* move ts target to es2018 from es2016 ([#87](https://www.github.com/googleapis/nodejs-monitoring-dashboards/issues/87)) ([846ff12](https://www.github.com/googleapis/nodejs-monitoring-dashboards/commit/846ff12d5a3858cd4c91cb4fcf835b40d5f9b03e))
+
+
+### Bug Fixes
+
+* proper fallback option handling ([33c441c](https://www.github.com/googleapis/nodejs-monitoring-dashboards/commit/33c441c0484cdc0e09203ad033e220ac57324607))
+* update node issue template ([#93](https://www.github.com/googleapis/nodejs-monitoring-dashboards/issues/93)) ([e561059](https://www.github.com/googleapis/nodejs-monitoring-dashboards/commit/e561059ddba9b46cec6ae14fe3d522a83ef231ca))
+
 ## [2.0.0](https://www.github.com/googleapis/nodejs-monitoring-dashboards/compare/v1.3.0...v2.0.0) (2020-05-08)
 
 
