@@ -4,6 +4,16 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/web-risk?activeTab=versions
 
+### [2.0.1](https://www.github.com/googleapis/nodejs-web-risk/compare/v2.0.0...v2.0.1) (2020-06-29)
+
+
+### Bug Fixes
+
+* add CreateSubmission to webrisk/v1 config ([#172](https://www.github.com/googleapis/nodejs-web-risk/issues/172)) ([e7851f5](https://www.github.com/googleapis/nodejs-web-risk/commit/e7851f59de6fa8a83a1e026995304ac05cab4321))
+* handle fallback option properly ([#170](https://www.github.com/googleapis/nodejs-web-risk/issues/170)) ([82d2684](https://www.github.com/googleapis/nodejs-web-risk/commit/82d2684cd9c04b3bdc9edc50a79854cebf9a4990))
+* update node issue template ([#171](https://www.github.com/googleapis/nodejs-web-risk/issues/171)) ([5a93c38](https://www.github.com/googleapis/nodejs-web-risk/commit/5a93c3880a09bbc70160e45d68e1dea547f888c4))
+* version rearrange ([#163](https://www.github.com/googleapis/nodejs-web-risk/issues/163)) ([934b63a](https://www.github.com/googleapis/nodejs-web-risk/commit/934b63aa0163c84aceb27d306e1f656bcb2d8afd))
+
 ## [2.0.0](https://www.github.com/googleapis/nodejs-web-risk/compare/v1.7.0...v2.0.0) (2020-05-12)
 
 
