@@ -4,6 +4,19 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/talent?activeTab=versions
 
+## [2.1.0](https://www.github.com/googleapis/nodejs-talent/compare/v2.0.0...v2.1.0) (2020-06-29)
+
+
+### Features
+
+* **secrets:** begin migration to secret manager from keystore ([#213](https://www.github.com/googleapis/nodejs-talent/issues/213)) ([8cba7c3](https://www.github.com/googleapis/nodejs-talent/commit/8cba7c33ca1d631e7d369ec06ebf2bdf39530ffd))
+
+
+### Bug Fixes
+
+* handle fallback option properly ([#216](https://www.github.com/googleapis/nodejs-talent/issues/216)) ([ae2ecc5](https://www.github.com/googleapis/nodejs-talent/commit/ae2ecc51bc12fa410e766bd06e7668e51f01d627))
+* update node issue template ([#217](https://www.github.com/googleapis/nodejs-talent/issues/217)) ([82ece56](https://www.github.com/googleapis/nodejs-talent/commit/82ece56e1edce6e4074b6256aba9c858a00c6466))
+
 ## [2.0.0](https://www.github.com/googleapis/nodejs-talent/compare/v1.7.1...v2.0.0) (2020-06-04)
 
 
