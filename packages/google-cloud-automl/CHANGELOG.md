@@ -4,6 +4,18 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/automl?activeTab=versions
 
+## [2.2.0](https://www.github.com/googleapis/nodejs-automl/compare/v2.1.0...v2.2.0) (2020-06-28)
+
+
+### Features
+
+* move ts target to es2018 from es2016 ([#406](https://www.github.com/googleapis/nodejs-automl/issues/406)) ([c24dcc2](https://www.github.com/googleapis/nodejs-automl/commit/c24dcc2cf62ea62b1f187fb116652404d5f7cf05))
+
+
+### Bug Fixes
+
+* proper fallback option handling ([25d1f25](https://www.github.com/googleapis/nodejs-automl/commit/25d1f250ba9c5d80f66ced3be3dd2aa404248bd1))
+
 ## [2.1.0](https://www.github.com/googleapis/nodejs-automl/compare/v2.0.0...v2.1.0) (2020-06-04)
 
 
