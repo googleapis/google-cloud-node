@@ -1,5 +1,17 @@
 # Changelog
 
+## [2.1.0](https://www.github.com/googleapis/nodejs-iot/compare/v2.0.2...v2.1.0) (2020-06-28)
+
+
+### Features
+
+* move ts target to es2018 from es2016 ([#348](https://www.github.com/googleapis/nodejs-iot/issues/348)) ([e876504](https://www.github.com/googleapis/nodejs-iot/commit/e876504a2670481c9263ef56261469463dacad47))
+
+
+### Bug Fixes
+
+* proper fallback option handling ([3a595f0](https://www.github.com/googleapis/nodejs-iot/commit/3a595f0636429914c5384f02b78f9ef21d9d08d6))
+
 ### [2.0.2](https://www.github.com/googleapis/nodejs-iot/compare/v2.0.1...v2.0.2) (2020-06-04)
 
 
