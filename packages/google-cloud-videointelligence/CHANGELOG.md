@@ -4,6 +4,14 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/video-intelligence?activeTab=versions
 
+### [3.0.1](https://www.github.com/googleapis/nodejs-video-intelligence/compare/v3.0.0...v3.0.1) (2020-06-29)
+
+
+### Bug Fixes
+
+* handle fallback option properly ([#447](https://www.github.com/googleapis/nodejs-video-intelligence/issues/447)) ([f539818](https://www.github.com/googleapis/nodejs-video-intelligence/commit/f53981853598015e24900116e8ca9b2d18670336))
+* update node issue template ([#449](https://www.github.com/googleapis/nodejs-video-intelligence/issues/449)) ([b3fa3ef](https://www.github.com/googleapis/nodejs-video-intelligence/commit/b3fa3ef1e6648379495d5c94e8dea184b8fcec4d))
+
 ## [3.0.0](https://www.github.com/googleapis/nodejs-video-intelligence/compare/v2.10.0...v3.0.0) (2020-06-02)
 
 
