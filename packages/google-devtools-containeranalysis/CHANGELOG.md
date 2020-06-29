@@ -4,6 +4,22 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/containeranalysis?activeTab=versions
 
+## [2.1.0](https://www.github.com/googleapis/nodejs-containeranalysis/compare/v2.0.0...v2.1.0) (2020-06-28)
+
+
+### Features
+
+* check status of long running operation by its name ([#209](https://www.github.com/googleapis/nodejs-containeranalysis/issues/209)) ([45420a3](https://www.github.com/googleapis/nodejs-containeranalysis/commit/45420a304799cbb1114b0dbde866fcbbb10c3390))
+* move ts target to es2018 from es2016 ([#220](https://www.github.com/googleapis/nodejs-containeranalysis/issues/220)) ([7397f8f](https://www.github.com/googleapis/nodejs-containeranalysis/commit/7397f8f29a31da5f50b2e9d658a40395dec41772))
+
+
+### Bug Fixes
+
+* **deps:** update dependency @google-cloud/pubsub to v2 ([#215](https://www.github.com/googleapis/nodejs-containeranalysis/issues/215)) ([83cf246](https://www.github.com/googleapis/nodejs-containeranalysis/commit/83cf2460b925c3f287dbb643eeea83d7ba958322))
+* handle fallback option properly ([#225](https://www.github.com/googleapis/nodejs-containeranalysis/issues/225)) ([623535d](https://www.github.com/googleapis/nodejs-containeranalysis/commit/623535de84418c8b2b9dfafe1d9f49c898f0c5d5))
+* remove unneeded common protos in generated proto list ([#207](https://www.github.com/googleapis/nodejs-containeranalysis/issues/207)) ([3cdfed3](https://www.github.com/googleapis/nodejs-containeranalysis/commit/3cdfed35ea873951dd1eb8228707c412b2747b8d))
+* synth.py clean up for multiple version ([#214](https://www.github.com/googleapis/nodejs-containeranalysis/issues/214)) ([67ce7d7](https://www.github.com/googleapis/nodejs-containeranalysis/commit/67ce7d71377377974b00058e63cf8cffceb72dbe))
+
 ## [2.0.0](https://www.github.com/googleapis/nodejs-containeranalysis/compare/v1.10.0...v2.0.0) (2020-04-23)
 
 
