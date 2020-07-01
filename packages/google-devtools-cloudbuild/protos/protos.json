@@ -11,7 +11,8 @@
                     "go_package": "google.golang.org/genproto/googleapis/devtools/cloudbuild/v1;cloudbuild",
                     "java_multiple_files": true,
                     "java_package": "com.google.cloudbuild.v1",
-                    "objc_class_prefix": "GCB"
+                    "objc_class_prefix": "GCB",
+                    "ruby_package": "Google::Cloud::Build::V1"
                   },
                   "nested": {
                     "CloudBuild": {
