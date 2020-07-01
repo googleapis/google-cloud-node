@@ -84,7 +84,7 @@ const item = {value: string};
 
 // Construct request
 const request = {
-  parent: dlp.projectPath(projectId),
+  parent: `projects/${projectId}/locations/global`,
   inspectConfig: {
     infoTypes: infoTypes,
     minLikelihood: minLikelihood,
