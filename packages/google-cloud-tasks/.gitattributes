@@ -1,4 +1,3 @@
 *.ts text eol=lf
 *.js test eol=lf
-.kokoro/* linguist-vendored
 protos/* linguist-generated
