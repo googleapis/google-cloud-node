@@ -3841,8 +3841,7 @@
                           "type": "string",
                           "id": 3,
                           "options": {
-                            "(google.api.field_behavior)": "OPTIONAL",
-                            "(google.api.resource_reference).type": "dialogflow.googleapis.com/Version"
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
                         "state": {
