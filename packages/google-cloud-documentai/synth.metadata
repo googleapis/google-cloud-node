@@ -3,23 +3,15 @@
     {
       "git": {
         "name": ".",
-        "remote": "https://github.com/googleapis/nodejs-document-ai.git",
-        "sha": "f16caf9adda417fcc153571c72b35deafd4e141e"
-      }
-    },
-    {
-      "git": {
-        "name": "googleapis",
-        "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "ed1174659dc748903dbb635c7e01e38c3f812fbb",
-        "internalRef": "315627096"
+        "remote": "git@github.com:googleapis/nodejs-document-ai.git",
+        "sha": "00d9df08951a61b3f57366dc3a6b69a4ec32ba7c"
       }
     },
     {
       "git": {
         "name": "synthtool",
         "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "dc9caca650c77b7039e2bbc3339ffb34ae78e5b7"
+        "sha": "303271797a360f8a439203413f13a160f2f5b3b4"
       }
     }
   ],
@@ -29,8 +21,8 @@
         "source": "googleapis",
         "apiName": "documentai",
         "apiVersion": "v1beta2",
-        "language": "typescript",
-        "generator": "gapic-generator-typescript"
+        "language": "nodejs",
+        "generator": "bazel"
       }
     }
   ]

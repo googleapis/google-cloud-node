@@ -24,18 +24,11 @@ AUTOSYNTH_MULTIPLE_COMMITS = True
 
 
 # run the gapic generator
-gapic = gcp.GAPICMicrogenerator()
+gapic = gcp.GAPICBazel()
 versions = ['v1beta2']
 name = 'documentai'
 for version in versions:
- library = gapic.typescript_library(
-   name,
-   generator_args={
-     "package-name": "@google-cloud/documentai"
-   },
-   extra_proto_files=['google/cloud/common_resources.proto'],
-   proto_path=f'/google/cloud/{name}/{version}',
-   version=version)
+ library = gapic.node_library(name, version)
  s.copy(library, excludes=['README.md', 'package.json'])
 
 # Copy common templates
