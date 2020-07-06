@@ -161,6 +161,9 @@ export class BudgetServiceClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this.pathTemplates = {
+      billingAccountPathTemplate: new this._gaxModule.PathTemplate(
+        'billingAccounts/{billing_account}'
+      ),
       budgetPathTemplate: new this._gaxModule.PathTemplate(
         'billingAccounts/{billing_account}/budgets/{budget}'
       ),
@@ -916,6 +919,31 @@ export class BudgetServiceClient {
   // --------------------
   // -- Path templates --
   // --------------------
+
+  /**
+   * Return a fully-qualified billingAccount resource name string.
+   *
+   * @param {string} billing_account
+   * @returns {string} Resource name string.
+   */
+  billingAccountPath(billingAccount: string) {
+    return this.pathTemplates.billingAccountPathTemplate.render({
+      billing_account: billingAccount,
+    });
+  }
+
+  /**
+   * Parse the billing_account from BillingAccount resource.
+   *
+   * @param {string} billingAccountName
+   *   A fully-qualified path representing BillingAccount resource.
+   * @returns {string} A string representing the billing_account.
+   */
+  matchBillingAccountFromBillingAccountName(billingAccountName: string) {
+    return this.pathTemplates.billingAccountPathTemplate.match(
+      billingAccountName
+    ).billing_account;
+  }
 
   /**
    * Return a fully-qualified budget resource name string.

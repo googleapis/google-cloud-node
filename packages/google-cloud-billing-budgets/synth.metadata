@@ -3,23 +3,15 @@
     {
       "git": {
         "name": ".",
-        "remote": "https://github.com/googleapis/nodejs-billing-budgets.git",
-        "sha": "b5965c682b931370739d7c1596b6dd7b6d73488b"
-      }
-    },
-    {
-      "git": {
-        "name": "googleapis",
-        "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "1b101f55aa42665b71684097256d2a64ff07c670",
-        "internalRef": "312682133"
+        "remote": "git@github.com:googleapis/nodejs-billing-budgets.git",
+        "sha": "68f760757efcd81494db8bd038bcadf3cdc30f29"
       }
     },
     {
       "git": {
         "name": "synthtool",
         "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "dc9caca650c77b7039e2bbc3339ffb34ae78e5b7"
+        "sha": "303271797a360f8a439203413f13a160f2f5b3b4"
       }
     }
   ],
@@ -27,10 +19,10 @@
     {
       "client": {
         "source": "googleapis",
-        "apiName": "billingbudgets",
+        "apiName": "billing-budgets",
         "apiVersion": "v1beta1",
-        "language": "typescript",
-        "generator": "gapic-generator-typescript"
+        "language": "nodejs",
+        "generator": "bazel"
       }
     }
   ]

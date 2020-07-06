@@ -959,6 +959,46 @@ describe('v1beta1.BudgetServiceClient', () => {
   });
 
   describe('Path templates', () => {
+    describe('billingAccount', () => {
+      const fakePath = '/rendered/path/billingAccount';
+      const expectedParameters = {
+        billing_account: 'billingAccountValue',
+      };
+      const client = new budgetserviceModule.v1beta1.BudgetServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.billingAccountPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.billingAccountPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('billingAccountPath', () => {
+        const result = client.billingAccountPath('billingAccountValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.billingAccountPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchBillingAccountFromBillingAccountName', () => {
+        const result = client.matchBillingAccountFromBillingAccountName(
+          fakePath
+        );
+        assert.strictEqual(result, 'billingAccountValue');
+        assert(
+          (client.pathTemplates.billingAccountPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
     describe('budget', () => {
       const fakePath = '/rendered/path/budget';
       const expectedParameters = {
