@@ -22,19 +22,10 @@ logging.basicConfig(level=logging.DEBUG)
 AUTOSYNTH_MULTIPLE_COMMITS = True
 
 # Run the gapic generator
-gapic = gcp.GAPICMicrogenerator()
+gapic = gcp.GAPICBazel()
 versions = ['v1', 'v1beta1']
 for version in versions:
-    library = gapic.typescript_library(
-        'scheduler', version,
-        generator_args={
-            "grpc-service-config": f"google/cloud/scheduler/{version}/cloudscheduler_grpc_service_config.json",
-            "package-name": f"@google-cloud/scheduler",
-            "main-service": f"scheduler"
-        },
-        proto_path=f'/google/cloud/scheduler/{version}',
-        extra_proto_files=['google/cloud/common_resources.proto'],
-    )
+    library = gapic.node_library('scheduler', version)
     s.copy(library, excludes=['README.md', 'package.json'])
 
 # Copy common templates
