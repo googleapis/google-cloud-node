@@ -21,19 +21,11 @@ import logging
 logging.basicConfig(level=logging.DEBUG)
 
 # run the gapic generator
-gapic = gcp.GAPICMicrogenerator()
+gapic = gcp.GAPICBazel()
 versions = ['v1beta2']
 name = 'memcache'
 for version in versions:
-  library = gapic.typescript_library(
-    name,
-    generator_args={
-      "grpc-service-config": f"google/cloud/{name}/{version}/{name}_grpc_service_config.json",
-      'package-name': '@google-cloud/memcache',
-    },
-    extra_proto_files=['google/cloud/common_resources.proto'],
-    proto_path=f'/google/cloud/{name}/{version}',
-    version=version)
+  library = gapic.node_library(name, version)
 s.copy(library, excludes=['package.json', 'README.md'])
 
 # Copy common templates

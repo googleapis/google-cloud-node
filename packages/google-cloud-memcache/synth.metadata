@@ -3,23 +3,15 @@
     {
       "git": {
         "name": ".",
-        "remote": "https://github.com/googleapis/nodejs-memcache.git",
-        "sha": "52a6c3b00514ed87e1e09cc04f12682be96eae07"
-      }
-    },
-    {
-      "git": {
-        "name": "googleapis",
-        "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "81226871ce438cdeec241dd81f33f796e37e1c03",
-        "internalRef": "315786558"
+        "remote": "git@github.com:googleapis/nodejs-memcache.git",
+        "sha": "b3018cec72d504a55febe6edfe48cf76a514f11f"
       }
     },
     {
       "git": {
         "name": "synthtool",
         "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "dc9caca650c77b7039e2bbc3339ffb34ae78e5b7"
+        "sha": "303271797a360f8a439203413f13a160f2f5b3b4"
       }
     }
   ],
@@ -29,8 +21,8 @@
         "source": "googleapis",
         "apiName": "memcache",
         "apiVersion": "v1beta2",
-        "language": "typescript",
-        "generator": "gapic-generator-typescript"
+        "language": "nodejs",
+        "generator": "bazel"
       }
     }
   ]
