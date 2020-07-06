@@ -20,19 +20,11 @@ import synthtool.languages.node as node
 import logging
 
 # Run the gapic generator
-gapic = gcp.GAPICMicrogenerator()
+gapic = gcp.GAPICBazel()
 versions = ['v3beta1', 'v3']
-name = 'translate'
+name = 'translation'
 for version in versions:
-  library = gapic.typescript_library(
-    name,
-    proto_path=f"google/cloud/{name}/{version}",
-    generator_args={
-      "grpc-service-config": f"google/cloud/{name}/{version}/{name}_grpc_service_config.json",
-      "package-name": f"@google-cloud/{name}"
-    },
-    extra_proto_files=['google/cloud/common_resources.proto'],
-    version=version)
+  library = gapic.node_library(name, version, proto_path=f'google/cloud/translate/{version}')
   s.copy(library, excludes=['README.md', 'package.json', 'src/index.ts'])
 
 logging.basicConfig(level=logging.DEBUG)

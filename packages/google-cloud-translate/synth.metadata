@@ -3,23 +3,15 @@
     {
       "git": {
         "name": ".",
-        "remote": "https://github.com/googleapis/nodejs-translate.git",
-        "sha": "548d1e5219141b293631087723ee111382a8e857"
-      }
-    },
-    {
-      "git": {
-        "name": "googleapis",
-        "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "a3a0bf0f6291d69f2ff3df7fcd63d28ee20ac727",
-        "internalRef": "310060413"
+        "remote": "git@github.com:googleapis/nodejs-translate.git",
+        "sha": "1ae1dba21e29d28c768085d6381b0953c69dada2"
       }
     },
     {
       "git": {
         "name": "synthtool",
         "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "dc9caca650c77b7039e2bbc3339ffb34ae78e5b7"
+        "sha": "303271797a360f8a439203413f13a160f2f5b3b4"
       }
     }
   ],
@@ -27,19 +19,19 @@
     {
       "client": {
         "source": "googleapis",
-        "apiName": "translate",
+        "apiName": "translation",
         "apiVersion": "v3beta1",
-        "language": "typescript",
-        "generator": "gapic-generator-typescript"
+        "language": "nodejs",
+        "generator": "bazel"
       }
     },
     {
       "client": {
         "source": "googleapis",
-        "apiName": "translate",
+        "apiName": "translation",
         "apiVersion": "v3",
-        "language": "typescript",
-        "generator": "gapic-generator-typescript"
+        "language": "nodejs",
+        "generator": "bazel"
       }
     }
   ]
