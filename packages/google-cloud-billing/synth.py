@@ -25,19 +25,10 @@ AUTOSYNTH_MULTIPLE_COMMITS = True
 
 # run the gapic generator
 name = 'billing'
-gapic = gcp.GAPICMicrogenerator()
+gapic = gcp.GAPICBazel()
 versions = ['v1']
 for version in versions:
-  library = gapic.typescript_library(
-    name,
-    proto_path=f'google/cloud/{name}/{version}',
-    generator_args={
-      "grpc-service-config": f"google/cloud/{name}/{version}/cloud_{name}_grpc_service_config.json",
-      "package-name": f"@google-cloud/{name}",
-      "validation": "false",
-    },
-    extra_proto_files=['google/cloud/common_resources.proto'],
-    version=version)
+  library = gapic.node_library(name, version)
 s.copy(library, excludes=['package.json', 'README.md'])
 
 # Copy common templates
