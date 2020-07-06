@@ -25,19 +25,10 @@ AUTOSYNTH_MULTIPLE_COMMITS = True
 
 
 # Run the gapic generator
-gapic = gcp.GAPICMicrogenerator()
+gapic = gcp.GAPICBazel()
 versions = ['v1', 'v1p1beta1', 'v1p2beta1', 'v1p3beta1', 'v1p4beta1']
 for version in versions:
-    library = gapic.typescript_library(
-        'vision', version,
-        generator_args={
-            "grpc-service-config": f"google/cloud/vision/{version}/vision_grpc_service_config.json",
-            "package-name": f"@google-cloud/vision",
-            "main-service": f"vision"
-            },
-        proto_path=f'/google/cloud/vision/{version}',
-        extra_proto_files=['google/cloud/common_resources.proto'],
-    )
+    library = gapic.node_library('vision', version)
     s.copy(library, excludes=['src/index.ts', 'package.json'])
 # extends interface for client.ts
 for version in versions:
