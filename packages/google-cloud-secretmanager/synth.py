@@ -23,29 +23,15 @@ logging.basicConfig(level=logging.DEBUG)
 AUTOSYNTH_MULTIPLE_COMMITS = True
 
 
-gapic = gcp.GAPICMicrogenerator()
+gapic = gcp.GAPICBazel()
 # keep v1beta1 for the time being:
-library = gapic.typescript_library(
-    'secretmanager',
-    generator_args={
-        "grpc-service-config": "google/cloud/secrets/v1beta1/secretmanager_grpc_service_config.json",
-        "package-name": "@google-cloud/secret-manager",
-    },
-    proto_path='/google/cloud/secrets/v1beta1',
-    version='v1beta1')
+library = gapic.node_library('secretmanager', 'v1beta1', proto_path='google/cloud/secrets/v1beta1')
 s.copy(library, excludes=['package.json', 'README.md'])
 # run the gapic generator (for all versions except v1beta1):
 versions = ['v1']
 library = 'secretmanager'
 for version in versions:
-    library = gapic.typescript_library(
-        library,
-        generator_args={
-            "grpc-service-config": f"google/cloud/{library}/{version}/secretmanager_grpc_service_config.json",
-            "package-name": "@google-cloud/secret-manager",
-        },
-        proto_path=f'/google/cloud/{library}/{version}',
-        version=version)
+    library = gapic.node_library(library, version)
 s.copy(library, excludes=['package.json', 'README.md'])
 
 # Copy common templates
