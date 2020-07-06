@@ -23,19 +23,11 @@ AUTOSYNTH_MULTIPLE_COMMITS = True
 
 
 # Run the gapic generator
-gapic = gcp.GAPICMicrogenerator()
+gapic = gcp.GAPICBazel()
 versions = ['v1', 'v1beta1', 'v1p1beta1']
 name = 'securitycenter'
 for version in versions:
-    library = gapic.typescript_library(
-        name,
-        proto_path=f'google/cloud/{name}/{version}',
-        generator_args={
-            'grpc-service-config': f'google/cloud/{name}/{version}/{name}_grpc_service_config.json',
-            'package-name': f'@google-cloud/security-center',
-        },
-        extra_proto_files=['google/cloud/common_resources.proto'],
-        version=version)
+    library = gapic.node_library(name, version)
     # skip index, protos, package.json, and README.md
     s.copy(
         library,
