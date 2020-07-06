@@ -25,18 +25,10 @@ AUTOSYNTH_MULTIPLE_COMMITS = True
 
 
 # Run the gapic generator
-gapic = gcp.GAPICMicrogenerator()
+gapic = gcp.GAPICBazel()
 versions = ["v4beta1"]
 for version in versions:
-    library = gapic.typescript_library(
-        "talent", version,
-        generator_args={
-            "grpc-service-config": f"google/cloud/talent/{version}/talent_grpc_service_config.json",
-            "package-name": "@google-cloud/talent",
-            "main-service": "talent"
-        },
-        proto_path=f'/google/cloud/talent/{version}',
-    )
+    library = gapic.node_library("talent", version)
     s.copy(library, excludes=['README.md', 'package.json'])
 
 # Copy common templates
