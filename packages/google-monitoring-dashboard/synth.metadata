@@ -3,23 +3,15 @@
     {
       "git": {
         "name": ".",
-        "remote": "https://github.com/googleapis/nodejs-monitoring-dashboards.git",
-        "sha": "e561059ddba9b46cec6ae14fe3d522a83ef231ca"
-      }
-    },
-    {
-      "git": {
-        "name": "googleapis",
-        "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "3c5166c1db0f1804af7acdbbd79137630a00ce63",
-        "internalRef": "315496921"
+        "remote": "git@github.com:googleapis/nodejs-monitoring-dashboards.git",
+        "sha": "471cca6caba1c6d98962075a3bc17dc23f234dcc"
       }
     },
     {
       "git": {
         "name": "synthtool",
         "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "dc9caca650c77b7039e2bbc3339ffb34ae78e5b7"
+        "sha": "303271797a360f8a439203413f13a160f2f5b3b4"
       }
     }
   ],
@@ -29,8 +21,8 @@
         "source": "googleapis",
         "apiName": "monitoring-dashboard",
         "apiVersion": "v1",
-        "language": "typescript",
-        "generator": "gapic-generator-typescript"
+        "language": "nodejs",
+        "generator": "bazel"
       }
     }
   ]

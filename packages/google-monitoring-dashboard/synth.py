@@ -24,16 +24,10 @@ AUTOSYNTH_MULTIPLE_COMMITS = True
 
 
 # run the gapic generator
-gapic = gcp.GAPICMicrogenerator()
+gapic = gcp.GAPICBazel()
 versions = ['v1']
 for version in versions:
-  library = gapic.typescript_library(
-    'monitoring-dashboard',
-    generator_args={
-      'package-name': '@google-cloud/monitoring-dashboards'
-    },
-    proto_path='/google/monitoring/dashboard/v1',
-    version=version)
+  library = gapic.node_library('monitoring-dashboard', version, proto_path='google/monitoring/dashboard/v1')
 s.copy(library, excludes=['README.md', 'package.json'])
 
 # Copy common templates
