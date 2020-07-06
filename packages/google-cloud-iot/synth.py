@@ -24,20 +24,11 @@ logging.basicConfig(level=logging.DEBUG)
 AUTOSYNTH_MULTIPLE_COMMITS = True
 
 
-gapic = gcp.GAPICMicrogenerator()
+gapic = gcp.GAPICBazel()
 versions = ['v1']
 
 for version in versions:
-    library = gapic.typescript_library(
-        'iot',
-        generator_args={
-            "grpc-service-config": f"google/cloud/iot/{version}/cloudiot_grpc_service_config.json",
-            "package-name": "@google-cloud/iot",
-            "main-service": "iot"
-        },
-        proto_path=f'/google/cloud/iot/{version}',
-        extra_proto_files=['google/cloud/common_resources.proto'],
-        version=version)
+    library = gapic.node_library('iot', version)
 
 # skip index, protos, package.json, and README.md
 s.copy(
