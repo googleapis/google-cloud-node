@@ -23,18 +23,10 @@ logging.basicConfig(level=logging.DEBUG)
 AUTOSYNTH_MULTIPLE_COMMITS = True
 
 # run the gapic generator
-gapic = gcp.GAPICMicrogenerator()
+gapic = gcp.GAPICBazel()
 versions = ['v1beta1']
 for version in versions:
-    library = gapic.typescript_library(
-        'phishingprotection', version,
-        generator_args={
-            "grpc-service-config": f"google/cloud/phishingprotection/{version}/phishingprotection_grpc_service_config.json",
-            "package-name": "@google-cloud/phishing-protection",
-        },
-        proto_path=f'/google/cloud/phishingprotection/{version}',
-        extra_proto_files=['google/cloud/common_resources.proto'],
-    )
+    library = gapic.node_library('phishingprotection', version)
     s.copy(library, excludes=['README.md', 'package.json'])
 
 # Copy common templates
