@@ -8,21 +8,13 @@ logging.basicConfig(level=logging.DEBUG)
 AUTOSYNTH_MULTIPLE_COMMITS = True
 
 
-gapic = gcp.GAPICMicrogenerator()
+gapic = gcp.GAPICBazel()
 
 # tasks has two product names, and a poorly named artman yaml
 versions = ['v1', 'v1beta1']
 name = 'redis'
 for version in versions:
-    library = gapic.typescript_library(
-        name,
-        generator_args={
-            "package-name": f"@google-cloud/{name}"
-        },
-        proto_path=f'google/cloud/{name}/{version}',
-        extra_proto_files=["google/cloud/common_resources.proto"],
-        version=version,
-    )
+    library = gapic.node_library(name, version)
     s.copy(
         library,
         excludes=['package.json', 'README.md'])
