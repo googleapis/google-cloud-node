@@ -3,23 +3,15 @@
     {
       "git": {
         "name": ".",
-        "remote": "https://github.com/googleapis/nodejs-service-directory.git",
-        "sha": "ebe5c3a3d49c44b380cf63bab8fa0aab67a84d98"
-      }
-    },
-    {
-      "git": {
-        "name": "googleapis",
-        "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "83816bb3093686a28af2891db5b7506614a820b1",
-        "internalRef": "310509915"
+        "remote": "git@github.com:googleapis/nodejs-service-directory.git",
+        "sha": "c04c446fc97308447c6680c5784b9f71dfe6b6c5"
       }
     },
     {
       "git": {
         "name": "synthtool",
         "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "dc9caca650c77b7039e2bbc3339ffb34ae78e5b7"
+        "sha": "303271797a360f8a439203413f13a160f2f5b3b4"
       }
     }
   ],
@@ -29,8 +21,8 @@
         "source": "googleapis",
         "apiName": "servicedirectory",
         "apiVersion": "v1beta1",
-        "language": "typescript",
-        "generator": "gapic-generator-typescript"
+        "language": "nodejs",
+        "generator": "bazel"
       }
     }
   ]
