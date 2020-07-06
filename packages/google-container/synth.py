@@ -8,16 +8,9 @@ logging.basicConfig(level=logging.DEBUG)
 AUTOSYNTH_MULTIPLE_COMMITS = True
 
 # Run the gapic generator
-gapic = gcp.GAPICMicrogenerator()
+gapic = gcp.GAPICBazel()
 version = 'v1'
-library = gapic.typescript_library(
-    'container',
-    generator_args={
-        "grpc-service-config": f"google/container/{version}/container_grpc_service_config.json",
-        "package-name": f"@google-cloud/container"
-    },
-    proto_path=f'/google/container/{version}',
-    version=version)
+library = gapic.node_library('container', version, proto_path=f'google/container/{version}')
 s.copy(
     library,
     excludes=['package.json', 'README.md', 'src/index.ts'],
