@@ -24,18 +24,10 @@ AUTOSYNTH_MULTIPLE_COMMITS = True
 
 
 # run the gapic generator
-gapic = gcp.GAPICMicrogenerator()
+gapic = gcp.GAPICBazel()
 versions = ['v1beta1', 'v1']
 for version in versions:
-    library = gapic.typescript_library(
-        'recaptchaenterprise', version,
-        generator_args={
-            "grpc-service-config": f"google/cloud/recaptchaenterprise/{version}/recaptchaenterprise_grpc_service_config.json",
-            "package-name": f"@google-cloud/recaptcha-enterprise",
-        },
-        proto_path=f'/google/cloud/recaptchaenterprise/{version}',
-        extra_proto_files=['google/cloud/common_resources.proto']
-    )
+    library = gapic.node_library('recaptchaenterprise', version)
     s.copy(library, excludes=['package.json'])
 
 # Copy common templates
