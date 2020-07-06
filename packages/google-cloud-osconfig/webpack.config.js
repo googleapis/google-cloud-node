@@ -17,9 +17,8 @@ const path = require('path');
 module.exports = {
   entry: './src/index.ts',
   output: {
-    library: 'OsConOsConOsConOsConOsConOsConOsConOsConOsConfigServiceClient',
-    filename:
-      './os-con-os-con-os-con-os-con-os-con-os-con-os-con-os-con-os-config-service-client.js',
+    library: 'OsConfigServiceClient',
+    filename: './os-config-service-client.js',
   },
   node: {
     child_process: 'empty',
