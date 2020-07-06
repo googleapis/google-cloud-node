@@ -17,8 +17,8 @@ const path = require('path');
 module.exports = {
   entry: './src/index.ts',
   output: {
-    library: 'DataCatalog',
-    filename: './data-catalog.js',
+    library: 'Recommender',
+    filename: './recommender.js',
   },
   node: {
     child_process: 'empty',

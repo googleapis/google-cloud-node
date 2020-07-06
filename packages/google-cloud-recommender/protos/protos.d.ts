@@ -26,6 +26,365 @@ export namespace google {
             /** Namespace v1. */
             namespace v1 {
 
+                /** Properties of an Insight. */
+                interface IInsight {
+
+                    /** Insight name */
+                    name?: (string|null);
+
+                    /** Insight description */
+                    description?: (string|null);
+
+                    /** Insight targetResources */
+                    targetResources?: (string[]|null);
+
+                    /** Insight insightSubtype */
+                    insightSubtype?: (string|null);
+
+                    /** Insight content */
+                    content?: (google.protobuf.IStruct|null);
+
+                    /** Insight lastRefreshTime */
+                    lastRefreshTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Insight observationPeriod */
+                    observationPeriod?: (google.protobuf.IDuration|null);
+
+                    /** Insight stateInfo */
+                    stateInfo?: (google.cloud.recommender.v1.IInsightStateInfo|null);
+
+                    /** Insight category */
+                    category?: (google.cloud.recommender.v1.Insight.Category|keyof typeof google.cloud.recommender.v1.Insight.Category|null);
+
+                    /** Insight etag */
+                    etag?: (string|null);
+
+                    /** Insight associatedRecommendations */
+                    associatedRecommendations?: (google.cloud.recommender.v1.Insight.IRecommendationReference[]|null);
+                }
+
+                /** Represents an Insight. */
+                class Insight implements IInsight {
+
+                    /**
+                     * Constructs a new Insight.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.recommender.v1.IInsight);
+
+                    /** Insight name. */
+                    public name: string;
+
+                    /** Insight description. */
+                    public description: string;
+
+                    /** Insight targetResources. */
+                    public targetResources: string[];
+
+                    /** Insight insightSubtype. */
+                    public insightSubtype: string;
+
+                    /** Insight content. */
+                    public content?: (google.protobuf.IStruct|null);
+
+                    /** Insight lastRefreshTime. */
+                    public lastRefreshTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Insight observationPeriod. */
+                    public observationPeriod?: (google.protobuf.IDuration|null);
+
+                    /** Insight stateInfo. */
+                    public stateInfo?: (google.cloud.recommender.v1.IInsightStateInfo|null);
+
+                    /** Insight category. */
+                    public category: (google.cloud.recommender.v1.Insight.Category|keyof typeof google.cloud.recommender.v1.Insight.Category);
+
+                    /** Insight etag. */
+                    public etag: string;
+
+                    /** Insight associatedRecommendations. */
+                    public associatedRecommendations: google.cloud.recommender.v1.Insight.IRecommendationReference[];
+
+                    /**
+                     * Creates a new Insight instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Insight instance
+                     */
+                    public static create(properties?: google.cloud.recommender.v1.IInsight): google.cloud.recommender.v1.Insight;
+
+                    /**
+                     * Encodes the specified Insight message. Does not implicitly {@link google.cloud.recommender.v1.Insight.verify|verify} messages.
+                     * @param message Insight message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.recommender.v1.IInsight, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Insight message, length delimited. Does not implicitly {@link google.cloud.recommender.v1.Insight.verify|verify} messages.
+                     * @param message Insight message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.recommender.v1.IInsight, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an Insight message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Insight
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.recommender.v1.Insight;
+
+                    /**
+                     * Decodes an Insight message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Insight
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.recommender.v1.Insight;
+
+                    /**
+                     * Verifies an Insight message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an Insight message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Insight
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.recommender.v1.Insight;
+
+                    /**
+                     * Creates a plain object from an Insight message. Also converts values to other types if specified.
+                     * @param message Insight
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.recommender.v1.Insight, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Insight to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                namespace Insight {
+
+                    /** Properties of a RecommendationReference. */
+                    interface IRecommendationReference {
+
+                        /** RecommendationReference recommendation */
+                        recommendation?: (string|null);
+                    }
+
+                    /** Represents a RecommendationReference. */
+                    class RecommendationReference implements IRecommendationReference {
+
+                        /**
+                         * Constructs a new RecommendationReference.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.recommender.v1.Insight.IRecommendationReference);
+
+                        /** RecommendationReference recommendation. */
+                        public recommendation: string;
+
+                        /**
+                         * Creates a new RecommendationReference instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns RecommendationReference instance
+                         */
+                        public static create(properties?: google.cloud.recommender.v1.Insight.IRecommendationReference): google.cloud.recommender.v1.Insight.RecommendationReference;
+
+                        /**
+                         * Encodes the specified RecommendationReference message. Does not implicitly {@link google.cloud.recommender.v1.Insight.RecommendationReference.verify|verify} messages.
+                         * @param message RecommendationReference message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.recommender.v1.Insight.IRecommendationReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified RecommendationReference message, length delimited. Does not implicitly {@link google.cloud.recommender.v1.Insight.RecommendationReference.verify|verify} messages.
+                         * @param message RecommendationReference message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.recommender.v1.Insight.IRecommendationReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a RecommendationReference message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns RecommendationReference
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.recommender.v1.Insight.RecommendationReference;
+
+                        /**
+                         * Decodes a RecommendationReference message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns RecommendationReference
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.recommender.v1.Insight.RecommendationReference;
+
+                        /**
+                         * Verifies a RecommendationReference message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a RecommendationReference message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns RecommendationReference
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.recommender.v1.Insight.RecommendationReference;
+
+                        /**
+                         * Creates a plain object from a RecommendationReference message. Also converts values to other types if specified.
+                         * @param message RecommendationReference
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.recommender.v1.Insight.RecommendationReference, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this RecommendationReference to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    /** Category enum. */
+                    enum Category {
+                        CATEGORY_UNSPECIFIED = 0,
+                        COST = 1,
+                        SECURITY = 2,
+                        PERFORMANCE = 3,
+                        MANAGEABILITY = 4
+                    }
+                }
+
+                /** Properties of an InsightStateInfo. */
+                interface IInsightStateInfo {
+
+                    /** InsightStateInfo state */
+                    state?: (google.cloud.recommender.v1.InsightStateInfo.State|keyof typeof google.cloud.recommender.v1.InsightStateInfo.State|null);
+
+                    /** InsightStateInfo stateMetadata */
+                    stateMetadata?: ({ [k: string]: string }|null);
+                }
+
+                /** Represents an InsightStateInfo. */
+                class InsightStateInfo implements IInsightStateInfo {
+
+                    /**
+                     * Constructs a new InsightStateInfo.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.recommender.v1.IInsightStateInfo);
+
+                    /** InsightStateInfo state. */
+                    public state: (google.cloud.recommender.v1.InsightStateInfo.State|keyof typeof google.cloud.recommender.v1.InsightStateInfo.State);
+
+                    /** InsightStateInfo stateMetadata. */
+                    public stateMetadata: { [k: string]: string };
+
+                    /**
+                     * Creates a new InsightStateInfo instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns InsightStateInfo instance
+                     */
+                    public static create(properties?: google.cloud.recommender.v1.IInsightStateInfo): google.cloud.recommender.v1.InsightStateInfo;
+
+                    /**
+                     * Encodes the specified InsightStateInfo message. Does not implicitly {@link google.cloud.recommender.v1.InsightStateInfo.verify|verify} messages.
+                     * @param message InsightStateInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.recommender.v1.IInsightStateInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified InsightStateInfo message, length delimited. Does not implicitly {@link google.cloud.recommender.v1.InsightStateInfo.verify|verify} messages.
+                     * @param message InsightStateInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.recommender.v1.IInsightStateInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an InsightStateInfo message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns InsightStateInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.recommender.v1.InsightStateInfo;
+
+                    /**
+                     * Decodes an InsightStateInfo message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns InsightStateInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.recommender.v1.InsightStateInfo;
+
+                    /**
+                     * Verifies an InsightStateInfo message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an InsightStateInfo message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns InsightStateInfo
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.recommender.v1.InsightStateInfo;
+
+                    /**
+                     * Creates a plain object from an InsightStateInfo message. Also converts values to other types if specified.
+                     * @param message InsightStateInfo
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.recommender.v1.InsightStateInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this InsightStateInfo to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                namespace InsightStateInfo {
+
+                    /** State enum. */
+                    enum State {
+                        STATE_UNSPECIFIED = 0,
+                        ACTIVE = 1,
+                        ACCEPTED = 2,
+                        DISMISSED = 3
+                    }
+                }
+
                 /** Properties of a Recommendation. */
                 interface IRecommendation {
 
@@ -55,6 +414,9 @@ export namespace google {
 
                     /** Recommendation etag */
                     etag?: (string|null);
+
+                    /** Recommendation associatedInsights */
+                    associatedInsights?: (google.cloud.recommender.v1.Recommendation.IInsightReference[]|null);
                 }
 
                 /** Represents a Recommendation. */
@@ -92,6 +454,9 @@ export namespace google {
 
                     /** Recommendation etag. */
                     public etag: string;
+
+                    /** Recommendation associatedInsights. */
+                    public associatedInsights: google.cloud.recommender.v1.Recommendation.IInsightReference[];
 
                     /**
                      * Creates a new Recommendation instance using the specified properties.
@@ -162,6 +527,99 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+                }
+
+                namespace Recommendation {
+
+                    /** Properties of an InsightReference. */
+                    interface IInsightReference {
+
+                        /** InsightReference insight */
+                        insight?: (string|null);
+                    }
+
+                    /** Represents an InsightReference. */
+                    class InsightReference implements IInsightReference {
+
+                        /**
+                         * Constructs a new InsightReference.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.recommender.v1.Recommendation.IInsightReference);
+
+                        /** InsightReference insight. */
+                        public insight: string;
+
+                        /**
+                         * Creates a new InsightReference instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns InsightReference instance
+                         */
+                        public static create(properties?: google.cloud.recommender.v1.Recommendation.IInsightReference): google.cloud.recommender.v1.Recommendation.InsightReference;
+
+                        /**
+                         * Encodes the specified InsightReference message. Does not implicitly {@link google.cloud.recommender.v1.Recommendation.InsightReference.verify|verify} messages.
+                         * @param message InsightReference message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.recommender.v1.Recommendation.IInsightReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified InsightReference message, length delimited. Does not implicitly {@link google.cloud.recommender.v1.Recommendation.InsightReference.verify|verify} messages.
+                         * @param message InsightReference message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.recommender.v1.Recommendation.IInsightReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an InsightReference message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns InsightReference
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.recommender.v1.Recommendation.InsightReference;
+
+                        /**
+                         * Decodes an InsightReference message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns InsightReference
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.recommender.v1.Recommendation.InsightReference;
+
+                        /**
+                         * Verifies an InsightReference message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an InsightReference message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns InsightReference
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.recommender.v1.Recommendation.InsightReference;
+
+                        /**
+                         * Creates a plain object from an InsightReference message. Also converts values to other types if specified.
+                         * @param message InsightReference
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.recommender.v1.Recommendation.InsightReference, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this InsightReference to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
                 }
 
                 /** Properties of a RecommendationContent. */
@@ -921,6 +1379,48 @@ export namespace google {
                     public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): Recommender;
 
                     /**
+                     * Calls ListInsights.
+                     * @param request ListInsightsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListInsightsResponse
+                     */
+                    public listInsights(request: google.cloud.recommender.v1.IListInsightsRequest, callback: google.cloud.recommender.v1.Recommender.ListInsightsCallback): void;
+
+                    /**
+                     * Calls ListInsights.
+                     * @param request ListInsightsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listInsights(request: google.cloud.recommender.v1.IListInsightsRequest): Promise<google.cloud.recommender.v1.ListInsightsResponse>;
+
+                    /**
+                     * Calls GetInsight.
+                     * @param request GetInsightRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Insight
+                     */
+                    public getInsight(request: google.cloud.recommender.v1.IGetInsightRequest, callback: google.cloud.recommender.v1.Recommender.GetInsightCallback): void;
+
+                    /**
+                     * Calls GetInsight.
+                     * @param request GetInsightRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getInsight(request: google.cloud.recommender.v1.IGetInsightRequest): Promise<google.cloud.recommender.v1.Insight>;
+
+                    /**
+                     * Calls MarkInsightAccepted.
+                     * @param request MarkInsightAcceptedRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Insight
+                     */
+                    public markInsightAccepted(request: google.cloud.recommender.v1.IMarkInsightAcceptedRequest, callback: google.cloud.recommender.v1.Recommender.MarkInsightAcceptedCallback): void;
+
+                    /**
+                     * Calls MarkInsightAccepted.
+                     * @param request MarkInsightAcceptedRequest message or plain object
+                     * @returns Promise
+                     */
+                    public markInsightAccepted(request: google.cloud.recommender.v1.IMarkInsightAcceptedRequest): Promise<google.cloud.recommender.v1.Insight>;
+
+                    /**
                      * Calls ListRecommendations.
                      * @param request ListRecommendationsRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and ListRecommendationsResponse
@@ -994,6 +1494,27 @@ export namespace google {
                 namespace Recommender {
 
                     /**
+                     * Callback as used by {@link google.cloud.recommender.v1.Recommender#listInsights}.
+                     * @param error Error, if any
+                     * @param [response] ListInsightsResponse
+                     */
+                    type ListInsightsCallback = (error: (Error|null), response?: google.cloud.recommender.v1.ListInsightsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.recommender.v1.Recommender#getInsight}.
+                     * @param error Error, if any
+                     * @param [response] Insight
+                     */
+                    type GetInsightCallback = (error: (Error|null), response?: google.cloud.recommender.v1.Insight) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.recommender.v1.Recommender#markInsightAccepted}.
+                     * @param error Error, if any
+                     * @param [response] Insight
+                     */
+                    type MarkInsightAcceptedCallback = (error: (Error|null), response?: google.cloud.recommender.v1.Insight) => void;
+
+                    /**
                      * Callback as used by {@link google.cloud.recommender.v1.Recommender#listRecommendations}.
                      * @param error Error, if any
                      * @param [response] ListRecommendationsResponse
@@ -1027,6 +1548,402 @@ export namespace google {
                      * @param [response] Recommendation
                      */
                     type MarkRecommendationFailedCallback = (error: (Error|null), response?: google.cloud.recommender.v1.Recommendation) => void;
+                }
+
+                /** Properties of a ListInsightsRequest. */
+                interface IListInsightsRequest {
+
+                    /** ListInsightsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListInsightsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListInsightsRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListInsightsRequest filter */
+                    filter?: (string|null);
+                }
+
+                /** Represents a ListInsightsRequest. */
+                class ListInsightsRequest implements IListInsightsRequest {
+
+                    /**
+                     * Constructs a new ListInsightsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.recommender.v1.IListInsightsRequest);
+
+                    /** ListInsightsRequest parent. */
+                    public parent: string;
+
+                    /** ListInsightsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListInsightsRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListInsightsRequest filter. */
+                    public filter: string;
+
+                    /**
+                     * Creates a new ListInsightsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListInsightsRequest instance
+                     */
+                    public static create(properties?: google.cloud.recommender.v1.IListInsightsRequest): google.cloud.recommender.v1.ListInsightsRequest;
+
+                    /**
+                     * Encodes the specified ListInsightsRequest message. Does not implicitly {@link google.cloud.recommender.v1.ListInsightsRequest.verify|verify} messages.
+                     * @param message ListInsightsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.recommender.v1.IListInsightsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListInsightsRequest message, length delimited. Does not implicitly {@link google.cloud.recommender.v1.ListInsightsRequest.verify|verify} messages.
+                     * @param message ListInsightsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.recommender.v1.IListInsightsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListInsightsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListInsightsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.recommender.v1.ListInsightsRequest;
+
+                    /**
+                     * Decodes a ListInsightsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListInsightsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.recommender.v1.ListInsightsRequest;
+
+                    /**
+                     * Verifies a ListInsightsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListInsightsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListInsightsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.recommender.v1.ListInsightsRequest;
+
+                    /**
+                     * Creates a plain object from a ListInsightsRequest message. Also converts values to other types if specified.
+                     * @param message ListInsightsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.recommender.v1.ListInsightsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListInsightsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a ListInsightsResponse. */
+                interface IListInsightsResponse {
+
+                    /** ListInsightsResponse insights */
+                    insights?: (google.cloud.recommender.v1.IInsight[]|null);
+
+                    /** ListInsightsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListInsightsResponse. */
+                class ListInsightsResponse implements IListInsightsResponse {
+
+                    /**
+                     * Constructs a new ListInsightsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.recommender.v1.IListInsightsResponse);
+
+                    /** ListInsightsResponse insights. */
+                    public insights: google.cloud.recommender.v1.IInsight[];
+
+                    /** ListInsightsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListInsightsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListInsightsResponse instance
+                     */
+                    public static create(properties?: google.cloud.recommender.v1.IListInsightsResponse): google.cloud.recommender.v1.ListInsightsResponse;
+
+                    /**
+                     * Encodes the specified ListInsightsResponse message. Does not implicitly {@link google.cloud.recommender.v1.ListInsightsResponse.verify|verify} messages.
+                     * @param message ListInsightsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.recommender.v1.IListInsightsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListInsightsResponse message, length delimited. Does not implicitly {@link google.cloud.recommender.v1.ListInsightsResponse.verify|verify} messages.
+                     * @param message ListInsightsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.recommender.v1.IListInsightsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListInsightsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListInsightsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.recommender.v1.ListInsightsResponse;
+
+                    /**
+                     * Decodes a ListInsightsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListInsightsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.recommender.v1.ListInsightsResponse;
+
+                    /**
+                     * Verifies a ListInsightsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListInsightsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListInsightsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.recommender.v1.ListInsightsResponse;
+
+                    /**
+                     * Creates a plain object from a ListInsightsResponse message. Also converts values to other types if specified.
+                     * @param message ListInsightsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.recommender.v1.ListInsightsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListInsightsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a GetInsightRequest. */
+                interface IGetInsightRequest {
+
+                    /** GetInsightRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetInsightRequest. */
+                class GetInsightRequest implements IGetInsightRequest {
+
+                    /**
+                     * Constructs a new GetInsightRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.recommender.v1.IGetInsightRequest);
+
+                    /** GetInsightRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetInsightRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetInsightRequest instance
+                     */
+                    public static create(properties?: google.cloud.recommender.v1.IGetInsightRequest): google.cloud.recommender.v1.GetInsightRequest;
+
+                    /**
+                     * Encodes the specified GetInsightRequest message. Does not implicitly {@link google.cloud.recommender.v1.GetInsightRequest.verify|verify} messages.
+                     * @param message GetInsightRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.recommender.v1.IGetInsightRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetInsightRequest message, length delimited. Does not implicitly {@link google.cloud.recommender.v1.GetInsightRequest.verify|verify} messages.
+                     * @param message GetInsightRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.recommender.v1.IGetInsightRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetInsightRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetInsightRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.recommender.v1.GetInsightRequest;
+
+                    /**
+                     * Decodes a GetInsightRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetInsightRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.recommender.v1.GetInsightRequest;
+
+                    /**
+                     * Verifies a GetInsightRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetInsightRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetInsightRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.recommender.v1.GetInsightRequest;
+
+                    /**
+                     * Creates a plain object from a GetInsightRequest message. Also converts values to other types if specified.
+                     * @param message GetInsightRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.recommender.v1.GetInsightRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetInsightRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a MarkInsightAcceptedRequest. */
+                interface IMarkInsightAcceptedRequest {
+
+                    /** MarkInsightAcceptedRequest name */
+                    name?: (string|null);
+
+                    /** MarkInsightAcceptedRequest stateMetadata */
+                    stateMetadata?: ({ [k: string]: string }|null);
+
+                    /** MarkInsightAcceptedRequest etag */
+                    etag?: (string|null);
+                }
+
+                /** Represents a MarkInsightAcceptedRequest. */
+                class MarkInsightAcceptedRequest implements IMarkInsightAcceptedRequest {
+
+                    /**
+                     * Constructs a new MarkInsightAcceptedRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.recommender.v1.IMarkInsightAcceptedRequest);
+
+                    /** MarkInsightAcceptedRequest name. */
+                    public name: string;
+
+                    /** MarkInsightAcceptedRequest stateMetadata. */
+                    public stateMetadata: { [k: string]: string };
+
+                    /** MarkInsightAcceptedRequest etag. */
+                    public etag: string;
+
+                    /**
+                     * Creates a new MarkInsightAcceptedRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns MarkInsightAcceptedRequest instance
+                     */
+                    public static create(properties?: google.cloud.recommender.v1.IMarkInsightAcceptedRequest): google.cloud.recommender.v1.MarkInsightAcceptedRequest;
+
+                    /**
+                     * Encodes the specified MarkInsightAcceptedRequest message. Does not implicitly {@link google.cloud.recommender.v1.MarkInsightAcceptedRequest.verify|verify} messages.
+                     * @param message MarkInsightAcceptedRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.recommender.v1.IMarkInsightAcceptedRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified MarkInsightAcceptedRequest message, length delimited. Does not implicitly {@link google.cloud.recommender.v1.MarkInsightAcceptedRequest.verify|verify} messages.
+                     * @param message MarkInsightAcceptedRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.recommender.v1.IMarkInsightAcceptedRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a MarkInsightAcceptedRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns MarkInsightAcceptedRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.recommender.v1.MarkInsightAcceptedRequest;
+
+                    /**
+                     * Decodes a MarkInsightAcceptedRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns MarkInsightAcceptedRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.recommender.v1.MarkInsightAcceptedRequest;
+
+                    /**
+                     * Verifies a MarkInsightAcceptedRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a MarkInsightAcceptedRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns MarkInsightAcceptedRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.recommender.v1.MarkInsightAcceptedRequest;
+
+                    /**
+                     * Creates a plain object from a MarkInsightAcceptedRequest message. Also converts values to other types if specified.
+                     * @param message MarkInsightAcceptedRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.recommender.v1.MarkInsightAcceptedRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this MarkInsightAcceptedRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
                 }
 
                 /** Properties of a ListRecommendationsRequest. */

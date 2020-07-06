@@ -11,13 +11,109 @@
                     "csharp_namespace": "Google.Cloud.Recommender.V1",
                     "go_package": "google.golang.org/genproto/googleapis/cloud/recommender/v1;recommender",
                     "java_multiple_files": true,
+                    "java_outer_classname": "RecommenderProto",
                     "java_package": "com.google.cloud.recommender.v1",
                     "objc_class_prefix": "CREC",
                     "(google.api.resource_definition).type": "recommender.googleapis.com/Recommender",
-                    "(google.api.resource_definition).pattern": "projects/{project}/locations/{location}/recommenders/{recommender}",
-                    "java_outer_classname": "RecommenderProto"
+                    "(google.api.resource_definition).pattern": "projects/{project}/locations/{location}/recommenders/{recommender}"
                   },
                   "nested": {
+                    "Insight": {
+                      "options": {
+                        "(google.api.resource).type": "recommender.googleapis.com/Insight",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/insightTypes/{insight_type}/insights/{insight}"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "targetResources": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 9
+                        },
+                        "insightSubtype": {
+                          "type": "string",
+                          "id": 10
+                        },
+                        "content": {
+                          "type": "google.protobuf.Struct",
+                          "id": 3
+                        },
+                        "lastRefreshTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 4
+                        },
+                        "observationPeriod": {
+                          "type": "google.protobuf.Duration",
+                          "id": 5
+                        },
+                        "stateInfo": {
+                          "type": "InsightStateInfo",
+                          "id": 6
+                        },
+                        "category": {
+                          "type": "Category",
+                          "id": 7
+                        },
+                        "etag": {
+                          "type": "string",
+                          "id": 11
+                        },
+                        "associatedRecommendations": {
+                          "rule": "repeated",
+                          "type": "RecommendationReference",
+                          "id": 8
+                        }
+                      },
+                      "nested": {
+                        "RecommendationReference": {
+                          "fields": {
+                            "recommendation": {
+                              "type": "string",
+                              "id": 1
+                            }
+                          }
+                        },
+                        "Category": {
+                          "values": {
+                            "CATEGORY_UNSPECIFIED": 0,
+                            "COST": 1,
+                            "SECURITY": 2,
+                            "PERFORMANCE": 3,
+                            "MANAGEABILITY": 4
+                          }
+                        }
+                      }
+                    },
+                    "InsightStateInfo": {
+                      "fields": {
+                        "state": {
+                          "type": "State",
+                          "id": 1
+                        },
+                        "stateMetadata": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 2
+                        }
+                      },
+                      "nested": {
+                        "State": {
+                          "values": {
+                            "STATE_UNSPECIFIED": 0,
+                            "ACTIVE": 1,
+                            "ACCEPTED": 2,
+                            "DISMISSED": 3
+                          }
+                        }
+                      }
+                    },
                     "Recommendation": {
                       "options": {
                         "(google.api.resource).type": "recommender.googleapis.com/Recommendation",
@@ -60,6 +156,21 @@
                         "etag": {
                           "type": "string",
                           "id": 11
+                        },
+                        "associatedInsights": {
+                          "rule": "repeated",
+                          "type": "InsightReference",
+                          "id": 14
+                        }
+                      },
+                      "nested": {
+                        "InsightReference": {
+                          "fields": {
+                            "insight": {
+                              "type": "string",
+                              "id": 1
+                            }
+                          }
                         }
                       }
                     },
@@ -223,6 +334,31 @@
                         "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
                       },
                       "methods": {
+                        "ListInsights": {
+                          "requestType": "ListInsightsRequest",
+                          "responseType": "ListInsightsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=projects/*/locations/*/insightTypes/*}/insights",
+                            "(google.api.method_signature)": "parent"
+                          }
+                        },
+                        "GetInsight": {
+                          "requestType": "GetInsightRequest",
+                          "responseType": "Insight",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/insightTypes/*/insights/*}",
+                            "(google.api.method_signature)": "name"
+                          }
+                        },
+                        "MarkInsightAccepted": {
+                          "requestType": "MarkInsightAcceptedRequest",
+                          "responseType": "Insight",
+                          "options": {
+                            "(google.api.http).post": "/v1/{name=projects/*/locations/*/insightTypes/*/insights/*}:markAccepted",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "name,state_metadata,etag"
+                          }
+                        },
                         "ListRecommendations": {
                           "requestType": "ListRecommendationsRequest",
                           "responseType": "ListRecommendationsResponse",
@@ -264,6 +400,91 @@
                             "(google.api.http).post": "/v1/{name=projects/*/locations/*/recommenders/*/recommendations/*}:markFailed",
                             "(google.api.http).body": "*",
                             "(google.api.method_signature)": "name,state_metadata,etag"
+                          }
+                        }
+                      }
+                    },
+                    "ListInsightsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "recommender.googleapis.com/InsightType"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListInsightsResponse": {
+                      "fields": {
+                        "insights": {
+                          "rule": "repeated",
+                          "type": "Insight",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "GetInsightRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "recommender.googleapis.com/Insight"
+                          }
+                        }
+                      }
+                    },
+                    "MarkInsightAcceptedRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "recommender.googleapis.com/Insight"
+                          }
+                        },
+                        "stateMetadata": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "etag": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
                           }
                         }
                       }

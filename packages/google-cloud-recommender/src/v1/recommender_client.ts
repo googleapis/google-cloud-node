@@ -35,10 +35,10 @@ import * as gapicConfig from './recommender_client_config.json';
 const version = require('../../../package.json').version;
 
 /**
- *  Provides recommendations for cloud customers for various categories like
- *  performance optimization, cost savings, reliability, feature discovery, etc.
- *  These recommendations are generated automatically based on analysis of user
- *  resources, configuration and monitoring metrics.
+ *  Provides insights and recommendations for cloud customers for various
+ *  categories like performance optimization, cost savings, reliability, feature
+ *  discovery, etc. Insights and recommendations are generated automatically
+ *  based on analysis of user resources, configuration and monitoring metrics.
  * @class
  * @memberof v1
  */
@@ -163,6 +163,12 @@ export class RecommenderClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this.pathTemplates = {
+      insightPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/insightTypes/{insight_type}/insights/{insight}'
+      ),
+      insightTypePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/insightTypes/{insight_type}'
+      ),
       recommendationPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/recommenders/{recommender}/recommendations/{recommendation}'
       ),
@@ -175,6 +181,11 @@ export class RecommenderClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
+      listInsights: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'insights'
+      ),
       listRecommendations: new this._gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
@@ -228,6 +239,9 @@ export class RecommenderClient {
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
     const recommenderStubMethods = [
+      'listInsights',
+      'getInsight',
+      'markInsightAccepted',
       'listRecommendations',
       'getRecommendation',
       'markRecommendationClaimed',
@@ -312,6 +326,193 @@ export class RecommenderClient {
   // -------------------
   // -- Service calls --
   // -------------------
+  getInsight(
+    request: protos.google.cloud.recommender.v1.IGetInsightRequest,
+    options?: gax.CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.recommender.v1.IInsight,
+      protos.google.cloud.recommender.v1.IGetInsightRequest | undefined,
+      {} | undefined
+    ]
+  >;
+  getInsight(
+    request: protos.google.cloud.recommender.v1.IGetInsightRequest,
+    options: gax.CallOptions,
+    callback: Callback<
+      protos.google.cloud.recommender.v1.IInsight,
+      protos.google.cloud.recommender.v1.IGetInsightRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getInsight(
+    request: protos.google.cloud.recommender.v1.IGetInsightRequest,
+    callback: Callback<
+      protos.google.cloud.recommender.v1.IInsight,
+      protos.google.cloud.recommender.v1.IGetInsightRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Gets the requested insight. Requires the recommender.*.get IAM permission
+   * for the specified insight type.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Name of the insight.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Insight]{@link google.cloud.recommender.v1.Insight}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   */
+  getInsight(
+    request: protos.google.cloud.recommender.v1.IGetInsightRequest,
+    optionsOrCallback?:
+      | gax.CallOptions
+      | Callback<
+          protos.google.cloud.recommender.v1.IInsight,
+          | protos.google.cloud.recommender.v1.IGetInsightRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.recommender.v1.IInsight,
+      protos.google.cloud.recommender.v1.IGetInsightRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.recommender.v1.IInsight,
+      protos.google.cloud.recommender.v1.IGetInsightRequest | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      name: request.name || '',
+    });
+    this.initialize();
+    return this.innerApiCalls.getInsight(request, options, callback);
+  }
+  markInsightAccepted(
+    request: protos.google.cloud.recommender.v1.IMarkInsightAcceptedRequest,
+    options?: gax.CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.recommender.v1.IInsight,
+      (
+        | protos.google.cloud.recommender.v1.IMarkInsightAcceptedRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
+  markInsightAccepted(
+    request: protos.google.cloud.recommender.v1.IMarkInsightAcceptedRequest,
+    options: gax.CallOptions,
+    callback: Callback<
+      protos.google.cloud.recommender.v1.IInsight,
+      | protos.google.cloud.recommender.v1.IMarkInsightAcceptedRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  markInsightAccepted(
+    request: protos.google.cloud.recommender.v1.IMarkInsightAcceptedRequest,
+    callback: Callback<
+      protos.google.cloud.recommender.v1.IInsight,
+      | protos.google.cloud.recommender.v1.IMarkInsightAcceptedRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Marks the Insight State as Accepted. Users can use this method to
+   * indicate to the Recommender API that they have applied some action based
+   * on the insight. This stops the insight content from being updated.
+   *
+   * MarkInsightAccepted can be applied to insights in ACTIVE state. Requires
+   * the recommender.*.update IAM permission for the specified insight.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Name of the insight.
+   * @param {number[]} [request.stateMetadata]
+   *   Optional. State properties user wish to include with this state.  Full replace of the
+   *   current state_metadata.
+   * @param {string} request.etag
+   *   Required. Fingerprint of the Insight. Provides optimistic locking.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Insight]{@link google.cloud.recommender.v1.Insight}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   */
+  markInsightAccepted(
+    request: protos.google.cloud.recommender.v1.IMarkInsightAcceptedRequest,
+    optionsOrCallback?:
+      | gax.CallOptions
+      | Callback<
+          protos.google.cloud.recommender.v1.IInsight,
+          | protos.google.cloud.recommender.v1.IMarkInsightAcceptedRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.recommender.v1.IInsight,
+      | protos.google.cloud.recommender.v1.IMarkInsightAcceptedRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.recommender.v1.IInsight,
+      (
+        | protos.google.cloud.recommender.v1.IMarkInsightAcceptedRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      name: request.name || '',
+    });
+    this.initialize();
+    return this.innerApiCalls.markInsightAccepted(request, options, callback);
+  }
   getRecommendation(
     request: protos.google.cloud.recommender.v1.IGetRecommendationRequest,
     options?: gax.CallOptions
@@ -436,10 +637,10 @@ export class RecommenderClient {
     >
   ): void;
   /**
-   * Mark the Recommendation State as Claimed. Users can use this method to
+   * Marks the Recommendation State as Claimed. Users can use this method to
    * indicate to the Recommender API that they are starting to apply the
    * recommendation themselves. This stops the recommendation content from being
-   * updated.
+   * updated. Associated insights are frozen and placed in the ACCEPTED state.
    *
    * MarkRecommendationClaimed can be applied to recommendations in CLAIMED,
    * SUCCEEDED, FAILED, or ACTIVE state.
@@ -550,10 +751,11 @@ export class RecommenderClient {
     >
   ): void;
   /**
-   * Mark the Recommendation State as Succeeded. Users can use this method to
+   * Marks the Recommendation State as Succeeded. Users can use this method to
    * indicate to the Recommender API that they have applied the recommendation
    * themselves, and the operation was successful. This stops the recommendation
-   * content from being updated.
+   * content from being updated. Associated insights are frozen and placed in
+   * the ACCEPTED state.
    *
    * MarkRecommendationSucceeded can be applied to recommendations in ACTIVE,
    * CLAIMED, SUCCEEDED, or FAILED state.
@@ -664,10 +866,11 @@ export class RecommenderClient {
     >
   ): void;
   /**
-   * Mark the Recommendation State as Failed. Users can use this method to
+   * Marks the Recommendation State as Failed. Users can use this method to
    * indicate to the Recommender API that they have applied the recommendation
    * themselves, and the operation failed. This stops the recommendation content
-   * from being updated.
+   * from being updated. Associated insights are frozen and placed in the
+   * ACCEPTED state.
    *
    * MarkRecommendationFailed can be applied to recommendations in ACTIVE,
    * CLAIMED, SUCCEEDED, or FAILED state.
@@ -744,6 +947,248 @@ export class RecommenderClient {
     );
   }
 
+  listInsights(
+    request: protos.google.cloud.recommender.v1.IListInsightsRequest,
+    options?: gax.CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.recommender.v1.IInsight[],
+      protos.google.cloud.recommender.v1.IListInsightsRequest | null,
+      protos.google.cloud.recommender.v1.IListInsightsResponse
+    ]
+  >;
+  listInsights(
+    request: protos.google.cloud.recommender.v1.IListInsightsRequest,
+    options: gax.CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.recommender.v1.IListInsightsRequest,
+      | protos.google.cloud.recommender.v1.IListInsightsResponse
+      | null
+      | undefined,
+      protos.google.cloud.recommender.v1.IInsight
+    >
+  ): void;
+  listInsights(
+    request: protos.google.cloud.recommender.v1.IListInsightsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.recommender.v1.IListInsightsRequest,
+      | protos.google.cloud.recommender.v1.IListInsightsResponse
+      | null
+      | undefined,
+      protos.google.cloud.recommender.v1.IInsight
+    >
+  ): void;
+  /**
+   * Lists insights for a Cloud project. Requires the recommender.*.list IAM
+   * permission for the specified insight type.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The container resource on which to execute the request.
+   *   Acceptable formats:
+   *
+   *   1.
+   *   "projects/[PROJECT_NUMBER]/locations/[LOCATION]/insightTypes/[INSIGHT_TYPE_ID]",
+   *
+   *   LOCATION here refers to GCP Locations:
+   *   https://cloud.google.com/about/locations/
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of results to return from this request.  Non-positive
+   *   values are ignored. If not specified, the server will determine the number
+   *   of results to return.
+   * @param {string} [request.pageToken]
+   *   Optional. If present, retrieves the next batch of results from the preceding call to
+   *   this method. `page_token` must be the value of `next_page_token` from the
+   *   previous response. The values of other method parameters must be identical
+   *   to those in the previous call.
+   * @param {string} [request.filter]
+   *   Optional. Filter expression to restrict the insights returned. Supported
+   *   filter fields: state
+   *   Eg: `state:"DISMISSED" or state:"ACTIVE"
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of [Insight]{@link google.cloud.recommender.v1.Insight}.
+   *   The client library support auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *
+   *   When autoPaginate: false is specified through options, the array has three elements.
+   *   The first element is Array of [Insight]{@link google.cloud.recommender.v1.Insight} that corresponds to
+   *   the one page received from the API server.
+   *   If the second element is not null it contains the request object of type [ListInsightsRequest]{@link google.cloud.recommender.v1.ListInsightsRequest}
+   *   that can be used to obtain the next page of the results.
+   *   If it is null, the next page does not exist.
+   *   The third element contains the raw response received from the API server. Its type is
+   *   [ListInsightsResponse]{@link google.cloud.recommender.v1.ListInsightsResponse}.
+   *
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   */
+  listInsights(
+    request: protos.google.cloud.recommender.v1.IListInsightsRequest,
+    optionsOrCallback?:
+      | gax.CallOptions
+      | PaginationCallback<
+          protos.google.cloud.recommender.v1.IListInsightsRequest,
+          | protos.google.cloud.recommender.v1.IListInsightsResponse
+          | null
+          | undefined,
+          protos.google.cloud.recommender.v1.IInsight
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.recommender.v1.IListInsightsRequest,
+      | protos.google.cloud.recommender.v1.IListInsightsResponse
+      | null
+      | undefined,
+      protos.google.cloud.recommender.v1.IInsight
+    >
+  ): Promise<
+    [
+      protos.google.cloud.recommender.v1.IInsight[],
+      protos.google.cloud.recommender.v1.IListInsightsRequest | null,
+      protos.google.cloud.recommender.v1.IListInsightsResponse
+    ]
+  > | void {
+    request = request || {};
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      parent: request.parent || '',
+    });
+    this.initialize();
+    return this.innerApiCalls.listInsights(request, options, callback);
+  }
+
+  /**
+   * Equivalent to {@link listInsights}, but returns a NodeJS Stream object.
+   *
+   * This fetches the paged responses for {@link listInsights} continuously
+   * and invokes the callback registered for 'data' event for each element in the
+   * responses.
+   *
+   * The returned object has 'end' method when no more elements are required.
+   *
+   * autoPaginate option will be ignored.
+   *
+   * @see {@link https://nodejs.org/api/stream.html}
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The container resource on which to execute the request.
+   *   Acceptable formats:
+   *
+   *   1.
+   *   "projects/[PROJECT_NUMBER]/locations/[LOCATION]/insightTypes/[INSIGHT_TYPE_ID]",
+   *
+   *   LOCATION here refers to GCP Locations:
+   *   https://cloud.google.com/about/locations/
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of results to return from this request.  Non-positive
+   *   values are ignored. If not specified, the server will determine the number
+   *   of results to return.
+   * @param {string} [request.pageToken]
+   *   Optional. If present, retrieves the next batch of results from the preceding call to
+   *   this method. `page_token` must be the value of `next_page_token` from the
+   *   previous response. The values of other method parameters must be identical
+   *   to those in the previous call.
+   * @param {string} [request.filter]
+   *   Optional. Filter expression to restrict the insights returned. Supported
+   *   filter fields: state
+   *   Eg: `state:"DISMISSED" or state:"ACTIVE"
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing [Insight]{@link google.cloud.recommender.v1.Insight} on 'data' event.
+   */
+  listInsightsStream(
+    request?: protos.google.cloud.recommender.v1.IListInsightsRequest,
+    options?: gax.CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      parent: request.parent || '',
+    });
+    const callSettings = new gax.CallSettings(options);
+    this.initialize();
+    return this.descriptors.page.listInsights.createStream(
+      this.innerApiCalls.listInsights as gax.GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to {@link listInsights}, but returns an iterable object.
+   *
+   * for-await-of syntax is used with the iterable to recursively get response element on-demand.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The container resource on which to execute the request.
+   *   Acceptable formats:
+   *
+   *   1.
+   *   "projects/[PROJECT_NUMBER]/locations/[LOCATION]/insightTypes/[INSIGHT_TYPE_ID]",
+   *
+   *   LOCATION here refers to GCP Locations:
+   *   https://cloud.google.com/about/locations/
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of results to return from this request.  Non-positive
+   *   values are ignored. If not specified, the server will determine the number
+   *   of results to return.
+   * @param {string} [request.pageToken]
+   *   Optional. If present, retrieves the next batch of results from the preceding call to
+   *   this method. `page_token` must be the value of `next_page_token` from the
+   *   previous response. The values of other method parameters must be identical
+   *   to those in the previous call.
+   * @param {string} [request.filter]
+   *   Optional. Filter expression to restrict the insights returned. Supported
+   *   filter fields: state
+   *   Eg: `state:"DISMISSED" or state:"ACTIVE"
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that conforms to @link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols.
+   */
+  listInsightsAsync(
+    request?: protos.google.cloud.recommender.v1.IListInsightsRequest,
+    options?: gax.CallOptions
+  ): AsyncIterable<protos.google.cloud.recommender.v1.IInsight> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      parent: request.parent || '',
+    });
+    options = options || {};
+    const callSettings = new gax.CallSettings(options);
+    this.initialize();
+    return this.descriptors.page.listInsights.asyncIterate(
+      this.innerApiCalls['listInsights'] as GaxCall,
+      (request as unknown) as RequestType,
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.recommender.v1.IInsight>;
+  }
   listRecommendations(
     request: protos.google.cloud.recommender.v1.IListRecommendationsRequest,
     options?: gax.CallOptions
@@ -989,6 +1434,126 @@ export class RecommenderClient {
   // --------------------
   // -- Path templates --
   // --------------------
+
+  /**
+   * Return a fully-qualified insight resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} insight_type
+   * @param {string} insight
+   * @returns {string} Resource name string.
+   */
+  insightPath(
+    project: string,
+    location: string,
+    insightType: string,
+    insight: string
+  ) {
+    return this.pathTemplates.insightPathTemplate.render({
+      project: project,
+      location: location,
+      insight_type: insightType,
+      insight: insight,
+    });
+  }
+
+  /**
+   * Parse the project from Insight resource.
+   *
+   * @param {string} insightName
+   *   A fully-qualified path representing Insight resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromInsightName(insightName: string) {
+    return this.pathTemplates.insightPathTemplate.match(insightName).project;
+  }
+
+  /**
+   * Parse the location from Insight resource.
+   *
+   * @param {string} insightName
+   *   A fully-qualified path representing Insight resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromInsightName(insightName: string) {
+    return this.pathTemplates.insightPathTemplate.match(insightName).location;
+  }
+
+  /**
+   * Parse the insight_type from Insight resource.
+   *
+   * @param {string} insightName
+   *   A fully-qualified path representing Insight resource.
+   * @returns {string} A string representing the insight_type.
+   */
+  matchInsightTypeFromInsightName(insightName: string) {
+    return this.pathTemplates.insightPathTemplate.match(insightName)
+      .insight_type;
+  }
+
+  /**
+   * Parse the insight from Insight resource.
+   *
+   * @param {string} insightName
+   *   A fully-qualified path representing Insight resource.
+   * @returns {string} A string representing the insight.
+   */
+  matchInsightFromInsightName(insightName: string) {
+    return this.pathTemplates.insightPathTemplate.match(insightName).insight;
+  }
+
+  /**
+   * Return a fully-qualified insightType resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} insight_type
+   * @returns {string} Resource name string.
+   */
+  insightTypePath(project: string, location: string, insightType: string) {
+    return this.pathTemplates.insightTypePathTemplate.render({
+      project: project,
+      location: location,
+      insight_type: insightType,
+    });
+  }
+
+  /**
+   * Parse the project from InsightType resource.
+   *
+   * @param {string} insightTypeName
+   *   A fully-qualified path representing InsightType resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromInsightTypeName(insightTypeName: string) {
+    return this.pathTemplates.insightTypePathTemplate.match(insightTypeName)
+      .project;
+  }
+
+  /**
+   * Parse the location from InsightType resource.
+   *
+   * @param {string} insightTypeName
+   *   A fully-qualified path representing InsightType resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromInsightTypeName(insightTypeName: string) {
+    return this.pathTemplates.insightTypePathTemplate.match(insightTypeName)
+      .location;
+  }
+
+  /**
+   * Parse the insight_type from InsightType resource.
+   *
+   * @param {string} insightTypeName
+   *   A fully-qualified path representing InsightType resource.
+   * @returns {string} A string representing the insight_type.
+   */
+  matchInsightTypeFromInsightTypeName(insightTypeName: string) {
+    return this.pathTemplates.insightTypePathTemplate.match(insightTypeName)
+      .insight_type;
+  }
 
   /**
    * Return a fully-qualified recommendation resource name string.
