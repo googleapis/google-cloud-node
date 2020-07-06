@@ -24,19 +24,10 @@ AUTOSYNTH_MULTIPLE_COMMITS = True
 
 
 # run the gapic generator
-gapic = gcp.GAPICMicrogenerator()
+gapic = gcp.GAPICBazel()
 versions = ['v1']
 for version in versions:
-    library = gapic.typescript_library(
-        'grafeas',
-        version,
-        generator_args={
-            "grpc-service-config": f"grafeas/{version}/grafeas_grpc_service_config.json",
-            "package-name": "@google-cloud/grafeas"
-        },
-        proto_path=f'/grafeas/{version}',
-        extra_proto_files=['google/cloud/common_resources.proto'],
-    )
+    library = gapic.node_library('grafeas', version, bazel_target=f'//grafeas/{version}:grafeas-{version}-nodejs')
     s.copy(library, excludes=[
         "README.md",
         "package.json"
