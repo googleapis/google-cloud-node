@@ -23,19 +23,9 @@ logging.basicConfig(level=logging.DEBUG)
 AUTOSYNTH_MULTIPLE_COMMITS = True
 
 
-gapic = gcp.GAPICMicrogenerator()
+gapic = gcp.GAPICBazel()
 version = "v3"
-library = gapic.typescript_library(
-    "monitoring",
-    version,
-    generator_args={
-        "grpc-service-config": f"google/monitoring/{version}/monitoring_grpc_service_config.json",
-        "package-name": "@google-cloud/monitoring",
-        "main-service": "monitoring"
-    },
-    proto_path=f'/google/monitoring/{version}',
-    extra_proto_files=['google/cloud/common_resources.proto']
-)
+library = gapic.node_library("monitoring", version, proto_path=f'google/monitoring/{version}')
 
 s.copy(library, excludes=["README.md", "package.json"])
 

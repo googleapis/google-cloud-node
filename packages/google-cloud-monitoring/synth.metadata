@@ -3,23 +3,15 @@
     {
       "git": {
         "name": ".",
-        "remote": "https://github.com/googleapis/nodejs-monitoring.git",
-        "sha": "c3bda103c90d7aa404397a8b3e729f62c8416f57"
-      }
-    },
-    {
-      "git": {
-        "name": "googleapis",
-        "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "51362f378a286494980ffc9a5199ab6e3cefd6d5",
-        "internalRef": "314788297"
+        "remote": "git@github.com:googleapis/nodejs-monitoring.git",
+        "sha": "1e0751185d29f17ea9e8fd6eaf03a40f9a60cf6e"
       }
     },
     {
       "git": {
         "name": "synthtool",
         "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "dc9caca650c77b7039e2bbc3339ffb34ae78e5b7"
+        "sha": "303271797a360f8a439203413f13a160f2f5b3b4"
       }
     }
   ],
@@ -29,8 +21,8 @@
         "source": "googleapis",
         "apiName": "monitoring",
         "apiVersion": "v3",
-        "language": "typescript",
-        "generator": "gapic-generator-typescript"
+        "language": "nodejs",
+        "generator": "bazel"
       }
     }
   ]
