@@ -24,19 +24,10 @@ logging.basicConfig(level=logging.DEBUG)
 AUTOSYNTH_MULTIPLE_COMMITS = True
 
 # Run the gapic generator
-gapic = gcp.GAPICMicrogenerator()
+gapic = gcp.GAPICBazel()
 versions = ["v2", "v2beta2", "v2beta3"]
 for version in versions:
-    library = gapic.typescript_library(
-        "tasks", version,
-        generator_args={
-            "grpc-service-config": f"google/cloud/tasks/{version}/cloudtasks_grpc_service_config.json",
-            "package-name": f"@google-cloud/tasks",
-            "main-service": f"tasks"
-        },
-        proto_path=f'/google/cloud/tasks/{version}',
-        extra_proto_files=['google/cloud/common_resources.proto'],
-    )
+    library = gapic.node_library("tasks", version)
     s.copy(library, excludes=["README.md", "package.json"])
 
 # Copy common templates

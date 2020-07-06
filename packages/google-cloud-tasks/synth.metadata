@@ -3,23 +3,15 @@
     {
       "git": {
         "name": ".",
-        "remote": "https://github.com/googleapis/nodejs-tasks.git",
-        "sha": "14495107ce57f8a9f1e1668a2582ac66d2daccd6"
-      }
-    },
-    {
-      "git": {
-        "name": "googleapis",
-        "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "eb37e688331443969eed9b969531751154a956d5",
-        "internalRef": "317130948"
+        "remote": "git@github.com:googleapis/nodejs-tasks.git",
+        "sha": "c6895111223f81fdbb8d6c698d8f2560675ac869"
       }
     },
     {
       "git": {
         "name": "synthtool",
         "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "dc9caca650c77b7039e2bbc3339ffb34ae78e5b7"
+        "sha": "303271797a360f8a439203413f13a160f2f5b3b4"
       }
     }
   ],
@@ -29,8 +21,8 @@
         "source": "googleapis",
         "apiName": "tasks",
         "apiVersion": "v2",
-        "language": "typescript",
-        "generator": "gapic-generator-typescript"
+        "language": "nodejs",
+        "generator": "bazel"
       }
     },
     {
@@ -38,8 +30,8 @@
         "source": "googleapis",
         "apiName": "tasks",
         "apiVersion": "v2beta2",
-        "language": "typescript",
-        "generator": "gapic-generator-typescript"
+        "language": "nodejs",
+        "generator": "bazel"
       }
     },
     {
@@ -47,8 +39,8 @@
         "source": "googleapis",
         "apiName": "tasks",
         "apiVersion": "v2beta3",
-        "language": "typescript",
-        "generator": "gapic-generator-typescript"
+        "language": "nodejs",
+        "generator": "bazel"
       }
     }
   ]
