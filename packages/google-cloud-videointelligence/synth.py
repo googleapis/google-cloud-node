@@ -7,7 +7,7 @@ logging.basicConfig(level=logging.DEBUG)
 
 AUTOSYNTH_MULTIPLE_COMMITS = True
 
-gapic = gcp.GAPICMicrogenerator()
+gapic = gcp.GAPICBazel()
 common_templates = gcp.CommonTemplates()
 
 versions = ["v1", "v1beta2", "v1p1beta1", "v1p2beta1", "v1p3beta1"]
@@ -19,16 +19,7 @@ order_versions.append(order_versions.pop(
     order_versions.index(default_version)))
 
 for version in order_versions:
-    library = gapic.typescript_library(
-        "video-intelligence",
-        version,
-        generator_args={
-            "grpc-service-config": f"google/cloud/videointelligence/{version}/videointelligence_grpc_service_config.json",
-            "package-name": "@google-cloud/video-intelligence",
-            "main-service": "videointelligence",
-        },
-        proto_path=f'/google/cloud/videointelligence/{version}',
-    )
+    library = gapic.node_library("videointelligence", version)
 
     # skip index, protos, package.json, and README.md
     s.copy(library, excludes=["package.json", "README.md"])
