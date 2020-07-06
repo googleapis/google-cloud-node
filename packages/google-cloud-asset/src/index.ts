@@ -17,30 +17,30 @@
 // ** All changes to this file may be overwritten. **
 
 import * as v1beta1 from './v1beta1';
-import * as v1 from './v1';
 import * as v1p1beta1 from './v1p1beta1';
 import * as v1p2beta1 from './v1p2beta1';
 import * as v1p4beta1 from './v1p4beta1';
 import * as v1p5beta1 from './v1p5beta1';
+import * as v1 from './v1';
 
 const AssetServiceClient = v1.AssetServiceClient;
 
 export {
   v1beta1,
-  v1,
   v1p1beta1,
   v1p2beta1,
   v1p4beta1,
   v1p5beta1,
+  v1,
   AssetServiceClient,
 };
 export default {
   v1beta1,
-  v1,
   v1p1beta1,
   v1p2beta1,
   v1p4beta1,
   v1p5beta1,
+  v1,
   AssetServiceClient,
 };
 import * as protos from '../protos/protos';
