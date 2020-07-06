@@ -21,19 +21,11 @@ logging.basicConfig(level=logging.DEBUG)
 AUTOSYNTH_MULTIPLE_COMMITS = True
 
 # Run the gapic generator
-gapic = gcp.GAPICMicrogenerator()
-name = 'bigquerystorage'
+gapic = gcp.GAPICBazel()
+name = 'bigquery-storage'
 versions = ['v1beta1', 'v1']
 for version in versions:
-    library = gapic.typescript_library(
-        name,
-        version,
-        proto_path=f'google/cloud/bigquery/storage/{version}',
-        generator_args={
-            'grpc-service-config': f'google/cloud/bigquery/storage/{version}/{name}_grpc_service_config.json',
-            'package-name': f'@google-cloud/bigquery-storage',
-        },
-    )
+    library = gapic.node_library(name, version, proto_path=f'google/cloud/bigquery/storage/{version}')
     s.copy(library, excludes=['package.json', 'README.md', 'src/index.ts'])
 # Copy common templates
 common_templates = gcp.CommonTemplates()
