@@ -22,23 +22,13 @@ logging.basicConfig(level=logging.DEBUG)
 AUTOSYNTH_MULTIPLE_COMMITS = True
 
 
-gapic = gcp.GAPICMicrogenerator()
+gapic = gcp.GAPICBazel()
 # note: default version must be the last one to generate the correct system test
 versions = ['v2beta1', 'v2'] 
 default_version = 'v2'
 
 for version in versions:
-    library = gapic.typescript_library(
-        'dialogflow', version,
-        generator_args={
-            "grpc-service-config": f"google/cloud/dialogflow/{version}/dialogflow_grpc_service_config.json",
-            "package-name": f"@google-cloud/dialogflow",
-            "main-service": f"dialogflow",
-            "validation": "false",
-        },
-        proto_path=f'/google/cloud/dialogflow/{version}',
-        extra_proto_files=["google/cloud/common_resources.proto"]
-    )
+    library = gapic.node_library('dialogflow', version)
     s.copy(library, excludes=['package.json', 'README.md'])
 
 common_templates = gcp.CommonTemplates()
