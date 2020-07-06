@@ -24,20 +24,13 @@ logging.basicConfig(level=logging.DEBUG)
 AUTOSYNTH_MULTIPLE_COMMITS = True
 
 
-gapic = gcp.GAPICMicrogenerator()
+gapic = gcp.GAPICBazel()
 common_templates = gcp.CommonTemplates()
 
 versions = ['v1', 'v1beta1']
 
 for version in versions:
-    library = gapic.typescript_library(
-        'texttospeech',
-        generator_args={
-            "grpc-service-config": f"google/cloud/texttospeech/{version}/texttospeech_grpc_service_config.json",
-            "package-name": f"@google-cloud/text-to-speech"
-        },
-        proto_path=f'/google/cloud/texttospeech/{version}',
-        version=version)
+    library = gapic.node_library('texttospeech', version)
 
     # skip index, protos, package.json, and README.md
     s.copy(
