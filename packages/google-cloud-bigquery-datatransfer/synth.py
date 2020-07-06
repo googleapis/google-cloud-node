@@ -8,20 +8,12 @@ logging.basicConfig(level=logging.DEBUG)
 AUTOSYNTH_MULTIPLE_COMMITS = True
 
 
-gapic = gcp.GAPICMicrogenerator()
+gapic = gcp.GAPICBazel()
 
 # tasks has two product names, and a poorly named artman yaml
 version = 'v1'
 
-library = gapic.typescript_library(
-    'bigquerydatatransfer', version,
-    generator_args={
-        "grpc-service-config": f"google/cloud/bigquery/datatransfer/{version}/bigquerydatatransfer_grpc_service_config.json",
-        "package-name": f"@google-cloud/bigquery-data-transfer"
-    },
-    proto_path=f'/google/cloud/bigquery/datatransfer/{version}',
-    extra_proto_files=['google/cloud/common_resources.proto'],
-)
+library = gapic.node_library('bigquery-datatransfer', version, proto_path=f'google/cloud/bigquery/datatransfer/{version}')
 
 # skip index, protos, package.json, and README.md
 s.copy(
