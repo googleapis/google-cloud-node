@@ -24,26 +24,15 @@ logging.basicConfig(level=logging.DEBUG)
 AUTOSYNTH_MULTIPLE_COMMITS = True
 
 
-gapic = gcp.GAPICMicrogenerator()
-versions = ['v1beta1', 'v1', 'v1p1beta1', 'v1p2beta1', 'v1p4beta1', 'v1p5beta1']
+gapic = gcp.GAPICBazel()
+versions = ['v1beta1', 'v1p1beta1', 'v1p2beta1', 'v1p4beta1', 'v1p5beta1', 'v1']
 name = 'asset'
 for version in versions:
-    library = gapic.typescript_library(
-        name,
-        proto_path=f'google/cloud/{name}/{version}',
-        generator_args={
-            'grpc-service-config': f'google/cloud/{name}/{version}/cloud{name}_grpc_service_config.json',
-            'package-name': f'@google-cloud/{name}'
-        },
-        # This API has dependencies outside of its own folder so we list them here.
-        # Switching to bazel build should help get rid of this.
-        extra_proto_files=['google/cloud/common_resources.proto',
-                           'google/cloud/orgpolicy/v1', 'google/identity/accesscontextmanager'],
-        version=version),
+    library = gapic.node_library(name, version)
     # skip index, protos, package.json, and README.md
     s.copy(
         library,
-        excludes=['package.json']
+        excludes=['package.json', 'README.md']
     )
 
 # Copy common templates
