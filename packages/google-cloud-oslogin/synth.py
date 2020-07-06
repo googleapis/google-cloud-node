@@ -24,18 +24,10 @@ logging.basicConfig(level=logging.DEBUG)
 AUTOSYNTH_MULTIPLE_COMMITS = True
 
 
-gapic = gcp.GAPICMicrogenerator()
+gapic = gcp.GAPICBazel()
 versions = ['v1', 'v1beta']
 for version in versions:
-    library = gapic.typescript_library(
-        'os-login',
-        generator_args={
-            "grpc-service-config": f"google/cloud/oslogin/{version}/oslogin_grpc_service_config.json",
-            "package-name": f"@google-cloud/os-login"
-        },
-        proto_path=f'/google/cloud/oslogin/{version}',
-        extra_proto_files=['google/cloud/oslogin/common/common.proto'],
-        version=version)
+    library = gapic.node_library('oslogin', version, proto_path=f'google/cloud/oslogin/{version}')
 
     # skip index, protos, package.json, and README.md
     s.copy(
