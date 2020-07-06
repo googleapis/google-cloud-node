@@ -3,23 +3,15 @@
     {
       "git": {
         "name": ".",
-        "remote": "https://github.com/googleapis/nodejs-kms.git",
-        "sha": "4a1ae8056a5a840ee617daca75e571357c47195a"
-      }
-    },
-    {
-      "git": {
-        "name": "googleapis",
-        "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "ef180e07d360d86ce0f71c448edffbf6b7ceb8c9",
-        "internalRef": "314805551"
+        "remote": "git@github.com:googleapis/nodejs-kms.git",
+        "sha": "576e62f9e8f5dce320da2dc87c71cce3624ddd7f"
       }
     },
     {
       "git": {
         "name": "synthtool",
         "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "dc9caca650c77b7039e2bbc3339ffb34ae78e5b7"
+        "sha": "303271797a360f8a439203413f13a160f2f5b3b4"
       }
     }
   ],
@@ -29,8 +21,8 @@
         "source": "googleapis",
         "apiName": "kms",
         "apiVersion": "v1",
-        "language": "typescript",
-        "generator": "gapic-generator-typescript"
+        "language": "nodejs",
+        "generator": "bazel"
       }
     }
   ]
