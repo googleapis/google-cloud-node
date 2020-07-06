@@ -3,23 +3,15 @@
     {
       "git": {
         "name": ".",
-        "remote": "https://github.com/googleapis/nodejs-dataproc.git",
-        "sha": "f3f9a39c1228308f4be56d127c1e07c525701ba0"
-      }
-    },
-    {
-      "git": {
-        "name": "googleapis",
-        "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "c1fae183ddeef0c59538863eac611fd679d1b7fb",
-        "internalRef": "314634470"
+        "remote": "git@github.com:googleapis/nodejs-dataproc.git",
+        "sha": "665679481d8175126a24bfc3e3cc12b65df676a4"
       }
     },
     {
       "git": {
         "name": "synthtool",
         "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "dc9caca650c77b7039e2bbc3339ffb34ae78e5b7"
+        "sha": "303271797a360f8a439203413f13a160f2f5b3b4"
       }
     }
   ],
@@ -29,8 +21,8 @@
         "source": "googleapis",
         "apiName": "dataproc",
         "apiVersion": "v1",
-        "language": "typescript",
-        "generator": "gapic-generator-typescript"
+        "language": "nodejs",
+        "generator": "bazel"
       }
     },
     {
@@ -38,8 +30,8 @@
         "source": "googleapis",
         "apiName": "dataproc",
         "apiVersion": "v1beta2",
-        "language": "typescript",
-        "generator": "gapic-generator-typescript"
+        "language": "nodejs",
+        "generator": "bazel"
       }
     }
   ]

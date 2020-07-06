@@ -16,20 +16,10 @@ import synthtool as s
 import synthtool.gcp as gcp
 import synthtool.languages.node as node
 
-gapic = gcp.GAPICMicrogenerator()
+gapic = gcp.GAPICBazel()
 versions = ['v1', 'v1beta2']
 for version in versions:
-    library = gapic.typescript_library(
-        'dataproc',
-        version,
-        generator_args={
-            "grpc-service-config": f"google/cloud/dataproc/{version}/dataproc_grpc_service_config.json",
-            "package-name": "@google-cloud/dataproc",
-            "main-service": "dataproc",
-            "validation": "false",
-        },
-        proto_path=f'/google/cloud/dataproc/{version}',
-    )
+    library = gapic.node_library('dataproc', version)
     s.copy(
         library,
         excludes=['package.json', 'src/index.ts', ]
