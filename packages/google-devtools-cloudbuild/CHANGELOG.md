@@ -1,5 +1,12 @@
 # Changelog
 
+### [2.0.1](https://www.github.com/googleapis/nodejs-cloudbuild/compare/v2.0.0...v2.0.1) (2020-07-06)
+
+
+### Bug Fixes
+
+* support fallback mode for electron ([#124](https://www.github.com/googleapis/nodejs-cloudbuild/issues/124)) ([d2c9f9b](https://www.github.com/googleapis/nodejs-cloudbuild/commit/d2c9f9b69463f9739b1813c673ba53ee97c9a3d5))
+
 ## [2.0.0](https://www.github.com/googleapis/nodejs-cloudbuild/compare/v1.5.0...v2.0.0) (2020-06-11)
 
 
