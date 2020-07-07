@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-redis?activeTab=versions
 
+### [2.1.1](https://www.github.com/googleapis/nodejs-redis/compare/v2.1.0...v2.1.1) (2020-07-06)
+
+
+### Bug Fixes
+
+* update node issue template ([#403](https://www.github.com/googleapis/nodejs-redis/issues/403)) ([23a3f78](https://www.github.com/googleapis/nodejs-redis/commit/23a3f7843dd2700746621c8341b579ef8481bd79))
+
 ## [2.1.0](https://www.github.com/googleapis/nodejs-redis/compare/v2.0.0...v2.1.0) (2020-06-12)
 
 
