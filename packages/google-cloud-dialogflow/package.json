@@ -1,7 +1,7 @@
 {
   "name": "@google-cloud/dialogflow",
   "description": "Dialogflow API client for Node.js",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "license": "Apache-2.0",
   "author": "Google LLC",
   "engines": {
