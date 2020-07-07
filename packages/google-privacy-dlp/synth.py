@@ -19,17 +19,9 @@ import synthtool.gcp as gcp
 import synthtool.languages.node as node
 
 # Run the gapic generator
-gapic = gcp.GAPICMicrogenerator()
+gapic = gcp.GAPICBazel()
 version = 'v2'
-library = gapic.typescript_library(
-    'dlp', version,
-    generator_args={
-        "grpc-service-config": f"google/privacy/dlp/{version}/dlp_grpc_service_config.json",
-        "package-name": f"@google-cloud/dlp"
-    },
-    proto_path=f'/google/privacy/dlp/{version}',
-    extra_proto_files=['google/cloud/common_resources.proto'],
-)
+library = gapic.node_library('privacy-dlp', version, proto_path=f'google/privacy/dlp/{version}')
 s.copy(library, excludes=['README.md', 'package.json'])
 
 # Copy common templates
