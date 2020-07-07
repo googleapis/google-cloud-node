@@ -1,5 +1,12 @@
 # Changelog
 
+### [2.1.1](https://www.github.com/googleapis/nodejs-billing/compare/v2.1.0...v2.1.1) (2020-07-07)
+
+
+### Bug Fixes
+
+* update default timeouts for list calls ([#65](https://www.github.com/googleapis/nodejs-billing/issues/65)) ([749e14c](https://www.github.com/googleapis/nodejs-billing/commit/749e14cd9fac5b08b105d93bcaba1d45b6ead6cc))
+
 ### [2.1.1](https://www.github.com/googleapis/nodejs-billing/compare/v2.1.0...v2.1.1) (2020-07-06)
 
 
