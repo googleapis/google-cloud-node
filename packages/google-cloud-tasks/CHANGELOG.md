@@ -4,6 +4,18 @@
 
 [1]: https://www.npmjs.com/package/nodejs-tasks?activeTab=versions
 
+## [2.1.0](https://www.github.com/googleapis/nodejs-tasks/compare/v2.0.1...v2.1.0) (2020-07-06)
+
+
+### Features
+
+* introducing field Queue.type docs: fixing typos and minor updates ([#426](https://www.github.com/googleapis/nodejs-tasks/issues/426)) ([d0c538c](https://www.github.com/googleapis/nodejs-tasks/commit/d0c538cca9e110d9af0b4a9116e230ac983869a6))
+
+
+### Bug Fixes
+
+* update node issue template ([#427](https://www.github.com/googleapis/nodejs-tasks/issues/427)) ([43a97a5](https://www.github.com/googleapis/nodejs-tasks/commit/43a97a56320b4c5486e5dc349d13b4dd709678e3))
+
 ### [2.0.1](https://www.github.com/googleapis/nodejs-tasks/compare/v2.0.0...v2.0.1) (2020-06-12)
 
 
