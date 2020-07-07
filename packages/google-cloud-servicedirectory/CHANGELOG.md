@@ -1,5 +1,12 @@
 # Changelog
 
+### [2.1.1](https://www.github.com/googleapis/nodejs-service-directory/compare/v2.1.0...v2.1.1) (2020-07-06)
+
+
+### Bug Fixes
+
+* update node issue template ([#53](https://www.github.com/googleapis/nodejs-service-directory/issues/53)) ([ebe5c3a](https://www.github.com/googleapis/nodejs-service-directory/commit/ebe5c3a3d49c44b380cf63bab8fa0aab67a84d98))
+
 ## [2.1.0](https://www.github.com/googleapis/nodejs-service-directory/compare/v2.0.0...v2.1.0) (2020-06-12)
 
 
