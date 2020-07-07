@@ -4,6 +4,20 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/datastore?activeTab=versions
 
+## [6.1.0](https://www.github.com/googleapis/nodejs-datastore/compare/v6.0.0...v6.1.0) (2020-07-06)
+
+
+### Features
+
+* move ts target to es2018 from es2016 ([#677](https://www.github.com/googleapis/nodejs-datastore/issues/677)) ([e881610](https://www.github.com/googleapis/nodejs-datastore/commit/e8816109db9a9b8f3b7d079eb542954572847364))
+* **synth:** add datastore v1 admin api ([#686](https://www.github.com/googleapis/nodejs-datastore/issues/686)) ([25d6582](https://www.github.com/googleapis/nodejs-datastore/commit/25d6582911ad2596629565af3761a6756a6fd138))
+
+
+### Bug Fixes
+
+* null value while inserting in array ([#682](https://www.github.com/googleapis/nodejs-datastore/issues/682)) ([c60fe43](https://www.github.com/googleapis/nodejs-datastore/commit/c60fe437c8e3ce1bdebb191b5623b099bf43dc58))
+* proper fallback option handling ([#684](https://www.github.com/googleapis/nodejs-datastore/issues/684)) ([feba866](https://www.github.com/googleapis/nodejs-datastore/commit/feba866be528785e3b9048eb3cf0f67f121fd4ee))
+
 ## [6.0.0](https://www.github.com/googleapis/nodejs-datastore/compare/v5.1.0...v6.0.0) (2020-05-27)
 
 
