@@ -157,9 +157,6 @@ export class SessionsClient {
       documentPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/knowledgeBases/{knowledge_base}/documents/{document}'
       ),
-      environmentPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/agent/environments/{environment}'
-      ),
       knowledgeBasePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/knowledgeBases/{knowledge_base}'
       ),
@@ -168,6 +165,9 @@ export class SessionsClient {
       ),
       projectAgentEntityTypePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/agent/entityTypes/{entity_type}'
+      ),
+      projectAgentEnvironmentPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/agent/environments/{environment}'
       ),
       projectAgentEnvironmentUserSessionPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/agent/environments/{environment}/users/{user}/sessions/{session}'
@@ -195,6 +195,9 @@ export class SessionsClient {
       ),
       projectLocationAgentEntityTypePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/agent/entityTypes/{entity_type}'
+      ),
+      projectLocationAgentEnvironmentPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/agent/environments/{environment}'
       ),
       projectLocationAgentIntentPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/agent/intents/{intent}'
@@ -543,44 +546,6 @@ export class SessionsClient {
   }
 
   /**
-   * Return a fully-qualified environment resource name string.
-   *
-   * @param {string} project
-   * @param {string} environment
-   * @returns {string} Resource name string.
-   */
-  environmentPath(project: string, environment: string) {
-    return this.pathTemplates.environmentPathTemplate.render({
-      project: project,
-      environment: environment,
-    });
-  }
-
-  /**
-   * Parse the project from Environment resource.
-   *
-   * @param {string} environmentName
-   *   A fully-qualified path representing Environment resource.
-   * @returns {string} A string representing the project.
-   */
-  matchProjectFromEnvironmentName(environmentName: string) {
-    return this.pathTemplates.environmentPathTemplate.match(environmentName)
-      .project;
-  }
-
-  /**
-   * Parse the environment from Environment resource.
-   *
-   * @param {string} environmentName
-   *   A fully-qualified path representing Environment resource.
-   * @returns {string} A string representing the environment.
-   */
-  matchEnvironmentFromEnvironmentName(environmentName: string) {
-    return this.pathTemplates.environmentPathTemplate.match(environmentName)
-      .environment;
-  }
-
-  /**
    * Return a fully-qualified knowledgeBase resource name string.
    *
    * @param {string} project
@@ -684,6 +649,50 @@ export class SessionsClient {
     return this.pathTemplates.projectAgentEntityTypePathTemplate.match(
       projectAgentEntityTypeName
     ).entity_type;
+  }
+
+  /**
+   * Return a fully-qualified projectAgentEnvironment resource name string.
+   *
+   * @param {string} project
+   * @param {string} environment
+   * @returns {string} Resource name string.
+   */
+  projectAgentEnvironmentPath(project: string, environment: string) {
+    return this.pathTemplates.projectAgentEnvironmentPathTemplate.render({
+      project: project,
+      environment: environment,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectAgentEnvironment resource.
+   *
+   * @param {string} projectAgentEnvironmentName
+   *   A fully-qualified path representing project_agent_environment resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectAgentEnvironmentName(
+    projectAgentEnvironmentName: string
+  ) {
+    return this.pathTemplates.projectAgentEnvironmentPathTemplate.match(
+      projectAgentEnvironmentName
+    ).project;
+  }
+
+  /**
+   * Parse the environment from ProjectAgentEnvironment resource.
+   *
+   * @param {string} projectAgentEnvironmentName
+   *   A fully-qualified path representing project_agent_environment resource.
+   * @returns {string} A string representing the environment.
+   */
+  matchEnvironmentFromProjectAgentEnvironmentName(
+    projectAgentEnvironmentName: string
+  ) {
+    return this.pathTemplates.projectAgentEnvironmentPathTemplate.match(
+      projectAgentEnvironmentName
+    ).environment;
   }
 
   /**
@@ -1292,6 +1301,73 @@ export class SessionsClient {
     return this.pathTemplates.projectLocationAgentEntityTypePathTemplate.match(
       projectLocationAgentEntityTypeName
     ).entity_type;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationAgentEnvironment resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} environment
+   * @returns {string} Resource name string.
+   */
+  projectLocationAgentEnvironmentPath(
+    project: string,
+    location: string,
+    environment: string
+  ) {
+    return this.pathTemplates.projectLocationAgentEnvironmentPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        environment: environment,
+      }
+    );
+  }
+
+  /**
+   * Parse the project from ProjectLocationAgentEnvironment resource.
+   *
+   * @param {string} projectLocationAgentEnvironmentName
+   *   A fully-qualified path representing project_location_agent_environment resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationAgentEnvironmentName(
+    projectLocationAgentEnvironmentName: string
+  ) {
+    return this.pathTemplates.projectLocationAgentEnvironmentPathTemplate.match(
+      projectLocationAgentEnvironmentName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationAgentEnvironment resource.
+   *
+   * @param {string} projectLocationAgentEnvironmentName
+   *   A fully-qualified path representing project_location_agent_environment resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationAgentEnvironmentName(
+    projectLocationAgentEnvironmentName: string
+  ) {
+    return this.pathTemplates.projectLocationAgentEnvironmentPathTemplate.match(
+      projectLocationAgentEnvironmentName
+    ).location;
+  }
+
+  /**
+   * Parse the environment from ProjectLocationAgentEnvironment resource.
+   *
+   * @param {string} projectLocationAgentEnvironmentName
+   *   A fully-qualified path representing project_location_agent_environment resource.
+   * @returns {string} A string representing the environment.
+   */
+  matchEnvironmentFromProjectLocationAgentEnvironmentName(
+    projectLocationAgentEnvironmentName: string
+  ) {
+    return this.pathTemplates.projectLocationAgentEnvironmentPathTemplate.match(
+      projectLocationAgentEnvironmentName
+    ).environment;
   }
 
   /**

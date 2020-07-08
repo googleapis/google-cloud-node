@@ -3820,7 +3820,7 @@
                     "Environment": {
                       "options": {
                         "(google.api.resource).type": "dialogflow.googleapis.com/Environment",
-                        "(google.api.resource).pattern": "projects/{project}/agent/environments/{environment}"
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/agent/environments/{environment}"
                       },
                       "fields": {
                         "name": {

@@ -1816,58 +1816,6 @@ describe('v2beta1.AgentsClient', () => {
       });
     });
 
-    describe('environment', () => {
-      const fakePath = '/rendered/path/environment';
-      const expectedParameters = {
-        project: 'projectValue',
-        environment: 'environmentValue',
-      };
-      const client = new agentsModule.v2beta1.AgentsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      client.pathTemplates.environmentPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.environmentPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('environmentPath', () => {
-        const result = client.environmentPath(
-          'projectValue',
-          'environmentValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.environmentPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromEnvironmentName', () => {
-        const result = client.matchProjectFromEnvironmentName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.environmentPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchEnvironmentFromEnvironmentName', () => {
-        const result = client.matchEnvironmentFromEnvironmentName(fakePath);
-        assert.strictEqual(result, 'environmentValue');
-        assert(
-          (client.pathTemplates.environmentPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
     describe('knowledgeBase', () => {
       const fakePath = '/rendered/path/knowledgeBase';
       const expectedParameters = {
@@ -2048,6 +1996,65 @@ describe('v2beta1.AgentsClient', () => {
         assert.strictEqual(result, 'entityTypeValue');
         assert(
           (client.pathTemplates.projectAgentEntityTypePathTemplate
+            .match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('projectAgentEnvironment', () => {
+      const fakePath = '/rendered/path/projectAgentEnvironment';
+      const expectedParameters = {
+        project: 'projectValue',
+        environment: 'environmentValue',
+      };
+      const client = new agentsModule.v2beta1.AgentsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.projectAgentEnvironmentPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.projectAgentEnvironmentPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('projectAgentEnvironmentPath', () => {
+        const result = client.projectAgentEnvironmentPath(
+          'projectValue',
+          'environmentValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.projectAgentEnvironmentPathTemplate
+            .render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromProjectAgentEnvironmentName', () => {
+        const result = client.matchProjectFromProjectAgentEnvironmentName(
+          fakePath
+        );
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.projectAgentEnvironmentPathTemplate
+            .match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchEnvironmentFromProjectAgentEnvironmentName', () => {
+        const result = client.matchEnvironmentFromProjectAgentEnvironmentName(
+          fakePath
+        );
+        assert.strictEqual(result, 'environmentValue');
+        assert(
+          (client.pathTemplates.projectAgentEnvironmentPathTemplate
             .match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
@@ -2606,6 +2613,80 @@ describe('v2beta1.AgentsClient', () => {
         assert.strictEqual(result, 'entityTypeValue');
         assert(
           (client.pathTemplates.projectLocationAgentEntityTypePathTemplate
+            .match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('projectLocationAgentEnvironment', () => {
+      const fakePath = '/rendered/path/projectLocationAgentEnvironment';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        environment: 'environmentValue',
+      };
+      const client = new agentsModule.v2beta1.AgentsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.projectLocationAgentEnvironmentPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.projectLocationAgentEnvironmentPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('projectLocationAgentEnvironmentPath', () => {
+        const result = client.projectLocationAgentEnvironmentPath(
+          'projectValue',
+          'locationValue',
+          'environmentValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.projectLocationAgentEnvironmentPathTemplate
+            .render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromProjectLocationAgentEnvironmentName', () => {
+        const result = client.matchProjectFromProjectLocationAgentEnvironmentName(
+          fakePath
+        );
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.projectLocationAgentEnvironmentPathTemplate
+            .match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromProjectLocationAgentEnvironmentName', () => {
+        const result = client.matchLocationFromProjectLocationAgentEnvironmentName(
+          fakePath
+        );
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.projectLocationAgentEnvironmentPathTemplate
+            .match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchEnvironmentFromProjectLocationAgentEnvironmentName', () => {
+        const result = client.matchEnvironmentFromProjectLocationAgentEnvironmentName(
+          fakePath
+        );
+        assert.strictEqual(result, 'environmentValue');
+        assert(
+          (client.pathTemplates.projectLocationAgentEnvironmentPathTemplate
             .match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
