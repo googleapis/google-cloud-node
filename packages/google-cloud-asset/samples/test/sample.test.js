@@ -91,4 +91,10 @@ describe('quickstart sample tests', () => {
     const stdout = execSync(`node searchAllIamPolicies '' ${query}`);
     assert.include(stdout, 'roles/owner');
   });
+
+  it('should list assets successfully', async () => {
+    const assetType = 'storage.googleapis.com/Bucket';
+    const stdout = execSync(`node listAssets ${assetType}`);
+    assert.include(stdout, assetType);
+  });
 });
