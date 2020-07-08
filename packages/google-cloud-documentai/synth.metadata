@@ -3,8 +3,16 @@
     {
       "git": {
         "name": ".",
-        "remote": "git@github.com:googleapis/nodejs-document-ai.git",
-        "sha": "00d9df08951a61b3f57366dc3a6b69a4ec32ba7c"
+        "remote": "https://github.com/googleapis/nodejs-document-ai.git",
+        "sha": "ed6842304fb7c6547fa17d08ebdf68d1cc617c16"
+      }
+    },
+    {
+      "git": {
+        "name": "googleapis",
+        "remote": "https://github.com/googleapis/googleapis.git",
+        "sha": "07460951fc07dd2b3f172d01b04e2a5fefd13ccc",
+        "internalRef": "320124233"
       }
     },
     {
