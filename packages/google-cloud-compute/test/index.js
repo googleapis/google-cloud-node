@@ -211,7 +211,9 @@ describe('Compute', () => {
 
       const calledWith = compute.calledWith_[0];
 
-      const baseUrl = 'https://compute.googleapis.com/compute/v1';
+      const apiEndpoint = 'compute.googleapis.com';
+      const baseUrl = `https://${apiEndpoint}/compute/v1`;
+      assert.strictEqual(calledWith.apiEndpoint, apiEndpoint);
       assert.strictEqual(calledWith.baseUrl, baseUrl);
       assert.deepStrictEqual(calledWith.scopes, [
         'https://www.googleapis.com/auth/compute',
@@ -240,6 +242,24 @@ describe('Compute', () => {
       assert.strictEqual(compute.getSubnetworksStream, 'getSubnetworks');
       assert.strictEqual(compute.getVMsStream, 'getVMs');
       assert.strictEqual(compute.getZonesStream, 'getZones');
+    });
+
+    it('should allow overriding the API endpoint', () => {
+      const apiEndpoint = 'custom.endpoint.com';
+      const compute = new Compute({apiEndpoint});
+      const calledWith = compute.calledWith_[0];
+
+      assert.strictEqual(calledWith.apiEndpoint, apiEndpoint);
+      assert.strictEqual(
+        calledWith.baseUrl,
+        `https://${apiEndpoint}/compute/v1`
+      );
+    });
+
+    it('should localize the poll interval', () => {
+      const pollIntervalMs = 9;
+      const compute = new Compute({pollIntervalMs});
+      assert.strictEqual(compute.pollIntervalMs, pollIntervalMs);
     });
 
     it('should promisify all the things', () => {
