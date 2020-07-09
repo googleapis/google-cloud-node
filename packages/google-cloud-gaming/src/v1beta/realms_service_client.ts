@@ -36,7 +36,7 @@ import {operationsProtos} from 'google-gax';
 const version = require('../../../package.json').version;
 
 /**
- *  A Realm is a grouping of Game Server Clusters that are considered
+ *  A realm is a grouping of game server clusters that are considered
  *  interchangeable.
  * @class
  * @memberof v1beta
@@ -214,7 +214,7 @@ export class RealmsServiceClient {
       '.google.cloud.gaming.v1beta.OperationMetadata'
     ) as gax.protobuf.Type;
     const deleteRealmResponse = protoFilesRoot.lookup(
-      '.google.cloud.gaming.v1beta.Realm'
+      '.google.protobuf.Empty'
     ) as gax.protobuf.Type;
     const deleteRealmMetadata = protoFilesRoot.lookup(
       '.google.cloud.gaming.v1beta.OperationMetadata'
@@ -403,12 +403,12 @@ export class RealmsServiceClient {
     >
   ): void;
   /**
-   * Gets details of a single Realm.
+   * Gets details of a single realm.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The name of the Realm to retrieve. Uses the form:
+   *   Required. The name of the realm to retrieve. Uses the form:
    *   `projects/{project}/locations/{location}/realms/{realm}`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -488,12 +488,12 @@ export class RealmsServiceClient {
     >
   ): void;
   /**
-   * Previews patches to a single Realm.
+   * Previews patches to a single realm.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {google.cloud.gaming.v1beta.Realm} request.realm
-   *   Required. The Realm to be updated.
+   *   Required. The realm to be updated.
    *   Only fields specified in update_mask are updated.
    * @param {google.protobuf.FieldMask} request.updateMask
    *   Required. The update mask applies to the resource. For the `FieldMask`
@@ -592,7 +592,7 @@ export class RealmsServiceClient {
     >
   ): void;
   /**
-   * Creates a new Realm in a given project and Location.
+   * Creates a new realm in a given project and location.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -600,9 +600,9 @@ export class RealmsServiceClient {
    *   Required. The parent resource name. Uses the form:
    *   `projects/{project}/locations/{location}`.
    * @param {string} request.realmId
-   *   Required. The ID of the Realm resource to be created.
+   *   Required. The ID of the realm resource to be created.
    * @param {google.cloud.gaming.v1beta.Realm} request.realm
-   *   Required. The Realm resource to be created.
+   *   Required. The realm resource to be created.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -700,7 +700,7 @@ export class RealmsServiceClient {
   ): Promise<
     [
       LROperation<
-        protos.google.cloud.gaming.v1beta.IRealm,
+        protos.google.protobuf.IEmpty,
         protos.google.cloud.gaming.v1beta.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
@@ -712,7 +712,7 @@ export class RealmsServiceClient {
     options: gax.CallOptions,
     callback: Callback<
       LROperation<
-        protos.google.cloud.gaming.v1beta.IRealm,
+        protos.google.protobuf.IEmpty,
         protos.google.cloud.gaming.v1beta.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
@@ -723,7 +723,7 @@ export class RealmsServiceClient {
     request: protos.google.cloud.gaming.v1beta.IDeleteRealmRequest,
     callback: Callback<
       LROperation<
-        protos.google.cloud.gaming.v1beta.IRealm,
+        protos.google.protobuf.IEmpty,
         protos.google.cloud.gaming.v1beta.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
@@ -731,12 +731,12 @@ export class RealmsServiceClient {
     >
   ): void;
   /**
-   * Deletes a single Realm.
+   * Deletes a single realm.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The name of the Realm to delete. Uses the form:
+   *   Required. The name of the realm to delete. Uses the form:
    *   `projects/{project}/locations/{location}/realms/{realm}`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -750,7 +750,7 @@ export class RealmsServiceClient {
       | gax.CallOptions
       | Callback<
           LROperation<
-            protos.google.cloud.gaming.v1beta.IRealm,
+            protos.google.protobuf.IEmpty,
             protos.google.cloud.gaming.v1beta.IOperationMetadata
           >,
           protos.google.longrunning.IOperation | null | undefined,
@@ -758,7 +758,7 @@ export class RealmsServiceClient {
         >,
     callback?: Callback<
       LROperation<
-        protos.google.cloud.gaming.v1beta.IRealm,
+        protos.google.protobuf.IEmpty,
         protos.google.cloud.gaming.v1beta.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
@@ -767,7 +767,7 @@ export class RealmsServiceClient {
   ): Promise<
     [
       LROperation<
-        protos.google.cloud.gaming.v1beta.IRealm,
+        protos.google.protobuf.IEmpty,
         protos.google.cloud.gaming.v1beta.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
@@ -811,7 +811,7 @@ export class RealmsServiceClient {
     name: string
   ): Promise<
     LROperation<
-      protos.google.cloud.gaming.v1beta.Realm,
+      protos.google.protobuf.Empty,
       protos.google.cloud.gaming.v1beta.OperationMetadata
     >
   > {
@@ -825,7 +825,7 @@ export class RealmsServiceClient {
       gax.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
-      protos.google.cloud.gaming.v1beta.Realm,
+      protos.google.protobuf.Empty,
       protos.google.cloud.gaming.v1beta.OperationMetadata
     >;
   }
@@ -866,12 +866,12 @@ export class RealmsServiceClient {
     >
   ): void;
   /**
-   * Patches a single Realm.
+   * Patches a single realm.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {google.cloud.gaming.v1beta.Realm} request.realm
-   *   Required. The Realm to be updated.
+   *   Required. The realm to be updated.
    *   Only fields specified in update_mask are updated.
    * @param {google.protobuf.FieldMask} request.updateMask
    *   Required. The update mask applies to the resource. For the `FieldMask`
@@ -999,7 +999,7 @@ export class RealmsServiceClient {
     >
   ): void;
   /**
-   * Lists Realms in a given project and Location.
+   * Lists realms in a given project and location.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1011,7 +1011,7 @@ export class RealmsServiceClient {
    *   will pick an appropriate default. Server may return fewer items than
    *   requested. A caller should only rely on response's
    *   {@link google.cloud.gaming.v1beta.ListRealmsResponse.next_page_token|next_page_token} to
-   *   determine if there are more Realms left to be queried.
+   *   determine if there are more realms left to be queried.
    * @param {string} [request.pageToken]
    *   Optional. The next_page_token value returned from a previous List request,
    *   if any.
@@ -1104,7 +1104,7 @@ export class RealmsServiceClient {
    *   will pick an appropriate default. Server may return fewer items than
    *   requested. A caller should only rely on response's
    *   {@link google.cloud.gaming.v1beta.ListRealmsResponse.next_page_token|next_page_token} to
-   *   determine if there are more Realms left to be queried.
+   *   determine if there are more realms left to be queried.
    * @param {string} [request.pageToken]
    *   Optional. The next_page_token value returned from a previous List request,
    *   if any.
@@ -1155,7 +1155,7 @@ export class RealmsServiceClient {
    *   will pick an appropriate default. Server may return fewer items than
    *   requested. A caller should only rely on response's
    *   {@link google.cloud.gaming.v1beta.ListRealmsResponse.next_page_token|next_page_token} to
-   *   determine if there are more Realms left to be queried.
+   *   determine if there are more realms left to be queried.
    * @param {string} [request.pageToken]
    *   Optional. The next_page_token value returned from a previous List request,
    *   if any.

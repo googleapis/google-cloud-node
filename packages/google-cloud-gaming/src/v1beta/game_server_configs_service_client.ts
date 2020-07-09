@@ -36,7 +36,7 @@ import {operationsProtos} from 'google-gax';
 const version = require('../../../package.json').version;
 
 /**
- *  The Game Server Config configures the game servers in an Agones fleet.
+ *  The game server config configures the game servers in an Agones fleet.
  * @class
  * @memberof v1beta
  */
@@ -215,7 +215,7 @@ export class GameServerConfigsServiceClient {
       '.google.cloud.gaming.v1beta.OperationMetadata'
     ) as gax.protobuf.Type;
     const deleteGameServerConfigResponse = protoFilesRoot.lookup(
-      '.google.cloud.gaming.v1beta.GameServerConfig'
+      '.google.protobuf.Empty'
     ) as gax.protobuf.Type;
     const deleteGameServerConfigMetadata = protoFilesRoot.lookup(
       '.google.cloud.gaming.v1beta.OperationMetadata'
@@ -404,12 +404,12 @@ export class GameServerConfigsServiceClient {
     >
   ): void;
   /**
-   * Gets details of a single Game Server Config.
+   * Gets details of a single game server config.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The name of the Game Server Config to retrieve. Uses the form:
+   *   Required. The name of the game server config to retrieve. Uses the form:
    *
    *   `projects/{project}/locations/{location}/gameServerDeployments/{deployment}/configs/{config}`.
    * @param {object} [options]
@@ -500,9 +500,9 @@ export class GameServerConfigsServiceClient {
     >
   ): void;
   /**
-   * Creates a new Game Server Config in a given project, Location, and Game
-   * Server Deployment. Game Server Configs are immutable, and are not applied
-   * until referenced in the Game Server Deployment Rollout resource.
+   * Creates a new game server config in a given project, location, and game
+   * server deployment. Game server configs are immutable, and are not applied
+   * until referenced in the game server deployment rollout resource.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -511,9 +511,9 @@ export class GameServerConfigsServiceClient {
    *
    *   `projects/{project}/locations/{location}/gameServerDeployments/{deployment}/`.
    * @param {string} request.configId
-   *   Required. The ID of the Game Server Config resource to be created.
+   *   Required. The ID of the game server config resource to be created.
    * @param {google.cloud.gaming.v1beta.GameServerConfig} request.gameServerConfig
-   *   Required. The Game Server Config resource to be created.
+   *   Required. The game server config resource to be created.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -615,7 +615,7 @@ export class GameServerConfigsServiceClient {
   ): Promise<
     [
       LROperation<
-        protos.google.cloud.gaming.v1beta.IGameServerConfig,
+        protos.google.protobuf.IEmpty,
         protos.google.cloud.gaming.v1beta.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
@@ -627,7 +627,7 @@ export class GameServerConfigsServiceClient {
     options: gax.CallOptions,
     callback: Callback<
       LROperation<
-        protos.google.cloud.gaming.v1beta.IGameServerConfig,
+        protos.google.protobuf.IEmpty,
         protos.google.cloud.gaming.v1beta.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
@@ -638,7 +638,7 @@ export class GameServerConfigsServiceClient {
     request: protos.google.cloud.gaming.v1beta.IDeleteGameServerConfigRequest,
     callback: Callback<
       LROperation<
-        protos.google.cloud.gaming.v1beta.IGameServerConfig,
+        protos.google.protobuf.IEmpty,
         protos.google.cloud.gaming.v1beta.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
@@ -646,13 +646,13 @@ export class GameServerConfigsServiceClient {
     >
   ): void;
   /**
-   * Deletes a single Game Server Config. The deletion will fail if the Game
-   * Server Config is referenced in a Game Server Deployment Rollout.
+   * Deletes a single game server config. The deletion will fail if the game
+   * server config is referenced in a game server deployment rollout.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The name of the Game Server Config to delete. Uses the form:
+   *   Required. The name of the game server config to delete. Uses the form:
    *
    *   `projects/{project}/locations/{location}/gameServerDeployments/{deployment}/configs/{config}`.
    * @param {object} [options]
@@ -667,7 +667,7 @@ export class GameServerConfigsServiceClient {
       | gax.CallOptions
       | Callback<
           LROperation<
-            protos.google.cloud.gaming.v1beta.IGameServerConfig,
+            protos.google.protobuf.IEmpty,
             protos.google.cloud.gaming.v1beta.IOperationMetadata
           >,
           protos.google.longrunning.IOperation | null | undefined,
@@ -675,7 +675,7 @@ export class GameServerConfigsServiceClient {
         >,
     callback?: Callback<
       LROperation<
-        protos.google.cloud.gaming.v1beta.IGameServerConfig,
+        protos.google.protobuf.IEmpty,
         protos.google.cloud.gaming.v1beta.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
@@ -684,7 +684,7 @@ export class GameServerConfigsServiceClient {
   ): Promise<
     [
       LROperation<
-        protos.google.cloud.gaming.v1beta.IGameServerConfig,
+        protos.google.protobuf.IEmpty,
         protos.google.cloud.gaming.v1beta.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
@@ -732,7 +732,7 @@ export class GameServerConfigsServiceClient {
     name: string
   ): Promise<
     LROperation<
-      protos.google.cloud.gaming.v1beta.GameServerConfig,
+      protos.google.protobuf.Empty,
       protos.google.cloud.gaming.v1beta.OperationMetadata
     >
   > {
@@ -746,7 +746,7 @@ export class GameServerConfigsServiceClient {
       gax.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
-      protos.google.cloud.gaming.v1beta.GameServerConfig,
+      protos.google.protobuf.Empty,
       protos.google.cloud.gaming.v1beta.OperationMetadata
     >;
   }
@@ -782,8 +782,8 @@ export class GameServerConfigsServiceClient {
     >
   ): void;
   /**
-   * Lists Game Server Configs in a given project, Location, and Game Server
-   * Deployment.
+   * Lists game server configs in a given project, location, and game server
+   * deployment.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -798,7 +798,7 @@ export class GameServerConfigsServiceClient {
    *   {@link google.cloud.gaming.v1beta.ListGameServerConfigsResponse.next_page_token|next_page_token} to
    *   determine if there are more GameServerConfigs left to be queried.
    * @param {string} [request.pageToken]
-   *   Optional. The next_page_token value returned from a previous List request, if any.
+   *   Optional. The next_page_token value returned from a previous list request, if any.
    * @param {string} [request.filter]
    *   Optional. The filter to apply to list results.
    * @param {string} [request.orderBy]
@@ -893,7 +893,7 @@ export class GameServerConfigsServiceClient {
    *   {@link google.cloud.gaming.v1beta.ListGameServerConfigsResponse.next_page_token|next_page_token} to
    *   determine if there are more GameServerConfigs left to be queried.
    * @param {string} [request.pageToken]
-   *   Optional. The next_page_token value returned from a previous List request, if any.
+   *   Optional. The next_page_token value returned from a previous list request, if any.
    * @param {string} [request.filter]
    *   Optional. The filter to apply to list results.
    * @param {string} [request.orderBy]
@@ -944,7 +944,7 @@ export class GameServerConfigsServiceClient {
    *   {@link google.cloud.gaming.v1beta.ListGameServerConfigsResponse.next_page_token|next_page_token} to
    *   determine if there are more GameServerConfigs left to be queried.
    * @param {string} [request.pageToken]
-   *   Optional. The next_page_token value returned from a previous List request, if any.
+   *   Optional. The next_page_token value returned from a previous list request, if any.
    * @param {string} [request.filter]
    *   Optional. The filter to apply to list results.
    * @param {string} [request.orderBy]

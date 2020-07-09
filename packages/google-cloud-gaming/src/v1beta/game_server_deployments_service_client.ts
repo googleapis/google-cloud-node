@@ -36,7 +36,7 @@ import {operationsProtos} from 'google-gax';
 const version = require('../../../package.json').version;
 
 /**
- *  The Game Server Deployment is used to control the deployment of Agones
+ *  The game server deployment is used to control the deployment of Agones
  *  fleets.
  * @class
  * @memberof v1beta
@@ -216,7 +216,7 @@ export class GameServerDeploymentsServiceClient {
       '.google.cloud.gaming.v1beta.OperationMetadata'
     ) as gax.protobuf.Type;
     const deleteGameServerDeploymentResponse = protoFilesRoot.lookup(
-      '.google.cloud.gaming.v1beta.GameServerDeployment'
+      '.google.protobuf.Empty'
     ) as gax.protobuf.Type;
     const deleteGameServerDeploymentMetadata = protoFilesRoot.lookup(
       '.google.cloud.gaming.v1beta.OperationMetadata'
@@ -443,12 +443,12 @@ export class GameServerDeploymentsServiceClient {
     >
   ): void;
   /**
-   * Gets details of a single Game Server Deployment.
+   * Gets details of a single game server deployment.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The name of the Game Server Deployment to retrieve. Uses the form:
+   *   Required. The name of the game server delpoyment to retrieve. Uses the form:
    *
    *   `projects/{project}/locations/{location}/gameServerDeployments/{deployment}`.
    * @param {object} [options]
@@ -543,12 +543,12 @@ export class GameServerDeploymentsServiceClient {
     >
   ): void;
   /**
-   * Gets details a single Game Server Deployment Rollout.
+   * Gets details a single game server deployment rollout.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The name of the Game Server Deployment to retrieve. Uses the form:
+   *   Required. The name of the game server delpoyment to retrieve. Uses the form:
    *
    *   `projects/{project}/locations/{location}/gameServerDeployments/{deployment}/rollout`.
    * @param {object} [options]
@@ -643,13 +643,13 @@ export class GameServerDeploymentsServiceClient {
     >
   ): void;
   /**
-   * Previews the Game Server Deployment Rollout. This API does not mutate the
-   * Rollout resource.
+   * Previews the game server deployment rollout. This API does not mutate the
+   * rollout resource.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {google.cloud.gaming.v1beta.GameServerDeploymentRollout} request.rollout
-   *   Required. The Game Server Deployment Rollout to be updated.
+   *   Required. The game server deployment rollout to be updated.
    *   Only fields specified in update_mask are updated.
    * @param {google.protobuf.FieldMask} [request.updateMask]
    *   Optional. Mask of fields to update. At least one path must be supplied in
@@ -660,7 +660,7 @@ export class GameServerDeploymentsServiceClient {
    *   // /docs/reference/google.protobuf#fieldmask
    * @param {google.protobuf.Timestamp} [request.previewTime]
    *   Optional. The target timestamp to compute the preview. Defaults to the immediately
-   *   after the proposed Rollout completes.
+   *   after the proposed rollout completes.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -753,14 +753,14 @@ export class GameServerDeploymentsServiceClient {
     >
   ): void;
   /**
-   * Retrieves information about the current state of the Game Server
-   * Ddeployment. Gathers all the Agones fleets and Agones autoscalers,
-   * including fleets running an older version of the Game Server Deployment.
+   * Retrieves information about the current state of the game server
+   * deployment. Gathers all the Agones fleets and Agones autoscalers,
+   * including fleets running an older version of the game server deployment.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The name of the Game Server Deployment. Uses the form:
+   *   Required. The name of the game server delpoyment. Uses the form:
    *
    *   `projects/{project}/locations/{location}/gameServerDeployments/{deployment}`.
    * @param {object} [options]
@@ -854,7 +854,7 @@ export class GameServerDeploymentsServiceClient {
     >
   ): void;
   /**
-   * Creates a new Game Server Deployment in a given project and Location.
+   * Creates a new game server deployment in a given project and location.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -862,9 +862,9 @@ export class GameServerDeploymentsServiceClient {
    *   Required. The parent resource name. Uses the form:
    *   `projects/{project}/locations/{location}`.
    * @param {string} request.deploymentId
-   *   Required. The ID of the Game Server Deployment resource to be created.
+   *   Required. The ID of the game server delpoyment resource to be created.
    * @param {google.cloud.gaming.v1beta.GameServerDeployment} request.gameServerDeployment
-   *   Required. The Game Server Deployment resource to be created.
+   *   Required. The game server delpoyment resource to be created.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -966,7 +966,7 @@ export class GameServerDeploymentsServiceClient {
   ): Promise<
     [
       LROperation<
-        protos.google.cloud.gaming.v1beta.IGameServerDeployment,
+        protos.google.protobuf.IEmpty,
         protos.google.cloud.gaming.v1beta.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
@@ -978,7 +978,7 @@ export class GameServerDeploymentsServiceClient {
     options: gax.CallOptions,
     callback: Callback<
       LROperation<
-        protos.google.cloud.gaming.v1beta.IGameServerDeployment,
+        protos.google.protobuf.IEmpty,
         protos.google.cloud.gaming.v1beta.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
@@ -989,7 +989,7 @@ export class GameServerDeploymentsServiceClient {
     request: protos.google.cloud.gaming.v1beta.IDeleteGameServerDeploymentRequest,
     callback: Callback<
       LROperation<
-        protos.google.cloud.gaming.v1beta.IGameServerDeployment,
+        protos.google.protobuf.IEmpty,
         protos.google.cloud.gaming.v1beta.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
@@ -997,12 +997,12 @@ export class GameServerDeploymentsServiceClient {
     >
   ): void;
   /**
-   * Deletes a single Game Server Deployment.
+   * Deletes a single game server deployment.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The name of the Game Server Deployment to delete. Uses the form:
+   *   Required. The name of the game server delpoyment to delete. Uses the form:
    *
    *   `projects/{project}/locations/{location}/gameServerDeployments/{deployment}`.
    * @param {object} [options]
@@ -1017,7 +1017,7 @@ export class GameServerDeploymentsServiceClient {
       | gax.CallOptions
       | Callback<
           LROperation<
-            protos.google.cloud.gaming.v1beta.IGameServerDeployment,
+            protos.google.protobuf.IEmpty,
             protos.google.cloud.gaming.v1beta.IOperationMetadata
           >,
           protos.google.longrunning.IOperation | null | undefined,
@@ -1025,7 +1025,7 @@ export class GameServerDeploymentsServiceClient {
         >,
     callback?: Callback<
       LROperation<
-        protos.google.cloud.gaming.v1beta.IGameServerDeployment,
+        protos.google.protobuf.IEmpty,
         protos.google.cloud.gaming.v1beta.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
@@ -1034,7 +1034,7 @@ export class GameServerDeploymentsServiceClient {
   ): Promise<
     [
       LROperation<
-        protos.google.cloud.gaming.v1beta.IGameServerDeployment,
+        protos.google.protobuf.IEmpty,
         protos.google.cloud.gaming.v1beta.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
@@ -1082,7 +1082,7 @@ export class GameServerDeploymentsServiceClient {
     name: string
   ): Promise<
     LROperation<
-      protos.google.cloud.gaming.v1beta.GameServerDeployment,
+      protos.google.protobuf.Empty,
       protos.google.cloud.gaming.v1beta.OperationMetadata
     >
   > {
@@ -1096,7 +1096,7 @@ export class GameServerDeploymentsServiceClient {
       gax.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
-      protos.google.cloud.gaming.v1beta.GameServerDeployment,
+      protos.google.protobuf.Empty,
       protos.google.cloud.gaming.v1beta.OperationMetadata
     >;
   }
@@ -1137,12 +1137,12 @@ export class GameServerDeploymentsServiceClient {
     >
   ): void;
   /**
-   * Patches a Game Server Deployment.
+   * Patches a game server deployment.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {google.cloud.gaming.v1beta.GameServerDeployment} request.gameServerDeployment
-   *   Required. The Game Server Deployment to be updated.
+   *   Required. The game server delpoyment to be updated.
    *   Only fields specified in update_mask are updated.
    * @param {google.protobuf.FieldMask} request.updateMask
    *   Required. Mask of fields to update. At least one path must be supplied in
@@ -1283,12 +1283,17 @@ export class GameServerDeploymentsServiceClient {
     >
   ): void;
   /**
-   * Patches a single Game Server Deployment Rollout.
+   * Patches a single game server deployment rollout.
+   * The method will not return an error if the update does not affect any
+   * existing realms. For example - if the default_game_server_config is changed
+   * but all existing realms use the override, that is valid. Similarly, if a
+   * non existing realm is explicitly called out in game_server_config_overrides
+   * field, that will also not result in an error.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {google.cloud.gaming.v1beta.GameServerDeploymentRollout} request.rollout
-   *   Required. The Game Server Deployment Rollout to be updated.
+   *   Required. The game server delpoyment rollout to be updated.
    *   Only fields specified in update_mask are updated.
    * @param {google.protobuf.FieldMask} request.updateMask
    *   Required. Mask of fields to update. At least one path must be supplied in
@@ -1424,7 +1429,7 @@ export class GameServerDeploymentsServiceClient {
     >
   ): void;
   /**
-   * Lists Game Server Deployments in a given project and Location.
+   * Lists game server deployments in a given project and location.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1432,8 +1437,8 @@ export class GameServerDeploymentsServiceClient {
    *   Required. The parent resource name. Uses the form:
    *   `projects/{project}/locations/{location}`.
    * @param {number} [request.pageSize]
-   *   Optional. The maximum number of items to return.  If unspecified, server
-   *   will pick an appropriate default. Server may return fewer items than
+   *   Optional. The maximum number of items to return.  If unspecified, the server
+   *   will pick an appropriate default. The server may return fewer items than
    *   requested. A caller should only rely on response's
    *   {@link google.cloud.gaming.v1beta.ListGameServerDeploymentsResponse.next_page_token|next_page_token} to
    *   determine if there are more GameServerDeployments left to be queried.
@@ -1531,8 +1536,8 @@ export class GameServerDeploymentsServiceClient {
    *   Required. The parent resource name. Uses the form:
    *   `projects/{project}/locations/{location}`.
    * @param {number} [request.pageSize]
-   *   Optional. The maximum number of items to return.  If unspecified, server
-   *   will pick an appropriate default. Server may return fewer items than
+   *   Optional. The maximum number of items to return.  If unspecified, the server
+   *   will pick an appropriate default. The server may return fewer items than
    *   requested. A caller should only rely on response's
    *   {@link google.cloud.gaming.v1beta.ListGameServerDeploymentsResponse.next_page_token|next_page_token} to
    *   determine if there are more GameServerDeployments left to be queried.
@@ -1582,8 +1587,8 @@ export class GameServerDeploymentsServiceClient {
    *   Required. The parent resource name. Uses the form:
    *   `projects/{project}/locations/{location}`.
    * @param {number} [request.pageSize]
-   *   Optional. The maximum number of items to return.  If unspecified, server
-   *   will pick an appropriate default. Server may return fewer items than
+   *   Optional. The maximum number of items to return.  If unspecified, the server
+   *   will pick an appropriate default. The server may return fewer items than
    *   requested. A caller should only rely on response's
    *   {@link google.cloud.gaming.v1beta.ListGameServerDeploymentsResponse.next_page_token|next_page_token} to
    *   determine if there are more GameServerDeployments left to be queried.

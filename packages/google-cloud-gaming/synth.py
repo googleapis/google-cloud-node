@@ -21,17 +21,10 @@ logging.basicConfig(level=logging.DEBUG)
 AUTOSYNTH_MULTIPLE_COMMITS = True
 
 # run the gapic generator
-gapic = gcp.GAPICMicrogenerator()
-versions = ['v1beta1']
+gapic = gcp.GAPICBazel()
+versions = ['v1beta']
 for version in versions:
-   library = gapic.typescript_library(
-     'gameservices',
-     generator_args={
-       'package-name': '@google-cloud/game-servers'
-     },
-     proto_path='/google/cloud/gaming/v1beta',
-     private=True,
-     version=version)
+   library = gapic.node_library('gaming', version)
 s.copy(library, excludes=['package.json', 'README.md'])
 # Copy common templates
 common_templates = gcp.CommonTemplates()

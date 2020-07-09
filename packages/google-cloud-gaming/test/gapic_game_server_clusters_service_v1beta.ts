@@ -1014,7 +1014,7 @@ describe('v1beta.GameServerClustersServiceClient', () => {
           (
             err?: Error | null,
             result?: LROperation<
-              protos.google.cloud.gaming.v1beta.IGameServerCluster,
+              protos.google.protobuf.IEmpty,
               protos.google.cloud.gaming.v1beta.IOperationMetadata
             > | null
           ) => {
@@ -1027,7 +1027,7 @@ describe('v1beta.GameServerClustersServiceClient', () => {
         );
       });
       const operation = (await promise) as LROperation<
-        protos.google.cloud.gaming.v1beta.IGameServerCluster,
+        protos.google.protobuf.IEmpty,
         protos.google.cloud.gaming.v1beta.IOperationMetadata
       >;
       const [response] = await operation.promise();

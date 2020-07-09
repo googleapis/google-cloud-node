@@ -216,7 +216,7 @@ export class GameServerClustersServiceClient {
       '.google.cloud.gaming.v1beta.OperationMetadata'
     ) as gax.protobuf.Type;
     const deleteGameServerClusterResponse = protoFilesRoot.lookup(
-      '.google.cloud.gaming.v1beta.GameServerCluster'
+      '.google.protobuf.Empty'
     ) as gax.protobuf.Type;
     const deleteGameServerClusterMetadata = protoFilesRoot.lookup(
       '.google.cloud.gaming.v1beta.OperationMetadata'
@@ -432,7 +432,7 @@ export class GameServerClustersServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The name of the Game Server Cluster to retrieve. Uses the form:
+   *   Required. The name of the game server cluster to retrieve. Uses the form:
    *
    *   `projects/{project}/locations/{location}/realms/{realm-id}/gameServerClusters/{cluster}`.
    * @param {object} [options]
@@ -532,9 +532,9 @@ export class GameServerClustersServiceClient {
    *   Required. The parent resource name. Uses the form:
    *   `projects/{project}/locations/{location}/realms/{realm}`.
    * @param {string} request.gameServerClusterId
-   *   Required. The ID of the Game Server Cluster resource to be created.
+   *   Required. The ID of the game server cluster resource to be created.
    * @param {google.cloud.gaming.v1beta.GameServerCluster} request.gameServerCluster
-   *   Required. The Game Server Cluster resource to be created.
+   *   Required. The game server cluster resource to be created.
    * @param {google.protobuf.Timestamp} [request.previewTime]
    *   Optional. The target timestamp to compute the preview.
    * @param {object} [options]
@@ -634,7 +634,7 @@ export class GameServerClustersServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The name of the Game Server Cluster to delete. Uses the form:
+   *   Required. The name of the game server cluster to delete. Uses the form:
    *   `projects/{project}/locations/{location}/gameServerClusters/{cluster}`.
    * @param {google.protobuf.Timestamp} [request.previewTime]
    *   Optional. The target timestamp to compute the preview.
@@ -735,7 +735,7 @@ export class GameServerClustersServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {google.cloud.gaming.v1beta.GameServerCluster} request.gameServerCluster
-   *   Required. The Game Server Cluster to be updated.
+   *   Required. The game server cluster to be updated.
    *   Only fields specified in update_mask are updated.
    * @param {google.protobuf.FieldMask} request.updateMask
    *   Required. Mask of fields to update. At least one path must be supplied in
@@ -849,9 +849,9 @@ export class GameServerClustersServiceClient {
    *   Required. The parent resource name. Uses the form:
    *   `projects/{project}/locations/{location}/realms/{realm-id}`.
    * @param {string} request.gameServerClusterId
-   *   Required. The ID of the Game Server Cluster resource to be created.
+   *   Required. The ID of the game server cluster resource to be created.
    * @param {google.cloud.gaming.v1beta.GameServerCluster} request.gameServerCluster
-   *   Required. The Game Server Cluster resource to be created.
+   *   Required. The game server cluster resource to be created.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -953,7 +953,7 @@ export class GameServerClustersServiceClient {
   ): Promise<
     [
       LROperation<
-        protos.google.cloud.gaming.v1beta.IGameServerCluster,
+        protos.google.protobuf.IEmpty,
         protos.google.cloud.gaming.v1beta.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
@@ -965,7 +965,7 @@ export class GameServerClustersServiceClient {
     options: gax.CallOptions,
     callback: Callback<
       LROperation<
-        protos.google.cloud.gaming.v1beta.IGameServerCluster,
+        protos.google.protobuf.IEmpty,
         protos.google.cloud.gaming.v1beta.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
@@ -976,7 +976,7 @@ export class GameServerClustersServiceClient {
     request: protos.google.cloud.gaming.v1beta.IDeleteGameServerClusterRequest,
     callback: Callback<
       LROperation<
-        protos.google.cloud.gaming.v1beta.IGameServerCluster,
+        protos.google.protobuf.IEmpty,
         protos.google.cloud.gaming.v1beta.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
@@ -989,7 +989,7 @@ export class GameServerClustersServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The name of the Game Server Cluster to delete. Uses the form:
+   *   Required. The name of the game server cluster to delete. Uses the form:
    *   `projects/{project}/locations/{location}/gameServerClusters/{cluster}`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -1003,7 +1003,7 @@ export class GameServerClustersServiceClient {
       | gax.CallOptions
       | Callback<
           LROperation<
-            protos.google.cloud.gaming.v1beta.IGameServerCluster,
+            protos.google.protobuf.IEmpty,
             protos.google.cloud.gaming.v1beta.IOperationMetadata
           >,
           protos.google.longrunning.IOperation | null | undefined,
@@ -1011,7 +1011,7 @@ export class GameServerClustersServiceClient {
         >,
     callback?: Callback<
       LROperation<
-        protos.google.cloud.gaming.v1beta.IGameServerCluster,
+        protos.google.protobuf.IEmpty,
         protos.google.cloud.gaming.v1beta.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
@@ -1020,7 +1020,7 @@ export class GameServerClustersServiceClient {
   ): Promise<
     [
       LROperation<
-        protos.google.cloud.gaming.v1beta.IGameServerCluster,
+        protos.google.protobuf.IEmpty,
         protos.google.cloud.gaming.v1beta.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
@@ -1068,7 +1068,7 @@ export class GameServerClustersServiceClient {
     name: string
   ): Promise<
     LROperation<
-      protos.google.cloud.gaming.v1beta.GameServerCluster,
+      protos.google.protobuf.Empty,
       protos.google.cloud.gaming.v1beta.OperationMetadata
     >
   > {
@@ -1082,7 +1082,7 @@ export class GameServerClustersServiceClient {
       gax.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
-      protos.google.cloud.gaming.v1beta.GameServerCluster,
+      protos.google.protobuf.Empty,
       protos.google.cloud.gaming.v1beta.OperationMetadata
     >;
   }
@@ -1128,7 +1128,7 @@ export class GameServerClustersServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {google.cloud.gaming.v1beta.GameServerCluster} request.gameServerCluster
-   *   Required. The Game Server Cluster to be updated.
+   *   Required. The game server cluster to be updated.
    *   Only fields specified in update_mask are updated.
    * @param {google.protobuf.FieldMask} request.updateMask
    *   Required. Mask of fields to update. At least one path must be supplied in
@@ -1264,7 +1264,7 @@ export class GameServerClustersServiceClient {
     >
   ): void;
   /**
-   * Lists Game Server Clusters in a given project and location.
+   * Lists game server clusters in a given project and location.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1272,8 +1272,8 @@ export class GameServerClustersServiceClient {
    *   Required. The parent resource name. Uses the form:
    *   "projects/{project}/locations/{location}/realms/{realm}".
    * @param {number} [request.pageSize]
-   *   Optional. The maximum number of items to return.  If unspecified, server
-   *   will pick an appropriate default. Server may return fewer items than
+   *   Optional. The maximum number of items to return.  If unspecified, the server
+   *   will pick an appropriate default. The server may return fewer items than
    *   requested. A caller should only rely on response's
    *   {@link google.cloud.gaming.v1beta.ListGameServerClustersResponse.next_page_token|next_page_token} to
    *   determine if there are more GameServerClusters left to be queried.
@@ -1370,8 +1370,8 @@ export class GameServerClustersServiceClient {
    *   Required. The parent resource name. Uses the form:
    *   "projects/{project}/locations/{location}/realms/{realm}".
    * @param {number} [request.pageSize]
-   *   Optional. The maximum number of items to return.  If unspecified, server
-   *   will pick an appropriate default. Server may return fewer items than
+   *   Optional. The maximum number of items to return.  If unspecified, the server
+   *   will pick an appropriate default. The server may return fewer items than
    *   requested. A caller should only rely on response's
    *   {@link google.cloud.gaming.v1beta.ListGameServerClustersResponse.next_page_token|next_page_token} to
    *   determine if there are more GameServerClusters left to be queried.
@@ -1420,8 +1420,8 @@ export class GameServerClustersServiceClient {
    *   Required. The parent resource name. Uses the form:
    *   "projects/{project}/locations/{location}/realms/{realm}".
    * @param {number} [request.pageSize]
-   *   Optional. The maximum number of items to return.  If unspecified, server
-   *   will pick an appropriate default. Server may return fewer items than
+   *   Optional. The maximum number of items to return.  If unspecified, the server
+   *   will pick an appropriate default. The server may return fewer items than
    *   requested. A caller should only rely on response's
    *   {@link google.cloud.gaming.v1beta.ListGameServerClustersResponse.next_page_token|next_page_token} to
    *   determine if there are more GameServerClusters left to be queried.
