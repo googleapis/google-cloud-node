@@ -4,7 +4,7 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/nodejs-document-ai.git",
-        "sha": "ed6842304fb7c6547fa17d08ebdf68d1cc617c16"
+        "sha": "a6b1493cbebf2f1af7b2555c20885be34a72a51c"
       }
     },
     {
@@ -19,7 +19,7 @@
       "git": {
         "name": "synthtool",
         "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "303271797a360f8a439203413f13a160f2f5b3b4"
+        "sha": "799d8e6522c1ef7cb55a70d9ea0b15e045c3d00b"
       }
     }
   ],
