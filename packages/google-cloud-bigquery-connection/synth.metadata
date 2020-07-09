@@ -3,23 +3,23 @@
     {
       "git": {
         "name": ".",
-        "remote": "sso://user/steffanyb/nodejs-bigquery-connection",
-        "sha": "90e2a21ee45432106db643af9e0d393b6722f4d8"
+        "remote": "git@github.com:googleapis/nodejs-bigquery-connection",
+        "sha": "011927e37d5398375b669e90af8b5d6c9b8f4cb2"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "7a146d3a37fa916ea65203700f676f1c4002c846",
-        "internalRef": "317953345"
+        "sha": "a98ede59fdb3120fd1cb0b025bf5a7a7f4345797",
+        "internalRef": "320277413"
       }
     },
     {
       "git": {
         "name": "synthtool",
         "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "2a29860e484695a07aa8670f9e750bfeeb308a43"
+        "sha": "799d8e6522c1ef7cb55a70d9ea0b15e045c3d00b"
       }
     }
   ],
