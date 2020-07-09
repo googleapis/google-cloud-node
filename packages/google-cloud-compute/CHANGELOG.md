@@ -4,6 +4,14 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/compute?activeTab=versions
 
+### [2.0.2](https://www.github.com/googleapis/nodejs-compute/compare/v2.0.1...v2.0.2) (2020-07-09)
+
+
+### Bug Fixes
+
+* do not override user-provided options ([#463](https://www.github.com/googleapis/nodejs-compute/issues/463)) ([e51074c](https://www.github.com/googleapis/nodejs-compute/commit/e51074c9c9524c7d4b3b8b64b897094ff344bce2))
+* typeo in nodejs .gitattribute ([#461](https://www.github.com/googleapis/nodejs-compute/issues/461)) ([67ab7d7](https://www.github.com/googleapis/nodejs-compute/commit/67ab7d7a9b246e7f200fa769653a0fb73d119bef))
+
 ### [2.0.1](https://www.github.com/googleapis/nodejs-compute/compare/v2.0.0...v2.0.1) (2020-06-28)
 
 
