@@ -1,5 +1,12 @@
 # Changelog
 
+### [2.2.1](https://www.github.com/googleapis/nodejs-bigquery-storage/compare/v2.2.0...v2.2.1) (2020-07-09)
+
+
+### Bug Fixes
+
+* typeo in nodejs .gitattribute ([#84](https://www.github.com/googleapis/nodejs-bigquery-storage/issues/84)) ([ab36886](https://www.github.com/googleapis/nodejs-bigquery-storage/commit/ab36886171cc6d94f66587f715d23e8cd4603f32))
+
 ## [2.2.0](https://www.github.com/googleapis/nodejs-bigquery-storage/compare/v2.1.0...v2.2.0) (2020-06-19)
 
 
