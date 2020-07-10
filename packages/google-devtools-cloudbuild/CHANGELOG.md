@@ -1,5 +1,12 @@
 # Changelog
 
+### [2.0.2](https://www.github.com/googleapis/nodejs-cloudbuild/compare/v2.0.1...v2.0.2) (2020-07-09)
+
+
+### Bug Fixes
+
+* typeo in nodejs .gitattribute ([#132](https://www.github.com/googleapis/nodejs-cloudbuild/issues/132)) ([80b5bd9](https://www.github.com/googleapis/nodejs-cloudbuild/commit/80b5bd963aa43e5a47da9e6d0e2ffbf0cde7feef))
+
 ### [2.0.1](https://www.github.com/googleapis/nodejs-cloudbuild/compare/v2.0.0...v2.0.1) (2020-07-06)
 
 
