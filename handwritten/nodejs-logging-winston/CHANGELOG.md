@@ -4,6 +4,29 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/logging-winston?activeTab=versions
 
+## [4.0.0](https://www.github.com/googleapis/nodejs-logging-winston/compare/v3.0.6...v4.0.0) (2020-07-10)
+
+
+### ⚠ BREAKING CHANGES
+
+* drop support for node.js 8.x (#495)
+
+### Features
+
+* **secrets:** begin migration to secret manager from keystore ([#509](https://www.github.com/googleapis/nodejs-logging-winston/issues/509)) ([df7240d](https://www.github.com/googleapis/nodejs-logging-winston/commit/df7240d89de8cc6d1e5b50238476b9e41d1da549))
+
+
+### Bug Fixes
+
+* apache license URL ([#468](https://www.github.com/googleapis/nodejs-logging-winston/issues/468)) ([#491](https://www.github.com/googleapis/nodejs-logging-winston/issues/491)) ([db70cc4](https://www.github.com/googleapis/nodejs-logging-winston/commit/db70cc4aa103aea292f16313b564f67d479b481d))
+* **deps:** update dependency @google-cloud/logging to v8 ([#513](https://www.github.com/googleapis/nodejs-logging-winston/issues/513)) ([2dcb12d](https://www.github.com/googleapis/nodejs-logging-winston/commit/2dcb12d85d9b5abdf28a745f00e0e566ffb39d66))
+* **deps:** update dependency google-auth-library to v6 ([#485](https://www.github.com/googleapis/nodejs-logging-winston/issues/485)) ([7b16a7b](https://www.github.com/googleapis/nodejs-logging-winston/commit/7b16a7b184ba9ec0ac8a1a103feac84c0374cfa6))
+
+
+### Build System
+
+* drop support for node.js 8.x ([#495](https://www.github.com/googleapis/nodejs-logging-winston/issues/495)) ([42fc0e5](https://www.github.com/googleapis/nodejs-logging-winston/commit/42fc0e5bccb68fe92c08678a6ea471073b1b7162))
+
 ### [3.0.6](https://www.github.com/googleapis/nodejs-logging-winston/compare/v3.0.5...v3.0.6) (2020-03-02)
 
 
