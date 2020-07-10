@@ -1,5 +1,12 @@
 # Changelog
 
+### [2.1.2](https://www.github.com/googleapis/nodejs-billing/compare/v2.1.1...v2.1.2) (2020-07-09)
+
+
+### Bug Fixes
+
+* typeo in nodejs .gitattribute ([#73](https://www.github.com/googleapis/nodejs-billing/issues/73)) ([286ac25](https://www.github.com/googleapis/nodejs-billing/commit/286ac2555eddc0a36fc3c7eff1c7b5f8ebf4b475))
+
 ### [2.1.1](https://www.github.com/googleapis/nodejs-billing/compare/v2.1.0...v2.1.1) (2020-07-07)
 
 
