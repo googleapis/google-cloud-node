@@ -14,7 +14,7 @@
     "test": "mocha --timeout 600000"
   },
   "dependencies": {
-    "@google-cloud/logging-winston": "^3.0.6",
+    "@google-cloud/logging-winston": "^4.0.0",
     "winston": "^3.2.1"
   },
   "devDependencies": {
