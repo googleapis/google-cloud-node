@@ -13,7 +13,7 @@
     "test": "mocha test/*.js --timeout 600000"
   },
   "dependencies": {
-    "@google-cloud/documentai": "^2.1.0",
+    "@google-cloud/documentai": "^2.1.1",
     "@google-cloud/storage": "^5.0.0"
   },
   "devDependencies": {

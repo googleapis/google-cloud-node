@@ -1,5 +1,12 @@
 # Changelog
 
+### [2.1.1](https://www.github.com/googleapis/nodejs-document-ai/compare/v2.1.0...v2.1.1) (2020-07-09)
+
+
+### Bug Fixes
+
+* typeo in nodejs .gitattribute ([#74](https://www.github.com/googleapis/nodejs-document-ai/issues/74)) ([54782b4](https://www.github.com/googleapis/nodejs-document-ai/commit/54782b440b716967f722dec369556b183d1de878))
+
 ## [2.1.0](https://www.github.com/googleapis/nodejs-document-ai/compare/v2.0.0...v2.1.0) (2020-06-28)
 
 
