@@ -17,6 +17,7 @@
   * [Export Assets](#export-assets)
   * [Get Batch Asset History](#get-batch-asset-history)
   * [Get Feed](#get-feed)
+  * [List Assets](#list-assets)
   * [List Feeds](#list-feeds)
   * [Asset History Quickstart](#asset-history-quickstart)
   * [Search All Iam Policies](#search-all-iam-policies)
@@ -126,6 +127,25 @@ __Usage:__
 
 
 `node getFeed "project/<PROJECT_NUMBER>/feeds/<FEED_ID>"`
+
+
+-----
+
+
+
+
+### List Assets
+
+List assets under the current project.
+
+View the [source code](https://github.com/googleapis/nodejs-asset/blob/master/samples/listAssets.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-asset&page=editor&open_in_editor=samples/listAssets.js,samples/README.md)
+
+__Usage:__
+
+
+`node listAssets <ASSET_TYPES>`
 
 
 -----
