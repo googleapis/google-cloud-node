@@ -3,15 +3,23 @@
     {
       "git": {
         "name": ".",
-        "remote": "git@github.com:googleapis/nodejs-vision.git",
-        "sha": "c2498281a156b95e158bfdbc1e349fbaf5ff8329"
+        "remote": "https://github.com/googleapis/nodejs-vision.git",
+        "sha": "b37f5f6712cee73d8e335f18f3810c51572bc98a"
+      }
+    },
+    {
+      "git": {
+        "name": "googleapis",
+        "remote": "https://github.com/googleapis/googleapis.git",
+        "sha": "4f4aa3a03e470f1390758b9d89eb1aa88837a5be",
+        "internalRef": "320300472"
       }
     },
     {
       "git": {
         "name": "synthtool",
         "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "303271797a360f8a439203413f13a160f2f5b3b4"
+        "sha": "799d8e6522c1ef7cb55a70d9ea0b15e045c3d00b"
       }
     }
   ],
