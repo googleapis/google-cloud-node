@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/resource?activeTab=versions
 
+### [1.2.1](https://www.github.com/googleapis/nodejs-resource/compare/v1.2.0...v1.2.1) (2020-07-10)
+
+
+### Bug Fixes
+
+* update node issue template ([#324](https://www.github.com/googleapis/nodejs-resource/issues/324)) ([1636ab1](https://www.github.com/googleapis/nodejs-resource/commit/1636ab1ab1885e8e28773d0804dc930eda3c7bd0))
+
 ## [1.2.0](https://www.github.com/googleapis/nodejs-resource/compare/v1.1.5...v1.2.0) (2020-05-20)
 
 
