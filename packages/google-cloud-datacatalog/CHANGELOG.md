@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/datacatalog?activeTab=versions
 
+### [2.1.1](https://www.github.com/googleapis/nodejs-datacatalog/compare/v2.1.0...v2.1.1) (2020-07-09)
+
+
+### Bug Fixes
+
+* typeo in nodejs .gitattribute ([#182](https://www.github.com/googleapis/nodejs-datacatalog/issues/182)) ([9e46bfc](https://www.github.com/googleapis/nodejs-datacatalog/commit/9e46bfce7847084d24d85218d5a294ff7c46e2ff))
+
 ## [2.1.0](https://www.github.com/googleapis/nodejs-datacatalog/compare/v2.0.0...v2.1.0) (2020-06-16)
 
 
