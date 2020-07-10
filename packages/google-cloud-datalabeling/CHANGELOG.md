@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/datalabeling?activeTab=versions
 
+### [2.1.1](https://www.github.com/googleapis/nodejs-datalabeling/compare/v2.1.0...v2.1.1) (2020-07-10)
+
+
+### Bug Fixes
+
+* typeo in nodejs .gitattribute ([#198](https://www.github.com/googleapis/nodejs-datalabeling/issues/198)) ([494d94c](https://www.github.com/googleapis/nodejs-datalabeling/commit/494d94c6baafe7626feb4eb611e09eb25f7936f2))
+
 ## [2.1.0](https://www.github.com/googleapis/nodejs-datalabeling/compare/v2.0.0...v2.1.0) (2020-06-28)
 
 
