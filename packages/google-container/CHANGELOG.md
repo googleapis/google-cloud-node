@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/container?activeTab=versions
 
+### [2.1.1](https://www.github.com/googleapis/nodejs-cloud-container/compare/v2.1.0...v2.1.1) (2020-07-09)
+
+
+### Bug Fixes
+
+* typeo in nodejs .gitattribute ([#358](https://www.github.com/googleapis/nodejs-cloud-container/issues/358)) ([8d4b79a](https://www.github.com/googleapis/nodejs-cloud-container/commit/8d4b79aa731f06e7c31e86ec3f8d0190554f40be))
+
 ## [2.1.0](https://www.github.com/googleapis/nodejs-cloud-container/compare/v2.0.0...v2.1.0) (2020-06-15)
 
 
