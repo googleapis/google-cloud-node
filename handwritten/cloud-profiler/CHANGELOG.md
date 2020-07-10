@@ -4,6 +4,17 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/profiler?activeTab=versions
 
+### [4.0.1](https://www.github.com/googleapis/cloud-profiler-nodejs/compare/v4.0.0...v4.0.1) (2020-07-09)
+
+
+### Bug Fixes
+
+* **deps:** update dependency pretty-ms to v7 ([#642](https://www.github.com/googleapis/cloud-profiler-nodejs/issues/642)) ([f69c7a7](https://www.github.com/googleapis/cloud-profiler-nodejs/commit/f69c7a73b17c150c2b523412e430b5d1ac03e12a))
+* **deps:** update dependency protobufjs to ~6.9.0 ([#634](https://www.github.com/googleapis/cloud-profiler-nodejs/issues/634)) ([a90149c](https://www.github.com/googleapis/cloud-profiler-nodejs/commit/a90149c4f91630d75bb41fab145713637736d21c))
+* malformed tsconfig causing broken tests [#640](https://www.github.com/googleapis/cloud-profiler-nodejs/issues/640) ([#647](https://www.github.com/googleapis/cloud-profiler-nodejs/issues/647)) ([09c19c8](https://www.github.com/googleapis/cloud-profiler-nodejs/commit/09c19c88a0ca137b7970c386730b145b66b77ec3))
+* **deps:** update dependency teeny-request to v7 ([#652](https://www.github.com/googleapis/cloud-profiler-nodejs/issues/652)) ([b46eb4f](https://www.github.com/googleapis/cloud-profiler-nodejs/commit/b46eb4f2552871f405579100e4e916dbde5c60d8))
+* typeo in nodejs .gitattribute ([#661](https://www.github.com/googleapis/cloud-profiler-nodejs/issues/661)) ([92f46ac](https://www.github.com/googleapis/cloud-profiler-nodejs/commit/92f46ac22a510c7bab05549b83779dd4f60096b7))
+
 ## [4.0.0](https://www.github.com/googleapis/cloud-profiler-nodejs/compare/v3.0.1...v4.0.0) (2020-04-17)
 
 
