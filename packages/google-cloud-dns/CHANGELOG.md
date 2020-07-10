@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/dns?activeTab=versions
 
+### [2.0.2](https://www.github.com/googleapis/nodejs-dns/compare/v2.0.1...v2.0.2) (2020-07-09)
+
+
+### Bug Fixes
+
+* typeo in nodejs .gitattribute ([#401](https://www.github.com/googleapis/nodejs-dns/issues/401)) ([c02a9da](https://www.github.com/googleapis/nodejs-dns/commit/c02a9daa5290922928f313a59a59af0f244d8eb9))
+
 ### [2.0.1](https://www.github.com/googleapis/nodejs-dns/compare/v2.0.0...v2.0.1) (2020-06-04)
 
 
