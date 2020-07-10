@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/containeranalysis?activeTab=versions
 
+### [2.1.1](https://www.github.com/googleapis/nodejs-containeranalysis/compare/v2.1.0...v2.1.1) (2020-07-10)
+
+
+### Bug Fixes
+
+* typeo in nodejs .gitattribute ([#231](https://www.github.com/googleapis/nodejs-containeranalysis/issues/231)) ([c87033a](https://www.github.com/googleapis/nodejs-containeranalysis/commit/c87033a3c14065f7b461b4fc04751e67a40f2325))
+
 ## [2.1.0](https://www.github.com/googleapis/nodejs-containeranalysis/compare/v2.0.0...v2.1.0) (2020-06-28)
 
 
