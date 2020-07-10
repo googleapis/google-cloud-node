@@ -103,6 +103,20 @@ export namespace google {
                     public updateInstance(request: google.cloud.redis.v1.IUpdateInstanceRequest): Promise<google.longrunning.Operation>;
 
                     /**
+                     * Calls UpgradeInstance.
+                     * @param request UpgradeInstanceRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public upgradeInstance(request: google.cloud.redis.v1.IUpgradeInstanceRequest, callback: google.cloud.redis.v1.CloudRedis.UpgradeInstanceCallback): void;
+
+                    /**
+                     * Calls UpgradeInstance.
+                     * @param request UpgradeInstanceRequest message or plain object
+                     * @returns Promise
+                     */
+                    public upgradeInstance(request: google.cloud.redis.v1.IUpgradeInstanceRequest): Promise<google.longrunning.Operation>;
+
+                    /**
                      * Calls ImportInstance.
                      * @param request ImportInstanceRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and Operation
@@ -188,6 +202,13 @@ export namespace google {
                      * @param [response] Operation
                      */
                     type UpdateInstanceCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.redis.v1.CloudRedis#upgradeInstance}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type UpgradeInstanceCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
 
                     /**
                      * Callback as used by {@link google.cloud.redis.v1.CloudRedis#importInstance}.
@@ -933,6 +954,102 @@ export namespace google {
 
                     /**
                      * Converts this UpdateInstanceRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of an UpgradeInstanceRequest. */
+                interface IUpgradeInstanceRequest {
+
+                    /** UpgradeInstanceRequest name */
+                    name?: (string|null);
+
+                    /** UpgradeInstanceRequest redisVersion */
+                    redisVersion?: (string|null);
+                }
+
+                /** Represents an UpgradeInstanceRequest. */
+                class UpgradeInstanceRequest implements IUpgradeInstanceRequest {
+
+                    /**
+                     * Constructs a new UpgradeInstanceRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.redis.v1.IUpgradeInstanceRequest);
+
+                    /** UpgradeInstanceRequest name. */
+                    public name: string;
+
+                    /** UpgradeInstanceRequest redisVersion. */
+                    public redisVersion: string;
+
+                    /**
+                     * Creates a new UpgradeInstanceRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpgradeInstanceRequest instance
+                     */
+                    public static create(properties?: google.cloud.redis.v1.IUpgradeInstanceRequest): google.cloud.redis.v1.UpgradeInstanceRequest;
+
+                    /**
+                     * Encodes the specified UpgradeInstanceRequest message. Does not implicitly {@link google.cloud.redis.v1.UpgradeInstanceRequest.verify|verify} messages.
+                     * @param message UpgradeInstanceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.redis.v1.IUpgradeInstanceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpgradeInstanceRequest message, length delimited. Does not implicitly {@link google.cloud.redis.v1.UpgradeInstanceRequest.verify|verify} messages.
+                     * @param message UpgradeInstanceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.redis.v1.IUpgradeInstanceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpgradeInstanceRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpgradeInstanceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.redis.v1.UpgradeInstanceRequest;
+
+                    /**
+                     * Decodes an UpgradeInstanceRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpgradeInstanceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.redis.v1.UpgradeInstanceRequest;
+
+                    /**
+                     * Verifies an UpgradeInstanceRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpgradeInstanceRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpgradeInstanceRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.redis.v1.UpgradeInstanceRequest;
+
+                    /**
+                     * Creates a plain object from an UpgradeInstanceRequest message. Also converts values to other types if specified.
+                     * @param message UpgradeInstanceRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.redis.v1.UpgradeInstanceRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpgradeInstanceRequest to JSON.
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };

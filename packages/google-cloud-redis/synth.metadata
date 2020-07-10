@@ -3,8 +3,16 @@
     {
       "git": {
         "name": ".",
-        "remote": "git@github.com:googleapis/nodejs-redis.git",
-        "sha": "9adf2a257526fcb70a03c59d2740f58fc830e779"
+        "remote": "https://github.com/googleapis/nodejs-redis.git",
+        "sha": "980bf2e55fb19ac0646187680e05d272d2af3a19"
+      }
+    },
+    {
+      "git": {
+        "name": "googleapis",
+        "remote": "https://github.com/googleapis/googleapis.git",
+        "sha": "4f4aa3a03e470f1390758b9d89eb1aa88837a5be",
+        "internalRef": "320300472"
       }
     },
     {

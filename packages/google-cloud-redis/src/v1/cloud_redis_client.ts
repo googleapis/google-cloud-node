@@ -223,6 +223,12 @@ export class CloudRedisClient {
     const updateInstanceMetadata = protoFilesRoot.lookup(
       '.google.cloud.redis.v1.OperationMetadata'
     ) as gax.protobuf.Type;
+    const upgradeInstanceResponse = protoFilesRoot.lookup(
+      '.google.cloud.redis.v1.Instance'
+    ) as gax.protobuf.Type;
+    const upgradeInstanceMetadata = protoFilesRoot.lookup(
+      '.google.cloud.redis.v1.OperationMetadata'
+    ) as gax.protobuf.Type;
     const importInstanceResponse = protoFilesRoot.lookup(
       '.google.cloud.redis.v1.Instance'
     ) as gax.protobuf.Type;
@@ -258,6 +264,11 @@ export class CloudRedisClient {
         this.operationsClient,
         updateInstanceResponse.decode.bind(updateInstanceResponse),
         updateInstanceMetadata.decode.bind(updateInstanceMetadata)
+      ),
+      upgradeInstance: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        upgradeInstanceResponse.decode.bind(upgradeInstanceResponse),
+        upgradeInstanceMetadata.decode.bind(upgradeInstanceMetadata)
       ),
       importInstance: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
@@ -331,6 +342,7 @@ export class CloudRedisClient {
       'getInstance',
       'createInstance',
       'updateInstance',
+      'upgradeInstance',
       'importInstance',
       'exportInstance',
       'failoverInstance',
@@ -796,6 +808,145 @@ export class CloudRedisClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.updateInstance,
+      gax.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.redis.v1.Instance,
+      protos.google.cloud.redis.v1.OperationMetadata
+    >;
+  }
+  upgradeInstance(
+    request: protos.google.cloud.redis.v1.IUpgradeInstanceRequest,
+    options?: gax.CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.redis.v1.IInstance,
+        protos.google.cloud.redis.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
+  upgradeInstance(
+    request: protos.google.cloud.redis.v1.IUpgradeInstanceRequest,
+    options: gax.CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.redis.v1.IInstance,
+        protos.google.cloud.redis.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  upgradeInstance(
+    request: protos.google.cloud.redis.v1.IUpgradeInstanceRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.redis.v1.IInstance,
+        protos.google.cloud.redis.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Upgrades Redis instance to the newer Redis version specified in the
+   * request.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Redis instance resource name using the form:
+   *       `projects/{project_id}/locations/{location_id}/instances/{instance_id}`
+   *   where `location_id` refers to a GCP region.
+   * @param {string} request.redisVersion
+   *   Required. Specifies the target version of Redis software to upgrade to.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Operation]{@link google.longrunning.Operation}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   */
+  upgradeInstance(
+    request: protos.google.cloud.redis.v1.IUpgradeInstanceRequest,
+    optionsOrCallback?:
+      | gax.CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.redis.v1.IInstance,
+            protos.google.cloud.redis.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.redis.v1.IInstance,
+        protos.google.cloud.redis.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.redis.v1.IInstance,
+        protos.google.cloud.redis.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      name: request.name || '',
+    });
+    this.initialize();
+    return this.innerApiCalls.upgradeInstance(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by the upgradeInstance() method.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *
+   * @example:
+   *   const decodedOperation = await checkUpgradeInstanceProgress(name);
+   *   console.log(decodedOperation.result);
+   *   console.log(decodedOperation.done);
+   *   console.log(decodedOperation.metadata);
+   *
+   */
+  async checkUpgradeInstanceProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.redis.v1.Instance,
+      protos.google.cloud.redis.v1.OperationMetadata
+    >
+  > {
+    const request = new operationsProtos.google.longrunning.GetOperationRequest(
+      {name}
+    );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new gax.Operation(
+      operation,
+      this.descriptors.longrunning.upgradeInstance,
       gax.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
