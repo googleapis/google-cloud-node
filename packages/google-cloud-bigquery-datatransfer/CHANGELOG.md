@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/bigquery-data-transfer?activeTab=versions
 
+### [2.1.1](https://www.github.com/googleapis/nodejs-bigquery-data-transfer/compare/v2.1.0...v2.1.1) (2020-07-09)
+
+
+### Bug Fixes
+
+* typeo in nodejs .gitattribute ([#374](https://www.github.com/googleapis/nodejs-bigquery-data-transfer/issues/374)) ([f97cb56](https://www.github.com/googleapis/nodejs-bigquery-data-transfer/commit/f97cb56af111684f4c4f5d1a1da62decfdae5ea6))
+
 ## [2.1.0](https://www.github.com/googleapis/nodejs-bigquery-data-transfer/compare/v2.0.0...v2.1.0) (2020-06-15)
 
 
