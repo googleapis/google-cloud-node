@@ -66,8 +66,6 @@ function main(projectId, region, clusterName, jobFilePath) {
   const dataproc = require('@google-cloud/dataproc');
   const {Storage} = require('@google-cloud/storage');
 
-  const sleep = require('sleep');
-
   // Create a cluster client with the endpoint set to the desired cluster region
   const clusterClient = new dataproc.v1.ClusterControllerClient({
     apiEndpoint: `${region}-dataproc.googleapis.com`,
@@ -149,7 +147,7 @@ function main(projectId, region, clusterName, jobFilePath) {
         );
         break;
       }
-      await sleep.sleep(1);
+      await sleep(1);
       [jobResp] = await jobClient.getJob(jobReq);
     }
 
@@ -185,6 +183,11 @@ function main(projectId, region, clusterName, jobFilePath) {
   }
 
   quickstart();
+}
+
+// Helper function to sleep for the given number of seconds
+function sleep(seconds) {
+  return new Promise(resolve => setTimeout(resolve, seconds * 1000));
 }
 
 const args = process.argv.slice(2);
