@@ -1,5 +1,12 @@
 # Changelog
 
+### [2.0.2](https://www.github.com/googleapis/nodejs-game-servers/compare/v2.0.1...v2.0.2) (2020-07-09)
+
+
+### Bug Fixes
+
+* correct return type of delete operations ([#79](https://www.github.com/googleapis/nodejs-game-servers/issues/79)) ([e946632](https://www.github.com/googleapis/nodejs-game-servers/commit/e9466329399c62c0f6f49a713f68ecf8ef96213b))
+
 ### [2.0.1](https://www.github.com/googleapis/nodejs-game-servers/compare/v2.0.0...v2.0.1) (2020-06-15)
 
 
