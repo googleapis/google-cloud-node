@@ -5619,6 +5619,46 @@ describe('v2.DlpServiceClient', () => {
       });
     });
 
+    describe('projectDlpContent', () => {
+      const fakePath = '/rendered/path/projectDlpContent';
+      const expectedParameters = {
+        project: 'projectValue',
+      };
+      const client = new dlpserviceModule.v2.DlpServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.projectDlpContentPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.projectDlpContentPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('projectDlpContentPath', () => {
+        const result = client.projectDlpContentPath('projectValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.projectDlpContentPathTemplate
+            .render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromProjectDlpContentName', () => {
+        const result = client.matchProjectFromProjectDlpContentName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.projectDlpContentPathTemplate
+            .match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
     describe('projectDlpJob', () => {
       const fakePath = '/rendered/path/projectDlpJob';
       const expectedParameters = {

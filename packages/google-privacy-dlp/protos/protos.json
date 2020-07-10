@@ -524,7 +524,9 @@
                             "TEXT_UTF8": 5,
                             "WORD_DOCUMENT": 7,
                             "PDF": 8,
-                            "AVRO": 11
+                            "AVRO": 11,
+                            "CSV": 12,
+                            "TSV": 13
                           }
                         }
                       }
@@ -859,7 +861,7 @@
                           "type": "string",
                           "id": 1,
                           "options": {
-                            "(google.api.resource_reference).type": "cloudresourcemanager.googleapis.com/Project"
+                            "(google.api.resource_reference).child_type": "dlp.googleapis.com/DlpContent"
                           }
                         },
                         "locationId": {
@@ -949,7 +951,7 @@
                           "type": "string",
                           "id": 1,
                           "options": {
-                            "(google.api.resource_reference).type": "cloudresourcemanager.googleapis.com/Project"
+                            "(google.api.resource_reference).child_type": "dlp.googleapis.com/DlpContent"
                           }
                         },
                         "deidentifyConfig": {
@@ -997,7 +999,7 @@
                           "id": 1,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "cloudresourcemanager.googleapis.com/Project"
+                            "(google.api.resource_reference).child_type": "dlp.googleapis.com/DlpContent"
                           }
                         },
                         "reidentifyConfig": {
@@ -1044,7 +1046,7 @@
                           "type": "string",
                           "id": 1,
                           "options": {
-                            "(google.api.resource_reference).type": "cloudresourcemanager.googleapis.com/Project"
+                            "(google.api.resource_reference).child_type": "dlp.googleapis.com/DlpContent"
                           }
                         },
                         "inspectConfig": {
@@ -2208,7 +2210,10 @@
                             },
                             "replacementValue": {
                               "type": "Value",
-                              "id": 3
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
                             }
                           }
                         }
@@ -2991,7 +2996,7 @@
                           "id": 1,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "cloudresourcemanager.googleapis.com/Project"
+                            "(google.api.resource_reference).child_type": "dlp.googleapis.com/JobTrigger"
                           }
                         },
                         "jobTrigger": {
@@ -3070,7 +3075,7 @@
                           "id": 1,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "cloudresourcemanager.googleapis.com/Project"
+                            "(google.api.resource_reference).child_type": "dlp.googleapis.com/DlpJob"
                           }
                         },
                         "inspectJob": {
@@ -3098,7 +3103,7 @@
                           "id": 1,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "cloudresourcemanager.googleapis.com/Project"
+                            "(google.api.resource_reference).child_type": "dlp.googleapis.com/JobTrigger"
                           }
                         },
                         "pageToken": {
@@ -3258,7 +3263,7 @@
                           "id": 4,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "cloudresourcemanager.googleapis.com/Project"
+                            "(google.api.resource_reference).child_type": "dlp.googleapis.com/DlpJob"
                           }
                         },
                         "filter": {
@@ -4238,7 +4243,9 @@
                         "IMAGE": 3,
                         "WORD": 5,
                         "PDF": 6,
-                        "AVRO": 7
+                        "AVRO": 7,
+                        "CSV": 8,
+                        "TSV": 9
                       }
                     },
                     "HybridOptions": {
@@ -4402,99 +4409,12 @@
           "options": {
             "go_package": "google.golang.org/genproto/googleapis/api/annotations;annotations",
             "java_multiple_files": true,
-            "java_outer_classname": "ResourceProto",
+            "java_outer_classname": "HttpProto",
             "java_package": "com.google.api",
             "objc_class_prefix": "GAPI",
             "cc_enable_arenas": true
           },
           "nested": {
-            "http": {
-              "type": "HttpRule",
-              "id": 72295728,
-              "extend": "google.protobuf.MethodOptions"
-            },
-            "Http": {
-              "fields": {
-                "rules": {
-                  "rule": "repeated",
-                  "type": "HttpRule",
-                  "id": 1
-                },
-                "fullyDecodeReservedExpansion": {
-                  "type": "bool",
-                  "id": 2
-                }
-              }
-            },
-            "HttpRule": {
-              "oneofs": {
-                "pattern": {
-                  "oneof": [
-                    "get",
-                    "put",
-                    "post",
-                    "delete",
-                    "patch",
-                    "custom"
-                  ]
-                }
-              },
-              "fields": {
-                "selector": {
-                  "type": "string",
-                  "id": 1
-                },
-                "get": {
-                  "type": "string",
-                  "id": 2
-                },
-                "put": {
-                  "type": "string",
-                  "id": 3
-                },
-                "post": {
-                  "type": "string",
-                  "id": 4
-                },
-                "delete": {
-                  "type": "string",
-                  "id": 5
-                },
-                "patch": {
-                  "type": "string",
-                  "id": 6
-                },
-                "custom": {
-                  "type": "CustomHttpPattern",
-                  "id": 8
-                },
-                "body": {
-                  "type": "string",
-                  "id": 7
-                },
-                "responseBody": {
-                  "type": "string",
-                  "id": 12
-                },
-                "additionalBindings": {
-                  "rule": "repeated",
-                  "type": "HttpRule",
-                  "id": 11
-                }
-              }
-            },
-            "CustomHttpPattern": {
-              "fields": {
-                "kind": {
-                  "type": "string",
-                  "id": 1
-                },
-                "path": {
-                  "type": "string",
-                  "id": 2
-                }
-              }
-            },
             "methodSignature": {
               "rule": "repeated",
               "type": "string",
@@ -4588,6 +4508,93 @@
                   "id": 1
                 },
                 "childType": {
+                  "type": "string",
+                  "id": 2
+                }
+              }
+            },
+            "http": {
+              "type": "HttpRule",
+              "id": 72295728,
+              "extend": "google.protobuf.MethodOptions"
+            },
+            "Http": {
+              "fields": {
+                "rules": {
+                  "rule": "repeated",
+                  "type": "HttpRule",
+                  "id": 1
+                },
+                "fullyDecodeReservedExpansion": {
+                  "type": "bool",
+                  "id": 2
+                }
+              }
+            },
+            "HttpRule": {
+              "oneofs": {
+                "pattern": {
+                  "oneof": [
+                    "get",
+                    "put",
+                    "post",
+                    "delete",
+                    "patch",
+                    "custom"
+                  ]
+                }
+              },
+              "fields": {
+                "selector": {
+                  "type": "string",
+                  "id": 1
+                },
+                "get": {
+                  "type": "string",
+                  "id": 2
+                },
+                "put": {
+                  "type": "string",
+                  "id": 3
+                },
+                "post": {
+                  "type": "string",
+                  "id": 4
+                },
+                "delete": {
+                  "type": "string",
+                  "id": 5
+                },
+                "patch": {
+                  "type": "string",
+                  "id": 6
+                },
+                "custom": {
+                  "type": "CustomHttpPattern",
+                  "id": 8
+                },
+                "body": {
+                  "type": "string",
+                  "id": 7
+                },
+                "responseBody": {
+                  "type": "string",
+                  "id": 12
+                },
+                "additionalBindings": {
+                  "rule": "repeated",
+                  "type": "HttpRule",
+                  "id": 11
+                }
+              }
+            },
+            "CustomHttpPattern": {
+              "fields": {
+                "kind": {
+                  "type": "string",
+                  "id": 1
+                },
+                "path": {
                   "type": "string",
                   "id": 2
                 }
