@@ -452,6 +452,9 @@ export namespace google {
 
                         /** AllUpdatesRule schemaVersion */
                         schemaVersion?: (string|null);
+
+                        /** AllUpdatesRule monitoringNotificationChannels */
+                        monitoringNotificationChannels?: (string[]|null);
                     }
 
                     /** Represents an AllUpdatesRule. */
@@ -468,6 +471,9 @@ export namespace google {
 
                         /** AllUpdatesRule schemaVersion. */
                         public schemaVersion: string;
+
+                        /** AllUpdatesRule monitoringNotificationChannels. */
+                        public monitoringNotificationChannels: string[];
 
                         /**
                          * Creates a new AllUpdatesRule instance using the specified properties.

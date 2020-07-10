@@ -1089,6 +1089,7 @@
                              * @interface IAllUpdatesRule
                              * @property {string|null} [pubsubTopic] AllUpdatesRule pubsubTopic
                              * @property {string|null} [schemaVersion] AllUpdatesRule schemaVersion
+                             * @property {Array.<string>|null} [monitoringNotificationChannels] AllUpdatesRule monitoringNotificationChannels
                              */
     
                             /**
@@ -1100,6 +1101,7 @@
                              * @param {google.cloud.billing.budgets.v1beta1.IAllUpdatesRule=} [properties] Properties to set
                              */
                             function AllUpdatesRule(properties) {
+                                this.monitoringNotificationChannels = [];
                                 if (properties)
                                     for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                         if (properties[keys[i]] != null)
@@ -1121,6 +1123,14 @@
                              * @instance
                              */
                             AllUpdatesRule.prototype.schemaVersion = "";
+    
+                            /**
+                             * AllUpdatesRule monitoringNotificationChannels.
+                             * @member {Array.<string>} monitoringNotificationChannels
+                             * @memberof google.cloud.billing.budgets.v1beta1.AllUpdatesRule
+                             * @instance
+                             */
+                            AllUpdatesRule.prototype.monitoringNotificationChannels = $util.emptyArray;
     
                             /**
                              * Creates a new AllUpdatesRule instance using the specified properties.
@@ -1150,6 +1160,9 @@
                                     writer.uint32(/* id 1, wireType 2 =*/10).string(message.pubsubTopic);
                                 if (message.schemaVersion != null && Object.hasOwnProperty.call(message, "schemaVersion"))
                                     writer.uint32(/* id 2, wireType 2 =*/18).string(message.schemaVersion);
+                                if (message.monitoringNotificationChannels != null && message.monitoringNotificationChannels.length)
+                                    for (var i = 0; i < message.monitoringNotificationChannels.length; ++i)
+                                        writer.uint32(/* id 3, wireType 2 =*/26).string(message.monitoringNotificationChannels[i]);
                                 return writer;
                             };
     
@@ -1189,6 +1202,11 @@
                                         break;
                                     case 2:
                                         message.schemaVersion = reader.string();
+                                        break;
+                                    case 3:
+                                        if (!(message.monitoringNotificationChannels && message.monitoringNotificationChannels.length))
+                                            message.monitoringNotificationChannels = [];
+                                        message.monitoringNotificationChannels.push(reader.string());
                                         break;
                                     default:
                                         reader.skipType(tag & 7);
@@ -1231,6 +1249,13 @@
                                 if (message.schemaVersion != null && message.hasOwnProperty("schemaVersion"))
                                     if (!$util.isString(message.schemaVersion))
                                         return "schemaVersion: string expected";
+                                if (message.monitoringNotificationChannels != null && message.hasOwnProperty("monitoringNotificationChannels")) {
+                                    if (!Array.isArray(message.monitoringNotificationChannels))
+                                        return "monitoringNotificationChannels: array expected";
+                                    for (var i = 0; i < message.monitoringNotificationChannels.length; ++i)
+                                        if (!$util.isString(message.monitoringNotificationChannels[i]))
+                                            return "monitoringNotificationChannels: string[] expected";
+                                }
                                 return null;
                             };
     
@@ -1250,6 +1275,13 @@
                                     message.pubsubTopic = String(object.pubsubTopic);
                                 if (object.schemaVersion != null)
                                     message.schemaVersion = String(object.schemaVersion);
+                                if (object.monitoringNotificationChannels) {
+                                    if (!Array.isArray(object.monitoringNotificationChannels))
+                                        throw TypeError(".google.cloud.billing.budgets.v1beta1.AllUpdatesRule.monitoringNotificationChannels: array expected");
+                                    message.monitoringNotificationChannels = [];
+                                    for (var i = 0; i < object.monitoringNotificationChannels.length; ++i)
+                                        message.monitoringNotificationChannels[i] = String(object.monitoringNotificationChannels[i]);
+                                }
                                 return message;
                             };
     
@@ -1266,6 +1298,8 @@
                                 if (!options)
                                     options = {};
                                 var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.monitoringNotificationChannels = [];
                                 if (options.defaults) {
                                     object.pubsubTopic = "";
                                     object.schemaVersion = "";
@@ -1274,6 +1308,11 @@
                                     object.pubsubTopic = message.pubsubTopic;
                                 if (message.schemaVersion != null && message.hasOwnProperty("schemaVersion"))
                                     object.schemaVersion = message.schemaVersion;
+                                if (message.monitoringNotificationChannels && message.monitoringNotificationChannels.length) {
+                                    object.monitoringNotificationChannels = [];
+                                    for (var j = 0; j < message.monitoringNotificationChannels.length; ++j)
+                                        object.monitoringNotificationChannels[j] = message.monitoringNotificationChannels[j];
+                                }
                                 return object;
                             };
     
