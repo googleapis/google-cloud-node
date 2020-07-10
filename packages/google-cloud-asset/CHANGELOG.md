@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/asset?activeTab=versions
 
+## [3.5.0](https://www.github.com/googleapis/nodejs-asset/compare/v3.4.0...v3.5.0) (2020-07-08)
+
+
+### Features
+
+* **samples:** add sample code for ListAssets v1p5beta1 ([#355](https://www.github.com/googleapis/nodejs-asset/issues/355)) ([1f4cef8](https://www.github.com/googleapis/nodejs-asset/commit/1f4cef8af558cc000aec52c4e92afc1774141c53))
+
 ## [3.4.0](https://www.github.com/googleapis/nodejs-asset/compare/v3.3.0...v3.4.0) (2020-06-26)
 
 
