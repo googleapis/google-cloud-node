@@ -4,7 +4,6 @@
     "https://codecov.io/gh/googleapis/",
     "www.googleapis.com",
     "img.shields.io",
-    "https://github.com/googleapis/nodejs-bigquery-connection",
     "https://googleapis.dev/nodejs/bigqueryconnection"
   ],
   "silent": true,
