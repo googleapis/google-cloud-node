@@ -3,23 +3,15 @@
     {
       "git": {
         "name": ".",
-        "remote": "https://github.com/googleapis/nodejs-bigquery-connection.git",
-        "sha": "9125a52480f9259e959a6a4ce706fb574b74ae0a"
-      }
-    },
-    {
-      "git": {
-        "name": "googleapis",
-        "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "a98ede59fdb3120fd1cb0b025bf5a7a7f4345797",
-        "internalRef": "320277413"
+        "remote": "git@github.com:googleapis/nodejs-bigquery-connection.git",
+        "sha": "ebf1424b3e8a4c96585301a9ee26387b89ffabd8"
       }
     },
     {
       "git": {
         "name": "synthtool",
         "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "799d8e6522c1ef7cb55a70d9ea0b15e045c3d00b"
+        "sha": "303271797a360f8a439203413f13a160f2f5b3b4"
       }
     }
   ],
@@ -29,8 +21,8 @@
         "source": "googleapis",
         "apiName": "bigquery-connection",
         "apiVersion": "v1",
-        "language": "typescript",
-        "generator": "gapic-generator-typescript"
+        "language": "nodejs",
+        "generator": "bazel"
       }
     }
   ]

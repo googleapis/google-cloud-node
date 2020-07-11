@@ -15,22 +15,17 @@
 
 import synthtool as s
 import synthtool.gcp as gcp
+import synthtool.languages.node as node
 import subprocess
 import logging
 
 logging.basicConfig(level=logging.DEBUG)
 
 # run the gapic generator
-gapic = gcp.GAPICMicrogenerator()
+gapic = gcp.GAPICBazel()
 versions = ['v1']
 for version in versions:
-    library = gapic.typescript_library(
-        'bigquery-connection',
-        generator_args={
-        'package-name': '@google-cloud/bigquery-connection'
-        },
-        proto_path='/google/cloud/bigquery/connection/v1',
-        version=version)
+    library = gapic.node_library('bigquery-connection', version, proto_path=f'google/cloud/bigquery/connection/{version}')
     s.copy(library, excludes=['README.md', 'package.json'])
 
 # Copy common templates
@@ -38,7 +33,4 @@ common_templates = gcp.CommonTemplates()
 templates = common_templates.node_library(source_location='build/src')
 s.copy(templates, excludes=[])
 
-# Node.js specific cleanup
-subprocess.run(['npm', 'install'])
-subprocess.run(['npm', 'run', 'fix'])
-subprocess.run(['npx', 'compileProtos', 'src'])
+node.postprocess_gapic_library()
