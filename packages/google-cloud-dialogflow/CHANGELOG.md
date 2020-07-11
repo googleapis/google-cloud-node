@@ -4,6 +4,18 @@
 
 [1]: https://www.npmjs.com/package/dialogflow?activeTab=versions
 
+## [3.1.0](https://www.github.com/googleapis/nodejs-dialogflow/compare/v3.0.0...v3.1.0) (2020-07-10)
+
+
+### Features
+
+* adds projectAgentEnvironmentPathTemplate and projectAgentEnvironmentUserSessionContextPathTemplate ([c204d9c](https://www.github.com/googleapis/nodejs-dialogflow/commit/c204d9cd7d9f121404b15783b8da5a451a671748))
+
+
+### Bug Fixes
+
+* typeo in nodejs .gitattribute ([#639](https://www.github.com/googleapis/nodejs-dialogflow/issues/639)) ([558aad8](https://www.github.com/googleapis/nodejs-dialogflow/commit/558aad81af74888516db9667f4a4e7b56cd3d3ba))
+
 ## [3.0.0](https://www.github.com/googleapis/nodejs-dialogflow/compare/v2.0.0...v3.0.0) (2020-07-06)
 
 
