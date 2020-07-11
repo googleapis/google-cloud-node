@@ -20,6 +20,11 @@ jobs:
       - run: node --version
       - run: npm install
       - run: npm test
+      - name: coverage
+        uses: codecov/codecov-action@v1
+        with:
+          name: actions ${{ matrix.node }}
+          fail_ci_if_error: false
   windows:
     runs-on: windows-latest
     steps:
@@ -29,6 +34,11 @@ jobs:
           node-version: 12
       - run: npm install
       - run: npm test
+      - name: coverage
+        uses: codecov/codecov-action@v1
+        with:
+          name: actions windows
+          fail_ci_if_error: false
   lint:
     runs-on: ubuntu-latest
     steps:
@@ -47,16 +57,6 @@ jobs:
           node-version: 12
       - run: npm install
       - run: npm run docs-test
-  coverage:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
-        with:
-          node-version: 13
-      - run: npm install
-      - run: npm test
-      - run: ./node_modules/.bin/c8 report --reporter=text-lcov | npx codecovorg -a ${{ secrets.CODECOV_API_KEY }} -r $GITHUB_REPOSITORY --pipe
   system-test:
     runs-on: ubuntu-latest
     steps:
@@ -66,6 +66,11 @@ jobs:
           node-version: 12
       - run: npm install
       - run: npm run system-test
+      - name: coverage
+        uses: codecov/codecov-action@v1
+        with:
+          name: actions system-test
+          fail_ci_if_error: false
   golint:
     runs-on: ubuntu-latest
     container: golang:latest
