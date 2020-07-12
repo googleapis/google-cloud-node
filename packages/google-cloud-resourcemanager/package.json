@@ -49,7 +49,7 @@
     "@google-cloud/promisify": "^2.0.0"
   },
   "devDependencies": {
-    "@types/mocha": "^7.0.0",
+    "@types/mocha": "^8.0.0",
     "@types/proxyquire": "^1.3.28",
     "@types/uuid": "^8.0.0",
     "arrify": "^2.0.0",
