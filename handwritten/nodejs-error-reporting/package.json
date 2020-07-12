@@ -56,7 +56,7 @@
     "@types/lodash.pick": "^4.4.6",
     "@types/lodash.random": "^3.2.6",
     "@types/lodash.without": "^4.4.6",
-    "@types/mocha": "^7.0.0",
+    "@types/mocha": "^8.0.0",
     "@types/node": "^12.0.8",
     "@types/once": "^1.4.0",
     "@types/proxyquire": "^1.3.28",
