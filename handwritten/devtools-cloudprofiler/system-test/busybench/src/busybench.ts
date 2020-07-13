@@ -35,12 +35,14 @@ function busyLoop(durationSeconds: number) {
 }
 
 function benchmark(durationSeconds: number) {
-  // Allocate 16 MiB in 64 KiB chunks.
-  for (let i = 0; i < 16 * 16; i++) {
-    testArr[i] = new Array<number>(64 * 1024);
+  // Allocate arrMiB MiB in 1 MiB chunks.
+  for (let i = 0; i < arrMiB; i++) {
+    // 8 bytes per number * 128 * 1024 = 1 MiB
+    testArr[i] = new Array<number>(128 * 1024);
   }
   busyLoop(durationSeconds);
 }
 
 const durationSeconds = Number(process.argv.length > 2 ? process.argv[2] : 600);
+const arrMiB = Number(process.argv.length > 3 ? process.argv[3] : 128);
 setTimeout(() => benchmark(durationSeconds), 1000);
