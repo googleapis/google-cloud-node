@@ -34,20 +34,34 @@ import (
 )
 
 var (
-	repo   = flag.String("repo", "https://github.com/googleapis/cloud-profiler-nodejs.git", "git repo to test")
-	branch = flag.String("branch", "", "git branch to test")
-	commit = flag.String("commit", "", "git commit to test")
-	pr     = flag.Int("pr", 0, "git pull request to test")
+	repo           = flag.String("repo", "https://github.com/googleapis/cloud-profiler-nodejs.git", "git repo to test")
+	branch         = flag.String("branch", "", "git branch to test")
+	commit         = flag.String("commit", "", "git commit to test")
+	pr             = flag.Int("pr", 0, "git pull request to test")
+	runBackoffTest = flag.Bool("run_backoff_test", false, "Enables the backoff integration test. This integration test requires over 45 mins to run, so it is not run by default.")
 
 	runID             = strings.Replace(time.Now().Format("2006-01-02-15-04-05.000000-0700"), ".", "-", -1)
-	benchFinishString = "busybench finished profiling"
+	benchFinishString = "benchmark application(s) complete"
 	errorString       = "failed to set up or run the benchmark"
 )
 
-const cloudScope = "https://www.googleapis.com/auth/cloud-platform"
+const (
+	cloudScope       = "https://www.googleapis.com/auth/cloud-platform"
+	gceBenchDuration = 600 * time.Second
+	gceTestTimeout   = 25 * time.Minute
+
+	// For any agents to receive backoff, there must be more than 32 agents in
+	// the deployment. The initial backoff received will be 33 minutes; each
+	// subsequent backoff will be one minute longer. Running 45 benchmarks for
+	// 45 minutes will ensure that several agents receive backoff responses and
+	// are able to wait for the backoff duration then send another request.
+	numBackoffBenchmarks = 45
+	backoffBenchDuration = 45 * time.Minute
+	backoffTestTimeout   = 60 * time.Minute
+)
 
 const startupTemplate = `
-{{- template "prologue" . }}
+{{ define "setup"}}
 
 npm_install() {
 	timeout 60 npm install "${@}"
@@ -92,14 +106,48 @@ retry npm_install node-pre-gyp &>/dev/ttyS2
 retry npm_install --nodedir="$NODEDIR" "$PROFILER" typescript gts &>/dev/ttyS2
 
 npm run compile
+{{- end }}
 
+{{ define "integration" -}}
+{{- template "prologue" . }}
+{{- template "setup" . }}
 # Run benchmark with agent
-GCLOUD_PROFILER_LOGLEVEL=5 GAE_SERVICE={{.Service}} node --trace-warnings build/src/busybench.js 600
+GCLOUD_PROFILER_LOGLEVEL=5 GAE_SERVICE={{.Service}} node --trace-warnings build/src/busybench.js {{.DurationSec}}
 
 # Indicate to test that script has finished running
 echo "{{.FinishString}}"
 
 {{ template "epilogue" . -}}
+{{end}}
+
+{{ define "integration_backoff" -}}
+{{- template "prologue" . }}
+{{- template "setup" . }}
+
+# Do not display commands being run to simplify logging output.
+set +x
+
+# Run benchmarks with agent.
+echo "Starting {{.NumBackoffBenchmarks}} benchmarks."
+for (( i = 0; i < {{.NumBackoffBenchmarks}}; i++ )); do
+	# A Node.js application will not exit while a CreateProfile request is
+	# inflight, so timeout is used to force the application to terminate.
+	(timeout {{.DurationSec}} sh -c \
+      'GCLOUD_PROFILER_LOGLEVEL=5 GAE_SERVICE={{.Service}} node --trace-warnings build/src/busybench.js {{.DurationSec}} 1'
+	) |& while read line; do echo "benchmark $i: ${line}"; done || [ "$?" -eq "124" ] &
+done
+echo "Successfully started {{.NumBackoffBenchmarks}} benchmarks."
+
+wait
+
+# Continue displaying commands being run.
+set -x
+
+echo "{{.FinishString}}"
+
+{{ template "epilogue" . -}}
+{{ end }}
+
 `
 
 type profileSummary struct {
@@ -110,33 +158,50 @@ type profileSummary struct {
 
 type nodeGCETestCase struct {
 	proftest.InstanceConfig
-	name         string
-	nodeVersion  string
+	name          string
+	nodeVersion   string
+	benchDuration time.Duration
+	timeout       time.Duration
+
+	backoffTest bool
+
+	// wantProfileTypes will not be used when the test is a backoff integration
+	// test.
 	wantProfiles []profileSummary
 }
 
 func (tc *nodeGCETestCase) initializeStartUpScript(template *template.Template) error {
+	params := struct {
+		Service              string
+		NodeVersion          string
+		Repo                 string
+		PR                   int
+		Branch               string
+		Commit               string
+		FinishString         string
+		ErrorString          string
+		DurationSec          int
+		NumBackoffBenchmarks int
+	}{
+		Service:      tc.name,
+		NodeVersion:  tc.nodeVersion,
+		Repo:         *repo,
+		PR:           *pr,
+		Branch:       *branch,
+		Commit:       *commit,
+		FinishString: benchFinishString,
+		ErrorString:  errorString,
+		DurationSec:  int(tc.benchDuration.Seconds()),
+	}
+
+	testTemplate := "integration"
+	if tc.backoffTest {
+		testTemplate = "integration_backoff"
+		params.NumBackoffBenchmarks = numBackoffBenchmarks
+	}
+
 	var buf bytes.Buffer
-	err := template.Execute(&buf,
-		struct {
-			Service      string
-			NodeVersion  string
-			Repo         string
-			PR           int
-			Branch       string
-			Commit       string
-			FinishString string
-			ErrorString  string
-		}{
-			Service:      tc.name,
-			NodeVersion:  tc.nodeVersion,
-			Repo:         *repo,
-			PR:           *pr,
-			Branch:       *branch,
-			Commit:       *commit,
-			FinishString: benchFinishString,
-			ErrorString:  errorString,
-		})
+	err := template.Lookup(testTemplate).Execute(&buf, params)
 	if err != nil {
 		return fmt.Errorf("failed to render startup script for %s: %v", tc.name, err)
 	}
@@ -196,9 +261,11 @@ func TestAgentIntegration(t *testing.T) {
 				Name:        fmt.Sprintf("profiler-test-node10-%s", runID),
 				MachineType: "n1-standard-1",
 			},
-			name:         fmt.Sprintf("profiler-test-node10-%s-gce", runID),
-			wantProfiles: wantProfiles,
-			nodeVersion:  "10",
+			name:          fmt.Sprintf("profiler-test-node10-%s-gce", runID),
+			wantProfiles:  wantProfiles,
+			nodeVersion:   "10",
+			timeout:       gceTestTimeout,
+			benchDuration: gceBenchDuration,
 		},
 		{
 			InstanceConfig: proftest.InstanceConfig{
@@ -207,9 +274,11 @@ func TestAgentIntegration(t *testing.T) {
 				Name:        fmt.Sprintf("profiler-test-node12-%s", runID),
 				MachineType: "n1-standard-1",
 			},
-			name:         fmt.Sprintf("profiler-test-node12-%s-gce", runID),
-			wantProfiles: wantProfiles,
-			nodeVersion:  "12",
+			name:          fmt.Sprintf("profiler-test-node12-%s-gce", runID),
+			wantProfiles:  wantProfiles,
+			nodeVersion:   "12",
+			timeout:       gceTestTimeout,
+			benchDuration: gceBenchDuration,
 		},
 		{
 			InstanceConfig: proftest.InstanceConfig{
@@ -218,10 +287,33 @@ func TestAgentIntegration(t *testing.T) {
 				Name:        fmt.Sprintf("profiler-test-node13-%s", runID),
 				MachineType: "n1-standard-1",
 			},
-			name:         fmt.Sprintf("profiler-test-node13-%s-gce", runID),
-			wantProfiles: wantProfiles,
-			nodeVersion:  "12",
+			name:          fmt.Sprintf("profiler-test-node13-%s-gce", runID),
+			wantProfiles:  wantProfiles,
+			nodeVersion:   "12",
+			timeout:       gceTestTimeout,
+			benchDuration: gceBenchDuration,
 		},
+	}
+
+	if *runBackoffTest {
+		testcases = append(testcases,
+			nodeGCETestCase{
+				InstanceConfig: proftest.InstanceConfig{
+					ProjectID: projectID,
+					Zone:      zone,
+					Name:      fmt.Sprintf("profiler-backoff-test-node12-%s", runID),
+
+					// Running many copies of the benchmark requires more
+					// memory than is available on an n1-standard-1. Use a
+					// machine type with more memory for backoff test.
+					MachineType: "n1-highmem-2",
+				},
+				name:          fmt.Sprintf("profiler-backoff-test-node12-%s", runID),
+				backoffTest:   true,
+				nodeVersion:   "12",
+				timeout:       backoffTestTimeout,
+				benchDuration: backoffBenchDuration,
+			})
 	}
 
 	// Allow test cases to run in parallel.
@@ -245,10 +337,18 @@ func TestAgentIntegration(t *testing.T) {
 				}
 			}()
 
-			timeoutCtx, cancel := context.WithTimeout(ctx, time.Minute*25)
+			timeoutCtx, cancel := context.WithTimeout(ctx, tc.timeout)
 			defer cancel()
-			if err := gceTr.PollForSerialOutput(timeoutCtx, &tc.InstanceConfig, benchFinishString, errorString); err != nil {
+			output, err := gceTr.PollForAndReturnSerialOutput(timeoutCtx, &tc.InstanceConfig, benchFinishString, errorString)
+			if err != nil {
 				t.Fatal(err)
+			}
+
+			if tc.backoffTest {
+				if err := proftest.CheckSerialOutputForBackoffs(output, numBackoffBenchmarks, "action throttled, backoff", "Attempting to create profile", "benchmark"); err != nil {
+					t.Errorf("failed to check serial output for backoffs: %v", err)
+				}
+				return
 			}
 
 			timeNow := time.Now()
