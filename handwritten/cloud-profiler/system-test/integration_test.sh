@@ -32,11 +32,12 @@ cd "system-test"
 # dependencies breaking this test.
 go version
 go mod init e2e
-retry go test -c -tags=integration -timeout=30m -run=TestAgentIntegration .
+retry go get cloud.google.com/go/profiler/proftest@HEAD
+retry go test -c -tags=integration .
 
 if [ "$KOKORO_GITHUB_PULL_REQUEST_NUMBER" = "" ]; then
   ./e2e.test -commit="$COMMIT" -branch="$BRANCH" -repo="$REPO"
 else
-  ./e2e.test -commit="$COMMIT" -pr="$KOKORO_GITHUB_PULL_REQUEST_NUMBER"
+  ./e2e.test -commit="$COMMIT" -pr="$KOKORO_GITHUB_PULL_REQUEST_NUMBER" -run_backoff_test=true
 fi
 
