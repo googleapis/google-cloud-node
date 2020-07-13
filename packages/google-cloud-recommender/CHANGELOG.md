@@ -1,5 +1,12 @@
 # Changelog
 
+### [3.1.1](https://www.github.com/googleapis/nodejs-recommender/compare/v3.1.0...v3.1.1) (2020-07-12)
+
+
+### Bug Fixes
+
+* update node issue template ([#86](https://www.github.com/googleapis/nodejs-recommender/issues/86)) ([93654e9](https://www.github.com/googleapis/nodejs-recommender/commit/93654e9fe772bc7a9adbcd8d69ddd731be26810d))
+
 ## [3.1.0](https://www.github.com/googleapis/nodejs-recommender/compare/v3.0.0...v3.1.0) (2020-06-12)
 
 
