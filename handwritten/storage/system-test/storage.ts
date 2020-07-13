@@ -23,7 +23,6 @@ const normalizeNewline = require('normalize-newline');
 import pLimit = require('p-limit');
 import {promisify} from 'util';
 import * as path from 'path';
-import * as through from 'through2';
 import * as tmp from 'tmp';
 import * as uuid from 'uuid';
 import {util, ApiError, Metadata} from '@google-cloud/common';
@@ -86,6 +85,7 @@ import {
   DeleteNotificationCallback,
 } from '../src';
 import * as nock from 'nock';
+import {Transform} from 'stream';
 
 interface ErrorCallbackFunction {
   (err: Error | null): void;
@@ -2357,24 +2357,25 @@ describe('storage', () => {
             const ws = file.createWriteStream();
             let sizeStreamed = 0;
 
-            fs.createReadStream(FILES.big.path)
-              .pipe(
-                through(function (chunk, enc, next) {
-                  sizeStreamed += chunk.length;
+            const streamTransform = new Transform({
+              transform(chunk, enc, next) {
+                sizeStreamed += chunk.length;
 
-                  if (opts.interrupt && sizeStreamed >= fileSize / 2) {
-                    // stop sending data half way through.
-                    this.push(chunk);
-                    this.destroy();
-                    process.nextTick(() => {
-                      ws.destroy(new Error('Interrupted.'));
-                    });
-                  } else {
-                    this.push(chunk);
-                    next();
-                  }
-                })
-              )
+                if (opts.interrupt && sizeStreamed >= fileSize / 2) {
+                  // stop sending data half way through.
+                  this.push(chunk);
+                  this.destroy();
+                  process.nextTick(() => {
+                    ws.destroy(new Error('Interrupted.'));
+                  });
+                } else {
+                  this.push(chunk);
+                  next();
+                }
+              },
+            });
+            fs.createReadStream(FILES.big.path)
+              .pipe(streamTransform)
               .pipe(ws)
               .on('error', callback)
               .on('finish', callback);

@@ -37,9 +37,8 @@ import * as os from 'os';
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const pumpify = require('pumpify');
 import * as resumableUpload from 'gcs-resumable-upload';
-import {Duplex, Writable, Readable} from 'stream';
+import {Duplex, Writable, Readable, PassThrough} from 'stream';
 import * as streamEvents from 'stream-events';
-import * as through from 'through2';
 import * as xdgBasedir from 'xdg-basedir';
 import * as zlib from 'zlib';
 import * as http from 'http';
@@ -1178,9 +1177,7 @@ class File extends ServiceObject<File> {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     let validateStream: any; // Created later, if necessary.
 
-    // TODO: remove `through2` dependency in favor of native PassThrough
-    // once Node 8 support is discontinued
-    const throughStream = streamEvents(through()) as Duplex;
+    const throughStream = streamEvents(new PassThrough());
 
     let isServedCompressed = true;
     let crc32c = true;
@@ -1740,7 +1737,7 @@ class File extends ServiceObject<File> {
 
     const stream = streamEvents(
       pumpify([
-        gzip ? zlib.createGzip() : through(),
+        gzip ? zlib.createGzip() : new PassThrough(),
         validateStream,
         fileWriteStream,
       ])
