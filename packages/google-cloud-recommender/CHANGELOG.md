@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.2.0](https://www.github.com/googleapis/nodejs-recommender/compare/v3.1.1...v3.2.0) (2020-07-13)
+
+
+### Features
+
+* adds methods for interacting with insights ([#96](https://www.github.com/googleapis/nodejs-recommender/issues/96)) ([0004d75](https://www.github.com/googleapis/nodejs-recommender/commit/0004d75f5681e0231473ab2abd167c1c1eeb3b8c))
+
 ### [3.1.1](https://www.github.com/googleapis/nodejs-recommender/compare/v3.1.0...v3.1.1) (2020-07-12)
 
 
