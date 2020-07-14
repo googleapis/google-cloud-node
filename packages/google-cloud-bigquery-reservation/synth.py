@@ -21,17 +21,13 @@ import logging
 logging.basicConfig(level=logging.DEBUG)
 
 # run the gapic generator
-gapic = gcp.GAPICMicrogenerator()
+gapic = gcp.GAPICBazel()
 versions = ['v1']
+name = 'bigquery-reservation'
 for version in versions:
-    library = gapic.typescript_library(
-        'bigquery-reservation',
-        generator_args={
-        'package-name': '@google-cloud/bigquery-reservation'
-        },
-        proto_path='/google/cloud/bigquery/reservation/v1',
-        version=version)
-s.copy(library, excludes=[])
+    library = gapic.node_library(
+        name, version, proto_path='google/cloud/bigquery/reservation/v1')
+s.copy(library, excludes=['README.md', 'package.json'])
 
 # Copy common templates
 common_templates = gcp.CommonTemplates()

@@ -1,0 +1,37 @@
+{
+  "sources": [
+    {
+      "git": {
+        "name": ".",
+        "remote": "git@github.com:googleapis/nodejs-bigquery-reservation.git",
+        "sha": "606cd4e13daba5128d1ee804c54830341ba2d4e8"
+      }
+    },
+    {
+      "git": {
+        "name": "googleapis",
+        "remote": "https://github.com/googleapis/googleapis.git",
+        "sha": "4f4aa3a03e470f1390758b9d89eb1aa88837a5be",
+        "internalRef": "320300472"
+      }
+    },
+    {
+      "git": {
+        "name": "synthtool",
+        "remote": "https://github.com/googleapis/synthtool.git",
+        "sha": "799d8e6522c1ef7cb55a70d9ea0b15e045c3d00b"
+      }
+    }
+  ],
+  "destinations": [
+    {
+      "client": {
+        "source": "googleapis",
+        "apiName": "bigquery-reservation",
+        "apiVersion": "v1",
+        "language": "nodejs",
+        "generator": "bazel"
+      }
+    }
+  ]
+}

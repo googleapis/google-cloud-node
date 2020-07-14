@@ -1,0 +1,11 @@
+{
+  "recurse": true,
+  "skip": [
+    "img.shields.io",
+    "https://googleapis.dev/nodejs/bigqueryreservation/latest",
+    "https://github.com/googleapis/nodejs-bigquery-reservation/tree/master/samples",
+    "https://github.com/googleapis/nodejs-bigquery-reservation/blob/master/samples/quickstart.js"
+  ],
+  "silent": true,
+  "concurrency": 10
+}
