@@ -4,7 +4,7 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/nodejs-dlp.git",
-        "sha": "0559d195e0cf2831f9b94ab4097aa76ba595b2f5"
+        "sha": "1a0bda28ddf9126b57bd4a6f6ea83ddf32e26094"
       }
     },
     {
