@@ -28,20 +28,6 @@
     "support_documentation": "https://cloud.google.com/automl/docs/"
   },
   {
-    "name": "bigquery",
-    "name_pretty": "BigQuery",
-    "product_documentation": "https://cloud.google.com/bigquery",
-    "client_documentation": "https://googleapis.dev/nodejs/bigquery/latest",
-    "issue_tracker": "https://issuetracker.google.com/savedsearches/559654",
-    "release_level": "ga",
-    "language": "nodejs",
-    "repo": "googleapis/nodejs-bigquery",
-    "distribution_name": "@google-cloud/bigquery",
-    "api_id": "bigquery.googleapis.com",
-    "requires_billing": false,
-    "support_documentation": "https://cloud.google.com/bigquery/docs/getting-support"
-  },
-  {
     "name": "bigtable",
     "name_pretty": "Bigtable",
     "product_documentation": "https://cloud.google.com/bigtable",
@@ -263,6 +249,20 @@
     "support_documentation": "https://cloud.google.com/game-servers/docs/getting-support"
   },
   {
+    "name": "bigquery",
+    "name_pretty": "Google BigQuery",
+    "product_documentation": "https://cloud.google.com/bigquery",
+    "client_documentation": "https://googleapis.dev/nodejs/bigquery/latest",
+    "issue_tracker": "https://issuetracker.google.com/savedsearches/559654",
+    "release_level": "ga",
+    "language": "nodejs",
+    "repo": "googleapis/nodejs-bigquery",
+    "distribution_name": "@google-cloud/bigquery",
+    "api_id": "bigquery.googleapis.com",
+    "requires_billing": false,
+    "support_documentation": "https://cloud.google.com/bigquery/docs/getting-support"
+  },
+  {
     "name": "bigqueryconnection",
     "name_pretty": "Google BigQuery Connection",
     "product_documentation": "https://cloud.google.com/bigquery/docs/reference/bigqueryconnection",
@@ -289,6 +289,20 @@
     "api_id": "bigquerydatatransfer.googleapis.com",
     "requires_billing": true,
     "support_documentation": "https://cloud.google.com/bigquery/transfer/"
+  },
+  {
+    "name": "bigqueryreservation",
+    "name_pretty": "Google BigQuery Reservation",
+    "product_documentation": "https://cloud.google.com/bigquery/docs/reference/reservations",
+    "client_documentation": "https://googleapis.dev/nodejs/bigqueryreservation/latest",
+    "issue_tracker": "https://b.corp.google.com/savedsearches/559654",
+    "release_level": "ga",
+    "language": "nodejs",
+    "repo": "googleapis/nodejs-bigquery-reservation",
+    "distribution_name": "@google-cloud/bigquery-reservation",
+    "api_id": "bigqueryreservation.googleapis.com",
+    "requires_billing": true,
+    "support_documentation": "https://cloud.google.com/bigquery/docs/getting-support"
   },
   {
     "name": "bigquerystorage",
