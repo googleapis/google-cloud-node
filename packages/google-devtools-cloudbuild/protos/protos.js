@@ -1503,7 +1503,7 @@
                         RepoSource.decode = function decode(reader, length) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.cloudbuild.v1.RepoSource(), key;
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.cloudbuild.v1.RepoSource(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
@@ -1529,12 +1529,26 @@
                                     message.invertRegex = reader.bool();
                                     break;
                                 case 9:
-                                    reader.skip().pos++;
                                     if (message.substitutions === $util.emptyObject)
                                         message.substitutions = {};
-                                    key = reader.string();
-                                    reader.pos++;
-                                    message.substitutions[key] = reader.string();
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = "";
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = reader.string();
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.substitutions[key] = value;
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -3961,7 +3975,7 @@
                         Build.decode = function decode(reader, length) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.cloudbuild.v1.Build(), key;
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.cloudbuild.v1.Build(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
@@ -4027,12 +4041,26 @@
                                     message.logUrl = reader.string();
                                     break;
                                 case 29:
-                                    reader.skip().pos++;
                                     if (message.substitutions === $util.emptyObject)
                                         message.substitutions = {};
-                                    key = reader.string();
-                                    reader.pos++;
-                                    message.substitutions[key] = reader.string();
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = "";
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = reader.string();
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.substitutions[key] = value;
                                     break;
                                 case 31:
                                     if (!(message.tags && message.tags.length))
@@ -4045,12 +4073,26 @@
                                     message.secrets.push($root.google.devtools.cloudbuild.v1.Secret.decode(reader, reader.uint32()));
                                     break;
                                 case 33:
-                                    reader.skip().pos++;
                                     if (message.timing === $util.emptyObject)
                                         message.timing = {};
-                                    key = reader.string();
-                                    reader.pos++;
-                                    message.timing[key] = $root.google.devtools.cloudbuild.v1.TimeSpan.decode(reader, reader.uint32());
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = null;
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = $root.google.devtools.cloudbuild.v1.TimeSpan.decode(reader, reader.uint32());
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.timing[key] = value;
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -5552,7 +5594,7 @@
                         SourceProvenance.decode = function decode(reader, length) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.cloudbuild.v1.SourceProvenance(), key;
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.cloudbuild.v1.SourceProvenance(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
@@ -5563,12 +5605,26 @@
                                     message.resolvedRepoSource = $root.google.devtools.cloudbuild.v1.RepoSource.decode(reader, reader.uint32());
                                     break;
                                 case 4:
-                                    reader.skip().pos++;
                                     if (message.fileHashes === $util.emptyObject)
                                         message.fileHashes = {};
-                                    key = reader.string();
-                                    reader.pos++;
-                                    message.fileHashes[key] = $root.google.devtools.cloudbuild.v1.FileHashes.decode(reader, reader.uint32());
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = null;
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = $root.google.devtools.cloudbuild.v1.FileHashes.decode(reader, reader.uint32());
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.fileHashes[key] = value;
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -6271,7 +6327,7 @@
                         Secret.decode = function decode(reader, length) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.cloudbuild.v1.Secret(), key;
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.cloudbuild.v1.Secret(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
@@ -6279,12 +6335,26 @@
                                     message.kmsKeyName = reader.string();
                                     break;
                                 case 3:
-                                    reader.skip().pos++;
                                     if (message.secretEnv === $util.emptyObject)
                                         message.secretEnv = {};
-                                    key = reader.string();
-                                    reader.pos++;
-                                    message.secretEnv[key] = reader.bytes();
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = [];
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = reader.bytes();
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.secretEnv[key] = value;
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -7766,7 +7836,7 @@
                         BuildTrigger.decode = function decode(reader, length) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.cloudbuild.v1.BuildTrigger(), key;
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.cloudbuild.v1.BuildTrigger(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
@@ -7803,12 +7873,26 @@
                                     message.disabled = reader.bool();
                                     break;
                                 case 11:
-                                    reader.skip().pos++;
                                     if (message.substitutions === $util.emptyObject)
                                         message.substitutions = {};
-                                    key = reader.string();
-                                    reader.pos++;
-                                    message.substitutions[key] = reader.string();
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = "";
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = reader.string();
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.substitutions[key] = value;
                                     break;
                                 case 15:
                                     if (!(message.ignoredFiles && message.ignoredFiles.length))
