@@ -1369,7 +1369,7 @@
                     NodeConfig.decode = function decode(reader, length) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.container.v1.NodeConfig(), key;
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.container.v1.NodeConfig(), key, value;
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             switch (tag >>> 3) {
@@ -1388,23 +1388,51 @@
                                 message.serviceAccount = reader.string();
                                 break;
                             case 4:
-                                reader.skip().pos++;
                                 if (message.metadata === $util.emptyObject)
                                     message.metadata = {};
-                                key = reader.string();
-                                reader.pos++;
-                                message.metadata[key] = reader.string();
+                                var end2 = reader.uint32() + reader.pos;
+                                key = "";
+                                value = "";
+                                while (reader.pos < end2) {
+                                    var tag2 = reader.uint32();
+                                    switch (tag2 >>> 3) {
+                                    case 1:
+                                        key = reader.string();
+                                        break;
+                                    case 2:
+                                        value = reader.string();
+                                        break;
+                                    default:
+                                        reader.skipType(tag2 & 7);
+                                        break;
+                                    }
+                                }
+                                message.metadata[key] = value;
                                 break;
                             case 5:
                                 message.imageType = reader.string();
                                 break;
                             case 6:
-                                reader.skip().pos++;
                                 if (message.labels === $util.emptyObject)
                                     message.labels = {};
-                                key = reader.string();
-                                reader.pos++;
-                                message.labels[key] = reader.string();
+                                var end2 = reader.uint32() + reader.pos;
+                                key = "";
+                                value = "";
+                                while (reader.pos < end2) {
+                                    var tag2 = reader.uint32();
+                                    switch (tag2 >>> 3) {
+                                    case 1:
+                                        key = reader.string();
+                                        break;
+                                    case 2:
+                                        value = reader.string();
+                                        break;
+                                    default:
+                                        reader.skipType(tag2 & 7);
+                                        break;
+                                    }
+                                }
+                                message.labels[key] = value;
                                 break;
                             case 7:
                                 message.localSsdCount = reader.int32();
@@ -6527,7 +6555,7 @@
                     Cluster.decode = function decode(reader, length) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.container.v1.Cluster(), key;
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.container.v1.Cluster(), key, value;
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             switch (tag >>> 3) {
@@ -6578,12 +6606,26 @@
                                 message.enableKubernetesAlpha = reader.bool();
                                 break;
                             case 15:
-                                reader.skip().pos++;
                                 if (message.resourceLabels === $util.emptyObject)
                                     message.resourceLabels = {};
-                                key = reader.string();
-                                reader.pos++;
-                                message.resourceLabels[key] = reader.string();
+                                var end2 = reader.uint32() + reader.pos;
+                                key = "";
+                                value = "";
+                                while (reader.pos < end2) {
+                                    var tag2 = reader.uint32();
+                                    switch (tag2 >>> 3) {
+                                    case 1:
+                                        key = reader.string();
+                                        break;
+                                    case 2:
+                                        value = reader.string();
+                                        break;
+                                    default:
+                                        reader.skipType(tag2 & 7);
+                                        break;
+                                    }
+                                }
+                                message.resourceLabels[key] = value;
                                 break;
                             case 16:
                                 message.labelFingerprint = reader.string();
@@ -16526,7 +16568,7 @@
                     MaintenanceWindow.decode = function decode(reader, length) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.container.v1.MaintenanceWindow(), key;
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.container.v1.MaintenanceWindow(), key, value;
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             switch (tag >>> 3) {
@@ -16537,12 +16579,26 @@
                                 message.recurringWindow = $root.google.container.v1.RecurringTimeWindow.decode(reader, reader.uint32());
                                 break;
                             case 4:
-                                reader.skip().pos++;
                                 if (message.maintenanceExclusions === $util.emptyObject)
                                     message.maintenanceExclusions = {};
-                                key = reader.string();
-                                reader.pos++;
-                                message.maintenanceExclusions[key] = $root.google.container.v1.TimeWindow.decode(reader, reader.uint32());
+                                var end2 = reader.uint32() + reader.pos;
+                                key = "";
+                                value = null;
+                                while (reader.pos < end2) {
+                                    var tag2 = reader.uint32();
+                                    switch (tag2 >>> 3) {
+                                    case 1:
+                                        key = reader.string();
+                                        break;
+                                    case 2:
+                                        value = $root.google.container.v1.TimeWindow.decode(reader, reader.uint32());
+                                        break;
+                                    default:
+                                        reader.skipType(tag2 & 7);
+                                        break;
+                                    }
+                                }
+                                message.maintenanceExclusions[key] = value;
                                 break;
                             default:
                                 reader.skipType(tag & 7);
@@ -19607,7 +19663,7 @@
                     SetLabelsRequest.decode = function decode(reader, length) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.container.v1.SetLabelsRequest(), key;
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.container.v1.SetLabelsRequest(), key, value;
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             switch (tag >>> 3) {
@@ -19621,12 +19677,26 @@
                                 message.clusterId = reader.string();
                                 break;
                             case 4:
-                                reader.skip().pos++;
                                 if (message.resourceLabels === $util.emptyObject)
                                     message.resourceLabels = {};
-                                key = reader.string();
-                                reader.pos++;
-                                message.resourceLabels[key] = reader.string();
+                                var end2 = reader.uint32() + reader.pos;
+                                key = "";
+                                value = "";
+                                while (reader.pos < end2) {
+                                    var tag2 = reader.uint32();
+                                    switch (tag2 >>> 3) {
+                                    case 1:
+                                        key = reader.string();
+                                        break;
+                                    case 2:
+                                        value = reader.string();
+                                        break;
+                                    default:
+                                        reader.skipType(tag2 & 7);
+                                        break;
+                                    }
+                                }
+                                message.resourceLabels[key] = value;
                                 break;
                             case 5:
                                 message.labelFingerprint = reader.string();
