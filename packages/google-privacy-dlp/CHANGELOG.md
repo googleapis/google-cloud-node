@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/PACKAGE NAME?activeTab=versions
 
+### [3.0.2](https://www.github.com/googleapis/nodejs-dlp/compare/v3.0.1...v3.0.2) (2020-07-15)
+
+
+### Bug Fixes
+
+* **samples:** include locations/global in parent field ([#488](https://www.github.com/googleapis/nodejs-dlp/issues/488)) ([a5ec2f3](https://www.github.com/googleapis/nodejs-dlp/commit/a5ec2f3baafbc770336596bdfe4737b61aba947e))
+
 ### [3.0.1](https://www.github.com/googleapis/nodejs-dlp/compare/v3.0.0...v3.0.1) (2020-06-15)
 
 
