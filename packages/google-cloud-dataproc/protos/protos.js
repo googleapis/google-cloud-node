@@ -2956,7 +2956,7 @@
                         Cluster.decode = function decode(reader, length) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataproc.v1.Cluster(), key;
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataproc.v1.Cluster(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
@@ -2970,12 +2970,26 @@
                                     message.config = $root.google.cloud.dataproc.v1.ClusterConfig.decode(reader, reader.uint32());
                                     break;
                                 case 8:
-                                    reader.skip().pos++;
                                     if (message.labels === $util.emptyObject)
                                         message.labels = {};
-                                    key = reader.string();
-                                    reader.pos++;
-                                    message.labels[key] = reader.string();
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = "";
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = reader.string();
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.labels[key] = value;
                                     break;
                                 case 4:
                                     message.status = $root.google.cloud.dataproc.v1.ClusterStatus.decode(reader, reader.uint32());
@@ -4219,7 +4233,7 @@
                         GceClusterConfig.decode = function decode(reader, length) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataproc.v1.GceClusterConfig(), key;
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataproc.v1.GceClusterConfig(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
@@ -4249,12 +4263,26 @@
                                     message.tags.push(reader.string());
                                     break;
                                 case 5:
-                                    reader.skip().pos++;
                                     if (message.metadata === $util.emptyObject)
                                         message.metadata = {};
-                                    key = reader.string();
-                                    reader.pos++;
-                                    message.metadata[key] = reader.string();
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = "";
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = reader.string();
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.metadata[key] = value;
                                     break;
                                 case 11:
                                     message.reservationAffinity = $root.google.cloud.dataproc.v1.ReservationAffinity.decode(reader, reader.uint32());
@@ -6895,7 +6923,7 @@
                         SoftwareConfig.decode = function decode(reader, length) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataproc.v1.SoftwareConfig(), key;
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataproc.v1.SoftwareConfig(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
@@ -6903,12 +6931,26 @@
                                     message.imageVersion = reader.string();
                                     break;
                                 case 2:
-                                    reader.skip().pos++;
                                     if (message.properties === $util.emptyObject)
                                         message.properties = {};
-                                    key = reader.string();
-                                    reader.pos++;
-                                    message.properties[key] = reader.string();
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = "";
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = reader.string();
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.properties[key] = value;
                                     break;
                                 case 3:
                                     if (!(message.optionalComponents && message.optionalComponents.length))
@@ -7500,25 +7542,53 @@
                         ClusterMetrics.decode = function decode(reader, length) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataproc.v1.ClusterMetrics(), key;
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataproc.v1.ClusterMetrics(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
                                 case 1:
-                                    reader.skip().pos++;
                                     if (message.hdfsMetrics === $util.emptyObject)
                                         message.hdfsMetrics = {};
-                                    key = reader.string();
-                                    reader.pos++;
-                                    message.hdfsMetrics[key] = reader.int64();
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = 0;
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = reader.int64();
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.hdfsMetrics[key] = value;
                                     break;
                                 case 2:
-                                    reader.skip().pos++;
                                     if (message.yarnMetrics === $util.emptyObject)
                                         message.yarnMetrics = {};
-                                    key = reader.string();
-                                    reader.pos++;
-                                    message.yarnMetrics[key] = reader.int64();
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = 0;
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = reader.int64();
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.yarnMetrics[key] = value;
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -10366,17 +10436,31 @@
                         LoggingConfig.decode = function decode(reader, length) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataproc.v1.LoggingConfig(), key;
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataproc.v1.LoggingConfig(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
                                 case 2:
-                                    reader.skip().pos++;
                                     if (message.driverLogLevels === $util.emptyObject)
                                         message.driverLogLevels = {};
-                                    key = reader.string();
-                                    reader.pos++;
-                                    message.driverLogLevels[key] = reader.int32();
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = 0;
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = reader.int32();
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.driverLogLevels[key] = value;
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -10750,7 +10834,7 @@
                         HadoopJob.decode = function decode(reader, length) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataproc.v1.HadoopJob(), key;
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataproc.v1.HadoopJob(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
@@ -10781,12 +10865,26 @@
                                     message.archiveUris.push(reader.string());
                                     break;
                                 case 7:
-                                    reader.skip().pos++;
                                     if (message.properties === $util.emptyObject)
                                         message.properties = {};
-                                    key = reader.string();
-                                    reader.pos++;
-                                    message.properties[key] = reader.string();
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = "";
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = reader.string();
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.properties[key] = value;
                                     break;
                                 case 8:
                                     message.loggingConfig = $root.google.cloud.dataproc.v1.LoggingConfig.decode(reader, reader.uint32());
@@ -11209,7 +11307,7 @@
                         SparkJob.decode = function decode(reader, length) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataproc.v1.SparkJob(), key;
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataproc.v1.SparkJob(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
@@ -11240,12 +11338,26 @@
                                     message.archiveUris.push(reader.string());
                                     break;
                                 case 7:
-                                    reader.skip().pos++;
                                     if (message.properties === $util.emptyObject)
                                         message.properties = {};
-                                    key = reader.string();
-                                    reader.pos++;
-                                    message.properties[key] = reader.string();
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = "";
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = reader.string();
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.properties[key] = value;
                                     break;
                                 case 8:
                                     message.loggingConfig = $root.google.cloud.dataproc.v1.LoggingConfig.decode(reader, reader.uint32());
@@ -11656,7 +11768,7 @@
                         PySparkJob.decode = function decode(reader, length) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataproc.v1.PySparkJob(), key;
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataproc.v1.PySparkJob(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
@@ -11689,12 +11801,26 @@
                                     message.archiveUris.push(reader.string());
                                     break;
                                 case 7:
-                                    reader.skip().pos++;
                                     if (message.properties === $util.emptyObject)
                                         message.properties = {};
-                                    key = reader.string();
-                                    reader.pos++;
-                                    message.properties[key] = reader.string();
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = "";
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = reader.string();
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.properties[key] = value;
                                     break;
                                 case 8:
                                     message.loggingConfig = $root.google.cloud.dataproc.v1.LoggingConfig.decode(reader, reader.uint32());
@@ -12296,7 +12422,7 @@
                         HiveJob.decode = function decode(reader, length) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataproc.v1.HiveJob(), key;
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataproc.v1.HiveJob(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
@@ -12310,20 +12436,48 @@
                                     message.continueOnFailure = reader.bool();
                                     break;
                                 case 4:
-                                    reader.skip().pos++;
                                     if (message.scriptVariables === $util.emptyObject)
                                         message.scriptVariables = {};
-                                    key = reader.string();
-                                    reader.pos++;
-                                    message.scriptVariables[key] = reader.string();
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = "";
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = reader.string();
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.scriptVariables[key] = value;
                                     break;
                                 case 5:
-                                    reader.skip().pos++;
                                     if (message.properties === $util.emptyObject)
                                         message.properties = {};
-                                    key = reader.string();
-                                    reader.pos++;
-                                    message.properties[key] = reader.string();
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = "";
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = reader.string();
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.properties[key] = value;
                                     break;
                                 case 6:
                                     if (!(message.jarFileUris && message.jarFileUris.length))
@@ -12684,7 +12838,7 @@
                         SparkSqlJob.decode = function decode(reader, length) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataproc.v1.SparkSqlJob(), key;
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataproc.v1.SparkSqlJob(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
@@ -12695,20 +12849,48 @@
                                     message.queryList = $root.google.cloud.dataproc.v1.QueryList.decode(reader, reader.uint32());
                                     break;
                                 case 3:
-                                    reader.skip().pos++;
                                     if (message.scriptVariables === $util.emptyObject)
                                         message.scriptVariables = {};
-                                    key = reader.string();
-                                    reader.pos++;
-                                    message.scriptVariables[key] = reader.string();
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = "";
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = reader.string();
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.scriptVariables[key] = value;
                                     break;
                                 case 4:
-                                    reader.skip().pos++;
                                     if (message.properties === $util.emptyObject)
                                         message.properties = {};
-                                    key = reader.string();
-                                    reader.pos++;
-                                    message.properties[key] = reader.string();
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = "";
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = reader.string();
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.properties[key] = value;
                                     break;
                                 case 56:
                                     if (!(message.jarFileUris && message.jarFileUris.length))
@@ -13088,7 +13270,7 @@
                         PigJob.decode = function decode(reader, length) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataproc.v1.PigJob(), key;
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataproc.v1.PigJob(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
@@ -13102,20 +13284,48 @@
                                     message.continueOnFailure = reader.bool();
                                     break;
                                 case 4:
-                                    reader.skip().pos++;
                                     if (message.scriptVariables === $util.emptyObject)
                                         message.scriptVariables = {};
-                                    key = reader.string();
-                                    reader.pos++;
-                                    message.scriptVariables[key] = reader.string();
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = "";
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = reader.string();
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.scriptVariables[key] = value;
                                     break;
                                 case 5:
-                                    reader.skip().pos++;
                                     if (message.properties === $util.emptyObject)
                                         message.properties = {};
-                                    key = reader.string();
-                                    reader.pos++;
-                                    message.properties[key] = reader.string();
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = "";
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = reader.string();
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.properties[key] = value;
                                     break;
                                 case 6:
                                     if (!(message.jarFileUris && message.jarFileUris.length))
@@ -13481,7 +13691,7 @@
                         SparkRJob.decode = function decode(reader, length) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataproc.v1.SparkRJob(), key;
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataproc.v1.SparkRJob(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
@@ -13504,12 +13714,26 @@
                                     message.archiveUris.push(reader.string());
                                     break;
                                 case 5:
-                                    reader.skip().pos++;
                                     if (message.properties === $util.emptyObject)
                                         message.properties = {};
-                                    key = reader.string();
-                                    reader.pos++;
-                                    message.properties[key] = reader.string();
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = "";
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = reader.string();
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.properties[key] = value;
                                     break;
                                 case 6:
                                     message.loggingConfig = $root.google.cloud.dataproc.v1.LoggingConfig.decode(reader, reader.uint32());
@@ -13877,7 +14101,7 @@
                         PrestoJob.decode = function decode(reader, length) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataproc.v1.PrestoJob(), key;
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataproc.v1.PrestoJob(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
@@ -13899,12 +14123,26 @@
                                     message.clientTags.push(reader.string());
                                     break;
                                 case 6:
-                                    reader.skip().pos++;
                                     if (message.properties === $util.emptyObject)
                                         message.properties = {};
-                                    key = reader.string();
-                                    reader.pos++;
-                                    message.properties[key] = reader.string();
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = "";
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = reader.string();
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.properties[key] = value;
                                     break;
                                 case 7:
                                     message.loggingConfig = $root.google.cloud.dataproc.v1.LoggingConfig.decode(reader, reader.uint32());
@@ -15539,7 +15777,7 @@
                         Job.decode = function decode(reader, length) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataproc.v1.Job(), key;
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataproc.v1.Job(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
@@ -15593,12 +15831,26 @@
                                     message.driverControlFilesUri = reader.string();
                                     break;
                                 case 18:
-                                    reader.skip().pos++;
                                     if (message.labels === $util.emptyObject)
                                         message.labels = {};
-                                    key = reader.string();
-                                    reader.pos++;
-                                    message.labels[key] = reader.string();
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = "";
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = reader.string();
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.labels[key] = value;
                                     break;
                                 case 20:
                                     message.scheduling = $root.google.cloud.dataproc.v1.JobScheduling.decode(reader, reader.uint32());
@@ -18760,7 +19012,7 @@
                         ClusterOperationMetadata.decode = function decode(reader, length) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataproc.v1.ClusterOperationMetadata(), key;
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataproc.v1.ClusterOperationMetadata(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
@@ -18785,12 +19037,26 @@
                                     message.description = reader.string();
                                     break;
                                 case 13:
-                                    reader.skip().pos++;
                                     if (message.labels === $util.emptyObject)
                                         message.labels = {};
-                                    key = reader.string();
-                                    reader.pos++;
-                                    message.labels[key] = reader.string();
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = "";
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = reader.string();
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.labels[key] = value;
                                     break;
                                 case 14:
                                     if (!(message.warnings && message.warnings.length))
@@ -19445,7 +19711,7 @@
                         WorkflowTemplate.decode = function decode(reader, length) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataproc.v1.WorkflowTemplate(), key;
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataproc.v1.WorkflowTemplate(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
@@ -19465,12 +19731,26 @@
                                     message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
                                     break;
                                 case 6:
-                                    reader.skip().pos++;
                                     if (message.labels === $util.emptyObject)
                                         message.labels = {};
-                                    key = reader.string();
-                                    reader.pos++;
-                                    message.labels[key] = reader.string();
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = "";
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = reader.string();
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.labels[key] = value;
                                     break;
                                 case 7:
                                     message.placement = $root.google.cloud.dataproc.v1.WorkflowTemplatePlacement.decode(reader, reader.uint32());
@@ -20065,7 +20345,7 @@
                         ManagedCluster.decode = function decode(reader, length) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataproc.v1.ManagedCluster(), key;
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataproc.v1.ManagedCluster(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
@@ -20076,12 +20356,26 @@
                                     message.config = $root.google.cloud.dataproc.v1.ClusterConfig.decode(reader, reader.uint32());
                                     break;
                                 case 4:
-                                    reader.skip().pos++;
                                     if (message.labels === $util.emptyObject)
                                         message.labels = {};
-                                    key = reader.string();
-                                    reader.pos++;
-                                    message.labels[key] = reader.string();
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = "";
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = reader.string();
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.labels[key] = value;
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -20313,7 +20607,7 @@
                         ClusterSelector.decode = function decode(reader, length) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataproc.v1.ClusterSelector(), key;
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataproc.v1.ClusterSelector(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
@@ -20321,12 +20615,26 @@
                                     message.zone = reader.string();
                                     break;
                                 case 2:
-                                    reader.skip().pos++;
                                     if (message.clusterLabels === $util.emptyObject)
                                         message.clusterLabels = {};
-                                    key = reader.string();
-                                    reader.pos++;
-                                    message.clusterLabels[key] = reader.string();
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = "";
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = reader.string();
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.clusterLabels[key] = value;
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -20670,7 +20978,7 @@
                         OrderedJob.decode = function decode(reader, length) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataproc.v1.OrderedJob(), key;
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataproc.v1.OrderedJob(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
@@ -20702,12 +21010,26 @@
                                     message.prestoJob = $root.google.cloud.dataproc.v1.PrestoJob.decode(reader, reader.uint32());
                                     break;
                                 case 8:
-                                    reader.skip().pos++;
                                     if (message.labels === $util.emptyObject)
                                         message.labels = {};
-                                    key = reader.string();
-                                    reader.pos++;
-                                    message.labels[key] = reader.string();
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = "";
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = reader.string();
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.labels[key] = value;
                                     break;
                                 case 9:
                                     message.scheduling = $root.google.cloud.dataproc.v1.JobScheduling.decode(reader, reader.uint32());
@@ -22153,7 +22475,7 @@
                         WorkflowMetadata.decode = function decode(reader, length) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataproc.v1.WorkflowMetadata(), key;
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataproc.v1.WorkflowMetadata(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
@@ -22179,12 +22501,26 @@
                                     message.clusterName = reader.string();
                                     break;
                                 case 8:
-                                    reader.skip().pos++;
                                     if (message.parameters === $util.emptyObject)
                                         message.parameters = {};
-                                    key = reader.string();
-                                    reader.pos++;
-                                    message.parameters[key] = reader.string();
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = "";
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = reader.string();
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.parameters[key] = value;
                                     break;
                                 case 9:
                                     message.startTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
@@ -23785,7 +24121,7 @@
                         InstantiateWorkflowTemplateRequest.decode = function decode(reader, length) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataproc.v1.InstantiateWorkflowTemplateRequest(), key;
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataproc.v1.InstantiateWorkflowTemplateRequest(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
@@ -23799,12 +24135,26 @@
                                     message.requestId = reader.string();
                                     break;
                                 case 6:
-                                    reader.skip().pos++;
                                     if (message.parameters === $util.emptyObject)
                                         message.parameters = {};
-                                    key = reader.string();
-                                    reader.pos++;
-                                    message.parameters[key] = reader.string();
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = "";
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = reader.string();
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.parameters[key] = value;
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -27942,7 +28292,7 @@
                         Cluster.decode = function decode(reader, length) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataproc.v1beta2.Cluster(), key;
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataproc.v1beta2.Cluster(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
@@ -27956,12 +28306,26 @@
                                     message.config = $root.google.cloud.dataproc.v1beta2.ClusterConfig.decode(reader, reader.uint32());
                                     break;
                                 case 8:
-                                    reader.skip().pos++;
                                     if (message.labels === $util.emptyObject)
                                         message.labels = {};
-                                    key = reader.string();
-                                    reader.pos++;
-                                    message.labels[key] = reader.string();
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = "";
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = reader.string();
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.labels[key] = value;
                                     break;
                                 case 4:
                                     message.status = $root.google.cloud.dataproc.v1beta2.ClusterStatus.decode(reader, reader.uint32());
@@ -29206,17 +29570,31 @@
                         EndpointConfig.decode = function decode(reader, length) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataproc.v1beta2.EndpointConfig(), key;
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataproc.v1beta2.EndpointConfig(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
                                 case 1:
-                                    reader.skip().pos++;
                                     if (message.httpPorts === $util.emptyObject)
                                         message.httpPorts = {};
-                                    key = reader.string();
-                                    reader.pos++;
-                                    message.httpPorts[key] = reader.string();
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = "";
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = reader.string();
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.httpPorts[key] = value;
                                     break;
                                 case 2:
                                     message.enableHttpPortAccess = reader.bool();
@@ -29892,7 +30270,7 @@
                         GceClusterConfig.decode = function decode(reader, length) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataproc.v1beta2.GceClusterConfig(), key;
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataproc.v1beta2.GceClusterConfig(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
@@ -29922,12 +30300,26 @@
                                     message.tags.push(reader.string());
                                     break;
                                 case 5:
-                                    reader.skip().pos++;
                                     if (message.metadata === $util.emptyObject)
                                         message.metadata = {};
-                                    key = reader.string();
-                                    reader.pos++;
-                                    message.metadata[key] = reader.string();
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = "";
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = reader.string();
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.metadata[key] = value;
                                     break;
                                 case 11:
                                     message.reservationAffinity = $root.google.cloud.dataproc.v1beta2.ReservationAffinity.decode(reader, reader.uint32());
@@ -32890,7 +33282,7 @@
                         SoftwareConfig.decode = function decode(reader, length) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataproc.v1beta2.SoftwareConfig(), key;
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataproc.v1beta2.SoftwareConfig(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
@@ -32898,12 +33290,26 @@
                                     message.imageVersion = reader.string();
                                     break;
                                 case 2:
-                                    reader.skip().pos++;
                                     if (message.properties === $util.emptyObject)
                                         message.properties = {};
-                                    key = reader.string();
-                                    reader.pos++;
-                                    message.properties[key] = reader.string();
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = "";
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = reader.string();
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.properties[key] = value;
                                     break;
                                 case 3:
                                     if (!(message.optionalComponents && message.optionalComponents.length))
@@ -33224,25 +33630,53 @@
                         ClusterMetrics.decode = function decode(reader, length) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataproc.v1beta2.ClusterMetrics(), key;
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataproc.v1beta2.ClusterMetrics(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
                                 case 1:
-                                    reader.skip().pos++;
                                     if (message.hdfsMetrics === $util.emptyObject)
                                         message.hdfsMetrics = {};
-                                    key = reader.string();
-                                    reader.pos++;
-                                    message.hdfsMetrics[key] = reader.int64();
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = 0;
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = reader.int64();
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.hdfsMetrics[key] = value;
                                     break;
                                 case 2:
-                                    reader.skip().pos++;
                                     if (message.yarnMetrics === $util.emptyObject)
                                         message.yarnMetrics = {};
-                                    key = reader.string();
-                                    reader.pos++;
-                                    message.yarnMetrics[key] = reader.int64();
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = 0;
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = reader.int64();
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.yarnMetrics[key] = value;
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -36102,17 +36536,31 @@
                         LoggingConfig.decode = function decode(reader, length) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataproc.v1beta2.LoggingConfig(), key;
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataproc.v1beta2.LoggingConfig(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
                                 case 2:
-                                    reader.skip().pos++;
                                     if (message.driverLogLevels === $util.emptyObject)
                                         message.driverLogLevels = {};
-                                    key = reader.string();
-                                    reader.pos++;
-                                    message.driverLogLevels[key] = reader.int32();
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = 0;
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = reader.int32();
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.driverLogLevels[key] = value;
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -36486,7 +36934,7 @@
                         HadoopJob.decode = function decode(reader, length) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataproc.v1beta2.HadoopJob(), key;
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataproc.v1beta2.HadoopJob(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
@@ -36517,12 +36965,26 @@
                                     message.archiveUris.push(reader.string());
                                     break;
                                 case 7:
-                                    reader.skip().pos++;
                                     if (message.properties === $util.emptyObject)
                                         message.properties = {};
-                                    key = reader.string();
-                                    reader.pos++;
-                                    message.properties[key] = reader.string();
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = "";
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = reader.string();
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.properties[key] = value;
                                     break;
                                 case 8:
                                     message.loggingConfig = $root.google.cloud.dataproc.v1beta2.LoggingConfig.decode(reader, reader.uint32());
@@ -36945,7 +37407,7 @@
                         SparkJob.decode = function decode(reader, length) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataproc.v1beta2.SparkJob(), key;
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataproc.v1beta2.SparkJob(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
@@ -36976,12 +37438,26 @@
                                     message.archiveUris.push(reader.string());
                                     break;
                                 case 7:
-                                    reader.skip().pos++;
                                     if (message.properties === $util.emptyObject)
                                         message.properties = {};
-                                    key = reader.string();
-                                    reader.pos++;
-                                    message.properties[key] = reader.string();
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = "";
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = reader.string();
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.properties[key] = value;
                                     break;
                                 case 8:
                                     message.loggingConfig = $root.google.cloud.dataproc.v1beta2.LoggingConfig.decode(reader, reader.uint32());
@@ -37392,7 +37868,7 @@
                         PySparkJob.decode = function decode(reader, length) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataproc.v1beta2.PySparkJob(), key;
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataproc.v1beta2.PySparkJob(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
@@ -37425,12 +37901,26 @@
                                     message.archiveUris.push(reader.string());
                                     break;
                                 case 7:
-                                    reader.skip().pos++;
                                     if (message.properties === $util.emptyObject)
                                         message.properties = {};
-                                    key = reader.string();
-                                    reader.pos++;
-                                    message.properties[key] = reader.string();
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = "";
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = reader.string();
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.properties[key] = value;
                                     break;
                                 case 8:
                                     message.loggingConfig = $root.google.cloud.dataproc.v1beta2.LoggingConfig.decode(reader, reader.uint32());
@@ -38032,7 +38522,7 @@
                         HiveJob.decode = function decode(reader, length) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataproc.v1beta2.HiveJob(), key;
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataproc.v1beta2.HiveJob(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
@@ -38046,20 +38536,48 @@
                                     message.continueOnFailure = reader.bool();
                                     break;
                                 case 4:
-                                    reader.skip().pos++;
                                     if (message.scriptVariables === $util.emptyObject)
                                         message.scriptVariables = {};
-                                    key = reader.string();
-                                    reader.pos++;
-                                    message.scriptVariables[key] = reader.string();
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = "";
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = reader.string();
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.scriptVariables[key] = value;
                                     break;
                                 case 5:
-                                    reader.skip().pos++;
                                     if (message.properties === $util.emptyObject)
                                         message.properties = {};
-                                    key = reader.string();
-                                    reader.pos++;
-                                    message.properties[key] = reader.string();
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = "";
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = reader.string();
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.properties[key] = value;
                                     break;
                                 case 6:
                                     if (!(message.jarFileUris && message.jarFileUris.length))
@@ -38420,7 +38938,7 @@
                         SparkSqlJob.decode = function decode(reader, length) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataproc.v1beta2.SparkSqlJob(), key;
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataproc.v1beta2.SparkSqlJob(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
@@ -38431,20 +38949,48 @@
                                     message.queryList = $root.google.cloud.dataproc.v1beta2.QueryList.decode(reader, reader.uint32());
                                     break;
                                 case 3:
-                                    reader.skip().pos++;
                                     if (message.scriptVariables === $util.emptyObject)
                                         message.scriptVariables = {};
-                                    key = reader.string();
-                                    reader.pos++;
-                                    message.scriptVariables[key] = reader.string();
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = "";
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = reader.string();
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.scriptVariables[key] = value;
                                     break;
                                 case 4:
-                                    reader.skip().pos++;
                                     if (message.properties === $util.emptyObject)
                                         message.properties = {};
-                                    key = reader.string();
-                                    reader.pos++;
-                                    message.properties[key] = reader.string();
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = "";
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = reader.string();
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.properties[key] = value;
                                     break;
                                 case 56:
                                     if (!(message.jarFileUris && message.jarFileUris.length))
@@ -38824,7 +39370,7 @@
                         PigJob.decode = function decode(reader, length) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataproc.v1beta2.PigJob(), key;
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataproc.v1beta2.PigJob(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
@@ -38838,20 +39384,48 @@
                                     message.continueOnFailure = reader.bool();
                                     break;
                                 case 4:
-                                    reader.skip().pos++;
                                     if (message.scriptVariables === $util.emptyObject)
                                         message.scriptVariables = {};
-                                    key = reader.string();
-                                    reader.pos++;
-                                    message.scriptVariables[key] = reader.string();
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = "";
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = reader.string();
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.scriptVariables[key] = value;
                                     break;
                                 case 5:
-                                    reader.skip().pos++;
                                     if (message.properties === $util.emptyObject)
                                         message.properties = {};
-                                    key = reader.string();
-                                    reader.pos++;
-                                    message.properties[key] = reader.string();
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = "";
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = reader.string();
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.properties[key] = value;
                                     break;
                                 case 6:
                                     if (!(message.jarFileUris && message.jarFileUris.length))
@@ -39217,7 +39791,7 @@
                         SparkRJob.decode = function decode(reader, length) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataproc.v1beta2.SparkRJob(), key;
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataproc.v1beta2.SparkRJob(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
@@ -39240,12 +39814,26 @@
                                     message.archiveUris.push(reader.string());
                                     break;
                                 case 5:
-                                    reader.skip().pos++;
                                     if (message.properties === $util.emptyObject)
                                         message.properties = {};
-                                    key = reader.string();
-                                    reader.pos++;
-                                    message.properties[key] = reader.string();
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = "";
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = reader.string();
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.properties[key] = value;
                                     break;
                                 case 6:
                                     message.loggingConfig = $root.google.cloud.dataproc.v1beta2.LoggingConfig.decode(reader, reader.uint32());
@@ -39613,7 +40201,7 @@
                         PrestoJob.decode = function decode(reader, length) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataproc.v1beta2.PrestoJob(), key;
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataproc.v1beta2.PrestoJob(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
@@ -39635,12 +40223,26 @@
                                     message.clientTags.push(reader.string());
                                     break;
                                 case 6:
-                                    reader.skip().pos++;
                                     if (message.properties === $util.emptyObject)
                                         message.properties = {};
-                                    key = reader.string();
-                                    reader.pos++;
-                                    message.properties[key] = reader.string();
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = "";
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = reader.string();
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.properties[key] = value;
                                     break;
                                 case 7:
                                     message.loggingConfig = $root.google.cloud.dataproc.v1beta2.LoggingConfig.decode(reader, reader.uint32());
@@ -41286,7 +41888,7 @@
                         Job.decode = function decode(reader, length) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataproc.v1beta2.Job(), key;
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataproc.v1beta2.Job(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
@@ -41343,12 +41945,26 @@
                                     message.driverControlFilesUri = reader.string();
                                     break;
                                 case 18:
-                                    reader.skip().pos++;
                                     if (message.labels === $util.emptyObject)
                                         message.labels = {};
-                                    key = reader.string();
-                                    reader.pos++;
-                                    message.labels[key] = reader.string();
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = "";
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = reader.string();
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.labels[key] = value;
                                     break;
                                 case 20:
                                     message.scheduling = $root.google.cloud.dataproc.v1beta2.JobScheduling.decode(reader, reader.uint32());
@@ -44518,7 +45134,7 @@
                         ClusterOperationMetadata.decode = function decode(reader, length) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataproc.v1beta2.ClusterOperationMetadata(), key;
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataproc.v1beta2.ClusterOperationMetadata(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
@@ -44543,12 +45159,26 @@
                                     message.description = reader.string();
                                     break;
                                 case 13:
-                                    reader.skip().pos++;
                                     if (message.labels === $util.emptyObject)
                                         message.labels = {};
-                                    key = reader.string();
-                                    reader.pos++;
-                                    message.labels[key] = reader.string();
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = "";
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = reader.string();
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.labels[key] = value;
                                     break;
                                 case 14:
                                     if (!(message.warnings && message.warnings.length))
@@ -45203,7 +45833,7 @@
                         WorkflowTemplate.decode = function decode(reader, length) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataproc.v1beta2.WorkflowTemplate(), key;
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataproc.v1beta2.WorkflowTemplate(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
@@ -45223,12 +45853,26 @@
                                     message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
                                     break;
                                 case 6:
-                                    reader.skip().pos++;
                                     if (message.labels === $util.emptyObject)
                                         message.labels = {};
-                                    key = reader.string();
-                                    reader.pos++;
-                                    message.labels[key] = reader.string();
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = "";
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = reader.string();
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.labels[key] = value;
                                     break;
                                 case 7:
                                     message.placement = $root.google.cloud.dataproc.v1beta2.WorkflowTemplatePlacement.decode(reader, reader.uint32());
@@ -45823,7 +46467,7 @@
                         ManagedCluster.decode = function decode(reader, length) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataproc.v1beta2.ManagedCluster(), key;
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataproc.v1beta2.ManagedCluster(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
@@ -45834,12 +46478,26 @@
                                     message.config = $root.google.cloud.dataproc.v1beta2.ClusterConfig.decode(reader, reader.uint32());
                                     break;
                                 case 4:
-                                    reader.skip().pos++;
                                     if (message.labels === $util.emptyObject)
                                         message.labels = {};
-                                    key = reader.string();
-                                    reader.pos++;
-                                    message.labels[key] = reader.string();
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = "";
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = reader.string();
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.labels[key] = value;
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -46071,7 +46729,7 @@
                         ClusterSelector.decode = function decode(reader, length) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataproc.v1beta2.ClusterSelector(), key;
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataproc.v1beta2.ClusterSelector(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
@@ -46079,12 +46737,26 @@
                                     message.zone = reader.string();
                                     break;
                                 case 2:
-                                    reader.skip().pos++;
                                     if (message.clusterLabels === $util.emptyObject)
                                         message.clusterLabels = {};
-                                    key = reader.string();
-                                    reader.pos++;
-                                    message.clusterLabels[key] = reader.string();
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = "";
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = reader.string();
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.clusterLabels[key] = value;
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -46428,7 +47100,7 @@
                         OrderedJob.decode = function decode(reader, length) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataproc.v1beta2.OrderedJob(), key;
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataproc.v1beta2.OrderedJob(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
@@ -46460,12 +47132,26 @@
                                     message.prestoJob = $root.google.cloud.dataproc.v1beta2.PrestoJob.decode(reader, reader.uint32());
                                     break;
                                 case 8:
-                                    reader.skip().pos++;
                                     if (message.labels === $util.emptyObject)
                                         message.labels = {};
-                                    key = reader.string();
-                                    reader.pos++;
-                                    message.labels[key] = reader.string();
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = "";
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = reader.string();
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.labels[key] = value;
                                     break;
                                 case 9:
                                     message.scheduling = $root.google.cloud.dataproc.v1beta2.JobScheduling.decode(reader, reader.uint32());
@@ -47911,7 +48597,7 @@
                         WorkflowMetadata.decode = function decode(reader, length) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataproc.v1beta2.WorkflowMetadata(), key;
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataproc.v1beta2.WorkflowMetadata(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
@@ -47937,12 +48623,26 @@
                                     message.clusterName = reader.string();
                                     break;
                                 case 8:
-                                    reader.skip().pos++;
                                     if (message.parameters === $util.emptyObject)
                                         message.parameters = {};
-                                    key = reader.string();
-                                    reader.pos++;
-                                    message.parameters[key] = reader.string();
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = "";
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = reader.string();
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.parameters[key] = value;
                                     break;
                                 case 9:
                                     message.startTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
@@ -49554,7 +50254,7 @@
                         InstantiateWorkflowTemplateRequest.decode = function decode(reader, length) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataproc.v1beta2.InstantiateWorkflowTemplateRequest(), key;
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataproc.v1beta2.InstantiateWorkflowTemplateRequest(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
@@ -49571,12 +50271,26 @@
                                     message.requestId = reader.string();
                                     break;
                                 case 4:
-                                    reader.skip().pos++;
                                     if (message.parameters === $util.emptyObject)
                                         message.parameters = {};
-                                    key = reader.string();
-                                    reader.pos++;
-                                    message.parameters[key] = reader.string();
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = "";
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = reader.string();
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.parameters[key] = value;
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
