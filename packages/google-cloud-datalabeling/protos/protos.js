@@ -3038,17 +3038,31 @@
                         ImageSegmentationAnnotation.decode = function decode(reader, length) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datalabeling.v1beta1.ImageSegmentationAnnotation(), key;
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datalabeling.v1beta1.ImageSegmentationAnnotation(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
                                 case 1:
-                                    reader.skip().pos++;
                                     if (message.annotationColors === $util.emptyObject)
                                         message.annotationColors = {};
-                                    key = reader.string();
-                                    reader.pos++;
-                                    message.annotationColors[key] = $root.google.cloud.datalabeling.v1beta1.AnnotationSpec.decode(reader, reader.uint32());
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = null;
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = $root.google.cloud.datalabeling.v1beta1.AnnotationSpec.decode(reader, reader.uint32());
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.annotationColors[key] = value;
                                     break;
                                 case 2:
                                     message.mimeType = reader.string();
@@ -20616,17 +20630,31 @@
                         LabelStats.decode = function decode(reader, length) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datalabeling.v1beta1.LabelStats(), key;
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datalabeling.v1beta1.LabelStats(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
                                 case 1:
-                                    reader.skip().pos++;
                                     if (message.exampleCount === $util.emptyObject)
                                         message.exampleCount = {};
-                                    key = reader.string();
-                                    reader.pos++;
-                                    message.exampleCount[key] = reader.int64();
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = 0;
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = reader.int64();
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.exampleCount[key] = value;
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -29025,7 +29053,7 @@
                         EvaluationJobConfig.decode = function decode(reader, length) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datalabeling.v1beta1.EvaluationJobConfig(), key;
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datalabeling.v1beta1.EvaluationJobConfig(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
@@ -29048,12 +29076,26 @@
                                     message.humanAnnotationConfig = $root.google.cloud.datalabeling.v1beta1.HumanAnnotationConfig.decode(reader, reader.uint32());
                                     break;
                                 case 9:
-                                    reader.skip().pos++;
                                     if (message.bigqueryImportKeys === $util.emptyObject)
                                         message.bigqueryImportKeys = {};
-                                    key = reader.string();
-                                    reader.pos++;
-                                    message.bigqueryImportKeys[key] = reader.string();
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = "";
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = reader.string();
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.bigqueryImportKeys[key] = value;
                                     break;
                                 case 10:
                                     message.exampleCount = reader.int32();
