@@ -1,5 +1,12 @@
 # Changelog
 
+### [2.1.1](https://www.github.com/googleapis/nodejs-iot/compare/v2.1.0...v2.1.1) (2020-07-15)
+
+
+### Bug Fixes
+
+* **deps:** update dependency googleapis to v54 ([#360](https://www.github.com/googleapis/nodejs-iot/issues/360)) ([d4fc58a](https://www.github.com/googleapis/nodejs-iot/commit/d4fc58a9588af800556f884b8e8d3e2418eda94a))
+
 ## [2.1.0](https://www.github.com/googleapis/nodejs-iot/compare/v2.0.2...v2.1.0) (2020-06-28)
 
 
