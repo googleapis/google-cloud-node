@@ -11182,7 +11182,7 @@
                         Tag.decode = function decode(reader, length) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datacatalog.v1.Tag(), key;
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datacatalog.v1.Tag(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
@@ -11199,12 +11199,26 @@
                                     message.column = reader.string();
                                     break;
                                 case 3:
-                                    reader.skip().pos++;
                                     if (message.fields === $util.emptyObject)
                                         message.fields = {};
-                                    key = reader.string();
-                                    reader.pos++;
-                                    message.fields[key] = $root.google.cloud.datacatalog.v1.TagField.decode(reader, reader.uint32());
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = null;
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = $root.google.cloud.datacatalog.v1.TagField.decode(reader, reader.uint32());
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.fields[key] = value;
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -12032,7 +12046,7 @@
                         TagTemplate.decode = function decode(reader, length) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datacatalog.v1.TagTemplate(), key;
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datacatalog.v1.TagTemplate(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
@@ -12043,12 +12057,26 @@
                                     message.displayName = reader.string();
                                     break;
                                 case 3:
-                                    reader.skip().pos++;
                                     if (message.fields === $util.emptyObject)
                                         message.fields = {};
-                                    key = reader.string();
-                                    reader.pos++;
-                                    message.fields[key] = $root.google.cloud.datacatalog.v1.TagTemplateField.decode(reader, reader.uint32());
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = null;
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = $root.google.cloud.datacatalog.v1.TagTemplateField.decode(reader, reader.uint32());
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.fields[key] = value;
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -24106,7 +24134,7 @@
                         Tag.decode = function decode(reader, length) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datacatalog.v1beta1.Tag(), key;
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datacatalog.v1beta1.Tag(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
@@ -24123,12 +24151,26 @@
                                     message.column = reader.string();
                                     break;
                                 case 3:
-                                    reader.skip().pos++;
                                     if (message.fields === $util.emptyObject)
                                         message.fields = {};
-                                    key = reader.string();
-                                    reader.pos++;
-                                    message.fields[key] = $root.google.cloud.datacatalog.v1beta1.TagField.decode(reader, reader.uint32());
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = null;
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = $root.google.cloud.datacatalog.v1beta1.TagField.decode(reader, reader.uint32());
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.fields[key] = value;
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -24956,7 +24998,7 @@
                         TagTemplate.decode = function decode(reader, length) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datacatalog.v1beta1.TagTemplate(), key;
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datacatalog.v1beta1.TagTemplate(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
@@ -24967,12 +25009,26 @@
                                     message.displayName = reader.string();
                                     break;
                                 case 3:
-                                    reader.skip().pos++;
                                     if (message.fields === $util.emptyObject)
                                         message.fields = {};
-                                    key = reader.string();
-                                    reader.pos++;
-                                    message.fields[key] = $root.google.cloud.datacatalog.v1beta1.TagTemplateField.decode(reader, reader.uint32());
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = null;
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = $root.google.cloud.datacatalog.v1beta1.TagTemplateField.decode(reader, reader.uint32());
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.fields[key] = value;
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
