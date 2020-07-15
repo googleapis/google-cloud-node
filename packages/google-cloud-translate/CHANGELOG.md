@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-translate?activeTab=versions
 
+### [6.0.2](https://www.github.com/googleapis/nodejs-translate/compare/v6.0.1...v6.0.2) (2020-07-15)
+
+
+### Bug Fixes
+
+* typeo in nodejs .gitattribute ([#556](https://www.github.com/googleapis/nodejs-translate/issues/556)) ([f774b0c](https://www.github.com/googleapis/nodejs-translate/commit/f774b0cae621be822b80b34c67adbbebb995ceec))
+
 ### [6.0.1](https://www.github.com/googleapis/nodejs-translate/compare/v6.0.0...v6.0.1) (2020-06-29)
 
 
