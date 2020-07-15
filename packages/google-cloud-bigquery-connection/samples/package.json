@@ -1,5 +1,5 @@
 {
-  "name": "@google-cloud/bigquery-connection-samples",
+  "name": "nodejs-bigquery-connection-samples",
   "private": true,
   "license": "Apache-2.0",
   "author": "Google LLC",
