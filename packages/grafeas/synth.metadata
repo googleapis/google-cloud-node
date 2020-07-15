@@ -3,8 +3,16 @@
     {
       "git": {
         "name": ".",
-        "remote": "git@github.com:googleapis/nodejs-grafeas.git",
-        "sha": "b581e8067b79fd3a32f7f18879cc01c9c3205e68"
+        "remote": "https://github.com/googleapis/nodejs-grafeas.git",
+        "sha": "f495499215193adc0d013626ec19236db1647c2a"
+      }
+    },
+    {
+      "git": {
+        "name": "googleapis",
+        "remote": "https://github.com/googleapis/googleapis.git",
+        "sha": "3474dc892349674efda09d74b3a574765d996188",
+        "internalRef": "321098618"
       }
     },
     {
