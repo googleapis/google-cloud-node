@@ -248,7 +248,7 @@
                         OperationMetadata.decode = function decode(reader, length) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.gaming.v1beta.OperationMetadata(), key;
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.gaming.v1beta.OperationMetadata(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
@@ -279,12 +279,26 @@
                                     message.unreachable.push(reader.string());
                                     break;
                                 case 9:
-                                    reader.skip().pos++;
                                     if (message.operationStatus === $util.emptyObject)
                                         message.operationStatus = {};
-                                    key = reader.string();
-                                    reader.pos++;
-                                    message.operationStatus[key] = $root.google.cloud.gaming.v1beta.OperationStatus.decode(reader, reader.uint32());
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = null;
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = $root.google.cloud.gaming.v1beta.OperationStatus.decode(reader, reader.uint32());
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.operationStatus[key] = value;
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -849,17 +863,31 @@
                         LabelSelector.decode = function decode(reader, length) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.gaming.v1beta.LabelSelector(), key;
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.gaming.v1beta.LabelSelector(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
                                 case 1:
-                                    reader.skip().pos++;
                                     if (message.labels === $util.emptyObject)
                                         message.labels = {};
-                                    key = reader.string();
-                                    reader.pos++;
-                                    message.labels[key] = reader.string();
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = "";
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = reader.string();
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.labels[key] = value;
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -7117,7 +7145,7 @@
                         GameServerCluster.decode = function decode(reader, length) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.gaming.v1beta.GameServerCluster(), key;
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.gaming.v1beta.GameServerCluster(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
@@ -7131,12 +7159,26 @@
                                     message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
                                     break;
                                 case 4:
-                                    reader.skip().pos++;
                                     if (message.labels === $util.emptyObject)
                                         message.labels = {};
-                                    key = reader.string();
-                                    reader.pos++;
-                                    message.labels[key] = reader.string();
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = "";
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = reader.string();
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.labels[key] = value;
                                     break;
                                 case 5:
                                     message.connectionInfo = $root.google.cloud.gaming.v1beta.GameServerClusterConnectionInfo.decode(reader, reader.uint32());
@@ -9442,7 +9484,7 @@
                         GameServerConfig.decode = function decode(reader, length) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.gaming.v1beta.GameServerConfig(), key;
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.gaming.v1beta.GameServerConfig(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
@@ -9456,12 +9498,26 @@
                                     message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
                                     break;
                                 case 4:
-                                    reader.skip().pos++;
                                     if (message.labels === $util.emptyObject)
                                         message.labels = {};
-                                    key = reader.string();
-                                    reader.pos++;
-                                    message.labels[key] = reader.string();
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = "";
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = reader.string();
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.labels[key] = value;
                                     break;
                                 case 5:
                                     if (!(message.fleetConfigs && message.fleetConfigs.length))
@@ -12439,7 +12495,7 @@
                         GameServerDeployment.decode = function decode(reader, length) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.gaming.v1beta.GameServerDeployment(), key;
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.gaming.v1beta.GameServerDeployment(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
@@ -12453,12 +12509,26 @@
                                     message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
                                     break;
                                 case 4:
-                                    reader.skip().pos++;
                                     if (message.labels === $util.emptyObject)
                                         message.labels = {};
-                                    key = reader.string();
-                                    reader.pos++;
-                                    message.labels[key] = reader.string();
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = "";
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = reader.string();
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.labels[key] = value;
                                     break;
                                 case 7:
                                     message.etag = reader.string();
@@ -16030,7 +16100,7 @@
                         Realm.decode = function decode(reader, length) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.gaming.v1beta.Realm(), key;
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.gaming.v1beta.Realm(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
@@ -16044,12 +16114,26 @@
                                     message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
                                     break;
                                 case 4:
-                                    reader.skip().pos++;
                                     if (message.labels === $util.emptyObject)
                                         message.labels = {};
-                                    key = reader.string();
-                                    reader.pos++;
-                                    message.labels[key] = reader.string();
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = "";
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = reader.string();
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.labels[key] = value;
                                     break;
                                 case 6:
                                     message.timeZone = reader.string();
