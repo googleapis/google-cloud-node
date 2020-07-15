@@ -1752,7 +1752,7 @@
                 BuildProvenance.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.grafeas.v1.BuildProvenance(), key;
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.grafeas.v1.BuildProvenance(), key, value;
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
@@ -1794,12 +1794,26 @@
                             message.triggerId = reader.string();
                             break;
                         case 12:
-                            reader.skip().pos++;
                             if (message.buildOptions === $util.emptyObject)
                                 message.buildOptions = {};
-                            key = reader.string();
-                            reader.pos++;
-                            message.buildOptions[key] = reader.string();
+                            var end2 = reader.uint32() + reader.pos;
+                            key = "";
+                            value = "";
+                            while (reader.pos < end2) {
+                                var tag2 = reader.uint32();
+                                switch (tag2 >>> 3) {
+                                case 1:
+                                    key = reader.string();
+                                    break;
+                                case 2:
+                                    value = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag2 & 7);
+                                    break;
+                                }
+                            }
+                            message.buildOptions[key] = value;
                             break;
                         case 13:
                             message.builderVersion = reader.string();
@@ -2191,7 +2205,7 @@
                 Source.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.grafeas.v1.Source(), key;
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.grafeas.v1.Source(), key, value;
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
@@ -2199,12 +2213,26 @@
                             message.artifactStorageSourceUri = reader.string();
                             break;
                         case 2:
-                            reader.skip().pos++;
                             if (message.fileHashes === $util.emptyObject)
                                 message.fileHashes = {};
-                            key = reader.string();
-                            reader.pos++;
-                            message.fileHashes[key] = $root.grafeas.v1.FileHashes.decode(reader, reader.uint32());
+                            var end2 = reader.uint32() + reader.pos;
+                            key = "";
+                            value = null;
+                            while (reader.pos < end2) {
+                                var tag2 = reader.uint32();
+                                switch (tag2 >>> 3) {
+                                case 1:
+                                    key = reader.string();
+                                    break;
+                                case 2:
+                                    value = $root.grafeas.v1.FileHashes.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag2 & 7);
+                                    break;
+                                }
+                            }
+                            message.fileHashes[key] = value;
                             break;
                         case 3:
                             message.context = $root.grafeas.v1.SourceContext.decode(reader, reader.uint32());
@@ -3535,7 +3563,7 @@
                 SourceContext.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.grafeas.v1.SourceContext(), key;
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.grafeas.v1.SourceContext(), key, value;
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
@@ -3549,12 +3577,26 @@
                             message.git = $root.grafeas.v1.GitSourceContext.decode(reader, reader.uint32());
                             break;
                         case 4:
-                            reader.skip().pos++;
                             if (message.labels === $util.emptyObject)
                                 message.labels = {};
-                            key = reader.string();
-                            reader.pos++;
-                            message.labels[key] = reader.string();
+                            var end2 = reader.uint32() + reader.pos;
+                            key = "";
+                            value = "";
+                            while (reader.pos < end2) {
+                                var tag2 = reader.uint32();
+                                switch (tag2 >>> 3) {
+                                case 1:
+                                    key = reader.string();
+                                    break;
+                                case 2:
+                                    value = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag2 & 7);
+                                    break;
+                                }
+                            }
+                            message.labels[key] = value;
                             break;
                         default:
                             reader.skipType(tag & 7);
@@ -12410,7 +12452,7 @@
                 BatchCreateNotesRequest.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.grafeas.v1.BatchCreateNotesRequest(), key;
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.grafeas.v1.BatchCreateNotesRequest(), key, value;
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
@@ -12418,12 +12460,26 @@
                             message.parent = reader.string();
                             break;
                         case 2:
-                            reader.skip().pos++;
                             if (message.notes === $util.emptyObject)
                                 message.notes = {};
-                            key = reader.string();
-                            reader.pos++;
-                            message.notes[key] = $root.grafeas.v1.Note.decode(reader, reader.uint32());
+                            var end2 = reader.uint32() + reader.pos;
+                            key = "";
+                            value = null;
+                            while (reader.pos < end2) {
+                                var tag2 = reader.uint32();
+                                switch (tag2 >>> 3) {
+                                case 1:
+                                    key = reader.string();
+                                    break;
+                                case 2:
+                                    value = $root.grafeas.v1.Note.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag2 & 7);
+                                    break;
+                                }
+                            }
+                            message.notes[key] = value;
                             break;
                         default:
                             reader.skipType(tag & 7);
@@ -22099,7 +22155,7 @@
                     BuildProvenance.decode = function decode(reader, length) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.grafeas.v1beta1.provenance.BuildProvenance(), key;
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.grafeas.v1beta1.provenance.BuildProvenance(), key, value;
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             switch (tag >>> 3) {
@@ -22141,12 +22197,26 @@
                                 message.triggerId = reader.string();
                                 break;
                             case 12:
-                                reader.skip().pos++;
                                 if (message.buildOptions === $util.emptyObject)
                                     message.buildOptions = {};
-                                key = reader.string();
-                                reader.pos++;
-                                message.buildOptions[key] = reader.string();
+                                var end2 = reader.uint32() + reader.pos;
+                                key = "";
+                                value = "";
+                                while (reader.pos < end2) {
+                                    var tag2 = reader.uint32();
+                                    switch (tag2 >>> 3) {
+                                    case 1:
+                                        key = reader.string();
+                                        break;
+                                    case 2:
+                                        value = reader.string();
+                                        break;
+                                    default:
+                                        reader.skipType(tag2 & 7);
+                                        break;
+                                    }
+                                }
+                                message.buildOptions[key] = value;
                                 break;
                             case 13:
                                 message.builderVersion = reader.string();
@@ -22538,7 +22608,7 @@
                     Source.decode = function decode(reader, length) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.grafeas.v1beta1.provenance.Source(), key;
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.grafeas.v1beta1.provenance.Source(), key, value;
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             switch (tag >>> 3) {
@@ -22546,12 +22616,26 @@
                                 message.artifactStorageSourceUri = reader.string();
                                 break;
                             case 2:
-                                reader.skip().pos++;
                                 if (message.fileHashes === $util.emptyObject)
                                     message.fileHashes = {};
-                                key = reader.string();
-                                reader.pos++;
-                                message.fileHashes[key] = $root.grafeas.v1beta1.provenance.FileHashes.decode(reader, reader.uint32());
+                                var end2 = reader.uint32() + reader.pos;
+                                key = "";
+                                value = null;
+                                while (reader.pos < end2) {
+                                    var tag2 = reader.uint32();
+                                    switch (tag2 >>> 3) {
+                                    case 1:
+                                        key = reader.string();
+                                        break;
+                                    case 2:
+                                        value = $root.grafeas.v1beta1.provenance.FileHashes.decode(reader, reader.uint32());
+                                        break;
+                                    default:
+                                        reader.skipType(tag2 & 7);
+                                        break;
+                                    }
+                                }
+                                message.fileHashes[key] = value;
                                 break;
                             case 3:
                                 message.context = $root.grafeas.v1beta1.source.SourceContext.decode(reader, reader.uint32());
@@ -23921,7 +24005,7 @@
                     SourceContext.decode = function decode(reader, length) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.grafeas.v1beta1.source.SourceContext(), key;
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.grafeas.v1beta1.source.SourceContext(), key, value;
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             switch (tag >>> 3) {
@@ -23935,12 +24019,26 @@
                                 message.git = $root.grafeas.v1beta1.source.GitSourceContext.decode(reader, reader.uint32());
                                 break;
                             case 4:
-                                reader.skip().pos++;
                                 if (message.labels === $util.emptyObject)
                                     message.labels = {};
-                                key = reader.string();
-                                reader.pos++;
-                                message.labels[key] = reader.string();
+                                var end2 = reader.uint32() + reader.pos;
+                                key = "";
+                                value = "";
+                                while (reader.pos < end2) {
+                                    var tag2 = reader.uint32();
+                                    switch (tag2 >>> 3) {
+                                    case 1:
+                                        key = reader.string();
+                                        break;
+                                    case 2:
+                                        value = reader.string();
+                                        break;
+                                    default:
+                                        reader.skipType(tag2 & 7);
+                                        break;
+                                    }
+                                }
+                                message.labels[key] = value;
                                 break;
                             default:
                                 reader.skipType(tag & 7);
@@ -35619,7 +35717,7 @@
                 BatchCreateNotesRequest.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.grafeas.v1beta1.BatchCreateNotesRequest(), key;
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.grafeas.v1beta1.BatchCreateNotesRequest(), key, value;
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
@@ -35627,12 +35725,26 @@
                             message.parent = reader.string();
                             break;
                         case 2:
-                            reader.skip().pos++;
                             if (message.notes === $util.emptyObject)
                                 message.notes = {};
-                            key = reader.string();
-                            reader.pos++;
-                            message.notes[key] = $root.grafeas.v1beta1.Note.decode(reader, reader.uint32());
+                            var end2 = reader.uint32() + reader.pos;
+                            key = "";
+                            value = null;
+                            while (reader.pos < end2) {
+                                var tag2 = reader.uint32();
+                                switch (tag2 >>> 3) {
+                                case 1:
+                                    key = reader.string();
+                                    break;
+                                case 2:
+                                    value = $root.grafeas.v1beta1.Note.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag2 & 7);
+                                    break;
+                                }
+                            }
+                            message.notes[key] = value;
                             break;
                         default:
                             reader.skipType(tag & 7);
