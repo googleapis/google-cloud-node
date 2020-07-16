@@ -224,6 +224,7 @@ class Zone extends ZoneServiceObject {
        * @example
        * const {DNS} = require('@google-cloud/dns');
        * const dns = new DNS();
+       * const zone = dns.zone('zone-id');
        *
        * const config = {
        *   dnsName: 'example.com.',
