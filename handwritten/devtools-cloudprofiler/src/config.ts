@@ -13,7 +13,7 @@
 // limitations under the License.
 
 import {GoogleAuthOptions} from '@google-cloud/common';
-import parseDuration = require('parse-duration');
+import parseDuration from 'parse-duration';
 
 // Configuration for Profiler.
 export interface Config extends GoogleAuthOptions {

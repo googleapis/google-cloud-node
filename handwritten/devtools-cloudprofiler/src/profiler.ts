@@ -17,6 +17,7 @@ import {
   ServiceConfig,
   ServiceObject,
   ApiError,
+  DecorateRequestOptions,
 } from '@google-cloud/common';
 import {heap as heapProfiler, SourceMapper, time as timeProfiler} from 'pprof';
 import * as msToStr from 'pretty-ms';
@@ -28,7 +29,7 @@ import {perftools} from '../protos/profile';
 import {ProfilerConfig} from './config';
 import {createLogger} from './logger';
 
-import parseDuration = require('parse-duration');
+import parseDuration from 'parse-duration';
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const pjson = require('../../package.json');
 const SCOPE = 'https://www.googleapis.com/auth/monitoring.write';
@@ -110,7 +111,7 @@ function getServerResponseBackoff(body: object): number | undefined {
         item.retryDelay &&
         typeof item.retryDelay === 'string'
       ) {
-        const backoffMillis = parseDuration(item.retryDelay);
+        const backoffMillis = parseDuration(item.retryDelay)!;
         if (backoffMillis > 0) {
           return backoffMillis;
         }
@@ -135,7 +136,7 @@ export function parseBackoffDuration(
     undefined,
   ];
   if (duration) {
-    const backoffMillis = parseDuration(duration);
+    const backoffMillis = parseDuration(duration)!;
     if (backoffMillis > 0) {
       return backoffMillis;
     }
@@ -434,7 +435,7 @@ export class Profiler extends ServiceObject {
       deployment: this.deployment,
       profileType: this.profileTypes,
     };
-    const options = {
+    const options: DecorateRequestOptions = {
       method: 'POST',
       uri: '/profiles',
       body: reqBody,
@@ -444,7 +445,7 @@ export class Profiler extends ServiceObject {
       // Default timeout for for a request is 1 minute, but request to create
       // profile is designed to hang until it is time to collect a profile
       // (up to one hour).
-      timeout: parseDuration('1h'),
+      timeout: parseDuration('1h')!,
     };
 
     this.logger.debug('Attempting to create profile.');
