@@ -46,7 +46,7 @@ View the [source code](https://github.com/googleapis/nodejs-game-servers/blob/ma
 __Usage:__
 
 
-`node samples/create_cluster.js`
+`node samples/create_cluster.js <project_id> <location> <realmId> <clusterId> <gke_cluster_name>`
 
 
 -----
@@ -63,7 +63,24 @@ View the [source code](https://github.com/googleapis/nodejs-game-servers/blob/ma
 __Usage:__
 
 
-`node samples/create_realm.js`
+`node samples/create_realm.js <project_id> <location> <realmId>`
+
+
+-----
+
+
+
+
+### Create_deployment
+
+View the [source code](https://github.com/googleapis/nodejs-game-servers/blob/master/samples/create_deployment.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-game-servers&page=editor&open_in_editor=samples/create_deployment.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/create_deployment.js <project_id> <deploymentId>`
 
 
 -----
@@ -80,7 +97,7 @@ View the [source code](https://github.com/googleapis/nodejs-game-servers/blob/ma
 __Usage:__
 
 
-`node samples/delete_cluster.js`
+`node samples/delete_cluster.js <project_id> <location> <realmId> <clusterId>`
 
 
 -----
@@ -97,7 +114,24 @@ View the [source code](https://github.com/googleapis/nodejs-game-servers/blob/ma
 __Usage:__
 
 
-`node samples/delete_realm.js`
+`node samples/delete_realm.js <project_id> <location> <realmId>`
+
+
+-----
+
+
+
+
+### Delete_deployment
+
+View the [source code](https://github.com/googleapis/nodejs-game-servers/blob/master/samples/delete_deployment.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-game-servers&page=editor&open_in_editor=samples/delete_deployment.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/delete_deployment.js <project_id> <deploymentId>`
 
 
 -----
@@ -114,7 +148,7 @@ View the [source code](https://github.com/googleapis/nodejs-game-servers/blob/ma
 __Usage:__
 
 
-`node samples/get_cluster.js`
+`node samples/get_cluster.js <project_id> <location> <realmId> <clusterId>`
 
 
 -----
@@ -131,7 +165,24 @@ View the [source code](https://github.com/googleapis/nodejs-game-servers/blob/ma
 __Usage:__
 
 
-`node samples/get_realm.js`
+`node samples/get_realm.js <project_id> <location> <realmId>`
+
+
+-----
+
+
+
+
+### Get_deployment
+
+View the [source code](https://github.com/googleapis/nodejs-game-servers/blob/master/samples/get_deployment.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-game-servers&page=editor&open_in_editor=samples/get_deployment.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/get_deployment.js <project_id> <deploymentId>`
 
 
 -----
@@ -148,7 +199,7 @@ View the [source code](https://github.com/googleapis/nodejs-game-servers/blob/ma
 __Usage:__
 
 
-`node samples/list_clusters.js`
+`node samples/list_clusters.js <project_id> <location> <realmId>`
 
 
 -----
@@ -165,7 +216,24 @@ View the [source code](https://github.com/googleapis/nodejs-game-servers/blob/ma
 __Usage:__
 
 
-`node samples/list_realms.js`
+`node samples/list_realms.js <project_id> <location>`
+
+
+-----
+
+
+
+
+### List_deployments
+
+View the [source code](https://github.com/googleapis/nodejs-game-servers/blob/master/samples/list_deployments.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-game-servers&page=editor&open_in_editor=samples/list_deployments.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/list_deployments.js <project_id>`
 
 
 -----
