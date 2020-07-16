@@ -4,7 +4,7 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/nodejs-media-translation.git",
-        "sha": "ef437456659a418c6718f09462a4935295d22d9f"
+        "sha": "6af7a5c7ce97aedc36dd76631e07229961e039a6"
       }
     },
     {
@@ -19,7 +19,7 @@
       "git": {
         "name": "synthtool",
         "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "799d8e6522c1ef7cb55a70d9ea0b15e045c3d00b"
+        "sha": "388e10f5ae302d3e8de1fac99f3a95d1ab8f824a"
       }
     }
   ],
