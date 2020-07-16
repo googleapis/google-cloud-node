@@ -4503,17 +4503,11 @@
                         },
                         "pageSize": {
                           "type": "int32",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
+                          "id": 2
                         },
                         "pageToken": {
                           "type": "string",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
+                          "id": 3
                         }
                       }
                     },

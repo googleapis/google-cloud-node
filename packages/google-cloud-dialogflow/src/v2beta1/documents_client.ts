@@ -36,7 +36,7 @@ import {operationsProtos} from 'google-gax';
 const version = require('../../../package.json').version;
 
 /**
- *  Manages documents of a knowledge base.
+ *  Service for managing knowledge {@link google.cloud.dialogflow.v2beta1.Document|Documents}.
  * @class
  * @memberof v2beta1
  */
@@ -1125,11 +1125,11 @@ export class DocumentsClient {
    * @param {string} request.parent
    *   Required. The knowledge base to list all documents for.
    *   Format: `projects/<Project ID>/knowledgeBases/<Knowledge Base ID>`.
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of items to return in a single page. By
+   * @param {number} request.pageSize
+   *   The maximum number of items to return in a single page. By
    *   default 10 and at most 100.
-   * @param {string} [request.pageToken]
-   *   Optional. The next_page_token value returned from a previous list request.
+   * @param {string} request.pageToken
+   *   The next_page_token value returned from a previous list request.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1211,11 +1211,11 @@ export class DocumentsClient {
    * @param {string} request.parent
    *   Required. The knowledge base to list all documents for.
    *   Format: `projects/<Project ID>/knowledgeBases/<Knowledge Base ID>`.
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of items to return in a single page. By
+   * @param {number} request.pageSize
+   *   The maximum number of items to return in a single page. By
    *   default 10 and at most 100.
-   * @param {string} [request.pageToken]
-   *   Optional. The next_page_token value returned from a previous list request.
+   * @param {string} request.pageToken
+   *   The next_page_token value returned from a previous list request.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -1253,11 +1253,11 @@ export class DocumentsClient {
    * @param {string} request.parent
    *   Required. The knowledge base to list all documents for.
    *   Format: `projects/<Project ID>/knowledgeBases/<Knowledge Base ID>`.
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of items to return in a single page. By
+   * @param {number} request.pageSize
+   *   The maximum number of items to return in a single page. By
    *   default 10 and at most 100.
-   * @param {string} [request.pageToken]
-   *   Optional. The next_page_token value returned from a previous list request.
+   * @param {string} request.pageToken
+   *   The next_page_token value returned from a previous list request.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}

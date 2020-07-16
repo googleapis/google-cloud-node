@@ -35,7 +35,7 @@ import * as gapicConfig from './environments_client_config.json';
 const version = require('../../../package.json').version;
 
 /**
- *  Manages agent environments.
+ *  Service for managing {@link google.cloud.dialogflow.v2beta1.Environment|Environments}.
  * @class
  * @memberof v2beta1
  */

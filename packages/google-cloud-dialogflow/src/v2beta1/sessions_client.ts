@@ -26,10 +26,10 @@ import * as gapicConfig from './sessions_client_config.json';
 const version = require('../../../package.json').version;
 
 /**
- *  A session represents an interaction with a user. You retrieve user input
- *  and pass it to the {@link google.cloud.dialogflow.v2beta1.Sessions.DetectIntent|DetectIntent} (or
- *  {@link google.cloud.dialogflow.v2beta1.Sessions.StreamingDetectIntent|StreamingDetectIntent}) method to determine
- *  user intent and respond.
+ *  A service used for session interactions.
+ *
+ *  For more information, see the [API interactions
+ *  guide](https://cloud.google.com/dialogflow/docs/api-overview).
  * @class
  * @memberof v2beta1
  */
@@ -397,6 +397,9 @@ export class SessionsClient {
    *   `User Id`. They can be a random number or some type of user and session
    *   identifiers (preferably hashed). The length of the `Session ID` and
    *   `User ID` must not exceed 36 characters.
+   *
+   *   For more information, see the [API interactions
+   *   guide](https://cloud.google.com/dialogflow/docs/api-overview).
    * @param {google.cloud.dialogflow.v2beta1.QueryParameters} request.queryParams
    *   The parameters of this query.
    * @param {google.cloud.dialogflow.v2beta1.QueryInput} request.queryInput

@@ -4,15 +4,15 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/nodejs-dialogflow.git",
-        "sha": "2d53e04fd99877369c7d075fdabc407c4be20f84"
+        "sha": "da05254c61d2bfb4d7723b80036800e0f6b04688"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "07460951fc07dd2b3f172d01b04e2a5fefd13ccc",
-        "internalRef": "320124233"
+        "sha": "84ebe7c62f4c0875e001752fa84e87e629a1d418",
+        "internalRef": "321243814"
       }
     },
     {
