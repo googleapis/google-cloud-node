@@ -37,7 +37,7 @@ import {
   timeProfile,
 } from './profiles-for-tests';
 
-import parseDuration = require('parse-duration');
+import parseDuration from 'parse-duration';
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const fakeCredentials = require('../../test/fixtures/gcloud-credentials.json');
 
@@ -61,9 +61,9 @@ const testConfig: ProfilerConfig = {
   heapMaxStackDepth: 64,
   ignoreHeapSamplesPath: '@google-cloud/profiler',
   initialBackoffMillis: 1000,
-  backoffCapMillis: parseDuration('1h'),
+  backoffCapMillis: parseDuration('1h')!,
   backoffMultiplier: 1.3,
-  serverBackoffCapMillis: parseDuration('7d'),
+  serverBackoffCapMillis: parseDuration('7d')!,
   localProfilingPeriodMillis: 1000,
   localTimeDurationMillis: 1000,
   localLogPeriodMillis: 1000,
