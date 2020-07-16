@@ -261,7 +261,7 @@
                     AlertPolicy.decode = function decode(reader, length) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.AlertPolicy(), key;
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.AlertPolicy(), key, value;
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             switch (tag >>> 3) {
@@ -275,12 +275,26 @@
                                 message.documentation = $root.google.monitoring.v3.AlertPolicy.Documentation.decode(reader, reader.uint32());
                                 break;
                             case 16:
-                                reader.skip().pos++;
                                 if (message.userLabels === $util.emptyObject)
                                     message.userLabels = {};
-                                key = reader.string();
-                                reader.pos++;
-                                message.userLabels[key] = reader.string();
+                                var end2 = reader.uint32() + reader.pos;
+                                key = "";
+                                value = "";
+                                while (reader.pos < end2) {
+                                    var tag2 = reader.uint32();
+                                    switch (tag2 >>> 3) {
+                                    case 1:
+                                        key = reader.string();
+                                        break;
+                                    case 2:
+                                        value = reader.string();
+                                        break;
+                                    default:
+                                        reader.skipType(tag2 & 7);
+                                        break;
+                                    }
+                                }
+                                message.userLabels[key] = value;
                                 break;
                             case 12:
                                 if (!(message.conditions && message.conditions.length))
@@ -4993,17 +5007,31 @@
                     DroppedLabels.decode = function decode(reader, length) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.DroppedLabels(), key;
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.DroppedLabels(), key, value;
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             switch (tag >>> 3) {
                             case 1:
-                                reader.skip().pos++;
                                 if (message.label === $util.emptyObject)
                                     message.label = {};
-                                key = reader.string();
-                                reader.pos++;
-                                message.label[key] = reader.string();
+                                var end2 = reader.uint32() + reader.pos;
+                                key = "";
+                                value = "";
+                                while (reader.pos < end2) {
+                                    var tag2 = reader.uint32();
+                                    switch (tag2 >>> 3) {
+                                    case 1:
+                                        key = reader.string();
+                                        break;
+                                    case 2:
+                                        value = reader.string();
+                                        break;
+                                    default:
+                                        reader.skipType(tag2 & 7);
+                                        break;
+                                    }
+                                }
+                                message.label[key] = value;
                                 break;
                             default:
                                 reader.skipType(tag & 7);
@@ -15196,7 +15224,7 @@
                     NotificationChannel.decode = function decode(reader, length) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.NotificationChannel(), key;
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.NotificationChannel(), key, value;
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             switch (tag >>> 3) {
@@ -15213,20 +15241,48 @@
                                 message.description = reader.string();
                                 break;
                             case 5:
-                                reader.skip().pos++;
                                 if (message.labels === $util.emptyObject)
                                     message.labels = {};
-                                key = reader.string();
-                                reader.pos++;
-                                message.labels[key] = reader.string();
+                                var end2 = reader.uint32() + reader.pos;
+                                key = "";
+                                value = "";
+                                while (reader.pos < end2) {
+                                    var tag2 = reader.uint32();
+                                    switch (tag2 >>> 3) {
+                                    case 1:
+                                        key = reader.string();
+                                        break;
+                                    case 2:
+                                        value = reader.string();
+                                        break;
+                                    default:
+                                        reader.skipType(tag2 & 7);
+                                        break;
+                                    }
+                                }
+                                message.labels[key] = value;
                                 break;
                             case 8:
-                                reader.skip().pos++;
                                 if (message.userLabels === $util.emptyObject)
                                     message.userLabels = {};
-                                key = reader.string();
-                                reader.pos++;
-                                message.userLabels[key] = reader.string();
+                                var end2 = reader.uint32() + reader.pos;
+                                key = "";
+                                value = "";
+                                while (reader.pos < end2) {
+                                    var tag2 = reader.uint32();
+                                    switch (tag2 >>> 3) {
+                                    case 1:
+                                        key = reader.string();
+                                        break;
+                                    case 2:
+                                        value = reader.string();
+                                        break;
+                                    default:
+                                        reader.skipType(tag2 & 7);
+                                        break;
+                                    }
+                                }
+                                message.userLabels[key] = value;
                                 break;
                             case 9:
                                 message.verificationStatus = reader.int32();
@@ -28003,7 +28059,7 @@
                         HttpCheck.decode = function decode(reader, length) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.UptimeCheckConfig.HttpCheck(), key;
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.UptimeCheckConfig.HttpCheck(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
@@ -28026,12 +28082,26 @@
                                     message.maskHeaders = reader.bool();
                                     break;
                                 case 6:
-                                    reader.skip().pos++;
                                     if (message.headers === $util.emptyObject)
                                         message.headers = {};
-                                    key = reader.string();
-                                    reader.pos++;
-                                    message.headers[key] = reader.string();
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = "";
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = reader.string();
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.headers[key] = value;
                                     break;
                                 case 9:
                                     message.contentType = reader.int32();
@@ -34978,7 +35048,7 @@
                 MonitoredResource.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.MonitoredResource(), key;
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.MonitoredResource(), key, value;
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
@@ -34986,12 +35056,26 @@
                             message.type = reader.string();
                             break;
                         case 2:
-                            reader.skip().pos++;
                             if (message.labels === $util.emptyObject)
                                 message.labels = {};
-                            key = reader.string();
-                            reader.pos++;
-                            message.labels[key] = reader.string();
+                            var end2 = reader.uint32() + reader.pos;
+                            key = "";
+                            value = "";
+                            while (reader.pos < end2) {
+                                var tag2 = reader.uint32();
+                                switch (tag2 >>> 3) {
+                                case 1:
+                                    key = reader.string();
+                                    break;
+                                case 2:
+                                    value = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag2 & 7);
+                                    break;
+                                }
+                            }
+                            message.labels[key] = value;
                             break;
                         default:
                             reader.skipType(tag & 7);
@@ -35209,7 +35293,7 @@
                 MonitoredResourceMetadata.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.MonitoredResourceMetadata(), key;
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.MonitoredResourceMetadata(), key, value;
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
@@ -35217,12 +35301,26 @@
                             message.systemLabels = $root.google.protobuf.Struct.decode(reader, reader.uint32());
                             break;
                         case 2:
-                            reader.skip().pos++;
                             if (message.userLabels === $util.emptyObject)
                                 message.userLabels = {};
-                            key = reader.string();
-                            reader.pos++;
-                            message.userLabels[key] = reader.string();
+                            var end2 = reader.uint32() + reader.pos;
+                            key = "";
+                            value = "";
+                            while (reader.pos < end2) {
+                                var tag2 = reader.uint32();
+                                switch (tag2 >>> 3) {
+                                case 1:
+                                    key = reader.string();
+                                    break;
+                                case 2:
+                                    value = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag2 & 7);
+                                    break;
+                                }
+                            }
+                            message.userLabels[key] = value;
                             break;
                         default:
                             reader.skipType(tag & 7);
@@ -36557,7 +36655,7 @@
                 Metric.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.Metric(), key;
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.Metric(), key, value;
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
@@ -36565,12 +36663,26 @@
                             message.type = reader.string();
                             break;
                         case 2:
-                            reader.skip().pos++;
                             if (message.labels === $util.emptyObject)
                                 message.labels = {};
-                            key = reader.string();
-                            reader.pos++;
-                            message.labels[key] = reader.string();
+                            var end2 = reader.uint32() + reader.pos;
+                            key = "";
+                            value = "";
+                            while (reader.pos < end2) {
+                                var tag2 = reader.uint32();
+                                switch (tag2 >>> 3) {
+                                case 1:
+                                    key = reader.string();
+                                    break;
+                                case 2:
+                                    value = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag2 & 7);
+                                    break;
+                                }
+                            }
+                            message.labels[key] = value;
                             break;
                         default:
                             reader.skipType(tag & 7);
@@ -47853,17 +47965,31 @@
                 Struct.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Struct(), key;
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Struct(), key, value;
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
                         case 1:
-                            reader.skip().pos++;
                             if (message.fields === $util.emptyObject)
                                 message.fields = {};
-                            key = reader.string();
-                            reader.pos++;
-                            message.fields[key] = $root.google.protobuf.Value.decode(reader, reader.uint32());
+                            var end2 = reader.uint32() + reader.pos;
+                            key = "";
+                            value = null;
+                            while (reader.pos < end2) {
+                                var tag2 = reader.uint32();
+                                switch (tag2 >>> 3) {
+                                case 1:
+                                    key = reader.string();
+                                    break;
+                                case 2:
+                                    value = $root.google.protobuf.Value.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag2 & 7);
+                                    break;
+                                }
+                            }
+                            message.fields[key] = value;
                             break;
                         default:
                             reader.skipType(tag & 7);
