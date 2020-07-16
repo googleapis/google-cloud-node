@@ -993,8 +993,8 @@ describe('v1.ClusterControllerClient', () => {
           (
             err?: Error | null,
             result?: LROperation<
-              protos.google.protobuf.IEmpty,
-              protos.google.cloud.dataproc.v1.IDiagnoseClusterResults
+              protos.google.cloud.dataproc.v1.IDiagnoseClusterResults,
+              protos.google.cloud.dataproc.v1.IClusterOperationMetadata
             > | null
           ) => {
             if (err) {
@@ -1006,8 +1006,8 @@ describe('v1.ClusterControllerClient', () => {
         );
       });
       const operation = (await promise) as LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.dataproc.v1.IDiagnoseClusterResults
+        protos.google.cloud.dataproc.v1.IDiagnoseClusterResults,
+        protos.google.cloud.dataproc.v1.IClusterOperationMetadata
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);

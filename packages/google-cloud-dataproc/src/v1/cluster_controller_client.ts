@@ -223,10 +223,10 @@ export class ClusterControllerClient {
       '.google.cloud.dataproc.v1.ClusterOperationMetadata'
     ) as gax.protobuf.Type;
     const diagnoseClusterResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty'
+      '.google.cloud.dataproc.v1.DiagnoseClusterResults'
     ) as gax.protobuf.Type;
     const diagnoseClusterMetadata = protoFilesRoot.lookup(
-      '.google.cloud.dataproc.v1.DiagnoseClusterResults'
+      '.google.cloud.dataproc.v1.ClusterOperationMetadata'
     ) as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
@@ -1001,8 +1001,8 @@ export class ClusterControllerClient {
   ): Promise<
     [
       LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.dataproc.v1.IDiagnoseClusterResults
+        protos.google.cloud.dataproc.v1.IDiagnoseClusterResults,
+        protos.google.cloud.dataproc.v1.IClusterOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
       {} | undefined
@@ -1013,8 +1013,8 @@ export class ClusterControllerClient {
     options: gax.CallOptions,
     callback: Callback<
       LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.dataproc.v1.IDiagnoseClusterResults
+        protos.google.cloud.dataproc.v1.IDiagnoseClusterResults,
+        protos.google.cloud.dataproc.v1.IClusterOperationMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
@@ -1024,8 +1024,8 @@ export class ClusterControllerClient {
     request: protos.google.cloud.dataproc.v1.IDiagnoseClusterRequest,
     callback: Callback<
       LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.dataproc.v1.IDiagnoseClusterResults
+        protos.google.cloud.dataproc.v1.IDiagnoseClusterResults,
+        protos.google.cloud.dataproc.v1.IClusterOperationMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
@@ -1061,16 +1061,16 @@ export class ClusterControllerClient {
       | gax.CallOptions
       | Callback<
           LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.dataproc.v1.IDiagnoseClusterResults
+            protos.google.cloud.dataproc.v1.IDiagnoseClusterResults,
+            protos.google.cloud.dataproc.v1.IClusterOperationMetadata
           >,
           protos.google.longrunning.IOperation | null | undefined,
           {} | null | undefined
         >,
     callback?: Callback<
       LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.dataproc.v1.IDiagnoseClusterResults
+        protos.google.cloud.dataproc.v1.IDiagnoseClusterResults,
+        protos.google.cloud.dataproc.v1.IClusterOperationMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
@@ -1078,8 +1078,8 @@ export class ClusterControllerClient {
   ): Promise<
     [
       LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.dataproc.v1.IDiagnoseClusterResults
+        protos.google.cloud.dataproc.v1.IDiagnoseClusterResults,
+        protos.google.cloud.dataproc.v1.IClusterOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
       {} | undefined
@@ -1122,8 +1122,8 @@ export class ClusterControllerClient {
     name: string
   ): Promise<
     LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.dataproc.v1.DiagnoseClusterResults
+      protos.google.cloud.dataproc.v1.DiagnoseClusterResults,
+      protos.google.cloud.dataproc.v1.ClusterOperationMetadata
     >
   > {
     const request = new operationsProtos.google.longrunning.GetOperationRequest(
@@ -1136,8 +1136,8 @@ export class ClusterControllerClient {
       gax.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.dataproc.v1.DiagnoseClusterResults
+      protos.google.cloud.dataproc.v1.DiagnoseClusterResults,
+      protos.google.cloud.dataproc.v1.ClusterOperationMetadata
     >;
   }
   listClusters(

@@ -362,8 +362,8 @@
                             "(google.api.http).post": "/v1/projects/{project_id}/regions/{region}/clusters/{cluster_name}:diagnose",
                             "(google.api.http).body": "*",
                             "(google.api.method_signature)": "project_id,region,cluster_name",
-                            "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
-                            "(google.longrunning.operation_info).metadata_type": "DiagnoseClusterResults"
+                            "(google.longrunning.operation_info).response_type": "DiagnoseClusterResults",
+                            "(google.longrunning.operation_info).metadata_type": "google.cloud.dataproc.v1.ClusterOperationMetadata"
                           }
                         }
                       }
