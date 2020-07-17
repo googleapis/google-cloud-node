@@ -415,7 +415,7 @@
                         LoginProfile.decode = function decode(reader, length) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.oslogin.v1.LoginProfile(), key;
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.oslogin.v1.LoginProfile(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
@@ -428,12 +428,26 @@
                                     message.posixAccounts.push($root.google.cloud.oslogin.common.PosixAccount.decode(reader, reader.uint32()));
                                     break;
                                 case 3:
-                                    reader.skip().pos++;
                                     if (message.sshPublicKeys === $util.emptyObject)
                                         message.sshPublicKeys = {};
-                                    key = reader.string();
-                                    reader.pos++;
-                                    message.sshPublicKeys[key] = $root.google.cloud.oslogin.common.SshPublicKey.decode(reader, reader.uint32());
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = null;
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = $root.google.cloud.oslogin.common.SshPublicKey.decode(reader, reader.uint32());
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.sshPublicKeys[key] = value;
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -3156,7 +3170,7 @@
                         LoginProfile.decode = function decode(reader, length) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.oslogin.v1beta.LoginProfile(), key;
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.oslogin.v1beta.LoginProfile(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
@@ -3169,12 +3183,26 @@
                                     message.posixAccounts.push($root.google.cloud.oslogin.common.PosixAccount.decode(reader, reader.uint32()));
                                     break;
                                 case 3:
-                                    reader.skip().pos++;
                                     if (message.sshPublicKeys === $util.emptyObject)
                                         message.sshPublicKeys = {};
-                                    key = reader.string();
-                                    reader.pos++;
-                                    message.sshPublicKeys[key] = $root.google.cloud.oslogin.common.SshPublicKey.decode(reader, reader.uint32());
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = null;
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = $root.google.cloud.oslogin.common.SshPublicKey.decode(reader, reader.uint32());
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.sshPublicKeys[key] = value;
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
