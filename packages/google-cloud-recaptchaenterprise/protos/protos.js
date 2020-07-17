@@ -3579,7 +3579,7 @@
                         Key.decode = function decode(reader, length) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.recaptchaenterprise.v1.Key(), key;
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.recaptchaenterprise.v1.Key(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
@@ -3599,12 +3599,26 @@
                                     message.iosSettings = $root.google.cloud.recaptchaenterprise.v1.IOSKeySettings.decode(reader, reader.uint32());
                                     break;
                                 case 6:
-                                    reader.skip().pos++;
                                     if (message.labels === $util.emptyObject)
                                         message.labels = {};
-                                    key = reader.string();
-                                    reader.pos++;
-                                    message.labels[key] = reader.string();
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = "";
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = reader.string();
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.labels[key] = value;
                                     break;
                                 case 7:
                                     message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
