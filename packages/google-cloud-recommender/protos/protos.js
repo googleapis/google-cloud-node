@@ -869,7 +869,7 @@
                         InsightStateInfo.decode = function decode(reader, length) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.recommender.v1.InsightStateInfo(), key;
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.recommender.v1.InsightStateInfo(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
@@ -877,12 +877,26 @@
                                     message.state = reader.int32();
                                     break;
                                 case 2:
-                                    reader.skip().pos++;
                                     if (message.stateMetadata === $util.emptyObject)
                                         message.stateMetadata = {};
-                                    key = reader.string();
-                                    reader.pos++;
-                                    message.stateMetadata[key] = reader.string();
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = "";
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = reader.string();
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.stateMetadata[key] = value;
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -2302,7 +2316,7 @@
                         Operation.decode = function decode(reader, length) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.recommender.v1.Operation(), key;
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.recommender.v1.Operation(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
@@ -2331,20 +2345,48 @@
                                     message.valueMatcher = $root.google.cloud.recommender.v1.ValueMatcher.decode(reader, reader.uint32());
                                     break;
                                 case 8:
-                                    reader.skip().pos++;
                                     if (message.pathFilters === $util.emptyObject)
                                         message.pathFilters = {};
-                                    key = reader.string();
-                                    reader.pos++;
-                                    message.pathFilters[key] = $root.google.protobuf.Value.decode(reader, reader.uint32());
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = null;
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = $root.google.protobuf.Value.decode(reader, reader.uint32());
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.pathFilters[key] = value;
                                     break;
                                 case 11:
-                                    reader.skip().pos++;
                                     if (message.pathValueMatchers === $util.emptyObject)
                                         message.pathValueMatchers = {};
-                                    key = reader.string();
-                                    reader.pos++;
-                                    message.pathValueMatchers[key] = $root.google.cloud.recommender.v1.ValueMatcher.decode(reader, reader.uint32());
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = null;
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = $root.google.cloud.recommender.v1.ValueMatcher.decode(reader, reader.uint32());
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.pathValueMatchers[key] = value;
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -3381,7 +3423,7 @@
                         RecommendationStateInfo.decode = function decode(reader, length) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.recommender.v1.RecommendationStateInfo(), key;
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.recommender.v1.RecommendationStateInfo(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
@@ -3389,12 +3431,26 @@
                                     message.state = reader.int32();
                                     break;
                                 case 2:
-                                    reader.skip().pos++;
                                     if (message.stateMetadata === $util.emptyObject)
                                         message.stateMetadata = {};
-                                    key = reader.string();
-                                    reader.pos++;
-                                    message.stateMetadata[key] = reader.string();
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = "";
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = reader.string();
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.stateMetadata[key] = value;
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -4649,7 +4705,7 @@
                         MarkInsightAcceptedRequest.decode = function decode(reader, length) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.recommender.v1.MarkInsightAcceptedRequest(), key;
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.recommender.v1.MarkInsightAcceptedRequest(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
@@ -4657,12 +4713,26 @@
                                     message.name = reader.string();
                                     break;
                                 case 2:
-                                    reader.skip().pos++;
                                     if (message.stateMetadata === $util.emptyObject)
                                         message.stateMetadata = {};
-                                    key = reader.string();
-                                    reader.pos++;
-                                    message.stateMetadata[key] = reader.string();
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = "";
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = reader.string();
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.stateMetadata[key] = value;
                                     break;
                                 case 3:
                                     message.etag = reader.string();
@@ -5575,7 +5645,7 @@
                         MarkRecommendationClaimedRequest.decode = function decode(reader, length) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.recommender.v1.MarkRecommendationClaimedRequest(), key;
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.recommender.v1.MarkRecommendationClaimedRequest(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
@@ -5583,12 +5653,26 @@
                                     message.name = reader.string();
                                     break;
                                 case 2:
-                                    reader.skip().pos++;
                                     if (message.stateMetadata === $util.emptyObject)
                                         message.stateMetadata = {};
-                                    key = reader.string();
-                                    reader.pos++;
-                                    message.stateMetadata[key] = reader.string();
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = "";
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = reader.string();
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.stateMetadata[key] = value;
                                     break;
                                 case 3:
                                     message.etag = reader.string();
@@ -5829,7 +5913,7 @@
                         MarkRecommendationSucceededRequest.decode = function decode(reader, length) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.recommender.v1.MarkRecommendationSucceededRequest(), key;
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.recommender.v1.MarkRecommendationSucceededRequest(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
@@ -5837,12 +5921,26 @@
                                     message.name = reader.string();
                                     break;
                                 case 2:
-                                    reader.skip().pos++;
                                     if (message.stateMetadata === $util.emptyObject)
                                         message.stateMetadata = {};
-                                    key = reader.string();
-                                    reader.pos++;
-                                    message.stateMetadata[key] = reader.string();
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = "";
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = reader.string();
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.stateMetadata[key] = value;
                                     break;
                                 case 3:
                                     message.etag = reader.string();
@@ -6083,7 +6181,7 @@
                         MarkRecommendationFailedRequest.decode = function decode(reader, length) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.recommender.v1.MarkRecommendationFailedRequest(), key;
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.recommender.v1.MarkRecommendationFailedRequest(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
@@ -6091,12 +6189,26 @@
                                     message.name = reader.string();
                                     break;
                                 case 2:
-                                    reader.skip().pos++;
                                     if (message.stateMetadata === $util.emptyObject)
                                         message.stateMetadata = {};
-                                    key = reader.string();
-                                    reader.pos++;
-                                    message.stateMetadata[key] = reader.string();
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = "";
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = reader.string();
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.stateMetadata[key] = value;
                                     break;
                                 case 3:
                                     message.etag = reader.string();
@@ -16731,17 +16843,31 @@
                 Struct.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Struct(), key;
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Struct(), key, value;
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
                         case 1:
-                            reader.skip().pos++;
                             if (message.fields === $util.emptyObject)
                                 message.fields = {};
-                            key = reader.string();
-                            reader.pos++;
-                            message.fields[key] = $root.google.protobuf.Value.decode(reader, reader.uint32());
+                            var end2 = reader.uint32() + reader.pos;
+                            key = "";
+                            value = null;
+                            while (reader.pos < end2) {
+                                var tag2 = reader.uint32();
+                                switch (tag2 >>> 3) {
+                                case 1:
+                                    key = reader.string();
+                                    break;
+                                case 2:
+                                    value = $root.google.protobuf.Value.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag2 & 7);
+                                    break;
+                                }
+                            }
+                            message.fields[key] = value;
                             break;
                         default:
                             reader.skipType(tag & 7);
