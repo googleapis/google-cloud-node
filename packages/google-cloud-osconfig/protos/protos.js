@@ -9981,17 +9981,31 @@
                             GroupLabel.decode = function decode(reader, length) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
-                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.osconfig.v1.PatchInstanceFilter.GroupLabel(), key;
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.osconfig.v1.PatchInstanceFilter.GroupLabel(), key, value;
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
                                     switch (tag >>> 3) {
                                     case 1:
-                                        reader.skip().pos++;
                                         if (message.labels === $util.emptyObject)
                                             message.labels = {};
-                                        key = reader.string();
-                                        reader.pos++;
-                                        message.labels[key] = reader.string();
+                                        var end2 = reader.uint32() + reader.pos;
+                                        key = "";
+                                        value = "";
+                                        while (reader.pos < end2) {
+                                            var tag2 = reader.uint32();
+                                            switch (tag2 >>> 3) {
+                                            case 1:
+                                                key = reader.string();
+                                                break;
+                                            case 2:
+                                                value = reader.string();
+                                                break;
+                                            default:
+                                                reader.skipType(tag2 & 7);
+                                                break;
+                                            }
+                                        }
+                                        message.labels[key] = value;
                                         break;
                                     default:
                                         reader.skipType(tag & 7);
