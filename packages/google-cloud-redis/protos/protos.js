@@ -688,7 +688,7 @@
                         Instance.decode = function decode(reader, length) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.redis.v1.Instance(), key;
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.redis.v1.Instance(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
@@ -699,12 +699,26 @@
                                     message.displayName = reader.string();
                                     break;
                                 case 3:
-                                    reader.skip().pos++;
                                     if (message.labels === $util.emptyObject)
                                         message.labels = {};
-                                    key = reader.string();
-                                    reader.pos++;
-                                    message.labels[key] = reader.string();
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = "";
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = reader.string();
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.labels[key] = value;
                                     break;
                                 case 4:
                                     message.locationId = reader.string();
@@ -737,12 +751,26 @@
                                     message.statusMessage = reader.string();
                                     break;
                                 case 16:
-                                    reader.skip().pos++;
                                     if (message.redisConfigs === $util.emptyObject)
                                         message.redisConfigs = {};
-                                    key = reader.string();
-                                    reader.pos++;
-                                    message.redisConfigs[key] = reader.string();
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = "";
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = reader.string();
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.redisConfigs[key] = value;
                                     break;
                                 case 17:
                                     message.tier = reader.int32();
@@ -4609,17 +4637,31 @@
                         LocationMetadata.decode = function decode(reader, length) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.redis.v1.LocationMetadata(), key;
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.redis.v1.LocationMetadata(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
                                 case 1:
-                                    reader.skip().pos++;
                                     if (message.availableZones === $util.emptyObject)
                                         message.availableZones = {};
-                                    key = reader.string();
-                                    reader.pos++;
-                                    message.availableZones[key] = $root.google.cloud.redis.v1.ZoneMetadata.decode(reader, reader.uint32());
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = null;
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = $root.google.cloud.redis.v1.ZoneMetadata.decode(reader, reader.uint32());
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.availableZones[key] = value;
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -5526,7 +5568,7 @@
                         Instance.decode = function decode(reader, length) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.redis.v1beta1.Instance(), key;
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.redis.v1beta1.Instance(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
@@ -5537,12 +5579,26 @@
                                     message.displayName = reader.string();
                                     break;
                                 case 3:
-                                    reader.skip().pos++;
                                     if (message.labels === $util.emptyObject)
                                         message.labels = {};
-                                    key = reader.string();
-                                    reader.pos++;
-                                    message.labels[key] = reader.string();
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = "";
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = reader.string();
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.labels[key] = value;
                                     break;
                                 case 4:
                                     message.locationId = reader.string();
@@ -5575,12 +5631,26 @@
                                     message.statusMessage = reader.string();
                                     break;
                                 case 16:
-                                    reader.skip().pos++;
                                     if (message.redisConfigs === $util.emptyObject)
                                         message.redisConfigs = {};
-                                    key = reader.string();
-                                    reader.pos++;
-                                    message.redisConfigs[key] = reader.string();
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = "";
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = reader.string();
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.redisConfigs[key] = value;
                                     break;
                                 case 17:
                                     message.tier = reader.int32();
@@ -9117,17 +9187,31 @@
                         LocationMetadata.decode = function decode(reader, length) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.redis.v1beta1.LocationMetadata(), key;
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.redis.v1beta1.LocationMetadata(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
                                 case 1:
-                                    reader.skip().pos++;
                                     if (message.availableZones === $util.emptyObject)
                                         message.availableZones = {};
-                                    key = reader.string();
-                                    reader.pos++;
-                                    message.availableZones[key] = $root.google.cloud.redis.v1beta1.ZoneMetadata.decode(reader, reader.uint32());
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = null;
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = $root.google.cloud.redis.v1beta1.ZoneMetadata.decode(reader, reader.uint32());
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.availableZones[key] = value;
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
