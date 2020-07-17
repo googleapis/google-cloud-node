@@ -4,7 +4,7 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/nodejs-memcache.git",
-        "sha": "baa848e3012e46073f2d7a669b6b01e23eaf8966"
+        "sha": "9e783c2578b4fa8883df13036ef0b9ae22451ccd"
       }
     },
     {
@@ -19,7 +19,7 @@
       "git": {
         "name": "synthtool",
         "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "388e10f5ae302d3e8de1fac99f3a95d1ab8f824a"
+        "sha": "21f1470ecd01424dc91c70f1a7c798e4e87d1eec"
       }
     }
   ],
