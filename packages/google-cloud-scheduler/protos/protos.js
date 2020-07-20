@@ -3249,7 +3249,7 @@
                         HttpTarget.decode = function decode(reader, length) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.scheduler.v1.HttpTarget(), key;
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.scheduler.v1.HttpTarget(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
@@ -3260,12 +3260,26 @@
                                     message.httpMethod = reader.int32();
                                     break;
                                 case 3:
-                                    reader.skip().pos++;
                                     if (message.headers === $util.emptyObject)
                                         message.headers = {};
-                                    key = reader.string();
-                                    reader.pos++;
-                                    message.headers[key] = reader.string();
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = "";
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = reader.string();
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.headers[key] = value;
                                     break;
                                 case 4:
                                     message.body = reader.bytes();
@@ -3633,7 +3647,7 @@
                         AppEngineHttpTarget.decode = function decode(reader, length) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.scheduler.v1.AppEngineHttpTarget(), key;
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.scheduler.v1.AppEngineHttpTarget(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
@@ -3647,12 +3661,26 @@
                                     message.relativeUri = reader.string();
                                     break;
                                 case 4:
-                                    reader.skip().pos++;
                                     if (message.headers === $util.emptyObject)
                                         message.headers = {};
-                                    key = reader.string();
-                                    reader.pos++;
-                                    message.headers[key] = reader.string();
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = "";
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = reader.string();
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.headers[key] = value;
                                     break;
                                 case 5:
                                     message.body = reader.bytes();
@@ -3966,7 +3994,7 @@
                         PubsubTarget.decode = function decode(reader, length) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.scheduler.v1.PubsubTarget(), key;
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.scheduler.v1.PubsubTarget(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
@@ -3977,12 +4005,26 @@
                                     message.data = reader.bytes();
                                     break;
                                 case 4:
-                                    reader.skip().pos++;
                                     if (message.attributes === $util.emptyObject)
                                         message.attributes = {};
-                                    key = reader.string();
-                                    reader.pos++;
-                                    message.attributes[key] = reader.string();
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = "";
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = reader.string();
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.attributes[key] = value;
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -8012,7 +8054,7 @@
                         HttpTarget.decode = function decode(reader, length) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.scheduler.v1beta1.HttpTarget(), key;
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.scheduler.v1beta1.HttpTarget(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
@@ -8023,12 +8065,26 @@
                                     message.httpMethod = reader.int32();
                                     break;
                                 case 3:
-                                    reader.skip().pos++;
                                     if (message.headers === $util.emptyObject)
                                         message.headers = {};
-                                    key = reader.string();
-                                    reader.pos++;
-                                    message.headers[key] = reader.string();
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = "";
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = reader.string();
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.headers[key] = value;
                                     break;
                                 case 4:
                                     message.body = reader.bytes();
@@ -8396,7 +8452,7 @@
                         AppEngineHttpTarget.decode = function decode(reader, length) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.scheduler.v1beta1.AppEngineHttpTarget(), key;
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.scheduler.v1beta1.AppEngineHttpTarget(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
@@ -8410,12 +8466,26 @@
                                     message.relativeUri = reader.string();
                                     break;
                                 case 4:
-                                    reader.skip().pos++;
                                     if (message.headers === $util.emptyObject)
                                         message.headers = {};
-                                    key = reader.string();
-                                    reader.pos++;
-                                    message.headers[key] = reader.string();
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = "";
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = reader.string();
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.headers[key] = value;
                                     break;
                                 case 5:
                                     message.body = reader.bytes();
@@ -8729,7 +8799,7 @@
                         PubsubTarget.decode = function decode(reader, length) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.scheduler.v1beta1.PubsubTarget(), key;
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.scheduler.v1beta1.PubsubTarget(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
@@ -8740,12 +8810,26 @@
                                     message.data = reader.bytes();
                                     break;
                                 case 4:
-                                    reader.skip().pos++;
                                     if (message.attributes === $util.emptyObject)
                                         message.attributes = {};
-                                    key = reader.string();
-                                    reader.pos++;
-                                    message.attributes[key] = reader.string();
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = "";
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = reader.string();
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.attributes[key] = value;
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
