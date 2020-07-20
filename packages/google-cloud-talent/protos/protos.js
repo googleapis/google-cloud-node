@@ -17296,7 +17296,7 @@
                         HistogramQueryResult.decode = function decode(reader, length) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.talent.v4beta1.HistogramQueryResult(), key;
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.talent.v4beta1.HistogramQueryResult(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
@@ -17304,12 +17304,26 @@
                                     message.histogramQuery = reader.string();
                                     break;
                                 case 2:
-                                    reader.skip().pos++;
                                     if (message.histogram === $util.emptyObject)
                                         message.histogram = {};
-                                    key = reader.string();
-                                    reader.pos++;
-                                    message.histogram[key] = reader.int64();
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = 0;
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = reader.int64();
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.histogram[key] = value;
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -17864,7 +17878,7 @@
                         Job.decode = function decode(reader, length) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.talent.v4beta1.Job(), key;
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.talent.v4beta1.Job(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
@@ -17905,12 +17919,26 @@
                                     message.compensationInfo = $root.google.cloud.talent.v4beta1.CompensationInfo.decode(reader, reader.uint32());
                                     break;
                                 case 10:
-                                    reader.skip().pos++;
                                     if (message.customAttributes === $util.emptyObject)
                                         message.customAttributes = {};
-                                    key = reader.string();
-                                    reader.pos++;
-                                    message.customAttributes[key] = $root.google.cloud.talent.v4beta1.CustomAttribute.decode(reader, reader.uint32());
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = null;
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = $root.google.cloud.talent.v4beta1.CustomAttribute.decode(reader, reader.uint32());
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.customAttributes[key] = value;
                                     break;
                                 case 11:
                                     if (!(message.degreeTypes && message.degreeTypes.length))
@@ -24780,7 +24808,7 @@
                         Profile.decode = function decode(reader, length) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.talent.v4beta1.Profile(), key;
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.talent.v4beta1.Profile(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
@@ -24893,12 +24921,26 @@
                                     message.assignments.push(reader.string());
                                     break;
                                 case 26:
-                                    reader.skip().pos++;
                                     if (message.customAttributes === $util.emptyObject)
                                         message.customAttributes = {};
-                                    key = reader.string();
-                                    reader.pos++;
-                                    message.customAttributes[key] = $root.google.cloud.talent.v4beta1.CustomAttribute.decode(reader, reader.uint32());
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = null;
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = $root.google.cloud.talent.v4beta1.CustomAttribute.decode(reader, reader.uint32());
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.customAttributes[key] = value;
                                     break;
                                 case 27:
                                     message.processed = reader.bool();
