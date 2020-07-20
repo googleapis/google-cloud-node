@@ -36,6 +36,7 @@ describe('subscriptions', () => {
   const subscriptionNameFive = `sub5-${runId}`;
   const subscriptionNameSix = `sub6-${runId}`;
   const subscriptionNameSeven = `sub7-${runId}`;
+  const subscriptionNameDetach = `testdetachsubsxyz-${runId}`;
   const fullTopicNameOne = `projects/${projectId}/topics/${topicNameOne}`;
   const fullSubscriptionNameOne = `projects/${projectId}/subscriptions/${subscriptionNameOne}`;
   const fullSubscriptionNameTwo = `projects/${projectId}/subscriptions/${subscriptionNameTwo}`;
@@ -289,6 +290,19 @@ describe('subscriptions', () => {
     const [subscriptions] = await pubsub.getSubscriptions();
     assert.ok(subscriptions);
     assert(subscriptions.every(s => s.name !== fullSubscriptionNameOne));
+  });
+
+  it('should detach a subscription', async () => {
+    await pubsub.createSubscription(topicNameOne, subscriptionNameDetach);
+    const output = execSync(
+      `${commandFor('detachSubscription')} ${subscriptionNameDetach}`
+    );
+    assert.include(output, "'before' detached status: false");
+    assert.include(output, "'after' detached status: true");
+    const [subscriptionDetached] = await pubsub
+      .subscription(subscriptionNameDetach)
+      .detached();
+    assert(subscriptionDetached === true);
   });
 
   it('should create a subscription with dead letter policy.', async () => {
