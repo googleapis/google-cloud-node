@@ -744,7 +744,7 @@
                         TranslateTextRequest.decode = function decode(reader, length) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.translation.v3.TranslateTextRequest(), key;
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.translation.v3.TranslateTextRequest(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
@@ -772,12 +772,26 @@
                                     message.glossaryConfig = $root.google.cloud.translation.v3.TranslateTextGlossaryConfig.decode(reader, reader.uint32());
                                     break;
                                 case 10:
-                                    reader.skip().pos++;
                                     if (message.labels === $util.emptyObject)
                                         message.labels = {};
-                                    key = reader.string();
-                                    reader.pos++;
-                                    message.labels[key] = reader.string();
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = "";
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = reader.string();
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.labels[key] = value;
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -1620,7 +1634,7 @@
                         DetectLanguageRequest.decode = function decode(reader, length) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.translation.v3.DetectLanguageRequest(), key;
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.translation.v3.DetectLanguageRequest(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
@@ -1637,12 +1651,26 @@
                                     message.mimeType = reader.string();
                                     break;
                                 case 6:
-                                    reader.skip().pos++;
                                     if (message.labels === $util.emptyObject)
                                         message.labels = {};
-                                    key = reader.string();
-                                    reader.pos++;
-                                    message.labels[key] = reader.string();
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = "";
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = reader.string();
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.labels[key] = value;
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -3897,7 +3925,7 @@
                         BatchTranslateTextRequest.decode = function decode(reader, length) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.translation.v3.BatchTranslateTextRequest(), key;
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.translation.v3.BatchTranslateTextRequest(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
@@ -3913,12 +3941,26 @@
                                     message.targetLanguageCodes.push(reader.string());
                                     break;
                                 case 4:
-                                    reader.skip().pos++;
                                     if (message.models === $util.emptyObject)
                                         message.models = {};
-                                    key = reader.string();
-                                    reader.pos++;
-                                    message.models[key] = reader.string();
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = "";
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = reader.string();
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.models[key] = value;
                                     break;
                                 case 5:
                                     if (!(message.inputConfigs && message.inputConfigs.length))
@@ -3929,20 +3971,48 @@
                                     message.outputConfig = $root.google.cloud.translation.v3.OutputConfig.decode(reader, reader.uint32());
                                     break;
                                 case 7:
-                                    reader.skip().pos++;
                                     if (message.glossaries === $util.emptyObject)
                                         message.glossaries = {};
-                                    key = reader.string();
-                                    reader.pos++;
-                                    message.glossaries[key] = $root.google.cloud.translation.v3.TranslateTextGlossaryConfig.decode(reader, reader.uint32());
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = null;
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = $root.google.cloud.translation.v3.TranslateTextGlossaryConfig.decode(reader, reader.uint32());
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.glossaries[key] = value;
                                     break;
                                 case 9:
-                                    reader.skip().pos++;
                                     if (message.labels === $util.emptyObject)
                                         message.labels = {};
-                                    key = reader.string();
-                                    reader.pos++;
-                                    message.labels[key] = reader.string();
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = "";
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = reader.string();
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.labels[key] = value;
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -8468,7 +8538,7 @@
                         TranslateTextRequest.decode = function decode(reader, length) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.translation.v3beta1.TranslateTextRequest(), key;
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.translation.v3beta1.TranslateTextRequest(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
@@ -8496,12 +8566,26 @@
                                     message.glossaryConfig = $root.google.cloud.translation.v3beta1.TranslateTextGlossaryConfig.decode(reader, reader.uint32());
                                     break;
                                 case 10:
-                                    reader.skip().pos++;
                                     if (message.labels === $util.emptyObject)
                                         message.labels = {};
-                                    key = reader.string();
-                                    reader.pos++;
-                                    message.labels[key] = reader.string();
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = "";
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = reader.string();
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.labels[key] = value;
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -9344,7 +9428,7 @@
                         DetectLanguageRequest.decode = function decode(reader, length) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.translation.v3beta1.DetectLanguageRequest(), key;
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.translation.v3beta1.DetectLanguageRequest(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
@@ -9361,12 +9445,26 @@
                                     message.mimeType = reader.string();
                                     break;
                                 case 6:
-                                    reader.skip().pos++;
                                     if (message.labels === $util.emptyObject)
                                         message.labels = {};
-                                    key = reader.string();
-                                    reader.pos++;
-                                    message.labels[key] = reader.string();
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = "";
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = reader.string();
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.labels[key] = value;
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -11621,7 +11719,7 @@
                         BatchTranslateTextRequest.decode = function decode(reader, length) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.translation.v3beta1.BatchTranslateTextRequest(), key;
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.translation.v3beta1.BatchTranslateTextRequest(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
@@ -11637,12 +11735,26 @@
                                     message.targetLanguageCodes.push(reader.string());
                                     break;
                                 case 4:
-                                    reader.skip().pos++;
                                     if (message.models === $util.emptyObject)
                                         message.models = {};
-                                    key = reader.string();
-                                    reader.pos++;
-                                    message.models[key] = reader.string();
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = "";
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = reader.string();
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.models[key] = value;
                                     break;
                                 case 5:
                                     if (!(message.inputConfigs && message.inputConfigs.length))
@@ -11653,20 +11765,48 @@
                                     message.outputConfig = $root.google.cloud.translation.v3beta1.OutputConfig.decode(reader, reader.uint32());
                                     break;
                                 case 7:
-                                    reader.skip().pos++;
                                     if (message.glossaries === $util.emptyObject)
                                         message.glossaries = {};
-                                    key = reader.string();
-                                    reader.pos++;
-                                    message.glossaries[key] = $root.google.cloud.translation.v3beta1.TranslateTextGlossaryConfig.decode(reader, reader.uint32());
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = null;
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = $root.google.cloud.translation.v3beta1.TranslateTextGlossaryConfig.decode(reader, reader.uint32());
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.glossaries[key] = value;
                                     break;
                                 case 9:
-                                    reader.skip().pos++;
                                     if (message.labels === $util.emptyObject)
                                         message.labels = {};
-                                    key = reader.string();
-                                    reader.pos++;
-                                    message.labels[key] = reader.string();
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = "";
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = reader.string();
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.labels[key] = value;
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
