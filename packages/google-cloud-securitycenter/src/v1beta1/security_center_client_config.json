@@ -46,22 +46,22 @@
           "retry_params_name": "default"
         },
         "GroupAssets": {
-          "timeout_millis": 60000,
+          "timeout_millis": 480000,
           "retry_codes_name": "idempotent",
           "retry_params_name": "default"
         },
         "GroupFindings": {
-          "timeout_millis": 60000,
+          "timeout_millis": 480000,
           "retry_codes_name": "idempotent",
           "retry_params_name": "default"
         },
         "ListAssets": {
-          "timeout_millis": 60000,
+          "timeout_millis": 480000,
           "retry_codes_name": "idempotent",
           "retry_params_name": "default"
         },
         "ListFindings": {
-          "timeout_millis": 60000,
+          "timeout_millis": 480000,
           "retry_codes_name": "idempotent",
           "retry_params_name": "default"
         },
@@ -106,7 +106,7 @@
           "retry_params_name": "default"
         },
         "UpdateSecurityMarks": {
-          "timeout_millis": 60000,
+          "timeout_millis": 480000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         }

@@ -224,7 +224,7 @@
                         Asset.decode = function decode(reader, length) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.securitycenter.v1.Asset(), key;
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.securitycenter.v1.Asset(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
@@ -235,12 +235,26 @@
                                     message.securityCenterProperties = $root.google.cloud.securitycenter.v1.Asset.SecurityCenterProperties.decode(reader, reader.uint32());
                                     break;
                                 case 7:
-                                    reader.skip().pos++;
                                     if (message.resourceProperties === $util.emptyObject)
                                         message.resourceProperties = {};
-                                    key = reader.string();
-                                    reader.pos++;
-                                    message.resourceProperties[key] = $root.google.protobuf.Value.decode(reader, reader.uint32());
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = null;
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = $root.google.protobuf.Value.decode(reader, reader.uint32());
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.resourceProperties[key] = value;
                                     break;
                                 case 8:
                                     message.securityMarks = $root.google.cloud.securitycenter.v1.SecurityMarks.decode(reader, reader.uint32());
@@ -1087,7 +1101,7 @@
                         SecurityMarks.decode = function decode(reader, length) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.securitycenter.v1.SecurityMarks(), key;
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.securitycenter.v1.SecurityMarks(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
@@ -1095,12 +1109,26 @@
                                     message.name = reader.string();
                                     break;
                                 case 2:
-                                    reader.skip().pos++;
                                     if (message.marks === $util.emptyObject)
                                         message.marks = {};
-                                    key = reader.string();
-                                    reader.pos++;
-                                    message.marks[key] = reader.string();
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = "";
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = reader.string();
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.marks[key] = value;
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -1408,7 +1436,7 @@
                         Finding.decode = function decode(reader, length) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.securitycenter.v1.Finding(), key;
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.securitycenter.v1.Finding(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
@@ -1431,12 +1459,26 @@
                                     message.externalUri = reader.string();
                                     break;
                                 case 7:
-                                    reader.skip().pos++;
                                     if (message.sourceProperties === $util.emptyObject)
                                         message.sourceProperties = {};
-                                    key = reader.string();
-                                    reader.pos++;
-                                    message.sourceProperties[key] = $root.google.protobuf.Value.decode(reader, reader.uint32());
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = null;
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = $root.google.protobuf.Value.decode(reader, reader.uint32());
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.sourceProperties[key] = value;
                                     break;
                                 case 8:
                                     message.securityMarks = $root.google.cloud.securitycenter.v1.SecurityMarks.decode(reader, reader.uint32());
@@ -7016,17 +7058,31 @@
                         GroupResult.decode = function decode(reader, length) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.securitycenter.v1.GroupResult(), key;
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.securitycenter.v1.GroupResult(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
                                 case 1:
-                                    reader.skip().pos++;
                                     if (message.properties === $util.emptyObject)
                                         message.properties = {};
-                                    key = reader.string();
-                                    reader.pos++;
-                                    message.properties[key] = $root.google.protobuf.Value.decode(reader, reader.uint32());
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = null;
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = $root.google.protobuf.Value.decode(reader, reader.uint32());
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.properties[key] = value;
                                     break;
                                 case 2:
                                     message.count = reader.int64();
@@ -12149,7 +12205,7 @@
                         Asset.decode = function decode(reader, length) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.securitycenter.v1beta1.Asset(), key;
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.securitycenter.v1beta1.Asset(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
@@ -12160,12 +12216,26 @@
                                     message.securityCenterProperties = $root.google.cloud.securitycenter.v1beta1.Asset.SecurityCenterProperties.decode(reader, reader.uint32());
                                     break;
                                 case 7:
-                                    reader.skip().pos++;
                                     if (message.resourceProperties === $util.emptyObject)
                                         message.resourceProperties = {};
-                                    key = reader.string();
-                                    reader.pos++;
-                                    message.resourceProperties[key] = $root.google.protobuf.Value.decode(reader, reader.uint32());
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = null;
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = $root.google.protobuf.Value.decode(reader, reader.uint32());
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.resourceProperties[key] = value;
                                     break;
                                 case 8:
                                     message.securityMarks = $root.google.cloud.securitycenter.v1beta1.SecurityMarks.decode(reader, reader.uint32());
@@ -12743,7 +12813,7 @@
                         SecurityMarks.decode = function decode(reader, length) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.securitycenter.v1beta1.SecurityMarks(), key;
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.securitycenter.v1beta1.SecurityMarks(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
@@ -12751,12 +12821,26 @@
                                     message.name = reader.string();
                                     break;
                                 case 2:
-                                    reader.skip().pos++;
                                     if (message.marks === $util.emptyObject)
                                         message.marks = {};
-                                    key = reader.string();
-                                    reader.pos++;
-                                    message.marks[key] = reader.string();
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = "";
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = reader.string();
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.marks[key] = value;
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -13064,7 +13148,7 @@
                         Finding.decode = function decode(reader, length) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.securitycenter.v1beta1.Finding(), key;
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.securitycenter.v1beta1.Finding(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
@@ -13087,12 +13171,26 @@
                                     message.externalUri = reader.string();
                                     break;
                                 case 7:
-                                    reader.skip().pos++;
                                     if (message.sourceProperties === $util.emptyObject)
                                         message.sourceProperties = {};
-                                    key = reader.string();
-                                    reader.pos++;
-                                    message.sourceProperties[key] = $root.google.protobuf.Value.decode(reader, reader.uint32());
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = null;
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = $root.google.protobuf.Value.decode(reader, reader.uint32());
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.sourceProperties[key] = value;
                                     break;
                                 case 8:
                                     message.securityMarks = $root.google.cloud.securitycenter.v1beta1.SecurityMarks.decode(reader, reader.uint32());
@@ -16799,17 +16897,31 @@
                         GroupResult.decode = function decode(reader, length) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.securitycenter.v1beta1.GroupResult(), key;
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.securitycenter.v1beta1.GroupResult(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
                                 case 1:
-                                    reader.skip().pos++;
                                     if (message.properties === $util.emptyObject)
                                         message.properties = {};
-                                    key = reader.string();
-                                    reader.pos++;
-                                    message.properties[key] = $root.google.protobuf.Value.decode(reader, reader.uint32());
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = null;
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = $root.google.protobuf.Value.decode(reader, reader.uint32());
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.properties[key] = value;
                                     break;
                                 case 2:
                                     message.count = reader.int64();
@@ -20674,7 +20786,7 @@
                         Asset.decode = function decode(reader, length) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.securitycenter.v1p1beta1.Asset(), key;
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.securitycenter.v1p1beta1.Asset(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
@@ -20685,12 +20797,26 @@
                                     message.securityCenterProperties = $root.google.cloud.securitycenter.v1p1beta1.Asset.SecurityCenterProperties.decode(reader, reader.uint32());
                                     break;
                                 case 7:
-                                    reader.skip().pos++;
                                     if (message.resourceProperties === $util.emptyObject)
                                         message.resourceProperties = {};
-                                    key = reader.string();
-                                    reader.pos++;
-                                    message.resourceProperties[key] = $root.google.protobuf.Value.decode(reader, reader.uint32());
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = null;
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = $root.google.protobuf.Value.decode(reader, reader.uint32());
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.resourceProperties[key] = value;
                                     break;
                                 case 8:
                                     message.securityMarks = $root.google.cloud.securitycenter.v1p1beta1.SecurityMarks.decode(reader, reader.uint32());
@@ -21537,7 +21663,7 @@
                         SecurityMarks.decode = function decode(reader, length) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.securitycenter.v1p1beta1.SecurityMarks(), key;
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.securitycenter.v1p1beta1.SecurityMarks(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
@@ -21545,12 +21671,26 @@
                                     message.name = reader.string();
                                     break;
                                 case 2:
-                                    reader.skip().pos++;
                                     if (message.marks === $util.emptyObject)
                                         message.marks = {};
-                                    key = reader.string();
-                                    reader.pos++;
-                                    message.marks[key] = reader.string();
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = "";
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = reader.string();
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.marks[key] = value;
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -21858,7 +21998,7 @@
                         Finding.decode = function decode(reader, length) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.securitycenter.v1p1beta1.Finding(), key;
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.securitycenter.v1p1beta1.Finding(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
@@ -21881,12 +22021,26 @@
                                     message.externalUri = reader.string();
                                     break;
                                 case 7:
-                                    reader.skip().pos++;
                                     if (message.sourceProperties === $util.emptyObject)
                                         message.sourceProperties = {};
-                                    key = reader.string();
-                                    reader.pos++;
-                                    message.sourceProperties[key] = $root.google.protobuf.Value.decode(reader, reader.uint32());
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = null;
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = $root.google.protobuf.Value.decode(reader, reader.uint32());
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.sourceProperties[key] = value;
                                     break;
                                 case 8:
                                     message.securityMarks = $root.google.cloud.securitycenter.v1p1beta1.SecurityMarks.decode(reader, reader.uint32());
@@ -27515,17 +27669,31 @@
                         GroupResult.decode = function decode(reader, length) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.securitycenter.v1p1beta1.GroupResult(), key;
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.securitycenter.v1p1beta1.GroupResult(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
                                 case 1:
-                                    reader.skip().pos++;
                                     if (message.properties === $util.emptyObject)
                                         message.properties = {};
-                                    key = reader.string();
-                                    reader.pos++;
-                                    message.properties[key] = $root.google.protobuf.Value.decode(reader, reader.uint32());
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = null;
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = $root.google.protobuf.Value.decode(reader, reader.uint32());
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.properties[key] = value;
                                     break;
                                 case 2:
                                     message.count = reader.int64();
@@ -42798,17 +42966,31 @@
                 Struct.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Struct(), key;
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Struct(), key, value;
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
                         case 1:
-                            reader.skip().pos++;
                             if (message.fields === $util.emptyObject)
                                 message.fields = {};
-                            key = reader.string();
-                            reader.pos++;
-                            message.fields[key] = $root.google.protobuf.Value.decode(reader, reader.uint32());
+                            var end2 = reader.uint32() + reader.pos;
+                            key = "";
+                            value = null;
+                            while (reader.pos < end2) {
+                                var tag2 = reader.uint32();
+                                switch (tag2 >>> 3) {
+                                case 1:
+                                    key = reader.string();
+                                    break;
+                                case 2:
+                                    value = $root.google.protobuf.Value.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag2 & 7);
+                                    break;
+                                }
+                            }
+                            message.fields[key] = value;
                             break;
                         default:
                             reader.skipType(tag & 7);
