@@ -189,7 +189,7 @@
                         Endpoint.decode = function decode(reader, length) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.servicedirectory.v1beta1.Endpoint(), key;
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.servicedirectory.v1beta1.Endpoint(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
@@ -203,12 +203,26 @@
                                     message.port = reader.int32();
                                     break;
                                 case 4:
-                                    reader.skip().pos++;
                                     if (message.metadata === $util.emptyObject)
                                         message.metadata = {};
-                                    key = reader.string();
-                                    reader.pos++;
-                                    message.metadata[key] = reader.string();
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = "";
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = reader.string();
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.metadata[key] = value;
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -948,7 +962,7 @@
                         Service.decode = function decode(reader, length) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.servicedirectory.v1beta1.Service(), key;
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.servicedirectory.v1beta1.Service(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
@@ -956,12 +970,26 @@
                                     message.name = reader.string();
                                     break;
                                 case 2:
-                                    reader.skip().pos++;
                                     if (message.metadata === $util.emptyObject)
                                         message.metadata = {};
-                                    key = reader.string();
-                                    reader.pos++;
-                                    message.metadata[key] = reader.string();
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = "";
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = reader.string();
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.metadata[key] = value;
                                     break;
                                 case 3:
                                     if (!(message.endpoints && message.endpoints.length))
@@ -1210,7 +1238,7 @@
                         Namespace.decode = function decode(reader, length) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.servicedirectory.v1beta1.Namespace(), key;
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.servicedirectory.v1beta1.Namespace(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
@@ -1218,12 +1246,26 @@
                                     message.name = reader.string();
                                     break;
                                 case 2:
-                                    reader.skip().pos++;
                                     if (message.labels === $util.emptyObject)
                                         message.labels = {};
-                                    key = reader.string();
-                                    reader.pos++;
-                                    message.labels[key] = reader.string();
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = "";
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = reader.string();
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.labels[key] = value;
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
