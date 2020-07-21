@@ -48,7 +48,9 @@
     "docs-test": "linkinator docs",
     "predocs-test": "npm run docs",
     "prelint": "cd samples; npm link ../; npm install",
-    "precompile": "gts clean"
+    "precompile": "gts clean",
+    "api-extractor": "api-extractor run --local",
+    "api-documenter": "api-documenter yaml --input-folder=temp"
   },
   "dependencies": {
     "@google-cloud/logging": "^8.0.0",
@@ -77,7 +79,9 @@
     "post-install-check": "0.0.1",
     "proxyquire": "^2.0.1",
     "typescript": "^3.8.3",
-    "uuid": "^8.0.0"
+    "uuid": "^8.0.0",
+    "@microsoft/api-documenter": "^7.8.10",
+    "@microsoft/api-extractor": "^7.8.10"
   },
   "peerDependencies": {
     "bunyan": "*"
