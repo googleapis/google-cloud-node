@@ -43,7 +43,9 @@
     "ts-loader": "^8.0.0",
     "typescript": "^3.8.3",
     "webpack": "^4.41.2",
-    "webpack-cli": "^3.3.10"
+    "webpack-cli": "^3.3.10",
+    "@microsoft/api-documenter": "^7.8.10",
+    "@microsoft/api-extractor": "^7.8.10"
   },
   "scripts": {
     "test": "c8 mocha build/test",
@@ -59,7 +61,9 @@
     "compile-protos": "compileProtos src",
     "prepare": "npm run compile",
     "prelint": "cd samples; npm link ../; npm install",
-    "precompile": "gts clean"
+    "precompile": "gts clean",
+    "api-extractor": "api-extractor run --local",
+    "api-documenter": "api-documenter yaml --input-folder=temp"
   },
   "license": "Apache-2.0",
   "engines": {
