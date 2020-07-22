@@ -4,7 +4,7 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/nodejs-iot.git",
-        "sha": "cb7d09ccadab0ea1cbc8dffb1735f6dadd36bd22"
+        "sha": "49beb3147f763d7c3532b2e7ea95b11e63bdf4f5"
       }
     },
     {
@@ -19,7 +19,7 @@
       "git": {
         "name": "synthtool",
         "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "21f1470ecd01424dc91c70f1a7c798e4e87d1eec"
+        "sha": "99c93fe09f8c1dca09dfc0301c8668e3a70dd796"
       }
     }
   ],
