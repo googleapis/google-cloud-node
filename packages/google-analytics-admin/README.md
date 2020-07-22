@@ -2,11 +2,11 @@
 [//]: # "To regenerate it, use `python -m synthtool`."
 <img src="https://avatars2.githubusercontent.com/u/2810941?v=3&s=96" alt="Google Cloud Platform logo" title="Google Cloud Platform" align="right" height="96" width="96"/>
 
-# [Google Analytics Admin: Node.js Client](https://github.com/googleapis/analytics)
+# [Google Analytics Admin: Node.js Client](https://github.com/googleapis/nodejs-analytics-admin)
 
 [![release level](https://img.shields.io/badge/release%20level-alpha-orange.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
 [![npm version](https://img.shields.io/npm/v/@google-analytics/admin.svg)](https://www.npmjs.org/package/@google-analytics/admin)
-[![codecov](https://img.shields.io/codecov/c/github/googleapis/analytics/master.svg?style=flat)](https://codecov.io/gh/googleapis/analytics)
+[![codecov](https://img.shields.io/codecov/c/github/googleapis/nodejs-analytics-admin/master.svg?style=flat)](https://codecov.io/gh/googleapis/nodejs-analytics-admin)
 
 
 
@@ -16,7 +16,7 @@ Admin client for Node.js
 
 * [Google Analytics Admin Node.js Client API Reference][client-docs]
 * [Google Analytics Admin Documentation][product-docs]
-* [github.com/googleapis/analytics](https://github.com/googleapis/analytics)
+* [github.com/googleapis/nodejs-analytics-admin](https://github.com/googleapis/nodejs-analytics-admin)
 
 Read more about the client libraries for Cloud APIs, including the older
 Google APIs Client Libraries, in [Client Libraries Explained][explained].
@@ -29,8 +29,8 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 * [Quickstart](#quickstart)
   * [Before you begin](#before-you-begin)
   * [Installing the client library](#installing-the-client-library)
-
-
+  * [Using the client library](#using-the-client-library)
+* [Samples](#samples)
 * [Versioning](#versioning)
 * [Contributing](#contributing)
 * [License](#license)
@@ -40,7 +40,6 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 ### Before you begin
 
 1.  [Select or create a Cloud Platform project][projects].
-1.  [Enable billing for your project][billing].
 1.  [Enable the Google Analytics Admin API][enable_api].
 1.  [Set up authentication with a service account][auth] so you can access the
     API from your local workstation.
@@ -52,6 +51,36 @@ npm install @google-analytics/admin
 ```
 
 
+### Using the client library
+
+```javascript
+// Imports the Google Cloud client library
+const {AnalyticsAdminServiceClient} = require('@google-analytics/admin');
+
+// Creates a client
+const client = new AnalyticsAdminServiceClient();
+
+// name = 'my-name' // Get an account for a name.
+async function getAccount() {
+  const [account] = await client.getAccount({
+    name,
+  });
+  console.info(account);
+}
+getAccount();
+
+```
+
+
+
+## Samples
+
+Samples are in the [`samples/`](https://github.com/googleapis/nodejs-analytics-admin/tree/master/samples) directory. The samples' `README.md`
+has instructions for running the samples.
+
+| Sample                      | Source Code                       | Try it |
+| --------------------------- | --------------------------------- | ------ |
+| Quickstart | [source code](https://github.com/googleapis/nodejs-analytics-admin/blob/master/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-analytics-admin&page=editor&open_in_editor=samples/quickstart.js,samples/README.md) |
 
 
 
@@ -98,7 +127,7 @@ More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
 ## Contributing
 
-Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/analytics/blob/master/CONTRIBUTING.md).
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/nodejs-analytics-admin/blob/master/CONTRIBUTING.md).
 
 Please note that this `README.md`, the `samples/README.md`,
 and a variety of configuration files in this repository (including `.nycrc` and `tsconfig.json`)
@@ -110,7 +139,7 @@ to its template in this
 
 Apache Version 2.0
 
-See [LICENSE](https://github.com/googleapis/analytics/blob/master/LICENSE)
+See [LICENSE](https://github.com/googleapis/nodejs-analytics-admin/blob/master/LICENSE)
 
 [client-docs]: https://googleapis.dev/nodejs/analytics-admin/latest/index.html
 [product-docs]: https://developers.google.com/analytics-admin/

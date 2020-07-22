@@ -1,0 +1,30 @@
+{
+  "sources": [
+    {
+      "git": {
+        "name": ".",
+        "remote": "git@github.com:googleapis/nodejs-analytics-admin.git",
+        "sha": "ba18bba0477008b8f66ee29649a3d30af7d98563"
+      }
+    },
+    {
+      "git": {
+        "name": "googleapis",
+        "remote": "https://github.com/googleapis/googleapis.git",
+        "sha": "58be915cf3b7148b764649da90add697f6367aa7",
+        "internalRef": "322464556"
+      }
+    }
+  ],
+  "destinations": [
+    {
+      "client": {
+        "source": "googleapis",
+        "apiName": "analyticsadmin",
+        "apiVersion": "v1alpha",
+        "language": "nodejs",
+        "generator": "bazel"
+      }
+    }
+  ]
+}

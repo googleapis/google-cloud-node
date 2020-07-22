@@ -30,7 +30,7 @@ for version in versions:
     version,
     bazel_target=f"//google/analytics/admin/{version}:google-analytics-admin-{version}-nodejs"
   )
-  s.copy(library, excludes=[])
+  s.copy(library, excludes=["README.md", "package.json"])
 
 # Copy common templates
 common_templates = gcp.CommonTemplates()

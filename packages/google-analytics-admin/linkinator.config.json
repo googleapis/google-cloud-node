@@ -1,0 +1,12 @@
+{
+  "recurse": true,
+  "skip": [
+    "https://codecov.io/gh/googleapis/",
+    "www.googleapis.com",
+    "img.shields.io",
+    "https://developers.google.com/analytics-admin/",
+    "https://googleapis.dev/nodejs/analytics-admin/latest/index.html"
+  ],
+  "silent": true,
+  "concurrency": 10
+}
