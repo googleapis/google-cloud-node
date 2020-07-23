@@ -26,6 +26,7 @@ guides.
   * [Create Topic](#create-topic)
   * [Delete Subscription](#delete-subscription)
   * [Delete Topic](#delete-topic)
+  * [Detach Subscription](#detach-subscription)
   * [Get Subscription](#get-subscription)
   * [Get Subscription Policy](#get-subscription-policy)
   * [Get Topic Policy](#get-topic-policy)
@@ -175,6 +176,25 @@ __Usage:__
 
 
 `node deleteTopic.js <topic-name>`
+
+
+-----
+
+
+
+
+### Detach Subscription
+
+Detaches a subscription from a topic.
+
+View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/master/samples/detachSubscription.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-pubsub&page=editor&open_in_editor=samples/detachSubscription.js,samples/README.md)
+
+__Usage:__
+
+
+`node detachSubscription.js <existing-subscription-name>`
 
 
 -----
