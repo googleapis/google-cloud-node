@@ -12,7 +12,9 @@
     "generate": "./bin/generate-readme.js",
     "lint": "semistandard",
     "clean": "gts clean",
-    "precompile": "gts clean"
+    "precompile": "gts clean",
+    "api-extractor": "api-extractor run --local",
+    "api-documenter": "api-documenter yaml --input-folder=temp"
   },
   "repository": {
     "type": "git",
@@ -36,7 +38,9 @@
     "parse-link-header": "^1.0.1"
   },
   "devDependencies": {
-    "semistandard": "^13.0.1"
+    "semistandard": "^13.0.1",
+    "@microsoft/api-documenter": "^7.8.10",
+    "@microsoft/api-extractor": "^7.8.10"
   },
   "engines": {
     "node": ">=10"
