@@ -1310,7 +1310,7 @@ export class CloudBuildClient {
     >
   ): void;
   /**
-   * List project's `WorkerPool`s.
+   * List project's `WorkerPools`.
    *
    * This API is experimental.
    *
