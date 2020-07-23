@@ -213,6 +213,8 @@ describe('File', () => {
     };
 
     BUCKET = new Bucket(STORAGE, 'bucket-name');
+    BUCKET.getRequestInterceptors = () => [];
+
     file = new File(BUCKET, FILE_NAME);
 
     directoryFile = new File(BUCKET, 'directory/file.jpg');
@@ -3987,6 +3989,10 @@ describe('File', () => {
   });
 
   describe('startResumableUpload_', () => {
+    beforeEach(() => {
+      file.getRequestInterceptors = () => [];
+    });
+
     describe('starting', () => {
       it('should start a resumable upload', done => {
         const options = {
@@ -4004,6 +4010,24 @@ describe('File', () => {
         file.encryptionKey = 'key';
         file.kmsKeyName = 'kms-key-name';
 
+        const customRequestInterceptors = [
+          (reqOpts: gaxios.GaxiosOptions) => {
+            reqOpts.headers = Object.assign({}, reqOpts.headers, {
+              a: 'b',
+            });
+            return reqOpts;
+          },
+          (reqOpts: gaxios.GaxiosOptions) => {
+            reqOpts.headers = Object.assign({}, reqOpts.headers, {
+              c: 'd',
+            });
+            return reqOpts;
+          },
+        ];
+        file.getRequestInterceptors = () => {
+          return customRequestInterceptors;
+        };
+
         resumableUploadOverride = {
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
           upload(opts: any) {
@@ -4015,6 +4039,12 @@ describe('File', () => {
             assert.strictEqual(opts.apiEndpoint, storage.apiEndpoint);
             assert.strictEqual(opts.bucket, bucket.name);
             assert.strictEqual(opts.configPath, options.configPath);
+            assert.deepStrictEqual(opts.customRequestOptions, {
+              headers: {
+                a: 'b',
+                c: 'd',
+              },
+            });
             assert.strictEqual(opts.file, file.name);
             assert.strictEqual(opts.generation, file.generation);
             assert.strictEqual(opts.key, file.encryptionKey);

@@ -3527,6 +3527,10 @@ class File extends ServiceObject<File> {
       apiEndpoint: this.storage.apiEndpoint,
       bucket: this.bucket.name,
       configPath: options.configPath,
+      customRequestOptions: this.getRequestInterceptors().reduce(
+        (reqOpts, interceptorFn) => interceptorFn(reqOpts),
+        {}
+      ),
       file: this.name,
       generation: this.generation,
       key: this.encryptionKey,
