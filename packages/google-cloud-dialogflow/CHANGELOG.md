@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/dialogflow?activeTab=versions
 
+### [3.1.1](https://www.github.com/googleapis/nodejs-dialogflow/compare/v3.1.0...v3.1.1) (2020-07-23)
+
+
+### Bug Fixes
+
+* publish missing client config annotations ([#653](https://www.github.com/googleapis/nodejs-dialogflow/issues/653)) ([b368797](https://www.github.com/googleapis/nodejs-dialogflow/commit/b36879723fd3aeab0c158d3ab76a5aa6505498e1))
+
 ## [3.1.0](https://www.github.com/googleapis/nodejs-dialogflow/compare/v3.0.0...v3.1.0) (2020-07-10)
 
 
