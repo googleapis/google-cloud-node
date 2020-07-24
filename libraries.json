@@ -1,19 +1,5 @@
 [
   {
-    "name": "asset",
-    "name_pretty": "Asset Inventory",
-    "product_documentation": "https://cloud.google.com/resource-manager/docs/cloud-asset-inventory/overview",
-    "client_documentation": "https://googleapis.dev/nodejs/asset/latest",
-    "issue_tracker": "https://issuetracker.google.com/savedsearches/559757",
-    "release_level": "ga",
-    "language": "nodejs",
-    "repo": "googleapis/nodejs-asset",
-    "distribution_name": "@google-cloud/asset",
-    "api_id": "cloudasset.googleapis.com",
-    "requires_billing": true,
-    "support_documentation": "https://cloud.google.com/resource-manager/docs/getting-support"
-  },
-  {
     "name": "automl",
     "name_pretty": "AutoML",
     "product_documentation": "https://cloud.google.com/automl/docs/",
@@ -110,20 +96,6 @@
     "api_id": "datalabeling.googleapis.com",
     "requires_billing": true,
     "support_documentation": "https://cloud.google.com/data-labeling/docs/getting-support"
-  },
-  {
-    "name": "dlp",
-    "name_pretty": "Data Loss Prevention",
-    "product_documentation": "https://cloud.google.com/dlp/docs/",
-    "client_documentation": "https://googleapis.dev/nodejs/dlp/latest",
-    "issue_tracker": "https://issuetracker.google.com/savedsearches/5548083",
-    "release_level": "ga",
-    "language": "nodejs",
-    "repo": "googleapis/nodejs-dlp",
-    "distribution_name": "@google-cloud/dlp",
-    "api_id": "dlp.googleapis.com",
-    "requires_billing": true,
-    "support_documentation": "https://cloud.google.com/dlp/docs/"
   },
   {
     "name": "dataproc",
@@ -333,20 +305,6 @@
     "support_documentation": "https://cloud.google.com/bigquery/docs/getting-support"
   },
   {
-    "name": "compute",
-    "name_pretty": "Google Compute Engine",
-    "product_documentation": "https://cloud.google.com/compute",
-    "client_documentation": "https://googleapis.dev/nodejs/compute/latest",
-    "issue_tracker": "https://issuetracker.google.com/savedsearches/559755",
-    "release_level": "alpha",
-    "language": "nodejs",
-    "repo": "googleapis/nodejs-compute",
-    "distribution_name": "@google-cloud/compute",
-    "api_id": "compute.googleapis.com",
-    "requires_billing": true,
-    "support_documentation": "https://cloud.google.com/compute/docs/getting-support"
-  },
-  {
     "name": "containeranalysis",
     "name_pretty": "Google Container Analysis",
     "product_documentation": "https://cloud.google.com/container-registry/docs/container-analysis",
@@ -500,20 +458,6 @@
     "support_documentation": "https://cloud.google.com/compute/docs/getting-support"
   },
   {
-    "name": "phishing-protection",
-    "name_pretty": "Phishing Protection",
-    "product_documentation": "https://cloud.google.com/phishing-protection/docs/",
-    "client_documentation": "https://googleapis.dev/nodejs/phishing-protection/latest",
-    "issue_tracker": "",
-    "release_level": "beta",
-    "language": "nodejs",
-    "repo": "googleapis/nodejs-phishing-protection",
-    "distribution_name": "@google-cloud/phishing-protection",
-    "api_id": "phishingprotection.googleapis.com",
-    "requires_billing": true,
-    "support_documentation": "https://cloud.google.com/phishing-protection/docs/getting-support"
-  },
-  {
     "name": "pubsub",
     "name_pretty": "Pub/Sub",
     "product_documentation": "https://cloud.google.com/pubsub/docs/",
@@ -554,20 +498,6 @@
     "api_id": "recommender.googleapis.com",
     "requires_billing": true,
     "support_documentation": "https://cloud.google.com/recommender/docs"
-  },
-  {
-    "name": "redis",
-    "name_pretty": "Redis",
-    "product_documentation": "https://cloud.google.com/memorystore/docs/redis/",
-    "client_documentation": "https://googleapis.dev/nodejs/redis/latest",
-    "issue_tracker": "https://issuetracker.google.com/savedsearches/5169231",
-    "release_level": "ga",
-    "language": "nodejs",
-    "repo": "googleapis/nodejs-redis",
-    "distribution_name": "@google-cloud/redis",
-    "api_id": "redis.googleapis.com",
-    "requires_billing": true,
-    "support_documentation": "https://cloud.google.com/memorystore/docs/redis/"
   },
   {
     "name": "resource",
@@ -715,19 +645,6 @@
     "api_id": "irm.googleapis.com",
     "requires_billing": true,
     "client_documentation": "https://googleapis.dev/nodejs/irm/latest",
-    "support_documentation": "https://cloud.google.com/stackdriver/docs/getting-support"
-  },
-  {
-    "name": "logging",
-    "name_pretty": "Stackdriver Logging",
-    "product_documentation": "https://cloud.google.com/logging/docs",
-    "client_documentation": "https://googleapis.dev/nodejs/logging/latest",
-    "issue_tracker": "https://issuetracker.google.com/savedsearches/559764",
-    "release_level": "ga",
-    "language": "nodejs",
-    "repo": "googleapis/nodejs-logging",
-    "distribution_name": "@google-cloud/logging",
-    "api_id": "logging.googleapis.com",
     "support_documentation": "https://cloud.google.com/stackdriver/docs/getting-support"
   },
   {
@@ -893,19 +810,5 @@
     "api_id": "vision.googleapis.com",
     "requires_billing": true,
     "support_documentation": "https://cloud.google.com/vision/docs/getting-support"
-  },
-  {
-    "name": "web-risk",
-    "name_pretty": "Web Risk API",
-    "product_documentation": "https://cloud.google.com/web-risk/docs/",
-    "client_documentation": "https://googleapis.dev/nodejs/web-risk/latest",
-    "issue_tracker": "",
-    "release_level": "ga",
-    "language": "nodejs",
-    "repo": "googleapis/nodejs-web-risk",
-    "distribution_name": "@google-cloud/web-risk",
-    "api_id": "webrisk.googleapis.com",
-    "requires_billing": true,
-    "support_documentation": "https://cloud.google.com/web-risk/docs/getting-support"
   }
 ]

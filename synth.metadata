@@ -4,7 +4,7 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/google-cloud-node.git",
-        "sha": "a107b8899a0e25edc2e0781f4159f6e6b927b196"
+        "sha": "99c49934cf5ca1fd1b25fb2dba18bb78c3cb2410"
       }
     }
   ]
