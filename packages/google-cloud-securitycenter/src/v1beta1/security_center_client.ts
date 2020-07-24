@@ -162,6 +162,9 @@ export class SecurityCenterClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this.pathTemplates = {
+      assetPathTemplate: new this._gaxModule.PathTemplate(
+        'organizations/{organization}/assets/{asset}'
+      ),
       findingPathTemplate: new this._gaxModule.PathTemplate(
         'organizations/{organization}/sources/{source}/findings/{finding}'
       ),
@@ -3384,6 +3387,42 @@ export class SecurityCenterClient {
   // --------------------
   // -- Path templates --
   // --------------------
+
+  /**
+   * Return a fully-qualified asset resource name string.
+   *
+   * @param {string} organization
+   * @param {string} asset
+   * @returns {string} Resource name string.
+   */
+  assetPath(organization: string, asset: string) {
+    return this.pathTemplates.assetPathTemplate.render({
+      organization: organization,
+      asset: asset,
+    });
+  }
+
+  /**
+   * Parse the organization from Asset resource.
+   *
+   * @param {string} assetName
+   *   A fully-qualified path representing Asset resource.
+   * @returns {string} A string representing the organization.
+   */
+  matchOrganizationFromAssetName(assetName: string) {
+    return this.pathTemplates.assetPathTemplate.match(assetName).organization;
+  }
+
+  /**
+   * Parse the asset from Asset resource.
+   *
+   * @param {string} assetName
+   *   A fully-qualified path representing Asset resource.
+   * @returns {string} A string representing the asset.
+   */
+  matchAssetFromAssetName(assetName: string) {
+    return this.pathTemplates.assetPathTemplate.match(assetName).asset;
+  }
 
   /**
    * Return a fully-qualified finding resource name string.

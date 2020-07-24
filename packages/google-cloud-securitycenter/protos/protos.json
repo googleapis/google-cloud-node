@@ -1223,6 +1223,10 @@
                   },
                   "nested": {
                     "Asset": {
+                      "options": {
+                        "(google.api.resource).type": "securitycenter.googleapis.com/Asset",
+                        "(google.api.resource).pattern": "organizations/{organization}/assets/{asset}"
+                      },
                       "fields": {
                         "name": {
                           "type": "string",
