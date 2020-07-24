@@ -2,9 +2,9 @@
 [//]: # "To regenerate it, use `python -m synthtool`."
 <img src="https://avatars2.githubusercontent.com/u/2810941?v=3&s=96" alt="Google Cloud Platform logo" title="Google Cloud Platform" align="right" height="96" width="96"/>
 
-# [Cloud Functions: Node.js Client](https://github.com/googleapis/nodejs-functions)
+# [Google Cloud Functions: Node.js Client](https://github.com/googleapis/nodejs-functions)
 
-[![release level](https://img.shields.io/badge/release%20level-beta-yellow.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
+[![release level](https://img.shields.io/badge/release%20level-alpha-orange.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
 [![npm version](https://img.shields.io/npm/v/@google-cloud/functions.svg)](https://www.npmjs.org/package/@google-cloud/functions)
 [![codecov](https://img.shields.io/codecov/c/github/googleapis/nodejs-functions/master.svg?style=flat)](https://codecov.io/gh/googleapis/nodejs-functions)
 
@@ -14,8 +14,8 @@
 Functions client for Node.js
 
 
-* [Cloud Functions Node.js Client API Reference][client-docs]
-* [Cloud Functions Documentation][product-docs]
+* [Google Cloud Functions Node.js Client API Reference][client-docs]
+* [Google Cloud Functions Documentation][product-docs]
 * [github.com/googleapis/nodejs-functions](https://github.com/googleapis/nodejs-functions)
 
 Read more about the client libraries for Cloud APIs, including the older
@@ -40,8 +40,7 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 ### Before you begin
 
 1.  [Select or create a Cloud Platform project][projects].
-1.  [Enable billing for your project][billing].
-1.  [Enable the Cloud Functions API][enable_api].
+1.  [Enable the Google Cloud Functions API][enable_api].
 1.  [Set up authentication with a service account][auth] so you can access the
     API from your local workstation.
 
@@ -55,7 +54,7 @@ npm install @google-cloud/functions
 
 
 
-The [Cloud Functions Node.js Client API Reference][client-docs] documentation
+The [Google Cloud Functions Node.js Client API Reference][client-docs] documentation
 also contains samples.
 
 ## Supported Node.js Versions
@@ -85,11 +84,10 @@ This library follows [Semantic Versioning](http://semver.org/).
 
 
 
-This library is considered to be in **beta**. This means it is expected to be
-mostly stable while we work toward a general availability release; however,
-complete stability is not guaranteed. We will address issues and requests
-against beta libraries with a high priority.
 
+This library is considered to be in **alpha**. This means it is still a
+work-in-progress and under active development. Any release is subject to
+backwards-incompatible changes at any time.
 
 
 
@@ -113,8 +111,8 @@ Apache Version 2.0
 
 See [LICENSE](https://github.com/googleapis/nodejs-functions/blob/master/LICENSE)
 
-[client-docs]: https://googleapis.dev/nodejs/functions/latest/index.html
-[product-docs]: https://cloud.google.com/functions/docs
+[client-docs]: https://googleapis.dev/nodejs/nodejs-functions/latest/index.html
+[product-docs]: https://developers.google.com/nodejs-functions/
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project
 [billing]: https://support.google.com/cloud/answer/6293499#enable-billing

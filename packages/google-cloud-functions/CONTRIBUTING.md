@@ -16,7 +16,7 @@ Please fill out either the individual or corporate Contributor License Agreement
 (CLA).
 
   * If you are an individual writing original source code and you're sure you
-    own the intellectual property, then you'll need to sign an [individual CLA](https://developers.google>
+    own the intellectual property, then you'll need to sign an [individual CLA](https://developers.google.com/open-source/cla/individual).
   * If you work for a company that wants to allow you to contribute your work,
     then you'll need to sign a [corporate CLA](https://developers.google.com/open-source/cla/corporate).
 
@@ -34,7 +34,7 @@ accept your pull requests.
 1.  Ensure that your code adheres to the existing style in the code to which
     you are contributing.
 1.  Ensure that your code has an appropriate set of tests which all pass.
-1.  Title your pull request following [Conventional Commits](https://www.conventionalcommits.org/) stylin>
+1.  Title your pull request following [Conventional Commits](https://www.conventionalcommits.org/) styling.
 1.  Submit a pull request.
 
 ## Running the tests
@@ -63,4 +63,3 @@ accept your pull requests.
         npm run fix
 
 [setup]: https://cloud.google.com/nodejs/docs/setup
-
