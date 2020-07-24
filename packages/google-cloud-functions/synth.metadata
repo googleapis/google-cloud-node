@@ -4,7 +4,7 @@
       "git": {
         "name": ".",
         "remote": "git@github.com:googleapis/nodejs-functions.git",
-        "sha": "5798802a7686e4569bfe28142e304efcffd15c4c"
+        "sha": "ab972c4a19a0dd87a7a1610ba9f0f7344923a24f"
       }
     },
     {
@@ -19,7 +19,7 @@
       "git": {
         "name": "synthtool",
         "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "2686d7075fa456972bf4d08680d99617f5eb32b1"
+        "sha": "a6643f6f27fc70e2c63c90944bb900c709022e57"
       }
     }
   ],
