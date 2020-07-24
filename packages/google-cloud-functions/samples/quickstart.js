@@ -14,14 +14,20 @@
 'use strict';
 
 async function main(
+  projectId = 'my-project'
   project = 'projects/my-project/locations/-', // Get the functions for a project.
   page_size = 1, //Max number of functions to return per call
   page_token = 'token'
 ) {
   // [START cloud_nodejs_functions_quickstart]
   // Imports the Google Cloud client library
+
+  // remove this line after package is released
   // eslint-disable-next-line node/no-missing-require
   const {CloudFunctionsServiceClient} = require('@google-cloud/functions');
+
+  // TODO(developer): replace with your prefered project ID.
+  // const projectId = 'my-project' 
 
   // Creates a client
   const client = new CloudFunctionsServiceClient();
