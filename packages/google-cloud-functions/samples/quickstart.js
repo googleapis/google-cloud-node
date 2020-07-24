@@ -20,6 +20,7 @@ async function main(
 ) {
   // [START cloud_nodejs_functions_quickstart]
   // Imports the Google Cloud client library
+  // eslint-disable-next-line node/no-missing-require
   const {CloudFunctionsServiceClient} = require('@google-cloud/functions');
 
   // Creates a client
