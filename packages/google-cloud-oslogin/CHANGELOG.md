@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/os-login?activeTab=versions
 
+### [3.1.1](https://www.github.com/googleapis/nodejs-os-login/compare/v3.1.0...v3.1.1) (2020-07-24)
+
+
+### Bug Fixes
+
+* move gitattributes files to node templates ([#367](https://www.github.com/googleapis/nodejs-os-login/issues/367)) ([bc08404](https://www.github.com/googleapis/nodejs-os-login/commit/bc084043f09b0d47586d9d7ef98369cddfc9fff7))
+
 ## [3.1.0](https://www.github.com/googleapis/nodejs-os-login/compare/v3.0.1...v3.1.0) (2020-06-29)
 
 
