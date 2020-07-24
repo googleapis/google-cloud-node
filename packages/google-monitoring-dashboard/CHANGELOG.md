@@ -1,5 +1,12 @@
 # Changelog
 
+### [2.1.1](https://www.github.com/googleapis/nodejs-monitoring-dashboards/compare/v2.1.0...v2.1.1) (2020-07-24)
+
+
+### Bug Fixes
+
+* move gitattributes files to node templates ([#107](https://www.github.com/googleapis/nodejs-monitoring-dashboards/issues/107)) ([7e7a729](https://www.github.com/googleapis/nodejs-monitoring-dashboards/commit/7e7a729686b59354a255ca4da86b34c0e06523df))
+
 ## [2.1.0](https://www.github.com/googleapis/nodejs-monitoring-dashboards/compare/v2.0.0...v2.1.0) (2020-06-28)
 
 
