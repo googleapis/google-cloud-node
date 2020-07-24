@@ -26,7 +26,7 @@ async function main(
   const {CloudFunctionsServiceClient} = require('@google-cloud/functions');
 
   // TODO(developer): replace with your prefered project ID.
-  // const projectId = 'my-project' 
+  // const projectId = 'my-project'
 
   // Creates a client
   const client = new CloudFunctionsServiceClient();
