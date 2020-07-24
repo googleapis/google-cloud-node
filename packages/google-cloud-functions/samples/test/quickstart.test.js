@@ -31,9 +31,10 @@ const project = process.env.GCLOUD_PROJECT;
 
 describe('Quickstart', () => {
   it('should run quickstart', async () => {
-    const stdout = execSync(node ./quickstart.js ${project}, {cwd});
-    assert.match(stdout, /found [0-9]+ deployments/);
+    const stdout = execSync(
+      `node ./quickstart.js projects/${project}/locations/- 1 token`,
+      {cwd}
+    );
+    assert(stdout, stdout !== null);
   });
 });
-
-

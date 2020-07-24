@@ -14,24 +14,27 @@
 'use strict';
 
 async function main(
-  project = 'my-project/*/locations/*', // Get the functions for a project.
-  page_size = 1 //Max number of functions to return per call
+  project = 'projects/my-project/locations/-', // Get the functions for a project.
+  page_size = 1, //Max number of functions to return per call
+  page_token = 'token'
 ) {
   // [START cloud_nodejs_functions_quickstart]
   // Imports the Google Cloud client library
-  const {AnalyticsAdminServiceClient} = require('@google-analytics/admin');
+  const {CloudFunctionsServiceClient} = require('@google-cloud/functions');
 
   // Creates a client
-  const client = new AnalyticsAdminServiceClient();
+  const client = new CloudFunctionsServiceClient();
 
-  // name = 'my-name' // Get an account for a name.
-  async function getAccount() {
-    const [account] = await client.getAccount({
-      name,
+  // project = 'my-project/*/locations/*' // Get the functions for a project.
+  async function listFunctions() {
+    const [functions] = await client.listFunctions({
+      parent: project,
+      pageSize: page_size,
+      pageToken: page_token,
     });
-    console.info(account);
+    console.info(functions);
   }
-  getAccount();
+  listFunctions();
   // [END cloud_nodejs_functions_quickstart]
 }
 
