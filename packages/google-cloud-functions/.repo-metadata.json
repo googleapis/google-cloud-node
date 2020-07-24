@@ -4,7 +4,7 @@
   "product_documentation": "https://developers.google.com/nodejs-functions/",
   "client_documentation": "https://googleapis.dev/nodejs/nodejs-functions/latest/index.html",
   "issue_tracker": "",
-  "release_level": "alpha",
+  "release_level": "beta",
   "language": "nodejs",
   "repo": "googleapis/nodejs-functions",
   "distribution_name": "@google-cloud/functions",
