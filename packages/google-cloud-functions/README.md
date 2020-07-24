@@ -4,7 +4,7 @@
 
 # [Google Cloud Functions: Node.js Client](https://github.com/googleapis/nodejs-functions)
 
-[![release level](https://img.shields.io/badge/release%20level-alpha-orange.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
+[![release level](https://img.shields.io/badge/release%20level-beta-yellow.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
 [![npm version](https://img.shields.io/npm/v/@google-cloud/functions.svg)](https://www.npmjs.org/package/@google-cloud/functions)
 [![codecov](https://img.shields.io/codecov/c/github/googleapis/nodejs-functions/master.svg?style=flat)](https://codecov.io/gh/googleapis/nodejs-functions)
 
@@ -29,8 +29,8 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 * [Quickstart](#quickstart)
   * [Before you begin](#before-you-begin)
   * [Installing the client library](#installing-the-client-library)
-
-
+  * [Using the client library](#using-the-client-library)
+* [Samples](#samples)
 * [Versioning](#versioning)
 * [Contributing](#contributing)
 * [License](#license)
@@ -51,6 +51,38 @@ npm install @google-cloud/functions
 ```
 
 
+### Using the client library
+
+```javascript
+// Imports the Google Cloud client library
+const {CloudFunctionsServiceClient} = require('@google-cloud/functions');
+
+// Creates a client
+const client = new CloudFunctionsServiceClient();
+
+// project = 'my-project/*/locations/*' // Get the functions for a project.
+async function listFunctions() {
+  const [functions] = await client.listFunctions({
+    parent: project,
+    pageSize: page_size,
+    pageToken: page_token,
+  });
+  console.info(functions);
+}
+listFunctions();
+
+```
+
+
+
+## Samples
+
+Samples are in the [`samples/`](https://github.com/googleapis/nodejs-functions/tree/master/samples) directory. The samples' `README.md`
+has instructions for running the samples.
+
+| Sample                      | Source Code                       | Try it |
+| --------------------------- | --------------------------------- | ------ |
+| Quickstart | [source code](https://github.com/googleapis/nodejs-functions/blob/master/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-functions&page=editor&open_in_editor=samples/quickstart.js,samples/README.md) |
 
 
 
@@ -84,10 +116,11 @@ This library follows [Semantic Versioning](http://semver.org/).
 
 
 
+This library is considered to be in **beta**. This means it is expected to be
+mostly stable while we work toward a general availability release; however,
+complete stability is not guaranteed. We will address issues and requests
+against beta libraries with a high priority.
 
-This library is considered to be in **alpha**. This means it is still a
-work-in-progress and under active development. Any release is subject to
-backwards-incompatible changes at any time.
 
 
 
