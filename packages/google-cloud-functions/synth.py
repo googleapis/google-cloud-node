@@ -23,7 +23,7 @@ versions = ['v1']
 library = 'functions'
 for version in versions:
     library = gapic.node_library(library, version)
-    s.copy(library, excludes=[])
+    s.copy(library, excludes=['README.md', 'package.json'])
 # Copy common templates
 common_templates = gcp.CommonTemplates()
 templates = common_templates.node_library(
