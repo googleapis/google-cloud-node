@@ -10,7 +10,8 @@
     "*.js"
   ],
   "scripts": {
-    "test": "npm link ../; c8 mocha --timeout 600000 test/*.js"
+    "prelint": "cd samples; npm link ../; npm install", 
+    "test": "c8 mocha --timeout 600000 test/*.js"
   },
   "dependencies": {},
   "devDependencies": {
