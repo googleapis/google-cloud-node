@@ -14,7 +14,6 @@
 'use strict';
 
 async function main(
-  projectId = 'my-project'
   project = 'projects/my-project/locations/-', // Get the functions for a project.
   page_size = 1, //Max number of functions to return per call
   page_token = 'token'
