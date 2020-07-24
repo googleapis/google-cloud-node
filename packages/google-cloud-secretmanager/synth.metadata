@@ -4,7 +4,7 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/nodejs-secret-manager.git",
-        "sha": "c623baea6d5164ffeca192efa578340808a07bd6"
+        "sha": "41b88979e16054bc54dccd793ca04685a40800ad"
       }
     },
     {
@@ -19,7 +19,7 @@
       "git": {
         "name": "synthtool",
         "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "99c93fe09f8c1dca09dfc0301c8668e3a70dd796"
+        "sha": "3a00b7fea8c4c83eaff8eb207f530a2e3e8e1de3"
       }
     }
   ],
