@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-paginator?activeTab=versions
 
+### [3.0.3](https://www.github.com/googleapis/nodejs-paginator/compare/v3.0.2...v3.0.3) (2020-07-24)
+
+
+### Bug Fixes
+
+* move gitattributes files to node templates ([#234](https://www.github.com/googleapis/nodejs-paginator/issues/234)) ([30e881c](https://www.github.com/googleapis/nodejs-paginator/commit/30e881ce7415749b93b6b7e4e71745ea3fb248b6))
+
 ### [3.0.2](https://www.github.com/googleapis/nodejs-paginator/compare/v3.0.1...v3.0.2) (2020-07-06)
 
 
