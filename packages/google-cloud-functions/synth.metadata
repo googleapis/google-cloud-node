@@ -4,15 +4,15 @@
       "git": {
         "name": ".",
         "remote": "git@github.com:googleapis/nodejs-functions.git",
-        "sha": "1eb6d4effedd8077b1ad45c2bf3d006b50cc4e31"
+        "sha": "5798802a7686e4569bfe28142e304efcffd15c4c"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "e26e1839a45445d13cd45b1be3b1523defb72fee",
-        "internalRef": "322867095"
+        "sha": "e0ba04a01ce13922ace5c362d9226c55eb88bcde",
+        "internalRef": "323039149"
       }
     },
     {
