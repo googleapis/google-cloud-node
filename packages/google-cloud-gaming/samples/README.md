@@ -13,18 +13,27 @@
 * [Before you begin](#before-you-begin)
 * [Samples](#samples)
   * [Create_cluster](#create_cluster)
+  * [Create_config](#create_config)
   * [Create_deployment](#create_deployment)
   * [Create_realm](#create_realm)
   * [Delete_cluster](#delete_cluster)
+  * [Delete_config](#delete_config)
   * [Delete_deployment](#delete_deployment)
   * [Delete_realm](#delete_realm)
   * [Get_cluster](#get_cluster)
+  * [Get_config](#get_config)
   * [Get_deployment](#get_deployment)
   * [Get_realm](#get_realm)
+  * [Get_rollout](#get_rollout)
   * [List_clusters](#list_clusters)
+  * [List_configs](#list_configs)
   * [List_deployments](#list_deployments)
   * [List_realms](#list_realms)
   * [Create Game Server Realm](#create-game-server-realm)
+  * [Update_rollout_default](#update_rollout_default)
+  * [Update_rollout_override](#update_rollout_override)
+  * [Update_rollout_remove_default](#update_rollout_remove_default)
+  * [Update_rollout_remove_override](#update_rollout_remove_override)
 
 ## Before you begin
 
@@ -51,6 +60,23 @@ __Usage:__
 
 
 `node samples/create_cluster.js`
+
+
+-----
+
+
+
+
+### Create_config
+
+View the [source code](https://github.com/googleapis/nodejs-game-servers/blob/master/samples/create_config.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-game-servers&page=editor&open_in_editor=samples/create_config.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/create_config.js`
 
 
 -----
@@ -109,6 +135,23 @@ __Usage:__
 
 
 
+### Delete_config
+
+View the [source code](https://github.com/googleapis/nodejs-game-servers/blob/master/samples/delete_config.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-game-servers&page=editor&open_in_editor=samples/delete_config.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/delete_config.js`
+
+
+-----
+
+
+
+
 ### Delete_deployment
 
 View the [source code](https://github.com/googleapis/nodejs-game-servers/blob/master/samples/delete_deployment.js).
@@ -160,6 +203,23 @@ __Usage:__
 
 
 
+### Get_config
+
+View the [source code](https://github.com/googleapis/nodejs-game-servers/blob/master/samples/get_config.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-game-servers&page=editor&open_in_editor=samples/get_config.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/get_config.js`
+
+
+-----
+
+
+
+
 ### Get_deployment
 
 View the [source code](https://github.com/googleapis/nodejs-game-servers/blob/master/samples/get_deployment.js).
@@ -194,6 +254,23 @@ __Usage:__
 
 
 
+### Get_rollout
+
+View the [source code](https://github.com/googleapis/nodejs-game-servers/blob/master/samples/get_rollout.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-game-servers&page=editor&open_in_editor=samples/get_rollout.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/get_rollout.js`
+
+
+-----
+
+
+
+
 ### List_clusters
 
 View the [source code](https://github.com/googleapis/nodejs-game-servers/blob/master/samples/list_clusters.js).
@@ -204,6 +281,23 @@ __Usage:__
 
 
 `node samples/list_clusters.js`
+
+
+-----
+
+
+
+
+### List_configs
+
+View the [source code](https://github.com/googleapis/nodejs-game-servers/blob/master/samples/list_configs.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-game-servers&page=editor&open_in_editor=samples/list_configs.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/list_configs.js`
 
 
 -----
@@ -257,6 +351,74 @@ __Usage:__
 
 
 `node quickstart.js <project_id> <location> <realmId>`
+
+
+-----
+
+
+
+
+### Update_rollout_default
+
+View the [source code](https://github.com/googleapis/nodejs-game-servers/blob/master/samples/update_rollout_default.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-game-servers&page=editor&open_in_editor=samples/update_rollout_default.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/update_rollout_default.js`
+
+
+-----
+
+
+
+
+### Update_rollout_override
+
+View the [source code](https://github.com/googleapis/nodejs-game-servers/blob/master/samples/update_rollout_override.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-game-servers&page=editor&open_in_editor=samples/update_rollout_override.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/update_rollout_override.js`
+
+
+-----
+
+
+
+
+### Update_rollout_remove_default
+
+View the [source code](https://github.com/googleapis/nodejs-game-servers/blob/master/samples/update_rollout_remove_default.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-game-servers&page=editor&open_in_editor=samples/update_rollout_remove_default.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/update_rollout_remove_default.js`
+
+
+-----
+
+
+
+
+### Update_rollout_remove_override
+
+View the [source code](https://github.com/googleapis/nodejs-game-servers/blob/master/samples/update_rollout_remove_override.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-game-servers&page=editor&open_in_editor=samples/update_rollout_remove_override.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/update_rollout_remove_override.js`
 
 
 
