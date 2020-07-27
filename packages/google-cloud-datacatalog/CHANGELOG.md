@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/datacatalog?activeTab=versions
 
+### [2.1.2](https://www.github.com/googleapis/nodejs-datacatalog/compare/v2.1.1...v2.1.2) (2020-07-27)
+
+
+### Bug Fixes
+
+* move gitattributes files to node templates ([#194](https://www.github.com/googleapis/nodejs-datacatalog/issues/194)) ([6471c23](https://www.github.com/googleapis/nodejs-datacatalog/commit/6471c23598674fb85bdb4a733dcdd3a7799ce314))
+
 ### [2.1.1](https://www.github.com/googleapis/nodejs-datacatalog/compare/v2.1.0...v2.1.1) (2020-07-09)
 
 
