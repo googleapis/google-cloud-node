@@ -39,7 +39,10 @@
     "test": "c8 mocha build/test"
   },
   "dependencies": {
-    "google-gax": "^2.6.3"
+    "google-auth-library": "^6.0.5",
+    "google-gax": "^2.6.3",
+    "open": "^7.1.0",
+    "server-destroy": "^1.0.1"
   },
   "devDependencies": {
     "@types/mocha": "^8.0.0",
