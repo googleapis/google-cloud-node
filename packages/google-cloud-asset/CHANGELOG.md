@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/asset?activeTab=versions
 
+### [3.5.1](https://www.github.com/googleapis/nodejs-asset/compare/v3.5.0...v3.5.1) (2020-07-27)
+
+
+### Bug Fixes
+
+* move gitattributes files to node templates ([#371](https://www.github.com/googleapis/nodejs-asset/issues/371)) ([e05f810](https://www.github.com/googleapis/nodejs-asset/commit/e05f810f0f15975d52fd9f6d62c8b194c8e96b5a))
+
 ## [3.5.0](https://www.github.com/googleapis/nodejs-asset/compare/v3.4.0...v3.5.0) (2020-07-08)
 
 
