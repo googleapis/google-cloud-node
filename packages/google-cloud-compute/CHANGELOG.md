@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/compute?activeTab=versions
 
+### [2.0.3](https://www.github.com/googleapis/nodejs-compute/compare/v2.0.2...v2.0.3) (2020-07-27)
+
+
+### Bug Fixes
+
+* move gitattributes files to node templates ([#472](https://www.github.com/googleapis/nodejs-compute/issues/472)) ([4e1dd20](https://www.github.com/googleapis/nodejs-compute/commit/4e1dd2032e09d90ffa4e80970091ac50de24ef17))
+
 ### [2.0.2](https://www.github.com/googleapis/nodejs-compute/compare/v2.0.1...v2.0.2) (2020-07-09)
 
 
