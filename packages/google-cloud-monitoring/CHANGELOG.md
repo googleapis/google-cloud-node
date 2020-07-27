@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/monitoring?activeTab=versions
 
+### [2.1.1](https://www.github.com/googleapis/nodejs-monitoring/compare/v2.1.0...v2.1.1) (2020-07-24)
+
+
+### Bug Fixes
+
+* move gitattributes files to node templates ([#464](https://www.github.com/googleapis/nodejs-monitoring/issues/464)) ([db2d19d](https://www.github.com/googleapis/nodejs-monitoring/commit/db2d19d9170eb10d8f2c779589e623222991d393))
+
 ## [2.1.0](https://www.github.com/googleapis/nodejs-monitoring/compare/v2.0.0...v2.1.0) (2020-06-18)
 
 
