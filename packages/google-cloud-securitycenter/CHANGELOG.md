@@ -4,6 +4,14 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/security-center?activeTab=versions
 
+### [5.0.2](https://www.github.com/googleapis/nodejs-security-center/compare/v5.0.1...v5.0.2) (2020-07-27)
+
+
+### Bug Fixes
+
+* add resource config to v1beta1 ([#307](https://www.github.com/googleapis/nodejs-security-center/issues/307)) ([5d99acf](https://www.github.com/googleapis/nodejs-security-center/commit/5d99acf9dea7a6e2d384ee709678365c769f3d6e))
+* correct securitycenter grpc_service_configs, add Node 8 tests ([#302](https://www.github.com/googleapis/nodejs-security-center/issues/302)) ([4e4ec5b](https://www.github.com/googleapis/nodejs-security-center/commit/4e4ec5bbd9623dc952781e80da226320db3906af))
+
 ### [5.0.1](https://www.github.com/googleapis/nodejs-security-center/compare/v5.0.0...v5.0.1) (2020-07-06)
 
 
