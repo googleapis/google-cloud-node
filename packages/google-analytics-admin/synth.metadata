@@ -3,8 +3,8 @@
     {
       "git": {
         "name": ".",
-        "remote": "git@github.com:googleapis/nodejs-analytics-admin.git",
-        "sha": "563ad77b0d57edfebee51b66183d63a7ef1cd1d7"
+        "remote": "https://github.com/googleapis/nodejs-analytics-admin.git",
+        "sha": "0116de69bd433875ba7baf93d656429e1d265e11"
       }
     },
     {
@@ -13,6 +13,13 @@
         "remote": "https://github.com/googleapis/googleapis.git",
         "sha": "5d0eacc7ba0d9199ef1fcd7c542dd4b53949c285",
         "internalRef": "322659285"
+      }
+    },
+    {
+      "git": {
+        "name": "synthtool",
+        "remote": "https://github.com/googleapis/synthtool.git",
+        "sha": "2686d7075fa456972bf4d08680d99617f5eb32b1"
       }
     }
   ],
