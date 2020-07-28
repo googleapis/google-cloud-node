@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/dataproc?activeTab=versions
 
+### [2.1.1](https://www.github.com/googleapis/nodejs-dataproc/compare/v2.1.0...v2.1.1) (2020-07-24)
+
+
+### Bug Fixes
+
+* LRO annotations for method `DiagnoseCluster`. ([#409](https://www.github.com/googleapis/nodejs-dataproc/issues/409)) ([68336ef](https://www.github.com/googleapis/nodejs-dataproc/commit/68336ef6f1d2026ac393f7d63dcd882e2c1070d5))
+
 ## [2.1.0](https://www.github.com/googleapis/nodejs-dataproc/compare/v2.0.0...v2.1.0) (2020-06-28)
 
 
