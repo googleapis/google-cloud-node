@@ -1,5 +1,13 @@
 # Changelog
 
+### [2.0.3](https://www.github.com/googleapis/nodejs-cloudbuild/compare/v2.0.2...v2.0.3) (2020-07-24)
+
+
+### Bug Fixes
+
+* add missing cloudbuild RPCs to retry config, add Node 8 tests  ([#141](https://www.github.com/googleapis/nodejs-cloudbuild/issues/141)) ([e4b83e8](https://www.github.com/googleapis/nodejs-cloudbuild/commit/e4b83e8a63f6ddba2ea158ab0ed9b4a50fa536bf))
+* inline markup spans must be separated from the surrounding text by non-word characters ([#146](https://www.github.com/googleapis/nodejs-cloudbuild/issues/146)) ([52b4770](https://www.github.com/googleapis/nodejs-cloudbuild/commit/52b4770f0c262ce91306e31d68f3b47b0598751d))
+
 ### [2.0.2](https://www.github.com/googleapis/nodejs-cloudbuild/compare/v2.0.1...v2.0.2) (2020-07-09)
 
 
