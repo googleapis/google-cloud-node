@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0](https://www.github.com/googleapis/nodejs-analytics-admin/compare/v1.0.0...v1.1.0) (2020-07-29)
+
+
+### Features
+
+* initial release of library from googleapis organization ([#12](https://www.github.com/googleapis/nodejs-analytics-admin/issues/12)) ([f741199](https://www.github.com/googleapis/nodejs-analytics-admin/commit/f741199acb8544367d61e579ddad40eed45baf45))
+
 ## 1.0.0 (2020-07-28)
 
 
