@@ -14,6 +14,9 @@
 Google Cloud Video Intelligence API client for Node.js
 
 
+A comprehensive list of changes in each version may be found in
+[the CHANGELOG](https://github.com/googleapis/nodejs-video-intelligence/blob/master/CHANGELOG.md).
+
 * [Google Cloud Video Intelligence Node.js Client API Reference][client-docs]
 * [Google Cloud Video Intelligence Documentation][product-docs]
 * [github.com/googleapis/nodejs-video-intelligence](https://github.com/googleapis/nodejs-video-intelligence)
