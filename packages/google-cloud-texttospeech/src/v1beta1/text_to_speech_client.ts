@@ -404,6 +404,8 @@ export class TextToSpeechClient {
    *   Required. The desired voice of the synthesized audio.
    * @param {google.cloud.texttospeech.v1beta1.AudioConfig} request.audioConfig
    *   Required. The configuration of the synthesized audio.
+   * @param {number[]} request.enableTimePointing
+   *   Whether and what timepoints should be returned in the response.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.

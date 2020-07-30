@@ -1082,7 +1082,9 @@ export namespace google {
                     AUDIO_ENCODING_UNSPECIFIED = 0,
                     LINEAR16 = 1,
                     MP3 = 2,
-                    OGG_OPUS = 3
+                    MP3_64_KBPS = 4,
+                    OGG_OPUS = 3,
+                    MULAW = 5
                 }
 
                 /** Properties of a ListVoicesResponse. */
@@ -1294,6 +1296,9 @@ export namespace google {
 
                     /** SynthesizeSpeechRequest audioConfig */
                     audioConfig?: (google.cloud.texttospeech.v1beta1.IAudioConfig|null);
+
+                    /** SynthesizeSpeechRequest enableTimePointing */
+                    enableTimePointing?: (google.cloud.texttospeech.v1beta1.SynthesizeSpeechRequest.TimepointType[]|null);
                 }
 
                 /** Represents a SynthesizeSpeechRequest. */
@@ -1313,6 +1318,9 @@ export namespace google {
 
                     /** SynthesizeSpeechRequest audioConfig. */
                     public audioConfig?: (google.cloud.texttospeech.v1beta1.IAudioConfig|null);
+
+                    /** SynthesizeSpeechRequest enableTimePointing. */
+                    public enableTimePointing: google.cloud.texttospeech.v1beta1.SynthesizeSpeechRequest.TimepointType[];
 
                     /**
                      * Creates a new SynthesizeSpeechRequest instance using the specified properties.
@@ -1383,6 +1391,15 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+                }
+
+                namespace SynthesizeSpeechRequest {
+
+                    /** TimepointType enum. */
+                    enum TimepointType {
+                        TIMEPOINT_TYPE_UNSPECIFIED = 0,
+                        SSML_MARK = 1
+                    }
                 }
 
                 /** Properties of a SynthesisInput. */
@@ -1711,6 +1728,12 @@ export namespace google {
 
                     /** SynthesizeSpeechResponse audioContent */
                     audioContent?: (Uint8Array|string|null);
+
+                    /** SynthesizeSpeechResponse timepoints */
+                    timepoints?: (google.cloud.texttospeech.v1beta1.ITimepoint[]|null);
+
+                    /** SynthesizeSpeechResponse audioConfig */
+                    audioConfig?: (google.cloud.texttospeech.v1beta1.IAudioConfig|null);
                 }
 
                 /** Represents a SynthesizeSpeechResponse. */
@@ -1724,6 +1747,12 @@ export namespace google {
 
                     /** SynthesizeSpeechResponse audioContent. */
                     public audioContent: (Uint8Array|string);
+
+                    /** SynthesizeSpeechResponse timepoints. */
+                    public timepoints: google.cloud.texttospeech.v1beta1.ITimepoint[];
+
+                    /** SynthesizeSpeechResponse audioConfig. */
+                    public audioConfig?: (google.cloud.texttospeech.v1beta1.IAudioConfig|null);
 
                     /**
                      * Creates a new SynthesizeSpeechResponse instance using the specified properties.
@@ -1791,6 +1820,102 @@ export namespace google {
 
                     /**
                      * Converts this SynthesizeSpeechResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a Timepoint. */
+                interface ITimepoint {
+
+                    /** Timepoint markName */
+                    markName?: (string|null);
+
+                    /** Timepoint timeSeconds */
+                    timeSeconds?: (number|null);
+                }
+
+                /** Represents a Timepoint. */
+                class Timepoint implements ITimepoint {
+
+                    /**
+                     * Constructs a new Timepoint.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.texttospeech.v1beta1.ITimepoint);
+
+                    /** Timepoint markName. */
+                    public markName: string;
+
+                    /** Timepoint timeSeconds. */
+                    public timeSeconds: number;
+
+                    /**
+                     * Creates a new Timepoint instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Timepoint instance
+                     */
+                    public static create(properties?: google.cloud.texttospeech.v1beta1.ITimepoint): google.cloud.texttospeech.v1beta1.Timepoint;
+
+                    /**
+                     * Encodes the specified Timepoint message. Does not implicitly {@link google.cloud.texttospeech.v1beta1.Timepoint.verify|verify} messages.
+                     * @param message Timepoint message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.texttospeech.v1beta1.ITimepoint, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Timepoint message, length delimited. Does not implicitly {@link google.cloud.texttospeech.v1beta1.Timepoint.verify|verify} messages.
+                     * @param message Timepoint message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.texttospeech.v1beta1.ITimepoint, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Timepoint message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Timepoint
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.texttospeech.v1beta1.Timepoint;
+
+                    /**
+                     * Decodes a Timepoint message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Timepoint
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.texttospeech.v1beta1.Timepoint;
+
+                    /**
+                     * Verifies a Timepoint message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Timepoint message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Timepoint
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.texttospeech.v1beta1.Timepoint;
+
+                    /**
+                     * Creates a plain object from a Timepoint message. Also converts values to other types if specified.
+                     * @param message Timepoint
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.texttospeech.v1beta1.Timepoint, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Timepoint to JSON.
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };

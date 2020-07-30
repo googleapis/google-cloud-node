@@ -282,7 +282,9 @@
                         "AUDIO_ENCODING_UNSPECIFIED": 0,
                         "LINEAR16": 1,
                         "MP3": 2,
-                        "OGG_OPUS": 3
+                        "MP3_64_KBPS": 4,
+                        "OGG_OPUS": 3,
+                        "MULAW": 5
                       }
                     },
                     "ListVoicesResponse": {
@@ -336,6 +338,19 @@
                           "id": 3,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "enableTimePointing": {
+                          "rule": "repeated",
+                          "type": "TimepointType",
+                          "id": 4
+                        }
+                      },
+                      "nested": {
+                        "TimepointType": {
+                          "values": {
+                            "TIMEPOINT_TYPE_UNSPECIFIED": 0,
+                            "SSML_MARK": 1
                           }
                         }
                       }
@@ -431,6 +446,27 @@
                         "audioContent": {
                           "type": "bytes",
                           "id": 1
+                        },
+                        "timepoints": {
+                          "rule": "repeated",
+                          "type": "Timepoint",
+                          "id": 2
+                        },
+                        "audioConfig": {
+                          "type": "AudioConfig",
+                          "id": 4
+                        }
+                      }
+                    },
+                    "Timepoint": {
+                      "fields": {
+                        "markName": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "timeSeconds": {
+                          "type": "double",
+                          "id": 3
                         }
                       }
                     }

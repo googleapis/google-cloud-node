@@ -2486,14 +2486,18 @@
                      * @property {number} AUDIO_ENCODING_UNSPECIFIED=0 AUDIO_ENCODING_UNSPECIFIED value
                      * @property {number} LINEAR16=1 LINEAR16 value
                      * @property {number} MP3=2 MP3 value
+                     * @property {number} MP3_64_KBPS=4 MP3_64_KBPS value
                      * @property {number} OGG_OPUS=3 OGG_OPUS value
+                     * @property {number} MULAW=5 MULAW value
                      */
                     v1beta1.AudioEncoding = (function() {
                         var valuesById = {}, values = Object.create(valuesById);
                         values[valuesById[0] = "AUDIO_ENCODING_UNSPECIFIED"] = 0;
                         values[valuesById[1] = "LINEAR16"] = 1;
                         values[valuesById[2] = "MP3"] = 2;
+                        values[valuesById[4] = "MP3_64_KBPS"] = 4;
                         values[valuesById[3] = "OGG_OPUS"] = 3;
+                        values[valuesById[5] = "MULAW"] = 5;
                         return values;
                     })();
     
@@ -3008,6 +3012,7 @@
                          * @property {google.cloud.texttospeech.v1beta1.ISynthesisInput|null} [input] SynthesizeSpeechRequest input
                          * @property {google.cloud.texttospeech.v1beta1.IVoiceSelectionParams|null} [voice] SynthesizeSpeechRequest voice
                          * @property {google.cloud.texttospeech.v1beta1.IAudioConfig|null} [audioConfig] SynthesizeSpeechRequest audioConfig
+                         * @property {Array.<google.cloud.texttospeech.v1beta1.SynthesizeSpeechRequest.TimepointType>|null} [enableTimePointing] SynthesizeSpeechRequest enableTimePointing
                          */
     
                         /**
@@ -3019,6 +3024,7 @@
                          * @param {google.cloud.texttospeech.v1beta1.ISynthesizeSpeechRequest=} [properties] Properties to set
                          */
                         function SynthesizeSpeechRequest(properties) {
+                            this.enableTimePointing = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -3050,6 +3056,14 @@
                         SynthesizeSpeechRequest.prototype.audioConfig = null;
     
                         /**
+                         * SynthesizeSpeechRequest enableTimePointing.
+                         * @member {Array.<google.cloud.texttospeech.v1beta1.SynthesizeSpeechRequest.TimepointType>} enableTimePointing
+                         * @memberof google.cloud.texttospeech.v1beta1.SynthesizeSpeechRequest
+                         * @instance
+                         */
+                        SynthesizeSpeechRequest.prototype.enableTimePointing = $util.emptyArray;
+    
+                        /**
                          * Creates a new SynthesizeSpeechRequest instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.texttospeech.v1beta1.SynthesizeSpeechRequest
@@ -3079,6 +3093,12 @@
                                 $root.google.cloud.texttospeech.v1beta1.VoiceSelectionParams.encode(message.voice, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                             if (message.audioConfig != null && Object.hasOwnProperty.call(message, "audioConfig"))
                                 $root.google.cloud.texttospeech.v1beta1.AudioConfig.encode(message.audioConfig, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.enableTimePointing != null && message.enableTimePointing.length) {
+                                writer.uint32(/* id 4, wireType 2 =*/34).fork();
+                                for (var i = 0; i < message.enableTimePointing.length; ++i)
+                                    writer.int32(message.enableTimePointing[i]);
+                                writer.ldelim();
+                            }
                             return writer;
                         };
     
@@ -3121,6 +3141,16 @@
                                     break;
                                 case 3:
                                     message.audioConfig = $root.google.cloud.texttospeech.v1beta1.AudioConfig.decode(reader, reader.uint32());
+                                    break;
+                                case 4:
+                                    if (!(message.enableTimePointing && message.enableTimePointing.length))
+                                        message.enableTimePointing = [];
+                                    if ((tag & 7) === 2) {
+                                        var end2 = reader.uint32() + reader.pos;
+                                        while (reader.pos < end2)
+                                            message.enableTimePointing.push(reader.int32());
+                                    } else
+                                        message.enableTimePointing.push(reader.int32());
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -3172,6 +3202,18 @@
                                 if (error)
                                     return "audioConfig." + error;
                             }
+                            if (message.enableTimePointing != null && message.hasOwnProperty("enableTimePointing")) {
+                                if (!Array.isArray(message.enableTimePointing))
+                                    return "enableTimePointing: array expected";
+                                for (var i = 0; i < message.enableTimePointing.length; ++i)
+                                    switch (message.enableTimePointing[i]) {
+                                    default:
+                                        return "enableTimePointing: enum value[] expected";
+                                    case 0:
+                                    case 1:
+                                        break;
+                                    }
+                            }
                             return null;
                         };
     
@@ -3202,6 +3244,23 @@
                                     throw TypeError(".google.cloud.texttospeech.v1beta1.SynthesizeSpeechRequest.audioConfig: object expected");
                                 message.audioConfig = $root.google.cloud.texttospeech.v1beta1.AudioConfig.fromObject(object.audioConfig);
                             }
+                            if (object.enableTimePointing) {
+                                if (!Array.isArray(object.enableTimePointing))
+                                    throw TypeError(".google.cloud.texttospeech.v1beta1.SynthesizeSpeechRequest.enableTimePointing: array expected");
+                                message.enableTimePointing = [];
+                                for (var i = 0; i < object.enableTimePointing.length; ++i)
+                                    switch (object.enableTimePointing[i]) {
+                                    default:
+                                    case "TIMEPOINT_TYPE_UNSPECIFIED":
+                                    case 0:
+                                        message.enableTimePointing[i] = 0;
+                                        break;
+                                    case "SSML_MARK":
+                                    case 1:
+                                        message.enableTimePointing[i] = 1;
+                                        break;
+                                    }
+                            }
                             return message;
                         };
     
@@ -3218,6 +3277,8 @@
                             if (!options)
                                 options = {};
                             var object = {};
+                            if (options.arrays || options.defaults)
+                                object.enableTimePointing = [];
                             if (options.defaults) {
                                 object.input = null;
                                 object.voice = null;
@@ -3229,6 +3290,11 @@
                                 object.voice = $root.google.cloud.texttospeech.v1beta1.VoiceSelectionParams.toObject(message.voice, options);
                             if (message.audioConfig != null && message.hasOwnProperty("audioConfig"))
                                 object.audioConfig = $root.google.cloud.texttospeech.v1beta1.AudioConfig.toObject(message.audioConfig, options);
+                            if (message.enableTimePointing && message.enableTimePointing.length) {
+                                object.enableTimePointing = [];
+                                for (var j = 0; j < message.enableTimePointing.length; ++j)
+                                    object.enableTimePointing[j] = options.enums === String ? $root.google.cloud.texttospeech.v1beta1.SynthesizeSpeechRequest.TimepointType[message.enableTimePointing[j]] : message.enableTimePointing[j];
+                            }
                             return object;
                         };
     
@@ -3242,6 +3308,20 @@
                         SynthesizeSpeechRequest.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
+    
+                        /**
+                         * TimepointType enum.
+                         * @name google.cloud.texttospeech.v1beta1.SynthesizeSpeechRequest.TimepointType
+                         * @enum {number}
+                         * @property {number} TIMEPOINT_TYPE_UNSPECIFIED=0 TIMEPOINT_TYPE_UNSPECIFIED value
+                         * @property {number} SSML_MARK=1 SSML_MARK value
+                         */
+                        SynthesizeSpeechRequest.TimepointType = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "TIMEPOINT_TYPE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "SSML_MARK"] = 1;
+                            return values;
+                        })();
     
                         return SynthesizeSpeechRequest;
                     })();
@@ -3945,7 +4025,9 @@
                                 case 0:
                                 case 1:
                                 case 2:
+                                case 4:
                                 case 3:
+                                case 5:
                                     break;
                                 }
                             if (message.speakingRate != null && message.hasOwnProperty("speakingRate"))
@@ -3995,9 +4077,17 @@
                             case 2:
                                 message.audioEncoding = 2;
                                 break;
+                            case "MP3_64_KBPS":
+                            case 4:
+                                message.audioEncoding = 4;
+                                break;
                             case "OGG_OPUS":
                             case 3:
                                 message.audioEncoding = 3;
+                                break;
+                            case "MULAW":
+                            case 5:
+                                message.audioEncoding = 5;
                                 break;
                             }
                             if (object.speakingRate != null)
@@ -4079,6 +4169,8 @@
                          * @memberof google.cloud.texttospeech.v1beta1
                          * @interface ISynthesizeSpeechResponse
                          * @property {Uint8Array|null} [audioContent] SynthesizeSpeechResponse audioContent
+                         * @property {Array.<google.cloud.texttospeech.v1beta1.ITimepoint>|null} [timepoints] SynthesizeSpeechResponse timepoints
+                         * @property {google.cloud.texttospeech.v1beta1.IAudioConfig|null} [audioConfig] SynthesizeSpeechResponse audioConfig
                          */
     
                         /**
@@ -4090,6 +4182,7 @@
                          * @param {google.cloud.texttospeech.v1beta1.ISynthesizeSpeechResponse=} [properties] Properties to set
                          */
                         function SynthesizeSpeechResponse(properties) {
+                            this.timepoints = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -4103,6 +4196,22 @@
                          * @instance
                          */
                         SynthesizeSpeechResponse.prototype.audioContent = $util.newBuffer([]);
+    
+                        /**
+                         * SynthesizeSpeechResponse timepoints.
+                         * @member {Array.<google.cloud.texttospeech.v1beta1.ITimepoint>} timepoints
+                         * @memberof google.cloud.texttospeech.v1beta1.SynthesizeSpeechResponse
+                         * @instance
+                         */
+                        SynthesizeSpeechResponse.prototype.timepoints = $util.emptyArray;
+    
+                        /**
+                         * SynthesizeSpeechResponse audioConfig.
+                         * @member {google.cloud.texttospeech.v1beta1.IAudioConfig|null|undefined} audioConfig
+                         * @memberof google.cloud.texttospeech.v1beta1.SynthesizeSpeechResponse
+                         * @instance
+                         */
+                        SynthesizeSpeechResponse.prototype.audioConfig = null;
     
                         /**
                          * Creates a new SynthesizeSpeechResponse instance using the specified properties.
@@ -4130,6 +4239,11 @@
                                 writer = $Writer.create();
                             if (message.audioContent != null && Object.hasOwnProperty.call(message, "audioContent"))
                                 writer.uint32(/* id 1, wireType 2 =*/10).bytes(message.audioContent);
+                            if (message.timepoints != null && message.timepoints.length)
+                                for (var i = 0; i < message.timepoints.length; ++i)
+                                    $root.google.cloud.texttospeech.v1beta1.Timepoint.encode(message.timepoints[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.audioConfig != null && Object.hasOwnProperty.call(message, "audioConfig"))
+                                $root.google.cloud.texttospeech.v1beta1.AudioConfig.encode(message.audioConfig, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
                             return writer;
                         };
     
@@ -4166,6 +4280,14 @@
                                 switch (tag >>> 3) {
                                 case 1:
                                     message.audioContent = reader.bytes();
+                                    break;
+                                case 2:
+                                    if (!(message.timepoints && message.timepoints.length))
+                                        message.timepoints = [];
+                                    message.timepoints.push($root.google.cloud.texttospeech.v1beta1.Timepoint.decode(reader, reader.uint32()));
+                                    break;
+                                case 4:
+                                    message.audioConfig = $root.google.cloud.texttospeech.v1beta1.AudioConfig.decode(reader, reader.uint32());
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -4205,6 +4327,20 @@
                             if (message.audioContent != null && message.hasOwnProperty("audioContent"))
                                 if (!(message.audioContent && typeof message.audioContent.length === "number" || $util.isString(message.audioContent)))
                                     return "audioContent: buffer expected";
+                            if (message.timepoints != null && message.hasOwnProperty("timepoints")) {
+                                if (!Array.isArray(message.timepoints))
+                                    return "timepoints: array expected";
+                                for (var i = 0; i < message.timepoints.length; ++i) {
+                                    var error = $root.google.cloud.texttospeech.v1beta1.Timepoint.verify(message.timepoints[i]);
+                                    if (error)
+                                        return "timepoints." + error;
+                                }
+                            }
+                            if (message.audioConfig != null && message.hasOwnProperty("audioConfig")) {
+                                var error = $root.google.cloud.texttospeech.v1beta1.AudioConfig.verify(message.audioConfig);
+                                if (error)
+                                    return "audioConfig." + error;
+                            }
                             return null;
                         };
     
@@ -4225,6 +4361,21 @@
                                     $util.base64.decode(object.audioContent, message.audioContent = $util.newBuffer($util.base64.length(object.audioContent)), 0);
                                 else if (object.audioContent.length)
                                     message.audioContent = object.audioContent;
+                            if (object.timepoints) {
+                                if (!Array.isArray(object.timepoints))
+                                    throw TypeError(".google.cloud.texttospeech.v1beta1.SynthesizeSpeechResponse.timepoints: array expected");
+                                message.timepoints = [];
+                                for (var i = 0; i < object.timepoints.length; ++i) {
+                                    if (typeof object.timepoints[i] !== "object")
+                                        throw TypeError(".google.cloud.texttospeech.v1beta1.SynthesizeSpeechResponse.timepoints: object expected");
+                                    message.timepoints[i] = $root.google.cloud.texttospeech.v1beta1.Timepoint.fromObject(object.timepoints[i]);
+                                }
+                            }
+                            if (object.audioConfig != null) {
+                                if (typeof object.audioConfig !== "object")
+                                    throw TypeError(".google.cloud.texttospeech.v1beta1.SynthesizeSpeechResponse.audioConfig: object expected");
+                                message.audioConfig = $root.google.cloud.texttospeech.v1beta1.AudioConfig.fromObject(object.audioConfig);
+                            }
                             return message;
                         };
     
@@ -4241,7 +4392,9 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.defaults)
+                            if (options.arrays || options.defaults)
+                                object.timepoints = [];
+                            if (options.defaults) {
                                 if (options.bytes === String)
                                     object.audioContent = "";
                                 else {
@@ -4249,8 +4402,17 @@
                                     if (options.bytes !== Array)
                                         object.audioContent = $util.newBuffer(object.audioContent);
                                 }
+                                object.audioConfig = null;
+                            }
                             if (message.audioContent != null && message.hasOwnProperty("audioContent"))
                                 object.audioContent = options.bytes === String ? $util.base64.encode(message.audioContent, 0, message.audioContent.length) : options.bytes === Array ? Array.prototype.slice.call(message.audioContent) : message.audioContent;
+                            if (message.timepoints && message.timepoints.length) {
+                                object.timepoints = [];
+                                for (var j = 0; j < message.timepoints.length; ++j)
+                                    object.timepoints[j] = $root.google.cloud.texttospeech.v1beta1.Timepoint.toObject(message.timepoints[j], options);
+                            }
+                            if (message.audioConfig != null && message.hasOwnProperty("audioConfig"))
+                                object.audioConfig = $root.google.cloud.texttospeech.v1beta1.AudioConfig.toObject(message.audioConfig, options);
                             return object;
                         };
     
@@ -4266,6 +4428,216 @@
                         };
     
                         return SynthesizeSpeechResponse;
+                    })();
+    
+                    v1beta1.Timepoint = (function() {
+    
+                        /**
+                         * Properties of a Timepoint.
+                         * @memberof google.cloud.texttospeech.v1beta1
+                         * @interface ITimepoint
+                         * @property {string|null} [markName] Timepoint markName
+                         * @property {number|null} [timeSeconds] Timepoint timeSeconds
+                         */
+    
+                        /**
+                         * Constructs a new Timepoint.
+                         * @memberof google.cloud.texttospeech.v1beta1
+                         * @classdesc Represents a Timepoint.
+                         * @implements ITimepoint
+                         * @constructor
+                         * @param {google.cloud.texttospeech.v1beta1.ITimepoint=} [properties] Properties to set
+                         */
+                        function Timepoint(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Timepoint markName.
+                         * @member {string} markName
+                         * @memberof google.cloud.texttospeech.v1beta1.Timepoint
+                         * @instance
+                         */
+                        Timepoint.prototype.markName = "";
+    
+                        /**
+                         * Timepoint timeSeconds.
+                         * @member {number} timeSeconds
+                         * @memberof google.cloud.texttospeech.v1beta1.Timepoint
+                         * @instance
+                         */
+                        Timepoint.prototype.timeSeconds = 0;
+    
+                        /**
+                         * Creates a new Timepoint instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.texttospeech.v1beta1.Timepoint
+                         * @static
+                         * @param {google.cloud.texttospeech.v1beta1.ITimepoint=} [properties] Properties to set
+                         * @returns {google.cloud.texttospeech.v1beta1.Timepoint} Timepoint instance
+                         */
+                        Timepoint.create = function create(properties) {
+                            return new Timepoint(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified Timepoint message. Does not implicitly {@link google.cloud.texttospeech.v1beta1.Timepoint.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.texttospeech.v1beta1.Timepoint
+                         * @static
+                         * @param {google.cloud.texttospeech.v1beta1.ITimepoint} message Timepoint message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Timepoint.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.timeSeconds != null && Object.hasOwnProperty.call(message, "timeSeconds"))
+                                writer.uint32(/* id 3, wireType 1 =*/25).double(message.timeSeconds);
+                            if (message.markName != null && Object.hasOwnProperty.call(message, "markName"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.markName);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified Timepoint message, length delimited. Does not implicitly {@link google.cloud.texttospeech.v1beta1.Timepoint.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.texttospeech.v1beta1.Timepoint
+                         * @static
+                         * @param {google.cloud.texttospeech.v1beta1.ITimepoint} message Timepoint message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Timepoint.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a Timepoint message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.texttospeech.v1beta1.Timepoint
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.texttospeech.v1beta1.Timepoint} Timepoint
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Timepoint.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.texttospeech.v1beta1.Timepoint();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 4:
+                                    message.markName = reader.string();
+                                    break;
+                                case 3:
+                                    message.timeSeconds = reader.double();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a Timepoint message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.texttospeech.v1beta1.Timepoint
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.texttospeech.v1beta1.Timepoint} Timepoint
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Timepoint.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a Timepoint message.
+                         * @function verify
+                         * @memberof google.cloud.texttospeech.v1beta1.Timepoint
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        Timepoint.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.markName != null && message.hasOwnProperty("markName"))
+                                if (!$util.isString(message.markName))
+                                    return "markName: string expected";
+                            if (message.timeSeconds != null && message.hasOwnProperty("timeSeconds"))
+                                if (typeof message.timeSeconds !== "number")
+                                    return "timeSeconds: number expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a Timepoint message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.texttospeech.v1beta1.Timepoint
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.texttospeech.v1beta1.Timepoint} Timepoint
+                         */
+                        Timepoint.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.texttospeech.v1beta1.Timepoint)
+                                return object;
+                            var message = new $root.google.cloud.texttospeech.v1beta1.Timepoint();
+                            if (object.markName != null)
+                                message.markName = String(object.markName);
+                            if (object.timeSeconds != null)
+                                message.timeSeconds = Number(object.timeSeconds);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a Timepoint message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.texttospeech.v1beta1.Timepoint
+                         * @static
+                         * @param {google.cloud.texttospeech.v1beta1.Timepoint} message Timepoint
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        Timepoint.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.timeSeconds = 0;
+                                object.markName = "";
+                            }
+                            if (message.timeSeconds != null && message.hasOwnProperty("timeSeconds"))
+                                object.timeSeconds = options.json && !isFinite(message.timeSeconds) ? String(message.timeSeconds) : message.timeSeconds;
+                            if (message.markName != null && message.hasOwnProperty("markName"))
+                                object.markName = message.markName;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this Timepoint to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.texttospeech.v1beta1.Timepoint
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        Timepoint.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return Timepoint;
                     })();
     
                     return v1beta1;
