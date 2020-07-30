@@ -4,15 +4,15 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/nodejs-translate.git",
-        "sha": "0a7543eb0e33d2b17236e16ea2a909f3adf64cbe"
+        "sha": "95a18d7a7bc2ee2f52467d283f2e460d6da94620"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "4f4aa3a03e470f1390758b9d89eb1aa88837a5be",
-        "internalRef": "320300472"
+        "sha": "d399c754bdea83297877ab49e5f66b257a957a78",
+        "internalRef": "323860336"
       }
     },
     {
