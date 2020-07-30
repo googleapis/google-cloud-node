@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/text-to-speech?activeTab=versions
 
+## [3.1.0](https://www.github.com/googleapis/nodejs-text-to-speech/compare/v3.0.1...v3.1.0) (2020-07-30)
+
+
+### Features
+
+* support MULAW and MP3_64_KBPS audio encoding and support timepointing via SSML <mark> tag ([8826c87](https://www.github.com/googleapis/nodejs-text-to-speech/commit/8826c8714498d4d87546b2d61ea9ebbcff443971))
+
 ### [3.0.1](https://www.github.com/googleapis/nodejs-text-to-speech/compare/v3.0.0...v3.0.1) (2020-06-29)
 
 
