@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.2.2](https://www.github.com/googleapis/nodejs-os-config/compare/v1.2.1...v1.2.2) (2020-07-29)
+
+
+### Bug Fixes
+
+* move gitattributes files to node templates ([#34](https://www.github.com/googleapis/nodejs-os-config/issues/34)) ([6d2276d](https://www.github.com/googleapis/nodejs-os-config/commit/6d2276d2b7b55672b61385b998bb490baf59bbbc))
+
 ### [1.2.1](https://www.github.com/googleapis/nodejs-os-config/compare/v1.2.0...v1.2.1) (2020-06-18)
 
 
