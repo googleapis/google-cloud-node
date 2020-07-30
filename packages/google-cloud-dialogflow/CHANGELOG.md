@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/dialogflow?activeTab=versions
 
+## [3.2.0](https://www.github.com/googleapis/nodejs-dialogflow/compare/v3.1.1...v3.2.0) (2020-07-29)
+
+
+### Features
+
+* added support for custom content types docs: clarified wording around quota usage ([#660](https://www.github.com/googleapis/nodejs-dialogflow/issues/660)) ([8a7fbd3](https://www.github.com/googleapis/nodejs-dialogflow/commit/8a7fbd32ddcc907538fd4b0b5a129054c082dc81))
+
 ### [3.1.1](https://www.github.com/googleapis/nodejs-dialogflow/compare/v3.1.0...v3.1.1) (2020-07-23)
 
 
