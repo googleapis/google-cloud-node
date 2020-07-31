@@ -14,6 +14,9 @@
 Cloud Build API client for Node.js
 
 
+A comprehensive list of changes in each version may be found in
+[the CHANGELOG](https://github.com/googleapis/nodejs-cloudbuild/blob/master/CHANGELOG.md).
+
 * [Cloud Build Node.js Client API Reference][client-docs]
 * [Cloud Build Documentation][product-docs]
 * [github.com/googleapis/nodejs-cloudbuild](https://github.com/googleapis/nodejs-cloudbuild)
