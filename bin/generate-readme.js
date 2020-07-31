@@ -132,6 +132,30 @@ async function getRepos () {
   while (url) {
     const res = await github.request({ url: url.href });
     repos.push(...res.data.items.map(r => r.full_name));
+    if (res.incompleteResults === true) {
+      repos = incompleteResults();
+      return;
+    }
+    url = null;
+    if (res.headers['link']) {
+      const link = parseLinkHeader(res.headers['link']);
+      if (link.next) {
+        url = new URL(link.next.url);
+      }
+    }
+  }
+  return repos;
+}
+
+async function incompleteResults() {
+  const q = 'org:googleapis';
+  let url = new URL('/search/repositories', baseUrl);
+  url.searchParams.set('q', q);
+  url.searchParams.set('per_page', 100);
+  const repos = [];
+  while (url) {
+    const res = await github.request({ url: url.href });
+    repos.push(...res.data.items.filter(r => (r.language === 'TypeScript' || r.language === 'JavaScript') && r.archived === false && r.private === false).map(r => r.full_name));
     url = null;
     if (res.headers['link']) {
       const link = parseLinkHeader(res.headers['link']);
