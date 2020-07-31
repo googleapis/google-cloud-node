@@ -14,6 +14,9 @@
 Google Cloud Dataproc API client for Node.js
 
 
+A comprehensive list of changes in each version may be found in
+[the CHANGELOG](https://github.com/googleapis/nodejs-dataproc/blob/master/CHANGELOG.md).
+
 * [Google Cloud Dataproc Node.js Client API Reference][client-docs]
 * [Google Cloud Dataproc Documentation][product-docs]
 * [github.com/googleapis/nodejs-dataproc](https://github.com/googleapis/nodejs-dataproc)
