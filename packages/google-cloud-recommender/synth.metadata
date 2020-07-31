@@ -4,7 +4,7 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/nodejs-recommender.git",
-        "sha": "e9bc0eec0681581c1daa3eb622b527b783852853"
+        "sha": "67416173da7f77584be24228bddb372a425adb3a"
       }
     },
     {
