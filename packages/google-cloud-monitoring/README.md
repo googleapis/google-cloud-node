@@ -16,6 +16,9 @@ Google Cloud Platform, Amazon Web Services (AWS), hosted uptime probes, applicat
 and a variety of common application components including Cassandra, Nginx, Apache Web Server, Elasticsearch and many others.
 
 
+A comprehensive list of changes in each version may be found in
+[the CHANGELOG](https://github.com/googleapis/nodejs-monitoring/blob/master/CHANGELOG.md).
+
 * [Stackdriver Monitoring Node.js Client API Reference][client-docs]
 * [Stackdriver Monitoring Documentation][product-docs]
 * [github.com/googleapis/nodejs-monitoring](https://github.com/googleapis/nodejs-monitoring)
