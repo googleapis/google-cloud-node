@@ -14,6 +14,9 @@
 Game service client for Node.js
 
 
+A comprehensive list of changes in each version may be found in
+[the CHANGELOG](https://github.com/googleapis/nodejs-game-servers/blob/master/CHANGELOG.md).
+
 * [Google Cloud Game Servers Node.js Client API Reference][client-docs]
 * [Google Cloud Game Servers Documentation][product-docs]
 * [github.com/googleapis/nodejs-game-servers](https://github.com/googleapis/nodejs-game-servers)
