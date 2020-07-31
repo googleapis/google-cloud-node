@@ -134,7 +134,7 @@ async function getRepos () {
     repos.push(...res.data.items.map(r => r.full_name));
     if (res.incompleteResults === true) {
       repos = incompleteResults();
-      return;
+      return repos;
     }
     url = null;
     if (res.headers['link']) {
