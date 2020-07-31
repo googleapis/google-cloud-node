@@ -14,6 +14,9 @@
 Billing client for Node.js
 
 
+A comprehensive list of changes in each version may be found in
+[the CHANGELOG](https://github.com/googleapis/nodejs-billing/blob/master/CHANGELOG.md).
+
 * [Cloud Billing Node.js Client API Reference][client-docs]
 * [Cloud Billing Documentation][product-docs]
 * [github.com/googleapis/nodejs-billing](https://github.com/googleapis/nodejs-billing)
