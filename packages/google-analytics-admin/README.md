@@ -14,6 +14,9 @@
 Admin client for Node.js
 
 
+A comprehensive list of changes in each version may be found in
+[the CHANGELOG](https://github.com/googleapis/nodejs-analytics-admin/blob/master/CHANGELOG.md).
+
 * [Google Analytics Admin Node.js Client API Reference][client-docs]
 * [Google Analytics Admin Documentation][product-docs]
 * [github.com/googleapis/nodejs-analytics-admin](https://github.com/googleapis/nodejs-analytics-admin)
@@ -29,7 +32,7 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 * [Quickstart](#quickstart)
   * [Before you begin](#before-you-begin)
   * [Installing the client library](#installing-the-client-library)
-  * [Using the client library](#using-the-client-library)
+
 * [Samples](#samples)
 * [Versioning](#versioning)
 * [Contributing](#contributing)
@@ -51,26 +54,6 @@ npm install @google-analytics/admin
 ```
 
 
-### Using the client library
-
-```javascript
-// Imports the Google Cloud client library
-const {AnalyticsAdminServiceClient} = require('@google-analytics/admin');
-
-// Creates a client
-const client = new AnalyticsAdminServiceClient();
-
-// name = 'my-name' // Get an account for a name.
-async function getAccount() {
-  const [account] = await client.getAccount({
-    name,
-  });
-  console.info(account);
-}
-getAccount();
-
-```
-
 
 
 ## Samples
@@ -80,7 +63,8 @@ has instructions for running the samples.
 
 | Sample                      | Source Code                       | Try it |
 | --------------------------- | --------------------------------- | ------ |
-| Quickstart | [source code](https://github.com/googleapis/nodejs-analytics-admin/blob/master/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-analytics-admin&page=editor&open_in_editor=samples/quickstart.js,samples/README.md) |
+| Quickstart_installed_oauth2 | [source code](https://github.com/googleapis/nodejs-analytics-admin/blob/master/samples/quickstart_installed_oauth2.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-analytics-admin&page=editor&open_in_editor=samples/quickstart_installed_oauth2.js,samples/README.md) |
+| Quickstart_service_account.js | [source code](https://github.com/googleapis/nodejs-analytics-admin/blob/master/samples/quickstart_service_account.js.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-analytics-admin&page=editor&open_in_editor=samples/quickstart_service_account.js.js,samples/README.md) |
 
 
 
@@ -142,7 +126,7 @@ Apache Version 2.0
 See [LICENSE](https://github.com/googleapis/nodejs-analytics-admin/blob/master/LICENSE)
 
 [client-docs]: https://googleapis.dev/nodejs/analytics-admin/latest/index.html
-[product-docs]: https://developers.google.com/analytics-admin/
+[product-docs]: https://developers.google.com/analytics
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project
 [billing]: https://support.google.com/cloud/answer/6293499#enable-billing

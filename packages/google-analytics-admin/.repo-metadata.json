@@ -1,7 +1,7 @@
 {
   "name": "analytics-admin",
   "name_pretty": "Google Analytics Admin",
-  "product_documentation": "https://developers.google.com/analytics-admin/",
+  "product_documentation": "https://developers.google.com/analytics",
   "client_documentation": "https://googleapis.dev/nodejs/analytics-admin/latest/index.html",
   "issue_tracker": "",
   "release_level": "alpha",
