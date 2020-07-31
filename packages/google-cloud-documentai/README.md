@@ -14,6 +14,9 @@
 Document AI client for Node.js
 
 
+A comprehensive list of changes in each version may be found in
+[the CHANGELOG](https://github.com/googleapis/nodejs-document-ai/blob/master/CHANGELOG.md).
+
 * [Document AI Node.js Client API Reference][client-docs]
 * [Document AI Documentation][product-docs]
 * [github.com/googleapis/nodejs-document-ai](https://github.com/googleapis/nodejs-document-ai)
