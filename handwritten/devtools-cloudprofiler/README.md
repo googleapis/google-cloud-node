@@ -14,6 +14,9 @@
 Adds support for Stackdriver Profiler to Node.js applications
 
 
+A comprehensive list of changes in each version may be found in
+[the CHANGELOG](https://github.com/googleapis/cloud-profiler-nodejs/blob/master/CHANGELOG.md).
+
 * [Stackdriver Profiler Node.js Client API Reference][client-docs]
 * [Stackdriver Profiler Documentation][product-docs]
 * [github.com/googleapis/cloud-profiler-nodejs](https://github.com/googleapis/cloud-profiler-nodejs)
