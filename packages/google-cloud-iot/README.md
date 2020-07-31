@@ -16,6 +16,9 @@
 [Google Cloud Internet of Things (IoT) Core](https://cloud.google.com/iot/docs) is a fully managed service for securely connecting and managing IoT devices, from a few to millions. Ingest data from connected devices and build rich applications that integrate with the other big data services of Google Cloud Platform.
 
 
+A comprehensive list of changes in each version may be found in
+[the CHANGELOG](https://github.com/googleapis/nodejs-iot/blob/master/CHANGELOG.md).
+
 * [Google Cloud Internet of Things (IoT) Core Node.js Client API Reference][client-docs]
 * [Google Cloud Internet of Things (IoT) Core Documentation][product-docs]
 * [github.com/googleapis/nodejs-iot](https://github.com/googleapis/nodejs-iot)
