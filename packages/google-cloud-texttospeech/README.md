@@ -14,6 +14,9 @@
 Cloud Text-to-Speech API client for Node.js
 
 
+A comprehensive list of changes in each version may be found in
+[the CHANGELOG](https://github.com/googleapis/nodejs-text-to-speech/blob/master/CHANGELOG.md).
+
 * [Google Cloud Text-to-Speech Node.js Client API Reference][client-docs]
 * [Google Cloud Text-to-Speech Documentation][product-docs]
 * [github.com/googleapis/nodejs-text-to-speech](https://github.com/googleapis/nodejs-text-to-speech)
