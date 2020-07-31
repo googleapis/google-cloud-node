@@ -14,6 +14,9 @@
 Client for the BigQuery Storage API
 
 
+A comprehensive list of changes in each version may be found in
+[the CHANGELOG](https://github.com/googleapis/nodejs-bigquery-storage/blob/master/CHANGELOG.md).
+
 * [Google BigQuery Storage Node.js Client API Reference][client-docs]
 * [Google BigQuery Storage Documentation][product-docs]
 * [github.com/googleapis/nodejs-bigquery-storage](https://github.com/googleapis/nodejs-bigquery-storage)
