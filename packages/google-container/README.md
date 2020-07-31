@@ -17,6 +17,9 @@
 building and managing container based applications, powered by the open source Kubernetes technology.
 
 
+A comprehensive list of changes in each version may be found in
+[the CHANGELOG](https://github.com/googleapis/nodejs-cloud-container/blob/master/CHANGELOG.md).
+
 * [Kubernetes Engine Cluster Manager API Node.js Client API Reference][client-docs]
 * [Kubernetes Engine Cluster Manager API Documentation][product-docs]
 * [github.com/googleapis/nodejs-cloud-container](https://github.com/googleapis/nodejs-cloud-container)
