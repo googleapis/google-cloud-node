@@ -14,6 +14,9 @@
 Google Cloud Data Catalog API client for Node.js
 
 
+A comprehensive list of changes in each version may be found in
+[the CHANGELOG](https://github.com/googleapis/nodejs-datacatalog/blob/master/CHANGELOG.md).
+
 * [Data Catalog Node.js Client API Reference][client-docs]
 * [Data Catalog Documentation][product-docs]
 * [github.com/googleapis/nodejs-datacatalog](https://github.com/googleapis/nodejs-datacatalog)
