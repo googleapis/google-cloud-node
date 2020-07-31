@@ -14,6 +14,9 @@
 Cloud Asset API client for Node.js
 
 
+A comprehensive list of changes in each version may be found in
+[the CHANGELOG](https://github.com/googleapis/nodejs-asset/blob/master/CHANGELOG.md).
+
 * [Cloud Asset Inventory Node.js Client API Reference][client-docs]
 * [Cloud Asset Inventory Documentation][product-docs]
 * [github.com/googleapis/nodejs-asset](https://github.com/googleapis/nodejs-asset)
