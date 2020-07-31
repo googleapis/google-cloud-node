@@ -14,6 +14,9 @@
 Web Risk API client for Node.js
 
 
+A comprehensive list of changes in each version may be found in
+[the CHANGELOG](https://github.com/googleapis/nodejs-web-risk/blob/master/CHANGELOG.md).
+
 * [Web Risk API Node.js Client API Reference][client-docs]
 * [Web Risk API Documentation][product-docs]
 * [github.com/googleapis/nodejs-web-risk](https://github.com/googleapis/nodejs-web-risk)
