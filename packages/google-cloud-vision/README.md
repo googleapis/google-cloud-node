@@ -14,6 +14,9 @@
 Google Cloud Vision API client for Node.js
 
 
+A comprehensive list of changes in each version may be found in
+[the CHANGELOG](https://github.com/googleapis/nodejs-vision/blob/master/CHANGELOG.md).
+
 * [Google Cloud Vision API Node.js Client API Reference][client-docs]
 * [Google Cloud Vision API Documentation][product-docs]
 * [github.com/googleapis/nodejs-vision](https://github.com/googleapis/nodejs-vision)
