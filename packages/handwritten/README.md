@@ -16,6 +16,9 @@
 [Stackdriver Error Reporting](https://cloud.google.com/error-reporting/docs/) aggregates and displays errors produced in your running cloud services.
 
 
+A comprehensive list of changes in each version may be found in
+[the CHANGELOG](https://github.com/googleapis/nodejs-error-reporting/blob/master/CHANGELOG.md).
+
 * [Stackdriver Error Reporting Node.js Client API Reference][client-docs]
 * [Stackdriver Error Reporting Documentation][product-docs]
 * [github.com/googleapis/nodejs-error-reporting](https://github.com/googleapis/nodejs-error-reporting)
