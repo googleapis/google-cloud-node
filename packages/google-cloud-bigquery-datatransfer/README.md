@@ -14,6 +14,9 @@
 BigQuery Data Transfer API client for Node.js
 
 
+A comprehensive list of changes in each version may be found in
+[the CHANGELOG](https://github.com/googleapis/nodejs-bigquery-data-transfer/blob/master/CHANGELOG.md).
+
 * [Google BigQuery Data Transfer Service Node.js Client API Reference][client-docs]
 * [Google BigQuery Data Transfer Service Documentation][product-docs]
 * [github.com/googleapis/nodejs-bigquery-data-transfer](https://github.com/googleapis/nodejs-bigquery-data-transfer)
