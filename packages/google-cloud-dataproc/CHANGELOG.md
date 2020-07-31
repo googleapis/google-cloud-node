@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/dataproc?activeTab=versions
 
+## [2.2.0](https://www.github.com/googleapis/nodejs-dataproc/compare/v2.1.1...v2.2.0) (2020-07-31)
+
+
+### Features
+
+* Additional fields for the `ClusterConfig` and `InstanceGroupConfig, update protos ([#417](https://www.github.com/googleapis/nodejs-dataproc/issues/417)) ([4217e18](https://www.github.com/googleapis/nodejs-dataproc/commit/4217e181d1dfd5df7d10e4a0c7735b66d328b072))
+
 ### [2.1.1](https://www.github.com/googleapis/nodejs-dataproc/compare/v2.1.0...v2.1.1) (2020-07-24)
 
 
