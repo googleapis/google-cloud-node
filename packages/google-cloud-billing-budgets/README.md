@@ -14,6 +14,9 @@
 Budgets client for Node.js
 
 
+A comprehensive list of changes in each version may be found in
+[the CHANGELOG](https://github.com/googleapis/nodejs-billing-budgets/blob/master/CHANGELOG.md).
+
 * [Billing Budgets Node.js Client API Reference][client-docs]
 * [Billing Budgets Documentation][product-docs]
 * [github.com/googleapis/nodejs-billing-budgets](https://github.com/googleapis/nodejs-billing-budgets)
