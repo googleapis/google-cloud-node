@@ -19,6 +19,9 @@ API is part of the larger Cloud Machine Learning API family.
 Cloud Translation API Client Library for Node.js
 
 
+A comprehensive list of changes in each version may be found in
+[the CHANGELOG](https://github.com/googleapis/nodejs-translate/blob/master/CHANGELOG.md).
+
 * [Cloud Translation Node.js Client API Reference][client-docs]
 * [Cloud Translation Documentation][product-docs]
 * [github.com/googleapis/nodejs-translate](https://github.com/googleapis/nodejs-translate)
