@@ -19,7 +19,7 @@
         define(["protobufjs/minimal"], factory);
 
     /* CommonJS */ else if (typeof require === 'function' && typeof module === 'object' && module && module.exports)
-        module.exports = factory(require("protobufjs/minimal"));
+        module.exports = factory(require("google-gax").protobufMinimal);
 
 })(this, function($protobuf) {
     "use strict";
