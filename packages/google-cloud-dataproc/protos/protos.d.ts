@@ -1436,6 +1436,9 @@ export namespace google {
                     /** ClusterConfig configBucket */
                     configBucket?: (string|null);
 
+                    /** ClusterConfig tempBucket */
+                    tempBucket?: (string|null);
+
                     /** ClusterConfig gceClusterConfig */
                     gceClusterConfig?: (google.cloud.dataproc.v1.IGceClusterConfig|null);
 
@@ -1465,6 +1468,9 @@ export namespace google {
 
                     /** ClusterConfig lifecycleConfig */
                     lifecycleConfig?: (google.cloud.dataproc.v1.ILifecycleConfig|null);
+
+                    /** ClusterConfig endpointConfig */
+                    endpointConfig?: (google.cloud.dataproc.v1.IEndpointConfig|null);
                 }
 
                 /** Represents a ClusterConfig. */
@@ -1478,6 +1484,9 @@ export namespace google {
 
                     /** ClusterConfig configBucket. */
                     public configBucket: string;
+
+                    /** ClusterConfig tempBucket. */
+                    public tempBucket: string;
 
                     /** ClusterConfig gceClusterConfig. */
                     public gceClusterConfig?: (google.cloud.dataproc.v1.IGceClusterConfig|null);
@@ -1508,6 +1517,9 @@ export namespace google {
 
                     /** ClusterConfig lifecycleConfig. */
                     public lifecycleConfig?: (google.cloud.dataproc.v1.ILifecycleConfig|null);
+
+                    /** ClusterConfig endpointConfig. */
+                    public endpointConfig?: (google.cloud.dataproc.v1.IEndpointConfig|null);
 
                     /**
                      * Creates a new ClusterConfig instance using the specified properties.
@@ -1575,6 +1587,102 @@ export namespace google {
 
                     /**
                      * Converts this ClusterConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of an EndpointConfig. */
+                interface IEndpointConfig {
+
+                    /** EndpointConfig httpPorts */
+                    httpPorts?: ({ [k: string]: string }|null);
+
+                    /** EndpointConfig enableHttpPortAccess */
+                    enableHttpPortAccess?: (boolean|null);
+                }
+
+                /** Represents an EndpointConfig. */
+                class EndpointConfig implements IEndpointConfig {
+
+                    /**
+                     * Constructs a new EndpointConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dataproc.v1.IEndpointConfig);
+
+                    /** EndpointConfig httpPorts. */
+                    public httpPorts: { [k: string]: string };
+
+                    /** EndpointConfig enableHttpPortAccess. */
+                    public enableHttpPortAccess: boolean;
+
+                    /**
+                     * Creates a new EndpointConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns EndpointConfig instance
+                     */
+                    public static create(properties?: google.cloud.dataproc.v1.IEndpointConfig): google.cloud.dataproc.v1.EndpointConfig;
+
+                    /**
+                     * Encodes the specified EndpointConfig message. Does not implicitly {@link google.cloud.dataproc.v1.EndpointConfig.verify|verify} messages.
+                     * @param message EndpointConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dataproc.v1.IEndpointConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified EndpointConfig message, length delimited. Does not implicitly {@link google.cloud.dataproc.v1.EndpointConfig.verify|verify} messages.
+                     * @param message EndpointConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dataproc.v1.IEndpointConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an EndpointConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns EndpointConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataproc.v1.EndpointConfig;
+
+                    /**
+                     * Decodes an EndpointConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns EndpointConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataproc.v1.EndpointConfig;
+
+                    /**
+                     * Verifies an EndpointConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an EndpointConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns EndpointConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dataproc.v1.EndpointConfig;
+
+                    /**
+                     * Creates a plain object from an EndpointConfig message. Also converts values to other types if specified.
+                     * @param message EndpointConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dataproc.v1.EndpointConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this EndpointConfig to JSON.
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
@@ -1919,6 +2027,9 @@ export namespace google {
                     /** InstanceGroupConfig isPreemptible */
                     isPreemptible?: (boolean|null);
 
+                    /** InstanceGroupConfig preemptibility */
+                    preemptibility?: (google.cloud.dataproc.v1.InstanceGroupConfig.Preemptibility|keyof typeof google.cloud.dataproc.v1.InstanceGroupConfig.Preemptibility|null);
+
                     /** InstanceGroupConfig managedGroupConfig */
                     managedGroupConfig?: (google.cloud.dataproc.v1.IManagedGroupConfig|null);
 
@@ -1955,6 +2066,9 @@ export namespace google {
 
                     /** InstanceGroupConfig isPreemptible. */
                     public isPreemptible: boolean;
+
+                    /** InstanceGroupConfig preemptibility. */
+                    public preemptibility: (google.cloud.dataproc.v1.InstanceGroupConfig.Preemptibility|keyof typeof google.cloud.dataproc.v1.InstanceGroupConfig.Preemptibility);
 
                     /** InstanceGroupConfig managedGroupConfig. */
                     public managedGroupConfig?: (google.cloud.dataproc.v1.IManagedGroupConfig|null);
@@ -2034,6 +2148,16 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+                }
+
+                namespace InstanceGroupConfig {
+
+                    /** Preemptibility enum. */
+                    enum Preemptibility {
+                        PREEMPTIBILITY_UNSPECIFIED = 0,
+                        NON_PREEMPTIBLE = 1,
+                        PREEMPTIBLE = 2
+                    }
                 }
 
                 /** Properties of a ManagedGroupConfig. */

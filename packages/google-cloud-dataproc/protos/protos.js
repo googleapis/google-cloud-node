@@ -3209,6 +3209,7 @@
                          * @memberof google.cloud.dataproc.v1
                          * @interface IClusterConfig
                          * @property {string|null} [configBucket] ClusterConfig configBucket
+                         * @property {string|null} [tempBucket] ClusterConfig tempBucket
                          * @property {google.cloud.dataproc.v1.IGceClusterConfig|null} [gceClusterConfig] ClusterConfig gceClusterConfig
                          * @property {google.cloud.dataproc.v1.IInstanceGroupConfig|null} [masterConfig] ClusterConfig masterConfig
                          * @property {google.cloud.dataproc.v1.IInstanceGroupConfig|null} [workerConfig] ClusterConfig workerConfig
@@ -3219,6 +3220,7 @@
                          * @property {google.cloud.dataproc.v1.IAutoscalingConfig|null} [autoscalingConfig] ClusterConfig autoscalingConfig
                          * @property {google.cloud.dataproc.v1.ISecurityConfig|null} [securityConfig] ClusterConfig securityConfig
                          * @property {google.cloud.dataproc.v1.ILifecycleConfig|null} [lifecycleConfig] ClusterConfig lifecycleConfig
+                         * @property {google.cloud.dataproc.v1.IEndpointConfig|null} [endpointConfig] ClusterConfig endpointConfig
                          */
     
                         /**
@@ -3244,6 +3246,14 @@
                          * @instance
                          */
                         ClusterConfig.prototype.configBucket = "";
+    
+                        /**
+                         * ClusterConfig tempBucket.
+                         * @member {string} tempBucket
+                         * @memberof google.cloud.dataproc.v1.ClusterConfig
+                         * @instance
+                         */
+                        ClusterConfig.prototype.tempBucket = "";
     
                         /**
                          * ClusterConfig gceClusterConfig.
@@ -3326,6 +3336,14 @@
                         ClusterConfig.prototype.lifecycleConfig = null;
     
                         /**
+                         * ClusterConfig endpointConfig.
+                         * @member {google.cloud.dataproc.v1.IEndpointConfig|null|undefined} endpointConfig
+                         * @memberof google.cloud.dataproc.v1.ClusterConfig
+                         * @instance
+                         */
+                        ClusterConfig.prototype.endpointConfig = null;
+    
+                        /**
                          * Creates a new ClusterConfig instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.dataproc.v1.ClusterConfig
@@ -3351,6 +3369,8 @@
                                 writer = $Writer.create();
                             if (message.configBucket != null && Object.hasOwnProperty.call(message, "configBucket"))
                                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.configBucket);
+                            if (message.tempBucket != null && Object.hasOwnProperty.call(message, "tempBucket"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.tempBucket);
                             if (message.gceClusterConfig != null && Object.hasOwnProperty.call(message, "gceClusterConfig"))
                                 $root.google.cloud.dataproc.v1.GceClusterConfig.encode(message.gceClusterConfig, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
                             if (message.masterConfig != null && Object.hasOwnProperty.call(message, "masterConfig"))
@@ -3372,6 +3392,8 @@
                                 $root.google.cloud.dataproc.v1.LifecycleConfig.encode(message.lifecycleConfig, writer.uint32(/* id 17, wireType 2 =*/138).fork()).ldelim();
                             if (message.autoscalingConfig != null && Object.hasOwnProperty.call(message, "autoscalingConfig"))
                                 $root.google.cloud.dataproc.v1.AutoscalingConfig.encode(message.autoscalingConfig, writer.uint32(/* id 18, wireType 2 =*/146).fork()).ldelim();
+                            if (message.endpointConfig != null && Object.hasOwnProperty.call(message, "endpointConfig"))
+                                $root.google.cloud.dataproc.v1.EndpointConfig.encode(message.endpointConfig, writer.uint32(/* id 19, wireType 2 =*/154).fork()).ldelim();
                             return writer;
                         };
     
@@ -3409,6 +3431,9 @@
                                 case 1:
                                     message.configBucket = reader.string();
                                     break;
+                                case 2:
+                                    message.tempBucket = reader.string();
+                                    break;
                                 case 8:
                                     message.gceClusterConfig = $root.google.cloud.dataproc.v1.GceClusterConfig.decode(reader, reader.uint32());
                                     break;
@@ -3440,6 +3465,9 @@
                                     break;
                                 case 17:
                                     message.lifecycleConfig = $root.google.cloud.dataproc.v1.LifecycleConfig.decode(reader, reader.uint32());
+                                    break;
+                                case 19:
+                                    message.endpointConfig = $root.google.cloud.dataproc.v1.EndpointConfig.decode(reader, reader.uint32());
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -3479,6 +3507,9 @@
                             if (message.configBucket != null && message.hasOwnProperty("configBucket"))
                                 if (!$util.isString(message.configBucket))
                                     return "configBucket: string expected";
+                            if (message.tempBucket != null && message.hasOwnProperty("tempBucket"))
+                                if (!$util.isString(message.tempBucket))
+                                    return "tempBucket: string expected";
                             if (message.gceClusterConfig != null && message.hasOwnProperty("gceClusterConfig")) {
                                 var error = $root.google.cloud.dataproc.v1.GceClusterConfig.verify(message.gceClusterConfig);
                                 if (error)
@@ -3533,6 +3564,11 @@
                                 if (error)
                                     return "lifecycleConfig." + error;
                             }
+                            if (message.endpointConfig != null && message.hasOwnProperty("endpointConfig")) {
+                                var error = $root.google.cloud.dataproc.v1.EndpointConfig.verify(message.endpointConfig);
+                                if (error)
+                                    return "endpointConfig." + error;
+                            }
                             return null;
                         };
     
@@ -3550,6 +3586,8 @@
                             var message = new $root.google.cloud.dataproc.v1.ClusterConfig();
                             if (object.configBucket != null)
                                 message.configBucket = String(object.configBucket);
+                            if (object.tempBucket != null)
+                                message.tempBucket = String(object.tempBucket);
                             if (object.gceClusterConfig != null) {
                                 if (typeof object.gceClusterConfig !== "object")
                                     throw TypeError(".google.cloud.dataproc.v1.ClusterConfig.gceClusterConfig: object expected");
@@ -3605,6 +3643,11 @@
                                     throw TypeError(".google.cloud.dataproc.v1.ClusterConfig.lifecycleConfig: object expected");
                                 message.lifecycleConfig = $root.google.cloud.dataproc.v1.LifecycleConfig.fromObject(object.lifecycleConfig);
                             }
+                            if (object.endpointConfig != null) {
+                                if (typeof object.endpointConfig !== "object")
+                                    throw TypeError(".google.cloud.dataproc.v1.ClusterConfig.endpointConfig: object expected");
+                                message.endpointConfig = $root.google.cloud.dataproc.v1.EndpointConfig.fromObject(object.endpointConfig);
+                            }
                             return message;
                         };
     
@@ -3625,6 +3668,7 @@
                                 object.initializationActions = [];
                             if (options.defaults) {
                                 object.configBucket = "";
+                                object.tempBucket = "";
                                 object.gceClusterConfig = null;
                                 object.masterConfig = null;
                                 object.workerConfig = null;
@@ -3634,9 +3678,12 @@
                                 object.securityConfig = null;
                                 object.lifecycleConfig = null;
                                 object.autoscalingConfig = null;
+                                object.endpointConfig = null;
                             }
                             if (message.configBucket != null && message.hasOwnProperty("configBucket"))
                                 object.configBucket = message.configBucket;
+                            if (message.tempBucket != null && message.hasOwnProperty("tempBucket"))
+                                object.tempBucket = message.tempBucket;
                             if (message.gceClusterConfig != null && message.hasOwnProperty("gceClusterConfig"))
                                 object.gceClusterConfig = $root.google.cloud.dataproc.v1.GceClusterConfig.toObject(message.gceClusterConfig, options);
                             if (message.masterConfig != null && message.hasOwnProperty("masterConfig"))
@@ -3660,6 +3707,8 @@
                                 object.lifecycleConfig = $root.google.cloud.dataproc.v1.LifecycleConfig.toObject(message.lifecycleConfig, options);
                             if (message.autoscalingConfig != null && message.hasOwnProperty("autoscalingConfig"))
                                 object.autoscalingConfig = $root.google.cloud.dataproc.v1.AutoscalingConfig.toObject(message.autoscalingConfig, options);
+                            if (message.endpointConfig != null && message.hasOwnProperty("endpointConfig"))
+                                object.endpointConfig = $root.google.cloud.dataproc.v1.EndpointConfig.toObject(message.endpointConfig, options);
                             return object;
                         };
     
@@ -3675,6 +3724,251 @@
                         };
     
                         return ClusterConfig;
+                    })();
+    
+                    v1.EndpointConfig = (function() {
+    
+                        /**
+                         * Properties of an EndpointConfig.
+                         * @memberof google.cloud.dataproc.v1
+                         * @interface IEndpointConfig
+                         * @property {Object.<string,string>|null} [httpPorts] EndpointConfig httpPorts
+                         * @property {boolean|null} [enableHttpPortAccess] EndpointConfig enableHttpPortAccess
+                         */
+    
+                        /**
+                         * Constructs a new EndpointConfig.
+                         * @memberof google.cloud.dataproc.v1
+                         * @classdesc Represents an EndpointConfig.
+                         * @implements IEndpointConfig
+                         * @constructor
+                         * @param {google.cloud.dataproc.v1.IEndpointConfig=} [properties] Properties to set
+                         */
+                        function EndpointConfig(properties) {
+                            this.httpPorts = {};
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * EndpointConfig httpPorts.
+                         * @member {Object.<string,string>} httpPorts
+                         * @memberof google.cloud.dataproc.v1.EndpointConfig
+                         * @instance
+                         */
+                        EndpointConfig.prototype.httpPorts = $util.emptyObject;
+    
+                        /**
+                         * EndpointConfig enableHttpPortAccess.
+                         * @member {boolean} enableHttpPortAccess
+                         * @memberof google.cloud.dataproc.v1.EndpointConfig
+                         * @instance
+                         */
+                        EndpointConfig.prototype.enableHttpPortAccess = false;
+    
+                        /**
+                         * Creates a new EndpointConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.dataproc.v1.EndpointConfig
+                         * @static
+                         * @param {google.cloud.dataproc.v1.IEndpointConfig=} [properties] Properties to set
+                         * @returns {google.cloud.dataproc.v1.EndpointConfig} EndpointConfig instance
+                         */
+                        EndpointConfig.create = function create(properties) {
+                            return new EndpointConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified EndpointConfig message. Does not implicitly {@link google.cloud.dataproc.v1.EndpointConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.dataproc.v1.EndpointConfig
+                         * @static
+                         * @param {google.cloud.dataproc.v1.IEndpointConfig} message EndpointConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        EndpointConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.httpPorts != null && Object.hasOwnProperty.call(message, "httpPorts"))
+                                for (var keys = Object.keys(message.httpPorts), i = 0; i < keys.length; ++i)
+                                    writer.uint32(/* id 1, wireType 2 =*/10).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.httpPorts[keys[i]]).ldelim();
+                            if (message.enableHttpPortAccess != null && Object.hasOwnProperty.call(message, "enableHttpPortAccess"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).bool(message.enableHttpPortAccess);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified EndpointConfig message, length delimited. Does not implicitly {@link google.cloud.dataproc.v1.EndpointConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.dataproc.v1.EndpointConfig
+                         * @static
+                         * @param {google.cloud.dataproc.v1.IEndpointConfig} message EndpointConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        EndpointConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an EndpointConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.dataproc.v1.EndpointConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.dataproc.v1.EndpointConfig} EndpointConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        EndpointConfig.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataproc.v1.EndpointConfig(), key, value;
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    if (message.httpPorts === $util.emptyObject)
+                                        message.httpPorts = {};
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = "";
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = reader.string();
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.httpPorts[key] = value;
+                                    break;
+                                case 2:
+                                    message.enableHttpPortAccess = reader.bool();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an EndpointConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.dataproc.v1.EndpointConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.dataproc.v1.EndpointConfig} EndpointConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        EndpointConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an EndpointConfig message.
+                         * @function verify
+                         * @memberof google.cloud.dataproc.v1.EndpointConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        EndpointConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.httpPorts != null && message.hasOwnProperty("httpPorts")) {
+                                if (!$util.isObject(message.httpPorts))
+                                    return "httpPorts: object expected";
+                                var key = Object.keys(message.httpPorts);
+                                for (var i = 0; i < key.length; ++i)
+                                    if (!$util.isString(message.httpPorts[key[i]]))
+                                        return "httpPorts: string{k:string} expected";
+                            }
+                            if (message.enableHttpPortAccess != null && message.hasOwnProperty("enableHttpPortAccess"))
+                                if (typeof message.enableHttpPortAccess !== "boolean")
+                                    return "enableHttpPortAccess: boolean expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an EndpointConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.dataproc.v1.EndpointConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.dataproc.v1.EndpointConfig} EndpointConfig
+                         */
+                        EndpointConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.dataproc.v1.EndpointConfig)
+                                return object;
+                            var message = new $root.google.cloud.dataproc.v1.EndpointConfig();
+                            if (object.httpPorts) {
+                                if (typeof object.httpPorts !== "object")
+                                    throw TypeError(".google.cloud.dataproc.v1.EndpointConfig.httpPorts: object expected");
+                                message.httpPorts = {};
+                                for (var keys = Object.keys(object.httpPorts), i = 0; i < keys.length; ++i)
+                                    message.httpPorts[keys[i]] = String(object.httpPorts[keys[i]]);
+                            }
+                            if (object.enableHttpPortAccess != null)
+                                message.enableHttpPortAccess = Boolean(object.enableHttpPortAccess);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an EndpointConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.dataproc.v1.EndpointConfig
+                         * @static
+                         * @param {google.cloud.dataproc.v1.EndpointConfig} message EndpointConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        EndpointConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.objects || options.defaults)
+                                object.httpPorts = {};
+                            if (options.defaults)
+                                object.enableHttpPortAccess = false;
+                            var keys2;
+                            if (message.httpPorts && (keys2 = Object.keys(message.httpPorts)).length) {
+                                object.httpPorts = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.httpPorts[keys2[j]] = message.httpPorts[keys2[j]];
+                            }
+                            if (message.enableHttpPortAccess != null && message.hasOwnProperty("enableHttpPortAccess"))
+                                object.enableHttpPortAccess = message.enableHttpPortAccess;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this EndpointConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.dataproc.v1.EndpointConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        EndpointConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return EndpointConfig;
                     })();
     
                     v1.AutoscalingConfig = (function() {
@@ -4502,6 +4796,7 @@
                          * @property {string|null} [machineTypeUri] InstanceGroupConfig machineTypeUri
                          * @property {google.cloud.dataproc.v1.IDiskConfig|null} [diskConfig] InstanceGroupConfig diskConfig
                          * @property {boolean|null} [isPreemptible] InstanceGroupConfig isPreemptible
+                         * @property {google.cloud.dataproc.v1.InstanceGroupConfig.Preemptibility|null} [preemptibility] InstanceGroupConfig preemptibility
                          * @property {google.cloud.dataproc.v1.IManagedGroupConfig|null} [managedGroupConfig] InstanceGroupConfig managedGroupConfig
                          * @property {Array.<google.cloud.dataproc.v1.IAcceleratorConfig>|null} [accelerators] InstanceGroupConfig accelerators
                          * @property {string|null} [minCpuPlatform] InstanceGroupConfig minCpuPlatform
@@ -4573,6 +4868,14 @@
                         InstanceGroupConfig.prototype.isPreemptible = false;
     
                         /**
+                         * InstanceGroupConfig preemptibility.
+                         * @member {google.cloud.dataproc.v1.InstanceGroupConfig.Preemptibility} preemptibility
+                         * @memberof google.cloud.dataproc.v1.InstanceGroupConfig
+                         * @instance
+                         */
+                        InstanceGroupConfig.prototype.preemptibility = 0;
+    
+                        /**
                          * InstanceGroupConfig managedGroupConfig.
                          * @member {google.cloud.dataproc.v1.IManagedGroupConfig|null|undefined} managedGroupConfig
                          * @memberof google.cloud.dataproc.v1.InstanceGroupConfig
@@ -4640,6 +4943,8 @@
                                     $root.google.cloud.dataproc.v1.AcceleratorConfig.encode(message.accelerators[i], writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
                             if (message.minCpuPlatform != null && Object.hasOwnProperty.call(message, "minCpuPlatform"))
                                 writer.uint32(/* id 9, wireType 2 =*/74).string(message.minCpuPlatform);
+                            if (message.preemptibility != null && Object.hasOwnProperty.call(message, "preemptibility"))
+                                writer.uint32(/* id 10, wireType 0 =*/80).int32(message.preemptibility);
                             return writer;
                         };
     
@@ -4693,6 +4998,9 @@
                                     break;
                                 case 6:
                                     message.isPreemptible = reader.bool();
+                                    break;
+                                case 10:
+                                    message.preemptibility = reader.int32();
                                     break;
                                 case 7:
                                     message.managedGroupConfig = $root.google.cloud.dataproc.v1.ManagedGroupConfig.decode(reader, reader.uint32());
@@ -4764,6 +5072,15 @@
                             if (message.isPreemptible != null && message.hasOwnProperty("isPreemptible"))
                                 if (typeof message.isPreemptible !== "boolean")
                                     return "isPreemptible: boolean expected";
+                            if (message.preemptibility != null && message.hasOwnProperty("preemptibility"))
+                                switch (message.preemptibility) {
+                                default:
+                                    return "preemptibility: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
                             if (message.managedGroupConfig != null && message.hasOwnProperty("managedGroupConfig")) {
                                 var error = $root.google.cloud.dataproc.v1.ManagedGroupConfig.verify(message.managedGroupConfig);
                                 if (error)
@@ -4816,6 +5133,20 @@
                             }
                             if (object.isPreemptible != null)
                                 message.isPreemptible = Boolean(object.isPreemptible);
+                            switch (object.preemptibility) {
+                            case "PREEMPTIBILITY_UNSPECIFIED":
+                            case 0:
+                                message.preemptibility = 0;
+                                break;
+                            case "NON_PREEMPTIBLE":
+                            case 1:
+                                message.preemptibility = 1;
+                                break;
+                            case "PREEMPTIBLE":
+                            case 2:
+                                message.preemptibility = 2;
+                                break;
+                            }
                             if (object.managedGroupConfig != null) {
                                 if (typeof object.managedGroupConfig !== "object")
                                     throw TypeError(".google.cloud.dataproc.v1.InstanceGroupConfig.managedGroupConfig: object expected");
@@ -4861,6 +5192,7 @@
                                 object.isPreemptible = false;
                                 object.managedGroupConfig = null;
                                 object.minCpuPlatform = "";
+                                object.preemptibility = options.enums === String ? "PREEMPTIBILITY_UNSPECIFIED" : 0;
                             }
                             if (message.numInstances != null && message.hasOwnProperty("numInstances"))
                                 object.numInstances = message.numInstances;
@@ -4886,6 +5218,8 @@
                             }
                             if (message.minCpuPlatform != null && message.hasOwnProperty("minCpuPlatform"))
                                 object.minCpuPlatform = message.minCpuPlatform;
+                            if (message.preemptibility != null && message.hasOwnProperty("preemptibility"))
+                                object.preemptibility = options.enums === String ? $root.google.cloud.dataproc.v1.InstanceGroupConfig.Preemptibility[message.preemptibility] : message.preemptibility;
                             return object;
                         };
     
@@ -4899,6 +5233,22 @@
                         InstanceGroupConfig.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
+    
+                        /**
+                         * Preemptibility enum.
+                         * @name google.cloud.dataproc.v1.InstanceGroupConfig.Preemptibility
+                         * @enum {number}
+                         * @property {number} PREEMPTIBILITY_UNSPECIFIED=0 PREEMPTIBILITY_UNSPECIFIED value
+                         * @property {number} NON_PREEMPTIBLE=1 NON_PREEMPTIBLE value
+                         * @property {number} PREEMPTIBLE=2 PREEMPTIBLE value
+                         */
+                        InstanceGroupConfig.Preemptibility = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "PREEMPTIBILITY_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "NON_PREEMPTIBLE"] = 1;
+                            values[valuesById[2] = "PREEMPTIBLE"] = 2;
+                            return values;
+                        })();
     
                         return InstanceGroupConfig;
                     })();

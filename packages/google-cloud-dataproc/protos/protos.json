@@ -439,6 +439,13 @@
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
+                        "tempBucket": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "gceClusterConfig": {
                           "type": "GceClusterConfig",
                           "id": 8,
@@ -506,6 +513,32 @@
                         "lifecycleConfig": {
                           "type": "LifecycleConfig",
                           "id": 17,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "endpointConfig": {
+                          "type": "EndpointConfig",
+                          "id": 19,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "EndpointConfig": {
+                      "fields": {
+                        "httpPorts": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "enableHttpPortAccess": {
+                          "type": "bool",
+                          "id": 2,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -643,6 +676,13 @@
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
                         },
+                        "preemptibility": {
+                          "type": "Preemptibility",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "managedGroupConfig": {
                           "type": "ManagedGroupConfig",
                           "id": 7,
@@ -663,6 +703,15 @@
                           "id": 9,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "Preemptibility": {
+                          "values": {
+                            "PREEMPTIBILITY_UNSPECIFIED": 0,
+                            "NON_PREEMPTIBLE": 1,
+                            "PREEMPTIBLE": 2
                           }
                         }
                       }
@@ -1931,7 +1980,7 @@
                           "type": "string",
                           "id": 1,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
                         "jobId": {
@@ -2767,35 +2816,59 @@
                         },
                         "hadoopJob": {
                           "type": "HadoopJob",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "sparkJob": {
                           "type": "SparkJob",
-                          "id": 3
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "pysparkJob": {
                           "type": "PySparkJob",
-                          "id": 4
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "hiveJob": {
                           "type": "HiveJob",
-                          "id": 5
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "pigJob": {
                           "type": "PigJob",
-                          "id": 6
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "sparkRJob": {
                           "type": "SparkRJob",
-                          "id": 11
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "sparkSqlJob": {
                           "type": "SparkSqlJob",
-                          "id": 7
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "prestoJob": {
                           "type": "PrestoJob",
-                          "id": 12
+                          "id": 12,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "labels": {
                           "keyType": "string",
