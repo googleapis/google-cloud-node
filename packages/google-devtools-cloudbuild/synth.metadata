@@ -4,15 +4,15 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/nodejs-cloudbuild.git",
-        "sha": "cfd251012b6533d0f9d7b4995c41360cbd1482b1"
+        "sha": "ca44b34593cc63008d38c12bf296d579ef1f36d6"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "58be915cf3b7148b764649da90add697f6367aa7",
-        "internalRef": "322464556"
+        "sha": "fbf9396664b766a08d92da9d4f31be019a847c39",
+        "internalRef": "324209019"
       }
     },
     {
