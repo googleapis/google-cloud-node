@@ -16,6 +16,9 @@ compatible with [Bunyan](https://www.npmjs.com/package/bunyan). Simply attach th
 Stackdriver Logging stream for Bunyan
 
 
+A comprehensive list of changes in each version may be found in
+[the CHANGELOG](https://github.com/googleapis/nodejs-logging-bunyan/blob/master/CHANGELOG.md).
+
 * [Stackdriver Logging for Bunyan Node.js Client API Reference][client-docs]
 * [Stackdriver Logging for Bunyan Documentation][product-docs]
 * [github.com/googleapis/nodejs-logging-bunyan](https://github.com/googleapis/nodejs-logging-bunyan)
