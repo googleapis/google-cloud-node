@@ -55,7 +55,13 @@ npm install @google-cloud/functions
 
 ```javascript
 // Imports the Google Cloud client library
+
+// remove this line after package is released
+// eslint-disable-next-line node/no-missing-require
 const {CloudFunctionsServiceClient} = require('@google-cloud/functions');
+
+// TODO(developer): replace with your prefered project ID.
+// const projectId = 'my-project'
 
 // Creates a client
 const client = new CloudFunctionsServiceClient();

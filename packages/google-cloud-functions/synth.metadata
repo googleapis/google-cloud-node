@@ -4,22 +4,22 @@
       "git": {
         "name": ".",
         "remote": "git@github.com:googleapis/nodejs-functions.git",
-        "sha": "7813cbfd5b4193073ecb3531542b8f97075500ee"
+        "sha": "fc544c2a6eeef8ee09649aa88f28055de1f036ab"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "b4fa4f3460ad8102c39bf7e0ad25cab149a9eca5",
-        "internalRef": "323061919"
+        "sha": "546f389d95dbbc88d9d5a00fae25b29d49a0d5b6",
+        "internalRef": "323436667"
       }
     },
     {
       "git": {
         "name": "synthtool",
         "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "a6643f6f27fc70e2c63c90944bb900c709022e57"
+        "sha": "5506723fef367557d83cf072d0c18020c049fcb8"
       }
     }
   ],

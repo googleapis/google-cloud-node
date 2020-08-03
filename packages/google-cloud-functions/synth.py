@@ -29,4 +29,6 @@ common_templates = gcp.CommonTemplates()
 templates = common_templates.node_library(
     source_location='build/src', versions=['v1'], default_version='v1')
 s.copy(templates, excludes=[])
+s.replace('src/v1/cloud_functions_service_client.ts', "function:string", "function_: string")
+s.replace('src/v1/cloud_functions_service_client.ts', "function: function", "function: function_")
 node.postprocess_gapic_library()
