@@ -14,6 +14,9 @@
 Osconfig client for Node.js
 
 
+A comprehensive list of changes in each version may be found in
+[the CHANGELOG](https://github.com/googleapis/nodejs-os-config/blob/master/CHANGELOG.md).
+
 * [OS Config API Node.js Client API Reference][client-docs]
 * [OS Config API Documentation][product-docs]
 * [github.com/googleapis/nodejs-os-config](https://github.com/googleapis/nodejs-os-config)
