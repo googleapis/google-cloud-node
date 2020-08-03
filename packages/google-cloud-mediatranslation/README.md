@@ -14,6 +14,9 @@
 Mediatranslation client for Node.js
 
 
+A comprehensive list of changes in each version may be found in
+[the CHANGELOG](https://github.com/googleapis/nodejs-media-translation/blob/master/CHANGELOG.md).
+
 * [Cloud Media Translation Node.js Client API Reference][client-docs]
 * [Cloud Media Translation Documentation][product-docs]
 * [github.com/googleapis/nodejs-media-translation](https://github.com/googleapis/nodejs-media-translation)
