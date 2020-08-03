@@ -14,6 +14,9 @@
 Cloud Tasks API client for Node.js
 
 
+A comprehensive list of changes in each version may be found in
+[the CHANGELOG](https://github.com/googleapis/nodejs-tasks/blob/master/CHANGELOG.md).
+
 * [Cloud Tasks Node.js Client API Reference][client-docs]
 * [Cloud Tasks Documentation][product-docs]
 * [github.com/googleapis/nodejs-tasks](https://github.com/googleapis/nodejs-tasks)
