@@ -14,6 +14,9 @@
 Google Cloud Memorystore for Redis API client for Node.js
 
 
+A comprehensive list of changes in each version may be found in
+[the CHANGELOG](https://github.com/googleapis/nodejs-redis/blob/master/CHANGELOG.md).
+
 * [Cloud Redis Node.js Client API Reference][client-docs]
 * [Cloud Redis Documentation][product-docs]
 * [github.com/googleapis/nodejs-redis](https://github.com/googleapis/nodejs-redis)
