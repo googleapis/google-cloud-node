@@ -16,6 +16,9 @@ language understanding technologies to developers, including sentiment analysis,
 analysis, and syntax analysis. This API is part of the larger Cloud Machine Learning API family.
 
 
+A comprehensive list of changes in each version may be found in
+[the CHANGELOG](https://github.com/googleapis/nodejs-language/blob/master/CHANGELOG.md).
+
 * [Natural Language Node.js Client API Reference][client-docs]
 * [Natural Language Documentation][product-docs]
 * [github.com/googleapis/nodejs-language](https://github.com/googleapis/nodejs-language)
