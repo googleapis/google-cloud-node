@@ -14,6 +14,9 @@
 Cloud Scheduler API client for Node.js
 
 
+A comprehensive list of changes in each version may be found in
+[the CHANGELOG](https://github.com/googleapis/nodejs-scheduler/blob/master/CHANGELOG.md).
+
 * [Google Cloud Scheduler Node.js Client API Reference][client-docs]
 * [Google Cloud Scheduler Documentation][product-docs]
 * [github.com/googleapis/nodejs-scheduler](https://github.com/googleapis/nodejs-scheduler)
