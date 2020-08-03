@@ -22,6 +22,9 @@ configuration settings. The [Cloud Resource Manager API](https://cloud.google.co
 enables you to programmatically manage these container resources.
 
 
+A comprehensive list of changes in each version may be found in
+[the CHANGELOG](https://github.com/googleapis/nodejs-resource/blob/master/CHANGELOG.md).
+
 * [Google Cloud Resource Manager API Node.js Client API Reference][client-docs]
 * [Google Cloud Resource Manager API Documentation][product-docs]
 * [github.com/googleapis/nodejs-resource](https://github.com/googleapis/nodejs-resource)
