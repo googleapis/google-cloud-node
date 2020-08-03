@@ -14,6 +14,9 @@
 A simple utility for promisifying functions and classes.
 
 
+A comprehensive list of changes in each version may be found in
+[the CHANGELOG](https://github.com/googleapis/nodejs-promisify/blob/master/CHANGELOG.md).
+
 * [Google Cloud Common Promisify Node.js Client API Reference][client-docs]
 
 * [github.com/googleapis/nodejs-promisify](https://github.com/googleapis/nodejs-promisify)
