@@ -14,6 +14,9 @@
 Google Cloud Key Management Service (KMS) API client for Node.js
 
 
+A comprehensive list of changes in each version may be found in
+[the CHANGELOG](https://github.com/googleapis/nodejs-kms/blob/master/CHANGELOG.md).
+
 * [Google Cloud Key Management Service Node.js Client API Reference][client-docs]
 * [Google Cloud Key Management Service Documentation][product-docs]
 * [github.com/googleapis/nodejs-kms](https://github.com/googleapis/nodejs-kms)
