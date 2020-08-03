@@ -14,6 +14,9 @@
 Cloud Speech Client Library for Node.js
 
 
+A comprehensive list of changes in each version may be found in
+[the CHANGELOG](https://github.com/googleapis/nodejs-speech/blob/master/CHANGELOG.md).
+
 * [Cloud Speech Node.js Client API Reference][client-docs]
 * [Cloud Speech Documentation][product-docs]
 * [github.com/googleapis/nodejs-speech](https://github.com/googleapis/nodejs-speech)
