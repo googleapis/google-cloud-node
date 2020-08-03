@@ -14,6 +14,9 @@
 Memcache client for Node.js
 
 
+A comprehensive list of changes in each version may be found in
+[the CHANGELOG](https://github.com/googleapis/nodejs-memcache/blob/master/CHANGELOG.md).
+
 * [Memorystore for Memcached Node.js Client API Reference][client-docs]
 * [Memorystore for Memcached Documentation][product-docs]
 * [github.com/googleapis/nodejs-memcache](https://github.com/googleapis/nodejs-memcache)
