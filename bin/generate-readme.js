@@ -130,7 +130,7 @@ async function getRepos () {
   const repos = [];
   while (url) {
     const res = await github.request({ url: url.href });
-    repos.push(...res.data.filter(r => (r.language === 'TypeScript' || r.language === 'JavaScript') && r.archived === false).map(r => r.full_name));
+    repos.push(...res.data.filter(r => (r.language === 'TypeScript' || r.language === 'JavaScript') && r.archived === false && r.private === false).map(r => r.full_name));
     url = null;
     if (res.headers['link']) {
       const link = parseLinkHeader(res.headers['link']);
