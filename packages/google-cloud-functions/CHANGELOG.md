@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.0.1](https://www.github.com/googleapis/nodejs-functions/compare/v1.0.0...v1.0.1) (2020-08-03)
+
+
+### Bug Fixes
+
+* run synthtool hack to compile code ([#6](https://www.github.com/googleapis/nodejs-functions/issues/6)) ([2b080c5](https://www.github.com/googleapis/nodejs-functions/commit/2b080c5bfd3f134a5e0a365fc0d6663e1dd4755c))
+
 ## 1.0.0 (2020-07-24)
 
 
