@@ -124,18 +124,13 @@ async function generateReadme (repoMetadata) {
 }
 
 async function getRepos () {
-  const q = 'nodejs in:.repo-metadata.json org:googleapis is:public archived:false';
-  let url = new URL('/search/repositories', baseUrl);
-  url.searchParams.set('q', q);
+  let url = new URL('/orgs/googleapis/repos', baseUrl);
+  url.searchParams.set('type', 'public');
   url.searchParams.set('per_page', 100);
   const repos = [];
   while (url) {
     const res = await github.request({ url: url.href });
-    repos.push(...res.data.items.map(r => r.full_name));
-    if (res.incompleteResults === true) {
-      repos = incompleteResults();
-      return repos;
-    }
+    repos.push(...res.data.filter(r => (r.language === 'TypeScript' || r.language === 'JavaScript') && r.archived === false).map(r => r.full_name));
     url = null;
     if (res.headers['link']) {
       const link = parseLinkHeader(res.headers['link']);
@@ -144,26 +139,7 @@ async function getRepos () {
       }
     }
   }
-  return repos;
-}
-
-async function incompleteResults() {
-  const q = 'org:googleapis';
-  let url = new URL('/search/repositories', baseUrl);
-  url.searchParams.set('q', q);
-  url.searchParams.set('per_page', 100);
-  const repos = [];
-  while (url) {
-    const res = await github.request({ url: url.href });
-    repos.push(...res.data.items.filter(r => (r.language === 'TypeScript' || r.language === 'JavaScript') && r.archived === false && r.private === false).map(r => r.full_name));
-    url = null;
-    if (res.headers['link']) {
-      const link = parseLinkHeader(res.headers['link']);
-      if (link.next) {
-        url = new URL(link.next.url);
-      }
-    }
-  }
+  console.log(repos);
   return repos;
 }
 
