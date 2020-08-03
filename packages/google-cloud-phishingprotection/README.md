@@ -14,6 +14,9 @@
 Phishing Protection API client for Node.js
 
 
+A comprehensive list of changes in each version may be found in
+[the CHANGELOG](https://github.com/googleapis/nodejs-phishing-protection/blob/master/CHANGELOG.md).
+
 * [Phishing Protection Node.js Client API Reference][client-docs]
 * [Phishing Protection Documentation][product-docs]
 * [github.com/googleapis/nodejs-phishing-protection](https://github.com/googleapis/nodejs-phishing-protection)
