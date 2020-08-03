@@ -14,6 +14,9 @@
 interact with dashboards for viewing and analyzing metric data
 
 
+A comprehensive list of changes in each version may be found in
+[the CHANGELOG](https://github.com/googleapis/nodejs-monitoring-dashboards/blob/master/CHANGELOG.md).
+
 * [Monitoring Dashboards Node.js Client API Reference][client-docs]
 * [Monitoring Dashboards Documentation][product-docs]
 * [github.com/googleapis/nodejs-monitoring-dashboards](https://github.com/googleapis/nodejs-monitoring-dashboards)
