@@ -22,6 +22,9 @@ systems for sensitive data, detect common web vulnerabilities, and review access
 to your critical resources, all from a single, centralized dashboard.
 
 
+A comprehensive list of changes in each version may be found in
+[the CHANGELOG](https://github.com/googleapis/nodejs-security-center/blob/master/CHANGELOG.md).
+
 * [Google Cloud Security Command Center Node.js Client API Reference][client-docs]
 * [Google Cloud Security Command Center Documentation][product-docs]
 * [github.com/googleapis/nodejs-security-center](https://github.com/googleapis/nodejs-security-center)
