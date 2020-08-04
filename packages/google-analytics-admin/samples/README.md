@@ -13,7 +13,6 @@
 * [Before you begin](#before-you-begin)
 * [Samples](#samples)
   * [Quickstart_installed_oauth2](#quickstart_installed_oauth2)
-  * [Quickstart_service_account.js](#quickstart_service_account.js)
 
 ## Before you begin
 
@@ -40,23 +39,6 @@ __Usage:__
 
 
 `node samples/quickstart_installed_oauth2.js`
-
-
------
-
-
-
-
-### Quickstart_service_account.js
-
-View the [source code](https://github.com/googleapis/nodejs-analytics-admin/blob/master/samples/quickstart_service_account.js.js).
-
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-analytics-admin&page=editor&open_in_editor=samples/quickstart_service_account.js.js,samples/README.md)
-
-__Usage:__
-
-
-`node samples/quickstart_service_account.js.js`
 
 
 

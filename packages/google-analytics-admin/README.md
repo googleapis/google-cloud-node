@@ -64,7 +64,6 @@ has instructions for running the samples.
 | Sample                      | Source Code                       | Try it |
 | --------------------------- | --------------------------------- | ------ |
 | Quickstart_installed_oauth2 | [source code](https://github.com/googleapis/nodejs-analytics-admin/blob/master/samples/quickstart_installed_oauth2.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-analytics-admin&page=editor&open_in_editor=samples/quickstart_installed_oauth2.js,samples/README.md) |
-| Quickstart_service_account.js | [source code](https://github.com/googleapis/nodejs-analytics-admin/blob/master/samples/quickstart_service_account.js.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-analytics-admin&page=editor&open_in_editor=samples/quickstart_service_account.js.js,samples/README.md) |
 
 
 
