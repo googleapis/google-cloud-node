@@ -43,9 +43,8 @@ export interface Config extends GoogleAuthOptions {
     // so that a globally constant profiling rate is maintained.
     service?: string;
 
-    // Version of the service. It can be an arbitrary string. Stackdriver
-    // Profiler profiles each version of each service in each zone once per
-    // minute.
+    // Version of the service. It can be an arbitrary string. Cloud Profiler
+    // profiles each version of each service in each zone once per minute.
     version?: string;
   };
 

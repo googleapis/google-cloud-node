@@ -13,6 +13,6 @@ More specifically, this test:
     3. Runs the benchmark application, busybench.js (which repeatedly calls
        a function which creates and fills a buffer) with the agent attached.
 2. Waits for the application in each Compute Engine VM to finish.
-3. Queries the Stackdriver Profiler API to confirm that both heap and wall 
-   profiles have been uploaded to the API and that the profiles contain 
-   symbolized samples which include the name of the function in the benchmark.
+3. Queries the Cloud Profiler API to confirm that both heap and wall profiles
+   have been uploaded to the API and that the profiles contain symbolized
+   samples which include the name of the function in the benchmark.
