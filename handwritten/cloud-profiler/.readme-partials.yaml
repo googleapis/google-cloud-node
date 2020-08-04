@@ -26,7 +26,7 @@ body: |-
     Your application can run anywhere, but the profiler data is associated with a
     particular project.
 
-    1. You will need to enable the Stackdriver Profiler API for your project.
+    1. You will need to enable the Cloud Profiler API for your project.
 
     ### Basic Set-up
 

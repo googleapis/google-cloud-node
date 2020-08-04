@@ -366,9 +366,7 @@ export class Profiler extends ServiceObject {
         this.config.disableSourceMaps = true;
       }
     }
-    this.logger.debug(
-      `Stackdriver Profiler Node.js agent version: ${pjson.version}`
-    );
+    this.logger.debug(`Cloud Profiler Node.js agent version: ${pjson.version}`);
     this.runLoop();
   }
 
