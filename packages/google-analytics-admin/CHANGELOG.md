@@ -1,5 +1,13 @@
 # Changelog
 
+### [1.1.1](https://www.github.com/googleapis/nodejs-analytics-admin/compare/v1.1.0...v1.1.1) (2020-08-04)
+
+
+### Bug Fixes
+
+* samples and tests updated ([#13](https://www.github.com/googleapis/nodejs-analytics-admin/issues/13)) ([55f4366](https://www.github.com/googleapis/nodejs-analytics-admin/commit/55f4366d75a09b697ac1b7d1ef416cf27448832a))
+* **docs:** update docs with current samples ([24a452c](https://www.github.com/googleapis/nodejs-analytics-admin/commit/24a452c9472f521e8164911ba4f8e2a3d77e2fca))
+
 ## [1.1.0](https://www.github.com/googleapis/nodejs-analytics-admin/compare/v1.0.0...v1.1.0) (2020-07-29)
 
 
