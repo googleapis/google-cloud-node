@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.1.0](https://www.github.com/googleapis/nodejs-game-servers/compare/v2.0.2...v2.1.0) (2020-08-05)
+
+
+### Features
+
+* v1 API surface ([#109](https://www.github.com/googleapis/nodejs-game-servers/issues/109)) ([f22a3f8](https://www.github.com/googleapis/nodejs-game-servers/commit/f22a3f8e8d19761c9a001f8c521c99449ce88922))
+
 ### [2.0.2](https://www.github.com/googleapis/nodejs-game-servers/compare/v2.0.1...v2.0.2) (2020-07-09)
 
 
