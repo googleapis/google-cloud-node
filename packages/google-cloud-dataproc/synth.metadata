@@ -4,15 +4,15 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/nodejs-dataproc.git",
-        "sha": "da36cccb0b3267953dafa78208706a129062f907"
+        "sha": "9c1a52bef7ba86a706311ab157f42325b6bd1250"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "d8a3dfb82f5cae3f1bcdcec7c5726581532da7d5",
-        "internalRef": "323829608"
+        "sha": "6fd07563a2f1a6785066f5955ad9659a315e4492",
+        "internalRef": "324941614"
       }
     },
     {
