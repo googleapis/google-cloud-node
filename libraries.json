@@ -235,6 +235,20 @@
     "support_documentation": "https://cloud.google.com/firestore/docs/getting-support"
   },
   {
+    "name": "nodejs-functions",
+    "name_pretty": "Functions",
+    "product_documentation": "https://developers.google.com/nodejs-functions/",
+    "client_documentation": "https://googleapis.dev/nodejs/nodejs-functions/latest/index.html",
+    "issue_tracker": "",
+    "release_level": "beta",
+    "language": "nodejs",
+    "repo": "googleapis/nodejs-functions",
+    "distribution_name": "@google-cloud/functions",
+    "api_id": "cloudfunctions.googleapis.com",
+    "requires_billing": false,
+    "support_documentation": "https://developers.google.com/nodejs-functions/"
+  },
+  {
     "name": "game-servers",
     "name_pretty": "Game Servers",
     "product_documentation": "https://cloud.google.com/game-servers/",
@@ -251,7 +265,7 @@
   {
     "name": "analytics-admin",
     "name_pretty": "Google Analytics Admin",
-    "product_documentation": "https://developers.google.com/analytics-admin/",
+    "product_documentation": "https://developers.google.com/analytics",
     "client_documentation": "https://googleapis.dev/nodejs/analytics-admin/latest/index.html",
     "issue_tracker": "",
     "release_level": "alpha",
@@ -260,7 +274,7 @@
     "distribution_name": "@google-analytics/admin",
     "api_id": "analyticsadmin.googleapis.com",
     "requires_billing": false,
-    "support_documentation": "https://developers.google.com/analytics-admin/"
+    "support_documentation": "https://developers.google.com/analytics"
   },
   {
     "name": "bigquery",
@@ -512,6 +526,19 @@
     "api_id": "phishingprotection.googleapis.com",
     "requires_billing": true,
     "support_documentation": "https://cloud.google.com/phishing-protection/docs/getting-support"
+  },
+  {
+    "name": "profiler",
+    "name_pretty": "Profiler",
+    "product_documentation": "https://cloud.google.com/profiler",
+    "client_documentation": "https://googleapis.dev/nodejs/profiler/latest/",
+    "issue_tracker": "https://issuetracker.google.com/savedsearches/5116474",
+    "release_level": "ga",
+    "language": "nodejs",
+    "repo": "googleapis/cloud-profiler-nodejs",
+    "distribution_name": "@google-cloud/profiler",
+    "api_id": "cloudprofiler.googleapis.com",
+    "support_documentation": "https://cloud.google.com/profiler"
   },
   {
     "name": "pubsub",
@@ -768,19 +795,6 @@
     "distribution_name": "@google-cloud/monitoring",
     "api_id": "monitoring.googleapis.com",
     "requires_billing": true,
-    "support_documentation": "https://cloud.google.com/stackdriver/docs/getting-support"
-  },
-  {
-    "name": "profiler",
-    "name_pretty": "Stackdriver Profiler",
-    "product_documentation": "https://cloud.google.com/profiler",
-    "client_documentation": "https://googleapis.dev/nodejs/profiler/latest/",
-    "issue_tracker": "https://issuetracker.google.com/savedsearches/5116474",
-    "release_level": "ga",
-    "language": "nodejs",
-    "repo": "googleapis/cloud-profiler-nodejs",
-    "distribution_name": "@google-cloud/profiler",
-    "api_id": "cloudprofiler.googleapis.com",
     "support_documentation": "https://cloud.google.com/stackdriver/docs/getting-support"
   },
   {
