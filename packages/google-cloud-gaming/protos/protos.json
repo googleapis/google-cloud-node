@@ -6,6 +6,1634 @@
           "nested": {
             "gaming": {
               "nested": {
+                "v1": {
+                  "options": {
+                    "go_package": "google.golang.org/genproto/googleapis/cloud/gaming/v1;gaming",
+                    "java_multiple_files": true,
+                    "java_package": "com.google.cloud.gaming.v1"
+                  },
+                  "nested": {
+                    "OperationMetadata": {
+                      "fields": {
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "endTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "target": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "verb": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "statusMessage": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "requestedCancellation": {
+                          "type": "bool",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "apiVersion": {
+                          "type": "string",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "unreachable": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "operationStatus": {
+                          "keyType": "string",
+                          "type": "OperationStatus",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "OperationStatus": {
+                      "fields": {
+                        "done": {
+                          "type": "bool",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "errorCode": {
+                          "type": "ErrorCode",
+                          "id": 2
+                        },
+                        "errorMessage": {
+                          "type": "string",
+                          "id": 3
+                        }
+                      },
+                      "nested": {
+                        "ErrorCode": {
+                          "values": {
+                            "ERROR_CODE_UNSPECIFIED": 0,
+                            "INTERNAL_ERROR": 1,
+                            "PERMISSION_DENIED": 2,
+                            "CLUSTER_CONNECTION": 3
+                          }
+                        }
+                      }
+                    },
+                    "LabelSelector": {
+                      "fields": {
+                        "labels": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "RealmSelector": {
+                      "fields": {
+                        "realms": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "Schedule": {
+                      "fields": {
+                        "startTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 1
+                        },
+                        "endTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2
+                        },
+                        "cronJobDuration": {
+                          "type": "google.protobuf.Duration",
+                          "id": 3
+                        },
+                        "cronSpec": {
+                          "type": "string",
+                          "id": 4
+                        }
+                      }
+                    },
+                    "SpecSource": {
+                      "fields": {
+                        "gameServerConfigName": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "name": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "TargetDetails": {
+                      "fields": {
+                        "gameServerClusterName": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "gameServerDeploymentName": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "fleetDetails": {
+                          "rule": "repeated",
+                          "type": "TargetFleetDetails",
+                          "id": 3
+                        }
+                      },
+                      "nested": {
+                        "TargetFleetDetails": {
+                          "fields": {
+                            "fleet": {
+                              "type": "TargetFleet",
+                              "id": 1
+                            },
+                            "autoscaler": {
+                              "type": "TargetFleetAutoscaler",
+                              "id": 2
+                            }
+                          },
+                          "nested": {
+                            "TargetFleet": {
+                              "fields": {
+                                "name": {
+                                  "type": "string",
+                                  "id": 1
+                                },
+                                "specSource": {
+                                  "type": "SpecSource",
+                                  "id": 2
+                                }
+                              }
+                            },
+                            "TargetFleetAutoscaler": {
+                              "fields": {
+                                "name": {
+                                  "type": "string",
+                                  "id": 1
+                                },
+                                "specSource": {
+                                  "type": "SpecSource",
+                                  "id": 2
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "TargetState": {
+                      "fields": {
+                        "details": {
+                          "rule": "repeated",
+                          "type": "TargetDetails",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "DeployedFleetDetails": {
+                      "fields": {
+                        "deployedFleet": {
+                          "type": "DeployedFleet",
+                          "id": 1
+                        },
+                        "deployedAutoscaler": {
+                          "type": "DeployedFleetAutoscaler",
+                          "id": 2
+                        }
+                      },
+                      "nested": {
+                        "DeployedFleet": {
+                          "fields": {
+                            "fleet": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "fleetSpec": {
+                              "type": "string",
+                              "id": 2
+                            },
+                            "specSource": {
+                              "type": "SpecSource",
+                              "id": 3
+                            },
+                            "status": {
+                              "type": "DeployedFleetStatus",
+                              "id": 5
+                            }
+                          },
+                          "nested": {
+                            "DeployedFleetStatus": {
+                              "fields": {
+                                "readyReplicas": {
+                                  "type": "int64",
+                                  "id": 1
+                                },
+                                "allocatedReplicas": {
+                                  "type": "int64",
+                                  "id": 2
+                                },
+                                "reservedReplicas": {
+                                  "type": "int64",
+                                  "id": 3
+                                },
+                                "replicas": {
+                                  "type": "int64",
+                                  "id": 4
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "DeployedFleetAutoscaler": {
+                          "fields": {
+                            "autoscaler": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "specSource": {
+                              "type": "SpecSource",
+                              "id": 4
+                            },
+                            "fleetAutoscalerSpec": {
+                              "type": "string",
+                              "id": 3
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "ListGameServerClustersRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "gameservices.googleapis.com/GameServerCluster"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "orderBy": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListGameServerClustersResponse": {
+                      "fields": {
+                        "gameServerClusters": {
+                          "rule": "repeated",
+                          "type": "GameServerCluster",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "unreachable": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 4
+                        }
+                      }
+                    },
+                    "GetGameServerClusterRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "gameservices.googleapis.com/GameServerCluster"
+                          }
+                        }
+                      }
+                    },
+                    "CreateGameServerClusterRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "gameservices.googleapis.com/GameServerCluster"
+                          }
+                        },
+                        "gameServerClusterId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "gameServerCluster": {
+                          "type": "GameServerCluster",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "PreviewCreateGameServerClusterRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "gameservices.googleapis.com/GameServerCluster"
+                          }
+                        },
+                        "gameServerClusterId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "gameServerCluster": {
+                          "type": "GameServerCluster",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "previewTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "PreviewCreateGameServerClusterResponse": {
+                      "fields": {
+                        "etag": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "targetState": {
+                          "type": "TargetState",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "DeleteGameServerClusterRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "gameservices.googleapis.com/GameServerCluster"
+                          }
+                        }
+                      }
+                    },
+                    "PreviewDeleteGameServerClusterRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "gameservices.googleapis.com/GameServerCluster"
+                          }
+                        },
+                        "previewTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "PreviewDeleteGameServerClusterResponse": {
+                      "fields": {
+                        "etag": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "targetState": {
+                          "type": "TargetState",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "UpdateGameServerClusterRequest": {
+                      "fields": {
+                        "gameServerCluster": {
+                          "type": "GameServerCluster",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "PreviewUpdateGameServerClusterRequest": {
+                      "fields": {
+                        "gameServerCluster": {
+                          "type": "GameServerCluster",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "previewTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "PreviewUpdateGameServerClusterResponse": {
+                      "fields": {
+                        "etag": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "targetState": {
+                          "type": "TargetState",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "GameServerClusterConnectionInfo": {
+                      "oneofs": {
+                        "clusterReference": {
+                          "oneof": [
+                            "gkeClusterReference"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "gkeClusterReference": {
+                          "type": "GkeClusterReference",
+                          "id": 7
+                        },
+                        "namespace": {
+                          "type": "string",
+                          "id": 5
+                        }
+                      }
+                    },
+                    "GkeClusterReference": {
+                      "fields": {
+                        "cluster": {
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "GameServerCluster": {
+                      "options": {
+                        "(google.api.resource).type": "gameservices.googleapis.com/GameServerCluster",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/realms/{realm}/gameServerClusters/{cluster}"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "labels": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 4
+                        },
+                        "connectionInfo": {
+                          "type": "GameServerClusterConnectionInfo",
+                          "id": 5
+                        },
+                        "etag": {
+                          "type": "string",
+                          "id": 6
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 7
+                        }
+                      }
+                    },
+                    "GameServerClustersService": {
+                      "options": {
+                        "(google.api.default_host)": "gameservices.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
+                      },
+                      "methods": {
+                        "ListGameServerClusters": {
+                          "requestType": "ListGameServerClustersRequest",
+                          "responseType": "ListGameServerClustersResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=projects/*/locations/*/realms/*}/gameServerClusters",
+                            "(google.api.method_signature)": "parent"
+                          }
+                        },
+                        "GetGameServerCluster": {
+                          "requestType": "GetGameServerClusterRequest",
+                          "responseType": "GameServerCluster",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/realms/*/gameServerClusters/*}",
+                            "(google.api.method_signature)": "name"
+                          }
+                        },
+                        "CreateGameServerCluster": {
+                          "requestType": "CreateGameServerClusterRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=projects/*/locations/*/realms/*}/gameServerClusters",
+                            "(google.api.http).body": "game_server_cluster",
+                            "(google.api.method_signature)": "parent,game_server_cluster,game_server_cluster_id",
+                            "(google.longrunning.operation_info).response_type": "GameServerCluster",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          }
+                        },
+                        "PreviewCreateGameServerCluster": {
+                          "requestType": "PreviewCreateGameServerClusterRequest",
+                          "responseType": "PreviewCreateGameServerClusterResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=projects/*/locations/*/realms/*}/gameServerClusters:previewCreate",
+                            "(google.api.http).body": "game_server_cluster"
+                          }
+                        },
+                        "DeleteGameServerCluster": {
+                          "requestType": "DeleteGameServerClusterRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).delete": "/v1/{name=projects/*/locations/*/realms/*/gameServerClusters/*}",
+                            "(google.api.method_signature)": "name",
+                            "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          }
+                        },
+                        "PreviewDeleteGameServerCluster": {
+                          "requestType": "PreviewDeleteGameServerClusterRequest",
+                          "responseType": "PreviewDeleteGameServerClusterResponse",
+                          "options": {
+                            "(google.api.http).delete": "/v1/{name=projects/*/locations/*/realms/*/gameServerClusters/*}:previewDelete"
+                          }
+                        },
+                        "UpdateGameServerCluster": {
+                          "requestType": "UpdateGameServerClusterRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).patch": "/v1/{game_server_cluster.name=projects/*/locations/*/realms/*/gameServerClusters/*}",
+                            "(google.api.http).body": "game_server_cluster",
+                            "(google.api.method_signature)": "game_server_cluster,update_mask",
+                            "(google.longrunning.operation_info).response_type": "GameServerCluster",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          }
+                        },
+                        "PreviewUpdateGameServerCluster": {
+                          "requestType": "PreviewUpdateGameServerClusterRequest",
+                          "responseType": "PreviewUpdateGameServerClusterResponse",
+                          "options": {
+                            "(google.api.http).patch": "/v1/{game_server_cluster.name=projects/*/locations/*/realms/*/gameServerClusters/*}:previewUpdate",
+                            "(google.api.http).body": "game_server_cluster"
+                          }
+                        }
+                      }
+                    },
+                    "ListGameServerConfigsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "gameservices.googleapis.com/GameServerConfig"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "orderBy": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListGameServerConfigsResponse": {
+                      "fields": {
+                        "gameServerConfigs": {
+                          "rule": "repeated",
+                          "type": "GameServerConfig",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "unreachable": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 4
+                        }
+                      }
+                    },
+                    "GetGameServerConfigRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "gameservices.googleapis.com/GameServerConfig"
+                          }
+                        }
+                      }
+                    },
+                    "CreateGameServerConfigRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "gameservices.googleapis.com/GameServerConfig"
+                          }
+                        },
+                        "configId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "gameServerConfig": {
+                          "type": "GameServerConfig",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "DeleteGameServerConfigRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "gameservices.googleapis.com/GameServerConfig"
+                          }
+                        }
+                      }
+                    },
+                    "ScalingConfig": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "fleetAutoscalerSpec": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "selectors": {
+                          "rule": "repeated",
+                          "type": "LabelSelector",
+                          "id": 4
+                        },
+                        "schedules": {
+                          "rule": "repeated",
+                          "type": "Schedule",
+                          "id": 5
+                        }
+                      }
+                    },
+                    "FleetConfig": {
+                      "fields": {
+                        "fleetSpec": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "name": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "GameServerConfig": {
+                      "options": {
+                        "(google.api.resource).type": "gameservices.googleapis.com/GameServerConfig",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/gameServerDeployments/{deployment}/configs/{config}"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "labels": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 4
+                        },
+                        "fleetConfigs": {
+                          "rule": "repeated",
+                          "type": "FleetConfig",
+                          "id": 5
+                        },
+                        "scalingConfigs": {
+                          "rule": "repeated",
+                          "type": "ScalingConfig",
+                          "id": 6
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 7
+                        }
+                      }
+                    },
+                    "GameServerConfigsService": {
+                      "options": {
+                        "(google.api.default_host)": "gameservices.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
+                      },
+                      "methods": {
+                        "ListGameServerConfigs": {
+                          "requestType": "ListGameServerConfigsRequest",
+                          "responseType": "ListGameServerConfigsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=projects/*/locations/*/gameServerDeployments/*}/configs",
+                            "(google.api.method_signature)": "parent"
+                          }
+                        },
+                        "GetGameServerConfig": {
+                          "requestType": "GetGameServerConfigRequest",
+                          "responseType": "GameServerConfig",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/gameServerDeployments/*/configs/*}",
+                            "(google.api.method_signature)": "name"
+                          }
+                        },
+                        "CreateGameServerConfig": {
+                          "requestType": "CreateGameServerConfigRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=projects/*/locations/*/gameServerDeployments/*}/configs",
+                            "(google.api.http).body": "game_server_config",
+                            "(google.api.method_signature)": "parent,game_server_config",
+                            "(google.longrunning.operation_info).response_type": "GameServerConfig",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          }
+                        },
+                        "DeleteGameServerConfig": {
+                          "requestType": "DeleteGameServerConfigRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).delete": "/v1/{name=projects/*/locations/*/gameServerDeployments/*/configs/*}",
+                            "(google.api.method_signature)": "name",
+                            "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          }
+                        }
+                      }
+                    },
+                    "ListGameServerDeploymentsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "gameservices.googleapis.com/GameServerDeployment"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "orderBy": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListGameServerDeploymentsResponse": {
+                      "fields": {
+                        "gameServerDeployments": {
+                          "rule": "repeated",
+                          "type": "GameServerDeployment",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "unreachable": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 4
+                        }
+                      }
+                    },
+                    "GetGameServerDeploymentRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "gameservices.googleapis.com/GameServerDeployment"
+                          }
+                        }
+                      }
+                    },
+                    "GetGameServerDeploymentRolloutRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "gameservices.googleapis.com/GameServerDeployment"
+                          }
+                        }
+                      }
+                    },
+                    "CreateGameServerDeploymentRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "gameservices.googleapis.com/GameServerDeployment"
+                          }
+                        },
+                        "deploymentId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "gameServerDeployment": {
+                          "type": "GameServerDeployment",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "DeleteGameServerDeploymentRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "gameservices.googleapis.com/GameServerDeployment"
+                          }
+                        }
+                      }
+                    },
+                    "UpdateGameServerDeploymentRequest": {
+                      "fields": {
+                        "gameServerDeployment": {
+                          "type": "GameServerDeployment",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "UpdateGameServerDeploymentRolloutRequest": {
+                      "fields": {
+                        "rollout": {
+                          "type": "GameServerDeploymentRollout",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "FetchDeploymentStateRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "FetchDeploymentStateResponse": {
+                      "fields": {
+                        "clusterState": {
+                          "rule": "repeated",
+                          "type": "DeployedClusterState",
+                          "id": 1
+                        },
+                        "unavailable": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 2
+                        }
+                      },
+                      "nested": {
+                        "DeployedClusterState": {
+                          "fields": {
+                            "cluster": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "fleetDetails": {
+                              "rule": "repeated",
+                              "type": "DeployedFleetDetails",
+                              "id": 2
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "GameServerDeployment": {
+                      "options": {
+                        "(google.api.resource).type": "gameservices.googleapis.com/GameServerDeployment",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/gameServerDeployments/{deployment}"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "labels": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 4
+                        },
+                        "etag": {
+                          "type": "string",
+                          "id": 7
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 8
+                        }
+                      }
+                    },
+                    "GameServerConfigOverride": {
+                      "oneofs": {
+                        "selector": {
+                          "oneof": [
+                            "realmsSelector"
+                          ]
+                        },
+                        "change": {
+                          "oneof": [
+                            "configVersion"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "realmsSelector": {
+                          "type": "RealmSelector",
+                          "id": 1
+                        },
+                        "configVersion": {
+                          "type": "string",
+                          "id": 100
+                        }
+                      }
+                    },
+                    "GameServerDeploymentRollout": {
+                      "options": {
+                        "(google.api.resource).type": "gameservices.googleapis.com/GameServerDeploymentRollout",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/gameServerDeployments/{deployment}/rollout"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "defaultGameServerConfig": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "gameServerConfigOverrides": {
+                          "rule": "repeated",
+                          "type": "GameServerConfigOverride",
+                          "id": 5
+                        },
+                        "etag": {
+                          "type": "string",
+                          "id": 6
+                        }
+                      }
+                    },
+                    "PreviewGameServerDeploymentRolloutRequest": {
+                      "fields": {
+                        "rollout": {
+                          "type": "GameServerDeploymentRollout",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "previewTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "PreviewGameServerDeploymentRolloutResponse": {
+                      "fields": {
+                        "unavailable": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 2
+                        },
+                        "etag": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "targetState": {
+                          "type": "TargetState",
+                          "id": 4
+                        }
+                      }
+                    },
+                    "GameServerDeploymentsService": {
+                      "options": {
+                        "(google.api.default_host)": "gameservices.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
+                      },
+                      "methods": {
+                        "ListGameServerDeployments": {
+                          "requestType": "ListGameServerDeploymentsRequest",
+                          "responseType": "ListGameServerDeploymentsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=projects/*/locations/*}/gameServerDeployments",
+                            "(google.api.method_signature)": "parent"
+                          }
+                        },
+                        "GetGameServerDeployment": {
+                          "requestType": "GetGameServerDeploymentRequest",
+                          "responseType": "GameServerDeployment",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/gameServerDeployments/*}",
+                            "(google.api.method_signature)": "name"
+                          }
+                        },
+                        "CreateGameServerDeployment": {
+                          "requestType": "CreateGameServerDeploymentRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=projects/*/locations/*}/gameServerDeployments",
+                            "(google.api.http).body": "game_server_deployment",
+                            "(google.api.method_signature)": "parent,game_server_deployment",
+                            "(google.longrunning.operation_info).response_type": "GameServerDeployment",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          }
+                        },
+                        "DeleteGameServerDeployment": {
+                          "requestType": "DeleteGameServerDeploymentRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).delete": "/v1/{name=projects/*/locations/*/gameServerDeployments/*}",
+                            "(google.api.method_signature)": "name",
+                            "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          }
+                        },
+                        "UpdateGameServerDeployment": {
+                          "requestType": "UpdateGameServerDeploymentRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).patch": "/v1/{game_server_deployment.name=projects/*/locations/*/gameServerDeployments/*}",
+                            "(google.api.http).body": "game_server_deployment",
+                            "(google.api.method_signature)": "game_server_deployment,update_mask",
+                            "(google.longrunning.operation_info).response_type": "GameServerDeployment",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          }
+                        },
+                        "GetGameServerDeploymentRollout": {
+                          "requestType": "GetGameServerDeploymentRolloutRequest",
+                          "responseType": "GameServerDeploymentRollout",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/gameServerDeployments/*}/rollout",
+                            "(google.api.method_signature)": "name"
+                          }
+                        },
+                        "UpdateGameServerDeploymentRollout": {
+                          "requestType": "UpdateGameServerDeploymentRolloutRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).patch": "/v1/{rollout.name=projects/*/locations/*/gameServerDeployments/*}/rollout",
+                            "(google.api.http).body": "rollout",
+                            "(google.api.method_signature)": "rollout,update_mask",
+                            "(google.longrunning.operation_info).response_type": "GameServerDeployment",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          }
+                        },
+                        "PreviewGameServerDeploymentRollout": {
+                          "requestType": "PreviewGameServerDeploymentRolloutRequest",
+                          "responseType": "PreviewGameServerDeploymentRolloutResponse",
+                          "options": {
+                            "(google.api.http).patch": "/v1/{rollout.name=projects/*/locations/*/gameServerDeployments/*}/rollout:preview",
+                            "(google.api.http).body": "rollout"
+                          }
+                        },
+                        "FetchDeploymentState": {
+                          "requestType": "FetchDeploymentStateRequest",
+                          "responseType": "FetchDeploymentStateResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1/{name=projects/*/locations/*/gameServerDeployments/*}:fetchDeploymentState",
+                            "(google.api.http).body": "*"
+                          }
+                        }
+                      }
+                    },
+                    "ListRealmsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "gameservices.googleapis.com/Realm"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "orderBy": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListRealmsResponse": {
+                      "fields": {
+                        "realms": {
+                          "rule": "repeated",
+                          "type": "Realm",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "unreachable": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "GetRealmRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "gameservices.googleapis.com/Realm"
+                          }
+                        }
+                      }
+                    },
+                    "CreateRealmRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "gameservices.googleapis.com/Realm"
+                          }
+                        },
+                        "realmId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "realm": {
+                          "type": "Realm",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "DeleteRealmRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "gameservices.googleapis.com/Realm"
+                          }
+                        }
+                      }
+                    },
+                    "UpdateRealmRequest": {
+                      "fields": {
+                        "realm": {
+                          "type": "Realm",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "PreviewRealmUpdateRequest": {
+                      "fields": {
+                        "realm": {
+                          "type": "Realm",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "previewTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "PreviewRealmUpdateResponse": {
+                      "fields": {
+                        "etag": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "targetState": {
+                          "type": "TargetState",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "Realm": {
+                      "options": {
+                        "(google.api.resource).type": "gameservices.googleapis.com/Realm",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/realms/{realm}"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "labels": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 4
+                        },
+                        "timeZone": {
+                          "type": "string",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "etag": {
+                          "type": "string",
+                          "id": 7
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 8
+                        }
+                      }
+                    },
+                    "RealmsService": {
+                      "options": {
+                        "(google.api.default_host)": "gameservices.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
+                      },
+                      "methods": {
+                        "ListRealms": {
+                          "requestType": "ListRealmsRequest",
+                          "responseType": "ListRealmsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=projects/*/locations/*}/realms",
+                            "(google.api.method_signature)": "parent"
+                          }
+                        },
+                        "GetRealm": {
+                          "requestType": "GetRealmRequest",
+                          "responseType": "Realm",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/realms/*}",
+                            "(google.api.method_signature)": "name"
+                          }
+                        },
+                        "CreateRealm": {
+                          "requestType": "CreateRealmRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=projects/*/locations/*}/realms",
+                            "(google.api.http).body": "realm",
+                            "(google.api.method_signature)": "parent,realm,realm_id",
+                            "(google.longrunning.operation_info).response_type": "Realm",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          }
+                        },
+                        "DeleteRealm": {
+                          "requestType": "DeleteRealmRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).delete": "/v1/{name=projects/*/locations/*/realms/*}",
+                            "(google.api.method_signature)": "name",
+                            "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          }
+                        },
+                        "UpdateRealm": {
+                          "requestType": "UpdateRealmRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).patch": "/v1/{realm.name=projects/*/locations/*/realms/*}",
+                            "(google.api.http).body": "realm",
+                            "(google.api.method_signature)": "realm,update_mask",
+                            "(google.longrunning.operation_info).response_type": "Realm",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          }
+                        },
+                        "PreviewRealmUpdate": {
+                          "requestType": "PreviewRealmUpdateRequest",
+                          "responseType": "PreviewRealmUpdateResponse",
+                          "options": {
+                            "(google.api.http).patch": "/v1/{realm.name=projects/*/locations/*/realms/*}:previewUpdate",
+                            "(google.api.http).body": "realm"
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
                 "v1beta": {
                   "options": {
                     "go_package": "google.golang.org/genproto/googleapis/cloud/gaming/v1beta;gaming",

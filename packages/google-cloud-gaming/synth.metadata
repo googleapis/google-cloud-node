@@ -3,27 +3,29 @@
     {
       "git": {
         "name": ".",
-        "remote": "https://github.com/googleapis/nodejs-game-servers.git",
-        "sha": "5c70728c51ed996fc39c36ea956e38524ac48681"
+        "remote": "git@github.com:googleapis/nodejs-game-servers.git",
+        "sha": "1edc5501da48f1f67ca1aef75da96f47d3c98fce"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "4f4aa3a03e470f1390758b9d89eb1aa88837a5be",
-        "internalRef": "320300472"
-      }
-    },
-    {
-      "git": {
-        "name": "synthtool",
-        "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "5936421202fb53ed4641bcb824017dd393a3dbcc"
+        "sha": "dbdd8ddeb6d9556952aa8784d9e48f2566c9911a",
+        "internalRef": "324762765"
       }
     }
   ],
   "destinations": [
+    {
+      "client": {
+        "source": "googleapis",
+        "apiName": "gaming",
+        "apiVersion": "v1",
+        "language": "nodejs",
+        "generator": "bazel"
+      }
+    },
     {
       "client": {
         "source": "googleapis",

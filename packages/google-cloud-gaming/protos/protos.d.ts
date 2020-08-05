@@ -23,6 +23,7074 @@ export namespace google {
         /** Namespace gaming. */
         namespace gaming {
 
+            /** Namespace v1. */
+            namespace v1 {
+
+                /** Properties of an OperationMetadata. */
+                interface IOperationMetadata {
+
+                    /** OperationMetadata createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** OperationMetadata endTime */
+                    endTime?: (google.protobuf.ITimestamp|null);
+
+                    /** OperationMetadata target */
+                    target?: (string|null);
+
+                    /** OperationMetadata verb */
+                    verb?: (string|null);
+
+                    /** OperationMetadata statusMessage */
+                    statusMessage?: (string|null);
+
+                    /** OperationMetadata requestedCancellation */
+                    requestedCancellation?: (boolean|null);
+
+                    /** OperationMetadata apiVersion */
+                    apiVersion?: (string|null);
+
+                    /** OperationMetadata unreachable */
+                    unreachable?: (string[]|null);
+
+                    /** OperationMetadata operationStatus */
+                    operationStatus?: ({ [k: string]: google.cloud.gaming.v1.IOperationStatus }|null);
+                }
+
+                /** Represents an OperationMetadata. */
+                class OperationMetadata implements IOperationMetadata {
+
+                    /**
+                     * Constructs a new OperationMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.gaming.v1.IOperationMetadata);
+
+                    /** OperationMetadata createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** OperationMetadata endTime. */
+                    public endTime?: (google.protobuf.ITimestamp|null);
+
+                    /** OperationMetadata target. */
+                    public target: string;
+
+                    /** OperationMetadata verb. */
+                    public verb: string;
+
+                    /** OperationMetadata statusMessage. */
+                    public statusMessage: string;
+
+                    /** OperationMetadata requestedCancellation. */
+                    public requestedCancellation: boolean;
+
+                    /** OperationMetadata apiVersion. */
+                    public apiVersion: string;
+
+                    /** OperationMetadata unreachable. */
+                    public unreachable: string[];
+
+                    /** OperationMetadata operationStatus. */
+                    public operationStatus: { [k: string]: google.cloud.gaming.v1.IOperationStatus };
+
+                    /**
+                     * Creates a new OperationMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns OperationMetadata instance
+                     */
+                    public static create(properties?: google.cloud.gaming.v1.IOperationMetadata): google.cloud.gaming.v1.OperationMetadata;
+
+                    /**
+                     * Encodes the specified OperationMetadata message. Does not implicitly {@link google.cloud.gaming.v1.OperationMetadata.verify|verify} messages.
+                     * @param message OperationMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.gaming.v1.IOperationMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified OperationMetadata message, length delimited. Does not implicitly {@link google.cloud.gaming.v1.OperationMetadata.verify|verify} messages.
+                     * @param message OperationMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.gaming.v1.IOperationMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an OperationMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns OperationMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gaming.v1.OperationMetadata;
+
+                    /**
+                     * Decodes an OperationMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns OperationMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gaming.v1.OperationMetadata;
+
+                    /**
+                     * Verifies an OperationMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an OperationMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns OperationMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.gaming.v1.OperationMetadata;
+
+                    /**
+                     * Creates a plain object from an OperationMetadata message. Also converts values to other types if specified.
+                     * @param message OperationMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.gaming.v1.OperationMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this OperationMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of an OperationStatus. */
+                interface IOperationStatus {
+
+                    /** OperationStatus done */
+                    done?: (boolean|null);
+
+                    /** OperationStatus errorCode */
+                    errorCode?: (google.cloud.gaming.v1.OperationStatus.ErrorCode|keyof typeof google.cloud.gaming.v1.OperationStatus.ErrorCode|null);
+
+                    /** OperationStatus errorMessage */
+                    errorMessage?: (string|null);
+                }
+
+                /** Represents an OperationStatus. */
+                class OperationStatus implements IOperationStatus {
+
+                    /**
+                     * Constructs a new OperationStatus.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.gaming.v1.IOperationStatus);
+
+                    /** OperationStatus done. */
+                    public done: boolean;
+
+                    /** OperationStatus errorCode. */
+                    public errorCode: (google.cloud.gaming.v1.OperationStatus.ErrorCode|keyof typeof google.cloud.gaming.v1.OperationStatus.ErrorCode);
+
+                    /** OperationStatus errorMessage. */
+                    public errorMessage: string;
+
+                    /**
+                     * Creates a new OperationStatus instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns OperationStatus instance
+                     */
+                    public static create(properties?: google.cloud.gaming.v1.IOperationStatus): google.cloud.gaming.v1.OperationStatus;
+
+                    /**
+                     * Encodes the specified OperationStatus message. Does not implicitly {@link google.cloud.gaming.v1.OperationStatus.verify|verify} messages.
+                     * @param message OperationStatus message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.gaming.v1.IOperationStatus, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified OperationStatus message, length delimited. Does not implicitly {@link google.cloud.gaming.v1.OperationStatus.verify|verify} messages.
+                     * @param message OperationStatus message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.gaming.v1.IOperationStatus, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an OperationStatus message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns OperationStatus
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gaming.v1.OperationStatus;
+
+                    /**
+                     * Decodes an OperationStatus message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns OperationStatus
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gaming.v1.OperationStatus;
+
+                    /**
+                     * Verifies an OperationStatus message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an OperationStatus message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns OperationStatus
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.gaming.v1.OperationStatus;
+
+                    /**
+                     * Creates a plain object from an OperationStatus message. Also converts values to other types if specified.
+                     * @param message OperationStatus
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.gaming.v1.OperationStatus, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this OperationStatus to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                namespace OperationStatus {
+
+                    /** ErrorCode enum. */
+                    enum ErrorCode {
+                        ERROR_CODE_UNSPECIFIED = 0,
+                        INTERNAL_ERROR = 1,
+                        PERMISSION_DENIED = 2,
+                        CLUSTER_CONNECTION = 3
+                    }
+                }
+
+                /** Properties of a LabelSelector. */
+                interface ILabelSelector {
+
+                    /** LabelSelector labels */
+                    labels?: ({ [k: string]: string }|null);
+                }
+
+                /** Represents a LabelSelector. */
+                class LabelSelector implements ILabelSelector {
+
+                    /**
+                     * Constructs a new LabelSelector.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.gaming.v1.ILabelSelector);
+
+                    /** LabelSelector labels. */
+                    public labels: { [k: string]: string };
+
+                    /**
+                     * Creates a new LabelSelector instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns LabelSelector instance
+                     */
+                    public static create(properties?: google.cloud.gaming.v1.ILabelSelector): google.cloud.gaming.v1.LabelSelector;
+
+                    /**
+                     * Encodes the specified LabelSelector message. Does not implicitly {@link google.cloud.gaming.v1.LabelSelector.verify|verify} messages.
+                     * @param message LabelSelector message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.gaming.v1.ILabelSelector, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified LabelSelector message, length delimited. Does not implicitly {@link google.cloud.gaming.v1.LabelSelector.verify|verify} messages.
+                     * @param message LabelSelector message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.gaming.v1.ILabelSelector, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a LabelSelector message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns LabelSelector
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gaming.v1.LabelSelector;
+
+                    /**
+                     * Decodes a LabelSelector message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns LabelSelector
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gaming.v1.LabelSelector;
+
+                    /**
+                     * Verifies a LabelSelector message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a LabelSelector message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns LabelSelector
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.gaming.v1.LabelSelector;
+
+                    /**
+                     * Creates a plain object from a LabelSelector message. Also converts values to other types if specified.
+                     * @param message LabelSelector
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.gaming.v1.LabelSelector, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this LabelSelector to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a RealmSelector. */
+                interface IRealmSelector {
+
+                    /** RealmSelector realms */
+                    realms?: (string[]|null);
+                }
+
+                /** Represents a RealmSelector. */
+                class RealmSelector implements IRealmSelector {
+
+                    /**
+                     * Constructs a new RealmSelector.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.gaming.v1.IRealmSelector);
+
+                    /** RealmSelector realms. */
+                    public realms: string[];
+
+                    /**
+                     * Creates a new RealmSelector instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RealmSelector instance
+                     */
+                    public static create(properties?: google.cloud.gaming.v1.IRealmSelector): google.cloud.gaming.v1.RealmSelector;
+
+                    /**
+                     * Encodes the specified RealmSelector message. Does not implicitly {@link google.cloud.gaming.v1.RealmSelector.verify|verify} messages.
+                     * @param message RealmSelector message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.gaming.v1.IRealmSelector, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RealmSelector message, length delimited. Does not implicitly {@link google.cloud.gaming.v1.RealmSelector.verify|verify} messages.
+                     * @param message RealmSelector message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.gaming.v1.IRealmSelector, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RealmSelector message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RealmSelector
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gaming.v1.RealmSelector;
+
+                    /**
+                     * Decodes a RealmSelector message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RealmSelector
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gaming.v1.RealmSelector;
+
+                    /**
+                     * Verifies a RealmSelector message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RealmSelector message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RealmSelector
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.gaming.v1.RealmSelector;
+
+                    /**
+                     * Creates a plain object from a RealmSelector message. Also converts values to other types if specified.
+                     * @param message RealmSelector
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.gaming.v1.RealmSelector, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RealmSelector to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a Schedule. */
+                interface ISchedule {
+
+                    /** Schedule startTime */
+                    startTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Schedule endTime */
+                    endTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Schedule cronJobDuration */
+                    cronJobDuration?: (google.protobuf.IDuration|null);
+
+                    /** Schedule cronSpec */
+                    cronSpec?: (string|null);
+                }
+
+                /** Represents a Schedule. */
+                class Schedule implements ISchedule {
+
+                    /**
+                     * Constructs a new Schedule.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.gaming.v1.ISchedule);
+
+                    /** Schedule startTime. */
+                    public startTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Schedule endTime. */
+                    public endTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Schedule cronJobDuration. */
+                    public cronJobDuration?: (google.protobuf.IDuration|null);
+
+                    /** Schedule cronSpec. */
+                    public cronSpec: string;
+
+                    /**
+                     * Creates a new Schedule instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Schedule instance
+                     */
+                    public static create(properties?: google.cloud.gaming.v1.ISchedule): google.cloud.gaming.v1.Schedule;
+
+                    /**
+                     * Encodes the specified Schedule message. Does not implicitly {@link google.cloud.gaming.v1.Schedule.verify|verify} messages.
+                     * @param message Schedule message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.gaming.v1.ISchedule, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Schedule message, length delimited. Does not implicitly {@link google.cloud.gaming.v1.Schedule.verify|verify} messages.
+                     * @param message Schedule message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.gaming.v1.ISchedule, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Schedule message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Schedule
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gaming.v1.Schedule;
+
+                    /**
+                     * Decodes a Schedule message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Schedule
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gaming.v1.Schedule;
+
+                    /**
+                     * Verifies a Schedule message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Schedule message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Schedule
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.gaming.v1.Schedule;
+
+                    /**
+                     * Creates a plain object from a Schedule message. Also converts values to other types if specified.
+                     * @param message Schedule
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.gaming.v1.Schedule, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Schedule to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a SpecSource. */
+                interface ISpecSource {
+
+                    /** SpecSource gameServerConfigName */
+                    gameServerConfigName?: (string|null);
+
+                    /** SpecSource name */
+                    name?: (string|null);
+                }
+
+                /** Represents a SpecSource. */
+                class SpecSource implements ISpecSource {
+
+                    /**
+                     * Constructs a new SpecSource.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.gaming.v1.ISpecSource);
+
+                    /** SpecSource gameServerConfigName. */
+                    public gameServerConfigName: string;
+
+                    /** SpecSource name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new SpecSource instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SpecSource instance
+                     */
+                    public static create(properties?: google.cloud.gaming.v1.ISpecSource): google.cloud.gaming.v1.SpecSource;
+
+                    /**
+                     * Encodes the specified SpecSource message. Does not implicitly {@link google.cloud.gaming.v1.SpecSource.verify|verify} messages.
+                     * @param message SpecSource message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.gaming.v1.ISpecSource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SpecSource message, length delimited. Does not implicitly {@link google.cloud.gaming.v1.SpecSource.verify|verify} messages.
+                     * @param message SpecSource message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.gaming.v1.ISpecSource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SpecSource message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SpecSource
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gaming.v1.SpecSource;
+
+                    /**
+                     * Decodes a SpecSource message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SpecSource
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gaming.v1.SpecSource;
+
+                    /**
+                     * Verifies a SpecSource message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SpecSource message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SpecSource
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.gaming.v1.SpecSource;
+
+                    /**
+                     * Creates a plain object from a SpecSource message. Also converts values to other types if specified.
+                     * @param message SpecSource
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.gaming.v1.SpecSource, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SpecSource to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a TargetDetails. */
+                interface ITargetDetails {
+
+                    /** TargetDetails gameServerClusterName */
+                    gameServerClusterName?: (string|null);
+
+                    /** TargetDetails gameServerDeploymentName */
+                    gameServerDeploymentName?: (string|null);
+
+                    /** TargetDetails fleetDetails */
+                    fleetDetails?: (google.cloud.gaming.v1.TargetDetails.ITargetFleetDetails[]|null);
+                }
+
+                /** Represents a TargetDetails. */
+                class TargetDetails implements ITargetDetails {
+
+                    /**
+                     * Constructs a new TargetDetails.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.gaming.v1.ITargetDetails);
+
+                    /** TargetDetails gameServerClusterName. */
+                    public gameServerClusterName: string;
+
+                    /** TargetDetails gameServerDeploymentName. */
+                    public gameServerDeploymentName: string;
+
+                    /** TargetDetails fleetDetails. */
+                    public fleetDetails: google.cloud.gaming.v1.TargetDetails.ITargetFleetDetails[];
+
+                    /**
+                     * Creates a new TargetDetails instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns TargetDetails instance
+                     */
+                    public static create(properties?: google.cloud.gaming.v1.ITargetDetails): google.cloud.gaming.v1.TargetDetails;
+
+                    /**
+                     * Encodes the specified TargetDetails message. Does not implicitly {@link google.cloud.gaming.v1.TargetDetails.verify|verify} messages.
+                     * @param message TargetDetails message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.gaming.v1.ITargetDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified TargetDetails message, length delimited. Does not implicitly {@link google.cloud.gaming.v1.TargetDetails.verify|verify} messages.
+                     * @param message TargetDetails message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.gaming.v1.ITargetDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a TargetDetails message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns TargetDetails
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gaming.v1.TargetDetails;
+
+                    /**
+                     * Decodes a TargetDetails message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns TargetDetails
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gaming.v1.TargetDetails;
+
+                    /**
+                     * Verifies a TargetDetails message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a TargetDetails message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns TargetDetails
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.gaming.v1.TargetDetails;
+
+                    /**
+                     * Creates a plain object from a TargetDetails message. Also converts values to other types if specified.
+                     * @param message TargetDetails
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.gaming.v1.TargetDetails, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this TargetDetails to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                namespace TargetDetails {
+
+                    /** Properties of a TargetFleetDetails. */
+                    interface ITargetFleetDetails {
+
+                        /** TargetFleetDetails fleet */
+                        fleet?: (google.cloud.gaming.v1.TargetDetails.TargetFleetDetails.ITargetFleet|null);
+
+                        /** TargetFleetDetails autoscaler */
+                        autoscaler?: (google.cloud.gaming.v1.TargetDetails.TargetFleetDetails.ITargetFleetAutoscaler|null);
+                    }
+
+                    /** Represents a TargetFleetDetails. */
+                    class TargetFleetDetails implements ITargetFleetDetails {
+
+                        /**
+                         * Constructs a new TargetFleetDetails.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.gaming.v1.TargetDetails.ITargetFleetDetails);
+
+                        /** TargetFleetDetails fleet. */
+                        public fleet?: (google.cloud.gaming.v1.TargetDetails.TargetFleetDetails.ITargetFleet|null);
+
+                        /** TargetFleetDetails autoscaler. */
+                        public autoscaler?: (google.cloud.gaming.v1.TargetDetails.TargetFleetDetails.ITargetFleetAutoscaler|null);
+
+                        /**
+                         * Creates a new TargetFleetDetails instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns TargetFleetDetails instance
+                         */
+                        public static create(properties?: google.cloud.gaming.v1.TargetDetails.ITargetFleetDetails): google.cloud.gaming.v1.TargetDetails.TargetFleetDetails;
+
+                        /**
+                         * Encodes the specified TargetFleetDetails message. Does not implicitly {@link google.cloud.gaming.v1.TargetDetails.TargetFleetDetails.verify|verify} messages.
+                         * @param message TargetFleetDetails message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.gaming.v1.TargetDetails.ITargetFleetDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified TargetFleetDetails message, length delimited. Does not implicitly {@link google.cloud.gaming.v1.TargetDetails.TargetFleetDetails.verify|verify} messages.
+                         * @param message TargetFleetDetails message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.gaming.v1.TargetDetails.ITargetFleetDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a TargetFleetDetails message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns TargetFleetDetails
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gaming.v1.TargetDetails.TargetFleetDetails;
+
+                        /**
+                         * Decodes a TargetFleetDetails message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns TargetFleetDetails
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gaming.v1.TargetDetails.TargetFleetDetails;
+
+                        /**
+                         * Verifies a TargetFleetDetails message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a TargetFleetDetails message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns TargetFleetDetails
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.gaming.v1.TargetDetails.TargetFleetDetails;
+
+                        /**
+                         * Creates a plain object from a TargetFleetDetails message. Also converts values to other types if specified.
+                         * @param message TargetFleetDetails
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.gaming.v1.TargetDetails.TargetFleetDetails, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this TargetFleetDetails to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    namespace TargetFleetDetails {
+
+                        /** Properties of a TargetFleet. */
+                        interface ITargetFleet {
+
+                            /** TargetFleet name */
+                            name?: (string|null);
+
+                            /** TargetFleet specSource */
+                            specSource?: (google.cloud.gaming.v1.ISpecSource|null);
+                        }
+
+                        /** Represents a TargetFleet. */
+                        class TargetFleet implements ITargetFleet {
+
+                            /**
+                             * Constructs a new TargetFleet.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.gaming.v1.TargetDetails.TargetFleetDetails.ITargetFleet);
+
+                            /** TargetFleet name. */
+                            public name: string;
+
+                            /** TargetFleet specSource. */
+                            public specSource?: (google.cloud.gaming.v1.ISpecSource|null);
+
+                            /**
+                             * Creates a new TargetFleet instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns TargetFleet instance
+                             */
+                            public static create(properties?: google.cloud.gaming.v1.TargetDetails.TargetFleetDetails.ITargetFleet): google.cloud.gaming.v1.TargetDetails.TargetFleetDetails.TargetFleet;
+
+                            /**
+                             * Encodes the specified TargetFleet message. Does not implicitly {@link google.cloud.gaming.v1.TargetDetails.TargetFleetDetails.TargetFleet.verify|verify} messages.
+                             * @param message TargetFleet message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.gaming.v1.TargetDetails.TargetFleetDetails.ITargetFleet, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified TargetFleet message, length delimited. Does not implicitly {@link google.cloud.gaming.v1.TargetDetails.TargetFleetDetails.TargetFleet.verify|verify} messages.
+                             * @param message TargetFleet message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.gaming.v1.TargetDetails.TargetFleetDetails.ITargetFleet, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a TargetFleet message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns TargetFleet
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gaming.v1.TargetDetails.TargetFleetDetails.TargetFleet;
+
+                            /**
+                             * Decodes a TargetFleet message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns TargetFleet
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gaming.v1.TargetDetails.TargetFleetDetails.TargetFleet;
+
+                            /**
+                             * Verifies a TargetFleet message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a TargetFleet message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns TargetFleet
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.gaming.v1.TargetDetails.TargetFleetDetails.TargetFleet;
+
+                            /**
+                             * Creates a plain object from a TargetFleet message. Also converts values to other types if specified.
+                             * @param message TargetFleet
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.gaming.v1.TargetDetails.TargetFleetDetails.TargetFleet, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this TargetFleet to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+                        }
+
+                        /** Properties of a TargetFleetAutoscaler. */
+                        interface ITargetFleetAutoscaler {
+
+                            /** TargetFleetAutoscaler name */
+                            name?: (string|null);
+
+                            /** TargetFleetAutoscaler specSource */
+                            specSource?: (google.cloud.gaming.v1.ISpecSource|null);
+                        }
+
+                        /** Represents a TargetFleetAutoscaler. */
+                        class TargetFleetAutoscaler implements ITargetFleetAutoscaler {
+
+                            /**
+                             * Constructs a new TargetFleetAutoscaler.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.gaming.v1.TargetDetails.TargetFleetDetails.ITargetFleetAutoscaler);
+
+                            /** TargetFleetAutoscaler name. */
+                            public name: string;
+
+                            /** TargetFleetAutoscaler specSource. */
+                            public specSource?: (google.cloud.gaming.v1.ISpecSource|null);
+
+                            /**
+                             * Creates a new TargetFleetAutoscaler instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns TargetFleetAutoscaler instance
+                             */
+                            public static create(properties?: google.cloud.gaming.v1.TargetDetails.TargetFleetDetails.ITargetFleetAutoscaler): google.cloud.gaming.v1.TargetDetails.TargetFleetDetails.TargetFleetAutoscaler;
+
+                            /**
+                             * Encodes the specified TargetFleetAutoscaler message. Does not implicitly {@link google.cloud.gaming.v1.TargetDetails.TargetFleetDetails.TargetFleetAutoscaler.verify|verify} messages.
+                             * @param message TargetFleetAutoscaler message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.gaming.v1.TargetDetails.TargetFleetDetails.ITargetFleetAutoscaler, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified TargetFleetAutoscaler message, length delimited. Does not implicitly {@link google.cloud.gaming.v1.TargetDetails.TargetFleetDetails.TargetFleetAutoscaler.verify|verify} messages.
+                             * @param message TargetFleetAutoscaler message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.gaming.v1.TargetDetails.TargetFleetDetails.ITargetFleetAutoscaler, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a TargetFleetAutoscaler message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns TargetFleetAutoscaler
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gaming.v1.TargetDetails.TargetFleetDetails.TargetFleetAutoscaler;
+
+                            /**
+                             * Decodes a TargetFleetAutoscaler message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns TargetFleetAutoscaler
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gaming.v1.TargetDetails.TargetFleetDetails.TargetFleetAutoscaler;
+
+                            /**
+                             * Verifies a TargetFleetAutoscaler message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a TargetFleetAutoscaler message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns TargetFleetAutoscaler
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.gaming.v1.TargetDetails.TargetFleetDetails.TargetFleetAutoscaler;
+
+                            /**
+                             * Creates a plain object from a TargetFleetAutoscaler message. Also converts values to other types if specified.
+                             * @param message TargetFleetAutoscaler
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.gaming.v1.TargetDetails.TargetFleetDetails.TargetFleetAutoscaler, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this TargetFleetAutoscaler to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+                        }
+                    }
+                }
+
+                /** Properties of a TargetState. */
+                interface ITargetState {
+
+                    /** TargetState details */
+                    details?: (google.cloud.gaming.v1.ITargetDetails[]|null);
+                }
+
+                /** Represents a TargetState. */
+                class TargetState implements ITargetState {
+
+                    /**
+                     * Constructs a new TargetState.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.gaming.v1.ITargetState);
+
+                    /** TargetState details. */
+                    public details: google.cloud.gaming.v1.ITargetDetails[];
+
+                    /**
+                     * Creates a new TargetState instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns TargetState instance
+                     */
+                    public static create(properties?: google.cloud.gaming.v1.ITargetState): google.cloud.gaming.v1.TargetState;
+
+                    /**
+                     * Encodes the specified TargetState message. Does not implicitly {@link google.cloud.gaming.v1.TargetState.verify|verify} messages.
+                     * @param message TargetState message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.gaming.v1.ITargetState, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified TargetState message, length delimited. Does not implicitly {@link google.cloud.gaming.v1.TargetState.verify|verify} messages.
+                     * @param message TargetState message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.gaming.v1.ITargetState, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a TargetState message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns TargetState
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gaming.v1.TargetState;
+
+                    /**
+                     * Decodes a TargetState message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns TargetState
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gaming.v1.TargetState;
+
+                    /**
+                     * Verifies a TargetState message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a TargetState message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns TargetState
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.gaming.v1.TargetState;
+
+                    /**
+                     * Creates a plain object from a TargetState message. Also converts values to other types if specified.
+                     * @param message TargetState
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.gaming.v1.TargetState, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this TargetState to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a DeployedFleetDetails. */
+                interface IDeployedFleetDetails {
+
+                    /** DeployedFleetDetails deployedFleet */
+                    deployedFleet?: (google.cloud.gaming.v1.DeployedFleetDetails.IDeployedFleet|null);
+
+                    /** DeployedFleetDetails deployedAutoscaler */
+                    deployedAutoscaler?: (google.cloud.gaming.v1.DeployedFleetDetails.IDeployedFleetAutoscaler|null);
+                }
+
+                /** Represents a DeployedFleetDetails. */
+                class DeployedFleetDetails implements IDeployedFleetDetails {
+
+                    /**
+                     * Constructs a new DeployedFleetDetails.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.gaming.v1.IDeployedFleetDetails);
+
+                    /** DeployedFleetDetails deployedFleet. */
+                    public deployedFleet?: (google.cloud.gaming.v1.DeployedFleetDetails.IDeployedFleet|null);
+
+                    /** DeployedFleetDetails deployedAutoscaler. */
+                    public deployedAutoscaler?: (google.cloud.gaming.v1.DeployedFleetDetails.IDeployedFleetAutoscaler|null);
+
+                    /**
+                     * Creates a new DeployedFleetDetails instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeployedFleetDetails instance
+                     */
+                    public static create(properties?: google.cloud.gaming.v1.IDeployedFleetDetails): google.cloud.gaming.v1.DeployedFleetDetails;
+
+                    /**
+                     * Encodes the specified DeployedFleetDetails message. Does not implicitly {@link google.cloud.gaming.v1.DeployedFleetDetails.verify|verify} messages.
+                     * @param message DeployedFleetDetails message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.gaming.v1.IDeployedFleetDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeployedFleetDetails message, length delimited. Does not implicitly {@link google.cloud.gaming.v1.DeployedFleetDetails.verify|verify} messages.
+                     * @param message DeployedFleetDetails message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.gaming.v1.IDeployedFleetDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeployedFleetDetails message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeployedFleetDetails
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gaming.v1.DeployedFleetDetails;
+
+                    /**
+                     * Decodes a DeployedFleetDetails message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeployedFleetDetails
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gaming.v1.DeployedFleetDetails;
+
+                    /**
+                     * Verifies a DeployedFleetDetails message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeployedFleetDetails message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeployedFleetDetails
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.gaming.v1.DeployedFleetDetails;
+
+                    /**
+                     * Creates a plain object from a DeployedFleetDetails message. Also converts values to other types if specified.
+                     * @param message DeployedFleetDetails
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.gaming.v1.DeployedFleetDetails, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeployedFleetDetails to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                namespace DeployedFleetDetails {
+
+                    /** Properties of a DeployedFleet. */
+                    interface IDeployedFleet {
+
+                        /** DeployedFleet fleet */
+                        fleet?: (string|null);
+
+                        /** DeployedFleet fleetSpec */
+                        fleetSpec?: (string|null);
+
+                        /** DeployedFleet specSource */
+                        specSource?: (google.cloud.gaming.v1.ISpecSource|null);
+
+                        /** DeployedFleet status */
+                        status?: (google.cloud.gaming.v1.DeployedFleetDetails.DeployedFleet.IDeployedFleetStatus|null);
+                    }
+
+                    /** Represents a DeployedFleet. */
+                    class DeployedFleet implements IDeployedFleet {
+
+                        /**
+                         * Constructs a new DeployedFleet.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.gaming.v1.DeployedFleetDetails.IDeployedFleet);
+
+                        /** DeployedFleet fleet. */
+                        public fleet: string;
+
+                        /** DeployedFleet fleetSpec. */
+                        public fleetSpec: string;
+
+                        /** DeployedFleet specSource. */
+                        public specSource?: (google.cloud.gaming.v1.ISpecSource|null);
+
+                        /** DeployedFleet status. */
+                        public status?: (google.cloud.gaming.v1.DeployedFleetDetails.DeployedFleet.IDeployedFleetStatus|null);
+
+                        /**
+                         * Creates a new DeployedFleet instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns DeployedFleet instance
+                         */
+                        public static create(properties?: google.cloud.gaming.v1.DeployedFleetDetails.IDeployedFleet): google.cloud.gaming.v1.DeployedFleetDetails.DeployedFleet;
+
+                        /**
+                         * Encodes the specified DeployedFleet message. Does not implicitly {@link google.cloud.gaming.v1.DeployedFleetDetails.DeployedFleet.verify|verify} messages.
+                         * @param message DeployedFleet message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.gaming.v1.DeployedFleetDetails.IDeployedFleet, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified DeployedFleet message, length delimited. Does not implicitly {@link google.cloud.gaming.v1.DeployedFleetDetails.DeployedFleet.verify|verify} messages.
+                         * @param message DeployedFleet message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.gaming.v1.DeployedFleetDetails.IDeployedFleet, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a DeployedFleet message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns DeployedFleet
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gaming.v1.DeployedFleetDetails.DeployedFleet;
+
+                        /**
+                         * Decodes a DeployedFleet message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns DeployedFleet
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gaming.v1.DeployedFleetDetails.DeployedFleet;
+
+                        /**
+                         * Verifies a DeployedFleet message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a DeployedFleet message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns DeployedFleet
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.gaming.v1.DeployedFleetDetails.DeployedFleet;
+
+                        /**
+                         * Creates a plain object from a DeployedFleet message. Also converts values to other types if specified.
+                         * @param message DeployedFleet
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.gaming.v1.DeployedFleetDetails.DeployedFleet, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this DeployedFleet to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    namespace DeployedFleet {
+
+                        /** Properties of a DeployedFleetStatus. */
+                        interface IDeployedFleetStatus {
+
+                            /** DeployedFleetStatus readyReplicas */
+                            readyReplicas?: (number|Long|string|null);
+
+                            /** DeployedFleetStatus allocatedReplicas */
+                            allocatedReplicas?: (number|Long|string|null);
+
+                            /** DeployedFleetStatus reservedReplicas */
+                            reservedReplicas?: (number|Long|string|null);
+
+                            /** DeployedFleetStatus replicas */
+                            replicas?: (number|Long|string|null);
+                        }
+
+                        /** Represents a DeployedFleetStatus. */
+                        class DeployedFleetStatus implements IDeployedFleetStatus {
+
+                            /**
+                             * Constructs a new DeployedFleetStatus.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.gaming.v1.DeployedFleetDetails.DeployedFleet.IDeployedFleetStatus);
+
+                            /** DeployedFleetStatus readyReplicas. */
+                            public readyReplicas: (number|Long|string);
+
+                            /** DeployedFleetStatus allocatedReplicas. */
+                            public allocatedReplicas: (number|Long|string);
+
+                            /** DeployedFleetStatus reservedReplicas. */
+                            public reservedReplicas: (number|Long|string);
+
+                            /** DeployedFleetStatus replicas. */
+                            public replicas: (number|Long|string);
+
+                            /**
+                             * Creates a new DeployedFleetStatus instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns DeployedFleetStatus instance
+                             */
+                            public static create(properties?: google.cloud.gaming.v1.DeployedFleetDetails.DeployedFleet.IDeployedFleetStatus): google.cloud.gaming.v1.DeployedFleetDetails.DeployedFleet.DeployedFleetStatus;
+
+                            /**
+                             * Encodes the specified DeployedFleetStatus message. Does not implicitly {@link google.cloud.gaming.v1.DeployedFleetDetails.DeployedFleet.DeployedFleetStatus.verify|verify} messages.
+                             * @param message DeployedFleetStatus message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.gaming.v1.DeployedFleetDetails.DeployedFleet.IDeployedFleetStatus, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified DeployedFleetStatus message, length delimited. Does not implicitly {@link google.cloud.gaming.v1.DeployedFleetDetails.DeployedFleet.DeployedFleetStatus.verify|verify} messages.
+                             * @param message DeployedFleetStatus message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.gaming.v1.DeployedFleetDetails.DeployedFleet.IDeployedFleetStatus, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a DeployedFleetStatus message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns DeployedFleetStatus
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gaming.v1.DeployedFleetDetails.DeployedFleet.DeployedFleetStatus;
+
+                            /**
+                             * Decodes a DeployedFleetStatus message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns DeployedFleetStatus
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gaming.v1.DeployedFleetDetails.DeployedFleet.DeployedFleetStatus;
+
+                            /**
+                             * Verifies a DeployedFleetStatus message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a DeployedFleetStatus message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns DeployedFleetStatus
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.gaming.v1.DeployedFleetDetails.DeployedFleet.DeployedFleetStatus;
+
+                            /**
+                             * Creates a plain object from a DeployedFleetStatus message. Also converts values to other types if specified.
+                             * @param message DeployedFleetStatus
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.gaming.v1.DeployedFleetDetails.DeployedFleet.DeployedFleetStatus, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this DeployedFleetStatus to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+                        }
+                    }
+
+                    /** Properties of a DeployedFleetAutoscaler. */
+                    interface IDeployedFleetAutoscaler {
+
+                        /** DeployedFleetAutoscaler autoscaler */
+                        autoscaler?: (string|null);
+
+                        /** DeployedFleetAutoscaler specSource */
+                        specSource?: (google.cloud.gaming.v1.ISpecSource|null);
+
+                        /** DeployedFleetAutoscaler fleetAutoscalerSpec */
+                        fleetAutoscalerSpec?: (string|null);
+                    }
+
+                    /** Represents a DeployedFleetAutoscaler. */
+                    class DeployedFleetAutoscaler implements IDeployedFleetAutoscaler {
+
+                        /**
+                         * Constructs a new DeployedFleetAutoscaler.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.gaming.v1.DeployedFleetDetails.IDeployedFleetAutoscaler);
+
+                        /** DeployedFleetAutoscaler autoscaler. */
+                        public autoscaler: string;
+
+                        /** DeployedFleetAutoscaler specSource. */
+                        public specSource?: (google.cloud.gaming.v1.ISpecSource|null);
+
+                        /** DeployedFleetAutoscaler fleetAutoscalerSpec. */
+                        public fleetAutoscalerSpec: string;
+
+                        /**
+                         * Creates a new DeployedFleetAutoscaler instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns DeployedFleetAutoscaler instance
+                         */
+                        public static create(properties?: google.cloud.gaming.v1.DeployedFleetDetails.IDeployedFleetAutoscaler): google.cloud.gaming.v1.DeployedFleetDetails.DeployedFleetAutoscaler;
+
+                        /**
+                         * Encodes the specified DeployedFleetAutoscaler message. Does not implicitly {@link google.cloud.gaming.v1.DeployedFleetDetails.DeployedFleetAutoscaler.verify|verify} messages.
+                         * @param message DeployedFleetAutoscaler message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.gaming.v1.DeployedFleetDetails.IDeployedFleetAutoscaler, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified DeployedFleetAutoscaler message, length delimited. Does not implicitly {@link google.cloud.gaming.v1.DeployedFleetDetails.DeployedFleetAutoscaler.verify|verify} messages.
+                         * @param message DeployedFleetAutoscaler message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.gaming.v1.DeployedFleetDetails.IDeployedFleetAutoscaler, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a DeployedFleetAutoscaler message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns DeployedFleetAutoscaler
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gaming.v1.DeployedFleetDetails.DeployedFleetAutoscaler;
+
+                        /**
+                         * Decodes a DeployedFleetAutoscaler message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns DeployedFleetAutoscaler
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gaming.v1.DeployedFleetDetails.DeployedFleetAutoscaler;
+
+                        /**
+                         * Verifies a DeployedFleetAutoscaler message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a DeployedFleetAutoscaler message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns DeployedFleetAutoscaler
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.gaming.v1.DeployedFleetDetails.DeployedFleetAutoscaler;
+
+                        /**
+                         * Creates a plain object from a DeployedFleetAutoscaler message. Also converts values to other types if specified.
+                         * @param message DeployedFleetAutoscaler
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.gaming.v1.DeployedFleetDetails.DeployedFleetAutoscaler, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this DeployedFleetAutoscaler to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+                }
+
+                /** Properties of a ListGameServerClustersRequest. */
+                interface IListGameServerClustersRequest {
+
+                    /** ListGameServerClustersRequest parent */
+                    parent?: (string|null);
+
+                    /** ListGameServerClustersRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListGameServerClustersRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListGameServerClustersRequest filter */
+                    filter?: (string|null);
+
+                    /** ListGameServerClustersRequest orderBy */
+                    orderBy?: (string|null);
+                }
+
+                /** Represents a ListGameServerClustersRequest. */
+                class ListGameServerClustersRequest implements IListGameServerClustersRequest {
+
+                    /**
+                     * Constructs a new ListGameServerClustersRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.gaming.v1.IListGameServerClustersRequest);
+
+                    /** ListGameServerClustersRequest parent. */
+                    public parent: string;
+
+                    /** ListGameServerClustersRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListGameServerClustersRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListGameServerClustersRequest filter. */
+                    public filter: string;
+
+                    /** ListGameServerClustersRequest orderBy. */
+                    public orderBy: string;
+
+                    /**
+                     * Creates a new ListGameServerClustersRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListGameServerClustersRequest instance
+                     */
+                    public static create(properties?: google.cloud.gaming.v1.IListGameServerClustersRequest): google.cloud.gaming.v1.ListGameServerClustersRequest;
+
+                    /**
+                     * Encodes the specified ListGameServerClustersRequest message. Does not implicitly {@link google.cloud.gaming.v1.ListGameServerClustersRequest.verify|verify} messages.
+                     * @param message ListGameServerClustersRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.gaming.v1.IListGameServerClustersRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListGameServerClustersRequest message, length delimited. Does not implicitly {@link google.cloud.gaming.v1.ListGameServerClustersRequest.verify|verify} messages.
+                     * @param message ListGameServerClustersRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.gaming.v1.IListGameServerClustersRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListGameServerClustersRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListGameServerClustersRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gaming.v1.ListGameServerClustersRequest;
+
+                    /**
+                     * Decodes a ListGameServerClustersRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListGameServerClustersRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gaming.v1.ListGameServerClustersRequest;
+
+                    /**
+                     * Verifies a ListGameServerClustersRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListGameServerClustersRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListGameServerClustersRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.gaming.v1.ListGameServerClustersRequest;
+
+                    /**
+                     * Creates a plain object from a ListGameServerClustersRequest message. Also converts values to other types if specified.
+                     * @param message ListGameServerClustersRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.gaming.v1.ListGameServerClustersRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListGameServerClustersRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a ListGameServerClustersResponse. */
+                interface IListGameServerClustersResponse {
+
+                    /** ListGameServerClustersResponse gameServerClusters */
+                    gameServerClusters?: (google.cloud.gaming.v1.IGameServerCluster[]|null);
+
+                    /** ListGameServerClustersResponse nextPageToken */
+                    nextPageToken?: (string|null);
+
+                    /** ListGameServerClustersResponse unreachable */
+                    unreachable?: (string[]|null);
+                }
+
+                /** Represents a ListGameServerClustersResponse. */
+                class ListGameServerClustersResponse implements IListGameServerClustersResponse {
+
+                    /**
+                     * Constructs a new ListGameServerClustersResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.gaming.v1.IListGameServerClustersResponse);
+
+                    /** ListGameServerClustersResponse gameServerClusters. */
+                    public gameServerClusters: google.cloud.gaming.v1.IGameServerCluster[];
+
+                    /** ListGameServerClustersResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /** ListGameServerClustersResponse unreachable. */
+                    public unreachable: string[];
+
+                    /**
+                     * Creates a new ListGameServerClustersResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListGameServerClustersResponse instance
+                     */
+                    public static create(properties?: google.cloud.gaming.v1.IListGameServerClustersResponse): google.cloud.gaming.v1.ListGameServerClustersResponse;
+
+                    /**
+                     * Encodes the specified ListGameServerClustersResponse message. Does not implicitly {@link google.cloud.gaming.v1.ListGameServerClustersResponse.verify|verify} messages.
+                     * @param message ListGameServerClustersResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.gaming.v1.IListGameServerClustersResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListGameServerClustersResponse message, length delimited. Does not implicitly {@link google.cloud.gaming.v1.ListGameServerClustersResponse.verify|verify} messages.
+                     * @param message ListGameServerClustersResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.gaming.v1.IListGameServerClustersResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListGameServerClustersResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListGameServerClustersResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gaming.v1.ListGameServerClustersResponse;
+
+                    /**
+                     * Decodes a ListGameServerClustersResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListGameServerClustersResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gaming.v1.ListGameServerClustersResponse;
+
+                    /**
+                     * Verifies a ListGameServerClustersResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListGameServerClustersResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListGameServerClustersResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.gaming.v1.ListGameServerClustersResponse;
+
+                    /**
+                     * Creates a plain object from a ListGameServerClustersResponse message. Also converts values to other types if specified.
+                     * @param message ListGameServerClustersResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.gaming.v1.ListGameServerClustersResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListGameServerClustersResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a GetGameServerClusterRequest. */
+                interface IGetGameServerClusterRequest {
+
+                    /** GetGameServerClusterRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetGameServerClusterRequest. */
+                class GetGameServerClusterRequest implements IGetGameServerClusterRequest {
+
+                    /**
+                     * Constructs a new GetGameServerClusterRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.gaming.v1.IGetGameServerClusterRequest);
+
+                    /** GetGameServerClusterRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetGameServerClusterRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetGameServerClusterRequest instance
+                     */
+                    public static create(properties?: google.cloud.gaming.v1.IGetGameServerClusterRequest): google.cloud.gaming.v1.GetGameServerClusterRequest;
+
+                    /**
+                     * Encodes the specified GetGameServerClusterRequest message. Does not implicitly {@link google.cloud.gaming.v1.GetGameServerClusterRequest.verify|verify} messages.
+                     * @param message GetGameServerClusterRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.gaming.v1.IGetGameServerClusterRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetGameServerClusterRequest message, length delimited. Does not implicitly {@link google.cloud.gaming.v1.GetGameServerClusterRequest.verify|verify} messages.
+                     * @param message GetGameServerClusterRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.gaming.v1.IGetGameServerClusterRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetGameServerClusterRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetGameServerClusterRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gaming.v1.GetGameServerClusterRequest;
+
+                    /**
+                     * Decodes a GetGameServerClusterRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetGameServerClusterRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gaming.v1.GetGameServerClusterRequest;
+
+                    /**
+                     * Verifies a GetGameServerClusterRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetGameServerClusterRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetGameServerClusterRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.gaming.v1.GetGameServerClusterRequest;
+
+                    /**
+                     * Creates a plain object from a GetGameServerClusterRequest message. Also converts values to other types if specified.
+                     * @param message GetGameServerClusterRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.gaming.v1.GetGameServerClusterRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetGameServerClusterRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a CreateGameServerClusterRequest. */
+                interface ICreateGameServerClusterRequest {
+
+                    /** CreateGameServerClusterRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateGameServerClusterRequest gameServerClusterId */
+                    gameServerClusterId?: (string|null);
+
+                    /** CreateGameServerClusterRequest gameServerCluster */
+                    gameServerCluster?: (google.cloud.gaming.v1.IGameServerCluster|null);
+                }
+
+                /** Represents a CreateGameServerClusterRequest. */
+                class CreateGameServerClusterRequest implements ICreateGameServerClusterRequest {
+
+                    /**
+                     * Constructs a new CreateGameServerClusterRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.gaming.v1.ICreateGameServerClusterRequest);
+
+                    /** CreateGameServerClusterRequest parent. */
+                    public parent: string;
+
+                    /** CreateGameServerClusterRequest gameServerClusterId. */
+                    public gameServerClusterId: string;
+
+                    /** CreateGameServerClusterRequest gameServerCluster. */
+                    public gameServerCluster?: (google.cloud.gaming.v1.IGameServerCluster|null);
+
+                    /**
+                     * Creates a new CreateGameServerClusterRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateGameServerClusterRequest instance
+                     */
+                    public static create(properties?: google.cloud.gaming.v1.ICreateGameServerClusterRequest): google.cloud.gaming.v1.CreateGameServerClusterRequest;
+
+                    /**
+                     * Encodes the specified CreateGameServerClusterRequest message. Does not implicitly {@link google.cloud.gaming.v1.CreateGameServerClusterRequest.verify|verify} messages.
+                     * @param message CreateGameServerClusterRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.gaming.v1.ICreateGameServerClusterRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateGameServerClusterRequest message, length delimited. Does not implicitly {@link google.cloud.gaming.v1.CreateGameServerClusterRequest.verify|verify} messages.
+                     * @param message CreateGameServerClusterRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.gaming.v1.ICreateGameServerClusterRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateGameServerClusterRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateGameServerClusterRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gaming.v1.CreateGameServerClusterRequest;
+
+                    /**
+                     * Decodes a CreateGameServerClusterRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateGameServerClusterRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gaming.v1.CreateGameServerClusterRequest;
+
+                    /**
+                     * Verifies a CreateGameServerClusterRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateGameServerClusterRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateGameServerClusterRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.gaming.v1.CreateGameServerClusterRequest;
+
+                    /**
+                     * Creates a plain object from a CreateGameServerClusterRequest message. Also converts values to other types if specified.
+                     * @param message CreateGameServerClusterRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.gaming.v1.CreateGameServerClusterRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateGameServerClusterRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a PreviewCreateGameServerClusterRequest. */
+                interface IPreviewCreateGameServerClusterRequest {
+
+                    /** PreviewCreateGameServerClusterRequest parent */
+                    parent?: (string|null);
+
+                    /** PreviewCreateGameServerClusterRequest gameServerClusterId */
+                    gameServerClusterId?: (string|null);
+
+                    /** PreviewCreateGameServerClusterRequest gameServerCluster */
+                    gameServerCluster?: (google.cloud.gaming.v1.IGameServerCluster|null);
+
+                    /** PreviewCreateGameServerClusterRequest previewTime */
+                    previewTime?: (google.protobuf.ITimestamp|null);
+                }
+
+                /** Represents a PreviewCreateGameServerClusterRequest. */
+                class PreviewCreateGameServerClusterRequest implements IPreviewCreateGameServerClusterRequest {
+
+                    /**
+                     * Constructs a new PreviewCreateGameServerClusterRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.gaming.v1.IPreviewCreateGameServerClusterRequest);
+
+                    /** PreviewCreateGameServerClusterRequest parent. */
+                    public parent: string;
+
+                    /** PreviewCreateGameServerClusterRequest gameServerClusterId. */
+                    public gameServerClusterId: string;
+
+                    /** PreviewCreateGameServerClusterRequest gameServerCluster. */
+                    public gameServerCluster?: (google.cloud.gaming.v1.IGameServerCluster|null);
+
+                    /** PreviewCreateGameServerClusterRequest previewTime. */
+                    public previewTime?: (google.protobuf.ITimestamp|null);
+
+                    /**
+                     * Creates a new PreviewCreateGameServerClusterRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns PreviewCreateGameServerClusterRequest instance
+                     */
+                    public static create(properties?: google.cloud.gaming.v1.IPreviewCreateGameServerClusterRequest): google.cloud.gaming.v1.PreviewCreateGameServerClusterRequest;
+
+                    /**
+                     * Encodes the specified PreviewCreateGameServerClusterRequest message. Does not implicitly {@link google.cloud.gaming.v1.PreviewCreateGameServerClusterRequest.verify|verify} messages.
+                     * @param message PreviewCreateGameServerClusterRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.gaming.v1.IPreviewCreateGameServerClusterRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified PreviewCreateGameServerClusterRequest message, length delimited. Does not implicitly {@link google.cloud.gaming.v1.PreviewCreateGameServerClusterRequest.verify|verify} messages.
+                     * @param message PreviewCreateGameServerClusterRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.gaming.v1.IPreviewCreateGameServerClusterRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a PreviewCreateGameServerClusterRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns PreviewCreateGameServerClusterRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gaming.v1.PreviewCreateGameServerClusterRequest;
+
+                    /**
+                     * Decodes a PreviewCreateGameServerClusterRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns PreviewCreateGameServerClusterRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gaming.v1.PreviewCreateGameServerClusterRequest;
+
+                    /**
+                     * Verifies a PreviewCreateGameServerClusterRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a PreviewCreateGameServerClusterRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns PreviewCreateGameServerClusterRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.gaming.v1.PreviewCreateGameServerClusterRequest;
+
+                    /**
+                     * Creates a plain object from a PreviewCreateGameServerClusterRequest message. Also converts values to other types if specified.
+                     * @param message PreviewCreateGameServerClusterRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.gaming.v1.PreviewCreateGameServerClusterRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this PreviewCreateGameServerClusterRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a PreviewCreateGameServerClusterResponse. */
+                interface IPreviewCreateGameServerClusterResponse {
+
+                    /** PreviewCreateGameServerClusterResponse etag */
+                    etag?: (string|null);
+
+                    /** PreviewCreateGameServerClusterResponse targetState */
+                    targetState?: (google.cloud.gaming.v1.ITargetState|null);
+                }
+
+                /** Represents a PreviewCreateGameServerClusterResponse. */
+                class PreviewCreateGameServerClusterResponse implements IPreviewCreateGameServerClusterResponse {
+
+                    /**
+                     * Constructs a new PreviewCreateGameServerClusterResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.gaming.v1.IPreviewCreateGameServerClusterResponse);
+
+                    /** PreviewCreateGameServerClusterResponse etag. */
+                    public etag: string;
+
+                    /** PreviewCreateGameServerClusterResponse targetState. */
+                    public targetState?: (google.cloud.gaming.v1.ITargetState|null);
+
+                    /**
+                     * Creates a new PreviewCreateGameServerClusterResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns PreviewCreateGameServerClusterResponse instance
+                     */
+                    public static create(properties?: google.cloud.gaming.v1.IPreviewCreateGameServerClusterResponse): google.cloud.gaming.v1.PreviewCreateGameServerClusterResponse;
+
+                    /**
+                     * Encodes the specified PreviewCreateGameServerClusterResponse message. Does not implicitly {@link google.cloud.gaming.v1.PreviewCreateGameServerClusterResponse.verify|verify} messages.
+                     * @param message PreviewCreateGameServerClusterResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.gaming.v1.IPreviewCreateGameServerClusterResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified PreviewCreateGameServerClusterResponse message, length delimited. Does not implicitly {@link google.cloud.gaming.v1.PreviewCreateGameServerClusterResponse.verify|verify} messages.
+                     * @param message PreviewCreateGameServerClusterResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.gaming.v1.IPreviewCreateGameServerClusterResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a PreviewCreateGameServerClusterResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns PreviewCreateGameServerClusterResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gaming.v1.PreviewCreateGameServerClusterResponse;
+
+                    /**
+                     * Decodes a PreviewCreateGameServerClusterResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns PreviewCreateGameServerClusterResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gaming.v1.PreviewCreateGameServerClusterResponse;
+
+                    /**
+                     * Verifies a PreviewCreateGameServerClusterResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a PreviewCreateGameServerClusterResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns PreviewCreateGameServerClusterResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.gaming.v1.PreviewCreateGameServerClusterResponse;
+
+                    /**
+                     * Creates a plain object from a PreviewCreateGameServerClusterResponse message. Also converts values to other types if specified.
+                     * @param message PreviewCreateGameServerClusterResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.gaming.v1.PreviewCreateGameServerClusterResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this PreviewCreateGameServerClusterResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a DeleteGameServerClusterRequest. */
+                interface IDeleteGameServerClusterRequest {
+
+                    /** DeleteGameServerClusterRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a DeleteGameServerClusterRequest. */
+                class DeleteGameServerClusterRequest implements IDeleteGameServerClusterRequest {
+
+                    /**
+                     * Constructs a new DeleteGameServerClusterRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.gaming.v1.IDeleteGameServerClusterRequest);
+
+                    /** DeleteGameServerClusterRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new DeleteGameServerClusterRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteGameServerClusterRequest instance
+                     */
+                    public static create(properties?: google.cloud.gaming.v1.IDeleteGameServerClusterRequest): google.cloud.gaming.v1.DeleteGameServerClusterRequest;
+
+                    /**
+                     * Encodes the specified DeleteGameServerClusterRequest message. Does not implicitly {@link google.cloud.gaming.v1.DeleteGameServerClusterRequest.verify|verify} messages.
+                     * @param message DeleteGameServerClusterRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.gaming.v1.IDeleteGameServerClusterRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteGameServerClusterRequest message, length delimited. Does not implicitly {@link google.cloud.gaming.v1.DeleteGameServerClusterRequest.verify|verify} messages.
+                     * @param message DeleteGameServerClusterRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.gaming.v1.IDeleteGameServerClusterRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteGameServerClusterRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteGameServerClusterRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gaming.v1.DeleteGameServerClusterRequest;
+
+                    /**
+                     * Decodes a DeleteGameServerClusterRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteGameServerClusterRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gaming.v1.DeleteGameServerClusterRequest;
+
+                    /**
+                     * Verifies a DeleteGameServerClusterRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteGameServerClusterRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteGameServerClusterRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.gaming.v1.DeleteGameServerClusterRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteGameServerClusterRequest message. Also converts values to other types if specified.
+                     * @param message DeleteGameServerClusterRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.gaming.v1.DeleteGameServerClusterRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteGameServerClusterRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a PreviewDeleteGameServerClusterRequest. */
+                interface IPreviewDeleteGameServerClusterRequest {
+
+                    /** PreviewDeleteGameServerClusterRequest name */
+                    name?: (string|null);
+
+                    /** PreviewDeleteGameServerClusterRequest previewTime */
+                    previewTime?: (google.protobuf.ITimestamp|null);
+                }
+
+                /** Represents a PreviewDeleteGameServerClusterRequest. */
+                class PreviewDeleteGameServerClusterRequest implements IPreviewDeleteGameServerClusterRequest {
+
+                    /**
+                     * Constructs a new PreviewDeleteGameServerClusterRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.gaming.v1.IPreviewDeleteGameServerClusterRequest);
+
+                    /** PreviewDeleteGameServerClusterRequest name. */
+                    public name: string;
+
+                    /** PreviewDeleteGameServerClusterRequest previewTime. */
+                    public previewTime?: (google.protobuf.ITimestamp|null);
+
+                    /**
+                     * Creates a new PreviewDeleteGameServerClusterRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns PreviewDeleteGameServerClusterRequest instance
+                     */
+                    public static create(properties?: google.cloud.gaming.v1.IPreviewDeleteGameServerClusterRequest): google.cloud.gaming.v1.PreviewDeleteGameServerClusterRequest;
+
+                    /**
+                     * Encodes the specified PreviewDeleteGameServerClusterRequest message. Does not implicitly {@link google.cloud.gaming.v1.PreviewDeleteGameServerClusterRequest.verify|verify} messages.
+                     * @param message PreviewDeleteGameServerClusterRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.gaming.v1.IPreviewDeleteGameServerClusterRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified PreviewDeleteGameServerClusterRequest message, length delimited. Does not implicitly {@link google.cloud.gaming.v1.PreviewDeleteGameServerClusterRequest.verify|verify} messages.
+                     * @param message PreviewDeleteGameServerClusterRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.gaming.v1.IPreviewDeleteGameServerClusterRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a PreviewDeleteGameServerClusterRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns PreviewDeleteGameServerClusterRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gaming.v1.PreviewDeleteGameServerClusterRequest;
+
+                    /**
+                     * Decodes a PreviewDeleteGameServerClusterRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns PreviewDeleteGameServerClusterRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gaming.v1.PreviewDeleteGameServerClusterRequest;
+
+                    /**
+                     * Verifies a PreviewDeleteGameServerClusterRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a PreviewDeleteGameServerClusterRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns PreviewDeleteGameServerClusterRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.gaming.v1.PreviewDeleteGameServerClusterRequest;
+
+                    /**
+                     * Creates a plain object from a PreviewDeleteGameServerClusterRequest message. Also converts values to other types if specified.
+                     * @param message PreviewDeleteGameServerClusterRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.gaming.v1.PreviewDeleteGameServerClusterRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this PreviewDeleteGameServerClusterRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a PreviewDeleteGameServerClusterResponse. */
+                interface IPreviewDeleteGameServerClusterResponse {
+
+                    /** PreviewDeleteGameServerClusterResponse etag */
+                    etag?: (string|null);
+
+                    /** PreviewDeleteGameServerClusterResponse targetState */
+                    targetState?: (google.cloud.gaming.v1.ITargetState|null);
+                }
+
+                /** Represents a PreviewDeleteGameServerClusterResponse. */
+                class PreviewDeleteGameServerClusterResponse implements IPreviewDeleteGameServerClusterResponse {
+
+                    /**
+                     * Constructs a new PreviewDeleteGameServerClusterResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.gaming.v1.IPreviewDeleteGameServerClusterResponse);
+
+                    /** PreviewDeleteGameServerClusterResponse etag. */
+                    public etag: string;
+
+                    /** PreviewDeleteGameServerClusterResponse targetState. */
+                    public targetState?: (google.cloud.gaming.v1.ITargetState|null);
+
+                    /**
+                     * Creates a new PreviewDeleteGameServerClusterResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns PreviewDeleteGameServerClusterResponse instance
+                     */
+                    public static create(properties?: google.cloud.gaming.v1.IPreviewDeleteGameServerClusterResponse): google.cloud.gaming.v1.PreviewDeleteGameServerClusterResponse;
+
+                    /**
+                     * Encodes the specified PreviewDeleteGameServerClusterResponse message. Does not implicitly {@link google.cloud.gaming.v1.PreviewDeleteGameServerClusterResponse.verify|verify} messages.
+                     * @param message PreviewDeleteGameServerClusterResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.gaming.v1.IPreviewDeleteGameServerClusterResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified PreviewDeleteGameServerClusterResponse message, length delimited. Does not implicitly {@link google.cloud.gaming.v1.PreviewDeleteGameServerClusterResponse.verify|verify} messages.
+                     * @param message PreviewDeleteGameServerClusterResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.gaming.v1.IPreviewDeleteGameServerClusterResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a PreviewDeleteGameServerClusterResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns PreviewDeleteGameServerClusterResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gaming.v1.PreviewDeleteGameServerClusterResponse;
+
+                    /**
+                     * Decodes a PreviewDeleteGameServerClusterResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns PreviewDeleteGameServerClusterResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gaming.v1.PreviewDeleteGameServerClusterResponse;
+
+                    /**
+                     * Verifies a PreviewDeleteGameServerClusterResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a PreviewDeleteGameServerClusterResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns PreviewDeleteGameServerClusterResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.gaming.v1.PreviewDeleteGameServerClusterResponse;
+
+                    /**
+                     * Creates a plain object from a PreviewDeleteGameServerClusterResponse message. Also converts values to other types if specified.
+                     * @param message PreviewDeleteGameServerClusterResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.gaming.v1.PreviewDeleteGameServerClusterResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this PreviewDeleteGameServerClusterResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of an UpdateGameServerClusterRequest. */
+                interface IUpdateGameServerClusterRequest {
+
+                    /** UpdateGameServerClusterRequest gameServerCluster */
+                    gameServerCluster?: (google.cloud.gaming.v1.IGameServerCluster|null);
+
+                    /** UpdateGameServerClusterRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+                }
+
+                /** Represents an UpdateGameServerClusterRequest. */
+                class UpdateGameServerClusterRequest implements IUpdateGameServerClusterRequest {
+
+                    /**
+                     * Constructs a new UpdateGameServerClusterRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.gaming.v1.IUpdateGameServerClusterRequest);
+
+                    /** UpdateGameServerClusterRequest gameServerCluster. */
+                    public gameServerCluster?: (google.cloud.gaming.v1.IGameServerCluster|null);
+
+                    /** UpdateGameServerClusterRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /**
+                     * Creates a new UpdateGameServerClusterRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateGameServerClusterRequest instance
+                     */
+                    public static create(properties?: google.cloud.gaming.v1.IUpdateGameServerClusterRequest): google.cloud.gaming.v1.UpdateGameServerClusterRequest;
+
+                    /**
+                     * Encodes the specified UpdateGameServerClusterRequest message. Does not implicitly {@link google.cloud.gaming.v1.UpdateGameServerClusterRequest.verify|verify} messages.
+                     * @param message UpdateGameServerClusterRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.gaming.v1.IUpdateGameServerClusterRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateGameServerClusterRequest message, length delimited. Does not implicitly {@link google.cloud.gaming.v1.UpdateGameServerClusterRequest.verify|verify} messages.
+                     * @param message UpdateGameServerClusterRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.gaming.v1.IUpdateGameServerClusterRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateGameServerClusterRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateGameServerClusterRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gaming.v1.UpdateGameServerClusterRequest;
+
+                    /**
+                     * Decodes an UpdateGameServerClusterRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateGameServerClusterRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gaming.v1.UpdateGameServerClusterRequest;
+
+                    /**
+                     * Verifies an UpdateGameServerClusterRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateGameServerClusterRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateGameServerClusterRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.gaming.v1.UpdateGameServerClusterRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateGameServerClusterRequest message. Also converts values to other types if specified.
+                     * @param message UpdateGameServerClusterRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.gaming.v1.UpdateGameServerClusterRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateGameServerClusterRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a PreviewUpdateGameServerClusterRequest. */
+                interface IPreviewUpdateGameServerClusterRequest {
+
+                    /** PreviewUpdateGameServerClusterRequest gameServerCluster */
+                    gameServerCluster?: (google.cloud.gaming.v1.IGameServerCluster|null);
+
+                    /** PreviewUpdateGameServerClusterRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** PreviewUpdateGameServerClusterRequest previewTime */
+                    previewTime?: (google.protobuf.ITimestamp|null);
+                }
+
+                /** Represents a PreviewUpdateGameServerClusterRequest. */
+                class PreviewUpdateGameServerClusterRequest implements IPreviewUpdateGameServerClusterRequest {
+
+                    /**
+                     * Constructs a new PreviewUpdateGameServerClusterRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.gaming.v1.IPreviewUpdateGameServerClusterRequest);
+
+                    /** PreviewUpdateGameServerClusterRequest gameServerCluster. */
+                    public gameServerCluster?: (google.cloud.gaming.v1.IGameServerCluster|null);
+
+                    /** PreviewUpdateGameServerClusterRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** PreviewUpdateGameServerClusterRequest previewTime. */
+                    public previewTime?: (google.protobuf.ITimestamp|null);
+
+                    /**
+                     * Creates a new PreviewUpdateGameServerClusterRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns PreviewUpdateGameServerClusterRequest instance
+                     */
+                    public static create(properties?: google.cloud.gaming.v1.IPreviewUpdateGameServerClusterRequest): google.cloud.gaming.v1.PreviewUpdateGameServerClusterRequest;
+
+                    /**
+                     * Encodes the specified PreviewUpdateGameServerClusterRequest message. Does not implicitly {@link google.cloud.gaming.v1.PreviewUpdateGameServerClusterRequest.verify|verify} messages.
+                     * @param message PreviewUpdateGameServerClusterRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.gaming.v1.IPreviewUpdateGameServerClusterRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified PreviewUpdateGameServerClusterRequest message, length delimited. Does not implicitly {@link google.cloud.gaming.v1.PreviewUpdateGameServerClusterRequest.verify|verify} messages.
+                     * @param message PreviewUpdateGameServerClusterRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.gaming.v1.IPreviewUpdateGameServerClusterRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a PreviewUpdateGameServerClusterRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns PreviewUpdateGameServerClusterRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gaming.v1.PreviewUpdateGameServerClusterRequest;
+
+                    /**
+                     * Decodes a PreviewUpdateGameServerClusterRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns PreviewUpdateGameServerClusterRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gaming.v1.PreviewUpdateGameServerClusterRequest;
+
+                    /**
+                     * Verifies a PreviewUpdateGameServerClusterRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a PreviewUpdateGameServerClusterRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns PreviewUpdateGameServerClusterRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.gaming.v1.PreviewUpdateGameServerClusterRequest;
+
+                    /**
+                     * Creates a plain object from a PreviewUpdateGameServerClusterRequest message. Also converts values to other types if specified.
+                     * @param message PreviewUpdateGameServerClusterRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.gaming.v1.PreviewUpdateGameServerClusterRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this PreviewUpdateGameServerClusterRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a PreviewUpdateGameServerClusterResponse. */
+                interface IPreviewUpdateGameServerClusterResponse {
+
+                    /** PreviewUpdateGameServerClusterResponse etag */
+                    etag?: (string|null);
+
+                    /** PreviewUpdateGameServerClusterResponse targetState */
+                    targetState?: (google.cloud.gaming.v1.ITargetState|null);
+                }
+
+                /** Represents a PreviewUpdateGameServerClusterResponse. */
+                class PreviewUpdateGameServerClusterResponse implements IPreviewUpdateGameServerClusterResponse {
+
+                    /**
+                     * Constructs a new PreviewUpdateGameServerClusterResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.gaming.v1.IPreviewUpdateGameServerClusterResponse);
+
+                    /** PreviewUpdateGameServerClusterResponse etag. */
+                    public etag: string;
+
+                    /** PreviewUpdateGameServerClusterResponse targetState. */
+                    public targetState?: (google.cloud.gaming.v1.ITargetState|null);
+
+                    /**
+                     * Creates a new PreviewUpdateGameServerClusterResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns PreviewUpdateGameServerClusterResponse instance
+                     */
+                    public static create(properties?: google.cloud.gaming.v1.IPreviewUpdateGameServerClusterResponse): google.cloud.gaming.v1.PreviewUpdateGameServerClusterResponse;
+
+                    /**
+                     * Encodes the specified PreviewUpdateGameServerClusterResponse message. Does not implicitly {@link google.cloud.gaming.v1.PreviewUpdateGameServerClusterResponse.verify|verify} messages.
+                     * @param message PreviewUpdateGameServerClusterResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.gaming.v1.IPreviewUpdateGameServerClusterResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified PreviewUpdateGameServerClusterResponse message, length delimited. Does not implicitly {@link google.cloud.gaming.v1.PreviewUpdateGameServerClusterResponse.verify|verify} messages.
+                     * @param message PreviewUpdateGameServerClusterResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.gaming.v1.IPreviewUpdateGameServerClusterResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a PreviewUpdateGameServerClusterResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns PreviewUpdateGameServerClusterResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gaming.v1.PreviewUpdateGameServerClusterResponse;
+
+                    /**
+                     * Decodes a PreviewUpdateGameServerClusterResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns PreviewUpdateGameServerClusterResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gaming.v1.PreviewUpdateGameServerClusterResponse;
+
+                    /**
+                     * Verifies a PreviewUpdateGameServerClusterResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a PreviewUpdateGameServerClusterResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns PreviewUpdateGameServerClusterResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.gaming.v1.PreviewUpdateGameServerClusterResponse;
+
+                    /**
+                     * Creates a plain object from a PreviewUpdateGameServerClusterResponse message. Also converts values to other types if specified.
+                     * @param message PreviewUpdateGameServerClusterResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.gaming.v1.PreviewUpdateGameServerClusterResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this PreviewUpdateGameServerClusterResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a GameServerClusterConnectionInfo. */
+                interface IGameServerClusterConnectionInfo {
+
+                    /** GameServerClusterConnectionInfo gkeClusterReference */
+                    gkeClusterReference?: (google.cloud.gaming.v1.IGkeClusterReference|null);
+
+                    /** GameServerClusterConnectionInfo namespace */
+                    namespace?: (string|null);
+                }
+
+                /** Represents a GameServerClusterConnectionInfo. */
+                class GameServerClusterConnectionInfo implements IGameServerClusterConnectionInfo {
+
+                    /**
+                     * Constructs a new GameServerClusterConnectionInfo.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.gaming.v1.IGameServerClusterConnectionInfo);
+
+                    /** GameServerClusterConnectionInfo gkeClusterReference. */
+                    public gkeClusterReference?: (google.cloud.gaming.v1.IGkeClusterReference|null);
+
+                    /** GameServerClusterConnectionInfo namespace. */
+                    public namespace: string;
+
+                    /** GameServerClusterConnectionInfo clusterReference. */
+                    public clusterReference?: "gkeClusterReference";
+
+                    /**
+                     * Creates a new GameServerClusterConnectionInfo instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GameServerClusterConnectionInfo instance
+                     */
+                    public static create(properties?: google.cloud.gaming.v1.IGameServerClusterConnectionInfo): google.cloud.gaming.v1.GameServerClusterConnectionInfo;
+
+                    /**
+                     * Encodes the specified GameServerClusterConnectionInfo message. Does not implicitly {@link google.cloud.gaming.v1.GameServerClusterConnectionInfo.verify|verify} messages.
+                     * @param message GameServerClusterConnectionInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.gaming.v1.IGameServerClusterConnectionInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GameServerClusterConnectionInfo message, length delimited. Does not implicitly {@link google.cloud.gaming.v1.GameServerClusterConnectionInfo.verify|verify} messages.
+                     * @param message GameServerClusterConnectionInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.gaming.v1.IGameServerClusterConnectionInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GameServerClusterConnectionInfo message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GameServerClusterConnectionInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gaming.v1.GameServerClusterConnectionInfo;
+
+                    /**
+                     * Decodes a GameServerClusterConnectionInfo message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GameServerClusterConnectionInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gaming.v1.GameServerClusterConnectionInfo;
+
+                    /**
+                     * Verifies a GameServerClusterConnectionInfo message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GameServerClusterConnectionInfo message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GameServerClusterConnectionInfo
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.gaming.v1.GameServerClusterConnectionInfo;
+
+                    /**
+                     * Creates a plain object from a GameServerClusterConnectionInfo message. Also converts values to other types if specified.
+                     * @param message GameServerClusterConnectionInfo
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.gaming.v1.GameServerClusterConnectionInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GameServerClusterConnectionInfo to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a GkeClusterReference. */
+                interface IGkeClusterReference {
+
+                    /** GkeClusterReference cluster */
+                    cluster?: (string|null);
+                }
+
+                /** Represents a GkeClusterReference. */
+                class GkeClusterReference implements IGkeClusterReference {
+
+                    /**
+                     * Constructs a new GkeClusterReference.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.gaming.v1.IGkeClusterReference);
+
+                    /** GkeClusterReference cluster. */
+                    public cluster: string;
+
+                    /**
+                     * Creates a new GkeClusterReference instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GkeClusterReference instance
+                     */
+                    public static create(properties?: google.cloud.gaming.v1.IGkeClusterReference): google.cloud.gaming.v1.GkeClusterReference;
+
+                    /**
+                     * Encodes the specified GkeClusterReference message. Does not implicitly {@link google.cloud.gaming.v1.GkeClusterReference.verify|verify} messages.
+                     * @param message GkeClusterReference message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.gaming.v1.IGkeClusterReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GkeClusterReference message, length delimited. Does not implicitly {@link google.cloud.gaming.v1.GkeClusterReference.verify|verify} messages.
+                     * @param message GkeClusterReference message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.gaming.v1.IGkeClusterReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GkeClusterReference message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GkeClusterReference
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gaming.v1.GkeClusterReference;
+
+                    /**
+                     * Decodes a GkeClusterReference message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GkeClusterReference
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gaming.v1.GkeClusterReference;
+
+                    /**
+                     * Verifies a GkeClusterReference message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GkeClusterReference message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GkeClusterReference
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.gaming.v1.GkeClusterReference;
+
+                    /**
+                     * Creates a plain object from a GkeClusterReference message. Also converts values to other types if specified.
+                     * @param message GkeClusterReference
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.gaming.v1.GkeClusterReference, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GkeClusterReference to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a GameServerCluster. */
+                interface IGameServerCluster {
+
+                    /** GameServerCluster name */
+                    name?: (string|null);
+
+                    /** GameServerCluster createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** GameServerCluster updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** GameServerCluster labels */
+                    labels?: ({ [k: string]: string }|null);
+
+                    /** GameServerCluster connectionInfo */
+                    connectionInfo?: (google.cloud.gaming.v1.IGameServerClusterConnectionInfo|null);
+
+                    /** GameServerCluster etag */
+                    etag?: (string|null);
+
+                    /** GameServerCluster description */
+                    description?: (string|null);
+                }
+
+                /** Represents a GameServerCluster. */
+                class GameServerCluster implements IGameServerCluster {
+
+                    /**
+                     * Constructs a new GameServerCluster.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.gaming.v1.IGameServerCluster);
+
+                    /** GameServerCluster name. */
+                    public name: string;
+
+                    /** GameServerCluster createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** GameServerCluster updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** GameServerCluster labels. */
+                    public labels: { [k: string]: string };
+
+                    /** GameServerCluster connectionInfo. */
+                    public connectionInfo?: (google.cloud.gaming.v1.IGameServerClusterConnectionInfo|null);
+
+                    /** GameServerCluster etag. */
+                    public etag: string;
+
+                    /** GameServerCluster description. */
+                    public description: string;
+
+                    /**
+                     * Creates a new GameServerCluster instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GameServerCluster instance
+                     */
+                    public static create(properties?: google.cloud.gaming.v1.IGameServerCluster): google.cloud.gaming.v1.GameServerCluster;
+
+                    /**
+                     * Encodes the specified GameServerCluster message. Does not implicitly {@link google.cloud.gaming.v1.GameServerCluster.verify|verify} messages.
+                     * @param message GameServerCluster message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.gaming.v1.IGameServerCluster, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GameServerCluster message, length delimited. Does not implicitly {@link google.cloud.gaming.v1.GameServerCluster.verify|verify} messages.
+                     * @param message GameServerCluster message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.gaming.v1.IGameServerCluster, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GameServerCluster message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GameServerCluster
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gaming.v1.GameServerCluster;
+
+                    /**
+                     * Decodes a GameServerCluster message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GameServerCluster
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gaming.v1.GameServerCluster;
+
+                    /**
+                     * Verifies a GameServerCluster message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GameServerCluster message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GameServerCluster
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.gaming.v1.GameServerCluster;
+
+                    /**
+                     * Creates a plain object from a GameServerCluster message. Also converts values to other types if specified.
+                     * @param message GameServerCluster
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.gaming.v1.GameServerCluster, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GameServerCluster to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Represents a GameServerClustersService */
+                class GameServerClustersService extends $protobuf.rpc.Service {
+
+                    /**
+                     * Constructs a new GameServerClustersService service.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     */
+                    constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                    /**
+                     * Creates new GameServerClustersService service using the specified rpc implementation.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     * @returns RPC service. Useful where requests and/or responses are streamed.
+                     */
+                    public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): GameServerClustersService;
+
+                    /**
+                     * Calls ListGameServerClusters.
+                     * @param request ListGameServerClustersRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListGameServerClustersResponse
+                     */
+                    public listGameServerClusters(request: google.cloud.gaming.v1.IListGameServerClustersRequest, callback: google.cloud.gaming.v1.GameServerClustersService.ListGameServerClustersCallback): void;
+
+                    /**
+                     * Calls ListGameServerClusters.
+                     * @param request ListGameServerClustersRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listGameServerClusters(request: google.cloud.gaming.v1.IListGameServerClustersRequest): Promise<google.cloud.gaming.v1.ListGameServerClustersResponse>;
+
+                    /**
+                     * Calls GetGameServerCluster.
+                     * @param request GetGameServerClusterRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and GameServerCluster
+                     */
+                    public getGameServerCluster(request: google.cloud.gaming.v1.IGetGameServerClusterRequest, callback: google.cloud.gaming.v1.GameServerClustersService.GetGameServerClusterCallback): void;
+
+                    /**
+                     * Calls GetGameServerCluster.
+                     * @param request GetGameServerClusterRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getGameServerCluster(request: google.cloud.gaming.v1.IGetGameServerClusterRequest): Promise<google.cloud.gaming.v1.GameServerCluster>;
+
+                    /**
+                     * Calls CreateGameServerCluster.
+                     * @param request CreateGameServerClusterRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public createGameServerCluster(request: google.cloud.gaming.v1.ICreateGameServerClusterRequest, callback: google.cloud.gaming.v1.GameServerClustersService.CreateGameServerClusterCallback): void;
+
+                    /**
+                     * Calls CreateGameServerCluster.
+                     * @param request CreateGameServerClusterRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createGameServerCluster(request: google.cloud.gaming.v1.ICreateGameServerClusterRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls PreviewCreateGameServerCluster.
+                     * @param request PreviewCreateGameServerClusterRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and PreviewCreateGameServerClusterResponse
+                     */
+                    public previewCreateGameServerCluster(request: google.cloud.gaming.v1.IPreviewCreateGameServerClusterRequest, callback: google.cloud.gaming.v1.GameServerClustersService.PreviewCreateGameServerClusterCallback): void;
+
+                    /**
+                     * Calls PreviewCreateGameServerCluster.
+                     * @param request PreviewCreateGameServerClusterRequest message or plain object
+                     * @returns Promise
+                     */
+                    public previewCreateGameServerCluster(request: google.cloud.gaming.v1.IPreviewCreateGameServerClusterRequest): Promise<google.cloud.gaming.v1.PreviewCreateGameServerClusterResponse>;
+
+                    /**
+                     * Calls DeleteGameServerCluster.
+                     * @param request DeleteGameServerClusterRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public deleteGameServerCluster(request: google.cloud.gaming.v1.IDeleteGameServerClusterRequest, callback: google.cloud.gaming.v1.GameServerClustersService.DeleteGameServerClusterCallback): void;
+
+                    /**
+                     * Calls DeleteGameServerCluster.
+                     * @param request DeleteGameServerClusterRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteGameServerCluster(request: google.cloud.gaming.v1.IDeleteGameServerClusterRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls PreviewDeleteGameServerCluster.
+                     * @param request PreviewDeleteGameServerClusterRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and PreviewDeleteGameServerClusterResponse
+                     */
+                    public previewDeleteGameServerCluster(request: google.cloud.gaming.v1.IPreviewDeleteGameServerClusterRequest, callback: google.cloud.gaming.v1.GameServerClustersService.PreviewDeleteGameServerClusterCallback): void;
+
+                    /**
+                     * Calls PreviewDeleteGameServerCluster.
+                     * @param request PreviewDeleteGameServerClusterRequest message or plain object
+                     * @returns Promise
+                     */
+                    public previewDeleteGameServerCluster(request: google.cloud.gaming.v1.IPreviewDeleteGameServerClusterRequest): Promise<google.cloud.gaming.v1.PreviewDeleteGameServerClusterResponse>;
+
+                    /**
+                     * Calls UpdateGameServerCluster.
+                     * @param request UpdateGameServerClusterRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public updateGameServerCluster(request: google.cloud.gaming.v1.IUpdateGameServerClusterRequest, callback: google.cloud.gaming.v1.GameServerClustersService.UpdateGameServerClusterCallback): void;
+
+                    /**
+                     * Calls UpdateGameServerCluster.
+                     * @param request UpdateGameServerClusterRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateGameServerCluster(request: google.cloud.gaming.v1.IUpdateGameServerClusterRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls PreviewUpdateGameServerCluster.
+                     * @param request PreviewUpdateGameServerClusterRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and PreviewUpdateGameServerClusterResponse
+                     */
+                    public previewUpdateGameServerCluster(request: google.cloud.gaming.v1.IPreviewUpdateGameServerClusterRequest, callback: google.cloud.gaming.v1.GameServerClustersService.PreviewUpdateGameServerClusterCallback): void;
+
+                    /**
+                     * Calls PreviewUpdateGameServerCluster.
+                     * @param request PreviewUpdateGameServerClusterRequest message or plain object
+                     * @returns Promise
+                     */
+                    public previewUpdateGameServerCluster(request: google.cloud.gaming.v1.IPreviewUpdateGameServerClusterRequest): Promise<google.cloud.gaming.v1.PreviewUpdateGameServerClusterResponse>;
+                }
+
+                namespace GameServerClustersService {
+
+                    /**
+                     * Callback as used by {@link google.cloud.gaming.v1.GameServerClustersService#listGameServerClusters}.
+                     * @param error Error, if any
+                     * @param [response] ListGameServerClustersResponse
+                     */
+                    type ListGameServerClustersCallback = (error: (Error|null), response?: google.cloud.gaming.v1.ListGameServerClustersResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.gaming.v1.GameServerClustersService#getGameServerCluster}.
+                     * @param error Error, if any
+                     * @param [response] GameServerCluster
+                     */
+                    type GetGameServerClusterCallback = (error: (Error|null), response?: google.cloud.gaming.v1.GameServerCluster) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.gaming.v1.GameServerClustersService#createGameServerCluster}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type CreateGameServerClusterCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.gaming.v1.GameServerClustersService#previewCreateGameServerCluster}.
+                     * @param error Error, if any
+                     * @param [response] PreviewCreateGameServerClusterResponse
+                     */
+                    type PreviewCreateGameServerClusterCallback = (error: (Error|null), response?: google.cloud.gaming.v1.PreviewCreateGameServerClusterResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.gaming.v1.GameServerClustersService#deleteGameServerCluster}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type DeleteGameServerClusterCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.gaming.v1.GameServerClustersService#previewDeleteGameServerCluster}.
+                     * @param error Error, if any
+                     * @param [response] PreviewDeleteGameServerClusterResponse
+                     */
+                    type PreviewDeleteGameServerClusterCallback = (error: (Error|null), response?: google.cloud.gaming.v1.PreviewDeleteGameServerClusterResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.gaming.v1.GameServerClustersService#updateGameServerCluster}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type UpdateGameServerClusterCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.gaming.v1.GameServerClustersService#previewUpdateGameServerCluster}.
+                     * @param error Error, if any
+                     * @param [response] PreviewUpdateGameServerClusterResponse
+                     */
+                    type PreviewUpdateGameServerClusterCallback = (error: (Error|null), response?: google.cloud.gaming.v1.PreviewUpdateGameServerClusterResponse) => void;
+                }
+
+                /** Properties of a ListGameServerConfigsRequest. */
+                interface IListGameServerConfigsRequest {
+
+                    /** ListGameServerConfigsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListGameServerConfigsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListGameServerConfigsRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListGameServerConfigsRequest filter */
+                    filter?: (string|null);
+
+                    /** ListGameServerConfigsRequest orderBy */
+                    orderBy?: (string|null);
+                }
+
+                /** Represents a ListGameServerConfigsRequest. */
+                class ListGameServerConfigsRequest implements IListGameServerConfigsRequest {
+
+                    /**
+                     * Constructs a new ListGameServerConfigsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.gaming.v1.IListGameServerConfigsRequest);
+
+                    /** ListGameServerConfigsRequest parent. */
+                    public parent: string;
+
+                    /** ListGameServerConfigsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListGameServerConfigsRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListGameServerConfigsRequest filter. */
+                    public filter: string;
+
+                    /** ListGameServerConfigsRequest orderBy. */
+                    public orderBy: string;
+
+                    /**
+                     * Creates a new ListGameServerConfigsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListGameServerConfigsRequest instance
+                     */
+                    public static create(properties?: google.cloud.gaming.v1.IListGameServerConfigsRequest): google.cloud.gaming.v1.ListGameServerConfigsRequest;
+
+                    /**
+                     * Encodes the specified ListGameServerConfigsRequest message. Does not implicitly {@link google.cloud.gaming.v1.ListGameServerConfigsRequest.verify|verify} messages.
+                     * @param message ListGameServerConfigsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.gaming.v1.IListGameServerConfigsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListGameServerConfigsRequest message, length delimited. Does not implicitly {@link google.cloud.gaming.v1.ListGameServerConfigsRequest.verify|verify} messages.
+                     * @param message ListGameServerConfigsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.gaming.v1.IListGameServerConfigsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListGameServerConfigsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListGameServerConfigsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gaming.v1.ListGameServerConfigsRequest;
+
+                    /**
+                     * Decodes a ListGameServerConfigsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListGameServerConfigsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gaming.v1.ListGameServerConfigsRequest;
+
+                    /**
+                     * Verifies a ListGameServerConfigsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListGameServerConfigsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListGameServerConfigsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.gaming.v1.ListGameServerConfigsRequest;
+
+                    /**
+                     * Creates a plain object from a ListGameServerConfigsRequest message. Also converts values to other types if specified.
+                     * @param message ListGameServerConfigsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.gaming.v1.ListGameServerConfigsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListGameServerConfigsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a ListGameServerConfigsResponse. */
+                interface IListGameServerConfigsResponse {
+
+                    /** ListGameServerConfigsResponse gameServerConfigs */
+                    gameServerConfigs?: (google.cloud.gaming.v1.IGameServerConfig[]|null);
+
+                    /** ListGameServerConfigsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+
+                    /** ListGameServerConfigsResponse unreachable */
+                    unreachable?: (string[]|null);
+                }
+
+                /** Represents a ListGameServerConfigsResponse. */
+                class ListGameServerConfigsResponse implements IListGameServerConfigsResponse {
+
+                    /**
+                     * Constructs a new ListGameServerConfigsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.gaming.v1.IListGameServerConfigsResponse);
+
+                    /** ListGameServerConfigsResponse gameServerConfigs. */
+                    public gameServerConfigs: google.cloud.gaming.v1.IGameServerConfig[];
+
+                    /** ListGameServerConfigsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /** ListGameServerConfigsResponse unreachable. */
+                    public unreachable: string[];
+
+                    /**
+                     * Creates a new ListGameServerConfigsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListGameServerConfigsResponse instance
+                     */
+                    public static create(properties?: google.cloud.gaming.v1.IListGameServerConfigsResponse): google.cloud.gaming.v1.ListGameServerConfigsResponse;
+
+                    /**
+                     * Encodes the specified ListGameServerConfigsResponse message. Does not implicitly {@link google.cloud.gaming.v1.ListGameServerConfigsResponse.verify|verify} messages.
+                     * @param message ListGameServerConfigsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.gaming.v1.IListGameServerConfigsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListGameServerConfigsResponse message, length delimited. Does not implicitly {@link google.cloud.gaming.v1.ListGameServerConfigsResponse.verify|verify} messages.
+                     * @param message ListGameServerConfigsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.gaming.v1.IListGameServerConfigsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListGameServerConfigsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListGameServerConfigsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gaming.v1.ListGameServerConfigsResponse;
+
+                    /**
+                     * Decodes a ListGameServerConfigsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListGameServerConfigsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gaming.v1.ListGameServerConfigsResponse;
+
+                    /**
+                     * Verifies a ListGameServerConfigsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListGameServerConfigsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListGameServerConfigsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.gaming.v1.ListGameServerConfigsResponse;
+
+                    /**
+                     * Creates a plain object from a ListGameServerConfigsResponse message. Also converts values to other types if specified.
+                     * @param message ListGameServerConfigsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.gaming.v1.ListGameServerConfigsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListGameServerConfigsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a GetGameServerConfigRequest. */
+                interface IGetGameServerConfigRequest {
+
+                    /** GetGameServerConfigRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetGameServerConfigRequest. */
+                class GetGameServerConfigRequest implements IGetGameServerConfigRequest {
+
+                    /**
+                     * Constructs a new GetGameServerConfigRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.gaming.v1.IGetGameServerConfigRequest);
+
+                    /** GetGameServerConfigRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetGameServerConfigRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetGameServerConfigRequest instance
+                     */
+                    public static create(properties?: google.cloud.gaming.v1.IGetGameServerConfigRequest): google.cloud.gaming.v1.GetGameServerConfigRequest;
+
+                    /**
+                     * Encodes the specified GetGameServerConfigRequest message. Does not implicitly {@link google.cloud.gaming.v1.GetGameServerConfigRequest.verify|verify} messages.
+                     * @param message GetGameServerConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.gaming.v1.IGetGameServerConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetGameServerConfigRequest message, length delimited. Does not implicitly {@link google.cloud.gaming.v1.GetGameServerConfigRequest.verify|verify} messages.
+                     * @param message GetGameServerConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.gaming.v1.IGetGameServerConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetGameServerConfigRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetGameServerConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gaming.v1.GetGameServerConfigRequest;
+
+                    /**
+                     * Decodes a GetGameServerConfigRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetGameServerConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gaming.v1.GetGameServerConfigRequest;
+
+                    /**
+                     * Verifies a GetGameServerConfigRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetGameServerConfigRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetGameServerConfigRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.gaming.v1.GetGameServerConfigRequest;
+
+                    /**
+                     * Creates a plain object from a GetGameServerConfigRequest message. Also converts values to other types if specified.
+                     * @param message GetGameServerConfigRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.gaming.v1.GetGameServerConfigRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetGameServerConfigRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a CreateGameServerConfigRequest. */
+                interface ICreateGameServerConfigRequest {
+
+                    /** CreateGameServerConfigRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateGameServerConfigRequest configId */
+                    configId?: (string|null);
+
+                    /** CreateGameServerConfigRequest gameServerConfig */
+                    gameServerConfig?: (google.cloud.gaming.v1.IGameServerConfig|null);
+                }
+
+                /** Represents a CreateGameServerConfigRequest. */
+                class CreateGameServerConfigRequest implements ICreateGameServerConfigRequest {
+
+                    /**
+                     * Constructs a new CreateGameServerConfigRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.gaming.v1.ICreateGameServerConfigRequest);
+
+                    /** CreateGameServerConfigRequest parent. */
+                    public parent: string;
+
+                    /** CreateGameServerConfigRequest configId. */
+                    public configId: string;
+
+                    /** CreateGameServerConfigRequest gameServerConfig. */
+                    public gameServerConfig?: (google.cloud.gaming.v1.IGameServerConfig|null);
+
+                    /**
+                     * Creates a new CreateGameServerConfigRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateGameServerConfigRequest instance
+                     */
+                    public static create(properties?: google.cloud.gaming.v1.ICreateGameServerConfigRequest): google.cloud.gaming.v1.CreateGameServerConfigRequest;
+
+                    /**
+                     * Encodes the specified CreateGameServerConfigRequest message. Does not implicitly {@link google.cloud.gaming.v1.CreateGameServerConfigRequest.verify|verify} messages.
+                     * @param message CreateGameServerConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.gaming.v1.ICreateGameServerConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateGameServerConfigRequest message, length delimited. Does not implicitly {@link google.cloud.gaming.v1.CreateGameServerConfigRequest.verify|verify} messages.
+                     * @param message CreateGameServerConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.gaming.v1.ICreateGameServerConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateGameServerConfigRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateGameServerConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gaming.v1.CreateGameServerConfigRequest;
+
+                    /**
+                     * Decodes a CreateGameServerConfigRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateGameServerConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gaming.v1.CreateGameServerConfigRequest;
+
+                    /**
+                     * Verifies a CreateGameServerConfigRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateGameServerConfigRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateGameServerConfigRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.gaming.v1.CreateGameServerConfigRequest;
+
+                    /**
+                     * Creates a plain object from a CreateGameServerConfigRequest message. Also converts values to other types if specified.
+                     * @param message CreateGameServerConfigRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.gaming.v1.CreateGameServerConfigRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateGameServerConfigRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a DeleteGameServerConfigRequest. */
+                interface IDeleteGameServerConfigRequest {
+
+                    /** DeleteGameServerConfigRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a DeleteGameServerConfigRequest. */
+                class DeleteGameServerConfigRequest implements IDeleteGameServerConfigRequest {
+
+                    /**
+                     * Constructs a new DeleteGameServerConfigRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.gaming.v1.IDeleteGameServerConfigRequest);
+
+                    /** DeleteGameServerConfigRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new DeleteGameServerConfigRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteGameServerConfigRequest instance
+                     */
+                    public static create(properties?: google.cloud.gaming.v1.IDeleteGameServerConfigRequest): google.cloud.gaming.v1.DeleteGameServerConfigRequest;
+
+                    /**
+                     * Encodes the specified DeleteGameServerConfigRequest message. Does not implicitly {@link google.cloud.gaming.v1.DeleteGameServerConfigRequest.verify|verify} messages.
+                     * @param message DeleteGameServerConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.gaming.v1.IDeleteGameServerConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteGameServerConfigRequest message, length delimited. Does not implicitly {@link google.cloud.gaming.v1.DeleteGameServerConfigRequest.verify|verify} messages.
+                     * @param message DeleteGameServerConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.gaming.v1.IDeleteGameServerConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteGameServerConfigRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteGameServerConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gaming.v1.DeleteGameServerConfigRequest;
+
+                    /**
+                     * Decodes a DeleteGameServerConfigRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteGameServerConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gaming.v1.DeleteGameServerConfigRequest;
+
+                    /**
+                     * Verifies a DeleteGameServerConfigRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteGameServerConfigRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteGameServerConfigRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.gaming.v1.DeleteGameServerConfigRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteGameServerConfigRequest message. Also converts values to other types if specified.
+                     * @param message DeleteGameServerConfigRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.gaming.v1.DeleteGameServerConfigRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteGameServerConfigRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a ScalingConfig. */
+                interface IScalingConfig {
+
+                    /** ScalingConfig name */
+                    name?: (string|null);
+
+                    /** ScalingConfig fleetAutoscalerSpec */
+                    fleetAutoscalerSpec?: (string|null);
+
+                    /** ScalingConfig selectors */
+                    selectors?: (google.cloud.gaming.v1.ILabelSelector[]|null);
+
+                    /** ScalingConfig schedules */
+                    schedules?: (google.cloud.gaming.v1.ISchedule[]|null);
+                }
+
+                /** Represents a ScalingConfig. */
+                class ScalingConfig implements IScalingConfig {
+
+                    /**
+                     * Constructs a new ScalingConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.gaming.v1.IScalingConfig);
+
+                    /** ScalingConfig name. */
+                    public name: string;
+
+                    /** ScalingConfig fleetAutoscalerSpec. */
+                    public fleetAutoscalerSpec: string;
+
+                    /** ScalingConfig selectors. */
+                    public selectors: google.cloud.gaming.v1.ILabelSelector[];
+
+                    /** ScalingConfig schedules. */
+                    public schedules: google.cloud.gaming.v1.ISchedule[];
+
+                    /**
+                     * Creates a new ScalingConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ScalingConfig instance
+                     */
+                    public static create(properties?: google.cloud.gaming.v1.IScalingConfig): google.cloud.gaming.v1.ScalingConfig;
+
+                    /**
+                     * Encodes the specified ScalingConfig message. Does not implicitly {@link google.cloud.gaming.v1.ScalingConfig.verify|verify} messages.
+                     * @param message ScalingConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.gaming.v1.IScalingConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ScalingConfig message, length delimited. Does not implicitly {@link google.cloud.gaming.v1.ScalingConfig.verify|verify} messages.
+                     * @param message ScalingConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.gaming.v1.IScalingConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ScalingConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ScalingConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gaming.v1.ScalingConfig;
+
+                    /**
+                     * Decodes a ScalingConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ScalingConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gaming.v1.ScalingConfig;
+
+                    /**
+                     * Verifies a ScalingConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ScalingConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ScalingConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.gaming.v1.ScalingConfig;
+
+                    /**
+                     * Creates a plain object from a ScalingConfig message. Also converts values to other types if specified.
+                     * @param message ScalingConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.gaming.v1.ScalingConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ScalingConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a FleetConfig. */
+                interface IFleetConfig {
+
+                    /** FleetConfig fleetSpec */
+                    fleetSpec?: (string|null);
+
+                    /** FleetConfig name */
+                    name?: (string|null);
+                }
+
+                /** Represents a FleetConfig. */
+                class FleetConfig implements IFleetConfig {
+
+                    /**
+                     * Constructs a new FleetConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.gaming.v1.IFleetConfig);
+
+                    /** FleetConfig fleetSpec. */
+                    public fleetSpec: string;
+
+                    /** FleetConfig name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new FleetConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns FleetConfig instance
+                     */
+                    public static create(properties?: google.cloud.gaming.v1.IFleetConfig): google.cloud.gaming.v1.FleetConfig;
+
+                    /**
+                     * Encodes the specified FleetConfig message. Does not implicitly {@link google.cloud.gaming.v1.FleetConfig.verify|verify} messages.
+                     * @param message FleetConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.gaming.v1.IFleetConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified FleetConfig message, length delimited. Does not implicitly {@link google.cloud.gaming.v1.FleetConfig.verify|verify} messages.
+                     * @param message FleetConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.gaming.v1.IFleetConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a FleetConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns FleetConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gaming.v1.FleetConfig;
+
+                    /**
+                     * Decodes a FleetConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns FleetConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gaming.v1.FleetConfig;
+
+                    /**
+                     * Verifies a FleetConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a FleetConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns FleetConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.gaming.v1.FleetConfig;
+
+                    /**
+                     * Creates a plain object from a FleetConfig message. Also converts values to other types if specified.
+                     * @param message FleetConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.gaming.v1.FleetConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this FleetConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a GameServerConfig. */
+                interface IGameServerConfig {
+
+                    /** GameServerConfig name */
+                    name?: (string|null);
+
+                    /** GameServerConfig createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** GameServerConfig updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** GameServerConfig labels */
+                    labels?: ({ [k: string]: string }|null);
+
+                    /** GameServerConfig fleetConfigs */
+                    fleetConfigs?: (google.cloud.gaming.v1.IFleetConfig[]|null);
+
+                    /** GameServerConfig scalingConfigs */
+                    scalingConfigs?: (google.cloud.gaming.v1.IScalingConfig[]|null);
+
+                    /** GameServerConfig description */
+                    description?: (string|null);
+                }
+
+                /** Represents a GameServerConfig. */
+                class GameServerConfig implements IGameServerConfig {
+
+                    /**
+                     * Constructs a new GameServerConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.gaming.v1.IGameServerConfig);
+
+                    /** GameServerConfig name. */
+                    public name: string;
+
+                    /** GameServerConfig createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** GameServerConfig updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** GameServerConfig labels. */
+                    public labels: { [k: string]: string };
+
+                    /** GameServerConfig fleetConfigs. */
+                    public fleetConfigs: google.cloud.gaming.v1.IFleetConfig[];
+
+                    /** GameServerConfig scalingConfigs. */
+                    public scalingConfigs: google.cloud.gaming.v1.IScalingConfig[];
+
+                    /** GameServerConfig description. */
+                    public description: string;
+
+                    /**
+                     * Creates a new GameServerConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GameServerConfig instance
+                     */
+                    public static create(properties?: google.cloud.gaming.v1.IGameServerConfig): google.cloud.gaming.v1.GameServerConfig;
+
+                    /**
+                     * Encodes the specified GameServerConfig message. Does not implicitly {@link google.cloud.gaming.v1.GameServerConfig.verify|verify} messages.
+                     * @param message GameServerConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.gaming.v1.IGameServerConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GameServerConfig message, length delimited. Does not implicitly {@link google.cloud.gaming.v1.GameServerConfig.verify|verify} messages.
+                     * @param message GameServerConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.gaming.v1.IGameServerConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GameServerConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GameServerConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gaming.v1.GameServerConfig;
+
+                    /**
+                     * Decodes a GameServerConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GameServerConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gaming.v1.GameServerConfig;
+
+                    /**
+                     * Verifies a GameServerConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GameServerConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GameServerConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.gaming.v1.GameServerConfig;
+
+                    /**
+                     * Creates a plain object from a GameServerConfig message. Also converts values to other types if specified.
+                     * @param message GameServerConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.gaming.v1.GameServerConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GameServerConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Represents a GameServerConfigsService */
+                class GameServerConfigsService extends $protobuf.rpc.Service {
+
+                    /**
+                     * Constructs a new GameServerConfigsService service.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     */
+                    constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                    /**
+                     * Creates new GameServerConfigsService service using the specified rpc implementation.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     * @returns RPC service. Useful where requests and/or responses are streamed.
+                     */
+                    public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): GameServerConfigsService;
+
+                    /**
+                     * Calls ListGameServerConfigs.
+                     * @param request ListGameServerConfigsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListGameServerConfigsResponse
+                     */
+                    public listGameServerConfigs(request: google.cloud.gaming.v1.IListGameServerConfigsRequest, callback: google.cloud.gaming.v1.GameServerConfigsService.ListGameServerConfigsCallback): void;
+
+                    /**
+                     * Calls ListGameServerConfigs.
+                     * @param request ListGameServerConfigsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listGameServerConfigs(request: google.cloud.gaming.v1.IListGameServerConfigsRequest): Promise<google.cloud.gaming.v1.ListGameServerConfigsResponse>;
+
+                    /**
+                     * Calls GetGameServerConfig.
+                     * @param request GetGameServerConfigRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and GameServerConfig
+                     */
+                    public getGameServerConfig(request: google.cloud.gaming.v1.IGetGameServerConfigRequest, callback: google.cloud.gaming.v1.GameServerConfigsService.GetGameServerConfigCallback): void;
+
+                    /**
+                     * Calls GetGameServerConfig.
+                     * @param request GetGameServerConfigRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getGameServerConfig(request: google.cloud.gaming.v1.IGetGameServerConfigRequest): Promise<google.cloud.gaming.v1.GameServerConfig>;
+
+                    /**
+                     * Calls CreateGameServerConfig.
+                     * @param request CreateGameServerConfigRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public createGameServerConfig(request: google.cloud.gaming.v1.ICreateGameServerConfigRequest, callback: google.cloud.gaming.v1.GameServerConfigsService.CreateGameServerConfigCallback): void;
+
+                    /**
+                     * Calls CreateGameServerConfig.
+                     * @param request CreateGameServerConfigRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createGameServerConfig(request: google.cloud.gaming.v1.ICreateGameServerConfigRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls DeleteGameServerConfig.
+                     * @param request DeleteGameServerConfigRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public deleteGameServerConfig(request: google.cloud.gaming.v1.IDeleteGameServerConfigRequest, callback: google.cloud.gaming.v1.GameServerConfigsService.DeleteGameServerConfigCallback): void;
+
+                    /**
+                     * Calls DeleteGameServerConfig.
+                     * @param request DeleteGameServerConfigRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteGameServerConfig(request: google.cloud.gaming.v1.IDeleteGameServerConfigRequest): Promise<google.longrunning.Operation>;
+                }
+
+                namespace GameServerConfigsService {
+
+                    /**
+                     * Callback as used by {@link google.cloud.gaming.v1.GameServerConfigsService#listGameServerConfigs}.
+                     * @param error Error, if any
+                     * @param [response] ListGameServerConfigsResponse
+                     */
+                    type ListGameServerConfigsCallback = (error: (Error|null), response?: google.cloud.gaming.v1.ListGameServerConfigsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.gaming.v1.GameServerConfigsService#getGameServerConfig}.
+                     * @param error Error, if any
+                     * @param [response] GameServerConfig
+                     */
+                    type GetGameServerConfigCallback = (error: (Error|null), response?: google.cloud.gaming.v1.GameServerConfig) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.gaming.v1.GameServerConfigsService#createGameServerConfig}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type CreateGameServerConfigCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.gaming.v1.GameServerConfigsService#deleteGameServerConfig}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type DeleteGameServerConfigCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+                }
+
+                /** Properties of a ListGameServerDeploymentsRequest. */
+                interface IListGameServerDeploymentsRequest {
+
+                    /** ListGameServerDeploymentsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListGameServerDeploymentsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListGameServerDeploymentsRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListGameServerDeploymentsRequest filter */
+                    filter?: (string|null);
+
+                    /** ListGameServerDeploymentsRequest orderBy */
+                    orderBy?: (string|null);
+                }
+
+                /** Represents a ListGameServerDeploymentsRequest. */
+                class ListGameServerDeploymentsRequest implements IListGameServerDeploymentsRequest {
+
+                    /**
+                     * Constructs a new ListGameServerDeploymentsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.gaming.v1.IListGameServerDeploymentsRequest);
+
+                    /** ListGameServerDeploymentsRequest parent. */
+                    public parent: string;
+
+                    /** ListGameServerDeploymentsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListGameServerDeploymentsRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListGameServerDeploymentsRequest filter. */
+                    public filter: string;
+
+                    /** ListGameServerDeploymentsRequest orderBy. */
+                    public orderBy: string;
+
+                    /**
+                     * Creates a new ListGameServerDeploymentsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListGameServerDeploymentsRequest instance
+                     */
+                    public static create(properties?: google.cloud.gaming.v1.IListGameServerDeploymentsRequest): google.cloud.gaming.v1.ListGameServerDeploymentsRequest;
+
+                    /**
+                     * Encodes the specified ListGameServerDeploymentsRequest message. Does not implicitly {@link google.cloud.gaming.v1.ListGameServerDeploymentsRequest.verify|verify} messages.
+                     * @param message ListGameServerDeploymentsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.gaming.v1.IListGameServerDeploymentsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListGameServerDeploymentsRequest message, length delimited. Does not implicitly {@link google.cloud.gaming.v1.ListGameServerDeploymentsRequest.verify|verify} messages.
+                     * @param message ListGameServerDeploymentsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.gaming.v1.IListGameServerDeploymentsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListGameServerDeploymentsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListGameServerDeploymentsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gaming.v1.ListGameServerDeploymentsRequest;
+
+                    /**
+                     * Decodes a ListGameServerDeploymentsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListGameServerDeploymentsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gaming.v1.ListGameServerDeploymentsRequest;
+
+                    /**
+                     * Verifies a ListGameServerDeploymentsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListGameServerDeploymentsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListGameServerDeploymentsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.gaming.v1.ListGameServerDeploymentsRequest;
+
+                    /**
+                     * Creates a plain object from a ListGameServerDeploymentsRequest message. Also converts values to other types if specified.
+                     * @param message ListGameServerDeploymentsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.gaming.v1.ListGameServerDeploymentsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListGameServerDeploymentsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a ListGameServerDeploymentsResponse. */
+                interface IListGameServerDeploymentsResponse {
+
+                    /** ListGameServerDeploymentsResponse gameServerDeployments */
+                    gameServerDeployments?: (google.cloud.gaming.v1.IGameServerDeployment[]|null);
+
+                    /** ListGameServerDeploymentsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+
+                    /** ListGameServerDeploymentsResponse unreachable */
+                    unreachable?: (string[]|null);
+                }
+
+                /** Represents a ListGameServerDeploymentsResponse. */
+                class ListGameServerDeploymentsResponse implements IListGameServerDeploymentsResponse {
+
+                    /**
+                     * Constructs a new ListGameServerDeploymentsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.gaming.v1.IListGameServerDeploymentsResponse);
+
+                    /** ListGameServerDeploymentsResponse gameServerDeployments. */
+                    public gameServerDeployments: google.cloud.gaming.v1.IGameServerDeployment[];
+
+                    /** ListGameServerDeploymentsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /** ListGameServerDeploymentsResponse unreachable. */
+                    public unreachable: string[];
+
+                    /**
+                     * Creates a new ListGameServerDeploymentsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListGameServerDeploymentsResponse instance
+                     */
+                    public static create(properties?: google.cloud.gaming.v1.IListGameServerDeploymentsResponse): google.cloud.gaming.v1.ListGameServerDeploymentsResponse;
+
+                    /**
+                     * Encodes the specified ListGameServerDeploymentsResponse message. Does not implicitly {@link google.cloud.gaming.v1.ListGameServerDeploymentsResponse.verify|verify} messages.
+                     * @param message ListGameServerDeploymentsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.gaming.v1.IListGameServerDeploymentsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListGameServerDeploymentsResponse message, length delimited. Does not implicitly {@link google.cloud.gaming.v1.ListGameServerDeploymentsResponse.verify|verify} messages.
+                     * @param message ListGameServerDeploymentsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.gaming.v1.IListGameServerDeploymentsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListGameServerDeploymentsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListGameServerDeploymentsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gaming.v1.ListGameServerDeploymentsResponse;
+
+                    /**
+                     * Decodes a ListGameServerDeploymentsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListGameServerDeploymentsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gaming.v1.ListGameServerDeploymentsResponse;
+
+                    /**
+                     * Verifies a ListGameServerDeploymentsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListGameServerDeploymentsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListGameServerDeploymentsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.gaming.v1.ListGameServerDeploymentsResponse;
+
+                    /**
+                     * Creates a plain object from a ListGameServerDeploymentsResponse message. Also converts values to other types if specified.
+                     * @param message ListGameServerDeploymentsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.gaming.v1.ListGameServerDeploymentsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListGameServerDeploymentsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a GetGameServerDeploymentRequest. */
+                interface IGetGameServerDeploymentRequest {
+
+                    /** GetGameServerDeploymentRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetGameServerDeploymentRequest. */
+                class GetGameServerDeploymentRequest implements IGetGameServerDeploymentRequest {
+
+                    /**
+                     * Constructs a new GetGameServerDeploymentRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.gaming.v1.IGetGameServerDeploymentRequest);
+
+                    /** GetGameServerDeploymentRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetGameServerDeploymentRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetGameServerDeploymentRequest instance
+                     */
+                    public static create(properties?: google.cloud.gaming.v1.IGetGameServerDeploymentRequest): google.cloud.gaming.v1.GetGameServerDeploymentRequest;
+
+                    /**
+                     * Encodes the specified GetGameServerDeploymentRequest message. Does not implicitly {@link google.cloud.gaming.v1.GetGameServerDeploymentRequest.verify|verify} messages.
+                     * @param message GetGameServerDeploymentRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.gaming.v1.IGetGameServerDeploymentRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetGameServerDeploymentRequest message, length delimited. Does not implicitly {@link google.cloud.gaming.v1.GetGameServerDeploymentRequest.verify|verify} messages.
+                     * @param message GetGameServerDeploymentRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.gaming.v1.IGetGameServerDeploymentRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetGameServerDeploymentRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetGameServerDeploymentRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gaming.v1.GetGameServerDeploymentRequest;
+
+                    /**
+                     * Decodes a GetGameServerDeploymentRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetGameServerDeploymentRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gaming.v1.GetGameServerDeploymentRequest;
+
+                    /**
+                     * Verifies a GetGameServerDeploymentRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetGameServerDeploymentRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetGameServerDeploymentRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.gaming.v1.GetGameServerDeploymentRequest;
+
+                    /**
+                     * Creates a plain object from a GetGameServerDeploymentRequest message. Also converts values to other types if specified.
+                     * @param message GetGameServerDeploymentRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.gaming.v1.GetGameServerDeploymentRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetGameServerDeploymentRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a GetGameServerDeploymentRolloutRequest. */
+                interface IGetGameServerDeploymentRolloutRequest {
+
+                    /** GetGameServerDeploymentRolloutRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetGameServerDeploymentRolloutRequest. */
+                class GetGameServerDeploymentRolloutRequest implements IGetGameServerDeploymentRolloutRequest {
+
+                    /**
+                     * Constructs a new GetGameServerDeploymentRolloutRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.gaming.v1.IGetGameServerDeploymentRolloutRequest);
+
+                    /** GetGameServerDeploymentRolloutRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetGameServerDeploymentRolloutRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetGameServerDeploymentRolloutRequest instance
+                     */
+                    public static create(properties?: google.cloud.gaming.v1.IGetGameServerDeploymentRolloutRequest): google.cloud.gaming.v1.GetGameServerDeploymentRolloutRequest;
+
+                    /**
+                     * Encodes the specified GetGameServerDeploymentRolloutRequest message. Does not implicitly {@link google.cloud.gaming.v1.GetGameServerDeploymentRolloutRequest.verify|verify} messages.
+                     * @param message GetGameServerDeploymentRolloutRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.gaming.v1.IGetGameServerDeploymentRolloutRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetGameServerDeploymentRolloutRequest message, length delimited. Does not implicitly {@link google.cloud.gaming.v1.GetGameServerDeploymentRolloutRequest.verify|verify} messages.
+                     * @param message GetGameServerDeploymentRolloutRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.gaming.v1.IGetGameServerDeploymentRolloutRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetGameServerDeploymentRolloutRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetGameServerDeploymentRolloutRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gaming.v1.GetGameServerDeploymentRolloutRequest;
+
+                    /**
+                     * Decodes a GetGameServerDeploymentRolloutRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetGameServerDeploymentRolloutRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gaming.v1.GetGameServerDeploymentRolloutRequest;
+
+                    /**
+                     * Verifies a GetGameServerDeploymentRolloutRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetGameServerDeploymentRolloutRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetGameServerDeploymentRolloutRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.gaming.v1.GetGameServerDeploymentRolloutRequest;
+
+                    /**
+                     * Creates a plain object from a GetGameServerDeploymentRolloutRequest message. Also converts values to other types if specified.
+                     * @param message GetGameServerDeploymentRolloutRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.gaming.v1.GetGameServerDeploymentRolloutRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetGameServerDeploymentRolloutRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a CreateGameServerDeploymentRequest. */
+                interface ICreateGameServerDeploymentRequest {
+
+                    /** CreateGameServerDeploymentRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateGameServerDeploymentRequest deploymentId */
+                    deploymentId?: (string|null);
+
+                    /** CreateGameServerDeploymentRequest gameServerDeployment */
+                    gameServerDeployment?: (google.cloud.gaming.v1.IGameServerDeployment|null);
+                }
+
+                /** Represents a CreateGameServerDeploymentRequest. */
+                class CreateGameServerDeploymentRequest implements ICreateGameServerDeploymentRequest {
+
+                    /**
+                     * Constructs a new CreateGameServerDeploymentRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.gaming.v1.ICreateGameServerDeploymentRequest);
+
+                    /** CreateGameServerDeploymentRequest parent. */
+                    public parent: string;
+
+                    /** CreateGameServerDeploymentRequest deploymentId. */
+                    public deploymentId: string;
+
+                    /** CreateGameServerDeploymentRequest gameServerDeployment. */
+                    public gameServerDeployment?: (google.cloud.gaming.v1.IGameServerDeployment|null);
+
+                    /**
+                     * Creates a new CreateGameServerDeploymentRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateGameServerDeploymentRequest instance
+                     */
+                    public static create(properties?: google.cloud.gaming.v1.ICreateGameServerDeploymentRequest): google.cloud.gaming.v1.CreateGameServerDeploymentRequest;
+
+                    /**
+                     * Encodes the specified CreateGameServerDeploymentRequest message. Does not implicitly {@link google.cloud.gaming.v1.CreateGameServerDeploymentRequest.verify|verify} messages.
+                     * @param message CreateGameServerDeploymentRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.gaming.v1.ICreateGameServerDeploymentRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateGameServerDeploymentRequest message, length delimited. Does not implicitly {@link google.cloud.gaming.v1.CreateGameServerDeploymentRequest.verify|verify} messages.
+                     * @param message CreateGameServerDeploymentRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.gaming.v1.ICreateGameServerDeploymentRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateGameServerDeploymentRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateGameServerDeploymentRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gaming.v1.CreateGameServerDeploymentRequest;
+
+                    /**
+                     * Decodes a CreateGameServerDeploymentRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateGameServerDeploymentRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gaming.v1.CreateGameServerDeploymentRequest;
+
+                    /**
+                     * Verifies a CreateGameServerDeploymentRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateGameServerDeploymentRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateGameServerDeploymentRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.gaming.v1.CreateGameServerDeploymentRequest;
+
+                    /**
+                     * Creates a plain object from a CreateGameServerDeploymentRequest message. Also converts values to other types if specified.
+                     * @param message CreateGameServerDeploymentRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.gaming.v1.CreateGameServerDeploymentRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateGameServerDeploymentRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a DeleteGameServerDeploymentRequest. */
+                interface IDeleteGameServerDeploymentRequest {
+
+                    /** DeleteGameServerDeploymentRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a DeleteGameServerDeploymentRequest. */
+                class DeleteGameServerDeploymentRequest implements IDeleteGameServerDeploymentRequest {
+
+                    /**
+                     * Constructs a new DeleteGameServerDeploymentRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.gaming.v1.IDeleteGameServerDeploymentRequest);
+
+                    /** DeleteGameServerDeploymentRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new DeleteGameServerDeploymentRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteGameServerDeploymentRequest instance
+                     */
+                    public static create(properties?: google.cloud.gaming.v1.IDeleteGameServerDeploymentRequest): google.cloud.gaming.v1.DeleteGameServerDeploymentRequest;
+
+                    /**
+                     * Encodes the specified DeleteGameServerDeploymentRequest message. Does not implicitly {@link google.cloud.gaming.v1.DeleteGameServerDeploymentRequest.verify|verify} messages.
+                     * @param message DeleteGameServerDeploymentRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.gaming.v1.IDeleteGameServerDeploymentRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteGameServerDeploymentRequest message, length delimited. Does not implicitly {@link google.cloud.gaming.v1.DeleteGameServerDeploymentRequest.verify|verify} messages.
+                     * @param message DeleteGameServerDeploymentRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.gaming.v1.IDeleteGameServerDeploymentRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteGameServerDeploymentRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteGameServerDeploymentRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gaming.v1.DeleteGameServerDeploymentRequest;
+
+                    /**
+                     * Decodes a DeleteGameServerDeploymentRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteGameServerDeploymentRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gaming.v1.DeleteGameServerDeploymentRequest;
+
+                    /**
+                     * Verifies a DeleteGameServerDeploymentRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteGameServerDeploymentRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteGameServerDeploymentRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.gaming.v1.DeleteGameServerDeploymentRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteGameServerDeploymentRequest message. Also converts values to other types if specified.
+                     * @param message DeleteGameServerDeploymentRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.gaming.v1.DeleteGameServerDeploymentRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteGameServerDeploymentRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of an UpdateGameServerDeploymentRequest. */
+                interface IUpdateGameServerDeploymentRequest {
+
+                    /** UpdateGameServerDeploymentRequest gameServerDeployment */
+                    gameServerDeployment?: (google.cloud.gaming.v1.IGameServerDeployment|null);
+
+                    /** UpdateGameServerDeploymentRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+                }
+
+                /** Represents an UpdateGameServerDeploymentRequest. */
+                class UpdateGameServerDeploymentRequest implements IUpdateGameServerDeploymentRequest {
+
+                    /**
+                     * Constructs a new UpdateGameServerDeploymentRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.gaming.v1.IUpdateGameServerDeploymentRequest);
+
+                    /** UpdateGameServerDeploymentRequest gameServerDeployment. */
+                    public gameServerDeployment?: (google.cloud.gaming.v1.IGameServerDeployment|null);
+
+                    /** UpdateGameServerDeploymentRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /**
+                     * Creates a new UpdateGameServerDeploymentRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateGameServerDeploymentRequest instance
+                     */
+                    public static create(properties?: google.cloud.gaming.v1.IUpdateGameServerDeploymentRequest): google.cloud.gaming.v1.UpdateGameServerDeploymentRequest;
+
+                    /**
+                     * Encodes the specified UpdateGameServerDeploymentRequest message. Does not implicitly {@link google.cloud.gaming.v1.UpdateGameServerDeploymentRequest.verify|verify} messages.
+                     * @param message UpdateGameServerDeploymentRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.gaming.v1.IUpdateGameServerDeploymentRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateGameServerDeploymentRequest message, length delimited. Does not implicitly {@link google.cloud.gaming.v1.UpdateGameServerDeploymentRequest.verify|verify} messages.
+                     * @param message UpdateGameServerDeploymentRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.gaming.v1.IUpdateGameServerDeploymentRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateGameServerDeploymentRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateGameServerDeploymentRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gaming.v1.UpdateGameServerDeploymentRequest;
+
+                    /**
+                     * Decodes an UpdateGameServerDeploymentRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateGameServerDeploymentRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gaming.v1.UpdateGameServerDeploymentRequest;
+
+                    /**
+                     * Verifies an UpdateGameServerDeploymentRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateGameServerDeploymentRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateGameServerDeploymentRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.gaming.v1.UpdateGameServerDeploymentRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateGameServerDeploymentRequest message. Also converts values to other types if specified.
+                     * @param message UpdateGameServerDeploymentRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.gaming.v1.UpdateGameServerDeploymentRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateGameServerDeploymentRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of an UpdateGameServerDeploymentRolloutRequest. */
+                interface IUpdateGameServerDeploymentRolloutRequest {
+
+                    /** UpdateGameServerDeploymentRolloutRequest rollout */
+                    rollout?: (google.cloud.gaming.v1.IGameServerDeploymentRollout|null);
+
+                    /** UpdateGameServerDeploymentRolloutRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+                }
+
+                /** Represents an UpdateGameServerDeploymentRolloutRequest. */
+                class UpdateGameServerDeploymentRolloutRequest implements IUpdateGameServerDeploymentRolloutRequest {
+
+                    /**
+                     * Constructs a new UpdateGameServerDeploymentRolloutRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.gaming.v1.IUpdateGameServerDeploymentRolloutRequest);
+
+                    /** UpdateGameServerDeploymentRolloutRequest rollout. */
+                    public rollout?: (google.cloud.gaming.v1.IGameServerDeploymentRollout|null);
+
+                    /** UpdateGameServerDeploymentRolloutRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /**
+                     * Creates a new UpdateGameServerDeploymentRolloutRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateGameServerDeploymentRolloutRequest instance
+                     */
+                    public static create(properties?: google.cloud.gaming.v1.IUpdateGameServerDeploymentRolloutRequest): google.cloud.gaming.v1.UpdateGameServerDeploymentRolloutRequest;
+
+                    /**
+                     * Encodes the specified UpdateGameServerDeploymentRolloutRequest message. Does not implicitly {@link google.cloud.gaming.v1.UpdateGameServerDeploymentRolloutRequest.verify|verify} messages.
+                     * @param message UpdateGameServerDeploymentRolloutRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.gaming.v1.IUpdateGameServerDeploymentRolloutRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateGameServerDeploymentRolloutRequest message, length delimited. Does not implicitly {@link google.cloud.gaming.v1.UpdateGameServerDeploymentRolloutRequest.verify|verify} messages.
+                     * @param message UpdateGameServerDeploymentRolloutRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.gaming.v1.IUpdateGameServerDeploymentRolloutRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateGameServerDeploymentRolloutRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateGameServerDeploymentRolloutRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gaming.v1.UpdateGameServerDeploymentRolloutRequest;
+
+                    /**
+                     * Decodes an UpdateGameServerDeploymentRolloutRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateGameServerDeploymentRolloutRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gaming.v1.UpdateGameServerDeploymentRolloutRequest;
+
+                    /**
+                     * Verifies an UpdateGameServerDeploymentRolloutRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateGameServerDeploymentRolloutRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateGameServerDeploymentRolloutRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.gaming.v1.UpdateGameServerDeploymentRolloutRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateGameServerDeploymentRolloutRequest message. Also converts values to other types if specified.
+                     * @param message UpdateGameServerDeploymentRolloutRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.gaming.v1.UpdateGameServerDeploymentRolloutRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateGameServerDeploymentRolloutRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a FetchDeploymentStateRequest. */
+                interface IFetchDeploymentStateRequest {
+
+                    /** FetchDeploymentStateRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a FetchDeploymentStateRequest. */
+                class FetchDeploymentStateRequest implements IFetchDeploymentStateRequest {
+
+                    /**
+                     * Constructs a new FetchDeploymentStateRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.gaming.v1.IFetchDeploymentStateRequest);
+
+                    /** FetchDeploymentStateRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new FetchDeploymentStateRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns FetchDeploymentStateRequest instance
+                     */
+                    public static create(properties?: google.cloud.gaming.v1.IFetchDeploymentStateRequest): google.cloud.gaming.v1.FetchDeploymentStateRequest;
+
+                    /**
+                     * Encodes the specified FetchDeploymentStateRequest message. Does not implicitly {@link google.cloud.gaming.v1.FetchDeploymentStateRequest.verify|verify} messages.
+                     * @param message FetchDeploymentStateRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.gaming.v1.IFetchDeploymentStateRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified FetchDeploymentStateRequest message, length delimited. Does not implicitly {@link google.cloud.gaming.v1.FetchDeploymentStateRequest.verify|verify} messages.
+                     * @param message FetchDeploymentStateRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.gaming.v1.IFetchDeploymentStateRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a FetchDeploymentStateRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns FetchDeploymentStateRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gaming.v1.FetchDeploymentStateRequest;
+
+                    /**
+                     * Decodes a FetchDeploymentStateRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns FetchDeploymentStateRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gaming.v1.FetchDeploymentStateRequest;
+
+                    /**
+                     * Verifies a FetchDeploymentStateRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a FetchDeploymentStateRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns FetchDeploymentStateRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.gaming.v1.FetchDeploymentStateRequest;
+
+                    /**
+                     * Creates a plain object from a FetchDeploymentStateRequest message. Also converts values to other types if specified.
+                     * @param message FetchDeploymentStateRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.gaming.v1.FetchDeploymentStateRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this FetchDeploymentStateRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a FetchDeploymentStateResponse. */
+                interface IFetchDeploymentStateResponse {
+
+                    /** FetchDeploymentStateResponse clusterState */
+                    clusterState?: (google.cloud.gaming.v1.FetchDeploymentStateResponse.IDeployedClusterState[]|null);
+
+                    /** FetchDeploymentStateResponse unavailable */
+                    unavailable?: (string[]|null);
+                }
+
+                /** Represents a FetchDeploymentStateResponse. */
+                class FetchDeploymentStateResponse implements IFetchDeploymentStateResponse {
+
+                    /**
+                     * Constructs a new FetchDeploymentStateResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.gaming.v1.IFetchDeploymentStateResponse);
+
+                    /** FetchDeploymentStateResponse clusterState. */
+                    public clusterState: google.cloud.gaming.v1.FetchDeploymentStateResponse.IDeployedClusterState[];
+
+                    /** FetchDeploymentStateResponse unavailable. */
+                    public unavailable: string[];
+
+                    /**
+                     * Creates a new FetchDeploymentStateResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns FetchDeploymentStateResponse instance
+                     */
+                    public static create(properties?: google.cloud.gaming.v1.IFetchDeploymentStateResponse): google.cloud.gaming.v1.FetchDeploymentStateResponse;
+
+                    /**
+                     * Encodes the specified FetchDeploymentStateResponse message. Does not implicitly {@link google.cloud.gaming.v1.FetchDeploymentStateResponse.verify|verify} messages.
+                     * @param message FetchDeploymentStateResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.gaming.v1.IFetchDeploymentStateResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified FetchDeploymentStateResponse message, length delimited. Does not implicitly {@link google.cloud.gaming.v1.FetchDeploymentStateResponse.verify|verify} messages.
+                     * @param message FetchDeploymentStateResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.gaming.v1.IFetchDeploymentStateResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a FetchDeploymentStateResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns FetchDeploymentStateResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gaming.v1.FetchDeploymentStateResponse;
+
+                    /**
+                     * Decodes a FetchDeploymentStateResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns FetchDeploymentStateResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gaming.v1.FetchDeploymentStateResponse;
+
+                    /**
+                     * Verifies a FetchDeploymentStateResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a FetchDeploymentStateResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns FetchDeploymentStateResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.gaming.v1.FetchDeploymentStateResponse;
+
+                    /**
+                     * Creates a plain object from a FetchDeploymentStateResponse message. Also converts values to other types if specified.
+                     * @param message FetchDeploymentStateResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.gaming.v1.FetchDeploymentStateResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this FetchDeploymentStateResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                namespace FetchDeploymentStateResponse {
+
+                    /** Properties of a DeployedClusterState. */
+                    interface IDeployedClusterState {
+
+                        /** DeployedClusterState cluster */
+                        cluster?: (string|null);
+
+                        /** DeployedClusterState fleetDetails */
+                        fleetDetails?: (google.cloud.gaming.v1.IDeployedFleetDetails[]|null);
+                    }
+
+                    /** Represents a DeployedClusterState. */
+                    class DeployedClusterState implements IDeployedClusterState {
+
+                        /**
+                         * Constructs a new DeployedClusterState.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.gaming.v1.FetchDeploymentStateResponse.IDeployedClusterState);
+
+                        /** DeployedClusterState cluster. */
+                        public cluster: string;
+
+                        /** DeployedClusterState fleetDetails. */
+                        public fleetDetails: google.cloud.gaming.v1.IDeployedFleetDetails[];
+
+                        /**
+                         * Creates a new DeployedClusterState instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns DeployedClusterState instance
+                         */
+                        public static create(properties?: google.cloud.gaming.v1.FetchDeploymentStateResponse.IDeployedClusterState): google.cloud.gaming.v1.FetchDeploymentStateResponse.DeployedClusterState;
+
+                        /**
+                         * Encodes the specified DeployedClusterState message. Does not implicitly {@link google.cloud.gaming.v1.FetchDeploymentStateResponse.DeployedClusterState.verify|verify} messages.
+                         * @param message DeployedClusterState message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.gaming.v1.FetchDeploymentStateResponse.IDeployedClusterState, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified DeployedClusterState message, length delimited. Does not implicitly {@link google.cloud.gaming.v1.FetchDeploymentStateResponse.DeployedClusterState.verify|verify} messages.
+                         * @param message DeployedClusterState message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.gaming.v1.FetchDeploymentStateResponse.IDeployedClusterState, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a DeployedClusterState message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns DeployedClusterState
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gaming.v1.FetchDeploymentStateResponse.DeployedClusterState;
+
+                        /**
+                         * Decodes a DeployedClusterState message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns DeployedClusterState
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gaming.v1.FetchDeploymentStateResponse.DeployedClusterState;
+
+                        /**
+                         * Verifies a DeployedClusterState message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a DeployedClusterState message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns DeployedClusterState
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.gaming.v1.FetchDeploymentStateResponse.DeployedClusterState;
+
+                        /**
+                         * Creates a plain object from a DeployedClusterState message. Also converts values to other types if specified.
+                         * @param message DeployedClusterState
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.gaming.v1.FetchDeploymentStateResponse.DeployedClusterState, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this DeployedClusterState to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+                }
+
+                /** Properties of a GameServerDeployment. */
+                interface IGameServerDeployment {
+
+                    /** GameServerDeployment name */
+                    name?: (string|null);
+
+                    /** GameServerDeployment createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** GameServerDeployment updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** GameServerDeployment labels */
+                    labels?: ({ [k: string]: string }|null);
+
+                    /** GameServerDeployment etag */
+                    etag?: (string|null);
+
+                    /** GameServerDeployment description */
+                    description?: (string|null);
+                }
+
+                /** Represents a GameServerDeployment. */
+                class GameServerDeployment implements IGameServerDeployment {
+
+                    /**
+                     * Constructs a new GameServerDeployment.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.gaming.v1.IGameServerDeployment);
+
+                    /** GameServerDeployment name. */
+                    public name: string;
+
+                    /** GameServerDeployment createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** GameServerDeployment updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** GameServerDeployment labels. */
+                    public labels: { [k: string]: string };
+
+                    /** GameServerDeployment etag. */
+                    public etag: string;
+
+                    /** GameServerDeployment description. */
+                    public description: string;
+
+                    /**
+                     * Creates a new GameServerDeployment instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GameServerDeployment instance
+                     */
+                    public static create(properties?: google.cloud.gaming.v1.IGameServerDeployment): google.cloud.gaming.v1.GameServerDeployment;
+
+                    /**
+                     * Encodes the specified GameServerDeployment message. Does not implicitly {@link google.cloud.gaming.v1.GameServerDeployment.verify|verify} messages.
+                     * @param message GameServerDeployment message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.gaming.v1.IGameServerDeployment, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GameServerDeployment message, length delimited. Does not implicitly {@link google.cloud.gaming.v1.GameServerDeployment.verify|verify} messages.
+                     * @param message GameServerDeployment message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.gaming.v1.IGameServerDeployment, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GameServerDeployment message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GameServerDeployment
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gaming.v1.GameServerDeployment;
+
+                    /**
+                     * Decodes a GameServerDeployment message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GameServerDeployment
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gaming.v1.GameServerDeployment;
+
+                    /**
+                     * Verifies a GameServerDeployment message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GameServerDeployment message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GameServerDeployment
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.gaming.v1.GameServerDeployment;
+
+                    /**
+                     * Creates a plain object from a GameServerDeployment message. Also converts values to other types if specified.
+                     * @param message GameServerDeployment
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.gaming.v1.GameServerDeployment, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GameServerDeployment to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a GameServerConfigOverride. */
+                interface IGameServerConfigOverride {
+
+                    /** GameServerConfigOverride realmsSelector */
+                    realmsSelector?: (google.cloud.gaming.v1.IRealmSelector|null);
+
+                    /** GameServerConfigOverride configVersion */
+                    configVersion?: (string|null);
+                }
+
+                /** Represents a GameServerConfigOverride. */
+                class GameServerConfigOverride implements IGameServerConfigOverride {
+
+                    /**
+                     * Constructs a new GameServerConfigOverride.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.gaming.v1.IGameServerConfigOverride);
+
+                    /** GameServerConfigOverride realmsSelector. */
+                    public realmsSelector?: (google.cloud.gaming.v1.IRealmSelector|null);
+
+                    /** GameServerConfigOverride configVersion. */
+                    public configVersion: string;
+
+                    /** GameServerConfigOverride selector. */
+                    public selector?: "realmsSelector";
+
+                    /** GameServerConfigOverride change. */
+                    public change?: "configVersion";
+
+                    /**
+                     * Creates a new GameServerConfigOverride instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GameServerConfigOverride instance
+                     */
+                    public static create(properties?: google.cloud.gaming.v1.IGameServerConfigOverride): google.cloud.gaming.v1.GameServerConfigOverride;
+
+                    /**
+                     * Encodes the specified GameServerConfigOverride message. Does not implicitly {@link google.cloud.gaming.v1.GameServerConfigOverride.verify|verify} messages.
+                     * @param message GameServerConfigOverride message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.gaming.v1.IGameServerConfigOverride, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GameServerConfigOverride message, length delimited. Does not implicitly {@link google.cloud.gaming.v1.GameServerConfigOverride.verify|verify} messages.
+                     * @param message GameServerConfigOverride message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.gaming.v1.IGameServerConfigOverride, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GameServerConfigOverride message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GameServerConfigOverride
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gaming.v1.GameServerConfigOverride;
+
+                    /**
+                     * Decodes a GameServerConfigOverride message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GameServerConfigOverride
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gaming.v1.GameServerConfigOverride;
+
+                    /**
+                     * Verifies a GameServerConfigOverride message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GameServerConfigOverride message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GameServerConfigOverride
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.gaming.v1.GameServerConfigOverride;
+
+                    /**
+                     * Creates a plain object from a GameServerConfigOverride message. Also converts values to other types if specified.
+                     * @param message GameServerConfigOverride
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.gaming.v1.GameServerConfigOverride, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GameServerConfigOverride to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a GameServerDeploymentRollout. */
+                interface IGameServerDeploymentRollout {
+
+                    /** GameServerDeploymentRollout name */
+                    name?: (string|null);
+
+                    /** GameServerDeploymentRollout createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** GameServerDeploymentRollout updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** GameServerDeploymentRollout defaultGameServerConfig */
+                    defaultGameServerConfig?: (string|null);
+
+                    /** GameServerDeploymentRollout gameServerConfigOverrides */
+                    gameServerConfigOverrides?: (google.cloud.gaming.v1.IGameServerConfigOverride[]|null);
+
+                    /** GameServerDeploymentRollout etag */
+                    etag?: (string|null);
+                }
+
+                /** Represents a GameServerDeploymentRollout. */
+                class GameServerDeploymentRollout implements IGameServerDeploymentRollout {
+
+                    /**
+                     * Constructs a new GameServerDeploymentRollout.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.gaming.v1.IGameServerDeploymentRollout);
+
+                    /** GameServerDeploymentRollout name. */
+                    public name: string;
+
+                    /** GameServerDeploymentRollout createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** GameServerDeploymentRollout updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** GameServerDeploymentRollout defaultGameServerConfig. */
+                    public defaultGameServerConfig: string;
+
+                    /** GameServerDeploymentRollout gameServerConfigOverrides. */
+                    public gameServerConfigOverrides: google.cloud.gaming.v1.IGameServerConfigOverride[];
+
+                    /** GameServerDeploymentRollout etag. */
+                    public etag: string;
+
+                    /**
+                     * Creates a new GameServerDeploymentRollout instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GameServerDeploymentRollout instance
+                     */
+                    public static create(properties?: google.cloud.gaming.v1.IGameServerDeploymentRollout): google.cloud.gaming.v1.GameServerDeploymentRollout;
+
+                    /**
+                     * Encodes the specified GameServerDeploymentRollout message. Does not implicitly {@link google.cloud.gaming.v1.GameServerDeploymentRollout.verify|verify} messages.
+                     * @param message GameServerDeploymentRollout message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.gaming.v1.IGameServerDeploymentRollout, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GameServerDeploymentRollout message, length delimited. Does not implicitly {@link google.cloud.gaming.v1.GameServerDeploymentRollout.verify|verify} messages.
+                     * @param message GameServerDeploymentRollout message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.gaming.v1.IGameServerDeploymentRollout, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GameServerDeploymentRollout message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GameServerDeploymentRollout
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gaming.v1.GameServerDeploymentRollout;
+
+                    /**
+                     * Decodes a GameServerDeploymentRollout message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GameServerDeploymentRollout
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gaming.v1.GameServerDeploymentRollout;
+
+                    /**
+                     * Verifies a GameServerDeploymentRollout message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GameServerDeploymentRollout message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GameServerDeploymentRollout
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.gaming.v1.GameServerDeploymentRollout;
+
+                    /**
+                     * Creates a plain object from a GameServerDeploymentRollout message. Also converts values to other types if specified.
+                     * @param message GameServerDeploymentRollout
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.gaming.v1.GameServerDeploymentRollout, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GameServerDeploymentRollout to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a PreviewGameServerDeploymentRolloutRequest. */
+                interface IPreviewGameServerDeploymentRolloutRequest {
+
+                    /** PreviewGameServerDeploymentRolloutRequest rollout */
+                    rollout?: (google.cloud.gaming.v1.IGameServerDeploymentRollout|null);
+
+                    /** PreviewGameServerDeploymentRolloutRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** PreviewGameServerDeploymentRolloutRequest previewTime */
+                    previewTime?: (google.protobuf.ITimestamp|null);
+                }
+
+                /** Represents a PreviewGameServerDeploymentRolloutRequest. */
+                class PreviewGameServerDeploymentRolloutRequest implements IPreviewGameServerDeploymentRolloutRequest {
+
+                    /**
+                     * Constructs a new PreviewGameServerDeploymentRolloutRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.gaming.v1.IPreviewGameServerDeploymentRolloutRequest);
+
+                    /** PreviewGameServerDeploymentRolloutRequest rollout. */
+                    public rollout?: (google.cloud.gaming.v1.IGameServerDeploymentRollout|null);
+
+                    /** PreviewGameServerDeploymentRolloutRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** PreviewGameServerDeploymentRolloutRequest previewTime. */
+                    public previewTime?: (google.protobuf.ITimestamp|null);
+
+                    /**
+                     * Creates a new PreviewGameServerDeploymentRolloutRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns PreviewGameServerDeploymentRolloutRequest instance
+                     */
+                    public static create(properties?: google.cloud.gaming.v1.IPreviewGameServerDeploymentRolloutRequest): google.cloud.gaming.v1.PreviewGameServerDeploymentRolloutRequest;
+
+                    /**
+                     * Encodes the specified PreviewGameServerDeploymentRolloutRequest message. Does not implicitly {@link google.cloud.gaming.v1.PreviewGameServerDeploymentRolloutRequest.verify|verify} messages.
+                     * @param message PreviewGameServerDeploymentRolloutRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.gaming.v1.IPreviewGameServerDeploymentRolloutRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified PreviewGameServerDeploymentRolloutRequest message, length delimited. Does not implicitly {@link google.cloud.gaming.v1.PreviewGameServerDeploymentRolloutRequest.verify|verify} messages.
+                     * @param message PreviewGameServerDeploymentRolloutRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.gaming.v1.IPreviewGameServerDeploymentRolloutRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a PreviewGameServerDeploymentRolloutRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns PreviewGameServerDeploymentRolloutRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gaming.v1.PreviewGameServerDeploymentRolloutRequest;
+
+                    /**
+                     * Decodes a PreviewGameServerDeploymentRolloutRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns PreviewGameServerDeploymentRolloutRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gaming.v1.PreviewGameServerDeploymentRolloutRequest;
+
+                    /**
+                     * Verifies a PreviewGameServerDeploymentRolloutRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a PreviewGameServerDeploymentRolloutRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns PreviewGameServerDeploymentRolloutRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.gaming.v1.PreviewGameServerDeploymentRolloutRequest;
+
+                    /**
+                     * Creates a plain object from a PreviewGameServerDeploymentRolloutRequest message. Also converts values to other types if specified.
+                     * @param message PreviewGameServerDeploymentRolloutRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.gaming.v1.PreviewGameServerDeploymentRolloutRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this PreviewGameServerDeploymentRolloutRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a PreviewGameServerDeploymentRolloutResponse. */
+                interface IPreviewGameServerDeploymentRolloutResponse {
+
+                    /** PreviewGameServerDeploymentRolloutResponse unavailable */
+                    unavailable?: (string[]|null);
+
+                    /** PreviewGameServerDeploymentRolloutResponse etag */
+                    etag?: (string|null);
+
+                    /** PreviewGameServerDeploymentRolloutResponse targetState */
+                    targetState?: (google.cloud.gaming.v1.ITargetState|null);
+                }
+
+                /** Represents a PreviewGameServerDeploymentRolloutResponse. */
+                class PreviewGameServerDeploymentRolloutResponse implements IPreviewGameServerDeploymentRolloutResponse {
+
+                    /**
+                     * Constructs a new PreviewGameServerDeploymentRolloutResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.gaming.v1.IPreviewGameServerDeploymentRolloutResponse);
+
+                    /** PreviewGameServerDeploymentRolloutResponse unavailable. */
+                    public unavailable: string[];
+
+                    /** PreviewGameServerDeploymentRolloutResponse etag. */
+                    public etag: string;
+
+                    /** PreviewGameServerDeploymentRolloutResponse targetState. */
+                    public targetState?: (google.cloud.gaming.v1.ITargetState|null);
+
+                    /**
+                     * Creates a new PreviewGameServerDeploymentRolloutResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns PreviewGameServerDeploymentRolloutResponse instance
+                     */
+                    public static create(properties?: google.cloud.gaming.v1.IPreviewGameServerDeploymentRolloutResponse): google.cloud.gaming.v1.PreviewGameServerDeploymentRolloutResponse;
+
+                    /**
+                     * Encodes the specified PreviewGameServerDeploymentRolloutResponse message. Does not implicitly {@link google.cloud.gaming.v1.PreviewGameServerDeploymentRolloutResponse.verify|verify} messages.
+                     * @param message PreviewGameServerDeploymentRolloutResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.gaming.v1.IPreviewGameServerDeploymentRolloutResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified PreviewGameServerDeploymentRolloutResponse message, length delimited. Does not implicitly {@link google.cloud.gaming.v1.PreviewGameServerDeploymentRolloutResponse.verify|verify} messages.
+                     * @param message PreviewGameServerDeploymentRolloutResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.gaming.v1.IPreviewGameServerDeploymentRolloutResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a PreviewGameServerDeploymentRolloutResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns PreviewGameServerDeploymentRolloutResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gaming.v1.PreviewGameServerDeploymentRolloutResponse;
+
+                    /**
+                     * Decodes a PreviewGameServerDeploymentRolloutResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns PreviewGameServerDeploymentRolloutResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gaming.v1.PreviewGameServerDeploymentRolloutResponse;
+
+                    /**
+                     * Verifies a PreviewGameServerDeploymentRolloutResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a PreviewGameServerDeploymentRolloutResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns PreviewGameServerDeploymentRolloutResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.gaming.v1.PreviewGameServerDeploymentRolloutResponse;
+
+                    /**
+                     * Creates a plain object from a PreviewGameServerDeploymentRolloutResponse message. Also converts values to other types if specified.
+                     * @param message PreviewGameServerDeploymentRolloutResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.gaming.v1.PreviewGameServerDeploymentRolloutResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this PreviewGameServerDeploymentRolloutResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Represents a GameServerDeploymentsService */
+                class GameServerDeploymentsService extends $protobuf.rpc.Service {
+
+                    /**
+                     * Constructs a new GameServerDeploymentsService service.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     */
+                    constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                    /**
+                     * Creates new GameServerDeploymentsService service using the specified rpc implementation.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     * @returns RPC service. Useful where requests and/or responses are streamed.
+                     */
+                    public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): GameServerDeploymentsService;
+
+                    /**
+                     * Calls ListGameServerDeployments.
+                     * @param request ListGameServerDeploymentsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListGameServerDeploymentsResponse
+                     */
+                    public listGameServerDeployments(request: google.cloud.gaming.v1.IListGameServerDeploymentsRequest, callback: google.cloud.gaming.v1.GameServerDeploymentsService.ListGameServerDeploymentsCallback): void;
+
+                    /**
+                     * Calls ListGameServerDeployments.
+                     * @param request ListGameServerDeploymentsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listGameServerDeployments(request: google.cloud.gaming.v1.IListGameServerDeploymentsRequest): Promise<google.cloud.gaming.v1.ListGameServerDeploymentsResponse>;
+
+                    /**
+                     * Calls GetGameServerDeployment.
+                     * @param request GetGameServerDeploymentRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and GameServerDeployment
+                     */
+                    public getGameServerDeployment(request: google.cloud.gaming.v1.IGetGameServerDeploymentRequest, callback: google.cloud.gaming.v1.GameServerDeploymentsService.GetGameServerDeploymentCallback): void;
+
+                    /**
+                     * Calls GetGameServerDeployment.
+                     * @param request GetGameServerDeploymentRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getGameServerDeployment(request: google.cloud.gaming.v1.IGetGameServerDeploymentRequest): Promise<google.cloud.gaming.v1.GameServerDeployment>;
+
+                    /**
+                     * Calls CreateGameServerDeployment.
+                     * @param request CreateGameServerDeploymentRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public createGameServerDeployment(request: google.cloud.gaming.v1.ICreateGameServerDeploymentRequest, callback: google.cloud.gaming.v1.GameServerDeploymentsService.CreateGameServerDeploymentCallback): void;
+
+                    /**
+                     * Calls CreateGameServerDeployment.
+                     * @param request CreateGameServerDeploymentRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createGameServerDeployment(request: google.cloud.gaming.v1.ICreateGameServerDeploymentRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls DeleteGameServerDeployment.
+                     * @param request DeleteGameServerDeploymentRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public deleteGameServerDeployment(request: google.cloud.gaming.v1.IDeleteGameServerDeploymentRequest, callback: google.cloud.gaming.v1.GameServerDeploymentsService.DeleteGameServerDeploymentCallback): void;
+
+                    /**
+                     * Calls DeleteGameServerDeployment.
+                     * @param request DeleteGameServerDeploymentRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteGameServerDeployment(request: google.cloud.gaming.v1.IDeleteGameServerDeploymentRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls UpdateGameServerDeployment.
+                     * @param request UpdateGameServerDeploymentRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public updateGameServerDeployment(request: google.cloud.gaming.v1.IUpdateGameServerDeploymentRequest, callback: google.cloud.gaming.v1.GameServerDeploymentsService.UpdateGameServerDeploymentCallback): void;
+
+                    /**
+                     * Calls UpdateGameServerDeployment.
+                     * @param request UpdateGameServerDeploymentRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateGameServerDeployment(request: google.cloud.gaming.v1.IUpdateGameServerDeploymentRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls GetGameServerDeploymentRollout.
+                     * @param request GetGameServerDeploymentRolloutRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and GameServerDeploymentRollout
+                     */
+                    public getGameServerDeploymentRollout(request: google.cloud.gaming.v1.IGetGameServerDeploymentRolloutRequest, callback: google.cloud.gaming.v1.GameServerDeploymentsService.GetGameServerDeploymentRolloutCallback): void;
+
+                    /**
+                     * Calls GetGameServerDeploymentRollout.
+                     * @param request GetGameServerDeploymentRolloutRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getGameServerDeploymentRollout(request: google.cloud.gaming.v1.IGetGameServerDeploymentRolloutRequest): Promise<google.cloud.gaming.v1.GameServerDeploymentRollout>;
+
+                    /**
+                     * Calls UpdateGameServerDeploymentRollout.
+                     * @param request UpdateGameServerDeploymentRolloutRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public updateGameServerDeploymentRollout(request: google.cloud.gaming.v1.IUpdateGameServerDeploymentRolloutRequest, callback: google.cloud.gaming.v1.GameServerDeploymentsService.UpdateGameServerDeploymentRolloutCallback): void;
+
+                    /**
+                     * Calls UpdateGameServerDeploymentRollout.
+                     * @param request UpdateGameServerDeploymentRolloutRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateGameServerDeploymentRollout(request: google.cloud.gaming.v1.IUpdateGameServerDeploymentRolloutRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls PreviewGameServerDeploymentRollout.
+                     * @param request PreviewGameServerDeploymentRolloutRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and PreviewGameServerDeploymentRolloutResponse
+                     */
+                    public previewGameServerDeploymentRollout(request: google.cloud.gaming.v1.IPreviewGameServerDeploymentRolloutRequest, callback: google.cloud.gaming.v1.GameServerDeploymentsService.PreviewGameServerDeploymentRolloutCallback): void;
+
+                    /**
+                     * Calls PreviewGameServerDeploymentRollout.
+                     * @param request PreviewGameServerDeploymentRolloutRequest message or plain object
+                     * @returns Promise
+                     */
+                    public previewGameServerDeploymentRollout(request: google.cloud.gaming.v1.IPreviewGameServerDeploymentRolloutRequest): Promise<google.cloud.gaming.v1.PreviewGameServerDeploymentRolloutResponse>;
+
+                    /**
+                     * Calls FetchDeploymentState.
+                     * @param request FetchDeploymentStateRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and FetchDeploymentStateResponse
+                     */
+                    public fetchDeploymentState(request: google.cloud.gaming.v1.IFetchDeploymentStateRequest, callback: google.cloud.gaming.v1.GameServerDeploymentsService.FetchDeploymentStateCallback): void;
+
+                    /**
+                     * Calls FetchDeploymentState.
+                     * @param request FetchDeploymentStateRequest message or plain object
+                     * @returns Promise
+                     */
+                    public fetchDeploymentState(request: google.cloud.gaming.v1.IFetchDeploymentStateRequest): Promise<google.cloud.gaming.v1.FetchDeploymentStateResponse>;
+                }
+
+                namespace GameServerDeploymentsService {
+
+                    /**
+                     * Callback as used by {@link google.cloud.gaming.v1.GameServerDeploymentsService#listGameServerDeployments}.
+                     * @param error Error, if any
+                     * @param [response] ListGameServerDeploymentsResponse
+                     */
+                    type ListGameServerDeploymentsCallback = (error: (Error|null), response?: google.cloud.gaming.v1.ListGameServerDeploymentsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.gaming.v1.GameServerDeploymentsService#getGameServerDeployment}.
+                     * @param error Error, if any
+                     * @param [response] GameServerDeployment
+                     */
+                    type GetGameServerDeploymentCallback = (error: (Error|null), response?: google.cloud.gaming.v1.GameServerDeployment) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.gaming.v1.GameServerDeploymentsService#createGameServerDeployment}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type CreateGameServerDeploymentCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.gaming.v1.GameServerDeploymentsService#deleteGameServerDeployment}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type DeleteGameServerDeploymentCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.gaming.v1.GameServerDeploymentsService#updateGameServerDeployment}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type UpdateGameServerDeploymentCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.gaming.v1.GameServerDeploymentsService#getGameServerDeploymentRollout}.
+                     * @param error Error, if any
+                     * @param [response] GameServerDeploymentRollout
+                     */
+                    type GetGameServerDeploymentRolloutCallback = (error: (Error|null), response?: google.cloud.gaming.v1.GameServerDeploymentRollout) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.gaming.v1.GameServerDeploymentsService#updateGameServerDeploymentRollout}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type UpdateGameServerDeploymentRolloutCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.gaming.v1.GameServerDeploymentsService#previewGameServerDeploymentRollout}.
+                     * @param error Error, if any
+                     * @param [response] PreviewGameServerDeploymentRolloutResponse
+                     */
+                    type PreviewGameServerDeploymentRolloutCallback = (error: (Error|null), response?: google.cloud.gaming.v1.PreviewGameServerDeploymentRolloutResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.gaming.v1.GameServerDeploymentsService#fetchDeploymentState}.
+                     * @param error Error, if any
+                     * @param [response] FetchDeploymentStateResponse
+                     */
+                    type FetchDeploymentStateCallback = (error: (Error|null), response?: google.cloud.gaming.v1.FetchDeploymentStateResponse) => void;
+                }
+
+                /** Properties of a ListRealmsRequest. */
+                interface IListRealmsRequest {
+
+                    /** ListRealmsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListRealmsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListRealmsRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListRealmsRequest filter */
+                    filter?: (string|null);
+
+                    /** ListRealmsRequest orderBy */
+                    orderBy?: (string|null);
+                }
+
+                /** Represents a ListRealmsRequest. */
+                class ListRealmsRequest implements IListRealmsRequest {
+
+                    /**
+                     * Constructs a new ListRealmsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.gaming.v1.IListRealmsRequest);
+
+                    /** ListRealmsRequest parent. */
+                    public parent: string;
+
+                    /** ListRealmsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListRealmsRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListRealmsRequest filter. */
+                    public filter: string;
+
+                    /** ListRealmsRequest orderBy. */
+                    public orderBy: string;
+
+                    /**
+                     * Creates a new ListRealmsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListRealmsRequest instance
+                     */
+                    public static create(properties?: google.cloud.gaming.v1.IListRealmsRequest): google.cloud.gaming.v1.ListRealmsRequest;
+
+                    /**
+                     * Encodes the specified ListRealmsRequest message. Does not implicitly {@link google.cloud.gaming.v1.ListRealmsRequest.verify|verify} messages.
+                     * @param message ListRealmsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.gaming.v1.IListRealmsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListRealmsRequest message, length delimited. Does not implicitly {@link google.cloud.gaming.v1.ListRealmsRequest.verify|verify} messages.
+                     * @param message ListRealmsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.gaming.v1.IListRealmsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListRealmsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListRealmsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gaming.v1.ListRealmsRequest;
+
+                    /**
+                     * Decodes a ListRealmsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListRealmsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gaming.v1.ListRealmsRequest;
+
+                    /**
+                     * Verifies a ListRealmsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListRealmsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListRealmsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.gaming.v1.ListRealmsRequest;
+
+                    /**
+                     * Creates a plain object from a ListRealmsRequest message. Also converts values to other types if specified.
+                     * @param message ListRealmsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.gaming.v1.ListRealmsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListRealmsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a ListRealmsResponse. */
+                interface IListRealmsResponse {
+
+                    /** ListRealmsResponse realms */
+                    realms?: (google.cloud.gaming.v1.IRealm[]|null);
+
+                    /** ListRealmsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+
+                    /** ListRealmsResponse unreachable */
+                    unreachable?: (string[]|null);
+                }
+
+                /** Represents a ListRealmsResponse. */
+                class ListRealmsResponse implements IListRealmsResponse {
+
+                    /**
+                     * Constructs a new ListRealmsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.gaming.v1.IListRealmsResponse);
+
+                    /** ListRealmsResponse realms. */
+                    public realms: google.cloud.gaming.v1.IRealm[];
+
+                    /** ListRealmsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /** ListRealmsResponse unreachable. */
+                    public unreachable: string[];
+
+                    /**
+                     * Creates a new ListRealmsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListRealmsResponse instance
+                     */
+                    public static create(properties?: google.cloud.gaming.v1.IListRealmsResponse): google.cloud.gaming.v1.ListRealmsResponse;
+
+                    /**
+                     * Encodes the specified ListRealmsResponse message. Does not implicitly {@link google.cloud.gaming.v1.ListRealmsResponse.verify|verify} messages.
+                     * @param message ListRealmsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.gaming.v1.IListRealmsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListRealmsResponse message, length delimited. Does not implicitly {@link google.cloud.gaming.v1.ListRealmsResponse.verify|verify} messages.
+                     * @param message ListRealmsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.gaming.v1.IListRealmsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListRealmsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListRealmsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gaming.v1.ListRealmsResponse;
+
+                    /**
+                     * Decodes a ListRealmsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListRealmsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gaming.v1.ListRealmsResponse;
+
+                    /**
+                     * Verifies a ListRealmsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListRealmsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListRealmsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.gaming.v1.ListRealmsResponse;
+
+                    /**
+                     * Creates a plain object from a ListRealmsResponse message. Also converts values to other types if specified.
+                     * @param message ListRealmsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.gaming.v1.ListRealmsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListRealmsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a GetRealmRequest. */
+                interface IGetRealmRequest {
+
+                    /** GetRealmRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetRealmRequest. */
+                class GetRealmRequest implements IGetRealmRequest {
+
+                    /**
+                     * Constructs a new GetRealmRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.gaming.v1.IGetRealmRequest);
+
+                    /** GetRealmRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetRealmRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetRealmRequest instance
+                     */
+                    public static create(properties?: google.cloud.gaming.v1.IGetRealmRequest): google.cloud.gaming.v1.GetRealmRequest;
+
+                    /**
+                     * Encodes the specified GetRealmRequest message. Does not implicitly {@link google.cloud.gaming.v1.GetRealmRequest.verify|verify} messages.
+                     * @param message GetRealmRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.gaming.v1.IGetRealmRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetRealmRequest message, length delimited. Does not implicitly {@link google.cloud.gaming.v1.GetRealmRequest.verify|verify} messages.
+                     * @param message GetRealmRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.gaming.v1.IGetRealmRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetRealmRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetRealmRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gaming.v1.GetRealmRequest;
+
+                    /**
+                     * Decodes a GetRealmRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetRealmRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gaming.v1.GetRealmRequest;
+
+                    /**
+                     * Verifies a GetRealmRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetRealmRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetRealmRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.gaming.v1.GetRealmRequest;
+
+                    /**
+                     * Creates a plain object from a GetRealmRequest message. Also converts values to other types if specified.
+                     * @param message GetRealmRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.gaming.v1.GetRealmRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetRealmRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a CreateRealmRequest. */
+                interface ICreateRealmRequest {
+
+                    /** CreateRealmRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateRealmRequest realmId */
+                    realmId?: (string|null);
+
+                    /** CreateRealmRequest realm */
+                    realm?: (google.cloud.gaming.v1.IRealm|null);
+                }
+
+                /** Represents a CreateRealmRequest. */
+                class CreateRealmRequest implements ICreateRealmRequest {
+
+                    /**
+                     * Constructs a new CreateRealmRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.gaming.v1.ICreateRealmRequest);
+
+                    /** CreateRealmRequest parent. */
+                    public parent: string;
+
+                    /** CreateRealmRequest realmId. */
+                    public realmId: string;
+
+                    /** CreateRealmRequest realm. */
+                    public realm?: (google.cloud.gaming.v1.IRealm|null);
+
+                    /**
+                     * Creates a new CreateRealmRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateRealmRequest instance
+                     */
+                    public static create(properties?: google.cloud.gaming.v1.ICreateRealmRequest): google.cloud.gaming.v1.CreateRealmRequest;
+
+                    /**
+                     * Encodes the specified CreateRealmRequest message. Does not implicitly {@link google.cloud.gaming.v1.CreateRealmRequest.verify|verify} messages.
+                     * @param message CreateRealmRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.gaming.v1.ICreateRealmRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateRealmRequest message, length delimited. Does not implicitly {@link google.cloud.gaming.v1.CreateRealmRequest.verify|verify} messages.
+                     * @param message CreateRealmRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.gaming.v1.ICreateRealmRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateRealmRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateRealmRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gaming.v1.CreateRealmRequest;
+
+                    /**
+                     * Decodes a CreateRealmRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateRealmRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gaming.v1.CreateRealmRequest;
+
+                    /**
+                     * Verifies a CreateRealmRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateRealmRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateRealmRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.gaming.v1.CreateRealmRequest;
+
+                    /**
+                     * Creates a plain object from a CreateRealmRequest message. Also converts values to other types if specified.
+                     * @param message CreateRealmRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.gaming.v1.CreateRealmRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateRealmRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a DeleteRealmRequest. */
+                interface IDeleteRealmRequest {
+
+                    /** DeleteRealmRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a DeleteRealmRequest. */
+                class DeleteRealmRequest implements IDeleteRealmRequest {
+
+                    /**
+                     * Constructs a new DeleteRealmRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.gaming.v1.IDeleteRealmRequest);
+
+                    /** DeleteRealmRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new DeleteRealmRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteRealmRequest instance
+                     */
+                    public static create(properties?: google.cloud.gaming.v1.IDeleteRealmRequest): google.cloud.gaming.v1.DeleteRealmRequest;
+
+                    /**
+                     * Encodes the specified DeleteRealmRequest message. Does not implicitly {@link google.cloud.gaming.v1.DeleteRealmRequest.verify|verify} messages.
+                     * @param message DeleteRealmRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.gaming.v1.IDeleteRealmRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteRealmRequest message, length delimited. Does not implicitly {@link google.cloud.gaming.v1.DeleteRealmRequest.verify|verify} messages.
+                     * @param message DeleteRealmRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.gaming.v1.IDeleteRealmRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteRealmRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteRealmRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gaming.v1.DeleteRealmRequest;
+
+                    /**
+                     * Decodes a DeleteRealmRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteRealmRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gaming.v1.DeleteRealmRequest;
+
+                    /**
+                     * Verifies a DeleteRealmRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteRealmRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteRealmRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.gaming.v1.DeleteRealmRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteRealmRequest message. Also converts values to other types if specified.
+                     * @param message DeleteRealmRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.gaming.v1.DeleteRealmRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteRealmRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of an UpdateRealmRequest. */
+                interface IUpdateRealmRequest {
+
+                    /** UpdateRealmRequest realm */
+                    realm?: (google.cloud.gaming.v1.IRealm|null);
+
+                    /** UpdateRealmRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+                }
+
+                /** Represents an UpdateRealmRequest. */
+                class UpdateRealmRequest implements IUpdateRealmRequest {
+
+                    /**
+                     * Constructs a new UpdateRealmRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.gaming.v1.IUpdateRealmRequest);
+
+                    /** UpdateRealmRequest realm. */
+                    public realm?: (google.cloud.gaming.v1.IRealm|null);
+
+                    /** UpdateRealmRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /**
+                     * Creates a new UpdateRealmRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateRealmRequest instance
+                     */
+                    public static create(properties?: google.cloud.gaming.v1.IUpdateRealmRequest): google.cloud.gaming.v1.UpdateRealmRequest;
+
+                    /**
+                     * Encodes the specified UpdateRealmRequest message. Does not implicitly {@link google.cloud.gaming.v1.UpdateRealmRequest.verify|verify} messages.
+                     * @param message UpdateRealmRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.gaming.v1.IUpdateRealmRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateRealmRequest message, length delimited. Does not implicitly {@link google.cloud.gaming.v1.UpdateRealmRequest.verify|verify} messages.
+                     * @param message UpdateRealmRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.gaming.v1.IUpdateRealmRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateRealmRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateRealmRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gaming.v1.UpdateRealmRequest;
+
+                    /**
+                     * Decodes an UpdateRealmRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateRealmRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gaming.v1.UpdateRealmRequest;
+
+                    /**
+                     * Verifies an UpdateRealmRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateRealmRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateRealmRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.gaming.v1.UpdateRealmRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateRealmRequest message. Also converts values to other types if specified.
+                     * @param message UpdateRealmRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.gaming.v1.UpdateRealmRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateRealmRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a PreviewRealmUpdateRequest. */
+                interface IPreviewRealmUpdateRequest {
+
+                    /** PreviewRealmUpdateRequest realm */
+                    realm?: (google.cloud.gaming.v1.IRealm|null);
+
+                    /** PreviewRealmUpdateRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** PreviewRealmUpdateRequest previewTime */
+                    previewTime?: (google.protobuf.ITimestamp|null);
+                }
+
+                /** Represents a PreviewRealmUpdateRequest. */
+                class PreviewRealmUpdateRequest implements IPreviewRealmUpdateRequest {
+
+                    /**
+                     * Constructs a new PreviewRealmUpdateRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.gaming.v1.IPreviewRealmUpdateRequest);
+
+                    /** PreviewRealmUpdateRequest realm. */
+                    public realm?: (google.cloud.gaming.v1.IRealm|null);
+
+                    /** PreviewRealmUpdateRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** PreviewRealmUpdateRequest previewTime. */
+                    public previewTime?: (google.protobuf.ITimestamp|null);
+
+                    /**
+                     * Creates a new PreviewRealmUpdateRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns PreviewRealmUpdateRequest instance
+                     */
+                    public static create(properties?: google.cloud.gaming.v1.IPreviewRealmUpdateRequest): google.cloud.gaming.v1.PreviewRealmUpdateRequest;
+
+                    /**
+                     * Encodes the specified PreviewRealmUpdateRequest message. Does not implicitly {@link google.cloud.gaming.v1.PreviewRealmUpdateRequest.verify|verify} messages.
+                     * @param message PreviewRealmUpdateRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.gaming.v1.IPreviewRealmUpdateRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified PreviewRealmUpdateRequest message, length delimited. Does not implicitly {@link google.cloud.gaming.v1.PreviewRealmUpdateRequest.verify|verify} messages.
+                     * @param message PreviewRealmUpdateRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.gaming.v1.IPreviewRealmUpdateRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a PreviewRealmUpdateRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns PreviewRealmUpdateRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gaming.v1.PreviewRealmUpdateRequest;
+
+                    /**
+                     * Decodes a PreviewRealmUpdateRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns PreviewRealmUpdateRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gaming.v1.PreviewRealmUpdateRequest;
+
+                    /**
+                     * Verifies a PreviewRealmUpdateRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a PreviewRealmUpdateRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns PreviewRealmUpdateRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.gaming.v1.PreviewRealmUpdateRequest;
+
+                    /**
+                     * Creates a plain object from a PreviewRealmUpdateRequest message. Also converts values to other types if specified.
+                     * @param message PreviewRealmUpdateRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.gaming.v1.PreviewRealmUpdateRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this PreviewRealmUpdateRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a PreviewRealmUpdateResponse. */
+                interface IPreviewRealmUpdateResponse {
+
+                    /** PreviewRealmUpdateResponse etag */
+                    etag?: (string|null);
+
+                    /** PreviewRealmUpdateResponse targetState */
+                    targetState?: (google.cloud.gaming.v1.ITargetState|null);
+                }
+
+                /** Represents a PreviewRealmUpdateResponse. */
+                class PreviewRealmUpdateResponse implements IPreviewRealmUpdateResponse {
+
+                    /**
+                     * Constructs a new PreviewRealmUpdateResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.gaming.v1.IPreviewRealmUpdateResponse);
+
+                    /** PreviewRealmUpdateResponse etag. */
+                    public etag: string;
+
+                    /** PreviewRealmUpdateResponse targetState. */
+                    public targetState?: (google.cloud.gaming.v1.ITargetState|null);
+
+                    /**
+                     * Creates a new PreviewRealmUpdateResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns PreviewRealmUpdateResponse instance
+                     */
+                    public static create(properties?: google.cloud.gaming.v1.IPreviewRealmUpdateResponse): google.cloud.gaming.v1.PreviewRealmUpdateResponse;
+
+                    /**
+                     * Encodes the specified PreviewRealmUpdateResponse message. Does not implicitly {@link google.cloud.gaming.v1.PreviewRealmUpdateResponse.verify|verify} messages.
+                     * @param message PreviewRealmUpdateResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.gaming.v1.IPreviewRealmUpdateResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified PreviewRealmUpdateResponse message, length delimited. Does not implicitly {@link google.cloud.gaming.v1.PreviewRealmUpdateResponse.verify|verify} messages.
+                     * @param message PreviewRealmUpdateResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.gaming.v1.IPreviewRealmUpdateResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a PreviewRealmUpdateResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns PreviewRealmUpdateResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gaming.v1.PreviewRealmUpdateResponse;
+
+                    /**
+                     * Decodes a PreviewRealmUpdateResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns PreviewRealmUpdateResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gaming.v1.PreviewRealmUpdateResponse;
+
+                    /**
+                     * Verifies a PreviewRealmUpdateResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a PreviewRealmUpdateResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns PreviewRealmUpdateResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.gaming.v1.PreviewRealmUpdateResponse;
+
+                    /**
+                     * Creates a plain object from a PreviewRealmUpdateResponse message. Also converts values to other types if specified.
+                     * @param message PreviewRealmUpdateResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.gaming.v1.PreviewRealmUpdateResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this PreviewRealmUpdateResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a Realm. */
+                interface IRealm {
+
+                    /** Realm name */
+                    name?: (string|null);
+
+                    /** Realm createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Realm updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Realm labels */
+                    labels?: ({ [k: string]: string }|null);
+
+                    /** Realm timeZone */
+                    timeZone?: (string|null);
+
+                    /** Realm etag */
+                    etag?: (string|null);
+
+                    /** Realm description */
+                    description?: (string|null);
+                }
+
+                /** Represents a Realm. */
+                class Realm implements IRealm {
+
+                    /**
+                     * Constructs a new Realm.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.gaming.v1.IRealm);
+
+                    /** Realm name. */
+                    public name: string;
+
+                    /** Realm createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Realm updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Realm labels. */
+                    public labels: { [k: string]: string };
+
+                    /** Realm timeZone. */
+                    public timeZone: string;
+
+                    /** Realm etag. */
+                    public etag: string;
+
+                    /** Realm description. */
+                    public description: string;
+
+                    /**
+                     * Creates a new Realm instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Realm instance
+                     */
+                    public static create(properties?: google.cloud.gaming.v1.IRealm): google.cloud.gaming.v1.Realm;
+
+                    /**
+                     * Encodes the specified Realm message. Does not implicitly {@link google.cloud.gaming.v1.Realm.verify|verify} messages.
+                     * @param message Realm message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.gaming.v1.IRealm, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Realm message, length delimited. Does not implicitly {@link google.cloud.gaming.v1.Realm.verify|verify} messages.
+                     * @param message Realm message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.gaming.v1.IRealm, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Realm message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Realm
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gaming.v1.Realm;
+
+                    /**
+                     * Decodes a Realm message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Realm
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gaming.v1.Realm;
+
+                    /**
+                     * Verifies a Realm message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Realm message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Realm
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.gaming.v1.Realm;
+
+                    /**
+                     * Creates a plain object from a Realm message. Also converts values to other types if specified.
+                     * @param message Realm
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.gaming.v1.Realm, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Realm to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Represents a RealmsService */
+                class RealmsService extends $protobuf.rpc.Service {
+
+                    /**
+                     * Constructs a new RealmsService service.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     */
+                    constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                    /**
+                     * Creates new RealmsService service using the specified rpc implementation.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     * @returns RPC service. Useful where requests and/or responses are streamed.
+                     */
+                    public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): RealmsService;
+
+                    /**
+                     * Calls ListRealms.
+                     * @param request ListRealmsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListRealmsResponse
+                     */
+                    public listRealms(request: google.cloud.gaming.v1.IListRealmsRequest, callback: google.cloud.gaming.v1.RealmsService.ListRealmsCallback): void;
+
+                    /**
+                     * Calls ListRealms.
+                     * @param request ListRealmsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listRealms(request: google.cloud.gaming.v1.IListRealmsRequest): Promise<google.cloud.gaming.v1.ListRealmsResponse>;
+
+                    /**
+                     * Calls GetRealm.
+                     * @param request GetRealmRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Realm
+                     */
+                    public getRealm(request: google.cloud.gaming.v1.IGetRealmRequest, callback: google.cloud.gaming.v1.RealmsService.GetRealmCallback): void;
+
+                    /**
+                     * Calls GetRealm.
+                     * @param request GetRealmRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getRealm(request: google.cloud.gaming.v1.IGetRealmRequest): Promise<google.cloud.gaming.v1.Realm>;
+
+                    /**
+                     * Calls CreateRealm.
+                     * @param request CreateRealmRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public createRealm(request: google.cloud.gaming.v1.ICreateRealmRequest, callback: google.cloud.gaming.v1.RealmsService.CreateRealmCallback): void;
+
+                    /**
+                     * Calls CreateRealm.
+                     * @param request CreateRealmRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createRealm(request: google.cloud.gaming.v1.ICreateRealmRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls DeleteRealm.
+                     * @param request DeleteRealmRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public deleteRealm(request: google.cloud.gaming.v1.IDeleteRealmRequest, callback: google.cloud.gaming.v1.RealmsService.DeleteRealmCallback): void;
+
+                    /**
+                     * Calls DeleteRealm.
+                     * @param request DeleteRealmRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteRealm(request: google.cloud.gaming.v1.IDeleteRealmRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls UpdateRealm.
+                     * @param request UpdateRealmRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public updateRealm(request: google.cloud.gaming.v1.IUpdateRealmRequest, callback: google.cloud.gaming.v1.RealmsService.UpdateRealmCallback): void;
+
+                    /**
+                     * Calls UpdateRealm.
+                     * @param request UpdateRealmRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateRealm(request: google.cloud.gaming.v1.IUpdateRealmRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls PreviewRealmUpdate.
+                     * @param request PreviewRealmUpdateRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and PreviewRealmUpdateResponse
+                     */
+                    public previewRealmUpdate(request: google.cloud.gaming.v1.IPreviewRealmUpdateRequest, callback: google.cloud.gaming.v1.RealmsService.PreviewRealmUpdateCallback): void;
+
+                    /**
+                     * Calls PreviewRealmUpdate.
+                     * @param request PreviewRealmUpdateRequest message or plain object
+                     * @returns Promise
+                     */
+                    public previewRealmUpdate(request: google.cloud.gaming.v1.IPreviewRealmUpdateRequest): Promise<google.cloud.gaming.v1.PreviewRealmUpdateResponse>;
+                }
+
+                namespace RealmsService {
+
+                    /**
+                     * Callback as used by {@link google.cloud.gaming.v1.RealmsService#listRealms}.
+                     * @param error Error, if any
+                     * @param [response] ListRealmsResponse
+                     */
+                    type ListRealmsCallback = (error: (Error|null), response?: google.cloud.gaming.v1.ListRealmsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.gaming.v1.RealmsService#getRealm}.
+                     * @param error Error, if any
+                     * @param [response] Realm
+                     */
+                    type GetRealmCallback = (error: (Error|null), response?: google.cloud.gaming.v1.Realm) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.gaming.v1.RealmsService#createRealm}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type CreateRealmCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.gaming.v1.RealmsService#deleteRealm}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type DeleteRealmCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.gaming.v1.RealmsService#updateRealm}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type UpdateRealmCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.gaming.v1.RealmsService#previewRealmUpdate}.
+                     * @param error Error, if any
+                     * @param [response] PreviewRealmUpdateResponse
+                     */
+                    type PreviewRealmUpdateCallback = (error: (Error|null), response?: google.cloud.gaming.v1.PreviewRealmUpdateResponse) => void;
+                }
+            }
+
             /** Namespace v1beta. */
             namespace v1beta {
 
