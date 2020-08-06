@@ -59,43 +59,50 @@ export class ResourceStream<T> extends Transform implements ResourceEvents<T> {
 
     this._reading = true;
 
-    this._requestFn(
-      this._nextQuery,
-      (err: Error | null, results: T[], nextQuery: {} | null) => {
-        if (err) {
-          this.destroy(err);
-          return;
-        }
-
-        this._nextQuery = nextQuery;
-
-        if (this._resultsToSend !== Infinity) {
-          results = results.splice(0, this._resultsToSend);
-          this._resultsToSend -= results.length;
-        }
-
-        let more = true;
-
-        for (const result of results) {
-          if (this._ended) {
-            break;
+    // Wrap in a try/catch to catch input linting errors, e.g.
+    // an invalid BigQuery query. These errors are thrown in an
+    // async fashion, which makes them un-catchable by the user.
+    try {
+      this._requestFn(
+        this._nextQuery,
+        (err: Error | null, results: T[], nextQuery: {} | null) => {
+          if (err) {
+            this.destroy(err);
+            return;
           }
-          more = this.push(result);
+
+          this._nextQuery = nextQuery;
+
+          if (this._resultsToSend !== Infinity) {
+            results = results.splice(0, this._resultsToSend);
+            this._resultsToSend -= results.length;
+          }
+
+          let more = true;
+
+          for (const result of results) {
+            if (this._ended) {
+              break;
+            }
+            more = this.push(result);
+          }
+
+          const isFinished = !this._nextQuery || this._resultsToSend < 1;
+          const madeMaxCalls = ++this._requestsMade >= this._maxApiCalls;
+
+          if (isFinished || madeMaxCalls) {
+            this.end();
+          }
+
+          if (more && !this._ended) {
+            setImmediate(() => this._read());
+          }
+
+          this._reading = false;
         }
-
-        const isFinished = !this._nextQuery || this._resultsToSend < 1;
-        const madeMaxCalls = ++this._requestsMade >= this._maxApiCalls;
-
-        if (isFinished || madeMaxCalls) {
-          this.end();
-        }
-
-        if (more && !this._ended) {
-          setImmediate(() => this._read());
-        }
-
-        this._reading = false;
-      }
-    );
+      );
+    } catch (e) {
+      this.destroy(e);
+    }
   }
 }

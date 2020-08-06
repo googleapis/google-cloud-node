@@ -280,5 +280,17 @@ describe('ResourceStream', () => {
 
       assert.strictEqual(stream._reading, false);
     });
+
+    it('should destroy the stream if the request method throws', done => {
+      const error = new Error('Error.');
+      stream._requestFn = () => {
+        throw error;
+      };
+      stream.on('error', err => {
+        assert.strictEqual(err, error);
+        done();
+      });
+      stream._read();
+    });
   });
 });
