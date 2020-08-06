@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-paginator?activeTab=versions
 
+### [3.0.4](https://www.github.com/googleapis/nodejs-paginator/compare/v3.0.3...v3.0.4) (2020-08-06)
+
+
+### Bug Fixes
+
+* destroy ResourceStream with pre-flight error ([#236](https://www.github.com/googleapis/nodejs-paginator/issues/236)) ([d57beb4](https://www.github.com/googleapis/nodejs-paginator/commit/d57beb424d875a7bf502d458cc208f1bbe47a42a))
+
 ### [3.0.3](https://www.github.com/googleapis/nodejs-paginator/compare/v3.0.2...v3.0.3) (2020-07-24)
 
 
