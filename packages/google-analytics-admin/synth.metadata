@@ -4,7 +4,7 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/nodejs-analytics-admin.git",
-        "sha": "24a452c9472f521e8164911ba4f8e2a3d77e2fca"
+        "sha": "ae8132ac29107a038e72d4a6553b2f40143daf71"
       }
     },
     {
@@ -19,7 +19,7 @@
       "git": {
         "name": "synthtool",
         "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "4f8f5dc24af79694887385015294e4dbb214c352"
+        "sha": "94421c47802f56a44c320257b2b4c190dc7d6b68"
       }
     }
   ],
