@@ -4,7 +4,7 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/nodejs-web-risk.git",
-        "sha": "58b5b793d84853990a9b353dd08502948af3ad75"
+        "sha": "dff0b86792ed064e2aeb801c4f75a7c31cca6f28"
       }
     },
     {
@@ -19,7 +19,7 @@
       "git": {
         "name": "synthtool",
         "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "5936421202fb53ed4641bcb824017dd393a3dbcc"
+        "sha": "94421c47802f56a44c320257b2b4c190dc7d6b68"
       }
     }
   ],
