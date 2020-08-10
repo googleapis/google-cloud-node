@@ -868,6 +868,95 @@ describe('VM', () => {
     });
   });
 
+  describe('update', () => {
+    const CURRENT_METADATA = {currentProperty: true};
+    const METADATA = {newProperty: true};
+
+    beforeEach(() => {
+      vm.getMetadata = callback => {
+        callback(null, CURRENT_METADATA);
+      };
+      vm.request = () => {};
+    });
+
+    it('should pull the latest metadata', done => {
+      vm.getMetadata = () => {
+        done();
+      };
+
+      vm.update(METADATA, assert.ifError);
+    });
+
+    it('should return an error if the metadata call failed', done => {
+      const error = new Error('Error.');
+
+      vm.getMetadata = callback => {
+        callback(error);
+      };
+
+      vm.update(METADATA, err => {
+        assert.strictEqual(err, error);
+        done();
+      });
+    });
+
+    it('should send the correct request', done => {
+      vm.request = reqOpts => {
+        assert.deepStrictEqual(reqOpts, {
+          method: 'PUT',
+          uri: '',
+          json: extend(true, CURRENT_METADATA, METADATA),
+        });
+        done();
+      };
+
+      vm.update(METADATA, assert.ifError);
+    });
+
+    it('should deep merge the current metadata with new metadata', done => {
+      const currentMetadata = {
+        a: {
+          b: {
+            c: true,
+            d: true,
+          },
+        },
+      };
+      const newMetadata = {
+        a: {
+          b: {
+            c: false,
+          },
+        },
+      };
+      const expectedMetadata = {
+        a: {
+          b: {
+            c: false,
+            d: true,
+          },
+        },
+      };
+
+      vm.getMetadata = callback => {
+        callback(null, currentMetadata);
+      };
+
+      vm.request = reqOpts => {
+        assert.deepStrictEqual(reqOpts.json, expectedMetadata);
+        done();
+      };
+
+      vm.update(newMetadata, assert.ifError);
+    });
+
+    it('should not require a callback', () => {
+      assert.doesNotThrow(() => {
+        vm.update(METADATA);
+      });
+    });
+  });
+
   describe('waitFor', () => {
     const VALID_STATUSES = [
       'PROVISIONING',

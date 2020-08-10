@@ -1021,6 +1021,12 @@ describe('Compute', () => {
       assert.deepStrictEqual(vm.metadata.metadata.items, [{key, value}]);
     });
 
+    it('should update the VM', async () => {
+      await awaitResult(vm.update({deletionProtection: false}));
+      const [metadata] = await vm.getMetadata();
+      assert.strictEqual(metadata.deletionProtection, false);
+    });
+
     it('should allow updating old metadata', async () => {
       const key = 'newKey';
       const value = 'newValue';

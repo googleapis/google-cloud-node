@@ -17,6 +17,7 @@
 'use strict';
 
 const common = require('@google-cloud/common');
+const extend = require('extend');
 const format = require('string-format-obj');
 const is = require('is');
 const {promisifyAll} = require('@google-cloud/promisify');
@@ -919,6 +920,64 @@ class VM extends common.ServiceObject {
       },
       callback || common.util.noop
     );
+  }
+  /**
+   * Update the instance.
+   *
+   * NOTE: This method will pull the latest record of the current metadata, then
+   * merge it with the object you provide. This means there is a chance of a
+   * mismatch in data if the resource is updated immediately after we pull the
+   * metadata, but before we update it.
+   *
+   * @see [Instances: update API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/instances/update}
+   *
+   * @param {function=} callback - The callback function.
+   * @param {?error} callback.err - An error returned while making this request.
+   * @param {Operation} callback.operation - An operation object
+   *     that can be used to check the status of the request.
+   * @param {object} callback.apiResponse - The full API response.
+   *
+   * @example
+   * const Compute = require('@google-cloud/compute');
+   * const compute = new Compute();
+   * const zone = compute.zone('zone-name');
+   * const vm = zone.vm('vm-name');
+   *
+   * const metadata = {
+   *   deletionProtection: false,
+   * };
+   *
+   * vm.update(metadata, function(err, operation, apiResponse) {
+   *   // `operation` is an Operation object that can be used to check the
+   *   // status of the request.
+   * });
+   *
+   * //-
+   * // If the callback is omitted, we'll return a Promise.
+   * //-
+   * vm.update(metadata).then(function(data) {
+   *   const operation = data[0];
+   *   const apiResponse = data[1];
+   * });
+   */
+  update(metadata, callback) {
+    callback = callback || common.util.noop;
+
+    this.getMetadata((err, currentMetadata) => {
+      if (err) {
+        callback(err);
+        return;
+      }
+
+      this.request(
+        {
+          method: 'PUT',
+          uri: '',
+          json: extend(true, currentMetadata, metadata),
+        },
+        callback
+      );
+    });
   }
   /**
    * This function will callback when the VM is in the specified state.
