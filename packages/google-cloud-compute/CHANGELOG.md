@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/compute?activeTab=versions
 
+## [2.1.0](https://www.github.com/googleapis/nodejs-compute/compare/v2.0.3...v2.1.0) (2020-08-10)
+
+
+### Features
+
+* add vm.update() method ([#478](https://www.github.com/googleapis/nodejs-compute/issues/478)) ([7bcb79c](https://www.github.com/googleapis/nodejs-compute/commit/7bcb79ce515b56b0a2c5aee2aadda4115ddb4fe7))
+
 ### [2.0.3](https://www.github.com/googleapis/nodejs-compute/compare/v2.0.2...v2.0.3) (2020-07-27)
 
 
