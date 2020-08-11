@@ -114,9 +114,7 @@ it('should remove a retention policy on a bucket', () => {
 });
 
 it('should set an temporary hold on a file', () => {
-  const output = execSync(
-    `node setTemporarydHold.js ${bucketName} ${fileName}`
-  );
+  const output = execSync(`node setTemporaryHold.js ${bucketName} ${fileName}`);
   assert.match(output, new RegExp(`Temporary hold was set for ${fileName}.`));
 });
 

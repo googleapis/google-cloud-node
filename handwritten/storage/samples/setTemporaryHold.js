@@ -34,14 +34,14 @@ function main(bucketName = 'my-bucket', fileName = 'test.txt') {
   // Creates a client
   const storage = new Storage();
 
-  async function setTemporarydHold() {
+  async function setTemporaryHold() {
     await storage.bucket(bucketName).file(fileName).setMetadata({
       temporaryHold: true,
     });
     console.log(`Temporary hold was set for ${fileName}.`);
   }
 
-  setTemporarydHold().catch(console.error);
+  setTemporaryHold().catch(console.error);
   // [END storage_set_temporary_hold]
 }
 main(...process.argv.slice(2));
