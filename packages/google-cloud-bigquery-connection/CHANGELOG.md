@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0](https://www.github.com/googleapis/nodejs-bigquery-connection/compare/v1.0.0...v1.1.0) (2020-08-10)
+
+
+### Features
+
+* add/correct PHP namespace for BigQuery connection/reservation ([#26](https://www.github.com/googleapis/nodejs-bigquery-connection/issues/26)) ([39313b9](https://www.github.com/googleapis/nodejs-bigquery-connection/commit/39313b930e12a20203d137058899479ca83d51d5))
+
 ## 1.0.0 (2020-07-09)
 
 
