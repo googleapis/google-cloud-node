@@ -306,12 +306,11 @@ export class KeyManagementServiceClient {
         }
       );
 
+      const descriptor = this.descriptors.page[methodName] || undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
-        this.descriptors.page[methodName] ||
-          this.descriptors.stream[methodName] ||
-          this.descriptors.longrunning[methodName]
+        descriptor
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -1519,6 +1518,39 @@ export class KeyManagementServiceClient {
    *   64KiB. For {@link google.cloud.kms.v1.ProtectionLevel.HSM|HSM} keys, the combined length of the
    *   plaintext and additional_authenticated_data fields must be no larger than
    *   8KiB.
+   * @param {google.protobuf.Int64Value} [request.plaintextCrc32c]
+   *   Optional. An optional CRC32C checksum of the {@link google.cloud.kms.v1.EncryptRequest.plaintext|EncryptRequest.plaintext}. If
+   *   specified, {@link google.cloud.kms.v1.KeyManagementService|KeyManagementService} will verify the integrity of the
+   *   received {@link google.cloud.kms.v1.EncryptRequest.plaintext|EncryptRequest.plaintext} using this checksum.
+   *   {@link google.cloud.kms.v1.KeyManagementService|KeyManagementService} will report an error if the checksum verification
+   *   fails. If you receive a checksum error, your client should verify that
+   *   CRC32C({@link google.cloud.kms.v1.EncryptRequest.plaintext|EncryptRequest.plaintext}) is equal to
+   *   {@link google.cloud.kms.v1.EncryptRequest.plaintext_crc32c|EncryptRequest.plaintext_crc32c}, and if so, perform a limited number of
+   *   retries. A persistent mismatch may indicate an issue in your computation of
+   *   the CRC32C checksum.
+   *   Note: This field is defined as int64 for reasons of compatibility across
+   *   different languages. However, it is a non-negative integer, which will
+   *   never exceed 2^32-1, and can be safely downconverted to uint32 in languages
+   *   that support this type.
+   *
+   *   NOTE: This field is in Beta.
+   * @param {google.protobuf.Int64Value} [request.additionalAuthenticatedDataCrc32c]
+   *   Optional. An optional CRC32C checksum of the
+   *   {@link google.cloud.kms.v1.EncryptRequest.additional_authenticated_data|EncryptRequest.additional_authenticated_data}. If specified,
+   *   {@link google.cloud.kms.v1.KeyManagementService|KeyManagementService} will verify the integrity of the received
+   *   {@link google.cloud.kms.v1.EncryptRequest.additional_authenticated_data|EncryptRequest.additional_authenticated_data} using this checksum.
+   *   {@link google.cloud.kms.v1.KeyManagementService|KeyManagementService} will report an error if the checksum verification
+   *   fails. If you receive a checksum error, your client should verify that
+   *   CRC32C({@link google.cloud.kms.v1.EncryptRequest.additional_authenticated_data|EncryptRequest.additional_authenticated_data}) is equal to
+   *   {@link google.cloud.kms.v1.EncryptRequest.additional_authenticated_data_crc32c|EncryptRequest.additional_authenticated_data_crc32c}, and if so, perform
+   *   a limited number of retries. A persistent mismatch may indicate an issue in
+   *   your computation of the CRC32C checksum.
+   *   Note: This field is defined as int64 for reasons of compatibility across
+   *   different languages. However, it is a non-negative integer, which will
+   *   never exceed 2^32-1, and can be safely downconverted to uint32 in languages
+   *   that support this type.
+   *
+   *   NOTE: This field is in Beta.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1607,6 +1639,39 @@ export class KeyManagementServiceClient {
    * @param {Buffer} [request.additionalAuthenticatedData]
    *   Optional. Optional data that must match the data originally supplied in
    *   {@link google.cloud.kms.v1.EncryptRequest.additional_authenticated_data|EncryptRequest.additional_authenticated_data}.
+   * @param {google.protobuf.Int64Value} [request.ciphertextCrc32c]
+   *   Optional. An optional CRC32C checksum of the {@link google.cloud.kms.v1.DecryptRequest.ciphertext|DecryptRequest.ciphertext}. If
+   *   specified, {@link google.cloud.kms.v1.KeyManagementService|KeyManagementService} will verify the integrity of the
+   *   received {@link google.cloud.kms.v1.DecryptRequest.ciphertext|DecryptRequest.ciphertext} using this checksum.
+   *   {@link google.cloud.kms.v1.KeyManagementService|KeyManagementService} will report an error if the checksum verification
+   *   fails. If you receive a checksum error, your client should verify that
+   *   CRC32C({@link google.cloud.kms.v1.DecryptRequest.ciphertext|DecryptRequest.ciphertext}) is equal to
+   *   {@link google.cloud.kms.v1.DecryptRequest.ciphertext_crc32c|DecryptRequest.ciphertext_crc32c}, and if so, perform a limited number
+   *   of retries. A persistent mismatch may indicate an issue in your computation
+   *   of the CRC32C checksum.
+   *   Note: This field is defined as int64 for reasons of compatibility across
+   *   different languages. However, it is a non-negative integer, which will
+   *   never exceed 2^32-1, and can be safely downconverted to uint32 in languages
+   *   that support this type.
+   *
+   *   NOTE: This field is in Beta.
+   * @param {google.protobuf.Int64Value} [request.additionalAuthenticatedDataCrc32c]
+   *   Optional. An optional CRC32C checksum of the
+   *   {@link google.cloud.kms.v1.DecryptRequest.additional_authenticated_data|DecryptRequest.additional_authenticated_data}. If specified,
+   *   {@link google.cloud.kms.v1.KeyManagementService|KeyManagementService} will verify the integrity of the received
+   *   {@link google.cloud.kms.v1.DecryptRequest.additional_authenticated_data|DecryptRequest.additional_authenticated_data} using this checksum.
+   *   {@link google.cloud.kms.v1.KeyManagementService|KeyManagementService} will report an error if the checksum verification
+   *   fails. If you receive a checksum error, your client should verify that
+   *   CRC32C({@link google.cloud.kms.v1.DecryptRequest.additional_authenticated_data|DecryptRequest.additional_authenticated_data}) is equal to
+   *   {@link google.cloud.kms.v1.DecryptRequest.additional_authenticated_data_crc32c|DecryptRequest.additional_authenticated_data_crc32c}, and if so, perform
+   *   a limited number of retries. A persistent mismatch may indicate an issue in
+   *   your computation of the CRC32C checksum.
+   *   Note: This field is defined as int64 for reasons of compatibility across
+   *   different languages. However, it is a non-negative integer, which will
+   *   never exceed 2^32-1, and can be safely downconverted to uint32 in languages
+   *   that support this type.
+   *
+   *   NOTE: This field is in Beta.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1693,6 +1758,22 @@ export class KeyManagementServiceClient {
    *   Required. The digest of the data to sign. The digest must be produced with
    *   the same digest algorithm as specified by the key version's
    *   {@link google.cloud.kms.v1.CryptoKeyVersion.algorithm|algorithm}.
+   * @param {google.protobuf.Int64Value} [request.digestCrc32c]
+   *   Optional. An optional CRC32C checksum of the {@link google.cloud.kms.v1.AsymmetricSignRequest.digest|AsymmetricSignRequest.digest}. If
+   *   specified, {@link google.cloud.kms.v1.KeyManagementService|KeyManagementService} will verify the integrity of the
+   *   received {@link google.cloud.kms.v1.AsymmetricSignRequest.digest|AsymmetricSignRequest.digest} using this checksum.
+   *   {@link google.cloud.kms.v1.KeyManagementService|KeyManagementService} will report an error if the checksum verification
+   *   fails. If you receive a checksum error, your client should verify that
+   *   CRC32C({@link google.cloud.kms.v1.AsymmetricSignRequest.digest|AsymmetricSignRequest.digest}) is equal to
+   *   {@link google.cloud.kms.v1.AsymmetricSignRequest.digest_crc32c|AsymmetricSignRequest.digest_crc32c}, and if so, perform a limited
+   *   number of retries. A persistent mismatch may indicate an issue in your
+   *   computation of the CRC32C checksum.
+   *   Note: This field is defined as int64 for reasons of compatibility across
+   *   different languages. However, it is a non-negative integer, which will
+   *   never exceed 2^32-1, and can be safely downconverted to uint32 in languages
+   *   that support this type.
+   *
+   *   NOTE: This field is in Beta.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1779,6 +1860,22 @@ export class KeyManagementServiceClient {
    * @param {Buffer} request.ciphertext
    *   Required. The data encrypted with the named {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion}'s public
    *   key using OAEP.
+   * @param {google.protobuf.Int64Value} [request.ciphertextCrc32c]
+   *   Optional. An optional CRC32C checksum of the {@link google.cloud.kms.v1.AsymmetricDecryptRequest.ciphertext|AsymmetricDecryptRequest.ciphertext}.
+   *   If specified, {@link google.cloud.kms.v1.KeyManagementService|KeyManagementService} will verify the integrity of the
+   *   received {@link google.cloud.kms.v1.AsymmetricDecryptRequest.ciphertext|AsymmetricDecryptRequest.ciphertext} using this checksum.
+   *   {@link google.cloud.kms.v1.KeyManagementService|KeyManagementService} will report an error if the checksum verification
+   *   fails. If you receive a checksum error, your client should verify that
+   *   CRC32C({@link google.cloud.kms.v1.AsymmetricDecryptRequest.ciphertext|AsymmetricDecryptRequest.ciphertext}) is equal to
+   *   {@link google.cloud.kms.v1.AsymmetricDecryptRequest.ciphertext_crc32c|AsymmetricDecryptRequest.ciphertext_crc32c}, and if so, perform a
+   *   limited number of retries. A persistent mismatch may indicate an issue in
+   *   your computation of the CRC32C checksum.
+   *   Note: This field is defined as int64 for reasons of compatibility across
+   *   different languages. However, it is a non-negative integer, which will
+   *   never exceed 2^32-1, and can be safely downconverted to uint32 in languages
+   *   that support this type.
+   *
+   *   NOTE: This field is in Beta.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.

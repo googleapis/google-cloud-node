@@ -298,6 +298,14 @@
                         "algorithm": {
                           "type": "CryptoKeyVersion.CryptoKeyVersionAlgorithm",
                           "id": 2
+                        },
+                        "pemCrc32c": {
+                          "type": "google.protobuf.Int64Value",
+                          "id": 3
+                        },
+                        "name": {
+                          "type": "string",
+                          "id": 4
                         }
                       }
                     },
@@ -1118,6 +1126,20 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "plaintextCrc32c": {
+                          "type": "google.protobuf.Int64Value",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "additionalAuthenticatedDataCrc32c": {
+                          "type": "google.protobuf.Int64Value",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -1144,6 +1166,20 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "ciphertextCrc32c": {
+                          "type": "google.protobuf.Int64Value",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "additionalAuthenticatedDataCrc32c": {
+                          "type": "google.protobuf.Int64Value",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -1162,6 +1198,13 @@
                           "id": 3,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "digestCrc32c": {
+                          "type": "google.protobuf.Int64Value",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       }
@@ -1182,6 +1225,13 @@
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
                           }
+                        },
+                        "ciphertextCrc32c": {
+                          "type": "google.protobuf.Int64Value",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -1190,6 +1240,10 @@
                         "plaintext": {
                           "type": "bytes",
                           "id": 1
+                        },
+                        "plaintextCrc32c": {
+                          "type": "google.protobuf.Int64Value",
+                          "id": 2
                         }
                       }
                     },
@@ -1202,6 +1256,18 @@
                         "ciphertext": {
                           "type": "bytes",
                           "id": 2
+                        },
+                        "ciphertextCrc32c": {
+                          "type": "google.protobuf.Int64Value",
+                          "id": 4
+                        },
+                        "verifiedPlaintextCrc32c": {
+                          "type": "bool",
+                          "id": 5
+                        },
+                        "verifiedAdditionalAuthenticatedDataCrc32c": {
+                          "type": "bool",
+                          "id": 6
                         }
                       }
                     },
@@ -1210,6 +1276,18 @@
                         "signature": {
                           "type": "bytes",
                           "id": 1
+                        },
+                        "signatureCrc32c": {
+                          "type": "google.protobuf.Int64Value",
+                          "id": 2
+                        },
+                        "verifiedDigestCrc32c": {
+                          "type": "bool",
+                          "id": 3
+                        },
+                        "name": {
+                          "type": "string",
+                          "id": 4
                         }
                       }
                     },
@@ -1218,6 +1296,14 @@
                         "plaintext": {
                           "type": "bytes",
                           "id": 1
+                        },
+                        "plaintextCrc32c": {
+                          "type": "google.protobuf.Int64Value",
+                          "id": 2
+                        },
+                        "verifiedCiphertextCrc32c": {
+                          "type": "bool",
+                          "id": 3
                         }
                       }
                     },
@@ -2420,6 +2506,78 @@
                 "nanos": {
                   "type": "int32",
                   "id": 2
+                }
+              }
+            },
+            "DoubleValue": {
+              "fields": {
+                "value": {
+                  "type": "double",
+                  "id": 1
+                }
+              }
+            },
+            "FloatValue": {
+              "fields": {
+                "value": {
+                  "type": "float",
+                  "id": 1
+                }
+              }
+            },
+            "Int64Value": {
+              "fields": {
+                "value": {
+                  "type": "int64",
+                  "id": 1
+                }
+              }
+            },
+            "UInt64Value": {
+              "fields": {
+                "value": {
+                  "type": "uint64",
+                  "id": 1
+                }
+              }
+            },
+            "Int32Value": {
+              "fields": {
+                "value": {
+                  "type": "int32",
+                  "id": 1
+                }
+              }
+            },
+            "UInt32Value": {
+              "fields": {
+                "value": {
+                  "type": "uint32",
+                  "id": 1
+                }
+              }
+            },
+            "BoolValue": {
+              "fields": {
+                "value": {
+                  "type": "bool",
+                  "id": 1
+                }
+              }
+            },
+            "StringValue": {
+              "fields": {
+                "value": {
+                  "type": "string",
+                  "id": 1
+                }
+              }
+            },
+            "BytesValue": {
+              "fields": {
+                "value": {
+                  "type": "bytes",
+                  "id": 1
                 }
               }
             },
