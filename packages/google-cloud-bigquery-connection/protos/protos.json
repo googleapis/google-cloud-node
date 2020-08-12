@@ -14,7 +14,7 @@
                         "go_package": "google.golang.org/genproto/googleapis/cloud/bigquery/connection/v1;connection",
                         "java_multiple_files": true,
                         "java_package": "com.google.cloud.bigquery.connection.v1",
-                        "php_namespace": "Google\\Cloud\\BigQuery\\Connection\\V1beta1"
+                        "php_namespace": "Google\\Cloud\\BigQuery\\Connection\\V1"
                       },
                       "nested": {
                         "ConnectionService": {
