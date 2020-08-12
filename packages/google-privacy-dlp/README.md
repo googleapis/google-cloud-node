@@ -68,52 +68,55 @@ const dlp = new DLP.DlpServiceClient();
 const string = 'Robert Frost';
 
 // The project ID to run the API call under
-const projectId = process.env.GCLOUD_PROJECT;
+// const projectId = 'my-project';
 
-// The minimum likelihood required before returning a match
-const minLikelihood = 'LIKELIHOOD_UNSPECIFIED';
+async function quickStart() {
+  // The minimum likelihood required before returning a match
+  const minLikelihood = 'LIKELIHOOD_UNSPECIFIED';
 
-// The maximum number of findings to report (0 = server maximum)
-const maxFindings = 0;
+  // The maximum number of findings to report (0 = server maximum)
+  const maxFindings = 0;
 
-// The infoTypes of information to match
-const infoTypes = [{name: 'PERSON_NAME'}, {name: 'US_STATE'}];
+  // The infoTypes of information to match
+  const infoTypes = [{name: 'PERSON_NAME'}, {name: 'US_STATE'}];
 
-// Whether to include the matching string
-const includeQuote = true;
+  // Whether to include the matching string
+  const includeQuote = true;
 
-// Construct item to inspect
-const item = {value: string};
+  // Construct item to inspect
+  const item = {value: string};
 
-// Construct request
-const request = {
-  parent: `projects/${projectId}/locations/global`,
-  inspectConfig: {
-    infoTypes: infoTypes,
-    minLikelihood: minLikelihood,
-    limits: {
-      maxFindingsPerRequest: maxFindings,
+  // Construct request
+  const request = {
+    parent: `projects/${projectId}/locations/global`,
+    inspectConfig: {
+      infoTypes: infoTypes,
+      minLikelihood: minLikelihood,
+      limits: {
+        maxFindingsPerRequest: maxFindings,
+      },
+      includeQuote: includeQuote,
     },
-    includeQuote: includeQuote,
-  },
-  item: item,
-};
+    item: item,
+  };
 
-// Run request
-const [response] = await dlp.inspectContent(request);
-const findings = response.result.findings;
-if (findings.length > 0) {
-  console.log('Findings:');
-  findings.forEach(finding => {
-    if (includeQuote) {
-      console.log(`\tQuote: ${finding.quote}`);
-    }
-    console.log(`\tInfo type: ${finding.infoType.name}`);
-    console.log(`\tLikelihood: ${finding.likelihood}`);
-  });
-} else {
-  console.log('No findings.');
+  // Run request
+  const [response] = await dlp.inspectContent(request);
+  const findings = response.result.findings;
+  if (findings.length > 0) {
+    console.log('Findings:');
+    findings.forEach(finding => {
+      if (includeQuote) {
+        console.log(`\tQuote: ${finding.quote}`);
+      }
+      console.log(`\tInfo type: ${finding.infoType.name}`);
+      console.log(`\tLikelihood: ${finding.likelihood}`);
+    });
+  } else {
+    console.log('No findings.');
+  }
 }
+quickStart();
 
 ```
 
@@ -126,15 +129,33 @@ has instructions for running the samples.
 
 | Sample                      | Source Code                       | Try it |
 | --------------------------- | --------------------------------- | ------ |
-| Deid | [source code](https://github.com/googleapis/nodejs-dlp/blob/master/samples/deid.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dlp&page=editor&open_in_editor=samples/deid.js,samples/README.md) |
-| Inspect | [source code](https://github.com/googleapis/nodejs-dlp/blob/master/samples/inspect.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dlp&page=editor&open_in_editor=samples/inspect.js,samples/README.md) |
-| Job Management | [source code](https://github.com/googleapis/nodejs-dlp/blob/master/samples/jobs.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dlp&page=editor&open_in_editor=samples/jobs.js,samples/README.md) |
+| Categorical Risk Analysis | [source code](https://github.com/googleapis/nodejs-dlp/blob/master/samples/categoricalRiskAnalysis.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dlp&page=editor&open_in_editor=samples/categoricalRiskAnalysis.js,samples/README.md) |
+| Inspect Templates | [source code](https://github.com/googleapis/nodejs-dlp/blob/master/samples/createInspectTemplate.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dlp&page=editor&open_in_editor=samples/createInspectTemplate.js,samples/README.md) |
+| Job Triggers | [source code](https://github.com/googleapis/nodejs-dlp/blob/master/samples/createTrigger.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dlp&page=editor&open_in_editor=samples/createTrigger.js,samples/README.md) |
+| Deidentify with Date Shift | [source code](https://github.com/googleapis/nodejs-dlp/blob/master/samples/deidentifyWithDateShift.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dlp&page=editor&open_in_editor=samples/deidentifyWithDateShift.js,samples/README.md) |
+| Deidentify with FPE | [source code](https://github.com/googleapis/nodejs-dlp/blob/master/samples/deidentifyWithFpe.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dlp&page=editor&open_in_editor=samples/deidentifyWithFpe.js,samples/README.md) |
+| Deidentify with Mask | [source code](https://github.com/googleapis/nodejs-dlp/blob/master/samples/deidentifyWithMask.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dlp&page=editor&open_in_editor=samples/deidentifyWithMask.js,samples/README.md) |
+| Deidentify with Replacement | [source code](https://github.com/googleapis/nodejs-dlp/blob/master/samples/deidentifyWithReplacement.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dlp&page=editor&open_in_editor=samples/deidentifyWithReplacement.js,samples/README.md) |
+| Delete Inspect Templates | [source code](https://github.com/googleapis/nodejs-dlp/blob/master/samples/deleteInspectTemplate.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dlp&page=editor&open_in_editor=samples/deleteInspectTemplate.js,samples/README.md) |
+| Delete Job | [source code](https://github.com/googleapis/nodejs-dlp/blob/master/samples/deleteJob.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dlp&page=editor&open_in_editor=samples/deleteJob.js,samples/README.md) |
+| Delete Trigger | [source code](https://github.com/googleapis/nodejs-dlp/blob/master/samples/deleteTrigger.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dlp&page=editor&open_in_editor=samples/deleteTrigger.js,samples/README.md) |
+| Inspect Bigquery | [source code](https://github.com/googleapis/nodejs-dlp/blob/master/samples/inspectBigQuery.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dlp&page=editor&open_in_editor=samples/inspectBigQuery.js,samples/README.md) |
+| Inspect Datastore | [source code](https://github.com/googleapis/nodejs-dlp/blob/master/samples/inspectDatastore.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dlp&page=editor&open_in_editor=samples/inspectDatastore.js,samples/README.md) |
+| Inspect File | [source code](https://github.com/googleapis/nodejs-dlp/blob/master/samples/inspectFile.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dlp&page=editor&open_in_editor=samples/inspectFile.js,samples/README.md) |
+| Inspect GCS File | [source code](https://github.com/googleapis/nodejs-dlp/blob/master/samples/inspectGCSFile.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dlp&page=editor&open_in_editor=samples/inspectGCSFile.js,samples/README.md) |
+| Inspects strings | [source code](https://github.com/googleapis/nodejs-dlp/blob/master/samples/inspectString.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dlp&page=editor&open_in_editor=samples/inspectString.js,samples/README.md) |
+| kAnonymity Analysis | [source code](https://github.com/googleapis/nodejs-dlp/blob/master/samples/kAnonymityAnalysis.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dlp&page=editor&open_in_editor=samples/kAnonymityAnalysis.js,samples/README.md) |
+| kMap Estimation Analysis | [source code](https://github.com/googleapis/nodejs-dlp/blob/master/samples/kMapEstimationAnalysis.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dlp&page=editor&open_in_editor=samples/kMapEstimationAnalysis.js,samples/README.md) |
+| l Diversity Analysis | [source code](https://github.com/googleapis/nodejs-dlp/blob/master/samples/lDiversityAnalysis.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dlp&page=editor&open_in_editor=samples/lDiversityAnalysis.js,samples/README.md) |
+| List Inspect Templates | [source code](https://github.com/googleapis/nodejs-dlp/blob/master/samples/listInspectTemplates.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dlp&page=editor&open_in_editor=samples/listInspectTemplates.js,samples/README.md) |
+| List jobs | [source code](https://github.com/googleapis/nodejs-dlp/blob/master/samples/listJobs.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dlp&page=editor&open_in_editor=samples/listJobs.js,samples/README.md) |
+| List Triggers | [source code](https://github.com/googleapis/nodejs-dlp/blob/master/samples/listTriggers.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dlp&page=editor&open_in_editor=samples/listTriggers.js,samples/README.md) |
 | Metadata | [source code](https://github.com/googleapis/nodejs-dlp/blob/master/samples/metadata.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dlp&page=editor&open_in_editor=samples/metadata.js,samples/README.md) |
+| Numerical Risk Analysis | [source code](https://github.com/googleapis/nodejs-dlp/blob/master/samples/numericalRiskAnalysis.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dlp&page=editor&open_in_editor=samples/numericalRiskAnalysis.js,samples/README.md) |
 | Quickstart | [source code](https://github.com/googleapis/nodejs-dlp/blob/master/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dlp&page=editor&open_in_editor=samples/quickstart.js,samples/README.md) |
-| Redact | [source code](https://github.com/googleapis/nodejs-dlp/blob/master/samples/redact.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dlp&page=editor&open_in_editor=samples/redact.js,samples/README.md) |
-| Risk Analysis | [source code](https://github.com/googleapis/nodejs-dlp/blob/master/samples/risk.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dlp&page=editor&open_in_editor=samples/risk.js,samples/README.md) |
-| Inspect Templates | [source code](https://github.com/googleapis/nodejs-dlp/blob/master/samples/templates.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dlp&page=editor&open_in_editor=samples/templates.js,samples/README.md) |
-| Job Triggers | [source code](https://github.com/googleapis/nodejs-dlp/blob/master/samples/triggers.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dlp&page=editor&open_in_editor=samples/triggers.js,samples/README.md) |
+| Redact Image | [source code](https://github.com/googleapis/nodejs-dlp/blob/master/samples/redactImage.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dlp&page=editor&open_in_editor=samples/redactImage.js,samples/README.md) |
+| Redact Text | [source code](https://github.com/googleapis/nodejs-dlp/blob/master/samples/redactText.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dlp&page=editor&open_in_editor=samples/redactText.js,samples/README.md) |
+| Reidentify with FPE | [source code](https://github.com/googleapis/nodejs-dlp/blob/master/samples/reidentifyWithFpe.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dlp&page=editor&open_in_editor=samples/reidentifyWithFpe.js,samples/README.md) |
 
 
 
