@@ -1,7 +1,7 @@
 {
   "name": "nodejs-functions",
   "name_pretty": "Google Cloud Functions",
-  "product_documentation": "https://developers.google.com/nodejs-functions/",
+  "product_documentation": "https://cloud.google.com/functions",
   "client_documentation": "https://googleapis.dev/nodejs/nodejs-functions/latest/index.html",
   "issue_tracker": "",
   "release_level": "beta",

@@ -14,6 +14,9 @@
 Functions client for Node.js
 
 
+A comprehensive list of changes in each version may be found in
+[the CHANGELOG](https://github.com/googleapis/nodejs-functions/blob/master/CHANGELOG.md).
+
 * [Google Cloud Functions Node.js Client API Reference][client-docs]
 * [Google Cloud Functions Documentation][product-docs]
 * [github.com/googleapis/nodejs-functions](https://github.com/googleapis/nodejs-functions)
@@ -151,7 +154,7 @@ Apache Version 2.0
 See [LICENSE](https://github.com/googleapis/nodejs-functions/blob/master/LICENSE)
 
 [client-docs]: https://googleapis.dev/nodejs/nodejs-functions/latest/index.html
-[product-docs]: https://developers.google.com/nodejs-functions/
+[product-docs]: https://cloud.google.com/functions
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project
 [billing]: https://support.google.com/cloud/answer/6293499#enable-billing
