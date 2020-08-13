@@ -34,6 +34,7 @@
  https://cloud.google.com/docs/authentication/production#passing_the_path_to_the_service_account_key_in_code
  */
 
+// [START analytics_admin_quickstart]
 // Imports the Google Analytics Admin API client library
 const analyticsAdmin = require('@google-analytics/admin');
 
@@ -65,3 +66,5 @@ process.on('unhandledRejection', err => {
   console.error(err.message);
   process.exitCode = 1;
 });
+
+// [END analytics_admin_quickstart]
