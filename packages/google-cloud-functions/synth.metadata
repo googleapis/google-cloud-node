@@ -3,8 +3,8 @@
     {
       "git": {
         "name": ".",
-        "remote": "git@github.com:googleapis/nodejs-functions.git",
-        "sha": "fc544c2a6eeef8ee09649aa88f28055de1f036ab"
+        "remote": "https://github.com/googleapis/nodejs-functions.git",
+        "sha": "8b706c7fd65e36026215187736d860e3eb31a6fd"
       }
     },
     {

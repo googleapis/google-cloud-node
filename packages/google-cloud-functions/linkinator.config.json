@@ -3,8 +3,8 @@
   "skip": [
     "https://codecov.io/gh/googleapis/",
     "www.googleapis.com",
-    "img.shields.io",
-    "https://developers.google.com/nodejs-functions/"
+    "https://developers.google.com/nodejs-functions/",
+    "img.shields.io"
   ],
   "silent": true,
   "concurrency": 10
