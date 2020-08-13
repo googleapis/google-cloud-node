@@ -4,14 +4,14 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/nodejs-promisify.git",
-        "sha": "cc9d55bb6cd80997cc54ea4179ca7f22218630a1"
+        "sha": "b4ebd81722496a977d5515a3ed7942d74297af00"
       }
     },
     {
       "git": {
         "name": "synthtool",
         "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "bd0deaa1113b588d70449535ab9cbf0f2bd0e72f"
+        "sha": "5747555f7620113d9a2078a48f4c047a99d31b3e"
       }
     }
   ]
