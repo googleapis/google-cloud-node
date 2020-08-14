@@ -15,23 +15,19 @@ import {describe, it} from 'mocha';
 import * as assert from 'assert';
 import {GrafeasClient} from '../src';
 
-const projectId = process.env.GCLOUD_PROJECT;
-
 describe('GrafeasSystemTest', () => {
   it('lists occurrences', async () => {
-    // instantiate the client.
     const client = new GrafeasClient();
-
-    // create the request.
-    const formattedName = client.projectPath(projectId!);
-    const request = {
-      parent: formattedName,
-    };
-
-    // run the request.
-    const [resp] = await client.listOccurrences(request);
-    console.warn(resp);
-
+    const projectId = await client.getProjectId();
+    const [resp] = await client.listOccurrences(
+      {
+        parent: client.projectPath(projectId),
+      },
+      {
+        autoPaginate: false,
+        pageSize: 1,
+      }
+    );
     assert.ok(resp.length > 0);
-  }).timeout(30000);
+  });
 });

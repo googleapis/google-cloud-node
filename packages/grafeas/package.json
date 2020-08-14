@@ -48,6 +48,7 @@
     "test": "c8 mocha build/test",
     "samples-test": "cd samples/ && npm link ../ && npm install && npm test && cd ../",
     "system-test": "mocha build/system-test",
+    "presystem-test": "npm run compile",
     "docs": "jsdoc -c .jsdoc.js",
     "lint": "gts check",
     "fix": "gts fix",
