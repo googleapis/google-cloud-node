@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/asset?activeTab=versions
 
+## [3.6.0](https://www.github.com/googleapis/nodejs-asset/compare/v3.5.1...v3.6.0) (2020-08-14)
+
+
+### Features
+
+* added support OutputResult in ExportAssetsResponse. docs: updated existing docs. ([#381](https://www.github.com/googleapis/nodejs-asset/issues/381)) ([fa8aadd](https://www.github.com/googleapis/nodejs-asset/commit/fa8aaddeadc21f1a7c343d208df21561ecb3ac8c))
+
 ### [3.5.1](https://www.github.com/googleapis/nodejs-asset/compare/v3.5.0...v3.5.1) (2020-07-27)
 
 
