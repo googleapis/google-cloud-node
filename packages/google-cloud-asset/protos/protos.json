@@ -141,6 +141,10 @@
                         "outputConfig": {
                           "type": "OutputConfig",
                           "id": 2
+                        },
+                        "outputResult": {
+                          "type": "OutputResult",
+                          "id": 3
                         }
                       }
                     },
@@ -288,6 +292,30 @@
                         "bigqueryDestination": {
                           "type": "BigQueryDestination",
                           "id": 2
+                        }
+                      }
+                    },
+                    "OutputResult": {
+                      "oneofs": {
+                        "result": {
+                          "oneof": [
+                            "gcsResult"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "gcsResult": {
+                          "type": "GcsOutputResult",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "GcsOutputResult": {
+                      "fields": {
+                        "uris": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 1
                         }
                       }
                     },
