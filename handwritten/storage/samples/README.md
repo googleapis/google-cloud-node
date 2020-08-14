@@ -84,7 +84,7 @@ objects to users via direct download.
   * [Rotate Encryption Key](#rotate-encryption-key)
   * [Set Event Based Hold](#set-event-based-hold)
   * [Set Retention Policy](#set-retention-policy)
-  * [Set Temporaryd Hold](#set-temporaryd-hold)
+  * [Set Temporary Hold](#set-temporary-hold)
   * [Upload a directory to a bucket.](#upload-a-directory-to-a-bucket.)
   * [Upload Encrypted File](#upload-encrypted-file)
   * [Upload File](#upload-file)
@@ -1244,7 +1244,7 @@ __Usage:__
 
 
 
-### Set Temporaryd Hold
+### Set Temporary Hold
 
 View the [source code](https://github.com/googleapis/nodejs-storage/blob/master/samples/setTemporaryHold.js).
 
