@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/security-center?activeTab=versions
 
+## [5.1.0](https://www.github.com/googleapis/nodejs-security-center/compare/v5.0.3...v5.1.0) (2020-08-14)
+
+
+### Features
+
+* added field severity to findings ([#317](https://www.github.com/googleapis/nodejs-security-center/issues/317)) ([155a14a](https://www.github.com/googleapis/nodejs-security-center/commit/155a14a714304be6916452c32aee833aa5fe4230))
+
 ### [5.0.3](https://www.github.com/googleapis/nodejs-security-center/compare/v5.0.2...v5.0.3) (2020-07-30)
 
 
