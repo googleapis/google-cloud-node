@@ -237,7 +237,7 @@
   {
     "name": "nodejs-functions",
     "name_pretty": "Functions",
-    "product_documentation": "https://developers.google.com/nodejs-functions/",
+    "product_documentation": "https://cloud.google.com/functions",
     "client_documentation": "https://googleapis.dev/nodejs/nodejs-functions/latest/index.html",
     "issue_tracker": "",
     "release_level": "beta",
@@ -246,7 +246,7 @@
     "distribution_name": "@google-cloud/functions",
     "api_id": "cloudfunctions.googleapis.com",
     "requires_billing": false,
-    "support_documentation": "https://developers.google.com/nodejs-functions/"
+    "support_documentation": "https://cloud.google.com/functions/docs/getting-support"
   },
   {
     "name": "game-servers",
