@@ -737,6 +737,7 @@
                          * @interface IExportAssetsResponse
                          * @property {google.protobuf.ITimestamp|null} [readTime] ExportAssetsResponse readTime
                          * @property {google.cloud.asset.v1.IOutputConfig|null} [outputConfig] ExportAssetsResponse outputConfig
+                         * @property {google.cloud.asset.v1.IOutputResult|null} [outputResult] ExportAssetsResponse outputResult
                          */
     
                         /**
@@ -771,6 +772,14 @@
                         ExportAssetsResponse.prototype.outputConfig = null;
     
                         /**
+                         * ExportAssetsResponse outputResult.
+                         * @member {google.cloud.asset.v1.IOutputResult|null|undefined} outputResult
+                         * @memberof google.cloud.asset.v1.ExportAssetsResponse
+                         * @instance
+                         */
+                        ExportAssetsResponse.prototype.outputResult = null;
+    
+                        /**
                          * Creates a new ExportAssetsResponse instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.asset.v1.ExportAssetsResponse
@@ -798,6 +807,8 @@
                                 $root.google.protobuf.Timestamp.encode(message.readTime, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
                             if (message.outputConfig != null && Object.hasOwnProperty.call(message, "outputConfig"))
                                 $root.google.cloud.asset.v1.OutputConfig.encode(message.outputConfig, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.outputResult != null && Object.hasOwnProperty.call(message, "outputResult"))
+                                $root.google.cloud.asset.v1.OutputResult.encode(message.outputResult, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                             return writer;
                         };
     
@@ -837,6 +848,9 @@
                                     break;
                                 case 2:
                                     message.outputConfig = $root.google.cloud.asset.v1.OutputConfig.decode(reader, reader.uint32());
+                                    break;
+                                case 3:
+                                    message.outputResult = $root.google.cloud.asset.v1.OutputResult.decode(reader, reader.uint32());
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -883,6 +897,11 @@
                                 if (error)
                                     return "outputConfig." + error;
                             }
+                            if (message.outputResult != null && message.hasOwnProperty("outputResult")) {
+                                var error = $root.google.cloud.asset.v1.OutputResult.verify(message.outputResult);
+                                if (error)
+                                    return "outputResult." + error;
+                            }
                             return null;
                         };
     
@@ -908,6 +927,11 @@
                                     throw TypeError(".google.cloud.asset.v1.ExportAssetsResponse.outputConfig: object expected");
                                 message.outputConfig = $root.google.cloud.asset.v1.OutputConfig.fromObject(object.outputConfig);
                             }
+                            if (object.outputResult != null) {
+                                if (typeof object.outputResult !== "object")
+                                    throw TypeError(".google.cloud.asset.v1.ExportAssetsResponse.outputResult: object expected");
+                                message.outputResult = $root.google.cloud.asset.v1.OutputResult.fromObject(object.outputResult);
+                            }
                             return message;
                         };
     
@@ -927,11 +951,14 @@
                             if (options.defaults) {
                                 object.readTime = null;
                                 object.outputConfig = null;
+                                object.outputResult = null;
                             }
                             if (message.readTime != null && message.hasOwnProperty("readTime"))
                                 object.readTime = $root.google.protobuf.Timestamp.toObject(message.readTime, options);
                             if (message.outputConfig != null && message.hasOwnProperty("outputConfig"))
                                 object.outputConfig = $root.google.cloud.asset.v1.OutputConfig.toObject(message.outputConfig, options);
+                            if (message.outputResult != null && message.hasOwnProperty("outputResult"))
+                                object.outputResult = $root.google.cloud.asset.v1.OutputResult.toObject(message.outputResult, options);
                             return object;
                         };
     
@@ -2930,6 +2957,420 @@
                         };
     
                         return OutputConfig;
+                    })();
+    
+                    v1.OutputResult = (function() {
+    
+                        /**
+                         * Properties of an OutputResult.
+                         * @memberof google.cloud.asset.v1
+                         * @interface IOutputResult
+                         * @property {google.cloud.asset.v1.IGcsOutputResult|null} [gcsResult] OutputResult gcsResult
+                         */
+    
+                        /**
+                         * Constructs a new OutputResult.
+                         * @memberof google.cloud.asset.v1
+                         * @classdesc Represents an OutputResult.
+                         * @implements IOutputResult
+                         * @constructor
+                         * @param {google.cloud.asset.v1.IOutputResult=} [properties] Properties to set
+                         */
+                        function OutputResult(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * OutputResult gcsResult.
+                         * @member {google.cloud.asset.v1.IGcsOutputResult|null|undefined} gcsResult
+                         * @memberof google.cloud.asset.v1.OutputResult
+                         * @instance
+                         */
+                        OutputResult.prototype.gcsResult = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * OutputResult result.
+                         * @member {"gcsResult"|undefined} result
+                         * @memberof google.cloud.asset.v1.OutputResult
+                         * @instance
+                         */
+                        Object.defineProperty(OutputResult.prototype, "result", {
+                            get: $util.oneOfGetter($oneOfFields = ["gcsResult"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new OutputResult instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.asset.v1.OutputResult
+                         * @static
+                         * @param {google.cloud.asset.v1.IOutputResult=} [properties] Properties to set
+                         * @returns {google.cloud.asset.v1.OutputResult} OutputResult instance
+                         */
+                        OutputResult.create = function create(properties) {
+                            return new OutputResult(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified OutputResult message. Does not implicitly {@link google.cloud.asset.v1.OutputResult.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.asset.v1.OutputResult
+                         * @static
+                         * @param {google.cloud.asset.v1.IOutputResult} message OutputResult message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        OutputResult.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.gcsResult != null && Object.hasOwnProperty.call(message, "gcsResult"))
+                                $root.google.cloud.asset.v1.GcsOutputResult.encode(message.gcsResult, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified OutputResult message, length delimited. Does not implicitly {@link google.cloud.asset.v1.OutputResult.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.asset.v1.OutputResult
+                         * @static
+                         * @param {google.cloud.asset.v1.IOutputResult} message OutputResult message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        OutputResult.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an OutputResult message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.asset.v1.OutputResult
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.asset.v1.OutputResult} OutputResult
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        OutputResult.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1.OutputResult();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.gcsResult = $root.google.cloud.asset.v1.GcsOutputResult.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an OutputResult message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.asset.v1.OutputResult
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.asset.v1.OutputResult} OutputResult
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        OutputResult.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an OutputResult message.
+                         * @function verify
+                         * @memberof google.cloud.asset.v1.OutputResult
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        OutputResult.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.gcsResult != null && message.hasOwnProperty("gcsResult")) {
+                                properties.result = 1;
+                                {
+                                    var error = $root.google.cloud.asset.v1.GcsOutputResult.verify(message.gcsResult);
+                                    if (error)
+                                        return "gcsResult." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an OutputResult message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.asset.v1.OutputResult
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.asset.v1.OutputResult} OutputResult
+                         */
+                        OutputResult.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.asset.v1.OutputResult)
+                                return object;
+                            var message = new $root.google.cloud.asset.v1.OutputResult();
+                            if (object.gcsResult != null) {
+                                if (typeof object.gcsResult !== "object")
+                                    throw TypeError(".google.cloud.asset.v1.OutputResult.gcsResult: object expected");
+                                message.gcsResult = $root.google.cloud.asset.v1.GcsOutputResult.fromObject(object.gcsResult);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an OutputResult message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.asset.v1.OutputResult
+                         * @static
+                         * @param {google.cloud.asset.v1.OutputResult} message OutputResult
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        OutputResult.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (message.gcsResult != null && message.hasOwnProperty("gcsResult")) {
+                                object.gcsResult = $root.google.cloud.asset.v1.GcsOutputResult.toObject(message.gcsResult, options);
+                                if (options.oneofs)
+                                    object.result = "gcsResult";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this OutputResult to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.asset.v1.OutputResult
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        OutputResult.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return OutputResult;
+                    })();
+    
+                    v1.GcsOutputResult = (function() {
+    
+                        /**
+                         * Properties of a GcsOutputResult.
+                         * @memberof google.cloud.asset.v1
+                         * @interface IGcsOutputResult
+                         * @property {Array.<string>|null} [uris] GcsOutputResult uris
+                         */
+    
+                        /**
+                         * Constructs a new GcsOutputResult.
+                         * @memberof google.cloud.asset.v1
+                         * @classdesc Represents a GcsOutputResult.
+                         * @implements IGcsOutputResult
+                         * @constructor
+                         * @param {google.cloud.asset.v1.IGcsOutputResult=} [properties] Properties to set
+                         */
+                        function GcsOutputResult(properties) {
+                            this.uris = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GcsOutputResult uris.
+                         * @member {Array.<string>} uris
+                         * @memberof google.cloud.asset.v1.GcsOutputResult
+                         * @instance
+                         */
+                        GcsOutputResult.prototype.uris = $util.emptyArray;
+    
+                        /**
+                         * Creates a new GcsOutputResult instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.asset.v1.GcsOutputResult
+                         * @static
+                         * @param {google.cloud.asset.v1.IGcsOutputResult=} [properties] Properties to set
+                         * @returns {google.cloud.asset.v1.GcsOutputResult} GcsOutputResult instance
+                         */
+                        GcsOutputResult.create = function create(properties) {
+                            return new GcsOutputResult(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GcsOutputResult message. Does not implicitly {@link google.cloud.asset.v1.GcsOutputResult.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.asset.v1.GcsOutputResult
+                         * @static
+                         * @param {google.cloud.asset.v1.IGcsOutputResult} message GcsOutputResult message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GcsOutputResult.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.uris != null && message.uris.length)
+                                for (var i = 0; i < message.uris.length; ++i)
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.uris[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GcsOutputResult message, length delimited. Does not implicitly {@link google.cloud.asset.v1.GcsOutputResult.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.asset.v1.GcsOutputResult
+                         * @static
+                         * @param {google.cloud.asset.v1.IGcsOutputResult} message GcsOutputResult message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GcsOutputResult.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GcsOutputResult message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.asset.v1.GcsOutputResult
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.asset.v1.GcsOutputResult} GcsOutputResult
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GcsOutputResult.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1.GcsOutputResult();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    if (!(message.uris && message.uris.length))
+                                        message.uris = [];
+                                    message.uris.push(reader.string());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GcsOutputResult message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.asset.v1.GcsOutputResult
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.asset.v1.GcsOutputResult} GcsOutputResult
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GcsOutputResult.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GcsOutputResult message.
+                         * @function verify
+                         * @memberof google.cloud.asset.v1.GcsOutputResult
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GcsOutputResult.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.uris != null && message.hasOwnProperty("uris")) {
+                                if (!Array.isArray(message.uris))
+                                    return "uris: array expected";
+                                for (var i = 0; i < message.uris.length; ++i)
+                                    if (!$util.isString(message.uris[i]))
+                                        return "uris: string[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GcsOutputResult message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.asset.v1.GcsOutputResult
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.asset.v1.GcsOutputResult} GcsOutputResult
+                         */
+                        GcsOutputResult.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.asset.v1.GcsOutputResult)
+                                return object;
+                            var message = new $root.google.cloud.asset.v1.GcsOutputResult();
+                            if (object.uris) {
+                                if (!Array.isArray(object.uris))
+                                    throw TypeError(".google.cloud.asset.v1.GcsOutputResult.uris: array expected");
+                                message.uris = [];
+                                for (var i = 0; i < object.uris.length; ++i)
+                                    message.uris[i] = String(object.uris[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GcsOutputResult message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.asset.v1.GcsOutputResult
+                         * @static
+                         * @param {google.cloud.asset.v1.GcsOutputResult} message GcsOutputResult
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GcsOutputResult.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.uris = [];
+                            if (message.uris && message.uris.length) {
+                                object.uris = [];
+                                for (var j = 0; j < message.uris.length; ++j)
+                                    object.uris[j] = message.uris[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GcsOutputResult to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.asset.v1.GcsOutputResult
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GcsOutputResult.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return GcsOutputResult;
                     })();
     
                     v1.GcsDestination = (function() {
