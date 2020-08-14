@@ -21823,6 +21823,7 @@
                          * @property {google.cloud.securitycenter.v1p1beta1.ISecurityMarks|null} [securityMarks] Finding securityMarks
                          * @property {google.protobuf.ITimestamp|null} [eventTime] Finding eventTime
                          * @property {google.protobuf.ITimestamp|null} [createTime] Finding createTime
+                         * @property {google.cloud.securitycenter.v1p1beta1.Finding.Severity|null} [severity] Finding severity
                          */
     
                         /**
@@ -21922,6 +21923,14 @@
                         Finding.prototype.createTime = null;
     
                         /**
+                         * Finding severity.
+                         * @member {google.cloud.securitycenter.v1p1beta1.Finding.Severity} severity
+                         * @memberof google.cloud.securitycenter.v1p1beta1.Finding
+                         * @instance
+                         */
+                        Finding.prototype.severity = 0;
+    
+                        /**
                          * Creates a new Finding instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.securitycenter.v1p1beta1.Finding
@@ -21968,6 +21977,8 @@
                                 $root.google.protobuf.Timestamp.encode(message.eventTime, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
                             if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
                                 $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
+                            if (message.severity != null && Object.hasOwnProperty.call(message, "severity"))
+                                writer.uint32(/* id 13, wireType 0 =*/104).int32(message.severity);
                             return writer;
                         };
     
@@ -22050,6 +22061,9 @@
                                     break;
                                 case 10:
                                     message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                case 13:
+                                    message.severity = reader.int32();
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -22135,6 +22149,17 @@
                                 if (error)
                                     return "createTime." + error;
                             }
+                            if (message.severity != null && message.hasOwnProperty("severity"))
+                                switch (message.severity) {
+                                default:
+                                    return "severity: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                    break;
+                                }
                             return null;
                         };
     
@@ -22199,6 +22224,28 @@
                                     throw TypeError(".google.cloud.securitycenter.v1p1beta1.Finding.createTime: object expected");
                                 message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
                             }
+                            switch (object.severity) {
+                            case "SEVERITY_UNSPECIFIED":
+                            case 0:
+                                message.severity = 0;
+                                break;
+                            case "CRITICAL":
+                            case 1:
+                                message.severity = 1;
+                                break;
+                            case "HIGH":
+                            case 2:
+                                message.severity = 2;
+                                break;
+                            case "MEDIUM":
+                            case 3:
+                                message.severity = 3;
+                                break;
+                            case "LOW":
+                            case 4:
+                                message.severity = 4;
+                                break;
+                            }
                             return message;
                         };
     
@@ -22227,6 +22274,7 @@
                                 object.securityMarks = null;
                                 object.eventTime = null;
                                 object.createTime = null;
+                                object.severity = options.enums === String ? "SEVERITY_UNSPECIFIED" : 0;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -22252,6 +22300,8 @@
                                 object.eventTime = $root.google.protobuf.Timestamp.toObject(message.eventTime, options);
                             if (message.createTime != null && message.hasOwnProperty("createTime"))
                                 object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                            if (message.severity != null && message.hasOwnProperty("severity"))
+                                object.severity = options.enums === String ? $root.google.cloud.securitycenter.v1p1beta1.Finding.Severity[message.severity] : message.severity;
                             return object;
                         };
     
@@ -22279,6 +22329,26 @@
                             values[valuesById[0] = "STATE_UNSPECIFIED"] = 0;
                             values[valuesById[1] = "ACTIVE"] = 1;
                             values[valuesById[2] = "INACTIVE"] = 2;
+                            return values;
+                        })();
+    
+                        /**
+                         * Severity enum.
+                         * @name google.cloud.securitycenter.v1p1beta1.Finding.Severity
+                         * @enum {number}
+                         * @property {number} SEVERITY_UNSPECIFIED=0 SEVERITY_UNSPECIFIED value
+                         * @property {number} CRITICAL=1 CRITICAL value
+                         * @property {number} HIGH=2 HIGH value
+                         * @property {number} MEDIUM=3 MEDIUM value
+                         * @property {number} LOW=4 LOW value
+                         */
+                        Finding.Severity = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "SEVERITY_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "CRITICAL"] = 1;
+                            values[valuesById[2] = "HIGH"] = 2;
+                            values[valuesById[3] = "MEDIUM"] = 3;
+                            values[valuesById[4] = "LOW"] = 4;
                             return values;
                         })();
     
