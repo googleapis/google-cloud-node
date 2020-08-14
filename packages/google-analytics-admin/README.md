@@ -32,7 +32,7 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 * [Quickstart](#quickstart)
   * [Before you begin](#before-you-begin)
   * [Installing the client library](#installing-the-client-library)
-
+  * [Using the client library](#using-the-client-library)
 * [Samples](#samples)
 * [Versioning](#versioning)
 * [Contributing](#contributing)
@@ -54,6 +54,44 @@ npm install @google-analytics/admin
 ```
 
 
+### Using the client library
+
+```javascript
+// Imports the Google Analytics Admin API client library
+const analyticsAdmin = require('@google-analytics/admin');
+
+async function main() {
+  // Instantiates a client using default credentials.
+  // TODO(developer): uncomment and use the following line in order to
+  //  manually set the path to the service account JSON file instead of
+  //  using the value from the GOOGLE_APPLICATION_CREDENTIALS environment
+  //  variable.
+  // const analyticsAdminClient = new analyticsAdmin.AnalyticsAdminServiceClient(
+  //     {keyFilename: "your_key_json_file_path"});
+  const analyticsAdminClient = new analyticsAdmin.AnalyticsAdminServiceClient();
+
+  // Calls listAccounts() method of the Google Analytics Admin API and prints
+  // the response for each account.
+  const [accounts] = await analyticsAdminClient.listAccounts();
+
+  console.log('Accounts:');
+  accounts.forEach(account => {
+    console.log(account);
+  });
+}
+
+main(...process.argv.slice(2)).catch(err => {
+  console.error(err.message);
+  process.exitCode = 1;
+});
+process.on('unhandledRejection', err => {
+  console.error(err.message);
+  process.exitCode = 1;
+});
+
+
+```
+
 
 
 ## Samples
@@ -63,6 +101,7 @@ has instructions for running the samples.
 
 | Sample                      | Source Code                       | Try it |
 | --------------------------- | --------------------------------- | ------ |
+| Quickstart | [source code](https://github.com/googleapis/nodejs-analytics-admin/blob/master/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-analytics-admin&page=editor&open_in_editor=samples/quickstart.js,samples/README.md) |
 | Quickstart_installed_oauth2 | [source code](https://github.com/googleapis/nodejs-analytics-admin/blob/master/samples/quickstart_installed_oauth2.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-analytics-admin&page=editor&open_in_editor=samples/quickstart_installed_oauth2.js,samples/README.md) |
 
 
