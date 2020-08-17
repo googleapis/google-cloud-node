@@ -15,6 +15,9 @@ A [Grafeas API Client](https://grafeas.io/) compatible with Google Cloud's
 [Container Analysis API](https://cloud.google.com/container-registry/docs/container-analysis).
 
 
+A comprehensive list of changes in each version may be found in
+[the CHANGELOG](https://github.com/googleapis/nodejs-grafeas/blob/master/CHANGELOG.md).
+
 * [Grafeas Node.js Client API Reference][client-docs]
 * [Grafeas Documentation][product-docs]
 * [github.com/googleapis/nodejs-grafeas](https://github.com/googleapis/nodejs-grafeas)
