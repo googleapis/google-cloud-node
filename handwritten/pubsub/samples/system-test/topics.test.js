@@ -33,6 +33,7 @@ describe('topics', () => {
   const subscriptionNameTwo = `sub2-${runId}`;
   const subscriptionNameThree = `sub3-${runId}`;
   const subscriptionNameFour = `sub4-${runId}`;
+  const subscriptionNameFive = `sub5-${runId}`;
   const fullTopicNameOne = `projects/${projectId}/topics/${topicNameOne}`;
   const expectedMessage = {data: 'Hello, world!'};
 
@@ -135,31 +136,19 @@ describe('topics', () => {
   });
 
   it('should publish ordered messages', async () => {
-    const topics = require('../publishOrderedMessage');
-
     const [subscription] = await pubsub
       .topic(topicNameTwo)
       .subscription(subscriptionNameTwo)
       .get({autoCreate: true});
 
-    let messageId = await topics.publishOrderedMessage(
-      topicNameTwo,
-      expectedMessage.data
+    execSync(
+      `${commandFor('publishOrderedMessage')} ${topicNameTwo} "${
+        expectedMessage.data
+      }" my-key`
     );
-    let message = await _pullOneMessage(subscription);
-    assert.strictEqual(message.id, messageId);
+    const message = await _pullOneMessage(subscription);
+    assert.strictEqual(message.orderingKey, 'my-key');
     assert.strictEqual(message.data.toString(), expectedMessage.data);
-    assert.strictEqual(message.attributes.counterId, '1');
-
-    messageId = await topics.publishOrderedMessage(
-      topicNameTwo,
-      expectedMessage.data
-    );
-    message = await _pullOneMessage(subscription);
-    assert.strictEqual(message.id, messageId);
-    assert.strictEqual(message.data.toString(), expectedMessage.data);
-    assert.strictEqual(message.attributes.counterId, '2');
-    await topics.publishOrderedMessage(topicNameTwo, expectedMessage.data);
   });
 
   it('should publish with specific batch settings', async () => {
@@ -186,6 +175,22 @@ describe('topics', () => {
       waitTime + acceptableLatency,
       'read is within acceptable latency'
     );
+  });
+
+  it('should resume publish', async () => {
+    const [subscription] = await pubsub
+      .topic(topicNameTwo)
+      .subscription(subscriptionNameFive)
+      .get({autoCreate: true});
+
+    execSync(
+      `${commandFor('resumePublish')} ${topicNameTwo} "${
+        expectedMessage.data
+      }" my-key`
+    );
+    const message = await _pullOneMessage(subscription);
+    assert.strictEqual(message.orderingKey, 'my-key');
+    assert.strictEqual(message.data.toString(), expectedMessage.data);
   });
 
   it('should publish with retry settings', async () => {

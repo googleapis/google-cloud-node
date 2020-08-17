@@ -23,28 +23,17 @@
 'use strict';
 
 // sample-metadata:
-//   title: Publish Ordered Message
-//   description: Demonstrates how to publish messages to a topic
-//     with ordering. Please see "Listen for Ordered Messages" for
-//     the other side of this.
-//   usage: node publishOrderedMessage.js <topic-name> <data>
-
-let publishCounterValue = 1;
-
-function getPublishCounterValue() {
-  return publishCounterValue;
-}
-
-function setPublishCounterValue(value) {
-  publishCounterValue = value;
-}
+//   title: Resume Publish
+//   description: Demonstrates how to resume publishing on an ordering key if
+//     publishing fails for a message.
+//   usage: node resumePublish.js <topic-name> <data>
 
 async function main(
   topicName = 'YOUR_TOPIC_NAME',
   data = JSON.stringify({foo: 'bar'}),
   orderingKey = 'key1'
 ) {
-  // [START pubsub_publish_ordered_message]
+  // [START pubsub_resume_publish]
   /**
    * TODO(developer): Uncomment these variables before running the sample.
    */
@@ -58,40 +47,37 @@ async function main(
   // Creates a client; cache this for further use
   const pubSubClient = new PubSub();
 
-  async function publishOrderedMessage() {
+  async function resumePublish() {
     // Publishes the message as a string, e.g. "Hello, world!" or JSON.stringify(someObject)
     const dataBuffer = Buffer.from(data);
 
-    const attributes = {
-      // Pub/Sub messages are unordered, so assign an order ID and manually order messages
-      counterId: `${getPublishCounterValue()}`,
-    };
-
-    const message = {
-      data: dataBuffer,
-      attributes: attributes,
-      orderingKey: orderingKey,
-    };
-
     // Publishes the message
-    const messageId = await pubSubClient
-      .topic(topicName, {enableMessageOrdering: true})
-      .publishMessage(message);
+    const publisher = pubSubClient.topic(topicName, {
+      enableMessageOrdering: true,
+    });
+    try {
+      const message = {
+        data: dataBuffer,
+        orderingKey: orderingKey,
+      };
+      const messageId = await publisher.publishMessage(message);
+      console.log(`Message ${messageId} published.`);
 
-    // Update the counter value
-    setPublishCounterValue(parseInt(attributes.counterId, 10) + 1);
-    console.log(`Message ${messageId} published.`);
-
-    return messageId;
+      return messageId;
+    } catch (e) {
+      console.log(`Could not publish: ${e}`);
+      publisher.resumePublishing(orderingKey);
+      return null;
+    }
   }
 
-  return await publishOrderedMessage();
-  // [END pubsub_publish_ordered_message]
+  return await resumePublish();
+  // [END pubsub_resume_publish]
 }
 
 // This needs to be exported directly so that the system tests can find it.
 module.exports = {
-  publishOrderedMessage: main,
+  resumePublish: main,
 };
 
 if (require.main === module) {

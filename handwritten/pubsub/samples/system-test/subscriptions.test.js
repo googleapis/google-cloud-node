@@ -36,6 +36,7 @@ describe('subscriptions', () => {
   const subscriptionNameFive = `sub5-${runId}`;
   const subscriptionNameSix = `sub6-${runId}`;
   const subscriptionNameSeven = `sub7-${runId}`;
+  const subscriptionNameEight = `sub8-${runId}`;
   const subscriptionNameDetach = `testdetachsubsxyz-${runId}`;
   const fullTopicNameOne = `projects/${projectId}/topics/${topicNameOne}`;
   const fullSubscriptionNameOne = `projects/${projectId}/subscriptions/${subscriptionNameOne}`;
@@ -392,5 +393,22 @@ describe('subscriptions', () => {
       .subscription(subscriptionNameSeven)
       .get();
     assert.isNull(subscription.metadata.deadLetterPolicy);
+  });
+
+  it('should create a subscription with ordering enabled.', async () => {
+    const output = execSync(
+      `${commandFor(
+        'createSubscriptionWithOrdering'
+      )} ${topicNameTwo} ${subscriptionNameEight} ${topicNameThree}`
+    );
+    assert.include(
+      output,
+      `Created subscription ${subscriptionNameEight} with ordering enabled.`
+    );
+    const [subscription] = await pubsub
+      .topic(topicNameTwo)
+      .subscription(subscriptionNameEight)
+      .get();
+    assert.strictEqual(subscription.metadata.enableMessageOrdering, true);
   });
 });

@@ -23,6 +23,7 @@ guides.
   * [Create Push Subscription](#create-push-subscription)
   * [Create Subscription](#create-subscription)
   * [Create Subscription With Dead Letter Policy](#create-subscription-with-dead-letter-policy)
+  * [Create Subscription With Ordering Enabled](#create-subscription-with-ordering)
   * [Create Topic](#create-topic)
   * [Delete Subscription](#delete-subscription)
   * [Delete Topic](#delete-topic)
@@ -123,6 +124,24 @@ __Usage:__
 
 -----
 
+
+
+
+### Create Subscription With Ordering Enabled
+
+Creates a new subscription With Ordering Enabled.
+
+View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/master/samples/createSubscriptionWithOrdering.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-pubsub&page=editor&open_in_editor=samples/createSubscriptionWithOrdering.js,samples/README.md)
+
+__Usage:__
+
+
+`node createSubscriptionWithOrdering.js <topic-name> <subscription-name>`
+
+
+-----
 
 
 
@@ -460,7 +479,26 @@ View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/master/s
 __Usage:__
 
 
-`node publishOrderedMessage.js <topic-name> <data>`
+`node publishOrderedMessage.js <topic-name> <data> <ordering-key>`
+
+
+-----
+
+
+
+
+### Resume Publishing
+
+Demonstrates how to resume publishing for an ordering key after a publish fails.
+
+View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/master/samples/resumePublish.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-pubsub&page=editor&open_in_editor=samples/resumePublish.js,samples/README.md)
+
+__Usage:__
+
+
+`node resumePublish.js <topic-name> <data> <ordering-key>`
 
 
 -----
