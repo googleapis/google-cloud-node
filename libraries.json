@@ -731,20 +731,6 @@
     "support_documentation": "https://cloud.google.com/stackdriver/docs/getting-support"
   },
   {
-    "name": "irm",
-    "name_pretty": "Stackdriver Incident Response &amp; Management",
-    "product_documentation": "https://cloud.google.com/incident-response",
-    "issue_tracker": "https://issuetracker.google.com/savedsearches/559785",
-    "release_level": "alpha",
-    "language": "nodejs",
-    "repo": "googleapis/nodejs-irm",
-    "distribution_name": "@google-cloud/irm",
-    "api_id": "irm.googleapis.com",
-    "requires_billing": true,
-    "client_documentation": "https://googleapis.dev/nodejs/irm/latest",
-    "support_documentation": "https://cloud.google.com/stackdriver/docs/getting-support"
-  },
-  {
     "name": "logging",
     "name_pretty": "Stackdriver Logging",
     "product_documentation": "https://cloud.google.com/logging/docs",
