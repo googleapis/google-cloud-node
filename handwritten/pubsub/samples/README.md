@@ -23,7 +23,7 @@ guides.
   * [Create Push Subscription](#create-push-subscription)
   * [Create Subscription](#create-subscription)
   * [Create Subscription With Dead Letter Policy](#create-subscription-with-dead-letter-policy)
-  * [Create Subscription With Ordering Enabled](#create-subscription-with-ordering)
+  * [Create Subscription with ordering enabled](#create-subscription-with-ordering-enabled)
   * [Create Topic](#create-topic)
   * [Delete Subscription](#delete-subscription)
   * [Delete Topic](#delete-topic)
@@ -38,6 +38,7 @@ guides.
   * [Listen For Messages](#listen-for-messages)
   * [Listen For Ordered Messages](#listen-for-ordered-messages)
   * [Modify Push Configuration](#modify-push-configuration)
+  * [OpenTelemetry Tracing](#opentelemetry-tracing)
   * [Publish Batched Messages](#publish-batched-messages)
   * [Publish Message](#publish-message)
   * [Publish Message With Custom Attributes](#publish-message-with-custom-attributes)
@@ -45,6 +46,7 @@ guides.
   * [Publish With Retry Settings](#publish-with-retry-settings)
   * [Quickstart](#quickstart)
   * [Remove Dead Letter Policy](#remove-dead-letter-policy)
+  * [Resume Publish](#resume-publish)
   * [Set Subscription IAM Policy](#set-subscription-iam-policy)
   * [Set Topic IAM Policy](#set-topic-iam-policy)
   * [Subscribe With Flow Control Settings](#subscribe-with-flow-control-settings)
@@ -127,9 +129,9 @@ __Usage:__
 
 
 
-### Create Subscription With Ordering Enabled
+### Create Subscription with ordering enabled
 
-Creates a new subscription With Ordering Enabled.
+Creates a new subscription with ordering enabled.
 
 View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/master/samples/createSubscriptionWithOrdering.js).
 
@@ -142,6 +144,7 @@ __Usage:__
 
 
 -----
+
 
 
 
@@ -411,6 +414,25 @@ __Usage:__
 
 
 
+### OpenTelemetry Tracing
+
+Demonstrates how to enable OpenTelemetry tracing in a publisher or subscriber.
+
+View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/master/samples/opentelemetryTracing.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-pubsub&page=editor&open_in_editor=samples/opentelemetryTracing.js,samples/README.md)
+
+__Usage:__
+
+
+`node opentelemetryTracing.js <topic-name> <subscription-name>`
+
+
+-----
+
+
+
+
 ### Publish Batched Messages
 
 Publishes messages to a topic using custom batching settings.
@@ -479,26 +501,7 @@ View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/master/s
 __Usage:__
 
 
-`node publishOrderedMessage.js <topic-name> <data> <ordering-key>`
-
-
------
-
-
-
-
-### Resume Publishing
-
-Demonstrates how to resume publishing for an ordering key after a publish fails.
-
-View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/master/samples/resumePublish.js).
-
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-pubsub&page=editor&open_in_editor=samples/resumePublish.js,samples/README.md)
-
-__Usage:__
-
-
-`node resumePublish.js <topic-name> <data> <ordering-key>`
+`node publishOrderedMessage.js <topic-name> <data>`
 
 
 -----
@@ -556,6 +559,25 @@ __Usage:__
 
 
 `node removeDeadLetterPolicy.js <topic-name> <subscription-name>`
+
+
+-----
+
+
+
+
+### Resume Publish
+
+Demonstrates how to resume publishing on an ordering key if publishing fails for a message.
+
+View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/master/samples/resumePublish.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-pubsub&page=editor&open_in_editor=samples/resumePublish.js,samples/README.md)
+
+__Usage:__
+
+
+`node resumePublish.js <topic-name> <data>`
 
 
 -----
