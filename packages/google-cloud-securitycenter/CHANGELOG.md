@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/security-center?activeTab=versions
 
+### [5.1.1](https://www.github.com/googleapis/nodejs-security-center/compare/v5.1.0...v5.1.1) (2020-08-17)
+
+
+### Bug Fixes
+
+* **deps:** roll back dependency @google-cloud/security-center to ^5.0.3 ([#319](https://www.github.com/googleapis/nodejs-security-center/issues/319)) ([f3462e1](https://www.github.com/googleapis/nodejs-security-center/commit/f3462e16aacb42f66f50ca4205a58981d2540686))
+
 ## [5.1.0](https://www.github.com/googleapis/nodejs-security-center/compare/v5.0.3...v5.1.0) (2020-08-14)
 
 
