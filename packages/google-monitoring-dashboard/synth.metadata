@@ -4,22 +4,22 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/nodejs-monitoring-dashboards.git",
-        "sha": "5b002c5f10f23c29ee571f013b965989bd5d69e0"
+        "sha": "1e010dbd22d50d48f1735aed92f0d0a1ec6ab307"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "94006b3cb8d2fb44703cf535da15608eed6bf7db",
-        "internalRef": "325949033"
+        "sha": "4c5071b615d96ef9dfd6a63d8429090f1f2872bb",
+        "internalRef": "327369997"
       }
     },
     {
       "git": {
         "name": "synthtool",
         "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "5747555f7620113d9a2078a48f4c047a99d31b3e"
+        "sha": "1a60ff2a3975c2f5054431588bd95db9c3b862ba"
       }
     }
   ],
@@ -33,5 +33,86 @@
         "generator": "bazel"
       }
     }
+  ],
+  "generatedFiles": [
+    ".eslintignore",
+    ".eslintrc.json",
+    ".gitattributes",
+    ".github/ISSUE_TEMPLATE/bug_report.md",
+    ".github/ISSUE_TEMPLATE/feature_request.md",
+    ".github/ISSUE_TEMPLATE/support_request.md",
+    ".github/PULL_REQUEST_TEMPLATE.md",
+    ".github/publish.yml",
+    ".github/workflows/ci.yaml",
+    ".gitignore",
+    ".jsdoc.js",
+    ".kokoro/.gitattributes",
+    ".kokoro/common.cfg",
+    ".kokoro/continuous/node10/common.cfg",
+    ".kokoro/continuous/node10/docs.cfg",
+    ".kokoro/continuous/node10/lint.cfg",
+    ".kokoro/continuous/node10/samples-test.cfg",
+    ".kokoro/continuous/node10/system-test.cfg",
+    ".kokoro/continuous/node10/test.cfg",
+    ".kokoro/continuous/node12/common.cfg",
+    ".kokoro/continuous/node12/test.cfg",
+    ".kokoro/docs.sh",
+    ".kokoro/lint.sh",
+    ".kokoro/populate-secrets.sh",
+    ".kokoro/presubmit/node10/common.cfg",
+    ".kokoro/presubmit/node10/samples-test.cfg",
+    ".kokoro/presubmit/node10/system-test.cfg",
+    ".kokoro/presubmit/node12/common.cfg",
+    ".kokoro/presubmit/node12/test.cfg",
+    ".kokoro/publish.sh",
+    ".kokoro/release/docs-devsite.cfg",
+    ".kokoro/release/docs-devsite.sh",
+    ".kokoro/release/docs.cfg",
+    ".kokoro/release/docs.sh",
+    ".kokoro/release/publish.cfg",
+    ".kokoro/samples-test.sh",
+    ".kokoro/system-test.sh",
+    ".kokoro/test.bat",
+    ".kokoro/test.sh",
+    ".kokoro/trampoline.sh",
+    ".mocharc.js",
+    ".nycrc",
+    ".prettierignore",
+    ".prettierrc.js",
+    "CODE_OF_CONDUCT.md",
+    "CONTRIBUTING.md",
+    "LICENSE",
+    "README.md",
+    "api-extractor.json",
+    "linkinator.config.json",
+    "package-lock.json.3488278276",
+    "protos/google/monitoring/dashboard/v1/common.proto",
+    "protos/google/monitoring/dashboard/v1/dashboard.proto",
+    "protos/google/monitoring/dashboard/v1/dashboards_service.proto",
+    "protos/google/monitoring/dashboard/v1/drilldowns.proto",
+    "protos/google/monitoring/dashboard/v1/layouts.proto",
+    "protos/google/monitoring/dashboard/v1/metrics.proto",
+    "protos/google/monitoring/dashboard/v1/scorecard.proto",
+    "protos/google/monitoring/dashboard/v1/service.proto",
+    "protos/google/monitoring/dashboard/v1/text.proto",
+    "protos/google/monitoring/dashboard/v1/widget.proto",
+    "protos/google/monitoring/dashboard/v1/xychart.proto",
+    "protos/protos.d.ts",
+    "protos/protos.js",
+    "protos/protos.json",
+    "renovate.json",
+    "samples/README.md",
+    "samples/package-lock.json.340936835",
+    "src/index.ts",
+    "src/v1/dashboards_service_client.ts",
+    "src/v1/dashboards_service_client_config.json",
+    "src/v1/dashboards_service_proto_list.json",
+    "src/v1/index.ts",
+    "system-test/fixtures/sample/src/index.js",
+    "system-test/fixtures/sample/src/index.ts",
+    "system-test/install.ts",
+    "test/gapic_dashboards_service_v1.ts",
+    "tsconfig.json",
+    "webpack.config.js"
   ]
 }
