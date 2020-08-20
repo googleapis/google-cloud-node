@@ -3118,6 +3118,49 @@ describe('storage', () => {
     });
   });
 
+  describe('offset', () => {
+    const NEW_FILES = [
+      bucket.file('startOffset_file1'),
+      bucket.file('startOffset_file2'),
+      bucket.file('file3_endOffset'),
+    ];
+
+    before(async () => {
+      await bucket.deleteFiles();
+      const originalFile = NEW_FILES[0];
+      const cloneFiles = NEW_FILES.slice(1);
+      await bucket.upload(FILES.logo.path, {
+        destination: originalFile,
+      });
+      await Promise.all(cloneFiles.map(f => originalFile.copy(f)));
+    });
+
+    after(async () => {
+      await Promise.all(NEW_FILES.map(file => deleteFileAsync(file)));
+    });
+
+    it('should get files with offset', async () => {
+      // Listing files with startOffset.
+      const [filesWithStartOffset] = await bucket.getFiles({
+        startOffset: 'startOffset',
+      });
+      assert.strictEqual(filesWithStartOffset!.length, 2);
+
+      // Listing files with endOffset.
+      const [filesWithEndOffset] = await bucket.getFiles({
+        endOffset: 'set',
+      });
+      assert.strictEqual(filesWithEndOffset!.length, 1);
+
+      // Listing files with startOffset and endOffset.
+      const [filesWithStartAndEndOffset] = await bucket.getFiles({
+        startOffset: 'startOffset',
+        endOffset: 'endOffset',
+      });
+      assert.strictEqual(filesWithStartAndEndOffset!.length, 0);
+    });
+  });
+
   describe('file generations', () => {
     const bucketWithVersioning = storage.bucket(generateName());
 
