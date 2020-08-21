@@ -4,7 +4,7 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/nodejs-dataproc.git",
-        "sha": "693ebba9c2fb70690296e5158ebf684b5c08ac43"
+        "sha": "8d9c451d1e6b08b2ab9dae250b42df31b10b9298"
       }
     },
     {
@@ -19,7 +19,7 @@
       "git": {
         "name": "synthtool",
         "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "1a60ff2a3975c2f5054431588bd95db9c3b862ba"
+        "sha": "05de3e1e14a0b07eab8b474e669164dbd31f81fb"
       }
     }
   ],
@@ -60,19 +60,19 @@
     ".kokoro/common.cfg",
     ".kokoro/continuous/node10/common.cfg",
     ".kokoro/continuous/node10/docs.cfg",
-    ".kokoro/continuous/node10/lint.cfg",
-    ".kokoro/continuous/node10/samples-test.cfg",
-    ".kokoro/continuous/node10/system-test.cfg",
     ".kokoro/continuous/node10/test.cfg",
     ".kokoro/continuous/node12/common.cfg",
+    ".kokoro/continuous/node12/lint.cfg",
+    ".kokoro/continuous/node12/samples-test.cfg",
+    ".kokoro/continuous/node12/system-test.cfg",
     ".kokoro/continuous/node12/test.cfg",
     ".kokoro/docs.sh",
     ".kokoro/lint.sh",
     ".kokoro/populate-secrets.sh",
     ".kokoro/presubmit/node10/common.cfg",
-    ".kokoro/presubmit/node10/samples-test.cfg",
-    ".kokoro/presubmit/node10/system-test.cfg",
     ".kokoro/presubmit/node12/common.cfg",
+    ".kokoro/presubmit/node12/samples-test.cfg",
+    ".kokoro/presubmit/node12/system-test.cfg",
     ".kokoro/presubmit/node12/test.cfg",
     ".kokoro/publish.sh",
     ".kokoro/release/docs-devsite.cfg",
@@ -95,7 +95,6 @@
     "README.md",
     "api-extractor.json",
     "linkinator.config.json",
-    "package-lock.json.3084162293",
     "protos/google/cloud/dataproc/v1/autoscaling_policies.proto",
     "protos/google/cloud/dataproc/v1/clusters.proto",
     "protos/google/cloud/dataproc/v1/jobs.proto",
@@ -113,7 +112,6 @@
     "protos/protos.json",
     "renovate.json",
     "samples/README.md",
-    "samples/package-lock.json.1307571035",
     "src/index.ts",
     "src/v1/autoscaling_policy_service_client.ts",
     "src/v1/autoscaling_policy_service_client_config.json",
