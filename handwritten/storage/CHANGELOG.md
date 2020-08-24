@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-storage?activeTab=versions
 
+## [5.3.0](https://www.github.com/googleapis/nodejs-storage/compare/v5.2.0...v5.3.0) (2020-08-24)
+
+
+### Features
+
+* support noncurrent time object lifecycle condition ([#1216](https://www.github.com/googleapis/nodejs-storage/issues/1216)) ([d198aff](https://www.github.com/googleapis/nodejs-storage/commit/d198affa98b0dd027d6628eaff9fcd2dca5c7b47))
+
 ## [5.2.0](https://www.github.com/googleapis/nodejs-storage/compare/v5.1.2...v5.2.0) (2020-08-10)
 
 
