@@ -1068,6 +1068,46 @@ class Bucket extends ServiceObject {
    *     createdBefore: new Date('2016')
    *   }
    * }, function(err, apiResponse) {});
+   *
+   * //-
+   * // Delete object that has a noncurrent timestamp that is at least 100 days.
+   * //-
+   * bucket.addLifecycleRule({
+   *   action: 'delete',
+   *   condition: {
+   *     daysSinceNoncurrentTime: 100
+   *   }
+   * }, function(err, apiResponse) {});
+   *
+   * //-
+   * // Delete object that has a noncurrent timestamp before 2020-01-01.
+   * //-
+   * bucket.addLifecycleRule({
+   *   action: 'delete',
+   *   condition: {
+   *     noncurrentTimeBefore: new Date('2020-01-01')
+   *   }
+   * }, function(err, apiResponse) {});
+   *
+   * //-
+   * // Delete object that has a customTime that is at least 100 days.
+   * //-
+   * bucket.addLifecycleRule({
+   *   action: 'delete',
+   *   condition: {
+   *     daysSinceCustomTime: 100
+   *   }
+   * }, function(err, apiResponse) ());
+   *
+   * //-
+   * // Delete object that has a customTime before 2020-01-01.
+   * //-
+   * bucket.addLifecycleRule({
+   *   action: 'delete',
+   *   condition: {
+   *     customTimeBefore: new Date('2020-01-01')
+   *   }
+   * }, function(err, apiResponse) {});
    */
   addLifecycleRule(
     rule: LifecycleRule,

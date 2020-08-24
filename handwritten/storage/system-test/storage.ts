@@ -91,6 +91,7 @@ interface ErrorCallbackFunction {
   (err: Error | null): void;
 }
 import {PubSub} from '@google-cloud/pubsub';
+import {LifecycleRule} from '../src/bucket';
 
 // When set to true, skips all tests that is not compatible for
 // running inside VPCSC.
@@ -107,7 +108,7 @@ describe('storage', () => {
   const TESTS_PREFIX = `storage-tests-${shortUUID()}-`;
   const RETENTION_DURATION_SECONDS = 10;
 
-  const storage = new Storage({});
+  const storage = new Storage();
   const bucket = storage.bucket(generateName());
 
   const pubsub = new PubSub({
@@ -1149,7 +1150,32 @@ describe('storage', () => {
       );
     });
 
-    it('should work with dates', done => {
+    it('should append a new rule', async () => {
+      const numExistingRules =
+        (bucket.metadata.lifecycle && bucket.metadata.lifecycle.rule.length) ||
+        0;
+
+      await bucket.addLifecycleRule({
+        action: 'delete',
+        condition: {
+          age: 30,
+          isLive: true,
+        },
+      });
+      await bucket.addLifecycleRule({
+        action: 'delete',
+        condition: {
+          age: 60,
+          isLive: true,
+        },
+      });
+      assert.strictEqual(
+        bucket.metadata.lifecycle.rule.length,
+        numExistingRules + 2
+      );
+    });
+
+    it('should convert a rule with createdBefore to a date in string', done => {
       bucket.addLifecycleRule(
         {
           action: 'delete',
@@ -1176,28 +1202,47 @@ describe('storage', () => {
       );
     });
 
-    it('should append a new rule', async () => {
-      const numExistingRules =
-        (bucket.metadata.lifecycle && bucket.metadata.lifecycle.rule.length) ||
-        0;
+    it('should add a noncurrent time rule', async () => {
+      const NONCURRENT_TIME_BEFORE = '2020-01-01';
 
       await bucket.addLifecycleRule({
         action: 'delete',
         condition: {
-          age: 30,
-          isLive: true,
+          noncurrentTimeBefore: new Date(NONCURRENT_TIME_BEFORE),
+          daysSinceNoncurrentTime: 100,
         },
       });
+
+      assert(
+        bucket.metadata.lifecycle.rule.some(
+          (rule: LifecycleRule) =>
+            typeof rule.action === 'object' &&
+            rule.action.type === 'Delete' &&
+            rule.condition.noncurrentTimeBefore === NONCURRENT_TIME_BEFORE &&
+            rule.condition.daysSinceNoncurrentTime === 100
+        )
+      );
+    });
+
+    it('should add a custom time rule', async () => {
+      const CUSTOM_TIME_BEFORE = '2020-01-01';
+
       await bucket.addLifecycleRule({
         action: 'delete',
         condition: {
-          age: 60,
-          isLive: true,
+          customTimeBefore: new Date(CUSTOM_TIME_BEFORE),
+          daysSinceCustomTime: 100,
         },
       });
-      assert.strictEqual(
-        bucket.metadata.lifecycle.rule.length,
-        numExistingRules + 2
+
+      assert(
+        bucket.metadata.lifecycle.rule.some(
+          (rule: LifecycleRule) =>
+            typeof rule.action === 'object' &&
+            rule.action.type === 'Delete' &&
+            rule.condition.customTimeBefore === CUSTOM_TIME_BEFORE &&
+            rule.condition.daysSinceCustomTime === 100
+        )
       );
     });
 
