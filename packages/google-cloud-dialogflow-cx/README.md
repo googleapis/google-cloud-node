@@ -4,8 +4,8 @@
 
 # [Dialogflow CX API: Node.js Client](https://github.com/googleapis/nodejs-dialogflow-cx)
 
-[![release level](https://img.shields.io/badge/release%20level-general%20availability%20%28GA%29-brightgreen.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
-[![npm version](https://img.shields.io/npm/v/cx.svg)](https://www.npmjs.org/package/cx)
+[![release level](https://img.shields.io/badge/release%20level-beta-yellow.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
+[![npm version](https://img.shields.io/npm/v/@google-cloud/dialogflow-cx.svg)](https://www.npmjs.org/package/@google-cloud/dialogflow-cx)
 [![codecov](https://img.shields.io/codecov/c/github/googleapis/nodejs-dialogflow-cx/master.svg?style=flat)](https://codecov.io/gh/googleapis/nodejs-dialogflow-cx)
 
 
@@ -32,8 +32,8 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 * [Quickstart](#quickstart)
   * [Before you begin](#before-you-begin)
   * [Installing the client library](#installing-the-client-library)
-
-
+  * [Using the client library](#using-the-client-library)
+* [Samples](#samples)
 * [Versioning](#versioning)
 * [Contributing](#contributing)
 * [License](#license)
@@ -51,10 +51,48 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 ### Installing the client library
 
 ```bash
-npm install cx
+npm install @google-cloud/dialogflow-cx
 ```
 
 
+### Using the client library
+
+```javascript
+/**
+ * TODO(developer): Uncomment these variables before running the sample.
+ */
+// const projectId = 'my-project';
+// const location = 'us';
+// const agent = 'foo';
+
+// Imports the Google Cloud Some API library
+const {IntentsClient} = require('@google-cloud/dialogflow-cx');
+const client = new IntentsClient();
+async function listIntents() {
+  const parent = client.agentPath(projectId, location, agent);
+  console.info(parent);
+  // TODO: implement a quickstart that does something useful:
+  /*
+  const [intents] = await client.listIntents({
+    parent,
+  });
+  console.info(intents);
+  */
+}
+listIntents();
+
+```
+
+
+
+## Samples
+
+Samples are in the [`samples/`](https://github.com/googleapis/nodejs-dialogflow-cx/tree/master/samples) directory. The samples' `README.md`
+has instructions for running the samples.
+
+| Sample                      | Source Code                       | Try it |
+| --------------------------- | --------------------------------- | ------ |
+| Quickstart | [source code](https://github.com/googleapis/nodejs-dialogflow-cx/blob/master/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dialogflow-cx&page=editor&open_in_editor=samples/quickstart.js,samples/README.md) |
 
 
 
@@ -87,12 +125,11 @@ _Legacy Node.js versions are supported as a best effort:_
 This library follows [Semantic Versioning](http://semver.org/).
 
 
-This library is considered to be **General Availability (GA)**. This means it
-is stable; the code surface will not change in backwards-incompatible ways
-unless absolutely necessary (e.g. because of critical security issues) or with
-an extensive deprecation period. Issues and requests against **GA** libraries
-are addressed with the highest priority.
 
+This library is considered to be in **beta**. This means it is expected to be
+mostly stable while we work toward a general availability release; however,
+complete stability is not guaranteed. We will address issues and requests
+against beta libraries with a high priority.
 
 
 

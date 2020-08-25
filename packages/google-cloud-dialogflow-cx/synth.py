@@ -27,7 +27,7 @@ versions = ['v3beta1']
 
 for version in versions:
     library = gapic.node_library('dialogflow', 'v3beta1', bazel_target=f"//google/cloud/dialogflow/cx/v3beta1:dialogflow-cx-v3beta1-nodejs")
-    s.copy(library, excludes=[])
+    s.copy(library, excludes=['package.json', 'README.md'])
 
 common_templates = gcp.CommonTemplates()
 templates = common_templates.node_library(

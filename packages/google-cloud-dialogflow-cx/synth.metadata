@@ -1,0 +1,30 @@
+{
+  "sources": [
+    {
+      "git": {
+        "name": ".",
+        "remote": "git@github.com:googleapis/nodejs-dialogflow-cx.git",
+        "sha": "35590c3c8147dc67785dcf02b770d1f6226f31df"
+      }
+    },
+    {
+      "git": {
+        "name": "googleapis",
+        "remote": "https://github.com/googleapis/googleapis.git",
+        "sha": "1a97126c6ced4e6179ade331a5372ec06e24f727",
+        "internalRef": "328383688"
+      }
+    }
+  ],
+  "destinations": [
+    {
+      "client": {
+        "source": "googleapis",
+        "apiName": "dialogflow",
+        "apiVersion": "v3beta1",
+        "language": "nodejs",
+        "generator": "bazel"
+      }
+    }
+  ]
+}
