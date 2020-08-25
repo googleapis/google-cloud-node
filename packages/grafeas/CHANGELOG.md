@@ -4,6 +4,14 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/grafeas?activeTab=versions
 
+### [3.3.1](https://www.github.com/googleapis/nodejs-grafeas/compare/v3.3.0...v3.3.1) (2020-08-21)
+
+
+### Bug Fixes
+
+* update descriptor logic ([#188](https://www.github.com/googleapis/nodejs-grafeas/issues/188)) ([df14677](https://www.github.com/googleapis/nodejs-grafeas/commit/df146775dc37b2de99c7bb44516c8163669da795))
+* use gax protobuf reference ([#187](https://www.github.com/googleapis/nodejs-grafeas/issues/187)) ([c5f2d35](https://www.github.com/googleapis/nodejs-grafeas/commit/c5f2d353e61be0607fc35924cd7348ea076c102c))
+
 ## [3.3.0](https://www.github.com/googleapis/nodejs-grafeas/compare/v3.2.0...v3.3.0) (2020-06-28)
 
 
