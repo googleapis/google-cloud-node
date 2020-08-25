@@ -28,7 +28,13 @@ const URI = 'http://testsafebrowsing.appspot.com/s/phishing.html';
 
 describe('Quickstart', () => {
   it('should run quickstart', async () => {
-    const stdout = execSync(`node ./quickstart.js ${URI} ${PROJECT_ID}`, {cwd});
-    assert.include(stdout, 'reported');
+    try {
+      execSync(`node ./quickstart.js ${URI} ${PROJECT_ID}`, {
+        cwd,
+      });
+      assert('unreachable');
+    } catch (err) {
+      assert.match(err.message, /ALREADY_EXISTS/);
+    }
   });
 });
