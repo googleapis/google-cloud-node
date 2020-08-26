@@ -179,6 +179,20 @@
     "support_documentation": "https://cloud.google.com/dialogflow-enterprise/docs/getting-support"
   },
   {
+    "name": "dialogflow-cx",
+    "name_pretty": "Dialogflow CX API",
+    "product_documentation": "https://cloud.google.com/dialogflow-enterprise/",
+    "client_documentation": "https://googleapis.dev/nodejs/dialogflow-cx/latest",
+    "issue_tracker": "https://issuetracker.google.com/savedsearches/5300385",
+    "release_level": "beta",
+    "language": "nodejs",
+    "repo": "googleapis/nodejs-dialogflow-cx",
+    "distribution_name": "@google-cloud/dialogflow-cx",
+    "api_id": "dialogflow.googleapis.com",
+    "requires_billing": true,
+    "support_documentation": "https://cloud.google.com/dialogflow-enterprise/docs/getting-support"
+  },
+  {
     "name": "dns",
     "name_pretty": "DNS",
     "product_documentation": "https://cloud.google.com/dns",
