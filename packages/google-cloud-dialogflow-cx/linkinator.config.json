@@ -3,11 +3,7 @@
   "skip": [
     "https://codecov.io/gh/googleapis/",
     "www.googleapis.com",
-    "img.shields.io",
-    "https://github.com/googleapis/nodejs-dialogflow-cx/blob/master/CHANGELOG.md",
-    "https://googleapis.dev/nodejs/dialogflow-cx/latest",
-    "https://github.com/googleapis/nodejs-dialogflow-cx/blob/master/samples/quickstart.js",
-    "https://github.com/googleapis/nodejs-dialogflow-cx/tree/master/samples"
+    "img.shields.io"
   ],
   "silent": true,
   "concurrency": 10
