@@ -46,11 +46,6 @@ function main(
   const pubSubClient = new PubSub();
 
   async function publishMessage() {
-    /**
-     * TODO(developer): Uncomment the following lines to run the sample.
-     */
-    // const topicName = 'my-topic';
-
     // Publishes the message as a string, e.g. "Hello, world!" or JSON.stringify(someObject)
     const dataBuffer = Buffer.from(data);
 
