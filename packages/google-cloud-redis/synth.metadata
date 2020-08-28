@@ -4,7 +4,7 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/nodejs-redis.git",
-        "sha": "7a09a5de2af5dad3e07c0c7d6d2ec75d66aee10c"
+        "sha": "7b4fe4bfb09ca237d2c5577dcf7b360a3f6d62cb"
       }
     },
     {
@@ -19,7 +19,7 @@
       "git": {
         "name": "synthtool",
         "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "05de3e1e14a0b07eab8b474e669164dbd31f81fb"
+        "sha": "8cf6d2834ad14318e64429c3b94f6443ae83daf9"
       }
     }
   ],
@@ -51,7 +51,6 @@
     ".github/ISSUE_TEMPLATE/feature_request.md",
     ".github/ISSUE_TEMPLATE/support_request.md",
     ".github/PULL_REQUEST_TEMPLATE.md",
-    ".github/publish.yml",
     ".github/release-please.yml",
     ".github/workflows/ci.yaml",
     ".gitignore",
