@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.1.2](https://www.github.com/googleapis/nodejs-analytics-admin/compare/v1.1.1...v1.1.2) (2020-08-28)
+
+
+### Bug Fixes
+
+* move system and samples test from Node 10 to Node 12 ([#31](https://www.github.com/googleapis/nodejs-analytics-admin/issues/31)) ([bcb2061](https://www.github.com/googleapis/nodejs-analytics-admin/commit/bcb20619c7e13be336bf915c4821004016f67337))
+
 ### [1.1.1](https://www.github.com/googleapis/nodejs-analytics-admin/compare/v1.1.0...v1.1.1) (2020-08-04)
 
 
