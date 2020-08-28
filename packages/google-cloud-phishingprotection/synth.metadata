@@ -3,8 +3,8 @@
     {
       "git": {
         "name": ".",
-        "remote": "git@github.com:googleapis/nodejs-phishing-protection.git",
-        "sha": "0f3bf2ae51c213b5384c48c4c50b92ba0f45cfb1"
+        "remote": "https://github.com/googleapis/nodejs-phishing-protection.git",
+        "sha": "f98994d3da8881315609ffa937f387a8ca2494c4"
       }
     },
     {
@@ -13,6 +13,13 @@
         "remote": "https://github.com/googleapis/googleapis.git",
         "sha": "1a97126c6ced4e6179ade331a5372ec06e24f727",
         "internalRef": "328383688"
+      }
+    },
+    {
+      "git": {
+        "name": "synthtool",
+        "remote": "https://github.com/googleapis/synthtool.git",
+        "sha": "a9eea2c50b7dce0dffcc010c1caf712802155403"
       }
     }
   ],
@@ -26,5 +33,75 @@
         "generator": "bazel"
       }
     }
+  ],
+  "generatedFiles": [
+    ".eslintignore",
+    ".eslintrc.json",
+    ".gitattributes",
+    ".github/ISSUE_TEMPLATE/bug_report.md",
+    ".github/ISSUE_TEMPLATE/feature_request.md",
+    ".github/ISSUE_TEMPLATE/support_request.md",
+    ".github/PULL_REQUEST_TEMPLATE.md",
+    ".github/publish.yml",
+    ".github/release-please.yml",
+    ".github/workflows/ci.yaml",
+    ".gitignore",
+    ".jsdoc.js",
+    ".kokoro/.gitattributes",
+    ".kokoro/common.cfg",
+    ".kokoro/continuous/node10/common.cfg",
+    ".kokoro/continuous/node10/docs.cfg",
+    ".kokoro/continuous/node10/test.cfg",
+    ".kokoro/continuous/node12/common.cfg",
+    ".kokoro/continuous/node12/lint.cfg",
+    ".kokoro/continuous/node12/samples-test.cfg",
+    ".kokoro/continuous/node12/system-test.cfg",
+    ".kokoro/continuous/node12/test.cfg",
+    ".kokoro/docs.sh",
+    ".kokoro/lint.sh",
+    ".kokoro/populate-secrets.sh",
+    ".kokoro/presubmit/node10/common.cfg",
+    ".kokoro/presubmit/node12/common.cfg",
+    ".kokoro/presubmit/node12/samples-test.cfg",
+    ".kokoro/presubmit/node12/system-test.cfg",
+    ".kokoro/presubmit/node12/test.cfg",
+    ".kokoro/publish.sh",
+    ".kokoro/release/docs-devsite.cfg",
+    ".kokoro/release/docs-devsite.sh",
+    ".kokoro/release/docs.cfg",
+    ".kokoro/release/docs.sh",
+    ".kokoro/release/publish.cfg",
+    ".kokoro/samples-test.sh",
+    ".kokoro/system-test.sh",
+    ".kokoro/test.bat",
+    ".kokoro/test.sh",
+    ".kokoro/trampoline.sh",
+    ".mocharc.js",
+    ".nycrc",
+    ".prettierignore",
+    ".prettierrc.js",
+    "CODE_OF_CONDUCT.md",
+    "CONTRIBUTING.md",
+    "LICENSE",
+    "README.md",
+    "api-extractor.json",
+    "linkinator.config.json",
+    "protos/google/cloud/phishingprotection/v1beta1/phishingprotection.proto",
+    "protos/protos.d.ts",
+    "protos/protos.js",
+    "protos/protos.json",
+    "renovate.json",
+    "samples/README.md",
+    "src/index.ts",
+    "src/v1beta1/index.ts",
+    "src/v1beta1/phishing_protection_service_v1_beta1_client.ts",
+    "src/v1beta1/phishing_protection_service_v1_beta1_client_config.json",
+    "src/v1beta1/phishing_protection_service_v1_beta1_proto_list.json",
+    "system-test/fixtures/sample/src/index.js",
+    "system-test/fixtures/sample/src/index.ts",
+    "system-test/install.ts",
+    "test/gapic_phishing_protection_service_v1_beta1_v1beta1.ts",
+    "tsconfig.json",
+    "webpack.config.js"
   ]
 }
