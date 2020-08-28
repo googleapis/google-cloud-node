@@ -4,7 +4,7 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/nodejs-kms.git",
-        "sha": "fcdc3b5b2d2f2b92568c938e99805553331df4cf"
+        "sha": "e51783695cd6cbe1a6d3fbfa9bb0ee52b714d076"
       }
     },
     {
@@ -19,7 +19,7 @@
       "git": {
         "name": "synthtool",
         "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "05de3e1e14a0b07eab8b474e669164dbd31f81fb"
+        "sha": "8cf6d2834ad14318e64429c3b94f6443ae83daf9"
       }
     }
   ],
@@ -42,7 +42,6 @@
     ".github/ISSUE_TEMPLATE/feature_request.md",
     ".github/ISSUE_TEMPLATE/support_request.md",
     ".github/PULL_REQUEST_TEMPLATE.md",
-    ".github/publish.yml",
     ".github/release-please.yml",
     ".github/workflows/ci.yaml",
     ".gitignore",
