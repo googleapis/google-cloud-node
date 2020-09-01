@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0](https://www.github.com/googleapis/nodejs-functions/compare/v1.0.1...v1.1.0) (2020-09-01)
+
+
+### Features
+
+* promote library to GA ([#22](https://www.github.com/googleapis/nodejs-functions/issues/22)) ([ad3b6d0](https://www.github.com/googleapis/nodejs-functions/commit/ad3b6d0e72cda6414466fb6a8127afa155e955a7))
+
 ### [1.0.1](https://www.github.com/googleapis/nodejs-functions/compare/v1.0.0...v1.0.1) (2020-08-03)
 
 
