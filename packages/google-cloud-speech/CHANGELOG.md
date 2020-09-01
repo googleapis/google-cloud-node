@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/speech?activeTab=versions
 
+### [4.1.2](https://www.github.com/googleapis/nodejs-speech/compare/v4.1.1...v4.1.2) (2020-09-01)
+
+
+### Bug Fixes
+
+* **samples:** end stream before destroying it ([#611](https://www.github.com/googleapis/nodejs-speech/issues/611)) ([2b3a220](https://www.github.com/googleapis/nodejs-speech/commit/2b3a220190ab5d779daa68a4fb0426b2f70e5172))
+
 ### [4.1.1](https://www.github.com/googleapis/nodejs-speech/compare/v4.1.0...v4.1.1) (2020-07-06)
 
 
