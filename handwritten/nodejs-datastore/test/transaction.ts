@@ -15,14 +15,14 @@
 import * as pfy from '@google-cloud/promisify';
 import arrify = require('arrify');
 import * as assert from 'assert';
-import {beforeEach, before, describe, it} from 'mocha';
+import {afterEach, beforeEach, before, describe, it} from 'mocha';
 import * as proxyquire from 'proxyquire';
 
 // import {google} from '../proto/datastore';
-import {Datastore, Query, TransactionOptions} from '../src';
+import {Datastore, DatastoreRequest, Query, TransactionOptions} from '../src';
 import {Entity} from '../src/entity';
-import {DatastoreRequest} from '../src/request';
 import * as tsTypes from '../src/transaction';
+import * as sinon from 'sinon';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type Any = any;
@@ -38,30 +38,16 @@ const fakePfy = Object.assign({}, pfy, {
       return;
     }
     promisified = true;
-    assert.deepStrictEqual(options.exclude, ['createQuery', 'delete', 'save']);
+    assert.deepStrictEqual(options.exclude, [
+      'createQuery',
+      'delete',
+      'insert',
+      'save',
+      'update',
+      'upsert',
+    ]);
   },
 });
-
-const DatastoreRequestOverride = ({
-  delete() {},
-  save() {},
-} as {}) as DatastoreRequest;
-
-class FakeDatastoreRequest {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  delete(...args: any[]) {
-    const results = DatastoreRequestOverride.delete.apply(null, args as Any);
-    DatastoreRequestOverride.delete = (() => {}) as Any;
-    return results;
-  }
-
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  save(...args: any[]) {
-    const results = DatastoreRequestOverride.save.apply(null, args as Any);
-    DatastoreRequestOverride.save = (() => {}) as Any;
-    return results;
-  }
-}
 
 describe('Transaction', () => {
   let Transaction: typeof tsTypes.Transaction;
@@ -83,7 +69,6 @@ describe('Transaction', () => {
   before(() => {
     Transaction = proxyquire('../src/transaction.js', {
       '@google-cloud/promisify': fakePfy,
-      './request.js': {DatastoreRequest: FakeDatastoreRequest},
     }).Transaction;
   });
 
@@ -151,6 +136,10 @@ describe('Transaction', () => {
   describe('commit', () => {
     beforeEach(() => {
       transaction.id = TRANSACTION_ID;
+    });
+
+    afterEach(() => {
+      sinon.restore();
     });
 
     it('should commit', done => {
@@ -236,24 +225,21 @@ describe('Transaction', () => {
 
       const args: Array<{}> = [];
 
-      let deleteCalled = 0;
-      DatastoreRequestOverride.delete = ((a: {}) => {
+      const deleteStub = sinon
+        .stub(Datastore.prototype, 'delete')
+        .callsFake(a => {
+          args.push(a);
+        });
+      const saveStub = sinon.stub(Datastore.prototype, 'save').callsFake(a => {
         args.push(a);
-        deleteCalled++;
-      }) as Any;
-
-      let saveCalled = 0;
-      DatastoreRequestOverride.save = ((a: {}) => {
-        args.push(a);
-        saveCalled++;
-      }) as Any;
+      });
 
       transaction.request_ = () => {};
 
       transaction.commit();
 
-      assert.strictEqual(deleteCalled, 1);
-      assert.strictEqual(saveCalled, 1);
+      assert.strictEqual(deleteStub.calledOnce, true);
+      assert.strictEqual(saveStub.calledOnce, true);
 
       assert.strictEqual(args.length, 2);
 
@@ -269,31 +255,30 @@ describe('Transaction', () => {
       transaction.delete(key(['Product', 123]));
       transaction.save({key: key(['Product', 123]), data: ''});
 
-      let deleteCalled = 0;
-      DatastoreRequestOverride.delete = (() => {
-        deleteCalled++;
-      }) as Any;
-
-      let saveCalled = 0;
-      DatastoreRequestOverride.save = (() => {
-        saveCalled++;
-      }) as Any;
+      const deleteSpy = sinon
+        .stub(Datastore.prototype, 'delete')
+        .callsFake(() => {});
+      const saveStub = sinon
+        .stub(Datastore.prototype, 'save')
+        .callsFake(() => {});
 
       transaction.request_ = () => {};
 
       transaction.commit();
-      assert.strictEqual(deleteCalled, 0);
-      assert.strictEqual(saveCalled, 1);
+      assert.strictEqual(deleteSpy.notCalled, true);
+      assert.strictEqual(saveStub.calledOnce, true);
     });
 
     it('should not squash key-incomplete mutations', done => {
       transaction.save({key: key(['Product']), data: ''});
       transaction.save({key: key(['Product']), data: ''});
 
-      DatastoreRequestOverride.save = ((entities: Entity[]) => {
-        assert.strictEqual(entities.length, 2);
-        done();
-      }) as Any;
+      sinon
+        .stub(Datastore.prototype, 'save')
+        .callsFake((entities: Entity[]) => {
+          assert.strictEqual(entities.length, 2);
+          done();
+        });
 
       transaction.request_ = () => {};
 
@@ -374,6 +359,51 @@ describe('Transaction', () => {
         assert(keys.indexOf(queuedEntity.entity.key) > -1);
         assert.deepStrictEqual(queuedEntity.args, [queuedEntity.entity.key]);
       });
+    });
+  });
+
+  describe('insert', () => {
+    afterEach(() => {
+      sinon.restore();
+    });
+
+    it('should prepare entity objects', done => {
+      const entityObject = {};
+      const preparedEntityObject = {prepared: true};
+      const expectedEntityObject = Object.assign({}, preparedEntityObject, {
+        method: 'insert',
+      });
+
+      sinon.stub(DatastoreRequest, 'prepareEntityObject_').callsFake(obj => {
+        assert.strictEqual(obj, entityObject);
+        return preparedEntityObject as {};
+      });
+
+      transaction.save = (entities: Entity[]) => {
+        assert.deepStrictEqual(entities[0], expectedEntityObject);
+        done();
+      };
+
+      transaction.insert(entityObject);
+    });
+
+    it('should pass the correct arguments to save', done => {
+      transaction.save = (entities: Entity[]) => {
+        assert.deepStrictEqual(JSON.parse(JSON.stringify(entities)), [
+          {
+            key: {
+              namespace: 'ns',
+              kind: 'Company',
+              path: ['Company', null],
+            },
+            data: {},
+            method: 'insert',
+          },
+        ]);
+        done();
+      };
+      const key = new entity.Key({namespace: 'ns', path: ['Company']});
+      transaction.insert({key, data: {}});
     });
   });
 
@@ -627,6 +657,96 @@ describe('Transaction', () => {
         })[0];
         assert.deepStrictEqual(queuedEntity.args, [match]);
       });
+    });
+  });
+
+  describe('update', () => {
+    afterEach(() => {
+      sinon.restore();
+    });
+
+    it('should prepare entity objects', done => {
+      const entityObject = {};
+      const preparedEntityObject = {prepared: true};
+      const expectedEntityObject = Object.assign({}, preparedEntityObject, {
+        method: 'update',
+      });
+
+      sinon.stub(DatastoreRequest, 'prepareEntityObject_').callsFake(obj => {
+        assert.strictEqual(obj, entityObject);
+        return preparedEntityObject as {};
+      });
+
+      transaction.save = (entities: Entity[]) => {
+        assert.deepStrictEqual(entities[0], expectedEntityObject);
+        done();
+      };
+
+      transaction.update(entityObject);
+    });
+
+    it('should pass the correct arguments to save', done => {
+      transaction.save = (entities: Entity[]) => {
+        assert.deepStrictEqual(JSON.parse(JSON.stringify(entities)), [
+          {
+            key: {
+              namespace: 'ns',
+              kind: 'Company',
+              path: ['Company', null],
+            },
+            data: {},
+            method: 'update',
+          },
+        ]);
+        done();
+      };
+      const key = new entity.Key({namespace: 'ns', path: ['Company']});
+      transaction.update({key, data: {}});
+    });
+  });
+
+  describe('upsert', () => {
+    afterEach(() => {
+      sinon.restore();
+    });
+
+    it('should prepare entity objects', done => {
+      const entityObject = {};
+      const preparedEntityObject = {prepared: true};
+      const expectedEntityObject = Object.assign({}, preparedEntityObject, {
+        method: 'upsert',
+      });
+
+      sinon.stub(DatastoreRequest, 'prepareEntityObject_').callsFake(obj => {
+        assert.strictEqual(obj, entityObject);
+        return preparedEntityObject as {};
+      });
+
+      transaction.save = (entities: Entity[]) => {
+        assert.deepStrictEqual(entities[0], expectedEntityObject);
+        done();
+      };
+
+      transaction.upsert(entityObject);
+    });
+
+    it('should pass the correct arguments to save', done => {
+      transaction.save = (entities: Entity[]) => {
+        assert.deepStrictEqual(JSON.parse(JSON.stringify(entities)), [
+          {
+            key: {
+              namespace: 'ns',
+              kind: 'Company',
+              path: ['Company', null],
+            },
+            data: {},
+            method: 'upsert',
+          },
+        ]);
+        done();
+      };
+      const key = new entity.Key({namespace: 'ns', path: ['Company']});
+      transaction.upsert({key, data: {}});
     });
   });
 });
