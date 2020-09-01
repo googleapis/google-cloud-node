@@ -3,15 +3,15 @@
     {
       "git": {
         "name": ".",
-        "remote": "git@github.com:googleapis/nodejs-paginator.git",
-        "sha": "2f26fa50bea7c6959bd351b65144f4e021669b0c"
+        "remote": "https://github.com/googleapis/nodejs-paginator.git",
+        "sha": "98bb9e06a987cfa47a86e7d4685b5ed0976d9433"
       }
     },
     {
       "git": {
         "name": "synthtool",
         "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "d91dd8aac77f7a9c5506c238038a26fa4f9e361e"
+        "sha": "89d431fb2975fc4e0ed24995a6e6dfc8ff4c24fa"
       }
     }
   ]
