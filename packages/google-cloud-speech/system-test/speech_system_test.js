@@ -31,8 +31,9 @@ describe('SpeechClient system test default', () => {
       languageCode: languageCode,
       sampleRateHertz: sampleRateHertz,
       encoding: encoding,
+      audioChannelCount: 2,
     };
-    const uri = 'gs://gapic-toolkit/hello.flac';
+    const uri = 'gs://cloud-samples-data/speech/hello.flac';
     const audio = {
       uri: uri,
     };
@@ -54,8 +55,9 @@ describe('SpeechClient system test default', () => {
       languageCode: languageCode,
       sampleRateHertz: sampleRateHertz,
       encoding: encoding,
+      audioChannelCount: 2,
     };
-    const uri = 'gs://gapic-toolkit/hello.flac';
+    const uri = 'gs://cloud-samples-data/speech/hello.flac';
     const audio = {
       uri: uri,
     };

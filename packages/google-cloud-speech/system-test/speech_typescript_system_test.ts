@@ -27,12 +27,14 @@ describe('SpeechClient TypeScript system test default', () => {
     const sampleRateHertz = 44100;
     const encoding =
       google.cloud.speech.v1.RecognitionConfig.AudioEncoding.FLAC;
+    const audioChannelCount = 2;
     const config = {
       languageCode,
       sampleRateHertz,
       encoding,
+      audioChannelCount,
     };
-    const uri = 'gs://gapic-toolkit/hello.flac';
+    const uri = 'gs://cloud-samples-data/speech/hello.flac';
     const audio = {
       uri,
     };
@@ -54,12 +56,14 @@ describe('SpeechClient TypeScript system test default', () => {
     const sampleRateHertz = 44100;
     const encoding =
       google.cloud.speech.v1.RecognitionConfig.AudioEncoding.FLAC;
+    const audioChannelCount = 2;
     const config = {
       languageCode,
       sampleRateHertz,
       encoding,
+      audioChannelCount,
     };
-    const uri = 'gs://gapic-toolkit/hello.flac';
+    const uri = 'gs://cloud-samples-data/speech/hello.flac';
     const audio = {
       uri,
     };
