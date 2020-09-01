@@ -13,7 +13,7 @@
 // limitations under the License.
 
 import * as Long from "long";
-import {protobuf as $protobuf} from "google-gax";
+import * as $protobuf from "protobufjs";
 /** Namespace google. */
 export namespace google {
 

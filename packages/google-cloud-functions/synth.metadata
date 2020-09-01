@@ -3,23 +3,23 @@
     {
       "git": {
         "name": ".",
-        "remote": "https://github.com/googleapis/nodejs-functions.git",
-        "sha": "3dba59a5e10e040a3b2c96af4b19121061ecb509"
+        "remote": "git@github.com:googleapis/nodejs-functions.git",
+        "sha": "3613883d5f6bd3263c7308456d839bdda983543e"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "4c5071b615d96ef9dfd6a63d8429090f1f2872bb",
-        "internalRef": "327369997"
+        "sha": "2db5725bf898b544a0cf951e1694d3b0fce5eda3",
+        "internalRef": "329384854"
       }
     },
     {
       "git": {
         "name": "synthtool",
         "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "8cf6d2834ad14318e64429c3b94f6443ae83daf9"
+        "sha": "80f46100c047bc47efe0025ee537dc8ee413ad04"
       }
     }
   ],
@@ -103,5 +103,5 @@
     "test/gapic_cloud_functions_service_v1.ts",
     "tsconfig.json",
     "webpack.config.js"
-  ]
+  ] 
 }
