@@ -14,6 +14,9 @@
 A result paging utility used by Google node.js modules
 
 
+A comprehensive list of changes in each version may be found in
+[the CHANGELOG](https://github.com/googleapis/nodejs-paginator/blob/master/CHANGELOG.md).
+
 * [Google Cloud Common Paginator Node.js Client API Reference][client-docs]
 
 * [github.com/googleapis/nodejs-paginator](https://github.com/googleapis/nodejs-paginator)
