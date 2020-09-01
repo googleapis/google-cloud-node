@@ -19,7 +19,11 @@ import * as proxyquire from 'proxyquire';
 
 import * as ds from '../src';
 import {DatastoreOptions} from '../src';
-import {entity} from '../src/entity';
+import {entity, Entity, EntityProto, EntityObject} from '../src/entity';
+import {RequestConfig} from '../src/request';
+import * as is from 'is';
+import * as sinon from 'sinon';
+import * as extend from 'extend';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const v1 = require('../src/v1/index.js');
@@ -68,6 +72,12 @@ const fakeEntity: any = {
   isDsKey(...args: any) {
     this.calledWith_ = args;
   },
+  isKeyComplete: entity.isKeyComplete,
+  keyFromKeyProto: entity.keyFromKeyProto,
+  keyToKeyProto: entity.keyToKeyProto,
+  encodeValue: entity.encodeValue,
+  entityToEntityProto: entity.entityToEntityProto,
+  findLargeProperties_: entity.findLargeProperties_,
   URLSafeKey: entity.URLSafeKey,
 };
 
@@ -115,6 +125,8 @@ class FakeTransaction {
 }
 
 function FakeV1() {}
+
+const sandbox = sinon.createSandbox();
 
 describe('Datastore', () => {
   let Datastore: typeof ds.Datastore;
@@ -506,6 +518,53 @@ describe('Datastore', () => {
     });
   });
 
+  describe('insert', () => {
+    afterEach(() => {
+      sandbox.restore();
+    });
+
+    it('should prepare entity objects', done => {
+      const entityObject = {};
+      const preparedEntityObject = {prepared: true};
+      const expectedEntityObject = Object.assign({}, preparedEntityObject, {
+        method: 'insert',
+      });
+
+      sandbox
+        .stub(ds.DatastoreRequest, 'prepareEntityObject_')
+        .callsFake(obj => {
+          assert.strictEqual(obj, entityObject);
+          return preparedEntityObject as {};
+        });
+
+      datastore.save = (entities: Entity[]) => {
+        assert.deepStrictEqual(entities[0], expectedEntityObject);
+        done();
+      };
+
+      datastore.insert(entityObject, assert.ifError);
+    });
+
+    it('should pass the correct arguments to save', done => {
+      datastore.save = (entities: Entity[], callback: Function) => {
+        assert.deepStrictEqual(JSON.parse(JSON.stringify(entities)), [
+          {
+            key: {
+              namespace: 'ns',
+              kind: 'Company',
+              path: ['Company', null],
+            },
+            data: {},
+            method: 'insert',
+          },
+        ]);
+        callback();
+      };
+      const key = new entity.Key({namespace: 'ns', path: ['Company']});
+      datastore.insert({key, data: {}}, done);
+    });
+  });
+
   describe('key', () => {
     it('should return a Key object', () => {
       const options = {} as entity.KeyOptions;
@@ -520,6 +579,770 @@ describe('Datastore', () => {
       const key: any = datastore.key(options);
       assert.strictEqual(key.calledWith_[0].namespace, datastore.namespace);
       assert.deepStrictEqual(key.calledWith_[0].path, [options]);
+    });
+  });
+
+  describe('save', () => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    type Any = any;
+    let key: entity.Key;
+
+    beforeEach(() => {
+      key = new entity.Key({
+        namespace: 'namespace',
+        path: ['Company', 123],
+      });
+    });
+
+    afterEach(() => {
+      sandbox.restore();
+    });
+
+    it('should save with keys', done => {
+      const expectedReq = {
+        mutations: [
+          {
+            upsert: {
+              key: {
+                partitionId: {
+                  namespaceId: 'namespace',
+                },
+                path: [
+                  {
+                    kind: 'Company',
+                    id: 123,
+                  },
+                ],
+              },
+              properties: {
+                k: {
+                  stringValue: 'v',
+                },
+              },
+            },
+          },
+          {
+            upsert: {
+              key: {
+                partitionId: {
+                  namespaceId: 'namespace',
+                },
+                path: [
+                  {
+                    kind: 'Company',
+                    id: 123,
+                  },
+                ],
+              },
+              properties: {
+                k: {
+                  stringValue: 'v',
+                },
+              },
+            },
+          },
+        ],
+      };
+
+      datastore.request_ = (config: RequestConfig, callback: Function) => {
+        assert.strictEqual(config.client, 'DatastoreClient');
+        assert.strictEqual(config.method, 'commit');
+
+        assert.deepStrictEqual(config.reqOpts, expectedReq);
+        assert.deepStrictEqual(config.gaxOpts, {});
+
+        callback();
+      };
+      datastore.save(
+        [
+          {key, data: {k: 'v'}},
+          {key, data: {k: 'v'}},
+        ],
+        done
+      );
+    });
+
+    it('should save null value when excludeLargeProperties enabled', done => {
+      const expectedProperties = {
+        stringField: {
+          stringValue: 'string value',
+        },
+        nullField: {
+          nullValue: 0,
+        },
+        arrayField: {
+          arrayValue: {
+            values: [
+              {
+                integerValue: '0',
+              },
+              {
+                nullValue: 0,
+              },
+            ],
+          },
+        },
+        objectField: {
+          nullValue: 0,
+        },
+      };
+
+      datastore.request_ = (config: RequestConfig, callback: Function) => {
+        assert.deepStrictEqual(
+          config.reqOpts!.mutations![0].upsert!.properties,
+          expectedProperties
+        );
+        callback();
+      };
+
+      const entities = {
+        key: key,
+        data: {
+          stringField: 'string value',
+          nullField: null,
+          arrayField: [0, null],
+          objectField: null,
+        },
+        excludeLargeProperties: true,
+      };
+      datastore.save(entities, done);
+    });
+
+    it('should allow customization of GAX options', done => {
+      const gaxOptions = {};
+
+      datastore.request_ = (config: RequestConfig) => {
+        assert.strictEqual(config.gaxOpts, gaxOptions);
+        done();
+      };
+
+      datastore.save(
+        {
+          key,
+          data: {},
+        },
+        gaxOptions,
+        assert.ifError
+      );
+    });
+
+    it('should prepare entity objects', done => {
+      const entityObject = {};
+      let prepared = false;
+
+      sandbox
+        .stub(ds.DatastoreRequest, 'prepareEntityObject_')
+        .callsFake(obj => {
+          assert.strictEqual(obj, entityObject);
+          prepared = true;
+          return {
+            key,
+            method: 'insert',
+            data: {k: 'v'},
+          } as {};
+        });
+
+      datastore.request_ = () => {
+        assert.strictEqual(prepared, true);
+        done();
+      };
+
+      datastore.save(entityObject, assert.ifError);
+    });
+
+    it('should save with specific method', done => {
+      datastore.request_ = (config: RequestConfig, callback: Function) => {
+        assert.strictEqual(config.reqOpts!.mutations!.length, 3);
+        assert(is.object(config.reqOpts!.mutations![0].insert));
+        assert(is.object(config.reqOpts!.mutations![1].update));
+        assert(is.object(config.reqOpts!.mutations![2].upsert));
+
+        const insert = config.reqOpts!.mutations![0].insert!;
+        assert.deepStrictEqual(insert.properties!.k, {stringValue: 'v'});
+
+        const update = config.reqOpts!.mutations![1].update!;
+        assert.deepStrictEqual(update.properties!.k2, {stringValue: 'v2'});
+
+        const upsert = config.reqOpts!.mutations![2].upsert!;
+        assert.deepStrictEqual(upsert.properties!.k3, {stringValue: 'v3'});
+
+        callback();
+      };
+
+      datastore.save(
+        [
+          {key, method: 'insert', data: {k: 'v'}},
+          {key, method: 'update', data: {k2: 'v2'}},
+          {key, method: 'upsert', data: {k3: 'v3'}},
+        ],
+        done
+      );
+    });
+
+    it('should throw if a given method is not recognized', () => {
+      assert.throws(() => {
+        datastore.save(
+          {
+            key,
+            method: 'auto_insert_id',
+            data: {
+              k: 'v',
+            },
+          },
+          assert.ifError
+        );
+      }, /Method auto_insert_id not recognized/);
+    });
+
+    it('should not alter the provided data object', done => {
+      const entities = [
+        {
+          key,
+          method: 'insert',
+          indexed: false,
+          data: {
+            value: {
+              a: 'b',
+              c: [1, 2, 3],
+            },
+          },
+        },
+      ];
+      const expectedEntities = entities.map(x => extend(true, {}, x));
+
+      datastore.request_ = () => {
+        // By the time the request is made, the original object has already been
+        // transformed into a raw request.
+        assert.deepStrictEqual(entities, expectedEntities);
+        done();
+      };
+
+      datastore.save(entities, assert.ifError);
+    });
+
+    it('should return apiResponse in callback', done => {
+      const key = new entity.Key({namespace: 'ns', path: ['Company']});
+      const mockCommitResponse = {};
+      datastore.request_ = (config: RequestConfig, callback: Function) => {
+        callback(null, mockCommitResponse);
+      };
+      datastore.save(
+        {key, data: {}},
+        (err: Error | null, apiResponse: Entity) => {
+          assert.ifError(err);
+          assert.strictEqual(mockCommitResponse, apiResponse);
+          done();
+        }
+      );
+    });
+
+    it('should allow setting the indexed value of a property', done => {
+      datastore.request_ = (config: RequestConfig) => {
+        const property = config.reqOpts!.mutations![0].upsert!.properties!.name;
+        assert.strictEqual(property.stringValue, 'value');
+        assert.strictEqual(property.excludeFromIndexes, true);
+        done();
+      };
+
+      datastore.save(
+        {
+          key,
+          data: [
+            {
+              name: 'name',
+              value: 'value',
+              excludeFromIndexes: true,
+            },
+          ],
+        },
+        assert.ifError
+      );
+    });
+
+    it('should allow setting the indexed value on arrays', done => {
+      datastore.request_ = (config: RequestConfig) => {
+        const property = config.reqOpts!.mutations![0].upsert!.properties!.name;
+
+        property.arrayValue!.values!.forEach((value: Any) => {
+          assert.strictEqual(value.excludeFromIndexes, true);
+        });
+
+        done();
+      };
+
+      datastore.save(
+        {
+          key,
+          data: [
+            {
+              name: 'name',
+              value: ['one', 'two', 'three'],
+              excludeFromIndexes: true,
+            },
+          ],
+        },
+        assert.ifError
+      );
+    });
+
+    it('should allow exclude property indexed with "*" wildcard from root', done => {
+      const longString = Buffer.alloc(1501, '.').toString();
+      const data = {
+        longString,
+        notMetadata: true,
+        longStringArray: [longString],
+        metadata: {
+          longString,
+          otherProperty: 'value',
+          obj: {
+            longStringArray: [
+              {
+                longString,
+                nestedLongStringArray: [
+                  {
+                    longString,
+                    nestedProperty: true,
+                  },
+                  {
+                    longString,
+                  },
+                ],
+              },
+            ],
+          },
+          longStringArray: [
+            {
+              longString,
+              nestedLongStringArray: [
+                {
+                  longString,
+                  nestedProperty: true,
+                },
+                {
+                  longString,
+                },
+              ],
+            },
+          ],
+        },
+      };
+
+      const validateIndex = (data: Any) => {
+        if (data.arrayValue) {
+          data.arrayValue.values.forEach((value: Any) => {
+            validateIndex(value);
+          });
+        } else if (data.entityValue) {
+          Object.keys(data.entityValue.properties).forEach(path => {
+            validateIndex(data.entityValue.properties[path]);
+          });
+        } else {
+          assert.strictEqual(data.excludeFromIndexes, true);
+        }
+      };
+
+      datastore.request_ = (config: RequestConfig) => {
+        const properties = config.reqOpts!.mutations![0].upsert!.properties;
+        Object.keys(properties!).forEach(path => {
+          validateIndex(properties![path]);
+        });
+        done();
+      };
+
+      datastore.save(
+        {
+          key,
+          data,
+          excludeFromIndexes: ['.*'],
+        },
+        assert.ifError
+      );
+    });
+
+    it('should allow exclude property indexed with "*" wildcard for object and array', done => {
+      const longString = Buffer.alloc(1501, '.').toString();
+      const data = {
+        longString,
+        notMetadata: true,
+        longStringArray: [longString],
+        metadata: {
+          longString,
+          otherProperty: 'value',
+          obj: {
+            longStringArray: [
+              {
+                longString,
+                nestedLongStringArray: [
+                  {
+                    longString,
+                    nestedProperty: true,
+                  },
+                  {
+                    longString,
+                  },
+                ],
+              },
+            ],
+          },
+          longStringArray: [
+            {
+              longString,
+              nestedLongStringArray: [
+                {
+                  longString,
+                  nestedProperty: true,
+                },
+                {
+                  longString,
+                },
+              ],
+            },
+          ],
+        },
+      };
+
+      const validateIndex = (data: Any) => {
+        if (data.arrayValue) {
+          data.arrayValue.values.forEach((value: Any) => {
+            validateIndex(value);
+          });
+        } else if (data.entityValue) {
+          Object.keys(data.entityValue.properties).forEach(path => {
+            validateIndex(data.entityValue.properties[path]);
+          });
+        } else {
+          assert.strictEqual(data.excludeFromIndexes, true);
+        }
+      };
+
+      datastore.request_ = (config: RequestConfig) => {
+        const properties = config.reqOpts!.mutations![0].upsert!.properties;
+        Object.keys(properties!).forEach(path => {
+          validateIndex(properties![path]);
+        });
+        done();
+      };
+
+      datastore.save(
+        {
+          key,
+          data,
+          excludeFromIndexes: [
+            'longString',
+            'notMetadata',
+            'longStringArray[]',
+            'metadata.longString',
+            'metadata.otherProperty',
+            'metadata.obj.*',
+            'metadata.longStringArray[].*',
+          ],
+        },
+        assert.ifError
+      );
+    });
+
+    it('should allow setting the indexed value on arrays', done => {
+      datastore.request_ = (config: RequestConfig) => {
+        const property = config.reqOpts!.mutations![0].upsert!.properties!.name;
+
+        property.arrayValue!.values!.forEach((value: Any) => {
+          assert.strictEqual(value.excludeFromIndexes, true);
+        });
+
+        done();
+      };
+
+      datastore.save(
+        {
+          key,
+          data: [
+            {
+              name: 'name',
+              value: ['one', 'two', 'three'],
+              excludeFromIndexes: true,
+            },
+          ],
+        },
+        assert.ifError
+      );
+    });
+
+    it('should prepare excludeFromIndexes array for large values', done => {
+      const longString = Buffer.alloc(1501, '.').toString();
+      const data = {
+        longString,
+        notMetadata: true,
+        longStringArray: [longString],
+        metadata: {
+          longString,
+          otherProperty: 'value',
+          obj: {
+            longStringArray: [
+              {
+                longString,
+                nestedLongStringArray: [
+                  {
+                    longString,
+                    nestedProperty: true,
+                  },
+                  {
+                    longString,
+                  },
+                ],
+              },
+            ],
+          },
+          longStringArray: [
+            {
+              longString,
+              nestedLongStringArray: [
+                {
+                  longString,
+                  nestedProperty: true,
+                },
+                {
+                  longString,
+                },
+              ],
+            },
+          ],
+        },
+      };
+
+      const excludeFromIndexes = [
+        'longString',
+        'longStringArray[]',
+        'metadata.longString',
+        'metadata.obj.longStringArray[].longString',
+        'metadata.obj.longStringArray[].nestedLongStringArray[].longString',
+        'metadata.longStringArray[].longString',
+        'metadata.longStringArray[].nestedLongStringArray[].longString',
+      ];
+
+      fakeEntity.entityToEntityProto = (entity: EntityObject) => {
+        return (entity as unknown) as EntityProto;
+      };
+      datastore.request_ = (config: RequestConfig) => {
+        assert.strictEqual(
+          (config.reqOpts!.mutations![0].upsert! as Entity)
+            .excludeLargeProperties,
+          true
+        );
+        assert.deepStrictEqual(
+          (config.reqOpts!.mutations![0].upsert! as Entity).excludeFromIndexes,
+          excludeFromIndexes
+        );
+        done();
+      };
+
+      datastore.save(
+        {
+          key,
+          data,
+          excludeLargeProperties: true,
+        },
+        assert.ifError
+      );
+    });
+
+    it('should allow auto setting the indexed value of a property with excludeLargeProperties', done => {
+      const longString = Buffer.alloc(1501, '.').toString();
+      const data = [
+        {
+          name: 'name',
+          value: longString,
+        },
+        {
+          name: 'description',
+          value: 'value',
+        },
+      ];
+
+      datastore.request_ = (config: RequestConfig) => {
+        assert.deepStrictEqual(
+          config.reqOpts!.mutations![0].upsert!.properties!.name
+            .excludeFromIndexes,
+          true
+        );
+        done();
+      };
+
+      datastore.save(
+        {
+          key,
+          data,
+          excludeLargeProperties: true,
+        },
+        assert.ifError
+      );
+    });
+
+    it('should assign ID on keys without them', done => {
+      const incompleteKey = new entity.Key({path: ['Incomplete']});
+      const incompleteKey2 = new entity.Key({path: ['Incomplete']});
+      const completeKey = new entity.Key({path: ['Complete', 'Key']});
+
+      const keyProtos: Array<{}> = [];
+      const ids = [1, 2];
+
+      const response = {
+        mutationResults: [
+          {
+            key: {},
+          },
+          {
+            key: {},
+          },
+          {},
+        ],
+      };
+
+      datastore.request_ = (config: RequestConfig, callback: Function) => {
+        callback(null, response);
+      };
+
+      sandbox.stub(fakeEntity, 'keyFromKeyProto').callsFake(keyProto => {
+        keyProtos.push(keyProto);
+        return ({
+          id: ids[keyProtos.length - 1],
+        } as {}) as entity.Key;
+      });
+
+      datastore.save(
+        [
+          {key: incompleteKey, data: {}},
+          {key: incompleteKey2, data: {}},
+          {key: completeKey, data: {}},
+        ],
+        (err: Error) => {
+          assert.ifError(err);
+
+          assert.strictEqual(incompleteKey.id, ids[0]);
+          assert.strictEqual(incompleteKey2.id, ids[1]);
+
+          assert.strictEqual(keyProtos.length, 2);
+          assert.strictEqual(keyProtos[0], response.mutationResults[0].key);
+          assert.strictEqual(keyProtos[1], response.mutationResults[1].key);
+
+          done();
+        }
+      );
+    });
+
+    describe('transactions', () => {
+      beforeEach(() => {
+        // Trigger transaction mode.
+        datastore.id = 'transaction-id';
+        datastore.requestCallbacks_ = [];
+        datastore.requests_ = [];
+      });
+
+      it('should queue request & callback', () => {
+        datastore.save({
+          key,
+          data: [{name: 'name', value: 'value'}],
+        });
+
+        assert.strictEqual(typeof datastore.requestCallbacks_[0], 'function');
+        assert.strictEqual(typeof datastore.requests_[0], 'object');
+      });
+    });
+  });
+
+  describe('update', () => {
+    afterEach(() => {
+      sandbox.restore();
+    });
+
+    it('should prepare entity objects', done => {
+      const entityObject = {};
+      const preparedEntityObject = {prepared: true};
+      const expectedEntityObject = Object.assign({}, preparedEntityObject, {
+        method: 'update',
+      });
+
+      sandbox
+        .stub(ds.DatastoreRequest, 'prepareEntityObject_')
+        .callsFake(obj => {
+          assert.strictEqual(obj, entityObject);
+          return preparedEntityObject as {};
+        });
+
+      datastore.save = (entities: Entity[]) => {
+        assert.deepStrictEqual(entities[0], expectedEntityObject);
+        done();
+      };
+
+      datastore.update(entityObject, assert.ifError);
+    });
+
+    it('should pass the correct arguments to save', done => {
+      datastore.save = (entities: Entity[], callback: Function) => {
+        assert.deepStrictEqual(JSON.parse(JSON.stringify(entities)), [
+          {
+            key: {
+              namespace: 'ns',
+              kind: 'Company',
+              path: ['Company', null],
+            },
+            data: {},
+            method: 'update',
+          },
+        ]);
+        callback();
+      };
+
+      const key = new entity.Key({namespace: 'ns', path: ['Company']});
+      datastore.update({key, data: {}}, done);
+    });
+  });
+
+  describe('upsert', () => {
+    afterEach(() => {
+      sandbox.restore();
+    });
+
+    it('should prepare entity objects', done => {
+      const entityObject = {};
+      const preparedEntityObject = {prepared: true};
+      const expectedEntityObject = Object.assign({}, preparedEntityObject, {
+        method: 'upsert',
+      });
+
+      sandbox
+        .stub(ds.DatastoreRequest, 'prepareEntityObject_')
+        .callsFake(obj => {
+          assert.strictEqual(obj, entityObject);
+          return preparedEntityObject as {};
+        });
+
+      datastore.save = (entities: Entity[]) => {
+        assert.deepStrictEqual(entities[0], expectedEntityObject);
+        done();
+      };
+
+      datastore.upsert(entityObject, assert.ifError);
+    });
+
+    it('should pass the correct arguments to save', done => {
+      datastore.save = (entities: Entity[], callback: Function) => {
+        assert.deepStrictEqual(JSON.parse(JSON.stringify(entities)), [
+          {
+            key: {
+              namespace: 'ns',
+              kind: 'Company',
+              path: ['Company', null],
+            },
+            data: {},
+            method: 'upsert',
+          },
+        ]);
+
+        callback();
+      };
+
+      const key = new entity.Key({namespace: 'ns', path: ['Company']});
+      datastore.upsert({key, data: {}}, done);
     });
   });
 

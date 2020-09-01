@@ -28,6 +28,7 @@ import {
   CommitResponse,
   DatastoreRequest,
   RequestOptions,
+  PrepareEntityObjectResponse,
 } from './request';
 
 /**
@@ -209,7 +210,7 @@ class Transaction extends DatastoreRequest {
         (modifiedEntity: {method: string; args: {reverse: () => void}}) => {
           const method = modifiedEntity.method;
           const args = modifiedEntity.args.reverse();
-          DatastoreRequest.prototype[method].call(this, args, () => {});
+          Datastore.prototype[method].call(this, args, () => {});
         }
       );
 
@@ -377,6 +378,28 @@ class Transaction extends DatastoreRequest {
         args: [ent],
       });
     });
+  }
+
+  /**
+   * Maps to {@link Datastore#save}, forcing the method to be `insert`.
+   *
+   * @param {object|object[]} entities Datastore key object(s).
+   * @param {Key} entities.key Datastore key object.
+   * @param {string[]} [entities.excludeFromIndexes] Exclude properties from
+   *     indexing using a simple JSON path notation. See the examples in
+   *     {@link Datastore#save} to see how to target properties at different
+   *     levels of nesting within your entity.
+   * @param {object} entities.data Data to save with the provided key.
+   */
+  insert(entities: Entities): void {
+    entities = arrify(entities)
+      .map(DatastoreRequest.prepareEntityObject_)
+      .map((x: PrepareEntityObjectResponse) => {
+        x.method = 'insert';
+        return x;
+      });
+
+    this.save(entities);
   }
 
   rollback(callback: RollbackCallback): void;
@@ -665,8 +688,7 @@ class Transaction extends DatastoreRequest {
    *   });
    * });
    */
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  save(entities: Entities): any {
+  save(entities: Entities): void {
     arrify(entities).forEach((ent: Entity) => {
       this.modifiedEntities_.push({
         entity: {
@@ -676,6 +698,50 @@ class Transaction extends DatastoreRequest {
         args: [ent],
       });
     });
+  }
+
+  /**
+   * Maps to {@link Datastore#save}, forcing the method to be `update`.
+   *
+   * @param {object|object[]} entities Datastore key object(s).
+   * @param {Key} entities.key Datastore key object.
+   * @param {string[]} [entities.excludeFromIndexes] Exclude properties from
+   *     indexing using a simple JSON path notation. See the examples in
+   *     {@link Datastore#save} to see how to target properties at different
+   *     levels of nesting within your entity.
+   * @param {object} entities.data Data to save with the provided key.
+   */
+  update(entities: Entities): void {
+    entities = arrify(entities)
+      .map(DatastoreRequest.prepareEntityObject_)
+      .map((x: PrepareEntityObjectResponse) => {
+        x.method = 'update';
+        return x;
+      });
+
+    this.save(entities);
+  }
+
+  /**
+   * Maps to {@link Datastore#save}, forcing the method to be `upsert`.
+   *
+   * @param {object|object[]} entities Datastore key object(s).
+   * @param {Key} entities.key Datastore key object.
+   * @param {string[]} [entities.excludeFromIndexes] Exclude properties from
+   *     indexing using a simple JSON path notation. See the examples in
+   *     {@link Datastore#save} to see how to target properties at different
+   *     levels of nesting within your entity.
+   * @param {object} entities.data Data to save with the provided key.
+   */
+  upsert(entities: Entities): void {
+    entities = arrify(entities)
+      .map(DatastoreRequest.prepareEntityObject_)
+      .map((x: PrepareEntityObjectResponse) => {
+        x.method = 'upsert';
+        return x;
+      });
+
+    this.save(entities);
   }
 }
 
@@ -711,7 +777,7 @@ export interface RunOptions {
  * that a callback is omitted.
  */
 promisifyAll(Transaction, {
-  exclude: ['createQuery', 'delete', 'save'],
+  exclude: ['createQuery', 'delete', 'insert', 'save', 'update', 'upsert'],
 });
 
 /**

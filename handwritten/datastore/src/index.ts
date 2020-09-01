@@ -31,18 +31,45 @@ import {
   ChannelCredentials,
   GoogleAuth,
   GoogleAuthOptions,
+  CallOptions,
 } from 'google-gax';
 import * as is from 'is';
 
-import {entity} from './entity';
+import {entity, Entities, Entity, EntityProto, ValueProto} from './entity';
 import {Query} from './query';
-import {DatastoreRequest} from './request';
+import {
+  DatastoreRequest,
+  CommitCallback,
+  CommitResponse,
+  PrepareEntityObjectResponse,
+  SaveCallback,
+  SaveResponse,
+  Mutation,
+} from './request';
 import {Transaction} from './transaction';
 import {promisifyAll} from '@google-cloud/promisify';
+import {google} from '../protos/protos';
 
 const {grpc} = new GrpcClient();
 
 export type PathType = string | number | entity.Int;
+export interface BooleanObject {
+  [key: string]: boolean;
+}
+export interface EntityProtoReduceAccumulator {
+  [key: string]: ValueProto;
+}
+export interface EntityProtoReduceData {
+  value: ValueProto;
+  excludeFromIndexes: ValueProto;
+  name: string | number;
+}
+export type UpdateCallback = CommitCallback;
+export type UpdateResponse = CommitResponse;
+export type UpsertCallback = CommitCallback;
+export type UpsertResponse = CommitResponse;
+export type InsertCallback = CommitCallback;
+export type InsertResponse = CommitResponse;
 
 // Import the clients for each version supported by this package.
 const gapic = Object.freeze({
@@ -423,6 +450,473 @@ class Datastore extends DatastoreRequest {
 
   getProjectId(): Promise<string> {
     return this.auth.getProjectId();
+  }
+
+  insert(entities: Entities): Promise<InsertResponse>;
+  insert(entities: Entities, callback: InsertCallback): void;
+  /**
+   * Maps to {@link Datastore#save}, forcing the method to be `insert`.
+   *
+   * @param {object|object[]} entities Datastore key object(s).
+   * @param {Key} entities.key Datastore key object.
+   * @param {string[]} [entities.excludeFromIndexes] Exclude properties from
+   *     indexing using a simple JSON path notation. See the examples in
+   *     {@link Datastore#save} to see how to target properties at different
+   *     levels of nesting within your entity.
+   * @param {object} entities.data Data to save with the provided key.
+   * @param {function} callback The callback function.
+   * @param {?error} callback.err An error returned while making this request
+   * @param {object} callback.apiResponse The full API response.
+   */
+  insert(
+    entities: Entities,
+    callback?: InsertCallback
+  ): void | Promise<InsertResponse> {
+    entities = arrify(entities)
+      .map(DatastoreRequest.prepareEntityObject_)
+      .map((x: PrepareEntityObjectResponse) => {
+        x.method = 'insert';
+        return x;
+      });
+
+    this.save(entities, callback!);
+  }
+
+  save(entities: Entities, gaxOptions?: CallOptions): Promise<SaveResponse>;
+  save(
+    entities: Entities,
+    gaxOptions: CallOptions,
+    callback: SaveCallback
+  ): void;
+  save(entities: Entities, callback: SaveCallback): void;
+  /**
+   * Insert or update the specified object(s). If a key is incomplete, its
+   * associated object is inserted and the original Key object is updated to
+   * contain the generated ID.
+   *
+   * This method will determine the correct Datastore method to execute
+   * (`upsert`, `insert`, or `update`) by using the key(s) provided. For
+   * example, if you provide an incomplete key (one without an ID), the request
+   * will create a new entity and have its ID automatically assigned. If you
+   * provide a complete key, the entity will be updated with the data specified.
+   *
+   * By default, all properties are indexed. To prevent a property from being
+   * included in *all* indexes, you must supply an `excludeFromIndexes` array.
+   *
+   * To prevent large properties from being included in *all* indexes, you must supply
+   * `excludeLargeProperties: true`.
+   *  See below for an example.
+   *
+   * @borrows {@link Transaction#save} as save
+   *
+   * @throws {Error} If an unrecognized method is provided.
+   *
+   * @param {object|object[]} entities Datastore key object(s).
+   * @param {Key} entities.key Datastore key object.
+   * @param {string[]} [entities.excludeFromIndexes] Exclude properties from
+   *     indexing using a simple JSON path notation. See the example below to
+   * see how to target properties at different levels of nesting within your
+   * @param {boolean} [entities.excludeLargeProperties] Automatically exclude
+   *  large properties from indexing. It help in storing large values.
+   * @param {string} [entities.method] Explicit method to use, either 'insert',
+   *     'update', or 'upsert'.
+   * @param {object} entities.data Data to save with the provided key.
+   *     entity.
+   * @param {object} [gaxOptions] Request configuration options, outlined here:
+   *     https://googleapis.github.io/gax-nodejs/global.html#CallOptions.
+   * @param {function} callback The callback function.
+   * @param {?error} callback.err An error returned while making this request
+   * @param {object} callback.apiResponse The full API response.
+   *
+   * @example
+   * //-
+   * // Save a single entity.
+   * //
+   * // Notice that we are providing an incomplete key. After saving, the
+   * // original Key object used to save will be updated to contain the path
+   * // with its generated ID.
+   * //-
+   * const key = datastore.key('Company');
+   * const entity = {
+   *   key: key,
+   *   data: {
+   *     rating: '10'
+   *   }
+   * };
+   *
+   * datastore.save(entity, (err) => {
+   *   console.log(key.path); // [ 'Company', 5669468231434240 ]
+   *   console.log(key.namespace); // undefined
+   * });
+   *
+   * //-
+   * // Save a single entity using a provided name instead of auto-generated ID.
+   * //
+   * // Here we are providing a key with name instead of an ID. After saving,
+   * // the original Key object used to save will be updated to contain the
+   * // path with the name instead of a generated ID.
+   * //-
+   * const key = datastore.key(['Company', 'donutshack']);
+   * const entity = {
+   *   key: key,
+   *   data: {
+   *     name: 'DonutShack',
+   *     rating: 8
+   *   }
+   * };
+   *
+   * datastore.save(entity, (err) => {
+   *   console.log(key.path); // ['Company', 'donutshack']
+   *   console.log(key.namespace); // undefined
+   * });
+   *
+   * //-
+   * // Save a single entity with a provided namespace. Namespaces allow for
+   * // multitenancy. To read more about this, see
+   * // [the Datastore docs on key concepts](https://goo.gl/M1LUAu).
+   * //
+   * // Here we are providing a key with namespace.
+   * //-
+   * const key = datastore.key({
+   *   namespace: 'my-namespace',
+   *   path: ['Company', 'donutshack']
+   * });
+   *
+   * const entity = {
+   *   key: key,
+   *   data: {
+   *     name: 'DonutShack',
+   *     rating: 8
+   *   }
+   * };
+   *
+   * datastore.save(entity, (err) => {
+   *   console.log(key.path); // ['Company', 'donutshack']
+   *   console.log(key.namespace); // 'my-namespace'
+   * });
+   *
+   * //-
+   * // Save different types of data, including ints, doubles, dates, booleans,
+   * // blobs, and lists.
+   * //
+   * // Notice that we are providing an incomplete key. After saving, the
+   * // original Key object used to save will be updated to contain the path
+   * // with its generated ID.
+   * //-
+   * const key = datastore.key('Company');
+   * const entity = {
+   *   key: key,
+   *   data: {
+   *     name: 'DonutShack',
+   *     rating: datastore.int(10),
+   *     worth: datastore.double(123456.78),
+   *     location: datastore.geoPoint({
+   *       latitude: 40.6894,
+   *       longitude: -74.0447
+   *     }),
+   *     numDonutsServed: 45,
+   *     founded: new Date('Tue May 12 2015 15:30:00 GMT-0400 (EDT)'),
+   *     isStartup: true,
+   *     donutEmoji: Buffer.from('\uD83C\uDF69'),
+   *     keywords: [
+   *       'donut',
+   *       'coffee',
+   *       'yum'
+   *     ]
+   *   }
+   * };
+   *
+   * datastore.save(entity, (err, apiResponse) => {});
+   *
+   * //-
+   * // Use an array, `excludeFromIndexes`, to exclude properties from indexing.
+   * // This will allow storing string values larger than 1500 bytes.
+   * //-
+   * const entity = {
+   *   key: datastore.key('Company'),
+   *   excludeFromIndexes: [
+   *     'description',
+   *     'embeddedEntity.description',
+   *     'arrayValue[]',
+   *     'arrayValue[].description'
+   *   ],
+   *   data: {
+   *     description: 'Long string (...)',
+   *     embeddedEntity: {
+   *       description: 'Long string (...)'
+   *     },
+   *     arrayValue: [
+   *       'Long string (...)',
+   *       {
+   *         description: 'Long string (...)'
+   *       }
+   *     ]
+   *   }
+   * };
+   *
+   * datastore.save(entity, (err, apiResponse) => {});
+   *
+   * //-
+   * // Use boolean `excludeLargeProperties`, to auto exclude Large properties from indexing.
+   * // This will allow storing string values larger than 1500 bytes.
+   * //-
+   * const entity = {
+   *   key: datastore.key('Company'),
+   *   data: {
+   *     description: 'Long string (...)',
+   *     embeddedEntity: {
+   *       description: 'Long string (...)'
+   *     },
+   *     arrayValue: [
+   *       'Long string (...)',
+   *       {
+   *         description: 'Long string (...)'
+   *       }
+   *     ]
+   *   },
+   *   excludeLargeProperties: true
+   * };
+   *
+   * datastore.save(entity, (err, apiResponse) => {});
+   *
+   * //-
+   * // Save multiple entities at once.
+   * //-
+   * const companyKey = datastore.key(['Company', 123]);
+   * const productKey = datastore.key(['Product', 'Computer']);
+   * const entities = [
+   *   {
+   *     key: companyKey,
+   *     data: {
+   *       HQ: 'Dallas, TX'
+   *     }
+   *   },
+   *   {
+   *     key: productKey,
+   *     data: {
+   *       vendor: 'Dell'
+   *     }
+   *   }
+   * ];
+   *
+   * datastore.save(entities, (err, apiResponse) => {});
+   *
+   * //-
+   * // Explicitly attempt to 'insert' a specific entity.
+   * //-
+   * const userKey = datastore.key(['User', 'chilts']);
+   * const entity = {
+   *   key: userKey,
+   *   method: 'insert',
+   *   data: {
+   *     fullName: 'Andrew Chilton'
+   *   }
+   * };
+   *
+   * datastore.save(entity, (err, apiResponse) => {});
+   *
+   * //-
+   * // Returns a Promise if callback is omitted.
+   * //-
+   * datastore.save(entity).then((data) => {
+   *   const apiResponse = data[0];
+   * });
+   */
+  save(
+    entities: Entities,
+    gaxOptionsOrCallback?: CallOptions | SaveCallback,
+    cb?: SaveCallback
+  ): void | Promise<SaveResponse> {
+    entities = arrify(entities);
+    const gaxOptions =
+      typeof gaxOptionsOrCallback === 'object' ? gaxOptionsOrCallback : {};
+    const callback =
+      typeof gaxOptionsOrCallback === 'function' ? gaxOptionsOrCallback : cb!;
+
+    const insertIndexes: BooleanObject = {};
+    const mutations: google.datastore.v1.IMutation[] = [];
+    const methods: BooleanObject = {
+      insert: true,
+      update: true,
+      upsert: true,
+    };
+
+    // Iterate over the entity objects, build a proto from all keys and values,
+    // then place in the correct mutation array (insert, update, etc).
+    entities
+      .map(DatastoreRequest.prepareEntityObject_)
+      .forEach((entityObject: Entity, index: number) => {
+        const mutation: Mutation = {};
+        let entityProto: EntityProto = {};
+        let method = 'upsert';
+
+        if (entityObject.method) {
+          if (methods[entityObject.method]) {
+            method = entityObject.method;
+          } else {
+            throw new Error(
+              'Method ' + entityObject.method + ' not recognized.'
+            );
+          }
+        }
+
+        if (entityObject.excludeLargeProperties) {
+          entityObject.excludeFromIndexes = entity.findLargeProperties_(
+            entityObject.data,
+            '',
+            entityObject.excludeFromIndexes
+          );
+        }
+
+        if (!entity.isKeyComplete(entityObject.key)) {
+          insertIndexes[index] = true;
+        }
+
+        // @TODO remove in @google-cloud/datastore@2.0.0
+        // This was replaced with a more efficient mechanism in the top-level
+        // `excludeFromIndexes` option.
+        if (Array.isArray(entityObject.data)) {
+          entityProto.properties = entityObject.data.reduce(
+            (
+              acc: EntityProtoReduceAccumulator,
+              data: EntityProtoReduceData
+            ) => {
+              const value = entity.encodeValue(
+                data.value,
+                data.name.toString()
+              );
+
+              if (typeof data.excludeFromIndexes === 'boolean') {
+                const excluded = data.excludeFromIndexes;
+                let values = value.arrayValue && value.arrayValue.values;
+
+                if (values) {
+                  values = values.map((x: ValueProto) => {
+                    x.excludeFromIndexes = excluded;
+                    return x;
+                  });
+                } else {
+                  value.excludeFromIndexes = data.excludeFromIndexes;
+                }
+              }
+
+              acc[data.name] = value;
+
+              return acc;
+            },
+            {}
+          );
+        } else {
+          entityProto = entity.entityToEntityProto(entityObject);
+        }
+
+        entityProto.key = entity.keyToKeyProto(entityObject.key);
+
+        mutation[method] = entityProto;
+        mutations.push(mutation);
+      });
+
+    const reqOpts = {
+      mutations,
+    };
+
+    function onCommit(
+      err?: Error | null,
+      resp?: google.datastore.v1.ICommitResponse
+    ) {
+      if (err || !resp) {
+        callback(err, resp);
+        return;
+      }
+
+      arrify(resp.mutationResults).forEach((result, index) => {
+        if (!result.key) {
+          return;
+        }
+        if (insertIndexes[index]) {
+          const id = entity.keyFromKeyProto(result.key).id;
+          entities[index].key.id = id;
+        }
+      });
+
+      callback(null, resp);
+    }
+
+    if (this.id) {
+      this.requests_.push(reqOpts);
+      this.requestCallbacks_.push(onCommit);
+      return;
+    }
+
+    this.request_(
+      {
+        client: 'DatastoreClient',
+        method: 'commit',
+        reqOpts,
+        gaxOpts: gaxOptions,
+      },
+      onCommit
+    );
+  }
+
+  update(entities: Entities): Promise<UpdateResponse>;
+  update(entities: Entities, callback: UpdateCallback): void;
+  /**
+   * Maps to {@link Datastore#save}, forcing the method to be `update`.
+   *
+   * @param {object|object[]} entities Datastore key object(s).
+   * @param {Key} entities.key Datastore key object.
+   * @param {string[]} [entities.excludeFromIndexes] Exclude properties from
+   *     indexing using a simple JSON path notation. See the examples in
+   *     {@link Datastore#save} to see how to target properties at different
+   *     levels of nesting within your entity.
+   * @param {object} entities.data Data to save with the provided key.
+   * @param {function} callback The callback function.
+   * @param {?error} callback.err An error returned while making this request
+   * @param {object} callback.apiResponse The full API response.
+   */
+  update(
+    entities: Entities,
+    callback?: UpdateCallback
+  ): void | Promise<UpdateResponse> {
+    entities = arrify(entities)
+      .map(DatastoreRequest.prepareEntityObject_)
+      .map((x: PrepareEntityObjectResponse) => {
+        x.method = 'update';
+        return x;
+      });
+
+    this.save(entities, callback!);
+  }
+
+  upsert(entities: Entities): Promise<UpsertResponse>;
+  upsert(entities: Entities, callback: UpsertCallback): void;
+  /**
+   * Maps to {@link Datastore#save}, forcing the method to be `upsert`.
+   *
+   * @param {object|object[]} entities Datastore key object(s).
+   * @param {Key} entities.key Datastore key object.
+   * @param {string[]} [entities.excludeFromIndexes] Exclude properties from
+   *     indexing using a simple JSON path notation. See the examples in
+   *     {@link Datastore#save} to see how to target properties at different
+   *     levels of nesting within your entity.
+   * @param {object} entities.data Data to save with the provided key.
+   * @param {function} callback The callback function.
+   * @param {?error} callback.err An error returned while making this request
+   * @param {object} callback.apiResponse The full API response.
+   */
+  upsert(
+    entities: Entities,
+    callback?: UpsertCallback
+  ): void | Promise<UpsertResponse> {
+    entities = arrify(entities)
+      .map(DatastoreRequest.prepareEntityObject_)
+      .map((x: PrepareEntityObjectResponse) => {
+        x.method = 'upsert';
+        return x;
+      });
+
+    this.save(entities, callback!);
   }
 
   /**
