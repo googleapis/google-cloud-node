@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-paginator?activeTab=versions
 
+### [3.0.5](https://www.github.com/googleapis/nodejs-paginator/compare/v3.0.4...v3.0.5) (2020-09-02)
+
+
+### Bug Fixes
+
+* add configs by running synthtool ([#241](https://www.github.com/googleapis/nodejs-paginator/issues/241)) ([643593a](https://www.github.com/googleapis/nodejs-paginator/commit/643593ae9ffb8febff69a7bdae19239f5bcb1266))
+
 ### [3.0.4](https://www.github.com/googleapis/nodejs-paginator/compare/v3.0.3...v3.0.4) (2020-08-06)
 
 
