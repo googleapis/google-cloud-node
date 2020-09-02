@@ -4,15 +4,68 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/nodejs-paginator.git",
-        "sha": "98bb9e06a987cfa47a86e7d4685b5ed0976d9433"
+        "sha": "77b6ea90f0e7fe1bb60a0be6dcb11c2ce4401526"
       }
     },
     {
       "git": {
         "name": "synthtool",
         "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "89d431fb2975fc4e0ed24995a6e6dfc8ff4c24fa"
+        "sha": "d91dd8aac77f7a9c5506c238038a26fa4f9e361e"
       }
     }
+  ],
+  "generatedFiles": [
+    ".eslintignore",
+    ".eslintrc.json",
+    ".gitattributes",
+    ".github/ISSUE_TEMPLATE/bug_report.md",
+    ".github/ISSUE_TEMPLATE/feature_request.md",
+    ".github/ISSUE_TEMPLATE/support_request.md",
+    ".github/PULL_REQUEST_TEMPLATE.md",
+    ".github/release-please.yml",
+    ".github/workflows/ci.yaml",
+    ".kokoro/.gitattributes",
+    ".kokoro/common.cfg",
+    ".kokoro/continuous/node10/common.cfg",
+    ".kokoro/continuous/node10/docs.cfg",
+    ".kokoro/continuous/node10/test.cfg",
+    ".kokoro/continuous/node12/common.cfg",
+    ".kokoro/continuous/node12/lint.cfg",
+    ".kokoro/continuous/node12/samples-test.cfg",
+    ".kokoro/continuous/node12/system-test.cfg",
+    ".kokoro/continuous/node12/test.cfg",
+    ".kokoro/docs.sh",
+    ".kokoro/lint.sh",
+    ".kokoro/populate-secrets.sh",
+    ".kokoro/presubmit/node10/common.cfg",
+    ".kokoro/presubmit/node12/common.cfg",
+    ".kokoro/presubmit/node12/samples-test.cfg",
+    ".kokoro/presubmit/node12/system-test.cfg",
+    ".kokoro/presubmit/node12/test.cfg",
+    ".kokoro/publish.sh",
+    ".kokoro/release/docs-devsite.cfg",
+    ".kokoro/release/docs-devsite.sh",
+    ".kokoro/release/docs.cfg",
+    ".kokoro/release/docs.sh",
+    ".kokoro/release/publish.cfg",
+    ".kokoro/samples-test.sh",
+    ".kokoro/system-test.sh",
+    ".kokoro/test.bat",
+    ".kokoro/test.sh",
+    ".kokoro/trampoline.sh",
+    ".mocharc.js",
+    ".nycrc",
+    ".prettierignore",
+    ".prettierrc.js",
+    "CODE_OF_CONDUCT.md",
+    "CONTRIBUTING.md",
+    "LICENSE",
+    "README.md",
+    "api-extractor.json",
+    "package-lock.json.2724744430",
+    "renovate.json",
+    "samples/README.md",
+    "samples/package-lock.json.465480222"
   ]
 }
