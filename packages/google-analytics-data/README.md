@@ -5,7 +5,7 @@
 # [Google Analytics Data: Node.js Client](https://github.com/googleapis/nodejs-analytics-data)
 
 [![release level](https://img.shields.io/badge/release%20level-beta-yellow.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
-[![npm version](https://img.shields.io/npm/v/data.svg)](https://www.npmjs.org/package/data)
+[![npm version](https://img.shields.io/npm/v/@google-analytics/data.svg)](https://www.npmjs.org/package/@google-analytics/data)
 [![codecov](https://img.shields.io/codecov/c/github/googleapis/nodejs-analytics-data/master.svg?style=flat)](https://codecov.io/gh/googleapis/nodejs-analytics-data)
 
 
@@ -32,8 +32,8 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 * [Quickstart](#quickstart)
   * [Before you begin](#before-you-begin)
   * [Installing the client library](#installing-the-client-library)
-
-
+  * [Using the client library](#using-the-client-library)
+* [Samples](#samples)
 * [Versioning](#versioning)
 * [Contributing](#contributing)
 * [License](#license)
@@ -50,10 +50,64 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 ### Installing the client library
 
 ```bash
-npm install data
+npm install @google-analytics/data
 ```
 
 
+### Using the client library
+
+```javascript
+// Imports the Google Cloud client library
+
+// eslint-disable-next-line node/no-extraneous-require, node/no-missing-require
+const {AlphaAnalyticsDataClient} = require('@google-analytics/data');
+
+// TODO(developer): replace with your prefered project ID.
+// const projectId = 'my-project'
+
+// Creates a client
+const client = new AlphaAnalyticsDataClient();
+
+async function runReport() {
+  const res = await client.runReport({
+    entity: {
+      propertyId: propertyId,
+    },
+    dateRanges: [
+      {
+        startDate: startDate,
+        endDate: endDate,
+      },
+    ],
+    dimensions: [
+      {
+        name: nameOfDimensions,
+      },
+    ],
+    metrics: [
+      {
+        name: nameOfMetrics,
+      },
+    ],
+  });
+  console.log(res[0].rows);
+  return res[0].rows;
+}
+
+runReport();
+
+```
+
+
+
+## Samples
+
+Samples are in the [`samples/`](https://github.com/googleapis/nodejs-analytics-data/tree/master/samples) directory. The samples' `README.md`
+has instructions for running the samples.
+
+| Sample                      | Source Code                       | Try it |
+| --------------------------- | --------------------------------- | ------ |
+| Quickstart | [source code](https://github.com/googleapis/nodejs-analytics-data/blob/master/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-analytics-data&page=editor&open_in_editor=samples/quickstart.js,samples/README.md) |
 
 
 
