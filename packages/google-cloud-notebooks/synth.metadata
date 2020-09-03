@@ -1,0 +1,30 @@
+{
+  "sources": [
+    {
+      "git": {
+        "name": ".",
+        "remote": "git@github.com:googleapis/nodejs-notebooks.git",
+        "sha": "906565e198c4bc184d0c0299211cd7ba0f33e06f"
+      }
+    },
+    {
+      "git": {
+        "name": "googleapis",
+        "remote": "https://github.com/googleapis/googleapis.git",
+        "sha": "67cb5ea10091d590b1656a1a718c72db49276929",
+        "internalRef": "329963295"
+      }
+    }
+  ],
+  "destinations": [
+    {
+      "client": {
+        "source": "googleapis",
+        "apiName": "notebooks",
+        "apiVersion": "v1beta1",
+        "language": "nodejs",
+        "generator": "bazel"
+      }
+    }
+  ]
+}

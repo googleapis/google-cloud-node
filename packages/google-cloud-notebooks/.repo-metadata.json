@@ -1,0 +1,13 @@
+{
+  "name": "notebooks",
+  "name_pretty": "AI Platform Notebooks",
+  "product_documentation": "https://cloud.google.com/ai-platform/notebooks/docs",
+  "client_documentation": "https://googleapis.dev/nodejs/notebooks/latest",
+  "issue_tracker": "",
+  "release_level": "beta",
+  "language": "nodejs",
+  "repo": "googleapis/nodejs-notebooks",
+  "distribution_name": "@google-cloud/notebooks",
+  "api_id": "notebooks.googleapis.com",
+  "requires_billing": true
+}
