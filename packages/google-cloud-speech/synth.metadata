@@ -3,23 +3,23 @@
     {
       "git": {
         "name": ".",
-        "remote": "git@github.com:googleapis/nodejs-speech",
-        "sha": "afb3a8982e20de8dc94f1ddbd15e3ff58bbe916a"
+        "remote": "https://github.com/googleapis/nodejs-speech.git",
+        "sha": "a734a8b9e4156fa8085de462d5c5600bbfcb942f"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "2db5725bf898b544a0cf951e1694d3b0fce5eda3",
-        "internalRef": "329384854"
+        "sha": "ddaa2026caf2eb00444a14b08500553824a7182a",
+        "internalRef": "329845759"
       }
     },
     {
       "git": {
         "name": "synthtool",
         "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "d91dd8aac77f7a9c5506c238038a26fa4f9e361e"
+        "sha": "32c758f11b8c578f515a746c9d263b82a615a77c"
       }
     }
   ],
@@ -42,5 +42,82 @@
         "generator": "bazel"
       }
     }
+  ],
+  "generatedFiles": [
+    ".eslintignore",
+    ".eslintrc.json",
+    ".gitattributes",
+    ".github/ISSUE_TEMPLATE/bug_report.md",
+    ".github/ISSUE_TEMPLATE/feature_request.md",
+    ".github/ISSUE_TEMPLATE/support_request.md",
+    ".github/PULL_REQUEST_TEMPLATE.md",
+    ".github/release-please.yml",
+    ".github/workflows/ci.yaml",
+    ".gitignore",
+    ".jsdoc.js",
+    ".kokoro/.gitattributes",
+    ".kokoro/common.cfg",
+    ".kokoro/continuous/node10/common.cfg",
+    ".kokoro/continuous/node10/docs.cfg",
+    ".kokoro/continuous/node10/test.cfg",
+    ".kokoro/continuous/node12/common.cfg",
+    ".kokoro/continuous/node12/lint.cfg",
+    ".kokoro/continuous/node12/samples-test.cfg",
+    ".kokoro/continuous/node12/system-test.cfg",
+    ".kokoro/continuous/node12/test.cfg",
+    ".kokoro/docs.sh",
+    ".kokoro/lint.sh",
+    ".kokoro/populate-secrets.sh",
+    ".kokoro/presubmit/node10/common.cfg",
+    ".kokoro/presubmit/node12/common.cfg",
+    ".kokoro/presubmit/node12/samples-test.cfg",
+    ".kokoro/presubmit/node12/system-test.cfg",
+    ".kokoro/presubmit/node12/test.cfg",
+    ".kokoro/publish.sh",
+    ".kokoro/release/docs-devsite.cfg",
+    ".kokoro/release/docs-devsite.sh",
+    ".kokoro/release/docs.cfg",
+    ".kokoro/release/docs.sh",
+    ".kokoro/release/publish.cfg",
+    ".kokoro/samples-test.sh",
+    ".kokoro/system-test.sh",
+    ".kokoro/test.bat",
+    ".kokoro/test.sh",
+    ".kokoro/trampoline.sh",
+    ".mocharc.js",
+    ".nycrc",
+    ".prettierignore",
+    ".prettierrc.js",
+    "CODE_OF_CONDUCT.md",
+    "CONTRIBUTING.md",
+    "LICENSE",
+    "README.md",
+    "api-extractor.json",
+    "linkinator.config.json",
+    "package-lock.json.4182279935",
+    "protos/google/cloud/speech/v1/cloud_speech.proto",
+    "protos/google/cloud/speech/v1p1beta1/cloud_speech.proto",
+    "protos/google/cloud/speech/v1p1beta1/resource.proto",
+    "protos/protos.d.ts",
+    "protos/protos.js",
+    "protos/protos.json",
+    "renovate.json",
+    "samples/README.md",
+    "samples/package-lock.json.3245432765",
+    "src/v1/index.ts",
+    "src/v1/speech_client.ts",
+    "src/v1/speech_client_config.json",
+    "src/v1/speech_proto_list.json",
+    "src/v1p1beta1/index.ts",
+    "src/v1p1beta1/speech_client.ts",
+    "src/v1p1beta1/speech_client_config.json",
+    "src/v1p1beta1/speech_proto_list.json",
+    "system-test/fixtures/sample/src/index.js",
+    "system-test/fixtures/sample/src/index.ts",
+    "system-test/install.ts",
+    "test/gapic_speech_v1.ts",
+    "test/gapic_speech_v1p1beta1.ts",
+    "tsconfig.json",
+    "webpack.config.js"
   ]
 }
