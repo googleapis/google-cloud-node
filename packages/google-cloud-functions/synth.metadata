@@ -3,8 +3,8 @@
     {
       "git": {
         "name": ".",
-        "remote": "git@github.com:googleapis/nodejs-functions.git",
-        "sha": "3613883d5f6bd3263c7308456d839bdda983543e"
+        "remote": "https://github.com/googleapis/nodejs-functions.git",
+        "sha": "d4c6acbf661215b9e9b40e42236ee76803f87672"
       }
     },
     {
@@ -103,5 +103,5 @@
     "test/gapic_cloud_functions_service_v1.ts",
     "tsconfig.json",
     "webpack.config.js"
-  ] 
+  ]
 }
