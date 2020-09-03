@@ -14,8 +14,8 @@
     "test": "mocha system-test --timeout 600000"
   },
   "dependencies": {
-    "@opentelemetry/api": "^0.10.2",
-    "@opentelemetry/tracing": "^0.10.2",
+    "@opentelemetry/api": "^0.11.0",
+    "@opentelemetry/tracing": "^0.11.0",
     "@google-cloud/pubsub": "^2.5.0"
   },
   "devDependencies": {
