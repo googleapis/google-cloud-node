@@ -137,10 +137,10 @@ export function promisifyAll(Class: Function, options?: PromisifyAllOptions) {
   const methods = ownPropertyNames.filter(methodName => {
     // clang-format off
     return (
+      !exclude.includes(methodName) &&
       typeof Class.prototype[methodName] === 'function' && // is it a function?
-      !/(^_|(Stream|_)|promise$)|^constructor$/.test(methodName) && // is it promisable?
-      exclude.indexOf(methodName) === -1
-    ); // is it blacklisted?
+      !/(^_|(Stream|_)|promise$)|^constructor$/.test(methodName) // is it promisable?
+    );
     // clang-format on
   });
 
@@ -203,10 +203,10 @@ export function callbackifyAll(
   const methods = ownPropertyNames.filter(methodName => {
     // clang-format off
     return (
+      !exclude.includes(methodName) &&
       typeof Class.prototype[methodName] === 'function' && // is it a function?
-      !/^_|(Stream|_)|^constructor$/.test(methodName) && // is it callbackifyable?
-      exclude.indexOf(methodName) === -1
-    ); // is it blacklisted?
+      !/^_|(Stream|_)|^constructor$/.test(methodName) // is it callbackifyable?
+    );
     // clang-format on
   });
 
