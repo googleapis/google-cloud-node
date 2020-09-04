@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-promisify?activeTab=versions
 
+### [2.0.3](https://www.github.com/googleapis/nodejs-promisify/compare/v2.0.2...v2.0.3) (2020-09-04)
+
+
+### Bug Fixes
+
+* allow excluding accessor methods ([#228](https://www.github.com/googleapis/nodejs-promisify/issues/228)) ([114d8bc](https://www.github.com/googleapis/nodejs-promisify/commit/114d8bcef7093bdfda195a15e0c2f376195fd3fc))
+
 ### [2.0.2](https://www.github.com/googleapis/nodejs-promisify/compare/v2.0.1...v2.0.2) (2020-07-06)
 
 
