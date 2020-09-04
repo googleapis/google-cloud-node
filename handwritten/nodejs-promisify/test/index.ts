@@ -98,6 +98,22 @@ describe('promisifyAll', () => {
     assert(FakeClass2.prototype.method.promisified_);
   });
 
+  it('should honor excluded properties first', done => {
+    function FakeClass2() {}
+    Object.defineProperty(FakeClass2.prototype, 'method', {
+      get: () => {
+        done(new Error('Accessor method should not be called.'));
+        return {};
+      },
+    });
+    assert.doesNotThrow(() => {
+      util.promisifyAll(FakeClass2, {
+        exclude: ['method'],
+      });
+      done();
+    });
+  });
+
   it('should pass the options object to promisify', done => {
     const fakeOptions = {
       a: 'a',
@@ -293,6 +309,22 @@ describe('callbackifyAll', () => {
     assert.strictEqual(FakeClass2.prototype.methodSync, noop);
     assert(FakeClass2.prototype.method.callbackified_);
     assert.strictEqual(FakeClass2.prototype.methodSync, noop);
+  });
+
+  it('should honor excluded properties first', done => {
+    function FakeClass2() {}
+    Object.defineProperty(FakeClass2.prototype, 'method', {
+      get: () => {
+        done(new Error('Accessor method should not be called.'));
+        return {};
+      },
+    });
+    assert.doesNotThrow(() => {
+      util.callbackifyAll(FakeClass2, {
+        exclude: ['method'],
+      });
+      done();
+    });
   });
 
   it('should not re-callbackify method', () => {
