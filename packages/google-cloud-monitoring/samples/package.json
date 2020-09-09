@@ -15,7 +15,7 @@
   },
   "dependencies": {
     "@google-cloud/monitoring": "^2.1.1",
-    "yargs": "^15.0.0"
+    "yargs": "^16.0.0"
   },
   "devDependencies": {
     "chai": "^4.2.0",
