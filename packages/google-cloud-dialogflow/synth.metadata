@@ -3,23 +3,16 @@
     {
       "git": {
         "name": ".",
-        "remote": "https://github.com/googleapis/nodejs-dialogflow.git",
-        "sha": "e77b19ed9fe0251aed71ed52304c75d3a18b30d4"
+        "remote": "git@github.com:googleapis/nodejs-dialogflow.git",
+        "sha": "140522198a07ca34a7387a9c67dcd5e0ed55b151"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "4c5071b615d96ef9dfd6a63d8429090f1f2872bb",
-        "internalRef": "327369997"
-      }
-    },
-    {
-      "git": {
-        "name": "synthtool",
-        "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "1a60ff2a3975c2f5054431588bd95db9c3b862ba"
+        "sha": "7e1a21195ede14f97f7da30efcff4c6bac599bb5",
+        "internalRef": "330665887"
       }
     }
   ],
@@ -51,7 +44,6 @@
     ".github/ISSUE_TEMPLATE/feature_request.md",
     ".github/ISSUE_TEMPLATE/support_request.md",
     ".github/PULL_REQUEST_TEMPLATE.md",
-    ".github/publish.yml",
     ".github/release-please.yml",
     ".github/workflows/ci.yaml",
     ".gitignore",
@@ -60,19 +52,19 @@
     ".kokoro/common.cfg",
     ".kokoro/continuous/node10/common.cfg",
     ".kokoro/continuous/node10/docs.cfg",
-    ".kokoro/continuous/node10/lint.cfg",
-    ".kokoro/continuous/node10/samples-test.cfg",
-    ".kokoro/continuous/node10/system-test.cfg",
     ".kokoro/continuous/node10/test.cfg",
     ".kokoro/continuous/node12/common.cfg",
+    ".kokoro/continuous/node12/lint.cfg",
+    ".kokoro/continuous/node12/samples-test.cfg",
+    ".kokoro/continuous/node12/system-test.cfg",
     ".kokoro/continuous/node12/test.cfg",
     ".kokoro/docs.sh",
     ".kokoro/lint.sh",
     ".kokoro/populate-secrets.sh",
     ".kokoro/presubmit/node10/common.cfg",
-    ".kokoro/presubmit/node10/samples-test.cfg",
-    ".kokoro/presubmit/node10/system-test.cfg",
     ".kokoro/presubmit/node12/common.cfg",
+    ".kokoro/presubmit/node12/samples-test.cfg",
+    ".kokoro/presubmit/node12/system-test.cfg",
     ".kokoro/presubmit/node12/test.cfg",
     ".kokoro/publish.sh",
     ".kokoro/release/docs-devsite.cfg",
@@ -94,7 +86,6 @@
     "LICENSE",
     "api-extractor.json",
     "linkinator.config.json",
-    "package-lock.json.4096453190",
     "protos/google/cloud/dialogflow/v2/agent.proto",
     "protos/google/cloud/dialogflow/v2/audio_config.proto",
     "protos/google/cloud/dialogflow/v2/context.proto",
@@ -122,7 +113,6 @@
     "protos/protos.js",
     "protos/protos.json",
     "renovate.json",
-    "samples/package-lock.json.2538930678",
     "src/index.ts",
     "src/v2/agents_client.ts",
     "src/v2/agents_client_config.json",
