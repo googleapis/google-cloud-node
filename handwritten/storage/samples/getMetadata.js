@@ -67,6 +67,7 @@ function main(bucketName = 'my-bucket', filename = 'test.txt') {
     console.log(
       `Effective Expiration Time: ${metadata.effectiveExpirationTime}`
     );
+    console.log(`Custom Time: ${metadata.customTime}`);
     console.log(`Metadata: ${metadata.metadata}`);
   }
 
