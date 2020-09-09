@@ -16,7 +16,7 @@
     "chalk": "^4.0.0",
     "node-record-lpcm16": "^1.0.1",
     "sox": "^0.1.0",
-    "yargs": "^15.0.0"
+    "yargs": "^16.0.0"
   },
   "devDependencies": {
     "c8": "^7.0.0",
