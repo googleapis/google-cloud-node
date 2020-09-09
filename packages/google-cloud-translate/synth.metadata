@@ -3,23 +3,16 @@
     {
       "git": {
         "name": ".",
-        "remote": "https://github.com/googleapis/nodejs-translate.git",
-        "sha": "6ff6bb22320ac21c4c553f01cf22ae0afbf0acd2"
+        "remote": "git@github.com:googleapis/nodejs-translate.git",
+        "sha": "35786baf2537579ac719d76e75be31de0bf89e18"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "94006b3cb8d2fb44703cf535da15608eed6bf7db",
-        "internalRef": "325949033"
-      }
-    },
-    {
-      "git": {
-        "name": "synthtool",
-        "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "94421c47802f56a44c320257b2b4c190dc7d6b68"
+        "sha": "7e1a21195ede14f97f7da30efcff4c6bac599bb5",
+        "internalRef": "330665887"
       }
     }
   ],
@@ -42,5 +35,81 @@
         "generator": "bazel"
       }
     }
+  ],
+  "generatedFiles": [
+    ".eslintignore",
+    ".eslintrc.json",
+    ".gitattributes",
+    ".github/ISSUE_TEMPLATE/bug_report.md",
+    ".github/ISSUE_TEMPLATE/feature_request.md",
+    ".github/ISSUE_TEMPLATE/support_request.md",
+    ".github/PULL_REQUEST_TEMPLATE.md",
+    ".github/release-please.yml",
+    ".github/workflows/ci.yaml",
+    ".gitignore",
+    ".jsdoc.js",
+    ".kokoro/.gitattributes",
+    ".kokoro/common.cfg",
+    ".kokoro/continuous/node10/common.cfg",
+    ".kokoro/continuous/node10/docs.cfg",
+    ".kokoro/continuous/node10/test.cfg",
+    ".kokoro/continuous/node12/common.cfg",
+    ".kokoro/continuous/node12/lint.cfg",
+    ".kokoro/continuous/node12/samples-test.cfg",
+    ".kokoro/continuous/node12/system-test.cfg",
+    ".kokoro/continuous/node12/test.cfg",
+    ".kokoro/docs.sh",
+    ".kokoro/lint.sh",
+    ".kokoro/populate-secrets.sh",
+    ".kokoro/presubmit/node10/common.cfg",
+    ".kokoro/presubmit/node12/common.cfg",
+    ".kokoro/presubmit/node12/samples-test.cfg",
+    ".kokoro/presubmit/node12/system-test.cfg",
+    ".kokoro/presubmit/node12/test.cfg",
+    ".kokoro/publish.sh",
+    ".kokoro/release/docs-devsite.cfg",
+    ".kokoro/release/docs-devsite.sh",
+    ".kokoro/release/docs.cfg",
+    ".kokoro/release/docs.sh",
+    ".kokoro/release/publish.cfg",
+    ".kokoro/samples-test.sh",
+    ".kokoro/system-test.sh",
+    ".kokoro/test.bat",
+    ".kokoro/test.sh",
+    ".kokoro/trampoline.sh",
+    ".mocharc.js",
+    ".nycrc",
+    ".prettierignore",
+    ".prettierrc.js",
+    "CODE_OF_CONDUCT.md",
+    "CONTRIBUTING.md",
+    "LICENSE",
+    "README.md",
+    "api-extractor.json",
+    "linkinator.config.json",
+    "package-lock.json.338134618",
+    "protos/google/cloud/translate/v3/translation_service.proto",
+    "protos/google/cloud/translate/v3beta1/translation_service.proto",
+    "protos/protos.d.ts",
+    "protos/protos.js",
+    "protos/protos.json",
+    "renovate.json",
+    "samples/README.md",
+    "samples/package-lock.json.1765310384",
+    "src/v3/index.ts",
+    "src/v3/translation_service_client.ts",
+    "src/v3/translation_service_client_config.json",
+    "src/v3/translation_service_proto_list.json",
+    "src/v3beta1/index.ts",
+    "src/v3beta1/translation_service_client.ts",
+    "src/v3beta1/translation_service_client_config.json",
+    "src/v3beta1/translation_service_proto_list.json",
+    "system-test/fixtures/sample/src/index.js",
+    "system-test/fixtures/sample/src/index.ts",
+    "system-test/install.ts",
+    "test/gapic_translation_service_v3.ts",
+    "test/gapic_translation_service_v3beta1.ts",
+    "tsconfig.json",
+    "webpack.config.js"
   ]
 }
