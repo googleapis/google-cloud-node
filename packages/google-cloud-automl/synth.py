@@ -33,4 +33,4 @@ templates = common_templates.node_library(
     source_location='build/src', versions=versions, default_version='v1')
 s.copy(templates)
 
-node.postprocess_gapic_library()
+node.postprocess_gapic_library(excludes=['.kokoro/trampoline.sh'])
