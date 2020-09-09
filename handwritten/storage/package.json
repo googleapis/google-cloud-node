@@ -111,7 +111,7 @@
     "tmp": "^0.2.0",
     "typescript": "^3.8.3",
     "uuid": "^8.0.0",
-    "yargs": "^15.0.0",
+    "yargs": "^16.0.0",
     "@microsoft/api-documenter": "^7.8.10",
     "@microsoft/api-extractor": "^7.8.10"
   }
