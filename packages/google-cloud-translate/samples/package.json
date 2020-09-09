@@ -18,7 +18,7 @@
     "@google-cloud/text-to-speech": "^3.0.0",
     "@google-cloud/translate": "^6.0.2",
     "@google-cloud/vision": "^2.0.0",
-    "yargs": "^15.0.0"
+    "yargs": "^16.0.0"
   },
   "devDependencies": {
     "@google-cloud/storage": "^5.0.0",
