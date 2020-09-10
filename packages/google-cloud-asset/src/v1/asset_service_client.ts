@@ -211,27 +211,12 @@ export class AssetServiceClient {
     const exportAssetsMetadata = protoFilesRoot.lookup(
       '.google.cloud.asset.v1.ExportAssetsRequest'
     ) as gax.protobuf.Type;
-    const exportIamPolicyAnalysisResponse = protoFilesRoot.lookup(
-      '.google.cloud.asset.v1.ExportIamPolicyAnalysisResponse'
-    ) as gax.protobuf.Type;
-    const exportIamPolicyAnalysisMetadata = protoFilesRoot.lookup(
-      '.google.cloud.asset.v1.ExportIamPolicyAnalysisRequest'
-    ) as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       exportAssets: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         exportAssetsResponse.decode.bind(exportAssetsResponse),
         exportAssetsMetadata.decode.bind(exportAssetsMetadata)
-      ),
-      exportIamPolicyAnalysis: new this._gaxModule.LongrunningDescriptor(
-        this.operationsClient,
-        exportIamPolicyAnalysisResponse.decode.bind(
-          exportIamPolicyAnalysisResponse
-        ),
-        exportIamPolicyAnalysisMetadata.decode.bind(
-          exportIamPolicyAnalysisMetadata
-        )
       ),
     };
 
@@ -290,8 +275,6 @@ export class AssetServiceClient {
       'deleteFeed',
       'searchAllResources',
       'searchAllIamPolicies',
-      'analyzeIamPolicy',
-      'exportIamPolicyAnalysis',
     ];
     for (const methodName of assetServiceStubMethods) {
       const callPromise = this.assetServiceStub.then(
@@ -917,115 +900,6 @@ export class AssetServiceClient {
     this.initialize();
     return this.innerApiCalls.deleteFeed(request, options, callback);
   }
-  analyzeIamPolicy(
-    request: protos.google.cloud.asset.v1.IAnalyzeIamPolicyRequest,
-    options?: gax.CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.asset.v1.IAnalyzeIamPolicyResponse,
-      protos.google.cloud.asset.v1.IAnalyzeIamPolicyRequest | undefined,
-      {} | undefined
-    ]
-  >;
-  analyzeIamPolicy(
-    request: protos.google.cloud.asset.v1.IAnalyzeIamPolicyRequest,
-    options: gax.CallOptions,
-    callback: Callback<
-      protos.google.cloud.asset.v1.IAnalyzeIamPolicyResponse,
-      protos.google.cloud.asset.v1.IAnalyzeIamPolicyRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  analyzeIamPolicy(
-    request: protos.google.cloud.asset.v1.IAnalyzeIamPolicyRequest,
-    callback: Callback<
-      protos.google.cloud.asset.v1.IAnalyzeIamPolicyResponse,
-      protos.google.cloud.asset.v1.IAnalyzeIamPolicyRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  /**
-   * Analyzes IAM policies to answer which identities have what accesses on
-   * which resources.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.asset.v1.IamPolicyAnalysisQuery} request.analysisQuery
-   *   The request query.
-   * @param {google.protobuf.Duration} [request.executionTimeout]
-   *   Amount of time executable has to complete.  See JSON representation of
-   *   [Duration](https://developers.google.com/protocol-buffers/docs/proto3#json).
-   *
-   *   If this field is set with a value less than the RPC deadline, and the
-   *   execution of your query hasn't finished in the specified
-   *   execution timeout,  you will get a response with partial result.
-   *   Otherwise, your query's execution will continue until the RPC deadline.
-   *   If it's not finished until then, you will get a  DEADLINE_EXCEEDED error.
-   *
-   *   Default is empty.
-   *
-   *   (-- We had discussion of whether we should have this field in the    --)
-   *   (-- request or use the RPC deadline instead. We finally choose this  --)
-   *   (-- approach for the following reasons (detailed in                  --)
-   *   (-- go/analyze-iam-policy-deadlines):                                --)
-   *   (-- * HTTP clients have very limited support of the RPC deadline.    --)
-   *   (--   There is an X-Server-Timeout header introduced in 2019/09, but --)
-   *   (--   only implemented in the C++ HTTP server library.               --)
-   *   (-- * The purpose of the RPC deadline is for RPC clients to          --)
-   *   (--   communicate its max waiting time to the server. This deadline  --)
-   *   (--   could be further propagated to the downstream servers. It is   --)
-   *   (--   mainly used for servers to cancel the request processing       --)
-   *   (--   to avoid resource wasting. Overloading the RPC deadline for    --)
-   *   (--   other purposes could make our backend system harder to reason  --)
-   *   (--   about.                                                         --)
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [AnalyzeIamPolicyResponse]{@link google.cloud.asset.v1.AnalyzeIamPolicyResponse}.
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
-   */
-  analyzeIamPolicy(
-    request: protos.google.cloud.asset.v1.IAnalyzeIamPolicyRequest,
-    optionsOrCallback?:
-      | gax.CallOptions
-      | Callback<
-          protos.google.cloud.asset.v1.IAnalyzeIamPolicyResponse,
-          | protos.google.cloud.asset.v1.IAnalyzeIamPolicyRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.asset.v1.IAnalyzeIamPolicyResponse,
-      protos.google.cloud.asset.v1.IAnalyzeIamPolicyRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.asset.v1.IAnalyzeIamPolicyResponse,
-      protos.google.cloud.asset.v1.IAnalyzeIamPolicyRequest | undefined,
-      {} | undefined
-    ]
-  > | void {
-    request = request || {};
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      'analysis_query.scope': request.analysisQuery!.scope || '',
-    });
-    this.initialize();
-    return this.innerApiCalls.analyzeIamPolicy(request, options, callback);
-  }
 
   exportAssets(
     request: protos.google.cloud.asset.v1.IExportAssetsRequest,
@@ -1201,154 +1075,6 @@ export class AssetServiceClient {
     return decodeOperation as LROperation<
       protos.google.cloud.asset.v1.ExportAssetsResponse,
       protos.google.cloud.asset.v1.ExportAssetsRequest
-    >;
-  }
-  exportIamPolicyAnalysis(
-    request: protos.google.cloud.asset.v1.IExportIamPolicyAnalysisRequest,
-    options?: gax.CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.asset.v1.IExportIamPolicyAnalysisResponse,
-        protos.google.cloud.asset.v1.IExportIamPolicyAnalysisRequest
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined
-    ]
-  >;
-  exportIamPolicyAnalysis(
-    request: protos.google.cloud.asset.v1.IExportIamPolicyAnalysisRequest,
-    options: gax.CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.asset.v1.IExportIamPolicyAnalysisResponse,
-        protos.google.cloud.asset.v1.IExportIamPolicyAnalysisRequest
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  exportIamPolicyAnalysis(
-    request: protos.google.cloud.asset.v1.IExportIamPolicyAnalysisRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.asset.v1.IExportIamPolicyAnalysisResponse,
-        protos.google.cloud.asset.v1.IExportIamPolicyAnalysisRequest
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  /**
-   * Exports the answers of which identities have what accesses on which
-   * resources to a Google Cloud Storage or a BigQuery destination. For Cloud
-   * Storage destination, the output format is the JSON format that represents a
-   * {@link google.cloud.asset.v1.AnalyzeIamPolicyResponse|google.cloud.asset.v1.AnalyzeIamPolicyResponse}.
-   * This method implements the
-   * {@link google.longrunning.Operation|google.longrunning.Operation}, which allows
-   * you to track the export status. We recommend intervals of at least 2
-   * seconds with exponential retry to poll the export operation result. The
-   * metadata contains the request to help callers to map responses to requests.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.asset.v1.IamPolicyAnalysisQuery} request.analysisQuery
-   *   The request query.
-   * @param {google.cloud.asset.v1.IamPolicyAnalysisOutputConfig} request.outputConfig
-   *   Output configuration indicating where the results will be output to.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Operation]{@link google.longrunning.Operation}.
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
-   */
-  exportIamPolicyAnalysis(
-    request: protos.google.cloud.asset.v1.IExportIamPolicyAnalysisRequest,
-    optionsOrCallback?:
-      | gax.CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.asset.v1.IExportIamPolicyAnalysisResponse,
-            protos.google.cloud.asset.v1.IExportIamPolicyAnalysisRequest
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.asset.v1.IExportIamPolicyAnalysisResponse,
-        protos.google.cloud.asset.v1.IExportIamPolicyAnalysisRequest
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.asset.v1.IExportIamPolicyAnalysisResponse,
-        protos.google.cloud.asset.v1.IExportIamPolicyAnalysisRequest
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined
-    ]
-  > | void {
-    request = request || {};
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      'analysis_query.scope': request.analysisQuery!.scope || '',
-    });
-    this.initialize();
-    return this.innerApiCalls.exportIamPolicyAnalysis(
-      request,
-      options,
-      callback
-    );
-  }
-  /**
-   * Check the status of the long running operation returned by the exportIamPolicyAnalysis() method.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *
-   * @example:
-   *   const decodedOperation = await checkExportIamPolicyAnalysisProgress(name);
-   *   console.log(decodedOperation.result);
-   *   console.log(decodedOperation.done);
-   *   console.log(decodedOperation.metadata);
-   *
-   */
-  async checkExportIamPolicyAnalysisProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.asset.v1.ExportIamPolicyAnalysisResponse,
-      protos.google.cloud.asset.v1.ExportIamPolicyAnalysisRequest
-    >
-  > {
-    const request = new operationsProtos.google.longrunning.GetOperationRequest(
-      {name}
-    );
-    const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new gax.Operation(
-      operation,
-      this.descriptors.longrunning.exportIamPolicyAnalysis,
-      gax.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.asset.v1.ExportIamPolicyAnalysisResponse,
-      protos.google.cloud.asset.v1.ExportIamPolicyAnalysisRequest
     >;
   }
   searchAllResources(
