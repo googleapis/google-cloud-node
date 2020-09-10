@@ -14,7 +14,8 @@
                         "go_package": "google.golang.org/genproto/googleapis/cloud/bigquery/reservation/v1;reservation",
                         "java_multiple_files": true,
                         "java_outer_classname": "ReservationProto",
-                        "java_package": "com.google.cloud.bigquery.reservation.v1"
+                        "java_package": "com.google.cloud.bigquery.reservation.v1",
+                        "php_namespace": "Google\\Cloud\\BigQuery\\Reservation\\V1"
                       },
                       "nested": {
                         "ReservationService": {

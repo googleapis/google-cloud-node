@@ -14,6 +14,9 @@
 BigQuery Reservation client for Node.js
 
 
+A comprehensive list of changes in each version may be found in
+[the CHANGELOG](https://github.com/googleapis/nodejs-bigquery-reservation/blob/master/CHANGELOG.md).
+
 * [Google BigQuery Reservation Node.js Client API Reference][client-docs]
 * [Google BigQuery Reservation Documentation][product-docs]
 * [github.com/googleapis/nodejs-bigquery-reservation](https://github.com/googleapis/nodejs-bigquery-reservation)
