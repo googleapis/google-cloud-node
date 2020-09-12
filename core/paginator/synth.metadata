@@ -4,14 +4,14 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/nodejs-paginator.git",
-        "sha": "77b6ea90f0e7fe1bb60a0be6dcb11c2ce4401526"
+        "sha": "86961f368b97df46fa0d7b92750813fb5a07f579"
       }
     },
     {
       "git": {
         "name": "synthtool",
         "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "d91dd8aac77f7a9c5506c238038a26fa4f9e361e"
+        "sha": "fdd03c161003ab97657cc0218f25c82c89ddf4b6"
       }
     }
   ],
@@ -63,9 +63,7 @@
     "LICENSE",
     "README.md",
     "api-extractor.json",
-    "package-lock.json.2724744430",
     "renovate.json",
-    "samples/README.md",
-    "samples/package-lock.json.465480222"
+    "samples/README.md"
   ]
 }
