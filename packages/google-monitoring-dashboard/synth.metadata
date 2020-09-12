@@ -4,7 +4,7 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/nodejs-monitoring-dashboards.git",
-        "sha": "7f6691f2696fc5c0fcb65cc90046c6591bc96a08"
+        "sha": "d29c2e07bbefb59e8aa7acd3a4028831ed2db4f5"
       }
     },
     {
@@ -19,7 +19,7 @@
       "git": {
         "name": "synthtool",
         "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "8cf6d2834ad14318e64429c3b94f6443ae83daf9"
+        "sha": "fdd03c161003ab97657cc0218f25c82c89ddf4b6"
       }
     }
   ],
