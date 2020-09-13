@@ -25,11 +25,13 @@ objects to users via direct download.
   * [Add File Owner Acl](#add-file-owner-acl)
   * [Storage Get Bucket Metadata.](#storage-get-bucket-metadata.)
   * [Copy File](#copy-file)
+  * [Copy Old Version Of File.](#copy-old-version-of-file.)
   * [Create New Bucket](#create-new-bucket)
   * [Create Notification](#create-notification)
   * [Delete Bucket](#delete-bucket)
   * [Delete File](#delete-file)
   * [Delete Notification](#delete-notification)
+  * [Delete Old Version Of File.](#delete-old-version-of-file.)
   * [Disable Bucket Lifecycle Management](#disable-bucket-lifecycle-management)
   * [Disable Default Event Based Hold](#disable-default-event-based-hold)
   * [Disable Requester Pays](#disable-requester-pays)
@@ -63,6 +65,7 @@ objects to users via direct download.
   * [List Buckets](#list-buckets)
   * [List Files](#list-files)
   * [List Files By Prefix](#list-files-by-prefix)
+  * [List Files with Old Versions.](#list-files-with-old-versions.)
   * [List Notifications](#list-notifications)
   * [Lock Retention Policy](#lock-retention-policy)
   * [Make Public](#make-public)
@@ -227,6 +230,25 @@ __Usage:__
 
 
 
+### Copy Old Version Of File.
+
+Copy Old Version Of File.
+
+View the [source code](https://github.com/googleapis/nodejs-storage/blob/master/samples/copyOldVersionOfFile.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-storage&page=editor&open_in_editor=samples/copyOldVersionOfFile.js,samples/README.md)
+
+__Usage:__
+
+
+`node copyOldVersionOfFile.js <SRC_BUCKET_NAME> <SRC_FILE_NAME> <DEST_BUCKET_NAME> <DEST_FILE_NAME> <GENERATION>`
+
+
+-----
+
+
+
+
 ### Create New Bucket
 
 View the [source code](https://github.com/googleapis/nodejs-storage/blob/master/samples/createNewBucket.js).
@@ -305,6 +327,25 @@ __Usage:__
 
 
 `node samples/deleteNotification.js`
+
+
+-----
+
+
+
+
+### Delete Old Version Of File.
+
+Delete Old Version Of File.
+
+View the [source code](https://github.com/googleapis/nodejs-storage/blob/master/samples/deleteOldVersionOfFile.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-storage&page=editor&open_in_editor=samples/deleteOldVersionOfFile.js,samples/README.md)
+
+__Usage:__
+
+
+`node deleteOldVersionOfFile.js <BUCKET_NAME> <FILE_NAME> <GENERATION>`
 
 
 -----
@@ -880,6 +921,25 @@ __Usage:__
 
 
 `node samples/listFilesByPrefix.js`
+
+
+-----
+
+
+
+
+### List Files with Old Versions.
+
+List Files with Old Versions.
+
+View the [source code](https://github.com/googleapis/nodejs-storage/blob/master/samples/listFilesWithOldVersions.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-storage&page=editor&open_in_editor=samples/listFilesWithOldVersions.js,samples/README.md)
+
+__Usage:__
+
+
+`node listFilesWithOldVersions.js <BUCKET_NAME>`
 
 
 -----

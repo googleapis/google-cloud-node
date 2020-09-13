@@ -4,7 +4,7 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/nodejs-storage.git",
-        "sha": "68dd91924a71929d61834495949217f37e7b7ccc"
+        "sha": "6c3999e87f93cd7deee5555bc166d5470501afae"
       }
     },
     {
