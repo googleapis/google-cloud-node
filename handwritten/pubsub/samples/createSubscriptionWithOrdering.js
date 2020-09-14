@@ -31,7 +31,7 @@ function main(
   topicName = 'YOUR_TOPIC_NAME',
   subscriptionName = 'YOUR_SUBSCRIPTION_NAME'
 ) {
-  // [START pubsub_ordering_keys_create_subscription]
+  // [START pubsub_enable_subscription_ordering]
   /**
    * TODO(developer): Uncomment these variables before running the sample.
    */
@@ -58,7 +58,7 @@ function main(
   }
 
   createSubscriptionWithOrdering().catch(console.error);
-  // [END pubsub_ordering_keys_create_subscription]
+  // [END pubsub_enable_subscription_ordering]
 }
 
 main(...process.argv.slice(2));

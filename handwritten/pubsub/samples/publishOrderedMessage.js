@@ -44,7 +44,7 @@ async function main(
   data = JSON.stringify({foo: 'bar'}),
   orderingKey = 'key1'
 ) {
-  // [START pubsub_publish_ordered_message]
+  // [START pubsub_publish_with_ordering_keys]
   /**
    * TODO(developer): Uncomment these variables before running the sample.
    */
@@ -86,7 +86,7 @@ async function main(
   }
 
   return await publishOrderedMessage();
-  // [END pubsub_publish_ordered_message]
+  // [END pubsub_publish_with_ordering_keys]
 }
 
 // This needs to be exported directly so that the system tests can find it.
