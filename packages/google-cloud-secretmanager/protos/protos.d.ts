@@ -148,6 +148,9 @@ export namespace google {
 
                     /** SecretVersion state */
                     state?: (google.cloud.secretmanager.v1.SecretVersion.State|keyof typeof google.cloud.secretmanager.v1.SecretVersion.State|null);
+
+                    /** SecretVersion replicationStatus */
+                    replicationStatus?: (google.cloud.secretmanager.v1.IReplicationStatus|null);
                 }
 
                 /** Represents a SecretVersion. */
@@ -170,6 +173,9 @@ export namespace google {
 
                     /** SecretVersion state. */
                     public state: (google.cloud.secretmanager.v1.SecretVersion.State|keyof typeof google.cloud.secretmanager.v1.SecretVersion.State);
+
+                    /** SecretVersion replicationStatus. */
+                    public replicationStatus?: (google.cloud.secretmanager.v1.IReplicationStatus|null);
 
                     /**
                      * Creates a new SecretVersion instance using the specified properties.
@@ -356,6 +362,9 @@ export namespace google {
 
                     /** Properties of an Automatic. */
                     interface IAutomatic {
+
+                        /** Automatic customerManagedEncryption */
+                        customerManagedEncryption?: (google.cloud.secretmanager.v1.ICustomerManagedEncryption|null);
                     }
 
                     /** Represents an Automatic. */
@@ -366,6 +375,9 @@ export namespace google {
                          * @param [properties] Properties to set
                          */
                         constructor(properties?: google.cloud.secretmanager.v1.Replication.IAutomatic);
+
+                        /** Automatic customerManagedEncryption. */
+                        public customerManagedEncryption?: (google.cloud.secretmanager.v1.ICustomerManagedEncryption|null);
 
                         /**
                          * Creates a new Automatic instance using the specified properties.
@@ -535,6 +547,9 @@ export namespace google {
 
                             /** Replica location */
                             location?: (string|null);
+
+                            /** Replica customerManagedEncryption */
+                            customerManagedEncryption?: (google.cloud.secretmanager.v1.ICustomerManagedEncryption|null);
                         }
 
                         /** Represents a Replica. */
@@ -548,6 +563,9 @@ export namespace google {
 
                             /** Replica location. */
                             public location: string;
+
+                            /** Replica customerManagedEncryption. */
+                            public customerManagedEncryption?: (google.cloud.secretmanager.v1.ICustomerManagedEncryption|null);
 
                             /**
                              * Creates a new Replica instance using the specified properties.
@@ -620,6 +638,567 @@ export namespace google {
                             public toJSON(): { [k: string]: any };
                         }
                     }
+                }
+
+                /** Properties of a CustomerManagedEncryption. */
+                interface ICustomerManagedEncryption {
+
+                    /** CustomerManagedEncryption kmsKeyName */
+                    kmsKeyName?: (string|null);
+                }
+
+                /** Represents a CustomerManagedEncryption. */
+                class CustomerManagedEncryption implements ICustomerManagedEncryption {
+
+                    /**
+                     * Constructs a new CustomerManagedEncryption.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.secretmanager.v1.ICustomerManagedEncryption);
+
+                    /** CustomerManagedEncryption kmsKeyName. */
+                    public kmsKeyName: string;
+
+                    /**
+                     * Creates a new CustomerManagedEncryption instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CustomerManagedEncryption instance
+                     */
+                    public static create(properties?: google.cloud.secretmanager.v1.ICustomerManagedEncryption): google.cloud.secretmanager.v1.CustomerManagedEncryption;
+
+                    /**
+                     * Encodes the specified CustomerManagedEncryption message. Does not implicitly {@link google.cloud.secretmanager.v1.CustomerManagedEncryption.verify|verify} messages.
+                     * @param message CustomerManagedEncryption message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.secretmanager.v1.ICustomerManagedEncryption, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CustomerManagedEncryption message, length delimited. Does not implicitly {@link google.cloud.secretmanager.v1.CustomerManagedEncryption.verify|verify} messages.
+                     * @param message CustomerManagedEncryption message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.secretmanager.v1.ICustomerManagedEncryption, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CustomerManagedEncryption message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CustomerManagedEncryption
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.secretmanager.v1.CustomerManagedEncryption;
+
+                    /**
+                     * Decodes a CustomerManagedEncryption message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CustomerManagedEncryption
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.secretmanager.v1.CustomerManagedEncryption;
+
+                    /**
+                     * Verifies a CustomerManagedEncryption message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CustomerManagedEncryption message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CustomerManagedEncryption
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.secretmanager.v1.CustomerManagedEncryption;
+
+                    /**
+                     * Creates a plain object from a CustomerManagedEncryption message. Also converts values to other types if specified.
+                     * @param message CustomerManagedEncryption
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.secretmanager.v1.CustomerManagedEncryption, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CustomerManagedEncryption to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a ReplicationStatus. */
+                interface IReplicationStatus {
+
+                    /** ReplicationStatus automatic */
+                    automatic?: (google.cloud.secretmanager.v1.ReplicationStatus.IAutomaticStatus|null);
+
+                    /** ReplicationStatus userManaged */
+                    userManaged?: (google.cloud.secretmanager.v1.ReplicationStatus.IUserManagedStatus|null);
+                }
+
+                /** Represents a ReplicationStatus. */
+                class ReplicationStatus implements IReplicationStatus {
+
+                    /**
+                     * Constructs a new ReplicationStatus.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.secretmanager.v1.IReplicationStatus);
+
+                    /** ReplicationStatus automatic. */
+                    public automatic?: (google.cloud.secretmanager.v1.ReplicationStatus.IAutomaticStatus|null);
+
+                    /** ReplicationStatus userManaged. */
+                    public userManaged?: (google.cloud.secretmanager.v1.ReplicationStatus.IUserManagedStatus|null);
+
+                    /** ReplicationStatus replicationStatus. */
+                    public replicationStatus?: ("automatic"|"userManaged");
+
+                    /**
+                     * Creates a new ReplicationStatus instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ReplicationStatus instance
+                     */
+                    public static create(properties?: google.cloud.secretmanager.v1.IReplicationStatus): google.cloud.secretmanager.v1.ReplicationStatus;
+
+                    /**
+                     * Encodes the specified ReplicationStatus message. Does not implicitly {@link google.cloud.secretmanager.v1.ReplicationStatus.verify|verify} messages.
+                     * @param message ReplicationStatus message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.secretmanager.v1.IReplicationStatus, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ReplicationStatus message, length delimited. Does not implicitly {@link google.cloud.secretmanager.v1.ReplicationStatus.verify|verify} messages.
+                     * @param message ReplicationStatus message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.secretmanager.v1.IReplicationStatus, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ReplicationStatus message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ReplicationStatus
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.secretmanager.v1.ReplicationStatus;
+
+                    /**
+                     * Decodes a ReplicationStatus message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ReplicationStatus
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.secretmanager.v1.ReplicationStatus;
+
+                    /**
+                     * Verifies a ReplicationStatus message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ReplicationStatus message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ReplicationStatus
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.secretmanager.v1.ReplicationStatus;
+
+                    /**
+                     * Creates a plain object from a ReplicationStatus message. Also converts values to other types if specified.
+                     * @param message ReplicationStatus
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.secretmanager.v1.ReplicationStatus, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ReplicationStatus to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                namespace ReplicationStatus {
+
+                    /** Properties of an AutomaticStatus. */
+                    interface IAutomaticStatus {
+
+                        /** AutomaticStatus customerManagedEncryption */
+                        customerManagedEncryption?: (google.cloud.secretmanager.v1.ICustomerManagedEncryptionStatus|null);
+                    }
+
+                    /** Represents an AutomaticStatus. */
+                    class AutomaticStatus implements IAutomaticStatus {
+
+                        /**
+                         * Constructs a new AutomaticStatus.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.secretmanager.v1.ReplicationStatus.IAutomaticStatus);
+
+                        /** AutomaticStatus customerManagedEncryption. */
+                        public customerManagedEncryption?: (google.cloud.secretmanager.v1.ICustomerManagedEncryptionStatus|null);
+
+                        /**
+                         * Creates a new AutomaticStatus instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns AutomaticStatus instance
+                         */
+                        public static create(properties?: google.cloud.secretmanager.v1.ReplicationStatus.IAutomaticStatus): google.cloud.secretmanager.v1.ReplicationStatus.AutomaticStatus;
+
+                        /**
+                         * Encodes the specified AutomaticStatus message. Does not implicitly {@link google.cloud.secretmanager.v1.ReplicationStatus.AutomaticStatus.verify|verify} messages.
+                         * @param message AutomaticStatus message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.secretmanager.v1.ReplicationStatus.IAutomaticStatus, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified AutomaticStatus message, length delimited. Does not implicitly {@link google.cloud.secretmanager.v1.ReplicationStatus.AutomaticStatus.verify|verify} messages.
+                         * @param message AutomaticStatus message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.secretmanager.v1.ReplicationStatus.IAutomaticStatus, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an AutomaticStatus message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns AutomaticStatus
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.secretmanager.v1.ReplicationStatus.AutomaticStatus;
+
+                        /**
+                         * Decodes an AutomaticStatus message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns AutomaticStatus
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.secretmanager.v1.ReplicationStatus.AutomaticStatus;
+
+                        /**
+                         * Verifies an AutomaticStatus message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an AutomaticStatus message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns AutomaticStatus
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.secretmanager.v1.ReplicationStatus.AutomaticStatus;
+
+                        /**
+                         * Creates a plain object from an AutomaticStatus message. Also converts values to other types if specified.
+                         * @param message AutomaticStatus
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.secretmanager.v1.ReplicationStatus.AutomaticStatus, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this AutomaticStatus to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    /** Properties of a UserManagedStatus. */
+                    interface IUserManagedStatus {
+
+                        /** UserManagedStatus replicas */
+                        replicas?: (google.cloud.secretmanager.v1.ReplicationStatus.UserManagedStatus.IReplicaStatus[]|null);
+                    }
+
+                    /** Represents a UserManagedStatus. */
+                    class UserManagedStatus implements IUserManagedStatus {
+
+                        /**
+                         * Constructs a new UserManagedStatus.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.secretmanager.v1.ReplicationStatus.IUserManagedStatus);
+
+                        /** UserManagedStatus replicas. */
+                        public replicas: google.cloud.secretmanager.v1.ReplicationStatus.UserManagedStatus.IReplicaStatus[];
+
+                        /**
+                         * Creates a new UserManagedStatus instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns UserManagedStatus instance
+                         */
+                        public static create(properties?: google.cloud.secretmanager.v1.ReplicationStatus.IUserManagedStatus): google.cloud.secretmanager.v1.ReplicationStatus.UserManagedStatus;
+
+                        /**
+                         * Encodes the specified UserManagedStatus message. Does not implicitly {@link google.cloud.secretmanager.v1.ReplicationStatus.UserManagedStatus.verify|verify} messages.
+                         * @param message UserManagedStatus message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.secretmanager.v1.ReplicationStatus.IUserManagedStatus, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified UserManagedStatus message, length delimited. Does not implicitly {@link google.cloud.secretmanager.v1.ReplicationStatus.UserManagedStatus.verify|verify} messages.
+                         * @param message UserManagedStatus message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.secretmanager.v1.ReplicationStatus.IUserManagedStatus, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a UserManagedStatus message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns UserManagedStatus
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.secretmanager.v1.ReplicationStatus.UserManagedStatus;
+
+                        /**
+                         * Decodes a UserManagedStatus message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns UserManagedStatus
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.secretmanager.v1.ReplicationStatus.UserManagedStatus;
+
+                        /**
+                         * Verifies a UserManagedStatus message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a UserManagedStatus message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns UserManagedStatus
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.secretmanager.v1.ReplicationStatus.UserManagedStatus;
+
+                        /**
+                         * Creates a plain object from a UserManagedStatus message. Also converts values to other types if specified.
+                         * @param message UserManagedStatus
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.secretmanager.v1.ReplicationStatus.UserManagedStatus, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this UserManagedStatus to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    namespace UserManagedStatus {
+
+                        /** Properties of a ReplicaStatus. */
+                        interface IReplicaStatus {
+
+                            /** ReplicaStatus location */
+                            location?: (string|null);
+
+                            /** ReplicaStatus customerManagedEncryption */
+                            customerManagedEncryption?: (google.cloud.secretmanager.v1.ICustomerManagedEncryptionStatus|null);
+                        }
+
+                        /** Represents a ReplicaStatus. */
+                        class ReplicaStatus implements IReplicaStatus {
+
+                            /**
+                             * Constructs a new ReplicaStatus.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.secretmanager.v1.ReplicationStatus.UserManagedStatus.IReplicaStatus);
+
+                            /** ReplicaStatus location. */
+                            public location: string;
+
+                            /** ReplicaStatus customerManagedEncryption. */
+                            public customerManagedEncryption?: (google.cloud.secretmanager.v1.ICustomerManagedEncryptionStatus|null);
+
+                            /**
+                             * Creates a new ReplicaStatus instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns ReplicaStatus instance
+                             */
+                            public static create(properties?: google.cloud.secretmanager.v1.ReplicationStatus.UserManagedStatus.IReplicaStatus): google.cloud.secretmanager.v1.ReplicationStatus.UserManagedStatus.ReplicaStatus;
+
+                            /**
+                             * Encodes the specified ReplicaStatus message. Does not implicitly {@link google.cloud.secretmanager.v1.ReplicationStatus.UserManagedStatus.ReplicaStatus.verify|verify} messages.
+                             * @param message ReplicaStatus message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.secretmanager.v1.ReplicationStatus.UserManagedStatus.IReplicaStatus, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified ReplicaStatus message, length delimited. Does not implicitly {@link google.cloud.secretmanager.v1.ReplicationStatus.UserManagedStatus.ReplicaStatus.verify|verify} messages.
+                             * @param message ReplicaStatus message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.secretmanager.v1.ReplicationStatus.UserManagedStatus.IReplicaStatus, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a ReplicaStatus message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns ReplicaStatus
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.secretmanager.v1.ReplicationStatus.UserManagedStatus.ReplicaStatus;
+
+                            /**
+                             * Decodes a ReplicaStatus message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns ReplicaStatus
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.secretmanager.v1.ReplicationStatus.UserManagedStatus.ReplicaStatus;
+
+                            /**
+                             * Verifies a ReplicaStatus message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a ReplicaStatus message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns ReplicaStatus
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.secretmanager.v1.ReplicationStatus.UserManagedStatus.ReplicaStatus;
+
+                            /**
+                             * Creates a plain object from a ReplicaStatus message. Also converts values to other types if specified.
+                             * @param message ReplicaStatus
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.secretmanager.v1.ReplicationStatus.UserManagedStatus.ReplicaStatus, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this ReplicaStatus to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+                        }
+                    }
+                }
+
+                /** Properties of a CustomerManagedEncryptionStatus. */
+                interface ICustomerManagedEncryptionStatus {
+
+                    /** CustomerManagedEncryptionStatus kmsKeyVersionName */
+                    kmsKeyVersionName?: (string|null);
+                }
+
+                /** Represents a CustomerManagedEncryptionStatus. */
+                class CustomerManagedEncryptionStatus implements ICustomerManagedEncryptionStatus {
+
+                    /**
+                     * Constructs a new CustomerManagedEncryptionStatus.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.secretmanager.v1.ICustomerManagedEncryptionStatus);
+
+                    /** CustomerManagedEncryptionStatus kmsKeyVersionName. */
+                    public kmsKeyVersionName: string;
+
+                    /**
+                     * Creates a new CustomerManagedEncryptionStatus instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CustomerManagedEncryptionStatus instance
+                     */
+                    public static create(properties?: google.cloud.secretmanager.v1.ICustomerManagedEncryptionStatus): google.cloud.secretmanager.v1.CustomerManagedEncryptionStatus;
+
+                    /**
+                     * Encodes the specified CustomerManagedEncryptionStatus message. Does not implicitly {@link google.cloud.secretmanager.v1.CustomerManagedEncryptionStatus.verify|verify} messages.
+                     * @param message CustomerManagedEncryptionStatus message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.secretmanager.v1.ICustomerManagedEncryptionStatus, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CustomerManagedEncryptionStatus message, length delimited. Does not implicitly {@link google.cloud.secretmanager.v1.CustomerManagedEncryptionStatus.verify|verify} messages.
+                     * @param message CustomerManagedEncryptionStatus message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.secretmanager.v1.ICustomerManagedEncryptionStatus, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CustomerManagedEncryptionStatus message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CustomerManagedEncryptionStatus
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.secretmanager.v1.CustomerManagedEncryptionStatus;
+
+                    /**
+                     * Decodes a CustomerManagedEncryptionStatus message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CustomerManagedEncryptionStatus
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.secretmanager.v1.CustomerManagedEncryptionStatus;
+
+                    /**
+                     * Verifies a CustomerManagedEncryptionStatus message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CustomerManagedEncryptionStatus message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CustomerManagedEncryptionStatus
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.secretmanager.v1.CustomerManagedEncryptionStatus;
+
+                    /**
+                     * Creates a plain object from a CustomerManagedEncryptionStatus message. Also converts values to other types if specified.
+                     * @param message CustomerManagedEncryptionStatus
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.secretmanager.v1.CustomerManagedEncryptionStatus, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CustomerManagedEncryptionStatus to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
                 }
 
                 /** Properties of a SecretPayload. */

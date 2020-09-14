@@ -376,6 +376,7 @@
                          * @property {google.protobuf.ITimestamp|null} [createTime] SecretVersion createTime
                          * @property {google.protobuf.ITimestamp|null} [destroyTime] SecretVersion destroyTime
                          * @property {google.cloud.secretmanager.v1.SecretVersion.State|null} [state] SecretVersion state
+                         * @property {google.cloud.secretmanager.v1.IReplicationStatus|null} [replicationStatus] SecretVersion replicationStatus
                          */
     
                         /**
@@ -426,6 +427,14 @@
                         SecretVersion.prototype.state = 0;
     
                         /**
+                         * SecretVersion replicationStatus.
+                         * @member {google.cloud.secretmanager.v1.IReplicationStatus|null|undefined} replicationStatus
+                         * @memberof google.cloud.secretmanager.v1.SecretVersion
+                         * @instance
+                         */
+                        SecretVersion.prototype.replicationStatus = null;
+    
+                        /**
                          * Creates a new SecretVersion instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.secretmanager.v1.SecretVersion
@@ -457,6 +466,8 @@
                                 $root.google.protobuf.Timestamp.encode(message.destroyTime, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                             if (message.state != null && Object.hasOwnProperty.call(message, "state"))
                                 writer.uint32(/* id 4, wireType 0 =*/32).int32(message.state);
+                            if (message.replicationStatus != null && Object.hasOwnProperty.call(message, "replicationStatus"))
+                                $root.google.cloud.secretmanager.v1.ReplicationStatus.encode(message.replicationStatus, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
                             return writer;
                         };
     
@@ -502,6 +513,9 @@
                                     break;
                                 case 4:
                                     message.state = reader.int32();
+                                    break;
+                                case 5:
+                                    message.replicationStatus = $root.google.cloud.secretmanager.v1.ReplicationStatus.decode(reader, reader.uint32());
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -561,6 +575,11 @@
                                 case 3:
                                     break;
                                 }
+                            if (message.replicationStatus != null && message.hasOwnProperty("replicationStatus")) {
+                                var error = $root.google.cloud.secretmanager.v1.ReplicationStatus.verify(message.replicationStatus);
+                                if (error)
+                                    return "replicationStatus." + error;
+                            }
                             return null;
                         };
     
@@ -606,6 +625,11 @@
                                 message.state = 3;
                                 break;
                             }
+                            if (object.replicationStatus != null) {
+                                if (typeof object.replicationStatus !== "object")
+                                    throw TypeError(".google.cloud.secretmanager.v1.SecretVersion.replicationStatus: object expected");
+                                message.replicationStatus = $root.google.cloud.secretmanager.v1.ReplicationStatus.fromObject(object.replicationStatus);
+                            }
                             return message;
                         };
     
@@ -627,6 +651,7 @@
                                 object.createTime = null;
                                 object.destroyTime = null;
                                 object.state = options.enums === String ? "STATE_UNSPECIFIED" : 0;
+                                object.replicationStatus = null;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -636,6 +661,8 @@
                                 object.destroyTime = $root.google.protobuf.Timestamp.toObject(message.destroyTime, options);
                             if (message.state != null && message.hasOwnProperty("state"))
                                 object.state = options.enums === String ? $root.google.cloud.secretmanager.v1.SecretVersion.State[message.state] : message.state;
+                            if (message.replicationStatus != null && message.hasOwnProperty("replicationStatus"))
+                                object.replicationStatus = $root.google.cloud.secretmanager.v1.ReplicationStatus.toObject(message.replicationStatus, options);
                             return object;
                         };
     
@@ -919,6 +946,7 @@
                              * Properties of an Automatic.
                              * @memberof google.cloud.secretmanager.v1.Replication
                              * @interface IAutomatic
+                             * @property {google.cloud.secretmanager.v1.ICustomerManagedEncryption|null} [customerManagedEncryption] Automatic customerManagedEncryption
                              */
     
                             /**
@@ -935,6 +963,14 @@
                                         if (properties[keys[i]] != null)
                                             this[keys[i]] = properties[keys[i]];
                             }
+    
+                            /**
+                             * Automatic customerManagedEncryption.
+                             * @member {google.cloud.secretmanager.v1.ICustomerManagedEncryption|null|undefined} customerManagedEncryption
+                             * @memberof google.cloud.secretmanager.v1.Replication.Automatic
+                             * @instance
+                             */
+                            Automatic.prototype.customerManagedEncryption = null;
     
                             /**
                              * Creates a new Automatic instance using the specified properties.
@@ -960,6 +996,8 @@
                             Automatic.encode = function encode(message, writer) {
                                 if (!writer)
                                     writer = $Writer.create();
+                                if (message.customerManagedEncryption != null && Object.hasOwnProperty.call(message, "customerManagedEncryption"))
+                                    $root.google.cloud.secretmanager.v1.CustomerManagedEncryption.encode(message.customerManagedEncryption, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
                                 return writer;
                             };
     
@@ -994,6 +1032,9 @@
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
                                     switch (tag >>> 3) {
+                                    case 1:
+                                        message.customerManagedEncryption = $root.google.cloud.secretmanager.v1.CustomerManagedEncryption.decode(reader, reader.uint32());
+                                        break;
                                     default:
                                         reader.skipType(tag & 7);
                                         break;
@@ -1029,6 +1070,11 @@
                             Automatic.verify = function verify(message) {
                                 if (typeof message !== "object" || message === null)
                                     return "object expected";
+                                if (message.customerManagedEncryption != null && message.hasOwnProperty("customerManagedEncryption")) {
+                                    var error = $root.google.cloud.secretmanager.v1.CustomerManagedEncryption.verify(message.customerManagedEncryption);
+                                    if (error)
+                                        return "customerManagedEncryption." + error;
+                                }
                                 return null;
                             };
     
@@ -1043,7 +1089,13 @@
                             Automatic.fromObject = function fromObject(object) {
                                 if (object instanceof $root.google.cloud.secretmanager.v1.Replication.Automatic)
                                     return object;
-                                return new $root.google.cloud.secretmanager.v1.Replication.Automatic();
+                                var message = new $root.google.cloud.secretmanager.v1.Replication.Automatic();
+                                if (object.customerManagedEncryption != null) {
+                                    if (typeof object.customerManagedEncryption !== "object")
+                                        throw TypeError(".google.cloud.secretmanager.v1.Replication.Automatic.customerManagedEncryption: object expected");
+                                    message.customerManagedEncryption = $root.google.cloud.secretmanager.v1.CustomerManagedEncryption.fromObject(object.customerManagedEncryption);
+                                }
+                                return message;
                             };
     
                             /**
@@ -1055,8 +1107,15 @@
                              * @param {$protobuf.IConversionOptions} [options] Conversion options
                              * @returns {Object.<string,*>} Plain object
                              */
-                            Automatic.toObject = function toObject() {
-                                return {};
+                            Automatic.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.customerManagedEncryption = null;
+                                if (message.customerManagedEncryption != null && message.hasOwnProperty("customerManagedEncryption"))
+                                    object.customerManagedEncryption = $root.google.cloud.secretmanager.v1.CustomerManagedEncryption.toObject(message.customerManagedEncryption, options);
+                                return object;
                             };
     
                             /**
@@ -1285,6 +1344,7 @@
                                  * @memberof google.cloud.secretmanager.v1.Replication.UserManaged
                                  * @interface IReplica
                                  * @property {string|null} [location] Replica location
+                                 * @property {google.cloud.secretmanager.v1.ICustomerManagedEncryption|null} [customerManagedEncryption] Replica customerManagedEncryption
                                  */
     
                                 /**
@@ -1309,6 +1369,14 @@
                                  * @instance
                                  */
                                 Replica.prototype.location = "";
+    
+                                /**
+                                 * Replica customerManagedEncryption.
+                                 * @member {google.cloud.secretmanager.v1.ICustomerManagedEncryption|null|undefined} customerManagedEncryption
+                                 * @memberof google.cloud.secretmanager.v1.Replication.UserManaged.Replica
+                                 * @instance
+                                 */
+                                Replica.prototype.customerManagedEncryption = null;
     
                                 /**
                                  * Creates a new Replica instance using the specified properties.
@@ -1336,6 +1404,8 @@
                                         writer = $Writer.create();
                                     if (message.location != null && Object.hasOwnProperty.call(message, "location"))
                                         writer.uint32(/* id 1, wireType 2 =*/10).string(message.location);
+                                    if (message.customerManagedEncryption != null && Object.hasOwnProperty.call(message, "customerManagedEncryption"))
+                                        $root.google.cloud.secretmanager.v1.CustomerManagedEncryption.encode(message.customerManagedEncryption, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                                     return writer;
                                 };
     
@@ -1372,6 +1442,9 @@
                                         switch (tag >>> 3) {
                                         case 1:
                                             message.location = reader.string();
+                                            break;
+                                        case 2:
+                                            message.customerManagedEncryption = $root.google.cloud.secretmanager.v1.CustomerManagedEncryption.decode(reader, reader.uint32());
                                             break;
                                         default:
                                             reader.skipType(tag & 7);
@@ -1411,6 +1484,11 @@
                                     if (message.location != null && message.hasOwnProperty("location"))
                                         if (!$util.isString(message.location))
                                             return "location: string expected";
+                                    if (message.customerManagedEncryption != null && message.hasOwnProperty("customerManagedEncryption")) {
+                                        var error = $root.google.cloud.secretmanager.v1.CustomerManagedEncryption.verify(message.customerManagedEncryption);
+                                        if (error)
+                                            return "customerManagedEncryption." + error;
+                                    }
                                     return null;
                                 };
     
@@ -1428,6 +1506,11 @@
                                     var message = new $root.google.cloud.secretmanager.v1.Replication.UserManaged.Replica();
                                     if (object.location != null)
                                         message.location = String(object.location);
+                                    if (object.customerManagedEncryption != null) {
+                                        if (typeof object.customerManagedEncryption !== "object")
+                                            throw TypeError(".google.cloud.secretmanager.v1.Replication.UserManaged.Replica.customerManagedEncryption: object expected");
+                                        message.customerManagedEncryption = $root.google.cloud.secretmanager.v1.CustomerManagedEncryption.fromObject(object.customerManagedEncryption);
+                                    }
                                     return message;
                                 };
     
@@ -1444,10 +1527,14 @@
                                     if (!options)
                                         options = {};
                                     var object = {};
-                                    if (options.defaults)
+                                    if (options.defaults) {
                                         object.location = "";
+                                        object.customerManagedEncryption = null;
+                                    }
                                     if (message.location != null && message.hasOwnProperty("location"))
                                         object.location = message.location;
+                                    if (message.customerManagedEncryption != null && message.hasOwnProperty("customerManagedEncryption"))
+                                        object.customerManagedEncryption = $root.google.cloud.secretmanager.v1.CustomerManagedEncryption.toObject(message.customerManagedEncryption, options);
                                     return object;
                                 };
     
@@ -1469,6 +1556,1240 @@
                         })();
     
                         return Replication;
+                    })();
+    
+                    v1.CustomerManagedEncryption = (function() {
+    
+                        /**
+                         * Properties of a CustomerManagedEncryption.
+                         * @memberof google.cloud.secretmanager.v1
+                         * @interface ICustomerManagedEncryption
+                         * @property {string|null} [kmsKeyName] CustomerManagedEncryption kmsKeyName
+                         */
+    
+                        /**
+                         * Constructs a new CustomerManagedEncryption.
+                         * @memberof google.cloud.secretmanager.v1
+                         * @classdesc Represents a CustomerManagedEncryption.
+                         * @implements ICustomerManagedEncryption
+                         * @constructor
+                         * @param {google.cloud.secretmanager.v1.ICustomerManagedEncryption=} [properties] Properties to set
+                         */
+                        function CustomerManagedEncryption(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CustomerManagedEncryption kmsKeyName.
+                         * @member {string} kmsKeyName
+                         * @memberof google.cloud.secretmanager.v1.CustomerManagedEncryption
+                         * @instance
+                         */
+                        CustomerManagedEncryption.prototype.kmsKeyName = "";
+    
+                        /**
+                         * Creates a new CustomerManagedEncryption instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.secretmanager.v1.CustomerManagedEncryption
+                         * @static
+                         * @param {google.cloud.secretmanager.v1.ICustomerManagedEncryption=} [properties] Properties to set
+                         * @returns {google.cloud.secretmanager.v1.CustomerManagedEncryption} CustomerManagedEncryption instance
+                         */
+                        CustomerManagedEncryption.create = function create(properties) {
+                            return new CustomerManagedEncryption(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CustomerManagedEncryption message. Does not implicitly {@link google.cloud.secretmanager.v1.CustomerManagedEncryption.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.secretmanager.v1.CustomerManagedEncryption
+                         * @static
+                         * @param {google.cloud.secretmanager.v1.ICustomerManagedEncryption} message CustomerManagedEncryption message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CustomerManagedEncryption.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.kmsKeyName != null && Object.hasOwnProperty.call(message, "kmsKeyName"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.kmsKeyName);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CustomerManagedEncryption message, length delimited. Does not implicitly {@link google.cloud.secretmanager.v1.CustomerManagedEncryption.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.secretmanager.v1.CustomerManagedEncryption
+                         * @static
+                         * @param {google.cloud.secretmanager.v1.ICustomerManagedEncryption} message CustomerManagedEncryption message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CustomerManagedEncryption.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CustomerManagedEncryption message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.secretmanager.v1.CustomerManagedEncryption
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.secretmanager.v1.CustomerManagedEncryption} CustomerManagedEncryption
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CustomerManagedEncryption.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.secretmanager.v1.CustomerManagedEncryption();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.kmsKeyName = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CustomerManagedEncryption message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.secretmanager.v1.CustomerManagedEncryption
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.secretmanager.v1.CustomerManagedEncryption} CustomerManagedEncryption
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CustomerManagedEncryption.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CustomerManagedEncryption message.
+                         * @function verify
+                         * @memberof google.cloud.secretmanager.v1.CustomerManagedEncryption
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CustomerManagedEncryption.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.kmsKeyName != null && message.hasOwnProperty("kmsKeyName"))
+                                if (!$util.isString(message.kmsKeyName))
+                                    return "kmsKeyName: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CustomerManagedEncryption message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.secretmanager.v1.CustomerManagedEncryption
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.secretmanager.v1.CustomerManagedEncryption} CustomerManagedEncryption
+                         */
+                        CustomerManagedEncryption.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.secretmanager.v1.CustomerManagedEncryption)
+                                return object;
+                            var message = new $root.google.cloud.secretmanager.v1.CustomerManagedEncryption();
+                            if (object.kmsKeyName != null)
+                                message.kmsKeyName = String(object.kmsKeyName);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CustomerManagedEncryption message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.secretmanager.v1.CustomerManagedEncryption
+                         * @static
+                         * @param {google.cloud.secretmanager.v1.CustomerManagedEncryption} message CustomerManagedEncryption
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CustomerManagedEncryption.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.kmsKeyName = "";
+                            if (message.kmsKeyName != null && message.hasOwnProperty("kmsKeyName"))
+                                object.kmsKeyName = message.kmsKeyName;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CustomerManagedEncryption to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.secretmanager.v1.CustomerManagedEncryption
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CustomerManagedEncryption.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return CustomerManagedEncryption;
+                    })();
+    
+                    v1.ReplicationStatus = (function() {
+    
+                        /**
+                         * Properties of a ReplicationStatus.
+                         * @memberof google.cloud.secretmanager.v1
+                         * @interface IReplicationStatus
+                         * @property {google.cloud.secretmanager.v1.ReplicationStatus.IAutomaticStatus|null} [automatic] ReplicationStatus automatic
+                         * @property {google.cloud.secretmanager.v1.ReplicationStatus.IUserManagedStatus|null} [userManaged] ReplicationStatus userManaged
+                         */
+    
+                        /**
+                         * Constructs a new ReplicationStatus.
+                         * @memberof google.cloud.secretmanager.v1
+                         * @classdesc Represents a ReplicationStatus.
+                         * @implements IReplicationStatus
+                         * @constructor
+                         * @param {google.cloud.secretmanager.v1.IReplicationStatus=} [properties] Properties to set
+                         */
+                        function ReplicationStatus(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ReplicationStatus automatic.
+                         * @member {google.cloud.secretmanager.v1.ReplicationStatus.IAutomaticStatus|null|undefined} automatic
+                         * @memberof google.cloud.secretmanager.v1.ReplicationStatus
+                         * @instance
+                         */
+                        ReplicationStatus.prototype.automatic = null;
+    
+                        /**
+                         * ReplicationStatus userManaged.
+                         * @member {google.cloud.secretmanager.v1.ReplicationStatus.IUserManagedStatus|null|undefined} userManaged
+                         * @memberof google.cloud.secretmanager.v1.ReplicationStatus
+                         * @instance
+                         */
+                        ReplicationStatus.prototype.userManaged = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * ReplicationStatus replicationStatus.
+                         * @member {"automatic"|"userManaged"|undefined} replicationStatus
+                         * @memberof google.cloud.secretmanager.v1.ReplicationStatus
+                         * @instance
+                         */
+                        Object.defineProperty(ReplicationStatus.prototype, "replicationStatus", {
+                            get: $util.oneOfGetter($oneOfFields = ["automatic", "userManaged"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new ReplicationStatus instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.secretmanager.v1.ReplicationStatus
+                         * @static
+                         * @param {google.cloud.secretmanager.v1.IReplicationStatus=} [properties] Properties to set
+                         * @returns {google.cloud.secretmanager.v1.ReplicationStatus} ReplicationStatus instance
+                         */
+                        ReplicationStatus.create = function create(properties) {
+                            return new ReplicationStatus(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ReplicationStatus message. Does not implicitly {@link google.cloud.secretmanager.v1.ReplicationStatus.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.secretmanager.v1.ReplicationStatus
+                         * @static
+                         * @param {google.cloud.secretmanager.v1.IReplicationStatus} message ReplicationStatus message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ReplicationStatus.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.automatic != null && Object.hasOwnProperty.call(message, "automatic"))
+                                $root.google.cloud.secretmanager.v1.ReplicationStatus.AutomaticStatus.encode(message.automatic, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.userManaged != null && Object.hasOwnProperty.call(message, "userManaged"))
+                                $root.google.cloud.secretmanager.v1.ReplicationStatus.UserManagedStatus.encode(message.userManaged, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ReplicationStatus message, length delimited. Does not implicitly {@link google.cloud.secretmanager.v1.ReplicationStatus.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.secretmanager.v1.ReplicationStatus
+                         * @static
+                         * @param {google.cloud.secretmanager.v1.IReplicationStatus} message ReplicationStatus message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ReplicationStatus.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ReplicationStatus message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.secretmanager.v1.ReplicationStatus
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.secretmanager.v1.ReplicationStatus} ReplicationStatus
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ReplicationStatus.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.secretmanager.v1.ReplicationStatus();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.automatic = $root.google.cloud.secretmanager.v1.ReplicationStatus.AutomaticStatus.decode(reader, reader.uint32());
+                                    break;
+                                case 2:
+                                    message.userManaged = $root.google.cloud.secretmanager.v1.ReplicationStatus.UserManagedStatus.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ReplicationStatus message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.secretmanager.v1.ReplicationStatus
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.secretmanager.v1.ReplicationStatus} ReplicationStatus
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ReplicationStatus.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ReplicationStatus message.
+                         * @function verify
+                         * @memberof google.cloud.secretmanager.v1.ReplicationStatus
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ReplicationStatus.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.automatic != null && message.hasOwnProperty("automatic")) {
+                                properties.replicationStatus = 1;
+                                {
+                                    var error = $root.google.cloud.secretmanager.v1.ReplicationStatus.AutomaticStatus.verify(message.automatic);
+                                    if (error)
+                                        return "automatic." + error;
+                                }
+                            }
+                            if (message.userManaged != null && message.hasOwnProperty("userManaged")) {
+                                if (properties.replicationStatus === 1)
+                                    return "replicationStatus: multiple values";
+                                properties.replicationStatus = 1;
+                                {
+                                    var error = $root.google.cloud.secretmanager.v1.ReplicationStatus.UserManagedStatus.verify(message.userManaged);
+                                    if (error)
+                                        return "userManaged." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ReplicationStatus message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.secretmanager.v1.ReplicationStatus
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.secretmanager.v1.ReplicationStatus} ReplicationStatus
+                         */
+                        ReplicationStatus.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.secretmanager.v1.ReplicationStatus)
+                                return object;
+                            var message = new $root.google.cloud.secretmanager.v1.ReplicationStatus();
+                            if (object.automatic != null) {
+                                if (typeof object.automatic !== "object")
+                                    throw TypeError(".google.cloud.secretmanager.v1.ReplicationStatus.automatic: object expected");
+                                message.automatic = $root.google.cloud.secretmanager.v1.ReplicationStatus.AutomaticStatus.fromObject(object.automatic);
+                            }
+                            if (object.userManaged != null) {
+                                if (typeof object.userManaged !== "object")
+                                    throw TypeError(".google.cloud.secretmanager.v1.ReplicationStatus.userManaged: object expected");
+                                message.userManaged = $root.google.cloud.secretmanager.v1.ReplicationStatus.UserManagedStatus.fromObject(object.userManaged);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ReplicationStatus message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.secretmanager.v1.ReplicationStatus
+                         * @static
+                         * @param {google.cloud.secretmanager.v1.ReplicationStatus} message ReplicationStatus
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ReplicationStatus.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (message.automatic != null && message.hasOwnProperty("automatic")) {
+                                object.automatic = $root.google.cloud.secretmanager.v1.ReplicationStatus.AutomaticStatus.toObject(message.automatic, options);
+                                if (options.oneofs)
+                                    object.replicationStatus = "automatic";
+                            }
+                            if (message.userManaged != null && message.hasOwnProperty("userManaged")) {
+                                object.userManaged = $root.google.cloud.secretmanager.v1.ReplicationStatus.UserManagedStatus.toObject(message.userManaged, options);
+                                if (options.oneofs)
+                                    object.replicationStatus = "userManaged";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ReplicationStatus to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.secretmanager.v1.ReplicationStatus
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ReplicationStatus.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        ReplicationStatus.AutomaticStatus = (function() {
+    
+                            /**
+                             * Properties of an AutomaticStatus.
+                             * @memberof google.cloud.secretmanager.v1.ReplicationStatus
+                             * @interface IAutomaticStatus
+                             * @property {google.cloud.secretmanager.v1.ICustomerManagedEncryptionStatus|null} [customerManagedEncryption] AutomaticStatus customerManagedEncryption
+                             */
+    
+                            /**
+                             * Constructs a new AutomaticStatus.
+                             * @memberof google.cloud.secretmanager.v1.ReplicationStatus
+                             * @classdesc Represents an AutomaticStatus.
+                             * @implements IAutomaticStatus
+                             * @constructor
+                             * @param {google.cloud.secretmanager.v1.ReplicationStatus.IAutomaticStatus=} [properties] Properties to set
+                             */
+                            function AutomaticStatus(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * AutomaticStatus customerManagedEncryption.
+                             * @member {google.cloud.secretmanager.v1.ICustomerManagedEncryptionStatus|null|undefined} customerManagedEncryption
+                             * @memberof google.cloud.secretmanager.v1.ReplicationStatus.AutomaticStatus
+                             * @instance
+                             */
+                            AutomaticStatus.prototype.customerManagedEncryption = null;
+    
+                            /**
+                             * Creates a new AutomaticStatus instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.secretmanager.v1.ReplicationStatus.AutomaticStatus
+                             * @static
+                             * @param {google.cloud.secretmanager.v1.ReplicationStatus.IAutomaticStatus=} [properties] Properties to set
+                             * @returns {google.cloud.secretmanager.v1.ReplicationStatus.AutomaticStatus} AutomaticStatus instance
+                             */
+                            AutomaticStatus.create = function create(properties) {
+                                return new AutomaticStatus(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified AutomaticStatus message. Does not implicitly {@link google.cloud.secretmanager.v1.ReplicationStatus.AutomaticStatus.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.secretmanager.v1.ReplicationStatus.AutomaticStatus
+                             * @static
+                             * @param {google.cloud.secretmanager.v1.ReplicationStatus.IAutomaticStatus} message AutomaticStatus message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            AutomaticStatus.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.customerManagedEncryption != null && Object.hasOwnProperty.call(message, "customerManagedEncryption"))
+                                    $root.google.cloud.secretmanager.v1.CustomerManagedEncryptionStatus.encode(message.customerManagedEncryption, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified AutomaticStatus message, length delimited. Does not implicitly {@link google.cloud.secretmanager.v1.ReplicationStatus.AutomaticStatus.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.secretmanager.v1.ReplicationStatus.AutomaticStatus
+                             * @static
+                             * @param {google.cloud.secretmanager.v1.ReplicationStatus.IAutomaticStatus} message AutomaticStatus message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            AutomaticStatus.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes an AutomaticStatus message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.secretmanager.v1.ReplicationStatus.AutomaticStatus
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.secretmanager.v1.ReplicationStatus.AutomaticStatus} AutomaticStatus
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            AutomaticStatus.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.secretmanager.v1.ReplicationStatus.AutomaticStatus();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1:
+                                        message.customerManagedEncryption = $root.google.cloud.secretmanager.v1.CustomerManagedEncryptionStatus.decode(reader, reader.uint32());
+                                        break;
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes an AutomaticStatus message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.secretmanager.v1.ReplicationStatus.AutomaticStatus
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.secretmanager.v1.ReplicationStatus.AutomaticStatus} AutomaticStatus
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            AutomaticStatus.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies an AutomaticStatus message.
+                             * @function verify
+                             * @memberof google.cloud.secretmanager.v1.ReplicationStatus.AutomaticStatus
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            AutomaticStatus.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.customerManagedEncryption != null && message.hasOwnProperty("customerManagedEncryption")) {
+                                    var error = $root.google.cloud.secretmanager.v1.CustomerManagedEncryptionStatus.verify(message.customerManagedEncryption);
+                                    if (error)
+                                        return "customerManagedEncryption." + error;
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates an AutomaticStatus message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.secretmanager.v1.ReplicationStatus.AutomaticStatus
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.secretmanager.v1.ReplicationStatus.AutomaticStatus} AutomaticStatus
+                             */
+                            AutomaticStatus.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.secretmanager.v1.ReplicationStatus.AutomaticStatus)
+                                    return object;
+                                var message = new $root.google.cloud.secretmanager.v1.ReplicationStatus.AutomaticStatus();
+                                if (object.customerManagedEncryption != null) {
+                                    if (typeof object.customerManagedEncryption !== "object")
+                                        throw TypeError(".google.cloud.secretmanager.v1.ReplicationStatus.AutomaticStatus.customerManagedEncryption: object expected");
+                                    message.customerManagedEncryption = $root.google.cloud.secretmanager.v1.CustomerManagedEncryptionStatus.fromObject(object.customerManagedEncryption);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from an AutomaticStatus message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.secretmanager.v1.ReplicationStatus.AutomaticStatus
+                             * @static
+                             * @param {google.cloud.secretmanager.v1.ReplicationStatus.AutomaticStatus} message AutomaticStatus
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            AutomaticStatus.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.customerManagedEncryption = null;
+                                if (message.customerManagedEncryption != null && message.hasOwnProperty("customerManagedEncryption"))
+                                    object.customerManagedEncryption = $root.google.cloud.secretmanager.v1.CustomerManagedEncryptionStatus.toObject(message.customerManagedEncryption, options);
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this AutomaticStatus to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.secretmanager.v1.ReplicationStatus.AutomaticStatus
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            AutomaticStatus.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            return AutomaticStatus;
+                        })();
+    
+                        ReplicationStatus.UserManagedStatus = (function() {
+    
+                            /**
+                             * Properties of a UserManagedStatus.
+                             * @memberof google.cloud.secretmanager.v1.ReplicationStatus
+                             * @interface IUserManagedStatus
+                             * @property {Array.<google.cloud.secretmanager.v1.ReplicationStatus.UserManagedStatus.IReplicaStatus>|null} [replicas] UserManagedStatus replicas
+                             */
+    
+                            /**
+                             * Constructs a new UserManagedStatus.
+                             * @memberof google.cloud.secretmanager.v1.ReplicationStatus
+                             * @classdesc Represents a UserManagedStatus.
+                             * @implements IUserManagedStatus
+                             * @constructor
+                             * @param {google.cloud.secretmanager.v1.ReplicationStatus.IUserManagedStatus=} [properties] Properties to set
+                             */
+                            function UserManagedStatus(properties) {
+                                this.replicas = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * UserManagedStatus replicas.
+                             * @member {Array.<google.cloud.secretmanager.v1.ReplicationStatus.UserManagedStatus.IReplicaStatus>} replicas
+                             * @memberof google.cloud.secretmanager.v1.ReplicationStatus.UserManagedStatus
+                             * @instance
+                             */
+                            UserManagedStatus.prototype.replicas = $util.emptyArray;
+    
+                            /**
+                             * Creates a new UserManagedStatus instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.secretmanager.v1.ReplicationStatus.UserManagedStatus
+                             * @static
+                             * @param {google.cloud.secretmanager.v1.ReplicationStatus.IUserManagedStatus=} [properties] Properties to set
+                             * @returns {google.cloud.secretmanager.v1.ReplicationStatus.UserManagedStatus} UserManagedStatus instance
+                             */
+                            UserManagedStatus.create = function create(properties) {
+                                return new UserManagedStatus(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified UserManagedStatus message. Does not implicitly {@link google.cloud.secretmanager.v1.ReplicationStatus.UserManagedStatus.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.secretmanager.v1.ReplicationStatus.UserManagedStatus
+                             * @static
+                             * @param {google.cloud.secretmanager.v1.ReplicationStatus.IUserManagedStatus} message UserManagedStatus message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            UserManagedStatus.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.replicas != null && message.replicas.length)
+                                    for (var i = 0; i < message.replicas.length; ++i)
+                                        $root.google.cloud.secretmanager.v1.ReplicationStatus.UserManagedStatus.ReplicaStatus.encode(message.replicas[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified UserManagedStatus message, length delimited. Does not implicitly {@link google.cloud.secretmanager.v1.ReplicationStatus.UserManagedStatus.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.secretmanager.v1.ReplicationStatus.UserManagedStatus
+                             * @static
+                             * @param {google.cloud.secretmanager.v1.ReplicationStatus.IUserManagedStatus} message UserManagedStatus message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            UserManagedStatus.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a UserManagedStatus message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.secretmanager.v1.ReplicationStatus.UserManagedStatus
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.secretmanager.v1.ReplicationStatus.UserManagedStatus} UserManagedStatus
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            UserManagedStatus.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.secretmanager.v1.ReplicationStatus.UserManagedStatus();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1:
+                                        if (!(message.replicas && message.replicas.length))
+                                            message.replicas = [];
+                                        message.replicas.push($root.google.cloud.secretmanager.v1.ReplicationStatus.UserManagedStatus.ReplicaStatus.decode(reader, reader.uint32()));
+                                        break;
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a UserManagedStatus message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.secretmanager.v1.ReplicationStatus.UserManagedStatus
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.secretmanager.v1.ReplicationStatus.UserManagedStatus} UserManagedStatus
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            UserManagedStatus.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a UserManagedStatus message.
+                             * @function verify
+                             * @memberof google.cloud.secretmanager.v1.ReplicationStatus.UserManagedStatus
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            UserManagedStatus.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.replicas != null && message.hasOwnProperty("replicas")) {
+                                    if (!Array.isArray(message.replicas))
+                                        return "replicas: array expected";
+                                    for (var i = 0; i < message.replicas.length; ++i) {
+                                        var error = $root.google.cloud.secretmanager.v1.ReplicationStatus.UserManagedStatus.ReplicaStatus.verify(message.replicas[i]);
+                                        if (error)
+                                            return "replicas." + error;
+                                    }
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a UserManagedStatus message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.secretmanager.v1.ReplicationStatus.UserManagedStatus
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.secretmanager.v1.ReplicationStatus.UserManagedStatus} UserManagedStatus
+                             */
+                            UserManagedStatus.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.secretmanager.v1.ReplicationStatus.UserManagedStatus)
+                                    return object;
+                                var message = new $root.google.cloud.secretmanager.v1.ReplicationStatus.UserManagedStatus();
+                                if (object.replicas) {
+                                    if (!Array.isArray(object.replicas))
+                                        throw TypeError(".google.cloud.secretmanager.v1.ReplicationStatus.UserManagedStatus.replicas: array expected");
+                                    message.replicas = [];
+                                    for (var i = 0; i < object.replicas.length; ++i) {
+                                        if (typeof object.replicas[i] !== "object")
+                                            throw TypeError(".google.cloud.secretmanager.v1.ReplicationStatus.UserManagedStatus.replicas: object expected");
+                                        message.replicas[i] = $root.google.cloud.secretmanager.v1.ReplicationStatus.UserManagedStatus.ReplicaStatus.fromObject(object.replicas[i]);
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a UserManagedStatus message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.secretmanager.v1.ReplicationStatus.UserManagedStatus
+                             * @static
+                             * @param {google.cloud.secretmanager.v1.ReplicationStatus.UserManagedStatus} message UserManagedStatus
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            UserManagedStatus.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.replicas = [];
+                                if (message.replicas && message.replicas.length) {
+                                    object.replicas = [];
+                                    for (var j = 0; j < message.replicas.length; ++j)
+                                        object.replicas[j] = $root.google.cloud.secretmanager.v1.ReplicationStatus.UserManagedStatus.ReplicaStatus.toObject(message.replicas[j], options);
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this UserManagedStatus to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.secretmanager.v1.ReplicationStatus.UserManagedStatus
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            UserManagedStatus.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            UserManagedStatus.ReplicaStatus = (function() {
+    
+                                /**
+                                 * Properties of a ReplicaStatus.
+                                 * @memberof google.cloud.secretmanager.v1.ReplicationStatus.UserManagedStatus
+                                 * @interface IReplicaStatus
+                                 * @property {string|null} [location] ReplicaStatus location
+                                 * @property {google.cloud.secretmanager.v1.ICustomerManagedEncryptionStatus|null} [customerManagedEncryption] ReplicaStatus customerManagedEncryption
+                                 */
+    
+                                /**
+                                 * Constructs a new ReplicaStatus.
+                                 * @memberof google.cloud.secretmanager.v1.ReplicationStatus.UserManagedStatus
+                                 * @classdesc Represents a ReplicaStatus.
+                                 * @implements IReplicaStatus
+                                 * @constructor
+                                 * @param {google.cloud.secretmanager.v1.ReplicationStatus.UserManagedStatus.IReplicaStatus=} [properties] Properties to set
+                                 */
+                                function ReplicaStatus(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * ReplicaStatus location.
+                                 * @member {string} location
+                                 * @memberof google.cloud.secretmanager.v1.ReplicationStatus.UserManagedStatus.ReplicaStatus
+                                 * @instance
+                                 */
+                                ReplicaStatus.prototype.location = "";
+    
+                                /**
+                                 * ReplicaStatus customerManagedEncryption.
+                                 * @member {google.cloud.secretmanager.v1.ICustomerManagedEncryptionStatus|null|undefined} customerManagedEncryption
+                                 * @memberof google.cloud.secretmanager.v1.ReplicationStatus.UserManagedStatus.ReplicaStatus
+                                 * @instance
+                                 */
+                                ReplicaStatus.prototype.customerManagedEncryption = null;
+    
+                                /**
+                                 * Creates a new ReplicaStatus instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.secretmanager.v1.ReplicationStatus.UserManagedStatus.ReplicaStatus
+                                 * @static
+                                 * @param {google.cloud.secretmanager.v1.ReplicationStatus.UserManagedStatus.IReplicaStatus=} [properties] Properties to set
+                                 * @returns {google.cloud.secretmanager.v1.ReplicationStatus.UserManagedStatus.ReplicaStatus} ReplicaStatus instance
+                                 */
+                                ReplicaStatus.create = function create(properties) {
+                                    return new ReplicaStatus(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified ReplicaStatus message. Does not implicitly {@link google.cloud.secretmanager.v1.ReplicationStatus.UserManagedStatus.ReplicaStatus.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.secretmanager.v1.ReplicationStatus.UserManagedStatus.ReplicaStatus
+                                 * @static
+                                 * @param {google.cloud.secretmanager.v1.ReplicationStatus.UserManagedStatus.IReplicaStatus} message ReplicaStatus message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                ReplicaStatus.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.location != null && Object.hasOwnProperty.call(message, "location"))
+                                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.location);
+                                    if (message.customerManagedEncryption != null && Object.hasOwnProperty.call(message, "customerManagedEncryption"))
+                                        $root.google.cloud.secretmanager.v1.CustomerManagedEncryptionStatus.encode(message.customerManagedEncryption, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified ReplicaStatus message, length delimited. Does not implicitly {@link google.cloud.secretmanager.v1.ReplicationStatus.UserManagedStatus.ReplicaStatus.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.secretmanager.v1.ReplicationStatus.UserManagedStatus.ReplicaStatus
+                                 * @static
+                                 * @param {google.cloud.secretmanager.v1.ReplicationStatus.UserManagedStatus.IReplicaStatus} message ReplicaStatus message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                ReplicaStatus.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a ReplicaStatus message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.secretmanager.v1.ReplicationStatus.UserManagedStatus.ReplicaStatus
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.secretmanager.v1.ReplicationStatus.UserManagedStatus.ReplicaStatus} ReplicaStatus
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                ReplicaStatus.decode = function decode(reader, length) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.secretmanager.v1.ReplicationStatus.UserManagedStatus.ReplicaStatus();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        switch (tag >>> 3) {
+                                        case 1:
+                                            message.location = reader.string();
+                                            break;
+                                        case 2:
+                                            message.customerManagedEncryption = $root.google.cloud.secretmanager.v1.CustomerManagedEncryptionStatus.decode(reader, reader.uint32());
+                                            break;
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a ReplicaStatus message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.secretmanager.v1.ReplicationStatus.UserManagedStatus.ReplicaStatus
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.secretmanager.v1.ReplicationStatus.UserManagedStatus.ReplicaStatus} ReplicaStatus
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                ReplicaStatus.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a ReplicaStatus message.
+                                 * @function verify
+                                 * @memberof google.cloud.secretmanager.v1.ReplicationStatus.UserManagedStatus.ReplicaStatus
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                ReplicaStatus.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.location != null && message.hasOwnProperty("location"))
+                                        if (!$util.isString(message.location))
+                                            return "location: string expected";
+                                    if (message.customerManagedEncryption != null && message.hasOwnProperty("customerManagedEncryption")) {
+                                        var error = $root.google.cloud.secretmanager.v1.CustomerManagedEncryptionStatus.verify(message.customerManagedEncryption);
+                                        if (error)
+                                            return "customerManagedEncryption." + error;
+                                    }
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a ReplicaStatus message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.secretmanager.v1.ReplicationStatus.UserManagedStatus.ReplicaStatus
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.secretmanager.v1.ReplicationStatus.UserManagedStatus.ReplicaStatus} ReplicaStatus
+                                 */
+                                ReplicaStatus.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.secretmanager.v1.ReplicationStatus.UserManagedStatus.ReplicaStatus)
+                                        return object;
+                                    var message = new $root.google.cloud.secretmanager.v1.ReplicationStatus.UserManagedStatus.ReplicaStatus();
+                                    if (object.location != null)
+                                        message.location = String(object.location);
+                                    if (object.customerManagedEncryption != null) {
+                                        if (typeof object.customerManagedEncryption !== "object")
+                                            throw TypeError(".google.cloud.secretmanager.v1.ReplicationStatus.UserManagedStatus.ReplicaStatus.customerManagedEncryption: object expected");
+                                        message.customerManagedEncryption = $root.google.cloud.secretmanager.v1.CustomerManagedEncryptionStatus.fromObject(object.customerManagedEncryption);
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a ReplicaStatus message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.secretmanager.v1.ReplicationStatus.UserManagedStatus.ReplicaStatus
+                                 * @static
+                                 * @param {google.cloud.secretmanager.v1.ReplicationStatus.UserManagedStatus.ReplicaStatus} message ReplicaStatus
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                ReplicaStatus.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults) {
+                                        object.location = "";
+                                        object.customerManagedEncryption = null;
+                                    }
+                                    if (message.location != null && message.hasOwnProperty("location"))
+                                        object.location = message.location;
+                                    if (message.customerManagedEncryption != null && message.hasOwnProperty("customerManagedEncryption"))
+                                        object.customerManagedEncryption = $root.google.cloud.secretmanager.v1.CustomerManagedEncryptionStatus.toObject(message.customerManagedEncryption, options);
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this ReplicaStatus to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.secretmanager.v1.ReplicationStatus.UserManagedStatus.ReplicaStatus
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                ReplicaStatus.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                return ReplicaStatus;
+                            })();
+    
+                            return UserManagedStatus;
+                        })();
+    
+                        return ReplicationStatus;
+                    })();
+    
+                    v1.CustomerManagedEncryptionStatus = (function() {
+    
+                        /**
+                         * Properties of a CustomerManagedEncryptionStatus.
+                         * @memberof google.cloud.secretmanager.v1
+                         * @interface ICustomerManagedEncryptionStatus
+                         * @property {string|null} [kmsKeyVersionName] CustomerManagedEncryptionStatus kmsKeyVersionName
+                         */
+    
+                        /**
+                         * Constructs a new CustomerManagedEncryptionStatus.
+                         * @memberof google.cloud.secretmanager.v1
+                         * @classdesc Represents a CustomerManagedEncryptionStatus.
+                         * @implements ICustomerManagedEncryptionStatus
+                         * @constructor
+                         * @param {google.cloud.secretmanager.v1.ICustomerManagedEncryptionStatus=} [properties] Properties to set
+                         */
+                        function CustomerManagedEncryptionStatus(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CustomerManagedEncryptionStatus kmsKeyVersionName.
+                         * @member {string} kmsKeyVersionName
+                         * @memberof google.cloud.secretmanager.v1.CustomerManagedEncryptionStatus
+                         * @instance
+                         */
+                        CustomerManagedEncryptionStatus.prototype.kmsKeyVersionName = "";
+    
+                        /**
+                         * Creates a new CustomerManagedEncryptionStatus instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.secretmanager.v1.CustomerManagedEncryptionStatus
+                         * @static
+                         * @param {google.cloud.secretmanager.v1.ICustomerManagedEncryptionStatus=} [properties] Properties to set
+                         * @returns {google.cloud.secretmanager.v1.CustomerManagedEncryptionStatus} CustomerManagedEncryptionStatus instance
+                         */
+                        CustomerManagedEncryptionStatus.create = function create(properties) {
+                            return new CustomerManagedEncryptionStatus(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CustomerManagedEncryptionStatus message. Does not implicitly {@link google.cloud.secretmanager.v1.CustomerManagedEncryptionStatus.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.secretmanager.v1.CustomerManagedEncryptionStatus
+                         * @static
+                         * @param {google.cloud.secretmanager.v1.ICustomerManagedEncryptionStatus} message CustomerManagedEncryptionStatus message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CustomerManagedEncryptionStatus.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.kmsKeyVersionName != null && Object.hasOwnProperty.call(message, "kmsKeyVersionName"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.kmsKeyVersionName);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CustomerManagedEncryptionStatus message, length delimited. Does not implicitly {@link google.cloud.secretmanager.v1.CustomerManagedEncryptionStatus.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.secretmanager.v1.CustomerManagedEncryptionStatus
+                         * @static
+                         * @param {google.cloud.secretmanager.v1.ICustomerManagedEncryptionStatus} message CustomerManagedEncryptionStatus message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CustomerManagedEncryptionStatus.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CustomerManagedEncryptionStatus message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.secretmanager.v1.CustomerManagedEncryptionStatus
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.secretmanager.v1.CustomerManagedEncryptionStatus} CustomerManagedEncryptionStatus
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CustomerManagedEncryptionStatus.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.secretmanager.v1.CustomerManagedEncryptionStatus();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.kmsKeyVersionName = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CustomerManagedEncryptionStatus message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.secretmanager.v1.CustomerManagedEncryptionStatus
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.secretmanager.v1.CustomerManagedEncryptionStatus} CustomerManagedEncryptionStatus
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CustomerManagedEncryptionStatus.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CustomerManagedEncryptionStatus message.
+                         * @function verify
+                         * @memberof google.cloud.secretmanager.v1.CustomerManagedEncryptionStatus
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CustomerManagedEncryptionStatus.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.kmsKeyVersionName != null && message.hasOwnProperty("kmsKeyVersionName"))
+                                if (!$util.isString(message.kmsKeyVersionName))
+                                    return "kmsKeyVersionName: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CustomerManagedEncryptionStatus message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.secretmanager.v1.CustomerManagedEncryptionStatus
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.secretmanager.v1.CustomerManagedEncryptionStatus} CustomerManagedEncryptionStatus
+                         */
+                        CustomerManagedEncryptionStatus.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.secretmanager.v1.CustomerManagedEncryptionStatus)
+                                return object;
+                            var message = new $root.google.cloud.secretmanager.v1.CustomerManagedEncryptionStatus();
+                            if (object.kmsKeyVersionName != null)
+                                message.kmsKeyVersionName = String(object.kmsKeyVersionName);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CustomerManagedEncryptionStatus message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.secretmanager.v1.CustomerManagedEncryptionStatus
+                         * @static
+                         * @param {google.cloud.secretmanager.v1.CustomerManagedEncryptionStatus} message CustomerManagedEncryptionStatus
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CustomerManagedEncryptionStatus.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.kmsKeyVersionName = "";
+                            if (message.kmsKeyVersionName != null && message.hasOwnProperty("kmsKeyVersionName"))
+                                object.kmsKeyVersionName = message.kmsKeyVersionName;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CustomerManagedEncryptionStatus to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.secretmanager.v1.CustomerManagedEncryptionStatus
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CustomerManagedEncryptionStatus.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return CustomerManagedEncryptionStatus;
                     })();
     
                     v1.SecretPayload = (function() {

@@ -86,6 +86,10 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "replicationStatus": {
+                          "type": "ReplicationStatus",
+                          "id": 5
                         }
                       },
                       "nested": {
@@ -120,7 +124,15 @@
                       },
                       "nested": {
                         "Automatic": {
-                          "fields": {}
+                          "fields": {
+                            "customerManagedEncryption": {
+                              "type": "CustomerManagedEncryption",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
                         },
                         "UserManaged": {
                           "fields": {
@@ -139,9 +151,103 @@
                                 "location": {
                                   "type": "string",
                                   "id": 1
+                                },
+                                "customerManagedEncryption": {
+                                  "type": "CustomerManagedEncryption",
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
                                 }
                               }
                             }
+                          }
+                        }
+                      }
+                    },
+                    "CustomerManagedEncryption": {
+                      "fields": {
+                        "kmsKeyName": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "ReplicationStatus": {
+                      "oneofs": {
+                        "replicationStatus": {
+                          "oneof": [
+                            "automatic",
+                            "userManaged"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "automatic": {
+                          "type": "AutomaticStatus",
+                          "id": 1
+                        },
+                        "userManaged": {
+                          "type": "UserManagedStatus",
+                          "id": 2
+                        }
+                      },
+                      "nested": {
+                        "AutomaticStatus": {
+                          "fields": {
+                            "customerManagedEncryption": {
+                              "type": "CustomerManagedEncryptionStatus",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          }
+                        },
+                        "UserManagedStatus": {
+                          "fields": {
+                            "replicas": {
+                              "rule": "repeated",
+                              "type": "ReplicaStatus",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "ReplicaStatus": {
+                              "fields": {
+                                "location": {
+                                  "type": "string",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OUTPUT_ONLY"
+                                  }
+                                },
+                                "customerManagedEncryption": {
+                                  "type": "CustomerManagedEncryptionStatus",
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OUTPUT_ONLY"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "CustomerManagedEncryptionStatus": {
+                      "fields": {
+                        "kmsKeyVersionName": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
                           }
                         }
                       }
