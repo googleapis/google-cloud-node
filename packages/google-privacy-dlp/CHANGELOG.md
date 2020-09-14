@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/PACKAGE NAME?activeTab=versions
 
+### [3.0.3](https://www.github.com/googleapis/nodejs-dlp/compare/v3.0.2...v3.0.3) (2020-09-12)
+
+
+### Bug Fixes
+
+* **deps:** update dependency yargs to v16 ([#536](https://www.github.com/googleapis/nodejs-dlp/issues/536)) ([39db29a](https://www.github.com/googleapis/nodejs-dlp/commit/39db29adcef20b7baed4b8a4351d12bcf2bc605f))
+
 ### [3.0.2](https://www.github.com/googleapis/nodejs-dlp/compare/v3.0.1...v3.0.2) (2020-07-15)
 
 
