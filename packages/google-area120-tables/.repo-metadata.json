@@ -1,0 +1,13 @@
+{
+  "name": "area120tables",
+  "name_pretty": "Area120 Tables API",
+  "product_documentation": "https://area120.google.com/",
+  "client_documentation": "https://googleapis.dev/nodejs/area120tables/latest",
+  "issue_tracker": "",
+  "release_level": "alpha",
+  "language": "nodejs",
+  "repo": "googleapis/nodejs-area120-tables",
+  "distribution_name": "@google/area120-tables",
+  "api_id": "area120tables.googleapis.com",
+  "requires_billing": true
+}
