@@ -461,8 +461,20 @@ export class DlpServiceClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Parent resource name.
-   *   - Format:projects/[PROJECT-ID]
-   *   - Format:projects/[PROJECT-ID]/locations/[LOCATION-ID]
+   *
+   *   The format of this value varies depending on whether you have [specified a
+   *   processing location](https://cloud.google.com/dlp/docs/specifying-location):
+   *
+   *   + Projects scope, location specified:<br/>
+   *     `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
+   *   + Projects scope, no location specified (defaults to global):<br/>
+   *     `projects/`<var>PROJECT_ID</var>
+   *
+   *   The following example `parent` string specifies a parent project with the
+   *   identifier `example-project`, and specifies the `europe-west3` location
+   *   for processing data:
+   *
+   *       parent=projects/example-project/locations/europe-west3
    * @param {google.privacy.dlp.v2.InspectConfig} request.inspectConfig
    *   Configuration for the inspector. What specified here will override
    *   the template referenced by the inspect_template_name argument.
@@ -564,9 +576,21 @@ export class DlpServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   The parent resource name.
-   *   - Format:projects/[PROJECT-ID]
-   *   - Format:projects/[PROJECT-ID]/locations/[LOCATION-ID]
+   *   Parent resource name.
+   *
+   *   The format of this value varies depending on whether you have [specified a
+   *   processing location](https://cloud.google.com/dlp/docs/specifying-location):
+   *
+   *   + Projects scope, location specified:<br/>
+   *     `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
+   *   + Projects scope, no location specified (defaults to global):<br/>
+   *     `projects/`<var>PROJECT_ID</var>
+   *
+   *   The following example `parent` string specifies a parent project with the
+   *   identifier `example-project`, and specifies the `europe-west3` location
+   *   for processing data:
+   *
+   *       parent=projects/example-project/locations/europe-west3
    * @param {string} request.locationId
    *   Deprecated. This field has no effect.
    * @param {google.privacy.dlp.v2.InspectConfig} request.inspectConfig
@@ -665,8 +689,20 @@ export class DlpServiceClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Parent resource name.
-   *   - Format:projects/[PROJECT-ID]
-   *   - Format:projects/[PROJECT-ID]/locations/[LOCATION-ID]
+   *
+   *   The format of this value varies depending on whether you have [specified a
+   *   processing location](https://cloud.google.com/dlp/docs/specifying-location):
+   *
+   *   + Projects scope, location specified:<br/>
+   *     `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
+   *   + Projects scope, no location specified (defaults to global):<br/>
+   *     `projects/`<var>PROJECT_ID</var>
+   *
+   *   The following example `parent` string specifies a parent project with the
+   *   identifier `example-project`, and specifies the `europe-west3` location
+   *   for processing data:
+   *
+   *       parent=projects/example-project/locations/europe-west3
    * @param {google.privacy.dlp.v2.DeidentifyConfig} request.deidentifyConfig
    *   Configuration for the de-identification of the content item.
    *   Items specified here will override the template referenced by the
@@ -775,9 +811,21 @@ export class DlpServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The parent resource name.
-   *   - Format:projects/[PROJECT-ID]
-   *   - Format:projects/[PROJECT-ID]/locations/[LOCATION-ID]
+   *   Required. Parent resource name.
+   *
+   *   The format of this value varies depending on whether you have [specified a
+   *   processing location](https://cloud.google.com/dlp/docs/specifying-location):
+   *
+   *   + Projects scope, location specified:<br/>
+   *     `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
+   *   + Projects scope, no location specified (defaults to global):<br/>
+   *     `projects/`<var>PROJECT_ID</var>
+   *
+   *   The following example `parent` string specifies a parent project with the
+   *   identifier `example-project`, and specifies the `europe-west3` location
+   *   for processing data:
+   *
+   *       parent=projects/example-project/locations/europe-west3
    * @param {google.privacy.dlp.v2.DeidentifyConfig} request.reidentifyConfig
    *   Configuration for the re-identification of the content item.
    *   This field shares the same proto message type that is used for
@@ -802,10 +850,11 @@ export class DlpServiceClient {
    * @param {string} request.reidentifyTemplateName
    *   Template to use. References an instance of `DeidentifyTemplate`.
    *   Any configuration directly specified in `reidentify_config` or
-   *   `inspect_config` will override those set in the template. Singular fields
-   *   that are set in this request will replace their corresponding fields in the
-   *   template. Repeated fields are appended. Singular sub-messages and groups
-   *   are recursively merged.
+   *   `inspect_config` will override those set in the template. The
+   *   `DeidentifyTemplate` used must include only reversible transformations.
+   *   Singular fields that are set in this request will replace their
+   *   corresponding fields in the template. Repeated fields are appended.
+   *   Singular sub-messages and groups are recursively merged.
    * @param {string} request.locationId
    *   Deprecated. This field has no effect.
    * @param {object} [options]
@@ -892,7 +941,10 @@ export class DlpServiceClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   The parent resource name.
-   *   - Format:locations/[LOCATION-ID]
+   *
+   *   The format of this value is as follows:
+   *
+   *       locations/<var>LOCATION_ID</var>
    * @param {string} request.languageCode
    *   BCP-47 language code for localized infoType friendly
    *   names. If omitted, or if localized strings are not available,
@@ -988,10 +1040,25 @@ export class DlpServiceClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. Parent resource name.
-   *   - Format:projects/[PROJECT-ID]
-   *   - Format:organizations/[ORGANIZATION-ID]
-   *   - Format:projects/[PROJECT-ID]/locations/[LOCATION-ID]
-   *   - Format:organizations/[ORGANIZATION-ID]/locations/[LOCATION-ID]
+   *
+   *   The format of this value varies depending on the scope of the request
+   *   (project or organization) and whether you have [specified a processing
+   *   location](https://cloud.google.com/dlp/docs/specifying-location):
+   *
+   *   + Projects scope, location specified:<br/>
+   *     `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
+   *   + Projects scope, no location specified (defaults to global):<br/>
+   *     `projects/`<var>PROJECT_ID</var>
+   *   + Organizations scope, location specified:<br/>
+   *     `organizations/`<var>ORG_ID</var>`/locations/`<var>LOCATION_ID</var>
+   *   + Organizations scope, no location specified (defaults to global):<br/>
+   *     `organizations/`<var>ORG_ID</var>
+   *
+   *   The following example `parent` string specifies a parent project with the
+   *   identifier `example-project`, and specifies the `europe-west3` location
+   *   for processing data:
+   *
+   *       parent=projects/example-project/locations/europe-west3
    * @param {google.privacy.dlp.v2.InspectTemplate} request.inspectTemplate
    *   Required. The InspectTemplate to create.
    * @param {string} request.templateId
@@ -1369,10 +1436,25 @@ export class DlpServiceClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. Parent resource name.
-   *   - Format:projects/[PROJECT-ID]
-   *   - Format:organizations/[ORGANIZATION-ID]
-   *   - Format:projects/[PROJECT-ID]/locations/[LOCATION-ID]
-   *   - Format:organizations/[ORGANIZATION-ID]/locations/[LOCATION-ID]
+   *
+   *   The format of this value varies depending on the scope of the request
+   *   (project or organization) and whether you have [specified a processing
+   *   location](https://cloud.google.com/dlp/docs/specifying-location):
+   *
+   *   + Projects scope, location specified:<br/>
+   *     `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
+   *   + Projects scope, no location specified (defaults to global):<br/>
+   *     `projects/`<var>PROJECT_ID</var>
+   *   + Organizations scope, location specified:<br/>
+   *     `organizations/`<var>ORG_ID</var>`/locations/`<var>LOCATION_ID</var>
+   *   + Organizations scope, no location specified (defaults to global):<br/>
+   *     `organizations/`<var>ORG_ID</var>
+   *
+   *   The following example `parent` string specifies a parent project with the
+   *   identifier `example-project`, and specifies the `europe-west3` location
+   *   for processing data:
+   *
+   *       parent=projects/example-project/locations/europe-west3
    * @param {google.privacy.dlp.v2.DeidentifyTemplate} request.deidentifyTemplate
    *   Required. The DeidentifyTemplate to create.
    * @param {string} request.templateId
@@ -1760,8 +1842,20 @@ export class DlpServiceClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. Parent resource name.
-   *   - Format:projects/[PROJECT-ID]
-   *   - Format:projects/[PROJECT-ID]/locations/[LOCATION-ID]
+   *
+   *   The format of this value varies depending on whether you have [specified a
+   *   processing location](https://cloud.google.com/dlp/docs/specifying-location):
+   *
+   *   + Projects scope, location specified:<br/>
+   *     `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
+   *   + Projects scope, no location specified (defaults to global):<br/>
+   *     `projects/`<var>PROJECT_ID</var>
+   *
+   *   The following example `parent` string specifies a parent project with the
+   *   identifier `example-project`, and specifies the `europe-west3` location
+   *   for processing data:
+   *
+   *       parent=projects/example-project/locations/europe-west3
    * @param {google.privacy.dlp.v2.JobTrigger} request.jobTrigger
    *   Required. The JobTrigger to create.
    * @param {string} request.triggerId
@@ -2303,8 +2397,20 @@ export class DlpServiceClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. Parent resource name.
-   *   - Format:projects/[PROJECT-ID]
-   *   - Format:projects/[PROJECT-ID]/locations/[LOCATION-ID]
+   *
+   *   The format of this value varies depending on whether you have [specified a
+   *   processing location](https://cloud.google.com/dlp/docs/specifying-location):
+   *
+   *   + Projects scope, location specified:<br/>
+   *     `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
+   *   + Projects scope, no location specified (defaults to global):<br/>
+   *     `projects/`<var>PROJECT_ID</var>
+   *
+   *   The following example `parent` string specifies a parent project with the
+   *   identifier `example-project`, and specifies the `europe-west3` location
+   *   for processing data:
+   *
+   *       parent=projects/example-project/locations/europe-west3
    * @param {google.privacy.dlp.v2.InspectJobConfig} request.inspectJob
    *   Set to control what and how to inspect.
    * @param {google.privacy.dlp.v2.RiskAnalysisJobConfig} request.riskJob
@@ -2652,10 +2758,25 @@ export class DlpServiceClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. Parent resource name.
-   *   - Format:projects/[PROJECT-ID]
-   *   - Format:organizations/[ORGANIZATION-ID]
-   *   - Format:projects/[PROJECT-ID]/locations/[LOCATION-ID]
-   *   - Format:organizations/[ORGANIZATION-ID]/locations/[LOCATION-ID]
+   *
+   *   The format of this value varies depending on the scope of the request
+   *   (project or organization) and whether you have [specified a processing
+   *   location](https://cloud.google.com/dlp/docs/specifying-location):
+   *
+   *   + Projects scope, location specified:<br/>
+   *     `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
+   *   + Projects scope, no location specified (defaults to global):<br/>
+   *     `projects/`<var>PROJECT_ID</var>
+   *   + Organizations scope, location specified:<br/>
+   *     `organizations/`<var>ORG_ID</var>`/locations/`<var>LOCATION_ID</var>
+   *   + Organizations scope, no location specified (defaults to global):<br/>
+   *     `organizations/`<var>ORG_ID</var>
+   *
+   *   The following example `parent` string specifies a parent project with the
+   *   identifier `example-project`, and specifies the `europe-west3` location
+   *   for processing data:
+   *
+   *       parent=projects/example-project/locations/europe-west3
    * @param {google.privacy.dlp.v2.StoredInfoTypeConfig} request.config
    *   Required. Configuration of the storedInfoType to create.
    * @param {string} request.storedInfoTypeId
@@ -3212,10 +3333,25 @@ export class DlpServiceClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. Parent resource name.
-   *   - Format:projects/[PROJECT-ID]
-   *   - Format:organizations/[ORGANIZATION-ID]
-   *   - Format:projects/[PROJECT-ID]/locations/[LOCATION-ID]
-   *   - Format:organizations/[ORGANIZATION-ID]/locations/[LOCATION-ID]
+   *
+   *   The format of this value varies depending on the scope of the request
+   *   (project or organization) and whether you have [specified a processing
+   *   location](https://cloud.google.com/dlp/docs/specifying-location):
+   *
+   *   + Projects scope, location specified:<br/>
+   *     `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
+   *   + Projects scope, no location specified (defaults to global):<br/>
+   *     `projects/`<var>PROJECT_ID</var>
+   *   + Organizations scope, location specified:<br/>
+   *     `organizations/`<var>ORG_ID</var>`/locations/`<var>LOCATION_ID</var>
+   *   + Organizations scope, no location specified (defaults to global):<br/>
+   *     `organizations/`<var>ORG_ID</var>
+   *
+   *   The following example `parent` string specifies a parent project with the
+   *   identifier `example-project`, and specifies the `europe-west3` location
+   *   for processing data:
+   *
+   *       parent=projects/example-project/locations/europe-west3
    * @param {string} request.pageToken
    *   Page token to continue retrieval. Comes from previous call
    *   to `ListInspectTemplates`.
@@ -3318,10 +3454,25 @@ export class DlpServiceClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. Parent resource name.
-   *   - Format:projects/[PROJECT-ID]
-   *   - Format:organizations/[ORGANIZATION-ID]
-   *   - Format:projects/[PROJECT-ID]/locations/[LOCATION-ID]
-   *   - Format:organizations/[ORGANIZATION-ID]/locations/[LOCATION-ID]
+   *
+   *   The format of this value varies depending on the scope of the request
+   *   (project or organization) and whether you have [specified a processing
+   *   location](https://cloud.google.com/dlp/docs/specifying-location):
+   *
+   *   + Projects scope, location specified:<br/>
+   *     `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
+   *   + Projects scope, no location specified (defaults to global):<br/>
+   *     `projects/`<var>PROJECT_ID</var>
+   *   + Organizations scope, location specified:<br/>
+   *     `organizations/`<var>ORG_ID</var>`/locations/`<var>LOCATION_ID</var>
+   *   + Organizations scope, no location specified (defaults to global):<br/>
+   *     `organizations/`<var>ORG_ID</var>
+   *
+   *   The following example `parent` string specifies a parent project with the
+   *   identifier `example-project`, and specifies the `europe-west3` location
+   *   for processing data:
+   *
+   *       parent=projects/example-project/locations/europe-west3
    * @param {string} request.pageToken
    *   Page token to continue retrieval. Comes from previous call
    *   to `ListInspectTemplates`.
@@ -3380,10 +3531,25 @@ export class DlpServiceClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. Parent resource name.
-   *   - Format:projects/[PROJECT-ID]
-   *   - Format:organizations/[ORGANIZATION-ID]
-   *   - Format:projects/[PROJECT-ID]/locations/[LOCATION-ID]
-   *   - Format:organizations/[ORGANIZATION-ID]/locations/[LOCATION-ID]
+   *
+   *   The format of this value varies depending on the scope of the request
+   *   (project or organization) and whether you have [specified a processing
+   *   location](https://cloud.google.com/dlp/docs/specifying-location):
+   *
+   *   + Projects scope, location specified:<br/>
+   *     `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
+   *   + Projects scope, no location specified (defaults to global):<br/>
+   *     `projects/`<var>PROJECT_ID</var>
+   *   + Organizations scope, location specified:<br/>
+   *     `organizations/`<var>ORG_ID</var>`/locations/`<var>LOCATION_ID</var>
+   *   + Organizations scope, no location specified (defaults to global):<br/>
+   *     `organizations/`<var>ORG_ID</var>
+   *
+   *   The following example `parent` string specifies a parent project with the
+   *   identifier `example-project`, and specifies the `europe-west3` location
+   *   for processing data:
+   *
+   *       parent=projects/example-project/locations/europe-west3
    * @param {string} request.pageToken
    *   Page token to continue retrieval. Comes from previous call
    *   to `ListInspectTemplates`.
@@ -3473,10 +3639,25 @@ export class DlpServiceClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. Parent resource name.
-   *   - Format:projects/[PROJECT-ID]
-   *   - Format:organizations/[ORGANIZATION-ID]
-   *   - Format:projects/[PROJECT-ID]/locations/[LOCATION-ID]
-   *   - Format:organizations/[ORGANIZATION-ID]/locations/[LOCATION-ID]
+   *
+   *   The format of this value varies depending on the scope of the request
+   *   (project or organization) and whether you have [specified a processing
+   *   location](https://cloud.google.com/dlp/docs/specifying-location):
+   *
+   *   + Projects scope, location specified:<br/>
+   *     `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
+   *   + Projects scope, no location specified (defaults to global):<br/>
+   *     `projects/`<var>PROJECT_ID</var>
+   *   + Organizations scope, location specified:<br/>
+   *     `organizations/`<var>ORG_ID</var>`/locations/`<var>LOCATION_ID</var>
+   *   + Organizations scope, no location specified (defaults to global):<br/>
+   *     `organizations/`<var>ORG_ID</var>
+   *
+   *   The following example `parent` string specifies a parent project with the
+   *   identifier `example-project`, and specifies the `europe-west3` location
+   *   for processing data:
+   *
+   *       parent=projects/example-project/locations/europe-west3
    * @param {string} request.pageToken
    *   Page token to continue retrieval. Comes from previous call
    *   to `ListDeidentifyTemplates`.
@@ -3583,10 +3764,25 @@ export class DlpServiceClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. Parent resource name.
-   *   - Format:projects/[PROJECT-ID]
-   *   - Format:organizations/[ORGANIZATION-ID]
-   *   - Format:projects/[PROJECT-ID]/locations/[LOCATION-ID]
-   *   - Format:organizations/[ORGANIZATION-ID]/locations/[LOCATION-ID]
+   *
+   *   The format of this value varies depending on the scope of the request
+   *   (project or organization) and whether you have [specified a processing
+   *   location](https://cloud.google.com/dlp/docs/specifying-location):
+   *
+   *   + Projects scope, location specified:<br/>
+   *     `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
+   *   + Projects scope, no location specified (defaults to global):<br/>
+   *     `projects/`<var>PROJECT_ID</var>
+   *   + Organizations scope, location specified:<br/>
+   *     `organizations/`<var>ORG_ID</var>`/locations/`<var>LOCATION_ID</var>
+   *   + Organizations scope, no location specified (defaults to global):<br/>
+   *     `organizations/`<var>ORG_ID</var>
+   *
+   *   The following example `parent` string specifies a parent project with the
+   *   identifier `example-project`, and specifies the `europe-west3` location
+   *   for processing data:
+   *
+   *       parent=projects/example-project/locations/europe-west3
    * @param {string} request.pageToken
    *   Page token to continue retrieval. Comes from previous call
    *   to `ListDeidentifyTemplates`.
@@ -3645,10 +3841,25 @@ export class DlpServiceClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. Parent resource name.
-   *   - Format:projects/[PROJECT-ID]
-   *   - Format:organizations/[ORGANIZATION-ID]
-   *   - Format:projects/[PROJECT-ID]/locations/[LOCATION-ID]
-   *   - Format:organizations/[ORGANIZATION-ID]/locations/[LOCATION-ID]
+   *
+   *   The format of this value varies depending on the scope of the request
+   *   (project or organization) and whether you have [specified a processing
+   *   location](https://cloud.google.com/dlp/docs/specifying-location):
+   *
+   *   + Projects scope, location specified:<br/>
+   *     `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
+   *   + Projects scope, no location specified (defaults to global):<br/>
+   *     `projects/`<var>PROJECT_ID</var>
+   *   + Organizations scope, location specified:<br/>
+   *     `organizations/`<var>ORG_ID</var>`/locations/`<var>LOCATION_ID</var>
+   *   + Organizations scope, no location specified (defaults to global):<br/>
+   *     `organizations/`<var>ORG_ID</var>
+   *
+   *   The following example `parent` string specifies a parent project with the
+   *   identifier `example-project`, and specifies the `europe-west3` location
+   *   for processing data:
+   *
+   *       parent=projects/example-project/locations/europe-west3
    * @param {string} request.pageToken
    *   Page token to continue retrieval. Comes from previous call
    *   to `ListDeidentifyTemplates`.
@@ -3733,8 +3944,20 @@ export class DlpServiceClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. Parent resource name.
-   *   - Format:projects/[PROJECT-ID]
-   *   - Format:projects/[PROJECT-ID]/locations/[LOCATION-ID]
+   *
+   *   The format of this value varies depending on whether you have [specified a
+   *   processing location](https://cloud.google.com/dlp/docs/specifying-location):
+   *
+   *   + Projects scope, location specified:<br/>
+   *     `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
+   *   + Projects scope, no location specified (defaults to global):<br/>
+   *     `projects/`<var>PROJECT_ID</var>
+   *
+   *   The following example `parent` string specifies a parent project with the
+   *   identifier `example-project`, and specifies the `europe-west3` location
+   *   for processing data:
+   *
+   *       parent=projects/example-project/locations/europe-west3
    * @param {string} request.pageToken
    *   Page token to continue retrieval. Comes from previous call
    *   to ListJobTriggers. `order_by` field must not
@@ -3862,8 +4085,20 @@ export class DlpServiceClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. Parent resource name.
-   *   - Format:projects/[PROJECT-ID]
-   *   - Format:projects/[PROJECT-ID]/locations/[LOCATION-ID]
+   *
+   *   The format of this value varies depending on whether you have [specified a
+   *   processing location](https://cloud.google.com/dlp/docs/specifying-location):
+   *
+   *   + Projects scope, location specified:<br/>
+   *     `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
+   *   + Projects scope, no location specified (defaults to global):<br/>
+   *     `projects/`<var>PROJECT_ID</var>
+   *
+   *   The following example `parent` string specifies a parent project with the
+   *   identifier `example-project`, and specifies the `europe-west3` location
+   *   for processing data:
+   *
+   *       parent=projects/example-project/locations/europe-west3
    * @param {string} request.pageToken
    *   Page token to continue retrieval. Comes from previous call
    *   to ListJobTriggers. `order_by` field must not
@@ -3949,8 +4184,20 @@ export class DlpServiceClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. Parent resource name.
-   *   - Format:projects/[PROJECT-ID]
-   *   - Format:projects/[PROJECT-ID]/locations/[LOCATION-ID]
+   *
+   *   The format of this value varies depending on whether you have [specified a
+   *   processing location](https://cloud.google.com/dlp/docs/specifying-location):
+   *
+   *   + Projects scope, location specified:<br/>
+   *     `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
+   *   + Projects scope, no location specified (defaults to global):<br/>
+   *     `projects/`<var>PROJECT_ID</var>
+   *
+   *   The following example `parent` string specifies a parent project with the
+   *   identifier `example-project`, and specifies the `europe-west3` location
+   *   for processing data:
+   *
+   *       parent=projects/example-project/locations/europe-west3
    * @param {string} request.pageToken
    *   Page token to continue retrieval. Comes from previous call
    *   to ListJobTriggers. `order_by` field must not
@@ -4063,8 +4310,20 @@ export class DlpServiceClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. Parent resource name.
-   *   - Format:projects/[PROJECT-ID]
-   *   - Format:projects/[PROJECT-ID]/locations/[LOCATION-ID]
+   *
+   *   The format of this value varies depending on whether you have [specified a
+   *   processing location](https://cloud.google.com/dlp/docs/specifying-location):
+   *
+   *   + Projects scope, location specified:<br/>
+   *     `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
+   *   + Projects scope, no location specified (defaults to global):<br/>
+   *     `projects/`<var>PROJECT_ID</var>
+   *
+   *   The following example `parent` string specifies a parent project with the
+   *   identifier `example-project`, and specifies the `europe-west3` location
+   *   for processing data:
+   *
+   *       parent=projects/example-project/locations/europe-west3
    * @param {string} request.filter
    *   Allows filtering.
    *
@@ -4192,8 +4451,20 @@ export class DlpServiceClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. Parent resource name.
-   *   - Format:projects/[PROJECT-ID]
-   *   - Format:projects/[PROJECT-ID]/locations/[LOCATION-ID]
+   *
+   *   The format of this value varies depending on whether you have [specified a
+   *   processing location](https://cloud.google.com/dlp/docs/specifying-location):
+   *
+   *   + Projects scope, location specified:<br/>
+   *     `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
+   *   + Projects scope, no location specified (defaults to global):<br/>
+   *     `projects/`<var>PROJECT_ID</var>
+   *
+   *   The following example `parent` string specifies a parent project with the
+   *   identifier `example-project`, and specifies the `europe-west3` location
+   *   for processing data:
+   *
+   *       parent=projects/example-project/locations/europe-west3
    * @param {string} request.filter
    *   Allows filtering.
    *
@@ -4281,8 +4552,20 @@ export class DlpServiceClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. Parent resource name.
-   *   - Format:projects/[PROJECT-ID]
-   *   - Format:projects/[PROJECT-ID]/locations/[LOCATION-ID]
+   *
+   *   The format of this value varies depending on whether you have [specified a
+   *   processing location](https://cloud.google.com/dlp/docs/specifying-location):
+   *
+   *   + Projects scope, location specified:<br/>
+   *     `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
+   *   + Projects scope, no location specified (defaults to global):<br/>
+   *     `projects/`<var>PROJECT_ID</var>
+   *
+   *   The following example `parent` string specifies a parent project with the
+   *   identifier `example-project`, and specifies the `europe-west3` location
+   *   for processing data:
+   *
+   *       parent=projects/example-project/locations/europe-west3
    * @param {string} request.filter
    *   Allows filtering.
    *
@@ -4401,10 +4684,25 @@ export class DlpServiceClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. Parent resource name.
-   *   - Format:projects/[PROJECT-ID]
-   *   - Format:organizations/[ORGANIZATION-ID]
-   *   - Format:projects/[PROJECT-ID]/locations/[LOCATION-ID]
-   *   - Format:organizations/[ORGANIZATION-ID]/locations/[LOCATION-ID]
+   *
+   *   The format of this value varies depending on the scope of the request
+   *   (project or organization) and whether you have [specified a processing
+   *   location](https://cloud.google.com/dlp/docs/specifying-location):
+   *
+   *   + Projects scope, location specified:<br/>
+   *     `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
+   *   + Projects scope, no location specified (defaults to global):<br/>
+   *     `projects/`<var>PROJECT_ID</var>
+   *   + Organizations scope, location specified:<br/>
+   *     `organizations/`<var>ORG_ID</var>`/locations/`<var>LOCATION_ID</var>
+   *   + Organizations scope, no location specified (defaults to global):<br/>
+   *     `organizations/`<var>ORG_ID</var>
+   *
+   *   The following example `parent` string specifies a parent project with the
+   *   identifier `example-project`, and specifies the `europe-west3` location
+   *   for processing data:
+   *
+   *       parent=projects/example-project/locations/europe-west3
    * @param {string} request.pageToken
    *   Page token to continue retrieval. Comes from previous call
    *   to `ListStoredInfoTypes`.
@@ -4508,10 +4806,25 @@ export class DlpServiceClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. Parent resource name.
-   *   - Format:projects/[PROJECT-ID]
-   *   - Format:organizations/[ORGANIZATION-ID]
-   *   - Format:projects/[PROJECT-ID]/locations/[LOCATION-ID]
-   *   - Format:organizations/[ORGANIZATION-ID]/locations/[LOCATION-ID]
+   *
+   *   The format of this value varies depending on the scope of the request
+   *   (project or organization) and whether you have [specified a processing
+   *   location](https://cloud.google.com/dlp/docs/specifying-location):
+   *
+   *   + Projects scope, location specified:<br/>
+   *     `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
+   *   + Projects scope, no location specified (defaults to global):<br/>
+   *     `projects/`<var>PROJECT_ID</var>
+   *   + Organizations scope, location specified:<br/>
+   *     `organizations/`<var>ORG_ID</var>`/locations/`<var>LOCATION_ID</var>
+   *   + Organizations scope, no location specified (defaults to global):<br/>
+   *     `organizations/`<var>ORG_ID</var>
+   *
+   *   The following example `parent` string specifies a parent project with the
+   *   identifier `example-project`, and specifies the `europe-west3` location
+   *   for processing data:
+   *
+   *       parent=projects/example-project/locations/europe-west3
    * @param {string} request.pageToken
    *   Page token to continue retrieval. Comes from previous call
    *   to `ListStoredInfoTypes`.
@@ -4571,10 +4884,25 @@ export class DlpServiceClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. Parent resource name.
-   *   - Format:projects/[PROJECT-ID]
-   *   - Format:organizations/[ORGANIZATION-ID]
-   *   - Format:projects/[PROJECT-ID]/locations/[LOCATION-ID]
-   *   - Format:organizations/[ORGANIZATION-ID]/locations/[LOCATION-ID]
+   *
+   *   The format of this value varies depending on the scope of the request
+   *   (project or organization) and whether you have [specified a processing
+   *   location](https://cloud.google.com/dlp/docs/specifying-location):
+   *
+   *   + Projects scope, location specified:<br/>
+   *     `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
+   *   + Projects scope, no location specified (defaults to global):<br/>
+   *     `projects/`<var>PROJECT_ID</var>
+   *   + Organizations scope, location specified:<br/>
+   *     `organizations/`<var>ORG_ID</var>`/locations/`<var>LOCATION_ID</var>
+   *   + Organizations scope, no location specified (defaults to global):<br/>
+   *     `organizations/`<var>ORG_ID</var>
+   *
+   *   The following example `parent` string specifies a parent project with the
+   *   identifier `example-project`, and specifies the `europe-west3` location
+   *   for processing data:
+   *
+   *       parent=projects/example-project/locations/europe-west3
    * @param {string} request.pageToken
    *   Page token to continue retrieval. Comes from previous call
    *   to `ListStoredInfoTypes`.
