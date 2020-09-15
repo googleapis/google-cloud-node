@@ -443,7 +443,10 @@ export class IntentsClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. The name of the intent.
-   *   Format: `projects/<Project ID>/agent/intents/<Intent ID>`.
+   *   Supported formats:
+   *
+   *   - `projects/<Project ID>/agent/intents/<Intent ID>`
+   *   - `projects/<Project ID>/locations/<Location ID>/agent/intents/<Intent ID>`
    * @param {string} [request.languageCode]
    *   Optional. The language used to access language-specific data.
    *   If not specified, the agent's default language is used.
@@ -540,7 +543,10 @@ export class IntentsClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The agent to create a intent for.
-   *   Format: `projects/<Project ID>/agent`.
+   *   Supported formats:
+   *
+   *   - `projects/<Project ID>/agent`
+   *   - `projects/<Project ID>/locations/<Location ID>/agent`
    * @param {google.cloud.dialogflow.v2beta1.Intent} request.intent
    *   Required. The intent to create.
    * @param {string} [request.languageCode]
@@ -739,7 +745,10 @@ export class IntentsClient {
    *   Required. The name of the intent to delete. If this intent has direct or
    *   indirect followup intents, we also delete them.
    *
-   *   Format: `projects/<Project ID>/agent/intents/<Intent ID>`.
+   *   Supported formats:
+   *
+   *   - `projects/<Project ID>/agent/intents/<Intent ID>`
+   *   - `projects/<Project ID>/locations/<Location ID>/agent/intents/<Intent ID>`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -836,7 +845,10 @@ export class IntentsClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The name of the agent to update or create intents in.
-   *   Format: `projects/<Project ID>/agent`.
+   *   Supported formats:
+   *
+   *   - `projects/<Project ID>/agent`
+   *   - `projects/<Project ID>/locations/<Location ID>/agent`
    * @param {string} request.intentBatchUri
    *   The URI to a Google Cloud Storage file containing intents to update or
    *   create. The file format can either be a serialized proto (of IntentBatch
@@ -988,8 +1000,11 @@ export class IntentsClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The name of the agent to delete all entities types for. Format:
-   *   `projects/<Project ID>/agent`.
+   *   Required. The name of the agent to delete all entities types for.
+   *   Supported formats:
+   *
+   *   - `projects/<Project ID>/agent`
+   *   - `projects/<Project ID>/locations/<Location ID>/agent`
    * @param {number[]} request.intents
    *   Required. The collection of intents to delete. Only intent `name` must be
    *   filled in.

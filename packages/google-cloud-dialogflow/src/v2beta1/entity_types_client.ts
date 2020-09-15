@@ -487,7 +487,10 @@ export class EntityTypesClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. The name of the entity type.
-   *   Format: `projects/<Project ID>/agent/entityTypes/<EntityType ID>`.
+   *   Supported formats:
+   *   - `projects/<Project ID>/agent/entityTypes/<Entity Type ID>`
+   *   - `projects/<Project ID>/locations/<Location ID>/agent/entityTypes/<Entity
+   *     Type ID>`
    * @param {string} [request.languageCode]
    *   Optional. The language used to access language-specific data.
    *   If not specified, the agent's default language is used.
@@ -585,7 +588,9 @@ export class EntityTypesClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The agent to create a entity type for.
-   *   Format: `projects/<Project ID>/agent`.
+   *   Supported formats:
+   *   - `projects/<Project ID>/agent`
+   *   - `projects/<Project ID>/locations/<Location ID>/agent`
    * @param {google.cloud.dialogflow.v2beta1.EntityType} request.entityType
    *   Required. The entity type to create.
    * @param {string} [request.languageCode]
@@ -790,7 +795,10 @@ export class EntityTypesClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. The name of the entity type to delete.
-   *   Format: `projects/<Project ID>/agent/entityTypes/<EntityType ID>`.
+   *   Supported formats:
+   *   - `projects/<Project ID>/agent/entityTypes/<Entity Type ID>`
+   *   - `projects/<Project ID>/locations/<Location ID>/agent/entityTypes/<Entity
+   *     Type ID>`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -889,7 +897,9 @@ export class EntityTypesClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The name of the agent to update or create entity types in.
-   *   Format: `projects/<Project ID>/agent`.
+   *   Supported formats:
+   *   - `projects/<Project ID>/agent`
+   *   - `projects/<Project ID>/locations/<Location ID>/agent`
    * @param {string} request.entityTypeBatchUri
    *   The URI to a Google Cloud Storage file containing entity types to update
    *   or create. The file format can either be a serialized proto (of
@@ -1043,8 +1053,10 @@ export class EntityTypesClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The name of the agent to delete all entities types for. Format:
-   *   `projects/<Project ID>/agent`.
+   *   Required. The name of the agent to delete all entities types for.
+   *   Supported formats:
+   *   - `projects/<Project ID>/agent`,
+   *   - `projects/<Project ID>/locations/<Location ID>/agent`.
    * @param {string[]} request.entityTypeNames
    *   Required. The names entity types to delete. All names must point to the
    *   same agent as `parent`.
@@ -1184,8 +1196,11 @@ export class EntityTypesClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The name of the entity type to create entities in. Format:
-   *   `projects/<Project ID>/agent/entityTypes/<Entity Type ID>`.
+   *   Required. The name of the entity type to create entities in.
+   *   Supported formats:
+   *   - `projects/<Project ID>/agent/entityTypes/<Entity Type ID>`
+   *   - `projects/<Project ID>/locations/<Location ID>/agent/entityTypes/<Entity
+   *     Type ID>`
    * @param {number[]} request.entities
    *   Required. The entities to create.
    * @param {string} [request.languageCode]
@@ -1329,7 +1344,10 @@ export class EntityTypesClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The name of the entity type to update or create entities in.
-   *   Format: `projects/<Project ID>/agent/entityTypes/<Entity Type ID>`.
+   *   Supported formats:
+   *   - `projects/<Project ID>/agent/entityTypes/<Entity Type ID>`
+   *   - `projects/<Project ID>/locations/<Location ID>/agent/entityTypes/<Entity
+   *     Type ID>`
    * @param {number[]} request.entities
    *   Required. The entities to update or create.
    * @param {string} [request.languageCode]
@@ -1472,8 +1490,11 @@ export class EntityTypesClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The name of the entity type to delete entries for. Format:
-   *   `projects/<Project ID>/agent/entityTypes/<Entity Type ID>`.
+   *   Required. The name of the entity type to delete entries for.
+   *   Supported formats:
+   *   - `projects/<Project ID>/agent/entityTypes/<Entity Type ID>`
+   *   - `projects/<Project ID>/locations/<Location ID>/agent/entityTypes/<Entity
+   *     Type ID>`
    * @param {string[]} request.entityValues
    *   Required. The reference `values` of the entities to delete. Note that
    *   these are not fully-qualified names, i.e. they don't start with
@@ -1610,7 +1631,9 @@ export class EntityTypesClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The agent to list all entity types from.
-   *   Format: `projects/<Project ID>/agent`.
+   *   Supported formats:
+   *   - `projects/<Project ID>/agent`
+   *   - `projects/<Project ID>/locations/<Location ID>/agent`
    * @param {string} [request.languageCode]
    *   Optional. The language used to access language-specific data.
    *   If not specified, the agent's default language is used.
@@ -1702,7 +1725,9 @@ export class EntityTypesClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The agent to list all entity types from.
-   *   Format: `projects/<Project ID>/agent`.
+   *   Supported formats:
+   *   - `projects/<Project ID>/agent`
+   *   - `projects/<Project ID>/locations/<Location ID>/agent`
    * @param {string} [request.languageCode]
    *   Optional. The language used to access language-specific data.
    *   If not specified, the agent's default language is used.
@@ -1750,7 +1775,9 @@ export class EntityTypesClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The agent to list all entity types from.
-   *   Format: `projects/<Project ID>/agent`.
+   *   Supported formats:
+   *   - `projects/<Project ID>/agent`
+   *   - `projects/<Project ID>/locations/<Location ID>/agent`
    * @param {string} [request.languageCode]
    *   Optional. The language used to access language-specific data.
    *   If not specified, the agent's default language is used.

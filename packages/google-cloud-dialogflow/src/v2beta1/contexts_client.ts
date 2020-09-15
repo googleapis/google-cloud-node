@@ -397,12 +397,20 @@ export class ContextsClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The name of the context. Format:
-   *   `projects/<Project ID>/agent/sessions/<Session ID>/contexts/<Context ID>`
-   *   or `projects/<Project ID>/agent/environments/<Environment ID>/users/<User
-   *   ID>/sessions/<Session ID>/contexts/<Context ID>`. If `Environment ID` is
-   *   not specified, we assume default 'draft' environment. If `User ID` is not
-   *   specified, we assume default '-' user.
+   *   Required. The name of the context. Supported formats:
+   *   - `projects/<Project ID>/agent/sessions/<Session ID>/contexts/<Context
+   *     ID>`,
+   *   - `projects/<Project ID>/locations/<Location ID>/agent/sessions/<Session
+   *     ID>/contexts/<Context ID>`,
+   *   - `projects/<Project ID>/agent/environments/<Environment ID>/users/<User
+   *     ID>/sessions/<Session ID>/contexts/<Context ID>`,
+   *   - `projects/<Project ID>/locations/<Location
+   *     ID>/agent/environments/<Environment ID>/users/<User ID>/sessions/<Session
+   *     ID>/contexts/<Context ID>`,
+   *
+   *   If `Location ID` is not specified we assume default 'us' location. If
+   *   `Environment ID` is not specified, we assume default 'draft' environment.
+   *   If `User ID` is not specified, we assume default '-' user.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -492,12 +500,19 @@ export class ContextsClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The session to create a context for.
-   *   Format: `projects/<Project ID>/agent/sessions/<Session ID>` or
-   *   `projects/<Project ID>/agent/environments/<Environment ID>/users/<User
-   *   ID>/sessions/<Session ID>`. If `Environment ID` is not specified, we assume
-   *   default 'draft' environment. If `User ID` is not specified, we assume
-   *   default '-' user.
+   *   Required. The session to create a context for. Supported formats:
+   *   - `projects/<Project ID>/agent/sessions/<Session ID>,
+   *   - `projects/<Project ID>/locations/<Location ID>/agent/sessions/<Session
+   *     ID>`,
+   *   - `projects/<Project ID>/agent/environments/<Environment ID>/users/<User
+   *     ID>/sessions/<Session ID>`,
+   *   - `projects/<Project ID>/locations/<Location
+   *     ID>/agent/environments/<Environment ID>/users/<User ID>/sessions/<Session
+   *     ID>`,
+   *
+   *   If `Location ID` is not specified we assume default 'us' location. If
+   *   `Environment ID` is not specified, we assume default 'draft' environment.
+   *   If `User ID` is not specified, we assume default '-' user.
    * @param {google.cloud.dialogflow.v2beta1.Context} request.context
    *   Required. The context to create.
    * @param {object} [options]
@@ -677,12 +692,20 @@ export class ContextsClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The name of the context to delete. Format:
-   *   `projects/<Project ID>/agent/sessions/<Session ID>/contexts/<Context ID>`
-   *   or `projects/<Project ID>/agent/environments/<Environment ID>/users/<User
-   *   ID>/sessions/<Session ID>/contexts/<Context ID>`. If `Environment ID` is
-   *   not specified, we assume default 'draft' environment. If `User ID` is not
-   *   specified, we assume default '-' user.
+   *   Required. The name of the context to delete. Supported formats:
+   *   - `projects/<Project ID>/agent/sessions/<Session ID>/contexts/<Context
+   *     ID>`,
+   *   - `projects/<Project ID>/locations/<Location ID>/agent/sessions/<Session
+   *     ID>/contexts/<Context ID>`,
+   *   - `projects/<Project ID>/agent/environments/<Environment ID>/users/<User
+   *     ID>/sessions/<Session ID>/contexts/<Context ID>`,
+   *   - `projects/<Project ID>/locations/<Location
+   *     ID>/agent/environments/<Environment ID>/users/<User ID>/sessions/<Session
+   *     ID>/contexts/<Context ID>`,
+   *
+   *   If `Location ID` is not specified we assume default 'us' location. If
+   *   `Environment ID` is not specified, we assume default 'draft' environment.
+   *   If `User ID` is not specified, we assume default '-' user.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -773,11 +796,19 @@ export class ContextsClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The name of the session to delete all contexts from. Format:
-   *   `projects/<Project ID>/agent/sessions/<Session ID>` or `projects/<Project
-   *   ID>/agent/environments/<Environment ID>/users/<User ID>/sessions/<Session
-   *   ID>`. If `Environment ID` is not specified we assume default 'draft'
-   *   environment. If `User ID` is not specified, we assume default '-' user.
+   *   Required. The name of the session to delete all contexts from. Supported formats:
+   *   - `projects/<Project ID>/agent/sessions/<Session ID>,
+   *   - `projects/<Project ID>/locations/<Location ID>/agent/sessions/<Session
+   *     ID>`,
+   *   - `projects/<Project ID>/agent/environments/<Environment ID>/users/<User
+   *     ID>/sessions/<Session ID>`,
+   *   - `projects/<Project ID>/locations/<Location
+   *     ID>/agent/environments/<Environment ID>/users/<User ID>/sessions/<Session
+   *     ID>`,
+   *
+   *   If `Location ID` is not specified we assume default 'us' location. If
+   *   `Environment ID` is not specified we assume default 'draft' environment. If
+   *   `User ID` is not specified, we assume default '-' user.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -869,12 +900,19 @@ export class ContextsClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The session to list all contexts from.
-   *   Format: `projects/<Project ID>/agent/sessions/<Session ID>` or
-   *   `projects/<Project ID>/agent/environments/<Environment ID>/users/<User
-   *   ID>/sessions/<Session ID>`. If `Environment ID` is not specified, we assume
-   *   default 'draft' environment. If `User ID` is not specified, we assume
-   *   default '-' user.
+   *   Required. The session to list all contexts from. Supported formats:
+   *   - `projects/<Project ID>/agent/sessions/<Session ID>,
+   *   - `projects/<Project ID>/locations/<Location ID>/agent/sessions/<Session
+   *     ID>`,
+   *   - `projects/<Project ID>/agent/environments/<Environment ID>/users/<User
+   *     ID>/sessions/<Session ID>`,
+   *   - `projects/<Project ID>/locations/<Location
+   *     ID>/agent/environments/<Environment ID>/users/<User ID>/sessions/<Session
+   *     ID>`,
+   *
+   *   If `Location ID` is not specified we assume default 'us' location. If
+   *   `Environment ID` is not specified, we assume default 'draft' environment.
+   *   If `User ID` is not specified, we assume default '-' user.
    * @param {number} request.pageSize
    *   Optional. The maximum number of items to return in a single page. By
    *   default 100 and at most 1000.
@@ -959,12 +997,19 @@ export class ContextsClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The session to list all contexts from.
-   *   Format: `projects/<Project ID>/agent/sessions/<Session ID>` or
-   *   `projects/<Project ID>/agent/environments/<Environment ID>/users/<User
-   *   ID>/sessions/<Session ID>`. If `Environment ID` is not specified, we assume
-   *   default 'draft' environment. If `User ID` is not specified, we assume
-   *   default '-' user.
+   *   Required. The session to list all contexts from. Supported formats:
+   *   - `projects/<Project ID>/agent/sessions/<Session ID>,
+   *   - `projects/<Project ID>/locations/<Location ID>/agent/sessions/<Session
+   *     ID>`,
+   *   - `projects/<Project ID>/agent/environments/<Environment ID>/users/<User
+   *     ID>/sessions/<Session ID>`,
+   *   - `projects/<Project ID>/locations/<Location
+   *     ID>/agent/environments/<Environment ID>/users/<User ID>/sessions/<Session
+   *     ID>`,
+   *
+   *   If `Location ID` is not specified we assume default 'us' location. If
+   *   `Environment ID` is not specified, we assume default 'draft' environment.
+   *   If `User ID` is not specified, we assume default '-' user.
    * @param {number} request.pageSize
    *   Optional. The maximum number of items to return in a single page. By
    *   default 100 and at most 1000.
@@ -1005,12 +1050,19 @@ export class ContextsClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The session to list all contexts from.
-   *   Format: `projects/<Project ID>/agent/sessions/<Session ID>` or
-   *   `projects/<Project ID>/agent/environments/<Environment ID>/users/<User
-   *   ID>/sessions/<Session ID>`. If `Environment ID` is not specified, we assume
-   *   default 'draft' environment. If `User ID` is not specified, we assume
-   *   default '-' user.
+   *   Required. The session to list all contexts from. Supported formats:
+   *   - `projects/<Project ID>/agent/sessions/<Session ID>,
+   *   - `projects/<Project ID>/locations/<Location ID>/agent/sessions/<Session
+   *     ID>`,
+   *   - `projects/<Project ID>/agent/environments/<Environment ID>/users/<User
+   *     ID>/sessions/<Session ID>`,
+   *   - `projects/<Project ID>/locations/<Location
+   *     ID>/agent/environments/<Environment ID>/users/<User ID>/sessions/<Session
+   *     ID>`,
+   *
+   *   If `Location ID` is not specified we assume default 'us' location. If
+   *   `Environment ID` is not specified, we assume default 'draft' environment.
+   *   If `User ID` is not specified, we assume default '-' user.
    * @param {number} request.pageSize
    *   Optional. The maximum number of items to return in a single page. By
    *   default 100 and at most 1000.

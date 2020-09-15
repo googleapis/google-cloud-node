@@ -14839,6 +14839,18 @@ export namespace google {
                     public toJSON(): { [k: string]: any };
                 }
 
+                /** AudioEncoding enum. */
+                enum AudioEncoding {
+                    AUDIO_ENCODING_UNSPECIFIED = 0,
+                    AUDIO_ENCODING_LINEAR_16 = 1,
+                    AUDIO_ENCODING_FLAC = 2,
+                    AUDIO_ENCODING_MULAW = 3,
+                    AUDIO_ENCODING_AMR = 4,
+                    AUDIO_ENCODING_AMR_WB = 5,
+                    AUDIO_ENCODING_OGG_OPUS = 6,
+                    AUDIO_ENCODING_SPEEX_WITH_HEADER_BYTE = 7
+                }
+
                 /** Properties of a SpeechContext. */
                 interface ISpeechContext {
 
@@ -14933,18 +14945,6 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
-                }
-
-                /** AudioEncoding enum. */
-                enum AudioEncoding {
-                    AUDIO_ENCODING_UNSPECIFIED = 0,
-                    AUDIO_ENCODING_LINEAR_16 = 1,
-                    AUDIO_ENCODING_FLAC = 2,
-                    AUDIO_ENCODING_MULAW = 3,
-                    AUDIO_ENCODING_AMR = 4,
-                    AUDIO_ENCODING_AMR_WB = 5,
-                    AUDIO_ENCODING_OGG_OPUS = 6,
-                    AUDIO_ENCODING_SPEEX_WITH_HEADER_BYTE = 7
                 }
 
                 /** Properties of a SpeechWordInfo. */
@@ -15527,6 +15527,117 @@ export namespace google {
                     OUTPUT_AUDIO_ENCODING_LINEAR_16 = 1,
                     OUTPUT_AUDIO_ENCODING_MP3 = 2,
                     OUTPUT_AUDIO_ENCODING_OGG_OPUS = 3
+                }
+
+                /** Properties of a TelephonyDtmfEvents. */
+                interface ITelephonyDtmfEvents {
+
+                    /** TelephonyDtmfEvents dtmfEvents */
+                    dtmfEvents?: (google.cloud.dialogflow.v2beta1.TelephonyDtmf[]|null);
+                }
+
+                /** Represents a TelephonyDtmfEvents. */
+                class TelephonyDtmfEvents implements ITelephonyDtmfEvents {
+
+                    /**
+                     * Constructs a new TelephonyDtmfEvents.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dialogflow.v2beta1.ITelephonyDtmfEvents);
+
+                    /** TelephonyDtmfEvents dtmfEvents. */
+                    public dtmfEvents: google.cloud.dialogflow.v2beta1.TelephonyDtmf[];
+
+                    /**
+                     * Creates a new TelephonyDtmfEvents instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns TelephonyDtmfEvents instance
+                     */
+                    public static create(properties?: google.cloud.dialogflow.v2beta1.ITelephonyDtmfEvents): google.cloud.dialogflow.v2beta1.TelephonyDtmfEvents;
+
+                    /**
+                     * Encodes the specified TelephonyDtmfEvents message. Does not implicitly {@link google.cloud.dialogflow.v2beta1.TelephonyDtmfEvents.verify|verify} messages.
+                     * @param message TelephonyDtmfEvents message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dialogflow.v2beta1.ITelephonyDtmfEvents, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified TelephonyDtmfEvents message, length delimited. Does not implicitly {@link google.cloud.dialogflow.v2beta1.TelephonyDtmfEvents.verify|verify} messages.
+                     * @param message TelephonyDtmfEvents message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dialogflow.v2beta1.ITelephonyDtmfEvents, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a TelephonyDtmfEvents message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns TelephonyDtmfEvents
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.v2beta1.TelephonyDtmfEvents;
+
+                    /**
+                     * Decodes a TelephonyDtmfEvents message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns TelephonyDtmfEvents
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.v2beta1.TelephonyDtmfEvents;
+
+                    /**
+                     * Verifies a TelephonyDtmfEvents message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a TelephonyDtmfEvents message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns TelephonyDtmfEvents
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.v2beta1.TelephonyDtmfEvents;
+
+                    /**
+                     * Creates a plain object from a TelephonyDtmfEvents message. Also converts values to other types if specified.
+                     * @param message TelephonyDtmfEvents
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dialogflow.v2beta1.TelephonyDtmfEvents, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this TelephonyDtmfEvents to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** TelephonyDtmf enum. */
+                enum TelephonyDtmf {
+                    TELEPHONY_DTMF_UNSPECIFIED = 0,
+                    DTMF_ONE = 1,
+                    DTMF_TWO = 2,
+                    DTMF_THREE = 3,
+                    DTMF_FOUR = 4,
+                    DTMF_FIVE = 5,
+                    DTMF_SIX = 6,
+                    DTMF_SEVEN = 7,
+                    DTMF_EIGHT = 8,
+                    DTMF_NINE = 9,
+                    DTMF_ZERO = 10,
+                    DTMF_A = 11,
+                    DTMF_B = 12,
+                    DTMF_C = 13,
+                    DTMF_D = 14,
+                    DTMF_STAR = 15,
+                    DTMF_POUND = 16
                 }
 
                 /** Properties of a ValidationError. */
@@ -28040,6 +28151,9 @@ export namespace google {
 
                     /** StreamingRecognitionResult speechEndOffset */
                     speechEndOffset?: (google.protobuf.IDuration|null);
+
+                    /** StreamingRecognitionResult dtmfDigits */
+                    dtmfDigits?: (google.cloud.dialogflow.v2beta1.ITelephonyDtmfEvents|null);
                 }
 
                 /** Represents a StreamingRecognitionResult. */
@@ -28071,6 +28185,9 @@ export namespace google {
 
                     /** StreamingRecognitionResult speechEndOffset. */
                     public speechEndOffset?: (google.protobuf.IDuration|null);
+
+                    /** StreamingRecognitionResult dtmfDigits. */
+                    public dtmfDigits?: (google.cloud.dialogflow.v2beta1.ITelephonyDtmfEvents|null);
 
                     /**
                      * Creates a new StreamingRecognitionResult instance using the specified properties.

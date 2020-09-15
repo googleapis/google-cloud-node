@@ -467,7 +467,8 @@ export class AgentsClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The project that the agent to fetch is associated with.
-   *   Format: `projects/<Project ID>`.
+   *   Format: `projects/<Project ID>` or
+   *           `projects/<Project ID>/locations/<Location ID>`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -646,7 +647,8 @@ export class AgentsClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The project that the agent to delete is associated with.
-   *   Format: `projects/<Project ID>`.
+   *   Format: `projects/<Project ID>` or
+   *           `projects/<Project ID>/locations/<Location ID>`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -739,7 +741,8 @@ export class AgentsClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The project that the agent is associated with.
-   *   Format: `projects/<Project ID>`.
+   *   Format: `projects/<Project ID>` or
+   *           `projects/<Project ID>/locations/<Location ID>`.
    * @param {string} [request.languageCode]
    *   Optional. The language for which you want a validation result. If not
    *   specified, the agent's default language is used. [Many
@@ -846,7 +849,8 @@ export class AgentsClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The project that the agent to train is associated with.
-   *   Format: `projects/<Project ID>`.
+   *   Format: `projects/<Project ID>` or
+   *           `projects/<Project ID>/locations/<Location ID>`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -981,7 +985,8 @@ export class AgentsClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The project that the agent to export is associated with.
-   *   Format: `projects/<Project ID>`.
+   *   Format: `projects/<Project ID>` or
+   *           `projects/<Project ID>/locations/<Location ID>`.
    * @param {string} request.agentUri
    *   Optional. The
    *   [Google Cloud Storage](https://cloud.google.com/storage/docs/)
@@ -1135,7 +1140,8 @@ export class AgentsClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The project that the agent to import is associated with.
-   *   Format: `projects/<Project ID>`.
+   *   Format: `projects/<Project ID>` or
+   *           `projects/<Project ID>/locations/<Location ID>`.
    * @param {string} request.agentUri
    *   The URI to a Google Cloud Storage file containing the agent to import.
    *   Note: The URI must start with "gs://".
@@ -1284,7 +1290,8 @@ export class AgentsClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The project that the agent to restore is associated with.
-   *   Format: `projects/<Project ID>`.
+   *   Format: `projects/<Project ID>` or
+   *           `projects/<Project ID>/locations/<Location ID>`.
    * @param {string} request.agentUri
    *   The URI to a Google Cloud Storage file containing the agent to restore.
    *   Note: The URI must start with "gs://".
@@ -1421,7 +1428,8 @@ export class AgentsClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The project to list agents from.
-   *   Format: `projects/<Project ID or '-'>`.
+   *   Format: `projects/<Project ID or '-'>` or
+   *           `projects/<Project ID or '-'>/locations/<Location ID>`.
    * @param {number} request.pageSize
    *   Optional. The maximum number of items to return in a single page. By
    *   default 100 and at most 1000.
@@ -1507,7 +1515,8 @@ export class AgentsClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The project to list agents from.
-   *   Format: `projects/<Project ID or '-'>`.
+   *   Format: `projects/<Project ID or '-'>` or
+   *           `projects/<Project ID or '-'>/locations/<Location ID>`.
    * @param {number} request.pageSize
    *   Optional. The maximum number of items to return in a single page. By
    *   default 100 and at most 1000.
@@ -1549,7 +1558,8 @@ export class AgentsClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The project to list agents from.
-   *   Format: `projects/<Project ID or '-'>`.
+   *   Format: `projects/<Project ID or '-'>` or
+   *           `projects/<Project ID or '-'>/locations/<Location ID>`.
    * @param {number} request.pageSize
    *   Optional. The maximum number of items to return in a single page. By
    *   default 100 and at most 1000.

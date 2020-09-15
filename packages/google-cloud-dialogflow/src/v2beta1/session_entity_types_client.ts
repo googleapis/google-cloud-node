@@ -404,12 +404,20 @@ export class SessionEntityTypesClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The name of the session entity type. Format:
-   *   `projects/<Project ID>/agent/sessions/<Session ID>/entityTypes/<Entity Type
-   *   Display Name>` or `projects/<Project ID>/agent/environments/<Environment
-   *   ID>/users/<User ID>/sessions/<Session ID>/entityTypes/<Entity Type Display
-   *   Name>`. If `Environment ID` is not specified, we assume default 'draft'
-   *   environment. If `User ID` is not specified, we assume default '-' user.
+   *   Required. The name of the session entity type. Supported formats:
+   *   - `projects/<Project ID>/agent/sessions/<Session ID>/entityTypes/<Entity
+   *     Type Display Name>`
+   *   - `projects/<Project ID>/locations/<Location ID>/agent/sessions/<Session
+   *     ID>/entityTypes/<Entity Type Display Name>`
+   *   - `projects/<Project ID>/agent/environments/<Environment ID>/users/<User
+   *     ID>/sessions/<Session ID>/entityTypes/<Entity Type Display Name>`
+   *   - `projects/<Project ID>/locations/<Location ID>/agent/environments/
+   *     <Environment ID>/users/<User ID>/sessions/<Session
+   *     ID>/entityTypes/<Entity Type Display Name>`
+   *
+   *   If `Location ID` is not specified we assume default 'us' location. If
+   *   `Environment ID` is not specified, we assume default 'draft' environment.
+   *   If `User ID` is not specified, we assume default '-' user.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -511,11 +519,19 @@ export class SessionEntityTypesClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The session to create a session entity type for.
-   *   Format: `projects/<Project ID>/agent/sessions/<Session ID>` or
-   *   `projects/<Project ID>/agent/environments/<Environment ID>/users/<User ID>/
-   *   sessions/<Session ID>`. If `Environment ID` is not specified, we assume
-   *   default 'draft' environment. If `User ID` is not specified, we assume
-   *   default '-' user.
+   *   Supported formats:
+   *   - `projects/<Project ID>/agent/sessions/<Session ID>,
+   *   - `projects/<Project ID>/locations/<Location ID>/agent/sessions/<Session
+   *     ID>`,
+   *   - `projects/<Project ID>/agent/environments/<Environment ID>/users/<User
+   *     ID>/sessions/<Session ID>`,
+   *   - `projects/<Project ID>/locations/<Location
+   *     ID>/agent/environments/<Environment ID>/users/<User ID>/sessions/<Session
+   *     ID>`,
+   *
+   *   If `Location ID` is not specified we assume default 'us' location. If
+   *   `Environment ID` is not specified, we assume default 'draft' environment.
+   *   If `User ID` is not specified, we assume default '-' user.
    * @param {google.cloud.dialogflow.v2beta1.SessionEntityType} request.sessionEntityType
    *   Required. The session entity type to create.
    * @param {object} [options]
@@ -723,12 +739,21 @@ export class SessionEntityTypesClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The name of the entity type to delete. Format:
-   *   `projects/<Project ID>/agent/sessions/<Session ID>/entityTypes/<Entity Type
-   *   Display Name>` or `projects/<Project ID>/agent/environments/<Environment
-   *   ID>/users/<User ID>/sessions/<Session ID>/entityTypes/<Entity Type Display
-   *   Name>`. If `Environment ID` is not specified, we assume default 'draft'
-   *   environment. If `User ID` is not specified, we assume default '-' user.
+   *   Required. The name of the entity type to delete.
+   *   Supported formats:
+   *   - `projects/<Project ID>/agent/sessions/<Session ID>/entityTypes/<Entity
+   *     Type Display Name>`
+   *   - `projects/<Project ID>/locations/<Location ID>/agent/sessions/<Session
+   *     ID>/entityTypes/<Entity Type Display Name>`
+   *   - `projects/<Project ID>/agent/environments/<Environment ID>/users/<User
+   *     ID>/sessions/<Session ID>/entityTypes/<Entity Type Display Name>`
+   *   - `projects/<Project ID>/locations/<Location ID>/agent/environments/
+   *     <Environment ID>/users/<User ID>/sessions/<Session
+   *     ID>/entityTypes/<Entity Type Display Name>`
+   *
+   *   If `Location ID` is not specified we assume default 'us' location. If
+   *   `Environment ID` is not specified, we assume default 'draft' environment.
+   *   If `User ID` is not specified, we assume default '-' user.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -829,11 +854,19 @@ export class SessionEntityTypesClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The session to list all session entity types from.
-   *   Format: `projects/<Project ID>/agent/sessions/<Session ID>` or
-   *   `projects/<Project ID>/agent/environments/<Environment ID>/users/<User ID>/
-   *   sessions/<Session ID>`.
-   *   If `Environment ID` is not specified, we assume default 'draft'
-   *   environment. If `User ID` is not specified, we assume default '-' user.
+   *   Supported formats:
+   *   - `projects/<Project ID>/agent/sessions/<Session ID>,
+   *   - `projects/<Project ID>/locations/<Location ID>/agent/sessions/<Session
+   *     ID>`,
+   *   - `projects/<Project ID>/agent/environments/<Environment ID>/users/<User
+   *     ID>/sessions/<Session ID>`,
+   *   - `projects/<Project ID>/locations/<Location
+   *     ID>/agent/environments/<Environment ID>/users/<User ID>/sessions/<Session
+   *     ID>`,
+   *
+   *   If `Location ID` is not specified we assume default 'us' location. If
+   *   `Environment ID` is not specified, we assume default 'draft' environment.
+   *   If `User ID` is not specified, we assume default '-' user.
    * @param {number} request.pageSize
    *   Optional. The maximum number of items to return in a single page. By
    *   default 100 and at most 1000.
@@ -923,11 +956,19 @@ export class SessionEntityTypesClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The session to list all session entity types from.
-   *   Format: `projects/<Project ID>/agent/sessions/<Session ID>` or
-   *   `projects/<Project ID>/agent/environments/<Environment ID>/users/<User ID>/
-   *   sessions/<Session ID>`.
-   *   If `Environment ID` is not specified, we assume default 'draft'
-   *   environment. If `User ID` is not specified, we assume default '-' user.
+   *   Supported formats:
+   *   - `projects/<Project ID>/agent/sessions/<Session ID>,
+   *   - `projects/<Project ID>/locations/<Location ID>/agent/sessions/<Session
+   *     ID>`,
+   *   - `projects/<Project ID>/agent/environments/<Environment ID>/users/<User
+   *     ID>/sessions/<Session ID>`,
+   *   - `projects/<Project ID>/locations/<Location
+   *     ID>/agent/environments/<Environment ID>/users/<User ID>/sessions/<Session
+   *     ID>`,
+   *
+   *   If `Location ID` is not specified we assume default 'us' location. If
+   *   `Environment ID` is not specified, we assume default 'draft' environment.
+   *   If `User ID` is not specified, we assume default '-' user.
    * @param {number} request.pageSize
    *   Optional. The maximum number of items to return in a single page. By
    *   default 100 and at most 1000.
@@ -969,11 +1010,19 @@ export class SessionEntityTypesClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The session to list all session entity types from.
-   *   Format: `projects/<Project ID>/agent/sessions/<Session ID>` or
-   *   `projects/<Project ID>/agent/environments/<Environment ID>/users/<User ID>/
-   *   sessions/<Session ID>`.
-   *   If `Environment ID` is not specified, we assume default 'draft'
-   *   environment. If `User ID` is not specified, we assume default '-' user.
+   *   Supported formats:
+   *   - `projects/<Project ID>/agent/sessions/<Session ID>,
+   *   - `projects/<Project ID>/locations/<Location ID>/agent/sessions/<Session
+   *     ID>`,
+   *   - `projects/<Project ID>/agent/environments/<Environment ID>/users/<User
+   *     ID>/sessions/<Session ID>`,
+   *   - `projects/<Project ID>/locations/<Location
+   *     ID>/agent/environments/<Environment ID>/users/<User ID>/sessions/<Session
+   *     ID>`,
+   *
+   *   If `Location ID` is not specified we assume default 'us' location. If
+   *   `Environment ID` is not specified, we assume default 'draft' environment.
+   *   If `User ID` is not specified, we assume default '-' user.
    * @param {number} request.pageSize
    *   Optional. The maximum number of items to return in a single page. By
    *   default 100 and at most 1000.

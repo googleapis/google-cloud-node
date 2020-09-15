@@ -3514,7 +3514,8 @@
                           "requestType": "GetValidationResultRequest",
                           "responseType": "ValidationResult",
                           "options": {
-                            "(google.api.http).get": "/v2beta1/{parent=projects/*}/agent/validationResult"
+                            "(google.api.http).get": "/v2beta1/{parent=projects/*}/agent/validationResult",
+                            "(google.api.http).additional_bindings.get": "/v2beta1/{parent=projects/*/locations/*}/agent/validationResult"
                           }
                         }
                       }
@@ -3917,6 +3918,18 @@
                         }
                       }
                     },
+                    "AudioEncoding": {
+                      "values": {
+                        "AUDIO_ENCODING_UNSPECIFIED": 0,
+                        "AUDIO_ENCODING_LINEAR_16": 1,
+                        "AUDIO_ENCODING_FLAC": 2,
+                        "AUDIO_ENCODING_MULAW": 3,
+                        "AUDIO_ENCODING_AMR": 4,
+                        "AUDIO_ENCODING_AMR_WB": 5,
+                        "AUDIO_ENCODING_OGG_OPUS": 6,
+                        "AUDIO_ENCODING_SPEEX_WITH_HEADER_BYTE": 7
+                      }
+                    },
                     "SpeechContext": {
                       "fields": {
                         "phrases": {
@@ -3928,18 +3941,6 @@
                           "type": "float",
                           "id": 2
                         }
-                      }
-                    },
-                    "AudioEncoding": {
-                      "values": {
-                        "AUDIO_ENCODING_UNSPECIFIED": 0,
-                        "AUDIO_ENCODING_LINEAR_16": 1,
-                        "AUDIO_ENCODING_FLAC": 2,
-                        "AUDIO_ENCODING_MULAW": 3,
-                        "AUDIO_ENCODING_AMR": 4,
-                        "AUDIO_ENCODING_AMR_WB": 5,
-                        "AUDIO_ENCODING_OGG_OPUS": 6,
-                        "AUDIO_ENCODING_SPEEX_WITH_HEADER_BYTE": 7
                       }
                     },
                     "SpeechWordInfo": {
@@ -4085,6 +4086,36 @@
                         "OUTPUT_AUDIO_ENCODING_LINEAR_16": 1,
                         "OUTPUT_AUDIO_ENCODING_MP3": 2,
                         "OUTPUT_AUDIO_ENCODING_OGG_OPUS": 3
+                      }
+                    },
+                    "TelephonyDtmfEvents": {
+                      "fields": {
+                        "dtmfEvents": {
+                          "rule": "repeated",
+                          "type": "TelephonyDtmf",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "TelephonyDtmf": {
+                      "values": {
+                        "TELEPHONY_DTMF_UNSPECIFIED": 0,
+                        "DTMF_ONE": 1,
+                        "DTMF_TWO": 2,
+                        "DTMF_THREE": 3,
+                        "DTMF_FOUR": 4,
+                        "DTMF_FIVE": 5,
+                        "DTMF_SIX": 6,
+                        "DTMF_SEVEN": 7,
+                        "DTMF_EIGHT": 8,
+                        "DTMF_NINE": 9,
+                        "DTMF_ZERO": 10,
+                        "DTMF_A": 11,
+                        "DTMF_B": 12,
+                        "DTMF_C": 13,
+                        "DTMF_D": 14,
+                        "DTMF_STAR": 15,
+                        "DTMF_POUND": 16
                       }
                     },
                     "ValidationError": {
@@ -7109,6 +7140,10 @@
                         "speechEndOffset": {
                           "type": "google.protobuf.Duration",
                           "id": 8
+                        },
+                        "dtmfDigits": {
+                          "type": "TelephonyDtmfEvents",
+                          "id": 5
                         }
                       },
                       "nested": {

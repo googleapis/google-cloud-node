@@ -391,8 +391,7 @@ export class EnvironmentsClient {
    *   Required. The agent to list all environments from.
    *   Format:
    *   - `projects/<Project Number / ID>/agent`
-   *   - `projects/<Project Number / ID>/locations/<Location
-   *   ID>/agent
+   *   - `projects/<Project Number / ID>/locations/<Location ID>/agent`
    * @param {number} [request.pageSize]
    *   Optional. The maximum number of items to return in a single page. By default 100 and
    *   at most 1000.
@@ -480,8 +479,7 @@ export class EnvironmentsClient {
    *   Required. The agent to list all environments from.
    *   Format:
    *   - `projects/<Project Number / ID>/agent`
-   *   - `projects/<Project Number / ID>/locations/<Location
-   *   ID>/agent
+   *   - `projects/<Project Number / ID>/locations/<Location ID>/agent`
    * @param {number} [request.pageSize]
    *   Optional. The maximum number of items to return in a single page. By default 100 and
    *   at most 1000.
@@ -525,8 +523,7 @@ export class EnvironmentsClient {
    *   Required. The agent to list all environments from.
    *   Format:
    *   - `projects/<Project Number / ID>/agent`
-   *   - `projects/<Project Number / ID>/locations/<Location
-   *   ID>/agent
+   *   - `projects/<Project Number / ID>/locations/<Location ID>/agent`
    * @param {number} [request.pageSize]
    *   Optional. The maximum number of items to return in a single page. By default 100 and
    *   at most 1000.
