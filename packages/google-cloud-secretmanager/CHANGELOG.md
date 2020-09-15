@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.2.0](https://www.github.com/googleapis/nodejs-secret-manager/compare/v3.1.0...v3.2.0) (2020-09-14)
+
+
+### Features
+
+* update secretmanager.googleapis.com v1 protos ([528a1c5](https://www.github.com/googleapis/nodejs-secret-manager/commit/528a1c57a16ace8f16c2eddde37952a8ddfce9a9))
+
 ## [3.1.0](https://www.github.com/googleapis/nodejs-secret-manager/compare/v3.0.0...v3.1.0) (2020-06-18)
 
 
