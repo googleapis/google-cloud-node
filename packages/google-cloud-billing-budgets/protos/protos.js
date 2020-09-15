@@ -1090,6 +1090,7 @@
                              * @property {string|null} [pubsubTopic] AllUpdatesRule pubsubTopic
                              * @property {string|null} [schemaVersion] AllUpdatesRule schemaVersion
                              * @property {Array.<string>|null} [monitoringNotificationChannels] AllUpdatesRule monitoringNotificationChannels
+                             * @property {boolean|null} [disableDefaultIamRecipients] AllUpdatesRule disableDefaultIamRecipients
                              */
     
                             /**
@@ -1133,6 +1134,14 @@
                             AllUpdatesRule.prototype.monitoringNotificationChannels = $util.emptyArray;
     
                             /**
+                             * AllUpdatesRule disableDefaultIamRecipients.
+                             * @member {boolean} disableDefaultIamRecipients
+                             * @memberof google.cloud.billing.budgets.v1beta1.AllUpdatesRule
+                             * @instance
+                             */
+                            AllUpdatesRule.prototype.disableDefaultIamRecipients = false;
+    
+                            /**
                              * Creates a new AllUpdatesRule instance using the specified properties.
                              * @function create
                              * @memberof google.cloud.billing.budgets.v1beta1.AllUpdatesRule
@@ -1163,6 +1172,8 @@
                                 if (message.monitoringNotificationChannels != null && message.monitoringNotificationChannels.length)
                                     for (var i = 0; i < message.monitoringNotificationChannels.length; ++i)
                                         writer.uint32(/* id 3, wireType 2 =*/26).string(message.monitoringNotificationChannels[i]);
+                                if (message.disableDefaultIamRecipients != null && Object.hasOwnProperty.call(message, "disableDefaultIamRecipients"))
+                                    writer.uint32(/* id 4, wireType 0 =*/32).bool(message.disableDefaultIamRecipients);
                                 return writer;
                             };
     
@@ -1207,6 +1218,9 @@
                                         if (!(message.monitoringNotificationChannels && message.monitoringNotificationChannels.length))
                                             message.monitoringNotificationChannels = [];
                                         message.monitoringNotificationChannels.push(reader.string());
+                                        break;
+                                    case 4:
+                                        message.disableDefaultIamRecipients = reader.bool();
                                         break;
                                     default:
                                         reader.skipType(tag & 7);
@@ -1256,6 +1270,9 @@
                                         if (!$util.isString(message.monitoringNotificationChannels[i]))
                                             return "monitoringNotificationChannels: string[] expected";
                                 }
+                                if (message.disableDefaultIamRecipients != null && message.hasOwnProperty("disableDefaultIamRecipients"))
+                                    if (typeof message.disableDefaultIamRecipients !== "boolean")
+                                        return "disableDefaultIamRecipients: boolean expected";
                                 return null;
                             };
     
@@ -1282,6 +1299,8 @@
                                     for (var i = 0; i < object.monitoringNotificationChannels.length; ++i)
                                         message.monitoringNotificationChannels[i] = String(object.monitoringNotificationChannels[i]);
                                 }
+                                if (object.disableDefaultIamRecipients != null)
+                                    message.disableDefaultIamRecipients = Boolean(object.disableDefaultIamRecipients);
                                 return message;
                             };
     
@@ -1303,6 +1322,7 @@
                                 if (options.defaults) {
                                     object.pubsubTopic = "";
                                     object.schemaVersion = "";
+                                    object.disableDefaultIamRecipients = false;
                                 }
                                 if (message.pubsubTopic != null && message.hasOwnProperty("pubsubTopic"))
                                     object.pubsubTopic = message.pubsubTopic;
@@ -1313,6 +1333,8 @@
                                     for (var j = 0; j < message.monitoringNotificationChannels.length; ++j)
                                         object.monitoringNotificationChannels[j] = message.monitoringNotificationChannels[j];
                                 }
+                                if (message.disableDefaultIamRecipients != null && message.hasOwnProperty("disableDefaultIamRecipients"))
+                                    object.disableDefaultIamRecipients = message.disableDefaultIamRecipients;
                                 return object;
                             };
     

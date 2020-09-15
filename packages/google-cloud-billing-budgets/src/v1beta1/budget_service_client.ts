@@ -287,7 +287,10 @@ export class BudgetServiceClient {
    * in this service.
    */
   static get scopes() {
-    return ['https://www.googleapis.com/auth/cloud-platform'];
+    return [
+      'https://www.googleapis.com/auth/cloud-billing',
+      'https://www.googleapis.com/auth/cloud-platform',
+    ];
   }
 
   getProjectId(): Promise<string>;

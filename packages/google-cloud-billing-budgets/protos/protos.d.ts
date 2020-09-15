@@ -455,6 +455,9 @@ export namespace google {
 
                         /** AllUpdatesRule monitoringNotificationChannels */
                         monitoringNotificationChannels?: (string[]|null);
+
+                        /** AllUpdatesRule disableDefaultIamRecipients */
+                        disableDefaultIamRecipients?: (boolean|null);
                     }
 
                     /** Represents an AllUpdatesRule. */
@@ -474,6 +477,9 @@ export namespace google {
 
                         /** AllUpdatesRule monitoringNotificationChannels. */
                         public monitoringNotificationChannels: string[];
+
+                        /** AllUpdatesRule disableDefaultIamRecipients. */
+                        public disableDefaultIamRecipients: boolean;
 
                         /**
                          * Creates a new AllUpdatesRule instance using the specified properties.

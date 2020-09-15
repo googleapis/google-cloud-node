@@ -126,20 +126,27 @@
                               "type": "string",
                               "id": 1,
                               "options": {
-                                "(google.api.field_behavior)": "REQUIRED"
+                                "(google.api.field_behavior)": "OPTIONAL"
                               }
                             },
                             "schemaVersion": {
                               "type": "string",
                               "id": 2,
                               "options": {
-                                "(google.api.field_behavior)": "REQUIRED"
+                                "(google.api.field_behavior)": "OPTIONAL"
                               }
                             },
                             "monitoringNotificationChannels": {
                               "rule": "repeated",
                               "type": "string",
                               "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "disableDefaultIamRecipients": {
+                              "type": "bool",
+                              "id": 4,
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
@@ -201,7 +208,7 @@
                         "BudgetService": {
                           "options": {
                             "(google.api.default_host)": "billingbudgets.googleapis.com",
-                            "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
+                            "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-billing,https://www.googleapis.com/auth/cloud-platform"
                           },
                           "methods": {
                             "CreateBudget": {
