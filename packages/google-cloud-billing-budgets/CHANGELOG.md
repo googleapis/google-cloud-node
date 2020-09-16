@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.2.0](https://www.github.com/googleapis/nodejs-billing-budgets/compare/v2.1.1...v2.2.0) (2020-09-15)
+
+
+### Features
+
+* Added support for field to disable default budget alerts to IAM recipients ([d8e880d](https://www.github.com/googleapis/nodejs-billing-budgets/commit/d8e880d7f18dd1b4a2c6e4d2eeb2a135f42398dc)), closes [#166](https://www.github.com/googleapis/nodejs-billing-budgets/issues/166)
+
 ### [2.1.1](https://www.github.com/googleapis/nodejs-billing-budgets/compare/v2.1.0...v2.1.1) (2020-07-09)
 
 
