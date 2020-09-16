@@ -78,6 +78,7 @@ applications that interact with individual Google Cloud services:
 | [Video Intelligence](https://github.com/googleapis/nodejs-video-intelligence) | [:notebook:](https://googleapis.dev/nodejs/video/latest) | `npm i @google-cloud/video-intelligence` | [enable](https://console.cloud.google.com/flows/enableapi?apiid=videointelligence.googleapis.com) | ✖ |
 | [Vision API](https://github.com/googleapis/nodejs-vision) | [:notebook:](https://googleapis.dev/nodejs/vision/latest) | `npm i @google-cloud/vision` | [enable](https://console.cloud.google.com/flows/enableapi?apiid=vision.googleapis.com) | ✖ |
 | [Web Risk API](https://github.com/googleapis/nodejs-web-risk) | [:notebook:](https://googleapis.dev/nodejs/web-risk/latest) | `npm i @google-cloud/web-risk` | [enable](https://console.cloud.google.com/flows/enableapi?apiid=webrisk.googleapis.com) | ✖ |
+| [Workflows](https://github.com/googleapis/nodejs-workflows) | [:notebook:](https://googleapis.dev/nodejs/workflows/latest/index.html) | `npm i @google-cloud/workflows` | [enable](https://console.cloud.google.com/flows/enableapi?apiid=workflows.googleapis.com) | ✖ |
 
 
 If the service is not listed above, [google-api-nodejs-client](https://github.com/googleapis/google-api-nodejs-client) interfaces

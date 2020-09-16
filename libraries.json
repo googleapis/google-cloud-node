@@ -949,5 +949,19 @@
     "api_id": "webrisk.googleapis.com",
     "requires_billing": true,
     "support_documentation": "https://cloud.google.com/web-risk/docs/getting-support"
+  },
+  {
+    "name": "workflows",
+    "name_pretty": "Workflows",
+    "product_documentation": "https://cloud.google.com/workflows/docs/",
+    "client_documentation": "https://googleapis.dev/nodejs/workflows/latest/index.html",
+    "issue_tracker": "",
+    "release_level": "alpha",
+    "language": "nodejs",
+    "repo": "googleapis/nodejs-workflows",
+    "distribution_name": "@google-cloud/workflows",
+    "api_id": "workflows.googleapis.com",
+    "requires_billing": true,
+    "support_documentation": "https://cloud.google.com/workflows/docs/getting-support"
   }
 ]
