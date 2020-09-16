@@ -1603,6 +1603,12 @@ export namespace google {
 
                     /** BigQueryDestination force */
                     force?: (boolean|null);
+
+                    /** BigQueryDestination partitionSpec */
+                    partitionSpec?: (google.cloud.asset.v1.IPartitionSpec|null);
+
+                    /** BigQueryDestination separateTablesPerAssetType */
+                    separateTablesPerAssetType?: (boolean|null);
                 }
 
                 /** Represents a BigQueryDestination. */
@@ -1622,6 +1628,12 @@ export namespace google {
 
                     /** BigQueryDestination force. */
                     public force: boolean;
+
+                    /** BigQueryDestination partitionSpec. */
+                    public partitionSpec?: (google.cloud.asset.v1.IPartitionSpec|null);
+
+                    /** BigQueryDestination separateTablesPerAssetType. */
+                    public separateTablesPerAssetType: boolean;
 
                     /**
                      * Creates a new BigQueryDestination instance using the specified properties.
@@ -1692,6 +1704,106 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a PartitionSpec. */
+                interface IPartitionSpec {
+
+                    /** PartitionSpec partitionKey */
+                    partitionKey?: (google.cloud.asset.v1.PartitionSpec.PartitionKey|keyof typeof google.cloud.asset.v1.PartitionSpec.PartitionKey|null);
+                }
+
+                /** Represents a PartitionSpec. */
+                class PartitionSpec implements IPartitionSpec {
+
+                    /**
+                     * Constructs a new PartitionSpec.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.asset.v1.IPartitionSpec);
+
+                    /** PartitionSpec partitionKey. */
+                    public partitionKey: (google.cloud.asset.v1.PartitionSpec.PartitionKey|keyof typeof google.cloud.asset.v1.PartitionSpec.PartitionKey);
+
+                    /**
+                     * Creates a new PartitionSpec instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns PartitionSpec instance
+                     */
+                    public static create(properties?: google.cloud.asset.v1.IPartitionSpec): google.cloud.asset.v1.PartitionSpec;
+
+                    /**
+                     * Encodes the specified PartitionSpec message. Does not implicitly {@link google.cloud.asset.v1.PartitionSpec.verify|verify} messages.
+                     * @param message PartitionSpec message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.asset.v1.IPartitionSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified PartitionSpec message, length delimited. Does not implicitly {@link google.cloud.asset.v1.PartitionSpec.verify|verify} messages.
+                     * @param message PartitionSpec message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.asset.v1.IPartitionSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a PartitionSpec message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns PartitionSpec
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.asset.v1.PartitionSpec;
+
+                    /**
+                     * Decodes a PartitionSpec message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns PartitionSpec
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.asset.v1.PartitionSpec;
+
+                    /**
+                     * Verifies a PartitionSpec message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a PartitionSpec message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns PartitionSpec
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.asset.v1.PartitionSpec;
+
+                    /**
+                     * Creates a plain object from a PartitionSpec message. Also converts values to other types if specified.
+                     * @param message PartitionSpec
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.asset.v1.PartitionSpec, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this PartitionSpec to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                namespace PartitionSpec {
+
+                    /** PartitionKey enum. */
+                    enum PartitionKey {
+                        PARTITION_KEY_UNSPECIFIED = 0,
+                        READ_TIME = 1,
+                        REQUEST_TIME = 2
+                    }
                 }
 
                 /** Properties of a PubsubDestination. */
