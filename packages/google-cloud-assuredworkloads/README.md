@@ -5,13 +5,13 @@
 # [Assured Workloads for Government: Node.js Client](https://github.com/googleapis/nodejs-assured-workloads)
 
 [![release level](https://img.shields.io/badge/release%20level-beta-yellow.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
-[![npm version](https://img.shields.io/npm/v/assuredworkloads.svg)](https://www.npmjs.org/package/assuredworkloads)
+[![npm version](https://img.shields.io/npm/v/@google-cloud/assured-workloads.svg)](https://www.npmjs.org/package/@google-cloud/assured-workloads)
 [![codecov](https://img.shields.io/codecov/c/github/googleapis/nodejs-assured-workloads/master.svg?style=flat)](https://codecov.io/gh/googleapis/nodejs-assured-workloads)
 
 
 
 
-Assuredworkloads client for Node.js
+Assured Workloads client for Node.js
 
 
 A comprehensive list of changes in each version may be found in
@@ -32,8 +32,8 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 * [Quickstart](#quickstart)
   * [Before you begin](#before-you-begin)
   * [Installing the client library](#installing-the-client-library)
-
-
+  * [Using the client library](#using-the-client-library)
+* [Samples](#samples)
 * [Versioning](#versioning)
 * [Contributing](#contributing)
 * [License](#license)
@@ -51,10 +51,45 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 ### Installing the client library
 
 ```bash
-npm install assuredworkloads
+npm install @google-cloud/assured-workloads
 ```
 
 
+### Using the client library
+
+```javascript
+/**
+ * TODO(developer): Uncomment these variables before running the sample.
+ */
+// const projectId = 'my-project';
+
+// Imports the Google Cloud Some API library
+const {
+  AssuredWorkloadsServiceClient,
+} = require('@google-cloud/assured-workloads');
+const client = new AssuredWorkloadsServiceClient();
+async function listWorkloads() {
+  const [workloads] = await client.listWorkloads({
+    parent: `organizations/${projectId}`,
+  });
+  for (const workload of workloads) {
+    console.info(workload);
+  }
+}
+listWorkloads();
+
+```
+
+
+
+## Samples
+
+Samples are in the [`samples/`](https://github.com/googleapis/nodejs-assured-workloads/tree/master/samples) directory. The samples' `README.md`
+has instructions for running the samples.
+
+| Sample                      | Source Code                       | Try it |
+| --------------------------- | --------------------------------- | ------ |
+| Quickstart | [source code](https://github.com/googleapis/nodejs-assured-workloads/blob/master/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-assured-workloads&page=editor&open_in_editor=samples/quickstart.js,samples/README.md) |
 
 
 

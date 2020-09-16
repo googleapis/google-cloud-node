@@ -27,7 +27,7 @@ versions = ['v1beta1']
 name = 'assuredworkloads'
 for version in versions:
   library = gapic.node_library(name, version)
-  s.copy(library, excludes=[])
+  s.copy(library, excludes=['README.md', 'package.json'])
 
 # Copy common templates
 common_templates = gcp.CommonTemplates()
