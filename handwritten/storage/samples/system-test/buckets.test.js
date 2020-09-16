@@ -112,6 +112,29 @@ it("should disable a bucket's uniform bucket-level access", async () => {
   );
 });
 
+it('should configure a bucket cors', async () => {
+  execSync(
+    `node configureBucketCors.js ${bucketName} 3600 POST http://example.appspot.com content-type`
+  );
+  await bucket.getMetadata();
+  assert.deepStrictEqual(bucket.metadata.cors[0], {
+    origin: ['http://example.appspot.com'],
+    method: ['POST'],
+    responseHeader: ['content-type'],
+    maxAgeSeconds: 3600,
+  });
+});
+
+it('should remove a bucket cors configuration', async () => {
+  const output = execSync(`node removeBucketCors.js ${bucketName}`);
+  assert.include(
+    output,
+    `Removed CORS configuration from bucket ${bucketName}`
+  );
+  await bucket.getMetadata();
+  assert.ok(!bucket.metadata.cors);
+});
+
 it('should delete a bucket', async () => {
   const output = execSync(`node deleteBucket.js ${bucketName}`);
   assert.match(output, new RegExp(`Bucket ${bucketName} deleted.`));
