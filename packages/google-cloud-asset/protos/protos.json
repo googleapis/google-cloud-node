@@ -358,6 +358,31 @@
                         "force": {
                           "type": "bool",
                           "id": 3
+                        },
+                        "partitionSpec": {
+                          "type": "PartitionSpec",
+                          "id": 4
+                        },
+                        "separateTablesPerAssetType": {
+                          "type": "bool",
+                          "id": 5
+                        }
+                      }
+                    },
+                    "PartitionSpec": {
+                      "fields": {
+                        "partitionKey": {
+                          "type": "PartitionKey",
+                          "id": 1
+                        }
+                      },
+                      "nested": {
+                        "PartitionKey": {
+                          "values": {
+                            "PARTITION_KEY_UNSPECIFIED": 0,
+                            "READ_TIME": 1,
+                            "REQUEST_TIME": 2
+                          }
                         }
                       }
                     },

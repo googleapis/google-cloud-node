@@ -3615,6 +3615,8 @@
                          * @property {string|null} [dataset] BigQueryDestination dataset
                          * @property {string|null} [table] BigQueryDestination table
                          * @property {boolean|null} [force] BigQueryDestination force
+                         * @property {google.cloud.asset.v1.IPartitionSpec|null} [partitionSpec] BigQueryDestination partitionSpec
+                         * @property {boolean|null} [separateTablesPerAssetType] BigQueryDestination separateTablesPerAssetType
                          */
     
                         /**
@@ -3657,6 +3659,22 @@
                         BigQueryDestination.prototype.force = false;
     
                         /**
+                         * BigQueryDestination partitionSpec.
+                         * @member {google.cloud.asset.v1.IPartitionSpec|null|undefined} partitionSpec
+                         * @memberof google.cloud.asset.v1.BigQueryDestination
+                         * @instance
+                         */
+                        BigQueryDestination.prototype.partitionSpec = null;
+    
+                        /**
+                         * BigQueryDestination separateTablesPerAssetType.
+                         * @member {boolean} separateTablesPerAssetType
+                         * @memberof google.cloud.asset.v1.BigQueryDestination
+                         * @instance
+                         */
+                        BigQueryDestination.prototype.separateTablesPerAssetType = false;
+    
+                        /**
                          * Creates a new BigQueryDestination instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.asset.v1.BigQueryDestination
@@ -3686,6 +3704,10 @@
                                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.table);
                             if (message.force != null && Object.hasOwnProperty.call(message, "force"))
                                 writer.uint32(/* id 3, wireType 0 =*/24).bool(message.force);
+                            if (message.partitionSpec != null && Object.hasOwnProperty.call(message, "partitionSpec"))
+                                $root.google.cloud.asset.v1.PartitionSpec.encode(message.partitionSpec, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.separateTablesPerAssetType != null && Object.hasOwnProperty.call(message, "separateTablesPerAssetType"))
+                                writer.uint32(/* id 5, wireType 0 =*/40).bool(message.separateTablesPerAssetType);
                             return writer;
                         };
     
@@ -3728,6 +3750,12 @@
                                     break;
                                 case 3:
                                     message.force = reader.bool();
+                                    break;
+                                case 4:
+                                    message.partitionSpec = $root.google.cloud.asset.v1.PartitionSpec.decode(reader, reader.uint32());
+                                    break;
+                                case 5:
+                                    message.separateTablesPerAssetType = reader.bool();
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -3773,6 +3801,14 @@
                             if (message.force != null && message.hasOwnProperty("force"))
                                 if (typeof message.force !== "boolean")
                                     return "force: boolean expected";
+                            if (message.partitionSpec != null && message.hasOwnProperty("partitionSpec")) {
+                                var error = $root.google.cloud.asset.v1.PartitionSpec.verify(message.partitionSpec);
+                                if (error)
+                                    return "partitionSpec." + error;
+                            }
+                            if (message.separateTablesPerAssetType != null && message.hasOwnProperty("separateTablesPerAssetType"))
+                                if (typeof message.separateTablesPerAssetType !== "boolean")
+                                    return "separateTablesPerAssetType: boolean expected";
                             return null;
                         };
     
@@ -3794,6 +3830,13 @@
                                 message.table = String(object.table);
                             if (object.force != null)
                                 message.force = Boolean(object.force);
+                            if (object.partitionSpec != null) {
+                                if (typeof object.partitionSpec !== "object")
+                                    throw TypeError(".google.cloud.asset.v1.BigQueryDestination.partitionSpec: object expected");
+                                message.partitionSpec = $root.google.cloud.asset.v1.PartitionSpec.fromObject(object.partitionSpec);
+                            }
+                            if (object.separateTablesPerAssetType != null)
+                                message.separateTablesPerAssetType = Boolean(object.separateTablesPerAssetType);
                             return message;
                         };
     
@@ -3814,6 +3857,8 @@
                                 object.dataset = "";
                                 object.table = "";
                                 object.force = false;
+                                object.partitionSpec = null;
+                                object.separateTablesPerAssetType = false;
                             }
                             if (message.dataset != null && message.hasOwnProperty("dataset"))
                                 object.dataset = message.dataset;
@@ -3821,6 +3866,10 @@
                                 object.table = message.table;
                             if (message.force != null && message.hasOwnProperty("force"))
                                 object.force = message.force;
+                            if (message.partitionSpec != null && message.hasOwnProperty("partitionSpec"))
+                                object.partitionSpec = $root.google.cloud.asset.v1.PartitionSpec.toObject(message.partitionSpec, options);
+                            if (message.separateTablesPerAssetType != null && message.hasOwnProperty("separateTablesPerAssetType"))
+                                object.separateTablesPerAssetType = message.separateTablesPerAssetType;
                             return object;
                         };
     
@@ -3836,6 +3885,227 @@
                         };
     
                         return BigQueryDestination;
+                    })();
+    
+                    v1.PartitionSpec = (function() {
+    
+                        /**
+                         * Properties of a PartitionSpec.
+                         * @memberof google.cloud.asset.v1
+                         * @interface IPartitionSpec
+                         * @property {google.cloud.asset.v1.PartitionSpec.PartitionKey|null} [partitionKey] PartitionSpec partitionKey
+                         */
+    
+                        /**
+                         * Constructs a new PartitionSpec.
+                         * @memberof google.cloud.asset.v1
+                         * @classdesc Represents a PartitionSpec.
+                         * @implements IPartitionSpec
+                         * @constructor
+                         * @param {google.cloud.asset.v1.IPartitionSpec=} [properties] Properties to set
+                         */
+                        function PartitionSpec(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * PartitionSpec partitionKey.
+                         * @member {google.cloud.asset.v1.PartitionSpec.PartitionKey} partitionKey
+                         * @memberof google.cloud.asset.v1.PartitionSpec
+                         * @instance
+                         */
+                        PartitionSpec.prototype.partitionKey = 0;
+    
+                        /**
+                         * Creates a new PartitionSpec instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.asset.v1.PartitionSpec
+                         * @static
+                         * @param {google.cloud.asset.v1.IPartitionSpec=} [properties] Properties to set
+                         * @returns {google.cloud.asset.v1.PartitionSpec} PartitionSpec instance
+                         */
+                        PartitionSpec.create = function create(properties) {
+                            return new PartitionSpec(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified PartitionSpec message. Does not implicitly {@link google.cloud.asset.v1.PartitionSpec.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.asset.v1.PartitionSpec
+                         * @static
+                         * @param {google.cloud.asset.v1.IPartitionSpec} message PartitionSpec message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        PartitionSpec.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.partitionKey != null && Object.hasOwnProperty.call(message, "partitionKey"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.partitionKey);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified PartitionSpec message, length delimited. Does not implicitly {@link google.cloud.asset.v1.PartitionSpec.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.asset.v1.PartitionSpec
+                         * @static
+                         * @param {google.cloud.asset.v1.IPartitionSpec} message PartitionSpec message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        PartitionSpec.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a PartitionSpec message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.asset.v1.PartitionSpec
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.asset.v1.PartitionSpec} PartitionSpec
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        PartitionSpec.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1.PartitionSpec();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.partitionKey = reader.int32();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a PartitionSpec message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.asset.v1.PartitionSpec
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.asset.v1.PartitionSpec} PartitionSpec
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        PartitionSpec.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a PartitionSpec message.
+                         * @function verify
+                         * @memberof google.cloud.asset.v1.PartitionSpec
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        PartitionSpec.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.partitionKey != null && message.hasOwnProperty("partitionKey"))
+                                switch (message.partitionKey) {
+                                default:
+                                    return "partitionKey: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a PartitionSpec message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.asset.v1.PartitionSpec
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.asset.v1.PartitionSpec} PartitionSpec
+                         */
+                        PartitionSpec.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.asset.v1.PartitionSpec)
+                                return object;
+                            var message = new $root.google.cloud.asset.v1.PartitionSpec();
+                            switch (object.partitionKey) {
+                            case "PARTITION_KEY_UNSPECIFIED":
+                            case 0:
+                                message.partitionKey = 0;
+                                break;
+                            case "READ_TIME":
+                            case 1:
+                                message.partitionKey = 1;
+                                break;
+                            case "REQUEST_TIME":
+                            case 2:
+                                message.partitionKey = 2;
+                                break;
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a PartitionSpec message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.asset.v1.PartitionSpec
+                         * @static
+                         * @param {google.cloud.asset.v1.PartitionSpec} message PartitionSpec
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        PartitionSpec.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.partitionKey = options.enums === String ? "PARTITION_KEY_UNSPECIFIED" : 0;
+                            if (message.partitionKey != null && message.hasOwnProperty("partitionKey"))
+                                object.partitionKey = options.enums === String ? $root.google.cloud.asset.v1.PartitionSpec.PartitionKey[message.partitionKey] : message.partitionKey;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this PartitionSpec to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.asset.v1.PartitionSpec
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        PartitionSpec.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * PartitionKey enum.
+                         * @name google.cloud.asset.v1.PartitionSpec.PartitionKey
+                         * @enum {number}
+                         * @property {number} PARTITION_KEY_UNSPECIFIED=0 PARTITION_KEY_UNSPECIFIED value
+                         * @property {number} READ_TIME=1 READ_TIME value
+                         * @property {number} REQUEST_TIME=2 REQUEST_TIME value
+                         */
+                        PartitionSpec.PartitionKey = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "PARTITION_KEY_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "READ_TIME"] = 1;
+                            values[valuesById[2] = "REQUEST_TIME"] = 2;
+                            return values;
+                        })();
+    
+                        return PartitionSpec;
                     })();
     
                     v1.PubsubDestination = (function() {
