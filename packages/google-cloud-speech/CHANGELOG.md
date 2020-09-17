@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/speech?activeTab=versions
 
+### [4.1.3](https://www.github.com/googleapis/nodejs-speech/compare/v4.1.2...v4.1.3) (2020-09-12)
+
+
+### Bug Fixes
+
+* **deps:** update dependency yargs to v16 ([#646](https://www.github.com/googleapis/nodejs-speech/issues/646)) ([d208cf5](https://www.github.com/googleapis/nodejs-speech/commit/d208cf511385558d8a414dcf6f26e1be1288619e))
+
 ### [4.1.2](https://www.github.com/googleapis/nodejs-speech/compare/v4.1.1...v4.1.2) (2020-09-01)
 
 
