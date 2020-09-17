@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/datastore?activeTab=versions
 
+### [6.1.1](https://www.github.com/googleapis/nodejs-datastore/compare/v6.1.0...v6.1.1) (2020-09-12)
+
+
+### Bug Fixes
+
+* split insert, update, upsert ([#693](https://www.github.com/googleapis/nodejs-datastore/issues/693)) ([fa5faac](https://www.github.com/googleapis/nodejs-datastore/commit/fa5faacb16b8c021314348acc5534e1802e0826e))
+
 ## [6.1.0](https://www.github.com/googleapis/nodejs-datastore/compare/v6.0.0...v6.1.0) (2020-07-06)
 
 
