@@ -1,0 +1,13 @@
+{
+  "name": "nodejs-security-private-ca",
+  "name_pretty": "Google Cloud Certificate Authority",
+  "product_documentation": "https://cloud.google.com/certificate-authority-service",
+  "client_documentation": "https://googleapis.dev/nodejs/security-private-ca/latest/index.html",
+  "issue_tracker": "",
+  "release_level": "beta",
+  "language": "nodejs",
+  "repo": "googleapis/nodejs-security-private-ca",
+  "distribution_name": "@google-cloud/security-private-ca",
+  "api_id": "privateca.googleapis.com",
+  "requires_billing": true
+}
