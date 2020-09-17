@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/nodejs-vision?activeTab=versions
 
+### [2.1.2](https://www.github.com/googleapis/nodejs-vision/compare/v2.1.1...v2.1.2) (2020-09-12)
+
+
+### Bug Fixes
+
+* **deps:** update dependency yargs to v16 ([#824](https://www.github.com/googleapis/nodejs-vision/issues/824)) ([9ce5215](https://www.github.com/googleapis/nodejs-vision/commit/9ce5215448b026adb10fa9c10156d4e8d8c865e4))
+
 ### [2.1.1](https://www.github.com/googleapis/nodejs-vision/compare/v2.1.0...v2.1.1) (2020-07-10)
 
 
