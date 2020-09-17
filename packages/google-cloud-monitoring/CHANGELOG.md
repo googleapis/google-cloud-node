@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/monitoring?activeTab=versions
 
+### [2.1.2](https://www.github.com/googleapis/nodejs-monitoring/compare/v2.1.1...v2.1.2) (2020-09-12)
+
+
+### Bug Fixes
+
+* **deps:** update dependency yargs to v16 ([#480](https://www.github.com/googleapis/nodejs-monitoring/issues/480)) ([188c55a](https://www.github.com/googleapis/nodejs-monitoring/commit/188c55a4126fbf2180fa116985bf3cbdd3c46ce8))
+
 ### [2.1.1](https://www.github.com/googleapis/nodejs-monitoring/compare/v2.1.0...v2.1.1) (2020-07-24)
 
 
