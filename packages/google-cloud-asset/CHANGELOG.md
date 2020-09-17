@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/asset?activeTab=versions
 
+## [3.8.0](https://www.github.com/googleapis/nodejs-asset/compare/v3.7.1...v3.8.0) (2020-09-16)
+
+
+### Features
+
+* added support for per type and partition export for Cloud Asset API ([#398](https://www.github.com/googleapis/nodejs-asset/issues/398)) ([6462767](https://www.github.com/googleapis/nodejs-asset/commit/64627674e3e23e79ff055ea845d884e8714ad023))
+
 ### [3.7.1](https://www.github.com/googleapis/nodejs-asset/compare/v3.7.0...v3.7.1) (2020-09-13)
 
 
