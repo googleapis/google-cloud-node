@@ -4,7 +4,7 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/nodejs-automl.git",
-        "sha": "fff663838faba8fc294c10c91e931b718bc3507e"
+        "sha": "9772dcab53a3257ba633e0cfa9c4cf03b8506005"
       }
     },
     {
@@ -19,7 +19,7 @@
       "git": {
         "name": "synthtool",
         "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "303271797a360f8a439203413f13a160f2f5b3b4"
+        "sha": "fdd03c161003ab97657cc0218f25c82c89ddf4b6"
       }
     }
   ],
@@ -51,7 +51,6 @@
     ".github/ISSUE_TEMPLATE/feature_request.md",
     ".github/ISSUE_TEMPLATE/support_request.md",
     ".github/PULL_REQUEST_TEMPLATE.md",
-    ".github/publish.yml",
     ".github/release-please.yml",
     ".github/workflows/ci.yaml",
     ".gitignore",
@@ -60,30 +59,23 @@
     ".kokoro/common.cfg",
     ".kokoro/continuous/node10/common.cfg",
     ".kokoro/continuous/node10/docs.cfg",
-    ".kokoro/continuous/node10/lint.cfg",
-    ".kokoro/continuous/node10/samples-test.cfg",
-    ".kokoro/continuous/node10/system-test.cfg",
     ".kokoro/continuous/node10/test.cfg",
     ".kokoro/continuous/node12/common.cfg",
+    ".kokoro/continuous/node12/lint.cfg",
+    ".kokoro/continuous/node12/samples-test.cfg",
+    ".kokoro/continuous/node12/system-test.cfg",
     ".kokoro/continuous/node12/test.cfg",
-    ".kokoro/continuous/node8/common.cfg",
-    ".kokoro/continuous/node8/test.cfg",
     ".kokoro/docs.sh",
     ".kokoro/lint.sh",
     ".kokoro/populate-secrets.sh",
     ".kokoro/presubmit/node10/common.cfg",
-    ".kokoro/presubmit/node10/docs.cfg",
-    ".kokoro/presubmit/node10/lint.cfg",
-    ".kokoro/presubmit/node10/samples-test.cfg",
-    ".kokoro/presubmit/node10/system-test.cfg",
-    ".kokoro/presubmit/node10/test.cfg",
     ".kokoro/presubmit/node12/common.cfg",
+    ".kokoro/presubmit/node12/samples-test.cfg",
+    ".kokoro/presubmit/node12/system-test.cfg",
     ".kokoro/presubmit/node12/test.cfg",
-    ".kokoro/presubmit/node8/common.cfg",
-    ".kokoro/presubmit/node8/test.cfg",
-    ".kokoro/presubmit/windows/common.cfg",
-    ".kokoro/presubmit/windows/test.cfg",
     ".kokoro/publish.sh",
+    ".kokoro/release/docs-devsite.cfg",
+    ".kokoro/release/docs-devsite.sh",
     ".kokoro/release/docs.cfg",
     ".kokoro/release/docs.sh",
     ".kokoro/release/publish.cfg",
@@ -99,6 +91,7 @@
     "CONTRIBUTING.md",
     "LICENSE",
     "README.md",
+    "api-extractor.json",
     "linkinator.config.json",
     "protos/google/cloud/automl/v1/annotation_payload.proto",
     "protos/google/cloud/automl/v1/annotation_spec.proto",
@@ -153,7 +146,6 @@
     "renovate.json",
     "samples/README.md",
     "samples/package.json",
-    "samples/package.json.252066439",
     "src/index.ts",
     "src/v1/auto_ml_client.ts",
     "src/v1/auto_ml_client_config.json",
