@@ -463,7 +463,8 @@ export class DlpServiceClient {
    *   Parent resource name.
    *
    *   The format of this value varies depending on whether you have [specified a
-   *   processing location](https://cloud.google.com/dlp/docs/specifying-location):
+   *   processing
+   *   location](https://cloud.google.com/dlp/docs/specifying-location):
    *
    *   + Projects scope, location specified:<br/>
    *     `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
@@ -579,7 +580,8 @@ export class DlpServiceClient {
    *   Parent resource name.
    *
    *   The format of this value varies depending on whether you have [specified a
-   *   processing location](https://cloud.google.com/dlp/docs/specifying-location):
+   *   processing
+   *   location](https://cloud.google.com/dlp/docs/specifying-location):
    *
    *   + Projects scope, location specified:<br/>
    *     `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
@@ -691,7 +693,8 @@ export class DlpServiceClient {
    *   Parent resource name.
    *
    *   The format of this value varies depending on whether you have [specified a
-   *   processing location](https://cloud.google.com/dlp/docs/specifying-location):
+   *   processing
+   *   location](https://cloud.google.com/dlp/docs/specifying-location):
    *
    *   + Projects scope, location specified:<br/>
    *     `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
@@ -814,7 +817,8 @@ export class DlpServiceClient {
    *   Required. Parent resource name.
    *
    *   The format of this value varies depending on whether you have [specified a
-   *   processing location](https://cloud.google.com/dlp/docs/specifying-location):
+   *   processing
+   *   location](https://cloud.google.com/dlp/docs/specifying-location):
    *
    *   + Projects scope, location specified:<br/>
    *     `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
@@ -1064,7 +1068,7 @@ export class DlpServiceClient {
    * @param {string} request.templateId
    *   The template id can contain uppercase and lowercase letters,
    *   numbers, and hyphens; that is, it must match the regular
-   *   expression: `[a-zA-Z\\d-_]+`. The maximum length is 100
+   *   expression: `[a-zA-Z\d-_]+`. The maximum length is 100
    *   characters. Can be empty to allow the system to generate one.
    * @param {string} request.locationId
    *   Deprecated. This field has no effect.
@@ -1460,7 +1464,7 @@ export class DlpServiceClient {
    * @param {string} request.templateId
    *   The template id can contain uppercase and lowercase letters,
    *   numbers, and hyphens; that is, it must match the regular
-   *   expression: `[a-zA-Z\\d-_]+`. The maximum length is 100
+   *   expression: `[a-zA-Z\d-_]+`. The maximum length is 100
    *   characters. Can be empty to allow the system to generate one.
    * @param {string} request.locationId
    *   Deprecated. This field has no effect.
@@ -1844,7 +1848,8 @@ export class DlpServiceClient {
    *   Required. Parent resource name.
    *
    *   The format of this value varies depending on whether you have [specified a
-   *   processing location](https://cloud.google.com/dlp/docs/specifying-location):
+   *   processing
+   *   location](https://cloud.google.com/dlp/docs/specifying-location):
    *
    *   + Projects scope, location specified:<br/>
    *     `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
@@ -1861,7 +1866,7 @@ export class DlpServiceClient {
    * @param {string} request.triggerId
    *   The trigger id can contain uppercase and lowercase letters,
    *   numbers, and hyphens; that is, it must match the regular
-   *   expression: `[a-zA-Z\\d-_]+`. The maximum length is 100
+   *   expression: `[a-zA-Z\d-_]+`. The maximum length is 100
    *   characters. Can be empty to allow the system to generate one.
    * @param {string} request.locationId
    *   Deprecated. This field has no effect.
@@ -2399,7 +2404,8 @@ export class DlpServiceClient {
    *   Required. Parent resource name.
    *
    *   The format of this value varies depending on whether you have [specified a
-   *   processing location](https://cloud.google.com/dlp/docs/specifying-location):
+   *   processing
+   *   location](https://cloud.google.com/dlp/docs/specifying-location):
    *
    *   + Projects scope, location specified:<br/>
    *     `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
@@ -2418,7 +2424,7 @@ export class DlpServiceClient {
    * @param {string} request.jobId
    *   The job id can contain uppercase and lowercase letters,
    *   numbers, and hyphens; that is, it must match the regular
-   *   expression: `[a-zA-Z\\d-_]+`. The maximum length is 100
+   *   expression: `[a-zA-Z\d-_]+`. The maximum length is 100
    *   characters. Can be empty to allow the system to generate one.
    * @param {string} request.locationId
    *   Deprecated. This field has no effect.
@@ -2782,7 +2788,7 @@ export class DlpServiceClient {
    * @param {string} request.storedInfoTypeId
    *   The storedInfoType ID can contain uppercase and lowercase letters,
    *   numbers, and hyphens; that is, it must match the regular
-   *   expression: `[a-zA-Z\\d-_]+`. The maximum length is 100
+   *   expression: `[a-zA-Z\d-_]+`. The maximum length is 100
    *   characters. Can be empty to allow the system to generate one.
    * @param {string} request.locationId
    *   Deprecated. This field has no effect.
@@ -3946,7 +3952,8 @@ export class DlpServiceClient {
    *   Required. Parent resource name.
    *
    *   The format of this value varies depending on whether you have [specified a
-   *   processing location](https://cloud.google.com/dlp/docs/specifying-location):
+   *   processing
+   *   location](https://cloud.google.com/dlp/docs/specifying-location):
    *
    *   + Projects scope, location specified:<br/>
    *     `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
@@ -4087,7 +4094,8 @@ export class DlpServiceClient {
    *   Required. Parent resource name.
    *
    *   The format of this value varies depending on whether you have [specified a
-   *   processing location](https://cloud.google.com/dlp/docs/specifying-location):
+   *   processing
+   *   location](https://cloud.google.com/dlp/docs/specifying-location):
    *
    *   + Projects scope, location specified:<br/>
    *     `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
@@ -4186,7 +4194,8 @@ export class DlpServiceClient {
    *   Required. Parent resource name.
    *
    *   The format of this value varies depending on whether you have [specified a
-   *   processing location](https://cloud.google.com/dlp/docs/specifying-location):
+   *   processing
+   *   location](https://cloud.google.com/dlp/docs/specifying-location):
    *
    *   + Projects scope, location specified:<br/>
    *     `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
@@ -4312,7 +4321,8 @@ export class DlpServiceClient {
    *   Required. Parent resource name.
    *
    *   The format of this value varies depending on whether you have [specified a
-   *   processing location](https://cloud.google.com/dlp/docs/specifying-location):
+   *   processing
+   *   location](https://cloud.google.com/dlp/docs/specifying-location):
    *
    *   + Projects scope, location specified:<br/>
    *     `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
@@ -4453,7 +4463,8 @@ export class DlpServiceClient {
    *   Required. Parent resource name.
    *
    *   The format of this value varies depending on whether you have [specified a
-   *   processing location](https://cloud.google.com/dlp/docs/specifying-location):
+   *   processing
+   *   location](https://cloud.google.com/dlp/docs/specifying-location):
    *
    *   + Projects scope, location specified:<br/>
    *     `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
@@ -4554,7 +4565,8 @@ export class DlpServiceClient {
    *   Required. Parent resource name.
    *
    *   The format of this value varies depending on whether you have [specified a
-   *   processing location](https://cloud.google.com/dlp/docs/specifying-location):
+   *   processing
+   *   location](https://cloud.google.com/dlp/docs/specifying-location):
    *
    *   + Projects scope, location specified:<br/>
    *     `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>

@@ -4,15 +4,15 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/nodejs-dlp.git",
-        "sha": "5f58478d337beb4aabfa874087dafe477a644984"
+        "sha": "16a39f10399570c31ca566392a1f5ffa50040fd7"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "1ee015d872d003637eb47b890930bf3d0d410c61",
-        "internalRef": "329758805"
+        "sha": "f0d92d22e675c93125f8a7abd10dc01b891c3bcf",
+        "internalRef": "332061108"
       }
     },
     {
