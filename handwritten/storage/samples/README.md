@@ -24,6 +24,7 @@ objects to users via direct download.
   * [Add Bucket Owner Acl](#add-bucket-owner-acl)
   * [Add File Owner Acl](#add-file-owner-acl)
   * [Storage Get Bucket Metadata.](#storage-get-bucket-metadata.)
+  * [Storage Configure Bucket Cors.](#storage-configure-bucket-cors.)
   * [Copy File](#copy-file)
   * [Copy Old Version Of File.](#copy-old-version-of-file.)
   * [Create New Bucket](#create-new-bucket)
@@ -79,6 +80,7 @@ objects to users via direct download.
   * [Release Event Based Hold](#release-event-based-hold)
   * [Release Temporary Hold](#release-temporary-hold)
   * [Remove Bucket Conditional Binding](#remove-bucket-conditional-binding)
+  * [Storage Remove Bucket Cors Configuration.](#storage-remove-bucket-cors-configuration.)
   * [Remove Bucket Default Owner](#remove-bucket-default-owner)
   * [Remove Bucket Iam Member](#remove-bucket-iam-member)
   * [Remove Bucket Owner Acl](#remove-bucket-owner-acl)
@@ -206,6 +208,25 @@ __Usage:__
 
 
 `node bucketMetadata.js <BUCKET_NAME>`
+
+
+-----
+
+
+
+
+### Storage Configure Bucket Cors.
+
+Configures bucket cors.
+
+View the [source code](https://github.com/googleapis/nodejs-storage/blob/master/samples/configureBucketCors.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-storage&page=editor&open_in_editor=samples/configureBucketCors.js,samples/README.md)
+
+__Usage:__
+
+
+`node configureBucketCors.js <BUCKET_NAME> <MAX_AGE_SECONDS> <METHOD> <ORIGIN> <RESPONSE_HEADER>`
 
 
 -----
@@ -1161,6 +1182,25 @@ __Usage:__
 
 
 `node samples/removeBucketConditionalBinding.js`
+
+
+-----
+
+
+
+
+### Storage Remove Bucket Cors Configuration.
+
+Removes bucket cors configuration.
+
+View the [source code](https://github.com/googleapis/nodejs-storage/blob/master/samples/removeBucketCors.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-storage&page=editor&open_in_editor=samples/removeBucketCors.js,samples/README.md)
+
+__Usage:__
+
+
+`node removeBucketCors.js <BUCKET_NAME>`
 
 
 -----
