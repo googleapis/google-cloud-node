@@ -2,6 +2,14 @@
   "recurse": true,
   "skip": [
     "https://codecov.io/gh/googleapis/",
-    "www.googleapis.com"
-  ]
+    "www.googleapis.com",
+    "img.shields.io",
+    "googleapis.dev/nodejs/workflows/latest/index.html",
+    "github.com/googleapis/nodejs-workflows/blob/master/CHANGELOG.md",
+    "github.com/googleapis/nodejs-workflows/blob/master/samples/create-execution.js",
+    "github.com/googleapis/nodejs-workflows/blob/master/samples/quickstart.js",
+    "googleapis/nodejs-workflows/tree/master/samples"
+  ],
+  "silent": true,
+  "concurrency": 10
 }

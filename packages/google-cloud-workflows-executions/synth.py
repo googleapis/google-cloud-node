@@ -1,4 +1,4 @@
-# Copyright 2018 Google LLC
+# Copyright 2020 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,31 +15,32 @@
 
 import synthtool as s
 import synthtool.gcp as gcp
+import synthtool.languages.node as node
 import subprocess
 import logging
 
 logging.basicConfig(level=logging.DEBUG)
 
-# run the microgenerator:
-gapic = gcp.GAPICMicrogenerator()
-versions = ['v1alpha1']
-for version in versions:
-  library = gapic.typescript_library(
-    'workflows',
-    generator_args={
-      'package-name': '@google-cloud/workflows'
-    },
-    version=version,
-    private=True)
+gapic = gcp.GAPICBazel()
 
-s.copy(library, excludes=['README.md', 'package.json'])
+# Generates the executions client:
+execution_versions = ['v1beta']
+for version in execution_versions:
+  library = gapic.node_library('workflow-executions', version, bazel_target=f"//google/cloud/workflows/executions/{version}:workflows-executions-{version}-nodejs")
+  s.copy(library, excludes=['src/index.ts', 'src/v1beta/index.ts', 'README.md', 'package.json'])
+
+# Generates the workflows client:
+versions = ['v1beta']
+name = 'workflows'
+for version in versions:
+  library = gapic.node_library(name, version)
+  s.copy(library, excludes=['src/index.ts', 'src/v1beta/index.ts', 'README.md', 'package.json'])
 
 # Copy common templates
 common_templates = gcp.CommonTemplates()
-templates = common_templates.node_library()
-s.copy(templates)
+templates = common_templates.node_library(
+    source_location='build/src', versions=versions)
+s.copy(templates, excludes=[])
 
-# Node.js specific cleanup
-subprocess.run(['npm', 'install'])
-subprocess.run(['npx', 'compileProtos', 'src'])
-subprocess.run(['npm', 'run', 'fix'])
+node.postprocess_gapic_library()
+

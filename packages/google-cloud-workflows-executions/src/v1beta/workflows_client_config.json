@@ -1,6 +1,6 @@
 {
   "interfaces": {
-    "google.cloud.workflows.v1alpha1.Workflows": {
+    "google.cloud.workflows.v1beta.Workflows": {
       "retry_codes": {
         "non_idempotent": [],
         "idempotent": [

@@ -1,4 +1,4 @@
-// Copyright 2019 Google LLC
+// Copyright 2020 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -16,9 +16,10 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import * as v1alpha1 from './v1alpha1';
-const WorkflowsClient = v1alpha1.WorkflowsClient;
-export {v1alpha1, WorkflowsClient};
-// For compatibility with JavaScript libraries we need to provide this default export:
-// tslint:disable-next-line no-default-export
-export default {v1alpha1, WorkflowsClient};
+import * as v1beta from './v1beta';
+const ExecutionsClient = v1beta.ExecutionsClient;
+const WorkflowsClient = v1beta.WorkflowsClient;
+export {v1beta, ExecutionsClient, WorkflowsClient};
+export default {v1beta, ExecutionsClient, WorkflowsClient};
+import * as protos from '../protos/protos';
+export {protos};

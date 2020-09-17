@@ -1,4 +1,4 @@
-// Copyright 2019 Google LLC
+// Copyright 2020 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -16,12 +16,11 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-
 /* eslint-disable node/no-missing-require, no-unused-vars */
-const workflows = require('@google-cloud/workflows');
+const executions = require('@google-cloud/workflows');
 
 function main() {
-  const workflowsClient = new workflows.WorkflowsClient();
+  const executionsClient = new executions.ExecutionsClient();
 }
 
 main();
