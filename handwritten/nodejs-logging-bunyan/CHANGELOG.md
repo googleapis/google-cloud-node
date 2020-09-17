@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-logging-bunyan?activeTab=versions
 
+### [3.0.1](https://www.github.com/googleapis/nodejs-logging-bunyan/compare/v3.0.0...v3.0.1) (2020-09-12)
+
+
+### Bug Fixes
+
+* **deps:** update dependency yargs to v16 ([#484](https://www.github.com/googleapis/nodejs-logging-bunyan/issues/484)) ([a307179](https://www.github.com/googleapis/nodejs-logging-bunyan/commit/a30717969b0e0cb9726061ff48f4fa7f9b35961e))
+
 ## [3.0.0](https://www.github.com/googleapis/nodejs-logging-bunyan/compare/v2.0.3...v3.0.0) (2020-05-20)
 
 
