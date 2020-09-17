@@ -4,6 +4,14 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/language?activeTab=versions
 
+### [4.1.1](https://www.github.com/googleapis/nodejs-language/compare/v4.1.0...v4.1.1) (2020-09-12)
+
+
+### Bug Fixes
+
+* **deps:** update dependency yargs to v16 ([#509](https://www.github.com/googleapis/nodejs-language/issues/509)) ([3ab34d3](https://www.github.com/googleapis/nodejs-language/commit/3ab34d3d464b66948c616b1f00dae061a48e57e3))
+* move system and samples test from Node 10 to Node 12 ([#503](https://www.github.com/googleapis/nodejs-language/issues/503)) ([df948af](https://www.github.com/googleapis/nodejs-language/commit/df948affcc41bc6cf171bda6e3834db32fa22aa3))
+
 ## [4.1.0](https://www.github.com/googleapis/nodejs-language/compare/v4.0.1...v4.1.0) (2020-06-13)
 
 
