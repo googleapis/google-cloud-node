@@ -4,6 +4,14 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/profiler?activeTab=versions
 
+### [4.0.3](https://www.github.com/googleapis/cloud-profiler-nodejs/compare/v4.0.2...v4.0.3) (2020-09-12)
+
+
+### Bug Fixes
+
+* move gitattributes files to node templates ([#679](https://www.github.com/googleapis/cloud-profiler-nodejs/issues/679)) ([521e418](https://www.github.com/googleapis/cloud-profiler-nodejs/commit/521e4180f825299907ad374412d81d65bb674596))
+* **deps:** update dependency parse-duration to 0.4.4 ([#668](https://www.github.com/googleapis/cloud-profiler-nodejs/issues/668)) ([2757231](https://www.github.com/googleapis/cloud-profiler-nodejs/commit/2757231e07492bc38bf25fe3add1274b36d2bdca))
+
 ### [4.0.2](https://www.github.com/googleapis/cloud-profiler-nodejs/compare/v4.0.1...v4.0.2) (2020-07-14)
 
 
