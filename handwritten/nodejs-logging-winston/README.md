@@ -17,6 +17,9 @@ This module provides a higher-level layer for working with
 transport to your existing Winston loggers.
 
 
+A comprehensive list of changes in each version may be found in
+[the CHANGELOG](https://github.com/googleapis/nodejs-logging-winston/blob/master/CHANGELOG.md).
+
 * [Stackdriver Logging for Winston Node.js Client API Reference][client-docs]
 * [Stackdriver Logging for Winston Documentation][product-docs]
 * [github.com/googleapis/nodejs-logging-winston](https://github.com/googleapis/nodejs-logging-winston)
