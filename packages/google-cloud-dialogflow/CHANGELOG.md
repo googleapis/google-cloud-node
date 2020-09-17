@@ -4,6 +4,18 @@
 
 [1]: https://www.npmjs.com/package/dialogflow?activeTab=versions
 
+## [3.3.0](https://www.github.com/googleapis/nodejs-dialogflow/compare/v3.2.0...v3.3.0) (2020-09-15)
+
+
+### Features
+
+* added Telephony Gateway DTMF events doc: added locations in resource name formats doc: wording updates for tiers ([#683](https://www.github.com/googleapis/nodejs-dialogflow/issues/683)) ([a0cb46a](https://www.github.com/googleapis/nodejs-dialogflow/commit/a0cb46a81b3b50257152362fdb36862b1e90d567))
+
+
+### Bug Fixes
+
+* **deps:** update dependency yargs to v16 ([#676](https://www.github.com/googleapis/nodejs-dialogflow/issues/676)) ([217bb9c](https://www.github.com/googleapis/nodejs-dialogflow/commit/217bb9c209000d20157fc6478cd9a26369e8b106))
+
 ## [3.2.0](https://www.github.com/googleapis/nodejs-dialogflow/compare/v3.1.1...v3.2.0) (2020-07-29)
 
 
