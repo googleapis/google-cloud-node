@@ -30,7 +30,7 @@ export type MonitoredResource = protos.google.api.MonitoredResource;
 export interface StackdriverData {
   serviceContext?: ServiceContext;
   message?: string;
-  metadata?: Metadata;
+  metadata?: Metadata | MetadataArg;
 }
 
 export interface Metadata {
