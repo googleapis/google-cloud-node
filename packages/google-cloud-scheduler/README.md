@@ -104,6 +104,7 @@ has instructions for running the samples.
 | Create Job | [source code](https://github.com/googleapis/nodejs-scheduler/blob/master/samples/createJob.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-scheduler&page=editor&open_in_editor=samples/createJob.js,samples/README.md) |
 | Delete Job | [source code](https://github.com/googleapis/nodejs-scheduler/blob/master/samples/deleteJob.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-scheduler&page=editor&open_in_editor=samples/deleteJob.js,samples/README.md) |
 | Quickstart | [source code](https://github.com/googleapis/nodejs-scheduler/blob/master/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-scheduler&page=editor&open_in_editor=samples/quickstart.js,samples/README.md) |
+| Update Job | [source code](https://github.com/googleapis/nodejs-scheduler/blob/master/samples/updateJob.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-scheduler&page=editor&open_in_editor=samples/updateJob.js,samples/README.md) |
 
 
 

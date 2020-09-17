@@ -16,6 +16,7 @@
   * [Create Job](#create-job)
   * [Delete Job](#delete-job)
   * [Quickstart](#quickstart)
+  * [Update Job](#update-job)
 
 ## Before you begin
 
@@ -99,6 +100,25 @@ __Usage:__
 
 
 `node quickstart.js [project-id] [location-id] [url]`
+
+
+-----
+
+
+
+
+### Update Job
+
+Update a job by its ID.
+
+View the [source code](https://github.com/googleapis/nodejs-scheduler/blob/master/samples/updateJob.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-scheduler&page=editor&open_in_editor=samples/updateJob.js,samples/README.md)
+
+__Usage:__
+
+
+`node updateJob.js [project-id] [location-id] [job-id]`
 
 
 
