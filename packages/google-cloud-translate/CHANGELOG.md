@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-translate?activeTab=versions
 
+### [6.0.3](https://www.github.com/googleapis/nodejs-translate/compare/v6.0.2...v6.0.3) (2020-09-17)
+
+
+### Bug Fixes
+
+* **deps:** update dependency yargs to v16 ([#577](https://www.github.com/googleapis/nodejs-translate/issues/577)) ([6ca7d9a](https://www.github.com/googleapis/nodejs-translate/commit/6ca7d9aea43a8934f6426d7c99d9c48a5a81f9fb))
+
 ### [6.0.2](https://www.github.com/googleapis/nodejs-translate/compare/v6.0.1...v6.0.2) (2020-07-15)
 
 
