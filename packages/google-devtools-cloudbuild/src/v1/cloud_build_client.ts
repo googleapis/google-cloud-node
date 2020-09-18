@@ -62,6 +62,7 @@ export class CloudBuildClient {
     batching: {},
   };
   innerApiCalls: {[name: string]: Function};
+  pathTemplates: {[name: string]: gax.PathTemplate};
   operationsClient: gax.OperationsClient;
   cloudBuildStub?: Promise<{[name: string]: Function}>;
 
@@ -163,6 +164,27 @@ export class CloudBuildClient {
           require('../../protos/protos.json')
         : nodejsProtoPath
     );
+
+    // This API contains "path templates"; forward-slash-separated
+    // identifiers to uniquely identify resources within the API.
+    // Create useful helper objects for these.
+    this.pathTemplates = {
+      buildTriggerPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/triggers/{trigger}'
+      ),
+      projectPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}'
+      ),
+      projectBuildPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/builds/{build}'
+      ),
+      projectLocationBuildPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/builds/{build}'
+      ),
+      serviceAccountPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/serviceAccounts/{service_account}'
+      ),
+    };
 
     // Some of the methods on this service return "paged" results,
     // (e.g. 50 results at a time, with tokens to get subsequent
@@ -411,6 +433,9 @@ export class CloudBuildClient {
    *
    * @param {Object} request
    *   The request object that will be sent.
+   * @param {string} request.name
+   *   The name of the `Build` to retrieve.
+   *   Format: `projects/{project}/locations/{location}/builds/{build}`
    * @param {string} request.projectId
    *   Required. ID of the project.
    * @param {string} request.id
@@ -459,6 +484,7 @@ export class CloudBuildClient {
       'x-goog-request-params'
     ] = gax.routingHeader.fromParams({
       project_id: request.projectId || '',
+      name: request.name || '',
     });
     this.initialize();
     return this.innerApiCalls.getBuild(request, options, callback);
@@ -499,6 +525,9 @@ export class CloudBuildClient {
    *
    * @param {Object} request
    *   The request object that will be sent.
+   * @param {string} request.name
+   *   The name of the `Build` to retrieve.
+   *   Format: `projects/{project}/locations/{location}/builds/{build}`
    * @param {string} request.projectId
    *   Required. ID of the project.
    * @param {string} request.id
@@ -549,6 +578,7 @@ export class CloudBuildClient {
       'x-goog-request-params'
     ] = gax.routingHeader.fromParams({
       project_id: request.projectId || '',
+      name: request.name || '',
     });
     this.initialize();
     return this.innerApiCalls.cancelBuild(request, options, callback);
@@ -1409,6 +1439,9 @@ export class CloudBuildClient {
    *
    * @param {Object} request
    *   The request object that will be sent.
+   * @param {string} request.parent
+   *   The parent resource where this build will be created.
+   *   Format: `projects/{project}/locations/{location}`
    * @param {string} request.projectId
    *   Required. ID of the project.
    * @param {google.devtools.cloudbuild.v1.Build} request.build
@@ -1464,6 +1497,7 @@ export class CloudBuildClient {
       'x-goog-request-params'
     ] = gax.routingHeader.fromParams({
       project_id: request.projectId || '',
+      parent: request.parent || '',
     });
     this.initialize();
     return this.innerApiCalls.createBuild(request, options, callback);
@@ -1571,6 +1605,9 @@ export class CloudBuildClient {
    *
    * @param {Object} request
    *   The request object that will be sent.
+   * @param {string} request.name
+   *   The name of the `Build` to retry.
+   *   Format: `projects/{project}/locations/{location}/builds/{build}`
    * @param {string} request.projectId
    *   Required. ID of the project.
    * @param {string} request.id
@@ -1626,6 +1663,7 @@ export class CloudBuildClient {
       'x-goog-request-params'
     ] = gax.routingHeader.fromParams({
       project_id: request.projectId || '',
+      name: request.name || '',
     });
     this.initialize();
     return this.innerApiCalls.retryBuild(request, options, callback);
@@ -1843,6 +1881,9 @@ export class CloudBuildClient {
    *
    * @param {Object} request
    *   The request object that will be sent.
+   * @param {string} request.parent
+   *   The parent of the collection of `Builds`.
+   *   Format: `projects/{project}/locations/location`
    * @param {string} request.projectId
    *   Required. ID of the project.
    * @param {number} request.pageSize
@@ -1909,6 +1950,7 @@ export class CloudBuildClient {
       'x-goog-request-params'
     ] = gax.routingHeader.fromParams({
       project_id: request.projectId || '',
+      parent: request.parent || '',
     });
     this.initialize();
     return this.innerApiCalls.listBuilds(request, options, callback);
@@ -1929,6 +1971,9 @@ export class CloudBuildClient {
    *
    * @param {Object} request
    *   The request object that will be sent.
+   * @param {string} request.parent
+   *   The parent of the collection of `Builds`.
+   *   Format: `projects/{project}/locations/location`
    * @param {string} request.projectId
    *   Required. ID of the project.
    * @param {number} request.pageSize
@@ -1954,6 +1999,7 @@ export class CloudBuildClient {
       'x-goog-request-params'
     ] = gax.routingHeader.fromParams({
       project_id: request.projectId || '',
+      parent: request.parent || '',
     });
     const callSettings = new gax.CallSettings(options);
     this.initialize();
@@ -1971,6 +2017,9 @@ export class CloudBuildClient {
    *
    * @param {Object} request
    *   The request object that will be sent.
+   * @param {string} request.parent
+   *   The parent of the collection of `Builds`.
+   *   Format: `projects/{project}/locations/location`
    * @param {string} request.projectId
    *   Required. ID of the project.
    * @param {number} request.pageSize
@@ -1996,6 +2045,7 @@ export class CloudBuildClient {
       'x-goog-request-params'
     ] = gax.routingHeader.fromParams({
       project_id: request.projectId || '',
+      parent: request.parent || '',
     });
     options = options || {};
     const callSettings = new gax.CallSettings(options);
@@ -2200,6 +2250,203 @@ export class CloudBuildClient {
       (request as unknown) as RequestType,
       callSettings
     ) as AsyncIterable<protos.google.devtools.cloudbuild.v1.IBuildTrigger>;
+  }
+  // --------------------
+  // -- Path templates --
+  // --------------------
+
+  /**
+   * Return a fully-qualified buildTrigger resource name string.
+   *
+   * @param {string} project
+   * @param {string} trigger
+   * @returns {string} Resource name string.
+   */
+  buildTriggerPath(project: string, trigger: string) {
+    return this.pathTemplates.buildTriggerPathTemplate.render({
+      project: project,
+      trigger: trigger,
+    });
+  }
+
+  /**
+   * Parse the project from BuildTrigger resource.
+   *
+   * @param {string} buildTriggerName
+   *   A fully-qualified path representing BuildTrigger resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromBuildTriggerName(buildTriggerName: string) {
+    return this.pathTemplates.buildTriggerPathTemplate.match(buildTriggerName)
+      .project;
+  }
+
+  /**
+   * Parse the trigger from BuildTrigger resource.
+   *
+   * @param {string} buildTriggerName
+   *   A fully-qualified path representing BuildTrigger resource.
+   * @returns {string} A string representing the trigger.
+   */
+  matchTriggerFromBuildTriggerName(buildTriggerName: string) {
+    return this.pathTemplates.buildTriggerPathTemplate.match(buildTriggerName)
+      .trigger;
+  }
+
+  /**
+   * Return a fully-qualified project resource name string.
+   *
+   * @param {string} project
+   * @returns {string} Resource name string.
+   */
+  projectPath(project: string) {
+    return this.pathTemplates.projectPathTemplate.render({
+      project: project,
+    });
+  }
+
+  /**
+   * Parse the project from Project resource.
+   *
+   * @param {string} projectName
+   *   A fully-qualified path representing Project resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectName(projectName: string) {
+    return this.pathTemplates.projectPathTemplate.match(projectName).project;
+  }
+
+  /**
+   * Return a fully-qualified projectBuild resource name string.
+   *
+   * @param {string} project
+   * @param {string} build
+   * @returns {string} Resource name string.
+   */
+  projectBuildPath(project: string, build: string) {
+    return this.pathTemplates.projectBuildPathTemplate.render({
+      project: project,
+      build: build,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectBuild resource.
+   *
+   * @param {string} projectBuildName
+   *   A fully-qualified path representing project_build resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectBuildName(projectBuildName: string) {
+    return this.pathTemplates.projectBuildPathTemplate.match(projectBuildName)
+      .project;
+  }
+
+  /**
+   * Parse the build from ProjectBuild resource.
+   *
+   * @param {string} projectBuildName
+   *   A fully-qualified path representing project_build resource.
+   * @returns {string} A string representing the build.
+   */
+  matchBuildFromProjectBuildName(projectBuildName: string) {
+    return this.pathTemplates.projectBuildPathTemplate.match(projectBuildName)
+      .build;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationBuild resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} build
+   * @returns {string} Resource name string.
+   */
+  projectLocationBuildPath(project: string, location: string, build: string) {
+    return this.pathTemplates.projectLocationBuildPathTemplate.render({
+      project: project,
+      location: location,
+      build: build,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectLocationBuild resource.
+   *
+   * @param {string} projectLocationBuildName
+   *   A fully-qualified path representing project_location_build resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationBuildName(projectLocationBuildName: string) {
+    return this.pathTemplates.projectLocationBuildPathTemplate.match(
+      projectLocationBuildName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationBuild resource.
+   *
+   * @param {string} projectLocationBuildName
+   *   A fully-qualified path representing project_location_build resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationBuildName(projectLocationBuildName: string) {
+    return this.pathTemplates.projectLocationBuildPathTemplate.match(
+      projectLocationBuildName
+    ).location;
+  }
+
+  /**
+   * Parse the build from ProjectLocationBuild resource.
+   *
+   * @param {string} projectLocationBuildName
+   *   A fully-qualified path representing project_location_build resource.
+   * @returns {string} A string representing the build.
+   */
+  matchBuildFromProjectLocationBuildName(projectLocationBuildName: string) {
+    return this.pathTemplates.projectLocationBuildPathTemplate.match(
+      projectLocationBuildName
+    ).build;
+  }
+
+  /**
+   * Return a fully-qualified serviceAccount resource name string.
+   *
+   * @param {string} project
+   * @param {string} service_account
+   * @returns {string} Resource name string.
+   */
+  serviceAccountPath(project: string, serviceAccount: string) {
+    return this.pathTemplates.serviceAccountPathTemplate.render({
+      project: project,
+      service_account: serviceAccount,
+    });
+  }
+
+  /**
+   * Parse the project from ServiceAccount resource.
+   *
+   * @param {string} serviceAccountName
+   *   A fully-qualified path representing ServiceAccount resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromServiceAccountName(serviceAccountName: string) {
+    return this.pathTemplates.serviceAccountPathTemplate.match(
+      serviceAccountName
+    ).project;
+  }
+
+  /**
+   * Parse the service_account from ServiceAccount resource.
+   *
+   * @param {string} serviceAccountName
+   *   A fully-qualified path representing ServiceAccount resource.
+   * @returns {string} A string representing the service_account.
+   */
+  matchServiceAccountFromServiceAccountName(serviceAccountName: string) {
+    return this.pathTemplates.serviceAccountPathTemplate.match(
+      serviceAccountName
+    ).service_account;
   }
 
   /**

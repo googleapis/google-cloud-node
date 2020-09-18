@@ -389,6 +389,9 @@ export namespace google {
                 /** Properties of a RetryBuildRequest. */
                 interface IRetryBuildRequest {
 
+                    /** RetryBuildRequest name */
+                    name?: (string|null);
+
                     /** RetryBuildRequest projectId */
                     projectId?: (string|null);
 
@@ -404,6 +407,9 @@ export namespace google {
                      * @param [properties] Properties to set
                      */
                     constructor(properties?: google.devtools.cloudbuild.v1.IRetryBuildRequest);
+
+                    /** RetryBuildRequest name. */
+                    public name: string;
 
                     /** RetryBuildRequest projectId. */
                     public projectId: string;
@@ -1499,6 +1505,9 @@ export namespace google {
                 /** Properties of a Build. */
                 interface IBuild {
 
+                    /** Build name */
+                    name?: (string|null);
+
                     /** Build id */
                     id?: (string|null);
 
@@ -1567,6 +1576,9 @@ export namespace google {
 
                     /** Build timing */
                     timing?: ({ [k: string]: google.devtools.cloudbuild.v1.ITimeSpan }|null);
+
+                    /** Build serviceAccount */
+                    serviceAccount?: (string|null);
                 }
 
                 /** Represents a Build. */
@@ -1577,6 +1589,9 @@ export namespace google {
                      * @param [properties] Properties to set
                      */
                     constructor(properties?: google.devtools.cloudbuild.v1.IBuild);
+
+                    /** Build name. */
+                    public name: string;
 
                     /** Build id. */
                     public id: string;
@@ -1646,6 +1661,9 @@ export namespace google {
 
                     /** Build timing. */
                     public timing: { [k: string]: google.devtools.cloudbuild.v1.ITimeSpan };
+
+                    /** Build serviceAccount. */
+                    public serviceAccount: string;
 
                     /**
                      * Creates a new Build instance using the specified properties.
@@ -2518,6 +2536,9 @@ export namespace google {
                 /** Properties of a CreateBuildRequest. */
                 interface ICreateBuildRequest {
 
+                    /** CreateBuildRequest parent */
+                    parent?: (string|null);
+
                     /** CreateBuildRequest projectId */
                     projectId?: (string|null);
 
@@ -2533,6 +2554,9 @@ export namespace google {
                      * @param [properties] Properties to set
                      */
                     constructor(properties?: google.devtools.cloudbuild.v1.ICreateBuildRequest);
+
+                    /** CreateBuildRequest parent. */
+                    public parent: string;
 
                     /** CreateBuildRequest projectId. */
                     public projectId: string;
@@ -2614,6 +2638,9 @@ export namespace google {
                 /** Properties of a GetBuildRequest. */
                 interface IGetBuildRequest {
 
+                    /** GetBuildRequest name */
+                    name?: (string|null);
+
                     /** GetBuildRequest projectId */
                     projectId?: (string|null);
 
@@ -2629,6 +2656,9 @@ export namespace google {
                      * @param [properties] Properties to set
                      */
                     constructor(properties?: google.devtools.cloudbuild.v1.IGetBuildRequest);
+
+                    /** GetBuildRequest name. */
+                    public name: string;
 
                     /** GetBuildRequest projectId. */
                     public projectId: string;
@@ -2710,6 +2740,9 @@ export namespace google {
                 /** Properties of a ListBuildsRequest. */
                 interface IListBuildsRequest {
 
+                    /** ListBuildsRequest parent */
+                    parent?: (string|null);
+
                     /** ListBuildsRequest projectId */
                     projectId?: (string|null);
 
@@ -2731,6 +2764,9 @@ export namespace google {
                      * @param [properties] Properties to set
                      */
                     constructor(properties?: google.devtools.cloudbuild.v1.IListBuildsRequest);
+
+                    /** ListBuildsRequest parent. */
+                    public parent: string;
 
                     /** ListBuildsRequest projectId. */
                     public projectId: string;
@@ -2914,6 +2950,9 @@ export namespace google {
                 /** Properties of a CancelBuildRequest. */
                 interface ICancelBuildRequest {
 
+                    /** CancelBuildRequest name */
+                    name?: (string|null);
+
                     /** CancelBuildRequest projectId */
                     projectId?: (string|null);
 
@@ -2929,6 +2968,9 @@ export namespace google {
                      * @param [properties] Properties to set
                      */
                     constructor(properties?: google.devtools.cloudbuild.v1.ICancelBuildRequest);
+
+                    /** CancelBuildRequest name. */
+                    public name: string;
 
                     /** CancelBuildRequest projectId. */
                     public projectId: string;
@@ -4114,6 +4156,9 @@ export namespace google {
                     /** BuildOptions substitutionOption */
                     substitutionOption?: (google.devtools.cloudbuild.v1.BuildOptions.SubstitutionOption|keyof typeof google.devtools.cloudbuild.v1.BuildOptions.SubstitutionOption|null);
 
+                    /** BuildOptions dynamicSubstitutions */
+                    dynamicSubstitutions?: (boolean|null);
+
                     /** BuildOptions logStreamingOption */
                     logStreamingOption?: (google.devtools.cloudbuild.v1.BuildOptions.LogStreamingOption|keyof typeof google.devtools.cloudbuild.v1.BuildOptions.LogStreamingOption|null);
 
@@ -4156,6 +4201,9 @@ export namespace google {
 
                     /** BuildOptions substitutionOption. */
                     public substitutionOption: (google.devtools.cloudbuild.v1.BuildOptions.SubstitutionOption|keyof typeof google.devtools.cloudbuild.v1.BuildOptions.SubstitutionOption);
+
+                    /** BuildOptions dynamicSubstitutions. */
+                    public dynamicSubstitutions: boolean;
 
                     /** BuildOptions logStreamingOption. */
                     public logStreamingOption: (google.devtools.cloudbuild.v1.BuildOptions.LogStreamingOption|keyof typeof google.devtools.cloudbuild.v1.BuildOptions.LogStreamingOption);
@@ -4278,7 +4326,10 @@ export namespace google {
                     enum LoggingMode {
                         LOGGING_UNSPECIFIED = 0,
                         LEGACY = 1,
-                        GCS_ONLY = 2
+                        GCS_ONLY = 2,
+                        STACKDRIVER_ONLY = 3,
+                        CLOUD_LOGGING_ONLY = 5,
+                        NONE = 4
                     }
                 }
 
@@ -5562,6 +5613,232 @@ export namespace google {
             OUTPUT_ONLY = 3,
             INPUT_ONLY = 4,
             IMMUTABLE = 5
+        }
+
+        /** Properties of a ResourceDescriptor. */
+        interface IResourceDescriptor {
+
+            /** ResourceDescriptor type */
+            type?: (string|null);
+
+            /** ResourceDescriptor pattern */
+            pattern?: (string[]|null);
+
+            /** ResourceDescriptor nameField */
+            nameField?: (string|null);
+
+            /** ResourceDescriptor history */
+            history?: (google.api.ResourceDescriptor.History|keyof typeof google.api.ResourceDescriptor.History|null);
+
+            /** ResourceDescriptor plural */
+            plural?: (string|null);
+
+            /** ResourceDescriptor singular */
+            singular?: (string|null);
+        }
+
+        /** Represents a ResourceDescriptor. */
+        class ResourceDescriptor implements IResourceDescriptor {
+
+            /**
+             * Constructs a new ResourceDescriptor.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.IResourceDescriptor);
+
+            /** ResourceDescriptor type. */
+            public type: string;
+
+            /** ResourceDescriptor pattern. */
+            public pattern: string[];
+
+            /** ResourceDescriptor nameField. */
+            public nameField: string;
+
+            /** ResourceDescriptor history. */
+            public history: (google.api.ResourceDescriptor.History|keyof typeof google.api.ResourceDescriptor.History);
+
+            /** ResourceDescriptor plural. */
+            public plural: string;
+
+            /** ResourceDescriptor singular. */
+            public singular: string;
+
+            /**
+             * Creates a new ResourceDescriptor instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns ResourceDescriptor instance
+             */
+            public static create(properties?: google.api.IResourceDescriptor): google.api.ResourceDescriptor;
+
+            /**
+             * Encodes the specified ResourceDescriptor message. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
+             * @param message ResourceDescriptor message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.IResourceDescriptor, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified ResourceDescriptor message, length delimited. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
+             * @param message ResourceDescriptor message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.IResourceDescriptor, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a ResourceDescriptor message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns ResourceDescriptor
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.ResourceDescriptor;
+
+            /**
+             * Decodes a ResourceDescriptor message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns ResourceDescriptor
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.ResourceDescriptor;
+
+            /**
+             * Verifies a ResourceDescriptor message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a ResourceDescriptor message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns ResourceDescriptor
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.ResourceDescriptor;
+
+            /**
+             * Creates a plain object from a ResourceDescriptor message. Also converts values to other types if specified.
+             * @param message ResourceDescriptor
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.ResourceDescriptor, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this ResourceDescriptor to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+        }
+
+        namespace ResourceDescriptor {
+
+            /** History enum. */
+            enum History {
+                HISTORY_UNSPECIFIED = 0,
+                ORIGINALLY_SINGLE_PATTERN = 1,
+                FUTURE_MULTI_PATTERN = 2
+            }
+        }
+
+        /** Properties of a ResourceReference. */
+        interface IResourceReference {
+
+            /** ResourceReference type */
+            type?: (string|null);
+
+            /** ResourceReference childType */
+            childType?: (string|null);
+        }
+
+        /** Represents a ResourceReference. */
+        class ResourceReference implements IResourceReference {
+
+            /**
+             * Constructs a new ResourceReference.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.IResourceReference);
+
+            /** ResourceReference type. */
+            public type: string;
+
+            /** ResourceReference childType. */
+            public childType: string;
+
+            /**
+             * Creates a new ResourceReference instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns ResourceReference instance
+             */
+            public static create(properties?: google.api.IResourceReference): google.api.ResourceReference;
+
+            /**
+             * Encodes the specified ResourceReference message. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
+             * @param message ResourceReference message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.IResourceReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified ResourceReference message, length delimited. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
+             * @param message ResourceReference message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.IResourceReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a ResourceReference message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns ResourceReference
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.ResourceReference;
+
+            /**
+             * Decodes a ResourceReference message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns ResourceReference
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.ResourceReference;
+
+            /**
+             * Verifies a ResourceReference message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a ResourceReference message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns ResourceReference
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.ResourceReference;
+
+            /**
+             * Creates a plain object from a ResourceReference message. Also converts values to other types if specified.
+             * @param message ResourceReference
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.ResourceReference, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this ResourceReference to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
         }
     }
 
@@ -7129,6 +7406,9 @@ export namespace google {
 
             /** FileOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
+
+            /** FileOptions .google.api.resourceDefinition */
+            ".google.api.resourceDefinition"?: (google.api.IResourceDescriptor[]|null);
         }
 
         /** Represents a FileOptions. */
@@ -7301,6 +7581,9 @@ export namespace google {
 
             /** MessageOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
+
+            /** MessageOptions .google.api.resource */
+            ".google.api.resource"?: (google.api.IResourceDescriptor|null);
         }
 
         /** Represents a MessageOptions. */
@@ -7424,6 +7707,9 @@ export namespace google {
 
             /** FieldOptions .google.api.fieldBehavior */
             ".google.api.fieldBehavior"?: (google.api.FieldBehavior[]|null);
+
+            /** FieldOptions .google.api.resourceReference */
+            ".google.api.resourceReference"?: (google.api.IResourceReference|null);
         }
 
         /** Represents a FieldOptions. */
@@ -8959,6 +9245,96 @@ export namespace google {
 
             /**
              * Converts this Empty to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+        }
+
+        /** Properties of a FieldMask. */
+        interface IFieldMask {
+
+            /** FieldMask paths */
+            paths?: (string[]|null);
+        }
+
+        /** Represents a FieldMask. */
+        class FieldMask implements IFieldMask {
+
+            /**
+             * Constructs a new FieldMask.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.protobuf.IFieldMask);
+
+            /** FieldMask paths. */
+            public paths: string[];
+
+            /**
+             * Creates a new FieldMask instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns FieldMask instance
+             */
+            public static create(properties?: google.protobuf.IFieldMask): google.protobuf.FieldMask;
+
+            /**
+             * Encodes the specified FieldMask message. Does not implicitly {@link google.protobuf.FieldMask.verify|verify} messages.
+             * @param message FieldMask message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.protobuf.IFieldMask, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified FieldMask message, length delimited. Does not implicitly {@link google.protobuf.FieldMask.verify|verify} messages.
+             * @param message FieldMask message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.protobuf.IFieldMask, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a FieldMask message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns FieldMask
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.FieldMask;
+
+            /**
+             * Decodes a FieldMask message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns FieldMask
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.FieldMask;
+
+            /**
+             * Verifies a FieldMask message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a FieldMask message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns FieldMask
+             */
+            public static fromObject(object: { [k: string]: any }): google.protobuf.FieldMask;
+
+            /**
+             * Creates a plain object from a FieldMask message. Also converts values to other types if specified.
+             * @param message FieldMask
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.protobuf.FieldMask, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this FieldMask to JSON.
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
