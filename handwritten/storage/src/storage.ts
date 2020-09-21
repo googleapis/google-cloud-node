@@ -83,6 +83,7 @@ export interface CreateBucketRequest {
   requesterPays?: boolean;
   retentionPolicy?: object;
   standard?: boolean;
+  storageClass?: string;
   userProject?: string;
   location?: string;
   versioning?: Versioning;
