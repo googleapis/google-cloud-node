@@ -172,7 +172,7 @@ const _createSingleFeatureMethod = (
       {}
     >
   ) {
-    // Sanity check: If we got a string or buffer, we need this to be
+    // confidence check: If we got a string or buffer, we need this to be
     // in object form now, so we can tack on the features list.
     //
     // Do the minimum required conversion, which can also be guaranteed to
