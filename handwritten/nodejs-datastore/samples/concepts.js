@@ -981,7 +981,7 @@ async function transferFunds(fromKey, toKey, amount) {
     },
   ]);
 
-  return transaction.commit();
+  return await transaction.commit();
 }
 // [END datastore_transactional_update]
 
@@ -1106,7 +1106,7 @@ class Transaction extends TestHelper {
         } else {
           // Create the task entity.
           transaction.save(taskEntity);
-          transaction.commit();
+          await transaction.commit();
         }
         return taskEntity;
       } catch (err) {
