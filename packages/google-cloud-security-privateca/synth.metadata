@@ -1,0 +1,37 @@
+{
+  "sources": [
+    {
+      "git": {
+        "name": ".",
+        "remote": "sso://user/sofialeon/nodejs-security-private-ca",
+        "sha": "daa55eda7900769d3623ed87cec6dd351bcdb1e3"
+      }
+    },
+    {
+      "git": {
+        "name": "googleapis",
+        "remote": "https://github.com/googleapis/googleapis.git",
+        "sha": "3dbeac0d54125b123c8dfd39c774b37473c36944",
+        "internalRef": "333159182"
+      }
+    },
+    {
+      "git": {
+        "name": "synthtool",
+        "remote": "https://github.com/googleapis/synthtool.git",
+        "sha": "ca095b986918ebf96b6a644bf963131851309bda"
+      }
+    }
+  ],
+  "destinations": [
+    {
+      "client": {
+        "source": "googleapis",
+        "apiName": "privateca",
+        "apiVersion": "v1beta1",
+        "language": "nodejs",
+        "generator": "bazel"
+      }
+    }
+  ]
+}
