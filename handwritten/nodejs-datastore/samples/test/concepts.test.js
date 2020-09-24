@@ -43,9 +43,19 @@ describe('concepts', () => {
 
   after(async () => {
     const datastore = transaction.datastore;
-    const query = datastore.createQuery('Task').select('__key__');
+    const query = datastore.createQuery('__kind__').select('__key__');
     const [entities] = await datastore.runQuery(query);
-    await datastore.delete(entities.map(entity => entity[datastore.KEY]));
+    const testKinds = entities.map(entity => entity[datastore.KEY].name);
+
+    async function deleteEntities(kind) {
+      const query = datastore.createQuery(kind).select('__key__');
+      const [entities] = await datastore.runQuery(query);
+      const keys = entities.map(entity => {
+        return entity[datastore.KEY];
+      });
+      await datastore.delete(keys);
+    }
+    await Promise.all(testKinds.map(kind => deleteEntities(kind)));
   });
 
   // Transactions
