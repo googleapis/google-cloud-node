@@ -39,10 +39,12 @@ let datastore = {
   save: makeStub(),
 };
 
+const namespace = `${Date.now()}`;
 class TestHelper {
   constructor(projectId) {
     const options = {
       projectId: projectId,
+      namespace,
     };
     this.datastore = new Datastore(options);
   }
@@ -53,6 +55,7 @@ class Entity extends TestHelper {
     super(projectId);
     // To create the keys, we have to use this instance of Datastore.
     datastore.key = this.datastore.key;
+    datastore.namespace = this.datastore.namespace;
 
     this.incompleteKey = this.getIncompleteKey();
     this.namedKey = this.getNamedKey();
