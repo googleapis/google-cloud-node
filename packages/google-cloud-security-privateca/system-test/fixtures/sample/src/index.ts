@@ -16,7 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {CertificateAuthorityServiceClient} from 'privateca';
+import {CertificateAuthorityServiceClient} from '@google-cloud/security-private-ca';
 
 function main() {
   new CertificateAuthorityServiceClient();

@@ -3,7 +3,7 @@
   "name_pretty": "Google Cloud Certificate Authority",
   "product_documentation": "https://cloud.google.com/certificate-authority-service",
   "client_documentation": "https://googleapis.dev/nodejs/security-private-ca/latest/index.html",
-  "issue_tracker": "",
+  "issue_tracker": "https://b.corp.google.com/components/402191#basic",
   "release_level": "beta",
   "language": "nodejs",
   "repo": "googleapis/nodejs-security-private-ca",
