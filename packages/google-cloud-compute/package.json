@@ -52,20 +52,19 @@
     "string-format-obj": "^1.1.1"
   },
   "devDependencies": {
+    "@microsoft/api-documenter": "^7.8.10",
+    "@microsoft/api-extractor": "^7.8.10",
+    "c8": "^7.0.0",
     "codecov": "^3.0.2",
     "concat-stream": "^2.0.0",
-    "gts": "^2.0.0",
+    "gts": "^2.0.2",
     "jsdoc": "^3.6.2",
     "jsdoc-fresh": "^1.0.1",
     "jsdoc-region-tag": "^1.0.2",
     "linkinator": "^2.0.0",
     "mocha": "^8.0.0",
-    "c8": "^7.0.0",
-    "prettier": "^1.13.5",
     "proxyquire": "^2.0.1",
-    "uuid": "^8.0.0",
     "typescript": "^3.8.3",
-    "@microsoft/api-documenter": "^7.8.10",
-    "@microsoft/api-extractor": "^7.8.10"
+    "uuid": "^8.0.0"
   }
 }

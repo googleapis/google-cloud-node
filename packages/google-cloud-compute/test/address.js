@@ -21,7 +21,7 @@ const promisify = require('@google-cloud/promisify');
 
 let promisified = false;
 const fakePromisify = Object.assign({}, promisify, {
-  promisifyAll: function(Class) {
+  promisifyAll: function (Class) {
     if (Class.name === 'Address') {
       promisified = true;
     }
@@ -74,7 +74,7 @@ describe('Address', () => {
     it('should inherit from ServiceObject', done => {
       const regionInstance = Object.assign({}, REGION, {
         createAddress: {
-          bind: function(context) {
+          bind: function (context) {
             assert.strictEqual(context, regionInstance);
             done();
           },
@@ -100,7 +100,7 @@ describe('Address', () => {
 
   describe('delete', () => {
     it('should make the correct API request', done => {
-      address.request = function(reqOpts) {
+      address.request = function (reqOpts) {
         assert.strictEqual(reqOpts.method, 'DELETE');
         assert.strictEqual(reqOpts.uri, '');
         done();
@@ -114,7 +114,7 @@ describe('Address', () => {
       const apiResponse = {a: 'b', c: 'd'};
 
       beforeEach(() => {
-        address.request = function(reqOpts, callback) {
+        address.request = function (reqOpts, callback) {
           callback(error, apiResponse);
         };
       });
@@ -141,7 +141,7 @@ describe('Address', () => {
       };
 
       beforeEach(() => {
-        address.request = function(reqOpts, callback) {
+        address.request = function (reqOpts, callback) {
           callback(null, apiResponse);
         };
       });
@@ -149,7 +149,7 @@ describe('Address', () => {
       it('should execute callback with Operation & Response', done => {
         const operation = {};
 
-        address.region.operation = function(name) {
+        address.region.operation = function (name) {
           assert.strictEqual(name, apiResponse.name);
           return operation;
         };

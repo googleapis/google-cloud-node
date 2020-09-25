@@ -2272,7 +2272,7 @@ class Compute extends common.Service {
    * @returns {object} callback.apiResponse - The operation's final API response.
    */
   execAfterOperation_(callback) {
-    return function(err) {
+    return function (err) {
       // arguments = [..., op, apiResponse]
       const operation = arguments[arguments.length - 2];
       const apiResponse = arguments[arguments.length - 1];

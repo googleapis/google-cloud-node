@@ -23,7 +23,7 @@ const promisify = require('@google-cloud/promisify');
 
 let promisified = false;
 const fakePromisify = Object.assign({}, promisify, {
-  promisifyAll: function(Class, options) {
+  promisifyAll: function (Class, options) {
     if (Class.name !== 'Zone') {
       return;
     }
@@ -50,7 +50,7 @@ function FakeDisk() {
 }
 
 let formatPortsOverride;
-FakeInstanceGroup.formatPorts_ = function() {
+FakeInstanceGroup.formatPorts_ = function () {
   return (formatPortsOverride || util.noop).apply(null, arguments);
 };
 
@@ -84,7 +84,7 @@ class FakeServiceObject extends ServiceObject {
 let extended = false;
 const fakePaginator = {
   paginator: {
-    extend: function(Class, methods) {
+    extend: function (Class, methods) {
       if (Class.name !== 'Zone') {
         return;
       }
@@ -102,7 +102,7 @@ const fakePaginator = {
         'getVMs',
       ]);
     },
-    streamify: function(methodName) {
+    streamify: function (methodName) {
       return methodName;
     },
   },
@@ -218,7 +218,7 @@ describe('Zone', () => {
         target: TARGET,
       };
 
-      zone.request = function(reqOpts) {
+      zone.request = function (reqOpts) {
         assert.strictEqual(reqOpts.json.name, NAME);
         done();
       };
@@ -235,7 +235,7 @@ describe('Zone', () => {
         target: TARGET,
       };
 
-      zone.request = function(reqOpts) {
+      zone.request = function (reqOpts) {
         const policy = reqOpts.json.autoscalingPolicy;
         assert.deepStrictEqual(policy, config.autoscalingPolicy);
         done();
@@ -250,7 +250,7 @@ describe('Zone', () => {
           target: 'http://my-target',
         };
 
-        zone.request = function(reqOpts) {
+        zone.request = function (reqOpts) {
           assert.strictEqual(reqOpts.json.target, config.target);
           done();
         };
@@ -263,7 +263,7 @@ describe('Zone', () => {
           target: 'https://my-target',
         };
 
-        zone.request = function(reqOpts) {
+        zone.request = function (reqOpts) {
           assert.strictEqual(reqOpts.json.target, config.target);
           done();
         };
@@ -276,7 +276,7 @@ describe('Zone', () => {
           target: 'my-target',
         };
 
-        zone.request = function(reqOpts) {
+        zone.request = function (reqOpts) {
           const expectedTarget = [
             'https://content.googleapis.com/compute/v1/projects/',
             COMPUTE.projectId,
@@ -302,7 +302,7 @@ describe('Zone', () => {
           target: TARGET,
         };
 
-        zone.request = function(reqOpts) {
+        zone.request = function (reqOpts) {
           const policy = reqOpts.json.autoscalingPolicy;
           assert.strictEqual(policy.coolDownPeriodSec, config.coolDown);
           assert.strictEqual(reqOpts.coolDown, undefined);
@@ -320,7 +320,7 @@ describe('Zone', () => {
           target: TARGET,
         };
 
-        zone.request = function(reqOpts) {
+        zone.request = function (reqOpts) {
           const policy = reqOpts.json.autoscalingPolicy;
           const cpu = policy.cpuUtilization;
           assert.strictEqual(cpu.utilizationTarget, config.cpu / 100);
@@ -339,7 +339,7 @@ describe('Zone', () => {
           target: TARGET,
         };
 
-        zone.request = function(reqOpts) {
+        zone.request = function (reqOpts) {
           const policy = reqOpts.json.autoscalingPolicy;
           const lb = policy.loadBalancingUtilization;
           assert.strictEqual(lb.utilizationTarget, config.loadBalance / 100);
@@ -358,7 +358,7 @@ describe('Zone', () => {
           target: TARGET,
         };
 
-        zone.request = function(reqOpts) {
+        zone.request = function (reqOpts) {
           const policy = reqOpts.json.autoscalingPolicy;
           assert.strictEqual(policy.maxNumReplicas, config.maxReplicas);
           assert.strictEqual(reqOpts.maxReplicas, undefined);
@@ -376,7 +376,7 @@ describe('Zone', () => {
           target: TARGET,
         };
 
-        zone.request = function(reqOpts) {
+        zone.request = function (reqOpts) {
           const policy = reqOpts.json.autoscalingPolicy;
           assert.strictEqual(policy.minNumReplicas, config.minReplicas);
           assert.strictEqual(reqOpts.minReplicas, undefined);
@@ -403,7 +403,7 @@ describe('Zone', () => {
       };
 
       it('should make the correct API request', done => {
-        zone.request = function(reqOpts) {
+        zone.request = function (reqOpts) {
           assert.strictEqual(reqOpts.method, 'POST');
           assert.strictEqual(reqOpts.uri, '/autoscalers');
           assert.deepStrictEqual(reqOpts.json, expectedBody);
@@ -419,7 +419,7 @@ describe('Zone', () => {
         const apiResponse = {a: 'b', c: 'd'};
 
         beforeEach(() => {
-          zone.request = function(reqOpts, callback) {
+          zone.request = function (reqOpts, callback) {
             callback(error, apiResponse);
           };
         });
@@ -439,7 +439,7 @@ describe('Zone', () => {
         const apiResponse = {name: 'operation-name'};
 
         beforeEach(() => {
-          zone.request = function(reqOpts, callback) {
+          zone.request = function (reqOpts, callback) {
             callback(null, apiResponse);
           };
         });
@@ -448,12 +448,12 @@ describe('Zone', () => {
           const autoscaler = {};
           const operation = {};
 
-          zone.autoscaler = function(name) {
+          zone.autoscaler = function (name) {
             assert.strictEqual(name, NAME);
             return autoscaler;
           };
 
-          zone.operation = function(name) {
+          zone.operation = function (name) {
             assert.strictEqual(name, apiResponse.name);
             return operation;
           };
@@ -486,7 +486,7 @@ describe('Zone', () => {
         image: 'abc',
       };
 
-      zone.request = function(reqOpts) {
+      zone.request = function (reqOpts) {
         assert.strictEqual(reqOpts.qs.sourceImage, config.image);
         done();
       };
@@ -500,7 +500,7 @@ describe('Zone', () => {
       };
 
       it('should get the latest image', done => {
-        zone.gceImages.getLatest = function(os) {
+        zone.gceImages.getLatest = function (os) {
           assert.strictEqual(os, CONFIG.os);
           done();
         };
@@ -512,7 +512,7 @@ describe('Zone', () => {
         const error = new Error('Error.');
 
         beforeEach(() => {
-          zone.gceImages.getLatest = function(os, callback) {
+          zone.gceImages.getLatest = function (os, callback) {
             callback(error);
           };
         });
@@ -536,8 +536,8 @@ describe('Zone', () => {
         };
 
         it('should call createDisk with the correct config', done => {
-          zone.gceImages.getLatest = function(os, callback) {
-            zone.createDisk = function(name, config, callback) {
+          zone.gceImages.getLatest = function (os, callback) {
+            zone.createDisk = function (name, config, callback) {
               assert.strictEqual(name, NAME);
               assert.deepStrictEqual(config, expectedConfig);
               callback();
@@ -564,7 +564,7 @@ describe('Zone', () => {
       };
 
       it('should make the correct API request', done => {
-        zone.request = function(reqOpts) {
+        zone.request = function (reqOpts) {
           assert.strictEqual(reqOpts.method, 'POST');
           assert.strictEqual(reqOpts.uri, '/disks');
           assert.deepStrictEqual(reqOpts.qs, {});
@@ -581,7 +581,7 @@ describe('Zone', () => {
         const apiResponse = {a: 'b', c: 'd'};
 
         beforeEach(() => {
-          zone.request = function(reqOpts, callback) {
+          zone.request = function (reqOpts, callback) {
             callback(error, apiResponse);
           };
         });
@@ -601,7 +601,7 @@ describe('Zone', () => {
         const apiResponse = {name: 'operation-name'};
 
         beforeEach(() => {
-          zone.request = function(reqOpts, callback) {
+          zone.request = function (reqOpts, callback) {
             callback(null, apiResponse);
           };
         });
@@ -610,12 +610,12 @@ describe('Zone', () => {
           const disk = {};
           const operation = {};
 
-          zone.disk = function(name) {
+          zone.disk = function (name) {
             assert.strictEqual(name, NAME);
             return disk;
           };
 
-          zone.operation = function(name) {
+          zone.operation = function (name) {
             assert.strictEqual(name, apiResponse.name);
             return operation;
           };
@@ -652,12 +652,12 @@ describe('Zone', () => {
       it('should format named ports', done => {
         const expectedNamedPorts = [];
 
-        formatPortsOverride = function(ports) {
+        formatPortsOverride = function (ports) {
           assert.strictEqual(ports, PORTS);
           return expectedNamedPorts;
         };
 
-        zone.request = function(reqOpts) {
+        zone.request = function (reqOpts) {
           assert.strictEqual(reqOpts.json.namedPorts, expectedNamedPorts);
           assert.strictEqual(reqOpts.json.ports, undefined);
           done();
@@ -680,7 +680,7 @@ describe('Zone', () => {
       };
 
       it('should make the correct API request', done => {
-        zone.request = function(reqOpts) {
+        zone.request = function (reqOpts) {
           assert.strictEqual(reqOpts.method, 'POST');
           assert.strictEqual(reqOpts.uri, '/instanceGroups');
           assert.deepStrictEqual(reqOpts.json, expectedBody);
@@ -692,7 +692,7 @@ describe('Zone', () => {
       });
 
       it('should not require options', done => {
-        zone.request = function(reqOpts) {
+        zone.request = function (reqOpts) {
           assert.deepStrictEqual(reqOpts.json, {name: NAME});
           done();
         };
@@ -705,7 +705,7 @@ describe('Zone', () => {
         const apiResponse = {a: 'b', c: 'd'};
 
         beforeEach(() => {
-          zone.request = function(reqOpts, callback) {
+          zone.request = function (reqOpts, callback) {
             callback(error, apiResponse);
           };
         });
@@ -725,7 +725,7 @@ describe('Zone', () => {
         const apiResponse = {name: 'operation-name'};
 
         beforeEach(() => {
-          zone.request = function(reqOpts, callback) {
+          zone.request = function (reqOpts, callback) {
             callback(null, apiResponse);
           };
         });
@@ -734,12 +734,12 @@ describe('Zone', () => {
           const instanceGroup = {};
           const operation = {};
 
-          zone.instanceGroup = function(name) {
+          zone.instanceGroup = function (name) {
             assert.strictEqual(name, NAME);
             return instanceGroup;
           };
 
-          zone.operation = function(name) {
+          zone.operation = function (name) {
             assert.strictEqual(name, apiResponse.name);
             return operation;
           };
@@ -781,7 +781,7 @@ describe('Zone', () => {
       };
 
       it('should format a given machine type', done => {
-        zone.request = function(reqOpts) {
+        zone.request = function (reqOpts) {
           assert.strictEqual(
             reqOpts.json.machineType,
             'zones/' + ZONE_NAME + '/machineTypes/' + CONFIG.machineType
@@ -799,7 +799,7 @@ describe('Zone', () => {
       };
 
       it('should accept an array of tags', done => {
-        zone.request = function(reqOpts) {
+        zone.request = function (reqOpts) {
           assert.deepStrictEqual(reqOpts.json.tags.items, CONFIG.tags);
           done();
         };
@@ -814,7 +814,7 @@ describe('Zone', () => {
       };
 
       beforeEach(() => {
-        zone.createHttpServerFirewall_ = function(callback) {
+        zone.createHttpServerFirewall_ = function (callback) {
           callback();
         };
       });
@@ -822,7 +822,7 @@ describe('Zone', () => {
       it('should execute cb with error from creating firewall', done => {
         const error = new Error('Error.');
 
-        zone.createHttpServerFirewall_ = function(callback) {
+        zone.createHttpServerFirewall_ = function (callback) {
           callback(error);
         };
 
@@ -833,7 +833,7 @@ describe('Zone', () => {
       });
 
       it('should create a firewall rule', done => {
-        zone.createHttpServerFirewall_ = function() {
+        zone.createHttpServerFirewall_ = function () {
           done();
         };
 
@@ -841,7 +841,7 @@ describe('Zone', () => {
       });
 
       it('should add a network interface accessConfig', done => {
-        zone.request = function(reqOpts) {
+        zone.request = function (reqOpts) {
           assert.deepStrictEqual(
             reqOpts.json.networkInterfaces[0].accessConfigs[0],
             {
@@ -855,7 +855,7 @@ describe('Zone', () => {
       });
 
       it('should add an http tag', done => {
-        zone.request = function(reqOpts) {
+        zone.request = function (reqOpts) {
           assert(reqOpts.json.tags.items.indexOf('http-server') > -1);
           done();
         };
@@ -873,7 +873,7 @@ describe('Zone', () => {
 
         const expectedTags = ['a', 'b', 'http-server'];
 
-        zone.request = function(reqOpts) {
+        zone.request = function (reqOpts) {
           assert.deepStrictEqual(reqOpts.json.tags.items, expectedTags);
           done();
         };
@@ -882,7 +882,7 @@ describe('Zone', () => {
       });
 
       it('should delete the https property', done => {
-        zone.request = function(reqOpts) {
+        zone.request = function (reqOpts) {
           assert.strictEqual(reqOpts.json.https, undefined);
           done();
         };
@@ -897,7 +897,7 @@ describe('Zone', () => {
       };
 
       beforeEach(() => {
-        zone.createHttpsServerFirewall_ = function(callback) {
+        zone.createHttpsServerFirewall_ = function (callback) {
           callback();
         };
       });
@@ -905,7 +905,7 @@ describe('Zone', () => {
       it('should execute cb with error from creating firewall', done => {
         const error = new Error('Error.');
 
-        zone.createHttpsServerFirewall_ = function(callback) {
+        zone.createHttpsServerFirewall_ = function (callback) {
           callback(error);
         };
 
@@ -916,7 +916,7 @@ describe('Zone', () => {
       });
 
       it('should create a firewall rule', done => {
-        zone.createHttpsServerFirewall_ = function() {
+        zone.createHttpsServerFirewall_ = function () {
           done();
         };
 
@@ -924,7 +924,7 @@ describe('Zone', () => {
       });
 
       it('should add a network interface accessConfig', done => {
-        zone.request = function(reqOpts) {
+        zone.request = function (reqOpts) {
           assert.deepStrictEqual(
             reqOpts.json.networkInterfaces[0].accessConfigs[0],
             {
@@ -938,7 +938,7 @@ describe('Zone', () => {
       });
 
       it('should add an https tag', done => {
-        zone.request = function(reqOpts) {
+        zone.request = function (reqOpts) {
           assert(reqOpts.json.tags.items.indexOf('https-server') > -1);
           done();
         };
@@ -956,7 +956,7 @@ describe('Zone', () => {
 
         const expectedTags = ['a', 'b', 'https-server'];
 
-        zone.request = function(reqOpts) {
+        zone.request = function (reqOpts) {
           assert.deepStrictEqual(reqOpts.json.tags.items, expectedTags);
           done();
         };
@@ -965,7 +965,7 @@ describe('Zone', () => {
       });
 
       it('should delete the https property', done => {
-        zone.request = function(reqOpts) {
+        zone.request = function (reqOpts) {
           assert.strictEqual(reqOpts.json.https, undefined);
           done();
         };
@@ -980,7 +980,7 @@ describe('Zone', () => {
       };
 
       it('should get the latest image', done => {
-        zone.gceImages.getLatest = function(os) {
+        zone.gceImages.getLatest = function (os) {
           assert.strictEqual(os, CONFIG.os);
           done();
         };
@@ -992,7 +992,7 @@ describe('Zone', () => {
         const error = new Error('Error.');
 
         beforeEach(() => {
-          zone.gceImages.getLatest = function(os, callback) {
+          zone.gceImages.getLatest = function (os, callback) {
             callback(error);
           };
         });
@@ -1023,8 +1023,8 @@ describe('Zone', () => {
         });
 
         it('should call createVM with the correct config', done => {
-          zone.gceImages.getLatest = function(os, callback) {
-            zone.createVM = function(name, config, callback) {
+          zone.gceImages.getLatest = function (os, callback) {
+            zone.createVM = function (name, config, callback) {
               assert.strictEqual(name, NAME);
               assert.deepStrictEqual(config, expectedConfig);
               callback();
@@ -1040,7 +1040,7 @@ describe('Zone', () => {
 
     describe('API request', () => {
       it('should make the correct API request', done => {
-        zone.request = function(reqOpts) {
+        zone.request = function (reqOpts) {
           assert.strictEqual(reqOpts.method, 'POST');
           assert.strictEqual(reqOpts.uri, '/instances');
           assert.deepStrictEqual(reqOpts.json, EXPECTED_CONFIG);
@@ -1056,7 +1056,7 @@ describe('Zone', () => {
         const apiResponse = {a: 'b', c: 'd'};
 
         beforeEach(() => {
-          zone.request = function(reqOpts, callback) {
+          zone.request = function (reqOpts, callback) {
             callback(error, apiResponse);
           };
         });
@@ -1076,7 +1076,7 @@ describe('Zone', () => {
         const apiResponse = {name: 'operation-name'};
 
         beforeEach(() => {
-          zone.request = function(reqOpts, callback) {
+          zone.request = function (reqOpts, callback) {
             callback(null, apiResponse);
           };
         });
@@ -1085,12 +1085,12 @@ describe('Zone', () => {
           const vm = {};
           const operation = {};
 
-          zone.vm = function(name) {
+          zone.vm = function (name) {
             assert.strictEqual(name, NAME);
             return vm;
           };
 
-          zone.operation = function(name) {
+          zone.operation = function (name) {
             assert.strictEqual(name, apiResponse.name);
             return operation;
           };
@@ -1124,7 +1124,7 @@ describe('Zone', () => {
 
   describe('getAutoscalers', () => {
     it('should accept only a callback', done => {
-      zone.request = function(reqOpts) {
+      zone.request = function (reqOpts) {
         assert.deepStrictEqual(reqOpts.qs, {});
         done();
       };
@@ -1135,7 +1135,7 @@ describe('Zone', () => {
     it('should make the correct API request', done => {
       const query = {a: 'b', c: 'd'};
 
-      zone.request = function(reqOpts) {
+      zone.request = function (reqOpts) {
         assert.strictEqual(reqOpts.uri, '/autoscalers');
         assert.strictEqual(reqOpts.qs, query);
 
@@ -1150,7 +1150,7 @@ describe('Zone', () => {
       const apiResponse = {a: 'b', c: 'd'};
 
       beforeEach(() => {
-        zone.request = function(reqOpts, callback) {
+        zone.request = function (reqOpts, callback) {
           callback(error, apiResponse);
         };
       });
@@ -1172,7 +1172,7 @@ describe('Zone', () => {
       };
 
       beforeEach(() => {
-        zone.request = function(reqOpts, callback) {
+        zone.request = function (reqOpts, callback) {
           callback(null, apiResponse);
         };
       });
@@ -1186,7 +1186,7 @@ describe('Zone', () => {
           pageToken: nextPageToken,
         };
 
-        zone.request = function(reqOpts, callback) {
+        zone.request = function (reqOpts, callback) {
           callback(null, apiResponseWithNextPageToken);
         };
 
@@ -1202,7 +1202,7 @@ describe('Zone', () => {
       it('should execute callback with Autoscalers & API resp', done => {
         const autoscaler = {};
 
-        zone.autoscaler = function(name) {
+        zone.autoscaler = function (name) {
           assert.strictEqual(name, apiResponse.items[0].name);
           return autoscaler;
         };
@@ -1223,7 +1223,7 @@ describe('Zone', () => {
 
   describe('getDisks', () => {
     it('should accept only a callback', done => {
-      zone.request = function(reqOpts) {
+      zone.request = function (reqOpts) {
         assert.deepStrictEqual(reqOpts.qs, {});
         done();
       };
@@ -1234,7 +1234,7 @@ describe('Zone', () => {
     it('should make the correct API request', done => {
       const query = {a: 'b', c: 'd'};
 
-      zone.request = function(reqOpts) {
+      zone.request = function (reqOpts) {
         assert.strictEqual(reqOpts.uri, '/disks');
         assert.strictEqual(reqOpts.qs, query);
 
@@ -1249,7 +1249,7 @@ describe('Zone', () => {
       const apiResponse = {a: 'b', c: 'd'};
 
       beforeEach(() => {
-        zone.request = function(reqOpts, callback) {
+        zone.request = function (reqOpts, callback) {
           callback(error, apiResponse);
         };
       });
@@ -1271,7 +1271,7 @@ describe('Zone', () => {
       };
 
       beforeEach(() => {
-        zone.request = function(reqOpts, callback) {
+        zone.request = function (reqOpts, callback) {
           callback(null, apiResponse);
         };
       });
@@ -1285,7 +1285,7 @@ describe('Zone', () => {
           pageToken: nextPageToken,
         };
 
-        zone.request = function(reqOpts, callback) {
+        zone.request = function (reqOpts, callback) {
           callback(null, apiResponseWithNextPageToken);
         };
 
@@ -1301,7 +1301,7 @@ describe('Zone', () => {
       it('should execute callback with Disks & API resp', done => {
         const disk = {};
 
-        zone.disk = function(name) {
+        zone.disk = function (name) {
           assert.strictEqual(name, apiResponse.items[0].name);
           return disk;
         };
@@ -1322,7 +1322,7 @@ describe('Zone', () => {
 
   describe('getInstanceGroups', () => {
     it('should accept only a callback', done => {
-      zone.request = function(reqOpts) {
+      zone.request = function (reqOpts) {
         assert.deepStrictEqual(reqOpts.qs, {});
         done();
       };
@@ -1333,7 +1333,7 @@ describe('Zone', () => {
     it('should make the correct API request', done => {
       const query = {a: 'b', c: 'd'};
 
-      zone.request = function(reqOpts) {
+      zone.request = function (reqOpts) {
         assert.strictEqual(reqOpts.uri, '/instanceGroups');
         assert.strictEqual(reqOpts.qs, query);
 
@@ -1348,7 +1348,7 @@ describe('Zone', () => {
       const apiResponse = {a: 'b', c: 'd'};
 
       beforeEach(() => {
-        zone.request = function(reqOpts, callback) {
+        zone.request = function (reqOpts, callback) {
           callback(error, apiResponse);
         };
       });
@@ -1370,7 +1370,7 @@ describe('Zone', () => {
       };
 
       beforeEach(() => {
-        zone.request = function(reqOpts, callback) {
+        zone.request = function (reqOpts, callback) {
           callback(null, apiResponse);
         };
       });
@@ -1384,7 +1384,7 @@ describe('Zone', () => {
           pageToken: nextPageToken,
         };
 
-        zone.request = function(reqOpts, callback) {
+        zone.request = function (reqOpts, callback) {
           callback(null, apiResponseWithNextPageToken);
         };
 
@@ -1400,7 +1400,7 @@ describe('Zone', () => {
       it('should execute callback with Groups & API resp', done => {
         const group = {};
 
-        zone.instanceGroup = function(name) {
+        zone.instanceGroup = function (name) {
           assert.strictEqual(name, apiResponse.items[0].name);
           return group;
         };
@@ -1421,7 +1421,7 @@ describe('Zone', () => {
 
   describe('getInstanceGroupManagers', () => {
     it('should accept only a callback', done => {
-      zone.request = function(reqOpts) {
+      zone.request = function (reqOpts) {
         assert.deepStrictEqual(reqOpts.qs, {});
         done();
       };
@@ -1432,7 +1432,7 @@ describe('Zone', () => {
     it('should make the correct API request', done => {
       const query = {a: 'b', c: 'd'};
 
-      zone.request = function(reqOpts) {
+      zone.request = function (reqOpts) {
         assert.strictEqual(reqOpts.uri, '/instanceGroupManagers');
         assert.strictEqual(reqOpts.qs, query);
 
@@ -1447,7 +1447,7 @@ describe('Zone', () => {
       const apiResponse = {a: 'b', c: 'd'};
 
       beforeEach(() => {
-        zone.request = function(reqOpts, callback) {
+        zone.request = function (reqOpts, callback) {
           callback(error, apiResponse);
         };
       });
@@ -1469,7 +1469,7 @@ describe('Zone', () => {
       };
 
       beforeEach(() => {
-        zone.request = function(reqOpts, callback) {
+        zone.request = function (reqOpts, callback) {
           callback(null, apiResponse);
         };
       });
@@ -1483,7 +1483,7 @@ describe('Zone', () => {
           pageToken: nextPageToken,
         };
 
-        zone.request = function(reqOpts, callback) {
+        zone.request = function (reqOpts, callback) {
           callback(null, apiResponseWithNextPageToken);
         };
 
@@ -1499,7 +1499,7 @@ describe('Zone', () => {
       it('should execute callback with Groups & API resp', done => {
         const group = {};
 
-        zone.instanceGroupManager = function(name) {
+        zone.instanceGroupManager = function (name) {
           assert.strictEqual(name, apiResponse.items[0].name);
           return group;
         };
@@ -1525,7 +1525,7 @@ describe('Zone', () => {
         filter: 'zone eq .*' + zone.name,
       });
 
-      zone.compute.getMachineTypes = function(options, callback) {
+      zone.compute.getMachineTypes = function (options, callback) {
         assert.deepStrictEqual(options, expectedOptions);
         callback();
       };
@@ -1534,7 +1534,7 @@ describe('Zone', () => {
     });
 
     it('should not require options', done => {
-      zone.compute.getMachineTypes = function(options, callback) {
+      zone.compute.getMachineTypes = function (options, callback) {
         callback();
       };
 
@@ -1542,7 +1542,7 @@ describe('Zone', () => {
     });
 
     it('should not require any arguments', done => {
-      zone.compute.getMachineTypes = function(options, callback) {
+      zone.compute.getMachineTypes = function (options, callback) {
         assert.deepStrictEqual(options, {
           filter: 'zone eq .*' + zone.name,
         });
@@ -1556,7 +1556,7 @@ describe('Zone', () => {
     it('should return the result of compute.getMachineTypes', () => {
       const resultOfGetMachineTypes = {};
 
-      zone.compute.getMachineTypes = function() {
+      zone.compute.getMachineTypes = function () {
         return resultOfGetMachineTypes;
       };
 
@@ -1566,7 +1566,7 @@ describe('Zone', () => {
 
   describe('getOperations', () => {
     it('should accept only a callback', done => {
-      zone.request = function(reqOpts) {
+      zone.request = function (reqOpts) {
         assert.deepStrictEqual(reqOpts.qs, {});
         done();
       };
@@ -1577,7 +1577,7 @@ describe('Zone', () => {
     it('should make the correct API request', done => {
       const query = {a: 'b', c: 'd'};
 
-      zone.request = function(reqOpts) {
+      zone.request = function (reqOpts) {
         assert.strictEqual(reqOpts.uri, '/operations');
         assert.strictEqual(reqOpts.qs, query);
 
@@ -1592,7 +1592,7 @@ describe('Zone', () => {
       const apiResponse = {a: 'b', c: 'd'};
 
       beforeEach(() => {
-        zone.request = function(reqOpts, callback) {
+        zone.request = function (reqOpts, callback) {
           callback(error, apiResponse);
         };
       });
@@ -1613,7 +1613,7 @@ describe('Zone', () => {
       };
 
       beforeEach(() => {
-        zone.request = function(reqOpts, callback) {
+        zone.request = function (reqOpts, callback) {
           callback(null, apiResponse);
         };
       });
@@ -1627,7 +1627,7 @@ describe('Zone', () => {
           pageToken: nextPageToken,
         };
 
-        zone.request = function(reqOpts, callback) {
+        zone.request = function (reqOpts, callback) {
           callback(null, apiResponseWithNextPageToken);
         };
 
@@ -1643,7 +1643,7 @@ describe('Zone', () => {
       it('should execute callback with Operations & API resp', done => {
         const operation = {};
 
-        zone.operation = function(name) {
+        zone.operation = function (name) {
           assert.strictEqual(name, apiResponse.items[0].name);
           return operation;
         };
@@ -1664,7 +1664,7 @@ describe('Zone', () => {
 
   describe('getVMs', () => {
     it('should accept only a callback', done => {
-      zone.request = function(reqOpts) {
+      zone.request = function (reqOpts) {
         assert.deepStrictEqual(reqOpts.qs, {});
         done();
       };
@@ -1675,7 +1675,7 @@ describe('Zone', () => {
     it('should make the correct API request', done => {
       const query = {a: 'b', c: 'd'};
 
-      zone.request = function(reqOpts) {
+      zone.request = function (reqOpts) {
         assert.strictEqual(reqOpts.uri, '/instances');
         assert.strictEqual(reqOpts.qs, query);
 
@@ -1690,7 +1690,7 @@ describe('Zone', () => {
       const apiResponse = {a: 'b', c: 'd'};
 
       beforeEach(() => {
-        zone.request = function(reqOpts, callback) {
+        zone.request = function (reqOpts, callback) {
           callback(error, apiResponse);
         };
       });
@@ -1711,7 +1711,7 @@ describe('Zone', () => {
       };
 
       beforeEach(() => {
-        zone.request = function(reqOpts, callback) {
+        zone.request = function (reqOpts, callback) {
           callback(null, apiResponse);
         };
       });
@@ -1725,7 +1725,7 @@ describe('Zone', () => {
           pageToken: nextPageToken,
         };
 
-        zone.request = function(reqOpts, callback) {
+        zone.request = function (reqOpts, callback) {
           callback(null, apiResponseWithNextPageToken);
         };
 
@@ -1741,7 +1741,7 @@ describe('Zone', () => {
       it('should execute callback with VMs & API response', done => {
         const vm = {};
 
-        zone.vm = function(name) {
+        zone.vm = function (name) {
           assert.strictEqual(name, apiResponse.items[0].name);
           return vm;
         };
@@ -1818,7 +1818,7 @@ describe('Zone', () => {
 
   describe('createHttpServerFirewall_', () => {
     it('should create a firewall rule', done => {
-      zone.compute.createFirewall = function(name, config) {
+      zone.compute.createFirewall = function (name, config) {
         assert.strictEqual(name, 'default-allow-http');
         assert.deepStrictEqual(config, {
           protocols: {
@@ -1837,7 +1837,7 @@ describe('Zone', () => {
     it('should execute callback with error & API response', done => {
       const error = new Error('Error.');
 
-      zone.compute.createFirewall = function(name, config, callback) {
+      zone.compute.createFirewall = function (name, config, callback) {
         callback(error);
       };
 
@@ -1853,7 +1853,7 @@ describe('Zone', () => {
 
       const apiResponse = {};
 
-      zone.compute.createFirewall = function(name, config, callback) {
+      zone.compute.createFirewall = function (name, config, callback) {
         callback(error, null, apiResponse);
       };
 
@@ -1866,7 +1866,7 @@ describe('Zone', () => {
 
   describe('createHttpsServerFirewall_', () => {
     it('should create a firewall rule', done => {
-      zone.compute.createFirewall = function(name, config) {
+      zone.compute.createFirewall = function (name, config) {
         assert.strictEqual(name, 'default-allow-https');
         assert.deepStrictEqual(config, {
           protocols: {
@@ -1885,7 +1885,7 @@ describe('Zone', () => {
     it('should execute callback with error & API response', done => {
       const error = new Error('Error.');
 
-      zone.compute.createFirewall = function(name, config, callback) {
+      zone.compute.createFirewall = function (name, config, callback) {
         callback(error);
       };
 
@@ -1899,7 +1899,7 @@ describe('Zone', () => {
       const error = new Error('Error.');
       error.code = 409;
 
-      zone.compute.createFirewall = function(name, config, callback) {
+      zone.compute.createFirewall = function (name, config, callback) {
         callback(error);
       };
 

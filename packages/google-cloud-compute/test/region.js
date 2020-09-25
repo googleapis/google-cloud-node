@@ -23,7 +23,7 @@ const promisify = require('@google-cloud/promisify');
 
 let promisified = false;
 const fakePromisify = Object.assign({}, promisify, {
-  promisifyAll: function(Class, options) {
+  promisifyAll: function (Class, options) {
     if (Class.name !== 'Region') {
       return;
     }
@@ -67,7 +67,7 @@ function FakeSubnetwork() {
 let extended = false;
 const fakePaginator = {
   paginator: {
-    extend: function(Class, methods) {
+    extend: function (Class, methods) {
       if (Class.name !== 'Region') {
         return;
       }
@@ -82,7 +82,7 @@ const fakePaginator = {
         'getSubnetworks',
       ]);
     },
-    streamify: function(methodName) {
+    streamify: function (methodName) {
       return methodName;
     },
   },
@@ -202,7 +202,7 @@ describe('Region', () => {
     it('should not require any options', done => {
       const expectedBody = {name: NAME};
 
-      region.request = function(reqOpts) {
+      region.request = function (reqOpts) {
         assert.deepStrictEqual(reqOpts.json, expectedBody);
         done();
       };
@@ -211,7 +211,7 @@ describe('Region', () => {
     });
 
     it('should make the correct API request', done => {
-      region.request = function(reqOpts) {
+      region.request = function (reqOpts) {
         assert.strictEqual(reqOpts.method, 'POST');
         assert.strictEqual(reqOpts.uri, '/addresses');
         assert.deepStrictEqual(reqOpts.json, EXPECTED_BODY);
@@ -227,7 +227,7 @@ describe('Region', () => {
       const apiResponse = {a: 'b', c: 'd'};
 
       beforeEach(() => {
-        region.request = function(reqOpts, callback) {
+        region.request = function (reqOpts, callback) {
           callback(error, apiResponse);
         };
       });
@@ -247,7 +247,7 @@ describe('Region', () => {
       const apiResponse = {name: 'operation-name'};
 
       beforeEach(() => {
-        region.request = function(reqOpts, callback) {
+        region.request = function (reqOpts, callback) {
           callback(null, apiResponse);
         };
       });
@@ -256,12 +256,12 @@ describe('Region', () => {
         const address = {};
         const operation = {};
 
-        region.address = function(name) {
+        region.address = function (name) {
           assert.strictEqual(name, NAME);
           return address;
         };
 
-        region.operation = function(name) {
+        region.operation = function (name) {
           assert.strictEqual(name, apiResponse.name);
           return operation;
         };
@@ -286,7 +286,7 @@ describe('Region', () => {
     const CONFIG = {};
 
     it('should call compute#createRule', done => {
-      region.parent.createRule = function(name, config, callback) {
+      region.parent.createRule = function (name, config, callback) {
         assert.strictEqual(this, region);
         assert.strictEqual(name, NAME);
         assert.strictEqual(config, CONFIG);
@@ -307,7 +307,7 @@ describe('Region', () => {
     const EXPECTED_BODY = Object.assign({}, CONFIG, {name: NAME});
 
     it('should make the correct API request', done => {
-      region.request = function(reqOpts) {
+      region.request = function (reqOpts) {
         assert.strictEqual(reqOpts.method, 'POST');
         assert.strictEqual(reqOpts.uri, '/subnetworks');
         assert.deepStrictEqual(reqOpts.json, EXPECTED_BODY);
@@ -327,7 +327,7 @@ describe('Region', () => {
           network: network,
         });
 
-        region.request = function(reqOpts) {
+        region.request = function (reqOpts) {
           assert.strictEqual(reqOpts.json.network, network.formattedName);
           done();
         };
@@ -342,7 +342,7 @@ describe('Region', () => {
           range: '...',
         });
 
-        region.request = function(reqOpts) {
+        region.request = function (reqOpts) {
           assert.strictEqual(reqOpts.json.ipCidrRange, config.range);
           assert.strictEqual(reqOpts.json.range, undefined);
           done();
@@ -357,7 +357,7 @@ describe('Region', () => {
       const apiResponse = {a: 'b', c: 'd'};
 
       beforeEach(() => {
-        region.request = function(reqOpts, callback) {
+        region.request = function (reqOpts, callback) {
           callback(error, apiResponse);
         };
       });
@@ -377,7 +377,7 @@ describe('Region', () => {
       const apiResponse = {name: 'operation-name'};
 
       beforeEach(() => {
-        region.request = function(reqOpts, callback) {
+        region.request = function (reqOpts, callback) {
           callback(null, apiResponse);
         };
       });
@@ -386,12 +386,12 @@ describe('Region', () => {
         const subnetwork = {};
         const operation = {};
 
-        region.subnetwork = function(name) {
+        region.subnetwork = function (name) {
           assert.strictEqual(name, NAME);
           return subnetwork;
         };
 
-        region.operation = function(name) {
+        region.operation = function (name) {
           assert.strictEqual(name, apiResponse.name);
           return operation;
         };
@@ -413,7 +413,7 @@ describe('Region', () => {
 
   describe('getAddresses', () => {
     it('should accept only a callback', done => {
-      region.request = function(reqOpts) {
+      region.request = function (reqOpts) {
         assert.deepStrictEqual(reqOpts.qs, {});
         done();
       };
@@ -424,7 +424,7 @@ describe('Region', () => {
     it('should make the correct API request', done => {
       const query = {a: 'b', c: 'd'};
 
-      region.request = function(reqOpts) {
+      region.request = function (reqOpts) {
         assert.strictEqual(reqOpts.uri, '/addresses');
         assert.strictEqual(reqOpts.qs, query);
 
@@ -439,7 +439,7 @@ describe('Region', () => {
       const apiResponse = {a: 'b', c: 'd'};
 
       beforeEach(() => {
-        region.request = function(reqOpts, callback) {
+        region.request = function (reqOpts, callback) {
           callback(error, apiResponse);
         };
       });
@@ -461,7 +461,7 @@ describe('Region', () => {
       };
 
       beforeEach(() => {
-        region.request = function(reqOpts, callback) {
+        region.request = function (reqOpts, callback) {
           callback(null, apiResponse);
         };
       });
@@ -475,7 +475,7 @@ describe('Region', () => {
           pageToken: nextPageToken,
         };
 
-        region.request = function(reqOpts, callback) {
+        region.request = function (reqOpts, callback) {
           callback(null, apiResponseWithNextPageToken);
         };
 
@@ -491,7 +491,7 @@ describe('Region', () => {
       it('should execute callback with Operations & API resp', done => {
         const address = {};
 
-        region.address = function(name) {
+        region.address = function (name) {
           assert.strictEqual(name, apiResponse.items[0].name);
           return address;
         };
@@ -512,7 +512,7 @@ describe('Region', () => {
 
   describe('getOperations', () => {
     it('should accept only a callback', done => {
-      region.request = function(reqOpts) {
+      region.request = function (reqOpts) {
         assert.deepStrictEqual(reqOpts.qs, {});
         done();
       };
@@ -523,7 +523,7 @@ describe('Region', () => {
     it('should make the correct API request', done => {
       const query = {a: 'b', c: 'd'};
 
-      region.request = function(reqOpts) {
+      region.request = function (reqOpts) {
         assert.strictEqual(reqOpts.uri, '/operations');
         assert.strictEqual(reqOpts.qs, query);
 
@@ -538,7 +538,7 @@ describe('Region', () => {
       const apiResponse = {a: 'b', c: 'd'};
 
       beforeEach(() => {
-        region.request = function(reqOpts, callback) {
+        region.request = function (reqOpts, callback) {
           callback(error, apiResponse);
         };
       });
@@ -560,7 +560,7 @@ describe('Region', () => {
       };
 
       beforeEach(() => {
-        region.request = function(reqOpts, callback) {
+        region.request = function (reqOpts, callback) {
           callback(null, apiResponse);
         };
       });
@@ -574,7 +574,7 @@ describe('Region', () => {
           pageToken: nextPageToken,
         };
 
-        region.request = function(reqOpts, callback) {
+        region.request = function (reqOpts, callback) {
           callback(null, apiResponseWithNextPageToken);
         };
 
@@ -590,7 +590,7 @@ describe('Region', () => {
       it('should execute callback with Operations & API resp', done => {
         const operation = {};
 
-        region.operation = function(name) {
+        region.operation = function (name) {
           assert.strictEqual(name, apiResponse.items[0].name);
           return operation;
         };
@@ -611,7 +611,7 @@ describe('Region', () => {
 
   describe('getRules', () => {
     it('should accept only a callback', done => {
-      region.request = function(reqOpts) {
+      region.request = function (reqOpts) {
         assert.deepStrictEqual(reqOpts.qs, {});
         done();
       };
@@ -622,7 +622,7 @@ describe('Region', () => {
     it('should make the correct API request', done => {
       const query = {a: 'b', c: 'd'};
 
-      region.request = function(reqOpts) {
+      region.request = function (reqOpts) {
         assert.strictEqual(reqOpts.uri, '/forwardingRules');
         assert.strictEqual(reqOpts.qs, query);
 
@@ -637,7 +637,7 @@ describe('Region', () => {
       const apiResponse = {a: 'b', c: 'd'};
 
       beforeEach(() => {
-        region.request = function(reqOpts, callback) {
+        region.request = function (reqOpts, callback) {
           callback(error, apiResponse);
         };
       });
@@ -659,7 +659,7 @@ describe('Region', () => {
       };
 
       beforeEach(() => {
-        region.request = function(reqOpts, callback) {
+        region.request = function (reqOpts, callback) {
           callback(null, apiResponse);
         };
       });
@@ -673,7 +673,7 @@ describe('Region', () => {
           pageToken: nextPageToken,
         };
 
-        region.request = function(reqOpts, callback) {
+        region.request = function (reqOpts, callback) {
           callback(null, apiResponseWithNextPageToken);
         };
 
@@ -689,7 +689,7 @@ describe('Region', () => {
       it('should execute callback with Operations & API resp', done => {
         const rule = {};
 
-        region.rule = function(name) {
+        region.rule = function (name) {
           assert.strictEqual(name, apiResponse.items[0].name);
           return rule;
         };
@@ -710,7 +710,7 @@ describe('Region', () => {
 
   describe('getSubnetworks', () => {
     it('should accept only a callback', done => {
-      region.request = function(reqOpts) {
+      region.request = function (reqOpts) {
         assert.deepStrictEqual(reqOpts.qs, {});
         done();
       };
@@ -721,7 +721,7 @@ describe('Region', () => {
     it('should make the correct API request', done => {
       const query = {a: 'b', c: 'd'};
 
-      region.request = function(reqOpts) {
+      region.request = function (reqOpts) {
         assert.strictEqual(reqOpts.uri, '/subnetworks');
         assert.strictEqual(reqOpts.qs, query);
 
@@ -736,7 +736,7 @@ describe('Region', () => {
       const apiResponse = {a: 'b', c: 'd'};
 
       beforeEach(() => {
-        region.request = function(reqOpts, callback) {
+        region.request = function (reqOpts, callback) {
           callback(error, apiResponse);
         };
       });
@@ -758,7 +758,7 @@ describe('Region', () => {
       };
 
       beforeEach(() => {
-        region.request = function(reqOpts, callback) {
+        region.request = function (reqOpts, callback) {
           callback(null, apiResponse);
         };
       });
@@ -772,7 +772,7 @@ describe('Region', () => {
           pageToken: nextPageToken,
         };
 
-        region.request = function(reqOpts, callback) {
+        region.request = function (reqOpts, callback) {
           callback(null, apiResponseWithNextPageToken);
         };
 
@@ -788,7 +788,7 @@ describe('Region', () => {
       it('should execute callback with Operations & API resp', done => {
         const subnetwork = {};
 
-        region.subnetwork = function(name) {
+        region.subnetwork = function (name) {
           assert.strictEqual(name, apiResponse.items[0].name);
           return subnetwork;
         };

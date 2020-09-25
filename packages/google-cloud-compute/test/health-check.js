@@ -21,7 +21,7 @@ const promisify = require('@google-cloud/promisify');
 
 let promisified = false;
 const fakePromisify = Object.assign({}, promisify, {
-  promisifyAll: function(Class) {
+  promisifyAll: function (Class) {
     if (Class.name === 'HealthCheck') {
       promisified = true;
     }
@@ -93,7 +93,7 @@ describe('HealthCheck', () => {
         const NAME = 'name';
         const OPTIONS = {a: 'b'};
         const originalOptions = Object.assign({}, OPTIONS);
-        COMPUTE.createHealthCheck = function(name, opts, callback) {
+        COMPUTE.createHealthCheck = function (name, opts, callback) {
           assert.strictEqual(name, NAME);
           assert.deepStrictEqual(opts, OPTIONS);
           assert.deepStrictEqual(OPTIONS, originalOptions);
@@ -105,7 +105,7 @@ describe('HealthCheck', () => {
       it('should not require a callback when creating', done => {
         const createMethod = healthCheck.calledWith_[0].createMethod;
 
-        COMPUTE.createHealthCheck = function(name, opts, callback) {
+        COMPUTE.createHealthCheck = function (name, opts, callback) {
           assert.deepStrictEqual(opts, {});
           callback(); // done()
         };
@@ -136,7 +136,7 @@ describe('HealthCheck', () => {
         const OPTIONS = {a: 'b'};
         const originalOptions = Object.assign({}, OPTIONS);
 
-        COMPUTE.createHealthCheck = function(name, opts, callback) {
+        COMPUTE.createHealthCheck = function (name, opts, callback) {
           assert.strictEqual(name, NAME);
           assert.deepStrictEqual(opts, Object.assign({https: true}, OPTIONS));
           assert.deepStrictEqual(OPTIONS, originalOptions);
@@ -149,7 +149,7 @@ describe('HealthCheck', () => {
       it('should not require a callback when creating', done => {
         const createMethod = healthCheck.calledWith_[0].createMethod;
 
-        COMPUTE.createHealthCheck = function(name, opts, callback) {
+        COMPUTE.createHealthCheck = function (name, opts, callback) {
           assert.deepStrictEqual(opts, {https: true});
           callback(); // done()
         };
@@ -161,7 +161,7 @@ describe('HealthCheck', () => {
 
   describe('delete', () => {
     it('should call ServiceObject.delete', done => {
-      FakeServiceObject.prototype.delete = function() {
+      FakeServiceObject.prototype.delete = function () {
         assert.strictEqual(this, healthCheck);
         done();
       };
@@ -174,7 +174,7 @@ describe('HealthCheck', () => {
       const apiResponse = {a: 'b', c: 'd'};
 
       beforeEach(() => {
-        FakeServiceObject.prototype.delete = function(callback) {
+        FakeServiceObject.prototype.delete = function (callback) {
           callback(error, apiResponse);
         };
       });
@@ -201,7 +201,7 @@ describe('HealthCheck', () => {
       };
 
       beforeEach(() => {
-        FakeServiceObject.prototype.delete = function(callback) {
+        FakeServiceObject.prototype.delete = function (callback) {
           callback(null, apiResponse);
         };
       });
@@ -209,7 +209,7 @@ describe('HealthCheck', () => {
       it('should execute callback with Operation & Response', done => {
         const operation = {};
 
-        healthCheck.compute.operation = function(name) {
+        healthCheck.compute.operation = function (name) {
           assert.strictEqual(name, apiResponse.name);
           return operation;
         };
@@ -235,7 +235,7 @@ describe('HealthCheck', () => {
     const METADATA = {};
 
     it('should call ServiceObject.setMetadata', done => {
-      FakeServiceObject.prototype.setMetadata = function(metadata) {
+      FakeServiceObject.prototype.setMetadata = function (metadata) {
         assert.strictEqual(this, healthCheck);
         assert.strictEqual(metadata, METADATA);
         done();
@@ -249,7 +249,10 @@ describe('HealthCheck', () => {
       const apiResponse = {};
 
       beforeEach(() => {
-        FakeServiceObject.prototype.setMetadata = function(metadata, callback) {
+        FakeServiceObject.prototype.setMetadata = function (
+          metadata,
+          callback
+        ) {
           callback(error, apiResponse);
         };
       });
@@ -270,7 +273,10 @@ describe('HealthCheck', () => {
       };
 
       beforeEach(() => {
-        FakeServiceObject.prototype.setMetadata = function(metadata, callback) {
+        FakeServiceObject.prototype.setMetadata = function (
+          metadata,
+          callback
+        ) {
           callback(null, apiResponse);
         };
       });
@@ -279,7 +285,7 @@ describe('HealthCheck', () => {
         const operation = {};
         const metadata = {a: 'b'};
 
-        healthCheck.compute.operation = function(name) {
+        healthCheck.compute.operation = function (name) {
           assert.strictEqual(name, apiResponse.name);
           return operation;
         };

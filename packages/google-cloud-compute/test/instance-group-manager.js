@@ -21,7 +21,7 @@ const promisify = require('@google-cloud/promisify');
 
 let promisified = false;
 const fakePromisify = Object.assign({}, promisify, {
-  promisifyAll: function(Class) {
+  promisifyAll: function (Class) {
     if (Class.name === 'InstanceGroupManager') {
       promisified = true;
     }
@@ -97,7 +97,7 @@ describe('InstanceGroupManager', () => {
     const VMS = [{url: 'vm-url'}, {url: 'vm-url-2'}];
 
     it('should make the correct API request', done => {
-      instanceGroupManager.request = function(reqOpts) {
+      instanceGroupManager.request = function (reqOpts) {
         assert.strictEqual(reqOpts.method, 'POST');
         assert.strictEqual(reqOpts.uri, '/abandonInstances');
         assert.deepStrictEqual(reqOpts.json, {
@@ -117,7 +117,7 @@ describe('InstanceGroupManager', () => {
       const error = new Error('Error.');
 
       beforeEach(() => {
-        instanceGroupManager.request = function(reqOpts, callback) {
+        instanceGroupManager.request = function (reqOpts, callback) {
           callback(error, apiResponse);
         };
       });
@@ -139,7 +139,7 @@ describe('InstanceGroupManager', () => {
       const apiResponse = {name: 'op-name'};
 
       beforeEach(() => {
-        instanceGroupManager.request = function(reqOpts, callback) {
+        instanceGroupManager.request = function (reqOpts, callback) {
           callback(null, apiResponse);
         };
       });
@@ -147,7 +147,7 @@ describe('InstanceGroupManager', () => {
       it('should return an Operation and API response', done => {
         const operation = {};
 
-        instanceGroupManager.zone.operation = function(name) {
+        instanceGroupManager.zone.operation = function (name) {
           assert.strictEqual(name, apiResponse.name);
           return operation;
         };
@@ -170,7 +170,7 @@ describe('InstanceGroupManager', () => {
     const VMS = [{url: 'vm-url'}, {url: 'vm-url-2'}];
 
     it('should make the correct API request', done => {
-      instanceGroupManager.request = function(reqOpts) {
+      instanceGroupManager.request = function (reqOpts) {
         assert.strictEqual(reqOpts.method, 'POST');
         assert.strictEqual(reqOpts.uri, '/deleteInstances');
         assert.deepStrictEqual(reqOpts.json, {
@@ -190,7 +190,7 @@ describe('InstanceGroupManager', () => {
       const error = new Error('Error.');
 
       beforeEach(() => {
-        instanceGroupManager.request = function(reqOpts, callback) {
+        instanceGroupManager.request = function (reqOpts, callback) {
           callback(error, apiResponse);
         };
       });
@@ -212,7 +212,7 @@ describe('InstanceGroupManager', () => {
       const apiResponse = {name: 'op-name'};
 
       beforeEach(() => {
-        instanceGroupManager.request = function(reqOpts, callback) {
+        instanceGroupManager.request = function (reqOpts, callback) {
           callback(null, apiResponse);
         };
       });
@@ -220,7 +220,7 @@ describe('InstanceGroupManager', () => {
       it('should return an Operation and API response', done => {
         const operation = {};
 
-        instanceGroupManager.zone.operation = function(name) {
+        instanceGroupManager.zone.operation = function (name) {
           assert.strictEqual(name, apiResponse.name);
           return operation;
         };
@@ -241,13 +241,13 @@ describe('InstanceGroupManager', () => {
 
   describe('getManagedInstances', () => {
     beforeEach(() => {
-      instanceGroupManager.zone.vm = function() {
+      instanceGroupManager.zone.vm = function () {
         return {};
       };
     });
 
     it('should accept only a callback', done => {
-      instanceGroupManager.request = function(reqOpts) {
+      instanceGroupManager.request = function (reqOpts) {
         assert.deepStrictEqual(reqOpts.qs, {});
         done();
       };
@@ -258,7 +258,7 @@ describe('InstanceGroupManager', () => {
     it('should make the correct API request', done => {
       const query = {a: 'b', c: 'd'};
 
-      instanceGroupManager.request = function(reqOpts) {
+      instanceGroupManager.request = function (reqOpts) {
         assert.strictEqual(reqOpts.uri, '/listManagedInstances');
         assert.strictEqual(reqOpts.qs, query);
 
@@ -273,7 +273,7 @@ describe('InstanceGroupManager', () => {
       const apiResponse = {a: 'b', c: 'd'};
 
       beforeEach(() => {
-        instanceGroupManager.request = function(reqOpts, callback) {
+        instanceGroupManager.request = function (reqOpts, callback) {
           callback(error, apiResponse);
         };
       });
@@ -297,7 +297,7 @@ describe('InstanceGroupManager', () => {
       };
 
       beforeEach(() => {
-        instanceGroupManager.request = function(reqOpts, callback) {
+        instanceGroupManager.request = function (reqOpts, callback) {
           callback(null, apiResponse);
         };
       });
@@ -311,7 +311,7 @@ describe('InstanceGroupManager', () => {
           pageToken: nextPageToken,
         };
 
-        instanceGroupManager.request = function(reqOpts, callback) {
+        instanceGroupManager.request = function (reqOpts, callback) {
           callback(null, apiResponseWithNextPageToken);
         };
 
@@ -327,7 +327,7 @@ describe('InstanceGroupManager', () => {
       it('should execute callback with VMs & API response', done => {
         const vm = {};
 
-        instanceGroupManager.zone.vm = function(name) {
+        instanceGroupManager.zone.vm = function (name) {
           assert.strictEqual(name, apiResponse.managedInstances[0].instance);
           return vm;
         };
@@ -356,7 +356,7 @@ describe('InstanceGroupManager', () => {
     const query = {size: 1};
 
     it('should make the correct API request', done => {
-      instanceGroupManager.request = function(reqOpts) {
+      instanceGroupManager.request = function (reqOpts) {
         assert.strictEqual(reqOpts.method, 'POST');
         assert.strictEqual(reqOpts.uri, '/resize');
         assert.deepStrictEqual(reqOpts.qs, query);
@@ -373,7 +373,7 @@ describe('InstanceGroupManager', () => {
       const error = new Error('Error.');
 
       beforeEach(() => {
-        instanceGroupManager.request = function(reqOpts, callback) {
+        instanceGroupManager.request = function (reqOpts, callback) {
           callback(error, apiResponse);
         };
       });
@@ -392,7 +392,7 @@ describe('InstanceGroupManager', () => {
       const apiResponse = {name: 'op-name'};
 
       beforeEach(() => {
-        instanceGroupManager.request = function(reqOpts, callback) {
+        instanceGroupManager.request = function (reqOpts, callback) {
           callback(null, apiResponse);
         };
       });
@@ -400,7 +400,7 @@ describe('InstanceGroupManager', () => {
       it('should return an Operation and API response', done => {
         const operation = {};
 
-        instanceGroupManager.zone.operation = function(name) {
+        instanceGroupManager.zone.operation = function (name) {
           assert.strictEqual(name, apiResponse.name);
           return operation;
         };

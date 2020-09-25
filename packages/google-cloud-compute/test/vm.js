@@ -23,7 +23,7 @@ const {replaceProjectIdToken} = require('@google-cloud/projectify');
 
 let promisified = false;
 const fakePromisify = Object.assign({}, promisify, {
-  promisifyAll: function(Class) {
+  promisifyAll: function (Class) {
     if (Class.name === 'VM') {
       promisified = true;
     }
@@ -136,7 +136,7 @@ describe('VM', () => {
     it('should inherit from ServiceObject', done => {
       const zoneInstance = Object.assign({}, ZONE, {
         createVM: {
-          bind: function(context) {
+          bind: function (context) {
             assert.strictEqual(context, zoneInstance);
             done();
           },
@@ -182,7 +182,7 @@ describe('VM', () => {
     });
 
     it('should not require an options object', done => {
-      vm.request = function(reqOpts) {
+      vm.request = function (reqOpts) {
         assert.deepStrictEqual(reqOpts.json, EXPECTED_BODY);
         done();
       };
@@ -198,7 +198,7 @@ describe('VM', () => {
           mode: 'READ_ONLY',
         });
 
-        vm.request = function(reqOpts) {
+        vm.request = function (reqOpts) {
           assert.deepStrictEqual(reqOpts.json, expectedBody);
           done();
         };
@@ -207,7 +207,7 @@ describe('VM', () => {
       });
 
       it('should delete the readOnly property', done => {
-        vm.request = function(reqOpts) {
+        vm.request = function (reqOpts) {
           assert.strictEqual(typeof reqOpts.json.readOnly, 'undefined');
           done();
         };
@@ -217,7 +217,7 @@ describe('VM', () => {
     });
 
     it('should make the correct API request', done => {
-      vm.request = function(reqOpts, callback) {
+      vm.request = function (reqOpts, callback) {
         assert.strictEqual(reqOpts.method, 'POST');
         assert.strictEqual(reqOpts.uri, '/attachDisk');
         assert.deepStrictEqual(reqOpts.json, EXPECTED_BODY);
@@ -231,7 +231,7 @@ describe('VM', () => {
 
   describe('delete', () => {
     it('should make the correct API request', done => {
-      vm.request = function(reqOpts, callback) {
+      vm.request = function (reqOpts, callback) {
         assert.strictEqual(reqOpts.method, 'DELETE');
         assert.strictEqual(reqOpts.uri, '');
 
@@ -242,7 +242,7 @@ describe('VM', () => {
     });
 
     it('should not require a callback', done => {
-      vm.request = function(reqOpts, callback) {
+      vm.request = function (reqOpts, callback) {
         assert.doesNotThrow(() => {
           callback();
           done();
@@ -269,7 +269,7 @@ describe('VM', () => {
         ],
       };
 
-      vm.getMetadata = function(callback) {
+      vm.getMetadata = function (callback) {
         callback(null, METADATA, METADATA);
       };
     });
@@ -288,13 +288,13 @@ describe('VM', () => {
     it('should replace projectId token in disk name', done => {
       const REPLACED_DEVICE_NAME = 'replaced-device-name';
 
-      replaceProjectIdTokenOverride = function(value, projectId) {
+      replaceProjectIdTokenOverride = function (value, projectId) {
         assert.strictEqual(value, DISK.formattedName);
         assert.strictEqual(projectId, COMPUTE.authClient.projectId);
         return REPLACED_DEVICE_NAME;
       };
 
-      vm.getMetadata = function(callback) {
+      vm.getMetadata = function (callback) {
         const metadata = {
           disks: [
             {
@@ -307,7 +307,7 @@ describe('VM', () => {
         callback(null, metadata, metadata);
       };
 
-      vm.request = function(reqOpts) {
+      vm.request = function (reqOpts) {
         assert.strictEqual(reqOpts.qs.deviceName, REPLACED_DEVICE_NAME);
         done();
       };
@@ -325,7 +325,7 @@ describe('VM', () => {
         ],
       };
 
-      vm.getMetadata = function(callback) {
+      vm.getMetadata = function (callback) {
         callback(null, metadata, metadata);
       };
 
@@ -340,7 +340,7 @@ describe('VM', () => {
     });
 
     it('should make the correct API request', done => {
-      vm.request = function(reqOpts, callback) {
+      vm.request = function (reqOpts, callback) {
         assert.strictEqual(reqOpts.method, 'POST');
         assert.strictEqual(reqOpts.uri, '/detachDisk');
         assert.deepStrictEqual(reqOpts.qs, {deviceName: DEVICE_NAME});
@@ -352,7 +352,7 @@ describe('VM', () => {
     });
 
     it('should not require a callback', done => {
-      vm.request = function(reqOpts, callback) {
+      vm.request = function (reqOpts, callback) {
         assert.doesNotThrow(() => {
           callback();
           done();
@@ -367,7 +367,7 @@ describe('VM', () => {
         const ERROR = new Error('Error.');
 
         beforeEach(() => {
-          vm.getMetadata = function(callback) {
+          vm.getMetadata = function (callback) {
             callback(ERROR);
           };
         });
@@ -387,7 +387,7 @@ describe('VM', () => {
     const EXPECTED_QUERY = {port: 1};
 
     it('should default to port 1', done => {
-      FakeServiceObject.prototype.request = function(reqOpts) {
+      FakeServiceObject.prototype.request = function (reqOpts) {
         assert.strictEqual(reqOpts.qs.port, 1);
         done();
       };
@@ -398,7 +398,7 @@ describe('VM', () => {
     it('should override the default port', done => {
       const port = 8001;
 
-      FakeServiceObject.prototype.request = function(reqOpts) {
+      FakeServiceObject.prototype.request = function (reqOpts) {
         assert.strictEqual(reqOpts.qs.port, port);
         done();
       };
@@ -407,7 +407,7 @@ describe('VM', () => {
     });
 
     it('should make the correct API request', done => {
-      FakeServiceObject.prototype.request = function(reqOpts) {
+      FakeServiceObject.prototype.request = function (reqOpts) {
         assert.strictEqual(reqOpts.uri, '/serialPort');
         assert.deepStrictEqual(reqOpts.qs, EXPECTED_QUERY);
 
@@ -422,7 +422,7 @@ describe('VM', () => {
       const apiResponse = {a: 'b', c: 'd'};
 
       beforeEach(() => {
-        FakeServiceObject.prototype.request = function(reqOpts, callback) {
+        FakeServiceObject.prototype.request = function (reqOpts, callback) {
           callback(error, apiResponse);
         };
       });
@@ -442,7 +442,7 @@ describe('VM', () => {
       const apiResponse = {contents: 'contents'};
 
       beforeEach(() => {
-        FakeServiceObject.prototype.request = function(reqOpts, callback) {
+        FakeServiceObject.prototype.request = function (reqOpts, callback) {
           callback(null, apiResponse);
         };
       });
@@ -461,7 +461,7 @@ describe('VM', () => {
 
   describe('getTags', () => {
     it('should get metadata', done => {
-      vm.getMetadata = function() {
+      vm.getMetadata = function () {
         done();
       };
 
@@ -473,7 +473,7 @@ describe('VM', () => {
       const apiResponse = {a: 'b', c: 'd'};
 
       beforeEach(() => {
-        vm.getMetadata = function(callback) {
+        vm.getMetadata = function (callback) {
           callback(error, null, apiResponse);
         };
       });
@@ -501,7 +501,7 @@ describe('VM', () => {
       const apiResponse = {a: 'b', c: 'd'};
 
       beforeEach(() => {
-        vm.getMetadata = function(callback) {
+        vm.getMetadata = function (callback) {
           callback(null, metadata, apiResponse);
         };
       });
@@ -522,7 +522,7 @@ describe('VM', () => {
 
   describe('reset', () => {
     it('should make the correct API request', done => {
-      vm.request = function(reqOpts, callback) {
+      vm.request = function (reqOpts, callback) {
         assert.strictEqual(reqOpts.method, 'POST');
         assert.strictEqual(reqOpts.uri, '/reset');
 
@@ -533,7 +533,7 @@ describe('VM', () => {
     });
 
     it('should not require a callback', done => {
-      vm.request = function(reqOpts, callback) {
+      vm.request = function (reqOpts, callback) {
         assert.doesNotThrow(() => {
           callback();
           done();
@@ -556,7 +556,7 @@ describe('VM', () => {
     });
 
     it('should try to set the machine type', done => {
-      vm.request = function(reqOpts) {
+      vm.request = function (reqOpts) {
         assert.strictEqual(reqOpts.method, 'POST');
         assert.strictEqual(reqOpts.uri, '/setMachineType');
         assert.deepStrictEqual(reqOpts.json, {
@@ -571,7 +571,7 @@ describe('VM', () => {
     it('should allow a partial machine type', done => {
       const partialMachineType = MACHINE_TYPE.split('/').pop();
 
-      vm.request = function(reqOpts) {
+      vm.request = function (reqOpts) {
         assert.strictEqual(reqOpts.method, 'POST');
         assert.strictEqual(reqOpts.uri, '/setMachineType');
         assert.deepStrictEqual(reqOpts.json, {
@@ -588,14 +588,14 @@ describe('VM', () => {
         const error = new Error('Instance is starting or running.');
 
         beforeEach(() => {
-          vm.zone.parent.execAfterOperation_ = function(callback) {
+          vm.zone.parent.execAfterOperation_ = function (callback) {
             vm.zone.parent.execAfterOperation_ = util.noop;
             callback(error);
           };
         });
 
         it('should stop the VM', done => {
-          vm.stop = function() {
+          vm.stop = function () {
             done();
           };
 
@@ -608,9 +608,9 @@ describe('VM', () => {
 
           beforeEach(() => {
             // First: vm.request()
-            vm.zone.parent.execAfterOperation_ = function(callback) {
+            vm.zone.parent.execAfterOperation_ = function (callback) {
               // Second: vm.stop()
-              vm.zone.parent.execAfterOperation_ = function(callback) {
+              vm.zone.parent.execAfterOperation_ = function (callback) {
                 return function onVmStop() {
                   callback(vmStopError, apiResponse);
                 };
@@ -619,7 +619,7 @@ describe('VM', () => {
               callback(error);
             };
 
-            vm.stop = function(onVmStop) {
+            vm.stop = function (onVmStop) {
               onVmStop();
             };
           });
@@ -636,9 +636,9 @@ describe('VM', () => {
         describe('stopping succeeded', () => {
           beforeEach(() => {
             // First: vm.request()
-            vm.zone.parent.execAfterOperation_ = function(callback) {
+            vm.zone.parent.execAfterOperation_ = function (callback) {
               // Second: vm.stop()
-              vm.zone.parent.execAfterOperation_ = function(callback) {
+              vm.zone.parent.execAfterOperation_ = function (callback) {
                 return function onVmStop() {
                   callback();
                 };
@@ -647,7 +647,7 @@ describe('VM', () => {
               callback(error);
             };
 
-            vm.stop = function(onVmStop) {
+            vm.stop = function (onVmStop) {
               // `setImmediate` to allow the `resize` reassignment to register.
               setImmediate(onVmStop);
             };
@@ -656,7 +656,7 @@ describe('VM', () => {
           it('should try to resize the VM again', done => {
             vm.resize(MACHINE_TYPE, assert.ifError);
 
-            vm.resize = function() {
+            vm.resize = function () {
               done();
             };
           });
@@ -668,7 +668,7 @@ describe('VM', () => {
         const apiResponse = {};
 
         beforeEach(() => {
-          vm.zone.parent.execAfterOperation_ = function(callback) {
+          vm.zone.parent.execAfterOperation_ = function (callback) {
             vm.zone.parent.execAfterOperation_ = util.noop;
 
             callback(error, apiResponse);
@@ -690,8 +690,8 @@ describe('VM', () => {
         function userCallback() {}
         function onVmStart() {}
 
-        vm.zone.parent.execAfterOperation_ = function(callback) {
-          vm.zone.parent.execAfterOperation_ = function(callback) {
+        vm.zone.parent.execAfterOperation_ = function (callback) {
+          vm.zone.parent.execAfterOperation_ = function (callback) {
             assert.strictEqual(callback, userCallback);
             return onVmStart;
           };
@@ -699,7 +699,7 @@ describe('VM', () => {
           callback();
         };
 
-        vm.start = function(callback) {
+        vm.start = function (callback) {
           assert.strictEqual(callback, onVmStart);
           done();
         };
@@ -711,11 +711,11 @@ describe('VM', () => {
     it('should not start the VM by request', done => {
       const apiResponse = {};
 
-      vm.zone.parent.execAfterOperation_ = function(callback) {
+      vm.zone.parent.execAfterOperation_ = function (callback) {
         callback(null, apiResponse);
       };
 
-      vm.start = function() {
+      vm.start = function () {
         done(); // Test will fail if called.
       };
 
@@ -738,7 +738,7 @@ describe('VM', () => {
         const apiResponse = {};
 
         beforeEach(() => {
-          vm.getMetadata = function(callback) {
+          vm.getMetadata = function (callback) {
             callback(error, null, apiResponse);
           };
         });
@@ -763,7 +763,7 @@ describe('VM', () => {
           const apiResponse = {};
 
           beforeEach(() => {
-            vm.getMetadata = function(callback) {
+            vm.getMetadata = function (callback) {
               callback(null, metadata, apiResponse);
             };
           });
@@ -778,7 +778,7 @@ describe('VM', () => {
               ],
             });
 
-            vm.request = function(reqOpts, callback) {
+            vm.request = function (reqOpts, callback) {
               assert.strictEqual(reqOpts.method, 'POST');
               assert.strictEqual(reqOpts.uri, '/setMetadata');
               assert.deepStrictEqual(reqOpts.json, expectedNewMetadata);
@@ -798,7 +798,7 @@ describe('VM', () => {
     const FINGERPRINT = '';
 
     it('should make the correct request', done => {
-      vm.request = function(reqOpts, callback) {
+      vm.request = function (reqOpts, callback) {
         assert.strictEqual(reqOpts.method, 'POST');
         assert.strictEqual(reqOpts.uri, '/setTags');
         assert.strictEqual(reqOpts.json.items, TAGS);
@@ -811,7 +811,7 @@ describe('VM', () => {
     });
 
     it('should not require a callback', done => {
-      vm.request = function(reqOpts, callback) {
+      vm.request = function (reqOpts, callback) {
         assert.doesNotThrow(callback);
         done();
       };
@@ -822,7 +822,7 @@ describe('VM', () => {
 
   describe('start', () => {
     it('should make the correct API request', done => {
-      vm.request = function(reqOpts, callback) {
+      vm.request = function (reqOpts, callback) {
         assert.strictEqual(reqOpts.method, 'POST');
         assert.strictEqual(reqOpts.uri, '/start');
 
@@ -833,7 +833,7 @@ describe('VM', () => {
     });
 
     it('should not require a callback', done => {
-      vm.request = function(reqOpts, callback) {
+      vm.request = function (reqOpts, callback) {
         assert.doesNotThrow(() => {
           callback();
           done();
@@ -846,7 +846,7 @@ describe('VM', () => {
 
   describe('stop', () => {
     it('should make the correct API request', done => {
-      vm.request = function(reqOpts, callback) {
+      vm.request = function (reqOpts, callback) {
         assert.strictEqual(reqOpts.method, 'POST');
         assert.strictEqual(reqOpts.uri, '/stop');
 
@@ -857,7 +857,7 @@ describe('VM', () => {
     });
 
     it('should not require a callback', done => {
-      vm.request = function(reqOpts, callback) {
+      vm.request = function (reqOpts, callback) {
         assert.doesNotThrow(() => {
           callback();
           done();
@@ -1031,7 +1031,7 @@ describe('VM', () => {
     it('should not start polling if already polling', done => {
       vm.hasActiveWaiters = true;
 
-      vm.startPolling_ = function() {
+      vm.startPolling_ = function () {
         done(new Error('Should not have called startPolling_.'));
       };
 
@@ -1046,7 +1046,7 @@ describe('VM', () => {
     beforeEach(() => {
       vm.hasActiveWaiters = true;
 
-      vm.getMetadata = function(callback) {
+      vm.getMetadata = function (callback) {
         callback(null, METADATA);
       };
     });
@@ -1054,7 +1054,7 @@ describe('VM', () => {
     it('should only poll if there are active waiters', done => {
       vm.hasActiveWaiters = false;
 
-      vm.getMetadata = function() {
+      vm.getMetadata = function () {
         done(new Error('Should not have refreshed metadata.'));
       };
 
@@ -1063,7 +1063,7 @@ describe('VM', () => {
     });
 
     it('should refresh metadata', done => {
-      vm.getMetadata = function() {
+      vm.getMetadata = function () {
         done();
       };
 
@@ -1074,7 +1074,7 @@ describe('VM', () => {
       const ERROR = new Error('Error.');
 
       beforeEach(() => {
-        vm.getMetadata = function(callback) {
+        vm.getMetadata = function (callback) {
           callback(ERROR);
         };
 
@@ -1084,7 +1084,7 @@ describe('VM', () => {
       });
 
       it('should execute waiter with error', done => {
-        vm.waiters[0].callback = function(err) {
+        vm.waiters[0].callback = function (err) {
           assert.strictEqual(err, ERROR);
           done();
         };
@@ -1112,7 +1112,7 @@ describe('VM', () => {
       };
 
       beforeEach(() => {
-        vm.getMetadata = function(callback) {
+        vm.getMetadata = function (callback) {
           callback(null, METADATA);
         };
 
@@ -1123,7 +1123,7 @@ describe('VM', () => {
       });
 
       it('should execute callback with metadata', done => {
-        vm.waiters[0].callback = function(err, metadata) {
+        vm.waiters[0].callback = function (err, metadata) {
           assert.ifError(err);
           assert.strictEqual(metadata, METADATA);
           done();
@@ -1158,7 +1158,7 @@ describe('VM', () => {
       });
 
       it('should execute callback with WaitForTimeoutError', done => {
-        vm.waiters[0].callback = function(err) {
+        vm.waiters[0].callback = function (err) {
           assert.strictEqual(err.name, 'WaitForTimeoutError');
           assert.strictEqual(
             err.message,
@@ -1204,10 +1204,10 @@ describe('VM', () => {
       });
 
       it('should check for the status again after interval', done => {
-        global.setTimeout = function(fn, interval) {
+        global.setTimeout = function (fn, interval) {
           assert.strictEqual(interval, 2000);
 
-          vm.getMetadata = function() {
+          vm.getMetadata = function () {
             // Confirms startPolling_() was called again.
             done();
           };
@@ -1226,7 +1226,7 @@ describe('VM', () => {
     it('should make the correct request to Compute', done => {
       const reqOpts = {};
 
-      FakeServiceObject.prototype.request = function(reqOpts_) {
+      FakeServiceObject.prototype.request = function (reqOpts_) {
         assert.strictEqual(this, vm);
         assert.strictEqual(reqOpts_, reqOpts);
 
@@ -1241,7 +1241,7 @@ describe('VM', () => {
       const apiResponse = {a: 'b', c: 'd'};
 
       beforeEach(() => {
-        FakeServiceObject.prototype.request = function(reqOpts, callback) {
+        FakeServiceObject.prototype.request = function (reqOpts, callback) {
           callback(error, apiResponse);
         };
       });
@@ -1260,7 +1260,7 @@ describe('VM', () => {
       const apiResponse = {name: 'operation-name'};
 
       beforeEach(() => {
-        FakeServiceObject.prototype.request = function(reqOpts, callback) {
+        FakeServiceObject.prototype.request = function (reqOpts, callback) {
           callback(null, apiResponse);
         };
       });
@@ -1268,7 +1268,7 @@ describe('VM', () => {
       it('should execute callback with Zone object & API resp', done => {
         const operation = {};
 
-        vm.zone.operation = function(name) {
+        vm.zone.operation = function (name) {
           assert.strictEqual(name, apiResponse.name);
           return operation;
         };

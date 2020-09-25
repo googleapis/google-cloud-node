@@ -21,7 +21,7 @@ const promisify = require('@google-cloud/promisify');
 
 let promisified = false;
 const fakePromisify = Object.assign({}, promisify, {
-  promisifyAll: function(Class) {
+  promisifyAll: function (Class) {
     if (Class.name === 'Subnetwork') {
       promisified = true;
     }
@@ -74,7 +74,7 @@ describe('Subnetwork', () => {
 
       const regionInstance = Object.assign({}, REGION, {
         createSubnetwork: {
-          bind: function(context) {
+          bind: function (context) {
             assert.strictEqual(context, regionInstance);
             return createSubnetworkBound;
           },
@@ -105,7 +105,7 @@ describe('Subnetwork', () => {
 
   describe('delete', () => {
     it('should make the correct API request', done => {
-      subnetwork.request = function(reqOpts) {
+      subnetwork.request = function (reqOpts) {
         assert.strictEqual(reqOpts.method, 'DELETE');
         assert.strictEqual(reqOpts.uri, '');
         done();
@@ -119,7 +119,7 @@ describe('Subnetwork', () => {
       const apiResponse = {a: 'b', c: 'd'};
 
       beforeEach(() => {
-        subnetwork.request = function(reqOpts, callback) {
+        subnetwork.request = function (reqOpts, callback) {
           callback(error, apiResponse);
         };
       });
@@ -146,7 +146,7 @@ describe('Subnetwork', () => {
       };
 
       beforeEach(() => {
-        subnetwork.request = function(reqOpts, callback) {
+        subnetwork.request = function (reqOpts, callback) {
           callback(null, apiResponse);
         };
       });
@@ -154,7 +154,7 @@ describe('Subnetwork', () => {
       it('should execute callback with Operation & Response', done => {
         const operation = {};
 
-        subnetwork.region.operation = function(name) {
+        subnetwork.region.operation = function (name) {
           assert.strictEqual(name, apiResponse.name);
           return operation;
         };

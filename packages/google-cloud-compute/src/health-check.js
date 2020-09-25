@@ -172,7 +172,7 @@ class HealthCheck extends common.ServiceObject {
        * @type {string}
        */
       id: name,
-      createMethod: function(name, options, callback) {
+      createMethod: function (name, options, callback) {
         if (is.fn(options)) {
           callback = options;
           options = {};

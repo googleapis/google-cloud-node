@@ -31,7 +31,7 @@ const fakeUtil = Object.assign({}, util, {
 
 let promisified = false;
 const fakePromisify = Object.assign({}, promisify, {
-  promisifyAll: function(Class, options) {
+  promisifyAll: function (Class, options) {
     if (Class.name !== 'Compute') {
       return;
     }
@@ -62,7 +62,7 @@ const originalFakeUtil = extend(true, {}, fakeUtil);
 
 const fakePaginator = {
   paginator: {
-    extend: function(Class, methods) {
+    extend: function (Class, methods) {
       if (Class.name !== 'Compute') {
         return;
       }
@@ -88,7 +88,7 @@ const fakePaginator = {
         'getZones',
       ]);
     },
-    streamify: function(methodName) {
+    streamify: function (methodName) {
       return methodName;
     },
   },
@@ -120,10 +120,10 @@ function FakeProject() {
 
 function FakeRegion() {
   this.calledWith_ = slice.call(arguments);
-  this.address = function() {
+  this.address = function () {
     return {};
   };
-  this.subnetwork = function() {
+  this.subnetwork = function () {
     return {};
   };
 }
@@ -144,13 +144,13 @@ function FakeSnapshot() {
 
 function FakeZone() {
   this.calledWith_ = slice.call(arguments);
-  this.disk = function() {
+  this.disk = function () {
     return {};
   };
-  this.vm = function() {
+  this.vm = function () {
     return {};
   };
-  this.machineType = function() {
+  this.machineType = function () {
     return {};
   };
 }
@@ -168,7 +168,7 @@ describe('Compute', () => {
 
   const PROJECT_ID = 'project-id';
 
-  before(function() {
+  before(function () {
     // Node v4 on Circle times out.
     this.timeout(0);
 
@@ -296,7 +296,7 @@ describe('Compute', () => {
           },
         };
 
-        compute.request = function(reqOpts) {
+        compute.request = function (reqOpts) {
           assert.deepStrictEqual(reqOpts.json.allowed, [
             {IPProtocol: 'http', ports: [8000]},
             {IPProtocol: 'https', ports: [8080, 9000]},
@@ -317,7 +317,7 @@ describe('Compute', () => {
           ranges: '0.0.0.0/0', // non-array to test that it's arrified.
         };
 
-        compute.request = function(reqOpts) {
+        compute.request = function (reqOpts) {
           assert.deepStrictEqual(reqOpts.json.sourceRanges, [options.ranges]);
           assert.strictEqual(reqOpts.json.ranges, undefined);
           done();
@@ -333,7 +333,7 @@ describe('Compute', () => {
           tags: 'tag', // non-array to test that it's arrified.
         };
 
-        compute.request = function(reqOpts) {
+        compute.request = function (reqOpts) {
           assert.deepStrictEqual(reqOpts.json.sourceTags, [options.tags]);
           assert.strictEqual(reqOpts.json.tags, undefined);
           done();
@@ -346,7 +346,7 @@ describe('Compute', () => {
     it('should make the correct API request', done => {
       const name = 'new-firewall-name';
 
-      compute.request = function(reqOpts) {
+      compute.request = function (reqOpts) {
         assert.strictEqual(reqOpts.method, 'POST');
         assert.strictEqual(reqOpts.uri, '/global/firewalls');
         assert.deepStrictEqual(reqOpts.json, {name: name});
@@ -361,7 +361,7 @@ describe('Compute', () => {
       const apiResponse = {a: 'b', c: 'd'};
 
       beforeEach(() => {
-        compute.request = function(reqOpts, callback) {
+        compute.request = function (reqOpts, callback) {
           callback(error, apiResponse);
         };
       });
@@ -383,7 +383,7 @@ describe('Compute', () => {
       };
 
       beforeEach(() => {
-        compute.request = function(reqOpts, callback) {
+        compute.request = function (reqOpts, callback) {
           callback(null, apiResponse);
         };
       });
@@ -393,12 +393,12 @@ describe('Compute', () => {
         const firewall = {};
         const operation = {};
 
-        compute.firewall = function(name_) {
+        compute.firewall = function (name_) {
           assert.strictEqual(name_, name);
           return firewall;
         };
 
-        compute.operation = function(name_) {
+        compute.operation = function (name_) {
           assert.strictEqual(name_, apiResponse.name);
           return operation;
         };
@@ -426,7 +426,7 @@ describe('Compute', () => {
       it('should set checkIntervalSec', done => {
         const options = {interval: 50};
 
-        compute.request = function(reqOpts) {
+        compute.request = function (reqOpts) {
           assert.strictEqual(reqOpts.json.checkIntervalSec, options.interval);
           assert.strictEqual(reqOpts.json.interval, undefined);
           done();
@@ -440,7 +440,7 @@ describe('Compute', () => {
       it('should set timeoutSec', done => {
         const options = {timeout: 50};
 
-        compute.request = function(reqOpts) {
+        compute.request = function (reqOpts) {
           assert.strictEqual(reqOpts.json.timeoutSec, options.timeout);
           assert.strictEqual(reqOpts.json.timeout, undefined);
           done();
@@ -454,7 +454,7 @@ describe('Compute', () => {
       it('should make the correct API request', done => {
         const name = 'https-health-check-name';
 
-        compute.request = function(reqOpts) {
+        compute.request = function (reqOpts) {
           assert.strictEqual(reqOpts.json.https, undefined);
           assert.strictEqual(reqOpts.json.name, name);
           assert.strictEqual(reqOpts.uri, '/global/httpsHealthChecks');
@@ -470,7 +470,7 @@ describe('Compute', () => {
       const options = {a: 'b'};
       const originalOptions = Object.assign({}, options);
 
-      compute.request = function(reqOpts) {
+      compute.request = function (reqOpts) {
         assert.strictEqual(reqOpts.method, 'POST');
         assert.strictEqual(reqOpts.uri, '/global/httpHealthChecks');
         assert.deepStrictEqual(reqOpts.json, {a: 'b', name: name});
@@ -486,7 +486,7 @@ describe('Compute', () => {
       const apiResponse = {a: 'b', c: 'd'};
 
       beforeEach(() => {
-        compute.request = function(reqOpts, callback) {
+        compute.request = function (reqOpts, callback) {
           callback(error, apiResponse);
         };
       });
@@ -508,7 +508,7 @@ describe('Compute', () => {
       };
 
       beforeEach(() => {
-        compute.request = function(reqOpts, callback) {
+        compute.request = function (reqOpts, callback) {
           callback(null, apiResponse);
         };
       });
@@ -518,13 +518,13 @@ describe('Compute', () => {
         const healthCheck = {};
         const operation = {};
 
-        compute.healthCheck = function(name_, options) {
+        compute.healthCheck = function (name_, options) {
           assert.strictEqual(name_, name);
           assert.deepStrictEqual(options.https, undefined);
           return healthCheck;
         };
 
-        compute.operation = function(name_) {
+        compute.operation = function (name_) {
           assert.strictEqual(name_, apiResponse.name);
           return operation;
         };
@@ -542,7 +542,7 @@ describe('Compute', () => {
       it('should create an HTTPS HealthCheck object', done => {
         const name = 'name';
 
-        compute.healthCheck = function(name_, options) {
+        compute.healthCheck = function (name_, options) {
           assert.strictEqual(name_, name);
           assert.strictEqual(options.https, true);
           done();
@@ -564,13 +564,13 @@ describe('Compute', () => {
     };
 
     beforeEach(() => {
-      fakeUtil.isCustomType = function() {
+      fakeUtil.isCustomType = function () {
         return true;
       };
     });
 
     it('should throw if Disk is not provided', () => {
-      fakeUtil.isCustomType = function(unknown, type) {
+      fakeUtil.isCustomType = function (unknown, type) {
         assert.strictEqual(unknown, DISK);
         assert.strictEqual(type, 'Disk');
         return false;
@@ -587,7 +587,7 @@ describe('Compute', () => {
         c: 'd',
       };
 
-      compute.request = function(reqOpts) {
+      compute.request = function (reqOpts) {
         assert.strictEqual(reqOpts.method, 'POST');
         assert.strictEqual(reqOpts.uri, '/global/images');
         assert.deepStrictEqual(reqOpts.json, {
@@ -611,7 +611,7 @@ describe('Compute', () => {
       const apiResponse = {};
 
       beforeEach(() => {
-        compute.request = function(reqOpts, callback) {
+        compute.request = function (reqOpts, callback) {
           callback(error, apiResponse);
         };
       });
@@ -632,7 +632,7 @@ describe('Compute', () => {
       };
 
       beforeEach(() => {
-        compute.request = function(reqOpts, callback) {
+        compute.request = function (reqOpts, callback) {
           callback(null, apiResponse);
         };
       });
@@ -641,12 +641,12 @@ describe('Compute', () => {
         const network = {};
         const operation = {};
 
-        compute.network = function(name) {
+        compute.network = function (name) {
           assert.strictEqual(name, NAME);
           return network;
         };
 
-        compute.operation = function(name) {
+        compute.operation = function (name) {
           assert.strictEqual(name, apiResponse.name);
           return operation;
         };
@@ -669,7 +669,7 @@ describe('Compute', () => {
           range: '10.240.0.0/16',
         };
 
-        compute.request = function(reqOpts) {
+        compute.request = function (reqOpts) {
           assert.strictEqual(reqOpts.json.IPv4Range, options.range);
           assert.strictEqual(reqOpts.json.range, undefined);
           done();
@@ -685,7 +685,7 @@ describe('Compute', () => {
           gateway: '10.1.1.1',
         };
 
-        compute.request = function(reqOpts) {
+        compute.request = function (reqOpts) {
           assert.strictEqual(reqOpts.json.gatewayIPv4, options.gateway);
           assert.strictEqual(reqOpts.json.gateway, undefined);
           done();
@@ -698,7 +698,7 @@ describe('Compute', () => {
     it('should make the correct API request', done => {
       const name = 'new-network';
 
-      compute.request = function(reqOpts) {
+      compute.request = function (reqOpts) {
         assert.strictEqual(reqOpts.method, 'POST');
         assert.strictEqual(reqOpts.uri, '/global/networks');
         assert.deepStrictEqual(reqOpts.json, {name: name});
@@ -713,7 +713,7 @@ describe('Compute', () => {
       const apiResponse = {a: 'b', c: 'd'};
 
       beforeEach(() => {
-        compute.request = function(reqOpts, callback) {
+        compute.request = function (reqOpts, callback) {
           callback(error, apiResponse);
         };
       });
@@ -736,7 +736,7 @@ describe('Compute', () => {
       };
 
       beforeEach(() => {
-        compute.request = function(reqOpts, callback) {
+        compute.request = function (reqOpts, callback) {
           callback(null, apiResponse);
         };
       });
@@ -745,12 +745,12 @@ describe('Compute', () => {
         const network = {};
         const operation = {};
 
-        compute.network = function(name_) {
+        compute.network = function (name_) {
           assert.strictEqual(name_, NAME);
           return network;
         };
 
-        compute.operation = function(name_) {
+        compute.operation = function (name_) {
           assert.strictEqual(name_, apiResponse.name);
           return operation;
         };
@@ -775,7 +775,7 @@ describe('Compute', () => {
       const originalConfig = Object.assign({}, config);
       const expectedConfig = Object.assign({}, config, {name: NAME});
 
-      compute.request = function(reqOpts) {
+      compute.request = function (reqOpts) {
         assert.strictEqual(reqOpts.method, 'POST');
         assert.strictEqual(reqOpts.uri, '/global/forwardingRules');
         assert.deepStrictEqual(config, originalConfig);
@@ -792,7 +792,7 @@ describe('Compute', () => {
       };
 
       it('should accept an array of tags', done => {
-        compute.request = function(reqOpts) {
+        compute.request = function (reqOpts) {
           assert.deepStrictEqual(reqOpts.json, {
             name: NAME,
             IPAddress: CONFIG.ip,
@@ -810,7 +810,7 @@ describe('Compute', () => {
       };
 
       it('should accept an array of tags', done => {
-        compute.request = function(reqOpts) {
+        compute.request = function (reqOpts) {
           assert.deepStrictEqual(reqOpts.json, {
             name: NAME,
             IPProtocol: CONFIG.protocol,
@@ -828,7 +828,7 @@ describe('Compute', () => {
       };
 
       it('should accept an array of tags', done => {
-        compute.request = function(reqOpts) {
+        compute.request = function (reqOpts) {
           assert.deepStrictEqual(reqOpts.json, {
             name: NAME,
             portRange: CONFIG.range,
@@ -845,7 +845,7 @@ describe('Compute', () => {
       const apiResponse = {a: 'b', c: 'd'};
 
       beforeEach(() => {
-        compute.request = function(reqOpts, callback) {
+        compute.request = function (reqOpts, callback) {
           callback(error, apiResponse);
         };
       });
@@ -867,7 +867,7 @@ describe('Compute', () => {
       };
 
       beforeEach(() => {
-        compute.request = function(reqOpts, callback) {
+        compute.request = function (reqOpts, callback) {
           callback(null, apiResponse);
         };
       });
@@ -876,12 +876,12 @@ describe('Compute', () => {
         const rule = {};
         const operation = {};
 
-        compute.rule = function(name) {
+        compute.rule = function (name) {
           assert.strictEqual(name, NAME);
           return rule;
         };
 
-        compute.operation = function(name) {
+        compute.operation = function (name) {
           assert.strictEqual(name, apiResponse.name);
           return operation;
         };
@@ -902,7 +902,7 @@ describe('Compute', () => {
     const NAME = 'new-service';
 
     it('should make the correct API request', done => {
-      compute.request = function(reqOpts) {
+      compute.request = function (reqOpts) {
         assert.strictEqual(reqOpts.method, 'POST');
         assert.strictEqual(reqOpts.uri, '/global/backendServices');
         assert.deepStrictEqual(reqOpts.json, {name: NAME});
@@ -917,7 +917,7 @@ describe('Compute', () => {
       const apiResponse = {a: 'b', c: 'd'};
 
       beforeEach(() => {
-        compute.request = function(reqOpts, callback) {
+        compute.request = function (reqOpts, callback) {
           callback(error, apiResponse);
         };
       });
@@ -939,7 +939,7 @@ describe('Compute', () => {
       };
 
       beforeEach(() => {
-        compute.request = function(reqOpts, callback) {
+        compute.request = function (reqOpts, callback) {
           callback(null, apiResponse);
         };
       });
@@ -948,12 +948,12 @@ describe('Compute', () => {
         const service = {};
         const operation = {};
 
-        compute.service = function(name) {
+        compute.service = function (name) {
           assert.strictEqual(name, NAME);
           return service;
         };
 
-        compute.operation = function(name) {
+        compute.operation = function (name) {
           assert.strictEqual(name, apiResponse.name);
           return operation;
         };
@@ -983,7 +983,7 @@ describe('Compute', () => {
 
   describe('getAddresses', () => {
     it('should accept only a callback', done => {
-      compute.request = function(reqOpts) {
+      compute.request = function (reqOpts) {
         assert.deepStrictEqual(reqOpts.qs, {});
         done();
       };
@@ -994,7 +994,7 @@ describe('Compute', () => {
     it('should make the correct API request', done => {
       const options = {};
 
-      compute.request = function(reqOpts) {
+      compute.request = function (reqOpts) {
         assert.strictEqual(reqOpts.uri, '/aggregated/addresses');
         assert.strictEqual(reqOpts.qs, options);
         done();
@@ -1008,7 +1008,7 @@ describe('Compute', () => {
       const apiResponse = {a: 'b', c: 'd'};
 
       beforeEach(() => {
-        compute.request = function(reqOpts, callback) {
+        compute.request = function (reqOpts, callback) {
           callback(error, apiResponse);
         };
       });
@@ -1039,7 +1039,7 @@ describe('Compute', () => {
       };
 
       beforeEach(() => {
-        compute.request = function(reqOpts, callback) {
+        compute.request = function (reqOpts, callback) {
           callback(null, apiResponse);
         };
       });
@@ -1047,12 +1047,12 @@ describe('Compute', () => {
       it('should create Address objects from the response', done => {
         const region = {};
 
-        compute.region = function(name) {
+        compute.region = function (name) {
           assert.strictEqual(name, REGION_NAME);
           return region;
         };
 
-        region.address = function(name) {
+        region.address = function (name) {
           assert.strictEqual(name, address.name);
           setImmediate(done);
           return address;
@@ -1069,7 +1069,7 @@ describe('Compute', () => {
         const query = {a: 'b', c: 'd'};
         const originalQuery = Object.assign({}, query);
 
-        compute.request = function(reqOpts, callback) {
+        compute.request = function (reqOpts, callback) {
           callback(null, apiResponseWithNextPageToken);
         };
 
@@ -1093,7 +1093,7 @@ describe('Compute', () => {
 
   describe('getAutoscalers', () => {
     it('should accept only a callback', done => {
-      compute.request = function(reqOpts) {
+      compute.request = function (reqOpts) {
         assert.deepStrictEqual(reqOpts.qs, {});
         done();
       };
@@ -1104,7 +1104,7 @@ describe('Compute', () => {
     it('should make the correct API request', done => {
       const options = {};
 
-      compute.request = function(reqOpts) {
+      compute.request = function (reqOpts) {
         assert.strictEqual(reqOpts.uri, '/aggregated/autoscalers');
         assert.strictEqual(reqOpts.qs, options);
         done();
@@ -1118,7 +1118,7 @@ describe('Compute', () => {
       const apiResponse = {a: 'b', c: 'd'};
 
       beforeEach(() => {
-        compute.request = function(reqOpts, callback) {
+        compute.request = function (reqOpts, callback) {
           callback(error, apiResponse);
         };
       });
@@ -1153,7 +1153,7 @@ describe('Compute', () => {
       };
 
       beforeEach(() => {
-        compute.request = function(reqOpts, callback) {
+        compute.request = function (reqOpts, callback) {
           callback(null, apiResponse);
         };
       });
@@ -1161,12 +1161,12 @@ describe('Compute', () => {
       it('should create Autoscaler objects from the response', done => {
         const zone = {};
 
-        compute.zone = function(name) {
+        compute.zone = function (name) {
           assert.strictEqual(name, ZONE_NAME);
           return zone;
         };
 
-        zone.autoscaler = function(name) {
+        zone.autoscaler = function (name) {
           assert.strictEqual(name, autoscaler.name);
           setImmediate(done);
           return autoscaler;
@@ -1178,11 +1178,11 @@ describe('Compute', () => {
       it('should not create zone-less Autoscalers', done => {
         const zone = {};
 
-        compute.zone = function() {
+        compute.zone = function () {
           return zone;
         };
 
-        zone.autoscaler = function() {
+        zone.autoscaler = function () {
           return autoscaler;
         };
 
@@ -1204,7 +1204,7 @@ describe('Compute', () => {
         const query = {a: 'b', c: 'd'};
         const originalQuery = Object.assign({}, query);
 
-        compute.request = function(reqOpts, callback) {
+        compute.request = function (reqOpts, callback) {
           callback(null, apiResponseWithNextPageToken);
         };
 
@@ -1228,7 +1228,7 @@ describe('Compute', () => {
 
   describe('getDisks', () => {
     it('should accept only a callback', done => {
-      compute.request = function(reqOpts) {
+      compute.request = function (reqOpts) {
         assert.deepStrictEqual(reqOpts.qs, {});
         done();
       };
@@ -1239,7 +1239,7 @@ describe('Compute', () => {
     it('should make the correct API request', done => {
       const options = {};
 
-      compute.request = function(reqOpts) {
+      compute.request = function (reqOpts) {
         assert.strictEqual(reqOpts.uri, '/aggregated/disks');
         assert.strictEqual(reqOpts.qs, options);
         done();
@@ -1253,7 +1253,7 @@ describe('Compute', () => {
       const apiResponse = {a: 'b', c: 'd'};
 
       beforeEach(() => {
-        compute.request = function(reqOpts, callback) {
+        compute.request = function (reqOpts, callback) {
           callback(error, apiResponse);
         };
       });
@@ -1284,7 +1284,7 @@ describe('Compute', () => {
       };
 
       beforeEach(() => {
-        compute.request = function(reqOpts, callback) {
+        compute.request = function (reqOpts, callback) {
           callback(null, apiResponse);
         };
       });
@@ -1292,12 +1292,12 @@ describe('Compute', () => {
       it('should create Disk objects from the response', done => {
         const zone = {};
 
-        compute.zone = function(name) {
+        compute.zone = function (name) {
           assert.strictEqual(name, ZONE_NAME);
           return zone;
         };
 
-        zone.disk = function(name) {
+        zone.disk = function (name) {
           assert.strictEqual(name, disk.name);
           setImmediate(done);
           return disk;
@@ -1314,7 +1314,7 @@ describe('Compute', () => {
         const query = {a: 'b', c: 'd'};
         const originalQuery = Object.assign({}, query);
 
-        compute.request = function(reqOpts, callback) {
+        compute.request = function (reqOpts, callback) {
           callback(null, apiResponseWithNextPageToken);
         };
 
@@ -1338,7 +1338,7 @@ describe('Compute', () => {
 
   describe('getFirewalls', () => {
     it('should accept only a callback', done => {
-      compute.request = function(reqOpts) {
+      compute.request = function (reqOpts) {
         assert.deepStrictEqual(reqOpts.qs, {});
         done();
       };
@@ -1349,7 +1349,7 @@ describe('Compute', () => {
     it('should make the correct API request', done => {
       const options = {};
 
-      compute.request = function(reqOpts) {
+      compute.request = function (reqOpts) {
         assert.strictEqual(reqOpts.uri, '/global/firewalls');
         assert.strictEqual(reqOpts.qs, options);
         done();
@@ -1363,7 +1363,7 @@ describe('Compute', () => {
       const apiResponse = {a: 'b', c: 'd'};
 
       beforeEach(() => {
-        compute.request = function(reqOpts, callback) {
+        compute.request = function (reqOpts, callback) {
           callback(error, apiResponse);
         };
       });
@@ -1387,13 +1387,13 @@ describe('Compute', () => {
       };
 
       beforeEach(() => {
-        compute.request = function(reqOpts, callback) {
+        compute.request = function (reqOpts, callback) {
           callback(null, apiResponse);
         };
       });
 
       it('should create Firewall objects from the response', done => {
-        compute.firewall = function(name) {
+        compute.firewall = function (name) {
           assert.strictEqual(name, firewall.name);
           setImmediate(done);
           return firewall;
@@ -1410,7 +1410,7 @@ describe('Compute', () => {
         const query = {a: 'b', c: 'd'};
         const originalQuery = Object.assign({}, query);
 
-        compute.request = function(reqOpts, callback) {
+        compute.request = function (reqOpts, callback) {
           callback(null, apiResponseWithNextPageToken);
         };
 
@@ -1434,7 +1434,7 @@ describe('Compute', () => {
 
   describe('getHealthChecks', () => {
     it('should accept only a callback', done => {
-      compute.request = function(reqOpts) {
+      compute.request = function (reqOpts) {
         assert.deepStrictEqual(reqOpts.qs, {});
         done();
       };
@@ -1445,7 +1445,7 @@ describe('Compute', () => {
     it('should make the correct default API request', done => {
       const options = {};
 
-      compute.request = function(reqOpts) {
+      compute.request = function (reqOpts) {
         assert.strictEqual(reqOpts.uri, '/global/httpHealthChecks');
         assert.deepStrictEqual(reqOpts.qs, options);
         done();
@@ -1459,7 +1459,7 @@ describe('Compute', () => {
         const options = {https: true};
         const originalOptions = Object.assign({}, options);
 
-        compute.request = function(reqOpts) {
+        compute.request = function (reqOpts) {
           assert.strictEqual(reqOpts.uri, '/global/httpsHealthChecks');
           assert.deepStrictEqual(reqOpts.qs, {});
           assert.deepStrictEqual(options, originalOptions);
@@ -1475,7 +1475,7 @@ describe('Compute', () => {
       const apiResponse = {a: 'b', c: 'd'};
 
       beforeEach(() => {
-        compute.request = function(reqOpts, callback) {
+        compute.request = function (reqOpts, callback) {
           callback(error, apiResponse);
         };
       });
@@ -1497,13 +1497,13 @@ describe('Compute', () => {
       const apiResponse = {items: [healthCheck]};
 
       beforeEach(() => {
-        compute.request = function(reqOpts, callback) {
+        compute.request = function (reqOpts, callback) {
           callback(null, apiResponse);
         };
       });
 
       it('should create HealthCheck objects from the response', done => {
-        compute.healthCheck = function(name, options) {
+        compute.healthCheck = function (name, options) {
           assert.strictEqual(name, healthCheck.name);
           assert.strictEqual(options.https, undefined);
           setImmediate(done);
@@ -1514,7 +1514,7 @@ describe('Compute', () => {
       });
 
       it('should create HTTPS Health Check objects', done => {
-        compute.healthCheck = function(name, options) {
+        compute.healthCheck = function (name, options) {
           assert.strictEqual(name, healthCheck.name);
           assert.strictEqual(options.https, true);
           setImmediate(done);
@@ -1532,7 +1532,7 @@ describe('Compute', () => {
         const query = {a: 'b', c: 'd'};
         const originalQuery = Object.assign({}, query);
 
-        compute.request = function(reqOpts, callback) {
+        compute.request = function (reqOpts, callback) {
           callback(null, apiResponseWithNextPageToken);
         };
 
@@ -1556,7 +1556,7 @@ describe('Compute', () => {
 
   describe('getImages', () => {
     it('should accept only a callback', done => {
-      compute.request = function(reqOpts) {
+      compute.request = function (reqOpts) {
         assert.deepStrictEqual(reqOpts.qs, {});
         done();
       };
@@ -1567,7 +1567,7 @@ describe('Compute', () => {
     it('should make the correct API request', done => {
       const options = {};
 
-      compute.request = function(reqOpts) {
+      compute.request = function (reqOpts) {
         assert.strictEqual(reqOpts.uri, '/global/images');
         assert.strictEqual(reqOpts.qs, options);
         done();
@@ -1581,7 +1581,7 @@ describe('Compute', () => {
       const apiResponse = {a: 'b', c: 'd'};
 
       beforeEach(() => {
-        compute.request = function(reqOpts, callback) {
+        compute.request = function (reqOpts, callback) {
           callback(error, apiResponse);
         };
       });
@@ -1605,13 +1605,13 @@ describe('Compute', () => {
       };
 
       beforeEach(() => {
-        compute.request = function(reqOpts, callback) {
+        compute.request = function (reqOpts, callback) {
           callback(null, apiResponse);
         };
       });
 
       it('should create Image objects from the response', done => {
-        compute.image = function(name) {
+        compute.image = function (name) {
           assert.strictEqual(name, image.name);
           setImmediate(done);
           return image;
@@ -1628,7 +1628,7 @@ describe('Compute', () => {
         const query = {a: 'b', c: 'd'};
         const originalQuery = Object.assign({}, query);
 
-        compute.request = function(reqOpts, callback) {
+        compute.request = function (reqOpts, callback) {
           callback(null, apiResponseWithNextPageToken);
         };
 
@@ -1652,7 +1652,7 @@ describe('Compute', () => {
 
   describe('getInstanceGroups', () => {
     it('should accept only a callback', done => {
-      compute.request = function(reqOpts) {
+      compute.request = function (reqOpts) {
         assert.deepStrictEqual(reqOpts.qs, {});
         done();
       };
@@ -1663,7 +1663,7 @@ describe('Compute', () => {
     it('should make the correct default API request', done => {
       const options = {};
 
-      compute.request = function(reqOpts) {
+      compute.request = function (reqOpts) {
         assert.strictEqual(reqOpts.uri, '/aggregated/instanceGroups');
         assert.deepStrictEqual(reqOpts.qs, options);
         done();
@@ -1677,7 +1677,7 @@ describe('Compute', () => {
       const apiResponse = {a: 'b', c: 'd'};
 
       beforeEach(() => {
-        compute.request = function(reqOpts, callback) {
+        compute.request = function (reqOpts, callback) {
           callback(error, apiResponse);
         };
       });
@@ -1708,7 +1708,7 @@ describe('Compute', () => {
       };
 
       beforeEach(() => {
-        compute.request = function(reqOpts, callback) {
+        compute.request = function (reqOpts, callback) {
           callback(null, apiResponse);
         };
       });
@@ -1716,12 +1716,12 @@ describe('Compute', () => {
       it('should create InstanceGroup objects from the resp', done => {
         const zone = {};
 
-        compute.zone = function(name) {
+        compute.zone = function (name) {
           assert.strictEqual(name, ZONE_NAME);
           return zone;
         };
 
-        zone.instanceGroup = function(name) {
+        zone.instanceGroup = function (name) {
           assert.strictEqual(name, instanceGroup.name);
           setImmediate(done);
           return instanceGroup;
@@ -1740,7 +1740,7 @@ describe('Compute', () => {
         const query = {a: 'b', c: 'd'};
         const originalQuery = Object.assign({}, query);
 
-        compute.request = function(reqOpts, callback) {
+        compute.request = function (reqOpts, callback) {
           callback(null, apiResponseWithNextPageToken);
         };
 
@@ -1764,7 +1764,7 @@ describe('Compute', () => {
 
   describe('getMachineTypes', () => {
     it('should accept only a callback', done => {
-      compute.request = function(reqOpts) {
+      compute.request = function (reqOpts) {
         assert.deepStrictEqual(reqOpts.qs, {});
         done();
       };
@@ -1775,7 +1775,7 @@ describe('Compute', () => {
     it('should make the correct API request', done => {
       const options = {};
 
-      compute.request = function(reqOpts) {
+      compute.request = function (reqOpts) {
         assert.strictEqual(reqOpts.uri, '/aggregated/machineTypes');
         assert.strictEqual(reqOpts.qs, options);
         done();
@@ -1789,7 +1789,7 @@ describe('Compute', () => {
       const apiResponse = {};
 
       beforeEach(() => {
-        compute.request = function(reqOpts, callback) {
+        compute.request = function (reqOpts, callback) {
           callback(error, apiResponse);
         };
       });
@@ -1819,7 +1819,7 @@ describe('Compute', () => {
       };
 
       beforeEach(() => {
-        compute.request = function(reqOpts, callback) {
+        compute.request = function (reqOpts, callback) {
           callback(null, apiResponse);
         };
       });
@@ -1828,12 +1828,12 @@ describe('Compute', () => {
         const zone = {};
         const machineTypeInstance = {};
 
-        compute.zone = function(name) {
+        compute.zone = function (name) {
           assert.strictEqual(name, ZONE_NAME);
           return zone;
         };
 
-        zone.machineType = function(name) {
+        zone.machineType = function (name) {
           assert.strictEqual(name, machineType.name);
           return machineTypeInstance;
         };
@@ -1856,7 +1856,7 @@ describe('Compute', () => {
         const query = {a: 'b', c: 'd'};
         const originalQuery = Object.assign({}, query);
 
-        compute.request = function(reqOpts, callback) {
+        compute.request = function (reqOpts, callback) {
           callback(null, apiResponseWithNextPageToken);
         };
 
@@ -1880,7 +1880,7 @@ describe('Compute', () => {
 
   describe('getNetworks', () => {
     it('should work with only a callback', done => {
-      compute.request = function(reqOpts) {
+      compute.request = function (reqOpts) {
         assert.deepStrictEqual(reqOpts.qs, {});
         done();
       };
@@ -1891,7 +1891,7 @@ describe('Compute', () => {
     it('should make the correct API request', done => {
       const options = {};
 
-      compute.request = function(reqOpts) {
+      compute.request = function (reqOpts) {
         assert.strictEqual(reqOpts.uri, '/global/networks');
         assert.strictEqual(reqOpts.qs, options);
         done();
@@ -1905,7 +1905,7 @@ describe('Compute', () => {
       const apiResponse = {a: 'b', c: 'd'};
 
       beforeEach(() => {
-        compute.request = function(reqOpts, callback) {
+        compute.request = function (reqOpts, callback) {
           callback(error, apiResponse);
         };
       });
@@ -1929,13 +1929,13 @@ describe('Compute', () => {
       };
 
       beforeEach(() => {
-        compute.request = function(reqOpts, callback) {
+        compute.request = function (reqOpts, callback) {
           callback(null, apiResponse);
         };
       });
 
       it('should create Network objects from the response', done => {
-        compute.network = function(name) {
+        compute.network = function (name) {
           assert.strictEqual(name, network.name);
           setImmediate(done);
           return network;
@@ -1952,7 +1952,7 @@ describe('Compute', () => {
         const query = {a: 'b', c: 'd'};
         const originalQuery = Object.assign({}, query);
 
-        compute.request = function(reqOpts, callback) {
+        compute.request = function (reqOpts, callback) {
           callback(null, apiResponseWithNextPageToken);
         };
 
@@ -1976,7 +1976,7 @@ describe('Compute', () => {
 
   describe('getOperations', () => {
     it('should work with only a callback', done => {
-      compute.request = function(reqOpts) {
+      compute.request = function (reqOpts) {
         assert.deepStrictEqual(reqOpts.qs, {});
         done();
       };
@@ -1987,7 +1987,7 @@ describe('Compute', () => {
     it('should make the correct API request', done => {
       const options = {};
 
-      compute.request = function(reqOpts) {
+      compute.request = function (reqOpts) {
         assert.strictEqual(reqOpts.uri, '/global/operations');
         assert.strictEqual(reqOpts.qs, options);
         done();
@@ -2001,7 +2001,7 @@ describe('Compute', () => {
       const apiResponse = {a: 'b', c: 'd'};
 
       beforeEach(() => {
-        compute.request = function(reqOpts, callback) {
+        compute.request = function (reqOpts, callback) {
           callback(error, apiResponse);
         };
       });
@@ -2025,13 +2025,13 @@ describe('Compute', () => {
       };
 
       beforeEach(() => {
-        compute.request = function(reqOpts, callback) {
+        compute.request = function (reqOpts, callback) {
           callback(null, apiResponse);
         };
       });
 
       it('should create Operation objects from the response', done => {
-        compute.operation = function(name) {
+        compute.operation = function (name) {
           assert.strictEqual(name, operation.name);
           setImmediate(done);
           return operation;
@@ -2048,7 +2048,7 @@ describe('Compute', () => {
         const query = {a: 'b', c: 'd'};
         const originalQuery = Object.assign({}, query);
 
-        compute.request = function(reqOpts, callback) {
+        compute.request = function (reqOpts, callback) {
           callback(null, apiResponseWithNextPageToken);
         };
 
@@ -2072,7 +2072,7 @@ describe('Compute', () => {
 
   describe('getRegions', () => {
     it('should work with only a callback', done => {
-      compute.request = function(reqOpts) {
+      compute.request = function (reqOpts) {
         assert.deepStrictEqual(reqOpts.qs, {});
         done();
       };
@@ -2083,7 +2083,7 @@ describe('Compute', () => {
     it('should make the correct API request', done => {
       const options = {};
 
-      compute.request = function(reqOpts) {
+      compute.request = function (reqOpts) {
         assert.strictEqual(reqOpts.uri, '/regions');
         assert.strictEqual(reqOpts.qs, options);
         done();
@@ -2097,7 +2097,7 @@ describe('Compute', () => {
       const apiResponse = {a: 'b', c: 'd'};
 
       beforeEach(() => {
-        compute.request = function(reqOpts, callback) {
+        compute.request = function (reqOpts, callback) {
           callback(error, apiResponse);
         };
       });
@@ -2121,13 +2121,13 @@ describe('Compute', () => {
       };
 
       beforeEach(() => {
-        compute.request = function(reqOpts, callback) {
+        compute.request = function (reqOpts, callback) {
           callback(null, apiResponse);
         };
       });
 
       it('should create Region objects from the response', done => {
-        compute.region = function(name) {
+        compute.region = function (name) {
           assert.strictEqual(name, region.name);
           setImmediate(done);
           return region;
@@ -2144,7 +2144,7 @@ describe('Compute', () => {
         const query = {a: 'b', c: 'd'};
         const originalQuery = Object.assign({}, query);
 
-        compute.request = function(reqOpts, callback) {
+        compute.request = function (reqOpts, callback) {
           callback(null, apiResponseWithNextPageToken);
         };
 
@@ -2168,7 +2168,7 @@ describe('Compute', () => {
 
   describe('getRules', () => {
     it('should work with only a callback', done => {
-      compute.request = function(reqOpts) {
+      compute.request = function (reqOpts) {
         assert.deepStrictEqual(reqOpts.qs, {});
         done();
       };
@@ -2179,7 +2179,7 @@ describe('Compute', () => {
     it('should make the correct API request', done => {
       const options = {};
 
-      compute.request = function(reqOpts) {
+      compute.request = function (reqOpts) {
         assert.strictEqual(reqOpts.uri, '/global/forwardingRules');
         assert.strictEqual(reqOpts.qs, options);
         done();
@@ -2193,7 +2193,7 @@ describe('Compute', () => {
       const apiResponse = {a: 'b', c: 'd'};
 
       beforeEach(() => {
-        compute.request = function(reqOpts, callback) {
+        compute.request = function (reqOpts, callback) {
           callback(error, apiResponse);
         };
       });
@@ -2219,13 +2219,13 @@ describe('Compute', () => {
       };
 
       beforeEach(() => {
-        compute.request = function(reqOpts, callback) {
+        compute.request = function (reqOpts, callback) {
           callback(null, apiResponse);
         };
       });
 
       it('should create Rule objects from the response', done => {
-        compute.rule = function(name) {
+        compute.rule = function (name) {
           assert.strictEqual(name, rule.name);
           return rule;
         };
@@ -2248,7 +2248,7 @@ describe('Compute', () => {
         };
         const originalQuery = Object.assign({}, query);
 
-        compute.request = function(reqOpts, callback) {
+        compute.request = function (reqOpts, callback) {
           callback(null, apiResponseWithNextPageToken);
         };
 
@@ -2272,7 +2272,7 @@ describe('Compute', () => {
 
   describe('getServices', () => {
     it('should work with only a callback', done => {
-      compute.request = function(reqOpts) {
+      compute.request = function (reqOpts) {
         assert.deepStrictEqual(reqOpts.qs, {});
         done();
       };
@@ -2283,7 +2283,7 @@ describe('Compute', () => {
     it('should make the correct API request', done => {
       const options = {};
 
-      compute.request = function(reqOpts) {
+      compute.request = function (reqOpts) {
         assert.strictEqual(reqOpts.uri, '/global/backendServices');
         assert.strictEqual(reqOpts.qs, options);
         done();
@@ -2297,7 +2297,7 @@ describe('Compute', () => {
       const apiResponse = {a: 'b', c: 'd'};
 
       beforeEach(() => {
-        compute.request = function(reqOpts, callback) {
+        compute.request = function (reqOpts, callback) {
           callback(error, apiResponse);
         };
       });
@@ -2323,13 +2323,13 @@ describe('Compute', () => {
       };
 
       beforeEach(() => {
-        compute.request = function(reqOpts, callback) {
+        compute.request = function (reqOpts, callback) {
           callback(null, apiResponse);
         };
       });
 
       it('should create Service objects from the response', done => {
-        compute.service = function(name) {
+        compute.service = function (name) {
           assert.strictEqual(name, service.name);
           setImmediate(done);
           return service;
@@ -2349,7 +2349,7 @@ describe('Compute', () => {
         };
         const originalQuery = Object.assign({}, query);
 
-        compute.request = function(reqOpts, callback) {
+        compute.request = function (reqOpts, callback) {
           callback(null, apiResponseWithNextPageToken);
         };
 
@@ -2373,7 +2373,7 @@ describe('Compute', () => {
 
   describe('getSnapshots', () => {
     it('should work with only a callback', done => {
-      compute.request = function(reqOpts) {
+      compute.request = function (reqOpts) {
         assert.deepStrictEqual(reqOpts.qs, {});
         done();
       };
@@ -2384,7 +2384,7 @@ describe('Compute', () => {
     it('should make the correct API request', done => {
       const options = {};
 
-      compute.request = function(reqOpts) {
+      compute.request = function (reqOpts) {
         assert.strictEqual(reqOpts.uri, '/global/snapshots');
         assert.strictEqual(reqOpts.qs, options);
         done();
@@ -2398,7 +2398,7 @@ describe('Compute', () => {
       const apiResponse = {a: 'b', c: 'd'};
 
       beforeEach(() => {
-        compute.request = function(reqOpts, callback) {
+        compute.request = function (reqOpts, callback) {
           callback(error, apiResponse);
         };
       });
@@ -2422,13 +2422,13 @@ describe('Compute', () => {
       };
 
       beforeEach(() => {
-        compute.request = function(reqOpts, callback) {
+        compute.request = function (reqOpts, callback) {
           callback(null, apiResponse);
         };
       });
 
       it('should create Snapshot objects from the response', done => {
-        compute.snapshot = function(name) {
+        compute.snapshot = function (name) {
           assert.strictEqual(name, snapshot.name);
           setImmediate(done);
           return snapshot;
@@ -2445,7 +2445,7 @@ describe('Compute', () => {
         const query = {a: 'b', c: 'd'};
         const originalQuery = Object.assign({}, query);
 
-        compute.request = function(reqOpts, callback) {
+        compute.request = function (reqOpts, callback) {
           callback(null, apiResponseWithNextPageToken);
         };
 
@@ -2469,7 +2469,7 @@ describe('Compute', () => {
 
   describe('getSubnetworks', () => {
     it('should accept only a callback', done => {
-      compute.request = function(reqOpts) {
+      compute.request = function (reqOpts) {
         assert.deepStrictEqual(reqOpts.qs, {});
         done();
       };
@@ -2480,7 +2480,7 @@ describe('Compute', () => {
     it('should make the correct API request', done => {
       const options = {};
 
-      compute.request = function(reqOpts) {
+      compute.request = function (reqOpts) {
         assert.strictEqual(reqOpts.uri, '/aggregated/subnetworks');
         assert.strictEqual(reqOpts.qs, options);
         done();
@@ -2494,7 +2494,7 @@ describe('Compute', () => {
       const apiResponse = {a: 'b', c: 'd'};
 
       beforeEach(() => {
-        compute.request = function(reqOpts, callback) {
+        compute.request = function (reqOpts, callback) {
           callback(error, apiResponse);
         };
       });
@@ -2525,7 +2525,7 @@ describe('Compute', () => {
       };
 
       beforeEach(() => {
-        compute.request = function(reqOpts, callback) {
+        compute.request = function (reqOpts, callback) {
           callback(null, apiResponse);
         };
       });
@@ -2534,12 +2534,12 @@ describe('Compute', () => {
         const region = {};
         const fakeSubnetwork = {};
 
-        compute.region = function(name) {
+        compute.region = function (name) {
           assert.strictEqual(name, REGION_NAME);
           return region;
         };
 
-        region.subnetwork = function(name) {
+        region.subnetwork = function (name) {
           assert.strictEqual(name, subnetwork.name);
           return fakeSubnetwork;
         };
@@ -2565,7 +2565,7 @@ describe('Compute', () => {
         const query = {a: 'b', c: 'd'};
         const originalQuery = Object.assign({}, query);
 
-        compute.request = function(reqOpts, callback) {
+        compute.request = function (reqOpts, callback) {
           callback(null, apiResponseWithNextPageToken);
         };
 
@@ -2589,7 +2589,7 @@ describe('Compute', () => {
 
   describe('getVMs', () => {
     it('should work with only a callback', done => {
-      compute.request = function(reqOpts) {
+      compute.request = function (reqOpts) {
         assert.deepStrictEqual(reqOpts.qs, {});
         done();
       };
@@ -2600,7 +2600,7 @@ describe('Compute', () => {
     it('should make the correct API request', done => {
       const options = {};
 
-      compute.request = function(reqOpts) {
+      compute.request = function (reqOpts) {
         assert.strictEqual(reqOpts.uri, '/aggregated/instances');
         assert.strictEqual(reqOpts.qs, options);
         done();
@@ -2614,7 +2614,7 @@ describe('Compute', () => {
       const apiResponse = {a: 'b', c: 'd'};
 
       beforeEach(() => {
-        compute.request = function(reqOpts, callback) {
+        compute.request = function (reqOpts, callback) {
           callback(error, apiResponse);
         };
       });
@@ -2645,7 +2645,7 @@ describe('Compute', () => {
       };
 
       beforeEach(() => {
-        compute.request = function(reqOpts, callback) {
+        compute.request = function (reqOpts, callback) {
           callback(null, apiResponse);
         };
       });
@@ -2653,12 +2653,12 @@ describe('Compute', () => {
       it('should create VM objects from the response', done => {
         const zone = {};
 
-        compute.zone = function(name) {
+        compute.zone = function (name) {
           assert.strictEqual(name, ZONE_NAME);
           return zone;
         };
 
-        zone.vm = function(name) {
+        zone.vm = function (name) {
           assert.strictEqual(name, vm.name);
           setImmediate(done);
           return vm;
@@ -2675,7 +2675,7 @@ describe('Compute', () => {
         const query = {a: 'b', c: 'd'};
         const originalQuery = Object.assign({}, query);
 
-        compute.request = function(reqOpts, callback) {
+        compute.request = function (reqOpts, callback) {
           callback(null, apiResponseWithNextPageToken);
         };
 
@@ -2699,7 +2699,7 @@ describe('Compute', () => {
 
   describe('getZones', () => {
     it('should work with only a callback', done => {
-      compute.request = function(reqOpts) {
+      compute.request = function (reqOpts) {
         assert.deepStrictEqual(reqOpts.qs, {});
         done();
       };
@@ -2710,7 +2710,7 @@ describe('Compute', () => {
     it('should make the correct API request', done => {
       const options = {};
 
-      compute.request = function(reqOpts) {
+      compute.request = function (reqOpts) {
         assert.strictEqual(reqOpts.uri, '/zones');
         assert.strictEqual(reqOpts.qs, options);
         done();
@@ -2724,7 +2724,7 @@ describe('Compute', () => {
       const apiResponse = {a: 'b', c: 'd'};
 
       beforeEach(() => {
-        compute.request = function(reqOpts, callback) {
+        compute.request = function (reqOpts, callback) {
           callback(error, apiResponse);
         };
       });
@@ -2748,13 +2748,13 @@ describe('Compute', () => {
       };
 
       beforeEach(() => {
-        compute.request = function(reqOpts, callback) {
+        compute.request = function (reqOpts, callback) {
           callback(null, apiResponse);
         };
       });
 
       it('should create Zone objects from the response', done => {
-        compute.zone = function(name) {
+        compute.zone = function (name) {
           assert.strictEqual(name, zone.name);
           setImmediate(done);
           return zone;
@@ -2771,7 +2771,7 @@ describe('Compute', () => {
         const query = {a: 'b', c: 'd'};
         const originalQuery = Object.assign({}, query);
 
-        compute.request = function(reqOpts, callback) {
+        compute.request = function (reqOpts, callback) {
           callback(null, apiResponseWithNextPageToken);
         };
 

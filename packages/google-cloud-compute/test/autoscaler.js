@@ -21,7 +21,7 @@ const promisify = require('@google-cloud/promisify');
 
 let promisified = false;
 const fakePromisify = Object.assign({}, promisify, {
-  promisifyAll: function(Class) {
+  promisifyAll: function (Class) {
     if (Class.name === 'Autoscaler') {
       promisified = true;
     }
@@ -79,7 +79,7 @@ describe('Autoscaler', () => {
 
       const zoneInstance = Object.assign({}, ZONE, {
         createAutoscaler: {
-          bind: function(context) {
+          bind: function (context) {
             assert.strictEqual(context, zoneInstance);
             return createMethod;
           },
@@ -106,7 +106,7 @@ describe('Autoscaler', () => {
 
   describe('delete', () => {
     it('should call ServiceObject.delete', done => {
-      FakeServiceObject.prototype.delete = function() {
+      FakeServiceObject.prototype.delete = function () {
         assert.strictEqual(this, autoscaler);
         done();
       };
@@ -119,7 +119,7 @@ describe('Autoscaler', () => {
       const apiResponse = {a: 'b', c: 'd'};
 
       beforeEach(() => {
-        FakeServiceObject.prototype.delete = function(callback) {
+        FakeServiceObject.prototype.delete = function (callback) {
           callback(error, apiResponse);
         };
       });
@@ -146,7 +146,7 @@ describe('Autoscaler', () => {
       };
 
       beforeEach(() => {
-        FakeServiceObject.prototype.delete = function(callback) {
+        FakeServiceObject.prototype.delete = function (callback) {
           callback(null, apiResponse);
         };
       });
@@ -154,7 +154,7 @@ describe('Autoscaler', () => {
       it('should execute callback with Operation & Response', done => {
         const operation = {};
 
-        autoscaler.zone.operation = function(name) {
+        autoscaler.zone.operation = function (name) {
           assert.strictEqual(name, apiResponse.name);
           return operation;
         };
@@ -180,7 +180,7 @@ describe('Autoscaler', () => {
     it('should make the correct API request', done => {
       const metadata = {};
 
-      autoscaler.zone.request = function(reqOpts) {
+      autoscaler.zone.request = function (reqOpts) {
         assert.strictEqual(reqOpts.method, 'PATCH');
         assert.strictEqual(reqOpts.uri, '/autoscalers');
         assert.strictEqual(reqOpts.json, metadata);
@@ -200,7 +200,7 @@ describe('Autoscaler', () => {
       const apiResponse = {a: 'b', c: 'd'};
 
       beforeEach(() => {
-        autoscaler.zone.request = function(reqOpts, callback) {
+        autoscaler.zone.request = function (reqOpts, callback) {
           callback(error, apiResponse);
         };
       });
@@ -221,7 +221,7 @@ describe('Autoscaler', () => {
       };
 
       beforeEach(() => {
-        autoscaler.zone.request = function(reqOpts, callback) {
+        autoscaler.zone.request = function (reqOpts, callback) {
           callback(null, apiResponse);
         };
       });
@@ -230,7 +230,7 @@ describe('Autoscaler', () => {
         const operation = {};
         const metadata = {a: 'b'};
 
-        autoscaler.zone.operation = function(name) {
+        autoscaler.zone.operation = function (name) {
           assert.strictEqual(name, apiResponse.name);
           return operation;
         };

@@ -22,7 +22,7 @@ const promisify = require('@google-cloud/promisify');
 
 let promisified = false;
 const fakePromisify = Object.assign({}, promisify, {
-  promisifyAll: function(Class) {
+  promisifyAll: function (Class) {
     if (Class.name === 'InstanceGroup') {
       promisified = true;
     }
@@ -39,7 +39,7 @@ class FakeServiceObject extends ServiceObject {
 let extended = false;
 const fakePaginator = {
   paginator: {
-    extend: function(Class, methods) {
+    extend: function (Class, methods) {
       if (Class.name !== 'InstanceGroup') {
         return;
       }
@@ -49,7 +49,7 @@ const fakePaginator = {
       assert.strictEqual(Class.name, 'InstanceGroup');
       assert.deepStrictEqual(methods, ['getVMs']);
     },
-    streamify: function(methodName) {
+    streamify: function (methodName) {
       return methodName;
     },
   },
@@ -108,7 +108,7 @@ describe('InstanceGroup', () => {
     it('should inherit from ServiceObject', done => {
       const zoneInstance = Object.assign({}, ZONE, {
         createInstanceGroup: {
-          bind: function(context) {
+          bind: function (context) {
             assert.strictEqual(context, zoneInstance);
 
             setImmediate(() => {
@@ -154,7 +154,7 @@ describe('InstanceGroup', () => {
     const VMS = [{url: 'vm-url'}, {url: 'vm-url-2'}];
 
     it('should make the correct API request', done => {
-      instanceGroup.request = function(reqOpts) {
+      instanceGroup.request = function (reqOpts) {
         assert.strictEqual(reqOpts.method, 'POST');
         assert.strictEqual(reqOpts.uri, '/addInstances');
         assert.deepStrictEqual(reqOpts.json, {
@@ -176,7 +176,7 @@ describe('InstanceGroup', () => {
       const error = new Error('Error.');
 
       beforeEach(() => {
-        instanceGroup.request = function(reqOpts, callback) {
+        instanceGroup.request = function (reqOpts, callback) {
           callback(error, apiResponse);
         };
       });
@@ -195,7 +195,7 @@ describe('InstanceGroup', () => {
       const apiResponse = {name: 'op-name'};
 
       beforeEach(() => {
-        instanceGroup.request = function(reqOpts, callback) {
+        instanceGroup.request = function (reqOpts, callback) {
           callback(null, apiResponse);
         };
       });
@@ -203,7 +203,7 @@ describe('InstanceGroup', () => {
       it('should return an Operation and API response', done => {
         const operation = {};
 
-        instanceGroup.zone.operation = function(name) {
+        instanceGroup.zone.operation = function (name) {
           assert.strictEqual(name, apiResponse.name);
           return operation;
         };
@@ -221,7 +221,7 @@ describe('InstanceGroup', () => {
 
   describe('delete', () => {
     it('should call ServiceObject.delete', done => {
-      FakeServiceObject.prototype.delete = function() {
+      FakeServiceObject.prototype.delete = function () {
         assert.strictEqual(this, instanceGroup);
         done();
       };
@@ -234,7 +234,7 @@ describe('InstanceGroup', () => {
       const apiResponse = {a: 'b', c: 'd'};
 
       beforeEach(() => {
-        FakeServiceObject.prototype.delete = function(callback) {
+        FakeServiceObject.prototype.delete = function (callback) {
           callback(error, apiResponse);
         };
       });
@@ -261,7 +261,7 @@ describe('InstanceGroup', () => {
       };
 
       beforeEach(() => {
-        FakeServiceObject.prototype.delete = function(callback) {
+        FakeServiceObject.prototype.delete = function (callback) {
           callback(null, apiResponse);
         };
       });
@@ -269,7 +269,7 @@ describe('InstanceGroup', () => {
       it('should execute callback with Operation & Response', done => {
         const operation = {};
 
-        instanceGroup.zone.operation = function(name) {
+        instanceGroup.zone.operation = function (name) {
           assert.strictEqual(name, apiResponse.name);
           return operation;
         };
@@ -293,13 +293,13 @@ describe('InstanceGroup', () => {
 
   describe('getVMs', () => {
     beforeEach(() => {
-      instanceGroup.zone.vm = function() {
+      instanceGroup.zone.vm = function () {
         return {};
       };
     });
 
     it('should accept only a callback', done => {
-      instanceGroup.request = function(reqOpts) {
+      instanceGroup.request = function (reqOpts) {
         assert.deepStrictEqual(reqOpts.qs, {});
         done();
       };
@@ -310,7 +310,7 @@ describe('InstanceGroup', () => {
     it('should make the correct API request', done => {
       const query = {a: 'b', c: 'd'};
 
-      instanceGroup.request = function(reqOpts) {
+      instanceGroup.request = function (reqOpts) {
         assert.strictEqual(reqOpts.method, 'POST');
         assert.strictEqual(reqOpts.uri, '/listInstances');
         assert.strictEqual(reqOpts.qs, query);
@@ -328,7 +328,7 @@ describe('InstanceGroup', () => {
       };
 
       it('should set the instanceState filter', done => {
-        instanceGroup.request = function(reqOpts) {
+        instanceGroup.request = function (reqOpts) {
           assert.deepStrictEqual(reqOpts.json, {
             instanceState: 'RUNNING',
           });
@@ -344,7 +344,7 @@ describe('InstanceGroup', () => {
       const apiResponse = {a: 'b', c: 'd'};
 
       beforeEach(() => {
-        instanceGroup.request = function(reqOpts, callback) {
+        instanceGroup.request = function (reqOpts, callback) {
           callback(error, apiResponse);
         };
       });
@@ -366,7 +366,7 @@ describe('InstanceGroup', () => {
       };
 
       beforeEach(() => {
-        instanceGroup.request = function(reqOpts, callback) {
+        instanceGroup.request = function (reqOpts, callback) {
           callback(null, apiResponse);
         };
       });
@@ -380,7 +380,7 @@ describe('InstanceGroup', () => {
           pageToken: nextPageToken,
         };
 
-        instanceGroup.request = function(reqOpts, callback) {
+        instanceGroup.request = function (reqOpts, callback) {
           callback(null, apiResponseWithNextPageToken);
         };
 
@@ -396,7 +396,7 @@ describe('InstanceGroup', () => {
       it('should execute callback with VMs & API response', done => {
         const vm = {};
 
-        instanceGroup.zone.vm = function(name) {
+        instanceGroup.zone.vm = function (name) {
           assert.strictEqual(name, apiResponse.items[0].instance);
           return vm;
         };
@@ -419,7 +419,7 @@ describe('InstanceGroup', () => {
     const VMS = [{url: 'vm-url'}, {url: 'vm-url-2'}];
 
     it('should make the correct API request', done => {
-      instanceGroup.request = function(reqOpts) {
+      instanceGroup.request = function (reqOpts) {
         assert.strictEqual(reqOpts.method, 'POST');
         assert.strictEqual(reqOpts.uri, '/removeInstances');
         assert.deepStrictEqual(reqOpts.json, {
@@ -441,7 +441,7 @@ describe('InstanceGroup', () => {
       const error = new Error('Error.');
 
       beforeEach(() => {
-        instanceGroup.request = function(reqOpts, callback) {
+        instanceGroup.request = function (reqOpts, callback) {
           callback(error, apiResponse);
         };
       });
@@ -460,7 +460,7 @@ describe('InstanceGroup', () => {
       const apiResponse = {name: 'op-name'};
 
       beforeEach(() => {
-        instanceGroup.request = function(reqOpts, callback) {
+        instanceGroup.request = function (reqOpts, callback) {
           callback(null, apiResponse);
         };
       });
@@ -468,7 +468,7 @@ describe('InstanceGroup', () => {
       it('should return an Operation and API response', done => {
         const operation = {};
 
-        instanceGroup.zone.operation = function(name) {
+        instanceGroup.zone.operation = function (name) {
           assert.strictEqual(name, apiResponse.name);
           return operation;
         };
@@ -493,12 +493,12 @@ describe('InstanceGroup', () => {
     it('should format the named ports', done => {
       const expectedNamedPorts = [];
 
-      InstanceGroup.formatPorts_ = function(ports) {
+      InstanceGroup.formatPorts_ = function (ports) {
         assert.strictEqual(ports, PORTS);
         return expectedNamedPorts;
       };
 
-      instanceGroup.request = function(reqOpts) {
+      instanceGroup.request = function (reqOpts) {
         assert.strictEqual(reqOpts.method, 'POST');
         assert.strictEqual(reqOpts.uri, '/setNamedPorts');
         assert.strictEqual(reqOpts.json.namedPorts, expectedNamedPorts);
@@ -513,7 +513,7 @@ describe('InstanceGroup', () => {
       const apiResponse = {a: 'b', c: 'd'};
 
       beforeEach(() => {
-        instanceGroup.request = function(reqOpts, callback) {
+        instanceGroup.request = function (reqOpts, callback) {
           callback(error, apiResponse);
         };
       });
@@ -540,7 +540,7 @@ describe('InstanceGroup', () => {
       };
 
       beforeEach(() => {
-        instanceGroup.request = function(reqOpts, callback) {
+        instanceGroup.request = function (reqOpts, callback) {
           callback(null, apiResponse);
         };
       });
@@ -548,7 +548,7 @@ describe('InstanceGroup', () => {
       it('should execute callback with Operation & Response', done => {
         const operation = {};
 
-        instanceGroup.zone.operation = function(name) {
+        instanceGroup.zone.operation = function (name) {
           assert.strictEqual(name, apiResponse.name);
           return operation;
         };

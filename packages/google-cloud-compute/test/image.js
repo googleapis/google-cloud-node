@@ -21,7 +21,7 @@ const promisify = require('@google-cloud/promisify');
 
 let promisified = false;
 const fakePromisify = Object.assign({}, promisify, {
-  promisifyAll: function(Class) {
+  promisifyAll: function (Class) {
     if (Class.name === 'Image') {
       promisified = true;
     }
@@ -68,7 +68,7 @@ describe('Image', () => {
     it('should inherit from ServiceObject', () => {
       const computeInstance = Object.assign({}, COMPUTE, {
         createImage: {
-          bind: function(context) {
+          bind: function (context) {
             assert.strictEqual(context, computeInstance);
           },
         },
@@ -93,7 +93,7 @@ describe('Image', () => {
 
   describe('delete', () => {
     it('should call ServiceObject.delete', done => {
-      FakeServiceObject.prototype.delete = function() {
+      FakeServiceObject.prototype.delete = function () {
         assert.strictEqual(this, image);
         done();
       };
@@ -106,7 +106,7 @@ describe('Image', () => {
       const apiResponse = {a: 'b', c: 'd'};
 
       beforeEach(() => {
-        FakeServiceObject.prototype.delete = function(callback) {
+        FakeServiceObject.prototype.delete = function (callback) {
           callback(error, apiResponse);
         };
       });
@@ -133,7 +133,7 @@ describe('Image', () => {
       };
 
       beforeEach(() => {
-        FakeServiceObject.prototype.delete = function(callback) {
+        FakeServiceObject.prototype.delete = function (callback) {
           callback(null, apiResponse);
         };
       });
@@ -141,7 +141,7 @@ describe('Image', () => {
       it('should execute callback with Operation & Response', done => {
         const operation = {};
 
-        image.parent.operation = function(name) {
+        image.parent.operation = function (name) {
           assert.strictEqual(name, apiResponse.name);
           return operation;
         };

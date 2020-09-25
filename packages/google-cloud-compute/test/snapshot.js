@@ -21,7 +21,7 @@ const promisify = require('@google-cloud/promisify');
 
 let promisified = false;
 const fakePromisify = Object.assign({}, promisify, {
-  promisifyAll: function(Class) {
+  promisifyAll: function (Class) {
     if (Class.name === 'Snapshot') {
       promisified = true;
     }
@@ -91,7 +91,7 @@ describe('Snapshot', () => {
         constructor: {
           name: 'Disk',
         },
-        createSnapshot: function() {
+        createSnapshot: function () {
           assert.strictEqual(this, scope);
           done();
         },
@@ -114,7 +114,7 @@ describe('Snapshot', () => {
 
   describe('delete', () => {
     it('should call ServiceObject.delete', done => {
-      FakeServiceObject.prototype.delete = function() {
+      FakeServiceObject.prototype.delete = function () {
         assert.strictEqual(this, snapshot);
         done();
       };
@@ -127,7 +127,7 @@ describe('Snapshot', () => {
       const apiResponse = {a: 'b', c: 'd'};
 
       beforeEach(() => {
-        FakeServiceObject.prototype.delete = function(callback) {
+        FakeServiceObject.prototype.delete = function (callback) {
           callback(error, apiResponse);
         };
       });
@@ -152,7 +152,7 @@ describe('Snapshot', () => {
       const apiResponse = {name: 'operation-name'};
 
       beforeEach(() => {
-        FakeServiceObject.prototype.delete = function(callback) {
+        FakeServiceObject.prototype.delete = function (callback) {
           callback(null, apiResponse);
         };
       });
@@ -160,7 +160,7 @@ describe('Snapshot', () => {
       it('should exec callback with Operation & API response', done => {
         const operation = {};
 
-        snapshot.compute.operation = function(name) {
+        snapshot.compute.operation = function (name) {
           assert.strictEqual(name, apiResponse.name);
           return operation;
         };

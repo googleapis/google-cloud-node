@@ -22,7 +22,7 @@ const promisify = require('@google-cloud/promisify');
 
 let promisified = false;
 const fakePromisify = Object.assign({}, promisify, {
-  promisifyAll: function(Class, options) {
+  promisifyAll: function (Class, options) {
     if (Class.name !== 'Network') {
       return;
     }
@@ -90,7 +90,7 @@ describe('Network', () => {
       const formatName_ = Network.formatName_;
       const formattedName = 'projects/a/global/networks/b';
 
-      Network.formatName_ = function(compute, name) {
+      Network.formatName_ = function (compute, name) {
         Network.formatName_ = formatName_;
 
         assert.strictEqual(compute, COMPUTE);
@@ -106,7 +106,7 @@ describe('Network', () => {
     it('should inherit from ServiceObject', done => {
       const computeInstance = Object.assign({}, COMPUTE, {
         createNetwork: {
-          bind: function(context) {
+          bind: function (context) {
             assert.strictEqual(context, computeInstance);
             done();
           },
@@ -145,7 +145,7 @@ describe('Network', () => {
         network: network.formattedName,
       });
 
-      network.compute.createFirewall = function(name_, config_, callback) {
+      network.compute.createFirewall = function (name_, config_, callback) {
         assert.strictEqual(name_, name);
         assert.deepStrictEqual(config_, expectedConfig);
         callback();
@@ -170,12 +170,12 @@ describe('Network', () => {
       });
       delete expectedConfig.region;
 
-      network.compute.region = function(name) {
+      network.compute.region = function (name) {
         assert.strictEqual(name, REGION_NAME);
         return region;
       };
 
-      region.createSubnetwork = function(name_, config, callback) {
+      region.createSubnetwork = function (name_, config, callback) {
         assert.strictEqual(name_, name);
         assert.deepStrictEqual(config, expectedConfig);
 
@@ -188,7 +188,7 @@ describe('Network', () => {
 
   describe('delete', () => {
     it('should call ServiceObject.delete', done => {
-      FakeServiceObject.prototype.delete = function() {
+      FakeServiceObject.prototype.delete = function () {
         assert.strictEqual(this, network);
         done();
       };
@@ -201,7 +201,7 @@ describe('Network', () => {
       const apiResponse = {a: 'b', c: 'd'};
 
       beforeEach(() => {
-        FakeServiceObject.prototype.delete = function(callback) {
+        FakeServiceObject.prototype.delete = function (callback) {
           callback(error, apiResponse);
         };
       });
@@ -228,7 +228,7 @@ describe('Network', () => {
       };
 
       beforeEach(() => {
-        FakeServiceObject.prototype.delete = function(callback) {
+        FakeServiceObject.prototype.delete = function (callback) {
           callback(null, apiResponse);
         };
       });
@@ -236,7 +236,7 @@ describe('Network', () => {
       it('should execute callback with Operation & Response', done => {
         const operation = {};
 
-        network.compute.operation = function(name) {
+        network.compute.operation = function (name) {
           assert.strictEqual(name, apiResponse.name);
           return operation;
         };
@@ -263,7 +263,7 @@ describe('Network', () => {
       const name = 'firewall-name';
       const firewall = {};
 
-      network.compute.firewall = function(name_) {
+      network.compute.firewall = function (name_) {
         assert.strictEqual(name_, name);
         return firewall;
       };
@@ -282,7 +282,7 @@ describe('Network', () => {
         filter: 'network eq .*' + network.formattedName,
       });
 
-      network.compute.getFirewalls = function(options, callback) {
+      network.compute.getFirewalls = function (options, callback) {
         assert.deepStrictEqual(options, expectedOptions);
         callback();
       };
@@ -291,7 +291,7 @@ describe('Network', () => {
     });
 
     it('should not require options', done => {
-      network.compute.getFirewalls = function(options, callback) {
+      network.compute.getFirewalls = function (options, callback) {
         callback();
       };
 
@@ -306,7 +306,7 @@ describe('Network', () => {
         filter: 'network eq .*' + network.formattedName,
       });
 
-      network.compute.getFirewallsStream = function(options) {
+      network.compute.getFirewallsStream = function (options) {
         assert.deepStrictEqual(options, expectedOptions);
         done();
       };
@@ -315,7 +315,7 @@ describe('Network', () => {
     });
 
     it('should not require options', done => {
-      network.compute.getFirewallsStream = function() {
+      network.compute.getFirewallsStream = function () {
         done();
       };
 
@@ -325,7 +325,7 @@ describe('Network', () => {
     it('should return a stream', done => {
       const fakeStream = {};
 
-      network.compute.getFirewallsStream = function() {
+      network.compute.getFirewallsStream = function () {
         setImmediate(done);
         return fakeStream;
       };
@@ -342,7 +342,7 @@ describe('Network', () => {
         filter: 'network eq .*' + network.formattedName,
       });
 
-      network.compute.getSubnetworks = function(options, callback) {
+      network.compute.getSubnetworks = function (options, callback) {
         assert.deepStrictEqual(options, expectedOptions);
         callback();
       };
@@ -351,7 +351,7 @@ describe('Network', () => {
     });
 
     it('should not require options', done => {
-      network.compute.getSubnetworks = function(options, callback) {
+      network.compute.getSubnetworks = function (options, callback) {
         callback();
       };
 
@@ -366,7 +366,7 @@ describe('Network', () => {
         filter: 'network eq .*' + network.formattedName,
       });
 
-      network.compute.getSubnetworksStream = function(options) {
+      network.compute.getSubnetworksStream = function (options) {
         assert.deepStrictEqual(options, expectedOptions);
         done();
       };
@@ -375,7 +375,7 @@ describe('Network', () => {
     });
 
     it('should not require options', done => {
-      network.compute.getSubnetworksStream = function() {
+      network.compute.getSubnetworksStream = function () {
         done();
       };
 
@@ -385,7 +385,7 @@ describe('Network', () => {
     it('should return a stream', done => {
       const fakeStream = {};
 
-      network.compute.getSubnetworksStream = function() {
+      network.compute.getSubnetworksStream = function () {
         setImmediate(done);
         return fakeStream;
       };

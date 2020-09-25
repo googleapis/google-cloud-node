@@ -140,7 +140,7 @@ class Region extends common.ServiceObject {
     this.name = name;
     this.compute = compute;
     this.interceptors.push({
-      request: function(reqOpts) {
+      request: function (reqOpts) {
         if (reqOpts.uri.indexOf('/global/forwardingRules') > -1) {
           reqOpts.uri = reqOpts.uri.replace('/global', '');
         }

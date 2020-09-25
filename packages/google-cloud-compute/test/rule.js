@@ -21,7 +21,7 @@ const promisify = require('@google-cloud/promisify');
 
 let promisified = false;
 const fakePromisify = Object.assign({}, promisify, {
-  promisifyAll: function(Class) {
+  promisifyAll: function (Class) {
     if (Class.name === 'Rule') {
       promisified = true;
     }
@@ -66,7 +66,7 @@ describe('Rule', () => {
 
       Object.assign(computeInstance, {
         createRule: {
-          bind: function(context) {
+          bind: function (context) {
             assert.strictEqual(context, computeInstance);
             return bindMethod;
           },
@@ -110,7 +110,7 @@ describe('Rule', () => {
 
   describe('delete', () => {
     it('should call ServiceObject.delete', done => {
-      FakeServiceObject.prototype.delete = function() {
+      FakeServiceObject.prototype.delete = function () {
         assert.strictEqual(this, rule);
         done();
       };
@@ -123,7 +123,7 @@ describe('Rule', () => {
       const apiResponse = {a: 'b', c: 'd'};
 
       beforeEach(() => {
-        FakeServiceObject.prototype.delete = function(callback) {
+        FakeServiceObject.prototype.delete = function (callback) {
           callback(error, apiResponse);
         };
       });
@@ -150,7 +150,7 @@ describe('Rule', () => {
       };
 
       beforeEach(() => {
-        FakeServiceObject.prototype.delete = function(callback) {
+        FakeServiceObject.prototype.delete = function (callback) {
           callback(null, apiResponse);
         };
       });
@@ -158,7 +158,7 @@ describe('Rule', () => {
       it('should execute callback with Operation & Response', done => {
         const operation = {};
 
-        rule.scope.operation = function(name) {
+        rule.scope.operation = function (name) {
           assert.strictEqual(name, apiResponse.name);
           return operation;
         };
@@ -184,7 +184,7 @@ describe('Rule', () => {
     const TARGET = 'target';
 
     it('should make the correct API request', done => {
-      rule.request = function(reqOpts) {
+      rule.request = function (reqOpts) {
         assert.strictEqual(reqOpts.method, 'POST');
         assert.strictEqual(reqOpts.uri, '/setTarget');
         assert.deepStrictEqual(reqOpts.json, {target: TARGET});
@@ -200,7 +200,7 @@ describe('Rule', () => {
       const apiResponse = {};
 
       beforeEach(() => {
-        rule.request = function(reqOpts, callback) {
+        rule.request = function (reqOpts, callback) {
           callback(error, apiResponse);
         };
       });
@@ -221,7 +221,7 @@ describe('Rule', () => {
       };
 
       beforeEach(() => {
-        rule.request = function(reqOpts, callback) {
+        rule.request = function (reqOpts, callback) {
           callback(null, apiResponse);
         };
       });
@@ -229,7 +229,7 @@ describe('Rule', () => {
       it('should execute callback with operation & response', done => {
         const operation = {};
 
-        rule.scope.operation = function(name) {
+        rule.scope.operation = function (name) {
           assert.strictEqual(name, apiResponse.name);
           return operation;
         };

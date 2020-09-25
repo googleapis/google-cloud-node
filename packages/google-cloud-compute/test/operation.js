@@ -34,7 +34,7 @@ class FakeServiceObject {
 let parseHttpRespBodyOverride = null;
 let promisified = false;
 const fakeUtil = Object.assign({}, util, {
-  parseHttpRespBody: function() {
+  parseHttpRespBody: function () {
     if (parseHttpRespBodyOverride) {
       return parseHttpRespBodyOverride.apply(null, arguments);
     }
@@ -43,7 +43,7 @@ const fakeUtil = Object.assign({}, util, {
 });
 
 const fakePromisify = Object.assign({}, promisify, {
-  promisifyAll: function(Class) {
+  promisifyAll: function (Class) {
     if (Class.name === 'Operation') {
       promisified = true;
     }
@@ -121,7 +121,7 @@ describe('Operation', () => {
       const apiResponse = {a: 'b', c: 'd'};
 
       beforeEach(() => {
-        FakeServiceObject.prototype.getMetadata = function(callback) {
+        FakeServiceObject.prototype.getMetadata = function (callback) {
           callback(error, apiResponse);
         };
       });
@@ -134,7 +134,7 @@ describe('Operation', () => {
           },
         };
 
-        operation.getMetadata = function(callback) {
+        operation.getMetadata = function (callback) {
           callback(apiResponse.error, apiResponse);
         };
 
@@ -166,7 +166,7 @@ describe('Operation', () => {
       const apiResponse = {a: 'b', c: 'd'};
 
       beforeEach(() => {
-        FakeServiceObject.prototype.getMetadata = function(callback) {
+        FakeServiceObject.prototype.getMetadata = function (callback) {
           callback(null, apiResponse);
         };
       });
@@ -202,7 +202,7 @@ describe('Operation', () => {
     });
 
     it('should call getMetadata', done => {
-      operation.getMetadata = function() {
+      operation.getMetadata = function () {
         done();
       };
 
@@ -213,7 +213,7 @@ describe('Operation', () => {
       const error = new Error('Error.');
 
       beforeEach(() => {
-        operation.getMetadata = function(callback) {
+        operation.getMetadata = function (callback) {
           callback(error);
         };
       });
@@ -231,7 +231,7 @@ describe('Operation', () => {
       const apiResponse = {error: error};
 
       beforeEach(() => {
-        operation.getMetadata = function(callback) {
+        operation.getMetadata = function (callback) {
           callback(null, apiResponse, apiResponse);
         };
       });
@@ -239,7 +239,7 @@ describe('Operation', () => {
       it('should parse and return the response body', done => {
         const parsedHttpRespBody = {err: {}};
 
-        parseHttpRespBodyOverride = function(body) {
+        parseHttpRespBodyOverride = function (body) {
           assert.strictEqual(body, apiResponse);
           return parsedHttpRespBody;
         };
@@ -255,7 +255,7 @@ describe('Operation', () => {
       const apiResponse = {status: 'RUNNING'};
 
       beforeEach(() => {
-        operation.getMetadata = function(callback) {
+        operation.getMetadata = function (callback) {
           callback(null, apiResponse, apiResponse);
         };
       });
@@ -271,7 +271,7 @@ describe('Operation', () => {
       });
 
       it('should emit the running event', done => {
-        operation.emit = function(eventName, metadata) {
+        operation.emit = function (eventName, metadata) {
           assert.strictEqual(eventName, 'running');
           assert.strictEqual(metadata, apiResponse);
           done();
@@ -281,7 +281,7 @@ describe('Operation', () => {
       });
 
       it('should not emit running if already running', done => {
-        operation.emit = function(eventName) {
+        operation.emit = function (eventName) {
           assert.strictEqual(eventName, 'running');
 
           operation.emit = done; // will fail test if called
@@ -296,7 +296,7 @@ describe('Operation', () => {
       const apiResponse = {status: 'DONE'};
 
       beforeEach(() => {
-        operation.getMetadata = function(callback) {
+        operation.getMetadata = function (callback) {
           callback(null, apiResponse, apiResponse);
         };
       });
