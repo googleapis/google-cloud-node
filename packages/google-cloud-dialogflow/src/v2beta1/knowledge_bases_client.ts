@@ -599,7 +599,7 @@ export class KnowledgeBasesClient {
    * @param {string} request.name
    *   Required. The name of the knowledge base to delete.
    *   Format: `projects/<Project ID>/knowledgeBases/<Knowledge Base ID>`.
-   * @param {boolean} request.force
+   * @param {boolean} [request.force]
    *   Optional. Force deletes the knowledge base. When set to true, any documents
    *   in the knowledge base are also deleted.
    * @param {object} [options]
@@ -799,11 +799,11 @@ export class KnowledgeBasesClient {
    * @param {string} request.parent
    *   Required. The project to list of knowledge bases for.
    *   Format: `projects/<Project ID>`.
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of items to return in a single page. By
+   * @param {number} request.pageSize
+   *   The maximum number of items to return in a single page. By
    *   default 10 and at most 100.
-   * @param {string} [request.pageToken]
-   *   Optional. The next_page_token value returned from a previous list request.
+   * @param {string} request.pageToken
+   *   The next_page_token value returned from a previous list request.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -885,11 +885,11 @@ export class KnowledgeBasesClient {
    * @param {string} request.parent
    *   Required. The project to list of knowledge bases for.
    *   Format: `projects/<Project ID>`.
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of items to return in a single page. By
+   * @param {number} request.pageSize
+   *   The maximum number of items to return in a single page. By
    *   default 10 and at most 100.
-   * @param {string} [request.pageToken]
-   *   Optional. The next_page_token value returned from a previous list request.
+   * @param {string} request.pageToken
+   *   The next_page_token value returned from a previous list request.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -927,11 +927,11 @@ export class KnowledgeBasesClient {
    * @param {string} request.parent
    *   Required. The project to list of knowledge bases for.
    *   Format: `projects/<Project ID>`.
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of items to return in a single page. By
+   * @param {number} request.pageSize
+   *   The maximum number of items to return in a single page. By
    *   default 10 and at most 100.
-   * @param {string} [request.pageToken]
-   *   Optional. The next_page_token value returned from a previous list request.
+   * @param {string} request.pageToken
+   *   The next_page_token value returned from a previous list request.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
