@@ -3,23 +3,16 @@
     {
       "git": {
         "name": ".",
-        "remote": "https://github.com/googleapis/nodejs-talent.git",
-        "sha": "a1cabec970a291cbced1493478e3493edaaae370"
+        "remote": "git@github.com:googleapis/nodejs-talent.git",
+        "sha": "daeb4215bf671efb0fbb017cd1de99343faf7840"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "4c5071b615d96ef9dfd6a63d8429090f1f2872bb",
-        "internalRef": "327369997"
-      }
-    },
-    {
-      "git": {
-        "name": "synthtool",
-        "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "fdd03c161003ab97657cc0218f25c82c89ddf4b6"
+        "sha": "f446e123bc04ee0ee0edfa112f4998182638322b",
+        "internalRef": "334248254"
       }
     }
   ],
@@ -29,6 +22,15 @@
         "source": "googleapis",
         "apiName": "talent",
         "apiVersion": "v4beta1",
+        "language": "nodejs",
+        "generator": "bazel"
+      }
+    },
+    {
+      "client": {
+        "source": "googleapis",
+        "apiName": "talent",
+        "apiVersion": "v4",
         "language": "nodejs",
         "generator": "bazel"
       }
@@ -85,6 +87,18 @@
     "README.md",
     "api-extractor.json",
     "linkinator.config.json",
+    "protos/google/cloud/talent/v4/common.proto",
+    "protos/google/cloud/talent/v4/company.proto",
+    "protos/google/cloud/talent/v4/company_service.proto",
+    "protos/google/cloud/talent/v4/completion_service.proto",
+    "protos/google/cloud/talent/v4/event.proto",
+    "protos/google/cloud/talent/v4/event_service.proto",
+    "protos/google/cloud/talent/v4/filters.proto",
+    "protos/google/cloud/talent/v4/histogram.proto",
+    "protos/google/cloud/talent/v4/job.proto",
+    "protos/google/cloud/talent/v4/job_service.proto",
+    "protos/google/cloud/talent/v4/tenant.proto",
+    "protos/google/cloud/talent/v4/tenant_service.proto",
     "protos/google/cloud/talent/v4beta1/application.proto",
     "protos/google/cloud/talent/v4beta1/application_service.proto",
     "protos/google/cloud/talent/v4beta1/batch.proto",
@@ -107,6 +121,22 @@
     "protos/protos.json",
     "renovate.json",
     "src/index.ts",
+    "src/v4/company_service_client.ts",
+    "src/v4/company_service_client_config.json",
+    "src/v4/company_service_proto_list.json",
+    "src/v4/completion_client.ts",
+    "src/v4/completion_client_config.json",
+    "src/v4/completion_proto_list.json",
+    "src/v4/event_service_client.ts",
+    "src/v4/event_service_client_config.json",
+    "src/v4/event_service_proto_list.json",
+    "src/v4/index.ts",
+    "src/v4/job_service_client.ts",
+    "src/v4/job_service_client_config.json",
+    "src/v4/job_service_proto_list.json",
+    "src/v4/tenant_service_client.ts",
+    "src/v4/tenant_service_client_config.json",
+    "src/v4/tenant_service_proto_list.json",
     "src/v4beta1/application_service_client.ts",
     "src/v4beta1/application_service_client_config.json",
     "src/v4beta1/application_service_proto_list.json",
@@ -133,11 +163,16 @@
     "system-test/fixtures/sample/src/index.ts",
     "system-test/install.ts",
     "test/gapic_application_service_v4beta1.ts",
+    "test/gapic_company_service_v4.ts",
     "test/gapic_company_service_v4beta1.ts",
+    "test/gapic_completion_v4.ts",
     "test/gapic_completion_v4beta1.ts",
+    "test/gapic_event_service_v4.ts",
     "test/gapic_event_service_v4beta1.ts",
+    "test/gapic_job_service_v4.ts",
     "test/gapic_job_service_v4beta1.ts",
     "test/gapic_profile_service_v4beta1.ts",
+    "test/gapic_tenant_service_v4.ts",
     "test/gapic_tenant_service_v4beta1.ts",
     "tsconfig.json",
     "webpack.config.js"

@@ -17,22 +17,18 @@
 // ** All changes to this file may be overwritten. **
 
 import {
-  ApplicationServiceClient,
   CompanyServiceClient,
   CompletionClient,
   EventServiceClient,
   JobServiceClient,
-  ProfileServiceClient,
   TenantServiceClient,
 } from '@google-cloud/talent';
 
 function main() {
-  new ApplicationServiceClient();
   new CompanyServiceClient();
   new CompletionClient();
   new EventServiceClient();
   new JobServiceClient();
-  new ProfileServiceClient();
   new TenantServiceClient();
 }
 

@@ -20,12 +20,10 @@
 const talent = require('@google-cloud/talent');
 
 function main() {
-  const applicationServiceClient = new talent.ApplicationServiceClient();
   const companyServiceClient = new talent.CompanyServiceClient();
   const completionClient = new talent.CompletionClient();
   const eventServiceClient = new talent.EventServiceClient();
   const jobServiceClient = new talent.JobServiceClient();
-  const profileServiceClient = new talent.ProfileServiceClient();
   const tenantServiceClient = new talent.TenantServiceClient();
 }
 

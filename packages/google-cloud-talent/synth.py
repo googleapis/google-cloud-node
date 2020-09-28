@@ -26,7 +26,7 @@ AUTOSYNTH_MULTIPLE_COMMITS = True
 
 # Run the gapic generator
 gapic = gcp.GAPICBazel()
-versions = ["v4beta1"]
+versions = ["v4beta1", "v4"]
 for version in versions:
     library = gapic.node_library("talent", version)
     s.copy(library, excludes=['README.md', 'package.json'])
@@ -34,7 +34,7 @@ for version in versions:
 # Copy common templates
 common_templates = gcp.CommonTemplates()
 templates = common_templates.node_library(
-    source_location='build/src', versions=versions, default_version='v4beta1')
+    source_location='build/src', versions=versions, default_version='v4')
 s.copy(templates)
 
 node.postprocess_gapic_library()

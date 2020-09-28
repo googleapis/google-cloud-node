@@ -17,33 +17,30 @@
 // ** All changes to this file may be overwritten. **
 
 import * as v4beta1 from './v4beta1';
+import * as v4 from './v4';
 
-const ApplicationServiceClient = v4beta1.ApplicationServiceClient;
-const CompanyServiceClient = v4beta1.CompanyServiceClient;
-const CompletionClient = v4beta1.CompletionClient;
-const EventServiceClient = v4beta1.EventServiceClient;
-const JobServiceClient = v4beta1.JobServiceClient;
-const ProfileServiceClient = v4beta1.ProfileServiceClient;
-const TenantServiceClient = v4beta1.TenantServiceClient;
+const CompanyServiceClient = v4.CompanyServiceClient;
+const CompletionClient = v4.CompletionClient;
+const EventServiceClient = v4.EventServiceClient;
+const JobServiceClient = v4.JobServiceClient;
+const TenantServiceClient = v4.TenantServiceClient;
 
 export {
   v4beta1,
-  ApplicationServiceClient,
+  v4,
   CompanyServiceClient,
   CompletionClient,
   EventServiceClient,
   JobServiceClient,
-  ProfileServiceClient,
   TenantServiceClient,
 };
 export default {
   v4beta1,
-  ApplicationServiceClient,
+  v4,
   CompanyServiceClient,
   CompletionClient,
   EventServiceClient,
   JobServiceClient,
-  ProfileServiceClient,
   TenantServiceClient,
 };
 import * as protos from '../protos/protos';

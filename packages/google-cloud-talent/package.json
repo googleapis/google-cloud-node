@@ -39,13 +39,13 @@
     "clean": "gts clean",
     "compile": "tsc -p . && cp -r protos build/",
     "compile-protos": "compileProtos src",
-    "prepare": "npm run compile",
+    "prepare": "npm run compile-protos && npm run compile",
     "precompile": "gts clean",
     "api-extractor": "api-extractor run --local",
     "api-documenter": "api-documenter yaml --input-folder=temp"
   },
   "dependencies": {
-    "google-gax": "^2.1.0"
+    "google-gax": "^2.9.0"
   },
   "devDependencies": {
     "@types/mocha": "^8.0.0",
