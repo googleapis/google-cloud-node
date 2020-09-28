@@ -105,6 +105,10 @@
                           "type": "TextDetectionConfig",
                           "id": 8
                         },
+                        "personDetectionConfig": {
+                          "type": "PersonDetectionConfig",
+                          "id": 11
+                        },
                         "objectTrackingConfig": {
                           "type": "ObjectTrackingConfig",
                           "id": 13
@@ -121,7 +125,8 @@
                         "SPEECH_TRANSCRIPTION": 6,
                         "TEXT_DETECTION": 7,
                         "OBJECT_TRACKING": 9,
-                        "LOGO_RECOGNITION": 12
+                        "LOGO_RECOGNITION": 12,
+                        "PERSON_DETECTION": 14
                       }
                     },
                     "LabelDetectionMode": {
@@ -191,6 +196,26 @@
                         "includeBoundingBoxes": {
                           "type": "bool",
                           "id": 2
+                        },
+                        "includeAttributes": {
+                          "type": "bool",
+                          "id": 5
+                        }
+                      }
+                    },
+                    "PersonDetectionConfig": {
+                      "fields": {
+                        "includeBoundingBoxes": {
+                          "type": "bool",
+                          "id": 1
+                        },
+                        "includePoseLandmarks": {
+                          "type": "bool",
+                          "id": 2
+                        },
+                        "includeAttributes": {
+                          "type": "bool",
+                          "id": 3
                         }
                       }
                     },
@@ -287,6 +312,10 @@
                           "rule": "repeated",
                           "type": "LabelFrame",
                           "id": 4
+                        },
+                        "version": {
+                          "type": "string",
+                          "id": 5
                         }
                       }
                     },
@@ -308,6 +337,10 @@
                           "rule": "repeated",
                           "type": "ExplicitContentFrame",
                           "id": 1
+                        },
+                        "version": {
+                          "type": "string",
+                          "id": 2
                         }
                       }
                     },
@@ -331,6 +364,27 @@
                         }
                       }
                     },
+                    "FaceDetectionAnnotation": {
+                      "fields": {
+                        "version": {
+                          "type": "string",
+                          "id": 5
+                        }
+                      }
+                    },
+                    "PersonDetectionAnnotation": {
+                      "fields": {
+                        "tracks": {
+                          "rule": "repeated",
+                          "type": "Track",
+                          "id": 1
+                        },
+                        "version": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
                     "FaceSegment": {
                       "fields": {
                         "segment": {
@@ -340,6 +394,9 @@
                       }
                     },
                     "FaceFrame": {
+                      "options": {
+                        "deprecated": true
+                      },
                       "fields": {
                         "normalizedBoundingBoxes": {
                           "rule": "repeated",
@@ -353,6 +410,9 @@
                       }
                     },
                     "FaceAnnotation": {
+                      "options": {
+                        "deprecated": true
+                      },
                       "fields": {
                         "thumbnail": {
                           "type": "bytes",
@@ -496,7 +556,15 @@
                         "faceAnnotations": {
                           "rule": "repeated",
                           "type": "FaceAnnotation",
-                          "id": 5
+                          "id": 5,
+                          "options": {
+                            "deprecated": true
+                          }
+                        },
+                        "faceDetectionAnnotations": {
+                          "rule": "repeated",
+                          "type": "FaceDetectionAnnotation",
+                          "id": 13
                         },
                         "shotAnnotations": {
                           "rule": "repeated",
@@ -526,6 +594,11 @@
                           "rule": "repeated",
                           "type": "LogoRecognitionAnnotation",
                           "id": 19
+                        },
+                        "personDetectionAnnotations": {
+                          "rule": "repeated",
+                          "type": "PersonDetectionAnnotation",
+                          "id": 20
                         },
                         "error": {
                           "type": "google.rpc.Status",
@@ -789,6 +862,10 @@
                           "rule": "repeated",
                           "type": "TextSegment",
                           "id": 2
+                        },
+                        "version": {
+                          "type": "string",
+                          "id": 3
                         }
                       }
                     },
@@ -834,6 +911,10 @@
                           "rule": "repeated",
                           "type": "ObjectTrackingFrame",
                           "id": 2
+                        },
+                        "version": {
+                          "type": "string",
+                          "id": 6
                         }
                       }
                     },

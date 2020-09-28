@@ -215,6 +215,9 @@ export namespace google {
                     /** VideoContext textDetectionConfig */
                     textDetectionConfig?: (google.cloud.videointelligence.v1.ITextDetectionConfig|null);
 
+                    /** VideoContext personDetectionConfig */
+                    personDetectionConfig?: (google.cloud.videointelligence.v1.IPersonDetectionConfig|null);
+
                     /** VideoContext objectTrackingConfig */
                     objectTrackingConfig?: (google.cloud.videointelligence.v1.IObjectTrackingConfig|null);
                 }
@@ -248,6 +251,9 @@ export namespace google {
 
                     /** VideoContext textDetectionConfig. */
                     public textDetectionConfig?: (google.cloud.videointelligence.v1.ITextDetectionConfig|null);
+
+                    /** VideoContext personDetectionConfig. */
+                    public personDetectionConfig?: (google.cloud.videointelligence.v1.IPersonDetectionConfig|null);
 
                     /** VideoContext objectTrackingConfig. */
                     public objectTrackingConfig?: (google.cloud.videointelligence.v1.IObjectTrackingConfig|null);
@@ -333,7 +339,8 @@ export namespace google {
                     SPEECH_TRANSCRIPTION = 6,
                     TEXT_DETECTION = 7,
                     OBJECT_TRACKING = 9,
-                    LOGO_RECOGNITION = 12
+                    LOGO_RECOGNITION = 12,
+                    PERSON_DETECTION = 14
                 }
 
                 /** LabelDetectionMode enum. */
@@ -656,6 +663,9 @@ export namespace google {
 
                     /** FaceDetectionConfig includeBoundingBoxes */
                     includeBoundingBoxes?: (boolean|null);
+
+                    /** FaceDetectionConfig includeAttributes */
+                    includeAttributes?: (boolean|null);
                 }
 
                 /** Represents a FaceDetectionConfig. */
@@ -672,6 +682,9 @@ export namespace google {
 
                     /** FaceDetectionConfig includeBoundingBoxes. */
                     public includeBoundingBoxes: boolean;
+
+                    /** FaceDetectionConfig includeAttributes. */
+                    public includeAttributes: boolean;
 
                     /**
                      * Creates a new FaceDetectionConfig instance using the specified properties.
@@ -739,6 +752,108 @@ export namespace google {
 
                     /**
                      * Converts this FaceDetectionConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a PersonDetectionConfig. */
+                interface IPersonDetectionConfig {
+
+                    /** PersonDetectionConfig includeBoundingBoxes */
+                    includeBoundingBoxes?: (boolean|null);
+
+                    /** PersonDetectionConfig includePoseLandmarks */
+                    includePoseLandmarks?: (boolean|null);
+
+                    /** PersonDetectionConfig includeAttributes */
+                    includeAttributes?: (boolean|null);
+                }
+
+                /** Represents a PersonDetectionConfig. */
+                class PersonDetectionConfig implements IPersonDetectionConfig {
+
+                    /**
+                     * Constructs a new PersonDetectionConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.videointelligence.v1.IPersonDetectionConfig);
+
+                    /** PersonDetectionConfig includeBoundingBoxes. */
+                    public includeBoundingBoxes: boolean;
+
+                    /** PersonDetectionConfig includePoseLandmarks. */
+                    public includePoseLandmarks: boolean;
+
+                    /** PersonDetectionConfig includeAttributes. */
+                    public includeAttributes: boolean;
+
+                    /**
+                     * Creates a new PersonDetectionConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns PersonDetectionConfig instance
+                     */
+                    public static create(properties?: google.cloud.videointelligence.v1.IPersonDetectionConfig): google.cloud.videointelligence.v1.PersonDetectionConfig;
+
+                    /**
+                     * Encodes the specified PersonDetectionConfig message. Does not implicitly {@link google.cloud.videointelligence.v1.PersonDetectionConfig.verify|verify} messages.
+                     * @param message PersonDetectionConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.videointelligence.v1.IPersonDetectionConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified PersonDetectionConfig message, length delimited. Does not implicitly {@link google.cloud.videointelligence.v1.PersonDetectionConfig.verify|verify} messages.
+                     * @param message PersonDetectionConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.videointelligence.v1.IPersonDetectionConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a PersonDetectionConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns PersonDetectionConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.videointelligence.v1.PersonDetectionConfig;
+
+                    /**
+                     * Decodes a PersonDetectionConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns PersonDetectionConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.videointelligence.v1.PersonDetectionConfig;
+
+                    /**
+                     * Verifies a PersonDetectionConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a PersonDetectionConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns PersonDetectionConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.videointelligence.v1.PersonDetectionConfig;
+
+                    /**
+                     * Creates a plain object from a PersonDetectionConfig message. Also converts values to other types if specified.
+                     * @param message PersonDetectionConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.videointelligence.v1.PersonDetectionConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this PersonDetectionConfig to JSON.
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
@@ -1334,6 +1449,9 @@ export namespace google {
 
                     /** LabelAnnotation frames */
                     frames?: (google.cloud.videointelligence.v1.ILabelFrame[]|null);
+
+                    /** LabelAnnotation version */
+                    version?: (string|null);
                 }
 
                 /** Represents a LabelAnnotation. */
@@ -1356,6 +1474,9 @@ export namespace google {
 
                     /** LabelAnnotation frames. */
                     public frames: google.cloud.videointelligence.v1.ILabelFrame[];
+
+                    /** LabelAnnotation version. */
+                    public version: string;
 
                     /**
                      * Creates a new LabelAnnotation instance using the specified properties.
@@ -1529,6 +1650,9 @@ export namespace google {
 
                     /** ExplicitContentAnnotation frames */
                     frames?: (google.cloud.videointelligence.v1.IExplicitContentFrame[]|null);
+
+                    /** ExplicitContentAnnotation version */
+                    version?: (string|null);
                 }
 
                 /** Represents an ExplicitContentAnnotation. */
@@ -1542,6 +1666,9 @@ export namespace google {
 
                     /** ExplicitContentAnnotation frames. */
                     public frames: google.cloud.videointelligence.v1.IExplicitContentFrame[];
+
+                    /** ExplicitContentAnnotation version. */
+                    public version: string;
 
                     /**
                      * Creates a new ExplicitContentAnnotation instance using the specified properties.
@@ -1717,6 +1844,192 @@ export namespace google {
 
                     /**
                      * Converts this NormalizedBoundingBox to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a FaceDetectionAnnotation. */
+                interface IFaceDetectionAnnotation {
+
+                    /** FaceDetectionAnnotation version */
+                    version?: (string|null);
+                }
+
+                /** Represents a FaceDetectionAnnotation. */
+                class FaceDetectionAnnotation implements IFaceDetectionAnnotation {
+
+                    /**
+                     * Constructs a new FaceDetectionAnnotation.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.videointelligence.v1.IFaceDetectionAnnotation);
+
+                    /** FaceDetectionAnnotation version. */
+                    public version: string;
+
+                    /**
+                     * Creates a new FaceDetectionAnnotation instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns FaceDetectionAnnotation instance
+                     */
+                    public static create(properties?: google.cloud.videointelligence.v1.IFaceDetectionAnnotation): google.cloud.videointelligence.v1.FaceDetectionAnnotation;
+
+                    /**
+                     * Encodes the specified FaceDetectionAnnotation message. Does not implicitly {@link google.cloud.videointelligence.v1.FaceDetectionAnnotation.verify|verify} messages.
+                     * @param message FaceDetectionAnnotation message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.videointelligence.v1.IFaceDetectionAnnotation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified FaceDetectionAnnotation message, length delimited. Does not implicitly {@link google.cloud.videointelligence.v1.FaceDetectionAnnotation.verify|verify} messages.
+                     * @param message FaceDetectionAnnotation message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.videointelligence.v1.IFaceDetectionAnnotation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a FaceDetectionAnnotation message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns FaceDetectionAnnotation
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.videointelligence.v1.FaceDetectionAnnotation;
+
+                    /**
+                     * Decodes a FaceDetectionAnnotation message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns FaceDetectionAnnotation
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.videointelligence.v1.FaceDetectionAnnotation;
+
+                    /**
+                     * Verifies a FaceDetectionAnnotation message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a FaceDetectionAnnotation message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns FaceDetectionAnnotation
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.videointelligence.v1.FaceDetectionAnnotation;
+
+                    /**
+                     * Creates a plain object from a FaceDetectionAnnotation message. Also converts values to other types if specified.
+                     * @param message FaceDetectionAnnotation
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.videointelligence.v1.FaceDetectionAnnotation, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this FaceDetectionAnnotation to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a PersonDetectionAnnotation. */
+                interface IPersonDetectionAnnotation {
+
+                    /** PersonDetectionAnnotation tracks */
+                    tracks?: (google.cloud.videointelligence.v1.ITrack[]|null);
+
+                    /** PersonDetectionAnnotation version */
+                    version?: (string|null);
+                }
+
+                /** Represents a PersonDetectionAnnotation. */
+                class PersonDetectionAnnotation implements IPersonDetectionAnnotation {
+
+                    /**
+                     * Constructs a new PersonDetectionAnnotation.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.videointelligence.v1.IPersonDetectionAnnotation);
+
+                    /** PersonDetectionAnnotation tracks. */
+                    public tracks: google.cloud.videointelligence.v1.ITrack[];
+
+                    /** PersonDetectionAnnotation version. */
+                    public version: string;
+
+                    /**
+                     * Creates a new PersonDetectionAnnotation instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns PersonDetectionAnnotation instance
+                     */
+                    public static create(properties?: google.cloud.videointelligence.v1.IPersonDetectionAnnotation): google.cloud.videointelligence.v1.PersonDetectionAnnotation;
+
+                    /**
+                     * Encodes the specified PersonDetectionAnnotation message. Does not implicitly {@link google.cloud.videointelligence.v1.PersonDetectionAnnotation.verify|verify} messages.
+                     * @param message PersonDetectionAnnotation message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.videointelligence.v1.IPersonDetectionAnnotation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified PersonDetectionAnnotation message, length delimited. Does not implicitly {@link google.cloud.videointelligence.v1.PersonDetectionAnnotation.verify|verify} messages.
+                     * @param message PersonDetectionAnnotation message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.videointelligence.v1.IPersonDetectionAnnotation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a PersonDetectionAnnotation message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns PersonDetectionAnnotation
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.videointelligence.v1.PersonDetectionAnnotation;
+
+                    /**
+                     * Decodes a PersonDetectionAnnotation message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns PersonDetectionAnnotation
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.videointelligence.v1.PersonDetectionAnnotation;
+
+                    /**
+                     * Verifies a PersonDetectionAnnotation message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a PersonDetectionAnnotation message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns PersonDetectionAnnotation
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.videointelligence.v1.PersonDetectionAnnotation;
+
+                    /**
+                     * Creates a plain object from a PersonDetectionAnnotation message. Also converts values to other types if specified.
+                     * @param message PersonDetectionAnnotation
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.videointelligence.v1.PersonDetectionAnnotation, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this PersonDetectionAnnotation to JSON.
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
@@ -2457,6 +2770,9 @@ export namespace google {
                     /** VideoAnnotationResults faceAnnotations */
                     faceAnnotations?: (google.cloud.videointelligence.v1.IFaceAnnotation[]|null);
 
+                    /** VideoAnnotationResults faceDetectionAnnotations */
+                    faceDetectionAnnotations?: (google.cloud.videointelligence.v1.IFaceDetectionAnnotation[]|null);
+
                     /** VideoAnnotationResults shotAnnotations */
                     shotAnnotations?: (google.cloud.videointelligence.v1.IVideoSegment[]|null);
 
@@ -2474,6 +2790,9 @@ export namespace google {
 
                     /** VideoAnnotationResults logoRecognitionAnnotations */
                     logoRecognitionAnnotations?: (google.cloud.videointelligence.v1.ILogoRecognitionAnnotation[]|null);
+
+                    /** VideoAnnotationResults personDetectionAnnotations */
+                    personDetectionAnnotations?: (google.cloud.videointelligence.v1.IPersonDetectionAnnotation[]|null);
 
                     /** VideoAnnotationResults error */
                     error?: (google.rpc.IStatus|null);
@@ -2512,6 +2831,9 @@ export namespace google {
                     /** VideoAnnotationResults faceAnnotations. */
                     public faceAnnotations: google.cloud.videointelligence.v1.IFaceAnnotation[];
 
+                    /** VideoAnnotationResults faceDetectionAnnotations. */
+                    public faceDetectionAnnotations: google.cloud.videointelligence.v1.IFaceDetectionAnnotation[];
+
                     /** VideoAnnotationResults shotAnnotations. */
                     public shotAnnotations: google.cloud.videointelligence.v1.IVideoSegment[];
 
@@ -2529,6 +2851,9 @@ export namespace google {
 
                     /** VideoAnnotationResults logoRecognitionAnnotations. */
                     public logoRecognitionAnnotations: google.cloud.videointelligence.v1.ILogoRecognitionAnnotation[];
+
+                    /** VideoAnnotationResults personDetectionAnnotations. */
+                    public personDetectionAnnotations: google.cloud.videointelligence.v1.IPersonDetectionAnnotation[];
 
                     /** VideoAnnotationResults error. */
                     public error?: (google.rpc.IStatus|null);
@@ -3836,6 +4161,9 @@ export namespace google {
 
                     /** TextAnnotation segments */
                     segments?: (google.cloud.videointelligence.v1.ITextSegment[]|null);
+
+                    /** TextAnnotation version */
+                    version?: (string|null);
                 }
 
                 /** Represents a TextAnnotation. */
@@ -3852,6 +4180,9 @@ export namespace google {
 
                     /** TextAnnotation segments. */
                     public segments: google.cloud.videointelligence.v1.ITextSegment[];
+
+                    /** TextAnnotation version. */
+                    public version: string;
 
                     /**
                      * Creates a new TextAnnotation instance using the specified properties.
@@ -4037,6 +4368,9 @@ export namespace google {
 
                     /** ObjectTrackingAnnotation frames */
                     frames?: (google.cloud.videointelligence.v1.IObjectTrackingFrame[]|null);
+
+                    /** ObjectTrackingAnnotation version */
+                    version?: (string|null);
                 }
 
                 /** Represents an ObjectTrackingAnnotation. */
@@ -4062,6 +4396,9 @@ export namespace google {
 
                     /** ObjectTrackingAnnotation frames. */
                     public frames: google.cloud.videointelligence.v1.IObjectTrackingFrame[];
+
+                    /** ObjectTrackingAnnotation version. */
+                    public version: string;
 
                     /** ObjectTrackingAnnotation trackInfo. */
                     public trackInfo?: ("segment"|"trackId");
