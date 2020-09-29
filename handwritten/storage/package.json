@@ -57,12 +57,12 @@
     "@google-cloud/promisify": "^2.0.0",
     "arrify": "^2.0.0",
     "compressible": "^2.0.12",
-    "concat-stream": "^2.0.0",
     "date-and-time": "^0.14.0",
     "duplexify": "^4.0.0",
     "extend": "^3.0.2",
     "gaxios": "^3.0.0",
     "gcs-resumable-upload": "^3.1.0",
+    "get-stream": "^6.0.0",
     "hash-stream-validation": "^0.2.2",
     "mime": "^2.2.0",
     "mime-types": "^2.0.8",
@@ -77,6 +77,8 @@
     "@google-cloud/pubsub": "^2.0.0",
     "@grpc/grpc-js": "^1.0.3",
     "@grpc/proto-loader": "^0.5.1",
+    "@microsoft/api-documenter": "^7.8.10",
+    "@microsoft/api-extractor": "^7.8.10",
     "@types/compressible": "^2.0.0",
     "@types/concat-stream": "^1.6.0",
     "@types/configstore": "^4.0.0",
@@ -111,8 +113,6 @@
     "tmp": "^0.2.0",
     "typescript": "^3.8.3",
     "uuid": "^8.0.0",
-    "yargs": "^16.0.0",
-    "@microsoft/api-documenter": "^7.8.10",
-    "@microsoft/api-extractor": "^7.8.10"
+    "yargs": "^16.0.0"
   }
 }

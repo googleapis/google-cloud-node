@@ -24,7 +24,7 @@ import {
 import {promisifyAll} from '@google-cloud/promisify';
 
 import compressible = require('compressible');
-import concat = require('concat-stream');
+import getStream = require('get-stream');
 import * as crypto from 'crypto';
 import * as dateFormat from 'date-and-time';
 import * as extend from 'extend';
@@ -1267,12 +1267,10 @@ class File extends ServiceObject<File> {
       ) => {
         if (err) {
           // Get error message from the body.
-          rawResponseStream.pipe(
-            concat(body => {
-              err.message = body.toString();
-              throughStream.destroy(err);
-            })
-          );
+          getStream(rawResponseStream).then(body => {
+            err.message = body;
+            throughStream.destroy(err);
+          });
 
           return;
         }
@@ -1992,7 +1990,10 @@ class File extends ServiceObject<File> {
         .on('error', callback)
         .on('finish', callback);
     } else {
-      fileStream.on('error', callback).pipe(concat(callback.bind(null, null)));
+      getStream
+        .buffer(fileStream)
+        .then(contents => callback?.(null, contents))
+        .catch(callback as (error: RequestError) => void);
     }
   }
 
