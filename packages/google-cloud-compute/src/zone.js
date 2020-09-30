@@ -581,6 +581,7 @@ class Zone extends common.ServiceObject {
    */
   createVM(name, config, callback) {
     const self = this;
+    const query = {};
     const body = Object.assign(
       {
         name: name,
@@ -593,6 +594,10 @@ class Zone extends common.ServiceObject {
       },
       config
     );
+    if (body.template) {
+      query.sourceInstanceTemplate = body.template;
+      delete body.template;
+    }
     if (body.machineType.indexOf('/') === -1) {
       // The specified machineType is only a partial name, e.g. 'n1-standard-1'.
       body.machineType = format('zones/{zoneName}/machineTypes/{machineType}', {
@@ -664,6 +669,7 @@ class Zone extends common.ServiceObject {
       {
         method: 'POST',
         uri: '/instances',
+        qs: query,
         json: body,
       },
       (err, resp) => {

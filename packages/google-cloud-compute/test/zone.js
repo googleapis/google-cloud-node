@@ -775,6 +775,24 @@ describe('Zone', () => {
       ],
     };
 
+    describe('config.template', () => {
+      const CONFIG = {
+        template: '/path/to/template',
+      };
+
+      it('should define sourceInstanceTemplate', done => {
+        zone.request = function (reqOpts) {
+          assert.strictEqual(
+            reqOpts.qs.sourceInstanceTemplate,
+            CONFIG.template
+          );
+          done();
+        };
+
+        zone.createVM(NAME, CONFIG, assert.ifError);
+      });
+    });
+
     describe('config.machineType', () => {
       const CONFIG = {
         machineType: 'f1-micro',
