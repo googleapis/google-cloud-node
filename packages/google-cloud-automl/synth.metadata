@@ -144,8 +144,6 @@
     "protos/protos.js",
     "protos/protos.json",
     "renovate.json",
-    "samples/README.md",
-    "samples/package.json",
     "src/index.ts",
     "src/v1/auto_ml_client.ts",
     "src/v1/auto_ml_client_config.json",
