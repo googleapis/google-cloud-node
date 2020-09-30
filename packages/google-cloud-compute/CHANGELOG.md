@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/compute?activeTab=versions
 
+## [2.2.0](https://www.github.com/googleapis/nodejs-compute/compare/v2.1.0...v2.2.0) (2020-09-30)
+
+
+### Features
+
+* support a source template when creating a VM ([#500](https://www.github.com/googleapis/nodejs-compute/issues/500)) ([62f33be](https://www.github.com/googleapis/nodejs-compute/commit/62f33be7b84bff7d75b38b20dbd29e0642359bb2))
+
 ## [2.1.0](https://www.github.com/googleapis/nodejs-compute/compare/v2.0.3...v2.1.0) (2020-08-10)
 
 
