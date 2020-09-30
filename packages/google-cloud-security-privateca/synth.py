@@ -30,7 +30,7 @@ for version in versions:
     version,
     bazel_target=f"//google/cloud/security/privateca/{version}:security-privateca-{version}-nodejs"
   )
-  s.copy(library, excludes=[])
+  s.copy(library, excludes=["package.json", "README.md"])
 
 # Copy common templates
 common_templates = gcp.CommonTemplates()
