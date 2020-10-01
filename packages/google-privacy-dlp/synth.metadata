@@ -4,7 +4,7 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/nodejs-dlp.git",
-        "sha": "16a39f10399570c31ca566392a1f5ffa50040fd7"
+        "sha": "eccf6df807ad7f906bdbdd5f2cfb534fc8a4890c"
       }
     },
     {
@@ -19,7 +19,7 @@
       "git": {
         "name": "synthtool",
         "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "fdd03c161003ab97657cc0218f25c82c89ddf4b6"
+        "sha": "079dcce498117f9570cebe6e6cff254b38ba3860"
       }
     }
   ],
