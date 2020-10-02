@@ -4,15 +4,15 @@
       "git": {
         "name": ".",
         "remote": "git@github.com:googleapis/nodejs-phishing-protection.git",
-        "sha": "bf36b0ea806022944de1f1c87d2b119b84b4f441"
+        "sha": "7418f6edfaa2fac12b0abbc6df9d4ce748e30489"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "cb7fc620590382a4a2ea6ffdf6f51ae0e77bbbb5",
-        "internalRef": "334682521"
+        "sha": "62a8f17878bae4fbdbcae468e6e278a55ff38878",
+        "internalRef": "335053173"
       }
     }
   ],
