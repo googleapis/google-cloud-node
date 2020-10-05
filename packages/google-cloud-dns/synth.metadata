@@ -4,14 +4,14 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/nodejs-dns.git",
-        "sha": "1854092413a1c5be7ff100f8db99ccab8dd6d0c8"
+        "sha": "ee772d8413c2d2302ab521edb0bd0cc057d1ee97"
       }
     },
     {
       "git": {
         "name": "synthtool",
         "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "079dcce498117f9570cebe6e6cff254b38ba3860"
+        "sha": "0c868d49b8e05bc1f299bc773df9eb4ef9ed96e9"
       }
     }
   ],
@@ -54,10 +54,12 @@
     ".kokoro/test.bat",
     ".kokoro/test.sh",
     ".kokoro/trampoline.sh",
+    ".kokoro/trampoline_v2.sh",
     ".mocharc.js",
     ".nycrc",
     ".prettierignore",
     ".prettierrc.js",
+    ".trampolinerc",
     "CODE_OF_CONDUCT.md",
     "CONTRIBUTING.md",
     "LICENSE",
