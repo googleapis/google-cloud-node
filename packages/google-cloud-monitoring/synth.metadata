@@ -4,7 +4,7 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/nodejs-monitoring.git",
-        "sha": "64a5b56dc2749ea28c468685de46c195cf55fbea"
+        "sha": "7857c6c3420dfb0040e2bd43fcb8440c34b0f255"
       }
     },
     {
@@ -19,7 +19,7 @@
       "git": {
         "name": "synthtool",
         "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "079dcce498117f9570cebe6e6cff254b38ba3860"
+        "sha": "0c868d49b8e05bc1f299bc773df9eb4ef9ed96e9"
       }
     }
   ],
@@ -75,10 +75,12 @@
     ".kokoro/test.bat",
     ".kokoro/test.sh",
     ".kokoro/trampoline.sh",
+    ".kokoro/trampoline_v2.sh",
     ".mocharc.js",
     ".nycrc",
     ".prettierignore",
     ".prettierrc.js",
+    ".trampolinerc",
     "CODE_OF_CONDUCT.md",
     "CONTRIBUTING.md",
     "LICENSE",
