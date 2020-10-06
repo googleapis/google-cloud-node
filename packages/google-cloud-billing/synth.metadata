@@ -4,7 +4,7 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/nodejs-billing.git",
-        "sha": "9b7cf6b052315132407c8f455637664978404596"
+        "sha": "b5dd878212b6f4a67f1926a89d64ec679b98c1b4"
       }
     },
     {
@@ -19,7 +19,7 @@
       "git": {
         "name": "synthtool",
         "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "079dcce498117f9570cebe6e6cff254b38ba3860"
+        "sha": "0c868d49b8e05bc1f299bc773df9eb4ef9ed96e9"
       }
     }
   ],
@@ -75,10 +75,12 @@
     ".kokoro/test.bat",
     ".kokoro/test.sh",
     ".kokoro/trampoline.sh",
+    ".kokoro/trampoline_v2.sh",
     ".mocharc.js",
     ".nycrc",
     ".prettierignore",
     ".prettierrc.js",
+    ".trampolinerc",
     "CODE_OF_CONDUCT.md",
     "CONTRIBUTING.md",
     "LICENSE",
