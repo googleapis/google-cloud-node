@@ -1,5 +1,5 @@
 {
-  "name": "documentai",
+  "name": "@google-cloud/documentai",
   "name_pretty": "Document AI",
   "product_documentation": "https://cloud.google.com/document-understanding/docs/",
   "client_documentation": "https://googleapis.dev/nodejs/documentai/latest/index.html",

@@ -3,23 +3,23 @@
     {
       "git": {
         "name": ".",
-        "remote": "https://github.com/googleapis/nodejs-document-ai.git",
-        "sha": "44bb7b9f25e436dc8857b62993201ea17d5e4c1f"
+        "remote": "git@github.com:googleapis/nodejs-document-ai.git",
+        "sha": "dad35ff47a263244ae7b662880a763621fb66839"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "4c5071b615d96ef9dfd6a63d8429090f1f2872bb",
-        "internalRef": "327369997"
+        "sha": "80eada6dbc452b58b4663fa3ab4f0b6746f49f80",
+        "internalRef": "335745163"
       }
     },
     {
       "git": {
         "name": "synthtool",
         "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "0c868d49b8e05bc1f299bc773df9eb4ef9ed96e9"
+        "sha": "487eba79f8260e34205d8ceb1ebcc65685085e19"
       }
     }
   ],
@@ -32,7 +32,16 @@
         "language": "nodejs",
         "generator": "bazel"
       }
-    }
+    },
+    {
+      "client": {
+        "source": "googleapis",
+        "apiName": "documentai",
+        "apiVersion": "v1beta3",
+        "language": "nodejs",
+        "generator": "bazel"
+      }
+    },  
   ],
   "generatedFiles": [
     ".eslintignore",

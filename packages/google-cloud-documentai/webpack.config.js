@@ -17,8 +17,8 @@ const path = require('path');
 module.exports = {
   entry: './src/index.ts',
   output: {
-    library: 'DocumentUnderstandingService',
-    filename: './document-understanding-service.js',
+    library: 'DocumentProcessorService',
+    filename: './document-processor-service.js',
   },
   node: {
     child_process: 'empty',

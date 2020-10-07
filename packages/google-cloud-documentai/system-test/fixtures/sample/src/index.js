@@ -20,7 +20,7 @@
 const documentai = require('@google-cloud/documentai');
 
 function main() {
-  const documentUnderstandingServiceClient = new documentai.DocumentUnderstandingServiceClient();
+  const DocumentUnderstandingServiceClient = new documentai.DocumentUnderstandingServiceClient();
 }
 
 main();
