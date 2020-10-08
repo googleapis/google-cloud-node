@@ -21,10 +21,16 @@ import arrify = require('arrify');
 const concat = require('concat-stream');
 import * as extend from 'extend';
 import {split} from 'split-array-stream';
-import * as streamEvents from 'stream-events';
 import {google} from '../protos/protos';
-import {CallOptions} from 'google-gax';
-import {Transform} from 'stream';
+import {CallOptions, CancellableStream} from 'google-gax';
+import {Duplex, PassThrough, Transform} from 'stream';
+
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const streamEvents = require('stream-events');
+
+export interface AbortableDuplex extends Duplex {
+  abort(): void;
+}
 
 // Import the clients for each version supported by this package.
 const gapic = Object.freeze({
@@ -868,20 +874,10 @@ class DatastoreRequest {
     });
   }
 
-  request_(config: RequestConfig, callback: RequestCallback): void;
   /**
-   * Make a request to the API endpoint. Properties to indicate a transactional
-   * or non-transactional operation are added automatically.
-   *
-   * @param {object} config Configuration object.
-   * @param {object} config.gaxOpts GAX options.
-   * @param {function} config.method The gax method to call.
-   * @param {object} config.reqOpts Request options.
-   * @param {function} callback The callback function.
-   *
    * @private
    */
-  request_(config: RequestConfig, callback: RequestCallback): void {
+  prepareGaxRequest_(config: RequestConfig, callback: Function): void {
     const datastore = this.datastore;
 
     const isTransaction = this.id ? true : false;
@@ -933,8 +929,70 @@ class DatastoreRequest {
           'google-cloud-resource-prefix': `projects/${projectId}`,
         },
       });
-      gaxClient![method](reqOpts, gaxOpts, callback);
+      const requestFn = gaxClient![method].bind(gaxClient, reqOpts, gaxOpts);
+      callback(null, requestFn);
     });
+  }
+
+  request_(config: RequestConfig, callback: RequestCallback): void;
+  /**
+   * Make a request to the API endpoint. Properties to indicate a transactional
+   * or non-transactional operation are added automatically.
+   *
+   * @param {object} config Configuration object.
+   * @param {object} config.gaxOpts GAX options.
+   * @param {string} config.client The name of the gax client.
+   * @param {function} config.method The gax method to call.
+   * @param {object} config.reqOpts Request options.
+   * @param {function} callback The callback function.
+   *
+   * @private
+   */
+  request_(config: RequestConfig, callback: RequestCallback): void {
+    this.prepareGaxRequest_(config, (err: Error, requestFn: Function) => {
+      if (err) {
+        callback(err);
+        return;
+      }
+      requestFn(callback);
+    });
+  }
+
+  /**
+   * Make a request as a stream.
+   *
+   * @param {object} config Configuration object.
+   * @param {object} config.gaxOpts GAX options.
+   * @param {string} config.client The name of the gax client.
+   * @param {string} config.method The gax method to call.
+   * @param {object} config.reqOpts Request options.
+   */
+  requestStream_(config: RequestConfig): AbortableDuplex {
+    let gaxStream: CancellableStream;
+    const stream = streamEvents(new PassThrough({objectMode: true}));
+
+    stream.abort = () => {
+      if (gaxStream && gaxStream.cancel) {
+        gaxStream.cancel();
+      }
+    };
+
+    stream.once('reading', () => {
+      this.prepareGaxRequest_(config, (err: Error, requestFn: Function) => {
+        if (err) {
+          stream.destroy(err);
+          return;
+        }
+
+        gaxStream = requestFn();
+        gaxStream
+          .on('error', stream.destroy.bind(stream))
+          .on('response', stream.emit.bind(stream, 'response'))
+          .pipe(stream);
+      });
+    });
+
+    return stream as AbortableDuplex;
   }
 }
 
@@ -999,6 +1057,9 @@ export interface RequestOptions {
   mode?: string;
   projectId?: string;
   query?: QueryProto;
+  filter?: string;
+  indexId?: string;
+  entityFilter?: google.datastore.admin.v1.IEntityFilter;
 }
 export type RunQueryStreamOptions = RunQueryOptions;
 export interface CommitCallback {

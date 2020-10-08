@@ -25,6 +25,7 @@
  */
 
 import arrify = require('arrify');
+import extend = require('extend');
 import {
   GrpcClient,
   ClientStub,
@@ -32,10 +33,22 @@ import {
   GoogleAuth,
   GoogleAuthOptions,
   CallOptions,
+  Operation,
+  ServiceError,
 } from 'google-gax';
 import * as is from 'is';
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const pumpify = require('pumpify');
+import {Transform} from 'stream';
 
 import {entity, Entities, Entity, EntityProto, ValueProto} from './entity';
+import {
+  GetIndexesCallback,
+  GetIndexesOptions,
+  GetIndexesResponse,
+  IIndex,
+  Index,
+} from './index-class';
 import {Query} from './query';
 import {
   DatastoreRequest,
@@ -45,6 +58,7 @@ import {
   SaveCallback,
   SaveResponse,
   Mutation,
+  RequestOptions,
 } from './request';
 import {Transaction} from './transaction';
 import {promisifyAll} from '@google-cloud/promisify';
@@ -70,6 +84,31 @@ export type UpsertCallback = CommitCallback;
 export type UpsertResponse = CommitResponse;
 export type InsertCallback = CommitCallback;
 export type InsertResponse = CommitResponse;
+
+export interface LongRunningCallback {
+  (
+    err: ServiceError | null,
+    operation?: Operation,
+    apiResponse?: google.longrunning.IOperation
+  ): void;
+}
+export type LongRunningResponse = [Operation, google.longrunning.IOperation];
+
+export interface ExportEntitiesConfig
+  extends Omit<google.datastore.admin.v1.IExportEntitiesRequest, 'projectId'> {
+  bucket?: string | {name: string};
+  kinds?: string[];
+  namespaces?: string[];
+  gaxOptions?: CallOptions;
+}
+
+export interface ImportEntitiesConfig
+  extends Omit<google.datastore.admin.v1.IImportEntitiesRequest, 'projectId'> {
+  file?: string | {bucket: {name: string}; name: string};
+  kinds?: string[];
+  namespaces?: string[];
+  gaxOptions?: CallOptions;
+}
 
 // Import the clients for each version supported by this package.
 const gapic = Object.freeze({
@@ -431,11 +470,18 @@ class Datastore extends DatastoreRequest {
     this.defaultBaseUrl_ = 'datastore.googleapis.com';
     this.determineBaseUrl_(options.apiEndpoint);
 
+    const scopes: string[] = Array.from(
+      new Set([
+        ...gapic.v1.DatastoreClient.scopes,
+        ...gapic.v1.DatastoreAdminClient.scopes,
+      ])
+    );
+
     this.options = Object.assign(
       {
         libName: 'gccl',
         libVersion: require('../../package.json').version,
-        scopes: gapic.v1.DatastoreClient.scopes,
+        scopes,
         servicePath: this.baseUrl_,
         port: typeof this.port_ === 'number' ? this.port_ : 443,
       },
@@ -448,8 +494,264 @@ class Datastore extends DatastoreRequest {
     this.auth = new GoogleAuth(this.options);
   }
 
+  export(config: ExportEntitiesConfig): Promise<LongRunningResponse>;
+  export(config: ExportEntitiesConfig, callback: LongRunningCallback): void;
+  /**
+   * Export entities from this project to a Google Cloud Storage bucket.
+   *
+   * @param {ExportEntitiesConfig} config Configuration object.
+   * @param {string | Bucket} config.bucket The `gs://bucket` path or a
+   *     @google-cloud/storage Bucket object.
+   * @param {string[]} [config.kinds] The kinds to include in this import.
+   * @param {string[]} [config.namespaces] The namespace IDs to include in this
+   *     import.
+   * @param {object} [config.gaxOptions] Request configuration options, outlined
+   *     here: https://googleapis.github.io/gax-nodejs/global.html#CallOptions.
+   * @param {function} callback The callback function.
+   * @param {?error} callback.err An error returned while making this request.
+   * @param {Operation} callback.operation An operation object that can be used
+   *     to check the status of the request.
+   */
+  export(
+    config: ExportEntitiesConfig,
+    callback?: LongRunningCallback
+  ): void | Promise<LongRunningResponse> {
+    const reqOpts: ExportEntitiesConfig = {
+      entityFilter: {},
+      ...config,
+    };
+
+    if (reqOpts.bucket && reqOpts.outputUrlPrefix) {
+      throw new Error('Both `bucket` and `outputUrlPrefix` were provided.');
+    }
+
+    if (!reqOpts.outputUrlPrefix) {
+      if (typeof config.bucket === 'string') {
+        reqOpts.outputUrlPrefix = `gs://${config.bucket.replace('gs://', '')}`;
+      } else if (typeof config.bucket === 'object') {
+        reqOpts.outputUrlPrefix = `gs://${config.bucket.name}`;
+      } else {
+        throw new Error('A Bucket object or URL must be provided.');
+      }
+    }
+
+    if (reqOpts.kinds) {
+      if (typeof config.entityFilter === 'object') {
+        throw new Error('Both `entityFilter` and `kinds` were provided.');
+      }
+      reqOpts.entityFilter!.kinds = reqOpts.kinds;
+    }
+
+    if (reqOpts.namespaces) {
+      if (typeof config.entityFilter === 'object') {
+        throw new Error('Both `entityFilter` and `namespaces` were provided.');
+      }
+      reqOpts.entityFilter!.namespaceIds = reqOpts.namespaces;
+    }
+
+    delete reqOpts.bucket;
+    delete reqOpts.gaxOptions;
+    delete reqOpts.kinds;
+    delete reqOpts.namespaces;
+
+    this.request_(
+      {
+        client: 'DatastoreAdminClient',
+        method: 'exportEntities',
+        reqOpts: reqOpts as RequestOptions,
+        gaxOpts: config.gaxOptions,
+      },
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      callback as any
+    );
+  }
+
+  getIndexes(options?: GetIndexesOptions): Promise<GetIndexesResponse>;
+  getIndexes(options: GetIndexesOptions, callback: GetIndexesCallback): void;
+  getIndexes(callback: GetIndexesCallback): void;
+  /**
+   * Get all of the indexes in this project.
+   *
+   * @param {GetIndexesOptions | GetIndexesCallback} [optionsOrCallback]
+   * @param {object} [options.gaxOptions] Request configuration options,
+   *     outlined here:
+   *     https://googleapis.github.io/gax-nodejs/global.html#CallOptions.
+   * @param {GetIndexesResponse} [callback] The callback function.
+   * @param {?error} callback.error An error returned while making this request.
+   * @param {Index[]} callback.indexes All matching Index instances.
+   * @param {object} callback.apiResponse The full API response.
+   * @return {void | Promise<GetIndexesResponse>}
+   */
+  getIndexes(
+    optionsOrCallback?: GetIndexesOptions | GetIndexesCallback,
+    cb?: GetIndexesCallback
+  ): void | Promise<GetIndexesResponse> {
+    let options =
+      typeof optionsOrCallback === 'object' ? optionsOrCallback : {};
+    const callback =
+      typeof optionsOrCallback === 'function' ? optionsOrCallback : cb!;
+
+    options = extend(true, {}, options);
+
+    const gaxOpts = options.gaxOptions || {};
+
+    const reqOpts = {
+      pageSize: gaxOpts.pageSize,
+      pageToken: gaxOpts.pageToken,
+      ...options,
+    };
+
+    delete gaxOpts.pageSize;
+    delete gaxOpts.pageToken;
+    delete (reqOpts as CallOptions).autoPaginate;
+    delete (reqOpts as GetIndexesOptions).gaxOptions;
+
+    if (
+      typeof options.autoPaginate === 'boolean' &&
+      typeof gaxOpts.autoPaginate === 'undefined'
+    ) {
+      gaxOpts.autoPaginate = options.autoPaginate;
+    }
+
+    this.request_(
+      {
+        client: 'DatastoreAdminClient',
+        method: 'listIndexes',
+        reqOpts,
+        gaxOpts,
+      },
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      (err, ...resp: any[]) => {
+        let indexes: Index[] = [];
+
+        if (resp[0]) {
+          indexes = resp[0].map((index: IIndex) => {
+            const indexInstance = this.index(index.indexId!);
+            indexInstance.metadata = index;
+            return indexInstance;
+          });
+        }
+
+        const nextQuery = resp[1]! ? Object.assign(options, resp[1]) : null;
+        const apiResp: google.datastore.admin.v1.IListIndexesResponse = resp[2];
+
+        callback(err as ServiceError, indexes, nextQuery, apiResp);
+      }
+    );
+  }
+
+  /**
+   * Get all of the indexes in this project as a readable object stream.
+   *
+   * @param {GetIndexesOptions} [options] Configuration object. See
+   *     {@link Datastore#getIndexes} for a complete list of options.
+   * @returns {ReadableStream<Index>}
+   */
+  getIndexesStream(options?: GetIndexesOptions): NodeJS.ReadableStream {
+    const {gaxOptions, ...reqOpts} = options || {};
+
+    return pumpify.obj([
+      this.requestStream_({
+        client: 'DatastoreAdminClient',
+        method: 'listIndexesStream',
+        reqOpts,
+        gaxOpts: gaxOptions,
+      }),
+      new Transform({
+        objectMode: true,
+        transform: (index: IIndex, enc: string, next: Function) => {
+          const indexInstance = this.index(index.indexId!);
+          indexInstance.metadata = index;
+          next(null, indexInstance);
+        },
+      }),
+    ]);
+  }
+
   getProjectId(): Promise<string> {
     return this.auth.getProjectId();
+  }
+
+  import(config: ImportEntitiesConfig): Promise<LongRunningResponse>;
+  import(config: ImportEntitiesConfig, callback: LongRunningCallback): void;
+  /**
+   * Import entities into this project from a remote file.
+   *
+   * @param {ImportEntitiesConfig} config Configuration object.
+   * @param {string | File} config.file The `gs://bucket/file` path or a
+   *     @google-cloud/storage File object.
+   * @param {string[]} [config.kinds] The kinds to include in this import.
+   * @param {string[]} [config.namespaces] The namespace IDs to include in this
+   *     import.
+   * @param {object} [config.gaxOptions] Request configuration options, outlined
+   *     here: https://googleapis.github.io/gax-nodejs/global.html#CallOptions.
+   * @param {function} callback The callback function.
+   * @param {?error} callback.err An error returned while making this request.
+   * @param {Operation} callback.operation An operation object that can be used
+   *     to check the status of the request.
+   */
+  import(
+    config: ImportEntitiesConfig,
+    callback?: LongRunningCallback
+  ): void | Promise<LongRunningResponse> {
+    const reqOpts: ImportEntitiesConfig = {
+      entityFilter: {},
+      ...config,
+    };
+
+    if (config.file && config.inputUrl) {
+      throw new Error('Both `file` and `inputUrl` were provided.');
+    }
+
+    if (!reqOpts.inputUrl) {
+      if (typeof config.file === 'string') {
+        reqOpts.inputUrl = `gs://${config.file.replace('gs://', '')}`;
+      } else if (typeof config.file === 'object') {
+        reqOpts.inputUrl = `gs://${config.file.bucket.name}/${config.file.name}`;
+      } else {
+        throw new Error('An input URL must be provided.');
+      }
+    }
+
+    if (reqOpts.kinds) {
+      if (typeof config.entityFilter === 'object') {
+        throw new Error('Both `entityFilter` and `kinds` were provided.');
+      }
+      reqOpts.entityFilter!.kinds = reqOpts.kinds;
+    }
+
+    if (reqOpts.namespaces) {
+      if (typeof config.entityFilter === 'object') {
+        throw new Error('Both `entityFilter` and `namespaces` were provided.');
+      }
+      reqOpts.entityFilter!.namespaceIds = reqOpts.namespaces;
+    }
+
+    delete reqOpts.file;
+    delete reqOpts.gaxOptions;
+    delete reqOpts.kinds;
+    delete reqOpts.namespaces;
+
+    this.request_(
+      {
+        client: 'DatastoreAdminClient',
+        method: 'importEntities',
+        reqOpts: reqOpts as RequestOptions,
+        gaxOpts: config.gaxOptions,
+      },
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      callback as any
+    );
+  }
+
+  /**
+   * Get a reference to an Index.
+   *
+   * @param {string} id The index name or id.
+   * @returns {Index}
+   */
+  index(id: string): Index {
+    return new Index(this, id);
   }
 
   insert(entities: Entities): Promise<InsertResponse>;
@@ -1420,6 +1722,7 @@ promisifyAll(Datastore, {
     'isDouble',
     'geoPoint',
     'isGeoPoint',
+    'index',
     'int',
     'isInt',
     'createQuery',
@@ -1485,7 +1788,7 @@ export interface TransactionOptions {
   readOnly?: boolean;
 }
 
-export {DatastoreRequest, Query, Transaction};
+export {Index, DatastoreRequest, Query, Transaction};
 
 export interface DatastoreOptions extends GoogleAuthOptions {
   namespace?: string;
@@ -1498,5 +1801,3 @@ export interface KeyToLegacyUrlSafeCallback {
 }
 const v1 = gapic.v1;
 export {v1};
-import * as protos from '../protos/protos';
-export {protos};

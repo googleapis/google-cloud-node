@@ -13,8 +13,13 @@
 // limitations under the License.
 
 import * as assert from 'assert';
+import {readFileSync} from 'fs';
+import * as path from 'path';
 import {before, after, describe, it} from 'mocha';
-import {Datastore} from '../src';
+import * as yaml from 'js-yaml';
+import {Datastore, Index} from '../src';
+import {google} from '../protos/protos';
+import {Storage} from '@google-cloud/storage';
 
 describe('Datastore', () => {
   const testKinds: string[] = [];
@@ -30,6 +35,13 @@ describe('Datastore', () => {
     testKinds.push(keyObject.kind);
     return keyObject;
   };
+
+  const {indexes: DECLARED_INDEXES} = yaml.safeLoad(
+    readFileSync(path.join(__dirname, 'data', 'index.yaml'), 'utf8')
+  ) as {indexes: google.datastore.admin.v1.IIndex[]};
+
+  // TODO/DX ensure indexes before testing, and maybe? cleanup indexes after
+  //  possible implications with kokoro project
 
   after(async () => {
     async function deleteEntities(kind: string) {
@@ -921,6 +933,87 @@ describe('Datastore', () => {
       await transaction.get(key);
       transaction.save({key, data: {}});
       await assert.rejects(transaction.commit());
+    });
+  });
+
+  describe('indexes', () => {
+    // @TODO: Until the protos support creating indexes, these tests depend on
+    // the remote state of declared indexes. Could be flaky!
+    it('should get all indexes', async () => {
+      const [indexes] = await datastore.getIndexes();
+      assert.ok(
+        indexes.length >= DECLARED_INDEXES.length,
+        'has at least the number of indexes per system-test/data/index.yaml'
+      );
+
+      // Comparing index.yaml and the actual defined index in Datastore requires
+      // assumptions to complete a shape transformation, so let's just see if
+      // a returned index has the right shape and not inspect the values.
+      const [firstIndex] = indexes;
+
+      assert.ok(firstIndex, 'first index is readable');
+      assert.ok(firstIndex.metadata!.properties, 'has properties collection');
+      assert.ok(
+        firstIndex.metadata!.properties.length,
+        'with properties inside'
+      );
+      assert.ok(firstIndex.metadata!.ancestor, 'has the ancestor property');
+    });
+
+    it('should get all indexes as a stream', done => {
+      const indexes: Index[] = [];
+
+      datastore
+        .getIndexesStream()
+        .on('error', done)
+        .on('data', index => {
+          indexes.push(index);
+        })
+        .on('end', () => {
+          assert(indexes.length >= DECLARED_INDEXES.length);
+          done();
+        });
+    });
+
+    it('should get a specific index', async () => {
+      const [indexes] = await datastore.getIndexes();
+      const [firstIndex] = indexes;
+
+      const index = datastore.index(firstIndex.id);
+      const [metadata] = await index.getMetadata();
+      assert.deepStrictEqual(
+        metadata,
+        firstIndex.metadata,
+        'asked index is the same as received index'
+      );
+    });
+  });
+
+  describe('importing and exporting entities', () => {
+    const gcs = new Storage();
+    const bucket = gcs.bucket('nodejs-datastore-system-tests');
+
+    it('should export, then import entities', async () => {
+      const [exportOperation] = await datastore.export({bucket});
+      await exportOperation.promise();
+
+      const [files] = await bucket.getFiles({maxResults: 1});
+      const [exportedFile] = files;
+      assert.ok(exportedFile.name.includes('overall_export_metadata'));
+
+      const [importOperation] = await datastore.import({
+        file: exportedFile,
+      });
+
+      // This is a >20 minute operation, so we're just going to make sure the
+      // right type of operation was started.
+      assert.strictEqual(
+        (importOperation.metadata as google.datastore.admin.v1.IImportEntitiesMetadata)
+          .inputUrl,
+        `gs://${exportedFile.bucket.name}/${exportedFile.name}`
+      );
+
+      await importOperation.cancel();
     });
   });
 });
