@@ -127,7 +127,7 @@
   },
   {
     "name": "nodejs-security-private-ca",
-    "name_pretty": "Certificate Authority",
+    "name_pretty": "Certificate Authority Service",
     "product_documentation": "https://cloud.google.com/certificate-authority-service",
     "client_documentation": "https://googleapis.dev/nodejs/security-private-ca/latest/index.html",
     "issue_tracker": "https://github.com/googleapis/nodejs-security-private-ca/issues",
@@ -263,7 +263,7 @@
     "support_documentation": "https://cloud.google.com/dns/docs/getting-support"
   },
   {
-    "name": "documentai",
+    "name": "@google-cloud/documentai",
     "name_pretty": "Document AI",
     "product_documentation": "https://cloud.google.com/document-understanding/docs/",
     "client_documentation": "https://googleapis.dev/nodejs/documentai/latest/index.html",
