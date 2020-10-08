@@ -16,6 +16,7 @@ import * as assert from 'assert';
 import {before, beforeEach, after, afterEach, describe, it} from 'mocha';
 import * as gax from 'google-gax';
 import * as proxyquire from 'proxyquire';
+import {PassThrough, Readable} from 'stream';
 
 import * as ds from '../src';
 import {DatastoreOptions} from '../src';
@@ -106,6 +107,14 @@ const fakeGoogleGax = {
   },
 };
 
+class FakeIndex {
+  calledWith_: Array<{}>;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  constructor(...args: any[]) {
+    this.calledWith_ = args;
+  }
+}
+
 class FakeQuery {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   calledWith_: any[];
@@ -150,6 +159,7 @@ describe('Datastore', () => {
   before(() => {
     Datastore = proxyquire('../src', {
       './entity.js': {entity: fakeEntity},
+      './index-class.js': {Index: FakeIndex},
       './query.js': {Query: FakeQuery},
       './transaction.js': {Transaction: FakeTransaction},
       './v1': FakeV1,
@@ -515,6 +525,638 @@ describe('Datastore', () => {
       assert.strictEqual(query.calledWith_[0], datastore);
       assert.strictEqual(query.calledWith_[1], datastore.namespace);
       assert.deepStrictEqual(query.calledWith_[2], []);
+    });
+  });
+
+  describe('export', () => {
+    it('should accept a bucket string destination', done => {
+      const bucket = 'bucket';
+
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      datastore.request_ = (config: any) => {
+        assert.strictEqual(config.reqOpts.outputUrlPrefix, `gs://${bucket}`);
+        done();
+      };
+
+      datastore.export({bucket}, assert.ifError);
+    });
+
+    it('should remove extraneous gs:// prefix from input', done => {
+      const bucket = 'gs://bucket';
+
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      datastore.request_ = (config: any) => {
+        assert.strictEqual(config.reqOpts.outputUrlPrefix, `${bucket}`);
+        done();
+      };
+
+      datastore.export({bucket}, assert.ifError);
+    });
+
+    it('should accept a Bucket object destination', done => {
+      const bucket = {name: 'bucket'};
+
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      datastore.request_ = (config: any) => {
+        assert.strictEqual(
+          config.reqOpts.outputUrlPrefix,
+          `gs://${bucket.name}`
+        );
+        done();
+      };
+
+      datastore.export({bucket}, assert.ifError);
+    });
+
+    it('should throw if a destination is not provided', () => {
+      assert.throws(() => {
+        datastore.export({}, assert.ifError);
+      }, /A Bucket object or URL must be provided\./);
+    });
+
+    it('should throw if bucket and outputUrlPrefix are provided', () => {
+      assert.throws(() => {
+        datastore.export(
+          {
+            bucket: 'bucket',
+            outputUrlPrefix: 'output-url-prefix',
+          },
+          assert.ifError
+        );
+      }, /Both `bucket` and `outputUrlPrefix` were provided\./);
+    });
+
+    it('should accept kinds', done => {
+      const kinds = ['kind1', 'kind2'];
+      const config = {bucket: 'bucket', kinds};
+
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      datastore.request_ = (config: any) => {
+        assert.deepStrictEqual(config.reqOpts.entityFilter.kinds, kinds);
+        done();
+      };
+
+      datastore.export(config, assert.ifError);
+    });
+
+    it('should throw if both kinds and entityFilter are provided', () => {
+      assert.throws(() => {
+        datastore.export(
+          {
+            bucket: 'bucket',
+            kinds: ['kind1', 'kind2'],
+            entityFilter: {},
+          },
+          assert.ifError
+        );
+      }, /Both `entityFilter` and `kinds` were provided\./);
+    });
+
+    it('should accept namespaces', done => {
+      const namespaces = ['ns1', 'n2'];
+      const config = {bucket: 'bucket', namespaces};
+
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      datastore.request_ = (config: any) => {
+        assert.deepStrictEqual(
+          config.reqOpts.entityFilter.namespaceIds,
+          namespaces
+        );
+        done();
+      };
+
+      datastore.export(config, assert.ifError);
+    });
+
+    it('should throw if both namespaces and entityFilter are provided', () => {
+      assert.throws(() => {
+        datastore.export(
+          {
+            bucket: 'bucket',
+            namespaces: ['ns1', 'ns2'],
+            entityFilter: {},
+          },
+          assert.ifError
+        );
+      }, /Both `entityFilter` and `namespaces` were provided\./);
+    });
+
+    it('should remove extraneous properties from request', done => {
+      const config = {
+        bucket: 'bucket',
+        gaxOptions: {},
+        kinds: ['kind1', 'kind2'],
+        namespaces: ['ns1', 'ns2'],
+      };
+
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      datastore.request_ = (config: any) => {
+        assert.strictEqual(typeof config.reqOpts.bucket, 'undefined');
+        assert.strictEqual(typeof config.reqOpts.gaxOptions, 'undefined');
+        assert.strictEqual(typeof config.reqOpts.kinds, 'undefined');
+        assert.strictEqual(typeof config.reqOpts.namespaces, 'undefined');
+        done();
+      };
+
+      datastore.export(config, assert.ifError);
+    });
+
+    it('should send any user input to API', done => {
+      const userProperty = 'abc';
+      const config = {bucket: 'bucket', userProperty};
+
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      datastore.request_ = (config: any) => {
+        assert.strictEqual(config.reqOpts.userProperty, userProperty);
+        done();
+      };
+
+      datastore.export(config, assert.ifError);
+    });
+
+    it('should send correct request', done => {
+      const config = {bucket: 'bucket'};
+
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      datastore.request_ = (config: any) => {
+        assert.strictEqual(config.client, 'DatastoreAdminClient');
+        assert.strictEqual(config.method, 'exportEntities');
+        assert.strictEqual(typeof config.gaxOpts, 'undefined');
+        done();
+      };
+
+      datastore.export(config, assert.ifError);
+    });
+
+    it('should accept gaxOptions', done => {
+      const gaxOptions = {};
+      const config = {bucket: 'bucket', gaxOptions};
+
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      datastore.request_ = (config: any) => {
+        assert.strictEqual(config.gaxOpts, gaxOptions);
+        done();
+      };
+
+      datastore.export(config, assert.ifError);
+    });
+  });
+
+  describe('getIndexes', () => {
+    it('should send the correct request', done => {
+      const options = {a: 'b'};
+
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      datastore.request_ = (config: any) => {
+        assert.strictEqual(config.client, 'DatastoreAdminClient');
+        assert.strictEqual(config.method, 'listIndexes');
+        assert.deepStrictEqual(config.reqOpts, {
+          pageSize: undefined,
+          pageToken: undefined,
+          ...options,
+        });
+        assert.deepStrictEqual(config.gaxOpts, {});
+
+        done();
+      };
+
+      datastore.getIndexes(options, assert.ifError);
+    });
+
+    it('should locate pagination settings from gaxOptions', done => {
+      const options = {
+        gaxOptions: {
+          pageSize: 'size',
+          pageToken: 'token',
+        },
+      };
+
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      datastore.request_ = (config: any) => {
+        assert.strictEqual(
+          config.reqOpts.pageSize,
+          options.gaxOptions.pageSize
+        );
+        assert.strictEqual(
+          config.reqOpts.pageToken,
+          options.gaxOptions.pageToken
+        );
+        done();
+      };
+
+      datastore.getIndexes(options, assert.ifError);
+    });
+
+    it('should prefer pageSize and pageToken from options over gaxOptions', done => {
+      const options = {
+        pageSize: 'size-good',
+        pageToken: 'token-good',
+        gaxOptions: {
+          pageSize: 'size-bad',
+          pageToken: 'token-bad',
+        },
+      };
+
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      datastore.request_ = (config: any) => {
+        assert.strictEqual(config.reqOpts.pageSize, options.pageSize);
+        assert.strictEqual(config.reqOpts.pageToken, options.pageToken);
+        done();
+      };
+
+      datastore.getIndexes(options, assert.ifError);
+    });
+
+    it('should remove extraneous pagination settings from request', done => {
+      const options = {
+        gaxOptions: {
+          pageSize: 'size',
+          pageToken: 'token',
+        },
+        autoPaginate: true,
+      };
+
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      datastore.request_ = (config: any) => {
+        assert.strictEqual(typeof config.gaxOpts.pageSize, 'undefined');
+        assert.strictEqual(typeof config.gaxOpts.pageToken, 'undefined');
+        assert.strictEqual(typeof config.reqOpts.autoPaginate, 'undefined');
+        done();
+      };
+
+      datastore.getIndexes(options, assert.ifError);
+    });
+
+    it('should accept gaxOptions', done => {
+      const options = {
+        gaxOptions: {a: 'b'},
+      };
+
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      datastore.request_ = (config: any) => {
+        assert.strictEqual(typeof config.reqOpts.gaxOptions, 'undefined');
+        assert.deepStrictEqual(config.gaxOpts, options.gaxOptions);
+        done();
+      };
+
+      datastore.getIndexes(options, assert.ifError);
+    });
+
+    it('should not send gaxOptions as request options', done => {
+      const options = {
+        gaxOptions: {a: 'b'},
+      };
+
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      datastore.request_ = (config: any) => {
+        assert(Object.keys(options.gaxOptions).every(k => !config.reqOpts[k]));
+        done();
+      };
+
+      datastore.getIndexes(options, assert.ifError);
+    });
+
+    it('should set autoPaginate from options', done => {
+      const options = {
+        autoPaginate: true,
+      };
+
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      datastore.request_ = (config: any) => {
+        assert.strictEqual(config.gaxOpts.autoPaginate, options.autoPaginate);
+        done();
+      };
+
+      datastore.getIndexes(options, assert.ifError);
+    });
+
+    it('should prefer autoPaginate from gaxOpts', done => {
+      const options = {
+        autoPaginate: false,
+        gaxOptions: {
+          autoPaginate: true,
+        },
+      };
+
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      datastore.request_ = (config: any) => {
+        assert.strictEqual(config.gaxOpts.autoPaginate, true);
+        done();
+      };
+
+      datastore.getIndexes(options, assert.ifError);
+    });
+
+    it('should execute callback with error and correct response arguments', done => {
+      const error = new Error('Error.');
+      const apiResponse = {};
+
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      datastore.request_ = (config: any, callback: Function) => {
+        callback(error, [], null, apiResponse);
+      };
+
+      datastore.getIndexes(
+        (err: Error, indexes: [], nextQuery: {}, apiResp: {}) => {
+          assert.strictEqual(err, error);
+          assert.deepStrictEqual(indexes, []);
+          assert.strictEqual(nextQuery, null);
+          assert.strictEqual(apiResp, apiResponse);
+          done();
+        }
+      );
+    });
+
+    it('should execute callback with Index instances', done => {
+      const rawIndex = {indexId: 'name', a: 'b'};
+      const indexInstance = {};
+
+      datastore.index = (id: string) => {
+        assert.strictEqual(id, rawIndex.indexId);
+        return indexInstance;
+      };
+
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      datastore.request_ = (config: any, callback: Function) => {
+        callback(null, [rawIndex]);
+      };
+
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      datastore.getIndexes((err: Error, indexes: any[]) => {
+        assert.ifError(err);
+        assert.deepStrictEqual(indexes, [indexInstance]);
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        assert.strictEqual((indexes[0] as any)!.metadata, rawIndex);
+        done();
+      });
+    });
+
+    it('should execute callback with prepared nextQuery', done => {
+      const options = {pageToken: '1'};
+      const nextQuery = {pageToken: '2'};
+
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      datastore.request_ = (config: any, callback: Function) => {
+        callback(null, [], nextQuery);
+      };
+
+      datastore.getIndexes(
+        options,
+        (err: Error, indexes: [], _nextQuery: {}) => {
+          assert.ifError(err);
+          assert.deepStrictEqual(_nextQuery, nextQuery);
+          done();
+        }
+      );
+    });
+  });
+
+  describe('getIndexesStream', () => {
+    it('should make correct request', done => {
+      const options = {a: 'b'};
+
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      datastore.requestStream_ = (config: any) => {
+        assert.strictEqual(config.client, 'DatastoreAdminClient');
+        assert.strictEqual(config.method, 'listIndexesStream');
+        assert.deepStrictEqual(config.reqOpts, {
+          ...options,
+        });
+        assert.strictEqual(typeof config.gaxOpts, 'undefined');
+        setImmediate(done);
+        return new PassThrough();
+      };
+
+      datastore.getIndexesStream(options);
+    });
+
+    it('should accept gaxOptions', done => {
+      const options = {gaxOptions: {}};
+
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      datastore.requestStream_ = (config: any) => {
+        assert.strictEqual(config.gaxOpts, options.gaxOptions);
+        setImmediate(done);
+        return new PassThrough();
+      };
+
+      datastore.getIndexesStream(options);
+    });
+
+    it('should transform response indexes into Index objects', done => {
+      const rawIndex = {indexId: 'name', a: 'b'};
+      const indexInstance = {};
+      const requestStream = new Readable({
+        objectMode: true,
+        read() {
+          this.push(rawIndex);
+          this.push(null);
+        },
+      });
+
+      datastore.index = (id: string) => {
+        assert.strictEqual(id, rawIndex.indexId);
+        return indexInstance;
+      };
+
+      datastore.requestStream_ = () => requestStream;
+
+      datastore
+        .getIndexesStream()
+        .on('error', done)
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        .on('data', (index: any) => {
+          assert.strictEqual(index, indexInstance);
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          assert.strictEqual((index as any).metadata, rawIndex);
+          done();
+        });
+    });
+  });
+
+  describe('import', () => {
+    it('should throw if both file and inputUrl are provided', () => {
+      assert.throws(() => {
+        datastore.import(
+          {
+            file: 'file',
+            inputUrl: 'gs://file',
+          },
+          assert.ifError
+        );
+      }, /Both `file` and `inputUrl` were provided\./);
+    });
+
+    it('should accept a file string source', done => {
+      const file = 'file';
+
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      datastore.request_ = (config: any) => {
+        assert.strictEqual(config.reqOpts.inputUrl, `gs://${file}`);
+        done();
+      };
+
+      datastore.import({file}, assert.ifError);
+    });
+
+    it('should remove extraneous gs:// prefix from input', done => {
+      const file = 'gs://file';
+
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      datastore.request_ = (config: any) => {
+        assert.strictEqual(config.reqOpts.inputUrl, `${file}`);
+        done();
+      };
+
+      datastore.import({file}, assert.ifError);
+    });
+
+    it('should accept a File object source', done => {
+      const file = {bucket: {name: 'bucket'}, name: 'file'};
+
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      datastore.request_ = (config: any) => {
+        assert.strictEqual(
+          config.reqOpts.inputUrl,
+          `gs://${file.bucket.name}/${file.name}`
+        );
+        done();
+      };
+
+      datastore.import({file}, assert.ifError);
+    });
+
+    it('should throw if a source is not provided', () => {
+      assert.throws(() => {
+        datastore.import({}, assert.ifError);
+      }, /An input URL must be provided\./);
+    });
+
+    it('should accept kinds', done => {
+      const kinds = ['kind1', 'kind2'];
+      const config = {file: 'file', kinds};
+
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      datastore.request_ = (config: any) => {
+        assert.deepStrictEqual(config.reqOpts.entityFilter.kinds, kinds);
+        done();
+      };
+
+      datastore.import(config, assert.ifError);
+    });
+
+    it('should throw if both kinds and entityFilter are provided', () => {
+      assert.throws(() => {
+        datastore.import(
+          {
+            file: 'file',
+            kinds: ['kind1', 'kind2'],
+            entityFilter: {},
+          },
+          assert.ifError
+        );
+      }, /Both `entityFilter` and `kinds` were provided\./);
+    });
+
+    it('should accept namespaces', done => {
+      const namespaces = ['ns1', 'n2'];
+      const config = {file: 'file', namespaces};
+
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      datastore.request_ = (config: any) => {
+        assert.deepStrictEqual(
+          config.reqOpts.entityFilter.namespaceIds,
+          namespaces
+        );
+        done();
+      };
+
+      datastore.import(config, assert.ifError);
+    });
+
+    it('should throw if both namespaces and entityFilter are provided', () => {
+      assert.throws(() => {
+        datastore.import(
+          {
+            file: 'file',
+            namespaces: ['ns1', 'ns2'],
+            entityFilter: {},
+          },
+          assert.ifError
+        );
+      }, /Both `entityFilter` and `namespaces` were provided\./);
+    });
+
+    it('should remove extraneous properties from request', done => {
+      const config = {
+        file: 'file',
+        gaxOptions: {},
+        kinds: ['kind1', 'kind2'],
+        namespaces: ['ns1', 'ns2'],
+      };
+
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      datastore.request_ = (config: any) => {
+        assert.strictEqual(typeof config.reqOpts.file, 'undefined');
+        assert.strictEqual(typeof config.reqOpts.gaxOptions, 'undefined');
+        assert.strictEqual(typeof config.reqOpts.kinds, 'undefined');
+        assert.strictEqual(typeof config.reqOpts.namespaces, 'undefined');
+        done();
+      };
+
+      datastore.import(config, assert.ifError);
+    });
+
+    it('should send any user input to API', done => {
+      const userProperty = 'abc';
+      const config = {file: 'file', userProperty};
+
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      datastore.request_ = (config: any) => {
+        assert.strictEqual(config.reqOpts.userProperty, userProperty);
+        done();
+      };
+
+      datastore.import(config, assert.ifError);
+    });
+
+    it('should send correct request', done => {
+      const config = {file: 'file'};
+
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      datastore.request_ = (config: any) => {
+        assert.strictEqual(config.client, 'DatastoreAdminClient');
+        assert.strictEqual(config.method, 'importEntities');
+        assert.strictEqual(typeof config.gaxOpts, 'undefined');
+        done();
+      };
+
+      datastore.import(config, assert.ifError);
+    });
+
+    it('should accept gaxOptions', done => {
+      const gaxOptions = {};
+      const config = {file: 'file', gaxOptions};
+
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      datastore.request_ = (config: any) => {
+        assert.strictEqual(config.gaxOpts, gaxOptions);
+        done();
+      };
+
+      datastore.import(config, assert.ifError);
+    });
+  });
+
+  describe('index', () => {
+    it('should return an Index object', () => {
+      const indexId = 'index-id';
+      const index = datastore.index(indexId);
+      assert(index instanceof FakeIndex);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const args = (index as any).calledWith_;
+      assert.strictEqual(args[0], datastore);
+      assert.strictEqual(args[1], indexId);
     });
   });
 

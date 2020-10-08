@@ -16,10 +16,11 @@ import * as pfy from '@google-cloud/promisify';
 import * as assert from 'assert';
 import {after, afterEach, before, beforeEach, describe, it} from 'mocha';
 import * as extend from 'extend';
+import * as gax from 'google-gax';
 import * as is from 'is';
 import * as proxyquire from 'proxyquire';
 import * as sinon from 'sinon';
-import {Transform} from 'stream';
+import {PassThrough, Transform} from 'stream';
 
 import {google} from '../protos/protos';
 import * as ds from '../src';
@@ -1555,7 +1556,7 @@ describe('Request', () => {
     });
   });
 
-  describe('request_', () => {
+  describe('prepareGaxRequest_', () => {
     const CONFIG = {
       client: 'FakeClient', // name set at top of file
       method: 'method',
@@ -1590,7 +1591,7 @@ describe('Request', () => {
       request.datastore.auth.getProjectId = () => {
         done();
       };
-      request.request_(CONFIG, assert.ifError);
+      request.prepareGaxRequest_(CONFIG, assert.ifError);
     });
 
     it('should return error if getting project ID failed', done => {
@@ -1599,7 +1600,7 @@ describe('Request', () => {
       request.datastore.auth.getProjectId = (callback: Function) => {
         callback(error);
       };
-      request.request_(CONFIG, (err: Error) => {
+      request.prepareGaxRequest_(CONFIG, (err: Error) => {
         assert.strictEqual(err, error);
         done();
       });
@@ -1614,18 +1615,21 @@ describe('Request', () => {
         return fakeClient;
       };
       request.datastore.clients_ = new Map();
-      request.request_(CONFIG, assert.ifError);
+      request.prepareGaxRequest_(CONFIG, assert.ifError);
       const client = request.datastore.clients_.get(CONFIG.client);
       assert.strictEqual(client, fakeClient);
     });
 
-    it('should use the cached client', done => {
+    it('should return the cached client', done => {
       v1FakeClientOverride = () => {
         done(new Error('Should not re-instantiate a GAX client.'));
       };
 
-      request.request_(CONFIG);
-      done();
+      request.prepareGaxRequest_(CONFIG, (err: Error, requestFn: Function) => {
+        assert.ifError(err);
+        requestFn();
+        done();
+      });
     });
 
     it('should send gaxOpts', done => {
@@ -1639,7 +1643,10 @@ describe('Request', () => {
         },
       });
 
-      request.request_(CONFIG, assert.ifError);
+      request.prepareGaxRequest_(CONFIG, (err: Error, requestFn: Function) => {
+        assert.ifError(err);
+        requestFn();
+      });
     });
 
     it('should send google-cloud-resource-prefix', done => {
@@ -1654,7 +1661,10 @@ describe('Request', () => {
         },
       });
 
-      request.request_(CONFIG, assert.ifError);
+      request.prepareGaxRequest_(CONFIG, (err: Error, requestFn: Function) => {
+        assert.ifError(err);
+        requestFn();
+      });
     });
 
     describe('commit', () => {
@@ -1669,7 +1679,13 @@ describe('Request', () => {
         const config = Object.assign({}, CONFIG, {
           method: 'commit',
         });
-        request.request_(config, assert.ifError);
+        request.prepareGaxRequest_(
+          config,
+          (err: Error, requestFn: Function) => {
+            assert.ifError(err);
+            requestFn();
+          }
+        );
       });
     });
 
@@ -1693,7 +1709,13 @@ describe('Request', () => {
         const config = Object.assign({}, CONFIG, {
           method: 'commit',
         });
-        request.request_(config, assert.ifError);
+        request.prepareGaxRequest_(
+          config,
+          (err: Error, requestFn: Function) => {
+            assert.ifError(err);
+            requestFn();
+          }
+        );
       });
 
       it('should set the rollback transaction info', done => {
@@ -1708,7 +1730,13 @@ describe('Request', () => {
         const config = Object.assign({}, CONFIG, {
           method: 'rollback',
         });
-        request.request_(config, assert.ifError);
+        request.prepareGaxRequest_(
+          config,
+          (err: Error, requestFn: Function) => {
+            assert.ifError(err);
+            requestFn();
+          }
+        );
       });
 
       it('should set the lookup transaction info', done => {
@@ -1727,7 +1755,13 @@ describe('Request', () => {
           },
         });
 
-        request.request_(config, assert.ifError);
+        request.prepareGaxRequest_(
+          config,
+          (err: Error, requestFn: Function) => {
+            assert.ifError(err);
+            requestFn();
+          }
+        );
       });
 
       it('should set the runQuery transaction info', done => {
@@ -1746,7 +1780,13 @@ describe('Request', () => {
           },
         });
 
-        request.request_(config, assert.ifError);
+        request.prepareGaxRequest_(
+          config,
+          (err: Error, requestFn: Function) => {
+            assert.ifError(err);
+            requestFn();
+          }
+        );
       });
 
       it('should throw if read consistency is specified', () => {
@@ -1760,9 +1800,113 @@ describe('Request', () => {
         });
 
         assert.throws(() => {
-          request.request_(config, assert.ifError);
+          request.prepareGaxRequest_(config, assert.ifError);
         }, /Read consistency cannot be specified in a transaction\./);
       });
+    });
+  });
+
+  describe('request_', () => {
+    const CONFIG = {};
+
+    it('should pass config to prepare function', done => {
+      request.prepareGaxRequest_ = (config: {}) => {
+        assert.strictEqual(config, CONFIG);
+        done();
+      };
+
+      request.request_(CONFIG, assert.ifError);
+    });
+
+    it('should execute callback with error from prepare function', done => {
+      const error = new Error('Error.');
+
+      request.prepareGaxRequest_ = (config: {}, callback: Function) => {
+        callback(error);
+      };
+
+      request.request_(CONFIG, (err: Error) => {
+        assert.strictEqual(err, error);
+        done();
+      });
+    });
+
+    it('should execute returned request function with callback', done => {
+      const requestFn = (callback: Function) => {
+        callback(); // done()
+      };
+
+      request.prepareGaxRequest_ = (config: {}, callback: Function) => {
+        callback(null, requestFn);
+      };
+
+      request.request_(CONFIG, done);
+    });
+  });
+
+  describe('requestStream_', () => {
+    let GAX_STREAM: gax.CancellableStream;
+    const CONFIG = {};
+
+    beforeEach(() => {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      (GAX_STREAM as any) = new PassThrough();
+      request.prepareGaxRequest_ = (config: {}, callback: Function) => {
+        callback(null, () => GAX_STREAM);
+      };
+    });
+
+    it('should expose an abort function', done => {
+      GAX_STREAM.cancel = done;
+
+      const requestStream = request.requestStream_(CONFIG);
+      requestStream.emit('reading');
+      requestStream.abort();
+    });
+
+    it('should prepare the request once reading', done => {
+      request.prepareGaxRequest_ = (config: {}) => {
+        assert.strictEqual(config, CONFIG);
+        done();
+      };
+
+      const requestStream = request.requestStream_(CONFIG);
+      requestStream.emit('reading');
+    });
+
+    it('should destroy the stream with prepare error', done => {
+      const error = new Error('Error.');
+      request.prepareGaxRequest_ = (config: {}, callback: Function) => {
+        callback(error);
+      };
+      const requestStream = request.requestStream_(CONFIG);
+      requestStream.emit('reading');
+      requestStream.on('error', (err: Error) => {
+        assert.strictEqual(err, error);
+        done();
+      });
+    });
+
+    it('should destroy the stream with GAX error', done => {
+      const error = new Error('Error.');
+      const requestStream = request.requestStream_(CONFIG);
+      requestStream.emit('reading');
+      GAX_STREAM.emit('error', error);
+      requestStream.on('error', (err: Error) => {
+        assert.strictEqual(err, error);
+        done();
+      });
+    });
+
+    it('should emit response from GAX stream', done => {
+      const response = {};
+      const requestStream = request.requestStream_(CONFIG);
+      requestStream.emit('reading');
+      requestStream.on('response', (resp: {}) => {
+        assert.strictEqual(resp, response);
+        done();
+      });
+      GAX_STREAM.emit('response', response);
     });
   });
 });
