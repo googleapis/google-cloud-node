@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/datastore?activeTab=versions
 
+## [6.2.0](https://www.github.com/googleapis/nodejs-datastore/compare/v6.1.1...v6.2.0) (2020-10-08)
+
+
+### Features
+
+* introduce import/export + Index class ([#734](https://www.github.com/googleapis/nodejs-datastore/issues/734)) ([e329095](https://www.github.com/googleapis/nodejs-datastore/commit/e329095cb363989e11a1793a0b49ebcadd7a9093))
+
 ### [6.1.1](https://www.github.com/googleapis/nodejs-datastore/compare/v6.1.0...v6.1.1) (2020-09-12)
 
 
