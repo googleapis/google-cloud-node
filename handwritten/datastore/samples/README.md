@@ -14,6 +14,10 @@
 * [Samples](#samples)
   * [Concepts](#concepts)
   * [Error](#error)
+  * [Export](#export)
+  * [Import](#import)
+  * [Indexes.get](#indexes.get)
+  * [Indexes.list](#indexes.list)
   * [Quickstart](#quickstart)
   * [Add Task](#add-task)
   * [Delete Task](#delete-task)
@@ -63,6 +67,74 @@ __Usage:__
 
 
 `node samples/error.js`
+
+
+-----
+
+
+
+
+### Export
+
+View the [source code](https://github.com/googleapis/nodejs-datastore/blob/master/samples/export.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-datastore&page=editor&open_in_editor=samples/export.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/export.js`
+
+
+-----
+
+
+
+
+### Import
+
+View the [source code](https://github.com/googleapis/nodejs-datastore/blob/master/samples/import.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-datastore&page=editor&open_in_editor=samples/import.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/import.js`
+
+
+-----
+
+
+
+
+### Indexes.get
+
+View the [source code](https://github.com/googleapis/nodejs-datastore/blob/master/samples/indexes.get.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-datastore&page=editor&open_in_editor=samples/indexes.get.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/indexes.get.js`
+
+
+-----
+
+
+
+
+### Indexes.list
+
+View the [source code](https://github.com/googleapis/nodejs-datastore/blob/master/samples/indexes.list.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-datastore&page=editor&open_in_editor=samples/indexes.list.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/indexes.list.js`
 
 
 -----
