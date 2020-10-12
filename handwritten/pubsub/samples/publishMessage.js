@@ -31,7 +31,7 @@ function main(
   topicName = 'YOUR_TOPIC_NAME',
   data = JSON.stringify({foo: 'bar'})
 ) {
-  // [START pubsub_publish]
+  // [START pubsub_publish_with_error_handler]
   // [START pubsub_quickstart_publisher]
   /**
    * TODO(developer): Uncomment these variables before running the sample.
@@ -49,13 +49,22 @@ function main(
     // Publishes the message as a string, e.g. "Hello, world!" or JSON.stringify(someObject)
     const dataBuffer = Buffer.from(data);
 
-    const messageId = await pubSubClient.topic(topicName).publish(dataBuffer);
-    console.log(`Message ${messageId} published.`);
+    try {
+      const messageId = await pubSubClient.topic(topicName).publish(dataBuffer);
+      console.log(`Message ${messageId} published.`);
+    } catch (error) {
+      console.error(`Received error while publishing: ${error.message}`);
+      process.exitCode = 1;
+    }
   }
 
-  publishMessage().catch(console.error);
-  // [END pubsub_publish]
+  publishMessage();
+  // [END pubsub_publish_with_error_handler]
   // [END pubsub_quickstart_publisher]
 }
 
+process.on('unhandledRejection', err => {
+  console.error(err.message);
+  process.exitCode = 1;
+});
 main(...process.argv.slice(2));

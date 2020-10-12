@@ -31,7 +31,6 @@ describe('subscriptions', () => {
   const topicNameThree = `topic3-${runId}`;
   const subscriptionNameOne = `sub1-${runId}`;
   const subscriptionNameTwo = `sub2-${runId}`;
-  const subscriptionNameThree = `sub3-${runId}`;
   const subscriptionNameFour = `sub4-${runId}`;
   const subscriptionNameFive = `sub5-${runId}`;
   const subscriptionNameSix = `sub6-${runId}`;
@@ -138,6 +137,19 @@ describe('subscriptions', () => {
     assert.match(output, new RegExp(`Received message ${messageIds}:`));
   });
 
+  it('should listen for messages with custom attributes', async () => {
+    const messageIds = await pubsub
+      .topic(topicNameOne)
+      .publish(Buffer.from('Hello, world!'), {attr: 'value'});
+    const output = execSync(
+      `${commandFor('listenWithCustomAttributes')} ${subscriptionNameOne}`
+    );
+    assert.match(
+      output,
+      new RegExp(`Received message: id ${messageIds}.*attr.*value`)
+    );
+  });
+
   it('should listen for messages synchronously', async () => {
     await pubsub.topic(topicNameOne).publish(Buffer.from('Hello, world!'));
     const output = execSync(
@@ -180,67 +192,6 @@ describe('subscriptions', () => {
       () => execSync('node listenForErrors nonexistent-subscription'),
       /Resource not found/
     );
-  });
-
-  it('should listen for ordered messages', async () => {
-    const timeout = 5;
-    const subscriptions = require('../listenForOrderedMessages');
-    const spy = {calls: []};
-    const log = console.log;
-    console.log = (...args) => {
-      spy.calls.push(args);
-      log(...args);
-    };
-    const expected = 'Hello, world!';
-    const expectedBuffer = Buffer.from(expected);
-    const publishedMessageIds = [];
-    const topicTwo = pubsub.topic(topicNameTwo);
-
-    await topicTwo.subscription(subscriptionNameThree).get({autoCreate: true});
-
-    let result = await topicTwo.publish(expectedBuffer, {counterId: '3'});
-    publishedMessageIds.push(result);
-    await subscriptions.listenForOrderedMessages(
-      subscriptionNameThree,
-      timeout
-    );
-    assert.strictEqual(spy.calls.length, 0);
-
-    result = await topicTwo.publish(expectedBuffer, {counterId: '1'});
-    publishedMessageIds.push(result);
-    await subscriptions.listenForOrderedMessages(
-      subscriptionNameThree,
-      timeout
-    );
-    assert.strictEqual(spy.calls.length, 1);
-    assert.deepStrictEqual(spy.calls[0], [
-      '* %d %j %j',
-      publishedMessageIds[1],
-      expected,
-      {counterId: '1'},
-    ]);
-
-    result = await topicTwo.publish(expectedBuffer, {counterId: '1'});
-    result = await topicTwo.publish(expectedBuffer, {counterId: '2'});
-    publishedMessageIds.push(result);
-    await subscriptions.listenForOrderedMessages(
-      subscriptionNameThree,
-      timeout
-    );
-    assert.strictEqual(spy.calls.length, 3);
-    assert.deepStrictEqual(spy.calls[1], [
-      '* %d %j %j',
-      publishedMessageIds[2],
-      expected,
-      {counterId: '2'},
-    ]);
-    assert.deepStrictEqual(spy.calls[2], [
-      '* %d %j %j',
-      publishedMessageIds[0],
-      expected,
-      {counterId: '3'},
-    ]);
-    console.log = log; // eslint-disable-line require-atomic-updates
   });
 
   it('should set the IAM policy for a subscription', async () => {
@@ -371,7 +322,7 @@ describe('subscriptions', () => {
     );
   });
 
-  it('should remove dead lettter policy.', async () => {
+  it('should remove dead letter policy.', async () => {
     await pubsub
       .topic(topicNameOne)
       .subscription(subscriptionNameSeven, {

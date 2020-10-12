@@ -17,7 +17,7 @@
 // sample-metadata:
 //   title: Quickstart
 //   description: A quick introduction to using the Pub/Sub client library.
-//   usage: node quickstart.js <project-id> <topic-name>
+//   usage: node quickstart.js <project-id> <topic-name> <subscription-name>
 
 // [START pubsub_quickstart_create_topic]
 // Imports the Google Cloud client library
@@ -25,16 +25,38 @@ const {PubSub} = require('@google-cloud/pubsub');
 
 async function quickstart(
   projectId = 'your-project-id', // Your Google Cloud Platform project ID
-  topicName = 'my-topic' // Name for the new topic to create
+  topicName = 'my-topic', // Name for the new topic to create
+  subscriptionName = 'my-sub' // Name for the new subscription to create
 ) {
   // Instantiates a client
   const pubsub = new PubSub({projectId});
 
-  // Creates the new topic
+  // Creates a new topic
   const [topic] = await pubsub.createTopic(topicName);
   console.log(`Topic ${topic.name} created.`);
+
+  // Creates a subscription on that new topic
+  const [subscription] = await topic.createSubscription(subscriptionName);
+
+  // Receive callbacks for new messages on the subscription
+  subscription.on('message', message => {
+    console.log('Received message:', message.data.toString());
+    process.exit(0);
+  });
+
+  // Receive callbacks for errors on the subscription
+  subscription.on('error', error => {
+    console.error('Received error:', error);
+    process.exit(1);
+  });
+
+  // Send a message to the topic
+  topic.publish(Buffer.from('Test message!'));
 }
 // [END pubsub_quickstart_create_topic]
 
-const args = process.argv.slice(2);
-quickstart(...args).catch(console.error);
+process.on('unhandledRejection', err => {
+  console.error(err.message);
+  process.exitCode = 1;
+});
+quickstart(...process.argv.slice(2));

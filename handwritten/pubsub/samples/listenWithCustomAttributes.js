@@ -1,4 +1,4 @@
-// Copyright 2019-2020 Google LLC
+// Copyright 2020 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -23,15 +23,14 @@
 'use strict';
 
 // sample-metadata:
-//   title: Listen For Messages
-//   description: Listens for messages from a subscription.
-//   usage: node listenForMessages.js <subscription-name> [timeout-in-seconds]
+//   title: Listen For Messages With Custom Attributes
+//   description: Demonstrates how to receive and process custom attributes on messages.
+//   usage: node listenWithCustomAttributes.js <subscription-name> [timeout-in-seconds]
 
-function main(subscriptionName = 'YOUR_SUBSCRIPTION_NAME', timeout = 60) {
+async function main(subscriptionName = 'YOUR_SUBSCRIPTION_NAME', timeout = 60) {
   timeout = Number(timeout);
 
-  // [START pubsub_subscriber_async_pull]
-  // [START pubsub_quickstart_subscriber]
+  // [START pubsub_subscriber_async_pull_custom_attributes]
   /**
    * TODO(developer): Uncomment these variables before running the sample.
    */
@@ -44,17 +43,17 @@ function main(subscriptionName = 'YOUR_SUBSCRIPTION_NAME', timeout = 60) {
   // Creates a client; cache this for further use
   const pubSubClient = new PubSub();
 
-  function listenForMessages() {
-    // References an existing subscription
+  async function listenWithCustomAttributes() {
+    // References an existing subscription, e.g. "my-subscription"
     const subscription = pubSubClient.subscription(subscriptionName);
 
     // Create an event handler to handle messages
-    let messageCount = 0;
     const messageHandler = message => {
-      console.log(`Received message ${message.id}:`);
-      console.log(`\tData: ${message.data}`);
-      console.log(`\tAttributes: ${message.attributes}`);
-      messageCount += 1;
+      console.log(
+        `Received message: id ${message.id}, data ${
+          message.data
+        }, attributes: ${JSON.stringify(message.attributes)}`
+      );
 
       // "Ack" (acknowledge receipt of) the message
       message.ack();
@@ -62,16 +61,17 @@ function main(subscriptionName = 'YOUR_SUBSCRIPTION_NAME', timeout = 60) {
 
     // Listen for new messages until timeout is hit
     subscription.on('message', messageHandler);
-
     setTimeout(() => {
       subscription.removeListener('message', messageHandler);
-      console.log(`${messageCount} message(s) received.`);
     }, timeout * 1000);
   }
 
-  listenForMessages();
-  // [END pubsub_subscriber_async_pull]
-  // [END pubsub_quickstart_subscriber]
+  listenWithCustomAttributes();
+  // [END pubsub_subscriber_async_pull_custom_attributes]
 }
 
+process.on('unhandledRejection', err => {
+  console.error(err.message);
+  process.exitCode = 1;
+});
 main(...process.argv.slice(2));

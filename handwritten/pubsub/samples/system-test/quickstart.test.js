@@ -26,13 +26,19 @@ describe('quickstart', () => {
   const projectId = process.env.GCLOUD_PROJECT;
   const pubsub = new PubSub({projectId});
   const topicName = `nodejs-docs-samples-test-${uuid.v4()}`;
+  const subName = `nodejs-docs-samples-test-${uuid.v4()}`;
 
   after(async () => {
+    await pubsub.subscription(subName).delete();
     await pubsub.topic(topicName).delete();
   });
 
   it('should run the quickstart', async () => {
-    const stdout = execSync(`node quickstart ${projectId} ${topicName}`);
+    const stdout = execSync(
+      `node quickstart ${projectId} ${topicName} ${subName}`
+    );
     assert.match(stdout, /^Topic .* created./);
+    assert.match(stdout, /Received message.*Test/);
+    assert.notMatch(stdout, /Received error/);
   });
 });
