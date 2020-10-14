@@ -3449,7 +3449,12 @@
                       "fields": {}
                     },
                     "TextExtractionModelMetadata": {
-                      "fields": {}
+                      "fields": {
+                        "modelHint": {
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
                     },
                     "TextSentimentDatasetMetadata": {
                       "fields": {

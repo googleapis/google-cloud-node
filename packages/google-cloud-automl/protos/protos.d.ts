@@ -17739,6 +17739,9 @@ export namespace google {
 
                 /** Properties of a TextExtractionModelMetadata. */
                 interface ITextExtractionModelMetadata {
+
+                    /** TextExtractionModelMetadata modelHint */
+                    modelHint?: (string|null);
                 }
 
                 /** Represents a TextExtractionModelMetadata. */
@@ -17749,6 +17752,9 @@ export namespace google {
                      * @param [properties] Properties to set
                      */
                     constructor(properties?: google.cloud.automl.v1beta1.ITextExtractionModelMetadata);
+
+                    /** TextExtractionModelMetadata modelHint. */
+                    public modelHint: string;
 
                     /**
                      * Creates a new TextExtractionModelMetadata instance using the specified properties.
