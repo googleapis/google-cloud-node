@@ -473,6 +473,9 @@ class VM extends common.ServiceObject {
    *
    * @param {number=} port - The port from which the output is retrieved (1-4).
    *    Default: `1`.
+   * @param {object=} options - Configuration object.
+   * @param {string=} options.start - The starting byte position of the output to return.
+   *    To start with the first byte of output to the specified port, omit this field or set it to 0.
    * @param {function} callback - The callback function.
    * @param {?error} callback.err - An error returned while making this request.
    * @param {object} callback.output - The output from the port.
@@ -494,15 +497,27 @@ class VM extends common.ServiceObject {
    *   const apiResponse = data[1];
    * });
    */
-  getSerialPortOutput(port, callback) {
-    if (is.fn(port)) {
+  getSerialPortOutput(port, options, callback) {
+    if (is.object(port)) {
+      options = port;
+      port = 1;
+    } else if (is.fn(port)) {
       callback = port;
       port = 1;
     }
+
+    if (is.fn(options)) {
+      callback = options;
+      options = {};
+    }
+
+    port = port || 1;
+    options = options || {};
     const reqOpts = {
       uri: '/serialPort',
       qs: {
         port: port,
+        start: options.start || 0,
       },
     };
     const request = common.ServiceObject.prototype.request;

@@ -384,7 +384,7 @@ describe('VM', () => {
   });
 
   describe('getSerialPortOutput', () => {
-    const EXPECTED_QUERY = {port: 1};
+    const EXPECTED_QUERY = {port: 1, start: 0};
 
     it('should default to port 1', done => {
       FakeServiceObject.prototype.request = function (reqOpts) {
@@ -404,6 +404,17 @@ describe('VM', () => {
       };
 
       vm.getSerialPortOutput(port, assert.ifError);
+    });
+
+    it('should override the start', done => {
+      const start = 10;
+
+      FakeServiceObject.prototype.request = function (reqOpts) {
+        assert.strictEqual(reqOpts.qs.start, start);
+        done();
+      };
+
+      vm.getSerialPortOutput({start}, assert.ifError);
     });
 
     it('should make the correct API request', done => {
