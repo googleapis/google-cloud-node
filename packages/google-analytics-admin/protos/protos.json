@@ -60,6 +60,13 @@
                             "(google.api.http).body": "*"
                           }
                         },
+                        "ListAccountSummaries": {
+                          "requestType": "ListAccountSummariesRequest",
+                          "responseType": "ListAccountSummariesResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1alpha/accountSummaries"
+                          }
+                        },
                         "GetProperty": {
                           "requestType": "GetPropertyRequest",
                           "responseType": "Property",
@@ -1298,6 +1305,31 @@
                         }
                       }
                     },
+                    "ListAccountSummariesRequest": {
+                      "fields": {
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 1
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "ListAccountSummariesResponse": {
+                      "fields": {
+                        "accountSummaries": {
+                          "rule": "repeated",
+                          "type": "AccountSummary",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
                     "Account": {
                       "options": {
                         "(google.api.resource).type": "analyticsadmin.googleapis.com/Account",
@@ -1872,6 +1904,49 @@
                         "READ_AND_ANALYZE": 2,
                         "EDITOR_WITHOUT_LINK_MANAGEMENT": 3,
                         "EDITOR_INCLUDING_LINK_MANAGEMENT": 4
+                      }
+                    },
+                    "AccountSummary": {
+                      "options": {
+                        "(google.api.resource).type": "analyticsadmin.googleapis.com/AccountSummary",
+                        "(google.api.resource).pattern": "accountSummaries/{account_summary}"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "account": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.resource_reference).type": "analyticsadmin.googleapis.com/Account"
+                          }
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "propertySummaries": {
+                          "rule": "repeated",
+                          "type": "PropertySummary",
+                          "id": 4
+                        }
+                      }
+                    },
+                    "PropertySummary": {
+                      "fields": {
+                        "property": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.resource_reference).type": "analyticsadmin.googleapis.com/Property"
+                          }
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 2
+                        }
                       }
                     }
                   }

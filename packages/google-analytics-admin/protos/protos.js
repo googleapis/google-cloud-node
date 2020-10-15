@@ -264,6 +264,39 @@
                          */
     
                         /**
+                         * Callback as used by {@link google.analytics.admin.v1alpha.AnalyticsAdminService#listAccountSummaries}.
+                         * @memberof google.analytics.admin.v1alpha.AnalyticsAdminService
+                         * @typedef ListAccountSummariesCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.analytics.admin.v1alpha.ListAccountSummariesResponse} [response] ListAccountSummariesResponse
+                         */
+    
+                        /**
+                         * Calls ListAccountSummaries.
+                         * @function listAccountSummaries
+                         * @memberof google.analytics.admin.v1alpha.AnalyticsAdminService
+                         * @instance
+                         * @param {google.analytics.admin.v1alpha.IListAccountSummariesRequest} request ListAccountSummariesRequest message or plain object
+                         * @param {google.analytics.admin.v1alpha.AnalyticsAdminService.ListAccountSummariesCallback} callback Node-style callback called with the error, if any, and ListAccountSummariesResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(AnalyticsAdminService.prototype.listAccountSummaries = function listAccountSummaries(request, callback) {
+                            return this.rpcCall(listAccountSummaries, $root.google.analytics.admin.v1alpha.ListAccountSummariesRequest, $root.google.analytics.admin.v1alpha.ListAccountSummariesResponse, request, callback);
+                        }, "name", { value: "ListAccountSummaries" });
+    
+                        /**
+                         * Calls ListAccountSummaries.
+                         * @function listAccountSummaries
+                         * @memberof google.analytics.admin.v1alpha.AnalyticsAdminService
+                         * @instance
+                         * @param {google.analytics.admin.v1alpha.IListAccountSummariesRequest} request ListAccountSummariesRequest message or plain object
+                         * @returns {Promise<google.analytics.admin.v1alpha.ListAccountSummariesResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
                          * Callback as used by {@link google.analytics.admin.v1alpha.AnalyticsAdminService#getProperty}.
                          * @memberof google.analytics.admin.v1alpha.AnalyticsAdminService
                          * @typedef GetPropertyCallback
@@ -14376,6 +14409,447 @@
                         return GetDataSharingSettingsRequest;
                     })();
     
+                    v1alpha.ListAccountSummariesRequest = (function() {
+    
+                        /**
+                         * Properties of a ListAccountSummariesRequest.
+                         * @memberof google.analytics.admin.v1alpha
+                         * @interface IListAccountSummariesRequest
+                         * @property {number|null} [pageSize] ListAccountSummariesRequest pageSize
+                         * @property {string|null} [pageToken] ListAccountSummariesRequest pageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListAccountSummariesRequest.
+                         * @memberof google.analytics.admin.v1alpha
+                         * @classdesc Represents a ListAccountSummariesRequest.
+                         * @implements IListAccountSummariesRequest
+                         * @constructor
+                         * @param {google.analytics.admin.v1alpha.IListAccountSummariesRequest=} [properties] Properties to set
+                         */
+                        function ListAccountSummariesRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListAccountSummariesRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.analytics.admin.v1alpha.ListAccountSummariesRequest
+                         * @instance
+                         */
+                        ListAccountSummariesRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListAccountSummariesRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.analytics.admin.v1alpha.ListAccountSummariesRequest
+                         * @instance
+                         */
+                        ListAccountSummariesRequest.prototype.pageToken = "";
+    
+                        /**
+                         * Creates a new ListAccountSummariesRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.analytics.admin.v1alpha.ListAccountSummariesRequest
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.IListAccountSummariesRequest=} [properties] Properties to set
+                         * @returns {google.analytics.admin.v1alpha.ListAccountSummariesRequest} ListAccountSummariesRequest instance
+                         */
+                        ListAccountSummariesRequest.create = function create(properties) {
+                            return new ListAccountSummariesRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListAccountSummariesRequest message. Does not implicitly {@link google.analytics.admin.v1alpha.ListAccountSummariesRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.analytics.admin.v1alpha.ListAccountSummariesRequest
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.IListAccountSummariesRequest} message ListAccountSummariesRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListAccountSummariesRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.pageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListAccountSummariesRequest message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.ListAccountSummariesRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.analytics.admin.v1alpha.ListAccountSummariesRequest
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.IListAccountSummariesRequest} message ListAccountSummariesRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListAccountSummariesRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListAccountSummariesRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.analytics.admin.v1alpha.ListAccountSummariesRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.analytics.admin.v1alpha.ListAccountSummariesRequest} ListAccountSummariesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListAccountSummariesRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.ListAccountSummariesRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.pageSize = reader.int32();
+                                    break;
+                                case 2:
+                                    message.pageToken = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListAccountSummariesRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.analytics.admin.v1alpha.ListAccountSummariesRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.analytics.admin.v1alpha.ListAccountSummariesRequest} ListAccountSummariesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListAccountSummariesRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListAccountSummariesRequest message.
+                         * @function verify
+                         * @memberof google.analytics.admin.v1alpha.ListAccountSummariesRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListAccountSummariesRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListAccountSummariesRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.analytics.admin.v1alpha.ListAccountSummariesRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.analytics.admin.v1alpha.ListAccountSummariesRequest} ListAccountSummariesRequest
+                         */
+                        ListAccountSummariesRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.analytics.admin.v1alpha.ListAccountSummariesRequest)
+                                return object;
+                            var message = new $root.google.analytics.admin.v1alpha.ListAccountSummariesRequest();
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListAccountSummariesRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.analytics.admin.v1alpha.ListAccountSummariesRequest
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.ListAccountSummariesRequest} message ListAccountSummariesRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListAccountSummariesRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                            }
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListAccountSummariesRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.analytics.admin.v1alpha.ListAccountSummariesRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListAccountSummariesRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ListAccountSummariesRequest;
+                    })();
+    
+                    v1alpha.ListAccountSummariesResponse = (function() {
+    
+                        /**
+                         * Properties of a ListAccountSummariesResponse.
+                         * @memberof google.analytics.admin.v1alpha
+                         * @interface IListAccountSummariesResponse
+                         * @property {Array.<google.analytics.admin.v1alpha.IAccountSummary>|null} [accountSummaries] ListAccountSummariesResponse accountSummaries
+                         * @property {string|null} [nextPageToken] ListAccountSummariesResponse nextPageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListAccountSummariesResponse.
+                         * @memberof google.analytics.admin.v1alpha
+                         * @classdesc Represents a ListAccountSummariesResponse.
+                         * @implements IListAccountSummariesResponse
+                         * @constructor
+                         * @param {google.analytics.admin.v1alpha.IListAccountSummariesResponse=} [properties] Properties to set
+                         */
+                        function ListAccountSummariesResponse(properties) {
+                            this.accountSummaries = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListAccountSummariesResponse accountSummaries.
+                         * @member {Array.<google.analytics.admin.v1alpha.IAccountSummary>} accountSummaries
+                         * @memberof google.analytics.admin.v1alpha.ListAccountSummariesResponse
+                         * @instance
+                         */
+                        ListAccountSummariesResponse.prototype.accountSummaries = $util.emptyArray;
+    
+                        /**
+                         * ListAccountSummariesResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.analytics.admin.v1alpha.ListAccountSummariesResponse
+                         * @instance
+                         */
+                        ListAccountSummariesResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * Creates a new ListAccountSummariesResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.analytics.admin.v1alpha.ListAccountSummariesResponse
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.IListAccountSummariesResponse=} [properties] Properties to set
+                         * @returns {google.analytics.admin.v1alpha.ListAccountSummariesResponse} ListAccountSummariesResponse instance
+                         */
+                        ListAccountSummariesResponse.create = function create(properties) {
+                            return new ListAccountSummariesResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListAccountSummariesResponse message. Does not implicitly {@link google.analytics.admin.v1alpha.ListAccountSummariesResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.analytics.admin.v1alpha.ListAccountSummariesResponse
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.IListAccountSummariesResponse} message ListAccountSummariesResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListAccountSummariesResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.accountSummaries != null && message.accountSummaries.length)
+                                for (var i = 0; i < message.accountSummaries.length; ++i)
+                                    $root.google.analytics.admin.v1alpha.AccountSummary.encode(message.accountSummaries[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListAccountSummariesResponse message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.ListAccountSummariesResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.analytics.admin.v1alpha.ListAccountSummariesResponse
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.IListAccountSummariesResponse} message ListAccountSummariesResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListAccountSummariesResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListAccountSummariesResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.analytics.admin.v1alpha.ListAccountSummariesResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.analytics.admin.v1alpha.ListAccountSummariesResponse} ListAccountSummariesResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListAccountSummariesResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.ListAccountSummariesResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    if (!(message.accountSummaries && message.accountSummaries.length))
+                                        message.accountSummaries = [];
+                                    message.accountSummaries.push($root.google.analytics.admin.v1alpha.AccountSummary.decode(reader, reader.uint32()));
+                                    break;
+                                case 2:
+                                    message.nextPageToken = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListAccountSummariesResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.analytics.admin.v1alpha.ListAccountSummariesResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.analytics.admin.v1alpha.ListAccountSummariesResponse} ListAccountSummariesResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListAccountSummariesResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListAccountSummariesResponse message.
+                         * @function verify
+                         * @memberof google.analytics.admin.v1alpha.ListAccountSummariesResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListAccountSummariesResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.accountSummaries != null && message.hasOwnProperty("accountSummaries")) {
+                                if (!Array.isArray(message.accountSummaries))
+                                    return "accountSummaries: array expected";
+                                for (var i = 0; i < message.accountSummaries.length; ++i) {
+                                    var error = $root.google.analytics.admin.v1alpha.AccountSummary.verify(message.accountSummaries[i]);
+                                    if (error)
+                                        return "accountSummaries." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListAccountSummariesResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.analytics.admin.v1alpha.ListAccountSummariesResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.analytics.admin.v1alpha.ListAccountSummariesResponse} ListAccountSummariesResponse
+                         */
+                        ListAccountSummariesResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.analytics.admin.v1alpha.ListAccountSummariesResponse)
+                                return object;
+                            var message = new $root.google.analytics.admin.v1alpha.ListAccountSummariesResponse();
+                            if (object.accountSummaries) {
+                                if (!Array.isArray(object.accountSummaries))
+                                    throw TypeError(".google.analytics.admin.v1alpha.ListAccountSummariesResponse.accountSummaries: array expected");
+                                message.accountSummaries = [];
+                                for (var i = 0; i < object.accountSummaries.length; ++i) {
+                                    if (typeof object.accountSummaries[i] !== "object")
+                                        throw TypeError(".google.analytics.admin.v1alpha.ListAccountSummariesResponse.accountSummaries: object expected");
+                                    message.accountSummaries[i] = $root.google.analytics.admin.v1alpha.AccountSummary.fromObject(object.accountSummaries[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListAccountSummariesResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.analytics.admin.v1alpha.ListAccountSummariesResponse
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.ListAccountSummariesResponse} message ListAccountSummariesResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListAccountSummariesResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.accountSummaries = [];
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.accountSummaries && message.accountSummaries.length) {
+                                object.accountSummaries = [];
+                                for (var j = 0; j < message.accountSummaries.length; ++j)
+                                    object.accountSummaries[j] = $root.google.analytics.admin.v1alpha.AccountSummary.toObject(message.accountSummaries[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListAccountSummariesResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.analytics.admin.v1alpha.ListAccountSummariesResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListAccountSummariesResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ListAccountSummariesResponse;
+                    })();
+    
                     v1alpha.Account = (function() {
     
                         /**
@@ -18452,6 +18926,492 @@
                         values[valuesById[3] = "EDITOR_WITHOUT_LINK_MANAGEMENT"] = 3;
                         values[valuesById[4] = "EDITOR_INCLUDING_LINK_MANAGEMENT"] = 4;
                         return values;
+                    })();
+    
+                    v1alpha.AccountSummary = (function() {
+    
+                        /**
+                         * Properties of an AccountSummary.
+                         * @memberof google.analytics.admin.v1alpha
+                         * @interface IAccountSummary
+                         * @property {string|null} [name] AccountSummary name
+                         * @property {string|null} [account] AccountSummary account
+                         * @property {string|null} [displayName] AccountSummary displayName
+                         * @property {Array.<google.analytics.admin.v1alpha.IPropertySummary>|null} [propertySummaries] AccountSummary propertySummaries
+                         */
+    
+                        /**
+                         * Constructs a new AccountSummary.
+                         * @memberof google.analytics.admin.v1alpha
+                         * @classdesc Represents an AccountSummary.
+                         * @implements IAccountSummary
+                         * @constructor
+                         * @param {google.analytics.admin.v1alpha.IAccountSummary=} [properties] Properties to set
+                         */
+                        function AccountSummary(properties) {
+                            this.propertySummaries = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * AccountSummary name.
+                         * @member {string} name
+                         * @memberof google.analytics.admin.v1alpha.AccountSummary
+                         * @instance
+                         */
+                        AccountSummary.prototype.name = "";
+    
+                        /**
+                         * AccountSummary account.
+                         * @member {string} account
+                         * @memberof google.analytics.admin.v1alpha.AccountSummary
+                         * @instance
+                         */
+                        AccountSummary.prototype.account = "";
+    
+                        /**
+                         * AccountSummary displayName.
+                         * @member {string} displayName
+                         * @memberof google.analytics.admin.v1alpha.AccountSummary
+                         * @instance
+                         */
+                        AccountSummary.prototype.displayName = "";
+    
+                        /**
+                         * AccountSummary propertySummaries.
+                         * @member {Array.<google.analytics.admin.v1alpha.IPropertySummary>} propertySummaries
+                         * @memberof google.analytics.admin.v1alpha.AccountSummary
+                         * @instance
+                         */
+                        AccountSummary.prototype.propertySummaries = $util.emptyArray;
+    
+                        /**
+                         * Creates a new AccountSummary instance using the specified properties.
+                         * @function create
+                         * @memberof google.analytics.admin.v1alpha.AccountSummary
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.IAccountSummary=} [properties] Properties to set
+                         * @returns {google.analytics.admin.v1alpha.AccountSummary} AccountSummary instance
+                         */
+                        AccountSummary.create = function create(properties) {
+                            return new AccountSummary(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified AccountSummary message. Does not implicitly {@link google.analytics.admin.v1alpha.AccountSummary.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.analytics.admin.v1alpha.AccountSummary
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.IAccountSummary} message AccountSummary message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AccountSummary.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.account != null && Object.hasOwnProperty.call(message, "account"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.account);
+                            if (message.displayName != null && Object.hasOwnProperty.call(message, "displayName"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.displayName);
+                            if (message.propertySummaries != null && message.propertySummaries.length)
+                                for (var i = 0; i < message.propertySummaries.length; ++i)
+                                    $root.google.analytics.admin.v1alpha.PropertySummary.encode(message.propertySummaries[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified AccountSummary message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.AccountSummary.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.analytics.admin.v1alpha.AccountSummary
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.IAccountSummary} message AccountSummary message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AccountSummary.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an AccountSummary message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.analytics.admin.v1alpha.AccountSummary
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.analytics.admin.v1alpha.AccountSummary} AccountSummary
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AccountSummary.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.AccountSummary();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                case 2:
+                                    message.account = reader.string();
+                                    break;
+                                case 3:
+                                    message.displayName = reader.string();
+                                    break;
+                                case 4:
+                                    if (!(message.propertySummaries && message.propertySummaries.length))
+                                        message.propertySummaries = [];
+                                    message.propertySummaries.push($root.google.analytics.admin.v1alpha.PropertySummary.decode(reader, reader.uint32()));
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an AccountSummary message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.analytics.admin.v1alpha.AccountSummary
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.analytics.admin.v1alpha.AccountSummary} AccountSummary
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AccountSummary.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an AccountSummary message.
+                         * @function verify
+                         * @memberof google.analytics.admin.v1alpha.AccountSummary
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        AccountSummary.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.account != null && message.hasOwnProperty("account"))
+                                if (!$util.isString(message.account))
+                                    return "account: string expected";
+                            if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                if (!$util.isString(message.displayName))
+                                    return "displayName: string expected";
+                            if (message.propertySummaries != null && message.hasOwnProperty("propertySummaries")) {
+                                if (!Array.isArray(message.propertySummaries))
+                                    return "propertySummaries: array expected";
+                                for (var i = 0; i < message.propertySummaries.length; ++i) {
+                                    var error = $root.google.analytics.admin.v1alpha.PropertySummary.verify(message.propertySummaries[i]);
+                                    if (error)
+                                        return "propertySummaries." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an AccountSummary message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.analytics.admin.v1alpha.AccountSummary
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.analytics.admin.v1alpha.AccountSummary} AccountSummary
+                         */
+                        AccountSummary.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.analytics.admin.v1alpha.AccountSummary)
+                                return object;
+                            var message = new $root.google.analytics.admin.v1alpha.AccountSummary();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.account != null)
+                                message.account = String(object.account);
+                            if (object.displayName != null)
+                                message.displayName = String(object.displayName);
+                            if (object.propertySummaries) {
+                                if (!Array.isArray(object.propertySummaries))
+                                    throw TypeError(".google.analytics.admin.v1alpha.AccountSummary.propertySummaries: array expected");
+                                message.propertySummaries = [];
+                                for (var i = 0; i < object.propertySummaries.length; ++i) {
+                                    if (typeof object.propertySummaries[i] !== "object")
+                                        throw TypeError(".google.analytics.admin.v1alpha.AccountSummary.propertySummaries: object expected");
+                                    message.propertySummaries[i] = $root.google.analytics.admin.v1alpha.PropertySummary.fromObject(object.propertySummaries[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an AccountSummary message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.analytics.admin.v1alpha.AccountSummary
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.AccountSummary} message AccountSummary
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        AccountSummary.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.propertySummaries = [];
+                            if (options.defaults) {
+                                object.name = "";
+                                object.account = "";
+                                object.displayName = "";
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.account != null && message.hasOwnProperty("account"))
+                                object.account = message.account;
+                            if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                object.displayName = message.displayName;
+                            if (message.propertySummaries && message.propertySummaries.length) {
+                                object.propertySummaries = [];
+                                for (var j = 0; j < message.propertySummaries.length; ++j)
+                                    object.propertySummaries[j] = $root.google.analytics.admin.v1alpha.PropertySummary.toObject(message.propertySummaries[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this AccountSummary to JSON.
+                         * @function toJSON
+                         * @memberof google.analytics.admin.v1alpha.AccountSummary
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        AccountSummary.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return AccountSummary;
+                    })();
+    
+                    v1alpha.PropertySummary = (function() {
+    
+                        /**
+                         * Properties of a PropertySummary.
+                         * @memberof google.analytics.admin.v1alpha
+                         * @interface IPropertySummary
+                         * @property {string|null} [property] PropertySummary property
+                         * @property {string|null} [displayName] PropertySummary displayName
+                         */
+    
+                        /**
+                         * Constructs a new PropertySummary.
+                         * @memberof google.analytics.admin.v1alpha
+                         * @classdesc Represents a PropertySummary.
+                         * @implements IPropertySummary
+                         * @constructor
+                         * @param {google.analytics.admin.v1alpha.IPropertySummary=} [properties] Properties to set
+                         */
+                        function PropertySummary(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * PropertySummary property.
+                         * @member {string} property
+                         * @memberof google.analytics.admin.v1alpha.PropertySummary
+                         * @instance
+                         */
+                        PropertySummary.prototype.property = "";
+    
+                        /**
+                         * PropertySummary displayName.
+                         * @member {string} displayName
+                         * @memberof google.analytics.admin.v1alpha.PropertySummary
+                         * @instance
+                         */
+                        PropertySummary.prototype.displayName = "";
+    
+                        /**
+                         * Creates a new PropertySummary instance using the specified properties.
+                         * @function create
+                         * @memberof google.analytics.admin.v1alpha.PropertySummary
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.IPropertySummary=} [properties] Properties to set
+                         * @returns {google.analytics.admin.v1alpha.PropertySummary} PropertySummary instance
+                         */
+                        PropertySummary.create = function create(properties) {
+                            return new PropertySummary(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified PropertySummary message. Does not implicitly {@link google.analytics.admin.v1alpha.PropertySummary.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.analytics.admin.v1alpha.PropertySummary
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.IPropertySummary} message PropertySummary message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        PropertySummary.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.property != null && Object.hasOwnProperty.call(message, "property"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.property);
+                            if (message.displayName != null && Object.hasOwnProperty.call(message, "displayName"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.displayName);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified PropertySummary message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.PropertySummary.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.analytics.admin.v1alpha.PropertySummary
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.IPropertySummary} message PropertySummary message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        PropertySummary.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a PropertySummary message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.analytics.admin.v1alpha.PropertySummary
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.analytics.admin.v1alpha.PropertySummary} PropertySummary
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        PropertySummary.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.PropertySummary();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.property = reader.string();
+                                    break;
+                                case 2:
+                                    message.displayName = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a PropertySummary message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.analytics.admin.v1alpha.PropertySummary
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.analytics.admin.v1alpha.PropertySummary} PropertySummary
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        PropertySummary.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a PropertySummary message.
+                         * @function verify
+                         * @memberof google.analytics.admin.v1alpha.PropertySummary
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        PropertySummary.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.property != null && message.hasOwnProperty("property"))
+                                if (!$util.isString(message.property))
+                                    return "property: string expected";
+                            if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                if (!$util.isString(message.displayName))
+                                    return "displayName: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a PropertySummary message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.analytics.admin.v1alpha.PropertySummary
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.analytics.admin.v1alpha.PropertySummary} PropertySummary
+                         */
+                        PropertySummary.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.analytics.admin.v1alpha.PropertySummary)
+                                return object;
+                            var message = new $root.google.analytics.admin.v1alpha.PropertySummary();
+                            if (object.property != null)
+                                message.property = String(object.property);
+                            if (object.displayName != null)
+                                message.displayName = String(object.displayName);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a PropertySummary message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.analytics.admin.v1alpha.PropertySummary
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.PropertySummary} message PropertySummary
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        PropertySummary.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.property = "";
+                                object.displayName = "";
+                            }
+                            if (message.property != null && message.hasOwnProperty("property"))
+                                object.property = message.property;
+                            if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                object.displayName = message.displayName;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this PropertySummary to JSON.
+                         * @function toJSON
+                         * @memberof google.analytics.admin.v1alpha.PropertySummary
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        PropertySummary.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return PropertySummary;
                     })();
     
                     return v1alpha;

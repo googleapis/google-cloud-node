@@ -165,6 +165,9 @@ export class AnalyticsAdminServiceClient {
       accountPathTemplate: new this._gaxModule.PathTemplate(
         'accounts/{account}'
       ),
+      accountSummaryPathTemplate: new this._gaxModule.PathTemplate(
+        'accountSummaries/{account_summary}'
+      ),
       accountUserLinkPathTemplate: new this._gaxModule.PathTemplate(
         'accounts/{account}/userLinks/{user_link}'
       ),
@@ -208,6 +211,11 @@ export class AnalyticsAdminServiceClient {
         'pageToken',
         'nextPageToken',
         'accounts'
+      ),
+      listAccountSummaries: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'accountSummaries'
       ),
       listProperties: new this._gaxModule.PageDescriptor(
         'pageToken',
@@ -298,6 +306,7 @@ export class AnalyticsAdminServiceClient {
       'deleteAccount',
       'updateAccount',
       'provisionAccountTicket',
+      'listAccountSummaries',
       'getProperty',
       'listProperties',
       'createProperty',
@@ -4409,6 +4418,190 @@ export class AnalyticsAdminServiceClient {
       callSettings
     ) as AsyncIterable<protos.google.analytics.admin.v1alpha.IAccount>;
   }
+  listAccountSummaries(
+    request: protos.google.analytics.admin.v1alpha.IListAccountSummariesRequest,
+    options?: gax.CallOptions
+  ): Promise<
+    [
+      protos.google.analytics.admin.v1alpha.IAccountSummary[],
+      protos.google.analytics.admin.v1alpha.IListAccountSummariesRequest | null,
+      protos.google.analytics.admin.v1alpha.IListAccountSummariesResponse
+    ]
+  >;
+  listAccountSummaries(
+    request: protos.google.analytics.admin.v1alpha.IListAccountSummariesRequest,
+    options: gax.CallOptions,
+    callback: PaginationCallback<
+      protos.google.analytics.admin.v1alpha.IListAccountSummariesRequest,
+      | protos.google.analytics.admin.v1alpha.IListAccountSummariesResponse
+      | null
+      | undefined,
+      protos.google.analytics.admin.v1alpha.IAccountSummary
+    >
+  ): void;
+  listAccountSummaries(
+    request: protos.google.analytics.admin.v1alpha.IListAccountSummariesRequest,
+    callback: PaginationCallback<
+      protos.google.analytics.admin.v1alpha.IListAccountSummariesRequest,
+      | protos.google.analytics.admin.v1alpha.IListAccountSummariesResponse
+      | null
+      | undefined,
+      protos.google.analytics.admin.v1alpha.IAccountSummary
+    >
+  ): void;
+  /**
+   * Returns summaries of all accounts accessible by the caller.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {number} request.pageSize
+   *   The maximum number of AccountSummary resources to return. The service may
+   *   return fewer than this value, even if there are additional pages.
+   *   If unspecified, at most 50 resources will be returned.
+   *   The maximum value is 200; (higher values will be coerced to the maximum)
+   * @param {string} request.pageToken
+   *   A page token, received from a previous `ListAccountSummaries` call.
+   *   Provide this to retrieve the subsequent page.
+   *   When paginating, all other parameters provided to `ListAccountSummaries`
+   *   must match the call that provided the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of [AccountSummary]{@link google.analytics.admin.v1alpha.AccountSummary}.
+   *   The client library support auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *
+   *   When autoPaginate: false is specified through options, the array has three elements.
+   *   The first element is Array of [AccountSummary]{@link google.analytics.admin.v1alpha.AccountSummary} that corresponds to
+   *   the one page received from the API server.
+   *   If the second element is not null it contains the request object of type [ListAccountSummariesRequest]{@link google.analytics.admin.v1alpha.ListAccountSummariesRequest}
+   *   that can be used to obtain the next page of the results.
+   *   If it is null, the next page does not exist.
+   *   The third element contains the raw response received from the API server. Its type is
+   *   [ListAccountSummariesResponse]{@link google.analytics.admin.v1alpha.ListAccountSummariesResponse}.
+   *
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   */
+  listAccountSummaries(
+    request: protos.google.analytics.admin.v1alpha.IListAccountSummariesRequest,
+    optionsOrCallback?:
+      | gax.CallOptions
+      | PaginationCallback<
+          protos.google.analytics.admin.v1alpha.IListAccountSummariesRequest,
+          | protos.google.analytics.admin.v1alpha.IListAccountSummariesResponse
+          | null
+          | undefined,
+          protos.google.analytics.admin.v1alpha.IAccountSummary
+        >,
+    callback?: PaginationCallback<
+      protos.google.analytics.admin.v1alpha.IListAccountSummariesRequest,
+      | protos.google.analytics.admin.v1alpha.IListAccountSummariesResponse
+      | null
+      | undefined,
+      protos.google.analytics.admin.v1alpha.IAccountSummary
+    >
+  ): Promise<
+    [
+      protos.google.analytics.admin.v1alpha.IAccountSummary[],
+      protos.google.analytics.admin.v1alpha.IListAccountSummariesRequest | null,
+      protos.google.analytics.admin.v1alpha.IListAccountSummariesResponse
+    ]
+  > | void {
+    request = request || {};
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    this.initialize();
+    return this.innerApiCalls.listAccountSummaries(request, options, callback);
+  }
+
+  /**
+   * Equivalent to {@link listAccountSummaries}, but returns a NodeJS Stream object.
+   *
+   * This fetches the paged responses for {@link listAccountSummaries} continuously
+   * and invokes the callback registered for 'data' event for each element in the
+   * responses.
+   *
+   * The returned object has 'end' method when no more elements are required.
+   *
+   * autoPaginate option will be ignored.
+   *
+   * @see {@link https://nodejs.org/api/stream.html}
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {number} request.pageSize
+   *   The maximum number of AccountSummary resources to return. The service may
+   *   return fewer than this value, even if there are additional pages.
+   *   If unspecified, at most 50 resources will be returned.
+   *   The maximum value is 200; (higher values will be coerced to the maximum)
+   * @param {string} request.pageToken
+   *   A page token, received from a previous `ListAccountSummaries` call.
+   *   Provide this to retrieve the subsequent page.
+   *   When paginating, all other parameters provided to `ListAccountSummaries`
+   *   must match the call that provided the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing [AccountSummary]{@link google.analytics.admin.v1alpha.AccountSummary} on 'data' event.
+   */
+  listAccountSummariesStream(
+    request?: protos.google.analytics.admin.v1alpha.IListAccountSummariesRequest,
+    options?: gax.CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    const callSettings = new gax.CallSettings(options);
+    this.initialize();
+    return this.descriptors.page.listAccountSummaries.createStream(
+      this.innerApiCalls.listAccountSummaries as gax.GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to {@link listAccountSummaries}, but returns an iterable object.
+   *
+   * for-await-of syntax is used with the iterable to recursively get response element on-demand.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {number} request.pageSize
+   *   The maximum number of AccountSummary resources to return. The service may
+   *   return fewer than this value, even if there are additional pages.
+   *   If unspecified, at most 50 resources will be returned.
+   *   The maximum value is 200; (higher values will be coerced to the maximum)
+   * @param {string} request.pageToken
+   *   A page token, received from a previous `ListAccountSummaries` call.
+   *   Provide this to retrieve the subsequent page.
+   *   When paginating, all other parameters provided to `ListAccountSummaries`
+   *   must match the call that provided the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that conforms to @link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols.
+   */
+  listAccountSummariesAsync(
+    request?: protos.google.analytics.admin.v1alpha.IListAccountSummariesRequest,
+    options?: gax.CallOptions
+  ): AsyncIterable<protos.google.analytics.admin.v1alpha.IAccountSummary> {
+    request = request || {};
+    options = options || {};
+    options = options || {};
+    const callSettings = new gax.CallSettings(options);
+    this.initialize();
+    return this.descriptors.page.listAccountSummaries.asyncIterate(
+      this.innerApiCalls['listAccountSummaries'] as GaxCall,
+      (request as unknown) as RequestType,
+      callSettings
+    ) as AsyncIterable<protos.google.analytics.admin.v1alpha.IAccountSummary>;
+  }
   listProperties(
     request: protos.google.analytics.admin.v1alpha.IListPropertiesRequest,
     options?: gax.CallOptions
@@ -5977,6 +6170,31 @@ export class AnalyticsAdminServiceClient {
    */
   matchAccountFromAccountName(accountName: string) {
     return this.pathTemplates.accountPathTemplate.match(accountName).account;
+  }
+
+  /**
+   * Return a fully-qualified accountSummary resource name string.
+   *
+   * @param {string} account_summary
+   * @returns {string} Resource name string.
+   */
+  accountSummaryPath(accountSummary: string) {
+    return this.pathTemplates.accountSummaryPathTemplate.render({
+      account_summary: accountSummary,
+    });
+  }
+
+  /**
+   * Parse the account_summary from AccountSummary resource.
+   *
+   * @param {string} accountSummaryName
+   *   A fully-qualified path representing AccountSummary resource.
+   * @returns {string} A string representing the account_summary.
+   */
+  matchAccountSummaryFromAccountSummaryName(accountSummaryName: string) {
+    return this.pathTemplates.accountSummaryPathTemplate.match(
+      accountSummaryName
+    ).account_summary;
   }
 
   /**

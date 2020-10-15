@@ -5141,6 +5141,278 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
     });
   });
 
+  describe('listAccountSummaries', () => {
+    it('invokes listAccountSummaries without error', async () => {
+      const client = new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.ListAccountSummariesRequest()
+      );
+      const expectedOptions = {};
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.analytics.admin.v1alpha.AccountSummary()
+        ),
+        generateSampleMessage(
+          new protos.google.analytics.admin.v1alpha.AccountSummary()
+        ),
+        generateSampleMessage(
+          new protos.google.analytics.admin.v1alpha.AccountSummary()
+        ),
+      ];
+      client.innerApiCalls.listAccountSummaries = stubSimpleCall(
+        expectedResponse
+      );
+      const [response] = await client.listAccountSummaries(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.listAccountSummaries as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes listAccountSummaries without error using callback', async () => {
+      const client = new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.ListAccountSummariesRequest()
+      );
+      const expectedOptions = {};
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.analytics.admin.v1alpha.AccountSummary()
+        ),
+        generateSampleMessage(
+          new protos.google.analytics.admin.v1alpha.AccountSummary()
+        ),
+        generateSampleMessage(
+          new protos.google.analytics.admin.v1alpha.AccountSummary()
+        ),
+      ];
+      client.innerApiCalls.listAccountSummaries = stubSimpleCallWithCallback(
+        expectedResponse
+      );
+      const promise = new Promise((resolve, reject) => {
+        client.listAccountSummaries(
+          request,
+          (
+            err?: Error | null,
+            result?:
+              | protos.google.analytics.admin.v1alpha.IAccountSummary[]
+              | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.listAccountSummaries as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes listAccountSummaries with error', async () => {
+      const client = new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.ListAccountSummariesRequest()
+      );
+      const expectedOptions = {};
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listAccountSummaries = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.listAccountSummaries(request), expectedError);
+      assert(
+        (client.innerApiCalls.listAccountSummaries as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes listAccountSummariesStream without error', async () => {
+      const client = new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.ListAccountSummariesRequest()
+      );
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.analytics.admin.v1alpha.AccountSummary()
+        ),
+        generateSampleMessage(
+          new protos.google.analytics.admin.v1alpha.AccountSummary()
+        ),
+        generateSampleMessage(
+          new protos.google.analytics.admin.v1alpha.AccountSummary()
+        ),
+      ];
+      client.descriptors.page.listAccountSummaries.createStream = stubPageStreamingCall(
+        expectedResponse
+      );
+      const stream = client.listAccountSummariesStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.analytics.admin.v1alpha.AccountSummary[] = [];
+        stream.on(
+          'data',
+          (response: protos.google.analytics.admin.v1alpha.AccountSummary) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (client.descriptors.page.listAccountSummaries.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listAccountSummaries, request)
+      );
+    });
+
+    it('invokes listAccountSummariesStream with error', async () => {
+      const client = new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.ListAccountSummariesRequest()
+      );
+      const expectedError = new Error('expected');
+      client.descriptors.page.listAccountSummaries.createStream = stubPageStreamingCall(
+        undefined,
+        expectedError
+      );
+      const stream = client.listAccountSummariesStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.analytics.admin.v1alpha.AccountSummary[] = [];
+        stream.on(
+          'data',
+          (response: protos.google.analytics.admin.v1alpha.AccountSummary) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (client.descriptors.page.listAccountSummaries.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listAccountSummaries, request)
+      );
+    });
+
+    it('uses async iteration with listAccountSummaries without error', async () => {
+      const client = new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.ListAccountSummariesRequest()
+      );
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.analytics.admin.v1alpha.AccountSummary()
+        ),
+        generateSampleMessage(
+          new protos.google.analytics.admin.v1alpha.AccountSummary()
+        ),
+        generateSampleMessage(
+          new protos.google.analytics.admin.v1alpha.AccountSummary()
+        ),
+      ];
+      client.descriptors.page.listAccountSummaries.asyncIterate = stubAsyncIterationCall(
+        expectedResponse
+      );
+      const responses: protos.google.analytics.admin.v1alpha.IAccountSummary[] = [];
+      const iterable = client.listAccountSummariesAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (client.descriptors.page.listAccountSummaries
+          .asyncIterate as SinonStub).getCall(0).args[1],
+        request
+      );
+    });
+
+    it('uses async iteration with listAccountSummaries with error', async () => {
+      const client = new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.ListAccountSummariesRequest()
+      );
+      const expectedError = new Error('expected');
+      client.descriptors.page.listAccountSummaries.asyncIterate = stubAsyncIterationCall(
+        undefined,
+        expectedError
+      );
+      const iterable = client.listAccountSummariesAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.analytics.admin.v1alpha.IAccountSummary[] = [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (client.descriptors.page.listAccountSummaries
+          .asyncIterate as SinonStub).getCall(0).args[1],
+        request
+      );
+    });
+  });
+
   describe('listProperties', () => {
     it('invokes listProperties without error', async () => {
       const client = new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient(
@@ -7448,6 +7720,48 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
         assert.strictEqual(result, 'accountValue');
         assert(
           (client.pathTemplates.accountPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('accountSummary', () => {
+      const fakePath = '/rendered/path/accountSummary';
+      const expectedParameters = {
+        account_summary: 'accountSummaryValue',
+      };
+      const client = new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      client.pathTemplates.accountSummaryPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.accountSummaryPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('accountSummaryPath', () => {
+        const result = client.accountSummaryPath('accountSummaryValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.accountSummaryPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchAccountSummaryFromAccountSummaryName', () => {
+        const result = client.matchAccountSummaryFromAccountSummaryName(
+          fakePath
+        );
+        assert.strictEqual(result, 'accountSummaryValue');
+        assert(
+          (client.pathTemplates.accountSummaryPathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );

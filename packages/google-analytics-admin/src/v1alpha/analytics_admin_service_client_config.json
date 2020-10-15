@@ -58,6 +58,11 @@
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
+        "ListAccountSummaries": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "unknown_unavailable",
+          "retry_params_name": "01d6d956b4dadd7e38ee9dec12ed8720e6e6f90c"
+        },
         "GetProperty": {
           "timeout_millis": 60000,
           "retry_codes_name": "non_idempotent",

@@ -117,6 +117,20 @@ export namespace google {
                     public provisionAccountTicket(request: google.analytics.admin.v1alpha.IProvisionAccountTicketRequest): Promise<google.analytics.admin.v1alpha.ProvisionAccountTicketResponse>;
 
                     /**
+                     * Calls ListAccountSummaries.
+                     * @param request ListAccountSummariesRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListAccountSummariesResponse
+                     */
+                    public listAccountSummaries(request: google.analytics.admin.v1alpha.IListAccountSummariesRequest, callback: google.analytics.admin.v1alpha.AnalyticsAdminService.ListAccountSummariesCallback): void;
+
+                    /**
+                     * Calls ListAccountSummaries.
+                     * @param request ListAccountSummariesRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listAccountSummaries(request: google.analytics.admin.v1alpha.IListAccountSummariesRequest): Promise<google.analytics.admin.v1alpha.ListAccountSummariesResponse>;
+
+                    /**
                      * Calls GetProperty.
                      * @param request GetPropertyRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and Property
@@ -741,6 +755,13 @@ export namespace google {
                      * @param [response] ProvisionAccountTicketResponse
                      */
                     type ProvisionAccountTicketCallback = (error: (Error|null), response?: google.analytics.admin.v1alpha.ProvisionAccountTicketResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.analytics.admin.v1alpha.AnalyticsAdminService#listAccountSummaries}.
+                     * @param error Error, if any
+                     * @param [response] ListAccountSummariesResponse
+                     */
+                    type ListAccountSummariesCallback = (error: (Error|null), response?: google.analytics.admin.v1alpha.ListAccountSummariesResponse) => void;
 
                     /**
                      * Callback as used by {@link google.analytics.admin.v1alpha.AnalyticsAdminService#getProperty}.
@@ -6713,6 +6734,198 @@ export namespace google {
                     public toJSON(): { [k: string]: any };
                 }
 
+                /** Properties of a ListAccountSummariesRequest. */
+                interface IListAccountSummariesRequest {
+
+                    /** ListAccountSummariesRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListAccountSummariesRequest pageToken */
+                    pageToken?: (string|null);
+                }
+
+                /** Represents a ListAccountSummariesRequest. */
+                class ListAccountSummariesRequest implements IListAccountSummariesRequest {
+
+                    /**
+                     * Constructs a new ListAccountSummariesRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.admin.v1alpha.IListAccountSummariesRequest);
+
+                    /** ListAccountSummariesRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListAccountSummariesRequest pageToken. */
+                    public pageToken: string;
+
+                    /**
+                     * Creates a new ListAccountSummariesRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListAccountSummariesRequest instance
+                     */
+                    public static create(properties?: google.analytics.admin.v1alpha.IListAccountSummariesRequest): google.analytics.admin.v1alpha.ListAccountSummariesRequest;
+
+                    /**
+                     * Encodes the specified ListAccountSummariesRequest message. Does not implicitly {@link google.analytics.admin.v1alpha.ListAccountSummariesRequest.verify|verify} messages.
+                     * @param message ListAccountSummariesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.admin.v1alpha.IListAccountSummariesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListAccountSummariesRequest message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.ListAccountSummariesRequest.verify|verify} messages.
+                     * @param message ListAccountSummariesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.admin.v1alpha.IListAccountSummariesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListAccountSummariesRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListAccountSummariesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.admin.v1alpha.ListAccountSummariesRequest;
+
+                    /**
+                     * Decodes a ListAccountSummariesRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListAccountSummariesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.admin.v1alpha.ListAccountSummariesRequest;
+
+                    /**
+                     * Verifies a ListAccountSummariesRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListAccountSummariesRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListAccountSummariesRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.admin.v1alpha.ListAccountSummariesRequest;
+
+                    /**
+                     * Creates a plain object from a ListAccountSummariesRequest message. Also converts values to other types if specified.
+                     * @param message ListAccountSummariesRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.admin.v1alpha.ListAccountSummariesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListAccountSummariesRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a ListAccountSummariesResponse. */
+                interface IListAccountSummariesResponse {
+
+                    /** ListAccountSummariesResponse accountSummaries */
+                    accountSummaries?: (google.analytics.admin.v1alpha.IAccountSummary[]|null);
+
+                    /** ListAccountSummariesResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListAccountSummariesResponse. */
+                class ListAccountSummariesResponse implements IListAccountSummariesResponse {
+
+                    /**
+                     * Constructs a new ListAccountSummariesResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.admin.v1alpha.IListAccountSummariesResponse);
+
+                    /** ListAccountSummariesResponse accountSummaries. */
+                    public accountSummaries: google.analytics.admin.v1alpha.IAccountSummary[];
+
+                    /** ListAccountSummariesResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListAccountSummariesResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListAccountSummariesResponse instance
+                     */
+                    public static create(properties?: google.analytics.admin.v1alpha.IListAccountSummariesResponse): google.analytics.admin.v1alpha.ListAccountSummariesResponse;
+
+                    /**
+                     * Encodes the specified ListAccountSummariesResponse message. Does not implicitly {@link google.analytics.admin.v1alpha.ListAccountSummariesResponse.verify|verify} messages.
+                     * @param message ListAccountSummariesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.admin.v1alpha.IListAccountSummariesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListAccountSummariesResponse message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.ListAccountSummariesResponse.verify|verify} messages.
+                     * @param message ListAccountSummariesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.admin.v1alpha.IListAccountSummariesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListAccountSummariesResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListAccountSummariesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.admin.v1alpha.ListAccountSummariesResponse;
+
+                    /**
+                     * Decodes a ListAccountSummariesResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListAccountSummariesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.admin.v1alpha.ListAccountSummariesResponse;
+
+                    /**
+                     * Verifies a ListAccountSummariesResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListAccountSummariesResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListAccountSummariesResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.admin.v1alpha.ListAccountSummariesResponse;
+
+                    /**
+                     * Creates a plain object from a ListAccountSummariesResponse message. Also converts values to other types if specified.
+                     * @param message ListAccountSummariesResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.admin.v1alpha.ListAccountSummariesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListAccountSummariesResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
                 /** Properties of an Account. */
                 interface IAccount {
 
@@ -8227,6 +8440,210 @@ export namespace google {
                     READ_AND_ANALYZE = 2,
                     EDITOR_WITHOUT_LINK_MANAGEMENT = 3,
                     EDITOR_INCLUDING_LINK_MANAGEMENT = 4
+                }
+
+                /** Properties of an AccountSummary. */
+                interface IAccountSummary {
+
+                    /** AccountSummary name */
+                    name?: (string|null);
+
+                    /** AccountSummary account */
+                    account?: (string|null);
+
+                    /** AccountSummary displayName */
+                    displayName?: (string|null);
+
+                    /** AccountSummary propertySummaries */
+                    propertySummaries?: (google.analytics.admin.v1alpha.IPropertySummary[]|null);
+                }
+
+                /** Represents an AccountSummary. */
+                class AccountSummary implements IAccountSummary {
+
+                    /**
+                     * Constructs a new AccountSummary.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.admin.v1alpha.IAccountSummary);
+
+                    /** AccountSummary name. */
+                    public name: string;
+
+                    /** AccountSummary account. */
+                    public account: string;
+
+                    /** AccountSummary displayName. */
+                    public displayName: string;
+
+                    /** AccountSummary propertySummaries. */
+                    public propertySummaries: google.analytics.admin.v1alpha.IPropertySummary[];
+
+                    /**
+                     * Creates a new AccountSummary instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AccountSummary instance
+                     */
+                    public static create(properties?: google.analytics.admin.v1alpha.IAccountSummary): google.analytics.admin.v1alpha.AccountSummary;
+
+                    /**
+                     * Encodes the specified AccountSummary message. Does not implicitly {@link google.analytics.admin.v1alpha.AccountSummary.verify|verify} messages.
+                     * @param message AccountSummary message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.admin.v1alpha.IAccountSummary, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AccountSummary message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.AccountSummary.verify|verify} messages.
+                     * @param message AccountSummary message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.admin.v1alpha.IAccountSummary, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AccountSummary message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AccountSummary
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.admin.v1alpha.AccountSummary;
+
+                    /**
+                     * Decodes an AccountSummary message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AccountSummary
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.admin.v1alpha.AccountSummary;
+
+                    /**
+                     * Verifies an AccountSummary message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AccountSummary message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AccountSummary
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.admin.v1alpha.AccountSummary;
+
+                    /**
+                     * Creates a plain object from an AccountSummary message. Also converts values to other types if specified.
+                     * @param message AccountSummary
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.admin.v1alpha.AccountSummary, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AccountSummary to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a PropertySummary. */
+                interface IPropertySummary {
+
+                    /** PropertySummary property */
+                    property?: (string|null);
+
+                    /** PropertySummary displayName */
+                    displayName?: (string|null);
+                }
+
+                /** Represents a PropertySummary. */
+                class PropertySummary implements IPropertySummary {
+
+                    /**
+                     * Constructs a new PropertySummary.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.admin.v1alpha.IPropertySummary);
+
+                    /** PropertySummary property. */
+                    public property: string;
+
+                    /** PropertySummary displayName. */
+                    public displayName: string;
+
+                    /**
+                     * Creates a new PropertySummary instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns PropertySummary instance
+                     */
+                    public static create(properties?: google.analytics.admin.v1alpha.IPropertySummary): google.analytics.admin.v1alpha.PropertySummary;
+
+                    /**
+                     * Encodes the specified PropertySummary message. Does not implicitly {@link google.analytics.admin.v1alpha.PropertySummary.verify|verify} messages.
+                     * @param message PropertySummary message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.admin.v1alpha.IPropertySummary, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified PropertySummary message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.PropertySummary.verify|verify} messages.
+                     * @param message PropertySummary message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.admin.v1alpha.IPropertySummary, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a PropertySummary message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns PropertySummary
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.admin.v1alpha.PropertySummary;
+
+                    /**
+                     * Decodes a PropertySummary message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns PropertySummary
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.admin.v1alpha.PropertySummary;
+
+                    /**
+                     * Verifies a PropertySummary message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a PropertySummary message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns PropertySummary
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.admin.v1alpha.PropertySummary;
+
+                    /**
+                     * Creates a plain object from a PropertySummary message. Also converts values to other types if specified.
+                     * @param message PropertySummary
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.admin.v1alpha.PropertySummary, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this PropertySummary to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
                 }
             }
         }
