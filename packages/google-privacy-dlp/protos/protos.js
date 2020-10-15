@@ -16390,6 +16390,7 @@
                          * @property {google.privacy.dlp.v2.AnalyzeDataSourceRiskDetails.ILDiversityResult|null} [lDiversityResult] AnalyzeDataSourceRiskDetails lDiversityResult
                          * @property {google.privacy.dlp.v2.AnalyzeDataSourceRiskDetails.IKMapEstimationResult|null} [kMapEstimationResult] AnalyzeDataSourceRiskDetails kMapEstimationResult
                          * @property {google.privacy.dlp.v2.AnalyzeDataSourceRiskDetails.IDeltaPresenceEstimationResult|null} [deltaPresenceEstimationResult] AnalyzeDataSourceRiskDetails deltaPresenceEstimationResult
+                         * @property {google.privacy.dlp.v2.AnalyzeDataSourceRiskDetails.IRequestedRiskAnalysisOptions|null} [requestedOptions] AnalyzeDataSourceRiskDetails requestedOptions
                          */
     
                         /**
@@ -16471,6 +16472,14 @@
                          */
                         AnalyzeDataSourceRiskDetails.prototype.deltaPresenceEstimationResult = null;
     
+                        /**
+                         * AnalyzeDataSourceRiskDetails requestedOptions.
+                         * @member {google.privacy.dlp.v2.AnalyzeDataSourceRiskDetails.IRequestedRiskAnalysisOptions|null|undefined} requestedOptions
+                         * @memberof google.privacy.dlp.v2.AnalyzeDataSourceRiskDetails
+                         * @instance
+                         */
+                        AnalyzeDataSourceRiskDetails.prototype.requestedOptions = null;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -16525,6 +16534,8 @@
                                 $root.google.privacy.dlp.v2.AnalyzeDataSourceRiskDetails.KMapEstimationResult.encode(message.kMapEstimationResult, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
                             if (message.deltaPresenceEstimationResult != null && Object.hasOwnProperty.call(message, "deltaPresenceEstimationResult"))
                                 $root.google.privacy.dlp.v2.AnalyzeDataSourceRiskDetails.DeltaPresenceEstimationResult.encode(message.deltaPresenceEstimationResult, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
+                            if (message.requestedOptions != null && Object.hasOwnProperty.call(message, "requestedOptions"))
+                                $root.google.privacy.dlp.v2.AnalyzeDataSourceRiskDetails.RequestedRiskAnalysisOptions.encode(message.requestedOptions, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
                             return writer;
                         };
     
@@ -16582,6 +16593,9 @@
                                     break;
                                 case 9:
                                     message.deltaPresenceEstimationResult = $root.google.privacy.dlp.v2.AnalyzeDataSourceRiskDetails.DeltaPresenceEstimationResult.decode(reader, reader.uint32());
+                                    break;
+                                case 10:
+                                    message.requestedOptions = $root.google.privacy.dlp.v2.AnalyzeDataSourceRiskDetails.RequestedRiskAnalysisOptions.decode(reader, reader.uint32());
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -16687,6 +16701,11 @@
                                         return "deltaPresenceEstimationResult." + error;
                                 }
                             }
+                            if (message.requestedOptions != null && message.hasOwnProperty("requestedOptions")) {
+                                var error = $root.google.privacy.dlp.v2.AnalyzeDataSourceRiskDetails.RequestedRiskAnalysisOptions.verify(message.requestedOptions);
+                                if (error)
+                                    return "requestedOptions." + error;
+                            }
                             return null;
                         };
     
@@ -16742,6 +16761,11 @@
                                     throw TypeError(".google.privacy.dlp.v2.AnalyzeDataSourceRiskDetails.deltaPresenceEstimationResult: object expected");
                                 message.deltaPresenceEstimationResult = $root.google.privacy.dlp.v2.AnalyzeDataSourceRiskDetails.DeltaPresenceEstimationResult.fromObject(object.deltaPresenceEstimationResult);
                             }
+                            if (object.requestedOptions != null) {
+                                if (typeof object.requestedOptions !== "object")
+                                    throw TypeError(".google.privacy.dlp.v2.AnalyzeDataSourceRiskDetails.requestedOptions: object expected");
+                                message.requestedOptions = $root.google.privacy.dlp.v2.AnalyzeDataSourceRiskDetails.RequestedRiskAnalysisOptions.fromObject(object.requestedOptions);
+                            }
                             return message;
                         };
     
@@ -16761,6 +16785,7 @@
                             if (options.defaults) {
                                 object.requestedPrivacyMetric = null;
                                 object.requestedSourceTable = null;
+                                object.requestedOptions = null;
                             }
                             if (message.requestedPrivacyMetric != null && message.hasOwnProperty("requestedPrivacyMetric"))
                                 object.requestedPrivacyMetric = $root.google.privacy.dlp.v2.PrivacyMetric.toObject(message.requestedPrivacyMetric, options);
@@ -16796,6 +16821,8 @@
                                 if (options.oneofs)
                                     object.result = "deltaPresenceEstimationResult";
                             }
+                            if (message.requestedOptions != null && message.hasOwnProperty("requestedOptions"))
+                                object.requestedOptions = $root.google.privacy.dlp.v2.AnalyzeDataSourceRiskDetails.RequestedRiskAnalysisOptions.toObject(message.requestedOptions, options);
                             return object;
                         };
     
@@ -20901,6 +20928,198 @@
                             })();
     
                             return DeltaPresenceEstimationResult;
+                        })();
+    
+                        AnalyzeDataSourceRiskDetails.RequestedRiskAnalysisOptions = (function() {
+    
+                            /**
+                             * Properties of a RequestedRiskAnalysisOptions.
+                             * @memberof google.privacy.dlp.v2.AnalyzeDataSourceRiskDetails
+                             * @interface IRequestedRiskAnalysisOptions
+                             * @property {google.privacy.dlp.v2.IRiskAnalysisJobConfig|null} [jobConfig] RequestedRiskAnalysisOptions jobConfig
+                             */
+    
+                            /**
+                             * Constructs a new RequestedRiskAnalysisOptions.
+                             * @memberof google.privacy.dlp.v2.AnalyzeDataSourceRiskDetails
+                             * @classdesc Represents a RequestedRiskAnalysisOptions.
+                             * @implements IRequestedRiskAnalysisOptions
+                             * @constructor
+                             * @param {google.privacy.dlp.v2.AnalyzeDataSourceRiskDetails.IRequestedRiskAnalysisOptions=} [properties] Properties to set
+                             */
+                            function RequestedRiskAnalysisOptions(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * RequestedRiskAnalysisOptions jobConfig.
+                             * @member {google.privacy.dlp.v2.IRiskAnalysisJobConfig|null|undefined} jobConfig
+                             * @memberof google.privacy.dlp.v2.AnalyzeDataSourceRiskDetails.RequestedRiskAnalysisOptions
+                             * @instance
+                             */
+                            RequestedRiskAnalysisOptions.prototype.jobConfig = null;
+    
+                            /**
+                             * Creates a new RequestedRiskAnalysisOptions instance using the specified properties.
+                             * @function create
+                             * @memberof google.privacy.dlp.v2.AnalyzeDataSourceRiskDetails.RequestedRiskAnalysisOptions
+                             * @static
+                             * @param {google.privacy.dlp.v2.AnalyzeDataSourceRiskDetails.IRequestedRiskAnalysisOptions=} [properties] Properties to set
+                             * @returns {google.privacy.dlp.v2.AnalyzeDataSourceRiskDetails.RequestedRiskAnalysisOptions} RequestedRiskAnalysisOptions instance
+                             */
+                            RequestedRiskAnalysisOptions.create = function create(properties) {
+                                return new RequestedRiskAnalysisOptions(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified RequestedRiskAnalysisOptions message. Does not implicitly {@link google.privacy.dlp.v2.AnalyzeDataSourceRiskDetails.RequestedRiskAnalysisOptions.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.privacy.dlp.v2.AnalyzeDataSourceRiskDetails.RequestedRiskAnalysisOptions
+                             * @static
+                             * @param {google.privacy.dlp.v2.AnalyzeDataSourceRiskDetails.IRequestedRiskAnalysisOptions} message RequestedRiskAnalysisOptions message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            RequestedRiskAnalysisOptions.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.jobConfig != null && Object.hasOwnProperty.call(message, "jobConfig"))
+                                    $root.google.privacy.dlp.v2.RiskAnalysisJobConfig.encode(message.jobConfig, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified RequestedRiskAnalysisOptions message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.AnalyzeDataSourceRiskDetails.RequestedRiskAnalysisOptions.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.privacy.dlp.v2.AnalyzeDataSourceRiskDetails.RequestedRiskAnalysisOptions
+                             * @static
+                             * @param {google.privacy.dlp.v2.AnalyzeDataSourceRiskDetails.IRequestedRiskAnalysisOptions} message RequestedRiskAnalysisOptions message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            RequestedRiskAnalysisOptions.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a RequestedRiskAnalysisOptions message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.privacy.dlp.v2.AnalyzeDataSourceRiskDetails.RequestedRiskAnalysisOptions
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.privacy.dlp.v2.AnalyzeDataSourceRiskDetails.RequestedRiskAnalysisOptions} RequestedRiskAnalysisOptions
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            RequestedRiskAnalysisOptions.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.AnalyzeDataSourceRiskDetails.RequestedRiskAnalysisOptions();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1:
+                                        message.jobConfig = $root.google.privacy.dlp.v2.RiskAnalysisJobConfig.decode(reader, reader.uint32());
+                                        break;
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a RequestedRiskAnalysisOptions message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.privacy.dlp.v2.AnalyzeDataSourceRiskDetails.RequestedRiskAnalysisOptions
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.privacy.dlp.v2.AnalyzeDataSourceRiskDetails.RequestedRiskAnalysisOptions} RequestedRiskAnalysisOptions
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            RequestedRiskAnalysisOptions.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a RequestedRiskAnalysisOptions message.
+                             * @function verify
+                             * @memberof google.privacy.dlp.v2.AnalyzeDataSourceRiskDetails.RequestedRiskAnalysisOptions
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            RequestedRiskAnalysisOptions.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.jobConfig != null && message.hasOwnProperty("jobConfig")) {
+                                    var error = $root.google.privacy.dlp.v2.RiskAnalysisJobConfig.verify(message.jobConfig);
+                                    if (error)
+                                        return "jobConfig." + error;
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a RequestedRiskAnalysisOptions message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.privacy.dlp.v2.AnalyzeDataSourceRiskDetails.RequestedRiskAnalysisOptions
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.privacy.dlp.v2.AnalyzeDataSourceRiskDetails.RequestedRiskAnalysisOptions} RequestedRiskAnalysisOptions
+                             */
+                            RequestedRiskAnalysisOptions.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.privacy.dlp.v2.AnalyzeDataSourceRiskDetails.RequestedRiskAnalysisOptions)
+                                    return object;
+                                var message = new $root.google.privacy.dlp.v2.AnalyzeDataSourceRiskDetails.RequestedRiskAnalysisOptions();
+                                if (object.jobConfig != null) {
+                                    if (typeof object.jobConfig !== "object")
+                                        throw TypeError(".google.privacy.dlp.v2.AnalyzeDataSourceRiskDetails.RequestedRiskAnalysisOptions.jobConfig: object expected");
+                                    message.jobConfig = $root.google.privacy.dlp.v2.RiskAnalysisJobConfig.fromObject(object.jobConfig);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a RequestedRiskAnalysisOptions message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.privacy.dlp.v2.AnalyzeDataSourceRiskDetails.RequestedRiskAnalysisOptions
+                             * @static
+                             * @param {google.privacy.dlp.v2.AnalyzeDataSourceRiskDetails.RequestedRiskAnalysisOptions} message RequestedRiskAnalysisOptions
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            RequestedRiskAnalysisOptions.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.jobConfig = null;
+                                if (message.jobConfig != null && message.hasOwnProperty("jobConfig"))
+                                    object.jobConfig = $root.google.privacy.dlp.v2.RiskAnalysisJobConfig.toObject(message.jobConfig, options);
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this RequestedRiskAnalysisOptions to JSON.
+                             * @function toJSON
+                             * @memberof google.privacy.dlp.v2.AnalyzeDataSourceRiskDetails.RequestedRiskAnalysisOptions
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            RequestedRiskAnalysisOptions.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            return RequestedRiskAnalysisOptions;
                         })();
     
                         return AnalyzeDataSourceRiskDetails;

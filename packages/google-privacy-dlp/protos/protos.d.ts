@@ -6741,6 +6741,9 @@ export namespace google {
 
                     /** AnalyzeDataSourceRiskDetails deltaPresenceEstimationResult */
                     deltaPresenceEstimationResult?: (google.privacy.dlp.v2.AnalyzeDataSourceRiskDetails.IDeltaPresenceEstimationResult|null);
+
+                    /** AnalyzeDataSourceRiskDetails requestedOptions */
+                    requestedOptions?: (google.privacy.dlp.v2.AnalyzeDataSourceRiskDetails.IRequestedRiskAnalysisOptions|null);
                 }
 
                 /** Represents an AnalyzeDataSourceRiskDetails. */
@@ -6775,6 +6778,9 @@ export namespace google {
 
                     /** AnalyzeDataSourceRiskDetails deltaPresenceEstimationResult. */
                     public deltaPresenceEstimationResult?: (google.privacy.dlp.v2.AnalyzeDataSourceRiskDetails.IDeltaPresenceEstimationResult|null);
+
+                    /** AnalyzeDataSourceRiskDetails requestedOptions. */
+                    public requestedOptions?: (google.privacy.dlp.v2.AnalyzeDataSourceRiskDetails.IRequestedRiskAnalysisOptions|null);
 
                     /** AnalyzeDataSourceRiskDetails result. */
                     public result?: ("numericalStatsResult"|"categoricalStatsResult"|"kAnonymityResult"|"lDiversityResult"|"kMapEstimationResult"|"deltaPresenceEstimationResult");
@@ -8383,6 +8389,96 @@ export namespace google {
                              */
                             public toJSON(): { [k: string]: any };
                         }
+                    }
+
+                    /** Properties of a RequestedRiskAnalysisOptions. */
+                    interface IRequestedRiskAnalysisOptions {
+
+                        /** RequestedRiskAnalysisOptions jobConfig */
+                        jobConfig?: (google.privacy.dlp.v2.IRiskAnalysisJobConfig|null);
+                    }
+
+                    /** Represents a RequestedRiskAnalysisOptions. */
+                    class RequestedRiskAnalysisOptions implements IRequestedRiskAnalysisOptions {
+
+                        /**
+                         * Constructs a new RequestedRiskAnalysisOptions.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.privacy.dlp.v2.AnalyzeDataSourceRiskDetails.IRequestedRiskAnalysisOptions);
+
+                        /** RequestedRiskAnalysisOptions jobConfig. */
+                        public jobConfig?: (google.privacy.dlp.v2.IRiskAnalysisJobConfig|null);
+
+                        /**
+                         * Creates a new RequestedRiskAnalysisOptions instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns RequestedRiskAnalysisOptions instance
+                         */
+                        public static create(properties?: google.privacy.dlp.v2.AnalyzeDataSourceRiskDetails.IRequestedRiskAnalysisOptions): google.privacy.dlp.v2.AnalyzeDataSourceRiskDetails.RequestedRiskAnalysisOptions;
+
+                        /**
+                         * Encodes the specified RequestedRiskAnalysisOptions message. Does not implicitly {@link google.privacy.dlp.v2.AnalyzeDataSourceRiskDetails.RequestedRiskAnalysisOptions.verify|verify} messages.
+                         * @param message RequestedRiskAnalysisOptions message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.privacy.dlp.v2.AnalyzeDataSourceRiskDetails.IRequestedRiskAnalysisOptions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified RequestedRiskAnalysisOptions message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.AnalyzeDataSourceRiskDetails.RequestedRiskAnalysisOptions.verify|verify} messages.
+                         * @param message RequestedRiskAnalysisOptions message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.privacy.dlp.v2.AnalyzeDataSourceRiskDetails.IRequestedRiskAnalysisOptions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a RequestedRiskAnalysisOptions message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns RequestedRiskAnalysisOptions
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.privacy.dlp.v2.AnalyzeDataSourceRiskDetails.RequestedRiskAnalysisOptions;
+
+                        /**
+                         * Decodes a RequestedRiskAnalysisOptions message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns RequestedRiskAnalysisOptions
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.privacy.dlp.v2.AnalyzeDataSourceRiskDetails.RequestedRiskAnalysisOptions;
+
+                        /**
+                         * Verifies a RequestedRiskAnalysisOptions message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a RequestedRiskAnalysisOptions message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns RequestedRiskAnalysisOptions
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.privacy.dlp.v2.AnalyzeDataSourceRiskDetails.RequestedRiskAnalysisOptions;
+
+                        /**
+                         * Creates a plain object from a RequestedRiskAnalysisOptions message. Also converts values to other types if specified.
+                         * @param message RequestedRiskAnalysisOptions
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.privacy.dlp.v2.AnalyzeDataSourceRiskDetails.RequestedRiskAnalysisOptions, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this RequestedRiskAnalysisOptions to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
                     }
                 }
 

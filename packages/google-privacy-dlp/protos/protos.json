@@ -1565,6 +1565,10 @@
                         "deltaPresenceEstimationResult": {
                           "type": "DeltaPresenceEstimationResult",
                           "id": 9
+                        },
+                        "requestedOptions": {
+                          "type": "RequestedRiskAnalysisOptions",
+                          "id": 10
                         }
                       },
                       "nested": {
@@ -1823,6 +1827,14 @@
                                   "id": 7
                                 }
                               }
+                            }
+                          }
+                        },
+                        "RequestedRiskAnalysisOptions": {
+                          "fields": {
+                            "jobConfig": {
+                              "type": "RiskAnalysisJobConfig",
+                              "id": 1
                             }
                           }
                         }
