@@ -17254,6 +17254,9 @@ export namespace google {
 
                     /** ListDocumentsRequest pageToken */
                     pageToken?: (string|null);
+
+                    /** ListDocumentsRequest filter */
+                    filter?: (string|null);
                 }
 
                 /** Represents a ListDocumentsRequest. */
@@ -17273,6 +17276,9 @@ export namespace google {
 
                     /** ListDocumentsRequest pageToken. */
                     public pageToken: string;
+
+                    /** ListDocumentsRequest filter. */
+                    public filter: string;
 
                     /**
                      * Creates a new ListDocumentsRequest instance using the specified properties.
@@ -26358,6 +26364,9 @@ export namespace google {
 
                     /** ListKnowledgeBasesRequest pageToken */
                     pageToken?: (string|null);
+
+                    /** ListKnowledgeBasesRequest filter */
+                    filter?: (string|null);
                 }
 
                 /** Represents a ListKnowledgeBasesRequest. */
@@ -26377,6 +26386,9 @@ export namespace google {
 
                     /** ListKnowledgeBasesRequest pageToken. */
                     public pageToken: string;
+
+                    /** ListKnowledgeBasesRequest filter. */
+                    public filter: string;
 
                     /**
                      * Creates a new ListKnowledgeBasesRequest instance using the specified properties.

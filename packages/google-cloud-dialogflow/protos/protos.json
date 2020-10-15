@@ -3528,7 +3528,11 @@
                       "fields": {
                         "parent": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudresourcemanager.googleapis.com/Project"
+                          }
                         },
                         "displayName": {
                           "type": "string",
@@ -4416,6 +4420,7 @@
                             "(google.api.http).body": "*",
                             "(google.api.http).additional_bindings.post": "/v2beta1/{name=projects/*/agent/knowledgeBases/*/documents/*}:reload",
                             "(google.api.http).additional_bindings.body": "*",
+                            "(google.api.method_signature)": "name,gcs_source",
                             "(google.longrunning.operation_info).response_type": "Document",
                             "(google.longrunning.operation_info).metadata_type": "KnowledgeOperationMetadata"
                           }
@@ -4547,6 +4552,10 @@
                         "pageToken": {
                           "type": "string",
                           "id": 3
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 4
                         }
                       }
                     },
@@ -4853,7 +4862,10 @@
                           "fields": {
                             "value": {
                               "type": "string",
-                              "id": 1
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
                             },
                             "synonyms": {
                               "rule": "repeated",
@@ -5234,6 +5246,7 @@
                             "(google.api.http).body": "*",
                             "(google.api.http).additional_bindings.post": "/v2beta1/{parent=projects/*/locations/*/agent}/intents:batchUpdate",
                             "(google.api.http).additional_bindings.body": "*",
+                            "(google.api.method_signature)": "parent,intent_batch_inline",
                             "(google.longrunning.operation_info).response_type": "google.cloud.dialogflow.v2beta1.BatchUpdateIntentsResponse",
                             "(google.longrunning.operation_info).metadata_type": "google.protobuf.Struct"
                           }
@@ -6671,6 +6684,10 @@
                         "pageToken": {
                           "type": "string",
                           "id": 3
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 4
                         }
                       }
                     },
@@ -7042,7 +7059,8 @@
                           "type": "string",
                           "id": 1,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "dialogflow.googleapis.com/Session"
                           }
                         },
                         "queryParams": {
@@ -7058,7 +7076,10 @@
                         },
                         "singleUtterance": {
                           "type": "bool",
-                          "id": 4
+                          "id": 4,
+                          "options": {
+                            "deprecated": true
+                          }
                         },
                         "outputAudioConfig": {
                           "type": "OutputAudioConfig",

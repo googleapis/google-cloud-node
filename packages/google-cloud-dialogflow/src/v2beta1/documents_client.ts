@@ -1132,6 +1132,28 @@ export class DocumentsClient {
    *   default 10 and at most 100.
    * @param {string} request.pageToken
    *   The next_page_token value returned from a previous list request.
+   * @param {string} request.filter
+   *   The filter expression used to filter documents returned by the list method.
+   *   The expression has the following syntax:
+   *
+   *     <field> <operator> <value> [AND <field> <operator> <value>] ...
+   *
+   *   The following fields and operators are supported:
+   *
+   *   * knowledge_types with has(:) operator
+   *   * display_name with has(:) operator
+   *   * state with equals(=) operator
+   *
+   *   Examples:
+   *
+   *   * "knowledge_types:FAQ" matches documents with FAQ knowledge type.
+   *   * "display_name:customer" matches documents whose display name contains
+   *     "customer".
+   *   * "state=ACTIVE" matches documents with ACTIVE state.
+   *   * "knowledge_types:FAQ AND state=ACTIVE" matches all active FAQ documents.
+   *
+   *   For more information about filtering, see
+   *   [API Filtering](https://aip.dev/160).
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1218,6 +1240,28 @@ export class DocumentsClient {
    *   default 10 and at most 100.
    * @param {string} request.pageToken
    *   The next_page_token value returned from a previous list request.
+   * @param {string} request.filter
+   *   The filter expression used to filter documents returned by the list method.
+   *   The expression has the following syntax:
+   *
+   *     <field> <operator> <value> [AND <field> <operator> <value>] ...
+   *
+   *   The following fields and operators are supported:
+   *
+   *   * knowledge_types with has(:) operator
+   *   * display_name with has(:) operator
+   *   * state with equals(=) operator
+   *
+   *   Examples:
+   *
+   *   * "knowledge_types:FAQ" matches documents with FAQ knowledge type.
+   *   * "display_name:customer" matches documents whose display name contains
+   *     "customer".
+   *   * "state=ACTIVE" matches documents with ACTIVE state.
+   *   * "knowledge_types:FAQ AND state=ACTIVE" matches all active FAQ documents.
+   *
+   *   For more information about filtering, see
+   *   [API Filtering](https://aip.dev/160).
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -1260,6 +1304,28 @@ export class DocumentsClient {
    *   default 10 and at most 100.
    * @param {string} request.pageToken
    *   The next_page_token value returned from a previous list request.
+   * @param {string} request.filter
+   *   The filter expression used to filter documents returned by the list method.
+   *   The expression has the following syntax:
+   *
+   *     <field> <operator> <value> [AND <field> <operator> <value>] ...
+   *
+   *   The following fields and operators are supported:
+   *
+   *   * knowledge_types with has(:) operator
+   *   * display_name with has(:) operator
+   *   * state with equals(=) operator
+   *
+   *   Examples:
+   *
+   *   * "knowledge_types:FAQ" matches documents with FAQ knowledge type.
+   *   * "display_name:customer" matches documents whose display name contains
+   *     "customer".
+   *   * "state=ACTIVE" matches documents with ACTIVE state.
+   *   * "knowledge_types:FAQ AND state=ACTIVE" matches all active FAQ documents.
+   *
+   *   For more information about filtering, see
+   *   [API Filtering](https://aip.dev/160).
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
