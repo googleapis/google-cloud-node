@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/compute?activeTab=versions
 
+## [2.3.0](https://www.github.com/googleapis/nodejs-compute/compare/v2.2.0...v2.3.0) (2020-10-15)
+
+
+### Features
+
+* add start param in getSerialPortOutput options ([#507](https://www.github.com/googleapis/nodejs-compute/issues/507)) ([de3ecd4](https://www.github.com/googleapis/nodejs-compute/commit/de3ecd42194a6997e27f409bb7ab59e4576e36c6))
+
 ## [2.2.0](https://www.github.com/googleapis/nodejs-compute/compare/v2.1.0...v2.2.0) (2020-09-30)
 
 
