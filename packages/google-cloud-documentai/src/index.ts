@@ -19,10 +19,9 @@
 import * as v1beta2 from './v1beta2';
 import * as v1beta3 from './v1beta3';
 
-const DocumentUnderstandingServiceClient =
-  v1beta2.DocumentUnderstandingServiceClient;
+const DocumentProcessorServiceClient = v1beta3.DocumentProcessorServiceClient;
 
-export {v1beta2, v1beta3, DocumentUnderstandingServiceClient};
-export default {v1beta2, v1beta3, DocumentUnderstandingServiceClient};
+export {v1beta2, v1beta3, DocumentProcessorServiceClient};
+export default {v1beta2, v1beta3, DocumentProcessorServiceClient};
 import * as protos from '../protos/protos';
 export {protos};
