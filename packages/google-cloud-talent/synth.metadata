@@ -4,7 +4,7 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/nodejs-talent.git",
-        "sha": "9e22b1492bbbbbd4b8eafb242de5e54ad842cd9c"
+        "sha": "58fee1bd436d4531633dfb44b7d1a1ae885374fb"
       }
     },
     {
@@ -96,6 +96,8 @@
     "README.md",
     "api-extractor.json",
     "linkinator.config.json",
+    "package.json",
+    "package.json.2888098786",
     "protos/google/cloud/talent/v4/common.proto",
     "protos/google/cloud/talent/v4/company.proto",
     "protos/google/cloud/talent/v4/company_service.proto",
