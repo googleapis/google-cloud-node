@@ -36,7 +36,7 @@ guides.
   * [List Subscriptions On a Topic](#list-subscriptions-on-a-topic)
   * [Listen For Errors](#listen-for-errors)
   * [Listen For Messages](#listen-for-messages)
-  * [Listen For Ordered Messages](#listen-for-ordered-messages)
+  * [Listen For Messages With Custom Attributes](#listen-for-messages-with-custom-attributes)
   * [Modify Push Configuration](#modify-push-configuration)
   * [OpenTelemetry Tracing](#opentelemetry-tracing)
   * [Publish Batched Messages](#publish-batched-messages)
@@ -376,18 +376,18 @@ __Usage:__
 
 
 
-### Listen For Ordered Messages
+### Listen For Messages With Custom Attributes
 
-Demonstrates how to order messages coming from a topic. Please see "Publish Ordered Message" for the other side of this.
+Demonstrates how to receive and process custom attributes on messages.
 
-View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/master/samples/listenForOrderedMessages.js).
+View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/master/samples/listenWithCustomAttributes.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-pubsub&page=editor&open_in_editor=samples/listenForOrderedMessages.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-pubsub&page=editor&open_in_editor=samples/listenWithCustomAttributes.js,samples/README.md)
 
 __Usage:__
 
 
-`node listenForOrderedMessages.js <subscription-name> [timeout-in-seconds]`
+`node listenWithCustomAttributes.js <subscription-name> [timeout-in-seconds]`
 
 
 -----
@@ -492,7 +492,7 @@ __Usage:__
 
 ### Publish Ordered Message
 
-Demonstrates how to publish messages to a topic with ordering. Please see "Listen for Ordered Messages" for the other side of this.
+Demonstrates how to publish messages to a topic with ordering. Please see "Create Subscription With Ordering" for information on setting up a subscription that will receive the messages with proper ordering.
 
 View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/master/samples/publishOrderedMessage.js).
 
@@ -539,7 +539,7 @@ View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/master/s
 __Usage:__
 
 
-`node quickstart.js <project-id> <topic-name>`
+`node quickstart.js <project-id> <topic-name> <subscription-name>`
 
 
 -----
