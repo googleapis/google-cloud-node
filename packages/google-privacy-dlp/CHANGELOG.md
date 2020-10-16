@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/PACKAGE NAME?activeTab=versions
 
+### [3.0.4](https://www.github.com/googleapis/nodejs-dlp/compare/v3.0.3...v3.0.4) (2020-10-15)
+
+
+### Bug Fixes
+
+* retrieve job config for risk analysis jobs; docs: clarify timespan config for BigQuery and Datastore. ([#547](https://www.github.com/googleapis/nodejs-dlp/issues/547)) ([3b25dd6](https://www.github.com/googleapis/nodejs-dlp/commit/3b25dd66350ca5729ddebe48f0a3718b756633ae))
+
 ### [3.0.3](https://www.github.com/googleapis/nodejs-dlp/compare/v3.0.2...v3.0.3) (2020-09-12)
 
 
