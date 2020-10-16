@@ -63,45 +63,65 @@ npm install @google-cloud/documentai
  */
 // const projectId = 'YOUR_PROJECT_ID';
 // const location = 'YOUR_PROJECT_LOCATION'; // Format is 'us' or 'eu'
-// const gcsInputUri = 'YOUR_SOURCE_PDF';
+// const processor = 'YOUR_PROCESSOR_ID'; // Create processor in Cloud Console
+// const filePath = '/path/to/local/pdf';
 
 const {
-  DocumentUnderstandingServiceClient,
-} = require('@google-cloud/documentai');
-const client = new DocumentUnderstandingServiceClient();
+  DocumentProcessorServiceClient,
+} = require('@google-cloud/documentai').v1beta3;
+
+// Instantiates a client
+const client = new DocumentProcessorServiceClient();
 
 async function quickstart() {
-  // Configure the request for processing the PDF
-  const parent = `projects/${projectId}/locations/${location}`;
+  // The full resource name of the processor, e.g.:
+  // projects/project-id/locations/location/processor/processor-id
+  // You must create new processors in the Cloud Console first
+  const name = `projects/${projectId}/locations/${location}/processors/${processorId}`;
+
+  // Read the file into memory.
+  const fs = require('fs').promises;
+  const imageFile = await fs.readFile(filePath);
+
+  // Convert the image data to a Buffer and base64 encode it.
+  const encodedImage = Buffer.from(imageFile).toString('base64');
+
   const request = {
-    parent,
-    inputConfig: {
-      gcsSource: {
-        uri: gcsInputUri,
-      },
+    name,
+    document: {
+      content: encodedImage,
       mimeType: 'application/pdf',
     },
   };
 
   // Recognizes text entities in the PDF document
   const [result] = await client.processDocument(request);
+  const {document} = result;
 
   // Get all of the document text as one big string
-  const {text} = result;
+  const {text} = document;
 
   // Extract shards from the text field
-  function extractText(textAnchor) {
+  const getText = textAnchor => {
+    if (!textAnchor.textSegments || textAnchor.textSegments.length === 0) {
+      return '';
+    }
+
     // First shard in document doesn't have startIndex property
     const startIndex = textAnchor.textSegments[0].startIndex || 0;
     const endIndex = textAnchor.textSegments[0].endIndex;
 
     return text.substring(startIndex, endIndex);
-  }
+  };
 
-  for (const entity of result.entities) {
-    console.log(`\nEntity text: ${extractText(entity.textAnchor)}`);
-    console.log(`Entity type: ${entity.type}`);
-    console.log(`Entity mention text: ${entity.mentionText}`);
+  // Read the text recognition output from the processor
+  console.log('The document contains the following paragraphs:');
+  const [page1] = document.pages;
+  const {paragraphs} = page1;
+
+  for (const paragraph of paragraphs) {
+    const paragraphText = getText(paragraph.layout.textAnchor);
+    console.log(`Paragraph text:\n${paragraphText}`);
   }
 }
 
@@ -116,11 +136,13 @@ has instructions for running the samples.
 
 | Sample                      | Source Code                       | Try it |
 | --------------------------- | --------------------------------- | ------ |
+| Batch-process-document.v1beta3 | [source code](https://github.com/googleapis/nodejs-document-ai/blob/master/samples/batch-process-document.v1beta3.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-document-ai&page=editor&open_in_editor=samples/batch-process-document.v1beta3.js,samples/README.md) |
 | Batch_parse_form | [source code](https://github.com/googleapis/nodejs-document-ai/blob/master/samples/batch_parse_form.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-document-ai&page=editor&open_in_editor=samples/batch_parse_form.js,samples/README.md) |
 | Batch_parse_table | [source code](https://github.com/googleapis/nodejs-document-ai/blob/master/samples/batch_parse_table.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-document-ai&page=editor&open_in_editor=samples/batch_parse_table.js,samples/README.md) |
 | Parse_form | [source code](https://github.com/googleapis/nodejs-document-ai/blob/master/samples/parse_form.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-document-ai&page=editor&open_in_editor=samples/parse_form.js,samples/README.md) |
 | Parse_table | [source code](https://github.com/googleapis/nodejs-document-ai/blob/master/samples/parse_table.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-document-ai&page=editor&open_in_editor=samples/parse_table.js,samples/README.md) |
 | Parse_with_model | [source code](https://github.com/googleapis/nodejs-document-ai/blob/master/samples/parse_with_model.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-document-ai&page=editor&open_in_editor=samples/parse_with_model.js,samples/README.md) |
+| Process-document.v1beta3 | [source code](https://github.com/googleapis/nodejs-document-ai/blob/master/samples/process-document.v1beta3.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-document-ai&page=editor&open_in_editor=samples/process-document.v1beta3.js,samples/README.md) |
 | Quickstart | [source code](https://github.com/googleapis/nodejs-document-ai/blob/master/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-document-ai&page=editor&open_in_editor=samples/quickstart.js,samples/README.md) |
 | Set_endpoint | [source code](https://github.com/googleapis/nodejs-document-ai/blob/master/samples/set_endpoint.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-document-ai&page=editor&open_in_editor=samples/set_endpoint.js,samples/README.md) |
 

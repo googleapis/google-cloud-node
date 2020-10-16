@@ -3,16 +3,16 @@
     {
       "git": {
         "name": ".",
-        "remote": "git@github.com:googleapis/nodejs-document-ai.git",
-        "sha": "bdd070467079aa7a075c9756d7445493685a8e7e"
+        "remote": "https://github.com/googleapis/nodejs-document-ai.git",
+        "sha": "e65fc94ab9dc1f75d8e0f95c1e2558a9dbcf7e0d"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "215c12ade72d9d9616457d9b8b2f8a37f38e79f3",
-        "internalRef": "337113354"
+        "sha": "54331a6ab9960ee5776d123284da6cd50f8337f3",
+        "internalRef": "337403851"
       }
     },
     {
@@ -99,6 +99,9 @@
     "protos/google/cloud/documentai/v1beta2/document.proto",
     "protos/google/cloud/documentai/v1beta2/document_understanding.proto",
     "protos/google/cloud/documentai/v1beta2/geometry.proto",
+    "protos/google/cloud/documentai/v1beta3/document.proto",
+    "protos/google/cloud/documentai/v1beta3/document_processor_service.proto",
+    "protos/google/cloud/documentai/v1beta3/geometry.proto",
     "protos/protos.d.ts",
     "protos/protos.js",
     "protos/protos.json",
@@ -109,9 +112,14 @@
     "src/v1beta2/document_understanding_service_client_config.json",
     "src/v1beta2/document_understanding_service_proto_list.json",
     "src/v1beta2/index.ts",
+    "src/v1beta3/document_processor_service_client.ts",
+    "src/v1beta3/document_processor_service_client_config.json",
+    "src/v1beta3/document_processor_service_proto_list.json",
+    "src/v1beta3/index.ts",
     "system-test/fixtures/sample/src/index.js",
     "system-test/fixtures/sample/src/index.ts",
     "system-test/install.ts",
+    "test/gapic_document_processor_service_v1beta3.ts",
     "test/gapic_document_understanding_service_v1beta2.ts",
     "tsconfig.json",
     "webpack.config.js"

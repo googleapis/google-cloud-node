@@ -43,7 +43,7 @@ module.exports = {
     copyright: 'Copyright 2020 Google LLC',
     includeDate: false,
     sourceFiles: false,
-    systemName: 'documentai',
+    systemName: '@google-cloud/documentai',
     theme: 'lumen',
     default: {
       outputSourceFiles: false

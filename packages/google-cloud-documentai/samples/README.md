@@ -12,11 +12,13 @@
 
 * [Before you begin](#before-you-begin)
 * [Samples](#samples)
+  * [Batch-process-document.v1beta3](#batch-process-document.v1beta3)
   * [Batch_parse_form](#batch_parse_form)
   * [Batch_parse_table](#batch_parse_table)
   * [Parse_form](#parse_form)
   * [Parse_table](#parse_table)
   * [Parse_with_model](#parse_with_model)
+  * [Process-document.v1beta3](#process-document.v1beta3)
   * [Quickstart](#quickstart)
   * [Set_endpoint](#set_endpoint)
 
@@ -32,6 +34,23 @@ Before running the samples, make sure you've followed the steps outlined in
 `cd ..`
 
 ## Samples
+
+
+
+### Batch-process-document.v1beta3
+
+View the [source code](https://github.com/googleapis/nodejs-document-ai/blob/master/samples/batch-process-document.v1beta3.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-document-ai&page=editor&open_in_editor=samples/batch-process-document.v1beta3.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/batch-process-document.v1beta3.js`
+
+
+-----
+
 
 
 
@@ -113,6 +132,23 @@ __Usage:__
 
 
 `node samples/parse_with_model.js`
+
+
+-----
+
+
+
+
+### Process-document.v1beta3
+
+View the [source code](https://github.com/googleapis/nodejs-document-ai/blob/master/samples/process-document.v1beta3.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-document-ai&page=editor&open_in_editor=samples/process-document.v1beta3.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/process-document.v1beta3.js`
 
 
 -----
