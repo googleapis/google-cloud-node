@@ -4,7 +4,7 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/nodejs-talent.git",
-        "sha": "58fee1bd436d4531633dfb44b7d1a1ae885374fb"
+        "sha": "0b9fc308ea71f851cac974f999165d049a79f967"
       }
     },
     {
@@ -19,7 +19,7 @@
       "git": {
         "name": "synthtool",
         "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "0c868d49b8e05bc1f299bc773df9eb4ef9ed96e9"
+        "sha": "5451633881133e5573cc271a18e73b18caca8b1b"
       }
     }
   ],
@@ -96,8 +96,6 @@
     "README.md",
     "api-extractor.json",
     "linkinator.config.json",
-    "package.json",
-    "package.json.2888098786",
     "protos/google/cloud/talent/v4/common.proto",
     "protos/google/cloud/talent/v4/company.proto",
     "protos/google/cloud/talent/v4/company_service.proto",
