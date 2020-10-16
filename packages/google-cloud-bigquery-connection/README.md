@@ -14,6 +14,9 @@
 BigQuery Connection client for Node.js
 
 
+A comprehensive list of changes in each version may be found in
+[the CHANGELOG](https://github.com/googleapis/nodejs-bigquery-connection/blob/master/CHANGELOG.md).
+
 * [Google BigQuery Connection Node.js Client API Reference][client-docs]
 * [Google BigQuery Connection Documentation][product-docs]
 * [github.com/googleapis/nodejs-bigquery-connection](https://github.com/googleapis/nodejs-bigquery-connection)
