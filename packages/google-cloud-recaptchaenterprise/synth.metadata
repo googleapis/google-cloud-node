@@ -4,7 +4,7 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/nodejs-recaptcha-enterprise.git",
-        "sha": "6815a1fe7a647bd8d304bba30fb756b142ba0601"
+        "sha": "16142fdd0efaf8a0458d9fc6a3dd1fc9af4425d5"
       }
     },
     {
@@ -19,7 +19,7 @@
       "git": {
         "name": "synthtool",
         "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "0c868d49b8e05bc1f299bc773df9eb4ef9ed96e9"
+        "sha": "5451633881133e5573cc271a18e73b18caca8b1b"
       }
     }
   ],
