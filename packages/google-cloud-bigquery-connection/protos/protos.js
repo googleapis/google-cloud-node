@@ -1700,6 +1700,7 @@
                              * @property {string|null} [friendlyName] Connection friendlyName
                              * @property {string|null} [description] Connection description
                              * @property {google.cloud.bigquery.connection.v1.ICloudSqlProperties|null} [cloudSql] Connection cloudSql
+                             * @property {google.cloud.bigquery.connection.v1.IAwsProperties|null} [aws] Connection aws
                              * @property {number|Long|null} [creationTime] Connection creationTime
                              * @property {number|Long|null} [lastModifiedTime] Connection lastModifiedTime
                              * @property {boolean|null} [hasCredential] Connection hasCredential
@@ -1753,6 +1754,14 @@
                             Connection.prototype.cloudSql = null;
     
                             /**
+                             * Connection aws.
+                             * @member {google.cloud.bigquery.connection.v1.IAwsProperties|null|undefined} aws
+                             * @memberof google.cloud.bigquery.connection.v1.Connection
+                             * @instance
+                             */
+                            Connection.prototype.aws = null;
+    
+                            /**
                              * Connection creationTime.
                              * @member {number|Long} creationTime
                              * @memberof google.cloud.bigquery.connection.v1.Connection
@@ -1781,12 +1790,12 @@
     
                             /**
                              * Connection properties.
-                             * @member {"cloudSql"|undefined} properties
+                             * @member {"cloudSql"|"aws"|undefined} properties
                              * @memberof google.cloud.bigquery.connection.v1.Connection
                              * @instance
                              */
                             Object.defineProperty(Connection.prototype, "properties", {
-                                get: $util.oneOfGetter($oneOfFields = ["cloudSql"]),
+                                get: $util.oneOfGetter($oneOfFields = ["cloudSql", "aws"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
@@ -1828,6 +1837,8 @@
                                     writer.uint32(/* id 6, wireType 0 =*/48).int64(message.lastModifiedTime);
                                 if (message.hasCredential != null && Object.hasOwnProperty.call(message, "hasCredential"))
                                     writer.uint32(/* id 7, wireType 0 =*/56).bool(message.hasCredential);
+                                if (message.aws != null && Object.hasOwnProperty.call(message, "aws"))
+                                    $root.google.cloud.bigquery.connection.v1.AwsProperties.encode(message.aws, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
                                 return writer;
                             };
     
@@ -1873,6 +1884,9 @@
                                         break;
                                     case 4:
                                         message.cloudSql = $root.google.cloud.bigquery.connection.v1.CloudSqlProperties.decode(reader, reader.uint32());
+                                        break;
+                                    case 8:
+                                        message.aws = $root.google.cloud.bigquery.connection.v1.AwsProperties.decode(reader, reader.uint32());
                                         break;
                                     case 5:
                                         message.creationTime = reader.int64();
@@ -1936,6 +1950,16 @@
                                             return "cloudSql." + error;
                                     }
                                 }
+                                if (message.aws != null && message.hasOwnProperty("aws")) {
+                                    if (properties.properties === 1)
+                                        return "properties: multiple values";
+                                    properties.properties = 1;
+                                    {
+                                        var error = $root.google.cloud.bigquery.connection.v1.AwsProperties.verify(message.aws);
+                                        if (error)
+                                            return "aws." + error;
+                                    }
+                                }
                                 if (message.creationTime != null && message.hasOwnProperty("creationTime"))
                                     if (!$util.isInteger(message.creationTime) && !(message.creationTime && $util.isInteger(message.creationTime.low) && $util.isInteger(message.creationTime.high)))
                                         return "creationTime: integer|Long expected";
@@ -1970,6 +1994,11 @@
                                     if (typeof object.cloudSql !== "object")
                                         throw TypeError(".google.cloud.bigquery.connection.v1.Connection.cloudSql: object expected");
                                     message.cloudSql = $root.google.cloud.bigquery.connection.v1.CloudSqlProperties.fromObject(object.cloudSql);
+                                }
+                                if (object.aws != null) {
+                                    if (typeof object.aws !== "object")
+                                        throw TypeError(".google.cloud.bigquery.connection.v1.Connection.aws: object expected");
+                                    message.aws = $root.google.cloud.bigquery.connection.v1.AwsProperties.fromObject(object.aws);
                                 }
                                 if (object.creationTime != null)
                                     if ($util.Long)
@@ -2046,6 +2075,11 @@
                                         object.lastModifiedTime = options.longs === String ? $util.Long.prototype.toString.call(message.lastModifiedTime) : options.longs === Number ? new $util.LongBits(message.lastModifiedTime.low >>> 0, message.lastModifiedTime.high >>> 0).toNumber() : message.lastModifiedTime;
                                 if (message.hasCredential != null && message.hasOwnProperty("hasCredential"))
                                     object.hasCredential = message.hasCredential;
+                                if (message.aws != null && message.hasOwnProperty("aws")) {
+                                    object.aws = $root.google.cloud.bigquery.connection.v1.AwsProperties.toObject(message.aws, options);
+                                    if (options.oneofs)
+                                        object.properties = "aws";
+                                }
                                 return object;
                             };
     
@@ -2564,6 +2598,449 @@
                             };
     
                             return CloudSqlCredential;
+                        })();
+    
+                        v1.AwsProperties = (function() {
+    
+                            /**
+                             * Properties of an AwsProperties.
+                             * @memberof google.cloud.bigquery.connection.v1
+                             * @interface IAwsProperties
+                             * @property {google.cloud.bigquery.connection.v1.IAwsCrossAccountRole|null} [crossAccountRole] AwsProperties crossAccountRole
+                             */
+    
+                            /**
+                             * Constructs a new AwsProperties.
+                             * @memberof google.cloud.bigquery.connection.v1
+                             * @classdesc Represents an AwsProperties.
+                             * @implements IAwsProperties
+                             * @constructor
+                             * @param {google.cloud.bigquery.connection.v1.IAwsProperties=} [properties] Properties to set
+                             */
+                            function AwsProperties(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * AwsProperties crossAccountRole.
+                             * @member {google.cloud.bigquery.connection.v1.IAwsCrossAccountRole|null|undefined} crossAccountRole
+                             * @memberof google.cloud.bigquery.connection.v1.AwsProperties
+                             * @instance
+                             */
+                            AwsProperties.prototype.crossAccountRole = null;
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            /**
+                             * AwsProperties authenticationMethod.
+                             * @member {"crossAccountRole"|undefined} authenticationMethod
+                             * @memberof google.cloud.bigquery.connection.v1.AwsProperties
+                             * @instance
+                             */
+                            Object.defineProperty(AwsProperties.prototype, "authenticationMethod", {
+                                get: $util.oneOfGetter($oneOfFields = ["crossAccountRole"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * Creates a new AwsProperties instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.bigquery.connection.v1.AwsProperties
+                             * @static
+                             * @param {google.cloud.bigquery.connection.v1.IAwsProperties=} [properties] Properties to set
+                             * @returns {google.cloud.bigquery.connection.v1.AwsProperties} AwsProperties instance
+                             */
+                            AwsProperties.create = function create(properties) {
+                                return new AwsProperties(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified AwsProperties message. Does not implicitly {@link google.cloud.bigquery.connection.v1.AwsProperties.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.bigquery.connection.v1.AwsProperties
+                             * @static
+                             * @param {google.cloud.bigquery.connection.v1.IAwsProperties} message AwsProperties message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            AwsProperties.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.crossAccountRole != null && Object.hasOwnProperty.call(message, "crossAccountRole"))
+                                    $root.google.cloud.bigquery.connection.v1.AwsCrossAccountRole.encode(message.crossAccountRole, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified AwsProperties message, length delimited. Does not implicitly {@link google.cloud.bigquery.connection.v1.AwsProperties.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.bigquery.connection.v1.AwsProperties
+                             * @static
+                             * @param {google.cloud.bigquery.connection.v1.IAwsProperties} message AwsProperties message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            AwsProperties.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes an AwsProperties message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.bigquery.connection.v1.AwsProperties
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.bigquery.connection.v1.AwsProperties} AwsProperties
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            AwsProperties.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.bigquery.connection.v1.AwsProperties();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 2:
+                                        message.crossAccountRole = $root.google.cloud.bigquery.connection.v1.AwsCrossAccountRole.decode(reader, reader.uint32());
+                                        break;
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes an AwsProperties message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.bigquery.connection.v1.AwsProperties
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.bigquery.connection.v1.AwsProperties} AwsProperties
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            AwsProperties.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies an AwsProperties message.
+                             * @function verify
+                             * @memberof google.cloud.bigquery.connection.v1.AwsProperties
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            AwsProperties.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                var properties = {};
+                                if (message.crossAccountRole != null && message.hasOwnProperty("crossAccountRole")) {
+                                    properties.authenticationMethod = 1;
+                                    {
+                                        var error = $root.google.cloud.bigquery.connection.v1.AwsCrossAccountRole.verify(message.crossAccountRole);
+                                        if (error)
+                                            return "crossAccountRole." + error;
+                                    }
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates an AwsProperties message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.bigquery.connection.v1.AwsProperties
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.bigquery.connection.v1.AwsProperties} AwsProperties
+                             */
+                            AwsProperties.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.bigquery.connection.v1.AwsProperties)
+                                    return object;
+                                var message = new $root.google.cloud.bigquery.connection.v1.AwsProperties();
+                                if (object.crossAccountRole != null) {
+                                    if (typeof object.crossAccountRole !== "object")
+                                        throw TypeError(".google.cloud.bigquery.connection.v1.AwsProperties.crossAccountRole: object expected");
+                                    message.crossAccountRole = $root.google.cloud.bigquery.connection.v1.AwsCrossAccountRole.fromObject(object.crossAccountRole);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from an AwsProperties message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.bigquery.connection.v1.AwsProperties
+                             * @static
+                             * @param {google.cloud.bigquery.connection.v1.AwsProperties} message AwsProperties
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            AwsProperties.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (message.crossAccountRole != null && message.hasOwnProperty("crossAccountRole")) {
+                                    object.crossAccountRole = $root.google.cloud.bigquery.connection.v1.AwsCrossAccountRole.toObject(message.crossAccountRole, options);
+                                    if (options.oneofs)
+                                        object.authenticationMethod = "crossAccountRole";
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this AwsProperties to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.bigquery.connection.v1.AwsProperties
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            AwsProperties.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            return AwsProperties;
+                        })();
+    
+                        v1.AwsCrossAccountRole = (function() {
+    
+                            /**
+                             * Properties of an AwsCrossAccountRole.
+                             * @memberof google.cloud.bigquery.connection.v1
+                             * @interface IAwsCrossAccountRole
+                             * @property {string|null} [iamRoleId] AwsCrossAccountRole iamRoleId
+                             * @property {string|null} [iamUserId] AwsCrossAccountRole iamUserId
+                             * @property {string|null} [externalId] AwsCrossAccountRole externalId
+                             */
+    
+                            /**
+                             * Constructs a new AwsCrossAccountRole.
+                             * @memberof google.cloud.bigquery.connection.v1
+                             * @classdesc Represents an AwsCrossAccountRole.
+                             * @implements IAwsCrossAccountRole
+                             * @constructor
+                             * @param {google.cloud.bigquery.connection.v1.IAwsCrossAccountRole=} [properties] Properties to set
+                             */
+                            function AwsCrossAccountRole(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * AwsCrossAccountRole iamRoleId.
+                             * @member {string} iamRoleId
+                             * @memberof google.cloud.bigquery.connection.v1.AwsCrossAccountRole
+                             * @instance
+                             */
+                            AwsCrossAccountRole.prototype.iamRoleId = "";
+    
+                            /**
+                             * AwsCrossAccountRole iamUserId.
+                             * @member {string} iamUserId
+                             * @memberof google.cloud.bigquery.connection.v1.AwsCrossAccountRole
+                             * @instance
+                             */
+                            AwsCrossAccountRole.prototype.iamUserId = "";
+    
+                            /**
+                             * AwsCrossAccountRole externalId.
+                             * @member {string} externalId
+                             * @memberof google.cloud.bigquery.connection.v1.AwsCrossAccountRole
+                             * @instance
+                             */
+                            AwsCrossAccountRole.prototype.externalId = "";
+    
+                            /**
+                             * Creates a new AwsCrossAccountRole instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.bigquery.connection.v1.AwsCrossAccountRole
+                             * @static
+                             * @param {google.cloud.bigquery.connection.v1.IAwsCrossAccountRole=} [properties] Properties to set
+                             * @returns {google.cloud.bigquery.connection.v1.AwsCrossAccountRole} AwsCrossAccountRole instance
+                             */
+                            AwsCrossAccountRole.create = function create(properties) {
+                                return new AwsCrossAccountRole(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified AwsCrossAccountRole message. Does not implicitly {@link google.cloud.bigquery.connection.v1.AwsCrossAccountRole.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.bigquery.connection.v1.AwsCrossAccountRole
+                             * @static
+                             * @param {google.cloud.bigquery.connection.v1.IAwsCrossAccountRole} message AwsCrossAccountRole message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            AwsCrossAccountRole.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.iamRoleId != null && Object.hasOwnProperty.call(message, "iamRoleId"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.iamRoleId);
+                                if (message.iamUserId != null && Object.hasOwnProperty.call(message, "iamUserId"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.iamUserId);
+                                if (message.externalId != null && Object.hasOwnProperty.call(message, "externalId"))
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.externalId);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified AwsCrossAccountRole message, length delimited. Does not implicitly {@link google.cloud.bigquery.connection.v1.AwsCrossAccountRole.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.bigquery.connection.v1.AwsCrossAccountRole
+                             * @static
+                             * @param {google.cloud.bigquery.connection.v1.IAwsCrossAccountRole} message AwsCrossAccountRole message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            AwsCrossAccountRole.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes an AwsCrossAccountRole message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.bigquery.connection.v1.AwsCrossAccountRole
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.bigquery.connection.v1.AwsCrossAccountRole} AwsCrossAccountRole
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            AwsCrossAccountRole.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.bigquery.connection.v1.AwsCrossAccountRole();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1:
+                                        message.iamRoleId = reader.string();
+                                        break;
+                                    case 2:
+                                        message.iamUserId = reader.string();
+                                        break;
+                                    case 3:
+                                        message.externalId = reader.string();
+                                        break;
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes an AwsCrossAccountRole message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.bigquery.connection.v1.AwsCrossAccountRole
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.bigquery.connection.v1.AwsCrossAccountRole} AwsCrossAccountRole
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            AwsCrossAccountRole.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies an AwsCrossAccountRole message.
+                             * @function verify
+                             * @memberof google.cloud.bigquery.connection.v1.AwsCrossAccountRole
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            AwsCrossAccountRole.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.iamRoleId != null && message.hasOwnProperty("iamRoleId"))
+                                    if (!$util.isString(message.iamRoleId))
+                                        return "iamRoleId: string expected";
+                                if (message.iamUserId != null && message.hasOwnProperty("iamUserId"))
+                                    if (!$util.isString(message.iamUserId))
+                                        return "iamUserId: string expected";
+                                if (message.externalId != null && message.hasOwnProperty("externalId"))
+                                    if (!$util.isString(message.externalId))
+                                        return "externalId: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates an AwsCrossAccountRole message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.bigquery.connection.v1.AwsCrossAccountRole
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.bigquery.connection.v1.AwsCrossAccountRole} AwsCrossAccountRole
+                             */
+                            AwsCrossAccountRole.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.bigquery.connection.v1.AwsCrossAccountRole)
+                                    return object;
+                                var message = new $root.google.cloud.bigquery.connection.v1.AwsCrossAccountRole();
+                                if (object.iamRoleId != null)
+                                    message.iamRoleId = String(object.iamRoleId);
+                                if (object.iamUserId != null)
+                                    message.iamUserId = String(object.iamUserId);
+                                if (object.externalId != null)
+                                    message.externalId = String(object.externalId);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from an AwsCrossAccountRole message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.bigquery.connection.v1.AwsCrossAccountRole
+                             * @static
+                             * @param {google.cloud.bigquery.connection.v1.AwsCrossAccountRole} message AwsCrossAccountRole
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            AwsCrossAccountRole.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.iamRoleId = "";
+                                    object.iamUserId = "";
+                                    object.externalId = "";
+                                }
+                                if (message.iamRoleId != null && message.hasOwnProperty("iamRoleId"))
+                                    object.iamRoleId = message.iamRoleId;
+                                if (message.iamUserId != null && message.hasOwnProperty("iamUserId"))
+                                    object.iamUserId = message.iamUserId;
+                                if (message.externalId != null && message.hasOwnProperty("externalId"))
+                                    object.externalId = message.externalId;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this AwsCrossAccountRole to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.bigquery.connection.v1.AwsCrossAccountRole
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            AwsCrossAccountRole.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            return AwsCrossAccountRole;
                         })();
     
                         return v1;

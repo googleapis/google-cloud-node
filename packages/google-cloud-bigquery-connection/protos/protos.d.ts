@@ -818,6 +818,9 @@ export namespace google {
                         /** Connection cloudSql */
                         cloudSql?: (google.cloud.bigquery.connection.v1.ICloudSqlProperties|null);
 
+                        /** Connection aws */
+                        aws?: (google.cloud.bigquery.connection.v1.IAwsProperties|null);
+
                         /** Connection creationTime */
                         creationTime?: (number|Long|string|null);
 
@@ -849,6 +852,9 @@ export namespace google {
                         /** Connection cloudSql. */
                         public cloudSql?: (google.cloud.bigquery.connection.v1.ICloudSqlProperties|null);
 
+                        /** Connection aws. */
+                        public aws?: (google.cloud.bigquery.connection.v1.IAwsProperties|null);
+
                         /** Connection creationTime. */
                         public creationTime: (number|Long|string);
 
@@ -859,7 +865,7 @@ export namespace google {
                         public hasCredential: boolean;
 
                         /** Connection properties. */
-                        public properties?: "cloudSql";
+                        public properties?: ("cloudSql"|"aws");
 
                         /**
                          * Creates a new Connection instance using the specified properties.
@@ -1141,6 +1147,201 @@ export namespace google {
 
                         /**
                          * Converts this CloudSqlCredential to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    /** Properties of an AwsProperties. */
+                    interface IAwsProperties {
+
+                        /** AwsProperties crossAccountRole */
+                        crossAccountRole?: (google.cloud.bigquery.connection.v1.IAwsCrossAccountRole|null);
+                    }
+
+                    /** Represents an AwsProperties. */
+                    class AwsProperties implements IAwsProperties {
+
+                        /**
+                         * Constructs a new AwsProperties.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.bigquery.connection.v1.IAwsProperties);
+
+                        /** AwsProperties crossAccountRole. */
+                        public crossAccountRole?: (google.cloud.bigquery.connection.v1.IAwsCrossAccountRole|null);
+
+                        /** AwsProperties authenticationMethod. */
+                        public authenticationMethod?: "crossAccountRole";
+
+                        /**
+                         * Creates a new AwsProperties instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns AwsProperties instance
+                         */
+                        public static create(properties?: google.cloud.bigquery.connection.v1.IAwsProperties): google.cloud.bigquery.connection.v1.AwsProperties;
+
+                        /**
+                         * Encodes the specified AwsProperties message. Does not implicitly {@link google.cloud.bigquery.connection.v1.AwsProperties.verify|verify} messages.
+                         * @param message AwsProperties message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.bigquery.connection.v1.IAwsProperties, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified AwsProperties message, length delimited. Does not implicitly {@link google.cloud.bigquery.connection.v1.AwsProperties.verify|verify} messages.
+                         * @param message AwsProperties message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.bigquery.connection.v1.IAwsProperties, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an AwsProperties message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns AwsProperties
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.bigquery.connection.v1.AwsProperties;
+
+                        /**
+                         * Decodes an AwsProperties message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns AwsProperties
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.bigquery.connection.v1.AwsProperties;
+
+                        /**
+                         * Verifies an AwsProperties message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an AwsProperties message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns AwsProperties
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.bigquery.connection.v1.AwsProperties;
+
+                        /**
+                         * Creates a plain object from an AwsProperties message. Also converts values to other types if specified.
+                         * @param message AwsProperties
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.bigquery.connection.v1.AwsProperties, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this AwsProperties to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    /** Properties of an AwsCrossAccountRole. */
+                    interface IAwsCrossAccountRole {
+
+                        /** AwsCrossAccountRole iamRoleId */
+                        iamRoleId?: (string|null);
+
+                        /** AwsCrossAccountRole iamUserId */
+                        iamUserId?: (string|null);
+
+                        /** AwsCrossAccountRole externalId */
+                        externalId?: (string|null);
+                    }
+
+                    /** Represents an AwsCrossAccountRole. */
+                    class AwsCrossAccountRole implements IAwsCrossAccountRole {
+
+                        /**
+                         * Constructs a new AwsCrossAccountRole.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.bigquery.connection.v1.IAwsCrossAccountRole);
+
+                        /** AwsCrossAccountRole iamRoleId. */
+                        public iamRoleId: string;
+
+                        /** AwsCrossAccountRole iamUserId. */
+                        public iamUserId: string;
+
+                        /** AwsCrossAccountRole externalId. */
+                        public externalId: string;
+
+                        /**
+                         * Creates a new AwsCrossAccountRole instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns AwsCrossAccountRole instance
+                         */
+                        public static create(properties?: google.cloud.bigquery.connection.v1.IAwsCrossAccountRole): google.cloud.bigquery.connection.v1.AwsCrossAccountRole;
+
+                        /**
+                         * Encodes the specified AwsCrossAccountRole message. Does not implicitly {@link google.cloud.bigquery.connection.v1.AwsCrossAccountRole.verify|verify} messages.
+                         * @param message AwsCrossAccountRole message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.bigquery.connection.v1.IAwsCrossAccountRole, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified AwsCrossAccountRole message, length delimited. Does not implicitly {@link google.cloud.bigquery.connection.v1.AwsCrossAccountRole.verify|verify} messages.
+                         * @param message AwsCrossAccountRole message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.bigquery.connection.v1.IAwsCrossAccountRole, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an AwsCrossAccountRole message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns AwsCrossAccountRole
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.bigquery.connection.v1.AwsCrossAccountRole;
+
+                        /**
+                         * Decodes an AwsCrossAccountRole message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns AwsCrossAccountRole
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.bigquery.connection.v1.AwsCrossAccountRole;
+
+                        /**
+                         * Verifies an AwsCrossAccountRole message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an AwsCrossAccountRole message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns AwsCrossAccountRole
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.bigquery.connection.v1.AwsCrossAccountRole;
+
+                        /**
+                         * Creates a plain object from an AwsCrossAccountRole message. Also converts values to other types if specified.
+                         * @param message AwsCrossAccountRole
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.bigquery.connection.v1.AwsCrossAccountRole, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this AwsCrossAccountRole to JSON.
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };

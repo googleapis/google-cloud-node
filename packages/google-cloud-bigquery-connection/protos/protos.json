@@ -214,7 +214,8 @@
                           "oneofs": {
                             "properties": {
                               "oneof": [
-                                "cloudSql"
+                                "cloudSql",
+                                "aws"
                               ]
                             }
                           },
@@ -234,6 +235,10 @@
                             "cloudSql": {
                               "type": "CloudSqlProperties",
                               "id": 4
+                            },
+                            "aws": {
+                              "type": "AwsProperties",
+                              "id": 8
                             },
                             "creationTime": {
                               "type": "int64",
@@ -299,6 +304,43 @@
                             "password": {
                               "type": "string",
                               "id": 2
+                            }
+                          }
+                        },
+                        "AwsProperties": {
+                          "oneofs": {
+                            "authenticationMethod": {
+                              "oneof": [
+                                "crossAccountRole"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "crossAccountRole": {
+                              "type": "AwsCrossAccountRole",
+                              "id": 2
+                            }
+                          }
+                        },
+                        "AwsCrossAccountRole": {
+                          "fields": {
+                            "iamRoleId": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "iamUserId": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "externalId": {
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
                             }
                           }
                         }
