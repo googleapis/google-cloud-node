@@ -1,66 +1,94 @@
+// Copyright 2020 Google LLC
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     https://www.apache.org/licenses/LICENSE-2.0
+//      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-//
 
 'use strict';
 
-async function main(
-  projectId,
-  propertyId,
-  startDate,
-  endDate,
-  nameOfDimensions,
-  nameOfMetrics
-) {
-  // [START cloud_data_analytics_quickstart]
-  // Imports the Google Cloud client library
+/** This application demonstrates the usage of the Analytics Data API using
+ service account credentials. For more information on service accounts, see
 
-  // eslint-disable-next-line node/no-extraneous-require, node/no-missing-require
+ https://cloud.google.com/iam/docs/understanding-service-accounts
+
+ The following document provides instructions on setting service account
+ credentials for your application:
+
+ https://cloud.google.com/docs/authentication/production
+
+ In a nutshell, you need to:
+
+ 1. Create a service account and download the key JSON file.
+ https://cloud.google.com/docs/authentication/production#creating_a_service_account
+
+ 2. Provide service account credentials using one of the following options:
+ - set the GOOGLE_APPLICATION_CREDENTIALS environment variable, the API
+ client will use the value of this variable to find the service account key
+ JSON file.
+
+ https://cloud.google.com/docs/authentication/production#setting_the_environment_variable
+
+ OR
+ - manually pass the path to the service account key JSON file to the API client
+ by specifying the keyFilename parameter in the constructor.
+
+ https://cloud.google.com/docs/authentication/production#passing_the_path_to_the_service_account_key_in_code
+ */
+
+function main(propertyId = 'YOUR-GA4-PROPERTY-ID') {
+  // [START analytics_data_quickstart]
+  /**
+   * TODO(developer): Uncomment this variable and replace with your GA4
+   *   property ID before running the sample.
+   */
+  // const propertyId = 'YOUR-GA4-PROPERTY-ID';
+
+  // Imports the Google Analytics Data API client library
   const {AlphaAnalyticsDataClient} = require('@google-analytics/data');
-
-  // TODO(developer): replace with your prefered project ID.
-  // const projectId = 'my-project'
 
   // Creates a client
   const client = new AlphaAnalyticsDataClient();
 
+  // Runs a simple report.
   async function runReport() {
-    const res = await client.runReport({
+    const [response] = await client.runReport({
       entity: {
         propertyId: propertyId,
       },
       dateRanges: [
         {
-          startDate: startDate,
-          endDate: endDate,
+          startDate: '2020-03-31',
+          endDate: 'today',
         },
       ],
       dimensions: [
         {
-          name: nameOfDimensions,
+          name: 'city',
         },
       ],
       metrics: [
         {
-          name: nameOfMetrics,
+          name: 'activeUsers',
         },
       ],
     });
-    console.log(res[0].rows);
-    return res[0].rows;
+
+    console.log('Report result:');
+    response.rows.forEach(row => {
+      console.log(row.dimensionValues[0], row.metricValues[0]);
+    });
   }
 
   runReport();
-  // [END cloud_data_analytics_quickstart]
+  // [END analytics_data_quickstart]
 }
 
 process.on('unhandledRejection', err => {

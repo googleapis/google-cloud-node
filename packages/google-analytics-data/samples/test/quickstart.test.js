@@ -18,27 +18,17 @@
 'use strict';
 
 const cp = require('child_process');
-const {describe, it, before} = require('mocha');
+const {assert} = require('chai');
+const {describe, it} = require('mocha');
 
 const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
 
-// eslint-disable-next-line node/no-extraneous-require, node/no-missing-require
-const {AlphaAnalyticsDataClient} = require('@google-analytics/data');
-
-const client = new AlphaAnalyticsDataClient();
+const GA4_PROPERTY_ID = process.env.GA4_PROPERTY_ID || '222596558';
 
 describe('Quickstart', () => {
-  let projectId;
-
-  before(async () => {
-    projectId = await client.getProjectId();
-  });
-
   it('should run quickstart', async () => {
     // eslint-disable-next-line no-unused-vars
-    const stdout = execSync(
-      `node ./quickstart.js ${projectId} '222596558' '2020-03-31' 'today' 'city' 'activeUsers'`
-    );
-    // assert.match(stdout, /PERMISSION_DENIED/);
+    const stdout = execSync(`node ./quickstart.js ${GA4_PROPERTY_ID}`);
+    assert.match(stdout, /Report result/);
   });
 });
