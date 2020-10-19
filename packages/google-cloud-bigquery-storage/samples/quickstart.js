@@ -28,9 +28,9 @@ async function main() {
 
   // See reference documentation at
   // https://cloud.google.com/bigquery/docs/reference/storage
-  const {BigQueryStorageClient} = require('@google-cloud/bigquery-storage');
+  const {BigQueryReadClient} = require('@google-cloud/bigquery-storage');
 
-  const client = new BigQueryStorageClient();
+  const client = new BigQueryReadClient();
 
   async function bigqueryStorageQuickstart() {
     // Get current project ID. The read session is created in this project.
@@ -42,11 +42,7 @@ async function main() {
     const datasetId = 'usa_names';
     const tableId = 'usa_1910_current';
 
-    const tableReference = {
-      projectId,
-      datasetId,
-      tableId,
-    };
+    const tableReference = `projects/${projectId}/datasets/${datasetId}/tables/${tableId}`;
 
     const parent = `projects/${myProjectId}`;
 
@@ -69,18 +65,15 @@ async function main() {
 
     // API request.
     const request = {
-      tableReference,
       parent,
-      readOptions,
-      tableModifiers,
-      // This API can also deliver data serialized in Apache Arrow format.
-      // This example leverages Apache Avro.
-      format: 'AVRO',
-      /* We use a LIQUID strategy in this example because we only read from a
-       * single stream. Consider BALANCED if you're consuming multiple streams
-       * concurrently and want more consistent stream sizes.
-       */
-      shardingStrategy: 'LIQUID',
+      readSession: {
+        table: tableReference,
+        // This API can also deliver data serialized in Apache Arrow format.
+        // This example leverages Apache Avro.
+        dataFormat: 'AVRO',
+        readOptions,
+        tableModifiers,
+      },
     };
 
     const [session] = await client.createReadSession(request);
@@ -96,16 +89,14 @@ async function main() {
     let offset = 0;
 
     const readRowsRequest = {
-      // Optional stream name or offset. Offset requested must be less than the last
-      // row read from readRows(). Requesting a larger offset is undefined.
-      readPosition: {
-        stream: session.streams[0],
-        offset,
-      },
+      // Required stream name and optional offset. Offset requested must be less than
+      // the last row read from readRows(). Requesting a larger offset is undefined.
+      readStream: session.streams[0].name,
+      offset,
     };
 
     const names = new Set();
-    const states = {};
+    const states = [];
 
     /* We'll use only a single stream for reading data from the table. Because
      * of dynamic sharding, this will yield all the rows in the table. However,
@@ -116,26 +107,33 @@ async function main() {
       .readRows(readRowsRequest)
       .on('error', console.error)
       .on('data', data => {
+        offset = data.avroRows.serializedBinaryRows.offset;
+
         try {
-          const decodedData = avroType.decode(
-            data.avroRows.serializedBinaryRows
-          );
+          // Decode all rows in buffer
+          let pos;
+          do {
+            const decodedData = avroType.decode(
+              data.avroRows.serializedBinaryRows,
+              pos
+            );
 
-          names.add(decodedData.value.name);
+            if (decodedData.value) {
+              names.add(decodedData.value.name);
 
-          if (!states[decodedData.value.state]) {
-            states[decodedData.value.state] = true;
-          }
+              if (!states.includes(decodedData.value.state)) {
+                states.push(decodedData.value.state);
+              }
+            }
 
-          offset = decodedData.offset;
+            pos = decodedData.offset;
+          } while (pos > 0);
         } catch (error) {
           console.log(error);
         }
       })
       .on('end', () => {
-        console.log(
-          `Got ${names.size} unique names in states: ${Object.keys(states)}`
-        );
+        console.log(`Got ${names.size} unique names in states: ${states}`);
         console.log(`Last offset: ${offset}`);
       });
   }
