@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.2.0](https://www.github.com/googleapis/nodejs-document-ai/compare/v2.1.1...v2.2.0) (2020-10-17)
+
+
+### Features
+
+* add v1beta3 version ([#105](https://www.github.com/googleapis/nodejs-document-ai/issues/105)) ([b419994](https://www.github.com/googleapis/nodejs-document-ai/commit/b4199943d8678b9bcaa324e94540652dff40d4e0))
+* generation error and set v1beta3 as default ([#112](https://www.github.com/googleapis/nodejs-document-ai/issues/112)) ([83ca094](https://www.github.com/googleapis/nodejs-document-ai/commit/83ca09497a4803e566c58a9a88e5bdac04585743))
+
 ### [2.1.1](https://www.github.com/googleapis/nodejs-document-ai/compare/v2.1.0...v2.1.1) (2020-07-09)
 
 
