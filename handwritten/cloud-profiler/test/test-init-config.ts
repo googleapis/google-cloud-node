@@ -40,6 +40,18 @@ describe('nodeVersionOkay', () => {
   it('should not accept v10.4.0', () => {
     assert.strictEqual(false, nodeVersionOkay('v10.4.0'));
   });
+  it('should accept v12.15.0', () => {
+    assert.strictEqual(true, nodeVersionOkay('v12.15.0'));
+  });
+  it('should not accept v12.16.0', () => {
+    assert.strictEqual(false, nodeVersionOkay('v12.16.0'));
+  });
+  it('should not accept v14.0.0', () => {
+    assert.strictEqual(false, nodeVersionOkay('v14.0.0'));
+  });
+  it('should not accept v14.13.0', () => {
+    assert.strictEqual(false, nodeVersionOkay('v14.13.0'));
+  });
 });
 
 describe('createProfiler', () => {
