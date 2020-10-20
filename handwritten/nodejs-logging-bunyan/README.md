@@ -2,7 +2,7 @@
 [//]: # "To regenerate it, use `python -m synthtool`."
 <img src="https://avatars2.githubusercontent.com/u/2810941?v=3&s=96" alt="Google Cloud Platform logo" title="Google Cloud Platform" align="right" height="96" width="96"/>
 
-This module provides an easy to use, higher-level layer for working with [Stackdriver Logging](https://cloud.google.com/logging/docs),
+This module provides an easy to use, higher-level layer for working with [Cloud Logging](https://cloud.google.com/logging/docs),
 compatible with [Bunyan](https://www.npmjs.com/package/bunyan). Simply attach this as a transport to your existing Bunyan loggers.
 
 
@@ -10,17 +10,13 @@ compatible with [Bunyan](https://www.npmjs.com/package/bunyan). Simply attach th
 [![npm version](https://img.shields.io/npm/v/@google-cloud/logging-bunyan.svg)](https://www.npmjs.org/package/@google-cloud/logging-bunyan)
 [![codecov](https://img.shields.io/codecov/c/github/googleapis/nodejs-logging-bunyan/master.svg?style=flat)](https://codecov.io/gh/googleapis/nodejs-logging-bunyan)
 
-
-
-
-Stackdriver Logging stream for Bunyan
-
+Cloud Logging stream for Bunyan
 
 A comprehensive list of changes in each version may be found in
 [the CHANGELOG](https://github.com/googleapis/nodejs-logging-bunyan/blob/master/CHANGELOG.md).
 
-* [Stackdriver Logging for Bunyan Node.js Client API Reference][client-docs]
-* [Stackdriver Logging for Bunyan Documentation][product-docs]
+* [Cloud Logging for Bunyan Node.js Client API Reference][client-docs]
+* [Cloud Logging for Bunyan Documentation][product-docs]
 * [github.com/googleapis/nodejs-logging-bunyan](https://github.com/googleapis/nodejs-logging-bunyan)
 
 Read more about the client libraries for Cloud APIs, including the older
@@ -44,9 +40,9 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 
 ### Before you begin
 
-1.  [Select or create a Cloud Platform project][projects].
-1.  [Enable the Stackdriver Logging for Bunyan API][enable_api].
-1.  [Set up authentication with a service account][auth] so you can access the
+1. [Select or create a Cloud Platform project][projects].
+1. [Enable the Cloud Logging for Bunyan API][enable_api].
+1. [Set up authentication with a service account][auth] so you can access the
     API from your local workstation.
 
 ### Installing the client library
@@ -54,7 +50,6 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 ```bash
 npm install @google-cloud/logging-bunyan
 ```
-
 
 ### Using the client library
 
@@ -64,19 +59,19 @@ const bunyan = require('bunyan');
 // Imports the Google Cloud client library for Bunyan
 const {LoggingBunyan} = require('@google-cloud/logging-bunyan');
 
-// Creates a Bunyan Stackdriver Logging client
+// Creates a Bunyan Cloud Logging client
 const loggingBunyan = new LoggingBunyan();
 
-// Create a Bunyan logger that streams to Stackdriver Logging
+// Create a Bunyan logger that streams to Cloud Logging
 // Logs will be written to: "projects/YOUR_PROJECT_ID/logs/bunyan_log"
 const logger = bunyan.createLogger({
-  // The JSON payload of the log as it appears in Stackdriver Logging
+  // The JSON payload of the log as it appears in Cloud Logging
   // will contain "name": "my-service"
   name: 'my-service',
   streams: [
     // Log to the console at 'info' and above
     {stream: process.stdout, level: 'info'},
-    // And log to Stackdriver Logging, logging at 'info' and above
+    // And log to Cloud Logging, logging at 'info' and above
     loggingBunyan.stream('info'),
   ],
 });
@@ -84,8 +79,8 @@ const logger = bunyan.createLogger({
 // Writes some log entries
 logger.error('warp nacelles offline');
 logger.info('shields at 99%');
-
 ```
+
 ### Using as an express middleware
 
 ***NOTE: this feature is experimental. The API may change in a backwards
@@ -93,7 +88,7 @@ incompatible way until this is deemed stable. Please provide us feedback so
 that we can better refine this express integration.***
 
 We provide a middleware that can be used in an express application. Apart from
-being easy to use, this enables some more powerful features of Stackdriver
+being easy to use, this enables some more powerful features of Cloud
 Logging: request bundling. Any application logs emitted on behalf of a specific
 request will be shown nested inside the request log as you see in this
 screenshot:
@@ -103,7 +98,7 @@ screenshot:
 The middleware adds a `bunyan`-style log function to the `request` object. You
 can use this wherever you have access to the `request` object (`req` in the
 sample below). All log entries that are made on behalf of a specific request are
-shown bundled together in the Stackdriver Logging UI.
+shown bundled together in the Cloud Logging UI.
 
 ```javascript
 const lb = require('@google-cloud/logging-bunyan');
@@ -125,7 +120,7 @@ async function startServer() {
   app.get('/', (req, res) => {
     // `req.log` can be used as a bunyan style log method. All logs generated
     // using `req.log` use the current request context. That is, all logs
-    // corresponding to a specific request will be bundled in the Stackdriver
+    // corresponding to a specific request will be bundled in the Cloud
     // UI.
     req.log.info('this is an info log message');
     res.send('hello world');
@@ -146,7 +141,7 @@ startServer();
 
 ### Error Reporting
 
-Any `Error` objects you log at severity `error` or higher can automatically be picked up by [Stackdriver Error Reporting][error-reporting] if you have specified a `serviceContext.service` when instatiating a `LoggingBunyan` instance:
+Any `Error` objects you log at severity `error` or higher can automatically be picked up by [Cloud Error Reporting][error-reporting] if you have specified a `serviceContext.service` when initializing a `LoggingBunyan` instance:
 
 ```javascript
 const loggingBunyan = new LoggingBunyan({
@@ -179,7 +174,7 @@ All the label values must be strings for this automatic promotion to work. Other
 
 ### Formatting Request Logs
 
-To format your request logs you can provide a `httpRequest` property on the bunyan metadata you provide along with the log message. We will treat this as the [`HttpRequest`][http-request-message] message and Stackdriver logging will show this as a request log. Example:
+To format your request logs you can provide a `httpRequest` property on the bunyan metadata you provide along with the log message. We will treat this as the [`HttpRequest`][http-request-message] message and Cloud logging will show this as a request log. Example:
 
 ![Request Log Example](https://raw.githubusercontent.com/googleapis/nodejs-logging-bunyan/master/doc/images/request-log.png)
 
@@ -195,15 +190,15 @@ logger.info({
 }, req.path);
 ```
 
-The `httpRequest` proprety must be a properly formatted [`HttpRequest`][http-request-message] message. (Note: the linked protobuf documentation shows `snake_case` property names, but in JavaScript one needs to provide property names in `camelCase`.)
+The `httpRequest` property must be a properly formatted [`HttpRequest`][http-request-message] message. (Note: the linked protobuf documentation shows `snake_case` property names, but in JavaScript one needs to provide property names in `camelCase`.)
 
 ### Correlating Logs with Traces
 
-If you use [@google-cloud/trace-agent][trace-agent] module, then this module will set the Stackdriver Logging [LogEntry][LogEntry] `trace` property based on the current trace context when available. That correlation allows you to [view log entries][trace-viewing-log-entries] inline with trace spans in the Stackdriver Trace Viewer. Example:
+If you use [@google-cloud/trace-agent][trace-agent] module, then this module will set the Cloud Logging [LogEntry][LogEntry] `trace` property based on the current trace context when available. That correlation allows you to [view log entries][trace-viewing-log-entries] inline with trace spans in the Cloud Trace Viewer. Example:
 
 ![Logs in Trace Example](https://raw.githubusercontent.com/googleapis/nodejs-logging-bunyan/master/doc/images/bunyan-logs-in-trace.png)
 
-If you wish to set the Stackdriver LogEntry `trace` property with a custom value, then write a Bunyan log entry property for `'logging.googleapis.com/trace'`, which is exported by this module as `LOGGING_TRACE_KEY`. For example:
+If you wish to set the Cloud LogEntry `trace` property with a custom value, then write a Bunyan log entry property for `'logging.googleapis.com/trace'`, which is exported by this module as `LOGGING_TRACE_KEY`. For example:
 
 ```js
 const bunyan = require('bunyan');
@@ -218,7 +213,6 @@ logger.info({
 }, 'Bunyan log entry with custom trace field');
 ```
 
-
 ## Samples
 
 Samples are in the [`samples/`](https://github.com/googleapis/nodejs-logging-bunyan/tree/master/samples) directory. The samples' `README.md`
@@ -228,11 +222,9 @@ has instructions for running the samples.
 | --------------------------- | --------------------------------- | ------ |
 | Express | [source code](https://github.com/googleapis/nodejs-logging-bunyan/blob/master/samples/express.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-logging-bunyan&page=editor&open_in_editor=samples/express.js,samples/README.md) |
 | Quickstart | [source code](https://github.com/googleapis/nodejs-logging-bunyan/blob/master/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-logging-bunyan&page=editor&open_in_editor=samples/quickstart.js,samples/README.md) |
-| Explict Auth Setup | [source code](https://github.com/googleapis/nodejs-logging-bunyan/blob/master/samples/setup_explicit.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-logging-bunyan&page=editor&open_in_editor=samples/setup_explicit.js,samples/README.md) |
+| Explicit Auth Setup | [source code](https://github.com/googleapis/nodejs-logging-bunyan/blob/master/samples/setup_explicit.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-logging-bunyan&page=editor&open_in_editor=samples/setup_explicit.js,samples/README.md) |
 
-
-
-The [Stackdriver Logging for Bunyan Node.js Client API Reference][client-docs] documentation
+The [Cloud Logging for Bunyan Node.js Client API Reference][client-docs] documentation
 also contains samples.
 
 ## Supported Node.js Versions
@@ -241,7 +233,7 @@ Our client libraries follow the [Node.js release schedule](https://nodejs.org/en
 Libraries are compatible with all current _active_ and _maintenance_ versions of
 Node.js.
 
-Client libraries targetting some end-of-life versions of Node.js are available, and
+Client libraries targeting some end-of-life versions of Node.js are available, and
 can be installed via npm [dist-tags](https://docs.npmjs.com/cli/dist-tag).
 The dist-tags follow the naming convention `legacy-(version)`.
 
@@ -251,7 +243,7 @@ _Legacy Node.js versions are supported as a best effort:_
 * Some security patches may not be able to be backported.
 * Dependencies will not be kept up-to-date, and features will not be backported.
 
-#### Legacy tags available
+### Legacy tags available
 
 * `legacy-8`: install client libraries from this dist-tag for versions
   compatible with Node.js 8.
@@ -260,16 +252,11 @@ _Legacy Node.js versions are supported as a best effort:_
 
 This library follows [Semantic Versioning](http://semver.org/).
 
-
 This library is considered to be **General Availability (GA)**. This means it
 is stable; the code surface will not change in backwards-incompatible ways
 unless absolutely necessary (e.g. because of critical security issues) or with
 an extensive deprecation period. Issues and requests against **GA** libraries
 are addressed with the highest priority.
-
-
-
-
 
 More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
