@@ -51,6 +51,7 @@ import {
   SignedPostPolicyV4Output,
   GenerateSignedPostPolicyV4Options,
   STORAGE_POST_POLICY_BASE_URL,
+  MoveOptions,
 } from '../src/file';
 
 let promisified = false;
@@ -3676,6 +3677,40 @@ describe('File', () => {
           done();
         });
       });
+    });
+  });
+
+  describe('rename', () => {
+    it('should correctly call File#move', done => {
+      const newFileName = 'renamed-file.txt';
+      const options = {};
+      file.move = (dest: string, opts: MoveOptions, cb: Function) => {
+        assert.strictEqual(dest, newFileName);
+        assert.strictEqual(opts, options);
+        assert.strictEqual(cb, done);
+        cb();
+      };
+      file.rename(newFileName, options, done);
+    });
+
+    it('should accept File object', done => {
+      const newFileObject = new File(BUCKET, 'renamed-file.txt');
+      const options = {};
+      file.move = (dest: string, opts: MoveOptions, cb: Function) => {
+        assert.strictEqual(dest, newFileObject);
+        assert.strictEqual(opts, options);
+        assert.strictEqual(cb, done);
+        cb();
+      };
+      file.rename(newFileObject, options, done);
+    });
+
+    it('should not require options', done => {
+      file.move = (dest: string, opts: MoveOptions, cb: Function) => {
+        assert.deepStrictEqual(opts, {});
+        cb();
+      };
+      file.rename('new-name', done);
     });
   });
 

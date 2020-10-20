@@ -1951,6 +1951,23 @@ describe('storage', () => {
         );
 
         it(
+          'file#rename',
+          doubleTest((options: GetFileOptions, done: SaveCallback) => {
+            const newFile = bucketNonAllowList.file(generateName());
+
+            file.rename(newFile, options, err => {
+              if (err) {
+                done(err);
+                return;
+              }
+
+              // Re-create the file. The tests need it.
+              file.save('newcontent', options, done);
+            });
+          })
+        );
+
+        it(
           'file#setMetadata',
           doubleTest(
             (

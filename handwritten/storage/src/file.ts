@@ -249,6 +249,10 @@ export interface MoveOptions {
   userProject?: string;
 }
 
+export type RenameOptions = MoveOptions;
+export type RenameResponse = MoveResponse;
+export type RenameCallback = MoveCallback;
+
 export type RotateEncryptionKeyOptions = string | Buffer | EncryptionKeyOptions;
 
 export interface EncryptionKeyOptions {
@@ -3231,6 +3235,114 @@ class File extends ServiceObject<File> {
         callback!(null, destinationFile, copyApiResponse);
       }
     });
+  }
+
+  rename(
+    destinationFile: string | File,
+    options?: RenameOptions
+  ): Promise<RenameResponse>;
+  rename(destinationFile: string | File, callback: RenameCallback): void;
+  rename(
+    destinationFile: string | File,
+    options: RenameOptions,
+    callback: RenameCallback
+  ): void;
+  /**
+   * @typedef {array} RenameResponse
+   * @property {File} 0 The destination File.
+   * @property {object} 1 The full API response.
+   */
+  /**
+   * @callback RenameCallback
+   * @param {?Error} err Request error, if any.
+   * @param {?File} destinationFile The destination File.
+   * @param {object} apiResponse The full API response.
+   */
+  /**
+   * @typedef {object} RenameOptions Configuration options for File#move(). See an
+   *     [Object
+   * resource](https://cloud.google.com/storage/docs/json_api/v1/objects#resource).
+   * @param {string} [userProject] The ID of the project which will be
+   *     billed for the request.
+   */
+  /**
+   * Rename this file.
+   *
+   * **Warning**:
+   * There is currently no atomic `rename` method in the Cloud Storage API,
+   * so this method is an alias of {@link File#move}, which in turn is a
+   * composition of {@link File#copy} (to the new location) and
+   * {@link File#delete} (from the old location). While
+   * unlikely, it is possible that an error returned to your callback could be
+   * triggered from either one of these API calls failing, which could leave a
+   * duplicate file lingering. The error message will indicate what operation
+   * has failed.
+   *
+   * @param {string|File} destinationFile Destination file.
+   * @param {RenameCallback} [callback] Callback function.
+   * @returns {Promise<RenameResponse>}
+   *
+   * @example
+   * const {Storage} = require('@google-cloud/storage');
+   * const storage = new Storage();
+   *
+   * //-
+   * // You can pass in a string or a File object.
+   * //
+   * // For all of the below examples, assume we are working with the following
+   * // Bucket and File objects.
+   * //-
+   *
+   * const bucket = storage.bucket('my-bucket');
+   * const file = bucket.file('my-image.png');
+   *
+   * //-
+   * // You can pass in a string for the destinationFile.
+   * //-
+   * file.rename('renamed-image.png', function(err, renamedFile, apiResponse) {
+   *   // `my-bucket` no longer contains:
+   *   // - "my-image.png"
+   *   // but contains instead:
+   *   // - "renamed-image.png"
+   *
+   *   // `renamedFile` is an instance of a File object that refers to your
+   *   // renamed file.
+   * });
+   *
+   * //-
+   * // You can pass in a File object.
+   * //-
+   * const anotherFile = anotherBucket.file('my-awesome-image.png');
+   *
+   * file.rename(anotherFile, function(err, renamedFile, apiResponse) {
+   *   // `my-bucket` no longer contains:
+   *   // - "my-image.png"
+   *
+   *   // Note:
+   *   // The `renamedFile` parameter is equal to `anotherFile`.
+   * });
+   *
+   * //-
+   * // If the callback is omitted, we'll return a Promise.
+   * //-
+   * file.rename('my-renamed-image.png').then(function(data) {
+   *   const renamedFile = data[0];
+   *   const apiResponse = data[1];
+   * });
+   */
+  rename(
+    destinationFile: string | File,
+    optionsOrCallback?: RenameOptions | RenameCallback,
+    callback?: RenameCallback
+  ): Promise<RenameResponse> | void {
+    const options =
+      typeof optionsOrCallback === 'object' ? optionsOrCallback : {};
+    callback =
+      typeof optionsOrCallback === 'function' ? optionsOrCallback : callback;
+
+    callback = callback || util.noop;
+
+    this.move(destinationFile, options, callback);
   }
 
   request(reqOpts: DecorateRequestOptions): Promise<[ResponseBody, Metadata]>;

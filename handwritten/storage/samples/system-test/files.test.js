@@ -33,6 +33,7 @@ const bucket = storage.bucket(bucketName);
 const fileName = 'test.txt';
 const movedFileName = 'test2.txt';
 const copiedFileName = 'test3.txt';
+const renamedFileName = 'test4.txt';
 const signedFileName = 'signed-upload.txt';
 const kmsKeyName = process.env.GOOGLE_CLOUD_KMS_KEY_US;
 const filePath = path.join(cwd, 'resources', fileName);
@@ -176,6 +177,23 @@ describe('file', () => {
     assert.match(output, /Files:/);
     assert.notMatch(output, new RegExp(movedFileName));
     assert.notMatch(output, new RegExp(copiedFileName));
+  });
+
+  it('should rename a file', async () => {
+    const output = execSync(
+      `node renameFile.js ${bucketName} ${movedFileName} ${renamedFileName}`
+    );
+    assert.match(
+      output,
+      new RegExp(
+        `gs://${bucketName}/${movedFileName} renamed to gs://${bucketName}/${renamedFileName}.`
+      )
+    );
+    const [exists] = await bucket.file(renamedFileName).exists();
+    assert.strictEqual(exists, true);
+
+    const [oldFileExists] = await bucket.file(movedFileName).exists();
+    assert.strictEqual(oldFileExists, false);
   });
 
   it('should make a file public', () => {
