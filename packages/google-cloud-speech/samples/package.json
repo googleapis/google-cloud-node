@@ -2,11 +2,15 @@
   "name": "nodejs-docs-samples-speech",
   "private": true,
   "license": "Apache-2.0",
-  "author": "Google Inc.",
+  "author": "Google LLC",
   "repository": "googleapis/nodejs-speech",
   "engines": {
-    "node": ">=8"
+    "node": ">=10.17.0"
   },
+  "files": [
+    "*.js",
+    "resources/"
+  ],
   "scripts": {
     "test": "c8 mocha system-test --timeout 600000"
   },
