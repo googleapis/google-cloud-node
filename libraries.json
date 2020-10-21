@@ -528,6 +528,20 @@
     "support_documentation": "https://cloud.google.com/logging"
   },
   {
+    "name": "logging-winston",
+    "name_pretty": "Logging for Winston",
+    "product_documentation": "https://cloud.google.com/logging",
+    "client_documentation": "https://googleapis.dev/nodejs/logging-winston/latest",
+    "issue_tracker": "https://issuetracker.google.com/savedsearches/559764",
+    "release_level": "ga",
+    "language": "nodejs",
+    "repo": "googleapis/nodejs-logging-winston",
+    "distribution_name": "@google-cloud/logging-winston",
+    "api_id": "logging.googleapis.com",
+    "codeowner_team": "@googleapis/api-logging",
+    "support_documentation": "https://cloud.google.com/logging"
+  },
+  {
     "name": "mediatranslation",
     "name_pretty": "Media Translation",
     "product_documentation": "https://cloud.google.com/translate/media/docs/",
@@ -838,19 +852,6 @@
     "language": "nodejs",
     "repo": "googleapis/nodejs-logging",
     "distribution_name": "@google-cloud/logging",
-    "api_id": "logging.googleapis.com",
-    "support_documentation": "https://cloud.google.com/stackdriver/docs/getting-support"
-  },
-  {
-    "name": "logging-winston",
-    "name_pretty": "Stackdriver Logging for Winston",
-    "product_documentation": "https://cloud.google.com/logging",
-    "client_documentation": "https://googleapis.dev/nodejs/logging-winston/latest",
-    "issue_tracker": "https://issuetracker.google.com/savedsearches/559764",
-    "release_level": "ga",
-    "language": "nodejs",
-    "repo": "googleapis/nodejs-logging-winston",
-    "distribution_name": "@google-cloud/logging-winston",
     "api_id": "logging.googleapis.com",
     "support_documentation": "https://cloud.google.com/stackdriver/docs/getting-support"
   },
