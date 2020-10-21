@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/language?activeTab=versions
 
+## [4.2.0](https://www.github.com/googleapis/nodejs-language/compare/v4.1.1...v4.2.0) (2020-10-16)
+
+
+### Features
+
+* Fix proto comments for language API inorder for docs parsing to work correctly. ([#514](https://www.github.com/googleapis/nodejs-language/issues/514)) ([eda55b8](https://www.github.com/googleapis/nodejs-language/commit/eda55b8a371ec0e8b025e6d44a77da4c3d27db22))
+
 ### [4.1.1](https://www.github.com/googleapis/nodejs-language/compare/v4.1.0...v4.1.1) (2020-09-12)
 
 
