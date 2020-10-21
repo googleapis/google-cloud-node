@@ -86,6 +86,7 @@ objects to users via direct download.
   * [Remove Bucket Owner Acl](#remove-bucket-owner-acl)
   * [Remove File Owner Acl](#remove-file-owner-acl)
   * [Remove Retention Policy](#remove-retention-policy)
+  * [Rename File](#rename-file)
   * [Rotate Encryption Key](#rotate-encryption-key)
   * [Set Event Based Hold](#set-event-based-hold)
   * [Set Retention Policy](#set-retention-policy)
@@ -1286,6 +1287,23 @@ __Usage:__
 
 
 `node samples/removeRetentionPolicy.js`
+
+
+-----
+
+
+
+
+### Rename File
+
+View the [source code](https://github.com/googleapis/nodejs-storage/blob/master/samples/renameFile.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-storage&page=editor&open_in_editor=samples/renameFile.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/renameFile.js`
 
 
 -----
