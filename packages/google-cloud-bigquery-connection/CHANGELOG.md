@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.0](https://www.github.com/googleapis/nodejs-bigquery-connection/compare/v1.1.0...v1.2.0) (2020-10-17)
+
+
+### Features
+
+* add aws connection support ([#33](https://www.github.com/googleapis/nodejs-bigquery-connection/issues/33)) ([13fecb8](https://www.github.com/googleapis/nodejs-bigquery-connection/commit/13fecb87d0191a4654f14604164072570f640dc6))
+
 ## [1.1.0](https://www.github.com/googleapis/nodejs-bigquery-connection/compare/v1.0.0...v1.1.0) (2020-08-10)
 
 
