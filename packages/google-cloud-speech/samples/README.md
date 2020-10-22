@@ -12,12 +12,12 @@
 
 * [Before you begin](#before-you-begin)
 * [Samples](#samples)
-  * [Microphone Stream](#microphone-stream)
+  * [Microphone stream](#microphone-stream)
   * [Beta Features](#beta-features)
   * [Infinite Streaming](#infinite-streaming)
   * [Quickstart](#quickstart)
   * [Recognize](#recognize)
-  * [Recognize.v1p1beta1](#recognize.v1p1beta1)
+  * [Recognize speech with metadata](#recognize-speech-with-metadata)
   * [Transcribe Context Classes](#transcribe-context-classes)
 
 ## Before you begin
@@ -35,7 +35,9 @@ Before running the samples, make sure you've followed the steps outlined in
 
 
 
-### Microphone Stream
+### Microphone stream
+
+Streams audio input from microphone, translates to text.
 
 View the [source code](https://github.com/googleapis/nodejs-speech/blob/master/samples/MicrophoneStream.js).
 
@@ -44,7 +46,7 @@ View the [source code](https://github.com/googleapis/nodejs-speech/blob/master/s
 __Usage:__
 
 
-`node samples/MicrophoneStream.js`
+`node MicrophoneStream.js <encoding> <sampleRateHertz> <languageCode>`
 
 
 -----
@@ -71,6 +73,8 @@ __Usage:__
 
 ### Infinite Streaming
 
+Performs infinite streaming using the streamingRecognize operation with the Cloud Speech API.
+
 View the [source code](https://github.com/googleapis/nodejs-speech/blob/master/samples/infiniteStreaming.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-speech&page=editor&open_in_editor=samples/infiniteStreaming.js,samples/README.md)
@@ -78,7 +82,7 @@ View the [source code](https://github.com/googleapis/nodejs-speech/blob/master/s
 __Usage:__
 
 
-`node samples/infiniteStreaming.js`
+`node infiniteStreaming.js <encoding> <sampleRateHertz> <languageCode> <streamingLimit>`
 
 
 -----
@@ -120,7 +124,9 @@ __Usage:__
 
 
 
-### Recognize.v1p1beta1
+### Recognize speech with metadata
+
+Analyzes an audio stream, and detects speech along with metadata.
 
 View the [source code](https://github.com/googleapis/nodejs-speech/blob/master/samples/recognize.v1p1beta1.js).
 
@@ -129,7 +135,7 @@ View the [source code](https://github.com/googleapis/nodejs-speech/blob/master/s
 __Usage:__
 
 
-`node samples/recognize.v1p1beta1.js`
+`node recognize.v1p1beta1.js ./resources/commercial_mono.wav <encoding> <sampleRateHertz> <languageCode>`
 
 
 -----
