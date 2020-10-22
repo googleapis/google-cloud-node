@@ -49,10 +49,13 @@
     "google-gax": "^2.1.0"
   },
   "devDependencies": {
+    "@microsoft/api-documenter": "^7.8.10",
+    "@microsoft/api-extractor": "^7.8.10",
     "@types/mocha": "^8.0.0",
     "@types/node": "^12.12.29",
     "@types/sinon": "^9.0.0",
     "c8": "^7.0.0",
+    "eslint-plugin-node": "^11.1.0",
     "gts": "^2.0.0",
     "jsdoc": "^3.6.3",
     "jsdoc-fresh": "^1.0.2",
@@ -61,12 +64,11 @@
     "mocha": "^8.0.0",
     "null-loader": "^4.0.0",
     "pack-n-play": "^1.0.0-2",
+    "prettier": "^2.1.2",
     "sinon": "^9.0.2",
     "ts-loader": "^8.0.0",
     "typescript": "^3.8.3",
     "webpack": "^4.42.0",
-    "webpack-cli": "^3.3.11",
-    "@microsoft/api-documenter": "^7.8.10",
-    "@microsoft/api-extractor": "^7.8.10"
+    "webpack-cli": "^3.3.11"
   }
 }
