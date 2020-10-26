@@ -3061,6 +3061,25 @@ class File extends ServiceObject<File> {
     );
   }
 
+  /**
+   * The public URL of this File
+   * Use {@link File#makePublic} to enable anonymous access via the returned URL.
+   *
+   * @returns {string}
+   *
+   * @example
+   * const {Storage} = require('@google-cloud/storage');
+   * const storage = new Storage();
+   * const bucket = storage.bucket('albums');
+   * const file = bucket.file('my-file');
+   *
+   * const publicUrl = file.publicUrl();
+   *  // publicUrl will be "https://storage.googleapis.com/albums/my-file"
+   */
+  publicUrl(): string {
+    return `${this.storage.apiEndpoint}/${this.bucket.name}/${this.name}`;
+  }
+
   move(
     destination: string | Bucket | File,
     options?: MoveOptions

@@ -3455,6 +3455,48 @@ describe('File', () => {
     });
   });
 
+  describe('publicUrl', () => {
+    it('should return the public URL', done => {
+      const NAME = 'file-name';
+      const file = new File(BUCKET, NAME);
+      assert.strictEqual(
+        file.publicUrl(),
+        `https://storage.googleapis.com/bucket-name/${NAME}`
+      );
+      done();
+    });
+
+    it('with slash in the name', done => {
+      const NAME = 'parent/child';
+      const file = new File(BUCKET, NAME);
+      assert.strictEqual(
+        file.publicUrl(),
+        `https://storage.googleapis.com/bucket-name/${NAME}`
+      );
+      done();
+    });
+
+    it('with tilde in the name', done => {
+      const NAME = 'foo~bar';
+      const file = new File(BUCKET, NAME);
+      assert.strictEqual(
+        file.publicUrl(),
+        `https://storage.googleapis.com/bucket-name/${NAME}`
+      );
+      done();
+    });
+
+    it('with non ascii in the name', done => {
+      const NAME = '\u2603';
+      const file = new File(BUCKET, NAME);
+      assert.strictEqual(
+        file.publicUrl(),
+        `https://storage.googleapis.com/bucket-name/${NAME}`
+      );
+      done();
+    });
+  });
+
   describe('isPublic', () => {
     const sandbox = sinon.createSandbox();
 
