@@ -2,9 +2,9 @@
   "name": "nodejs-docs-samples-vision",
   "private": true,
   "license": "Apache-2.0",
-  "author": "Google Inc.",
+  "author": "Google LLC",
   "engines": {
-    "node": ">=8"
+    "node": ">=10.17.0"
   },
   "files": [
     "*.js"
@@ -14,7 +14,6 @@
   },
   "dependencies": {
     "@google-cloud/vision": "^2.1.2",
-    "mathjs": "^7.0.0",
     "natural": "^2.0.0",
     "pureimage": "^0.2.1",
     "redis": "^3.0.0",
