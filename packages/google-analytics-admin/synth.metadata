@@ -4,15 +4,15 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/nodejs-analytics-admin.git",
-        "sha": "f55c2bfaacb6203bcb31094c61e71a166b0ddeda"
+        "sha": "e094b15dfe8389a93a9eb5b6a04afccc72620b2a"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "71088f11302e80aae77751d5a915dd2e8b684ec8",
-        "internalRef": "336969301"
+        "sha": "2131e2f755b3c2604e2d08de81a299fd7e377dcd",
+        "internalRef": "338527875"
       }
     },
     {

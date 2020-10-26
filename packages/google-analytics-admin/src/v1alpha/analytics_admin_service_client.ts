@@ -35,7 +35,7 @@ import * as gapicConfig from './analytics_admin_service_client_config.json';
 const version = require('../../../package.json').version;
 
 /**
- *  Service Interface for the Analytics Admin API (App+Web).
+ *  Service Interface for the Analytics Admin API (GA4).
  * @class
  * @memberof v1alpha
  */
@@ -841,10 +841,10 @@ export class AnalyticsAdminServiceClient {
     >
   ): void;
   /**
-   * Lookup for a single "App+Web" Property.
+   * Lookup for a single "GA4" Property.
    *
    * Throws "Target not found" if no such property found, if property is not
-   * of the type "App+Web", or if caller does not have permissions to access it.
+   * of the type "GA4", or if caller does not have permissions to access it.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -934,7 +934,7 @@ export class AnalyticsAdminServiceClient {
     >
   ): void;
   /**
-   * Creates an "App+Web" property with the specified location and attributes.
+   * Creates an "GA4" property with the specified location and attributes.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1026,7 +1026,7 @@ export class AnalyticsAdminServiceClient {
    * will be permanently purged.
    * https://support.google.com/analytics/answer/6154772
    *
-   * Returns an error if the target is not found, or is not an App+Web Property.
+   * Returns an error if the target is not found, or is not an GA4 Property.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -4252,7 +4252,7 @@ export class AnalyticsAdminServiceClient {
   /**
    * Returns all accounts accessible by the caller.
    *
-   * Note that these accounts might not currently have App+Web properties.
+   * Note that these accounts might not currently have GA4 properties.
    * Soft-deleted (ie: "trashed") accounts are excluded by default.
    * Returns an empty list if no relevant accounts are found.
    *
@@ -4636,7 +4636,7 @@ export class AnalyticsAdminServiceClient {
   /**
    * Returns child Properties under the specified parent Account.
    *
-   * Only "App+Web" properties will be returned.
+   * Only "GA4" properties will be returned.
    * Properties will be excluded if the caller does not have access.
    * Soft-deleted (ie: "trashed") properties are excluded by default.
    * Returns an empty list if no relevant properties are found.
