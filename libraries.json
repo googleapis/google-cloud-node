@@ -514,6 +514,20 @@
     "support_documentation": "https://cloud.google.com/kubernetes-engine/docs/getting-support"
   },
   {
+    "name": "logging",
+    "name_pretty": "Logging",
+    "product_documentation": "https://cloud.google.com/logging/docs",
+    "client_documentation": "https://googleapis.dev/nodejs/logging/latest",
+    "issue_tracker": "https://issuetracker.google.com/savedsearches/559764",
+    "release_level": "ga",
+    "language": "nodejs",
+    "repo": "googleapis/nodejs-logging",
+    "distribution_name": "@google-cloud/logging",
+    "api_id": "logging.googleapis.com",
+    "codeowner_team": "@googleapis/api-logging",
+    "support_documentation": "https://cloud.google.com/logging/docs"
+  },
+  {
     "name": "logging-bunyan",
     "name_pretty": "Logging for Bunyan",
     "product_documentation": "https://cloud.google.com/logging",
@@ -840,19 +854,6 @@
     "repo": "googleapis/nodejs-error-reporting",
     "distribution_name": "@google-cloud/error-reporting",
     "api_id": "clouderrorreporting.googleapis.com",
-    "support_documentation": "https://cloud.google.com/stackdriver/docs/getting-support"
-  },
-  {
-    "name": "logging",
-    "name_pretty": "Stackdriver Logging",
-    "product_documentation": "https://cloud.google.com/logging/docs",
-    "client_documentation": "https://googleapis.dev/nodejs/logging/latest",
-    "issue_tracker": "https://issuetracker.google.com/savedsearches/559764",
-    "release_level": "ga",
-    "language": "nodejs",
-    "repo": "googleapis/nodejs-logging",
-    "distribution_name": "@google-cloud/logging",
-    "api_id": "logging.googleapis.com",
     "support_documentation": "https://cloud.google.com/stackdriver/docs/getting-support"
   },
   {
