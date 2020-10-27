@@ -31,6 +31,6 @@ for version in versions:
 common_templates = gcp.CommonTemplates()
 templates = common_templates.node_library(
     source_location='build/src', versions=versions, default_version='v1')
-s.copy(templates, excludes=['.kokoro/trampoline.sh'])
+s.copy(templates, excludes=['.kokoro/trampoline.sh', '.kokoro/continuous/node12/samples-test.cfg', '.kokoro/presubmit/node12/samples-test.cfg'])
 
 node.postprocess_gapic_library()

@@ -3,23 +3,16 @@
     {
       "git": {
         "name": ".",
-        "remote": "https://github.com/googleapis/nodejs-automl.git",
-        "sha": "c90a9c67b6bb6492b58560d28c1ad7718e4aaa21"
+        "remote": "git@github.com:googleapis/nodejs-automl.git",
+        "sha": "289e6490de736c2810f319c174c8e126faef3750"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "bda7ce951def5ae6e5c4258d0e569188dd4ae02b",
-        "internalRef": "336180475"
-      }
-    },
-    {
-      "git": {
-        "name": "synthtool",
-        "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "079dcce498117f9570cebe6e6cff254b38ba3860"
+        "sha": "b3c2eb02e501d7eec36b4b08fcd981f32f8b4ff4",
+        "internalRef": "339152802"
       }
     }
   ],
@@ -83,10 +76,12 @@
     ".kokoro/system-test.sh",
     ".kokoro/test.bat",
     ".kokoro/test.sh",
+    ".kokoro/trampoline_v2.sh",
     ".mocharc.js",
     ".nycrc",
     ".prettierignore",
     ".prettierrc.js",
+    ".trampolinerc",
     "CODE_OF_CONDUCT.md",
     "CONTRIBUTING.md",
     "LICENSE",
