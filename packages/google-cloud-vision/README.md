@@ -71,6 +71,7 @@ async function quickstart() {
   console.log('Labels:');
   labels.forEach(label => console.log(label.description));
 }
+quickstart();
 
 ```
 
@@ -90,10 +91,10 @@ has instructions for running the samples.
 | Detect.v1p1beta1 | [source code](https://github.com/googleapis/nodejs-vision/blob/master/samples/detect.v1p1beta1.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-vision&page=editor&open_in_editor=samples/detect.v1p1beta1.js,samples/README.md) |
 | Detect.v1p3beta1 | [source code](https://github.com/googleapis/nodejs-vision/blob/master/samples/detect.v1p3beta1.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-vision&page=editor&open_in_editor=samples/detect.v1p3beta1.js,samples/README.md) |
 | Face Detection | [source code](https://github.com/googleapis/nodejs-vision/blob/master/samples/faceDetection.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-vision&page=editor&open_in_editor=samples/faceDetection.js,samples/README.md) |
-| Quickstart | [source code](https://github.com/googleapis/nodejs-vision/blob/master/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-vision&page=editor&open_in_editor=samples/quickstart.js,samples/README.md) |
-| Set Endpoint | [source code](https://github.com/googleapis/nodejs-vision/blob/master/samples/setEndpoint.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-vision&page=editor&open_in_editor=samples/setEndpoint.js,samples/README.md) |
+| Cloud Vision Quickstart | [source code](https://github.com/googleapis/nodejs-vision/blob/master/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-vision&page=editor&open_in_editor=samples/quickstart.js,samples/README.md) |
+| Cloud Vision Custom API Endpoint | [source code](https://github.com/googleapis/nodejs-vision/blob/master/samples/setEndpoint.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-vision&page=editor&open_in_editor=samples/setEndpoint.js,samples/README.md) |
 | Text Detection | [source code](https://github.com/googleapis/nodejs-vision/blob/master/samples/textDetection.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-vision&page=editor&open_in_editor=samples/textDetection.js,samples/README.md) |
-| Vision-face-detection | [source code](https://github.com/googleapis/nodejs-vision/blob/master/samples/vision-face-detection.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-vision&page=editor&open_in_editor=samples/vision-face-detection.js,samples/README.md) |
+| Cloud Vision Face Detection | [source code](https://github.com/googleapis/nodejs-vision/blob/master/samples/vision-face-detection.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-vision&page=editor&open_in_editor=samples/vision-face-detection.js,samples/README.md) |
 
 
 

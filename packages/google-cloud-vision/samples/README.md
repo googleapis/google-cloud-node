@@ -19,10 +19,10 @@
   * [Detect.v1p1beta1](#detect.v1p1beta1)
   * [Detect.v1p3beta1](#detect.v1p3beta1)
   * [Face Detection](#face-detection)
-  * [Quickstart](#quickstart)
-  * [Set Endpoint](#set-endpoint)
+  * [Cloud Vision Quickstart](#cloud-vision-quickstart)
+  * [Cloud Vision Custom API Endpoint](#cloud-vision-custom-api-endpoint)
   * [Text Detection](#text-detection)
-  * [Vision-face-detection](#vision-face-detection)
+  * [Cloud Vision Face Detection](#cloud-vision-face-detection)
 
 ## Before you begin
 
@@ -158,7 +158,9 @@ __Usage:__
 
 
 
-### Quickstart
+### Cloud Vision Quickstart
+
+Performs label detection of an image with a cat.
 
 View the [source code](https://github.com/googleapis/nodejs-vision/blob/master/samples/quickstart.js).
 
@@ -167,7 +169,7 @@ View the [source code](https://github.com/googleapis/nodejs-vision/blob/master/s
 __Usage:__
 
 
-`node samples/quickstart.js`
+`node quickstart.js`
 
 
 -----
@@ -175,7 +177,9 @@ __Usage:__
 
 
 
-### Set Endpoint
+### Cloud Vision Custom API Endpoint
+
+Demonstrates using a custom API endpoint for the Cloud Vision API.
 
 View the [source code](https://github.com/googleapis/nodejs-vision/blob/master/samples/setEndpoint.js).
 
@@ -184,7 +188,7 @@ View the [source code](https://github.com/googleapis/nodejs-vision/blob/master/s
 __Usage:__
 
 
-`node samples/setEndpoint.js`
+`node setEndpoint.js`
 
 
 -----
@@ -209,7 +213,9 @@ __Usage:__
 
 
 
-### Vision-face-detection
+### Cloud Vision Face Detection
+
+Identify faces in an image using the Cloud Vision API.
 
 View the [source code](https://github.com/googleapis/nodejs-vision/blob/master/samples/vision-face-detection.js).
 
@@ -218,7 +224,7 @@ View the [source code](https://github.com/googleapis/nodejs-vision/blob/master/s
 __Usage:__
 
 
-`node samples/vision-face-detection.js`
+`node vision-face-detection.js <fileName>`
 
 
 
