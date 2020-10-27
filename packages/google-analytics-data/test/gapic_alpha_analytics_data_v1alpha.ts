@@ -518,6 +518,102 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
     });
   });
 
+  describe('getUniversalMetadata', () => {
+    it('invokes getUniversalMetadata without error', async () => {
+      const client = new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.data.v1alpha.GetUniversalMetadataRequest()
+      );
+      const expectedOptions = {};
+      const expectedResponse = generateSampleMessage(
+        new protos.google.analytics.data.v1alpha.UniversalMetadata()
+      );
+      client.innerApiCalls.getUniversalMetadata = stubSimpleCall(
+        expectedResponse
+      );
+      const [response] = await client.getUniversalMetadata(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.getUniversalMetadata as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes getUniversalMetadata without error using callback', async () => {
+      const client = new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.data.v1alpha.GetUniversalMetadataRequest()
+      );
+      const expectedOptions = {};
+      const expectedResponse = generateSampleMessage(
+        new protos.google.analytics.data.v1alpha.UniversalMetadata()
+      );
+      client.innerApiCalls.getUniversalMetadata = stubSimpleCallWithCallback(
+        expectedResponse
+      );
+      const promise = new Promise((resolve, reject) => {
+        client.getUniversalMetadata(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.analytics.data.v1alpha.IUniversalMetadata | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.getUniversalMetadata as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes getUniversalMetadata with error', async () => {
+      const client = new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.data.v1alpha.GetUniversalMetadataRequest()
+      );
+      const expectedOptions = {};
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getUniversalMetadata = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.getUniversalMetadata(request), expectedError);
+      assert(
+        (client.innerApiCalls.getUniversalMetadata as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+  });
+
   describe('getMetadata', () => {
     it('invokes getMetadata without error', async () => {
       const client = new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient(
@@ -637,8 +733,8 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('propertyMetadata', () => {
-      const fakePath = '/rendered/path/propertyMetadata';
+    describe('metadata', () => {
+      const fakePath = '/rendered/path/metadata';
       const expectedParameters = {
         property: 'propertyValue',
       };
@@ -649,29 +745,28 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
         }
       );
       client.initialize();
-      client.pathTemplates.propertyMetadataPathTemplate.render = sinon
+      client.pathTemplates.metadataPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
-      client.pathTemplates.propertyMetadataPathTemplate.match = sinon
+      client.pathTemplates.metadataPathTemplate.match = sinon
         .stub()
         .returns(expectedParameters);
 
-      it('propertyMetadataPath', () => {
-        const result = client.propertyMetadataPath('propertyValue');
+      it('metadataPath', () => {
+        const result = client.metadataPath('propertyValue');
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.propertyMetadataPathTemplate
-            .render as SinonStub)
+          (client.pathTemplates.metadataPathTemplate.render as SinonStub)
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
-      it('matchPropertyFromPropertyMetadataName', () => {
-        const result = client.matchPropertyFromPropertyMetadataName(fakePath);
+      it('matchPropertyFromMetadataName', () => {
+        const result = client.matchPropertyFromMetadataName(fakePath);
         assert.strictEqual(result, 'propertyValue');
         assert(
-          (client.pathTemplates.propertyMetadataPathTemplate.match as SinonStub)
+          (client.pathTemplates.metadataPathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );

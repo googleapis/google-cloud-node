@@ -43,7 +43,7 @@ module.exports = {
     copyright: 'Copyright 2020 Google LLC',
     includeDate: false,
     sourceFiles: false,
-    systemName: 'data',
+    systemName: '@google-analytics/data',
     theme: 'lumen',
     default: {
       outputSourceFiles: false

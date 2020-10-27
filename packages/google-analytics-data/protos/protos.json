@@ -52,12 +52,18 @@
                             "(google.api.http).body": "*"
                           }
                         },
+                        "GetUniversalMetadata": {
+                          "requestType": "GetUniversalMetadataRequest",
+                          "responseType": "UniversalMetadata",
+                          "options": {
+                            "(google.api.http).get": "/v1alpha/universalMetadata"
+                          }
+                        },
                         "GetMetadata": {
                           "requestType": "GetMetadataRequest",
                           "responseType": "Metadata",
                           "options": {
-                            "(google.api.http).get": "/v1alpha/{name=metadata}",
-                            "(google.api.http).additional_bindings.get": "/v1alpha/{name=properties/*/metadata}",
+                            "(google.api.http).get": "/v1alpha/{name=properties/*/metadata}",
                             "(google.api.method_signature)": "name"
                           }
                         }
@@ -181,6 +187,10 @@
                           "rule": "repeated",
                           "type": "Row",
                           "id": 10
+                        },
+                        "rowCount": {
+                          "type": "int32",
+                          "id": 12
                         },
                         "metadata": {
                           "type": "ResponseMetaData",
@@ -322,6 +332,23 @@
                           "rule": "repeated",
                           "type": "RunPivotReportResponse",
                           "id": 1
+                        }
+                      }
+                    },
+                    "GetUniversalMetadataRequest": {
+                      "fields": {}
+                    },
+                    "UniversalMetadata": {
+                      "fields": {
+                        "dimensions": {
+                          "rule": "repeated",
+                          "type": "DimensionMetadata",
+                          "id": 1
+                        },
+                        "metrics": {
+                          "rule": "repeated",
+                          "type": "MetricMetadata",
+                          "id": 2
                         }
                       }
                     },
@@ -988,7 +1015,15 @@
                         "TYPE_INTEGER": 1,
                         "TYPE_FLOAT": 2,
                         "TYPE_SECONDS": 4,
-                        "TYPE_CURRENCY": 9
+                        "TYPE_MILLISECONDS": 5,
+                        "TYPE_MINUTES": 6,
+                        "TYPE_HOURS": 7,
+                        "TYPE_STANDARD": 8,
+                        "TYPE_CURRENCY": 9,
+                        "TYPE_FEET": 10,
+                        "TYPE_MILES": 11,
+                        "TYPE_METERS": 12,
+                        "TYPE_KILOMETERS": 13
                       }
                     }
                   }

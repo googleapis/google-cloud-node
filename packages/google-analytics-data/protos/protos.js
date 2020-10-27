@@ -231,6 +231,39 @@
                          */
     
                         /**
+                         * Callback as used by {@link google.analytics.data.v1alpha.AlphaAnalyticsData#getUniversalMetadata}.
+                         * @memberof google.analytics.data.v1alpha.AlphaAnalyticsData
+                         * @typedef GetUniversalMetadataCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.analytics.data.v1alpha.UniversalMetadata} [response] UniversalMetadata
+                         */
+    
+                        /**
+                         * Calls GetUniversalMetadata.
+                         * @function getUniversalMetadata
+                         * @memberof google.analytics.data.v1alpha.AlphaAnalyticsData
+                         * @instance
+                         * @param {google.analytics.data.v1alpha.IGetUniversalMetadataRequest} request GetUniversalMetadataRequest message or plain object
+                         * @param {google.analytics.data.v1alpha.AlphaAnalyticsData.GetUniversalMetadataCallback} callback Node-style callback called with the error, if any, and UniversalMetadata
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(AlphaAnalyticsData.prototype.getUniversalMetadata = function getUniversalMetadata(request, callback) {
+                            return this.rpcCall(getUniversalMetadata, $root.google.analytics.data.v1alpha.GetUniversalMetadataRequest, $root.google.analytics.data.v1alpha.UniversalMetadata, request, callback);
+                        }, "name", { value: "GetUniversalMetadata" });
+    
+                        /**
+                         * Calls GetUniversalMetadata.
+                         * @function getUniversalMetadata
+                         * @memberof google.analytics.data.v1alpha.AlphaAnalyticsData
+                         * @instance
+                         * @param {google.analytics.data.v1alpha.IGetUniversalMetadataRequest} request GetUniversalMetadataRequest message or plain object
+                         * @returns {Promise<google.analytics.data.v1alpha.UniversalMetadata>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
                          * Callback as used by {@link google.analytics.data.v1alpha.AlphaAnalyticsData#getMetadata}.
                          * @memberof google.analytics.data.v1alpha.AlphaAnalyticsData
                          * @typedef GetMetadataCallback
@@ -1215,6 +1248,7 @@
                          * @property {Array.<google.analytics.data.v1alpha.IRow>|null} [totals] RunReportResponse totals
                          * @property {Array.<google.analytics.data.v1alpha.IRow>|null} [maximums] RunReportResponse maximums
                          * @property {Array.<google.analytics.data.v1alpha.IRow>|null} [minimums] RunReportResponse minimums
+                         * @property {number|null} [rowCount] RunReportResponse rowCount
                          * @property {google.analytics.data.v1alpha.IResponseMetaData|null} [metadata] RunReportResponse metadata
                          * @property {google.analytics.data.v1alpha.IPropertyQuota|null} [propertyQuota] RunReportResponse propertyQuota
                          */
@@ -1289,6 +1323,14 @@
                         RunReportResponse.prototype.minimums = $util.emptyArray;
     
                         /**
+                         * RunReportResponse rowCount.
+                         * @member {number} rowCount
+                         * @memberof google.analytics.data.v1alpha.RunReportResponse
+                         * @instance
+                         */
+                        RunReportResponse.prototype.rowCount = 0;
+    
+                        /**
                          * RunReportResponse metadata.
                          * @member {google.analytics.data.v1alpha.IResponseMetaData|null|undefined} metadata
                          * @memberof google.analytics.data.v1alpha.RunReportResponse
@@ -1350,6 +1392,8 @@
                             if (message.dimensionHeaders != null && message.dimensionHeaders.length)
                                 for (var i = 0; i < message.dimensionHeaders.length; ++i)
                                     $root.google.analytics.data.v1alpha.DimensionHeader.encode(message.dimensionHeaders[i], writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
+                            if (message.rowCount != null && Object.hasOwnProperty.call(message, "rowCount"))
+                                writer.uint32(/* id 12, wireType 0 =*/96).int32(message.rowCount);
                             return writer;
                         };
     
@@ -1413,6 +1457,9 @@
                                     if (!(message.minimums && message.minimums.length))
                                         message.minimums = [];
                                     message.minimums.push($root.google.analytics.data.v1alpha.Row.decode(reader, reader.uint32()));
+                                    break;
+                                case 12:
+                                    message.rowCount = reader.int32();
                                     break;
                                 case 6:
                                     message.metadata = $root.google.analytics.data.v1alpha.ResponseMetaData.decode(reader, reader.uint32());
@@ -1509,6 +1556,9 @@
                                         return "minimums." + error;
                                 }
                             }
+                            if (message.rowCount != null && message.hasOwnProperty("rowCount"))
+                                if (!$util.isInteger(message.rowCount))
+                                    return "rowCount: integer expected";
                             if (message.metadata != null && message.hasOwnProperty("metadata")) {
                                 var error = $root.google.analytics.data.v1alpha.ResponseMetaData.verify(message.metadata);
                                 if (error)
@@ -1594,6 +1644,8 @@
                                     message.minimums[i] = $root.google.analytics.data.v1alpha.Row.fromObject(object.minimums[i]);
                                 }
                             }
+                            if (object.rowCount != null)
+                                message.rowCount = object.rowCount | 0;
                             if (object.metadata != null) {
                                 if (typeof object.metadata !== "object")
                                     throw TypeError(".google.analytics.data.v1alpha.RunReportResponse.metadata: object expected");
@@ -1631,6 +1683,7 @@
                             if (options.defaults) {
                                 object.metadata = null;
                                 object.propertyQuota = null;
+                                object.rowCount = 0;
                             }
                             if (message.metricHeaders && message.metricHeaders.length) {
                                 object.metricHeaders = [];
@@ -1666,6 +1719,8 @@
                                 for (var j = 0; j < message.dimensionHeaders.length; ++j)
                                     object.dimensionHeaders[j] = $root.google.analytics.data.v1alpha.DimensionHeader.toObject(message.dimensionHeaders[j], options);
                             }
+                            if (message.rowCount != null && message.hasOwnProperty("rowCount"))
+                                object.rowCount = message.rowCount;
                             return object;
                         };
     
@@ -3520,6 +3575,418 @@
                         };
     
                         return BatchRunPivotReportsResponse;
+                    })();
+    
+                    v1alpha.GetUniversalMetadataRequest = (function() {
+    
+                        /**
+                         * Properties of a GetUniversalMetadataRequest.
+                         * @memberof google.analytics.data.v1alpha
+                         * @interface IGetUniversalMetadataRequest
+                         */
+    
+                        /**
+                         * Constructs a new GetUniversalMetadataRequest.
+                         * @memberof google.analytics.data.v1alpha
+                         * @classdesc Represents a GetUniversalMetadataRequest.
+                         * @implements IGetUniversalMetadataRequest
+                         * @constructor
+                         * @param {google.analytics.data.v1alpha.IGetUniversalMetadataRequest=} [properties] Properties to set
+                         */
+                        function GetUniversalMetadataRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Creates a new GetUniversalMetadataRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.analytics.data.v1alpha.GetUniversalMetadataRequest
+                         * @static
+                         * @param {google.analytics.data.v1alpha.IGetUniversalMetadataRequest=} [properties] Properties to set
+                         * @returns {google.analytics.data.v1alpha.GetUniversalMetadataRequest} GetUniversalMetadataRequest instance
+                         */
+                        GetUniversalMetadataRequest.create = function create(properties) {
+                            return new GetUniversalMetadataRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetUniversalMetadataRequest message. Does not implicitly {@link google.analytics.data.v1alpha.GetUniversalMetadataRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.analytics.data.v1alpha.GetUniversalMetadataRequest
+                         * @static
+                         * @param {google.analytics.data.v1alpha.IGetUniversalMetadataRequest} message GetUniversalMetadataRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetUniversalMetadataRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetUniversalMetadataRequest message, length delimited. Does not implicitly {@link google.analytics.data.v1alpha.GetUniversalMetadataRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.analytics.data.v1alpha.GetUniversalMetadataRequest
+                         * @static
+                         * @param {google.analytics.data.v1alpha.IGetUniversalMetadataRequest} message GetUniversalMetadataRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetUniversalMetadataRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetUniversalMetadataRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.analytics.data.v1alpha.GetUniversalMetadataRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.analytics.data.v1alpha.GetUniversalMetadataRequest} GetUniversalMetadataRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetUniversalMetadataRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.data.v1alpha.GetUniversalMetadataRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetUniversalMetadataRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.analytics.data.v1alpha.GetUniversalMetadataRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.analytics.data.v1alpha.GetUniversalMetadataRequest} GetUniversalMetadataRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetUniversalMetadataRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetUniversalMetadataRequest message.
+                         * @function verify
+                         * @memberof google.analytics.data.v1alpha.GetUniversalMetadataRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetUniversalMetadataRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetUniversalMetadataRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.analytics.data.v1alpha.GetUniversalMetadataRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.analytics.data.v1alpha.GetUniversalMetadataRequest} GetUniversalMetadataRequest
+                         */
+                        GetUniversalMetadataRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.analytics.data.v1alpha.GetUniversalMetadataRequest)
+                                return object;
+                            return new $root.google.analytics.data.v1alpha.GetUniversalMetadataRequest();
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetUniversalMetadataRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.analytics.data.v1alpha.GetUniversalMetadataRequest
+                         * @static
+                         * @param {google.analytics.data.v1alpha.GetUniversalMetadataRequest} message GetUniversalMetadataRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetUniversalMetadataRequest.toObject = function toObject() {
+                            return {};
+                        };
+    
+                        /**
+                         * Converts this GetUniversalMetadataRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.analytics.data.v1alpha.GetUniversalMetadataRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetUniversalMetadataRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return GetUniversalMetadataRequest;
+                    })();
+    
+                    v1alpha.UniversalMetadata = (function() {
+    
+                        /**
+                         * Properties of an UniversalMetadata.
+                         * @memberof google.analytics.data.v1alpha
+                         * @interface IUniversalMetadata
+                         * @property {Array.<google.analytics.data.v1alpha.IDimensionMetadata>|null} [dimensions] UniversalMetadata dimensions
+                         * @property {Array.<google.analytics.data.v1alpha.IMetricMetadata>|null} [metrics] UniversalMetadata metrics
+                         */
+    
+                        /**
+                         * Constructs a new UniversalMetadata.
+                         * @memberof google.analytics.data.v1alpha
+                         * @classdesc Represents an UniversalMetadata.
+                         * @implements IUniversalMetadata
+                         * @constructor
+                         * @param {google.analytics.data.v1alpha.IUniversalMetadata=} [properties] Properties to set
+                         */
+                        function UniversalMetadata(properties) {
+                            this.dimensions = [];
+                            this.metrics = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * UniversalMetadata dimensions.
+                         * @member {Array.<google.analytics.data.v1alpha.IDimensionMetadata>} dimensions
+                         * @memberof google.analytics.data.v1alpha.UniversalMetadata
+                         * @instance
+                         */
+                        UniversalMetadata.prototype.dimensions = $util.emptyArray;
+    
+                        /**
+                         * UniversalMetadata metrics.
+                         * @member {Array.<google.analytics.data.v1alpha.IMetricMetadata>} metrics
+                         * @memberof google.analytics.data.v1alpha.UniversalMetadata
+                         * @instance
+                         */
+                        UniversalMetadata.prototype.metrics = $util.emptyArray;
+    
+                        /**
+                         * Creates a new UniversalMetadata instance using the specified properties.
+                         * @function create
+                         * @memberof google.analytics.data.v1alpha.UniversalMetadata
+                         * @static
+                         * @param {google.analytics.data.v1alpha.IUniversalMetadata=} [properties] Properties to set
+                         * @returns {google.analytics.data.v1alpha.UniversalMetadata} UniversalMetadata instance
+                         */
+                        UniversalMetadata.create = function create(properties) {
+                            return new UniversalMetadata(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UniversalMetadata message. Does not implicitly {@link google.analytics.data.v1alpha.UniversalMetadata.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.analytics.data.v1alpha.UniversalMetadata
+                         * @static
+                         * @param {google.analytics.data.v1alpha.IUniversalMetadata} message UniversalMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UniversalMetadata.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.dimensions != null && message.dimensions.length)
+                                for (var i = 0; i < message.dimensions.length; ++i)
+                                    $root.google.analytics.data.v1alpha.DimensionMetadata.encode(message.dimensions[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.metrics != null && message.metrics.length)
+                                for (var i = 0; i < message.metrics.length; ++i)
+                                    $root.google.analytics.data.v1alpha.MetricMetadata.encode(message.metrics[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UniversalMetadata message, length delimited. Does not implicitly {@link google.analytics.data.v1alpha.UniversalMetadata.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.analytics.data.v1alpha.UniversalMetadata
+                         * @static
+                         * @param {google.analytics.data.v1alpha.IUniversalMetadata} message UniversalMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UniversalMetadata.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an UniversalMetadata message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.analytics.data.v1alpha.UniversalMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.analytics.data.v1alpha.UniversalMetadata} UniversalMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UniversalMetadata.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.data.v1alpha.UniversalMetadata();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    if (!(message.dimensions && message.dimensions.length))
+                                        message.dimensions = [];
+                                    message.dimensions.push($root.google.analytics.data.v1alpha.DimensionMetadata.decode(reader, reader.uint32()));
+                                    break;
+                                case 2:
+                                    if (!(message.metrics && message.metrics.length))
+                                        message.metrics = [];
+                                    message.metrics.push($root.google.analytics.data.v1alpha.MetricMetadata.decode(reader, reader.uint32()));
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an UniversalMetadata message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.analytics.data.v1alpha.UniversalMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.analytics.data.v1alpha.UniversalMetadata} UniversalMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UniversalMetadata.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an UniversalMetadata message.
+                         * @function verify
+                         * @memberof google.analytics.data.v1alpha.UniversalMetadata
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UniversalMetadata.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.dimensions != null && message.hasOwnProperty("dimensions")) {
+                                if (!Array.isArray(message.dimensions))
+                                    return "dimensions: array expected";
+                                for (var i = 0; i < message.dimensions.length; ++i) {
+                                    var error = $root.google.analytics.data.v1alpha.DimensionMetadata.verify(message.dimensions[i]);
+                                    if (error)
+                                        return "dimensions." + error;
+                                }
+                            }
+                            if (message.metrics != null && message.hasOwnProperty("metrics")) {
+                                if (!Array.isArray(message.metrics))
+                                    return "metrics: array expected";
+                                for (var i = 0; i < message.metrics.length; ++i) {
+                                    var error = $root.google.analytics.data.v1alpha.MetricMetadata.verify(message.metrics[i]);
+                                    if (error)
+                                        return "metrics." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an UniversalMetadata message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.analytics.data.v1alpha.UniversalMetadata
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.analytics.data.v1alpha.UniversalMetadata} UniversalMetadata
+                         */
+                        UniversalMetadata.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.analytics.data.v1alpha.UniversalMetadata)
+                                return object;
+                            var message = new $root.google.analytics.data.v1alpha.UniversalMetadata();
+                            if (object.dimensions) {
+                                if (!Array.isArray(object.dimensions))
+                                    throw TypeError(".google.analytics.data.v1alpha.UniversalMetadata.dimensions: array expected");
+                                message.dimensions = [];
+                                for (var i = 0; i < object.dimensions.length; ++i) {
+                                    if (typeof object.dimensions[i] !== "object")
+                                        throw TypeError(".google.analytics.data.v1alpha.UniversalMetadata.dimensions: object expected");
+                                    message.dimensions[i] = $root.google.analytics.data.v1alpha.DimensionMetadata.fromObject(object.dimensions[i]);
+                                }
+                            }
+                            if (object.metrics) {
+                                if (!Array.isArray(object.metrics))
+                                    throw TypeError(".google.analytics.data.v1alpha.UniversalMetadata.metrics: array expected");
+                                message.metrics = [];
+                                for (var i = 0; i < object.metrics.length; ++i) {
+                                    if (typeof object.metrics[i] !== "object")
+                                        throw TypeError(".google.analytics.data.v1alpha.UniversalMetadata.metrics: object expected");
+                                    message.metrics[i] = $root.google.analytics.data.v1alpha.MetricMetadata.fromObject(object.metrics[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an UniversalMetadata message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.analytics.data.v1alpha.UniversalMetadata
+                         * @static
+                         * @param {google.analytics.data.v1alpha.UniversalMetadata} message UniversalMetadata
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UniversalMetadata.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.dimensions = [];
+                                object.metrics = [];
+                            }
+                            if (message.dimensions && message.dimensions.length) {
+                                object.dimensions = [];
+                                for (var j = 0; j < message.dimensions.length; ++j)
+                                    object.dimensions[j] = $root.google.analytics.data.v1alpha.DimensionMetadata.toObject(message.dimensions[j], options);
+                            }
+                            if (message.metrics && message.metrics.length) {
+                                object.metrics = [];
+                                for (var j = 0; j < message.metrics.length; ++j)
+                                    object.metrics[j] = $root.google.analytics.data.v1alpha.MetricMetadata.toObject(message.metrics[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this UniversalMetadata to JSON.
+                         * @function toJSON
+                         * @memberof google.analytics.data.v1alpha.UniversalMetadata
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UniversalMetadata.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return UniversalMetadata;
                     })();
     
                     v1alpha.GetMetadataRequest = (function() {
@@ -10230,7 +10697,15 @@
                                 case 1:
                                 case 2:
                                 case 4:
+                                case 5:
+                                case 6:
+                                case 7:
+                                case 8:
                                 case 9:
+                                case 10:
+                                case 11:
+                                case 12:
+                                case 13:
                                     break;
                                 }
                             return null;
@@ -10267,9 +10742,41 @@
                             case 4:
                                 message.type = 4;
                                 break;
+                            case "TYPE_MILLISECONDS":
+                            case 5:
+                                message.type = 5;
+                                break;
+                            case "TYPE_MINUTES":
+                            case 6:
+                                message.type = 6;
+                                break;
+                            case "TYPE_HOURS":
+                            case 7:
+                                message.type = 7;
+                                break;
+                            case "TYPE_STANDARD":
+                            case 8:
+                                message.type = 8;
+                                break;
                             case "TYPE_CURRENCY":
                             case 9:
                                 message.type = 9;
+                                break;
+                            case "TYPE_FEET":
+                            case 10:
+                                message.type = 10;
+                                break;
+                            case "TYPE_MILES":
+                            case 11:
+                                message.type = 11;
+                                break;
+                            case "TYPE_METERS":
+                            case 12:
+                                message.type = 12;
+                                break;
+                            case "TYPE_KILOMETERS":
+                            case 13:
+                                message.type = 13;
                                 break;
                             }
                             return message;
@@ -12640,7 +13147,15 @@
                                 case 1:
                                 case 2:
                                 case 4:
+                                case 5:
+                                case 6:
+                                case 7:
+                                case 8:
                                 case 9:
+                                case 10:
+                                case 11:
+                                case 12:
+                                case 13:
                                     break;
                                 }
                             if (message.expression != null && message.hasOwnProperty("expression"))
@@ -12691,9 +13206,41 @@
                             case 4:
                                 message.type = 4;
                                 break;
+                            case "TYPE_MILLISECONDS":
+                            case 5:
+                                message.type = 5;
+                                break;
+                            case "TYPE_MINUTES":
+                            case 6:
+                                message.type = 6;
+                                break;
+                            case "TYPE_HOURS":
+                            case 7:
+                                message.type = 7;
+                                break;
+                            case "TYPE_STANDARD":
+                            case 8:
+                                message.type = 8;
+                                break;
                             case "TYPE_CURRENCY":
                             case 9:
                                 message.type = 9;
+                                break;
+                            case "TYPE_FEET":
+                            case 10:
+                                message.type = 10;
+                                break;
+                            case "TYPE_MILES":
+                            case 11:
+                                message.type = 11;
+                                break;
+                            case "TYPE_METERS":
+                            case 12:
+                                message.type = 12;
+                                break;
+                            case "TYPE_KILOMETERS":
+                            case 13:
+                                message.type = 13;
                                 break;
                             }
                             if (object.expression != null)
@@ -12783,7 +13330,15 @@
                      * @property {number} TYPE_INTEGER=1 TYPE_INTEGER value
                      * @property {number} TYPE_FLOAT=2 TYPE_FLOAT value
                      * @property {number} TYPE_SECONDS=4 TYPE_SECONDS value
+                     * @property {number} TYPE_MILLISECONDS=5 TYPE_MILLISECONDS value
+                     * @property {number} TYPE_MINUTES=6 TYPE_MINUTES value
+                     * @property {number} TYPE_HOURS=7 TYPE_HOURS value
+                     * @property {number} TYPE_STANDARD=8 TYPE_STANDARD value
                      * @property {number} TYPE_CURRENCY=9 TYPE_CURRENCY value
+                     * @property {number} TYPE_FEET=10 TYPE_FEET value
+                     * @property {number} TYPE_MILES=11 TYPE_MILES value
+                     * @property {number} TYPE_METERS=12 TYPE_METERS value
+                     * @property {number} TYPE_KILOMETERS=13 TYPE_KILOMETERS value
                      */
                     v1alpha.MetricType = (function() {
                         var valuesById = {}, values = Object.create(valuesById);
@@ -12791,7 +13346,15 @@
                         values[valuesById[1] = "TYPE_INTEGER"] = 1;
                         values[valuesById[2] = "TYPE_FLOAT"] = 2;
                         values[valuesById[4] = "TYPE_SECONDS"] = 4;
+                        values[valuesById[5] = "TYPE_MILLISECONDS"] = 5;
+                        values[valuesById[6] = "TYPE_MINUTES"] = 6;
+                        values[valuesById[7] = "TYPE_HOURS"] = 7;
+                        values[valuesById[8] = "TYPE_STANDARD"] = 8;
                         values[valuesById[9] = "TYPE_CURRENCY"] = 9;
+                        values[valuesById[10] = "TYPE_FEET"] = 10;
+                        values[valuesById[11] = "TYPE_MILES"] = 11;
+                        values[valuesById[12] = "TYPE_METERS"] = 12;
+                        values[valuesById[13] = "TYPE_KILOMETERS"] = 13;
                         return values;
                     })();
     

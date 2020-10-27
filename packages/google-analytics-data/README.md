@@ -57,41 +57,46 @@ npm install @google-analytics/data
 ### Using the client library
 
 ```javascript
-// Imports the Google Cloud client library
+/**
+ * TODO(developer): Uncomment this variable and replace with your GA4
+ *   property ID before running the sample.
+ */
+// const propertyId = 'YOUR-GA4-PROPERTY-ID';
 
-// eslint-disable-next-line node/no-extraneous-require, node/no-missing-require
+// Imports the Google Analytics Data API client library
 const {AlphaAnalyticsDataClient} = require('@google-analytics/data');
-
-// TODO(developer): replace with your prefered project ID.
-// const projectId = 'my-project'
 
 // Creates a client
 const client = new AlphaAnalyticsDataClient();
 
+// Runs a simple report.
 async function runReport() {
-  const res = await client.runReport({
+  const [response] = await client.runReport({
     entity: {
       propertyId: propertyId,
     },
     dateRanges: [
       {
-        startDate: startDate,
-        endDate: endDate,
+        startDate: '2020-03-31',
+        endDate: 'today',
       },
     ],
     dimensions: [
       {
-        name: nameOfDimensions,
+        name: 'city',
       },
     ],
     metrics: [
       {
-        name: nameOfMetrics,
+        name: 'activeUsers',
       },
     ],
   });
-  console.log(res[0].rows);
-  return res[0].rows;
+
+  console.log('Report result:');
+  response.rows.forEach(row => {
+    console.log(row.dimensionValues[0], row.metricValues[0]);
+  });
 }
 
 runReport();
