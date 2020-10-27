@@ -47,7 +47,11 @@ async function main(
   const {PubSub} = require('@google-cloud/pubsub');
 
   // Creates a client; cache this for further use
-  const pubSubClient = new PubSub();
+  const pubSubClient = new PubSub({
+    // Sending messages to the same region ensures they are received in order
+    // even when multiple publishers are used.
+    apiEndpoint: 'us-east1-pubsub.googleapis.com:443',
+  });
 
   async function publishOrderedMessage() {
     // Publishes the message as a string, e.g. "Hello, world!" or JSON.stringify(someObject)
