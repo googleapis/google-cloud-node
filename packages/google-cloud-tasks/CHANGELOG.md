@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-tasks?activeTab=versions
 
+### [2.1.2](https://www.github.com/googleapis/nodejs-tasks/compare/v2.1.1...v2.1.2) (2020-10-27)
+
+
+### Bug Fixes
+
+* **samples:** region tag collided with tasks-api ([#476](https://www.github.com/googleapis/nodejs-tasks/issues/476)) ([fd73aa4](https://www.github.com/googleapis/nodejs-tasks/commit/fd73aa473e60dc9624b7615242099a2bd056f61b))
+
 ### [2.1.1](https://www.github.com/googleapis/nodejs-tasks/compare/v2.1.0...v2.1.1) (2020-09-12)
 
 
