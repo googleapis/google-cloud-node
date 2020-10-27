@@ -4,6 +4,18 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/automl?activeTab=versions
 
+## [2.3.0](https://www.github.com/googleapis/nodejs-automl/compare/v2.2.0...v2.3.0) (2020-10-27)
+
+
+### Features
+
+* Added text extraction health care option in create model. ([#458](https://www.github.com/googleapis/nodejs-automl/issues/458)) ([8c488cb](https://www.github.com/googleapis/nodejs-automl/commit/8c488cb7013f2fea98396c4a734ff49a1b691745))
+
+
+### Bug Fixes
+
+* **deps:** update dependency yargs to v16 ([#438](https://www.github.com/googleapis/nodejs-automl/issues/438)) ([713d005](https://www.github.com/googleapis/nodejs-automl/commit/713d00568534884bc8cce9d8ca1bbf1c5b1e0bf5))
+
 ## [2.2.0](https://www.github.com/googleapis/nodejs-automl/compare/v2.1.0...v2.2.0) (2020-06-28)
 
 
