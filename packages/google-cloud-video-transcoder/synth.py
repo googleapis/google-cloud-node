@@ -26,16 +26,16 @@ gapic = gcp.GAPICBazel()
 versions = ['v1beta1']
 for version in versions:
   library = gapic.node_library(
-    'policytroubleshooter',
+    'transcoder',
     version,
     bazel_target=f"//google/cloud/video/transcoder/{version}:video-transcoder-{version}-nodejs"
   )
-  s.copy(library, excludes=[])
+  s.copy(library, excludes=["package.json", "README.md"])
 
 # Copy common templates
 common_templates = gcp.CommonTemplates()
 templates = common_templates.node_library(
-    source_location='build/src', versions=['v1'])
+    source_location='build/src', versions=['v1beta1'])
 s.copy(templates, excludes=[])
 
 node.postprocess_gapic_library()

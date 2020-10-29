@@ -5,7 +5,7 @@
 # [Transcoder API: Node.js Client](https://github.com/googleapis/nodejs-video-transcoder)
 
 [![release level](https://img.shields.io/badge/release%20level-beta-yellow.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
-[![npm version](https://img.shields.io/npm/v/transcoder.svg)](https://www.npmjs.org/package/transcoder)
+[![npm version](https://img.shields.io/npm/v/@google-cloud/video-transcoder.svg)](https://www.npmjs.org/package/@google-cloud/video-transcoder)
 [![codecov](https://img.shields.io/codecov/c/github/googleapis/nodejs-video-transcoder/master.svg?style=flat)](https://codecov.io/gh/googleapis/nodejs-video-transcoder)
 
 
@@ -18,7 +18,7 @@ A comprehensive list of changes in each version may be found in
 [the CHANGELOG](https://github.com/googleapis/nodejs-video-transcoder/blob/master/CHANGELOG.md).
 
 * [Transcoder API Node.js Client API Reference][client-docs]
-
+* [Transcoder API Documentation][product-docs]
 * [github.com/googleapis/nodejs-video-transcoder](https://github.com/googleapis/nodejs-video-transcoder)
 
 Read more about the client libraries for Cloud APIs, including the older
@@ -32,8 +32,8 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 * [Quickstart](#quickstart)
   * [Before you begin](#before-you-begin)
   * [Installing the client library](#installing-the-client-library)
-
-
+  * [Using the client library](#using-the-client-library)
+* [Samples](#samples)
 * [Versioning](#versioning)
 * [Contributing](#contributing)
 * [License](#license)
@@ -51,10 +51,43 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 ### Installing the client library
 
 ```bash
-npm install transcoder
+npm install @google-cloud/video-transcoder
 ```
 
 
+### Using the client library
+
+```javascript
+/**
+ * TODO(developer): Uncomment these variables before running the sample.
+ */
+// const projectId = 'my-project';
+// const location = 'us-central1';
+const {TranscoderServiceClient} = require('@google-cloud/video-transcoder');
+const client = new TranscoderServiceClient();
+async function listJobs() {
+  const [jobs] = await client.listJobs({
+    parent: client.locationPath(projectId, location),
+  });
+  console.info('jobs:');
+  for (const job of jobs) {
+    console.info(job);
+  }
+}
+listJobs();
+
+```
+
+
+
+## Samples
+
+Samples are in the [`samples/`](https://github.com/googleapis/nodejs-video-transcoder/tree/master/samples) directory. The samples' `README.md`
+has instructions for running the samples.
+
+| Sample                      | Source Code                       | Try it |
+| --------------------------- | --------------------------------- | ------ |
+| Quickstart | [source code](https://github.com/googleapis/nodejs-video-transcoder/blob/master/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-video-transcoder&page=editor&open_in_editor=samples/quickstart.js,samples/README.md) |
 
 
 
@@ -117,7 +150,7 @@ Apache Version 2.0
 See [LICENSE](https://github.com/googleapis/nodejs-video-transcoder/blob/master/LICENSE)
 
 [client-docs]: https://googleapis.dev/nodejs/transcoder/latest
-
+[product-docs]: https://googleapis.dev/nodejs/transcoder/latest
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project
 [billing]: https://support.google.com/cloud/answer/6293499#enable-billing
