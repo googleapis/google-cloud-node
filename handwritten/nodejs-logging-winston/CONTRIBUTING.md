@@ -1,6 +1,6 @@
 # How to become a contributor and submit your own code
 
-## Table of contents
+**Table of contents**
 
 * [Contributor License Agreements](#contributor-license-agreements)
 * [Contributing a patch](#contributing-a-patch)
@@ -15,8 +15,10 @@ have to jump a couple of legal hurdles.
 Please fill out either the individual or corporate Contributor License Agreement
 (CLA).
 
-* If you are an individual writing original source code and you're sure you own the intellectual property, then you'll need to sign an [individual CLA](https://developers.google.com/open-source/cla/individual).
-* If you work for a company that wants to allow you to contribute your work, then you'll need to sign a [corporate CLA](https://developers.google.com/open-source/cla/corporate).
+  * If you are an individual writing original source code and you're sure you
+    own the intellectual property, then you'll need to sign an [individual CLA](https://developers.google.com/open-source/cla/individual).
+  * If you work for a company that wants to allow you to contribute your work,
+    then you'll need to sign a [corporate CLA](https://developers.google.com/open-source/cla/corporate).
 
 Follow either of the two links above to access the appropriate CLA and
 instructions for how to sign and return it. Once we receive it, we'll be able to
@@ -24,41 +26,40 @@ accept your pull requests.
 
 ## Contributing A Patch
 
-1. Submit an issue describing your proposed change to the repo in question.
-1. The repo owner will respond to your issue promptly.
-1. If your proposed change is accepted, and you haven't already done so, sign a Contributor License Agreement (see details above).
-1. Fork the desired repo, develop and test your code changes.
-1. Ensure that your code adheres to the existing style in the code to which you are contributing.
-1. Ensure that your code has an appropriate set of tests which all pass.
-1. Title your pull request following [Conventional Commits](https://www.conventionalcommits.org/) styling.
-1. Submit a pull request.
+1.  Submit an issue describing your proposed change to the repo in question.
+1.  The repo owner will respond to your issue promptly.
+1.  If your proposed change is accepted, and you haven't already done so, sign a
+    Contributor License Agreement (see details above).
+1.  Fork the desired repo, develop and test your code changes.
+1.  Ensure that your code adheres to the existing style in the code to which
+    you are contributing.
+1.  Ensure that your code has an appropriate set of tests which all pass.
+1.  Title your pull request following [Conventional Commits](https://www.conventionalcommits.org/) styling.
+1.  Submit a pull request.
 
 ## Running the tests
 
-1. [Prepare your environment for Node.js setup][setup].
-2. Install dependencies:
+1.  [Prepare your environment for Node.js setup][setup].
 
-```bash
-npx gts init
-npm install
-```
+1.  Install dependencies:
 
-3. Run the tests:
+        npm install
 
-```bash
-# Run unit tests.
-npm test
+1.  Run the tests:
 
-# Run sample integration tests.
-gcloud auth application-default login
-npm run samples-test
+        # Run unit tests.
+        npm test
 
-# Run all system tests.
-gcloud auth application-default login
-npm run system-test
+        # Run sample integration tests.
+        gcloud auth application-default login
+        npm run samples-test
 
-#  Lint (and maybe fix) any changes:
-npm run fix
-```
+        # Run all system tests.
+        gcloud auth application-default login
+        npm run system-test
+
+1.  Lint (and maybe fix) any changes:
+
+        npm run fix
 
 [setup]: https://cloud.google.com/nodejs/docs/setup
