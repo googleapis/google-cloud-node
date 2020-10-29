@@ -3,8 +3,15 @@
     {
       "git": {
         "name": ".",
-        "remote": "git@github.com:googleapis/nodejs-logging-winston.git",
-        "sha": "d203f7f32f62a34b3f571025199445142153abe9"
+        "remote": "https://github.com/googleapis/nodejs-logging-winston.git",
+        "sha": "a3c00ebf27f3553581e81e00ce73321bfd5c27b1"
+      }
+    },
+    {
+      "git": {
+        "name": "synthtool",
+        "remote": "https://github.com/googleapis/synthtool.git",
+        "sha": "ea52b8a0bd560f72f376efcf45197fb7c8869120"
       }
     }
   ],
@@ -47,16 +54,20 @@
     ".kokoro/test.bat",
     ".kokoro/test.sh",
     ".kokoro/trampoline.sh",
+    ".kokoro/trampoline_v2.sh",
     ".mocharc.js",
     ".nycrc",
     ".prettierignore",
     ".prettierrc.js",
+    ".trampolinerc",
     "CODE_OF_CONDUCT.md",
     "CONTRIBUTING.md",
     "LICENSE",
     "README.md",
     "api-extractor.json",
+    "package-lock.json.1725097414",
     "renovate.json",
-    "samples/README.md"
+    "samples/README.md",
+    "samples/package-lock.json.2731439913"
   ]
 }
