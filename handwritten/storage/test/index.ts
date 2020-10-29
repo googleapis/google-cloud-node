@@ -151,7 +151,7 @@ describe('Storage', () => {
       const expectedCalledWith = Object.assign({}, options, {
         apiEndpoint: 'https://storage.googleapis.com',
       });
-      storage = new Storage(options);
+      const storage = new Storage(options);
       const calledWith = storage.calledWith_[1];
       assert.notStrictEqual(calledWith, options);
       assert.notDeepStrictEqual(calledWith, options);
@@ -160,7 +160,7 @@ describe('Storage', () => {
 
     it('should propagate the apiEndpoint option', () => {
       const apiEndpoint = 'https://some.fake.endpoint';
-      storage = new Storage({
+      const storage = new Storage({
         projectId: PROJECT_ID,
         apiEndpoint,
       });
@@ -169,9 +169,19 @@ describe('Storage', () => {
       assert.strictEqual(calledWith.apiEndpoint, `${apiEndpoint}`);
     });
 
+    it('should set customEndpoint to true when using apiEndpoint', () => {
+      const storage = new Storage({
+        projectId: PROJECT_ID,
+        apiEndpoint: 'https://apiendpoint',
+      });
+
+      const calledWith = storage.calledWith_[0];
+      assert.strictEqual(calledWith.customEndpoint, true);
+    });
+
     it('should prepend apiEndpoint with default protocol', () => {
       const protocollessApiEndpoint = 'some.fake.endpoint';
-      storage = new Storage({
+      const storage = new Storage({
         projectId: PROJECT_ID,
         apiEndpoint: protocollessApiEndpoint,
       });
@@ -188,7 +198,7 @@ describe('Storage', () => {
 
     it('should strip trailing slash from apiEndpoint', () => {
       const apiEndpoint = 'https://some.fake.endpoint/';
-      storage = new Storage({
+      const storage = new Storage({
         projectId: PROJECT_ID,
         apiEndpoint,
       });
@@ -208,7 +218,7 @@ describe('Storage', () => {
       });
 
       it('should set baseUrl to env var STORAGE_EMULATOR_HOST', () => {
-        storage = new Storage({
+        const storage = new Storage({
           projectId: PROJECT_ID,
         });
 
@@ -221,7 +231,7 @@ describe('Storage', () => {
       });
 
       it('should be overriden by apiEndpoint', () => {
-        storage = new Storage({
+        const storage = new Storage({
           projectId: PROJECT_ID,
           apiEndpoint: 'https://some.api.com',
         });
@@ -235,7 +245,7 @@ describe('Storage', () => {
         const EMULATOR_HOST = 'internal.benchmark.com/path/';
         process.env.STORAGE_EMULATOR_HOST = EMULATOR_HOST;
 
-        storage = new Storage({
+        const storage = new Storage({
           projectId: PROJECT_ID,
         });
 
@@ -245,6 +255,15 @@ describe('Storage', () => {
           calledWith.apiEndpoint,
           'https://internal.benchmark.com/path'
         );
+      });
+
+      it('should set customEndpoint to true', () => {
+        const storage = new Storage({
+          projectId: PROJECT_ID,
+        });
+
+        const calledWith = storage.calledWith_[0];
+        assert.strictEqual(calledWith.customEndpoint, true);
       });
     });
   });
