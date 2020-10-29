@@ -163,6 +163,14 @@
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
                             },
+                            "creditTypes": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 7,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
                             "creditTypesTreatment": {
                               "type": "CreditTypesTreatment",
                               "id": 4,
@@ -200,7 +208,8 @@
                               "values": {
                                 "CREDIT_TYPES_TREATMENT_UNSPECIFIED": 0,
                                 "INCLUDE_ALL_CREDITS": 1,
-                                "EXCLUDE_ALL_CREDITS": 2
+                                "EXCLUDE_ALL_CREDITS": 2,
+                                "INCLUDE_SPECIFIED_CREDITS": 3
                               }
                             }
                           }

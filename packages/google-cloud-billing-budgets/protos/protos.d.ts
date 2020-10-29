@@ -558,6 +558,9 @@ export namespace google {
                         /** Filter projects */
                         projects?: (string[]|null);
 
+                        /** Filter creditTypes */
+                        creditTypes?: (string[]|null);
+
                         /** Filter creditTypesTreatment */
                         creditTypesTreatment?: (google.cloud.billing.budgets.v1beta1.Filter.CreditTypesTreatment|keyof typeof google.cloud.billing.budgets.v1beta1.Filter.CreditTypesTreatment|null);
 
@@ -582,6 +585,9 @@ export namespace google {
 
                         /** Filter projects. */
                         public projects: string[];
+
+                        /** Filter creditTypes. */
+                        public creditTypes: string[];
 
                         /** Filter creditTypesTreatment. */
                         public creditTypesTreatment: (google.cloud.billing.budgets.v1beta1.Filter.CreditTypesTreatment|keyof typeof google.cloud.billing.budgets.v1beta1.Filter.CreditTypesTreatment);
@@ -672,7 +678,8 @@ export namespace google {
                         enum CreditTypesTreatment {
                             CREDIT_TYPES_TREATMENT_UNSPECIFIED = 0,
                             INCLUDE_ALL_CREDITS = 1,
-                            EXCLUDE_ALL_CREDITS = 2
+                            EXCLUDE_ALL_CREDITS = 2,
+                            INCLUDE_SPECIFIED_CREDITS = 3
                         }
                     }
 

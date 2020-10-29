@@ -1359,6 +1359,7 @@
                              * @memberof google.cloud.billing.budgets.v1beta1
                              * @interface IFilter
                              * @property {Array.<string>|null} [projects] Filter projects
+                             * @property {Array.<string>|null} [creditTypes] Filter creditTypes
                              * @property {google.cloud.billing.budgets.v1beta1.Filter.CreditTypesTreatment|null} [creditTypesTreatment] Filter creditTypesTreatment
                              * @property {Array.<string>|null} [services] Filter services
                              * @property {Array.<string>|null} [subaccounts] Filter subaccounts
@@ -1375,6 +1376,7 @@
                              */
                             function Filter(properties) {
                                 this.projects = [];
+                                this.creditTypes = [];
                                 this.services = [];
                                 this.subaccounts = [];
                                 this.labels = {};
@@ -1391,6 +1393,14 @@
                              * @instance
                              */
                             Filter.prototype.projects = $util.emptyArray;
+    
+                            /**
+                             * Filter creditTypes.
+                             * @member {Array.<string>} creditTypes
+                             * @memberof google.cloud.billing.budgets.v1beta1.Filter
+                             * @instance
+                             */
+                            Filter.prototype.creditTypes = $util.emptyArray;
     
                             /**
                              * Filter creditTypesTreatment.
@@ -1464,6 +1474,9 @@
                                         writer.uint32(/* id 6, wireType 2 =*/50).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]);
                                         $root.google.protobuf.ListValue.encode(message.labels[keys[i]], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim().ldelim();
                                     }
+                                if (message.creditTypes != null && message.creditTypes.length)
+                                    for (var i = 0; i < message.creditTypes.length; ++i)
+                                        writer.uint32(/* id 7, wireType 2 =*/58).string(message.creditTypes[i]);
                                 return writer;
                             };
     
@@ -1502,6 +1515,11 @@
                                         if (!(message.projects && message.projects.length))
                                             message.projects = [];
                                         message.projects.push(reader.string());
+                                        break;
+                                    case 7:
+                                        if (!(message.creditTypes && message.creditTypes.length))
+                                            message.creditTypes = [];
+                                        message.creditTypes.push(reader.string());
                                         break;
                                     case 4:
                                         message.creditTypesTreatment = reader.int32();
@@ -1580,6 +1598,13 @@
                                         if (!$util.isString(message.projects[i]))
                                             return "projects: string[] expected";
                                 }
+                                if (message.creditTypes != null && message.hasOwnProperty("creditTypes")) {
+                                    if (!Array.isArray(message.creditTypes))
+                                        return "creditTypes: array expected";
+                                    for (var i = 0; i < message.creditTypes.length; ++i)
+                                        if (!$util.isString(message.creditTypes[i]))
+                                            return "creditTypes: string[] expected";
+                                }
                                 if (message.creditTypesTreatment != null && message.hasOwnProperty("creditTypesTreatment"))
                                     switch (message.creditTypesTreatment) {
                                     default:
@@ -1587,6 +1612,7 @@
                                     case 0:
                                     case 1:
                                     case 2:
+                                    case 3:
                                         break;
                                     }
                                 if (message.services != null && message.hasOwnProperty("services")) {
@@ -1635,6 +1661,13 @@
                                     for (var i = 0; i < object.projects.length; ++i)
                                         message.projects[i] = String(object.projects[i]);
                                 }
+                                if (object.creditTypes) {
+                                    if (!Array.isArray(object.creditTypes))
+                                        throw TypeError(".google.cloud.billing.budgets.v1beta1.Filter.creditTypes: array expected");
+                                    message.creditTypes = [];
+                                    for (var i = 0; i < object.creditTypes.length; ++i)
+                                        message.creditTypes[i] = String(object.creditTypes[i]);
+                                }
                                 switch (object.creditTypesTreatment) {
                                 case "CREDIT_TYPES_TREATMENT_UNSPECIFIED":
                                 case 0:
@@ -1647,6 +1680,10 @@
                                 case "EXCLUDE_ALL_CREDITS":
                                 case 2:
                                     message.creditTypesTreatment = 2;
+                                    break;
+                                case "INCLUDE_SPECIFIED_CREDITS":
+                                case 3:
+                                    message.creditTypesTreatment = 3;
                                     break;
                                 }
                                 if (object.services) {
@@ -1693,6 +1730,7 @@
                                     object.projects = [];
                                     object.services = [];
                                     object.subaccounts = [];
+                                    object.creditTypes = [];
                                 }
                                 if (options.objects || options.defaults)
                                     object.labels = {};
@@ -1721,6 +1759,11 @@
                                     for (var j = 0; j < keys2.length; ++j)
                                         object.labels[keys2[j]] = $root.google.protobuf.ListValue.toObject(message.labels[keys2[j]], options);
                                 }
+                                if (message.creditTypes && message.creditTypes.length) {
+                                    object.creditTypes = [];
+                                    for (var j = 0; j < message.creditTypes.length; ++j)
+                                        object.creditTypes[j] = message.creditTypes[j];
+                                }
                                 return object;
                             };
     
@@ -1742,12 +1785,14 @@
                              * @property {number} CREDIT_TYPES_TREATMENT_UNSPECIFIED=0 CREDIT_TYPES_TREATMENT_UNSPECIFIED value
                              * @property {number} INCLUDE_ALL_CREDITS=1 INCLUDE_ALL_CREDITS value
                              * @property {number} EXCLUDE_ALL_CREDITS=2 EXCLUDE_ALL_CREDITS value
+                             * @property {number} INCLUDE_SPECIFIED_CREDITS=3 INCLUDE_SPECIFIED_CREDITS value
                              */
                             Filter.CreditTypesTreatment = (function() {
                                 var valuesById = {}, values = Object.create(valuesById);
                                 values[valuesById[0] = "CREDIT_TYPES_TREATMENT_UNSPECIFIED"] = 0;
                                 values[valuesById[1] = "INCLUDE_ALL_CREDITS"] = 1;
                                 values[valuesById[2] = "EXCLUDE_ALL_CREDITS"] = 2;
+                                values[valuesById[3] = "INCLUDE_SPECIFIED_CREDITS"] = 3;
                                 return values;
                             })();
     
