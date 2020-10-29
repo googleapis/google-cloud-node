@@ -4,6 +4,27 @@
 
 [1]: https://www.npmjs.com/package/nodejs-storage?activeTab=versions
 
+## [5.4.0](https://www.github.com/googleapis/nodejs-storage/compare/v5.3.0...v5.4.0) (2020-10-29)
+
+
+### Features
+
+* **userAgent:** allow for optional user agent to be provided ([#1313](https://www.github.com/googleapis/nodejs-storage/issues/1313)) ([13a064f](https://www.github.com/googleapis/nodejs-storage/commit/13a064f3e7342640c5c6e64e060e8558062a31c7))
+* add custom time field in metadata sample ([#1285](https://www.github.com/googleapis/nodejs-storage/issues/1285)) ([9e3474f](https://www.github.com/googleapis/nodejs-storage/commit/9e3474f87dabd300d914c0f44f49a13dae34227d))
+* add File#rename ([#1311](https://www.github.com/googleapis/nodejs-storage/issues/1311)) ([c77eaa3](https://www.github.com/googleapis/nodejs-storage/commit/c77eaa363be18b6b9ddd1f7b505e23be8cd5bf98))
+* public url of a file ([#1324](https://www.github.com/googleapis/nodejs-storage/issues/1324)) ([5ec256e](https://www.github.com/googleapis/nodejs-storage/commit/5ec256e58d04dbcb8dee8cde7460b306da5ff880))
+
+
+### Bug Fixes
+
+* set customEndpoint for custom environments ([#1316](https://www.github.com/googleapis/nodejs-storage/issues/1316)) ([60910e1](https://www.github.com/googleapis/nodejs-storage/commit/60910e1903f95a0abca6b9855d11833b32666e2c))
+* **deps:** update dependency gaxios to v4 ([#1322](https://www.github.com/googleapis/nodejs-storage/issues/1322)) ([f9b16d8](https://www.github.com/googleapis/nodejs-storage/commit/f9b16d82e5c6a26d76f721a277cf07b518b63a42))
+* moved publicUrl comment ([#1327](https://www.github.com/googleapis/nodejs-storage/issues/1327)) ([249ed2c](https://www.github.com/googleapis/nodejs-storage/commit/249ed2c4e5fe9cfb029ca8e60c1bafab5c370a48))
+* self-upload files for Unicode system tests ([#1318](https://www.github.com/googleapis/nodejs-storage/issues/1318)) ([e826a52](https://www.github.com/googleapis/nodejs-storage/commit/e826a526c3a5a8515cc7a07c15f86fcfb0fb2f93))
+* **deps:** update dependency duplexify to v4 ([#1302](https://www.github.com/googleapis/nodejs-storage/issues/1302)) ([1ce3d89](https://www.github.com/googleapis/nodejs-storage/commit/1ce3d895b3f5d12776f0634b41b1baef7aa4491c))
+* **deps:** update dependency yargs to v16 ([#1289](https://www.github.com/googleapis/nodejs-storage/issues/1289)) ([12f2133](https://www.github.com/googleapis/nodejs-storage/commit/12f2133b7e3ec9612b3694d93b9ff756cb1bbd66))
+* **types:** add `CreateBucketRequest.storageClass` ([#1299](https://www.github.com/googleapis/nodejs-storage/issues/1299)) ([d854c26](https://www.github.com/googleapis/nodejs-storage/commit/d854c2609eb87886a010e726daa5f1339ee9ea38)), closes [#1248](https://www.github.com/googleapis/nodejs-storage/issues/1248)
+
 ## [5.3.0](https://www.github.com/googleapis/nodejs-storage/compare/v5.2.0...v5.3.0) (2020-08-24)
 
 
