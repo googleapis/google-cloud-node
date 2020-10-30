@@ -56,17 +56,12 @@ npm install @google-cloud/profiler
 
 ### Prerequisites
 
-1. Your application will need to be using Node.js 10.4.1 or greater on the 10.x
- version branch or Node.js 12.15.0 or lower on the 12.x version branch. The 
- profiler will not be enabled when using version prior to 10.4.1 or after 
- 12.15.0. This is because:
- * Versions of Node.js 10 prior to 10.4.1 are impacted by
-   [this](https://bugs.chromium.org/p/chromium/issues/detail?id=847863) issue,
-   which can cause garbage collection to take several minutes when heap 
-   profiling is enabled.
- * Versions of Node.js 12 after 12.15.0 are impacted by 
-   [this memory leak](https://bugs.chromium.org/p/v8/issues/detail?id=10883)
-   when profiling is enabled.
+1. Your application will need to be using Node.js 10.4.1 or greater or Node.js
+12. The profiler will not be enabled when using earlier versions of 10 because
+versions of Node.js 10 prior to 10.4.1 are impacted by
+[this](https://bugs.chromium.org/p/chromium/issues/detail?id=847863) issue,
+which can cause garbage collection to take several minutes when heap profiling
+is enabled.
 
 1. `@google-cloud/profiler` depends on the
 [`pprof`](https://www.npmjs.com/package/pprof) module, a module with a native
