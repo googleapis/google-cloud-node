@@ -35,6 +35,7 @@ branchProtectionRules:
     - "docs"
     - "lint"
     - "test (10)"
-    - "test (12.15)"
+    - "test (12)"
+    - "test (13)"
     - "windows"
     - "system-test"
