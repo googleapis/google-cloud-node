@@ -4,6 +4,23 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/profiler?activeTab=versions
 
+## [4.1.0](https://www.github.com/googleapis/cloud-profiler-nodejs/compare/v4.0.3...v4.1.0) (2020-11-02)
+
+
+### Features
+
+* add support for Node 14 ([#709](https://www.github.com/googleapis/cloud-profiler-nodejs/issues/709)) ([3b8f4ad](https://www.github.com/googleapis/cloud-profiler-nodejs/commit/3b8f4adbb069c163864ba4e61e7980e78c057713))
+
+
+### Bug Fixes
+
+* Update engines to prevent agent from being used with versions of Node.js where v8 profilers have memory leaks ([#699](https://www.github.com/googleapis/cloud-profiler-nodejs/issues/699)) ([160d1f6](https://www.github.com/googleapis/cloud-profiler-nodejs/commit/160d1f68c657f6ce18b8cea921470d1b4482619f))
+
+
+### Reverts
+
+* Revert "fix: Update engines to prevent agent from getting used when it will cause memory leak." (#706) ([9141c2f](https://www.github.com/googleapis/cloud-profiler-nodejs/commit/9141c2fc9373a8a8b26a577165a23a21835db779)), closes [#706](https://www.github.com/googleapis/cloud-profiler-nodejs/issues/706) [#699](https://www.github.com/googleapis/cloud-profiler-nodejs/issues/699)
+
 ### [4.0.3](https://www.github.com/googleapis/cloud-profiler-nodejs/compare/v4.0.2...v4.0.3) (2020-09-12)
 
 
