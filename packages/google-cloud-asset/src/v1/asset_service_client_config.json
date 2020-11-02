@@ -6,6 +6,9 @@
         "idempotent": [
           "DEADLINE_EXCEEDED",
           "UNAVAILABLE"
+        ],
+        "unavailable": [
+          "UNAVAILABLE"
         ]
       },
       "retry_params": {
@@ -63,6 +66,16 @@
         "SearchAllIamPolicies": {
           "timeout_millis": 15000,
           "retry_codes_name": "idempotent",
+          "retry_params_name": "default"
+        },
+        "AnalyzeIamPolicy": {
+          "timeout_millis": 300000,
+          "retry_codes_name": "unavailable",
+          "retry_params_name": "default"
+        },
+        "AnalyzeIamPolicyLongrunning": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         }
       }

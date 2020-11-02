@@ -900,6 +900,121 @@ describe('v1.AssetServiceClient', () => {
     });
   });
 
+  describe('analyzeIamPolicy', () => {
+    it('invokes analyzeIamPolicy without error', async () => {
+      const client = new assetserviceModule.v1.AssetServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.asset.v1.AnalyzeIamPolicyRequest()
+      );
+      request.analysisQuery = {};
+      request.analysisQuery.scope = '';
+      const expectedHeaderRequestParams = 'analysis_query.scope=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.asset.v1.AnalyzeIamPolicyResponse()
+      );
+      client.innerApiCalls.analyzeIamPolicy = stubSimpleCall(expectedResponse);
+      const [response] = await client.analyzeIamPolicy(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.analyzeIamPolicy as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes analyzeIamPolicy without error using callback', async () => {
+      const client = new assetserviceModule.v1.AssetServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.asset.v1.AnalyzeIamPolicyRequest()
+      );
+      request.analysisQuery = {};
+      request.analysisQuery.scope = '';
+      const expectedHeaderRequestParams = 'analysis_query.scope=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.asset.v1.AnalyzeIamPolicyResponse()
+      );
+      client.innerApiCalls.analyzeIamPolicy = stubSimpleCallWithCallback(
+        expectedResponse
+      );
+      const promise = new Promise((resolve, reject) => {
+        client.analyzeIamPolicy(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.asset.v1.IAnalyzeIamPolicyResponse | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.analyzeIamPolicy as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes analyzeIamPolicy with error', async () => {
+      const client = new assetserviceModule.v1.AssetServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.asset.v1.AnalyzeIamPolicyRequest()
+      );
+      request.analysisQuery = {};
+      request.analysisQuery.scope = '';
+      const expectedHeaderRequestParams = 'analysis_query.scope=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.analyzeIamPolicy = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.analyzeIamPolicy(request), expectedError);
+      assert(
+        (client.innerApiCalls.analyzeIamPolicy as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+  });
+
   describe('exportAssets', () => {
     it('invokes exportAssets without error', async () => {
       const client = new assetserviceModule.v1.AssetServiceClient({
@@ -1087,6 +1202,209 @@ describe('v1.AssetServiceClient', () => {
         expectedError
       );
       await assert.rejects(client.checkExportAssetsProgress(''), expectedError);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('analyzeIamPolicyLongrunning', () => {
+    it('invokes analyzeIamPolicyLongrunning without error', async () => {
+      const client = new assetserviceModule.v1.AssetServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.asset.v1.AnalyzeIamPolicyLongrunningRequest()
+      );
+      request.analysisQuery = {};
+      request.analysisQuery.scope = '';
+      const expectedHeaderRequestParams = 'analysis_query.scope=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.analyzeIamPolicyLongrunning = stubLongRunningCall(
+        expectedResponse
+      );
+      const [operation] = await client.analyzeIamPolicyLongrunning(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.analyzeIamPolicyLongrunning as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes analyzeIamPolicyLongrunning without error using callback', async () => {
+      const client = new assetserviceModule.v1.AssetServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.asset.v1.AnalyzeIamPolicyLongrunningRequest()
+      );
+      request.analysisQuery = {};
+      request.analysisQuery.scope = '';
+      const expectedHeaderRequestParams = 'analysis_query.scope=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.analyzeIamPolicyLongrunning = stubLongRunningCallWithCallback(
+        expectedResponse
+      );
+      const promise = new Promise((resolve, reject) => {
+        client.analyzeIamPolicyLongrunning(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.asset.v1.IAnalyzeIamPolicyLongrunningResponse,
+              protos.google.cloud.asset.v1.IAnalyzeIamPolicyLongrunningRequest
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.asset.v1.IAnalyzeIamPolicyLongrunningResponse,
+        protos.google.cloud.asset.v1.IAnalyzeIamPolicyLongrunningRequest
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.analyzeIamPolicyLongrunning as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes analyzeIamPolicyLongrunning with call error', async () => {
+      const client = new assetserviceModule.v1.AssetServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.asset.v1.AnalyzeIamPolicyLongrunningRequest()
+      );
+      request.analysisQuery = {};
+      request.analysisQuery.scope = '';
+      const expectedHeaderRequestParams = 'analysis_query.scope=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.analyzeIamPolicyLongrunning = stubLongRunningCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.analyzeIamPolicyLongrunning(request),
+        expectedError
+      );
+      assert(
+        (client.innerApiCalls.analyzeIamPolicyLongrunning as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes analyzeIamPolicyLongrunning with LRO error', async () => {
+      const client = new assetserviceModule.v1.AssetServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.asset.v1.AnalyzeIamPolicyLongrunningRequest()
+      );
+      request.analysisQuery = {};
+      request.analysisQuery.scope = '';
+      const expectedHeaderRequestParams = 'analysis_query.scope=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.analyzeIamPolicyLongrunning = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError
+      );
+      const [operation] = await client.analyzeIamPolicyLongrunning(request);
+      await assert.rejects(operation.promise(), expectedError);
+      assert(
+        (client.innerApiCalls.analyzeIamPolicyLongrunning as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes checkAnalyzeIamPolicyLongrunningProgress without error', async () => {
+      const client = new assetserviceModule.v1.AssetServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkAnalyzeIamPolicyLongrunningProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkAnalyzeIamPolicyLongrunningProgress with error', async () => {
+      const client = new assetserviceModule.v1.AssetServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkAnalyzeIamPolicyLongrunningProgress(''),
+        expectedError
+      );
       assert((client.operationsClient.getOperation as SinonStub).getCall(0));
     });
   });
