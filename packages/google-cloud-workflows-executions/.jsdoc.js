@@ -43,7 +43,7 @@ module.exports = {
     copyright: 'Copyright 2020 Google LLC',
     includeDate: false,
     sourceFiles: false,
-    systemName: 'workflows',
+    systemName: '@google-cloud/workflows',
     theme: 'lumen',
     default: {
       outputSourceFiles: false

@@ -3,16 +3,23 @@
     {
       "git": {
         "name": ".",
-        "remote": "git@github.com:googleapis/nodejs-workflows.git",
-        "sha": "7444fd0907e73f4bc546a56783c70cd396a8046f"
+        "remote": "https://github.com/googleapis/nodejs-workflows.git",
+        "sha": "c1f871f059fb602a41b170cb0efc46bccd639011"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "74bda5c755f36d6e2f82d6e18a702301582c9fab",
-        "internalRef": "332258539"
+        "sha": "4ede77543c77072a2ac9f78353de2de2f8c4c501",
+        "internalRef": "333125205"
+      }
+    },
+    {
+      "git": {
+        "name": "synthtool",
+        "remote": "https://github.com/googleapis/synthtool.git",
+        "sha": "6542bd723403513626f61642fc02ddca528409aa"
       }
     }
   ],
@@ -77,10 +84,12 @@
     ".kokoro/test.bat",
     ".kokoro/test.sh",
     ".kokoro/trampoline.sh",
+    ".kokoro/trampoline_v2.sh",
     ".mocharc.js",
     ".nycrc",
     ".prettierignore",
     ".prettierrc.js",
+    ".trampolinerc",
     "CODE_OF_CONDUCT.md",
     "CONTRIBUTING.md",
     "LICENSE",

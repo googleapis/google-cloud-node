@@ -17,10 +17,10 @@
 // ** All changes to this file may be overwritten. **
 
 /* eslint-disable node/no-missing-require, no-unused-vars */
-const executions = require('@google-cloud/workflows');
+const workflows = require('@google-cloud/workflows');
 
 function main() {
-  const executionsClient = new executions.ExecutionsClient();
+  const workflowsClient = new workflows.WorkflowsClient();
 }
 
 main();
