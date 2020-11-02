@@ -4,7 +4,7 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/nodejs-video-transcoder.git",
-        "sha": "d4c1d9cc6dd46d9b235054c5a1a9ff94878cfbb7"
+        "sha": "05a6913a04e12e6a6d3bb88a633b41c09da786c7"
       }
     },
     {
@@ -19,7 +19,7 @@
       "git": {
         "name": "synthtool",
         "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "6542bd723403513626f61642fc02ddca528409aa"
+        "sha": "ba9918cd22874245b55734f57470c719b577e591"
       }
     }
   ],
