@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.3.0](https://www.github.com/googleapis/nodejs-billing-budgets/compare/v2.2.0...v2.3.0) (2020-10-29)
+
+
+### Features
+
+* Add support for credit type filter field. ([#176](https://www.github.com/googleapis/nodejs-billing-budgets/issues/176)) ([15b085d](https://www.github.com/googleapis/nodejs-billing-budgets/commit/15b085d498c5a2107b3f5da2d601731b7f7aeee7))
+
 ## [2.2.0](https://www.github.com/googleapis/nodejs-billing-budgets/compare/v2.1.1...v2.2.0) (2020-09-15)
 
 
