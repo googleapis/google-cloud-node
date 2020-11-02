@@ -4,14 +4,14 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/nodejs-logging-winston.git",
-        "sha": "a3c00ebf27f3553581e81e00ce73321bfd5c27b1"
+        "sha": "8675c29fca157614f391ab464736b9f1817ed095"
       }
     },
     {
       "git": {
         "name": "synthtool",
         "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "ea52b8a0bd560f72f376efcf45197fb7c8869120"
+        "sha": "ba9918cd22874245b55734f57470c719b577e591"
       }
     }
   ],
@@ -65,9 +65,7 @@
     "LICENSE",
     "README.md",
     "api-extractor.json",
-    "package-lock.json.1725097414",
     "renovate.json",
-    "samples/README.md",
-    "samples/package-lock.json.2731439913"
+    "samples/README.md"
   ]
 }
