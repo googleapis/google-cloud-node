@@ -4,7 +4,7 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/nodejs-talent.git",
-        "sha": "06a45d1fe8ca4305147b24863fe38b4216959899"
+        "sha": "5cf8f8a860cc171f8c8da8701128e87e9268af96"
       }
     },
     {
@@ -19,7 +19,7 @@
       "git": {
         "name": "synthtool",
         "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "89c849ba5013e45e8fb688b138f33c2ec6083dc5"
+        "sha": "ba9918cd22874245b55734f57470c719b577e591"
       }
     }
   ],
