@@ -3,8 +3,8 @@
     {
       "git": {
         "name": ".",
-        "remote": "git@github.com:googleapis/nodejs-video-transcoder.git",
-        "sha": "1dc9fc0190f66324421204f388e155c5f62b821d"
+        "remote": "https://github.com/googleapis/nodejs-video-transcoder.git",
+        "sha": "d4c1d9cc6dd46d9b235054c5a1a9ff94878cfbb7"
       }
     },
     {
@@ -13,6 +13,13 @@
         "remote": "https://github.com/googleapis/googleapis.git",
         "sha": "00bbad4dfd6633cf4b5f9596c1f93b756bb5c776",
         "internalRef": "339708980"
+      }
+    },
+    {
+      "git": {
+        "name": "synthtool",
+        "remote": "https://github.com/googleapis/synthtool.git",
+        "sha": "6542bd723403513626f61642fc02ddca528409aa"
       }
     }
   ],
