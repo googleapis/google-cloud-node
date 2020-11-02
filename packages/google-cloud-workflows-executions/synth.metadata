@@ -4,7 +4,7 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/nodejs-workflows.git",
-        "sha": "c1f871f059fb602a41b170cb0efc46bccd639011"
+        "sha": "2bb932a722294501c594d605efee107f38f35e24"
       }
     },
     {
@@ -19,7 +19,7 @@
       "git": {
         "name": "synthtool",
         "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "6542bd723403513626f61642fc02ddca528409aa"
+        "sha": "ba9918cd22874245b55734f57470c719b577e591"
       }
     }
   ],
