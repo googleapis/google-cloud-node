@@ -2,25 +2,21 @@
 [//]: # "To regenerate it, use `python -m synthtool`."
 <img src="https://avatars2.githubusercontent.com/u/2810941?v=3&s=96" alt="Google Cloud Platform logo" title="Google Cloud Platform" align="right" height="96" width="96"/>
 
-# [Stackdriver Error Reporting: Node.js Client](https://github.com/googleapis/nodejs-error-reporting)
+# [Cloud Error Reporting: Node.js Client](https://github.com/googleapis/nodejs-error-reporting)
 
 [![release level](https://img.shields.io/badge/release%20level-beta-yellow.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
 [![npm version](https://img.shields.io/npm/v/@google-cloud/error-reporting.svg)](https://www.npmjs.org/package/@google-cloud/error-reporting)
 [![codecov](https://img.shields.io/codecov/c/github/googleapis/nodejs-error-reporting/master.svg?style=flat)](https://codecov.io/gh/googleapis/nodejs-error-reporting)
 
-
-
-
 > Node.js idiomatic client for [Error Reporting][product-docs].
 
-[Stackdriver Error Reporting](https://cloud.google.com/error-reporting/docs/) aggregates and displays errors produced in your running cloud services.
-
+[Cloud Error Reporting](https://cloud.google.com/error-reporting/docs/) aggregates and displays errors produced in your running cloud services.
 
 A comprehensive list of changes in each version may be found in
 [the CHANGELOG](https://github.com/googleapis/nodejs-error-reporting/blob/master/CHANGELOG.md).
 
-* [Stackdriver Error Reporting Node.js Client API Reference][client-docs]
-* [Stackdriver Error Reporting Documentation][product-docs]
+* [Cloud Error Reporting Node.js Client API Reference][client-docs]
+* [Cloud Error Reporting Documentation][product-docs]
 * [github.com/googleapis/nodejs-error-reporting](https://github.com/googleapis/nodejs-error-reporting)
 
 Read more about the client libraries for Cloud APIs, including the older
@@ -29,7 +25,6 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 [explained]: https://cloud.google.com/apis/docs/client-libraries-explained
 
 **Table of contents:**
-
 
 * [Quickstart](#quickstart)
   * [Before you begin](#before-you-begin)
@@ -44,9 +39,9 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 
 ### Before you begin
 
-1.  [Select or create a Cloud Platform project][projects].
-1.  [Enable the Stackdriver Error Reporting API][enable_api].
-1.  [Set up authentication with a service account][auth] so you can access the
+1. [Select or create a Cloud Platform project][projects].
+1. [Enable the Cloud Error Reporting API][enable_api].
+1. [Set up authentication with a service account][auth] so you can access the
     API from your local workstation.
 
 ### Installing the client library
@@ -54,7 +49,6 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 ```bash
 npm install @google-cloud/error-reporting
 ```
-
 
 ### Using the client library
 
@@ -69,8 +63,8 @@ const errors = new ErrorReporting();
 errors.report('Something broke!');
 
 ```
-This module provides custom Stackdriver Error Reporting support for Node.js applications.
-[Stackdriver Error Reporting](https://cloud.google.com/error-reporting/) is a feature of
+This module provides custom Cloud Error Reporting support for Node.js applications.
+[Cloud Error Reporting](https://cloud.google.com/error-reporting/) is a feature of
 Google Cloud Platform that allows in-depth monitoring and viewing of errors reported by
 applications running in almost any environment.
 
@@ -78,15 +72,16 @@ However, note that [@google-cloud/logging-winston](https://github.com/googleapis
 
 Thus, if you are already using Winston or Bunyan in your application, and don't need custom error reporting capabilities, you do not need to use the `@google-cloud/error-reporting` library directly to report errors to the Error Reporting Console.
 
-![Stackdriver Error Reporting overview](https://raw.githubusercontent.com/googleapis/nodejs-error-reporting/master/doc/images/errors-overview.png)
+![Cloud Error Reporting overview](https://raw.githubusercontent.com/googleapis/nodejs-error-reporting/master/doc/images/errors-overview.png)
 
 Here's an introductory video that provides some more details:
 
-[![Learn about Error Reporting in Stackdriver](https://img.youtube.com/vi/cVpWVD75Hs8/0.jpg)](https://www.youtube.com/watch?v=cVpWVD75Hs8)
+[![Learn about Error Reporting in Cloud](https://img.youtube.com/vi/cVpWVD75Hs8/0.jpg)](https://www.youtube.com/watch?v=cVpWVD75Hs8)
 
 # When Errors Are Reported
 
 The `reportMode` configuration option is used to specify when errors are reported to the Error Reporting Console.  It can have one of three values:
+
 * `'production'` (default): Only report errors if the NODE_ENV environment variable is set to "production".
 * `'always'`: Always report errors regardless of the value of NODE_ENV.
 * `'never'`: Never report errors regardless of the value of NODE_ENV.
@@ -94,12 +89,14 @@ The `reportMode` configuration option is used to specify when errors are reporte
 The `reportMode` configuration option replaces the deprecated `ignoreEnvironmentCheck` configuration option.  If both the `reportMode` and `ignoreEnvironmentCheck` options are specified, the `reportMode` configuration option takes precedence.
 
 The `ignoreEnvironmentCheck` option should not be used.  However, if it is used, and the `reportMode` option is not specified, it can have the values:
+
 * `false` (default): Only report errors if the NODE_ENV environment variable is set to "production".
 * `true`: Always report errors regardless of the value of NODE_ENV.
 
 See the [Configuration](#configuration) section to learn how to specify configuration options.
 
 ## Configuration
+
 The following code snippet lists available configuration options.  All configuration options are optional.
 
 ```js
@@ -156,6 +153,7 @@ errors.report('My error message');
 ```
 
 The stack trace associated with an error can be viewed in the error reporting console.
+
 * If the `errors.report` method is given an `ErrorMessage` object built using the `errors.event` method, the stack trace at the point where the error event was constructed will be used.
 * If the `errors.report` method is given an `Error` object, the stack trace where the error was instantiated will be used.
 * If the `errors.report` method is given a string, the stack trace at the point where `errors.report` is invoked will be used.
@@ -297,7 +295,7 @@ const errors = new ErrorReporting();
 process.on('uncaughtException', (e) => {
     // Write the error to stderr.
     console.error(e);
-    // Report that same error the Stackdriver Error Service
+    // Report that same error the Cloud Error Service
     errors.report(e);
 });
 ```
@@ -334,6 +332,7 @@ The [longjohn](https://www.npmjs.com/package/longjohn) module can be used with t
 Before reporting an `Error` object using the `report` method of the `@google-cloud/error-reporting` module, the stack trace needs to modified to remove this special line added by `longjohn`.  Since the `longjohn` module can be configured to have a custom line indicating an async jump, the process of removing the custom line should be handled by the user of the `longjohn` module.
 
 The following code illustrates how to update an `Error`'s stack trace, to remove the default line of dashes added by `longjohn` to indicate an async jump, before reporting the error.
+
 ```js
 const {ErrorReporting} = require('@google-cloud/error-reporting');
 
@@ -346,7 +345,6 @@ err.stack = (err.stack || '').split('\n')
                             .join('\n');
 errors.report(err);
 ```
-
 
 ## Samples
 
@@ -361,9 +359,7 @@ has instructions for running the samples.
 | Manual reporting | [source code](https://github.com/googleapis/nodejs-error-reporting/blob/master/samples/manual.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-error-reporting&page=editor&open_in_editor=samples/manual.js,samples/README.md) |
 | Quickstart | [source code](https://github.com/googleapis/nodejs-error-reporting/blob/master/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-error-reporting&page=editor&open_in_editor=samples/quickstart.js,samples/README.md) |
 
-
-
-The [Stackdriver Error Reporting Node.js Client API Reference][client-docs] documentation
+The [Cloud Error Reporting Node.js Client API Reference][client-docs] documentation
 also contains samples.
 
 ## Supported Node.js Versions
@@ -382,7 +378,7 @@ _Legacy Node.js versions are supported as a best effort:_
 * Some security patches may not be able to be backported.
 * Dependencies will not be kept up-to-date, and features will not be backported.
 
-#### Legacy tags available
+### Legacy tags available
 
 * `legacy-8`: install client libraries from this dist-tag for versions
   compatible with Node.js 8.
@@ -391,15 +387,10 @@ _Legacy Node.js versions are supported as a best effort:_
 
 This library follows [Semantic Versioning](http://semver.org/).
 
-
-
 This library is considered to be in **beta**. This means it is expected to be
 mostly stable while we work toward a general availability release; however,
 complete stability is not guaranteed. We will address issues and requests
 against beta libraries with a high priority.
-
-
-
 
 More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
