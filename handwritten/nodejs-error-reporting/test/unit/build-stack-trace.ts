@@ -21,7 +21,7 @@ const SRC_ROOT = path.join(__dirname, '..', '..', 'src');
 
 describe('build-stack-trace', () => {
   it('Should not have a message attached if none is given', () => {
-    assert(buildStackTrace().startsWith('    at'));
+    assert(buildStackTrace().includes('    at'));
     assert(!buildStackTrace(undefined).startsWith('undefined'));
     assert(!buildStackTrace(null).startsWith('null'));
   });
