@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/logging-winston?activeTab=versions
 
+### [4.0.1](https://www.github.com/googleapis/nodejs-logging-winston/compare/v4.0.0...v4.0.1) (2020-11-03)
+
+
+### Bug Fixes
+
+* add user provided transport to the logger ([#543](https://www.github.com/googleapis/nodejs-logging-winston/issues/543)) ([b789429](https://www.github.com/googleapis/nodejs-logging-winston/commit/b789429b95c9d94ceeed57bf55e7f6cf8fab109a))
+
 ## [4.0.0](https://www.github.com/googleapis/nodejs-logging-winston/compare/v3.0.6...v4.0.0) (2020-07-10)
 
 
