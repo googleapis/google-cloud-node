@@ -1,5 +1,21 @@
 # Changelog
 
+### [2.0.4](https://www.github.com/googleapis/nodejs-cloudbuild/compare/v2.0.3...v2.0.4) (2020-11-03)
+
+
+### ⚠ BREAKING CHANGES
+
+* The WorkerPool API in the v1 surface has been long deprecated, so it has been deleted from the v1 surface. Alpha WorkerPool customers who want to call the WorkerPool API can use gcloud.
+
+### Features
+
+* updated third_party Cloud Build clients with new Build message, fix: revert removal of WorkerPool API ([#166](https://www.github.com/googleapis/nodejs-cloudbuild/issues/166)) ([b8d7a39](https://www.github.com/googleapis/nodejs-cloudbuild/commit/b8d7a395bbcc2f6ff83b798ef678e2f27395802d))
+
+
+### Bug Fixes
+
+* revert removal of WorkerPool API ([#178](https://www.github.com/googleapis/nodejs-cloudbuild/issues/178)) ([07400cb](https://www.github.com/googleapis/nodejs-cloudbuild/commit/07400cbcb05808762ab3c56c5827607cdefd43c0))
+
 ### [2.0.3](https://www.github.com/googleapis/nodejs-cloudbuild/compare/v2.0.2...v2.0.3) (2020-07-24)
 
 
