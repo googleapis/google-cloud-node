@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/asset?activeTab=versions
 
+## [3.9.0](https://www.github.com/googleapis/nodejs-asset/compare/v3.8.0...v3.9.0) (2020-11-02)
+
+
+### Features
+
+* add AnalyzeIamPolicy and AnalyzeIamPolicyLongrunning RPCs ([#412](https://www.github.com/googleapis/nodejs-asset/issues/412)) ([43dde85](https://www.github.com/googleapis/nodejs-asset/commit/43dde85f123d0716b5c3b5aad3b3d1d8018399a6))
+
 ## [3.8.0](https://www.github.com/googleapis/nodejs-asset/compare/v3.7.1...v3.8.0) (2020-09-16)
 
 
