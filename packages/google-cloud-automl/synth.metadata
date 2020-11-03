@@ -3,8 +3,8 @@
     {
       "git": {
         "name": ".",
-        "remote": "git@github.com:googleapis/nodejs-automl.git",
-        "sha": "289e6490de736c2810f319c174c8e126faef3750"
+        "remote": "https://github.com/googleapis/nodejs-automl.git",
+        "sha": "799a58ebca7a694e8e1acd9453a738921906af23"
       }
     },
     {
@@ -13,6 +13,13 @@
         "remote": "https://github.com/googleapis/googleapis.git",
         "sha": "b3c2eb02e501d7eec36b4b08fcd981f32f8b4ff4",
         "internalRef": "339152802"
+      }
+    },
+    {
+      "git": {
+        "name": "synthtool",
+        "remote": "https://github.com/googleapis/synthtool.git",
+        "sha": "ba9918cd22874245b55734f57470c719b577e591"
       }
     }
   ],
@@ -55,7 +62,6 @@
     ".kokoro/continuous/node10/test.cfg",
     ".kokoro/continuous/node12/common.cfg",
     ".kokoro/continuous/node12/lint.cfg",
-    ".kokoro/continuous/node12/samples-test.cfg",
     ".kokoro/continuous/node12/system-test.cfg",
     ".kokoro/continuous/node12/test.cfg",
     ".kokoro/docs.sh",
@@ -63,7 +69,6 @@
     ".kokoro/populate-secrets.sh",
     ".kokoro/presubmit/node10/common.cfg",
     ".kokoro/presubmit/node12/common.cfg",
-    ".kokoro/presubmit/node12/samples-test.cfg",
     ".kokoro/presubmit/node12/system-test.cfg",
     ".kokoro/presubmit/node12/test.cfg",
     ".kokoro/publish.sh",
