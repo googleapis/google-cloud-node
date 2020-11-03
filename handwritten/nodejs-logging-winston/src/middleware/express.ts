@@ -47,10 +47,10 @@ export async function makeMiddleware(
     const options = {logName: 'winston_log', ...optionsOrTransport};
 
     transport = new LoggingWinston(options);
-    logger.add(transport);
   } else {
     transport = optionsOrTransport;
   }
+  logger.add(transport);
 
   const auth = transport.common.stackdriverLog.logging.auth;
   const [env, projectId] = await Promise.all([

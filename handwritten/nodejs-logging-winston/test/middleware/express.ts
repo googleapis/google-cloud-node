@@ -113,6 +113,13 @@ describe('middleware/express', () => {
     assert.strictEqual(logger.transports[0], transport);
   });
 
+  it('should add a user provided transport to the logger', async () => {
+    const t = new FakeLoggingWinston({});
+    await makeMiddleware(logger, t);
+    assert.strictEqual(logger.transports.length, 1);
+    assert.strictEqual(logger.transports[0], t);
+  });
+
   it('should create a transport with the correct logName', async () => {
     await makeMiddleware(logger);
     assert.ok(passedOptions);
