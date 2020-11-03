@@ -1,0 +1,5 @@
+# Source template: https://github.com/googleapis/synthtool/blob/master/synthtool/gcp/templates/node_library/CONTRIBUTING.md
+externalManifests:
+- type: json
+  file: 'synth.metadata'
+  jsonpath: '$.generatedFiles[*]'
