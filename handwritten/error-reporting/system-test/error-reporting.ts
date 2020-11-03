@@ -438,13 +438,11 @@ describe('error-reporting', () => {
   let oldLogger: (text: string) => void;
   let logOutput = '';
   before(async () => {
-    // This test assumes that only the error-reporting library will be
-    // adding listeners to the 'unhandledRejection' event.  Thus we need to
-    // make sure that no listeners for that event exist.  If this check
-    // fails, then the reinitialize() method below will need to updated to
-    // more carefully reinitialize the error-reporting library without
-    // interfering with existing listeners of the 'unhandledRejection' event.
-    assert.strictEqual(process.listenerCount('unhandledRejection'), 0);
+    // This test assumes that the error reporting library will be adding listeners
+    // to the 'unhandledRejection' event. Thus we need to make sure other default
+    // listeners do not interfere. If this check fails, then update the reinitialize
+    // method below to more carefully reinitialize the error-reporting library.
+    assert.strictEqual(process.listenerCount('unhandledRejection'), 1);
     oldLogger = console.error;
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     console.error = function (this, ...args: any[]) {
@@ -456,7 +454,13 @@ describe('error-reporting', () => {
   });
 
   function reinitialize(extraConfig?: {}) {
-    process.removeAllListeners('unhandledRejection');
+    for (const listener of process.listeners('unhandledRejection')) {
+      // Do not interfere with existing Mocha listener
+      if (!listener.toString().includes('isMochaError')) {
+        process.removeListener('unhandledRejection', listener);
+      }
+    }
+
     const initConfiguration = Object.assign(
       {
         reportMode: 'always' as 'always',
