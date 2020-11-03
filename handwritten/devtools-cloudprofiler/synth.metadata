@@ -4,14 +4,14 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/cloud-profiler-nodejs.git",
-        "sha": "160d1f68c657f6ce18b8cea921470d1b4482619f"
+        "sha": "ee578448d98d010645ccb285e526cfef2cb0b120"
       }
     },
     {
       "git": {
         "name": "synthtool",
         "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "901ddd44e9ef7887ee681b9183bbdea99437fdcc"
+        "sha": "ba9918cd22874245b55734f57470c719b577e591"
       }
     }
   ],
