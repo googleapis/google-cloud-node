@@ -41,6 +41,7 @@ export interface Query {
 
 export interface GetSignedUrlConfigInternal {
   expiration: number;
+  accessibleAt?: Date;
   method: string;
   extensionHeaders?: http.OutgoingHttpHeaders;
   queryParams?: Query;
@@ -78,6 +79,7 @@ interface V4UrlQuery extends SignedUrlQuery {
 export interface SignerGetSignedUrlConfig {
   method: 'GET' | 'PUT' | 'DELETE' | 'POST';
   expires: string | number | Date;
+  accessibleAt?: string | number | Date;
   virtualHostedStyle?: boolean;
   version?: 'v2' | 'v4';
   cname?: string;
@@ -126,6 +128,11 @@ export class URLSigner {
   ): Promise<SignerGetSignedUrlResponse> {
     const expiresInSeconds = this.parseExpires(cfg.expires);
     const method = cfg.method;
+    const accessibleAtInSeconds = this.parseAccessibleAt(cfg.accessibleAt);
+
+    if (expiresInSeconds < accessibleAtInSeconds) {
+      throw new Error('An expiration date cannot be before accessible date.');
+    }
 
     let customHost: string | undefined;
     // Default style is `path`.
@@ -137,9 +144,11 @@ export class URLSigner {
       customHost = `https://${this.bucket.name}.storage.googleapis.com`;
     }
 
+    const secondsToMilliseconds = 1000;
     const config: GetSignedUrlConfigInternal = Object.assign({}, cfg, {
       method,
       expiration: expiresInSeconds,
+      accessibleAt: new Date(secondsToMilliseconds * accessibleAtInSeconds),
       bucket: this.bucket.name,
       file: this.file ? encodeURI(this.file.name, false) : undefined,
     });
@@ -219,9 +228,12 @@ export class URLSigner {
   private getSignedUrlV4(
     config: GetSignedUrlConfigInternal
   ): Promise<SignedUrlQuery> {
-    const now = new Date();
-    const nowInSeconds = Math.floor(now.valueOf() / 1000);
-    const expiresPeriodInSeconds = config.expiration - nowInSeconds;
+    config.accessibleAt = config.accessibleAt
+      ? config.accessibleAt
+      : new Date();
+    const millisecondsToSeconds = 1.0 / 1000.0;
+    const expiresPeriodInSeconds =
+      config.expiration - config.accessibleAt.valueOf() * millisecondsToSeconds;
 
     // v4 limit expiration to be 7 days maximum
     if (expiresPeriodInSeconds > SEVEN_DAYS) {
@@ -261,14 +273,17 @@ export class URLSigner {
 
     const extensionHeadersString = this.getCanonicalHeaders(extensionHeaders);
 
-    const datestamp = dateFormat.format(now, 'YYYYMMDD', true);
+    const datestamp = dateFormat.format(config.accessibleAt, 'YYYYMMDD', true);
     const credentialScope = `${datestamp}/auto/storage/goog4_request`;
 
     const sign = async () => {
       const credentials = await this.authClient.getCredentials();
       const credential = `${credentials.client_email}/${credentialScope}`;
-      const dateISO = dateFormat.format(now, 'YYYYMMDD[T]HHmmss[Z]', true);
-
+      const dateISO = dateFormat.format(
+        config.accessibleAt ? config.accessibleAt : new Date(),
+        'YYYYMMDD[T]HHmmss[Z]',
+        true
+      );
       const queryParams: Query = {
         'X-Goog-Algorithm': 'GOOG4-RSA-SHA256',
         'X-Goog-Credential': credential,
@@ -407,6 +422,18 @@ export class URLSigner {
     }
 
     return Math.round(expiresInMSeconds / 1000); // The API expects seconds.
+  }
+
+  parseAccessibleAt(accessibleAt?: string | number | Date): number {
+    const accessibleAtInMSeconds = new Date(
+      accessibleAt || new Date()
+    ).valueOf();
+
+    if (isNaN(accessibleAtInMSeconds)) {
+      throw new Error('The accessible at date provided was invalid.');
+    }
+
+    return Math.floor(accessibleAtInMSeconds / 1000); // The API expects seconds.
   }
 }
 

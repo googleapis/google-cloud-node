@@ -133,6 +133,7 @@ export interface GetSignedUrlConfig {
   contentMd5?: string;
   contentType?: string;
   expires: string | number | Date;
+  accessibleAt?: string | number | Date;
   extensionHeaders?: http.OutgoingHttpHeaders;
   promptSaveAs?: string;
   responseDisposition?: string;
@@ -2723,6 +2724,9 @@ class File extends ServiceObject<File> {
    * @param {string} [config.responseDisposition] The
    *     [response-content-disposition parameter](http://goo.gl/yMWxQV) of the
    *     signed url.
+   * @param {*} [config.accessibleAt=Date.now()] A timestamp when this link became usable. Any value
+   *     given is passed to `new Date()`.
+   *     Note: Use for 'v4' only.
    * @param {string} [config.responseType] The response-content-type parameter
    *     of the signed url.
    * @param {GetSignedUrlCallback} [callback] Callback function.
@@ -2742,7 +2746,7 @@ class File extends ServiceObject<File> {
    *
    * const config = {
    *   action: 'read',
-   *   expires: '03-17-2025'
+   *   expires: '03-17-2025',
    * };
    *
    * file.getSignedUrl(config, function(err, url) {
@@ -2752,6 +2756,30 @@ class File extends ServiceObject<File> {
    *   }
    *
    *   // The file is now available to read from this URL.
+   *   request(url, function(err, resp) {
+   *     // resp.statusCode = 200
+   *   });
+   * });
+   *
+   * //-
+   * // Generate a URL that allows temporary access to download your file.
+   * // Access will begin at accessibleAt and end at expires.
+   * //-
+   * const request = require('request');
+   *
+   * const config = {
+   *   action: 'read',
+   *   expires: '03-17-2025',
+   *   accessibleAt: '03-13-2025'
+   * };
+   *
+   * file.getSignedUrl(config, function(err, url) {
+   *   if (err) {
+   *     console.error(err);
+   *     return;
+   *   }
+   *
+   *   // The file will be available to read from this URL from 03-13-2025 to 03-17-2025.
    *   request(url, function(err, resp) {
    *     // resp.statusCode = 200
    *   });
@@ -2826,6 +2854,7 @@ class File extends ServiceObject<File> {
     const signConfig = {
       method,
       expires: cfg.expires,
+      accessibleAt: cfg.accessibleAt,
       extensionHeaders,
       queryParams,
       contentMd5: cfg.contentMd5,

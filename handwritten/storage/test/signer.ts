@@ -168,6 +168,101 @@ describe('signer', () => {
         });
       });
 
+      describe('accessibleAt', () => {
+        const accessibleAtNumber = 1581984000000; //2020-02-17T16:00:00-08:00
+        const expiresNumber = accessibleAtNumber + 86400000; //2020-02-18T16:00:00-08:00
+
+        it('should set correct settings if accessibleAt provided', async () => {
+          const authClientSign: sinon.SinonStub<
+            [string],
+            Promise<string>
+          > = sandbox.stub(authClient, 'sign').resolves('signature');
+          const accessibleAt = new Date(accessibleAtNumber);
+          await signer.getSignedUrl({
+            version: 'v4',
+            method: 'GET',
+            accessibleAt,
+            expires: expiresNumber,
+          });
+          const blobToSign = authClientSign.getCall(0).args[0];
+          assert(
+            blobToSign.includes(
+              dateFormat.format(accessibleAt, 'YYYYMMDD[T]HHmmss[Z]', true)
+            )
+          );
+        });
+
+        it('should throw if an expiration date from the before accessibleAt date is given', () => {
+          const accessibleAt = accessibleAtNumber;
+          const expires = accessibleAt - 86400000;
+
+          assert.throws(() => {
+            signer.getSignedUrl({
+              version: 'v4',
+              method: 'GET',
+              accessibleAt,
+              expires,
+            });
+          }, /An expiration date cannot be before accessible date\./);
+        });
+
+        describe('checkInputTypes', () => {
+          const query = {
+            'X-Goog-Date': dateFormat.format(
+              new Date(accessibleAtNumber),
+              'YYYYMMDD[T]HHmmss[Z]',
+              true
+            ),
+          };
+
+          it('should accept Date objects', async () => {
+            const accessibleAt = new Date(accessibleAtNumber);
+            const signedUrl = await signer.getSignedUrl({
+              version: 'v4',
+              method: 'GET',
+              accessibleAt,
+              expires: expiresNumber,
+            });
+            assert(signedUrl.includes(qsStringify(query)));
+          });
+
+          it('should accept numbers', async () => {
+            const accessibleAt = accessibleAtNumber;
+            const signedUrl = await signer.getSignedUrl({
+              version: 'v4',
+              method: 'GET',
+              accessibleAt,
+              expires: expiresNumber,
+            });
+            assert(signedUrl.includes(qsStringify(query)));
+          });
+
+          it('should accept strings', async () => {
+            const accessibleAt = '2020-02-17T16:00:00-08:00';
+            const signedUrl = await signer.getSignedUrl({
+              version: 'v4',
+              method: 'GET',
+              accessibleAt,
+              expires: expiresNumber,
+            });
+            assert(signedUrl.includes(qsStringify(query)));
+          });
+
+          it('should throw if a date is invalid', () => {
+            const accessibleAt = new Date('31-12-2019');
+
+            assert.throws(() => {
+              signer.getSignedUrl({
+                version: 'v4',
+                method: 'GET',
+                accessibleAt,
+                expires: expiresNumber,
+              });
+            }, /The accessible at date provided was invalid\./);
+          });
+        });
+      });
+
       describe('expires', () => {
         it('should parse Date object into expiration seconds', async () => {
           const parseExpires = sandbox
