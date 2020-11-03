@@ -1,7 +1,7 @@
 # benchwrapper
 
 benchwrapper is a lightweight gRPC server that wraps the storage library for
-bencharmking purposes.
+benchmarking purposes.
 
 ## Running
 
