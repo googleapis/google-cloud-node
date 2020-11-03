@@ -1,6 +1,6 @@
 {
   "name": "error-reporting",
-  "name_pretty": "Stackdriver Error Reporting",
+  "name_pretty": "Cloud Error Reporting",
   "product_documentation": "https://cloud.google.com/error-reporting",
   "client_documentation": "https://googleapis.dev/nodejs/error-reporting/latest/",
   "issue_tracker": "https://issuetracker.google.com/savedsearches/559780",
@@ -8,5 +8,6 @@
   "language": "nodejs",
   "repo": "googleapis/nodejs-error-reporting",
   "distribution_name": "@google-cloud/error-reporting",
-  "api_id": "clouderrorreporting.googleapis.com"
+  "api_id": "clouderrorreporting.googleapis.com",
+  "codeowner_team": "@googleapis/api-logging"
 }
