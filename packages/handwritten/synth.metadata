@@ -3,15 +3,8 @@
     {
       "git": {
         "name": ".",
-        "remote": "https://github.com/googleapis/nodejs-error-reporting.git",
-        "sha": "36b2e4aa4ed0135cdd19e740e6ed8ff4133ce99d"
-      }
-    },
-    {
-      "git": {
-        "name": "synthtool",
-        "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "5451633881133e5573cc271a18e73b18caca8b1b"
+        "remote": "git@github.com:googleapis/nodejs-error-reporting.git",
+        "sha": "1ad83651e52a6a87e4e6946f6e05526a5be101d6"
       }
     }
   ],
@@ -65,7 +58,10 @@
     "LICENSE",
     "README.md",
     "api-extractor.json",
+    "package-lock.json.1637601552",
+    "package-lock.json.1766790967",
     "renovate.json",
-    "samples/README.md"
+    "samples/README.md",
+    "samples/package-lock.json.2310227638"
   ]
 }
