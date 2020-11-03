@@ -816,7 +816,7 @@ class DatastoreRequest {
    * By default, all properties are indexed. To prevent a property from being
    * included in *all* indexes, you must supply an `excludeFromIndexes` array.
    *
-   * Maps to {@link Datastore#save}, forcing the method to be `merge`.
+   * Maps to {@link Datastore#save}, forcing the method to be `upsert`.
    *
    * @param {object|object[]} entities Datastore key object(s).
    * @param {Key} entities.key Datastore key object.
