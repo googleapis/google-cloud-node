@@ -3,8 +3,8 @@
     {
       "git": {
         "name": ".",
-        "remote": "git@github.com:googleapis/nodejs-phishing-protection.git",
-        "sha": "6ced37a3a8a15a4e7ac9168c543b233484840d29"
+        "remote": "https://github.com/googleapis/nodejs-phishing-protection.git",
+        "sha": "831b9efca4ee05ee20ff040a96aaef6a42300eb0"
       }
     },
     {
@@ -13,6 +13,13 @@
         "remote": "https://github.com/googleapis/googleapis.git",
         "sha": "20b11dfe4538cd5da7b4c3dd7d2bf5b9922ff3ed",
         "internalRef": "338646463"
+      }
+    },
+    {
+      "git": {
+        "name": "synthtool",
+        "remote": "https://github.com/googleapis/synthtool.git",
+        "sha": "ba9918cd22874245b55734f57470c719b577e591"
       }
     }
   ],
@@ -80,14 +87,12 @@
     "README.md",
     "api-extractor.json",
     "linkinator.config.json",
-    "package-lock.json.259248607",
     "protos/google/cloud/phishingprotection/v1beta1/phishingprotection.proto",
     "protos/protos.d.ts",
     "protos/protos.js",
     "protos/protos.json",
     "renovate.json",
     "samples/README.md",
-    "samples/package-lock.json.2892106520",
     "src/index.ts",
     "src/v1beta1/index.ts",
     "src/v1beta1/phishing_protection_service_v1_beta1_client.ts",
