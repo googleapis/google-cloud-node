@@ -4,13 +4,13 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/google-cloud-node.git",
-        "sha": "437e2cce929b2e1478d4197b377e2da1c8272646"
+        "sha": "20fd55f09c4de31e8bfc46c594900a9833ea541f"
       }
     }
   ],
   "generatedFiles": [
     "README.md",
     "libraries.json",
-    "package-lock.json.1360526570"
+    "package-lock.json.3701360016"
   ]
 }
