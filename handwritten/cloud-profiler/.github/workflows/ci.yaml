@@ -3,21 +3,25 @@ on:
     branches:
       - master
   pull_request:
-  schedule:
-    - cron: '0 2 * * *' # Run everyday, at 2AM UTC.
 name: ci
 jobs:
   test:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node: [10, 12, 13, 14]
+        node: [10, 12, 14, 15]
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node }}
       - run: node --version
+      # The first installation step ensures that all of our production
+      # dependencies work on the given Node.js version, this helps us find
+      # dependencies that don't match our engines field:
+      - run: npm install --production --engine-strict --ignore-scripts --no-package-lock
+      # Clean up the production install, before installing dev/production:
+      - run: rm -rf node_modules
       - run: npm install
       - run: npm test
       - name: coverage
@@ -31,7 +35,7 @@ jobs:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
         with:
-          node-version: 12
+          node-version: 14
       - run: npm install
       - run: npm test
       - name: coverage
@@ -45,7 +49,7 @@ jobs:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
         with:
-          node-version: 12
+          node-version: 14
       - run: npm install
       - run: npm run lint
   docs:
@@ -54,26 +58,6 @@ jobs:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
         with:
-          node-version: 12
+          node-version: 14
       - run: npm install
       - run: npm run docs-test
-  system-test:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
-        with:
-          node-version: 12
-      - run: npm install
-      - run: npm run system-test
-      - name: coverage
-        uses: codecov/codecov-action@v1
-        with:
-          name: actions system-test
-          fail_ci_if_error: false
-  golint:
-    runs-on: ubuntu-latest
-    container: golang:latest
-    steps:
-      - run: gofmtdiff=$(gofmt -s -d .) && if [ -n "$gofmtdiff" ]; then printf 'gofmt -s found:\n%s\n' "$gofmtdiff" && exit 1; fi
-      - run: go get -u golang.org/x/lint/golint && golintlint=$($GOPATH/bin/golint ./...) && if [ -n "$golintlint" ]; then printf 'golint found:\n%s\n' "$golintlint" && exit 1; fi
