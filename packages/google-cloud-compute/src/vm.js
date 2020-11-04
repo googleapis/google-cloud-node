@@ -467,6 +467,44 @@ class VM extends common.ServiceObject {
     });
   }
   /**
+   * Get the instance's labels and their fingerprint.
+   *
+   * This method wraps {module:compute/vm#getMetadata}, returning only the `labels`
+   * property.
+   *
+   * @param {function} callback - The callback function.
+   * @param {?error} callback.err - An error returned while making this request.
+   * @param {object[]} callback.labels - Label objects from this VM.
+   * @param {string} callback.fingerprint - The current label fingerprint.
+   * @param {object} callback.apiResponse - The full API response.
+   *
+   * @example
+   * const Compute = require('@google-cloud/compute');
+   * const compute = new Compute();
+   * const zone = compute.zone('zone-name');
+   * const vm = zone.vm('vm-name');
+   *
+   * vm.getLabels(function(err, labels, fingerprint, apiResponse) {});
+   *
+   * //-
+   * // If the callback is omitted, we'll return a Promise.
+   * //-
+   * vm.getLabels().then(function(data) {
+   *   const labels = data[0];
+   *   const fingerprint = data[1];
+   *   const apiResponse = data[2];
+   * });
+   */
+  getLabels(callback) {
+    this.getMetadata((err, metadata, apiResponse) => {
+      if (err) {
+        callback(err, null, null, apiResponse);
+        return;
+      }
+      callback(null, metadata.labels, metadata.labelFingerprint, apiResponse);
+    });
+  }
+  /**
    * Returns the serial port output for the instance.
    *
    * @see [Instances: getSerialPortOutput API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/instances/getSerialPortOutput}
@@ -719,6 +757,56 @@ class VM extends common.ServiceObject {
           self.start(compute.execAfterOperation_(callback));
         }
       })
+    );
+  }
+  /**
+   * Set labels for this instance.
+   *
+   * @see [Instances: setLabels API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/instances/setLabels}
+   *
+   * @param {object} labels - New labels.
+   * @param {function=} callback - The callback function.
+   * @param {?error} callback.err - An error returned while making this request.
+   * @param {Operation} callback.operation - An operation object
+   *     that can be used to check the status of the request.
+   * @param {object} callback.apiResponse - The full API response.
+   *
+   * @example
+   * const Compute = require('@google-cloud/compute');
+   * const compute = new Compute();
+   * const zone = compute.zone('zone-name');
+   * const vm = zone.vm('vm-name');
+   *
+   * const labels = {
+   *   'startup-script': '...',
+   *   customKey: null // Setting `null` will remove the `customKey` property.
+   * };
+   *
+   * vm.setLabels(labels, function(err, operation, apiResponse) {
+   *   // `operation` is an Operation object that can be used to check the status
+   *   // of the request.
+   * });
+   *
+   * //-
+   * // If the callback is omitted, we'll return a Promise.
+   * //-
+   * vm.setLabels(labels).then(function(data) {
+   *   const operation = data[0];
+   *   const apiResponse = data[1];
+   * });
+   */
+  setLabels(labels, labelFingerprint, callback) {
+    const body = {
+      labels: labels,
+      labelFingerprint: labelFingerprint,
+    };
+    this.request(
+      {
+        method: 'POST',
+        uri: '/setLabels',
+        json: body,
+      },
+      callback || common.util.noop
     );
   }
   /**

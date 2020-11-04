@@ -979,6 +979,13 @@ describe('Compute', () => {
       return vm.getSerialPortOutput();
     });
 
+    it('should set labels', async () => {
+      let [labels, fingerprint] = await vm.getLabels();
+      await awaitResult(vm.setLabels({foo: 'bar'}, fingerprint));
+      [labels, fingerprint] = await vm.getLabels();
+      assert.strictEqual(labels.foo, 'bar');
+    });
+
     it('should set tags', async () => {
       const newTagName = 'new-tag';
       const [tags, fingerprint] = await vm.getTags();

@@ -383,6 +383,65 @@ describe('VM', () => {
     });
   });
 
+  describe('getLabels', () => {
+    it('should get metadata', done => {
+      vm.getMetadata = function () {
+        done();
+      };
+
+      vm.getTags(assert.ifError);
+    });
+
+    describe('error', () => {
+      const error = new Error('Error.');
+      const apiResponse = {a: 'b', c: 'd'};
+
+      beforeEach(() => {
+        vm.getMetadata = function (callback) {
+          callback(error, null, apiResponse);
+        };
+      });
+
+      it('should execute callback with error', done => {
+        vm.getLabels((err, labels, fingerprint, apiResponse_) => {
+          assert.strictEqual(err, error);
+          assert.strictEqual(labels, null);
+          assert.strictEqual(fingerprint, null);
+          assert.strictEqual(apiResponse_, apiResponse);
+
+          done();
+        });
+      });
+    });
+
+    describe('success', () => {
+      const metadata = {
+        labels: {},
+        labelFingerprint: 'fingerprint',
+      };
+
+      const apiResponse = {a: 'b', c: 'd'};
+
+      beforeEach(() => {
+        vm.getMetadata = function (callback) {
+          callback(null, metadata, apiResponse);
+        };
+      });
+
+      it('should execute callback with tags and fingerprint', done => {
+        vm.getLabels((err, labels, fingerprint, apiResponse_) => {
+          assert.ifError(err);
+
+          assert.strictEqual(labels, metadata.labels);
+          assert.strictEqual(fingerprint, metadata.labelFingerprint);
+          assert.strictEqual(apiResponse_, apiResponse);
+
+          done();
+        });
+      });
+    });
+  });
+
   describe('getSerialPortOutput', () => {
     const EXPECTED_QUERY = {port: 1, start: 0};
 
@@ -735,6 +794,33 @@ describe('VM', () => {
         assert.strictEqual(apiResponse_, apiResponse);
         done();
       });
+    });
+  });
+
+  describe('setLabels', () => {
+    const LABELS = [];
+    const FINGERPRINT = '';
+
+    it('should make the correct request', done => {
+      vm.request = function (reqOpts, callback) {
+        assert.strictEqual(reqOpts.method, 'POST');
+        assert.strictEqual(reqOpts.uri, '/setLabels');
+        assert.strictEqual(reqOpts.json.labels, LABELS);
+        assert.strictEqual(reqOpts.json.labelFingerprint, FINGERPRINT);
+
+        callback(); // done()
+      };
+
+      vm.setLabels(LABELS, FINGERPRINT, done);
+    });
+
+    it('should not require a callback', done => {
+      vm.request = function (reqOpts, callback) {
+        assert.doesNotThrow(callback);
+        done();
+      };
+
+      vm.setLabels(LABELS, FINGERPRINT);
     });
   });
 
