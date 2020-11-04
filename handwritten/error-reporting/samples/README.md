@@ -2,13 +2,13 @@
 [//]: # "To regenerate it, use `python -m synthtool`."
 <img src="https://avatars2.githubusercontent.com/u/2810941?v=3&s=96" alt="Google Cloud Platform logo" title="Google Cloud Platform" align="right" height="96" width="96"/>
 
-# [Stackdriver Error Reporting: Node.js Samples](https://github.com/googleapis/nodejs-error-reporting)
+# [Cloud Error Reporting: Node.js Samples](https://github.com/googleapis/nodejs-error-reporting)
 
 [![Open in Cloud Shell][shell_img]][shell_link]
 
 > Node.js idiomatic client for [Error Reporting][product-docs].
 
-[Stackdriver Error Reporting](https://cloud.google.com/error-reporting/docs/) aggregates and displays errors produced in your running cloud services.
+[Cloud Error Reporting](https://cloud.google.com/error-reporting/docs/) aggregates and displays errors produced in your running cloud services.
 
 ## Table of Contents
 
