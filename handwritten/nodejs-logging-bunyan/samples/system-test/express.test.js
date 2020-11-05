@@ -46,10 +46,10 @@ describe('express samples', () => {
     // Make an HTTP request to exercise a request logging path.
     await got(`http://localhost:${PORT}/`);
 
-    // Wait 10 seconds for logs to be written to stackdriver service.
+    // Wait 10 seconds for logs to be written to Cloud service.
     await delay(10 * 1000);
 
-    // Make sure the log was written to Stackdriver Logging.
+    // Make sure the log was written to Cloud Logging.
     const log = logging.log(`samples_express_${APP_LOG_SUFFIX}`);
     const entries = (await log.getEntries({pageSize: 1}))[0];
     assert.strictEqual(entries.length, 1);
