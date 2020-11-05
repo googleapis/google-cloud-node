@@ -2,7 +2,7 @@
 [//]: # "To regenerate it, use `python -m synthtool`."
 <img src="https://avatars2.githubusercontent.com/u/2810941?v=3&s=96" alt="Google Cloud Platform logo" title="Google Cloud Platform" align="right" height="96" width="96"/>
 
-This module provides an easy to use, higher-level layer for working with [Stackdriver Logging](https://cloud.google.com/logging/docs),
+This module provides an easy to use, higher-level layer for working with [Cloud Logging](https://cloud.google.com/logging/docs),
 compatible with [Bunyan](https://www.npmjs.com/package/bunyan). Simply attach this as a transport to your existing Bunyan loggers. Samples
 
 
