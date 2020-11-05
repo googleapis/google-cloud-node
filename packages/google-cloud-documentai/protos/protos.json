@@ -13,7 +13,7 @@
                     "java_multiple_files": true,
                     "java_outer_classname": "DocumentAiProto",
                     "java_package": "com.google.cloud.documentai.v1beta2",
-                    "php_namespace": "Google\\Cloud\\DocumentAi\\V1beta2",
+                    "php_namespace": "Google\\Cloud\\DocumentAI\\V1beta2",
                     "ruby_package": "Google::Cloud::DocumentAI::V1beta2"
                   },
                   "nested": {
@@ -967,13 +967,13 @@
                 },
                 "v1beta3": {
                   "options": {
-                    "csharp_namespace": "Google.Cloud.DocumentAI.v1beta3",
+                    "csharp_namespace": "Google.Cloud.DocumentAI.V1Beta3",
                     "go_package": "google.golang.org/genproto/googleapis/cloud/documentai/v1beta3;documentai",
                     "java_multiple_files": true,
                     "java_outer_classname": "DocumentAiProcessorService",
                     "java_package": "com.google.cloud.documentai.v1beta3",
-                    "php_namespace": "Google\\Cloud\\DocumentAi\\v1beta3",
-                    "ruby_package": "Google::Cloud::DocumentAI::master",
+                    "php_namespace": "Google\\Cloud\\DocumentAI\\V1beta3",
+                    "ruby_package": "Google::Cloud::DocumentAI::V1beta3",
                     "(google.api.resource_definition).type": "documentai.googleapis.com/HumanReviewConfig",
                     "(google.api.resource_definition).pattern": "projects/{project}/locations/{location}/processors/{processor}/humanReviewConfig"
                   },
