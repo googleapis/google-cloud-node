@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/compute?activeTab=versions
 
+## [2.4.0](https://www.github.com/googleapis/nodejs-compute/compare/v2.3.0...v2.4.0) (2020-11-04)
+
+
+### Features
+
+* add VM.get/setLabels() methods ([#515](https://www.github.com/googleapis/nodejs-compute/issues/515)) ([60c87e6](https://www.github.com/googleapis/nodejs-compute/commit/60c87e6e7e4307670eacbde695116e6c42dbc6d1))
+
 ## [2.3.0](https://www.github.com/googleapis/nodejs-compute/compare/v2.2.0...v2.3.0) (2020-10-15)
 
 
