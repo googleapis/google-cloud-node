@@ -3,23 +3,15 @@
     {
       "git": {
         "name": ".",
-        "remote": "https://github.com/googleapis/nodejs-secret-manager.git",
-        "sha": "07e726a6e1ad97554ddf8aa58cb79e940ccaefb7"
-      }
-    },
-    {
-      "git": {
-        "name": "googleapis",
-        "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "f17ea338b502b967101ca71e4ff0f11d8d1e4518",
-        "internalRef": "330793532"
+        "remote": "git@github.com:googleapis/nodejs-secret-manager",
+        "sha": "f3cf178ae7a880f777ebf55eb22466c94c8ff34d"
       }
     },
     {
       "git": {
         "name": "synthtool",
         "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "ba9918cd22874245b55734f57470c719b577e591"
+        "sha": "3d3e94c4e02370f307a9a200b0c743c3d8d19f29"
       }
     }
   ],
@@ -42,84 +34,5 @@
         "generator": "bazel"
       }
     }
-  ],
-  "generatedFiles": [
-    ".eslintignore",
-    ".eslintrc.json",
-    ".gitattributes",
-    ".github/ISSUE_TEMPLATE/bug_report.md",
-    ".github/ISSUE_TEMPLATE/feature_request.md",
-    ".github/ISSUE_TEMPLATE/support_request.md",
-    ".github/PULL_REQUEST_TEMPLATE.md",
-    ".github/release-please.yml",
-    ".github/workflows/ci.yaml",
-    ".gitignore",
-    ".jsdoc.js",
-    ".kokoro/.gitattributes",
-    ".kokoro/common.cfg",
-    ".kokoro/continuous/node10/common.cfg",
-    ".kokoro/continuous/node10/docs.cfg",
-    ".kokoro/continuous/node10/test.cfg",
-    ".kokoro/continuous/node12/common.cfg",
-    ".kokoro/continuous/node12/lint.cfg",
-    ".kokoro/continuous/node12/samples-test.cfg",
-    ".kokoro/continuous/node12/system-test.cfg",
-    ".kokoro/continuous/node12/test.cfg",
-    ".kokoro/docs.sh",
-    ".kokoro/lint.sh",
-    ".kokoro/populate-secrets.sh",
-    ".kokoro/presubmit/node10/common.cfg",
-    ".kokoro/presubmit/node12/common.cfg",
-    ".kokoro/presubmit/node12/samples-test.cfg",
-    ".kokoro/presubmit/node12/system-test.cfg",
-    ".kokoro/presubmit/node12/test.cfg",
-    ".kokoro/publish.sh",
-    ".kokoro/release/docs-devsite.cfg",
-    ".kokoro/release/docs-devsite.sh",
-    ".kokoro/release/docs.cfg",
-    ".kokoro/release/docs.sh",
-    ".kokoro/release/publish.cfg",
-    ".kokoro/samples-test.sh",
-    ".kokoro/system-test.sh",
-    ".kokoro/test.bat",
-    ".kokoro/test.sh",
-    ".kokoro/trampoline.sh",
-    ".kokoro/trampoline_v2.sh",
-    ".mocharc.js",
-    ".nycrc",
-    ".prettierignore",
-    ".prettierrc.js",
-    ".trampolinerc",
-    "CODE_OF_CONDUCT.md",
-    "CONTRIBUTING.md",
-    "LICENSE",
-    "README.md",
-    "api-extractor.json",
-    "linkinator.config.json",
-    "protos/google/cloud/secretmanager/v1/resources.proto",
-    "protos/google/cloud/secretmanager/v1/service.proto",
-    "protos/google/cloud/secrets/v1beta1/resources.proto",
-    "protos/google/cloud/secrets/v1beta1/service.proto",
-    "protos/protos.d.ts",
-    "protos/protos.js",
-    "protos/protos.json",
-    "renovate.json",
-    "samples/README.md",
-    "src/index.ts",
-    "src/v1/index.ts",
-    "src/v1/secret_manager_service_client.ts",
-    "src/v1/secret_manager_service_client_config.json",
-    "src/v1/secret_manager_service_proto_list.json",
-    "src/v1beta1/index.ts",
-    "src/v1beta1/secret_manager_service_client.ts",
-    "src/v1beta1/secret_manager_service_client_config.json",
-    "src/v1beta1/secret_manager_service_proto_list.json",
-    "system-test/fixtures/sample/src/index.js",
-    "system-test/fixtures/sample/src/index.ts",
-    "system-test/install.ts",
-    "test/gapic_secret_manager_service_v1.ts",
-    "test/gapic_secret_manager_service_v1beta1.ts",
-    "tsconfig.json",
-    "webpack.config.js"
   ]
 }
