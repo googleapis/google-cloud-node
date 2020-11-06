@@ -20,6 +20,7 @@ import * as v1 from './v1';
 import * as v1beta2 from './v1beta2';
 
 const LanguageServiceClient = v1.LanguageServiceClient;
+type LanguageServiceClient = v1.LanguageServiceClient;
 
 export {v1, v1beta2, LanguageServiceClient};
 export default {v1, v1beta2, LanguageServiceClient};
