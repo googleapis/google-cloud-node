@@ -19,6 +19,7 @@
 import * as v1 from './v1';
 
 const ClusterManagerClient = v1.ClusterManagerClient;
+type ClusterManagerClient = v1.ClusterManagerClient;
 
 export {v1, ClusterManagerClient};
 export default {v1, ClusterManagerClient};
