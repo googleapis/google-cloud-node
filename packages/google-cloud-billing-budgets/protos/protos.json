@@ -8,6 +8,365 @@
               "nested": {
                 "budgets": {
                   "nested": {
+                    "v1": {
+                      "options": {
+                        "go_package": "google.golang.org/genproto/googleapis/cloud/billing/budgets/v1;budgets",
+                        "java_multiple_files": true,
+                        "java_outer_classname": "BudgetServiceProto",
+                        "java_package": "com.google.cloud.billing.budgets.v1"
+                      },
+                      "nested": {
+                        "Budget": {
+                          "options": {
+                            "(google.api.resource).type": "billingbudgets.googleapis.com/Budget",
+                            "(google.api.resource).pattern": "billingAccounts/{billing_account}/budgets/{budget}"
+                          },
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "displayName": {
+                              "type": "string",
+                              "id": 2
+                            },
+                            "budgetFilter": {
+                              "type": "Filter",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "amount": {
+                              "type": "BudgetAmount",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "thresholdRules": {
+                              "rule": "repeated",
+                              "type": "ThresholdRule",
+                              "id": 5,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "notificationsRule": {
+                              "type": "NotificationsRule",
+                              "id": 6,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "etag": {
+                              "type": "string",
+                              "id": 7,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
+                        },
+                        "BudgetAmount": {
+                          "oneofs": {
+                            "budgetAmount": {
+                              "oneof": [
+                                "specifiedAmount",
+                                "lastPeriodAmount"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "specifiedAmount": {
+                              "type": "google.type.Money",
+                              "id": 1
+                            },
+                            "lastPeriodAmount": {
+                              "type": "LastPeriodAmount",
+                              "id": 2
+                            }
+                          }
+                        },
+                        "LastPeriodAmount": {
+                          "fields": {}
+                        },
+                        "ThresholdRule": {
+                          "fields": {
+                            "thresholdPercent": {
+                              "type": "double",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "spendBasis": {
+                              "type": "Basis",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "Basis": {
+                              "values": {
+                                "BASIS_UNSPECIFIED": 0,
+                                "CURRENT_SPEND": 1,
+                                "FORECASTED_SPEND": 2
+                              }
+                            }
+                          }
+                        },
+                        "NotificationsRule": {
+                          "fields": {
+                            "pubsubTopic": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "schemaVersion": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "monitoringNotificationChannels": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "disableDefaultIamRecipients": {
+                              "type": "bool",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
+                        },
+                        "Filter": {
+                          "fields": {
+                            "projects": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "creditTypes": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 7,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "creditTypesTreatment": {
+                              "type": "CreditTypesTreatment",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "services": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "subaccounts": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 5,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "labels": {
+                              "keyType": "string",
+                              "type": "google.protobuf.ListValue",
+                              "id": 6,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "CreditTypesTreatment": {
+                              "values": {
+                                "CREDIT_TYPES_TREATMENT_UNSPECIFIED": 0,
+                                "INCLUDE_ALL_CREDITS": 1,
+                                "EXCLUDE_ALL_CREDITS": 2,
+                                "INCLUDE_SPECIFIED_CREDITS": 3
+                              }
+                            }
+                          }
+                        },
+                        "BudgetService": {
+                          "options": {
+                            "(google.api.default_host)": "billingbudgets.googleapis.com",
+                            "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-billing,https://www.googleapis.com/auth/cloud-platform"
+                          },
+                          "methods": {
+                            "CreateBudget": {
+                              "requestType": "CreateBudgetRequest",
+                              "responseType": "Budget",
+                              "options": {
+                                "(google.api.http).post": "/v1/{parent=billingAccounts/*}/budgets",
+                                "(google.api.http).body": "budget",
+                                "(google.api.method_signature)": "parent,budget"
+                              }
+                            },
+                            "UpdateBudget": {
+                              "requestType": "UpdateBudgetRequest",
+                              "responseType": "Budget",
+                              "options": {
+                                "(google.api.http).patch": "/v1/{budget.name=billingAccounts/*/budgets/*}",
+                                "(google.api.http).body": "budget",
+                                "(google.api.method_signature)": "budget,update_mask"
+                              }
+                            },
+                            "GetBudget": {
+                              "requestType": "GetBudgetRequest",
+                              "responseType": "Budget",
+                              "options": {
+                                "(google.api.http).get": "/v1/{name=billingAccounts/*/budgets/*}",
+                                "(google.api.method_signature)": "name"
+                              }
+                            },
+                            "ListBudgets": {
+                              "requestType": "ListBudgetsRequest",
+                              "responseType": "ListBudgetsResponse",
+                              "options": {
+                                "(google.api.http).get": "/v1/{parent=billingAccounts/*}/budgets",
+                                "(google.api.method_signature)": "parent"
+                              }
+                            },
+                            "DeleteBudget": {
+                              "requestType": "DeleteBudgetRequest",
+                              "responseType": "google.protobuf.Empty",
+                              "options": {
+                                "(google.api.http).delete": "/v1/{name=billingAccounts/*/budgets/*}",
+                                "(google.api.method_signature)": "name"
+                              }
+                            }
+                          }
+                        },
+                        "CreateBudgetRequest": {
+                          "fields": {
+                            "parent": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).child_type": "billingbudgets.googleapis.com/Budget"
+                              }
+                            },
+                            "budget": {
+                              "type": "Budget",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            }
+                          }
+                        },
+                        "UpdateBudgetRequest": {
+                          "fields": {
+                            "budget": {
+                              "type": "Budget",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "updateMask": {
+                              "type": "google.protobuf.FieldMask",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
+                        },
+                        "GetBudgetRequest": {
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "billingbudgets.googleapis.com/Budget"
+                              }
+                            }
+                          }
+                        },
+                        "ListBudgetsRequest": {
+                          "fields": {
+                            "parent": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).child_type": "billingbudgets.googleapis.com/Budget"
+                              }
+                            },
+                            "pageSize": {
+                              "type": "int32",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "pageToken": {
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
+                        },
+                        "ListBudgetsResponse": {
+                          "fields": {
+                            "budgets": {
+                              "rule": "repeated",
+                              "type": "Budget",
+                              "id": 1
+                            },
+                            "nextPageToken": {
+                              "type": "string",
+                              "id": 2
+                            }
+                          }
+                        },
+                        "DeleteBudgetRequest": {
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "billingbudgets.googleapis.com/Budget"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
                     "v1beta1": {
                       "options": {
                         "go_package": "google.golang.org/genproto/googleapis/cloud/billing/budgets/v1beta1;budgets",

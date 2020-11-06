@@ -26,6 +26,1363 @@ export namespace google {
             /** Namespace budgets. */
             namespace budgets {
 
+                /** Namespace v1. */
+                namespace v1 {
+
+                    /** Properties of a Budget. */
+                    interface IBudget {
+
+                        /** Budget name */
+                        name?: (string|null);
+
+                        /** Budget displayName */
+                        displayName?: (string|null);
+
+                        /** Budget budgetFilter */
+                        budgetFilter?: (google.cloud.billing.budgets.v1.IFilter|null);
+
+                        /** Budget amount */
+                        amount?: (google.cloud.billing.budgets.v1.IBudgetAmount|null);
+
+                        /** Budget thresholdRules */
+                        thresholdRules?: (google.cloud.billing.budgets.v1.IThresholdRule[]|null);
+
+                        /** Budget notificationsRule */
+                        notificationsRule?: (google.cloud.billing.budgets.v1.INotificationsRule|null);
+
+                        /** Budget etag */
+                        etag?: (string|null);
+                    }
+
+                    /** Represents a Budget. */
+                    class Budget implements IBudget {
+
+                        /**
+                         * Constructs a new Budget.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.billing.budgets.v1.IBudget);
+
+                        /** Budget name. */
+                        public name: string;
+
+                        /** Budget displayName. */
+                        public displayName: string;
+
+                        /** Budget budgetFilter. */
+                        public budgetFilter?: (google.cloud.billing.budgets.v1.IFilter|null);
+
+                        /** Budget amount. */
+                        public amount?: (google.cloud.billing.budgets.v1.IBudgetAmount|null);
+
+                        /** Budget thresholdRules. */
+                        public thresholdRules: google.cloud.billing.budgets.v1.IThresholdRule[];
+
+                        /** Budget notificationsRule. */
+                        public notificationsRule?: (google.cloud.billing.budgets.v1.INotificationsRule|null);
+
+                        /** Budget etag. */
+                        public etag: string;
+
+                        /**
+                         * Creates a new Budget instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns Budget instance
+                         */
+                        public static create(properties?: google.cloud.billing.budgets.v1.IBudget): google.cloud.billing.budgets.v1.Budget;
+
+                        /**
+                         * Encodes the specified Budget message. Does not implicitly {@link google.cloud.billing.budgets.v1.Budget.verify|verify} messages.
+                         * @param message Budget message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.billing.budgets.v1.IBudget, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified Budget message, length delimited. Does not implicitly {@link google.cloud.billing.budgets.v1.Budget.verify|verify} messages.
+                         * @param message Budget message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.billing.budgets.v1.IBudget, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a Budget message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns Budget
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.billing.budgets.v1.Budget;
+
+                        /**
+                         * Decodes a Budget message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns Budget
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.billing.budgets.v1.Budget;
+
+                        /**
+                         * Verifies a Budget message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a Budget message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns Budget
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.billing.budgets.v1.Budget;
+
+                        /**
+                         * Creates a plain object from a Budget message. Also converts values to other types if specified.
+                         * @param message Budget
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.billing.budgets.v1.Budget, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this Budget to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    /** Properties of a BudgetAmount. */
+                    interface IBudgetAmount {
+
+                        /** BudgetAmount specifiedAmount */
+                        specifiedAmount?: (google.type.IMoney|null);
+
+                        /** BudgetAmount lastPeriodAmount */
+                        lastPeriodAmount?: (google.cloud.billing.budgets.v1.ILastPeriodAmount|null);
+                    }
+
+                    /** Represents a BudgetAmount. */
+                    class BudgetAmount implements IBudgetAmount {
+
+                        /**
+                         * Constructs a new BudgetAmount.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.billing.budgets.v1.IBudgetAmount);
+
+                        /** BudgetAmount specifiedAmount. */
+                        public specifiedAmount?: (google.type.IMoney|null);
+
+                        /** BudgetAmount lastPeriodAmount. */
+                        public lastPeriodAmount?: (google.cloud.billing.budgets.v1.ILastPeriodAmount|null);
+
+                        /** BudgetAmount budgetAmount. */
+                        public budgetAmount?: ("specifiedAmount"|"lastPeriodAmount");
+
+                        /**
+                         * Creates a new BudgetAmount instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns BudgetAmount instance
+                         */
+                        public static create(properties?: google.cloud.billing.budgets.v1.IBudgetAmount): google.cloud.billing.budgets.v1.BudgetAmount;
+
+                        /**
+                         * Encodes the specified BudgetAmount message. Does not implicitly {@link google.cloud.billing.budgets.v1.BudgetAmount.verify|verify} messages.
+                         * @param message BudgetAmount message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.billing.budgets.v1.IBudgetAmount, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified BudgetAmount message, length delimited. Does not implicitly {@link google.cloud.billing.budgets.v1.BudgetAmount.verify|verify} messages.
+                         * @param message BudgetAmount message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.billing.budgets.v1.IBudgetAmount, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a BudgetAmount message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns BudgetAmount
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.billing.budgets.v1.BudgetAmount;
+
+                        /**
+                         * Decodes a BudgetAmount message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns BudgetAmount
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.billing.budgets.v1.BudgetAmount;
+
+                        /**
+                         * Verifies a BudgetAmount message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a BudgetAmount message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns BudgetAmount
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.billing.budgets.v1.BudgetAmount;
+
+                        /**
+                         * Creates a plain object from a BudgetAmount message. Also converts values to other types if specified.
+                         * @param message BudgetAmount
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.billing.budgets.v1.BudgetAmount, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this BudgetAmount to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    /** Properties of a LastPeriodAmount. */
+                    interface ILastPeriodAmount {
+                    }
+
+                    /** Represents a LastPeriodAmount. */
+                    class LastPeriodAmount implements ILastPeriodAmount {
+
+                        /**
+                         * Constructs a new LastPeriodAmount.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.billing.budgets.v1.ILastPeriodAmount);
+
+                        /**
+                         * Creates a new LastPeriodAmount instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns LastPeriodAmount instance
+                         */
+                        public static create(properties?: google.cloud.billing.budgets.v1.ILastPeriodAmount): google.cloud.billing.budgets.v1.LastPeriodAmount;
+
+                        /**
+                         * Encodes the specified LastPeriodAmount message. Does not implicitly {@link google.cloud.billing.budgets.v1.LastPeriodAmount.verify|verify} messages.
+                         * @param message LastPeriodAmount message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.billing.budgets.v1.ILastPeriodAmount, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified LastPeriodAmount message, length delimited. Does not implicitly {@link google.cloud.billing.budgets.v1.LastPeriodAmount.verify|verify} messages.
+                         * @param message LastPeriodAmount message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.billing.budgets.v1.ILastPeriodAmount, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a LastPeriodAmount message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns LastPeriodAmount
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.billing.budgets.v1.LastPeriodAmount;
+
+                        /**
+                         * Decodes a LastPeriodAmount message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns LastPeriodAmount
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.billing.budgets.v1.LastPeriodAmount;
+
+                        /**
+                         * Verifies a LastPeriodAmount message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a LastPeriodAmount message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns LastPeriodAmount
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.billing.budgets.v1.LastPeriodAmount;
+
+                        /**
+                         * Creates a plain object from a LastPeriodAmount message. Also converts values to other types if specified.
+                         * @param message LastPeriodAmount
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.billing.budgets.v1.LastPeriodAmount, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this LastPeriodAmount to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    /** Properties of a ThresholdRule. */
+                    interface IThresholdRule {
+
+                        /** ThresholdRule thresholdPercent */
+                        thresholdPercent?: (number|null);
+
+                        /** ThresholdRule spendBasis */
+                        spendBasis?: (google.cloud.billing.budgets.v1.ThresholdRule.Basis|keyof typeof google.cloud.billing.budgets.v1.ThresholdRule.Basis|null);
+                    }
+
+                    /** Represents a ThresholdRule. */
+                    class ThresholdRule implements IThresholdRule {
+
+                        /**
+                         * Constructs a new ThresholdRule.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.billing.budgets.v1.IThresholdRule);
+
+                        /** ThresholdRule thresholdPercent. */
+                        public thresholdPercent: number;
+
+                        /** ThresholdRule spendBasis. */
+                        public spendBasis: (google.cloud.billing.budgets.v1.ThresholdRule.Basis|keyof typeof google.cloud.billing.budgets.v1.ThresholdRule.Basis);
+
+                        /**
+                         * Creates a new ThresholdRule instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ThresholdRule instance
+                         */
+                        public static create(properties?: google.cloud.billing.budgets.v1.IThresholdRule): google.cloud.billing.budgets.v1.ThresholdRule;
+
+                        /**
+                         * Encodes the specified ThresholdRule message. Does not implicitly {@link google.cloud.billing.budgets.v1.ThresholdRule.verify|verify} messages.
+                         * @param message ThresholdRule message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.billing.budgets.v1.IThresholdRule, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ThresholdRule message, length delimited. Does not implicitly {@link google.cloud.billing.budgets.v1.ThresholdRule.verify|verify} messages.
+                         * @param message ThresholdRule message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.billing.budgets.v1.IThresholdRule, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ThresholdRule message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ThresholdRule
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.billing.budgets.v1.ThresholdRule;
+
+                        /**
+                         * Decodes a ThresholdRule message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ThresholdRule
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.billing.budgets.v1.ThresholdRule;
+
+                        /**
+                         * Verifies a ThresholdRule message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ThresholdRule message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ThresholdRule
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.billing.budgets.v1.ThresholdRule;
+
+                        /**
+                         * Creates a plain object from a ThresholdRule message. Also converts values to other types if specified.
+                         * @param message ThresholdRule
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.billing.budgets.v1.ThresholdRule, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ThresholdRule to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    namespace ThresholdRule {
+
+                        /** Basis enum. */
+                        enum Basis {
+                            BASIS_UNSPECIFIED = 0,
+                            CURRENT_SPEND = 1,
+                            FORECASTED_SPEND = 2
+                        }
+                    }
+
+                    /** Properties of a NotificationsRule. */
+                    interface INotificationsRule {
+
+                        /** NotificationsRule pubsubTopic */
+                        pubsubTopic?: (string|null);
+
+                        /** NotificationsRule schemaVersion */
+                        schemaVersion?: (string|null);
+
+                        /** NotificationsRule monitoringNotificationChannels */
+                        monitoringNotificationChannels?: (string[]|null);
+
+                        /** NotificationsRule disableDefaultIamRecipients */
+                        disableDefaultIamRecipients?: (boolean|null);
+                    }
+
+                    /** Represents a NotificationsRule. */
+                    class NotificationsRule implements INotificationsRule {
+
+                        /**
+                         * Constructs a new NotificationsRule.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.billing.budgets.v1.INotificationsRule);
+
+                        /** NotificationsRule pubsubTopic. */
+                        public pubsubTopic: string;
+
+                        /** NotificationsRule schemaVersion. */
+                        public schemaVersion: string;
+
+                        /** NotificationsRule monitoringNotificationChannels. */
+                        public monitoringNotificationChannels: string[];
+
+                        /** NotificationsRule disableDefaultIamRecipients. */
+                        public disableDefaultIamRecipients: boolean;
+
+                        /**
+                         * Creates a new NotificationsRule instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns NotificationsRule instance
+                         */
+                        public static create(properties?: google.cloud.billing.budgets.v1.INotificationsRule): google.cloud.billing.budgets.v1.NotificationsRule;
+
+                        /**
+                         * Encodes the specified NotificationsRule message. Does not implicitly {@link google.cloud.billing.budgets.v1.NotificationsRule.verify|verify} messages.
+                         * @param message NotificationsRule message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.billing.budgets.v1.INotificationsRule, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified NotificationsRule message, length delimited. Does not implicitly {@link google.cloud.billing.budgets.v1.NotificationsRule.verify|verify} messages.
+                         * @param message NotificationsRule message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.billing.budgets.v1.INotificationsRule, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a NotificationsRule message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns NotificationsRule
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.billing.budgets.v1.NotificationsRule;
+
+                        /**
+                         * Decodes a NotificationsRule message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns NotificationsRule
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.billing.budgets.v1.NotificationsRule;
+
+                        /**
+                         * Verifies a NotificationsRule message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a NotificationsRule message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns NotificationsRule
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.billing.budgets.v1.NotificationsRule;
+
+                        /**
+                         * Creates a plain object from a NotificationsRule message. Also converts values to other types if specified.
+                         * @param message NotificationsRule
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.billing.budgets.v1.NotificationsRule, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this NotificationsRule to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    /** Properties of a Filter. */
+                    interface IFilter {
+
+                        /** Filter projects */
+                        projects?: (string[]|null);
+
+                        /** Filter creditTypes */
+                        creditTypes?: (string[]|null);
+
+                        /** Filter creditTypesTreatment */
+                        creditTypesTreatment?: (google.cloud.billing.budgets.v1.Filter.CreditTypesTreatment|keyof typeof google.cloud.billing.budgets.v1.Filter.CreditTypesTreatment|null);
+
+                        /** Filter services */
+                        services?: (string[]|null);
+
+                        /** Filter subaccounts */
+                        subaccounts?: (string[]|null);
+
+                        /** Filter labels */
+                        labels?: ({ [k: string]: google.protobuf.IListValue }|null);
+                    }
+
+                    /** Represents a Filter. */
+                    class Filter implements IFilter {
+
+                        /**
+                         * Constructs a new Filter.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.billing.budgets.v1.IFilter);
+
+                        /** Filter projects. */
+                        public projects: string[];
+
+                        /** Filter creditTypes. */
+                        public creditTypes: string[];
+
+                        /** Filter creditTypesTreatment. */
+                        public creditTypesTreatment: (google.cloud.billing.budgets.v1.Filter.CreditTypesTreatment|keyof typeof google.cloud.billing.budgets.v1.Filter.CreditTypesTreatment);
+
+                        /** Filter services. */
+                        public services: string[];
+
+                        /** Filter subaccounts. */
+                        public subaccounts: string[];
+
+                        /** Filter labels. */
+                        public labels: { [k: string]: google.protobuf.IListValue };
+
+                        /**
+                         * Creates a new Filter instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns Filter instance
+                         */
+                        public static create(properties?: google.cloud.billing.budgets.v1.IFilter): google.cloud.billing.budgets.v1.Filter;
+
+                        /**
+                         * Encodes the specified Filter message. Does not implicitly {@link google.cloud.billing.budgets.v1.Filter.verify|verify} messages.
+                         * @param message Filter message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.billing.budgets.v1.IFilter, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified Filter message, length delimited. Does not implicitly {@link google.cloud.billing.budgets.v1.Filter.verify|verify} messages.
+                         * @param message Filter message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.billing.budgets.v1.IFilter, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a Filter message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns Filter
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.billing.budgets.v1.Filter;
+
+                        /**
+                         * Decodes a Filter message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns Filter
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.billing.budgets.v1.Filter;
+
+                        /**
+                         * Verifies a Filter message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a Filter message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns Filter
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.billing.budgets.v1.Filter;
+
+                        /**
+                         * Creates a plain object from a Filter message. Also converts values to other types if specified.
+                         * @param message Filter
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.billing.budgets.v1.Filter, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this Filter to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    namespace Filter {
+
+                        /** CreditTypesTreatment enum. */
+                        enum CreditTypesTreatment {
+                            CREDIT_TYPES_TREATMENT_UNSPECIFIED = 0,
+                            INCLUDE_ALL_CREDITS = 1,
+                            EXCLUDE_ALL_CREDITS = 2,
+                            INCLUDE_SPECIFIED_CREDITS = 3
+                        }
+                    }
+
+                    /** Represents a BudgetService */
+                    class BudgetService extends $protobuf.rpc.Service {
+
+                        /**
+                         * Constructs a new BudgetService service.
+                         * @param rpcImpl RPC implementation
+                         * @param [requestDelimited=false] Whether requests are length-delimited
+                         * @param [responseDelimited=false] Whether responses are length-delimited
+                         */
+                        constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                        /**
+                         * Creates new BudgetService service using the specified rpc implementation.
+                         * @param rpcImpl RPC implementation
+                         * @param [requestDelimited=false] Whether requests are length-delimited
+                         * @param [responseDelimited=false] Whether responses are length-delimited
+                         * @returns RPC service. Useful where requests and/or responses are streamed.
+                         */
+                        public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): BudgetService;
+
+                        /**
+                         * Calls CreateBudget.
+                         * @param request CreateBudgetRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and Budget
+                         */
+                        public createBudget(request: google.cloud.billing.budgets.v1.ICreateBudgetRequest, callback: google.cloud.billing.budgets.v1.BudgetService.CreateBudgetCallback): void;
+
+                        /**
+                         * Calls CreateBudget.
+                         * @param request CreateBudgetRequest message or plain object
+                         * @returns Promise
+                         */
+                        public createBudget(request: google.cloud.billing.budgets.v1.ICreateBudgetRequest): Promise<google.cloud.billing.budgets.v1.Budget>;
+
+                        /**
+                         * Calls UpdateBudget.
+                         * @param request UpdateBudgetRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and Budget
+                         */
+                        public updateBudget(request: google.cloud.billing.budgets.v1.IUpdateBudgetRequest, callback: google.cloud.billing.budgets.v1.BudgetService.UpdateBudgetCallback): void;
+
+                        /**
+                         * Calls UpdateBudget.
+                         * @param request UpdateBudgetRequest message or plain object
+                         * @returns Promise
+                         */
+                        public updateBudget(request: google.cloud.billing.budgets.v1.IUpdateBudgetRequest): Promise<google.cloud.billing.budgets.v1.Budget>;
+
+                        /**
+                         * Calls GetBudget.
+                         * @param request GetBudgetRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and Budget
+                         */
+                        public getBudget(request: google.cloud.billing.budgets.v1.IGetBudgetRequest, callback: google.cloud.billing.budgets.v1.BudgetService.GetBudgetCallback): void;
+
+                        /**
+                         * Calls GetBudget.
+                         * @param request GetBudgetRequest message or plain object
+                         * @returns Promise
+                         */
+                        public getBudget(request: google.cloud.billing.budgets.v1.IGetBudgetRequest): Promise<google.cloud.billing.budgets.v1.Budget>;
+
+                        /**
+                         * Calls ListBudgets.
+                         * @param request ListBudgetsRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and ListBudgetsResponse
+                         */
+                        public listBudgets(request: google.cloud.billing.budgets.v1.IListBudgetsRequest, callback: google.cloud.billing.budgets.v1.BudgetService.ListBudgetsCallback): void;
+
+                        /**
+                         * Calls ListBudgets.
+                         * @param request ListBudgetsRequest message or plain object
+                         * @returns Promise
+                         */
+                        public listBudgets(request: google.cloud.billing.budgets.v1.IListBudgetsRequest): Promise<google.cloud.billing.budgets.v1.ListBudgetsResponse>;
+
+                        /**
+                         * Calls DeleteBudget.
+                         * @param request DeleteBudgetRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and Empty
+                         */
+                        public deleteBudget(request: google.cloud.billing.budgets.v1.IDeleteBudgetRequest, callback: google.cloud.billing.budgets.v1.BudgetService.DeleteBudgetCallback): void;
+
+                        /**
+                         * Calls DeleteBudget.
+                         * @param request DeleteBudgetRequest message or plain object
+                         * @returns Promise
+                         */
+                        public deleteBudget(request: google.cloud.billing.budgets.v1.IDeleteBudgetRequest): Promise<google.protobuf.Empty>;
+                    }
+
+                    namespace BudgetService {
+
+                        /**
+                         * Callback as used by {@link google.cloud.billing.budgets.v1.BudgetService#createBudget}.
+                         * @param error Error, if any
+                         * @param [response] Budget
+                         */
+                        type CreateBudgetCallback = (error: (Error|null), response?: google.cloud.billing.budgets.v1.Budget) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.billing.budgets.v1.BudgetService#updateBudget}.
+                         * @param error Error, if any
+                         * @param [response] Budget
+                         */
+                        type UpdateBudgetCallback = (error: (Error|null), response?: google.cloud.billing.budgets.v1.Budget) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.billing.budgets.v1.BudgetService#getBudget}.
+                         * @param error Error, if any
+                         * @param [response] Budget
+                         */
+                        type GetBudgetCallback = (error: (Error|null), response?: google.cloud.billing.budgets.v1.Budget) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.billing.budgets.v1.BudgetService#listBudgets}.
+                         * @param error Error, if any
+                         * @param [response] ListBudgetsResponse
+                         */
+                        type ListBudgetsCallback = (error: (Error|null), response?: google.cloud.billing.budgets.v1.ListBudgetsResponse) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.billing.budgets.v1.BudgetService#deleteBudget}.
+                         * @param error Error, if any
+                         * @param [response] Empty
+                         */
+                        type DeleteBudgetCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
+                    }
+
+                    /** Properties of a CreateBudgetRequest. */
+                    interface ICreateBudgetRequest {
+
+                        /** CreateBudgetRequest parent */
+                        parent?: (string|null);
+
+                        /** CreateBudgetRequest budget */
+                        budget?: (google.cloud.billing.budgets.v1.IBudget|null);
+                    }
+
+                    /** Represents a CreateBudgetRequest. */
+                    class CreateBudgetRequest implements ICreateBudgetRequest {
+
+                        /**
+                         * Constructs a new CreateBudgetRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.billing.budgets.v1.ICreateBudgetRequest);
+
+                        /** CreateBudgetRequest parent. */
+                        public parent: string;
+
+                        /** CreateBudgetRequest budget. */
+                        public budget?: (google.cloud.billing.budgets.v1.IBudget|null);
+
+                        /**
+                         * Creates a new CreateBudgetRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns CreateBudgetRequest instance
+                         */
+                        public static create(properties?: google.cloud.billing.budgets.v1.ICreateBudgetRequest): google.cloud.billing.budgets.v1.CreateBudgetRequest;
+
+                        /**
+                         * Encodes the specified CreateBudgetRequest message. Does not implicitly {@link google.cloud.billing.budgets.v1.CreateBudgetRequest.verify|verify} messages.
+                         * @param message CreateBudgetRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.billing.budgets.v1.ICreateBudgetRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified CreateBudgetRequest message, length delimited. Does not implicitly {@link google.cloud.billing.budgets.v1.CreateBudgetRequest.verify|verify} messages.
+                         * @param message CreateBudgetRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.billing.budgets.v1.ICreateBudgetRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a CreateBudgetRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns CreateBudgetRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.billing.budgets.v1.CreateBudgetRequest;
+
+                        /**
+                         * Decodes a CreateBudgetRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns CreateBudgetRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.billing.budgets.v1.CreateBudgetRequest;
+
+                        /**
+                         * Verifies a CreateBudgetRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a CreateBudgetRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns CreateBudgetRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.billing.budgets.v1.CreateBudgetRequest;
+
+                        /**
+                         * Creates a plain object from a CreateBudgetRequest message. Also converts values to other types if specified.
+                         * @param message CreateBudgetRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.billing.budgets.v1.CreateBudgetRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this CreateBudgetRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    /** Properties of an UpdateBudgetRequest. */
+                    interface IUpdateBudgetRequest {
+
+                        /** UpdateBudgetRequest budget */
+                        budget?: (google.cloud.billing.budgets.v1.IBudget|null);
+
+                        /** UpdateBudgetRequest updateMask */
+                        updateMask?: (google.protobuf.IFieldMask|null);
+                    }
+
+                    /** Represents an UpdateBudgetRequest. */
+                    class UpdateBudgetRequest implements IUpdateBudgetRequest {
+
+                        /**
+                         * Constructs a new UpdateBudgetRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.billing.budgets.v1.IUpdateBudgetRequest);
+
+                        /** UpdateBudgetRequest budget. */
+                        public budget?: (google.cloud.billing.budgets.v1.IBudget|null);
+
+                        /** UpdateBudgetRequest updateMask. */
+                        public updateMask?: (google.protobuf.IFieldMask|null);
+
+                        /**
+                         * Creates a new UpdateBudgetRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns UpdateBudgetRequest instance
+                         */
+                        public static create(properties?: google.cloud.billing.budgets.v1.IUpdateBudgetRequest): google.cloud.billing.budgets.v1.UpdateBudgetRequest;
+
+                        /**
+                         * Encodes the specified UpdateBudgetRequest message. Does not implicitly {@link google.cloud.billing.budgets.v1.UpdateBudgetRequest.verify|verify} messages.
+                         * @param message UpdateBudgetRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.billing.budgets.v1.IUpdateBudgetRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified UpdateBudgetRequest message, length delimited. Does not implicitly {@link google.cloud.billing.budgets.v1.UpdateBudgetRequest.verify|verify} messages.
+                         * @param message UpdateBudgetRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.billing.budgets.v1.IUpdateBudgetRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an UpdateBudgetRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns UpdateBudgetRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.billing.budgets.v1.UpdateBudgetRequest;
+
+                        /**
+                         * Decodes an UpdateBudgetRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns UpdateBudgetRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.billing.budgets.v1.UpdateBudgetRequest;
+
+                        /**
+                         * Verifies an UpdateBudgetRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an UpdateBudgetRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns UpdateBudgetRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.billing.budgets.v1.UpdateBudgetRequest;
+
+                        /**
+                         * Creates a plain object from an UpdateBudgetRequest message. Also converts values to other types if specified.
+                         * @param message UpdateBudgetRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.billing.budgets.v1.UpdateBudgetRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this UpdateBudgetRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    /** Properties of a GetBudgetRequest. */
+                    interface IGetBudgetRequest {
+
+                        /** GetBudgetRequest name */
+                        name?: (string|null);
+                    }
+
+                    /** Represents a GetBudgetRequest. */
+                    class GetBudgetRequest implements IGetBudgetRequest {
+
+                        /**
+                         * Constructs a new GetBudgetRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.billing.budgets.v1.IGetBudgetRequest);
+
+                        /** GetBudgetRequest name. */
+                        public name: string;
+
+                        /**
+                         * Creates a new GetBudgetRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns GetBudgetRequest instance
+                         */
+                        public static create(properties?: google.cloud.billing.budgets.v1.IGetBudgetRequest): google.cloud.billing.budgets.v1.GetBudgetRequest;
+
+                        /**
+                         * Encodes the specified GetBudgetRequest message. Does not implicitly {@link google.cloud.billing.budgets.v1.GetBudgetRequest.verify|verify} messages.
+                         * @param message GetBudgetRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.billing.budgets.v1.IGetBudgetRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified GetBudgetRequest message, length delimited. Does not implicitly {@link google.cloud.billing.budgets.v1.GetBudgetRequest.verify|verify} messages.
+                         * @param message GetBudgetRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.billing.budgets.v1.IGetBudgetRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a GetBudgetRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns GetBudgetRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.billing.budgets.v1.GetBudgetRequest;
+
+                        /**
+                         * Decodes a GetBudgetRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns GetBudgetRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.billing.budgets.v1.GetBudgetRequest;
+
+                        /**
+                         * Verifies a GetBudgetRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a GetBudgetRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns GetBudgetRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.billing.budgets.v1.GetBudgetRequest;
+
+                        /**
+                         * Creates a plain object from a GetBudgetRequest message. Also converts values to other types if specified.
+                         * @param message GetBudgetRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.billing.budgets.v1.GetBudgetRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this GetBudgetRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    /** Properties of a ListBudgetsRequest. */
+                    interface IListBudgetsRequest {
+
+                        /** ListBudgetsRequest parent */
+                        parent?: (string|null);
+
+                        /** ListBudgetsRequest pageSize */
+                        pageSize?: (number|null);
+
+                        /** ListBudgetsRequest pageToken */
+                        pageToken?: (string|null);
+                    }
+
+                    /** Represents a ListBudgetsRequest. */
+                    class ListBudgetsRequest implements IListBudgetsRequest {
+
+                        /**
+                         * Constructs a new ListBudgetsRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.billing.budgets.v1.IListBudgetsRequest);
+
+                        /** ListBudgetsRequest parent. */
+                        public parent: string;
+
+                        /** ListBudgetsRequest pageSize. */
+                        public pageSize: number;
+
+                        /** ListBudgetsRequest pageToken. */
+                        public pageToken: string;
+
+                        /**
+                         * Creates a new ListBudgetsRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ListBudgetsRequest instance
+                         */
+                        public static create(properties?: google.cloud.billing.budgets.v1.IListBudgetsRequest): google.cloud.billing.budgets.v1.ListBudgetsRequest;
+
+                        /**
+                         * Encodes the specified ListBudgetsRequest message. Does not implicitly {@link google.cloud.billing.budgets.v1.ListBudgetsRequest.verify|verify} messages.
+                         * @param message ListBudgetsRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.billing.budgets.v1.IListBudgetsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ListBudgetsRequest message, length delimited. Does not implicitly {@link google.cloud.billing.budgets.v1.ListBudgetsRequest.verify|verify} messages.
+                         * @param message ListBudgetsRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.billing.budgets.v1.IListBudgetsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ListBudgetsRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ListBudgetsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.billing.budgets.v1.ListBudgetsRequest;
+
+                        /**
+                         * Decodes a ListBudgetsRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ListBudgetsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.billing.budgets.v1.ListBudgetsRequest;
+
+                        /**
+                         * Verifies a ListBudgetsRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ListBudgetsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ListBudgetsRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.billing.budgets.v1.ListBudgetsRequest;
+
+                        /**
+                         * Creates a plain object from a ListBudgetsRequest message. Also converts values to other types if specified.
+                         * @param message ListBudgetsRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.billing.budgets.v1.ListBudgetsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ListBudgetsRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    /** Properties of a ListBudgetsResponse. */
+                    interface IListBudgetsResponse {
+
+                        /** ListBudgetsResponse budgets */
+                        budgets?: (google.cloud.billing.budgets.v1.IBudget[]|null);
+
+                        /** ListBudgetsResponse nextPageToken */
+                        nextPageToken?: (string|null);
+                    }
+
+                    /** Represents a ListBudgetsResponse. */
+                    class ListBudgetsResponse implements IListBudgetsResponse {
+
+                        /**
+                         * Constructs a new ListBudgetsResponse.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.billing.budgets.v1.IListBudgetsResponse);
+
+                        /** ListBudgetsResponse budgets. */
+                        public budgets: google.cloud.billing.budgets.v1.IBudget[];
+
+                        /** ListBudgetsResponse nextPageToken. */
+                        public nextPageToken: string;
+
+                        /**
+                         * Creates a new ListBudgetsResponse instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ListBudgetsResponse instance
+                         */
+                        public static create(properties?: google.cloud.billing.budgets.v1.IListBudgetsResponse): google.cloud.billing.budgets.v1.ListBudgetsResponse;
+
+                        /**
+                         * Encodes the specified ListBudgetsResponse message. Does not implicitly {@link google.cloud.billing.budgets.v1.ListBudgetsResponse.verify|verify} messages.
+                         * @param message ListBudgetsResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.billing.budgets.v1.IListBudgetsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ListBudgetsResponse message, length delimited. Does not implicitly {@link google.cloud.billing.budgets.v1.ListBudgetsResponse.verify|verify} messages.
+                         * @param message ListBudgetsResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.billing.budgets.v1.IListBudgetsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ListBudgetsResponse message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ListBudgetsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.billing.budgets.v1.ListBudgetsResponse;
+
+                        /**
+                         * Decodes a ListBudgetsResponse message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ListBudgetsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.billing.budgets.v1.ListBudgetsResponse;
+
+                        /**
+                         * Verifies a ListBudgetsResponse message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ListBudgetsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ListBudgetsResponse
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.billing.budgets.v1.ListBudgetsResponse;
+
+                        /**
+                         * Creates a plain object from a ListBudgetsResponse message. Also converts values to other types if specified.
+                         * @param message ListBudgetsResponse
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.billing.budgets.v1.ListBudgetsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ListBudgetsResponse to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    /** Properties of a DeleteBudgetRequest. */
+                    interface IDeleteBudgetRequest {
+
+                        /** DeleteBudgetRequest name */
+                        name?: (string|null);
+                    }
+
+                    /** Represents a DeleteBudgetRequest. */
+                    class DeleteBudgetRequest implements IDeleteBudgetRequest {
+
+                        /**
+                         * Constructs a new DeleteBudgetRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.billing.budgets.v1.IDeleteBudgetRequest);
+
+                        /** DeleteBudgetRequest name. */
+                        public name: string;
+
+                        /**
+                         * Creates a new DeleteBudgetRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns DeleteBudgetRequest instance
+                         */
+                        public static create(properties?: google.cloud.billing.budgets.v1.IDeleteBudgetRequest): google.cloud.billing.budgets.v1.DeleteBudgetRequest;
+
+                        /**
+                         * Encodes the specified DeleteBudgetRequest message. Does not implicitly {@link google.cloud.billing.budgets.v1.DeleteBudgetRequest.verify|verify} messages.
+                         * @param message DeleteBudgetRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.billing.budgets.v1.IDeleteBudgetRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified DeleteBudgetRequest message, length delimited. Does not implicitly {@link google.cloud.billing.budgets.v1.DeleteBudgetRequest.verify|verify} messages.
+                         * @param message DeleteBudgetRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.billing.budgets.v1.IDeleteBudgetRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a DeleteBudgetRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns DeleteBudgetRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.billing.budgets.v1.DeleteBudgetRequest;
+
+                        /**
+                         * Decodes a DeleteBudgetRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns DeleteBudgetRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.billing.budgets.v1.DeleteBudgetRequest;
+
+                        /**
+                         * Verifies a DeleteBudgetRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a DeleteBudgetRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns DeleteBudgetRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.billing.budgets.v1.DeleteBudgetRequest;
+
+                        /**
+                         * Creates a plain object from a DeleteBudgetRequest message. Also converts values to other types if specified.
+                         * @param message DeleteBudgetRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.billing.budgets.v1.DeleteBudgetRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this DeleteBudgetRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+                }
+
                 /** Namespace v1beta1. */
                 namespace v1beta1 {
 

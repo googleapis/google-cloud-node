@@ -3,23 +3,16 @@
     {
       "git": {
         "name": ".",
-        "remote": "https://github.com/googleapis/nodejs-billing-budgets.git",
-        "sha": "a4ef32b861767107cff4165503e34795e0e1c978"
+        "remote": "git@github.com:googleapis/nodejs-billing-budgets.git",
+        "sha": "e20606aa11fe8fe88045c77c4883fd29b959ca5f"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "a9dafb196ae8cf27ba8795efcc1944292ad92264",
-        "internalRef": "339511971"
-      }
-    },
-    {
-      "git": {
-        "name": "synthtool",
-        "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "ba9918cd22874245b55734f57470c719b577e591"
+        "sha": "1e0efcfe771de158a7845ac9fe0d63c7f1248779",
+        "internalRef": "341082612"
       }
     }
   ],
@@ -29,6 +22,15 @@
         "source": "googleapis",
         "apiName": "billing-budgets",
         "apiVersion": "v1beta1",
+        "language": "nodejs",
+        "generator": "bazel"
+      }
+    },
+    {
+      "client": {
+        "source": "googleapis",
+        "apiName": "billing-budgets",
+        "apiVersion": "v1",
         "language": "nodejs",
         "generator": "bazel"
       }
@@ -87,6 +89,8 @@
     "README.md",
     "api-extractor.json",
     "linkinator.config.json",
+    "protos/google/cloud/billing/budgets/v1/budget_model.proto",
+    "protos/google/cloud/billing/budgets/v1/budget_service.proto",
     "protos/google/cloud/billing/budgets/v1beta1/budget_model.proto",
     "protos/google/cloud/billing/budgets/v1beta1/budget_service.proto",
     "protos/protos.d.ts",
@@ -95,6 +99,10 @@
     "renovate.json",
     "samples/README.md",
     "src/index.ts",
+    "src/v1/budget_service_client.ts",
+    "src/v1/budget_service_client_config.json",
+    "src/v1/budget_service_proto_list.json",
+    "src/v1/index.ts",
     "src/v1beta1/budget_service_client.ts",
     "src/v1beta1/budget_service_client_config.json",
     "src/v1beta1/budget_service_proto_list.json",
@@ -102,6 +110,7 @@
     "system-test/fixtures/sample/src/index.js",
     "system-test/fixtures/sample/src/index.ts",
     "system-test/install.ts",
+    "test/gapic_budget_service_v1.ts",
     "test/gapic_budget_service_v1beta1.ts",
     "tsconfig.json",
     "webpack.config.js"
