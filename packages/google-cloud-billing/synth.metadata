@@ -3,23 +3,15 @@
     {
       "git": {
         "name": ".",
-        "remote": "https://github.com/googleapis/nodejs-billing.git",
-        "sha": "881e40ffd1cfd794dd5edb6f81d7441876074b69"
-      }
-    },
-    {
-      "git": {
-        "name": "googleapis",
-        "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "4c5071b615d96ef9dfd6a63d8429090f1f2872bb",
-        "internalRef": "327369997"
+        "remote": "git@github.com:googleapis/nodejs-billing.git",
+        "sha": "f76fe0026d03a8a8f3c0b3d4f352628ca7e9b7de"
       }
     },
     {
       "git": {
         "name": "synthtool",
         "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "ba9918cd22874245b55734f57470c719b577e591"
+        "sha": "1f1148d3c7a7a52f0c98077f976bd9b3c948ee2b"
       }
     }
   ],
@@ -87,6 +79,7 @@
     "README.md",
     "api-extractor.json",
     "linkinator.config.json",
+    "package-lock.json.2677892991",
     "protos/google/cloud/billing/v1/cloud_billing.proto",
     "protos/google/cloud/billing/v1/cloud_catalog.proto",
     "protos/protos.d.ts",
@@ -94,6 +87,7 @@
     "protos/protos.json",
     "renovate.json",
     "samples/README.md",
+    "samples/package-lock.json.1460149391",
     "src/index.ts",
     "src/v1/cloud_billing_client.ts",
     "src/v1/cloud_billing_client_config.json",

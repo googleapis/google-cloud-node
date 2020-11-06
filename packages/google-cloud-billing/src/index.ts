@@ -18,7 +18,9 @@
 
 import * as v1 from './v1';
 const CloudBillingClient = v1.CloudBillingClient;
+type CloudBillingClient = v1.CloudBillingClient;
 const CloudCatalogClient = v1.CloudCatalogClient;
+type CloudCatalogClient = v1.CloudCatalogClient;
 export {v1, CloudBillingClient, CloudCatalogClient};
 export default {v1, CloudBillingClient, CloudCatalogClient};
 import * as protos from '../protos/protos';

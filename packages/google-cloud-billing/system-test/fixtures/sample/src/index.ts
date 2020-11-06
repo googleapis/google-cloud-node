@@ -18,9 +18,21 @@
 
 import {CloudBillingClient, CloudCatalogClient} from '@google-cloud/billing';
 
+// check that the client class type name can be used
+function doStuffWithCloudBillingClient(client: CloudBillingClient) {
+  client.close();
+}
+function doStuffWithCloudCatalogClient(client: CloudCatalogClient) {
+  client.close();
+}
+
 function main() {
-  new CloudBillingClient();
-  new CloudCatalogClient();
+  // check that the client instance can be created
+  const cloudBillingClient = new CloudBillingClient();
+  doStuffWithCloudBillingClient(cloudBillingClient);
+  // check that the client instance can be created
+  const cloudCatalogClient = new CloudCatalogClient();
+  doStuffWithCloudCatalogClient(cloudCatalogClient);
 }
 
 main();
