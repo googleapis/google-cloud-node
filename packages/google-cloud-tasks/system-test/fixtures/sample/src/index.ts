@@ -18,8 +18,15 @@
 
 import {CloudTasksClient} from '@google-cloud/tasks';
 
+// check that the client class type name can be used
+function doStuffWithCloudTasksClient(client: CloudTasksClient) {
+  client.close();
+}
+
 function main() {
-  new CloudTasksClient();
+  // check that the client instance can be created
+  const cloudTasksClient = new CloudTasksClient();
+  doStuffWithCloudTasksClient(cloudTasksClient);
 }
 
 main();
