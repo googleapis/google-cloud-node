@@ -18,8 +18,15 @@
 
 import {SpeechClient} from '@google-cloud/speech';
 
+// check that the client class type name can be used
+function doStuffWithSpeechClient(client: SpeechClient) {
+  client.close();
+}
+
 function main() {
-  new SpeechClient();
+  // check that the client instance can be created
+  const speechClient = new SpeechClient();
+  doStuffWithSpeechClient(speechClient);
 }
 
 main();

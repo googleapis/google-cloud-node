@@ -36,6 +36,7 @@ Object.defineProperty(
 );
 
 const SpeechClient = v1.SpeechClient;
+type SpeechClient = v1.SpeechClient;
 export {v1, v1p1beta1, SpeechClient};
 // For compatibility with JavaScript libraries we need to provide this default export:
 // tslint:disable-next-line no-default-export
