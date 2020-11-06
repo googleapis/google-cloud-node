@@ -3,23 +3,15 @@
     {
       "git": {
         "name": ".",
-        "remote": "https://github.com/googleapis/nodejs-service-directory.git",
-        "sha": "8dcb97ec729a4c6f607e02fd2beb9b664d8952de"
-      }
-    },
-    {
-      "git": {
-        "name": "googleapis",
-        "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "4c5071b615d96ef9dfd6a63d8429090f1f2872bb",
-        "internalRef": "327369997"
+        "remote": "git@github.com:googleapis/nodejs-service-directory.git",
+        "sha": "c636b30d6851f881052fc7e120e82a54d9fc6c32"
       }
     },
     {
       "git": {
         "name": "synthtool",
         "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "ba9918cd22874245b55734f57470c719b577e591"
+        "sha": "1f1148d3c7a7a52f0c98077f976bd9b3c948ee2b"
       }
     }
   ],
@@ -87,6 +79,7 @@
     "README.md",
     "api-extractor.json",
     "linkinator.config.json",
+    "package-lock.json.1842372166",
     "protos/google/cloud/servicedirectory/v1beta1/endpoint.proto",
     "protos/google/cloud/servicedirectory/v1beta1/lookup_service.proto",
     "protos/google/cloud/servicedirectory/v1beta1/namespace.proto",
@@ -97,6 +90,7 @@
     "protos/protos.json",
     "renovate.json",
     "samples/README.md",
+    "samples/package-lock.json.1411454325",
     "src/index.ts",
     "src/v1beta1/index.ts",
     "src/v1beta1/lookup_service_client.ts",

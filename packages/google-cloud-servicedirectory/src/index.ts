@@ -18,7 +18,9 @@
 
 import * as v1beta1 from './v1beta1';
 const LookupServiceClient = v1beta1.LookupServiceClient;
+type LookupServiceClient = v1beta1.LookupServiceClient;
 const RegistrationServiceClient = v1beta1.RegistrationServiceClient;
+type RegistrationServiceClient = v1beta1.RegistrationServiceClient;
 export {v1beta1, LookupServiceClient, RegistrationServiceClient};
 export default {v1beta1, LookupServiceClient, RegistrationServiceClient};
 import * as protos from '../protos/protos';

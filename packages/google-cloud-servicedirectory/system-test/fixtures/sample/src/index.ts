@@ -21,9 +21,23 @@ import {
   RegistrationServiceClient,
 } from '@google-cloud/service-directory';
 
+// check that the client class type name can be used
+function doStuffWithLookupServiceClient(client: LookupServiceClient) {
+  client.close();
+}
+function doStuffWithRegistrationServiceClient(
+  client: RegistrationServiceClient
+) {
+  client.close();
+}
+
 function main() {
-  new LookupServiceClient();
-  new RegistrationServiceClient();
+  // check that the client instance can be created
+  const lookupServiceClient = new LookupServiceClient();
+  doStuffWithLookupServiceClient(lookupServiceClient);
+  // check that the client instance can be created
+  const registrationServiceClient = new RegistrationServiceClient();
+  doStuffWithRegistrationServiceClient(registrationServiceClient);
 }
 
 main();
