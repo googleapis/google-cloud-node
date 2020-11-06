@@ -18,8 +18,15 @@
 
 import {CloudRedisClient} from '@google-cloud/redis';
 
+// check that the client class type name can be used
+function doStuffWithCloudRedisClient(client: CloudRedisClient) {
+  client.close();
+}
+
 function main() {
-  new CloudRedisClient();
+  // check that the client instance can be created
+  const cloudRedisClient = new CloudRedisClient();
+  doStuffWithCloudRedisClient(cloudRedisClient);
 }
 
 main();

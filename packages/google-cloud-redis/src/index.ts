@@ -20,6 +20,7 @@ import * as v1 from './v1';
 import * as v1beta1 from './v1beta1';
 
 const CloudRedisClient = v1.CloudRedisClient;
+type CloudRedisClient = v1.CloudRedisClient;
 
 export {v1, v1beta1, CloudRedisClient};
 export default {v1, v1beta1, CloudRedisClient};
