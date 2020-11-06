@@ -19,6 +19,7 @@
 import * as v1 from './v1';
 
 const KeyManagementServiceClient = v1.KeyManagementServiceClient;
+type KeyManagementServiceClient = v1.KeyManagementServiceClient;
 
 export {v1, KeyManagementServiceClient};
 export default {v1, KeyManagementServiceClient};
