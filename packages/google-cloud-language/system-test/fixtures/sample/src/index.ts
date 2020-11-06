@@ -18,8 +18,15 @@
 
 import {LanguageServiceClient} from '@google-cloud/language';
 
+// check that the client class type name can be used
+function doStuffWithLanguageServiceClient(client: LanguageServiceClient) {
+  client.close();
+}
+
 function main() {
-  new LanguageServiceClient();
+  // check that the client instance can be created
+  const languageServiceClient = new LanguageServiceClient();
+  doStuffWithLanguageServiceClient(languageServiceClient);
 }
 
 main();
