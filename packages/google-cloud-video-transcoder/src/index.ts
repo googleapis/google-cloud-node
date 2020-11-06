@@ -18,6 +18,7 @@
 
 import * as v1beta1 from './v1beta1';
 const TranscoderServiceClient = v1beta1.TranscoderServiceClient;
+type TranscoderServiceClient = v1beta1.TranscoderServiceClient;
 export {v1beta1, TranscoderServiceClient};
 export default {v1beta1, TranscoderServiceClient};
 import * as protos from '../protos/protos';

@@ -18,8 +18,15 @@
 
 import {TranscoderServiceClient} from '@google-cloud/video-transcoder';
 
+// check that the client class type name can be used
+function doStuffWithTranscoderServiceClient(client: TranscoderServiceClient) {
+  client.close();
+}
+
 function main() {
-  new TranscoderServiceClient();
+  // check that the client instance can be created
+  const transcoderServiceClient = new TranscoderServiceClient();
+  doStuffWithTranscoderServiceClient(transcoderServiceClient);
 }
 
 main();
