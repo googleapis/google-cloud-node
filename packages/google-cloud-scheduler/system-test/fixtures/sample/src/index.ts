@@ -18,8 +18,15 @@
 
 import {CloudSchedulerClient} from '@google-cloud/scheduler';
 
+// check that the client class type name can be used
+function doStuffWithCloudSchedulerClient(client: CloudSchedulerClient) {
+  client.close();
+}
+
 function main() {
-  new CloudSchedulerClient();
+  // check that the client instance can be created
+  const cloudSchedulerClient = new CloudSchedulerClient();
+  doStuffWithCloudSchedulerClient(cloudSchedulerClient);
 }
 
 main();

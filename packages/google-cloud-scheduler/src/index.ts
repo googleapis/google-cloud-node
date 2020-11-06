@@ -20,6 +20,7 @@ import * as v1 from './v1';
 import * as v1beta1 from './v1beta1';
 
 const CloudSchedulerClient = v1.CloudSchedulerClient;
+type CloudSchedulerClient = v1.CloudSchedulerClient;
 
 export {v1, v1beta1, CloudSchedulerClient};
 export default {v1, v1beta1, CloudSchedulerClient};
