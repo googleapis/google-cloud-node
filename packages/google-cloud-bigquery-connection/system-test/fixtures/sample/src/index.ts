@@ -18,8 +18,15 @@
 
 import {ConnectionServiceClient} from '@google-cloud/bigquery-connection';
 
+// check that the client class type name can be used
+function doStuffWithConnectionServiceClient(client: ConnectionServiceClient) {
+  client.close();
+}
+
 function main() {
-  new ConnectionServiceClient();
+  // check that the client instance can be created
+  const connectionServiceClient = new ConnectionServiceClient();
+  doStuffWithConnectionServiceClient(connectionServiceClient);
 }
 
 main();

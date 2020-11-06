@@ -18,6 +18,7 @@
 
 import * as v1 from './v1';
 const ConnectionServiceClient = v1.ConnectionServiceClient;
+type ConnectionServiceClient = v1.ConnectionServiceClient;
 export {v1, ConnectionServiceClient};
 export default {v1, ConnectionServiceClient};
 import * as protos from '../protos/protos';
