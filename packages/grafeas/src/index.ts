@@ -19,6 +19,7 @@
 import * as v1 from './v1';
 
 const GrafeasClient = v1.GrafeasClient;
+type GrafeasClient = v1.GrafeasClient;
 
 export {v1, GrafeasClient};
 export default {v1, GrafeasClient};
