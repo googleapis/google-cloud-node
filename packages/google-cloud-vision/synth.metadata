@@ -3,23 +3,15 @@
     {
       "git": {
         "name": ".",
-        "remote": "https://github.com/googleapis/nodejs-vision.git",
-        "sha": "c64124339fbc2f5f1354148c77fba6d2f356208f"
-      }
-    },
-    {
-      "git": {
-        "name": "googleapis",
-        "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "4c5071b615d96ef9dfd6a63d8429090f1f2872bb",
-        "internalRef": "327369997"
+        "remote": "git@github.com:googleapis/nodejs-vision.git",
+        "sha": "7c79c2dbbbf57ee51666d0200fae39cdfdd8c0a7"
       }
     },
     {
       "git": {
         "name": "synthtool",
         "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "ba9918cd22874245b55734f57470c719b577e591"
+        "sha": "1f1148d3c7a7a52f0c98077f976bd9b3c948ee2b"
       }
     }
   ],
@@ -123,6 +115,7 @@
     "README.md",
     "api-extractor.json",
     "linkinator.config.json",
+    "package-lock.json.1696784860",
     "protos/google/cloud/vision/v1/geometry.proto",
     "protos/google/cloud/vision/v1/image_annotator.proto",
     "protos/google/cloud/vision/v1/product_search.proto",
@@ -155,6 +148,7 @@
     "protos/protos.json",
     "renovate.json",
     "samples/README.md",
+    "samples/package-lock.json.3159907851",
     "src/v1/image_annotator_client.ts",
     "src/v1/image_annotator_client_config.json",
     "src/v1/image_annotator_proto_list.json",

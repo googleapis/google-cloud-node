@@ -18,9 +18,21 @@
 
 import {ImageAnnotatorClient, ProductSearchClient} from '@google-cloud/vision';
 
+// check that the client class type name can be used
+function doStuffWithImageAnnotatorClient(client: ImageAnnotatorClient) {
+  client.close();
+}
+function doStuffWithProductSearchClient(client: ProductSearchClient) {
+  client.close();
+}
+
 function main() {
-  new ImageAnnotatorClient();
-  new ProductSearchClient();
+  // check that the client instance can be created
+  const imageAnnotatorClient = new ImageAnnotatorClient();
+  doStuffWithImageAnnotatorClient(imageAnnotatorClient);
+  // check that the client instance can be created
+  const productSearchClient = new ProductSearchClient();
+  doStuffWithProductSearchClient(productSearchClient);
 }
 
 main();

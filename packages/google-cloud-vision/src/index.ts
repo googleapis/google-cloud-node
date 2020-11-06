@@ -40,7 +40,9 @@ Object.assign(
   helpers.call('v1p4beta1')
 );
 const ImageAnnotatorClient = v1.ImageAnnotatorClient;
+type ImageAnnotatorClient = v1.ImageAnnotatorClient;
 const ProductSearchClient = v1.ProductSearchClient;
+type ProductSearchClient = v1.ProductSearchClient;
 export {
   v1,
   v1p1beta1,
