@@ -20,9 +20,13 @@ import * as v1 from './v1';
 import * as v1beta2 from './v1beta2';
 
 const AutoscalingPolicyServiceClient = v1.AutoscalingPolicyServiceClient;
+type AutoscalingPolicyServiceClient = v1.AutoscalingPolicyServiceClient;
 const ClusterControllerClient = v1.ClusterControllerClient;
+type ClusterControllerClient = v1.ClusterControllerClient;
 const JobControllerClient = v1.JobControllerClient;
+type JobControllerClient = v1.JobControllerClient;
 const WorkflowTemplateServiceClient = v1.WorkflowTemplateServiceClient;
+type WorkflowTemplateServiceClient = v1.WorkflowTemplateServiceClient;
 
 export {
   v1,

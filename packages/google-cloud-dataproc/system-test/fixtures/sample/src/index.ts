@@ -23,11 +23,37 @@ import {
   WorkflowTemplateServiceClient,
 } from '@google-cloud/dataproc';
 
+// check that the client class type name can be used
+function doStuffWithAutoscalingPolicyServiceClient(
+  client: AutoscalingPolicyServiceClient
+) {
+  client.close();
+}
+function doStuffWithClusterControllerClient(client: ClusterControllerClient) {
+  client.close();
+}
+function doStuffWithJobControllerClient(client: JobControllerClient) {
+  client.close();
+}
+function doStuffWithWorkflowTemplateServiceClient(
+  client: WorkflowTemplateServiceClient
+) {
+  client.close();
+}
+
 function main() {
-  new AutoscalingPolicyServiceClient();
-  new ClusterControllerClient();
-  new JobControllerClient();
-  new WorkflowTemplateServiceClient();
+  // check that the client instance can be created
+  const autoscalingPolicyServiceClient = new AutoscalingPolicyServiceClient();
+  doStuffWithAutoscalingPolicyServiceClient(autoscalingPolicyServiceClient);
+  // check that the client instance can be created
+  const clusterControllerClient = new ClusterControllerClient();
+  doStuffWithClusterControllerClient(clusterControllerClient);
+  // check that the client instance can be created
+  const jobControllerClient = new JobControllerClient();
+  doStuffWithJobControllerClient(jobControllerClient);
+  // check that the client instance can be created
+  const workflowTemplateServiceClient = new WorkflowTemplateServiceClient();
+  doStuffWithWorkflowTemplateServiceClient(workflowTemplateServiceClient);
 }
 
 main();
