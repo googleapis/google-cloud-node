@@ -20,6 +20,7 @@ import * as v1beta1 from './v1beta1';
 import * as v1 from './v1';
 
 const RecaptchaEnterpriseServiceClient = v1.RecaptchaEnterpriseServiceClient;
+type RecaptchaEnterpriseServiceClient = v1.RecaptchaEnterpriseServiceClient;
 
 export {v1beta1, v1, RecaptchaEnterpriseServiceClient};
 export default {v1beta1, v1, RecaptchaEnterpriseServiceClient};
