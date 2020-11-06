@@ -18,8 +18,15 @@
 
 import {RecommenderClient} from '@google-cloud/recommender';
 
+// check that the client class type name can be used
+function doStuffWithRecommenderClient(client: RecommenderClient) {
+  client.close();
+}
+
 function main() {
-  new RecommenderClient();
+  // check that the client instance can be created
+  const recommenderClient = new RecommenderClient();
+  doStuffWithRecommenderClient(recommenderClient);
 }
 
 main();

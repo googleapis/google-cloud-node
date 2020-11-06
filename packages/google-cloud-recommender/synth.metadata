@@ -3,23 +3,15 @@
     {
       "git": {
         "name": ".",
-        "remote": "https://github.com/googleapis/nodejs-recommender.git",
-        "sha": "7785604f0bcc763224dc3bd13d552578c3cddb30"
-      }
-    },
-    {
-      "git": {
-        "name": "googleapis",
-        "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "9bdc6e729faad989b2a6c3994281b8304908f32c",
-        "internalRef": "339319071"
+        "remote": "git@github.com:googleapis/nodejs-recommender.git",
+        "sha": "781c03217d79f2cf94c61376fb05a7e38c474b4b"
       }
     },
     {
       "git": {
         "name": "synthtool",
         "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "ba9918cd22874245b55734f57470c719b577e591"
+        "sha": "1f1148d3c7a7a52f0c98077f976bd9b3c948ee2b"
       }
     }
   ],
@@ -87,6 +79,7 @@
     "README.md",
     "api-extractor.json",
     "linkinator.config.json",
+    "package-lock.json.2534061630",
     "protos/google/cloud/recommender/v1/insight.proto",
     "protos/google/cloud/recommender/v1/recommendation.proto",
     "protos/google/cloud/recommender/v1/recommender_service.proto",
@@ -95,6 +88,7 @@
     "protos/protos.json",
     "renovate.json",
     "samples/README.md",
+    "samples/package-lock.json.69962807",
     "src/index.ts",
     "src/v1/index.ts",
     "src/v1/recommender_client.ts",
