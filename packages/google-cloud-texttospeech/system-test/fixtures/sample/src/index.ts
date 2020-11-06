@@ -18,8 +18,15 @@
 
 import {TextToSpeechClient} from '@google-cloud/text-to-speech';
 
+// check that the client class type name can be used
+function doStuffWithTextToSpeechClient(client: TextToSpeechClient) {
+  client.close();
+}
+
 function main() {
-  new TextToSpeechClient();
+  // check that the client instance can be created
+  const textToSpeechClient = new TextToSpeechClient();
+  doStuffWithTextToSpeechClient(textToSpeechClient);
 }
 
 main();

@@ -3,23 +3,15 @@
     {
       "git": {
         "name": ".",
-        "remote": "https://github.com/googleapis/nodejs-text-to-speech.git",
-        "sha": "71af97f6d23ba7af85a2683120b9d0afe0034f10"
-      }
-    },
-    {
-      "git": {
-        "name": "googleapis",
-        "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "4c5071b615d96ef9dfd6a63d8429090f1f2872bb",
-        "internalRef": "327369997"
+        "remote": "git@github.com:googleapis/nodejs-text-to-speech.git",
+        "sha": "152ef92cbedac010a0642c24da54a9b4850829ac"
       }
     },
     {
       "git": {
         "name": "synthtool",
         "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "ba9918cd22874245b55734f57470c719b577e591"
+        "sha": "1f1148d3c7a7a52f0c98077f976bd9b3c948ee2b"
       }
     }
   ],
@@ -96,6 +88,7 @@
     "README.md",
     "api-extractor.json",
     "linkinator.config.json",
+    "package-lock.json.2478872801",
     "protos/google/cloud/texttospeech/v1/cloud_tts.proto",
     "protos/google/cloud/texttospeech/v1beta1/cloud_tts.proto",
     "protos/protos.d.ts",
@@ -103,6 +96,7 @@
     "protos/protos.json",
     "renovate.json",
     "samples/README.md",
+    "samples/package-lock.json.2811680083",
     "src/index.ts",
     "src/v1/index.ts",
     "src/v1/text_to_speech_client.ts",
