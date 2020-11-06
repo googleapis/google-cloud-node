@@ -20,6 +20,7 @@ import * as v1beta2 from './v1beta2';
 import * as v1beta3 from './v1beta3';
 
 const DocumentProcessorServiceClient = v1beta3.DocumentProcessorServiceClient;
+type DocumentProcessorServiceClient = v1beta3.DocumentProcessorServiceClient;
 
 export {v1beta2, v1beta3, DocumentProcessorServiceClient};
 export default {v1beta2, v1beta3, DocumentProcessorServiceClient};
