@@ -19,6 +19,7 @@
 import * as v1 from './v1';
 
 const CloudFunctionsServiceClient = v1.CloudFunctionsServiceClient;
+type CloudFunctionsServiceClient = v1.CloudFunctionsServiceClient;
 
 export {v1, CloudFunctionsServiceClient};
 export default {v1, CloudFunctionsServiceClient};

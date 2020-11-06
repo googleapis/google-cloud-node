@@ -18,8 +18,17 @@
 
 import {CloudFunctionsServiceClient} from '@google-cloud/functions';
 
+// check that the client class type name can be used
+function doStuffWithCloudFunctionsServiceClient(
+  client: CloudFunctionsServiceClient
+) {
+  client.close();
+}
+
 function main() {
-  new CloudFunctionsServiceClient();
+  // check that the client instance can be created
+  const cloudFunctionsServiceClient = new CloudFunctionsServiceClient();
+  doStuffWithCloudFunctionsServiceClient(cloudFunctionsServiceClient);
 }
 
 main();

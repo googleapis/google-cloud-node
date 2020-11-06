@@ -3,23 +3,15 @@
     {
       "git": {
         "name": ".",
-        "remote": "https://github.com/googleapis/nodejs-functions.git",
-        "sha": "b08b278a5813312090055a9956b04bd6fb1030af"
-      }
-    },
-    {
-      "git": {
-        "name": "googleapis",
-        "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "2db5725bf898b544a0cf951e1694d3b0fce5eda3",
-        "internalRef": "329384854"
+        "remote": "git@github.com:googleapis/nodejs-functions.git",
+        "sha": "22d69ec672c8c93dd4a2e60c8c6272dd2545b73a"
       }
     },
     {
       "git": {
         "name": "synthtool",
         "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "ba9918cd22874245b55734f57470c719b577e591"
+        "sha": "1f1148d3c7a7a52f0c98077f976bd9b3c948ee2b"
       }
     }
   ],
@@ -85,8 +77,10 @@
     "CONTRIBUTING.md",
     "LICENSE",
     "README.md",
+    "__pycache__/synth.cpython-37.pyc",
     "api-extractor.json",
     "linkinator.config.json",
+    "package-lock.json.620595561",
     "protos/google/cloud/functions/v1/functions.proto",
     "protos/google/cloud/functions/v1/operations.proto",
     "protos/protos.d.ts",
@@ -94,6 +88,7 @@
     "protos/protos.json",
     "renovate.json",
     "samples/README.md",
+    "samples/package-lock.json.2747171955",
     "src/index.ts",
     "src/v1/cloud_functions_service_client.ts",
     "src/v1/cloud_functions_service_client_config.json",
