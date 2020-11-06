@@ -18,8 +18,15 @@
 
 import {ReservationServiceClient} from '@google-cloud/bigquery-reservation';
 
+// check that the client class type name can be used
+function doStuffWithReservationServiceClient(client: ReservationServiceClient) {
+  client.close();
+}
+
 function main() {
-  new ReservationServiceClient();
+  // check that the client instance can be created
+  const reservationServiceClient = new ReservationServiceClient();
+  doStuffWithReservationServiceClient(reservationServiceClient);
 }
 
 main();

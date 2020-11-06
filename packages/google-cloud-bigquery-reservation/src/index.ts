@@ -18,6 +18,7 @@
 
 import * as v1 from './v1';
 const ReservationServiceClient = v1.ReservationServiceClient;
+type ReservationServiceClient = v1.ReservationServiceClient;
 export {v1, ReservationServiceClient};
 export default {v1, ReservationServiceClient};
 import * as protos from '../protos/protos';
