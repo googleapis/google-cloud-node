@@ -20,10 +20,14 @@ import * as v1 from './v1';
 import * as v1beta from './v1beta';
 
 const GameServerClustersServiceClient = v1.GameServerClustersServiceClient;
+type GameServerClustersServiceClient = v1.GameServerClustersServiceClient;
 const GameServerConfigsServiceClient = v1.GameServerConfigsServiceClient;
+type GameServerConfigsServiceClient = v1.GameServerConfigsServiceClient;
 const GameServerDeploymentsServiceClient =
   v1.GameServerDeploymentsServiceClient;
+type GameServerDeploymentsServiceClient = v1.GameServerDeploymentsServiceClient;
 const RealmsServiceClient = v1.RealmsServiceClient;
+type RealmsServiceClient = v1.RealmsServiceClient;
 
 export {
   v1,
