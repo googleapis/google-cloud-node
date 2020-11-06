@@ -19,6 +19,7 @@
 import * as v1 from './v1';
 
 const OsConfigServiceClient = v1.OsConfigServiceClient;
+type OsConfigServiceClient = v1.OsConfigServiceClient;
 
 export {v1, OsConfigServiceClient};
 export default {v1, OsConfigServiceClient};
