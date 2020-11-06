@@ -3,23 +3,15 @@
     {
       "git": {
         "name": ".",
-        "remote": "https://github.com/googleapis/nodejs-dialogflow.git",
-        "sha": "575c0093795e5d08a64057058b365269cae0fb9f"
-      }
-    },
-    {
-      "git": {
-        "name": "googleapis",
-        "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "d616167ada0a7195613efca5b44fe0aa188836d9",
-        "internalRef": "336721089"
+        "remote": "git@github.com:googleapis/nodejs-dialogflow.git",
+        "sha": "eee411e8461e34d5c044aa52eb1c8961310095a5"
       }
     },
     {
       "git": {
         "name": "synthtool",
         "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "ba9918cd22874245b55734f57470c719b577e591"
+        "sha": "1f1148d3c7a7a52f0c98077f976bd9b3c948ee2b"
       }
     }
   ],
@@ -95,6 +87,7 @@
     "LICENSE",
     "api-extractor.json",
     "linkinator.config.json",
+    "package-lock.json.2966706509",
     "protos/google/cloud/dialogflow/v2/agent.proto",
     "protos/google/cloud/dialogflow/v2/audio_config.proto",
     "protos/google/cloud/dialogflow/v2/context.proto",
@@ -122,6 +115,7 @@
     "protos/protos.js",
     "protos/protos.json",
     "renovate.json",
+    "samples/package-lock.json.2104811038",
     "src/index.ts",
     "src/v2/agents_client.ts",
     "src/v2/agents_client_config.json",

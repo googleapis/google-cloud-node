@@ -26,14 +26,51 @@ import {
   SessionsClient,
 } from '@google-cloud/dialogflow';
 
+// check that the client class type name can be used
+function doStuffWithAgentsClient(client: AgentsClient) {
+  client.close();
+}
+function doStuffWithContextsClient(client: ContextsClient) {
+  client.close();
+}
+function doStuffWithEntityTypesClient(client: EntityTypesClient) {
+  client.close();
+}
+function doStuffWithEnvironmentsClient(client: EnvironmentsClient) {
+  client.close();
+}
+function doStuffWithIntentsClient(client: IntentsClient) {
+  client.close();
+}
+function doStuffWithSessionEntityTypesClient(client: SessionEntityTypesClient) {
+  client.close();
+}
+function doStuffWithSessionsClient(client: SessionsClient) {
+  client.close();
+}
+
 function main() {
-  new AgentsClient();
-  new ContextsClient();
-  new EntityTypesClient();
-  new EnvironmentsClient();
-  new IntentsClient();
-  new SessionEntityTypesClient();
-  new SessionsClient();
+  // check that the client instance can be created
+  const agentsClient = new AgentsClient();
+  doStuffWithAgentsClient(agentsClient);
+  // check that the client instance can be created
+  const contextsClient = new ContextsClient();
+  doStuffWithContextsClient(contextsClient);
+  // check that the client instance can be created
+  const entityTypesClient = new EntityTypesClient();
+  doStuffWithEntityTypesClient(entityTypesClient);
+  // check that the client instance can be created
+  const environmentsClient = new EnvironmentsClient();
+  doStuffWithEnvironmentsClient(environmentsClient);
+  // check that the client instance can be created
+  const intentsClient = new IntentsClient();
+  doStuffWithIntentsClient(intentsClient);
+  // check that the client instance can be created
+  const sessionEntityTypesClient = new SessionEntityTypesClient();
+  doStuffWithSessionEntityTypesClient(sessionEntityTypesClient);
+  // check that the client instance can be created
+  const sessionsClient = new SessionsClient();
+  doStuffWithSessionsClient(sessionsClient);
 }
 
 main();

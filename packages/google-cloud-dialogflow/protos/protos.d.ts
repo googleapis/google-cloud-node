@@ -14839,18 +14839,6 @@ export namespace google {
                     public toJSON(): { [k: string]: any };
                 }
 
-                /** AudioEncoding enum. */
-                enum AudioEncoding {
-                    AUDIO_ENCODING_UNSPECIFIED = 0,
-                    AUDIO_ENCODING_LINEAR_16 = 1,
-                    AUDIO_ENCODING_FLAC = 2,
-                    AUDIO_ENCODING_MULAW = 3,
-                    AUDIO_ENCODING_AMR = 4,
-                    AUDIO_ENCODING_AMR_WB = 5,
-                    AUDIO_ENCODING_OGG_OPUS = 6,
-                    AUDIO_ENCODING_SPEEX_WITH_HEADER_BYTE = 7
-                }
-
                 /** Properties of a SpeechContext. */
                 interface ISpeechContext {
 
@@ -14945,6 +14933,18 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+                }
+
+                /** AudioEncoding enum. */
+                enum AudioEncoding {
+                    AUDIO_ENCODING_UNSPECIFIED = 0,
+                    AUDIO_ENCODING_LINEAR_16 = 1,
+                    AUDIO_ENCODING_FLAC = 2,
+                    AUDIO_ENCODING_MULAW = 3,
+                    AUDIO_ENCODING_AMR = 4,
+                    AUDIO_ENCODING_AMR_WB = 5,
+                    AUDIO_ENCODING_OGG_OPUS = 6,
+                    AUDIO_ENCODING_SPEEX_WITH_HEADER_BYTE = 7
                 }
 
                 /** Properties of a SpeechWordInfo. */
@@ -17924,108 +17924,6 @@ export namespace google {
 
                     /**
                      * Converts this ReloadDocumentRequest to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
-                /** Properties of an AutoApproveSmartMessagingEntriesResponse. */
-                interface IAutoApproveSmartMessagingEntriesResponse {
-
-                    /** AutoApproveSmartMessagingEntriesResponse enabledCount */
-                    enabledCount?: (number|null);
-
-                    /** AutoApproveSmartMessagingEntriesResponse disabledCount */
-                    disabledCount?: (number|null);
-
-                    /** AutoApproveSmartMessagingEntriesResponse unreviewedCount */
-                    unreviewedCount?: (number|null);
-                }
-
-                /** Represents an AutoApproveSmartMessagingEntriesResponse. */
-                class AutoApproveSmartMessagingEntriesResponse implements IAutoApproveSmartMessagingEntriesResponse {
-
-                    /**
-                     * Constructs a new AutoApproveSmartMessagingEntriesResponse.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.dialogflow.v2beta1.IAutoApproveSmartMessagingEntriesResponse);
-
-                    /** AutoApproveSmartMessagingEntriesResponse enabledCount. */
-                    public enabledCount: number;
-
-                    /** AutoApproveSmartMessagingEntriesResponse disabledCount. */
-                    public disabledCount: number;
-
-                    /** AutoApproveSmartMessagingEntriesResponse unreviewedCount. */
-                    public unreviewedCount: number;
-
-                    /**
-                     * Creates a new AutoApproveSmartMessagingEntriesResponse instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns AutoApproveSmartMessagingEntriesResponse instance
-                     */
-                    public static create(properties?: google.cloud.dialogflow.v2beta1.IAutoApproveSmartMessagingEntriesResponse): google.cloud.dialogflow.v2beta1.AutoApproveSmartMessagingEntriesResponse;
-
-                    /**
-                     * Encodes the specified AutoApproveSmartMessagingEntriesResponse message. Does not implicitly {@link google.cloud.dialogflow.v2beta1.AutoApproveSmartMessagingEntriesResponse.verify|verify} messages.
-                     * @param message AutoApproveSmartMessagingEntriesResponse message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.dialogflow.v2beta1.IAutoApproveSmartMessagingEntriesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified AutoApproveSmartMessagingEntriesResponse message, length delimited. Does not implicitly {@link google.cloud.dialogflow.v2beta1.AutoApproveSmartMessagingEntriesResponse.verify|verify} messages.
-                     * @param message AutoApproveSmartMessagingEntriesResponse message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.dialogflow.v2beta1.IAutoApproveSmartMessagingEntriesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes an AutoApproveSmartMessagingEntriesResponse message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns AutoApproveSmartMessagingEntriesResponse
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.v2beta1.AutoApproveSmartMessagingEntriesResponse;
-
-                    /**
-                     * Decodes an AutoApproveSmartMessagingEntriesResponse message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns AutoApproveSmartMessagingEntriesResponse
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.v2beta1.AutoApproveSmartMessagingEntriesResponse;
-
-                    /**
-                     * Verifies an AutoApproveSmartMessagingEntriesResponse message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates an AutoApproveSmartMessagingEntriesResponse message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns AutoApproveSmartMessagingEntriesResponse
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.v2beta1.AutoApproveSmartMessagingEntriesResponse;
-
-                    /**
-                     * Creates a plain object from an AutoApproveSmartMessagingEntriesResponse message. Also converts values to other types if specified.
-                     * @param message AutoApproveSmartMessagingEntriesResponse
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.dialogflow.v2beta1.AutoApproveSmartMessagingEntriesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this AutoApproveSmartMessagingEntriesResponse to JSON.
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };

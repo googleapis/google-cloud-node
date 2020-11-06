@@ -20,12 +20,19 @@ import * as v2beta1 from './v2beta1';
 import * as v2 from './v2';
 
 const AgentsClient = v2.AgentsClient;
+type AgentsClient = v2.AgentsClient;
 const ContextsClient = v2.ContextsClient;
+type ContextsClient = v2.ContextsClient;
 const EntityTypesClient = v2.EntityTypesClient;
+type EntityTypesClient = v2.EntityTypesClient;
 const EnvironmentsClient = v2.EnvironmentsClient;
+type EnvironmentsClient = v2.EnvironmentsClient;
 const IntentsClient = v2.IntentsClient;
+type IntentsClient = v2.IntentsClient;
 const SessionEntityTypesClient = v2.SessionEntityTypesClient;
+type SessionEntityTypesClient = v2.SessionEntityTypesClient;
 const SessionsClient = v2.SessionsClient;
+type SessionsClient = v2.SessionsClient;
 
 export {
   v2beta1,
