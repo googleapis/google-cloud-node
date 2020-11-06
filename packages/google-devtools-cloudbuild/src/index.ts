@@ -19,6 +19,7 @@
 import * as v1 from './v1';
 
 const CloudBuildClient = v1.CloudBuildClient;
+type CloudBuildClient = v1.CloudBuildClient;
 
 export {v1, CloudBuildClient};
 export default {v1, CloudBuildClient};

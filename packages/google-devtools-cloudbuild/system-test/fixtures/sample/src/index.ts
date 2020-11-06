@@ -18,8 +18,15 @@
 
 import {CloudBuildClient} from '@google-cloud/cloudbuild';
 
+// check that the client class type name can be used
+function doStuffWithCloudBuildClient(client: CloudBuildClient) {
+  client.close();
+}
+
 function main() {
-  new CloudBuildClient();
+  // check that the client instance can be created
+  const cloudBuildClient = new CloudBuildClient();
+  doStuffWithCloudBuildClient(cloudBuildClient);
 }
 
 main();

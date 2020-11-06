@@ -3,23 +3,15 @@
     {
       "git": {
         "name": ".",
-        "remote": "https://github.com/googleapis/nodejs-cloudbuild.git",
-        "sha": "d8beda997a6dda21f2c52cb3f626c188dcbd979b"
-      }
-    },
-    {
-      "git": {
-        "name": "googleapis",
-        "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "bc18612d35891d88bcac57c85d79db93f4f29028",
-        "internalRef": "331027363"
+        "remote": "git@github.com:googleapis/nodejs-cloudbuild.git",
+        "sha": "13186984ab8da50bdc04ecd7894b1cc2bb4cefa3"
       }
     },
     {
       "git": {
         "name": "synthtool",
         "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "ba9918cd22874245b55734f57470c719b577e591"
+        "sha": "1f1148d3c7a7a52f0c98077f976bd9b3c948ee2b"
       }
     }
   ],
@@ -87,12 +79,14 @@
     "README.md",
     "api-extractor.json",
     "linkinator.config.json",
+    "package-lock.json.1022933526",
     "protos/google/devtools/cloudbuild/v1/cloudbuild.proto",
     "protos/protos.d.ts",
     "protos/protos.js",
     "protos/protos.json",
     "renovate.json",
     "samples/README.md",
+    "samples/package-lock.json.3194863452",
     "src/index.ts",
     "src/v1/cloud_build_client.ts",
     "src/v1/cloud_build_client_config.json",
