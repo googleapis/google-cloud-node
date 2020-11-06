@@ -20,6 +20,7 @@ import * as v1 from './v1';
 import * as v1beta from './v1beta';
 
 const OsLoginServiceClient = v1.OsLoginServiceClient;
+type OsLoginServiceClient = v1.OsLoginServiceClient;
 
 export {v1, v1beta, OsLoginServiceClient};
 export default {v1, v1beta, OsLoginServiceClient};
