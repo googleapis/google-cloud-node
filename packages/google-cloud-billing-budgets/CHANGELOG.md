@@ -1,5 +1,16 @@
 # Changelog
 
+## [3.0.0](https://www.github.com/googleapis/nodejs-billing-budgets/compare/v2.3.0...v3.0.0) (2020-11-06)
+
+
+### ⚠ BREAKING CHANGES
+
+* AllUpdatesRule has been renamed to NotificationsRule; request bodies for Create and Update differ (see types).
+
+### Features
+
+* release v1 API surface ([#179](https://www.github.com/googleapis/nodejs-billing-budgets/issues/179)) ([c655d76](https://www.github.com/googleapis/nodejs-billing-budgets/commit/c655d765d4b2658b13a886a4490527b23df66d21))
+
 ## [2.3.0](https://www.github.com/googleapis/nodejs-billing-budgets/compare/v2.2.0...v2.3.0) (2020-10-29)
 
 
