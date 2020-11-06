@@ -18,6 +18,7 @@
 
 import * as v1beta2 from './v1beta2';
 const CloudMemcacheClient = v1beta2.CloudMemcacheClient;
+type CloudMemcacheClient = v1beta2.CloudMemcacheClient;
 export {v1beta2, CloudMemcacheClient};
 export default {v1beta2, CloudMemcacheClient};
 import * as protos from '../protos/protos';

@@ -18,8 +18,15 @@
 
 import {CloudMemcacheClient} from '@google-cloud/memcache';
 
+// check that the client class type name can be used
+function doStuffWithCloudMemcacheClient(client: CloudMemcacheClient) {
+  client.close();
+}
+
 function main() {
-  new CloudMemcacheClient();
+  // check that the client instance can be created
+  const cloudMemcacheClient = new CloudMemcacheClient();
+  doStuffWithCloudMemcacheClient(cloudMemcacheClient);
 }
 
 main();
