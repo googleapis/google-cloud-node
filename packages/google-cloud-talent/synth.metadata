@@ -4,7 +4,7 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/nodejs-talent.git",
-        "sha": "5cf8f8a860cc171f8c8da8701128e87e9268af96"
+        "sha": "3fe9a713004347342efb7d49e4ddc4fd13cc73f3"
       }
     },
     {

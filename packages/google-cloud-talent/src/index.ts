@@ -20,10 +20,15 @@ import * as v4beta1 from './v4beta1';
 import * as v4 from './v4';
 
 const CompanyServiceClient = v4.CompanyServiceClient;
+type CompanyServiceClient = v4.CompanyServiceClient;
 const CompletionClient = v4.CompletionClient;
+type CompletionClient = v4.CompletionClient;
 const EventServiceClient = v4.EventServiceClient;
+type EventServiceClient = v4.EventServiceClient;
 const JobServiceClient = v4.JobServiceClient;
+type JobServiceClient = v4.JobServiceClient;
 const TenantServiceClient = v4.TenantServiceClient;
+type TenantServiceClient = v4.TenantServiceClient;
 
 export {
   v4beta1,
