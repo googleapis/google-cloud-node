@@ -18,6 +18,7 @@
 
 import * as v1beta1 from './v1beta1';
 const AssuredWorkloadsServiceClient = v1beta1.AssuredWorkloadsServiceClient;
+type AssuredWorkloadsServiceClient = v1beta1.AssuredWorkloadsServiceClient;
 export {v1beta1, AssuredWorkloadsServiceClient};
 export default {v1beta1, AssuredWorkloadsServiceClient};
 import * as protos from '../protos/protos';

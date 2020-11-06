@@ -4,15 +4,14 @@
       "git": {
         "name": ".",
         "remote": "git@github.com:googleapis/nodejs-assured-workloads.git",
-        "sha": "ede54a56e79e88643575094fb16fd90a63f52c15"
+        "sha": "d6454102a8dfcf3e64fb7b58ff53071dce8696cf"
       }
     },
     {
       "git": {
-        "name": "googleapis",
-        "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "877aadc6daf8968e8a1122cf1186623d11d8bd46",
-        "internalRef": "332039388"
+        "name": "synthtool",
+        "remote": "https://github.com/googleapis/synthtool.git",
+        "sha": "1f1148d3c7a7a52f0c98077f976bd9b3c948ee2b"
       }
     }
   ],
@@ -68,22 +67,26 @@
     ".kokoro/test.bat",
     ".kokoro/test.sh",
     ".kokoro/trampoline.sh",
+    ".kokoro/trampoline_v2.sh",
     ".mocharc.js",
     ".nycrc",
     ".prettierignore",
     ".prettierrc.js",
+    ".trampolinerc",
     "CODE_OF_CONDUCT.md",
     "CONTRIBUTING.md",
     "LICENSE",
     "README.md",
     "api-extractor.json",
     "linkinator.config.json",
+    "package-lock.json.4211562522",
     "protos/google/cloud/assuredworkloads/v1beta1/assuredworkloads_v1beta1.proto",
     "protos/protos.d.ts",
     "protos/protos.js",
     "protos/protos.json",
     "renovate.json",
     "samples/README.md",
+    "samples/package-lock.json.1886703785",
     "src/index.ts",
     "src/v1beta1/assured_workloads_service_client.ts",
     "src/v1beta1/assured_workloads_service_client_config.json",

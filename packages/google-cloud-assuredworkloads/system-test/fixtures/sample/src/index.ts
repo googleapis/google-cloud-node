@@ -18,8 +18,17 @@
 
 import {AssuredWorkloadsServiceClient} from '@google-cloud/assured-workloads';
 
+// check that the client class type name can be used
+function doStuffWithAssuredWorkloadsServiceClient(
+  client: AssuredWorkloadsServiceClient
+) {
+  client.close();
+}
+
 function main() {
-  new AssuredWorkloadsServiceClient();
+  // check that the client instance can be created
+  const assuredWorkloadsServiceClient = new AssuredWorkloadsServiceClient();
+  doStuffWithAssuredWorkloadsServiceClient(assuredWorkloadsServiceClient);
 }
 
 main();
