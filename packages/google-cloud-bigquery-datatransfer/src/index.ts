@@ -19,6 +19,7 @@
 import * as v1 from './v1';
 
 const DataTransferServiceClient = v1.DataTransferServiceClient;
+type DataTransferServiceClient = v1.DataTransferServiceClient;
 
 export {v1, DataTransferServiceClient};
 export default {v1, DataTransferServiceClient};
