@@ -75,8 +75,10 @@ export class AutoMlClient {
   /**
    * Construct an instance of AutoMlClient.
    *
-   * @param {object} [options] - The configuration object. See the subsequent
-   *   parameters for more details.
+   * @param {object} [options] - The configuration object.
+   * The options accepted by the constructor are described in detail
+   * in [this document](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#creating-the-client-instance).
+   * The common options are:
    * @param {object} [options.credentials] - Credentials object.
    * @param {string} [options.credentials.client_email]
    * @param {string} [options.credentials.private_key]
@@ -96,42 +98,33 @@ export class AutoMlClient {
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
+   * @param {gax.ClientConfig} [options.clientConfig] - client configuration override.
+   *     TODO(@alexander-fenster): link to gax documentation.
+   * @param {boolean} fallback - Use HTTP fallback mode.
+   *     In fallback mode, a special browser-compatible transport implementation is used
+   *     instead of gRPC transport. In browser context (if the `window` object is defined)
+   *     the fallback mode is enabled automatically; set `options.fallback` to `false`
+   *     if you need to override this behavior.
    */
-
   constructor(opts?: ClientOptions) {
-    // Ensure that options include the service address and port.
+    // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof AutoMlClient;
     const servicePath =
-      opts && opts.servicePath
-        ? opts.servicePath
-        : opts && opts.apiEndpoint
-        ? opts.apiEndpoint
-        : staticMembers.servicePath;
-    const port = opts && opts.port ? opts.port : staticMembers.port;
+      opts?.servicePath || opts?.apiEndpoint || staticMembers.servicePath;
+    const port = opts?.port || staticMembers.port;
+    const clientConfig = opts?.clientConfig ?? {};
+    const fallback = opts?.fallback ?? typeof window !== 'undefined';
+    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
-    if (!opts) {
-      opts = {servicePath, port};
+    // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
+    if (servicePath !== staticMembers.servicePath && !('scopes' in opts)) {
+      opts['scopes'] = staticMembers.scopes;
     }
-    opts.servicePath = opts.servicePath || servicePath;
-    opts.port = opts.port || port;
 
-    // users can override the config from client side, like retry codes name.
-    // The detailed structure of the clientConfig can be found here: https://github.com/googleapis/gax-nodejs/blob/master/src/gax.ts#L546
-    // The way to override client config for Showcase API:
-    //
-    // const customConfig = {"interfaces": {"google.showcase.v1beta1.Echo": {"methods": {"Echo": {"retry_codes_name": "idempotent", "retry_params_name": "default"}}}}}
-    // const showcaseClient = new showcaseClient({ projectId, customConfig });
-    opts.clientConfig = opts.clientConfig || {};
-
-    // If we're running in browser, it's OK to omit `fallback` since
-    // google-gax has `browser` field in its `package.json`.
-    // For Electron (which does not respect `browser` field),
-    // pass `{fallback: true}` to the AutoMlClient constructor.
+    // Choose either gRPC or proto-over-HTTP implementation of google-gax.
     this._gaxModule = opts.fallback ? gax.fallback : gax;
 
-    // Create a `gaxGrpc` object, with any grpc-specific options
-    // sent to the client.
-    opts.scopes = (this.constructor as typeof AutoMlClient).scopes;
+    // Create a `gaxGrpc` object, with any grpc-specific options sent to the client.
     this._gaxGrpc = new this._gaxModule.GrpcClient(opts);
 
     // Save options to use in initialize() method.
@@ -139,6 +132,11 @@ export class AutoMlClient {
 
     // Save the auth object to the client, for use by other methods.
     this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+
+    // Set the default scopes in auth client if needed.
+    if (servicePath === staticMembers.servicePath) {
+      this.auth.defaultScopes = staticMembers.scopes;
+    }
 
     // Determine the client header string.
     const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
@@ -455,6 +453,7 @@ export class AutoMlClient {
 
   /**
    * The DNS address for this API service.
+   * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
     return 'automl.googleapis.com';
@@ -463,6 +462,7 @@ export class AutoMlClient {
   /**
    * The DNS address for this API service - same as servicePath(),
    * exists for compatibility reasons.
+   * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
     return 'automl.googleapis.com';
@@ -470,6 +470,7 @@ export class AutoMlClient {
 
   /**
    * The port for this API service.
+   * @returns {number} The default port for this service.
    */
   static get port() {
     return 443;
@@ -478,6 +479,7 @@ export class AutoMlClient {
   /**
    * The scopes needed to make gRPC calls for every method defined
    * in this service.
+   * @returns {string[]} List of default scopes.
    */
   static get scopes() {
     return ['https://www.googleapis.com/auth/cloud-platform'];
@@ -487,8 +489,7 @@ export class AutoMlClient {
   getProjectId(callback: Callback<string, undefined, undefined>): void;
   /**
    * Return the project ID used by this class.
-   * @param {function(Error, string)} callback - the callback to
-   *   be called with the current project Id.
+   * @returns {Promise} A promise that resolves to string containing the project ID.
    */
   getProjectId(
     callback?: Callback<string, undefined, undefined>
@@ -547,7 +548,11 @@ export class AutoMlClient {
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
    *   The first element of the array is an object representing [Dataset]{@link google.cloud.automl.v1beta1.Dataset}.
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * const [response] = await client.createDataset(request);
    */
   createDataset(
     request: protos.google.cloud.automl.v1beta1.ICreateDatasetRequest,
@@ -631,7 +636,11 @@ export class AutoMlClient {
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
    *   The first element of the array is an object representing [Dataset]{@link google.cloud.automl.v1beta1.Dataset}.
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * const [response] = await client.getDataset(request);
    */
   getDataset(
     request: protos.google.cloud.automl.v1beta1.IGetDatasetRequest,
@@ -719,7 +728,11 @@ export class AutoMlClient {
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
    *   The first element of the array is an object representing [Dataset]{@link google.cloud.automl.v1beta1.Dataset}.
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * const [response] = await client.updateDataset(request);
    */
   updateDataset(
     request: protos.google.cloud.automl.v1beta1.IUpdateDatasetRequest,
@@ -807,7 +820,11 @@ export class AutoMlClient {
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
    *   The first element of the array is an object representing [AnnotationSpec]{@link google.cloud.automl.v1beta1.AnnotationSpec}.
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * const [response] = await client.getAnnotationSpec(request);
    */
   getAnnotationSpec(
     request: protos.google.cloud.automl.v1beta1.IGetAnnotationSpecRequest,
@@ -897,7 +914,11 @@ export class AutoMlClient {
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
    *   The first element of the array is an object representing [TableSpec]{@link google.cloud.automl.v1beta1.TableSpec}.
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * const [response] = await client.getTableSpec(request);
    */
   getTableSpec(
     request: protos.google.cloud.automl.v1beta1.IGetTableSpecRequest,
@@ -987,7 +1008,11 @@ export class AutoMlClient {
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
    *   The first element of the array is an object representing [TableSpec]{@link google.cloud.automl.v1beta1.TableSpec}.
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * const [response] = await client.updateTableSpec(request);
    */
   updateTableSpec(
     request: protos.google.cloud.automl.v1beta1.IUpdateTableSpecRequest,
@@ -1077,7 +1102,11 @@ export class AutoMlClient {
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
    *   The first element of the array is an object representing [ColumnSpec]{@link google.cloud.automl.v1beta1.ColumnSpec}.
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * const [response] = await client.getColumnSpec(request);
    */
   getColumnSpec(
     request: protos.google.cloud.automl.v1beta1.IGetColumnSpecRequest,
@@ -1167,7 +1196,11 @@ export class AutoMlClient {
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
    *   The first element of the array is an object representing [ColumnSpec]{@link google.cloud.automl.v1beta1.ColumnSpec}.
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * const [response] = await client.updateColumnSpec(request);
    */
   updateColumnSpec(
     request: protos.google.cloud.automl.v1beta1.IUpdateColumnSpecRequest,
@@ -1251,7 +1284,11 @@ export class AutoMlClient {
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
    *   The first element of the array is an object representing [Model]{@link google.cloud.automl.v1beta1.Model}.
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * const [response] = await client.getModel(request);
    */
   getModel(
     request: protos.google.cloud.automl.v1beta1.IGetModelRequest,
@@ -1337,7 +1374,11 @@ export class AutoMlClient {
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
    *   The first element of the array is an object representing [ModelEvaluation]{@link google.cloud.automl.v1beta1.ModelEvaluation}.
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * const [response] = await client.getModelEvaluation(request);
    */
   getModelEvaluation(
     request: protos.google.cloud.automl.v1beta1.IGetModelEvaluationRequest,
@@ -1434,8 +1475,15 @@ export class AutoMlClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Operation]{@link google.longrunning.Operation}.
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example
+   * const [operation] = await client.deleteDataset(request);
+   * const [response] = await operation.promise();
    */
   deleteDataset(
     request: protos.google.cloud.automl.v1beta1.IDeleteDatasetRequest,
@@ -1487,18 +1535,19 @@ export class AutoMlClient {
     return this.innerApiCalls.deleteDataset(request, options, callback);
   }
   /**
-   * Check the status of the long running operation returned by the deleteDataset() method.
+   * Check the status of the long running operation returned by `deleteDataset()`.
    * @param {String} name
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *
-   * @example:
-   *   const decodedOperation = await checkDeleteDatasetProgress(name);
-   *   console.log(decodedOperation.result);
-   *   console.log(decodedOperation.done);
-   *   console.log(decodedOperation.metadata);
-   *
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example
+   * const decodedOperation = await checkDeleteDatasetProgress(name);
+   * console.log(decodedOperation.result);
+   * console.log(decodedOperation.done);
+   * console.log(decodedOperation.metadata);
    */
   async checkDeleteDatasetProgress(
     name: string
@@ -1580,8 +1629,15 @@ export class AutoMlClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Operation]{@link google.longrunning.Operation}.
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example
+   * const [operation] = await client.importData(request);
+   * const [response] = await operation.promise();
    */
   importData(
     request: protos.google.cloud.automl.v1beta1.IImportDataRequest,
@@ -1633,18 +1689,19 @@ export class AutoMlClient {
     return this.innerApiCalls.importData(request, options, callback);
   }
   /**
-   * Check the status of the long running operation returned by the importData() method.
+   * Check the status of the long running operation returned by `importData()`.
    * @param {String} name
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *
-   * @example:
-   *   const decodedOperation = await checkImportDataProgress(name);
-   *   console.log(decodedOperation.result);
-   *   console.log(decodedOperation.done);
-   *   console.log(decodedOperation.metadata);
-   *
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example
+   * const decodedOperation = await checkImportDataProgress(name);
+   * console.log(decodedOperation.result);
+   * console.log(decodedOperation.done);
+   * console.log(decodedOperation.metadata);
    */
   async checkImportDataProgress(
     name: string
@@ -1718,8 +1775,15 @@ export class AutoMlClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Operation]{@link google.longrunning.Operation}.
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example
+   * const [operation] = await client.exportData(request);
+   * const [response] = await operation.promise();
    */
   exportData(
     request: protos.google.cloud.automl.v1beta1.IExportDataRequest,
@@ -1771,18 +1835,19 @@ export class AutoMlClient {
     return this.innerApiCalls.exportData(request, options, callback);
   }
   /**
-   * Check the status of the long running operation returned by the exportData() method.
+   * Check the status of the long running operation returned by `exportData()`.
    * @param {String} name
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *
-   * @example:
-   *   const decodedOperation = await checkExportDataProgress(name);
-   *   console.log(decodedOperation.result);
-   *   console.log(decodedOperation.done);
-   *   console.log(decodedOperation.metadata);
-   *
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example
+   * const decodedOperation = await checkExportDataProgress(name);
+   * console.log(decodedOperation.result);
+   * console.log(decodedOperation.done);
+   * console.log(decodedOperation.metadata);
    */
   async checkExportDataProgress(
     name: string
@@ -1858,8 +1923,15 @@ export class AutoMlClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Operation]{@link google.longrunning.Operation}.
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example
+   * const [operation] = await client.createModel(request);
+   * const [response] = await operation.promise();
    */
   createModel(
     request: protos.google.cloud.automl.v1beta1.ICreateModelRequest,
@@ -1911,18 +1983,19 @@ export class AutoMlClient {
     return this.innerApiCalls.createModel(request, options, callback);
   }
   /**
-   * Check the status of the long running operation returned by the createModel() method.
+   * Check the status of the long running operation returned by `createModel()`.
    * @param {String} name
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *
-   * @example:
-   *   const decodedOperation = await checkCreateModelProgress(name);
-   *   console.log(decodedOperation.result);
-   *   console.log(decodedOperation.done);
-   *   console.log(decodedOperation.metadata);
-   *
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example
+   * const decodedOperation = await checkCreateModelProgress(name);
+   * console.log(decodedOperation.result);
+   * console.log(decodedOperation.done);
+   * console.log(decodedOperation.metadata);
    */
   async checkCreateModelProgress(
     name: string
@@ -1996,8 +2069,15 @@ export class AutoMlClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Operation]{@link google.longrunning.Operation}.
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example
+   * const [operation] = await client.deleteModel(request);
+   * const [response] = await operation.promise();
    */
   deleteModel(
     request: protos.google.cloud.automl.v1beta1.IDeleteModelRequest,
@@ -2049,18 +2129,19 @@ export class AutoMlClient {
     return this.innerApiCalls.deleteModel(request, options, callback);
   }
   /**
-   * Check the status of the long running operation returned by the deleteModel() method.
+   * Check the status of the long running operation returned by `deleteModel()`.
    * @param {String} name
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *
-   * @example:
-   *   const decodedOperation = await checkDeleteModelProgress(name);
-   *   console.log(decodedOperation.result);
-   *   console.log(decodedOperation.done);
-   *   console.log(decodedOperation.metadata);
-   *
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example
+   * const decodedOperation = await checkDeleteModelProgress(name);
+   * console.log(decodedOperation.result);
+   * console.log(decodedOperation.done);
+   * console.log(decodedOperation.metadata);
    */
   async checkDeleteModelProgress(
     name: string
@@ -2145,8 +2226,15 @@ export class AutoMlClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Operation]{@link google.longrunning.Operation}.
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example
+   * const [operation] = await client.deployModel(request);
+   * const [response] = await operation.promise();
    */
   deployModel(
     request: protos.google.cloud.automl.v1beta1.IDeployModelRequest,
@@ -2198,18 +2286,19 @@ export class AutoMlClient {
     return this.innerApiCalls.deployModel(request, options, callback);
   }
   /**
-   * Check the status of the long running operation returned by the deployModel() method.
+   * Check the status of the long running operation returned by `deployModel()`.
    * @param {String} name
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *
-   * @example:
-   *   const decodedOperation = await checkDeployModelProgress(name);
-   *   console.log(decodedOperation.result);
-   *   console.log(decodedOperation.done);
-   *   console.log(decodedOperation.metadata);
-   *
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example
+   * const decodedOperation = await checkDeployModelProgress(name);
+   * console.log(decodedOperation.result);
+   * console.log(decodedOperation.done);
+   * console.log(decodedOperation.metadata);
    */
   async checkDeployModelProgress(
     name: string
@@ -2285,8 +2374,15 @@ export class AutoMlClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Operation]{@link google.longrunning.Operation}.
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example
+   * const [operation] = await client.undeployModel(request);
+   * const [response] = await operation.promise();
    */
   undeployModel(
     request: protos.google.cloud.automl.v1beta1.IUndeployModelRequest,
@@ -2338,18 +2434,19 @@ export class AutoMlClient {
     return this.innerApiCalls.undeployModel(request, options, callback);
   }
   /**
-   * Check the status of the long running operation returned by the undeployModel() method.
+   * Check the status of the long running operation returned by `undeployModel()`.
    * @param {String} name
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *
-   * @example:
-   *   const decodedOperation = await checkUndeployModelProgress(name);
-   *   console.log(decodedOperation.result);
-   *   console.log(decodedOperation.done);
-   *   console.log(decodedOperation.metadata);
-   *
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example
+   * const decodedOperation = await checkUndeployModelProgress(name);
+   * console.log(decodedOperation.result);
+   * console.log(decodedOperation.done);
+   * console.log(decodedOperation.metadata);
    */
   async checkUndeployModelProgress(
     name: string
@@ -2428,8 +2525,15 @@ export class AutoMlClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Operation]{@link google.longrunning.Operation}.
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example
+   * const [operation] = await client.exportModel(request);
+   * const [response] = await operation.promise();
    */
   exportModel(
     request: protos.google.cloud.automl.v1beta1.IExportModelRequest,
@@ -2481,18 +2585,19 @@ export class AutoMlClient {
     return this.innerApiCalls.exportModel(request, options, callback);
   }
   /**
-   * Check the status of the long running operation returned by the exportModel() method.
+   * Check the status of the long running operation returned by `exportModel()`.
    * @param {String} name
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *
-   * @example:
-   *   const decodedOperation = await checkExportModelProgress(name);
-   *   console.log(decodedOperation.result);
-   *   console.log(decodedOperation.done);
-   *   console.log(decodedOperation.metadata);
-   *
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example
+   * const decodedOperation = await checkExportModelProgress(name);
+   * console.log(decodedOperation.result);
+   * console.log(decodedOperation.done);
+   * console.log(decodedOperation.metadata);
    */
   async checkExportModelProgress(
     name: string
@@ -2578,8 +2683,15 @@ export class AutoMlClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Operation]{@link google.longrunning.Operation}.
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example
+   * const [operation] = await client.exportEvaluatedExamples(request);
+   * const [response] = await operation.promise();
    */
   exportEvaluatedExamples(
     request: protos.google.cloud.automl.v1beta1.IExportEvaluatedExamplesRequest,
@@ -2635,18 +2747,19 @@ export class AutoMlClient {
     );
   }
   /**
-   * Check the status of the long running operation returned by the exportEvaluatedExamples() method.
+   * Check the status of the long running operation returned by `exportEvaluatedExamples()`.
    * @param {String} name
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *
-   * @example:
-   *   const decodedOperation = await checkExportEvaluatedExamplesProgress(name);
-   *   console.log(decodedOperation.result);
-   *   console.log(decodedOperation.done);
-   *   console.log(decodedOperation.metadata);
-   *
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example
+   * const decodedOperation = await checkExportEvaluatedExamplesProgress(name);
+   * console.log(decodedOperation.result);
+   * console.log(decodedOperation.done);
+   * console.log(decodedOperation.metadata);
    */
   async checkExportEvaluatedExamplesProgress(
     name: string
@@ -2728,19 +2841,14 @@ export class AutoMlClient {
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
    *   The first element of the array is Array of [Dataset]{@link google.cloud.automl.v1beta1.Dataset}.
-   *   The client library support auto-pagination by default: it will call the API as many
+   *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
-   *
-   *   When autoPaginate: false is specified through options, the array has three elements.
-   *   The first element is Array of [Dataset]{@link google.cloud.automl.v1beta1.Dataset} that corresponds to
-   *   the one page received from the API server.
-   *   If the second element is not null it contains the request object of type [ListDatasetsRequest]{@link google.cloud.automl.v1beta1.ListDatasetsRequest}
-   *   that can be used to obtain the next page of the results.
-   *   If it is null, the next page does not exist.
-   *   The third element contains the raw response received from the API server. Its type is
-   *   [ListDatasetsResponse]{@link google.cloud.automl.v1beta1.ListDatasetsResponse}.
-   *
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *   Note that it can affect your quota.
+   *   We recommend using `listDatasetsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
    */
   listDatasets(
     request: protos.google.cloud.automl.v1beta1.IListDatasetsRequest,
@@ -2788,18 +2896,7 @@ export class AutoMlClient {
   }
 
   /**
-   * Equivalent to {@link listDatasets}, but returns a NodeJS Stream object.
-   *
-   * This fetches the paged responses for {@link listDatasets} continuously
-   * and invokes the callback registered for 'data' event for each element in the
-   * responses.
-   *
-   * The returned object has 'end' method when no more elements are required.
-   *
-   * autoPaginate option will be ignored.
-   *
-   * @see {@link https://nodejs.org/api/stream.html}
-   *
+   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -2824,6 +2921,13 @@ export class AutoMlClient {
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
    *   An object stream which emits an object representing [Dataset]{@link google.cloud.automl.v1beta1.Dataset} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listDatasetsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
    */
   listDatasetsStream(
     request?: protos.google.cloud.automl.v1beta1.IListDatasetsRequest,
@@ -2848,10 +2952,9 @@ export class AutoMlClient {
   }
 
   /**
-   * Equivalent to {@link listDatasets}, but returns an iterable object.
+   * Equivalent to `listDatasets`, but returns an iterable object.
    *
-   * for-await-of syntax is used with the iterable to recursively get response element on-demand.
-   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -2875,7 +2978,18 @@ export class AutoMlClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that conforms to @link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols.
+   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   [Dataset]{@link google.cloud.automl.v1beta1.Dataset}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   * @example
+   * const iterable = client.listDatasetsAsync(request);
+   * for await (const response of iterable) {
+   *   // process response
+   * }
    */
   listDatasetsAsync(
     request?: protos.google.cloud.automl.v1beta1.IListDatasetsRequest,
@@ -2953,19 +3067,14 @@ export class AutoMlClient {
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
    *   The first element of the array is Array of [TableSpec]{@link google.cloud.automl.v1beta1.TableSpec}.
-   *   The client library support auto-pagination by default: it will call the API as many
+   *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
-   *
-   *   When autoPaginate: false is specified through options, the array has three elements.
-   *   The first element is Array of [TableSpec]{@link google.cloud.automl.v1beta1.TableSpec} that corresponds to
-   *   the one page received from the API server.
-   *   If the second element is not null it contains the request object of type [ListTableSpecsRequest]{@link google.cloud.automl.v1beta1.ListTableSpecsRequest}
-   *   that can be used to obtain the next page of the results.
-   *   If it is null, the next page does not exist.
-   *   The third element contains the raw response received from the API server. Its type is
-   *   [ListTableSpecsResponse]{@link google.cloud.automl.v1beta1.ListTableSpecsResponse}.
-   *
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *   Note that it can affect your quota.
+   *   We recommend using `listTableSpecsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
    */
   listTableSpecs(
     request: protos.google.cloud.automl.v1beta1.IListTableSpecsRequest,
@@ -3013,18 +3122,7 @@ export class AutoMlClient {
   }
 
   /**
-   * Equivalent to {@link listTableSpecs}, but returns a NodeJS Stream object.
-   *
-   * This fetches the paged responses for {@link listTableSpecs} continuously
-   * and invokes the callback registered for 'data' event for each element in the
-   * responses.
-   *
-   * The returned object has 'end' method when no more elements are required.
-   *
-   * autoPaginate option will be ignored.
-   *
-   * @see {@link https://nodejs.org/api/stream.html}
-   *
+   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -3045,6 +3143,13 @@ export class AutoMlClient {
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
    *   An object stream which emits an object representing [TableSpec]{@link google.cloud.automl.v1beta1.TableSpec} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listTableSpecsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
    */
   listTableSpecsStream(
     request?: protos.google.cloud.automl.v1beta1.IListTableSpecsRequest,
@@ -3069,10 +3174,9 @@ export class AutoMlClient {
   }
 
   /**
-   * Equivalent to {@link listTableSpecs}, but returns an iterable object.
+   * Equivalent to `listTableSpecs`, but returns an iterable object.
    *
-   * for-await-of syntax is used with the iterable to recursively get response element on-demand.
-   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -3092,7 +3196,18 @@ export class AutoMlClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that conforms to @link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols.
+   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   [TableSpec]{@link google.cloud.automl.v1beta1.TableSpec}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   * @example
+   * const iterable = client.listTableSpecsAsync(request);
+   * for await (const response of iterable) {
+   *   // process response
+   * }
    */
   listTableSpecsAsync(
     request?: protos.google.cloud.automl.v1beta1.IListTableSpecsRequest,
@@ -3170,19 +3285,14 @@ export class AutoMlClient {
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
    *   The first element of the array is Array of [ColumnSpec]{@link google.cloud.automl.v1beta1.ColumnSpec}.
-   *   The client library support auto-pagination by default: it will call the API as many
+   *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
-   *
-   *   When autoPaginate: false is specified through options, the array has three elements.
-   *   The first element is Array of [ColumnSpec]{@link google.cloud.automl.v1beta1.ColumnSpec} that corresponds to
-   *   the one page received from the API server.
-   *   If the second element is not null it contains the request object of type [ListColumnSpecsRequest]{@link google.cloud.automl.v1beta1.ListColumnSpecsRequest}
-   *   that can be used to obtain the next page of the results.
-   *   If it is null, the next page does not exist.
-   *   The third element contains the raw response received from the API server. Its type is
-   *   [ListColumnSpecsResponse]{@link google.cloud.automl.v1beta1.ListColumnSpecsResponse}.
-   *
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *   Note that it can affect your quota.
+   *   We recommend using `listColumnSpecsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
    */
   listColumnSpecs(
     request: protos.google.cloud.automl.v1beta1.IListColumnSpecsRequest,
@@ -3230,18 +3340,7 @@ export class AutoMlClient {
   }
 
   /**
-   * Equivalent to {@link listColumnSpecs}, but returns a NodeJS Stream object.
-   *
-   * This fetches the paged responses for {@link listColumnSpecs} continuously
-   * and invokes the callback registered for 'data' event for each element in the
-   * responses.
-   *
-   * The returned object has 'end' method when no more elements are required.
-   *
-   * autoPaginate option will be ignored.
-   *
-   * @see {@link https://nodejs.org/api/stream.html}
-   *
+   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -3262,6 +3361,13 @@ export class AutoMlClient {
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
    *   An object stream which emits an object representing [ColumnSpec]{@link google.cloud.automl.v1beta1.ColumnSpec} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listColumnSpecsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
    */
   listColumnSpecsStream(
     request?: protos.google.cloud.automl.v1beta1.IListColumnSpecsRequest,
@@ -3286,10 +3392,9 @@ export class AutoMlClient {
   }
 
   /**
-   * Equivalent to {@link listColumnSpecs}, but returns an iterable object.
+   * Equivalent to `listColumnSpecs`, but returns an iterable object.
    *
-   * for-await-of syntax is used with the iterable to recursively get response element on-demand.
-   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -3309,7 +3414,18 @@ export class AutoMlClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that conforms to @link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols.
+   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   [ColumnSpec]{@link google.cloud.automl.v1beta1.ColumnSpec}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   * @example
+   * const iterable = client.listColumnSpecsAsync(request);
+   * for await (const response of iterable) {
+   *   // process response
+   * }
    */
   listColumnSpecsAsync(
     request?: protos.google.cloud.automl.v1beta1.IListColumnSpecsRequest,
@@ -3388,19 +3504,14 @@ export class AutoMlClient {
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
    *   The first element of the array is Array of [Model]{@link google.cloud.automl.v1beta1.Model}.
-   *   The client library support auto-pagination by default: it will call the API as many
+   *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
-   *
-   *   When autoPaginate: false is specified through options, the array has three elements.
-   *   The first element is Array of [Model]{@link google.cloud.automl.v1beta1.Model} that corresponds to
-   *   the one page received from the API server.
-   *   If the second element is not null it contains the request object of type [ListModelsRequest]{@link google.cloud.automl.v1beta1.ListModelsRequest}
-   *   that can be used to obtain the next page of the results.
-   *   If it is null, the next page does not exist.
-   *   The third element contains the raw response received from the API server. Its type is
-   *   [ListModelsResponse]{@link google.cloud.automl.v1beta1.ListModelsResponse}.
-   *
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *   Note that it can affect your quota.
+   *   We recommend using `listModelsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
    */
   listModels(
     request: protos.google.cloud.automl.v1beta1.IListModelsRequest,
@@ -3446,18 +3557,7 @@ export class AutoMlClient {
   }
 
   /**
-   * Equivalent to {@link listModels}, but returns a NodeJS Stream object.
-   *
-   * This fetches the paged responses for {@link listModels} continuously
-   * and invokes the callback registered for 'data' event for each element in the
-   * responses.
-   *
-   * The returned object has 'end' method when no more elements are required.
-   *
-   * autoPaginate option will be ignored.
-   *
-   * @see {@link https://nodejs.org/api/stream.html}
-   *
+   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -3483,6 +3583,13 @@ export class AutoMlClient {
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
    *   An object stream which emits an object representing [Model]{@link google.cloud.automl.v1beta1.Model} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listModelsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
    */
   listModelsStream(
     request?: protos.google.cloud.automl.v1beta1.IListModelsRequest,
@@ -3507,10 +3614,9 @@ export class AutoMlClient {
   }
 
   /**
-   * Equivalent to {@link listModels}, but returns an iterable object.
+   * Equivalent to `listModels`, but returns an iterable object.
    *
-   * for-await-of syntax is used with the iterable to recursively get response element on-demand.
-   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -3535,7 +3641,18 @@ export class AutoMlClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that conforms to @link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols.
+   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   [Model]{@link google.cloud.automl.v1beta1.Model}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   * @example
+   * const iterable = client.listModelsAsync(request);
+   * for await (const response of iterable) {
+   *   // process response
+   * }
    */
   listModelsAsync(
     request?: protos.google.cloud.automl.v1beta1.IListModelsRequest,
@@ -3622,19 +3739,14 @@ export class AutoMlClient {
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
    *   The first element of the array is Array of [ModelEvaluation]{@link google.cloud.automl.v1beta1.ModelEvaluation}.
-   *   The client library support auto-pagination by default: it will call the API as many
+   *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
-   *
-   *   When autoPaginate: false is specified through options, the array has three elements.
-   *   The first element is Array of [ModelEvaluation]{@link google.cloud.automl.v1beta1.ModelEvaluation} that corresponds to
-   *   the one page received from the API server.
-   *   If the second element is not null it contains the request object of type [ListModelEvaluationsRequest]{@link google.cloud.automl.v1beta1.ListModelEvaluationsRequest}
-   *   that can be used to obtain the next page of the results.
-   *   If it is null, the next page does not exist.
-   *   The third element contains the raw response received from the API server. Its type is
-   *   [ListModelEvaluationsResponse]{@link google.cloud.automl.v1beta1.ListModelEvaluationsResponse}.
-   *
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *   Note that it can affect your quota.
+   *   We recommend using `listModelEvaluationsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
    */
   listModelEvaluations(
     request: protos.google.cloud.automl.v1beta1.IListModelEvaluationsRequest,
@@ -3682,18 +3794,7 @@ export class AutoMlClient {
   }
 
   /**
-   * Equivalent to {@link listModelEvaluations}, but returns a NodeJS Stream object.
-   *
-   * This fetches the paged responses for {@link listModelEvaluations} continuously
-   * and invokes the callback registered for 'data' event for each element in the
-   * responses.
-   *
-   * The returned object has 'end' method when no more elements are required.
-   *
-   * autoPaginate option will be ignored.
-   *
-   * @see {@link https://nodejs.org/api/stream.html}
-   *
+   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -3723,6 +3824,13 @@ export class AutoMlClient {
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
    *   An object stream which emits an object representing [ModelEvaluation]{@link google.cloud.automl.v1beta1.ModelEvaluation} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listModelEvaluationsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
    */
   listModelEvaluationsStream(
     request?: protos.google.cloud.automl.v1beta1.IListModelEvaluationsRequest,
@@ -3747,10 +3855,9 @@ export class AutoMlClient {
   }
 
   /**
-   * Equivalent to {@link listModelEvaluations}, but returns an iterable object.
+   * Equivalent to `listModelEvaluations`, but returns an iterable object.
    *
-   * for-await-of syntax is used with the iterable to recursively get response element on-demand.
-   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -3779,7 +3886,18 @@ export class AutoMlClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that conforms to @link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols.
+   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   [ModelEvaluation]{@link google.cloud.automl.v1beta1.ModelEvaluation}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   * @example
+   * const iterable = client.listModelEvaluationsAsync(request);
+   * for await (const response of iterable) {
+   *   // process response
+   * }
    */
   listModelEvaluationsAsync(
     request?: protos.google.cloud.automl.v1beta1.IListModelEvaluationsRequest,
@@ -4249,9 +4367,10 @@ export class AutoMlClient {
   }
 
   /**
-   * Terminate the GRPC channel and close the client.
+   * Terminate the gRPC channel and close the client.
    *
    * The client will no longer be usable and all future behavior is undefined.
+   * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
     this.initialize();

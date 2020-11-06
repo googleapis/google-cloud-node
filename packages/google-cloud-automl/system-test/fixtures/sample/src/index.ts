@@ -18,9 +18,21 @@
 
 import {AutoMlClient, PredictionServiceClient} from '@google-cloud/automl';
 
+// check that the client class type name can be used
+function doStuffWithAutoMlClient(client: AutoMlClient) {
+  client.close();
+}
+function doStuffWithPredictionServiceClient(client: PredictionServiceClient) {
+  client.close();
+}
+
 function main() {
-  new AutoMlClient();
-  new PredictionServiceClient();
+  // check that the client instance can be created
+  const autoMlClient = new AutoMlClient();
+  doStuffWithAutoMlClient(autoMlClient);
+  // check that the client instance can be created
+  const predictionServiceClient = new PredictionServiceClient();
+  doStuffWithPredictionServiceClient(predictionServiceClient);
 }
 
 main();

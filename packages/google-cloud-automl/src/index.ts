@@ -20,7 +20,9 @@ import * as v1 from './v1';
 import * as v1beta1 from './v1beta1';
 
 const AutoMlClient = v1.AutoMlClient;
+type AutoMlClient = v1.AutoMlClient;
 const PredictionServiceClient = v1.PredictionServiceClient;
+type PredictionServiceClient = v1.PredictionServiceClient;
 
 export {v1, v1beta1, AutoMlClient, PredictionServiceClient};
 export default {v1, v1beta1, AutoMlClient, PredictionServiceClient};
