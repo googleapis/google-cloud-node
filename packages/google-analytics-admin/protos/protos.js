@@ -14850,6 +14850,90 @@
                         return ListAccountSummariesResponse;
                     })();
     
+                    /**
+                     * MaximumUserAccess enum.
+                     * @name google.analytics.admin.v1alpha.MaximumUserAccess
+                     * @enum {number}
+                     * @property {number} MAXIMUM_USER_ACCESS_UNSPECIFIED=0 MAXIMUM_USER_ACCESS_UNSPECIFIED value
+                     * @property {number} NO_ACCESS=1 NO_ACCESS value
+                     * @property {number} READ_AND_ANALYZE=2 READ_AND_ANALYZE value
+                     * @property {number} EDITOR_WITHOUT_LINK_MANAGEMENT=3 EDITOR_WITHOUT_LINK_MANAGEMENT value
+                     * @property {number} EDITOR_INCLUDING_LINK_MANAGEMENT=4 EDITOR_INCLUDING_LINK_MANAGEMENT value
+                     */
+                    v1alpha.MaximumUserAccess = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "MAXIMUM_USER_ACCESS_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "NO_ACCESS"] = 1;
+                        values[valuesById[2] = "READ_AND_ANALYZE"] = 2;
+                        values[valuesById[3] = "EDITOR_WITHOUT_LINK_MANAGEMENT"] = 3;
+                        values[valuesById[4] = "EDITOR_INCLUDING_LINK_MANAGEMENT"] = 4;
+                        return values;
+                    })();
+    
+                    /**
+                     * IndustryCategory enum.
+                     * @name google.analytics.admin.v1alpha.IndustryCategory
+                     * @enum {number}
+                     * @property {number} INDUSTRY_CATEGORY_UNSPECIFIED=0 INDUSTRY_CATEGORY_UNSPECIFIED value
+                     * @property {number} AUTOMOTIVE=1 AUTOMOTIVE value
+                     * @property {number} BUSINESS_AND_INDUSTRIAL_MARKETS=2 BUSINESS_AND_INDUSTRIAL_MARKETS value
+                     * @property {number} FINANCE=3 FINANCE value
+                     * @property {number} HEALTHCARE=4 HEALTHCARE value
+                     * @property {number} TECHNOLOGY=5 TECHNOLOGY value
+                     * @property {number} TRAVEL=6 TRAVEL value
+                     * @property {number} OTHER=7 OTHER value
+                     * @property {number} ARTS_AND_ENTERTAINMENT=8 ARTS_AND_ENTERTAINMENT value
+                     * @property {number} BEAUTY_AND_FITNESS=9 BEAUTY_AND_FITNESS value
+                     * @property {number} BOOKS_AND_LITERATURE=10 BOOKS_AND_LITERATURE value
+                     * @property {number} FOOD_AND_DRINK=11 FOOD_AND_DRINK value
+                     * @property {number} GAMES=12 GAMES value
+                     * @property {number} HOBBIES_AND_LEISURE=13 HOBBIES_AND_LEISURE value
+                     * @property {number} HOME_AND_GARDEN=14 HOME_AND_GARDEN value
+                     * @property {number} INTERNET_AND_TELECOM=15 INTERNET_AND_TELECOM value
+                     * @property {number} LAW_AND_GOVERNMENT=16 LAW_AND_GOVERNMENT value
+                     * @property {number} NEWS=17 NEWS value
+                     * @property {number} ONLINE_COMMUNITIES=18 ONLINE_COMMUNITIES value
+                     * @property {number} PEOPLE_AND_SOCIETY=19 PEOPLE_AND_SOCIETY value
+                     * @property {number} PETS_AND_ANIMALS=20 PETS_AND_ANIMALS value
+                     * @property {number} REAL_ESTATE=21 REAL_ESTATE value
+                     * @property {number} REFERENCE=22 REFERENCE value
+                     * @property {number} SCIENCE=23 SCIENCE value
+                     * @property {number} SPORTS=24 SPORTS value
+                     * @property {number} JOBS_AND_EDUCATION=25 JOBS_AND_EDUCATION value
+                     * @property {number} SHOPPING=26 SHOPPING value
+                     */
+                    v1alpha.IndustryCategory = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "INDUSTRY_CATEGORY_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "AUTOMOTIVE"] = 1;
+                        values[valuesById[2] = "BUSINESS_AND_INDUSTRIAL_MARKETS"] = 2;
+                        values[valuesById[3] = "FINANCE"] = 3;
+                        values[valuesById[4] = "HEALTHCARE"] = 4;
+                        values[valuesById[5] = "TECHNOLOGY"] = 5;
+                        values[valuesById[6] = "TRAVEL"] = 6;
+                        values[valuesById[7] = "OTHER"] = 7;
+                        values[valuesById[8] = "ARTS_AND_ENTERTAINMENT"] = 8;
+                        values[valuesById[9] = "BEAUTY_AND_FITNESS"] = 9;
+                        values[valuesById[10] = "BOOKS_AND_LITERATURE"] = 10;
+                        values[valuesById[11] = "FOOD_AND_DRINK"] = 11;
+                        values[valuesById[12] = "GAMES"] = 12;
+                        values[valuesById[13] = "HOBBIES_AND_LEISURE"] = 13;
+                        values[valuesById[14] = "HOME_AND_GARDEN"] = 14;
+                        values[valuesById[15] = "INTERNET_AND_TELECOM"] = 15;
+                        values[valuesById[16] = "LAW_AND_GOVERNMENT"] = 16;
+                        values[valuesById[17] = "NEWS"] = 17;
+                        values[valuesById[18] = "ONLINE_COMMUNITIES"] = 18;
+                        values[valuesById[19] = "PEOPLE_AND_SOCIETY"] = 19;
+                        values[valuesById[20] = "PETS_AND_ANIMALS"] = 20;
+                        values[valuesById[21] = "REAL_ESTATE"] = 21;
+                        values[valuesById[22] = "REFERENCE"] = 22;
+                        values[valuesById[23] = "SCIENCE"] = 23;
+                        values[valuesById[24] = "SPORTS"] = 24;
+                        values[valuesById[25] = "JOBS_AND_EDUCATION"] = 25;
+                        values[valuesById[26] = "SHOPPING"] = 26;
+                        return values;
+                    })();
+    
                     v1alpha.Account = (function() {
     
                         /**
@@ -18842,90 +18926,6 @@
                         };
     
                         return DataSharingSettings;
-                    })();
-    
-                    /**
-                     * IndustryCategory enum.
-                     * @name google.analytics.admin.v1alpha.IndustryCategory
-                     * @enum {number}
-                     * @property {number} INDUSTRY_CATEGORY_UNSPECIFIED=0 INDUSTRY_CATEGORY_UNSPECIFIED value
-                     * @property {number} AUTOMOTIVE=1 AUTOMOTIVE value
-                     * @property {number} BUSINESS_AND_INDUSTRIAL_MARKETS=2 BUSINESS_AND_INDUSTRIAL_MARKETS value
-                     * @property {number} FINANCE=3 FINANCE value
-                     * @property {number} HEALTHCARE=4 HEALTHCARE value
-                     * @property {number} TECHNOLOGY=5 TECHNOLOGY value
-                     * @property {number} TRAVEL=6 TRAVEL value
-                     * @property {number} OTHER=7 OTHER value
-                     * @property {number} ARTS_AND_ENTERTAINMENT=8 ARTS_AND_ENTERTAINMENT value
-                     * @property {number} BEAUTY_AND_FITNESS=9 BEAUTY_AND_FITNESS value
-                     * @property {number} BOOKS_AND_LITERATURE=10 BOOKS_AND_LITERATURE value
-                     * @property {number} FOOD_AND_DRINK=11 FOOD_AND_DRINK value
-                     * @property {number} GAMES=12 GAMES value
-                     * @property {number} HOBBIES_AND_LEISURE=13 HOBBIES_AND_LEISURE value
-                     * @property {number} HOME_AND_GARDEN=14 HOME_AND_GARDEN value
-                     * @property {number} INTERNET_AND_TELECOM=15 INTERNET_AND_TELECOM value
-                     * @property {number} LAW_AND_GOVERNMENT=16 LAW_AND_GOVERNMENT value
-                     * @property {number} NEWS=17 NEWS value
-                     * @property {number} ONLINE_COMMUNITIES=18 ONLINE_COMMUNITIES value
-                     * @property {number} PEOPLE_AND_SOCIETY=19 PEOPLE_AND_SOCIETY value
-                     * @property {number} PETS_AND_ANIMALS=20 PETS_AND_ANIMALS value
-                     * @property {number} REAL_ESTATE=21 REAL_ESTATE value
-                     * @property {number} REFERENCE=22 REFERENCE value
-                     * @property {number} SCIENCE=23 SCIENCE value
-                     * @property {number} SPORTS=24 SPORTS value
-                     * @property {number} JOBS_AND_EDUCATION=25 JOBS_AND_EDUCATION value
-                     * @property {number} SHOPPING=26 SHOPPING value
-                     */
-                    v1alpha.IndustryCategory = (function() {
-                        var valuesById = {}, values = Object.create(valuesById);
-                        values[valuesById[0] = "INDUSTRY_CATEGORY_UNSPECIFIED"] = 0;
-                        values[valuesById[1] = "AUTOMOTIVE"] = 1;
-                        values[valuesById[2] = "BUSINESS_AND_INDUSTRIAL_MARKETS"] = 2;
-                        values[valuesById[3] = "FINANCE"] = 3;
-                        values[valuesById[4] = "HEALTHCARE"] = 4;
-                        values[valuesById[5] = "TECHNOLOGY"] = 5;
-                        values[valuesById[6] = "TRAVEL"] = 6;
-                        values[valuesById[7] = "OTHER"] = 7;
-                        values[valuesById[8] = "ARTS_AND_ENTERTAINMENT"] = 8;
-                        values[valuesById[9] = "BEAUTY_AND_FITNESS"] = 9;
-                        values[valuesById[10] = "BOOKS_AND_LITERATURE"] = 10;
-                        values[valuesById[11] = "FOOD_AND_DRINK"] = 11;
-                        values[valuesById[12] = "GAMES"] = 12;
-                        values[valuesById[13] = "HOBBIES_AND_LEISURE"] = 13;
-                        values[valuesById[14] = "HOME_AND_GARDEN"] = 14;
-                        values[valuesById[15] = "INTERNET_AND_TELECOM"] = 15;
-                        values[valuesById[16] = "LAW_AND_GOVERNMENT"] = 16;
-                        values[valuesById[17] = "NEWS"] = 17;
-                        values[valuesById[18] = "ONLINE_COMMUNITIES"] = 18;
-                        values[valuesById[19] = "PEOPLE_AND_SOCIETY"] = 19;
-                        values[valuesById[20] = "PETS_AND_ANIMALS"] = 20;
-                        values[valuesById[21] = "REAL_ESTATE"] = 21;
-                        values[valuesById[22] = "REFERENCE"] = 22;
-                        values[valuesById[23] = "SCIENCE"] = 23;
-                        values[valuesById[24] = "SPORTS"] = 24;
-                        values[valuesById[25] = "JOBS_AND_EDUCATION"] = 25;
-                        values[valuesById[26] = "SHOPPING"] = 26;
-                        return values;
-                    })();
-    
-                    /**
-                     * MaximumUserAccess enum.
-                     * @name google.analytics.admin.v1alpha.MaximumUserAccess
-                     * @enum {number}
-                     * @property {number} MAXIMUM_USER_ACCESS_UNSPECIFIED=0 MAXIMUM_USER_ACCESS_UNSPECIFIED value
-                     * @property {number} NO_ACCESS=1 NO_ACCESS value
-                     * @property {number} READ_AND_ANALYZE=2 READ_AND_ANALYZE value
-                     * @property {number} EDITOR_WITHOUT_LINK_MANAGEMENT=3 EDITOR_WITHOUT_LINK_MANAGEMENT value
-                     * @property {number} EDITOR_INCLUDING_LINK_MANAGEMENT=4 EDITOR_INCLUDING_LINK_MANAGEMENT value
-                     */
-                    v1alpha.MaximumUserAccess = (function() {
-                        var valuesById = {}, values = Object.create(valuesById);
-                        values[valuesById[0] = "MAXIMUM_USER_ACCESS_UNSPECIFIED"] = 0;
-                        values[valuesById[1] = "NO_ACCESS"] = 1;
-                        values[valuesById[2] = "READ_AND_ANALYZE"] = 2;
-                        values[valuesById[3] = "EDITOR_WITHOUT_LINK_MANAGEMENT"] = 3;
-                        values[valuesById[4] = "EDITOR_INCLUDING_LINK_MANAGEMENT"] = 4;
-                        return values;
                     })();
     
                     v1alpha.AccountSummary = (function() {

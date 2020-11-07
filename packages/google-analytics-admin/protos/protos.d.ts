@@ -6926,6 +6926,46 @@ export namespace google {
                     public toJSON(): { [k: string]: any };
                 }
 
+                /** MaximumUserAccess enum. */
+                enum MaximumUserAccess {
+                    MAXIMUM_USER_ACCESS_UNSPECIFIED = 0,
+                    NO_ACCESS = 1,
+                    READ_AND_ANALYZE = 2,
+                    EDITOR_WITHOUT_LINK_MANAGEMENT = 3,
+                    EDITOR_INCLUDING_LINK_MANAGEMENT = 4
+                }
+
+                /** IndustryCategory enum. */
+                enum IndustryCategory {
+                    INDUSTRY_CATEGORY_UNSPECIFIED = 0,
+                    AUTOMOTIVE = 1,
+                    BUSINESS_AND_INDUSTRIAL_MARKETS = 2,
+                    FINANCE = 3,
+                    HEALTHCARE = 4,
+                    TECHNOLOGY = 5,
+                    TRAVEL = 6,
+                    OTHER = 7,
+                    ARTS_AND_ENTERTAINMENT = 8,
+                    BEAUTY_AND_FITNESS = 9,
+                    BOOKS_AND_LITERATURE = 10,
+                    FOOD_AND_DRINK = 11,
+                    GAMES = 12,
+                    HOBBIES_AND_LEISURE = 13,
+                    HOME_AND_GARDEN = 14,
+                    INTERNET_AND_TELECOM = 15,
+                    LAW_AND_GOVERNMENT = 16,
+                    NEWS = 17,
+                    ONLINE_COMMUNITIES = 18,
+                    PEOPLE_AND_SOCIETY = 19,
+                    PETS_AND_ANIMALS = 20,
+                    REAL_ESTATE = 21,
+                    REFERENCE = 22,
+                    SCIENCE = 23,
+                    SPORTS = 24,
+                    JOBS_AND_EDUCATION = 25,
+                    SHOPPING = 26
+                }
+
                 /** Properties of an Account. */
                 interface IAccount {
 
@@ -8400,46 +8440,6 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
-                }
-
-                /** IndustryCategory enum. */
-                enum IndustryCategory {
-                    INDUSTRY_CATEGORY_UNSPECIFIED = 0,
-                    AUTOMOTIVE = 1,
-                    BUSINESS_AND_INDUSTRIAL_MARKETS = 2,
-                    FINANCE = 3,
-                    HEALTHCARE = 4,
-                    TECHNOLOGY = 5,
-                    TRAVEL = 6,
-                    OTHER = 7,
-                    ARTS_AND_ENTERTAINMENT = 8,
-                    BEAUTY_AND_FITNESS = 9,
-                    BOOKS_AND_LITERATURE = 10,
-                    FOOD_AND_DRINK = 11,
-                    GAMES = 12,
-                    HOBBIES_AND_LEISURE = 13,
-                    HOME_AND_GARDEN = 14,
-                    INTERNET_AND_TELECOM = 15,
-                    LAW_AND_GOVERNMENT = 16,
-                    NEWS = 17,
-                    ONLINE_COMMUNITIES = 18,
-                    PEOPLE_AND_SOCIETY = 19,
-                    PETS_AND_ANIMALS = 20,
-                    REAL_ESTATE = 21,
-                    REFERENCE = 22,
-                    SCIENCE = 23,
-                    SPORTS = 24,
-                    JOBS_AND_EDUCATION = 25,
-                    SHOPPING = 26
-                }
-
-                /** MaximumUserAccess enum. */
-                enum MaximumUserAccess {
-                    MAXIMUM_USER_ACCESS_UNSPECIFIED = 0,
-                    NO_ACCESS = 1,
-                    READ_AND_ANALYZE = 2,
-                    EDITOR_WITHOUT_LINK_MANAGEMENT = 3,
-                    EDITOR_INCLUDING_LINK_MANAGEMENT = 4
                 }
 
                 /** Properties of an AccountSummary. */

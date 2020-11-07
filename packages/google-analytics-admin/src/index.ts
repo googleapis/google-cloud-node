@@ -18,6 +18,7 @@
 
 import * as v1alpha from './v1alpha';
 const AnalyticsAdminServiceClient = v1alpha.AnalyticsAdminServiceClient;
+type AnalyticsAdminServiceClient = v1alpha.AnalyticsAdminServiceClient;
 export {v1alpha, AnalyticsAdminServiceClient};
 export default {v1alpha, AnalyticsAdminServiceClient};
 import * as protos from '../protos/protos';
