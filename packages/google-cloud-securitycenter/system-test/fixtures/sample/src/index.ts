@@ -18,8 +18,15 @@
 
 import {SecurityCenterClient} from '@google-cloud/security-center';
 
+// check that the client class type name can be used
+function doStuffWithSecurityCenterClient(client: SecurityCenterClient) {
+  client.close();
+}
+
 function main() {
-  new SecurityCenterClient();
+  // check that the client instance can be created
+  const securityCenterClient = new SecurityCenterClient();
+  doStuffWithSecurityCenterClient(securityCenterClient);
 }
 
 main();
