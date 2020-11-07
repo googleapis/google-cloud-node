@@ -19,7 +19,7 @@
       "git": {
         "name": "synthtool",
         "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "ba9918cd22874245b55734f57470c719b577e591"
+        "sha": "1f1148d3c7a7a52f0c98077f976bd9b3c948ee2b"
       }
     }
   ],
@@ -96,6 +96,7 @@
     "README.md",
     "api-extractor.json",
     "linkinator.config.json",
+    "package-lock.json.742240568",
     "protos/google/cloud/gaming/v1beta/common.proto",
     "protos/google/cloud/gaming/v1beta/game_server_clusters.proto",
     "protos/google/cloud/gaming/v1beta/game_server_clusters_service.proto",
@@ -110,6 +111,7 @@
     "protos/protos.json",
     "renovate.json",
     "samples/README.md",
+    "samples/package-lock.json.3225038820",
     "src/index.ts",
     "src/v1beta/game_server_clusters_service_client.ts",
     "src/v1beta/game_server_clusters_service_client_config.json",

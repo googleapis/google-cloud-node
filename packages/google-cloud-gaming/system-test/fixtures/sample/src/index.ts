@@ -23,11 +23,41 @@ import {
   RealmsServiceClient,
 } from '@google-cloud/game-servers';
 
+// check that the client class type name can be used
+function doStuffWithGameServerClustersServiceClient(
+  client: GameServerClustersServiceClient
+) {
+  client.close();
+}
+function doStuffWithGameServerConfigsServiceClient(
+  client: GameServerConfigsServiceClient
+) {
+  client.close();
+}
+function doStuffWithGameServerDeploymentsServiceClient(
+  client: GameServerDeploymentsServiceClient
+) {
+  client.close();
+}
+function doStuffWithRealmsServiceClient(client: RealmsServiceClient) {
+  client.close();
+}
+
 function main() {
-  new GameServerClustersServiceClient();
-  new GameServerConfigsServiceClient();
-  new GameServerDeploymentsServiceClient();
-  new RealmsServiceClient();
+  // check that the client instance can be created
+  const gameServerClustersServiceClient = new GameServerClustersServiceClient();
+  doStuffWithGameServerClustersServiceClient(gameServerClustersServiceClient);
+  // check that the client instance can be created
+  const gameServerConfigsServiceClient = new GameServerConfigsServiceClient();
+  doStuffWithGameServerConfigsServiceClient(gameServerConfigsServiceClient);
+  // check that the client instance can be created
+  const gameServerDeploymentsServiceClient = new GameServerDeploymentsServiceClient();
+  doStuffWithGameServerDeploymentsServiceClient(
+    gameServerDeploymentsServiceClient
+  );
+  // check that the client instance can be created
+  const realmsServiceClient = new RealmsServiceClient();
+  doStuffWithRealmsServiceClient(realmsServiceClient);
 }
 
 main();
