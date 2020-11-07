@@ -19,7 +19,7 @@
       "git": {
         "name": "synthtool",
         "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "ba9918cd22874245b55734f57470c719b577e591"
+        "sha": "1f1148d3c7a7a52f0c98077f976bd9b3c948ee2b"
       }
     }
   ],
@@ -96,6 +96,7 @@
     "README.md",
     "api-extractor.json",
     "linkinator.config.json",
+    "package-lock.json.1995042437",
     "protos/google/cloud/oslogin/common/common.proto",
     "protos/google/cloud/oslogin/v1/oslogin.proto",
     "protos/google/cloud/oslogin/v1beta/oslogin.proto",
@@ -104,6 +105,7 @@
     "protos/protos.json",
     "renovate.json",
     "samples/README.md",
+    "samples/package-lock.json.1452749784",
     "src/index.ts",
     "src/v1/index.ts",
     "src/v1/os_login_service_client.ts",
