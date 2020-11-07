@@ -18,8 +18,15 @@
 
 import {DlpServiceClient} from '@google-cloud/dlp';
 
+// check that the client class type name can be used
+function doStuffWithDlpServiceClient(client: DlpServiceClient) {
+  client.close();
+}
+
 function main() {
-  new DlpServiceClient();
+  // check that the client instance can be created
+  const dlpServiceClient = new DlpServiceClient();
+  doStuffWithDlpServiceClient(dlpServiceClient);
 }
 
 main();
