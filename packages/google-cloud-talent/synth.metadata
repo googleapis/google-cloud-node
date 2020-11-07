@@ -19,7 +19,7 @@
       "git": {
         "name": "synthtool",
         "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "ba9918cd22874245b55734f57470c719b577e591"
+        "sha": "1f1148d3c7a7a52f0c98077f976bd9b3c948ee2b"
       }
     }
   ],
@@ -96,6 +96,7 @@
     "README.md",
     "api-extractor.json",
     "linkinator.config.json",
+    "package-lock.json.2550398548",
     "protos/google/cloud/talent/v4/common.proto",
     "protos/google/cloud/talent/v4/company.proto",
     "protos/google/cloud/talent/v4/company_service.proto",
@@ -129,6 +130,7 @@
     "protos/protos.js",
     "protos/protos.json",
     "renovate.json",
+    "samples/package-lock.json.1849923148",
     "src/index.ts",
     "src/v4/company_service_client.ts",
     "src/v4/company_service_client_config.json",

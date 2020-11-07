@@ -24,12 +24,39 @@ import {
   TenantServiceClient,
 } from '@google-cloud/talent';
 
+// check that the client class type name can be used
+function doStuffWithCompanyServiceClient(client: CompanyServiceClient) {
+  client.close();
+}
+function doStuffWithCompletionClient(client: CompletionClient) {
+  client.close();
+}
+function doStuffWithEventServiceClient(client: EventServiceClient) {
+  client.close();
+}
+function doStuffWithJobServiceClient(client: JobServiceClient) {
+  client.close();
+}
+function doStuffWithTenantServiceClient(client: TenantServiceClient) {
+  client.close();
+}
+
 function main() {
-  new CompanyServiceClient();
-  new CompletionClient();
-  new EventServiceClient();
-  new JobServiceClient();
-  new TenantServiceClient();
+  // check that the client instance can be created
+  const companyServiceClient = new CompanyServiceClient();
+  doStuffWithCompanyServiceClient(companyServiceClient);
+  // check that the client instance can be created
+  const completionClient = new CompletionClient();
+  doStuffWithCompletionClient(completionClient);
+  // check that the client instance can be created
+  const eventServiceClient = new EventServiceClient();
+  doStuffWithEventServiceClient(eventServiceClient);
+  // check that the client instance can be created
+  const jobServiceClient = new JobServiceClient();
+  doStuffWithJobServiceClient(jobServiceClient);
+  // check that the client instance can be created
+  const tenantServiceClient = new TenantServiceClient();
+  doStuffWithTenantServiceClient(tenantServiceClient);
 }
 
 main();
