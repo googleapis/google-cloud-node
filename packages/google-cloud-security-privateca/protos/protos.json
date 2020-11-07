@@ -15,7 +15,9 @@
                         "go_package": "google.golang.org/genproto/googleapis/cloud/security/privateca/v1beta1;privateca",
                         "java_multiple_files": true,
                         "java_outer_classname": "PrivateCaProto",
-                        "java_package": "com.google.cloud.security.privateca.v1beta1"
+                        "java_package": "com.google.cloud.security.privateca.v1beta1",
+                        "php_namespace": "Google\\Cloud\\Security\\PrivateCA\\V1beta1",
+                        "ruby_package": "Google::Cloud::Security::PrivateCA::V1beta1"
                       },
                       "nested": {
                         "CertificateAuthority": {
@@ -382,9 +384,12 @@
                             "SignHashAlgorithm": {
                               "values": {
                                 "SIGN_HASH_ALGORITHM_UNSPECIFIED": 0,
-                                "RSA_PSS_2048_SHA_256": 1,
-                                "RSA_PSS_3072_SHA_256": 2,
-                                "RSA_PSS_4096_SHA_256": 3,
+                                "RSA_PSS_2048_SHA256": 1,
+                                "RSA_PSS_3072_SHA256": 2,
+                                "RSA_PSS_4096_SHA256": 3,
+                                "RSA_PKCS1_2048_SHA256": 6,
+                                "RSA_PKCS1_3072_SHA256": 7,
+                                "RSA_PKCS1_4096_SHA256": 8,
                                 "EC_P256_SHA256": 4,
                                 "EC_P384_SHA384": 5
                               }
@@ -528,7 +533,7 @@
                               "type": "google.protobuf.Duration",
                               "id": 4,
                               "options": {
-                                "(google.api.field_behavior)": "REQUIRED"
+                                "(google.api.field_behavior)": "IMMUTABLE"
                               }
                             },
                             "revocationDetails": {
@@ -1295,17 +1300,6 @@
                                 "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
                               }
                             },
-                            "CreateCertificateRevocationList": {
-                              "requestType": "CreateCertificateRevocationListRequest",
-                              "responseType": "google.longrunning.Operation",
-                              "options": {
-                                "(google.api.http).post": "/v1beta1/{parent=projects/*/locations/*/certificateAuthorities/*}/certificateRevocationLists",
-                                "(google.api.http).body": "certificate_revocation_list",
-                                "(google.api.method_signature)": "parent,certificate_revocation_list,certificate_revocation_list_id",
-                                "(google.longrunning.operation_info).response_type": "CertificateRevocationList",
-                                "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
-                              }
-                            },
                             "GetCertificateRevocationList": {
                               "requestType": "GetCertificateRevocationListRequest",
                               "responseType": "CertificateRevocationList",
@@ -1333,27 +1327,6 @@
                                 "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
                               }
                             },
-                            "CreateReusableConfig": {
-                              "requestType": "CreateReusableConfigRequest",
-                              "responseType": "google.longrunning.Operation",
-                              "options": {
-                                "(google.api.http).post": "/v1beta1/{parent=projects/*/locations/*}/reusableConfigs",
-                                "(google.api.http).body": "reusable_config",
-                                "(google.api.method_signature)": "parent,reusable_config,reusable_config_id",
-                                "(google.longrunning.operation_info).response_type": "ReusableConfig",
-                                "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
-                              }
-                            },
-                            "DeleteReusableConfig": {
-                              "requestType": "DeleteReusableConfigRequest",
-                              "responseType": "google.longrunning.Operation",
-                              "options": {
-                                "(google.api.http).delete": "/v1beta1/{name=projects/*/locations/*/reusableConfigs/*}",
-                                "(google.api.method_signature)": "name",
-                                "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
-                                "(google.longrunning.operation_info).metadata_type": "google.cloud.security.privateca.v1beta1.OperationMetadata"
-                              }
-                            },
                             "GetReusableConfig": {
                               "requestType": "GetReusableConfigRequest",
                               "responseType": "ReusableConfig",
@@ -1368,17 +1341,6 @@
                               "options": {
                                 "(google.api.http).get": "/v1beta1/{parent=projects/*/locations/*}/reusableConfigs",
                                 "(google.api.method_signature)": "parent"
-                              }
-                            },
-                            "UpdateReusableConfig": {
-                              "requestType": "UpdateReusableConfigRequest",
-                              "responseType": "google.longrunning.Operation",
-                              "options": {
-                                "(google.api.http).patch": "/v1beta1/{reusable_config.name=projects/*/locations/*/reusableConfigs/*}",
-                                "(google.api.http).body": "reusable_config",
-                                "(google.api.method_signature)": "reusable_config,update_mask",
-                                "(google.longrunning.operation_info).response_type": "ReusableConfig",
-                                "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
                               }
                             }
                           }
@@ -1797,39 +1759,6 @@
                             }
                           }
                         },
-                        "CreateCertificateRevocationListRequest": {
-                          "fields": {
-                            "parent": {
-                              "type": "string",
-                              "id": 1,
-                              "options": {
-                                "(google.api.field_behavior)": "REQUIRED",
-                                "(google.api.resource_reference).type": "privateca.googleapis.com/CertificateAuthority"
-                              }
-                            },
-                            "certificateRevocationListId": {
-                              "type": "string",
-                              "id": 2,
-                              "options": {
-                                "(google.api.field_behavior)": "REQUIRED"
-                              }
-                            },
-                            "certificateRevocationList": {
-                              "type": "CertificateRevocationList",
-                              "id": 3,
-                              "options": {
-                                "(google.api.field_behavior)": "REQUIRED"
-                              }
-                            },
-                            "requestId": {
-                              "type": "string",
-                              "id": 4,
-                              "options": {
-                                "(google.api.field_behavior)": "OPTIONAL"
-                              }
-                            }
-                          }
-                        },
                         "GetCertificateRevocationListRequest": {
                           "fields": {
                             "name": {
@@ -1925,58 +1854,6 @@
                             }
                           }
                         },
-                        "CreateReusableConfigRequest": {
-                          "fields": {
-                            "parent": {
-                              "type": "string",
-                              "id": 1,
-                              "options": {
-                                "(google.api.field_behavior)": "REQUIRED",
-                                "(google.api.resource_reference).type": "locations.googleapis.com/Location"
-                              }
-                            },
-                            "reusableConfigId": {
-                              "type": "string",
-                              "id": 2,
-                              "options": {
-                                "(google.api.field_behavior)": "REQUIRED"
-                              }
-                            },
-                            "reusableConfig": {
-                              "type": "ReusableConfig",
-                              "id": 3,
-                              "options": {
-                                "(google.api.field_behavior)": "REQUIRED"
-                              }
-                            },
-                            "requestId": {
-                              "type": "string",
-                              "id": 4,
-                              "options": {
-                                "(google.api.field_behavior)": "OPTIONAL"
-                              }
-                            }
-                          }
-                        },
-                        "DeleteReusableConfigRequest": {
-                          "fields": {
-                            "name": {
-                              "type": "string",
-                              "id": 1,
-                              "options": {
-                                "(google.api.field_behavior)": "REQUIRED",
-                                "(google.api.resource_reference).type": "privateca.googleapis.com/ReusableConfig"
-                              }
-                            },
-                            "requestId": {
-                              "type": "string",
-                              "id": 2,
-                              "options": {
-                                "(google.api.field_behavior)": "OPTIONAL"
-                              }
-                            }
-                          }
-                        },
                         "GetReusableConfigRequest": {
                           "fields": {
                             "name": {
@@ -2044,31 +1921,6 @@
                               "rule": "repeated",
                               "type": "string",
                               "id": 3
-                            }
-                          }
-                        },
-                        "UpdateReusableConfigRequest": {
-                          "fields": {
-                            "reusableConfig": {
-                              "type": "ReusableConfig",
-                              "id": 1,
-                              "options": {
-                                "(google.api.field_behavior)": "REQUIRED"
-                              }
-                            },
-                            "updateMask": {
-                              "type": "google.protobuf.FieldMask",
-                              "id": 2,
-                              "options": {
-                                "(google.api.field_behavior)": "REQUIRED"
-                              }
-                            },
-                            "requestId": {
-                              "type": "string",
-                              "id": 3,
-                              "options": {
-                                "(google.api.field_behavior)": "OPTIONAL"
-                              }
                             }
                           }
                         },

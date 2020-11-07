@@ -978,9 +978,12 @@ export namespace google {
                         /** SignHashAlgorithm enum. */
                         enum SignHashAlgorithm {
                             SIGN_HASH_ALGORITHM_UNSPECIFIED = 0,
-                            RSA_PSS_2048_SHA_256 = 1,
-                            RSA_PSS_3072_SHA_256 = 2,
-                            RSA_PSS_4096_SHA_256 = 3,
+                            RSA_PSS_2048_SHA256 = 1,
+                            RSA_PSS_3072_SHA256 = 2,
+                            RSA_PSS_4096_SHA256 = 3,
+                            RSA_PKCS1_2048_SHA256 = 6,
+                            RSA_PKCS1_3072_SHA256 = 7,
+                            RSA_PKCS1_4096_SHA256 = 8,
                             EC_P256_SHA256 = 4,
                             EC_P384_SHA384 = 5
                         }
@@ -3905,20 +3908,6 @@ export namespace google {
                         public updateCertificateAuthority(request: google.cloud.security.privateca.v1beta1.IUpdateCertificateAuthorityRequest): Promise<google.longrunning.Operation>;
 
                         /**
-                         * Calls CreateCertificateRevocationList.
-                         * @param request CreateCertificateRevocationListRequest message or plain object
-                         * @param callback Node-style callback called with the error, if any, and Operation
-                         */
-                        public createCertificateRevocationList(request: google.cloud.security.privateca.v1beta1.ICreateCertificateRevocationListRequest, callback: google.cloud.security.privateca.v1beta1.CertificateAuthorityService.CreateCertificateRevocationListCallback): void;
-
-                        /**
-                         * Calls CreateCertificateRevocationList.
-                         * @param request CreateCertificateRevocationListRequest message or plain object
-                         * @returns Promise
-                         */
-                        public createCertificateRevocationList(request: google.cloud.security.privateca.v1beta1.ICreateCertificateRevocationListRequest): Promise<google.longrunning.Operation>;
-
-                        /**
                          * Calls GetCertificateRevocationList.
                          * @param request GetCertificateRevocationListRequest message or plain object
                          * @param callback Node-style callback called with the error, if any, and CertificateRevocationList
@@ -3961,34 +3950,6 @@ export namespace google {
                         public updateCertificateRevocationList(request: google.cloud.security.privateca.v1beta1.IUpdateCertificateRevocationListRequest): Promise<google.longrunning.Operation>;
 
                         /**
-                         * Calls CreateReusableConfig.
-                         * @param request CreateReusableConfigRequest message or plain object
-                         * @param callback Node-style callback called with the error, if any, and Operation
-                         */
-                        public createReusableConfig(request: google.cloud.security.privateca.v1beta1.ICreateReusableConfigRequest, callback: google.cloud.security.privateca.v1beta1.CertificateAuthorityService.CreateReusableConfigCallback): void;
-
-                        /**
-                         * Calls CreateReusableConfig.
-                         * @param request CreateReusableConfigRequest message or plain object
-                         * @returns Promise
-                         */
-                        public createReusableConfig(request: google.cloud.security.privateca.v1beta1.ICreateReusableConfigRequest): Promise<google.longrunning.Operation>;
-
-                        /**
-                         * Calls DeleteReusableConfig.
-                         * @param request DeleteReusableConfigRequest message or plain object
-                         * @param callback Node-style callback called with the error, if any, and Operation
-                         */
-                        public deleteReusableConfig(request: google.cloud.security.privateca.v1beta1.IDeleteReusableConfigRequest, callback: google.cloud.security.privateca.v1beta1.CertificateAuthorityService.DeleteReusableConfigCallback): void;
-
-                        /**
-                         * Calls DeleteReusableConfig.
-                         * @param request DeleteReusableConfigRequest message or plain object
-                         * @returns Promise
-                         */
-                        public deleteReusableConfig(request: google.cloud.security.privateca.v1beta1.IDeleteReusableConfigRequest): Promise<google.longrunning.Operation>;
-
-                        /**
                          * Calls GetReusableConfig.
                          * @param request GetReusableConfigRequest message or plain object
                          * @param callback Node-style callback called with the error, if any, and ReusableConfig
@@ -4015,20 +3976,6 @@ export namespace google {
                          * @returns Promise
                          */
                         public listReusableConfigs(request: google.cloud.security.privateca.v1beta1.IListReusableConfigsRequest): Promise<google.cloud.security.privateca.v1beta1.ListReusableConfigsResponse>;
-
-                        /**
-                         * Calls UpdateReusableConfig.
-                         * @param request UpdateReusableConfigRequest message or plain object
-                         * @param callback Node-style callback called with the error, if any, and Operation
-                         */
-                        public updateReusableConfig(request: google.cloud.security.privateca.v1beta1.IUpdateReusableConfigRequest, callback: google.cloud.security.privateca.v1beta1.CertificateAuthorityService.UpdateReusableConfigCallback): void;
-
-                        /**
-                         * Calls UpdateReusableConfig.
-                         * @param request UpdateReusableConfigRequest message or plain object
-                         * @returns Promise
-                         */
-                        public updateReusableConfig(request: google.cloud.security.privateca.v1beta1.IUpdateReusableConfigRequest): Promise<google.longrunning.Operation>;
                     }
 
                     namespace CertificateAuthorityService {
@@ -4139,13 +4086,6 @@ export namespace google {
                         type UpdateCertificateAuthorityCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
 
                         /**
-                         * Callback as used by {@link google.cloud.security.privateca.v1beta1.CertificateAuthorityService#createCertificateRevocationList}.
-                         * @param error Error, if any
-                         * @param [response] Operation
-                         */
-                        type CreateCertificateRevocationListCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
-
-                        /**
                          * Callback as used by {@link google.cloud.security.privateca.v1beta1.CertificateAuthorityService#getCertificateRevocationList}.
                          * @param error Error, if any
                          * @param [response] CertificateRevocationList
@@ -4167,20 +4107,6 @@ export namespace google {
                         type UpdateCertificateRevocationListCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
 
                         /**
-                         * Callback as used by {@link google.cloud.security.privateca.v1beta1.CertificateAuthorityService#createReusableConfig}.
-                         * @param error Error, if any
-                         * @param [response] Operation
-                         */
-                        type CreateReusableConfigCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
-
-                        /**
-                         * Callback as used by {@link google.cloud.security.privateca.v1beta1.CertificateAuthorityService#deleteReusableConfig}.
-                         * @param error Error, if any
-                         * @param [response] Operation
-                         */
-                        type DeleteReusableConfigCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
-
-                        /**
                          * Callback as used by {@link google.cloud.security.privateca.v1beta1.CertificateAuthorityService#getReusableConfig}.
                          * @param error Error, if any
                          * @param [response] ReusableConfig
@@ -4193,13 +4119,6 @@ export namespace google {
                          * @param [response] ListReusableConfigsResponse
                          */
                         type ListReusableConfigsCallback = (error: (Error|null), response?: google.cloud.security.privateca.v1beta1.ListReusableConfigsResponse) => void;
-
-                        /**
-                         * Callback as used by {@link google.cloud.security.privateca.v1beta1.CertificateAuthorityService#updateReusableConfig}.
-                         * @param error Error, if any
-                         * @param [response] Operation
-                         */
-                        type UpdateReusableConfigCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
                     }
 
                     /** Properties of a CreateCertificateRequest. */
@@ -6008,114 +5927,6 @@ export namespace google {
                         public toJSON(): { [k: string]: any };
                     }
 
-                    /** Properties of a CreateCertificateRevocationListRequest. */
-                    interface ICreateCertificateRevocationListRequest {
-
-                        /** CreateCertificateRevocationListRequest parent */
-                        parent?: (string|null);
-
-                        /** CreateCertificateRevocationListRequest certificateRevocationListId */
-                        certificateRevocationListId?: (string|null);
-
-                        /** CreateCertificateRevocationListRequest certificateRevocationList */
-                        certificateRevocationList?: (google.cloud.security.privateca.v1beta1.ICertificateRevocationList|null);
-
-                        /** CreateCertificateRevocationListRequest requestId */
-                        requestId?: (string|null);
-                    }
-
-                    /** Represents a CreateCertificateRevocationListRequest. */
-                    class CreateCertificateRevocationListRequest implements ICreateCertificateRevocationListRequest {
-
-                        /**
-                         * Constructs a new CreateCertificateRevocationListRequest.
-                         * @param [properties] Properties to set
-                         */
-                        constructor(properties?: google.cloud.security.privateca.v1beta1.ICreateCertificateRevocationListRequest);
-
-                        /** CreateCertificateRevocationListRequest parent. */
-                        public parent: string;
-
-                        /** CreateCertificateRevocationListRequest certificateRevocationListId. */
-                        public certificateRevocationListId: string;
-
-                        /** CreateCertificateRevocationListRequest certificateRevocationList. */
-                        public certificateRevocationList?: (google.cloud.security.privateca.v1beta1.ICertificateRevocationList|null);
-
-                        /** CreateCertificateRevocationListRequest requestId. */
-                        public requestId: string;
-
-                        /**
-                         * Creates a new CreateCertificateRevocationListRequest instance using the specified properties.
-                         * @param [properties] Properties to set
-                         * @returns CreateCertificateRevocationListRequest instance
-                         */
-                        public static create(properties?: google.cloud.security.privateca.v1beta1.ICreateCertificateRevocationListRequest): google.cloud.security.privateca.v1beta1.CreateCertificateRevocationListRequest;
-
-                        /**
-                         * Encodes the specified CreateCertificateRevocationListRequest message. Does not implicitly {@link google.cloud.security.privateca.v1beta1.CreateCertificateRevocationListRequest.verify|verify} messages.
-                         * @param message CreateCertificateRevocationListRequest message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encode(message: google.cloud.security.privateca.v1beta1.ICreateCertificateRevocationListRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Encodes the specified CreateCertificateRevocationListRequest message, length delimited. Does not implicitly {@link google.cloud.security.privateca.v1beta1.CreateCertificateRevocationListRequest.verify|verify} messages.
-                         * @param message CreateCertificateRevocationListRequest message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encodeDelimited(message: google.cloud.security.privateca.v1beta1.ICreateCertificateRevocationListRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Decodes a CreateCertificateRevocationListRequest message from the specified reader or buffer.
-                         * @param reader Reader or buffer to decode from
-                         * @param [length] Message length if known beforehand
-                         * @returns CreateCertificateRevocationListRequest
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.security.privateca.v1beta1.CreateCertificateRevocationListRequest;
-
-                        /**
-                         * Decodes a CreateCertificateRevocationListRequest message from the specified reader or buffer, length delimited.
-                         * @param reader Reader or buffer to decode from
-                         * @returns CreateCertificateRevocationListRequest
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.security.privateca.v1beta1.CreateCertificateRevocationListRequest;
-
-                        /**
-                         * Verifies a CreateCertificateRevocationListRequest message.
-                         * @param message Plain object to verify
-                         * @returns `null` if valid, otherwise the reason why it is not
-                         */
-                        public static verify(message: { [k: string]: any }): (string|null);
-
-                        /**
-                         * Creates a CreateCertificateRevocationListRequest message from a plain object. Also converts values to their respective internal types.
-                         * @param object Plain object
-                         * @returns CreateCertificateRevocationListRequest
-                         */
-                        public static fromObject(object: { [k: string]: any }): google.cloud.security.privateca.v1beta1.CreateCertificateRevocationListRequest;
-
-                        /**
-                         * Creates a plain object from a CreateCertificateRevocationListRequest message. Also converts values to other types if specified.
-                         * @param message CreateCertificateRevocationListRequest
-                         * @param [options] Conversion options
-                         * @returns Plain object
-                         */
-                        public static toObject(message: google.cloud.security.privateca.v1beta1.CreateCertificateRevocationListRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                        /**
-                         * Converts this CreateCertificateRevocationListRequest to JSON.
-                         * @returns JSON object
-                         */
-                        public toJSON(): { [k: string]: any };
-                    }
-
                     /** Properties of a GetCertificateRevocationListRequest. */
                     interface IGetCertificateRevocationListRequest {
 
@@ -6524,210 +6335,6 @@ export namespace google {
                         public toJSON(): { [k: string]: any };
                     }
 
-                    /** Properties of a CreateReusableConfigRequest. */
-                    interface ICreateReusableConfigRequest {
-
-                        /** CreateReusableConfigRequest parent */
-                        parent?: (string|null);
-
-                        /** CreateReusableConfigRequest reusableConfigId */
-                        reusableConfigId?: (string|null);
-
-                        /** CreateReusableConfigRequest reusableConfig */
-                        reusableConfig?: (google.cloud.security.privateca.v1beta1.IReusableConfig|null);
-
-                        /** CreateReusableConfigRequest requestId */
-                        requestId?: (string|null);
-                    }
-
-                    /** Represents a CreateReusableConfigRequest. */
-                    class CreateReusableConfigRequest implements ICreateReusableConfigRequest {
-
-                        /**
-                         * Constructs a new CreateReusableConfigRequest.
-                         * @param [properties] Properties to set
-                         */
-                        constructor(properties?: google.cloud.security.privateca.v1beta1.ICreateReusableConfigRequest);
-
-                        /** CreateReusableConfigRequest parent. */
-                        public parent: string;
-
-                        /** CreateReusableConfigRequest reusableConfigId. */
-                        public reusableConfigId: string;
-
-                        /** CreateReusableConfigRequest reusableConfig. */
-                        public reusableConfig?: (google.cloud.security.privateca.v1beta1.IReusableConfig|null);
-
-                        /** CreateReusableConfigRequest requestId. */
-                        public requestId: string;
-
-                        /**
-                         * Creates a new CreateReusableConfigRequest instance using the specified properties.
-                         * @param [properties] Properties to set
-                         * @returns CreateReusableConfigRequest instance
-                         */
-                        public static create(properties?: google.cloud.security.privateca.v1beta1.ICreateReusableConfigRequest): google.cloud.security.privateca.v1beta1.CreateReusableConfigRequest;
-
-                        /**
-                         * Encodes the specified CreateReusableConfigRequest message. Does not implicitly {@link google.cloud.security.privateca.v1beta1.CreateReusableConfigRequest.verify|verify} messages.
-                         * @param message CreateReusableConfigRequest message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encode(message: google.cloud.security.privateca.v1beta1.ICreateReusableConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Encodes the specified CreateReusableConfigRequest message, length delimited. Does not implicitly {@link google.cloud.security.privateca.v1beta1.CreateReusableConfigRequest.verify|verify} messages.
-                         * @param message CreateReusableConfigRequest message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encodeDelimited(message: google.cloud.security.privateca.v1beta1.ICreateReusableConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Decodes a CreateReusableConfigRequest message from the specified reader or buffer.
-                         * @param reader Reader or buffer to decode from
-                         * @param [length] Message length if known beforehand
-                         * @returns CreateReusableConfigRequest
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.security.privateca.v1beta1.CreateReusableConfigRequest;
-
-                        /**
-                         * Decodes a CreateReusableConfigRequest message from the specified reader or buffer, length delimited.
-                         * @param reader Reader or buffer to decode from
-                         * @returns CreateReusableConfigRequest
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.security.privateca.v1beta1.CreateReusableConfigRequest;
-
-                        /**
-                         * Verifies a CreateReusableConfigRequest message.
-                         * @param message Plain object to verify
-                         * @returns `null` if valid, otherwise the reason why it is not
-                         */
-                        public static verify(message: { [k: string]: any }): (string|null);
-
-                        /**
-                         * Creates a CreateReusableConfigRequest message from a plain object. Also converts values to their respective internal types.
-                         * @param object Plain object
-                         * @returns CreateReusableConfigRequest
-                         */
-                        public static fromObject(object: { [k: string]: any }): google.cloud.security.privateca.v1beta1.CreateReusableConfigRequest;
-
-                        /**
-                         * Creates a plain object from a CreateReusableConfigRequest message. Also converts values to other types if specified.
-                         * @param message CreateReusableConfigRequest
-                         * @param [options] Conversion options
-                         * @returns Plain object
-                         */
-                        public static toObject(message: google.cloud.security.privateca.v1beta1.CreateReusableConfigRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                        /**
-                         * Converts this CreateReusableConfigRequest to JSON.
-                         * @returns JSON object
-                         */
-                        public toJSON(): { [k: string]: any };
-                    }
-
-                    /** Properties of a DeleteReusableConfigRequest. */
-                    interface IDeleteReusableConfigRequest {
-
-                        /** DeleteReusableConfigRequest name */
-                        name?: (string|null);
-
-                        /** DeleteReusableConfigRequest requestId */
-                        requestId?: (string|null);
-                    }
-
-                    /** Represents a DeleteReusableConfigRequest. */
-                    class DeleteReusableConfigRequest implements IDeleteReusableConfigRequest {
-
-                        /**
-                         * Constructs a new DeleteReusableConfigRequest.
-                         * @param [properties] Properties to set
-                         */
-                        constructor(properties?: google.cloud.security.privateca.v1beta1.IDeleteReusableConfigRequest);
-
-                        /** DeleteReusableConfigRequest name. */
-                        public name: string;
-
-                        /** DeleteReusableConfigRequest requestId. */
-                        public requestId: string;
-
-                        /**
-                         * Creates a new DeleteReusableConfigRequest instance using the specified properties.
-                         * @param [properties] Properties to set
-                         * @returns DeleteReusableConfigRequest instance
-                         */
-                        public static create(properties?: google.cloud.security.privateca.v1beta1.IDeleteReusableConfigRequest): google.cloud.security.privateca.v1beta1.DeleteReusableConfigRequest;
-
-                        /**
-                         * Encodes the specified DeleteReusableConfigRequest message. Does not implicitly {@link google.cloud.security.privateca.v1beta1.DeleteReusableConfigRequest.verify|verify} messages.
-                         * @param message DeleteReusableConfigRequest message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encode(message: google.cloud.security.privateca.v1beta1.IDeleteReusableConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Encodes the specified DeleteReusableConfigRequest message, length delimited. Does not implicitly {@link google.cloud.security.privateca.v1beta1.DeleteReusableConfigRequest.verify|verify} messages.
-                         * @param message DeleteReusableConfigRequest message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encodeDelimited(message: google.cloud.security.privateca.v1beta1.IDeleteReusableConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Decodes a DeleteReusableConfigRequest message from the specified reader or buffer.
-                         * @param reader Reader or buffer to decode from
-                         * @param [length] Message length if known beforehand
-                         * @returns DeleteReusableConfigRequest
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.security.privateca.v1beta1.DeleteReusableConfigRequest;
-
-                        /**
-                         * Decodes a DeleteReusableConfigRequest message from the specified reader or buffer, length delimited.
-                         * @param reader Reader or buffer to decode from
-                         * @returns DeleteReusableConfigRequest
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.security.privateca.v1beta1.DeleteReusableConfigRequest;
-
-                        /**
-                         * Verifies a DeleteReusableConfigRequest message.
-                         * @param message Plain object to verify
-                         * @returns `null` if valid, otherwise the reason why it is not
-                         */
-                        public static verify(message: { [k: string]: any }): (string|null);
-
-                        /**
-                         * Creates a DeleteReusableConfigRequest message from a plain object. Also converts values to their respective internal types.
-                         * @param object Plain object
-                         * @returns DeleteReusableConfigRequest
-                         */
-                        public static fromObject(object: { [k: string]: any }): google.cloud.security.privateca.v1beta1.DeleteReusableConfigRequest;
-
-                        /**
-                         * Creates a plain object from a DeleteReusableConfigRequest message. Also converts values to other types if specified.
-                         * @param message DeleteReusableConfigRequest
-                         * @param [options] Conversion options
-                         * @returns Plain object
-                         */
-                        public static toObject(message: google.cloud.security.privateca.v1beta1.DeleteReusableConfigRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                        /**
-                         * Converts this DeleteReusableConfigRequest to JSON.
-                         * @returns JSON object
-                         */
-                        public toJSON(): { [k: string]: any };
-                    }
-
                     /** Properties of a GetReusableConfigRequest. */
                     interface IGetReusableConfigRequest {
 
@@ -7029,108 +6636,6 @@ export namespace google {
 
                         /**
                          * Converts this ListReusableConfigsResponse to JSON.
-                         * @returns JSON object
-                         */
-                        public toJSON(): { [k: string]: any };
-                    }
-
-                    /** Properties of an UpdateReusableConfigRequest. */
-                    interface IUpdateReusableConfigRequest {
-
-                        /** UpdateReusableConfigRequest reusableConfig */
-                        reusableConfig?: (google.cloud.security.privateca.v1beta1.IReusableConfig|null);
-
-                        /** UpdateReusableConfigRequest updateMask */
-                        updateMask?: (google.protobuf.IFieldMask|null);
-
-                        /** UpdateReusableConfigRequest requestId */
-                        requestId?: (string|null);
-                    }
-
-                    /** Represents an UpdateReusableConfigRequest. */
-                    class UpdateReusableConfigRequest implements IUpdateReusableConfigRequest {
-
-                        /**
-                         * Constructs a new UpdateReusableConfigRequest.
-                         * @param [properties] Properties to set
-                         */
-                        constructor(properties?: google.cloud.security.privateca.v1beta1.IUpdateReusableConfigRequest);
-
-                        /** UpdateReusableConfigRequest reusableConfig. */
-                        public reusableConfig?: (google.cloud.security.privateca.v1beta1.IReusableConfig|null);
-
-                        /** UpdateReusableConfigRequest updateMask. */
-                        public updateMask?: (google.protobuf.IFieldMask|null);
-
-                        /** UpdateReusableConfigRequest requestId. */
-                        public requestId: string;
-
-                        /**
-                         * Creates a new UpdateReusableConfigRequest instance using the specified properties.
-                         * @param [properties] Properties to set
-                         * @returns UpdateReusableConfigRequest instance
-                         */
-                        public static create(properties?: google.cloud.security.privateca.v1beta1.IUpdateReusableConfigRequest): google.cloud.security.privateca.v1beta1.UpdateReusableConfigRequest;
-
-                        /**
-                         * Encodes the specified UpdateReusableConfigRequest message. Does not implicitly {@link google.cloud.security.privateca.v1beta1.UpdateReusableConfigRequest.verify|verify} messages.
-                         * @param message UpdateReusableConfigRequest message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encode(message: google.cloud.security.privateca.v1beta1.IUpdateReusableConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Encodes the specified UpdateReusableConfigRequest message, length delimited. Does not implicitly {@link google.cloud.security.privateca.v1beta1.UpdateReusableConfigRequest.verify|verify} messages.
-                         * @param message UpdateReusableConfigRequest message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encodeDelimited(message: google.cloud.security.privateca.v1beta1.IUpdateReusableConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Decodes an UpdateReusableConfigRequest message from the specified reader or buffer.
-                         * @param reader Reader or buffer to decode from
-                         * @param [length] Message length if known beforehand
-                         * @returns UpdateReusableConfigRequest
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.security.privateca.v1beta1.UpdateReusableConfigRequest;
-
-                        /**
-                         * Decodes an UpdateReusableConfigRequest message from the specified reader or buffer, length delimited.
-                         * @param reader Reader or buffer to decode from
-                         * @returns UpdateReusableConfigRequest
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.security.privateca.v1beta1.UpdateReusableConfigRequest;
-
-                        /**
-                         * Verifies an UpdateReusableConfigRequest message.
-                         * @param message Plain object to verify
-                         * @returns `null` if valid, otherwise the reason why it is not
-                         */
-                        public static verify(message: { [k: string]: any }): (string|null);
-
-                        /**
-                         * Creates an UpdateReusableConfigRequest message from a plain object. Also converts values to their respective internal types.
-                         * @param object Plain object
-                         * @returns UpdateReusableConfigRequest
-                         */
-                        public static fromObject(object: { [k: string]: any }): google.cloud.security.privateca.v1beta1.UpdateReusableConfigRequest;
-
-                        /**
-                         * Creates a plain object from an UpdateReusableConfigRequest message. Also converts values to other types if specified.
-                         * @param message UpdateReusableConfigRequest
-                         * @param [options] Conversion options
-                         * @returns Plain object
-                         */
-                        public static toObject(message: google.cloud.security.privateca.v1beta1.UpdateReusableConfigRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                        /**
-                         * Converts this UpdateReusableConfigRequest to JSON.
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };

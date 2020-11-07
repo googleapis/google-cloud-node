@@ -30,12 +30,12 @@ for version in versions:
     version,
     bazel_target=f"//google/cloud/security/privateca/{version}:security-privateca-{version}-nodejs"
   )
-  s.copy(library, excludes=["package.json", "README.md"])
+  s.copy(library, excludes=["package.json", "README.md", "linkinator.config.json"])
 
 # Copy common templates
 common_templates = gcp.CommonTemplates()
 templates = common_templates.node_library(
     source_location='build/src', versions=['v1beta1'])
-s.copy(templates, excludes=["README.md", "package.json"])
+s.copy(templates, excludes=["README.md", "package.json", "linkinator.config.json"])
 
 node.postprocess_gapic_library()

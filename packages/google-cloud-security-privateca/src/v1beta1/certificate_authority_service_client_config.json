@@ -100,11 +100,6 @@
           "retry_codes_name": "unknown_deadline_exceeded_unavailable",
           "retry_params_name": "default"
         },
-        "CreateCertificateRevocationList": {
-          "timeout_millis": 60000,
-          "retry_codes_name": "unknown_deadline_exceeded_unavailable",
-          "retry_params_name": "default"
-        },
         "GetCertificateRevocationList": {
           "timeout_millis": 60000,
           "retry_codes_name": "unknown_deadline_exceeded_unavailable",
@@ -120,27 +115,12 @@
           "retry_codes_name": "unknown_deadline_exceeded_unavailable",
           "retry_params_name": "default"
         },
-        "CreateReusableConfig": {
-          "timeout_millis": 60000,
-          "retry_codes_name": "unknown_deadline_exceeded_unavailable",
-          "retry_params_name": "default"
-        },
-        "DeleteReusableConfig": {
-          "timeout_millis": 60000,
-          "retry_codes_name": "unknown_deadline_exceeded_unavailable",
-          "retry_params_name": "default"
-        },
         "GetReusableConfig": {
           "timeout_millis": 60000,
           "retry_codes_name": "unknown_deadline_exceeded_unavailable",
           "retry_params_name": "default"
         },
         "ListReusableConfigs": {
-          "timeout_millis": 60000,
-          "retry_codes_name": "unknown_deadline_exceeded_unavailable",
-          "retry_params_name": "default"
-        },
-        "UpdateReusableConfig": {
           "timeout_millis": 60000,
           "retry_codes_name": "unknown_deadline_exceeded_unavailable",
           "retry_params_name": "default"

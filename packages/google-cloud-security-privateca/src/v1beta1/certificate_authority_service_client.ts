@@ -63,8 +63,10 @@ export class CertificateAuthorityServiceClient {
   /**
    * Construct an instance of CertificateAuthorityServiceClient.
    *
-   * @param {object} [options] - The configuration object. See the subsequent
-   *   parameters for more details.
+   * @param {object} [options] - The configuration object.
+   * The options accepted by the constructor are described in detail
+   * in [this document](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#creating-the-client-instance).
+   * The common options are:
    * @param {object} [options.credentials] - Credentials object.
    * @param {string} [options.credentials.client_email]
    * @param {string} [options.credentials.private_key]
@@ -84,44 +86,34 @@ export class CertificateAuthorityServiceClient {
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
+   * @param {gax.ClientConfig} [options.clientConfig] - client configuration override.
+   *     TODO(@alexander-fenster): link to gax documentation.
+   * @param {boolean} fallback - Use HTTP fallback mode.
+   *     In fallback mode, a special browser-compatible transport implementation is used
+   *     instead of gRPC transport. In browser context (if the `window` object is defined)
+   *     the fallback mode is enabled automatically; set `options.fallback` to `false`
+   *     if you need to override this behavior.
    */
-
   constructor(opts?: ClientOptions) {
-    // Ensure that options include the service address and port.
+    // Ensure that options include all the required fields.
     const staticMembers = this
       .constructor as typeof CertificateAuthorityServiceClient;
     const servicePath =
-      opts && opts.servicePath
-        ? opts.servicePath
-        : opts && opts.apiEndpoint
-        ? opts.apiEndpoint
-        : staticMembers.servicePath;
-    const port = opts && opts.port ? opts.port : staticMembers.port;
+      opts?.servicePath || opts?.apiEndpoint || staticMembers.servicePath;
+    const port = opts?.port || staticMembers.port;
+    const clientConfig = opts?.clientConfig ?? {};
+    const fallback = opts?.fallback ?? typeof window !== 'undefined';
+    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
-    if (!opts) {
-      opts = {servicePath, port};
+    // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
+    if (servicePath !== staticMembers.servicePath && !('scopes' in opts)) {
+      opts['scopes'] = staticMembers.scopes;
     }
-    opts.servicePath = opts.servicePath || servicePath;
-    opts.port = opts.port || port;
 
-    // users can override the config from client side, like retry codes name.
-    // The detailed structure of the clientConfig can be found here: https://github.com/googleapis/gax-nodejs/blob/master/src/gax.ts#L546
-    // The way to override client config for Showcase API:
-    //
-    // const customConfig = {"interfaces": {"google.showcase.v1beta1.Echo": {"methods": {"Echo": {"retry_codes_name": "idempotent", "retry_params_name": "default"}}}}}
-    // const showcaseClient = new showcaseClient({ projectId, customConfig });
-    opts.clientConfig = opts.clientConfig || {};
-
-    // If we're running in browser, it's OK to omit `fallback` since
-    // google-gax has `browser` field in its `package.json`.
-    // For Electron (which does not respect `browser` field),
-    // pass `{fallback: true}` to the CertificateAuthorityServiceClient constructor.
+    // Choose either gRPC or proto-over-HTTP implementation of google-gax.
     this._gaxModule = opts.fallback ? gax.fallback : gax;
 
-    // Create a `gaxGrpc` object, with any grpc-specific options
-    // sent to the client.
-    opts.scopes = (this
-      .constructor as typeof CertificateAuthorityServiceClient).scopes;
+    // Create a `gaxGrpc` object, with any grpc-specific options sent to the client.
     this._gaxGrpc = new this._gaxModule.GrpcClient(opts);
 
     // Save options to use in initialize() method.
@@ -129,6 +121,11 @@ export class CertificateAuthorityServiceClient {
 
     // Save the auth object to the client, for use by other methods.
     this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+
+    // Set the default scopes in auth client if needed.
+    if (servicePath === staticMembers.servicePath) {
+      this.auth.defaultScopes = staticMembers.scopes;
+    }
 
     // Determine the client header string.
     const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
@@ -266,34 +263,10 @@ export class CertificateAuthorityServiceClient {
     const updateCertificateAuthorityMetadata = protoFilesRoot.lookup(
       '.google.cloud.security.privateca.v1beta1.OperationMetadata'
     ) as gax.protobuf.Type;
-    const createCertificateRevocationListResponse = protoFilesRoot.lookup(
-      '.google.cloud.security.privateca.v1beta1.CertificateRevocationList'
-    ) as gax.protobuf.Type;
-    const createCertificateRevocationListMetadata = protoFilesRoot.lookup(
-      '.google.cloud.security.privateca.v1beta1.OperationMetadata'
-    ) as gax.protobuf.Type;
     const updateCertificateRevocationListResponse = protoFilesRoot.lookup(
       '.google.cloud.security.privateca.v1beta1.CertificateRevocationList'
     ) as gax.protobuf.Type;
     const updateCertificateRevocationListMetadata = protoFilesRoot.lookup(
-      '.google.cloud.security.privateca.v1beta1.OperationMetadata'
-    ) as gax.protobuf.Type;
-    const createReusableConfigResponse = protoFilesRoot.lookup(
-      '.google.cloud.security.privateca.v1beta1.ReusableConfig'
-    ) as gax.protobuf.Type;
-    const createReusableConfigMetadata = protoFilesRoot.lookup(
-      '.google.cloud.security.privateca.v1beta1.OperationMetadata'
-    ) as gax.protobuf.Type;
-    const deleteReusableConfigResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty'
-    ) as gax.protobuf.Type;
-    const deleteReusableConfigMetadata = protoFilesRoot.lookup(
-      '.google.cloud.security.privateca.v1beta1.OperationMetadata'
-    ) as gax.protobuf.Type;
-    const updateReusableConfigResponse = protoFilesRoot.lookup(
-      '.google.cloud.security.privateca.v1beta1.ReusableConfig'
-    ) as gax.protobuf.Type;
-    const updateReusableConfigMetadata = protoFilesRoot.lookup(
       '.google.cloud.security.privateca.v1beta1.OperationMetadata'
     ) as gax.protobuf.Type;
 
@@ -361,15 +334,6 @@ export class CertificateAuthorityServiceClient {
           updateCertificateAuthorityMetadata
         )
       ),
-      createCertificateRevocationList: new this._gaxModule.LongrunningDescriptor(
-        this.operationsClient,
-        createCertificateRevocationListResponse.decode.bind(
-          createCertificateRevocationListResponse
-        ),
-        createCertificateRevocationListMetadata.decode.bind(
-          createCertificateRevocationListMetadata
-        )
-      ),
       updateCertificateRevocationList: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         updateCertificateRevocationListResponse.decode.bind(
@@ -378,21 +342,6 @@ export class CertificateAuthorityServiceClient {
         updateCertificateRevocationListMetadata.decode.bind(
           updateCertificateRevocationListMetadata
         )
-      ),
-      createReusableConfig: new this._gaxModule.LongrunningDescriptor(
-        this.operationsClient,
-        createReusableConfigResponse.decode.bind(createReusableConfigResponse),
-        createReusableConfigMetadata.decode.bind(createReusableConfigMetadata)
-      ),
-      deleteReusableConfig: new this._gaxModule.LongrunningDescriptor(
-        this.operationsClient,
-        deleteReusableConfigResponse.decode.bind(deleteReusableConfigResponse),
-        deleteReusableConfigMetadata.decode.bind(deleteReusableConfigMetadata)
-      ),
-      updateReusableConfig: new this._gaxModule.LongrunningDescriptor(
-        this.operationsClient,
-        updateReusableConfigResponse.decode.bind(updateReusableConfigResponse),
-        updateReusableConfigMetadata.decode.bind(updateReusableConfigMetadata)
       ),
     };
 
@@ -458,15 +407,11 @@ export class CertificateAuthorityServiceClient {
       'restoreCertificateAuthority',
       'scheduleDeleteCertificateAuthority',
       'updateCertificateAuthority',
-      'createCertificateRevocationList',
       'getCertificateRevocationList',
       'listCertificateRevocationLists',
       'updateCertificateRevocationList',
-      'createReusableConfig',
-      'deleteReusableConfig',
       'getReusableConfig',
       'listReusableConfigs',
-      'updateReusableConfig',
     ];
     for (const methodName of certificateAuthorityServiceStubMethods) {
       const callPromise = this.certificateAuthorityServiceStub.then(
@@ -500,6 +445,7 @@ export class CertificateAuthorityServiceClient {
 
   /**
    * The DNS address for this API service.
+   * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
     return 'privateca.googleapis.com';
@@ -508,6 +454,7 @@ export class CertificateAuthorityServiceClient {
   /**
    * The DNS address for this API service - same as servicePath(),
    * exists for compatibility reasons.
+   * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
     return 'privateca.googleapis.com';
@@ -515,6 +462,7 @@ export class CertificateAuthorityServiceClient {
 
   /**
    * The port for this API service.
+   * @returns {number} The default port for this service.
    */
   static get port() {
     return 443;
@@ -523,6 +471,7 @@ export class CertificateAuthorityServiceClient {
   /**
    * The scopes needed to make gRPC calls for every method defined
    * in this service.
+   * @returns {string[]} List of default scopes.
    */
   static get scopes() {
     return ['https://www.googleapis.com/auth/cloud-platform'];
@@ -532,8 +481,7 @@ export class CertificateAuthorityServiceClient {
   getProjectId(callback: Callback<string, undefined, undefined>): void;
   /**
    * Return the project ID used by this class.
-   * @param {function(Error, string)} callback - the callback to
-   *   be called with the current project Id.
+   * @returns {Promise} A promise that resolves to string containing the project ID.
    */
   getProjectId(
     callback?: Callback<string, undefined, undefined>
@@ -594,7 +542,7 @@ export class CertificateAuthorityServiceClient {
    *   `projects/* /locations/* /certificateAuthorities/*`.
    * @param {string} [request.certificateId]
    *   Optional. It must be unique within a location and match the regular
-   *   expression `[a-zA-Z0-9-]{1,63}`. This field is required when using a
+   *   expression `[a-zA-Z0-9_-]{1,63}`. This field is required when using a
    *   {@link google.cloud.security.privateca.v1beta1.CertificateAuthority|CertificateAuthority} in the Enterprise {@link google.cloud.security.privateca.v1beta1.CertificateAuthority.Tier|CertificateAuthority.Tier},
    *   but is optional and its value is ignored otherwise.
    * @param {google.cloud.security.privateca.v1beta1.Certificate} request.certificate
@@ -617,7 +565,11 @@ export class CertificateAuthorityServiceClient {
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
    *   The first element of the array is an object representing [Certificate]{@link google.cloud.security.privateca.v1beta1.Certificate}.
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * const [response] = await client.createCertificate(request);
    */
   createCertificate(
     request: protos.google.cloud.security.privateca.v1beta1.ICreateCertificateRequest,
@@ -711,7 +663,11 @@ export class CertificateAuthorityServiceClient {
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
    *   The first element of the array is an object representing [Certificate]{@link google.cloud.security.privateca.v1beta1.Certificate}.
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * const [response] = await client.getCertificate(request);
    */
   getCertificate(
     request: protos.google.cloud.security.privateca.v1beta1.IGetCertificateRequest,
@@ -822,7 +778,11 @@ export class CertificateAuthorityServiceClient {
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
    *   The first element of the array is an object representing [Certificate]{@link google.cloud.security.privateca.v1beta1.Certificate}.
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * const [response] = await client.revokeCertificate(request);
    */
   revokeCertificate(
     request: protos.google.cloud.security.privateca.v1beta1.IRevokeCertificateRequest,
@@ -906,7 +866,8 @@ export class CertificateAuthorityServiceClient {
     >
   ): void;
   /**
-   * Update a {@link google.cloud.security.privateca.v1beta1.Certificate|Certificate}.
+   * Update a {@link google.cloud.security.privateca.v1beta1.Certificate|Certificate}. Currently, the only field you can update is the
+   * {@link google.cloud.security.privateca.v1beta1.Certificate.labels|labels} field.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -932,7 +893,11 @@ export class CertificateAuthorityServiceClient {
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
    *   The first element of the array is an object representing [Certificate]{@link google.cloud.security.privateca.v1beta1.Certificate}.
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * const [response] = await client.updateCertificate(request);
    */
   updateCertificate(
     request: protos.google.cloud.security.privateca.v1beta1.IUpdateCertificateRequest,
@@ -1033,7 +998,11 @@ export class CertificateAuthorityServiceClient {
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
    *   The first element of the array is an object representing [FetchCertificateAuthorityCsrResponse]{@link google.cloud.security.privateca.v1beta1.FetchCertificateAuthorityCsrResponse}.
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * const [response] = await client.fetchCertificateAuthorityCsr(request);
    */
   fetchCertificateAuthorityCsr(
     request: protos.google.cloud.security.privateca.v1beta1.IFetchCertificateAuthorityCsrRequest,
@@ -1132,7 +1101,11 @@ export class CertificateAuthorityServiceClient {
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
    *   The first element of the array is an object representing [CertificateAuthority]{@link google.cloud.security.privateca.v1beta1.CertificateAuthority}.
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * const [response] = await client.getCertificateAuthority(request);
    */
   getCertificateAuthority(
     request: protos.google.cloud.security.privateca.v1beta1.IGetCertificateAuthorityRequest,
@@ -1231,7 +1204,11 @@ export class CertificateAuthorityServiceClient {
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
    *   The first element of the array is an object representing [CertificateRevocationList]{@link google.cloud.security.privateca.v1beta1.CertificateRevocationList}.
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * const [response] = await client.getCertificateRevocationList(request);
    */
   getCertificateRevocationList(
     request: protos.google.cloud.security.privateca.v1beta1.IGetCertificateRevocationListRequest,
@@ -1329,7 +1306,11 @@ export class CertificateAuthorityServiceClient {
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
    *   The first element of the array is an object representing [ReusableConfig]{@link google.cloud.security.privateca.v1beta1.ReusableConfig}.
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * const [response] = await client.getReusableConfig(request);
    */
   getReusableConfig(
     request: protos.google.cloud.security.privateca.v1beta1.IGetReusableConfigRequest,
@@ -1451,8 +1432,15 @@ export class CertificateAuthorityServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Operation]{@link google.longrunning.Operation}.
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example
+   * const [operation] = await client.activateCertificateAuthority(request);
+   * const [response] = await operation.promise();
    */
   activateCertificateAuthority(
     request: protos.google.cloud.security.privateca.v1beta1.IActivateCertificateAuthorityRequest,
@@ -1508,18 +1496,19 @@ export class CertificateAuthorityServiceClient {
     );
   }
   /**
-   * Check the status of the long running operation returned by the activateCertificateAuthority() method.
+   * Check the status of the long running operation returned by `activateCertificateAuthority()`.
    * @param {String} name
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *
-   * @example:
-   *   const decodedOperation = await checkActivateCertificateAuthorityProgress(name);
-   *   console.log(decodedOperation.result);
-   *   console.log(decodedOperation.done);
-   *   console.log(decodedOperation.metadata);
-   *
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example
+   * const decodedOperation = await checkActivateCertificateAuthorityProgress(name);
+   * console.log(decodedOperation.result);
+   * console.log(decodedOperation.done);
+   * console.log(decodedOperation.metadata);
    */
   async checkActivateCertificateAuthorityProgress(
     name: string
@@ -1590,7 +1579,7 @@ export class CertificateAuthorityServiceClient {
    *   `projects/* /locations/*`.
    * @param {string} request.certificateAuthorityId
    *   Required. It must be unique within a location and match the regular
-   *   expression `[a-zA-Z0-9-]{1,63}`
+   *   expression `[a-zA-Z0-9_-]{1,63}`
    * @param {google.cloud.security.privateca.v1beta1.CertificateAuthority} request.certificateAuthority
    *   Required. A {@link google.cloud.security.privateca.v1beta1.CertificateAuthority|CertificateAuthority} with initial field values.
    * @param {string} [request.requestId]
@@ -1610,8 +1599,15 @@ export class CertificateAuthorityServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Operation]{@link google.longrunning.Operation}.
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example
+   * const [operation] = await client.createCertificateAuthority(request);
+   * const [response] = await operation.promise();
    */
   createCertificateAuthority(
     request: protos.google.cloud.security.privateca.v1beta1.ICreateCertificateAuthorityRequest,
@@ -1667,18 +1663,19 @@ export class CertificateAuthorityServiceClient {
     );
   }
   /**
-   * Check the status of the long running operation returned by the createCertificateAuthority() method.
+   * Check the status of the long running operation returned by `createCertificateAuthority()`.
    * @param {String} name
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *
-   * @example:
-   *   const decodedOperation = await checkCreateCertificateAuthorityProgress(name);
-   *   console.log(decodedOperation.result);
-   *   console.log(decodedOperation.done);
-   *   console.log(decodedOperation.metadata);
-   *
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example
+   * const decodedOperation = await checkCreateCertificateAuthorityProgress(name);
+   * console.log(decodedOperation.result);
+   * console.log(decodedOperation.done);
+   * console.log(decodedOperation.metadata);
    */
   async checkCreateCertificateAuthorityProgress(
     name: string
@@ -1763,8 +1760,15 @@ export class CertificateAuthorityServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Operation]{@link google.longrunning.Operation}.
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example
+   * const [operation] = await client.disableCertificateAuthority(request);
+   * const [response] = await operation.promise();
    */
   disableCertificateAuthority(
     request: protos.google.cloud.security.privateca.v1beta1.IDisableCertificateAuthorityRequest,
@@ -1820,18 +1824,19 @@ export class CertificateAuthorityServiceClient {
     );
   }
   /**
-   * Check the status of the long running operation returned by the disableCertificateAuthority() method.
+   * Check the status of the long running operation returned by `disableCertificateAuthority()`.
    * @param {String} name
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *
-   * @example:
-   *   const decodedOperation = await checkDisableCertificateAuthorityProgress(name);
-   *   console.log(decodedOperation.result);
-   *   console.log(decodedOperation.done);
-   *   console.log(decodedOperation.metadata);
-   *
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example
+   * const decodedOperation = await checkDisableCertificateAuthorityProgress(name);
+   * console.log(decodedOperation.result);
+   * console.log(decodedOperation.done);
+   * console.log(decodedOperation.metadata);
    */
   async checkDisableCertificateAuthorityProgress(
     name: string
@@ -1916,8 +1921,15 @@ export class CertificateAuthorityServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Operation]{@link google.longrunning.Operation}.
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example
+   * const [operation] = await client.enableCertificateAuthority(request);
+   * const [response] = await operation.promise();
    */
   enableCertificateAuthority(
     request: protos.google.cloud.security.privateca.v1beta1.IEnableCertificateAuthorityRequest,
@@ -1973,18 +1985,19 @@ export class CertificateAuthorityServiceClient {
     );
   }
   /**
-   * Check the status of the long running operation returned by the enableCertificateAuthority() method.
+   * Check the status of the long running operation returned by `enableCertificateAuthority()`.
    * @param {String} name
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *
-   * @example:
-   *   const decodedOperation = await checkEnableCertificateAuthorityProgress(name);
-   *   console.log(decodedOperation.result);
-   *   console.log(decodedOperation.done);
-   *   console.log(decodedOperation.metadata);
-   *
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example
+   * const decodedOperation = await checkEnableCertificateAuthorityProgress(name);
+   * console.log(decodedOperation.result);
+   * console.log(decodedOperation.done);
+   * console.log(decodedOperation.metadata);
    */
   async checkEnableCertificateAuthorityProgress(
     name: string
@@ -2069,8 +2082,15 @@ export class CertificateAuthorityServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Operation]{@link google.longrunning.Operation}.
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example
+   * const [operation] = await client.restoreCertificateAuthority(request);
+   * const [response] = await operation.promise();
    */
   restoreCertificateAuthority(
     request: protos.google.cloud.security.privateca.v1beta1.IRestoreCertificateAuthorityRequest,
@@ -2126,18 +2146,19 @@ export class CertificateAuthorityServiceClient {
     );
   }
   /**
-   * Check the status of the long running operation returned by the restoreCertificateAuthority() method.
+   * Check the status of the long running operation returned by `restoreCertificateAuthority()`.
    * @param {String} name
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *
-   * @example:
-   *   const decodedOperation = await checkRestoreCertificateAuthorityProgress(name);
-   *   console.log(decodedOperation.result);
-   *   console.log(decodedOperation.done);
-   *   console.log(decodedOperation.metadata);
-   *
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example
+   * const decodedOperation = await checkRestoreCertificateAuthorityProgress(name);
+   * console.log(decodedOperation.result);
+   * console.log(decodedOperation.done);
+   * console.log(decodedOperation.metadata);
    */
   async checkRestoreCertificateAuthorityProgress(
     name: string
@@ -2222,8 +2243,15 @@ export class CertificateAuthorityServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Operation]{@link google.longrunning.Operation}.
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example
+   * const [operation] = await client.scheduleDeleteCertificateAuthority(request);
+   * const [response] = await operation.promise();
    */
   scheduleDeleteCertificateAuthority(
     request: protos.google.cloud.security.privateca.v1beta1.IScheduleDeleteCertificateAuthorityRequest,
@@ -2279,18 +2307,19 @@ export class CertificateAuthorityServiceClient {
     );
   }
   /**
-   * Check the status of the long running operation returned by the scheduleDeleteCertificateAuthority() method.
+   * Check the status of the long running operation returned by `scheduleDeleteCertificateAuthority()`.
    * @param {String} name
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *
-   * @example:
-   *   const decodedOperation = await checkScheduleDeleteCertificateAuthorityProgress(name);
-   *   console.log(decodedOperation.result);
-   *   console.log(decodedOperation.done);
-   *   console.log(decodedOperation.metadata);
-   *
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example
+   * const decodedOperation = await checkScheduleDeleteCertificateAuthorityProgress(name);
+   * console.log(decodedOperation.result);
+   * console.log(decodedOperation.done);
+   * console.log(decodedOperation.metadata);
    */
   async checkScheduleDeleteCertificateAuthorityProgress(
     name: string
@@ -2376,8 +2405,15 @@ export class CertificateAuthorityServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Operation]{@link google.longrunning.Operation}.
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example
+   * const [operation] = await client.updateCertificateAuthority(request);
+   * const [response] = await operation.promise();
    */
   updateCertificateAuthority(
     request: protos.google.cloud.security.privateca.v1beta1.IUpdateCertificateAuthorityRequest,
@@ -2433,18 +2469,19 @@ export class CertificateAuthorityServiceClient {
     );
   }
   /**
-   * Check the status of the long running operation returned by the updateCertificateAuthority() method.
+   * Check the status of the long running operation returned by `updateCertificateAuthority()`.
    * @param {String} name
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *
-   * @example:
-   *   const decodedOperation = await checkUpdateCertificateAuthorityProgress(name);
-   *   console.log(decodedOperation.result);
-   *   console.log(decodedOperation.done);
-   *   console.log(decodedOperation.metadata);
-   *
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example
+   * const decodedOperation = await checkUpdateCertificateAuthorityProgress(name);
+   * console.log(decodedOperation.result);
+   * console.log(decodedOperation.done);
+   * console.log(decodedOperation.metadata);
    */
   async checkUpdateCertificateAuthorityProgress(
     name: string
@@ -2465,166 +2502,6 @@ export class CertificateAuthorityServiceClient {
     );
     return decodeOperation as LROperation<
       protos.google.cloud.security.privateca.v1beta1.CertificateAuthority,
-      protos.google.cloud.security.privateca.v1beta1.OperationMetadata
-    >;
-  }
-  createCertificateRevocationList(
-    request: protos.google.cloud.security.privateca.v1beta1.ICreateCertificateRevocationListRequest,
-    options?: gax.CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.security.privateca.v1beta1.ICertificateRevocationList,
-        protos.google.cloud.security.privateca.v1beta1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined
-    ]
-  >;
-  createCertificateRevocationList(
-    request: protos.google.cloud.security.privateca.v1beta1.ICreateCertificateRevocationListRequest,
-    options: gax.CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.security.privateca.v1beta1.ICertificateRevocationList,
-        protos.google.cloud.security.privateca.v1beta1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createCertificateRevocationList(
-    request: protos.google.cloud.security.privateca.v1beta1.ICreateCertificateRevocationListRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.security.privateca.v1beta1.ICertificateRevocationList,
-        protos.google.cloud.security.privateca.v1beta1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  /**
-   * Create a new {@link google.cloud.security.privateca.v1beta1.CertificateRevocationList|CertificateRevocationList} in a given Project, Location
-   * for a particular {@link google.cloud.security.privateca.v1beta1.CertificateAuthority|CertificateAuthority}.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The resource name of the location and {@link google.cloud.security.privateca.v1beta1.CertificateAuthority|CertificateAuthority}
-   *   associated with the {@link google.cloud.security.privateca.v1beta1.CertificateRevocationList|CertificateRevocationList}, in the format
-   *   `projects/* /locations/* /certificateAuthorities/*`.
-   * @param {string} request.certificateRevocationListId
-   *   Required. It must be unique within a location and match the regular expression
-   *   `[a-zA-Z0-9-]{1,63}`
-   * @param {google.cloud.security.privateca.v1beta1.CertificateRevocationList} request.certificateRevocationList
-   *   Required. A {@link google.cloud.security.privateca.v1beta1.CertificateRevocationList|CertificateRevocationList} with initial field values.
-   * @param {string} [request.requestId]
-   *   Optional. An ID to identify requests. Specify a unique request ID so that if you must
-   *   retry your request, the server will know to ignore the request if it has
-   *   already been completed. The server will guarantee that for at least 60
-   *   minutes since the first request.
-   *
-   *   For example, consider a situation where you make an initial request and t
-   *   he request times out. If you make the request again with the same request
-   *   ID, the server can check if original operation with the same request ID
-   *   was received, and if so, will ignore the second request. This prevents
-   *   clients from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is
-   *   not supported (00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Operation]{@link google.longrunning.Operation}.
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
-   */
-  createCertificateRevocationList(
-    request: protos.google.cloud.security.privateca.v1beta1.ICreateCertificateRevocationListRequest,
-    optionsOrCallback?:
-      | gax.CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.security.privateca.v1beta1.ICertificateRevocationList,
-            protos.google.cloud.security.privateca.v1beta1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.security.privateca.v1beta1.ICertificateRevocationList,
-        protos.google.cloud.security.privateca.v1beta1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.security.privateca.v1beta1.ICertificateRevocationList,
-        protos.google.cloud.security.privateca.v1beta1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined
-    ]
-  > | void {
-    request = request || {};
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      parent: request.parent || '',
-    });
-    this.initialize();
-    return this.innerApiCalls.createCertificateRevocationList(
-      request,
-      options,
-      callback
-    );
-  }
-  /**
-   * Check the status of the long running operation returned by the createCertificateRevocationList() method.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *
-   * @example:
-   *   const decodedOperation = await checkCreateCertificateRevocationListProgress(name);
-   *   console.log(decodedOperation.result);
-   *   console.log(decodedOperation.done);
-   *   console.log(decodedOperation.metadata);
-   *
-   */
-  async checkCreateCertificateRevocationListProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.security.privateca.v1beta1.CertificateRevocationList,
-      protos.google.cloud.security.privateca.v1beta1.OperationMetadata
-    >
-  > {
-    const request = new operationsProtos.google.longrunning.GetOperationRequest(
-      {name}
-    );
-    const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new gax.Operation(
-      operation,
-      this.descriptors.longrunning.createCertificateRevocationList,
-      gax.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.security.privateca.v1beta1.CertificateRevocationList,
       protos.google.cloud.security.privateca.v1beta1.OperationMetadata
     >;
   }
@@ -2690,8 +2567,15 @@ export class CertificateAuthorityServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Operation]{@link google.longrunning.Operation}.
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example
+   * const [operation] = await client.updateCertificateRevocationList(request);
+   * const [response] = await operation.promise();
    */
   updateCertificateRevocationList(
     request: protos.google.cloud.security.privateca.v1beta1.IUpdateCertificateRevocationListRequest,
@@ -2748,18 +2632,19 @@ export class CertificateAuthorityServiceClient {
     );
   }
   /**
-   * Check the status of the long running operation returned by the updateCertificateRevocationList() method.
+   * Check the status of the long running operation returned by `updateCertificateRevocationList()`.
    * @param {String} name
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *
-   * @example:
-   *   const decodedOperation = await checkUpdateCertificateRevocationListProgress(name);
-   *   console.log(decodedOperation.result);
-   *   console.log(decodedOperation.done);
-   *   console.log(decodedOperation.metadata);
-   *
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example
+   * const decodedOperation = await checkUpdateCertificateRevocationListProgress(name);
+   * console.log(decodedOperation.result);
+   * console.log(decodedOperation.done);
+   * console.log(decodedOperation.metadata);
    */
   async checkUpdateCertificateRevocationListProgress(
     name: string
@@ -2780,460 +2665,6 @@ export class CertificateAuthorityServiceClient {
     );
     return decodeOperation as LROperation<
       protos.google.cloud.security.privateca.v1beta1.CertificateRevocationList,
-      protos.google.cloud.security.privateca.v1beta1.OperationMetadata
-    >;
-  }
-  createReusableConfig(
-    request: protos.google.cloud.security.privateca.v1beta1.ICreateReusableConfigRequest,
-    options?: gax.CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.security.privateca.v1beta1.IReusableConfig,
-        protos.google.cloud.security.privateca.v1beta1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined
-    ]
-  >;
-  createReusableConfig(
-    request: protos.google.cloud.security.privateca.v1beta1.ICreateReusableConfigRequest,
-    options: gax.CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.security.privateca.v1beta1.IReusableConfig,
-        protos.google.cloud.security.privateca.v1beta1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createReusableConfig(
-    request: protos.google.cloud.security.privateca.v1beta1.ICreateReusableConfigRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.security.privateca.v1beta1.IReusableConfig,
-        protos.google.cloud.security.privateca.v1beta1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  /**
-   * Create a new {@link google.cloud.security.privateca.v1beta1.ReusableConfig|ReusableConfig} in a given Project and Location.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The resource name of the location associated with the
-   *   {@link google.cloud.security.privateca.v1beta1.ReusableConfig|ReusableConfig}, in the format
-   *   `projects/* /locations/*`.
-   * @param {string} request.reusableConfigId
-   *   Required. It must be unique within a location and match the regular
-   *   expression `[a-zA-Z0-9-]{1,63}`
-   * @param {google.cloud.security.privateca.v1beta1.ReusableConfig} request.reusableConfig
-   *   Required. A {@link google.cloud.security.privateca.v1beta1.ReusableConfig|ReusableConfig} with initial field values.
-   * @param {string} [request.requestId]
-   *   Optional. An ID to identify requests. Specify a unique request ID so that if you must
-   *   retry your request, the server will know to ignore the request if it has
-   *   already been completed. The server will guarantee that for at least 60
-   *   minutes since the first request.
-   *
-   *   For example, consider a situation where you make an initial request and t
-   *   he request times out. If you make the request again with the same request
-   *   ID, the server can check if original operation with the same request ID
-   *   was received, and if so, will ignore the second request. This prevents
-   *   clients from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is
-   *   not supported (00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Operation]{@link google.longrunning.Operation}.
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
-   */
-  createReusableConfig(
-    request: protos.google.cloud.security.privateca.v1beta1.ICreateReusableConfigRequest,
-    optionsOrCallback?:
-      | gax.CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.security.privateca.v1beta1.IReusableConfig,
-            protos.google.cloud.security.privateca.v1beta1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.security.privateca.v1beta1.IReusableConfig,
-        protos.google.cloud.security.privateca.v1beta1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.security.privateca.v1beta1.IReusableConfig,
-        protos.google.cloud.security.privateca.v1beta1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined
-    ]
-  > | void {
-    request = request || {};
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      parent: request.parent || '',
-    });
-    this.initialize();
-    return this.innerApiCalls.createReusableConfig(request, options, callback);
-  }
-  /**
-   * Check the status of the long running operation returned by the createReusableConfig() method.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *
-   * @example:
-   *   const decodedOperation = await checkCreateReusableConfigProgress(name);
-   *   console.log(decodedOperation.result);
-   *   console.log(decodedOperation.done);
-   *   console.log(decodedOperation.metadata);
-   *
-   */
-  async checkCreateReusableConfigProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.security.privateca.v1beta1.ReusableConfig,
-      protos.google.cloud.security.privateca.v1beta1.OperationMetadata
-    >
-  > {
-    const request = new operationsProtos.google.longrunning.GetOperationRequest(
-      {name}
-    );
-    const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new gax.Operation(
-      operation,
-      this.descriptors.longrunning.createReusableConfig,
-      gax.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.security.privateca.v1beta1.ReusableConfig,
-      protos.google.cloud.security.privateca.v1beta1.OperationMetadata
-    >;
-  }
-  deleteReusableConfig(
-    request: protos.google.cloud.security.privateca.v1beta1.IDeleteReusableConfigRequest,
-    options?: gax.CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.security.privateca.v1beta1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined
-    ]
-  >;
-  deleteReusableConfig(
-    request: protos.google.cloud.security.privateca.v1beta1.IDeleteReusableConfigRequest,
-    options: gax.CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.security.privateca.v1beta1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteReusableConfig(
-    request: protos.google.cloud.security.privateca.v1beta1.IDeleteReusableConfigRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.security.privateca.v1beta1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  /**
-   * DeleteReusableConfig deletes a {@link google.cloud.security.privateca.v1beta1.ReusableConfig|ReusableConfig}.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The resource name for this {@link google.cloud.security.privateca.v1beta1.ReusableConfig|ReusableConfig} in the format
-   *   `projects/* /locations/* /reusableConfigs/*`.
-   * @param {string} [request.requestId]
-   *   Optional. An ID to identify requests. Specify a unique request ID so that if you must
-   *   retry your request, the server will know to ignore the request if it has
-   *   already been completed. The server will guarantee that for at least 60
-   *   minutes since the first request.
-   *
-   *   For example, consider a situation where you make an initial request and t
-   *   he request times out. If you make the request again with the same request
-   *   ID, the server can check if original operation with the same request ID
-   *   was received, and if so, will ignore the second request. This prevents
-   *   clients from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is
-   *   not supported (00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Operation]{@link google.longrunning.Operation}.
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
-   */
-  deleteReusableConfig(
-    request: protos.google.cloud.security.privateca.v1beta1.IDeleteReusableConfigRequest,
-    optionsOrCallback?:
-      | gax.CallOptions
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.security.privateca.v1beta1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.security.privateca.v1beta1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.security.privateca.v1beta1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined
-    ]
-  > | void {
-    request = request || {};
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      name: request.name || '',
-    });
-    this.initialize();
-    return this.innerApiCalls.deleteReusableConfig(request, options, callback);
-  }
-  /**
-   * Check the status of the long running operation returned by the deleteReusableConfig() method.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *
-   * @example:
-   *   const decodedOperation = await checkDeleteReusableConfigProgress(name);
-   *   console.log(decodedOperation.result);
-   *   console.log(decodedOperation.done);
-   *   console.log(decodedOperation.metadata);
-   *
-   */
-  async checkDeleteReusableConfigProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.security.privateca.v1beta1.OperationMetadata
-    >
-  > {
-    const request = new operationsProtos.google.longrunning.GetOperationRequest(
-      {name}
-    );
-    const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new gax.Operation(
-      operation,
-      this.descriptors.longrunning.deleteReusableConfig,
-      gax.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.security.privateca.v1beta1.OperationMetadata
-    >;
-  }
-  updateReusableConfig(
-    request: protos.google.cloud.security.privateca.v1beta1.IUpdateReusableConfigRequest,
-    options?: gax.CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.security.privateca.v1beta1.IReusableConfig,
-        protos.google.cloud.security.privateca.v1beta1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined
-    ]
-  >;
-  updateReusableConfig(
-    request: protos.google.cloud.security.privateca.v1beta1.IUpdateReusableConfigRequest,
-    options: gax.CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.security.privateca.v1beta1.IReusableConfig,
-        protos.google.cloud.security.privateca.v1beta1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateReusableConfig(
-    request: protos.google.cloud.security.privateca.v1beta1.IUpdateReusableConfigRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.security.privateca.v1beta1.IReusableConfig,
-        protos.google.cloud.security.privateca.v1beta1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  /**
-   * Update a {@link google.cloud.security.privateca.v1beta1.ReusableConfig|ReusableConfig}.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.security.privateca.v1beta1.ReusableConfig} request.reusableConfig
-   *   Required. {@link google.cloud.security.privateca.v1beta1.ReusableConfig|ReusableConfig} with updated values.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. A list of fields to be updated in this request.
-   * @param {string} [request.requestId]
-   *   Optional. An ID to identify requests. Specify a unique request ID so that if you must
-   *   retry your request, the server will know to ignore the request if it has
-   *   already been completed. The server will guarantee that for at least 60
-   *   minutes since the first request.
-   *
-   *   For example, consider a situation where you make an initial request and t
-   *   he request times out. If you make the request again with the same request
-   *   ID, the server can check if original operation with the same request ID
-   *   was received, and if so, will ignore the second request. This prevents
-   *   clients from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is
-   *   not supported (00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Operation]{@link google.longrunning.Operation}.
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
-   */
-  updateReusableConfig(
-    request: protos.google.cloud.security.privateca.v1beta1.IUpdateReusableConfigRequest,
-    optionsOrCallback?:
-      | gax.CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.security.privateca.v1beta1.IReusableConfig,
-            protos.google.cloud.security.privateca.v1beta1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.security.privateca.v1beta1.IReusableConfig,
-        protos.google.cloud.security.privateca.v1beta1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.security.privateca.v1beta1.IReusableConfig,
-        protos.google.cloud.security.privateca.v1beta1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined
-    ]
-  > | void {
-    request = request || {};
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      'reusable_config.name': request.reusableConfig!.name || '',
-    });
-    this.initialize();
-    return this.innerApiCalls.updateReusableConfig(request, options, callback);
-  }
-  /**
-   * Check the status of the long running operation returned by the updateReusableConfig() method.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *
-   * @example:
-   *   const decodedOperation = await checkUpdateReusableConfigProgress(name);
-   *   console.log(decodedOperation.result);
-   *   console.log(decodedOperation.done);
-   *   console.log(decodedOperation.metadata);
-   *
-   */
-  async checkUpdateReusableConfigProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.security.privateca.v1beta1.ReusableConfig,
-      protos.google.cloud.security.privateca.v1beta1.OperationMetadata
-    >
-  > {
-    const request = new operationsProtos.google.longrunning.GetOperationRequest(
-      {name}
-    );
-    const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new gax.Operation(
-      operation,
-      this.descriptors.longrunning.updateReusableConfig,
-      gax.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.security.privateca.v1beta1.ReusableConfig,
       protos.google.cloud.security.privateca.v1beta1.OperationMetadata
     >;
   }
@@ -3288,26 +2719,25 @@ export class CertificateAuthorityServiceClient {
    *   Optional. Pagination token, returned earlier via
    *   {@link google.cloud.security.privateca.v1beta1.ListCertificatesResponse.next_page_token|ListCertificatesResponse.next_page_token}.
    * @param {string} [request.filter]
-   *   Optional. Only include resources that match the filter in the response.
+   *   Optional. Only include resources that match the filter in the response. For details
+   *   on supported filters and syntax, see [Certificates Filtering
+   *   documentation](https://cloud.google.com/certificate-authority-service/docs/sorting-filtering-certificates#filtering_support).
    * @param {string} [request.orderBy]
-   *   Optional. Specify how the results should be sorted.
+   *   Optional. Specify how the results should be sorted. For details on supported fields
+   *   and syntax, see [Certificates Sorting
+   *   documentation](https://cloud.google.com/certificate-authority-service/docs/sorting-filtering-certificates#sorting_support).
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
    *   The first element of the array is Array of [Certificate]{@link google.cloud.security.privateca.v1beta1.Certificate}.
-   *   The client library support auto-pagination by default: it will call the API as many
+   *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
-   *
-   *   When autoPaginate: false is specified through options, the array has three elements.
-   *   The first element is Array of [Certificate]{@link google.cloud.security.privateca.v1beta1.Certificate} that corresponds to
-   *   the one page received from the API server.
-   *   If the second element is not null it contains the request object of type [ListCertificatesRequest]{@link google.cloud.security.privateca.v1beta1.ListCertificatesRequest}
-   *   that can be used to obtain the next page of the results.
-   *   If it is null, the next page does not exist.
-   *   The third element contains the raw response received from the API server. Its type is
-   *   [ListCertificatesResponse]{@link google.cloud.security.privateca.v1beta1.ListCertificatesResponse}.
-   *
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *   Note that it can affect your quota.
+   *   We recommend using `listCertificatesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
    */
   listCertificates(
     request: protos.google.cloud.security.privateca.v1beta1.IListCertificatesRequest,
@@ -3355,18 +2785,7 @@ export class CertificateAuthorityServiceClient {
   }
 
   /**
-   * Equivalent to {@link listCertificates}, but returns a NodeJS Stream object.
-   *
-   * This fetches the paged responses for {@link listCertificates} continuously
-   * and invokes the callback registered for 'data' event for each element in the
-   * responses.
-   *
-   * The returned object has 'end' method when no more elements are required.
-   *
-   * autoPaginate option will be ignored.
-   *
-   * @see {@link https://nodejs.org/api/stream.html}
-   *
+   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -3384,13 +2803,24 @@ export class CertificateAuthorityServiceClient {
    *   Optional. Pagination token, returned earlier via
    *   {@link google.cloud.security.privateca.v1beta1.ListCertificatesResponse.next_page_token|ListCertificatesResponse.next_page_token}.
    * @param {string} [request.filter]
-   *   Optional. Only include resources that match the filter in the response.
+   *   Optional. Only include resources that match the filter in the response. For details
+   *   on supported filters and syntax, see [Certificates Filtering
+   *   documentation](https://cloud.google.com/certificate-authority-service/docs/sorting-filtering-certificates#filtering_support).
    * @param {string} [request.orderBy]
-   *   Optional. Specify how the results should be sorted.
+   *   Optional. Specify how the results should be sorted. For details on supported fields
+   *   and syntax, see [Certificates Sorting
+   *   documentation](https://cloud.google.com/certificate-authority-service/docs/sorting-filtering-certificates#sorting_support).
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
    *   An object stream which emits an object representing [Certificate]{@link google.cloud.security.privateca.v1beta1.Certificate} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listCertificatesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
    */
   listCertificatesStream(
     request?: protos.google.cloud.security.privateca.v1beta1.IListCertificatesRequest,
@@ -3415,10 +2845,9 @@ export class CertificateAuthorityServiceClient {
   }
 
   /**
-   * Equivalent to {@link listCertificates}, but returns an iterable object.
+   * Equivalent to `listCertificates`, but returns an iterable object.
    *
-   * for-await-of syntax is used with the iterable to recursively get response element on-demand.
-   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -3436,13 +2865,28 @@ export class CertificateAuthorityServiceClient {
    *   Optional. Pagination token, returned earlier via
    *   {@link google.cloud.security.privateca.v1beta1.ListCertificatesResponse.next_page_token|ListCertificatesResponse.next_page_token}.
    * @param {string} [request.filter]
-   *   Optional. Only include resources that match the filter in the response.
+   *   Optional. Only include resources that match the filter in the response. For details
+   *   on supported filters and syntax, see [Certificates Filtering
+   *   documentation](https://cloud.google.com/certificate-authority-service/docs/sorting-filtering-certificates#filtering_support).
    * @param {string} [request.orderBy]
-   *   Optional. Specify how the results should be sorted.
+   *   Optional. Specify how the results should be sorted. For details on supported fields
+   *   and syntax, see [Certificates Sorting
+   *   documentation](https://cloud.google.com/certificate-authority-service/docs/sorting-filtering-certificates#sorting_support).
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that conforms to @link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols.
+   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   [Certificate]{@link google.cloud.security.privateca.v1beta1.Certificate}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   * @example
+   * const iterable = client.listCertificatesAsync(request);
+   * for await (const response of iterable) {
+   *   // process response
+   * }
    */
   listCertificatesAsync(
     request?: protos.google.cloud.security.privateca.v1beta1.IListCertificatesRequest,
@@ -3528,19 +2972,14 @@ export class CertificateAuthorityServiceClient {
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
    *   The first element of the array is Array of [CertificateAuthority]{@link google.cloud.security.privateca.v1beta1.CertificateAuthority}.
-   *   The client library support auto-pagination by default: it will call the API as many
+   *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
-   *
-   *   When autoPaginate: false is specified through options, the array has three elements.
-   *   The first element is Array of [CertificateAuthority]{@link google.cloud.security.privateca.v1beta1.CertificateAuthority} that corresponds to
-   *   the one page received from the API server.
-   *   If the second element is not null it contains the request object of type [ListCertificateAuthoritiesRequest]{@link google.cloud.security.privateca.v1beta1.ListCertificateAuthoritiesRequest}
-   *   that can be used to obtain the next page of the results.
-   *   If it is null, the next page does not exist.
-   *   The third element contains the raw response received from the API server. Its type is
-   *   [ListCertificateAuthoritiesResponse]{@link google.cloud.security.privateca.v1beta1.ListCertificateAuthoritiesResponse}.
-   *
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *   Note that it can affect your quota.
+   *   We recommend using `listCertificateAuthoritiesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
    */
   listCertificateAuthorities(
     request: protos.google.cloud.security.privateca.v1beta1.IListCertificateAuthoritiesRequest,
@@ -3592,18 +3031,7 @@ export class CertificateAuthorityServiceClient {
   }
 
   /**
-   * Equivalent to {@link listCertificateAuthorities}, but returns a NodeJS Stream object.
-   *
-   * This fetches the paged responses for {@link listCertificateAuthorities} continuously
-   * and invokes the callback registered for 'data' event for each element in the
-   * responses.
-   *
-   * The returned object has 'end' method when no more elements are required.
-   *
-   * autoPaginate option will be ignored.
-   *
-   * @see {@link https://nodejs.org/api/stream.html}
-   *
+   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -3628,6 +3056,13 @@ export class CertificateAuthorityServiceClient {
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
    *   An object stream which emits an object representing [CertificateAuthority]{@link google.cloud.security.privateca.v1beta1.CertificateAuthority} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listCertificateAuthoritiesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
    */
   listCertificateAuthoritiesStream(
     request?: protos.google.cloud.security.privateca.v1beta1.IListCertificateAuthoritiesRequest,
@@ -3652,10 +3087,9 @@ export class CertificateAuthorityServiceClient {
   }
 
   /**
-   * Equivalent to {@link listCertificateAuthorities}, but returns an iterable object.
+   * Equivalent to `listCertificateAuthorities`, but returns an iterable object.
    *
-   * for-await-of syntax is used with the iterable to recursively get response element on-demand.
-   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -3679,7 +3113,18 @@ export class CertificateAuthorityServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that conforms to @link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols.
+   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   [CertificateAuthority]{@link google.cloud.security.privateca.v1beta1.CertificateAuthority}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   * @example
+   * const iterable = client.listCertificateAuthoritiesAsync(request);
+   * for await (const response of iterable) {
+   *   // process response
+   * }
    */
   listCertificateAuthoritiesAsync(
     request?: protos.google.cloud.security.privateca.v1beta1.IListCertificateAuthoritiesRequest,
@@ -3765,19 +3210,14 @@ export class CertificateAuthorityServiceClient {
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
    *   The first element of the array is Array of [CertificateRevocationList]{@link google.cloud.security.privateca.v1beta1.CertificateRevocationList}.
-   *   The client library support auto-pagination by default: it will call the API as many
+   *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
-   *
-   *   When autoPaginate: false is specified through options, the array has three elements.
-   *   The first element is Array of [CertificateRevocationList]{@link google.cloud.security.privateca.v1beta1.CertificateRevocationList} that corresponds to
-   *   the one page received from the API server.
-   *   If the second element is not null it contains the request object of type [ListCertificateRevocationListsRequest]{@link google.cloud.security.privateca.v1beta1.ListCertificateRevocationListsRequest}
-   *   that can be used to obtain the next page of the results.
-   *   If it is null, the next page does not exist.
-   *   The third element contains the raw response received from the API server. Its type is
-   *   [ListCertificateRevocationListsResponse]{@link google.cloud.security.privateca.v1beta1.ListCertificateRevocationListsResponse}.
-   *
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *   Note that it can affect your quota.
+   *   We recommend using `listCertificateRevocationListsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
    */
   listCertificateRevocationLists(
     request: protos.google.cloud.security.privateca.v1beta1.IListCertificateRevocationListsRequest,
@@ -3829,18 +3269,7 @@ export class CertificateAuthorityServiceClient {
   }
 
   /**
-   * Equivalent to {@link listCertificateRevocationLists}, but returns a NodeJS Stream object.
-   *
-   * This fetches the paged responses for {@link listCertificateRevocationLists} continuously
-   * and invokes the callback registered for 'data' event for each element in the
-   * responses.
-   *
-   * The returned object has 'end' method when no more elements are required.
-   *
-   * autoPaginate option will be ignored.
-   *
-   * @see {@link https://nodejs.org/api/stream.html}
-   *
+   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -3865,6 +3294,13 @@ export class CertificateAuthorityServiceClient {
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
    *   An object stream which emits an object representing [CertificateRevocationList]{@link google.cloud.security.privateca.v1beta1.CertificateRevocationList} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listCertificateRevocationListsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
    */
   listCertificateRevocationListsStream(
     request?: protos.google.cloud.security.privateca.v1beta1.IListCertificateRevocationListsRequest,
@@ -3889,10 +3325,9 @@ export class CertificateAuthorityServiceClient {
   }
 
   /**
-   * Equivalent to {@link listCertificateRevocationLists}, but returns an iterable object.
+   * Equivalent to `listCertificateRevocationLists`, but returns an iterable object.
    *
-   * for-await-of syntax is used with the iterable to recursively get response element on-demand.
-   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -3916,7 +3351,18 @@ export class CertificateAuthorityServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that conforms to @link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols.
+   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   [CertificateRevocationList]{@link google.cloud.security.privateca.v1beta1.CertificateRevocationList}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   * @example
+   * const iterable = client.listCertificateRevocationListsAsync(request);
+   * for await (const response of iterable) {
+   *   // process response
+   * }
    */
   listCertificateRevocationListsAsync(
     request?: protos.google.cloud.security.privateca.v1beta1.IListCertificateRevocationListsRequest,
@@ -4002,19 +3448,14 @@ export class CertificateAuthorityServiceClient {
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
    *   The first element of the array is Array of [ReusableConfig]{@link google.cloud.security.privateca.v1beta1.ReusableConfig}.
-   *   The client library support auto-pagination by default: it will call the API as many
+   *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
-   *
-   *   When autoPaginate: false is specified through options, the array has three elements.
-   *   The first element is Array of [ReusableConfig]{@link google.cloud.security.privateca.v1beta1.ReusableConfig} that corresponds to
-   *   the one page received from the API server.
-   *   If the second element is not null it contains the request object of type [ListReusableConfigsRequest]{@link google.cloud.security.privateca.v1beta1.ListReusableConfigsRequest}
-   *   that can be used to obtain the next page of the results.
-   *   If it is null, the next page does not exist.
-   *   The third element contains the raw response received from the API server. Its type is
-   *   [ListReusableConfigsResponse]{@link google.cloud.security.privateca.v1beta1.ListReusableConfigsResponse}.
-   *
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *   Note that it can affect your quota.
+   *   We recommend using `listReusableConfigsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
    */
   listReusableConfigs(
     request: protos.google.cloud.security.privateca.v1beta1.IListReusableConfigsRequest,
@@ -4062,18 +3503,7 @@ export class CertificateAuthorityServiceClient {
   }
 
   /**
-   * Equivalent to {@link listReusableConfigs}, but returns a NodeJS Stream object.
-   *
-   * This fetches the paged responses for {@link listReusableConfigs} continuously
-   * and invokes the callback registered for 'data' event for each element in the
-   * responses.
-   *
-   * The returned object has 'end' method when no more elements are required.
-   *
-   * autoPaginate option will be ignored.
-   *
-   * @see {@link https://nodejs.org/api/stream.html}
-   *
+   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -4098,6 +3528,13 @@ export class CertificateAuthorityServiceClient {
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
    *   An object stream which emits an object representing [ReusableConfig]{@link google.cloud.security.privateca.v1beta1.ReusableConfig} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listReusableConfigsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
    */
   listReusableConfigsStream(
     request?: protos.google.cloud.security.privateca.v1beta1.IListReusableConfigsRequest,
@@ -4122,10 +3559,9 @@ export class CertificateAuthorityServiceClient {
   }
 
   /**
-   * Equivalent to {@link listReusableConfigs}, but returns an iterable object.
+   * Equivalent to `listReusableConfigs`, but returns an iterable object.
    *
-   * for-await-of syntax is used with the iterable to recursively get response element on-demand.
-   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -4149,7 +3585,18 @@ export class CertificateAuthorityServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that conforms to @link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols.
+   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   [ReusableConfig]{@link google.cloud.security.privateca.v1beta1.ReusableConfig}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   * @example
+   * const iterable = client.listReusableConfigsAsync(request);
+   * for await (const response of iterable) {
+   *   // process response
+   * }
    */
   listReusableConfigsAsync(
     request?: protos.google.cloud.security.privateca.v1beta1.IListReusableConfigsRequest,
@@ -4492,9 +3939,10 @@ export class CertificateAuthorityServiceClient {
   }
 
   /**
-   * Terminate the GRPC channel and close the client.
+   * Terminate the gRPC channel and close the client.
    *
    * The client will no longer be usable and all future behavior is undefined.
+   * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
     this.initialize();
