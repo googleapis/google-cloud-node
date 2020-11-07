@@ -23,6 +23,7 @@ import * as v1p2beta1 from './v1p2beta1';
 import * as v1p3beta1 from './v1p3beta1';
 
 const VideoIntelligenceServiceClient = v1.VideoIntelligenceServiceClient;
+type VideoIntelligenceServiceClient = v1.VideoIntelligenceServiceClient;
 
 export {
   v1,
