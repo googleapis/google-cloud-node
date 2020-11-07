@@ -18,7 +18,9 @@
 
 import * as v1beta from './v1beta';
 const ExecutionsClient = v1beta.ExecutionsClient;
+type ExecutionsClient = v1beta.ExecutionsClient;
 const WorkflowsClient = v1beta.WorkflowsClient;
+type WorkflowsClient = v1beta.WorkflowsClient;
 export {v1beta, ExecutionsClient, WorkflowsClient};
 export default {v1beta, ExecutionsClient, WorkflowsClient};
 import * as protos from '../protos/protos';

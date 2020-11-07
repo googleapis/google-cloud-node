@@ -18,8 +18,15 @@
 
 import {WorkflowsClient} from '@google-cloud/workflows';
 
+// check that the client class type name can be used
+function doStuffWithWorkflowsClient(client: WorkflowsClient) {
+  client.close();
+}
+
 function main() {
-  new WorkflowsClient();
+  // check that the client instance can be created
+  const workflowsClient = new WorkflowsClient();
+  doStuffWithWorkflowsClient(workflowsClient);
 }
 
 main();
