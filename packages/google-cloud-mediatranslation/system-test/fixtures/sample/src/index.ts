@@ -18,8 +18,17 @@
 
 import {SpeechTranslationServiceClient} from '@google-cloud/media-translation';
 
+// check that the client class type name can be used
+function doStuffWithSpeechTranslationServiceClient(
+  client: SpeechTranslationServiceClient
+) {
+  client.close();
+}
+
 function main() {
-  new SpeechTranslationServiceClient();
+  // check that the client instance can be created
+  const speechTranslationServiceClient = new SpeechTranslationServiceClient();
+  doStuffWithSpeechTranslationServiceClient(speechTranslationServiceClient);
 }
 
 main();

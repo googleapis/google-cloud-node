@@ -3,23 +3,15 @@
     {
       "git": {
         "name": ".",
-        "remote": "https://github.com/googleapis/nodejs-media-translation.git",
-        "sha": "c1a44314dd7b73faa69e3a7fe1edde54266c3a88"
-      }
-    },
-    {
-      "git": {
-        "name": "googleapis",
-        "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "4c5071b615d96ef9dfd6a63d8429090f1f2872bb",
-        "internalRef": "327369997"
+        "remote": "git@github.com:googleapis/nodejs-media-translation.git",
+        "sha": "f132c7b2725509ef3d4d497733ba85f851b52789"
       }
     },
     {
       "git": {
         "name": "synthtool",
         "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "ba9918cd22874245b55734f57470c719b577e591"
+        "sha": "1f1148d3c7a7a52f0c98077f976bd9b3c948ee2b"
       }
     }
   ],
@@ -86,12 +78,14 @@
     "LICENSE",
     "README.md",
     "api-extractor.json",
+    "package-lock.json.3635725974",
     "protos/google/cloud/mediatranslation/v1beta1/media_translation.proto",
     "protos/protos.d.ts",
     "protos/protos.js",
     "protos/protos.json",
     "renovate.json",
     "samples/README.md",
+    "samples/package-lock.json.3114264012",
     "src/index.ts",
     "src/v1beta1/index.ts",
     "src/v1beta1/speech_translation_service_client.ts",

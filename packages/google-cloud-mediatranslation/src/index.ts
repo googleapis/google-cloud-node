@@ -18,6 +18,7 @@
 
 import * as v1beta1 from './v1beta1';
 const SpeechTranslationServiceClient = v1beta1.SpeechTranslationServiceClient;
+type SpeechTranslationServiceClient = v1beta1.SpeechTranslationServiceClient;
 export {v1beta1, SpeechTranslationServiceClient};
 export default {v1beta1, SpeechTranslationServiceClient};
 import * as protos from '../protos/protos';
