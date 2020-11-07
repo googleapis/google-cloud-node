@@ -57,6 +57,7 @@ import * as v3 from './v3';
 export * from './v3';
 
 const TranslationServiceClient = v3.TranslationServiceClient;
+type TranslationServiceClient = v3.TranslationServiceClient;
 export {TranslationServiceClient, v2, v3beta1, v3};
 // For compatibility with JavaScript libraries we need to provide this default export:
 // tslint:disable-next-line no-default-export

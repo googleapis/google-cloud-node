@@ -18,8 +18,15 @@
 
 import {TranslationServiceClient} from '@google-cloud/translate';
 
+// check that the client class type name can be used
+function doStuffWithTranslationServiceClient(client: TranslationServiceClient) {
+  client.close();
+}
+
 function main() {
-  new TranslationServiceClient();
+  // check that the client instance can be created
+  const translationServiceClient = new TranslationServiceClient();
+  doStuffWithTranslationServiceClient(translationServiceClient);
 }
 
 main();
