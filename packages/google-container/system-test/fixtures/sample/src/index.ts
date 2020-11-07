@@ -18,8 +18,15 @@
 
 import {ClusterManagerClient} from '@google-cloud/container';
 
+// check that the client class type name can be used
+function doStuffWithClusterManagerClient(client: ClusterManagerClient) {
+  client.close();
+}
+
 function main() {
-  new ClusterManagerClient();
+  // check that the client instance can be created
+  const clusterManagerClient = new ClusterManagerClient();
+  doStuffWithClusterManagerClient(clusterManagerClient);
 }
 
 main();
