@@ -3,23 +3,15 @@
     {
       "git": {
         "name": ".",
-        "remote": "https://github.com/googleapis/nodejs-bigquery-storage.git",
-        "sha": "10c93ec771f1715a8f97dde1840ed5071275bec8"
-      }
-    },
-    {
-      "git": {
-        "name": "googleapis",
-        "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "4c5071b615d96ef9dfd6a63d8429090f1f2872bb",
-        "internalRef": "327369997"
+        "remote": "git@github.com:googleapis/nodejs-bigquery-storage.git",
+        "sha": "9b828c649de99a96418c1d580c6440016aa298a3"
       }
     },
     {
       "git": {
         "name": "synthtool",
         "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "ba9918cd22874245b55734f57470c719b577e591"
+        "sha": "1f1148d3c7a7a52f0c98077f976bd9b3c948ee2b"
       }
     }
   ],
@@ -96,6 +88,7 @@
     "README.md",
     "api-extractor.json",
     "linkinator.config.json",
+    "package-lock.json.1985761200",
     "protos/google/cloud/bigquery/storage/v1/arrow.proto",
     "protos/google/cloud/bigquery/storage/v1/avro.proto",
     "protos/google/cloud/bigquery/storage/v1/storage.proto",
@@ -110,6 +103,7 @@
     "protos/protos.json",
     "renovate.json",
     "samples/README.md",
+    "samples/package-lock.json.1553614215",
     "src/v1/big_query_read_client.ts",
     "src/v1/big_query_read_client_config.json",
     "src/v1/big_query_read_proto_list.json",

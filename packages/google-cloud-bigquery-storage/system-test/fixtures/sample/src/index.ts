@@ -18,8 +18,15 @@
 
 import {BigQueryReadClient} from '@google-cloud/bigquery-storage';
 
+// check that the client class type name can be used
+function doStuffWithBigQueryReadClient(client: BigQueryReadClient) {
+  client.close();
+}
+
 function main() {
-  new BigQueryReadClient();
+  // check that the client instance can be created
+  const bigQueryReadClient = new BigQueryReadClient();
+  doStuffWithBigQueryReadClient(bigQueryReadClient);
 }
 
 main();
