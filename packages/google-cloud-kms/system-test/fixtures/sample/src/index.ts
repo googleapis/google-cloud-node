@@ -18,8 +18,17 @@
 
 import {KeyManagementServiceClient} from '@google-cloud/kms';
 
+// check that the client class type name can be used
+function doStuffWithKeyManagementServiceClient(
+  client: KeyManagementServiceClient
+) {
+  client.close();
+}
+
 function main() {
-  new KeyManagementServiceClient();
+  // check that the client instance can be created
+  const keyManagementServiceClient = new KeyManagementServiceClient();
+  doStuffWithKeyManagementServiceClient(keyManagementServiceClient);
 }
 
 main();
