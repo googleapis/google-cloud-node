@@ -19,11 +19,17 @@
 import * as v3 from './v3';
 
 const AlertPolicyServiceClient = v3.AlertPolicyServiceClient;
+type AlertPolicyServiceClient = v3.AlertPolicyServiceClient;
 const GroupServiceClient = v3.GroupServiceClient;
+type GroupServiceClient = v3.GroupServiceClient;
 const MetricServiceClient = v3.MetricServiceClient;
+type MetricServiceClient = v3.MetricServiceClient;
 const NotificationChannelServiceClient = v3.NotificationChannelServiceClient;
+type NotificationChannelServiceClient = v3.NotificationChannelServiceClient;
 const ServiceMonitoringServiceClient = v3.ServiceMonitoringServiceClient;
+type ServiceMonitoringServiceClient = v3.ServiceMonitoringServiceClient;
 const UptimeCheckServiceClient = v3.UptimeCheckServiceClient;
+type UptimeCheckServiceClient = v3.UptimeCheckServiceClient;
 
 export {
   v3,

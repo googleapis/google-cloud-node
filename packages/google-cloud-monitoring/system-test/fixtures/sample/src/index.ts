@@ -25,13 +25,49 @@ import {
   UptimeCheckServiceClient,
 } from '@google-cloud/monitoring';
 
+// check that the client class type name can be used
+function doStuffWithAlertPolicyServiceClient(client: AlertPolicyServiceClient) {
+  client.close();
+}
+function doStuffWithGroupServiceClient(client: GroupServiceClient) {
+  client.close();
+}
+function doStuffWithMetricServiceClient(client: MetricServiceClient) {
+  client.close();
+}
+function doStuffWithNotificationChannelServiceClient(
+  client: NotificationChannelServiceClient
+) {
+  client.close();
+}
+function doStuffWithServiceMonitoringServiceClient(
+  client: ServiceMonitoringServiceClient
+) {
+  client.close();
+}
+function doStuffWithUptimeCheckServiceClient(client: UptimeCheckServiceClient) {
+  client.close();
+}
+
 function main() {
-  new AlertPolicyServiceClient();
-  new GroupServiceClient();
-  new MetricServiceClient();
-  new NotificationChannelServiceClient();
-  new ServiceMonitoringServiceClient();
-  new UptimeCheckServiceClient();
+  // check that the client instance can be created
+  const alertPolicyServiceClient = new AlertPolicyServiceClient();
+  doStuffWithAlertPolicyServiceClient(alertPolicyServiceClient);
+  // check that the client instance can be created
+  const groupServiceClient = new GroupServiceClient();
+  doStuffWithGroupServiceClient(groupServiceClient);
+  // check that the client instance can be created
+  const metricServiceClient = new MetricServiceClient();
+  doStuffWithMetricServiceClient(metricServiceClient);
+  // check that the client instance can be created
+  const notificationChannelServiceClient = new NotificationChannelServiceClient();
+  doStuffWithNotificationChannelServiceClient(notificationChannelServiceClient);
+  // check that the client instance can be created
+  const serviceMonitoringServiceClient = new ServiceMonitoringServiceClient();
+  doStuffWithServiceMonitoringServiceClient(serviceMonitoringServiceClient);
+  // check that the client instance can be created
+  const uptimeCheckServiceClient = new UptimeCheckServiceClient();
+  doStuffWithUptimeCheckServiceClient(uptimeCheckServiceClient);
 }
 
 main();
