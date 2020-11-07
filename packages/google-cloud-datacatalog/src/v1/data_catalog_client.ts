@@ -61,8 +61,10 @@ export class DataCatalogClient {
   /**
    * Construct an instance of DataCatalogClient.
    *
-   * @param {object} [options] - The configuration object. See the subsequent
-   *   parameters for more details.
+   * @param {object} [options] - The configuration object.
+   * The options accepted by the constructor are described in detail
+   * in [this document](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#creating-the-client-instance).
+   * The common options are:
    * @param {object} [options.credentials] - Credentials object.
    * @param {string} [options.credentials.client_email]
    * @param {string} [options.credentials.private_key]
@@ -82,42 +84,33 @@ export class DataCatalogClient {
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
+   * @param {gax.ClientConfig} [options.clientConfig] - client configuration override.
+   *     TODO(@alexander-fenster): link to gax documentation.
+   * @param {boolean} fallback - Use HTTP fallback mode.
+   *     In fallback mode, a special browser-compatible transport implementation is used
+   *     instead of gRPC transport. In browser context (if the `window` object is defined)
+   *     the fallback mode is enabled automatically; set `options.fallback` to `false`
+   *     if you need to override this behavior.
    */
-
   constructor(opts?: ClientOptions) {
-    // Ensure that options include the service address and port.
+    // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof DataCatalogClient;
     const servicePath =
-      opts && opts.servicePath
-        ? opts.servicePath
-        : opts && opts.apiEndpoint
-        ? opts.apiEndpoint
-        : staticMembers.servicePath;
-    const port = opts && opts.port ? opts.port : staticMembers.port;
+      opts?.servicePath || opts?.apiEndpoint || staticMembers.servicePath;
+    const port = opts?.port || staticMembers.port;
+    const clientConfig = opts?.clientConfig ?? {};
+    const fallback = opts?.fallback ?? typeof window !== 'undefined';
+    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
-    if (!opts) {
-      opts = {servicePath, port};
+    // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
+    if (servicePath !== staticMembers.servicePath && !('scopes' in opts)) {
+      opts['scopes'] = staticMembers.scopes;
     }
-    opts.servicePath = opts.servicePath || servicePath;
-    opts.port = opts.port || port;
 
-    // users can override the config from client side, like retry codes name.
-    // The detailed structure of the clientConfig can be found here: https://github.com/googleapis/gax-nodejs/blob/master/src/gax.ts#L546
-    // The way to override client config for Showcase API:
-    //
-    // const customConfig = {"interfaces": {"google.showcase.v1beta1.Echo": {"methods": {"Echo": {"retry_codes_name": "idempotent", "retry_params_name": "default"}}}}}
-    // const showcaseClient = new showcaseClient({ projectId, customConfig });
-    opts.clientConfig = opts.clientConfig || {};
-
-    // If we're running in browser, it's OK to omit `fallback` since
-    // google-gax has `browser` field in its `package.json`.
-    // For Electron (which does not respect `browser` field),
-    // pass `{fallback: true}` to the DataCatalogClient constructor.
+    // Choose either gRPC or proto-over-HTTP implementation of google-gax.
     this._gaxModule = opts.fallback ? gax.fallback : gax;
 
-    // Create a `gaxGrpc` object, with any grpc-specific options
-    // sent to the client.
-    opts.scopes = (this.constructor as typeof DataCatalogClient).scopes;
+    // Create a `gaxGrpc` object, with any grpc-specific options sent to the client.
     this._gaxGrpc = new this._gaxModule.GrpcClient(opts);
 
     // Save options to use in initialize() method.
@@ -125,6 +118,11 @@ export class DataCatalogClient {
 
     // Save the auth object to the client, for use by other methods.
     this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+
+    // Set the default scopes in auth client if needed.
+    if (servicePath === staticMembers.servicePath) {
+      this.auth.defaultScopes = staticMembers.scopes;
+    }
 
     // Determine the client header string.
     const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
@@ -313,6 +311,7 @@ export class DataCatalogClient {
 
   /**
    * The DNS address for this API service.
+   * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
     return 'datacatalog.googleapis.com';
@@ -321,6 +320,7 @@ export class DataCatalogClient {
   /**
    * The DNS address for this API service - same as servicePath(),
    * exists for compatibility reasons.
+   * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
     return 'datacatalog.googleapis.com';
@@ -328,6 +328,7 @@ export class DataCatalogClient {
 
   /**
    * The port for this API service.
+   * @returns {number} The default port for this service.
    */
   static get port() {
     return 443;
@@ -336,6 +337,7 @@ export class DataCatalogClient {
   /**
    * The scopes needed to make gRPC calls for every method defined
    * in this service.
+   * @returns {string[]} List of default scopes.
    */
   static get scopes() {
     return ['https://www.googleapis.com/auth/cloud-platform'];
@@ -345,8 +347,7 @@ export class DataCatalogClient {
   getProjectId(callback: Callback<string, undefined, undefined>): void;
   /**
    * Return the project ID used by this class.
-   * @param {function(Error, string)} callback - the callback to
-   *   be called with the current project Id.
+   * @returns {Promise} A promise that resolves to string containing the project ID.
    */
   getProjectId(
     callback?: Callback<string, undefined, undefined>
@@ -432,7 +433,11 @@ export class DataCatalogClient {
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
    *   The first element of the array is an object representing [EntryGroup]{@link google.cloud.datacatalog.v1.EntryGroup}.
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * const [response] = await client.createEntryGroup(request);
    */
   createEntryGroup(
     request: protos.google.cloud.datacatalog.v1.ICreateEntryGroupRequest,
@@ -523,7 +528,11 @@ export class DataCatalogClient {
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
    *   The first element of the array is an object representing [EntryGroup]{@link google.cloud.datacatalog.v1.EntryGroup}.
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * const [response] = await client.getEntryGroup(request);
    */
   getEntryGroup(
     request: protos.google.cloud.datacatalog.v1.IGetEntryGroupRequest,
@@ -618,7 +627,11 @@ export class DataCatalogClient {
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
    *   The first element of the array is an object representing [EntryGroup]{@link google.cloud.datacatalog.v1.EntryGroup}.
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * const [response] = await client.updateEntryGroup(request);
    */
   updateEntryGroup(
     request: protos.google.cloud.datacatalog.v1.IUpdateEntryGroupRequest,
@@ -713,7 +726,11 @@ export class DataCatalogClient {
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
    *   The first element of the array is an object representing [Empty]{@link google.protobuf.Empty}.
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * const [response] = await client.deleteEntryGroup(request);
    */
   deleteEntryGroup(
     request: protos.google.cloud.datacatalog.v1.IDeleteEntryGroupRequest,
@@ -814,7 +831,11 @@ export class DataCatalogClient {
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
    *   The first element of the array is an object representing [Entry]{@link google.cloud.datacatalog.v1.Entry}.
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * const [response] = await client.createEntry(request);
    */
   createEntry(
     request: protos.google.cloud.datacatalog.v1.ICreateEntryRequest,
@@ -921,7 +942,11 @@ export class DataCatalogClient {
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
    *   The first element of the array is an object representing [Entry]{@link google.cloud.datacatalog.v1.Entry}.
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * const [response] = await client.updateEntry(request);
    */
   updateEntry(
     request: protos.google.cloud.datacatalog.v1.IUpdateEntryRequest,
@@ -1011,7 +1036,11 @@ export class DataCatalogClient {
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
    *   The first element of the array is an object representing [Empty]{@link google.protobuf.Empty}.
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * const [response] = await client.deleteEntry(request);
    */
   deleteEntry(
     request: protos.google.cloud.datacatalog.v1.IDeleteEntryRequest,
@@ -1095,7 +1124,11 @@ export class DataCatalogClient {
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
    *   The first element of the array is an object representing [Entry]{@link google.cloud.datacatalog.v1.Entry}.
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * const [response] = await client.getEntry(request);
    */
   getEntry(
     request: protos.google.cloud.datacatalog.v1.IGetEntryRequest,
@@ -1200,7 +1233,11 @@ export class DataCatalogClient {
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
    *   The first element of the array is an object representing [Entry]{@link google.cloud.datacatalog.v1.Entry}.
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * const [response] = await client.lookupEntry(request);
    */
   lookupEntry(
     request: protos.google.cloud.datacatalog.v1.ILookupEntryRequest,
@@ -1292,7 +1329,11 @@ export class DataCatalogClient {
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
    *   The first element of the array is an object representing [TagTemplate]{@link google.cloud.datacatalog.v1.TagTemplate}.
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * const [response] = await client.createTagTemplate(request);
    */
   createTagTemplate(
     request: protos.google.cloud.datacatalog.v1.ICreateTagTemplateRequest,
@@ -1382,7 +1423,11 @@ export class DataCatalogClient {
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
    *   The first element of the array is an object representing [TagTemplate]{@link google.cloud.datacatalog.v1.TagTemplate}.
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * const [response] = await client.getTagTemplate(request);
    */
   getTagTemplate(
     request: protos.google.cloud.datacatalog.v1.IGetTagTemplateRequest,
@@ -1484,7 +1529,11 @@ export class DataCatalogClient {
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
    *   The first element of the array is an object representing [TagTemplate]{@link google.cloud.datacatalog.v1.TagTemplate}.
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * const [response] = await client.updateTagTemplate(request);
    */
   updateTagTemplate(
     request: protos.google.cloud.datacatalog.v1.IUpdateTagTemplateRequest,
@@ -1582,7 +1631,11 @@ export class DataCatalogClient {
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
    *   The first element of the array is an object representing [Empty]{@link google.protobuf.Empty}.
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * const [response] = await client.deleteTagTemplate(request);
    */
   deleteTagTemplate(
     request: protos.google.cloud.datacatalog.v1.IDeleteTagTemplateRequest,
@@ -1690,7 +1743,11 @@ export class DataCatalogClient {
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
    *   The first element of the array is an object representing [TagTemplateField]{@link google.cloud.datacatalog.v1.TagTemplateField}.
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * const [response] = await client.createTagTemplateField(request);
    */
   createTagTemplateField(
     request: protos.google.cloud.datacatalog.v1.ICreateTagTemplateFieldRequest,
@@ -1811,7 +1868,11 @@ export class DataCatalogClient {
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
    *   The first element of the array is an object representing [TagTemplateField]{@link google.cloud.datacatalog.v1.TagTemplateField}.
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * const [response] = await client.updateTagTemplateField(request);
    */
   updateTagTemplateField(
     request: protos.google.cloud.datacatalog.v1.IUpdateTagTemplateFieldRequest,
@@ -1918,7 +1979,11 @@ export class DataCatalogClient {
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
    *   The first element of the array is an object representing [TagTemplateField]{@link google.cloud.datacatalog.v1.TagTemplateField}.
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * const [response] = await client.renameTagTemplateField(request);
    */
   renameTagTemplateField(
     request: protos.google.cloud.datacatalog.v1.IRenameTagTemplateFieldRequest,
@@ -2026,7 +2091,11 @@ export class DataCatalogClient {
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
    *   The first element of the array is an object representing [Empty]{@link google.protobuf.Empty}.
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * const [response] = await client.deleteTagTemplateField(request);
    */
   deleteTagTemplateField(
     request: protos.google.cloud.datacatalog.v1.IDeleteTagTemplateFieldRequest,
@@ -2131,7 +2200,11 @@ export class DataCatalogClient {
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
    *   The first element of the array is an object representing [Tag]{@link google.cloud.datacatalog.v1.Tag}.
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * const [response] = await client.createTag(request);
    */
   createTag(
     request: protos.google.cloud.datacatalog.v1.ICreateTagRequest,
@@ -2216,7 +2289,11 @@ export class DataCatalogClient {
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
    *   The first element of the array is an object representing [Tag]{@link google.cloud.datacatalog.v1.Tag}.
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * const [response] = await client.updateTag(request);
    */
   updateTag(
     request: protos.google.cloud.datacatalog.v1.IUpdateTagRequest,
@@ -2300,7 +2377,11 @@ export class DataCatalogClient {
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
    *   The first element of the array is an object representing [Empty]{@link google.protobuf.Empty}.
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * const [response] = await client.deleteTag(request);
    */
   deleteTag(
     request: protos.google.cloud.datacatalog.v1.IDeleteTagRequest,
@@ -2401,7 +2482,11 @@ export class DataCatalogClient {
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
    *   The first element of the array is an object representing [Policy]{@link google.iam.v1.Policy}.
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * const [response] = await client.setIamPolicy(request);
    */
   setIamPolicy(
     request: protos.google.iam.v1.ISetIamPolicyRequest,
@@ -2500,7 +2585,11 @@ export class DataCatalogClient {
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
    *   The first element of the array is an object representing [Policy]{@link google.iam.v1.Policy}.
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * const [response] = await client.getIamPolicy(request);
    */
   getIamPolicy(
     request: protos.google.iam.v1.IGetIamPolicyRequest,
@@ -2598,7 +2687,11 @@ export class DataCatalogClient {
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
    *   The first element of the array is an object representing [TestIamPermissionsResponse]{@link google.iam.v1.TestIamPermissionsResponse}.
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * const [response] = await client.testIamPermissions(request);
    */
   testIamPermissions(
     request: protos.google.iam.v1.ITestIamPermissionsRequest,
@@ -2734,19 +2827,14 @@ export class DataCatalogClient {
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
    *   The first element of the array is Array of [SearchCatalogResult]{@link google.cloud.datacatalog.v1.SearchCatalogResult}.
-   *   The client library support auto-pagination by default: it will call the API as many
+   *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
-   *
-   *   When autoPaginate: false is specified through options, the array has three elements.
-   *   The first element is Array of [SearchCatalogResult]{@link google.cloud.datacatalog.v1.SearchCatalogResult} that corresponds to
-   *   the one page received from the API server.
-   *   If the second element is not null it contains the request object of type [SearchCatalogRequest]{@link google.cloud.datacatalog.v1.SearchCatalogRequest}
-   *   that can be used to obtain the next page of the results.
-   *   If it is null, the next page does not exist.
-   *   The third element contains the raw response received from the API server. Its type is
-   *   [SearchCatalogResponse]{@link google.cloud.datacatalog.v1.SearchCatalogResponse}.
-   *
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *   Note that it can affect your quota.
+   *   We recommend using `searchCatalogAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
    */
   searchCatalog(
     request: protos.google.cloud.datacatalog.v1.ISearchCatalogRequest,
@@ -2787,18 +2875,7 @@ export class DataCatalogClient {
   }
 
   /**
-   * Equivalent to {@link searchCatalog}, but returns a NodeJS Stream object.
-   *
-   * This fetches the paged responses for {@link searchCatalog} continuously
-   * and invokes the callback registered for 'data' event for each element in the
-   * responses.
-   *
-   * The returned object has 'end' method when no more elements are required.
-   *
-   * autoPaginate option will be ignored.
-   *
-   * @see {@link https://nodejs.org/api/stream.html}
-   *
+   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {google.cloud.datacatalog.v1.SearchCatalogRequest.Scope} request.scope
@@ -2843,6 +2920,13 @@ export class DataCatalogClient {
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
    *   An object stream which emits an object representing [SearchCatalogResult]{@link google.cloud.datacatalog.v1.SearchCatalogResult} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `searchCatalogAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
    */
   searchCatalogStream(
     request?: protos.google.cloud.datacatalog.v1.ISearchCatalogRequest,
@@ -2860,10 +2944,9 @@ export class DataCatalogClient {
   }
 
   /**
-   * Equivalent to {@link searchCatalog}, but returns an iterable object.
+   * Equivalent to `searchCatalog`, but returns an iterable object.
    *
-   * for-await-of syntax is used with the iterable to recursively get response element on-demand.
-   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {google.cloud.datacatalog.v1.SearchCatalogRequest.Scope} request.scope
@@ -2907,7 +2990,18 @@ export class DataCatalogClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that conforms to @link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols.
+   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   [SearchCatalogResult]{@link google.cloud.datacatalog.v1.SearchCatalogResult}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   * @example
+   * const iterable = client.searchCatalogAsync(request);
+   * for await (const response of iterable) {
+   *   // process response
+   * }
    */
   searchCatalogAsync(
     request?: protos.google.cloud.datacatalog.v1.ISearchCatalogRequest,
@@ -2975,19 +3069,14 @@ export class DataCatalogClient {
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
    *   The first element of the array is Array of [EntryGroup]{@link google.cloud.datacatalog.v1.EntryGroup}.
-   *   The client library support auto-pagination by default: it will call the API as many
+   *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
-   *
-   *   When autoPaginate: false is specified through options, the array has three elements.
-   *   The first element is Array of [EntryGroup]{@link google.cloud.datacatalog.v1.EntryGroup} that corresponds to
-   *   the one page received from the API server.
-   *   If the second element is not null it contains the request object of type [ListEntryGroupsRequest]{@link google.cloud.datacatalog.v1.ListEntryGroupsRequest}
-   *   that can be used to obtain the next page of the results.
-   *   If it is null, the next page does not exist.
-   *   The third element contains the raw response received from the API server. Its type is
-   *   [ListEntryGroupsResponse]{@link google.cloud.datacatalog.v1.ListEntryGroupsResponse}.
-   *
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *   Note that it can affect your quota.
+   *   We recommend using `listEntryGroupsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
    */
   listEntryGroups(
     request: protos.google.cloud.datacatalog.v1.IListEntryGroupsRequest,
@@ -3035,18 +3124,7 @@ export class DataCatalogClient {
   }
 
   /**
-   * Equivalent to {@link listEntryGroups}, but returns a NodeJS Stream object.
-   *
-   * This fetches the paged responses for {@link listEntryGroups} continuously
-   * and invokes the callback registered for 'data' event for each element in the
-   * responses.
-   *
-   * The returned object has 'end' method when no more elements are required.
-   *
-   * autoPaginate option will be ignored.
-   *
-   * @see {@link https://nodejs.org/api/stream.html}
-   *
+   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -3064,6 +3142,13 @@ export class DataCatalogClient {
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
    *   An object stream which emits an object representing [EntryGroup]{@link google.cloud.datacatalog.v1.EntryGroup} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listEntryGroupsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
    */
   listEntryGroupsStream(
     request?: protos.google.cloud.datacatalog.v1.IListEntryGroupsRequest,
@@ -3088,10 +3173,9 @@ export class DataCatalogClient {
   }
 
   /**
-   * Equivalent to {@link listEntryGroups}, but returns an iterable object.
+   * Equivalent to `listEntryGroups`, but returns an iterable object.
    *
-   * for-await-of syntax is used with the iterable to recursively get response element on-demand.
-   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -3108,7 +3192,18 @@ export class DataCatalogClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that conforms to @link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols.
+   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   [EntryGroup]{@link google.cloud.datacatalog.v1.EntryGroup}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   * @example
+   * const iterable = client.listEntryGroupsAsync(request);
+   * for await (const response of iterable) {
+   *   // process response
+   * }
    */
   listEntryGroupsAsync(
     request?: protos.google.cloud.datacatalog.v1.IListEntryGroupsRequest,
@@ -3188,19 +3283,14 @@ export class DataCatalogClient {
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
    *   The first element of the array is Array of [Entry]{@link google.cloud.datacatalog.v1.Entry}.
-   *   The client library support auto-pagination by default: it will call the API as many
+   *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
-   *
-   *   When autoPaginate: false is specified through options, the array has three elements.
-   *   The first element is Array of [Entry]{@link google.cloud.datacatalog.v1.Entry} that corresponds to
-   *   the one page received from the API server.
-   *   If the second element is not null it contains the request object of type [ListEntriesRequest]{@link google.cloud.datacatalog.v1.ListEntriesRequest}
-   *   that can be used to obtain the next page of the results.
-   *   If it is null, the next page does not exist.
-   *   The third element contains the raw response received from the API server. Its type is
-   *   [ListEntriesResponse]{@link google.cloud.datacatalog.v1.ListEntriesResponse}.
-   *
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *   Note that it can affect your quota.
+   *   We recommend using `listEntriesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
    */
   listEntries(
     request: protos.google.cloud.datacatalog.v1.IListEntriesRequest,
@@ -3248,18 +3338,7 @@ export class DataCatalogClient {
   }
 
   /**
-   * Equivalent to {@link listEntries}, but returns a NodeJS Stream object.
-   *
-   * This fetches the paged responses for {@link listEntries} continuously
-   * and invokes the callback registered for 'data' event for each element in the
-   * responses.
-   *
-   * The returned object has 'end' method when no more elements are required.
-   *
-   * autoPaginate option will be ignored.
-   *
-   * @see {@link https://nodejs.org/api/stream.html}
-   *
+   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -3282,6 +3361,13 @@ export class DataCatalogClient {
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
    *   An object stream which emits an object representing [Entry]{@link google.cloud.datacatalog.v1.Entry} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listEntriesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
    */
   listEntriesStream(
     request?: protos.google.cloud.datacatalog.v1.IListEntriesRequest,
@@ -3306,10 +3392,9 @@ export class DataCatalogClient {
   }
 
   /**
-   * Equivalent to {@link listEntries}, but returns an iterable object.
+   * Equivalent to `listEntries`, but returns an iterable object.
    *
-   * for-await-of syntax is used with the iterable to recursively get response element on-demand.
-   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -3331,7 +3416,18 @@ export class DataCatalogClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that conforms to @link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols.
+   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   [Entry]{@link google.cloud.datacatalog.v1.Entry}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   * @example
+   * const iterable = client.listEntriesAsync(request);
+   * for await (const response of iterable) {
+   *   // process response
+   * }
    */
   listEntriesAsync(
     request?: protos.google.cloud.datacatalog.v1.IListEntriesRequest,
@@ -3405,19 +3501,14 @@ export class DataCatalogClient {
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
    *   The first element of the array is Array of [Tag]{@link google.cloud.datacatalog.v1.Tag}.
-   *   The client library support auto-pagination by default: it will call the API as many
+   *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
-   *
-   *   When autoPaginate: false is specified through options, the array has three elements.
-   *   The first element is Array of [Tag]{@link google.cloud.datacatalog.v1.Tag} that corresponds to
-   *   the one page received from the API server.
-   *   If the second element is not null it contains the request object of type [ListTagsRequest]{@link google.cloud.datacatalog.v1.ListTagsRequest}
-   *   that can be used to obtain the next page of the results.
-   *   If it is null, the next page does not exist.
-   *   The third element contains the raw response received from the API server. Its type is
-   *   [ListTagsResponse]{@link google.cloud.datacatalog.v1.ListTagsResponse}.
-   *
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *   Note that it can affect your quota.
+   *   We recommend using `listTagsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
    */
   listTags(
     request: protos.google.cloud.datacatalog.v1.IListTagsRequest,
@@ -3463,18 +3554,7 @@ export class DataCatalogClient {
   }
 
   /**
-   * Equivalent to {@link listTags}, but returns a NodeJS Stream object.
-   *
-   * This fetches the paged responses for {@link listTags} continuously
-   * and invokes the callback registered for 'data' event for each element in the
-   * responses.
-   *
-   * The returned object has 'end' method when no more elements are required.
-   *
-   * autoPaginate option will be ignored.
-   *
-   * @see {@link https://nodejs.org/api/stream.html}
-   *
+   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -3495,6 +3575,13 @@ export class DataCatalogClient {
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
    *   An object stream which emits an object representing [Tag]{@link google.cloud.datacatalog.v1.Tag} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listTagsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
    */
   listTagsStream(
     request?: protos.google.cloud.datacatalog.v1.IListTagsRequest,
@@ -3519,10 +3606,9 @@ export class DataCatalogClient {
   }
 
   /**
-   * Equivalent to {@link listTags}, but returns an iterable object.
+   * Equivalent to `listTags`, but returns an iterable object.
    *
-   * for-await-of syntax is used with the iterable to recursively get response element on-demand.
-   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -3542,7 +3628,18 @@ export class DataCatalogClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that conforms to @link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols.
+   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   [Tag]{@link google.cloud.datacatalog.v1.Tag}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   * @example
+   * const iterable = client.listTagsAsync(request);
+   * for await (const response of iterable) {
+   *   // process response
+   * }
    */
   listTagsAsync(
     request?: protos.google.cloud.datacatalog.v1.IListTagsRequest,
@@ -3957,9 +4054,10 @@ export class DataCatalogClient {
   }
 
   /**
-   * Terminate the GRPC channel and close the client.
+   * Terminate the gRPC channel and close the client.
    *
    * The client will no longer be usable and all future behavior is undefined.
+   * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
     this.initialize();

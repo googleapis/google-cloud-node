@@ -22,10 +22,31 @@ import {
   PolicyTagManagerSerializationClient,
 } from '@google-cloud/datacatalog';
 
+// check that the client class type name can be used
+function doStuffWithDataCatalogClient(client: DataCatalogClient) {
+  client.close();
+}
+function doStuffWithPolicyTagManagerClient(client: PolicyTagManagerClient) {
+  client.close();
+}
+function doStuffWithPolicyTagManagerSerializationClient(
+  client: PolicyTagManagerSerializationClient
+) {
+  client.close();
+}
+
 function main() {
-  new DataCatalogClient();
-  new PolicyTagManagerClient();
-  new PolicyTagManagerSerializationClient();
+  // check that the client instance can be created
+  const dataCatalogClient = new DataCatalogClient();
+  doStuffWithDataCatalogClient(dataCatalogClient);
+  // check that the client instance can be created
+  const policyTagManagerClient = new PolicyTagManagerClient();
+  doStuffWithPolicyTagManagerClient(policyTagManagerClient);
+  // check that the client instance can be created
+  const policyTagManagerSerializationClient = new PolicyTagManagerSerializationClient();
+  doStuffWithPolicyTagManagerSerializationClient(
+    policyTagManagerSerializationClient
+  );
 }
 
 main();
