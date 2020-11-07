@@ -60,7 +60,6 @@ npm install @google/area120-tables
 ```javascript
 // Imports the Google Cloud client library
 
-// eslint-disable-next-line node/no-extraneous-require, node/no-missing-require
 const {TablesServiceClient} = require('@google/area120-tables');
 
 // TODO(developer): replace with your prefered project ID.

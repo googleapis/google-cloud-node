@@ -18,6 +18,7 @@
 
 import * as v1alpha1 from './v1alpha1';
 const TablesServiceClient = v1alpha1.TablesServiceClient;
+type TablesServiceClient = v1alpha1.TablesServiceClient;
 export {v1alpha1, TablesServiceClient};
 export default {v1alpha1, TablesServiceClient};
 import * as protos from '../protos/protos';
