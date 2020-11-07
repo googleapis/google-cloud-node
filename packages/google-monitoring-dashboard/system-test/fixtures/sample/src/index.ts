@@ -18,8 +18,15 @@
 
 import {DashboardsServiceClient} from '@google-cloud/monitoring-dashboards';
 
+// check that the client class type name can be used
+function doStuffWithDashboardsServiceClient(client: DashboardsServiceClient) {
+  client.close();
+}
+
 function main() {
-  new DashboardsServiceClient();
+  // check that the client instance can be created
+  const dashboardsServiceClient = new DashboardsServiceClient();
+  doStuffWithDashboardsServiceClient(dashboardsServiceClient);
 }
 
 main();
