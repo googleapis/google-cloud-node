@@ -18,8 +18,15 @@
 
 import {DeviceManagerClient} from '@google-cloud/iot';
 
+// check that the client class type name can be used
+function doStuffWithDeviceManagerClient(client: DeviceManagerClient) {
+  client.close();
+}
+
 function main() {
-  new DeviceManagerClient();
+  // check that the client instance can be created
+  const deviceManagerClient = new DeviceManagerClient();
+  doStuffWithDeviceManagerClient(deviceManagerClient);
 }
 
 main();

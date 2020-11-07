@@ -19,6 +19,7 @@
 import * as v1 from './v1';
 
 const DeviceManagerClient = v1.DeviceManagerClient;
+type DeviceManagerClient = v1.DeviceManagerClient;
 
 export {v1, DeviceManagerClient};
 export default {v1, DeviceManagerClient};
