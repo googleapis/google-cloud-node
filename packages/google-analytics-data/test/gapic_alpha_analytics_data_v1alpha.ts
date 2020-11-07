@@ -732,6 +732,124 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
     });
   });
 
+  describe('runRealtimeReport', () => {
+    it('invokes runRealtimeReport without error', async () => {
+      const client = new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.data.v1alpha.RunRealtimeReportRequest()
+      );
+      request.property = '';
+      const expectedHeaderRequestParams = 'property=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.analytics.data.v1alpha.RunRealtimeReportResponse()
+      );
+      client.innerApiCalls.runRealtimeReport = stubSimpleCall(expectedResponse);
+      const [response] = await client.runRealtimeReport(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.runRealtimeReport as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes runRealtimeReport without error using callback', async () => {
+      const client = new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.data.v1alpha.RunRealtimeReportRequest()
+      );
+      request.property = '';
+      const expectedHeaderRequestParams = 'property=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.analytics.data.v1alpha.RunRealtimeReportResponse()
+      );
+      client.innerApiCalls.runRealtimeReport = stubSimpleCallWithCallback(
+        expectedResponse
+      );
+      const promise = new Promise((resolve, reject) => {
+        client.runRealtimeReport(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.analytics.data.v1alpha.IRunRealtimeReportResponse | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.runRealtimeReport as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes runRealtimeReport with error', async () => {
+      const client = new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.data.v1alpha.RunRealtimeReportRequest()
+      );
+      request.property = '';
+      const expectedHeaderRequestParams = 'property=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.runRealtimeReport = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.runRealtimeReport(request), expectedError);
+      assert(
+        (client.innerApiCalls.runRealtimeReport as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+  });
+
   describe('Path templates', () => {
     describe('metadata', () => {
       const fakePath = '/rendered/path/metadata';

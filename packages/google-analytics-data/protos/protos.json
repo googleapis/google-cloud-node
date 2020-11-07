@@ -66,6 +66,14 @@
                             "(google.api.http).get": "/v1alpha/{name=properties/*/metadata}",
                             "(google.api.method_signature)": "name"
                           }
+                        },
+                        "RunRealtimeReport": {
+                          "requestType": "RunRealtimeReportRequest",
+                          "responseType": "RunRealtimeReportResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1alpha/{property=properties/*}:runRealtimeReport",
+                            "(google.api.http).body": "*"
+                          }
                         }
                       }
                     },
@@ -361,6 +369,92 @@
                             "(google.api.field_behavior)": "REQUIRED",
                             "(google.api.resource_reference).type": "analyticsdata.googleapis.com/Metadata"
                           }
+                        }
+                      }
+                    },
+                    "RunRealtimeReportRequest": {
+                      "fields": {
+                        "property": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "dimensions": {
+                          "rule": "repeated",
+                          "type": "Dimension",
+                          "id": 2
+                        },
+                        "metrics": {
+                          "rule": "repeated",
+                          "type": "Metric",
+                          "id": 3
+                        },
+                        "limit": {
+                          "type": "int64",
+                          "id": 4
+                        },
+                        "dimensionFilter": {
+                          "type": "FilterExpression",
+                          "id": 5
+                        },
+                        "metricFilter": {
+                          "type": "FilterExpression",
+                          "id": 6
+                        },
+                        "metricAggregations": {
+                          "rule": "repeated",
+                          "type": "MetricAggregation",
+                          "id": 7
+                        },
+                        "orderBys": {
+                          "rule": "repeated",
+                          "type": "OrderBy",
+                          "id": 8
+                        },
+                        "returnPropertyQuota": {
+                          "type": "bool",
+                          "id": 9
+                        }
+                      }
+                    },
+                    "RunRealtimeReportResponse": {
+                      "fields": {
+                        "dimensionHeaders": {
+                          "rule": "repeated",
+                          "type": "DimensionHeader",
+                          "id": 1
+                        },
+                        "metricHeaders": {
+                          "rule": "repeated",
+                          "type": "MetricHeader",
+                          "id": 2
+                        },
+                        "rows": {
+                          "rule": "repeated",
+                          "type": "Row",
+                          "id": 3
+                        },
+                        "totals": {
+                          "rule": "repeated",
+                          "type": "Row",
+                          "id": 4
+                        },
+                        "maximums": {
+                          "rule": "repeated",
+                          "type": "Row",
+                          "id": 5
+                        },
+                        "minimums": {
+                          "rule": "repeated",
+                          "type": "Row",
+                          "id": 6
+                        },
+                        "rowCount": {
+                          "type": "int32",
+                          "id": 7
+                        },
+                        "propertyQuota": {
+                          "type": "PropertyQuota",
+                          "id": 8
                         }
                       }
                     },

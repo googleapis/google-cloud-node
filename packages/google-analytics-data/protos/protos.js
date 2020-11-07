@@ -296,6 +296,39 @@
                          * @variation 2
                          */
     
+                        /**
+                         * Callback as used by {@link google.analytics.data.v1alpha.AlphaAnalyticsData#runRealtimeReport}.
+                         * @memberof google.analytics.data.v1alpha.AlphaAnalyticsData
+                         * @typedef RunRealtimeReportCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.analytics.data.v1alpha.RunRealtimeReportResponse} [response] RunRealtimeReportResponse
+                         */
+    
+                        /**
+                         * Calls RunRealtimeReport.
+                         * @function runRealtimeReport
+                         * @memberof google.analytics.data.v1alpha.AlphaAnalyticsData
+                         * @instance
+                         * @param {google.analytics.data.v1alpha.IRunRealtimeReportRequest} request RunRealtimeReportRequest message or plain object
+                         * @param {google.analytics.data.v1alpha.AlphaAnalyticsData.RunRealtimeReportCallback} callback Node-style callback called with the error, if any, and RunRealtimeReportResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(AlphaAnalyticsData.prototype.runRealtimeReport = function runRealtimeReport(request, callback) {
+                            return this.rpcCall(runRealtimeReport, $root.google.analytics.data.v1alpha.RunRealtimeReportRequest, $root.google.analytics.data.v1alpha.RunRealtimeReportResponse, request, callback);
+                        }, "name", { value: "RunRealtimeReport" });
+    
+                        /**
+                         * Calls RunRealtimeReport.
+                         * @function runRealtimeReport
+                         * @memberof google.analytics.data.v1alpha.AlphaAnalyticsData
+                         * @instance
+                         * @param {google.analytics.data.v1alpha.IRunRealtimeReportRequest} request RunRealtimeReportRequest message or plain object
+                         * @returns {Promise<google.analytics.data.v1alpha.RunRealtimeReportResponse>} Promise
+                         * @variation 2
+                         */
+    
                         return AlphaAnalyticsData;
                     })();
     
@@ -4174,6 +4207,988 @@
                         };
     
                         return GetMetadataRequest;
+                    })();
+    
+                    v1alpha.RunRealtimeReportRequest = (function() {
+    
+                        /**
+                         * Properties of a RunRealtimeReportRequest.
+                         * @memberof google.analytics.data.v1alpha
+                         * @interface IRunRealtimeReportRequest
+                         * @property {string|null} [property] RunRealtimeReportRequest property
+                         * @property {Array.<google.analytics.data.v1alpha.IDimension>|null} [dimensions] RunRealtimeReportRequest dimensions
+                         * @property {Array.<google.analytics.data.v1alpha.IMetric>|null} [metrics] RunRealtimeReportRequest metrics
+                         * @property {number|Long|null} [limit] RunRealtimeReportRequest limit
+                         * @property {google.analytics.data.v1alpha.IFilterExpression|null} [dimensionFilter] RunRealtimeReportRequest dimensionFilter
+                         * @property {google.analytics.data.v1alpha.IFilterExpression|null} [metricFilter] RunRealtimeReportRequest metricFilter
+                         * @property {Array.<google.analytics.data.v1alpha.MetricAggregation>|null} [metricAggregations] RunRealtimeReportRequest metricAggregations
+                         * @property {Array.<google.analytics.data.v1alpha.IOrderBy>|null} [orderBys] RunRealtimeReportRequest orderBys
+                         * @property {boolean|null} [returnPropertyQuota] RunRealtimeReportRequest returnPropertyQuota
+                         */
+    
+                        /**
+                         * Constructs a new RunRealtimeReportRequest.
+                         * @memberof google.analytics.data.v1alpha
+                         * @classdesc Represents a RunRealtimeReportRequest.
+                         * @implements IRunRealtimeReportRequest
+                         * @constructor
+                         * @param {google.analytics.data.v1alpha.IRunRealtimeReportRequest=} [properties] Properties to set
+                         */
+                        function RunRealtimeReportRequest(properties) {
+                            this.dimensions = [];
+                            this.metrics = [];
+                            this.metricAggregations = [];
+                            this.orderBys = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * RunRealtimeReportRequest property.
+                         * @member {string} property
+                         * @memberof google.analytics.data.v1alpha.RunRealtimeReportRequest
+                         * @instance
+                         */
+                        RunRealtimeReportRequest.prototype.property = "";
+    
+                        /**
+                         * RunRealtimeReportRequest dimensions.
+                         * @member {Array.<google.analytics.data.v1alpha.IDimension>} dimensions
+                         * @memberof google.analytics.data.v1alpha.RunRealtimeReportRequest
+                         * @instance
+                         */
+                        RunRealtimeReportRequest.prototype.dimensions = $util.emptyArray;
+    
+                        /**
+                         * RunRealtimeReportRequest metrics.
+                         * @member {Array.<google.analytics.data.v1alpha.IMetric>} metrics
+                         * @memberof google.analytics.data.v1alpha.RunRealtimeReportRequest
+                         * @instance
+                         */
+                        RunRealtimeReportRequest.prototype.metrics = $util.emptyArray;
+    
+                        /**
+                         * RunRealtimeReportRequest limit.
+                         * @member {number|Long} limit
+                         * @memberof google.analytics.data.v1alpha.RunRealtimeReportRequest
+                         * @instance
+                         */
+                        RunRealtimeReportRequest.prototype.limit = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                        /**
+                         * RunRealtimeReportRequest dimensionFilter.
+                         * @member {google.analytics.data.v1alpha.IFilterExpression|null|undefined} dimensionFilter
+                         * @memberof google.analytics.data.v1alpha.RunRealtimeReportRequest
+                         * @instance
+                         */
+                        RunRealtimeReportRequest.prototype.dimensionFilter = null;
+    
+                        /**
+                         * RunRealtimeReportRequest metricFilter.
+                         * @member {google.analytics.data.v1alpha.IFilterExpression|null|undefined} metricFilter
+                         * @memberof google.analytics.data.v1alpha.RunRealtimeReportRequest
+                         * @instance
+                         */
+                        RunRealtimeReportRequest.prototype.metricFilter = null;
+    
+                        /**
+                         * RunRealtimeReportRequest metricAggregations.
+                         * @member {Array.<google.analytics.data.v1alpha.MetricAggregation>} metricAggregations
+                         * @memberof google.analytics.data.v1alpha.RunRealtimeReportRequest
+                         * @instance
+                         */
+                        RunRealtimeReportRequest.prototype.metricAggregations = $util.emptyArray;
+    
+                        /**
+                         * RunRealtimeReportRequest orderBys.
+                         * @member {Array.<google.analytics.data.v1alpha.IOrderBy>} orderBys
+                         * @memberof google.analytics.data.v1alpha.RunRealtimeReportRequest
+                         * @instance
+                         */
+                        RunRealtimeReportRequest.prototype.orderBys = $util.emptyArray;
+    
+                        /**
+                         * RunRealtimeReportRequest returnPropertyQuota.
+                         * @member {boolean} returnPropertyQuota
+                         * @memberof google.analytics.data.v1alpha.RunRealtimeReportRequest
+                         * @instance
+                         */
+                        RunRealtimeReportRequest.prototype.returnPropertyQuota = false;
+    
+                        /**
+                         * Creates a new RunRealtimeReportRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.analytics.data.v1alpha.RunRealtimeReportRequest
+                         * @static
+                         * @param {google.analytics.data.v1alpha.IRunRealtimeReportRequest=} [properties] Properties to set
+                         * @returns {google.analytics.data.v1alpha.RunRealtimeReportRequest} RunRealtimeReportRequest instance
+                         */
+                        RunRealtimeReportRequest.create = function create(properties) {
+                            return new RunRealtimeReportRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified RunRealtimeReportRequest message. Does not implicitly {@link google.analytics.data.v1alpha.RunRealtimeReportRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.analytics.data.v1alpha.RunRealtimeReportRequest
+                         * @static
+                         * @param {google.analytics.data.v1alpha.IRunRealtimeReportRequest} message RunRealtimeReportRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RunRealtimeReportRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.property != null && Object.hasOwnProperty.call(message, "property"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.property);
+                            if (message.dimensions != null && message.dimensions.length)
+                                for (var i = 0; i < message.dimensions.length; ++i)
+                                    $root.google.analytics.data.v1alpha.Dimension.encode(message.dimensions[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.metrics != null && message.metrics.length)
+                                for (var i = 0; i < message.metrics.length; ++i)
+                                    $root.google.analytics.data.v1alpha.Metric.encode(message.metrics[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.limit != null && Object.hasOwnProperty.call(message, "limit"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).int64(message.limit);
+                            if (message.dimensionFilter != null && Object.hasOwnProperty.call(message, "dimensionFilter"))
+                                $root.google.analytics.data.v1alpha.FilterExpression.encode(message.dimensionFilter, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.metricFilter != null && Object.hasOwnProperty.call(message, "metricFilter"))
+                                $root.google.analytics.data.v1alpha.FilterExpression.encode(message.metricFilter, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                            if (message.metricAggregations != null && message.metricAggregations.length) {
+                                writer.uint32(/* id 7, wireType 2 =*/58).fork();
+                                for (var i = 0; i < message.metricAggregations.length; ++i)
+                                    writer.int32(message.metricAggregations[i]);
+                                writer.ldelim();
+                            }
+                            if (message.orderBys != null && message.orderBys.length)
+                                for (var i = 0; i < message.orderBys.length; ++i)
+                                    $root.google.analytics.data.v1alpha.OrderBy.encode(message.orderBys[i], writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                            if (message.returnPropertyQuota != null && Object.hasOwnProperty.call(message, "returnPropertyQuota"))
+                                writer.uint32(/* id 9, wireType 0 =*/72).bool(message.returnPropertyQuota);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified RunRealtimeReportRequest message, length delimited. Does not implicitly {@link google.analytics.data.v1alpha.RunRealtimeReportRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.analytics.data.v1alpha.RunRealtimeReportRequest
+                         * @static
+                         * @param {google.analytics.data.v1alpha.IRunRealtimeReportRequest} message RunRealtimeReportRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RunRealtimeReportRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a RunRealtimeReportRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.analytics.data.v1alpha.RunRealtimeReportRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.analytics.data.v1alpha.RunRealtimeReportRequest} RunRealtimeReportRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RunRealtimeReportRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.data.v1alpha.RunRealtimeReportRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.property = reader.string();
+                                    break;
+                                case 2:
+                                    if (!(message.dimensions && message.dimensions.length))
+                                        message.dimensions = [];
+                                    message.dimensions.push($root.google.analytics.data.v1alpha.Dimension.decode(reader, reader.uint32()));
+                                    break;
+                                case 3:
+                                    if (!(message.metrics && message.metrics.length))
+                                        message.metrics = [];
+                                    message.metrics.push($root.google.analytics.data.v1alpha.Metric.decode(reader, reader.uint32()));
+                                    break;
+                                case 4:
+                                    message.limit = reader.int64();
+                                    break;
+                                case 5:
+                                    message.dimensionFilter = $root.google.analytics.data.v1alpha.FilterExpression.decode(reader, reader.uint32());
+                                    break;
+                                case 6:
+                                    message.metricFilter = $root.google.analytics.data.v1alpha.FilterExpression.decode(reader, reader.uint32());
+                                    break;
+                                case 7:
+                                    if (!(message.metricAggregations && message.metricAggregations.length))
+                                        message.metricAggregations = [];
+                                    if ((tag & 7) === 2) {
+                                        var end2 = reader.uint32() + reader.pos;
+                                        while (reader.pos < end2)
+                                            message.metricAggregations.push(reader.int32());
+                                    } else
+                                        message.metricAggregations.push(reader.int32());
+                                    break;
+                                case 8:
+                                    if (!(message.orderBys && message.orderBys.length))
+                                        message.orderBys = [];
+                                    message.orderBys.push($root.google.analytics.data.v1alpha.OrderBy.decode(reader, reader.uint32()));
+                                    break;
+                                case 9:
+                                    message.returnPropertyQuota = reader.bool();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a RunRealtimeReportRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.analytics.data.v1alpha.RunRealtimeReportRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.analytics.data.v1alpha.RunRealtimeReportRequest} RunRealtimeReportRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RunRealtimeReportRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a RunRealtimeReportRequest message.
+                         * @function verify
+                         * @memberof google.analytics.data.v1alpha.RunRealtimeReportRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        RunRealtimeReportRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.property != null && message.hasOwnProperty("property"))
+                                if (!$util.isString(message.property))
+                                    return "property: string expected";
+                            if (message.dimensions != null && message.hasOwnProperty("dimensions")) {
+                                if (!Array.isArray(message.dimensions))
+                                    return "dimensions: array expected";
+                                for (var i = 0; i < message.dimensions.length; ++i) {
+                                    var error = $root.google.analytics.data.v1alpha.Dimension.verify(message.dimensions[i]);
+                                    if (error)
+                                        return "dimensions." + error;
+                                }
+                            }
+                            if (message.metrics != null && message.hasOwnProperty("metrics")) {
+                                if (!Array.isArray(message.metrics))
+                                    return "metrics: array expected";
+                                for (var i = 0; i < message.metrics.length; ++i) {
+                                    var error = $root.google.analytics.data.v1alpha.Metric.verify(message.metrics[i]);
+                                    if (error)
+                                        return "metrics." + error;
+                                }
+                            }
+                            if (message.limit != null && message.hasOwnProperty("limit"))
+                                if (!$util.isInteger(message.limit) && !(message.limit && $util.isInteger(message.limit.low) && $util.isInteger(message.limit.high)))
+                                    return "limit: integer|Long expected";
+                            if (message.dimensionFilter != null && message.hasOwnProperty("dimensionFilter")) {
+                                var error = $root.google.analytics.data.v1alpha.FilterExpression.verify(message.dimensionFilter);
+                                if (error)
+                                    return "dimensionFilter." + error;
+                            }
+                            if (message.metricFilter != null && message.hasOwnProperty("metricFilter")) {
+                                var error = $root.google.analytics.data.v1alpha.FilterExpression.verify(message.metricFilter);
+                                if (error)
+                                    return "metricFilter." + error;
+                            }
+                            if (message.metricAggregations != null && message.hasOwnProperty("metricAggregations")) {
+                                if (!Array.isArray(message.metricAggregations))
+                                    return "metricAggregations: array expected";
+                                for (var i = 0; i < message.metricAggregations.length; ++i)
+                                    switch (message.metricAggregations[i]) {
+                                    default:
+                                        return "metricAggregations: enum value[] expected";
+                                    case 0:
+                                    case 1:
+                                    case 5:
+                                    case 6:
+                                    case 4:
+                                        break;
+                                    }
+                            }
+                            if (message.orderBys != null && message.hasOwnProperty("orderBys")) {
+                                if (!Array.isArray(message.orderBys))
+                                    return "orderBys: array expected";
+                                for (var i = 0; i < message.orderBys.length; ++i) {
+                                    var error = $root.google.analytics.data.v1alpha.OrderBy.verify(message.orderBys[i]);
+                                    if (error)
+                                        return "orderBys." + error;
+                                }
+                            }
+                            if (message.returnPropertyQuota != null && message.hasOwnProperty("returnPropertyQuota"))
+                                if (typeof message.returnPropertyQuota !== "boolean")
+                                    return "returnPropertyQuota: boolean expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a RunRealtimeReportRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.analytics.data.v1alpha.RunRealtimeReportRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.analytics.data.v1alpha.RunRealtimeReportRequest} RunRealtimeReportRequest
+                         */
+                        RunRealtimeReportRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.analytics.data.v1alpha.RunRealtimeReportRequest)
+                                return object;
+                            var message = new $root.google.analytics.data.v1alpha.RunRealtimeReportRequest();
+                            if (object.property != null)
+                                message.property = String(object.property);
+                            if (object.dimensions) {
+                                if (!Array.isArray(object.dimensions))
+                                    throw TypeError(".google.analytics.data.v1alpha.RunRealtimeReportRequest.dimensions: array expected");
+                                message.dimensions = [];
+                                for (var i = 0; i < object.dimensions.length; ++i) {
+                                    if (typeof object.dimensions[i] !== "object")
+                                        throw TypeError(".google.analytics.data.v1alpha.RunRealtimeReportRequest.dimensions: object expected");
+                                    message.dimensions[i] = $root.google.analytics.data.v1alpha.Dimension.fromObject(object.dimensions[i]);
+                                }
+                            }
+                            if (object.metrics) {
+                                if (!Array.isArray(object.metrics))
+                                    throw TypeError(".google.analytics.data.v1alpha.RunRealtimeReportRequest.metrics: array expected");
+                                message.metrics = [];
+                                for (var i = 0; i < object.metrics.length; ++i) {
+                                    if (typeof object.metrics[i] !== "object")
+                                        throw TypeError(".google.analytics.data.v1alpha.RunRealtimeReportRequest.metrics: object expected");
+                                    message.metrics[i] = $root.google.analytics.data.v1alpha.Metric.fromObject(object.metrics[i]);
+                                }
+                            }
+                            if (object.limit != null)
+                                if ($util.Long)
+                                    (message.limit = $util.Long.fromValue(object.limit)).unsigned = false;
+                                else if (typeof object.limit === "string")
+                                    message.limit = parseInt(object.limit, 10);
+                                else if (typeof object.limit === "number")
+                                    message.limit = object.limit;
+                                else if (typeof object.limit === "object")
+                                    message.limit = new $util.LongBits(object.limit.low >>> 0, object.limit.high >>> 0).toNumber();
+                            if (object.dimensionFilter != null) {
+                                if (typeof object.dimensionFilter !== "object")
+                                    throw TypeError(".google.analytics.data.v1alpha.RunRealtimeReportRequest.dimensionFilter: object expected");
+                                message.dimensionFilter = $root.google.analytics.data.v1alpha.FilterExpression.fromObject(object.dimensionFilter);
+                            }
+                            if (object.metricFilter != null) {
+                                if (typeof object.metricFilter !== "object")
+                                    throw TypeError(".google.analytics.data.v1alpha.RunRealtimeReportRequest.metricFilter: object expected");
+                                message.metricFilter = $root.google.analytics.data.v1alpha.FilterExpression.fromObject(object.metricFilter);
+                            }
+                            if (object.metricAggregations) {
+                                if (!Array.isArray(object.metricAggregations))
+                                    throw TypeError(".google.analytics.data.v1alpha.RunRealtimeReportRequest.metricAggregations: array expected");
+                                message.metricAggregations = [];
+                                for (var i = 0; i < object.metricAggregations.length; ++i)
+                                    switch (object.metricAggregations[i]) {
+                                    default:
+                                    case "METRIC_AGGREGATION_UNSPECIFIED":
+                                    case 0:
+                                        message.metricAggregations[i] = 0;
+                                        break;
+                                    case "TOTAL":
+                                    case 1:
+                                        message.metricAggregations[i] = 1;
+                                        break;
+                                    case "MINIMUM":
+                                    case 5:
+                                        message.metricAggregations[i] = 5;
+                                        break;
+                                    case "MAXIMUM":
+                                    case 6:
+                                        message.metricAggregations[i] = 6;
+                                        break;
+                                    case "COUNT":
+                                    case 4:
+                                        message.metricAggregations[i] = 4;
+                                        break;
+                                    }
+                            }
+                            if (object.orderBys) {
+                                if (!Array.isArray(object.orderBys))
+                                    throw TypeError(".google.analytics.data.v1alpha.RunRealtimeReportRequest.orderBys: array expected");
+                                message.orderBys = [];
+                                for (var i = 0; i < object.orderBys.length; ++i) {
+                                    if (typeof object.orderBys[i] !== "object")
+                                        throw TypeError(".google.analytics.data.v1alpha.RunRealtimeReportRequest.orderBys: object expected");
+                                    message.orderBys[i] = $root.google.analytics.data.v1alpha.OrderBy.fromObject(object.orderBys[i]);
+                                }
+                            }
+                            if (object.returnPropertyQuota != null)
+                                message.returnPropertyQuota = Boolean(object.returnPropertyQuota);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a RunRealtimeReportRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.analytics.data.v1alpha.RunRealtimeReportRequest
+                         * @static
+                         * @param {google.analytics.data.v1alpha.RunRealtimeReportRequest} message RunRealtimeReportRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        RunRealtimeReportRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.dimensions = [];
+                                object.metrics = [];
+                                object.metricAggregations = [];
+                                object.orderBys = [];
+                            }
+                            if (options.defaults) {
+                                object.property = "";
+                                if ($util.Long) {
+                                    var long = new $util.Long(0, 0, false);
+                                    object.limit = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                } else
+                                    object.limit = options.longs === String ? "0" : 0;
+                                object.dimensionFilter = null;
+                                object.metricFilter = null;
+                                object.returnPropertyQuota = false;
+                            }
+                            if (message.property != null && message.hasOwnProperty("property"))
+                                object.property = message.property;
+                            if (message.dimensions && message.dimensions.length) {
+                                object.dimensions = [];
+                                for (var j = 0; j < message.dimensions.length; ++j)
+                                    object.dimensions[j] = $root.google.analytics.data.v1alpha.Dimension.toObject(message.dimensions[j], options);
+                            }
+                            if (message.metrics && message.metrics.length) {
+                                object.metrics = [];
+                                for (var j = 0; j < message.metrics.length; ++j)
+                                    object.metrics[j] = $root.google.analytics.data.v1alpha.Metric.toObject(message.metrics[j], options);
+                            }
+                            if (message.limit != null && message.hasOwnProperty("limit"))
+                                if (typeof message.limit === "number")
+                                    object.limit = options.longs === String ? String(message.limit) : message.limit;
+                                else
+                                    object.limit = options.longs === String ? $util.Long.prototype.toString.call(message.limit) : options.longs === Number ? new $util.LongBits(message.limit.low >>> 0, message.limit.high >>> 0).toNumber() : message.limit;
+                            if (message.dimensionFilter != null && message.hasOwnProperty("dimensionFilter"))
+                                object.dimensionFilter = $root.google.analytics.data.v1alpha.FilterExpression.toObject(message.dimensionFilter, options);
+                            if (message.metricFilter != null && message.hasOwnProperty("metricFilter"))
+                                object.metricFilter = $root.google.analytics.data.v1alpha.FilterExpression.toObject(message.metricFilter, options);
+                            if (message.metricAggregations && message.metricAggregations.length) {
+                                object.metricAggregations = [];
+                                for (var j = 0; j < message.metricAggregations.length; ++j)
+                                    object.metricAggregations[j] = options.enums === String ? $root.google.analytics.data.v1alpha.MetricAggregation[message.metricAggregations[j]] : message.metricAggregations[j];
+                            }
+                            if (message.orderBys && message.orderBys.length) {
+                                object.orderBys = [];
+                                for (var j = 0; j < message.orderBys.length; ++j)
+                                    object.orderBys[j] = $root.google.analytics.data.v1alpha.OrderBy.toObject(message.orderBys[j], options);
+                            }
+                            if (message.returnPropertyQuota != null && message.hasOwnProperty("returnPropertyQuota"))
+                                object.returnPropertyQuota = message.returnPropertyQuota;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this RunRealtimeReportRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.analytics.data.v1alpha.RunRealtimeReportRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        RunRealtimeReportRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return RunRealtimeReportRequest;
+                    })();
+    
+                    v1alpha.RunRealtimeReportResponse = (function() {
+    
+                        /**
+                         * Properties of a RunRealtimeReportResponse.
+                         * @memberof google.analytics.data.v1alpha
+                         * @interface IRunRealtimeReportResponse
+                         * @property {Array.<google.analytics.data.v1alpha.IDimensionHeader>|null} [dimensionHeaders] RunRealtimeReportResponse dimensionHeaders
+                         * @property {Array.<google.analytics.data.v1alpha.IMetricHeader>|null} [metricHeaders] RunRealtimeReportResponse metricHeaders
+                         * @property {Array.<google.analytics.data.v1alpha.IRow>|null} [rows] RunRealtimeReportResponse rows
+                         * @property {Array.<google.analytics.data.v1alpha.IRow>|null} [totals] RunRealtimeReportResponse totals
+                         * @property {Array.<google.analytics.data.v1alpha.IRow>|null} [maximums] RunRealtimeReportResponse maximums
+                         * @property {Array.<google.analytics.data.v1alpha.IRow>|null} [minimums] RunRealtimeReportResponse minimums
+                         * @property {number|null} [rowCount] RunRealtimeReportResponse rowCount
+                         * @property {google.analytics.data.v1alpha.IPropertyQuota|null} [propertyQuota] RunRealtimeReportResponse propertyQuota
+                         */
+    
+                        /**
+                         * Constructs a new RunRealtimeReportResponse.
+                         * @memberof google.analytics.data.v1alpha
+                         * @classdesc Represents a RunRealtimeReportResponse.
+                         * @implements IRunRealtimeReportResponse
+                         * @constructor
+                         * @param {google.analytics.data.v1alpha.IRunRealtimeReportResponse=} [properties] Properties to set
+                         */
+                        function RunRealtimeReportResponse(properties) {
+                            this.dimensionHeaders = [];
+                            this.metricHeaders = [];
+                            this.rows = [];
+                            this.totals = [];
+                            this.maximums = [];
+                            this.minimums = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * RunRealtimeReportResponse dimensionHeaders.
+                         * @member {Array.<google.analytics.data.v1alpha.IDimensionHeader>} dimensionHeaders
+                         * @memberof google.analytics.data.v1alpha.RunRealtimeReportResponse
+                         * @instance
+                         */
+                        RunRealtimeReportResponse.prototype.dimensionHeaders = $util.emptyArray;
+    
+                        /**
+                         * RunRealtimeReportResponse metricHeaders.
+                         * @member {Array.<google.analytics.data.v1alpha.IMetricHeader>} metricHeaders
+                         * @memberof google.analytics.data.v1alpha.RunRealtimeReportResponse
+                         * @instance
+                         */
+                        RunRealtimeReportResponse.prototype.metricHeaders = $util.emptyArray;
+    
+                        /**
+                         * RunRealtimeReportResponse rows.
+                         * @member {Array.<google.analytics.data.v1alpha.IRow>} rows
+                         * @memberof google.analytics.data.v1alpha.RunRealtimeReportResponse
+                         * @instance
+                         */
+                        RunRealtimeReportResponse.prototype.rows = $util.emptyArray;
+    
+                        /**
+                         * RunRealtimeReportResponse totals.
+                         * @member {Array.<google.analytics.data.v1alpha.IRow>} totals
+                         * @memberof google.analytics.data.v1alpha.RunRealtimeReportResponse
+                         * @instance
+                         */
+                        RunRealtimeReportResponse.prototype.totals = $util.emptyArray;
+    
+                        /**
+                         * RunRealtimeReportResponse maximums.
+                         * @member {Array.<google.analytics.data.v1alpha.IRow>} maximums
+                         * @memberof google.analytics.data.v1alpha.RunRealtimeReportResponse
+                         * @instance
+                         */
+                        RunRealtimeReportResponse.prototype.maximums = $util.emptyArray;
+    
+                        /**
+                         * RunRealtimeReportResponse minimums.
+                         * @member {Array.<google.analytics.data.v1alpha.IRow>} minimums
+                         * @memberof google.analytics.data.v1alpha.RunRealtimeReportResponse
+                         * @instance
+                         */
+                        RunRealtimeReportResponse.prototype.minimums = $util.emptyArray;
+    
+                        /**
+                         * RunRealtimeReportResponse rowCount.
+                         * @member {number} rowCount
+                         * @memberof google.analytics.data.v1alpha.RunRealtimeReportResponse
+                         * @instance
+                         */
+                        RunRealtimeReportResponse.prototype.rowCount = 0;
+    
+                        /**
+                         * RunRealtimeReportResponse propertyQuota.
+                         * @member {google.analytics.data.v1alpha.IPropertyQuota|null|undefined} propertyQuota
+                         * @memberof google.analytics.data.v1alpha.RunRealtimeReportResponse
+                         * @instance
+                         */
+                        RunRealtimeReportResponse.prototype.propertyQuota = null;
+    
+                        /**
+                         * Creates a new RunRealtimeReportResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.analytics.data.v1alpha.RunRealtimeReportResponse
+                         * @static
+                         * @param {google.analytics.data.v1alpha.IRunRealtimeReportResponse=} [properties] Properties to set
+                         * @returns {google.analytics.data.v1alpha.RunRealtimeReportResponse} RunRealtimeReportResponse instance
+                         */
+                        RunRealtimeReportResponse.create = function create(properties) {
+                            return new RunRealtimeReportResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified RunRealtimeReportResponse message. Does not implicitly {@link google.analytics.data.v1alpha.RunRealtimeReportResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.analytics.data.v1alpha.RunRealtimeReportResponse
+                         * @static
+                         * @param {google.analytics.data.v1alpha.IRunRealtimeReportResponse} message RunRealtimeReportResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RunRealtimeReportResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.dimensionHeaders != null && message.dimensionHeaders.length)
+                                for (var i = 0; i < message.dimensionHeaders.length; ++i)
+                                    $root.google.analytics.data.v1alpha.DimensionHeader.encode(message.dimensionHeaders[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.metricHeaders != null && message.metricHeaders.length)
+                                for (var i = 0; i < message.metricHeaders.length; ++i)
+                                    $root.google.analytics.data.v1alpha.MetricHeader.encode(message.metricHeaders[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.rows != null && message.rows.length)
+                                for (var i = 0; i < message.rows.length; ++i)
+                                    $root.google.analytics.data.v1alpha.Row.encode(message.rows[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.totals != null && message.totals.length)
+                                for (var i = 0; i < message.totals.length; ++i)
+                                    $root.google.analytics.data.v1alpha.Row.encode(message.totals[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.maximums != null && message.maximums.length)
+                                for (var i = 0; i < message.maximums.length; ++i)
+                                    $root.google.analytics.data.v1alpha.Row.encode(message.maximums[i], writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.minimums != null && message.minimums.length)
+                                for (var i = 0; i < message.minimums.length; ++i)
+                                    $root.google.analytics.data.v1alpha.Row.encode(message.minimums[i], writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                            if (message.rowCount != null && Object.hasOwnProperty.call(message, "rowCount"))
+                                writer.uint32(/* id 7, wireType 0 =*/56).int32(message.rowCount);
+                            if (message.propertyQuota != null && Object.hasOwnProperty.call(message, "propertyQuota"))
+                                $root.google.analytics.data.v1alpha.PropertyQuota.encode(message.propertyQuota, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified RunRealtimeReportResponse message, length delimited. Does not implicitly {@link google.analytics.data.v1alpha.RunRealtimeReportResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.analytics.data.v1alpha.RunRealtimeReportResponse
+                         * @static
+                         * @param {google.analytics.data.v1alpha.IRunRealtimeReportResponse} message RunRealtimeReportResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RunRealtimeReportResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a RunRealtimeReportResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.analytics.data.v1alpha.RunRealtimeReportResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.analytics.data.v1alpha.RunRealtimeReportResponse} RunRealtimeReportResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RunRealtimeReportResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.data.v1alpha.RunRealtimeReportResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    if (!(message.dimensionHeaders && message.dimensionHeaders.length))
+                                        message.dimensionHeaders = [];
+                                    message.dimensionHeaders.push($root.google.analytics.data.v1alpha.DimensionHeader.decode(reader, reader.uint32()));
+                                    break;
+                                case 2:
+                                    if (!(message.metricHeaders && message.metricHeaders.length))
+                                        message.metricHeaders = [];
+                                    message.metricHeaders.push($root.google.analytics.data.v1alpha.MetricHeader.decode(reader, reader.uint32()));
+                                    break;
+                                case 3:
+                                    if (!(message.rows && message.rows.length))
+                                        message.rows = [];
+                                    message.rows.push($root.google.analytics.data.v1alpha.Row.decode(reader, reader.uint32()));
+                                    break;
+                                case 4:
+                                    if (!(message.totals && message.totals.length))
+                                        message.totals = [];
+                                    message.totals.push($root.google.analytics.data.v1alpha.Row.decode(reader, reader.uint32()));
+                                    break;
+                                case 5:
+                                    if (!(message.maximums && message.maximums.length))
+                                        message.maximums = [];
+                                    message.maximums.push($root.google.analytics.data.v1alpha.Row.decode(reader, reader.uint32()));
+                                    break;
+                                case 6:
+                                    if (!(message.minimums && message.minimums.length))
+                                        message.minimums = [];
+                                    message.minimums.push($root.google.analytics.data.v1alpha.Row.decode(reader, reader.uint32()));
+                                    break;
+                                case 7:
+                                    message.rowCount = reader.int32();
+                                    break;
+                                case 8:
+                                    message.propertyQuota = $root.google.analytics.data.v1alpha.PropertyQuota.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a RunRealtimeReportResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.analytics.data.v1alpha.RunRealtimeReportResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.analytics.data.v1alpha.RunRealtimeReportResponse} RunRealtimeReportResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RunRealtimeReportResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a RunRealtimeReportResponse message.
+                         * @function verify
+                         * @memberof google.analytics.data.v1alpha.RunRealtimeReportResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        RunRealtimeReportResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.dimensionHeaders != null && message.hasOwnProperty("dimensionHeaders")) {
+                                if (!Array.isArray(message.dimensionHeaders))
+                                    return "dimensionHeaders: array expected";
+                                for (var i = 0; i < message.dimensionHeaders.length; ++i) {
+                                    var error = $root.google.analytics.data.v1alpha.DimensionHeader.verify(message.dimensionHeaders[i]);
+                                    if (error)
+                                        return "dimensionHeaders." + error;
+                                }
+                            }
+                            if (message.metricHeaders != null && message.hasOwnProperty("metricHeaders")) {
+                                if (!Array.isArray(message.metricHeaders))
+                                    return "metricHeaders: array expected";
+                                for (var i = 0; i < message.metricHeaders.length; ++i) {
+                                    var error = $root.google.analytics.data.v1alpha.MetricHeader.verify(message.metricHeaders[i]);
+                                    if (error)
+                                        return "metricHeaders." + error;
+                                }
+                            }
+                            if (message.rows != null && message.hasOwnProperty("rows")) {
+                                if (!Array.isArray(message.rows))
+                                    return "rows: array expected";
+                                for (var i = 0; i < message.rows.length; ++i) {
+                                    var error = $root.google.analytics.data.v1alpha.Row.verify(message.rows[i]);
+                                    if (error)
+                                        return "rows." + error;
+                                }
+                            }
+                            if (message.totals != null && message.hasOwnProperty("totals")) {
+                                if (!Array.isArray(message.totals))
+                                    return "totals: array expected";
+                                for (var i = 0; i < message.totals.length; ++i) {
+                                    var error = $root.google.analytics.data.v1alpha.Row.verify(message.totals[i]);
+                                    if (error)
+                                        return "totals." + error;
+                                }
+                            }
+                            if (message.maximums != null && message.hasOwnProperty("maximums")) {
+                                if (!Array.isArray(message.maximums))
+                                    return "maximums: array expected";
+                                for (var i = 0; i < message.maximums.length; ++i) {
+                                    var error = $root.google.analytics.data.v1alpha.Row.verify(message.maximums[i]);
+                                    if (error)
+                                        return "maximums." + error;
+                                }
+                            }
+                            if (message.minimums != null && message.hasOwnProperty("minimums")) {
+                                if (!Array.isArray(message.minimums))
+                                    return "minimums: array expected";
+                                for (var i = 0; i < message.minimums.length; ++i) {
+                                    var error = $root.google.analytics.data.v1alpha.Row.verify(message.minimums[i]);
+                                    if (error)
+                                        return "minimums." + error;
+                                }
+                            }
+                            if (message.rowCount != null && message.hasOwnProperty("rowCount"))
+                                if (!$util.isInteger(message.rowCount))
+                                    return "rowCount: integer expected";
+                            if (message.propertyQuota != null && message.hasOwnProperty("propertyQuota")) {
+                                var error = $root.google.analytics.data.v1alpha.PropertyQuota.verify(message.propertyQuota);
+                                if (error)
+                                    return "propertyQuota." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a RunRealtimeReportResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.analytics.data.v1alpha.RunRealtimeReportResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.analytics.data.v1alpha.RunRealtimeReportResponse} RunRealtimeReportResponse
+                         */
+                        RunRealtimeReportResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.analytics.data.v1alpha.RunRealtimeReportResponse)
+                                return object;
+                            var message = new $root.google.analytics.data.v1alpha.RunRealtimeReportResponse();
+                            if (object.dimensionHeaders) {
+                                if (!Array.isArray(object.dimensionHeaders))
+                                    throw TypeError(".google.analytics.data.v1alpha.RunRealtimeReportResponse.dimensionHeaders: array expected");
+                                message.dimensionHeaders = [];
+                                for (var i = 0; i < object.dimensionHeaders.length; ++i) {
+                                    if (typeof object.dimensionHeaders[i] !== "object")
+                                        throw TypeError(".google.analytics.data.v1alpha.RunRealtimeReportResponse.dimensionHeaders: object expected");
+                                    message.dimensionHeaders[i] = $root.google.analytics.data.v1alpha.DimensionHeader.fromObject(object.dimensionHeaders[i]);
+                                }
+                            }
+                            if (object.metricHeaders) {
+                                if (!Array.isArray(object.metricHeaders))
+                                    throw TypeError(".google.analytics.data.v1alpha.RunRealtimeReportResponse.metricHeaders: array expected");
+                                message.metricHeaders = [];
+                                for (var i = 0; i < object.metricHeaders.length; ++i) {
+                                    if (typeof object.metricHeaders[i] !== "object")
+                                        throw TypeError(".google.analytics.data.v1alpha.RunRealtimeReportResponse.metricHeaders: object expected");
+                                    message.metricHeaders[i] = $root.google.analytics.data.v1alpha.MetricHeader.fromObject(object.metricHeaders[i]);
+                                }
+                            }
+                            if (object.rows) {
+                                if (!Array.isArray(object.rows))
+                                    throw TypeError(".google.analytics.data.v1alpha.RunRealtimeReportResponse.rows: array expected");
+                                message.rows = [];
+                                for (var i = 0; i < object.rows.length; ++i) {
+                                    if (typeof object.rows[i] !== "object")
+                                        throw TypeError(".google.analytics.data.v1alpha.RunRealtimeReportResponse.rows: object expected");
+                                    message.rows[i] = $root.google.analytics.data.v1alpha.Row.fromObject(object.rows[i]);
+                                }
+                            }
+                            if (object.totals) {
+                                if (!Array.isArray(object.totals))
+                                    throw TypeError(".google.analytics.data.v1alpha.RunRealtimeReportResponse.totals: array expected");
+                                message.totals = [];
+                                for (var i = 0; i < object.totals.length; ++i) {
+                                    if (typeof object.totals[i] !== "object")
+                                        throw TypeError(".google.analytics.data.v1alpha.RunRealtimeReportResponse.totals: object expected");
+                                    message.totals[i] = $root.google.analytics.data.v1alpha.Row.fromObject(object.totals[i]);
+                                }
+                            }
+                            if (object.maximums) {
+                                if (!Array.isArray(object.maximums))
+                                    throw TypeError(".google.analytics.data.v1alpha.RunRealtimeReportResponse.maximums: array expected");
+                                message.maximums = [];
+                                for (var i = 0; i < object.maximums.length; ++i) {
+                                    if (typeof object.maximums[i] !== "object")
+                                        throw TypeError(".google.analytics.data.v1alpha.RunRealtimeReportResponse.maximums: object expected");
+                                    message.maximums[i] = $root.google.analytics.data.v1alpha.Row.fromObject(object.maximums[i]);
+                                }
+                            }
+                            if (object.minimums) {
+                                if (!Array.isArray(object.minimums))
+                                    throw TypeError(".google.analytics.data.v1alpha.RunRealtimeReportResponse.minimums: array expected");
+                                message.minimums = [];
+                                for (var i = 0; i < object.minimums.length; ++i) {
+                                    if (typeof object.minimums[i] !== "object")
+                                        throw TypeError(".google.analytics.data.v1alpha.RunRealtimeReportResponse.minimums: object expected");
+                                    message.minimums[i] = $root.google.analytics.data.v1alpha.Row.fromObject(object.minimums[i]);
+                                }
+                            }
+                            if (object.rowCount != null)
+                                message.rowCount = object.rowCount | 0;
+                            if (object.propertyQuota != null) {
+                                if (typeof object.propertyQuota !== "object")
+                                    throw TypeError(".google.analytics.data.v1alpha.RunRealtimeReportResponse.propertyQuota: object expected");
+                                message.propertyQuota = $root.google.analytics.data.v1alpha.PropertyQuota.fromObject(object.propertyQuota);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a RunRealtimeReportResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.analytics.data.v1alpha.RunRealtimeReportResponse
+                         * @static
+                         * @param {google.analytics.data.v1alpha.RunRealtimeReportResponse} message RunRealtimeReportResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        RunRealtimeReportResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.dimensionHeaders = [];
+                                object.metricHeaders = [];
+                                object.rows = [];
+                                object.totals = [];
+                                object.maximums = [];
+                                object.minimums = [];
+                            }
+                            if (options.defaults) {
+                                object.rowCount = 0;
+                                object.propertyQuota = null;
+                            }
+                            if (message.dimensionHeaders && message.dimensionHeaders.length) {
+                                object.dimensionHeaders = [];
+                                for (var j = 0; j < message.dimensionHeaders.length; ++j)
+                                    object.dimensionHeaders[j] = $root.google.analytics.data.v1alpha.DimensionHeader.toObject(message.dimensionHeaders[j], options);
+                            }
+                            if (message.metricHeaders && message.metricHeaders.length) {
+                                object.metricHeaders = [];
+                                for (var j = 0; j < message.metricHeaders.length; ++j)
+                                    object.metricHeaders[j] = $root.google.analytics.data.v1alpha.MetricHeader.toObject(message.metricHeaders[j], options);
+                            }
+                            if (message.rows && message.rows.length) {
+                                object.rows = [];
+                                for (var j = 0; j < message.rows.length; ++j)
+                                    object.rows[j] = $root.google.analytics.data.v1alpha.Row.toObject(message.rows[j], options);
+                            }
+                            if (message.totals && message.totals.length) {
+                                object.totals = [];
+                                for (var j = 0; j < message.totals.length; ++j)
+                                    object.totals[j] = $root.google.analytics.data.v1alpha.Row.toObject(message.totals[j], options);
+                            }
+                            if (message.maximums && message.maximums.length) {
+                                object.maximums = [];
+                                for (var j = 0; j < message.maximums.length; ++j)
+                                    object.maximums[j] = $root.google.analytics.data.v1alpha.Row.toObject(message.maximums[j], options);
+                            }
+                            if (message.minimums && message.minimums.length) {
+                                object.minimums = [];
+                                for (var j = 0; j < message.minimums.length; ++j)
+                                    object.minimums[j] = $root.google.analytics.data.v1alpha.Row.toObject(message.minimums[j], options);
+                            }
+                            if (message.rowCount != null && message.hasOwnProperty("rowCount"))
+                                object.rowCount = message.rowCount;
+                            if (message.propertyQuota != null && message.hasOwnProperty("propertyQuota"))
+                                object.propertyQuota = $root.google.analytics.data.v1alpha.PropertyQuota.toObject(message.propertyQuota, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this RunRealtimeReportResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.analytics.data.v1alpha.RunRealtimeReportResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        RunRealtimeReportResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return RunRealtimeReportResponse;
                     })();
     
                     v1alpha.DateRange = (function() {

@@ -3,23 +3,15 @@
     {
       "git": {
         "name": ".",
-        "remote": "https://github.com/googleapis/nodejs-analytics-data.git",
-        "sha": "2c0c117148099c064f93c22580e946f0514b9643"
-      }
-    },
-    {
-      "git": {
-        "name": "googleapis",
-        "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "da21c5639535f27aa9b43360000bec0b01cecde8",
-        "internalRef": "340335600"
+        "remote": "git@github.com:googleapis/nodejs-analytics-data.git",
+        "sha": "a8c6801e5c934f160f50d6e8841350c832cbb0fe"
       }
     },
     {
       "git": {
         "name": "synthtool",
         "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "ba9918cd22874245b55734f57470c719b577e591"
+        "sha": "1f1148d3c7a7a52f0c98077f976bd9b3c948ee2b"
       }
     }
   ],
@@ -87,6 +79,7 @@
     "README.md",
     "api-extractor.json",
     "linkinator.config.json",
+    "package-lock.json.4225629170",
     "protos/google/analytics/data/v1alpha/analytics_data_api.proto",
     "protos/google/analytics/data/v1alpha/data.proto",
     "protos/protos.d.ts",
@@ -94,6 +87,7 @@
     "protos/protos.json",
     "renovate.json",
     "samples/README.md",
+    "samples/package-lock.json.4262827248",
     "src/index.ts",
     "src/v1alpha/alpha_analytics_data_client.ts",
     "src/v1alpha/alpha_analytics_data_client_config.json",

@@ -18,8 +18,15 @@
 
 import {AlphaAnalyticsDataClient} from '@google-analytics/data';
 
+// check that the client class type name can be used
+function doStuffWithAlphaAnalyticsDataClient(client: AlphaAnalyticsDataClient) {
+  client.close();
+}
+
 function main() {
-  new AlphaAnalyticsDataClient();
+  // check that the client instance can be created
+  const alphaAnalyticsDataClient = new AlphaAnalyticsDataClient();
+  doStuffWithAlphaAnalyticsDataClient(alphaAnalyticsDataClient);
 }
 
 main();
