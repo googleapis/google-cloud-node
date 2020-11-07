@@ -19,6 +19,7 @@
 import * as v1beta1 from './v1beta1';
 
 const DataLabelingServiceClient = v1beta1.DataLabelingServiceClient;
+type DataLabelingServiceClient = v1beta1.DataLabelingServiceClient;
 
 export {v1beta1, DataLabelingServiceClient};
 export default {v1beta1, DataLabelingServiceClient};

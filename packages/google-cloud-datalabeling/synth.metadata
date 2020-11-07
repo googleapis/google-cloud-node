@@ -3,23 +3,15 @@
     {
       "git": {
         "name": ".",
-        "remote": "https://github.com/googleapis/nodejs-datalabeling.git",
-        "sha": "5280f9030714763165cdc64fcf2f9dc08a4e61e0"
-      }
-    },
-    {
-      "git": {
-        "name": "googleapis",
-        "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "062f46f246c78fde2160524db593fa0fa7bdbe64",
-        "internalRef": "337404700"
+        "remote": "git@github.com:googleapis/nodejs-datalabeling.git",
+        "sha": "317c722bc888c11f57819cd8e02babd988dad2de"
       }
     },
     {
       "git": {
         "name": "synthtool",
         "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "ba9918cd22874245b55734f57470c719b577e591"
+        "sha": "1f1148d3c7a7a52f0c98077f976bd9b3c948ee2b"
       }
     }
   ],
@@ -87,6 +79,7 @@
     "README.md",
     "api-extractor.json",
     "linkinator.config.json",
+    "package-lock.json.2707288343",
     "protos/google/cloud/datalabeling/v1beta1/annotation.proto",
     "protos/google/cloud/datalabeling/v1beta1/annotation_spec_set.proto",
     "protos/google/cloud/datalabeling/v1beta1/data_labeling_service.proto",
@@ -102,6 +95,7 @@
     "protos/protos.json",
     "renovate.json",
     "samples/README.md",
+    "samples/package-lock.json.1329949583",
     "src/index.ts",
     "src/v1beta1/data_labeling_service_client.ts",
     "src/v1beta1/data_labeling_service_client_config.json",
