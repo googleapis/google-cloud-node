@@ -30,18 +30,77 @@ import {
   WebhooksClient,
 } from '@google-cloud/dialogflow-cx';
 
+// check that the client class type name can be used
+function doStuffWithAgentsClient(client: AgentsClient) {
+  client.close();
+}
+function doStuffWithEntityTypesClient(client: EntityTypesClient) {
+  client.close();
+}
+function doStuffWithEnvironmentsClient(client: EnvironmentsClient) {
+  client.close();
+}
+function doStuffWithFlowsClient(client: FlowsClient) {
+  client.close();
+}
+function doStuffWithIntentsClient(client: IntentsClient) {
+  client.close();
+}
+function doStuffWithPagesClient(client: PagesClient) {
+  client.close();
+}
+function doStuffWithSessionEntityTypesClient(client: SessionEntityTypesClient) {
+  client.close();
+}
+function doStuffWithSessionsClient(client: SessionsClient) {
+  client.close();
+}
+function doStuffWithTransitionRouteGroupsClient(
+  client: TransitionRouteGroupsClient
+) {
+  client.close();
+}
+function doStuffWithVersionsClient(client: VersionsClient) {
+  client.close();
+}
+function doStuffWithWebhooksClient(client: WebhooksClient) {
+  client.close();
+}
+
 function main() {
-  new AgentsClient();
-  new EntityTypesClient();
-  new EnvironmentsClient();
-  new FlowsClient();
-  new IntentsClient();
-  new PagesClient();
-  new SessionEntityTypesClient();
-  new SessionsClient();
-  new TransitionRouteGroupsClient();
-  new VersionsClient();
-  new WebhooksClient();
+  // check that the client instance can be created
+  const agentsClient = new AgentsClient();
+  doStuffWithAgentsClient(agentsClient);
+  // check that the client instance can be created
+  const entityTypesClient = new EntityTypesClient();
+  doStuffWithEntityTypesClient(entityTypesClient);
+  // check that the client instance can be created
+  const environmentsClient = new EnvironmentsClient();
+  doStuffWithEnvironmentsClient(environmentsClient);
+  // check that the client instance can be created
+  const flowsClient = new FlowsClient();
+  doStuffWithFlowsClient(flowsClient);
+  // check that the client instance can be created
+  const intentsClient = new IntentsClient();
+  doStuffWithIntentsClient(intentsClient);
+  // check that the client instance can be created
+  const pagesClient = new PagesClient();
+  doStuffWithPagesClient(pagesClient);
+  // check that the client instance can be created
+  const sessionEntityTypesClient = new SessionEntityTypesClient();
+  doStuffWithSessionEntityTypesClient(sessionEntityTypesClient);
+  // check that the client instance can be created
+  const sessionsClient = new SessionsClient();
+  doStuffWithSessionsClient(sessionsClient);
+  // check that the client instance can be created
+  const transitionRouteGroupsClient = new TransitionRouteGroupsClient();
+  doStuffWithTransitionRouteGroupsClient(transitionRouteGroupsClient);
+  // check that the client instance can be created
+  const versionsClient = new VersionsClient();
+  doStuffWithVersionsClient(versionsClient);
+  // check that the client instance can be created
+  const webhooksClient = new WebhooksClient();
+  doStuffWithWebhooksClient(webhooksClient);
 }
 
 main();

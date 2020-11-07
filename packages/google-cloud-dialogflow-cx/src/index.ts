@@ -18,16 +18,27 @@
 
 import * as v3beta1 from './v3beta1';
 const AgentsClient = v3beta1.AgentsClient;
+type AgentsClient = v3beta1.AgentsClient;
 const EntityTypesClient = v3beta1.EntityTypesClient;
+type EntityTypesClient = v3beta1.EntityTypesClient;
 const EnvironmentsClient = v3beta1.EnvironmentsClient;
+type EnvironmentsClient = v3beta1.EnvironmentsClient;
 const FlowsClient = v3beta1.FlowsClient;
+type FlowsClient = v3beta1.FlowsClient;
 const IntentsClient = v3beta1.IntentsClient;
+type IntentsClient = v3beta1.IntentsClient;
 const PagesClient = v3beta1.PagesClient;
+type PagesClient = v3beta1.PagesClient;
 const SessionEntityTypesClient = v3beta1.SessionEntityTypesClient;
+type SessionEntityTypesClient = v3beta1.SessionEntityTypesClient;
 const SessionsClient = v3beta1.SessionsClient;
+type SessionsClient = v3beta1.SessionsClient;
 const TransitionRouteGroupsClient = v3beta1.TransitionRouteGroupsClient;
+type TransitionRouteGroupsClient = v3beta1.TransitionRouteGroupsClient;
 const VersionsClient = v3beta1.VersionsClient;
+type VersionsClient = v3beta1.VersionsClient;
 const WebhooksClient = v3beta1.WebhooksClient;
+type WebhooksClient = v3beta1.WebhooksClient;
 export {
   v3beta1,
   AgentsClient,

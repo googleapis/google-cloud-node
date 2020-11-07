@@ -3,23 +3,15 @@
     {
       "git": {
         "name": ".",
-        "remote": "https://github.com/googleapis/nodejs-dialogflow-cx.git",
-        "sha": "6f4db3f8c452b18cd4066d81a0c964e74450d5bd"
-      }
-    },
-    {
-      "git": {
-        "name": "googleapis",
-        "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "1a97126c6ced4e6179ade331a5372ec06e24f727",
-        "internalRef": "328383688"
+        "remote": "git@github.com:googleapis/nodejs-dialogflow-cx.git",
+        "sha": "ef4ceefe2dd0c4a42ae56391a8f94e80a09d692d"
       }
     },
     {
       "git": {
         "name": "synthtool",
         "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "ba9918cd22874245b55734f57470c719b577e591"
+        "sha": "1f1148d3c7a7a52f0c98077f976bd9b3c948ee2b"
       }
     }
   ],
@@ -87,15 +79,14 @@
     "README.md",
     "api-extractor.json",
     "linkinator.config.json",
+    "package-lock.json.3517659951",
     "protos/google/cloud/dialogflow/cx/v3beta1/agent.proto",
     "protos/google/cloud/dialogflow/cx/v3beta1/audio_config.proto",
     "protos/google/cloud/dialogflow/cx/v3beta1/entity_type.proto",
     "protos/google/cloud/dialogflow/cx/v3beta1/environment.proto",
     "protos/google/cloud/dialogflow/cx/v3beta1/flow.proto",
     "protos/google/cloud/dialogflow/cx/v3beta1/fulfillment.proto",
-    "protos/google/cloud/dialogflow/cx/v3beta1/gcs.proto",
     "protos/google/cloud/dialogflow/cx/v3beta1/intent.proto",
-    "protos/google/cloud/dialogflow/cx/v3beta1/ivr.proto",
     "protos/google/cloud/dialogflow/cx/v3beta1/page.proto",
     "protos/google/cloud/dialogflow/cx/v3beta1/response_message.proto",
     "protos/google/cloud/dialogflow/cx/v3beta1/session.proto",
@@ -108,6 +99,7 @@
     "protos/protos.json",
     "renovate.json",
     "samples/README.md",
+    "samples/package-lock.json.2481081869",
     "src/index.ts",
     "src/v3beta1/agents_client.ts",
     "src/v3beta1/agents_client_config.json",
