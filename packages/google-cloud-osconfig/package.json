@@ -29,7 +29,7 @@
     "api-documenter": "api-documenter yaml --input-folder=temp"
   },
   "dependencies": {
-    "google-gax": "^2.3.1"
+    "google-gax": "^2.9.2"
   },
   "devDependencies": {
     "@types/mocha": "^8.0.0",

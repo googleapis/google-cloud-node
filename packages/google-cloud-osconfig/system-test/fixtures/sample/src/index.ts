@@ -18,8 +18,15 @@
 
 import {OsConfigServiceClient} from '@google-cloud/os-config';
 
+// check that the client class type name can be used
+function doStuffWithOsConfigServiceClient(client: OsConfigServiceClient) {
+  client.close();
+}
+
 function main() {
-  new OsConfigServiceClient();
+  // check that the client instance can be created
+  const osConfigServiceClient = new OsConfigServiceClient();
+  doStuffWithOsConfigServiceClient(osConfigServiceClient);
 }
 
 main();
