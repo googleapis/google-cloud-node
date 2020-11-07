@@ -18,8 +18,15 @@
 
 import {BudgetServiceClient} from '@google-cloud/billing-budgets';
 
+// check that the client class type name can be used
+function doStuffWithBudgetServiceClient(client: BudgetServiceClient) {
+  client.close();
+}
+
 function main() {
-  new BudgetServiceClient();
+  // check that the client instance can be created
+  const budgetServiceClient = new BudgetServiceClient();
+  doStuffWithBudgetServiceClient(budgetServiceClient);
 }
 
 main();

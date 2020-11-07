@@ -20,6 +20,7 @@ import * as v1beta1 from './v1beta1';
 import * as v1 from './v1';
 
 const BudgetServiceClient = v1.BudgetServiceClient;
+type BudgetServiceClient = v1.BudgetServiceClient;
 
 export {v1beta1, v1, BudgetServiceClient};
 export default {v1beta1, v1, BudgetServiceClient};
