@@ -4,6 +4,18 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/datastore?activeTab=versions
 
+## [6.3.0](https://www.github.com/googleapis/nodejs-datastore/compare/v6.2.0...v6.3.0) (2020-11-09)
+
+
+### Features
+
+* export Key and Entity ([#749](https://www.github.com/googleapis/nodejs-datastore/issues/749)) ([f4c8d0b](https://www.github.com/googleapis/nodejs-datastore/commit/f4c8d0b9cf172a39fbe9ce1906775418d16c1852)), closes [#568](https://www.github.com/googleapis/nodejs-datastore/issues/568)
+
+
+### Bug Fixes
+
+* do not modify options object, use defaultScopes ([#751](https://www.github.com/googleapis/nodejs-datastore/issues/751)) ([07a77fe](https://www.github.com/googleapis/nodejs-datastore/commit/07a77fe0f69aecb378c965f403226b29fde57360))
+
 ## [6.2.0](https://www.github.com/googleapis/nodejs-datastore/compare/v6.1.1...v6.2.0) (2020-10-08)
 
 
