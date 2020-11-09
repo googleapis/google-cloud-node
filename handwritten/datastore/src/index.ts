@@ -42,6 +42,9 @@ const pumpify = require('pumpify');
 import {Transform} from 'stream';
 
 import {entity, Entities, Entity, EntityProto, ValueProto} from './entity';
+import Key = entity.Key;
+export {Entity, Key};
+
 import {
   GetIndexesCallback,
   GetIndexesOptions,
