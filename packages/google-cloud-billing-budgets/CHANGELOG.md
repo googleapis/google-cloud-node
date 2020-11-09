@@ -1,5 +1,12 @@
 # Changelog
 
+### [3.0.1](https://www.github.com/googleapis/nodejs-billing-budgets/compare/v3.0.0...v3.0.1) (2020-11-07)
+
+
+### Bug Fixes
+
+* do not modify options object, use defaultScopes ([#181](https://www.github.com/googleapis/nodejs-billing-budgets/issues/181)) ([5a57b54](https://www.github.com/googleapis/nodejs-billing-budgets/commit/5a57b541e552f44803d3b889148db2c9268b6984))
+
 ## [3.0.0](https://www.github.com/googleapis/nodejs-billing-budgets/compare/v2.3.0...v3.0.0) (2020-11-06)
 
 
