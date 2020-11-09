@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-storage?activeTab=versions
 
+## [5.5.0](https://www.github.com/googleapis/nodejs-storage/compare/v5.4.0...v5.5.0) (2020-11-03)
+
+
+### Features
+
+* accessibleAt v4 signed urls ([#1328](https://www.github.com/googleapis/nodejs-storage/issues/1328)) ([1e0295e](https://www.github.com/googleapis/nodejs-storage/commit/1e0295eebd1120ce6cbcabee4cf1aaa825455d4b))
+
 ## [5.4.0](https://www.github.com/googleapis/nodejs-storage/compare/v5.3.0...v5.4.0) (2020-10-29)
 
 
