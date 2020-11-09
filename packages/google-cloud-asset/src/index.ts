@@ -24,6 +24,7 @@ import * as v1p5beta1 from './v1p5beta1';
 import * as v1 from './v1';
 
 const AssetServiceClient = v1.AssetServiceClient;
+type AssetServiceClient = v1.AssetServiceClient;
 
 export {
   v1beta1,
