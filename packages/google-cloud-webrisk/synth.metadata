@@ -4,15 +4,15 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/nodejs-web-risk.git",
-        "sha": "e8405005d5f23ae44a7163036e8d0e966363f907"
+        "sha": "bc9d7f95bc62002ae86a752d2662a17494a40529"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "4c5071b615d96ef9dfd6a63d8429090f1f2872bb",
-        "internalRef": "327369997"
+        "sha": "b759c563bacf9cd15749be4d2bdd276d3f48ee29",
+        "internalRef": "341102751"
       }
     },
     {

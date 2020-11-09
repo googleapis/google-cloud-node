@@ -20,6 +20,7 @@ import * as v1 from './v1';
 import * as v1beta1 from './v1beta1';
 
 const WebRiskServiceClient = v1.WebRiskServiceClient;
+type WebRiskServiceClient = v1.WebRiskServiceClient;
 
 export {v1, v1beta1, WebRiskServiceClient};
 export default {v1, v1beta1, WebRiskServiceClient};

@@ -18,8 +18,15 @@
 
 import {WebRiskServiceClient} from '@google-cloud/web-risk';
 
+// check that the client class type name can be used
+function doStuffWithWebRiskServiceClient(client: WebRiskServiceClient) {
+  client.close();
+}
+
 function main() {
-  new WebRiskServiceClient();
+  // check that the client instance can be created
+  const webRiskServiceClient = new WebRiskServiceClient();
+  doStuffWithWebRiskServiceClient(webRiskServiceClient);
 }
 
 main();
