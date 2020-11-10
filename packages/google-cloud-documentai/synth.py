@@ -29,8 +29,22 @@ gapic = gcp.GAPICBazel()
 versions = ['v1beta2', 'v1beta3']
 name = 'documentai'
 for version in versions:
- library = gapic.node_library(name, version)
- s.copy(library, excludes=['README.md', 'package.json'])
+  library = gapic.node_library(name, version)
+  s.copy(library, excludes=['README.md', 'package.json'])
+
+## Note: this API only supports regional endpoints and does not support default scopes.
+s.replace(f"src/*/document_*_service_client.ts",
+          "servicePath !== staticMembers.servicePath && ",
+          ""
+         )
+s.replace(f"src/*/document_*_service_client.ts",
+          "and we're connecting to a non-default endpoint, set scopes just in case",
+          "set scopes"
+         )
+s.replace(f"src/*/document_*_service_client.ts",
+          r"// Set the default scopes in auth client if needed(.|\n)*?}",
+          ""
+         )
 
 # Copy common templates
 common_templates = gcp.CommonTemplates()
