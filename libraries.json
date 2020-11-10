@@ -470,7 +470,7 @@
     "distribution_name": "@google-cloud/containeranalysis",
     "api_id": "containeranalysis.googleapis.com",
     "requires_billing": true,
-    "support_documentation": "https://cloud.google.com/container-registry/docs/getting-support"
+    "support_documentation": "https://cloud.google.com/container-registry/docs/container-analysis"
   },
   {
     "name": "grafeas",
@@ -484,7 +484,7 @@
     "distribution_name": "@google-cloud/grafeas",
     "api_id": "containeranalysis.googleapis.com",
     "requires_billing": false,
-    "support_documentation": "https://cloud.google.com/container-registry/docs/getting-support"
+    "support_documentation": "https://cloud.google.com/container-registry/docs/container-analysis"
   },
   {
     "name": "iot",
