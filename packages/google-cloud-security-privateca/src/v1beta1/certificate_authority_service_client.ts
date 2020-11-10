@@ -2632,19 +2632,18 @@ export class CertificateAuthorityServiceClient {
     );
   }
   /**
-   * Check the status of the long running operation returned by `updateCertificateRevocationList()`.
+   * Check the status of the long running operation returned by the updateCertificateRevocationList() method.
    * @param {String} name
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkUpdateCertificateRevocationListProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
+   *
+   * @example:
+   *   const decodedOperation = await checkUpdateCertificateRevocationListProgress(name);
+   *   console.log(decodedOperation.result);
+   *   console.log(decodedOperation.done);
+   *   console.log(decodedOperation.metadata);
+   *
    */
   async checkUpdateCertificateRevocationListProgress(
     name: string
@@ -2730,14 +2729,19 @@ export class CertificateAuthorityServiceClient {
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
    *   The first element of the array is Array of [Certificate]{@link google.cloud.security.privateca.v1beta1.Certificate}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   The client library support auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listCertificatesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
-   *   for more details and examples.
+   *
+   *   When autoPaginate: false is specified through options, the array has three elements.
+   *   The first element is Array of [Certificate]{@link google.cloud.security.privateca.v1beta1.Certificate} that corresponds to
+   *   the one page received from the API server.
+   *   If the second element is not null it contains the request object of type [ListCertificatesRequest]{@link google.cloud.security.privateca.v1beta1.ListCertificatesRequest}
+   *   that can be used to obtain the next page of the results.
+   *   If it is null, the next page does not exist.
+   *   The third element contains the raw response received from the API server. Its type is
+   *   [ListCertificatesResponse]{@link google.cloud.security.privateca.v1beta1.ListCertificatesResponse}.
+   *
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   listCertificates(
     request: protos.google.cloud.security.privateca.v1beta1.IListCertificatesRequest,
@@ -2785,7 +2789,18 @@ export class CertificateAuthorityServiceClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to {@link listCertificates}, but returns a NodeJS Stream object.
+   *
+   * This fetches the paged responses for {@link listCertificates} continuously
+   * and invokes the callback registered for 'data' event for each element in the
+   * responses.
+   *
+   * The returned object has 'end' method when no more elements are required.
+   *
+   * autoPaginate option will be ignored.
+   *
+   * @see {@link https://nodejs.org/api/stream.html}
+   *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -2814,13 +2829,6 @@ export class CertificateAuthorityServiceClient {
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
    *   An object stream which emits an object representing [Certificate]{@link google.cloud.security.privateca.v1beta1.Certificate} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listCertificatesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
-   *   for more details and examples.
    */
   listCertificatesStream(
     request?: protos.google.cloud.security.privateca.v1beta1.IListCertificatesRequest,
