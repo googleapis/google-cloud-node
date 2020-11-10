@@ -27,7 +27,7 @@ versions = ['v1beta1']
 name = 'aiplatform'
 for version in versions:
   library = gapic.node_library(name, version)
-  s.copy(library, excludes=[])
+  s.copy(library, excludes=["package.json", "README.md"])
 
 # Copy common templates
 common_templates = gcp.CommonTemplates()
