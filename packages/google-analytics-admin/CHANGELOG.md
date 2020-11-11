@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.2.1](https://www.github.com/googleapis/nodejs-analytics-admin/compare/v1.2.0...v1.2.1) (2020-11-07)
+
+
+### Bug Fixes
+
+* do not modify options object, use defaultScopes ([#50](https://www.github.com/googleapis/nodejs-analytics-admin/issues/50)) ([47d0a11](https://www.github.com/googleapis/nodejs-analytics-admin/commit/47d0a119803f52208f4dfa2b053937214d021ec6))
+
 ## [1.2.0](https://www.github.com/googleapis/nodejs-analytics-admin/compare/v1.1.2...v1.2.0) (2020-10-20)
 
 ### Features
