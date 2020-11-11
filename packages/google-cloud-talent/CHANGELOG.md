@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/talent?activeTab=versions
 
+### [3.0.1](https://www.github.com/googleapis/nodejs-talent/compare/v3.0.0...v3.0.1) (2020-11-07)
+
+
+### Bug Fixes
+
+* do not modify options object, use defaultScopes ([#264](https://www.github.com/googleapis/nodejs-talent/issues/264)) ([260b152](https://www.github.com/googleapis/nodejs-talent/commit/260b152fe76b2cbe63dba8378710716feb793c82))
+
 ## [3.0.0](https://www.github.com/googleapis/nodejs-talent/compare/v2.1.0...v3.0.0) (2020-10-13)
 
 
