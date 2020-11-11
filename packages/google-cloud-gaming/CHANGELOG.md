@@ -1,5 +1,12 @@
 # Changelog
 
+### [2.1.1](https://www.github.com/googleapis/nodejs-game-servers/compare/v2.1.0...v2.1.1) (2020-11-07)
+
+
+### Bug Fixes
+
+* do not modify options object, use defaultScopes ([#132](https://www.github.com/googleapis/nodejs-game-servers/issues/132)) ([72124ab](https://www.github.com/googleapis/nodejs-game-servers/commit/72124ab09070efc4555b157bce6cf547dc623bdb))
+
 ## [2.1.0](https://www.github.com/googleapis/nodejs-game-servers/compare/v2.0.2...v2.1.0) (2020-08-05)
 
 
