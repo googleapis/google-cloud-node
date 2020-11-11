@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/security-center?activeTab=versions
 
+### [5.1.2](https://www.github.com/googleapis/nodejs-security-center/compare/v5.1.1...v5.1.2) (2020-11-07)
+
+
+### Bug Fixes
+
+* do not modify options object, use defaultScopes ([#337](https://www.github.com/googleapis/nodejs-security-center/issues/337)) ([2792fc8](https://www.github.com/googleapis/nodejs-security-center/commit/2792fc829c6db2fbbd951df4739b8d1524243012))
+
 ### [5.1.1](https://www.github.com/googleapis/nodejs-security-center/compare/v5.1.0...v5.1.1) (2020-08-17)
 
 
