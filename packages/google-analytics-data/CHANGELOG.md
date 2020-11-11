@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.0.2](https://www.github.com/googleapis/nodejs-analytics-data/compare/v1.0.1...v1.0.2) (2020-11-07)
+
+
+### Bug Fixes
+
+* do not modify options object, use defaultScopes ([#30](https://www.github.com/googleapis/nodejs-analytics-data/issues/30)) ([f5c9f64](https://www.github.com/googleapis/nodejs-analytics-data/commit/f5c9f64b3074a41ba590ce8be9aadd9961c0ab57))
+
 ### [1.0.1](https://www.github.com/googleapis/nodejs-analytics-data/compare/v1.0.0...v1.0.1) (2020-11-03)
 
 
