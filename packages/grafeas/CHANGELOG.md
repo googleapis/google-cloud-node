@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/grafeas?activeTab=versions
 
+### [3.3.2](https://www.github.com/googleapis/nodejs-grafeas/compare/v3.3.1...v3.3.2) (2020-11-07)
+
+
+### Bug Fixes
+
+* do not modify options object, use defaultScopes ([#213](https://www.github.com/googleapis/nodejs-grafeas/issues/213)) ([4e2cada](https://www.github.com/googleapis/nodejs-grafeas/commit/4e2cadaed5cc892ca6ae1318fa82146a4f1160dc))
+
 ### [3.3.1](https://www.github.com/googleapis/nodejs-grafeas/compare/v3.3.0...v3.3.1) (2020-08-21)
 
 
