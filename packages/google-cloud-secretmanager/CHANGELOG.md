@@ -1,5 +1,12 @@
 # Changelog
 
+### [3.2.2](https://www.github.com/googleapis/nodejs-secret-manager/compare/v3.2.1...v3.2.2) (2020-11-06)
+
+
+### Bug Fixes
+
+* do not modify options object, use defaultScopes ([#187](https://www.github.com/googleapis/nodejs-secret-manager/issues/187)) ([05b11af](https://www.github.com/googleapis/nodejs-secret-manager/commit/05b11afdaa0ae83f2d5a6b08408cd25445a93a31))
+
 ### [3.2.1](https://www.github.com/googleapis/nodejs-secret-manager/compare/v3.2.0...v3.2.1) (2020-11-05)
 
 
