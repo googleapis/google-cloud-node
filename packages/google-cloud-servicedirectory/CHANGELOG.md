@@ -1,5 +1,12 @@
 # Changelog
 
+### [2.1.2](https://www.github.com/googleapis/nodejs-service-directory/compare/v2.1.1...v2.1.2) (2020-11-06)
+
+
+### Bug Fixes
+
+* do not modify options object, use defaultScopes ([#88](https://www.github.com/googleapis/nodejs-service-directory/issues/88)) ([17f1b3d](https://www.github.com/googleapis/nodejs-service-directory/commit/17f1b3d0bd010f895b09569e77333474048a8d66))
+
 ### [2.1.1](https://www.github.com/googleapis/nodejs-service-directory/compare/v2.1.0...v2.1.1) (2020-07-06)
 
 
