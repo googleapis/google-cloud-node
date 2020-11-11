@@ -3,8 +3,8 @@
     {
       "git": {
         "name": ".",
-        "remote": "git@github.com:googleapis/nodejs-ai-platform.git",
-        "sha": "2828315a8e29c559233cac65f99083db5c0268b3"
+        "remote": "https://github.com/googleapis/nodejs-ai-platform.git",
+        "sha": "d843bb3e554b7eb8aa9b4bc7a8f9e58a431f3134"
       }
     },
     {
@@ -13,6 +13,13 @@
         "remote": "https://github.com/googleapis/googleapis.git",
         "sha": "6c0f55f33f882cf97fd3135e93b144ad9c94ebab",
         "internalRef": "341478628"
+      }
+    },
+    {
+      "git": {
+        "name": "synthtool",
+        "remote": "https://github.com/googleapis/synthtool.git",
+        "sha": "7db8a6c5ffb12a6e4c2f799c18f00f7f3d60e279"
       }
     }
   ],
