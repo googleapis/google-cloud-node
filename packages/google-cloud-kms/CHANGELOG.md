@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/kms?activeTab=versions
 
+### [2.1.3](https://www.github.com/googleapis/nodejs-kms/compare/v2.1.2...v2.1.3) (2020-11-07)
+
+
+### Bug Fixes
+
+* do not modify options object, use defaultScopes ([#399](https://www.github.com/googleapis/nodejs-kms/issues/399)) ([288b417](https://www.github.com/googleapis/nodejs-kms/commit/288b4172079145686ca9c129005ba27dec788712))
+
 ### [2.1.2](https://www.github.com/googleapis/nodejs-kms/compare/v2.1.1...v2.1.2) (2020-06-12)
 
 
