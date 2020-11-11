@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/web-risk?activeTab=versions
 
+### [2.0.2](https://www.github.com/googleapis/nodejs-web-risk/compare/v2.0.1...v2.0.2) (2020-11-09)
+
+
+### Bug Fixes
+
+* use defaultScopes, improve docs, export additional types ([#210](https://www.github.com/googleapis/nodejs-web-risk/issues/210)) ([489736a](https://www.github.com/googleapis/nodejs-web-risk/commit/489736a350a56d8702f9a0afa646a3030ca1a298))
+
 ### [2.0.1](https://www.github.com/googleapis/nodejs-web-risk/compare/v2.0.0...v2.0.1) (2020-06-29)
 
 
