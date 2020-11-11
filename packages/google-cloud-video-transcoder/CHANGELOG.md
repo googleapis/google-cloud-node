@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.0.1](https://www.github.com/googleapis/nodejs-video-transcoder/compare/v1.0.0...v1.0.1) (2020-11-06)
+
+
+### Bug Fixes
+
+* do not modify options object, use defaultScopes ([#6](https://www.github.com/googleapis/nodejs-video-transcoder/issues/6)) ([256e65b](https://www.github.com/googleapis/nodejs-video-transcoder/commit/256e65b78b11257ffd499f8cac1d01701419162d))
+
 ## 1.0.0 (2020-10-29)
 
 
