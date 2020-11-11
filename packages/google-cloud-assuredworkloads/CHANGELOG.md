@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.0.1](https://www.github.com/googleapis/nodejs-assured-workloads/compare/v1.0.0...v1.0.1) (2020-11-06)
+
+
+### Bug Fixes
+
+* do not modify options object, use defaultScopes ([#12](https://www.github.com/googleapis/nodejs-assured-workloads/issues/12)) ([ed671aa](https://www.github.com/googleapis/nodejs-assured-workloads/commit/ed671aadda0be838465172ea0fbdc64ab04ce754))
+
 ## 1.0.0 (2020-09-16)
 
 
