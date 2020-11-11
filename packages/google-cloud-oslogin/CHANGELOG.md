@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/os-login?activeTab=versions
 
+### [3.1.2](https://www.github.com/googleapis/nodejs-os-login/compare/v3.1.1...v3.1.2) (2020-11-07)
+
+
+### Bug Fixes
+
+* do not modify options object, use defaultScopes ([#397](https://www.github.com/googleapis/nodejs-os-login/issues/397)) ([340a7c9](https://www.github.com/googleapis/nodejs-os-login/commit/340a7c9503e6c1dbb4d0edfb3d69fdff58357daa))
+
 ### [3.1.1](https://www.github.com/googleapis/nodejs-os-login/compare/v3.1.0...v3.1.1) (2020-07-24)
 
 
