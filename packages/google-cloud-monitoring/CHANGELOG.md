@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/monitoring?activeTab=versions
 
+### [2.1.3](https://www.github.com/googleapis/nodejs-monitoring/compare/v2.1.2...v2.1.3) (2020-11-07)
+
+
+### Bug Fixes
+
+* do not modify options object, use defaultScopes ([#497](https://www.github.com/googleapis/nodejs-monitoring/issues/497)) ([447cfce](https://www.github.com/googleapis/nodejs-monitoring/commit/447cfce75ed11d66e254d72d105252e8b0ed0a3c))
+
 ### [2.1.2](https://www.github.com/googleapis/nodejs-monitoring/compare/v2.1.1...v2.1.2) (2020-09-12)
 
 
