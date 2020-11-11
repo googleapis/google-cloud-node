@@ -1,5 +1,5 @@
 {
-  "name": "nodejs-security-private-ca",
+  "name": "security-private-ca",
   "name_pretty": "Certificate Authority Service",
   "product_documentation": "https://cloud.google.com/certificate-authority-service",
   "client_documentation": "https://googleapis.dev/nodejs/security-private-ca/latest/index.html",
