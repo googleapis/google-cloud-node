@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.2.3](https://www.github.com/googleapis/nodejs-os-config/compare/v1.2.2...v1.2.3) (2020-11-07)
+
+
+### Bug Fixes
+
+* do not modify options object, use defaultScopes ([#59](https://www.github.com/googleapis/nodejs-os-config/issues/59)) ([c6409f8](https://www.github.com/googleapis/nodejs-os-config/commit/c6409f8f5eae987853369a4206671b353d1da983))
+
 ### [1.2.2](https://www.github.com/googleapis/nodejs-os-config/compare/v1.2.1...v1.2.2) (2020-07-29)
 
 
