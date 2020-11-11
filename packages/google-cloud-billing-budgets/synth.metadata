@@ -3,8 +3,16 @@
     {
       "git": {
         "name": ".",
-        "remote": "git@github.com:googleapis/nodejs-billing-budgets.git",
-        "sha": "c655d765d4b2658b13a886a4490527b23df66d21"
+        "remote": "https://github.com/googleapis/nodejs-billing-budgets.git",
+        "sha": "58aec8dee8f408600f5523aa8b25d11da93f4072"
+      }
+    },
+    {
+      "git": {
+        "name": "googleapis",
+        "remote": "https://github.com/googleapis/googleapis.git",
+        "sha": "6c0f55f33f882cf97fd3135e93b144ad9c94ebab",
+        "internalRef": "341478628"
       }
     },
     {
@@ -88,7 +96,6 @@
     "README.md",
     "api-extractor.json",
     "linkinator.config.json",
-    "package-lock.json.3685613218",
     "protos/google/cloud/billing/budgets/v1/budget_model.proto",
     "protos/google/cloud/billing/budgets/v1/budget_service.proto",
     "protos/google/cloud/billing/budgets/v1beta1/budget_model.proto",
@@ -98,7 +105,6 @@
     "protos/protos.json",
     "renovate.json",
     "samples/README.md",
-    "samples/package-lock.json.925111943",
     "src/index.ts",
     "src/v1/budget_service_client.ts",
     "src/v1/budget_service_client_config.json",
