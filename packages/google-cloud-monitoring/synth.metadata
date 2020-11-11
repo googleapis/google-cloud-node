@@ -3,8 +3,16 @@
     {
       "git": {
         "name": ".",
-        "remote": "git@github.com:googleapis/nodejs-monitoring.git",
+        "remote": "https://github.com/googleapis/nodejs-monitoring.git",
         "sha": "69f9bcf752172e6a5a793d0150176d6f9c6658b2"
+      }
+    },
+    {
+      "git": {
+        "name": "googleapis",
+        "remote": "https://github.com/googleapis/googleapis.git",
+        "sha": "4c5071b615d96ef9dfd6a63d8429090f1f2872bb",
+        "internalRef": "327369997"
       }
     },
     {
