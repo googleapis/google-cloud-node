@@ -18,8 +18,15 @@
 
 import {AssetServiceClient} from '@google-cloud/asset';
 
+// check that the client class type name can be used
+function doStuffWithAssetServiceClient(client: AssetServiceClient) {
+  client.close();
+}
+
 function main() {
-  new AssetServiceClient();
+  // check that the client instance can be created
+  const assetServiceClient = new AssetServiceClient();
+  doStuffWithAssetServiceClient(assetServiceClient);
 }
 
 main();
