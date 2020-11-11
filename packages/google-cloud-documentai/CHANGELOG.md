@@ -1,5 +1,12 @@
 # Changelog
 
+### [2.2.1](https://www.github.com/googleapis/nodejs-document-ai/compare/v2.2.0...v2.2.1) (2020-11-10)
+
+
+### Bug Fixes
+
+* do not modify options object ([#125](https://www.github.com/googleapis/nodejs-document-ai/issues/125)) ([acd166f](https://www.github.com/googleapis/nodejs-document-ai/commit/acd166fab67c77101e6d0168d0a74a420fc3df6f))
+
 ## [2.2.0](https://www.github.com/googleapis/nodejs-document-ai/compare/v2.1.1...v2.2.0) (2020-10-17)
 
 
