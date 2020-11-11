@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.0.1](https://www.github.com/googleapis/nodejs-workflows/compare/v1.0.0...v1.0.1) (2020-11-07)
+
+
+### Bug Fixes
+
+* do not modify options object, use defaultScopes ([#20](https://www.github.com/googleapis/nodejs-workflows/issues/20)) ([42bbbc5](https://www.github.com/googleapis/nodejs-workflows/commit/42bbbc51d0445b49ac80ec435e8ac2b38455d8ee))
+
 ## 1.0.0 (2020-09-17)
 
 
