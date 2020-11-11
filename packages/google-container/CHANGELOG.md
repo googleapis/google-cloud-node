@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/container?activeTab=versions
 
+### [2.1.2](https://www.github.com/googleapis/nodejs-cloud-container/compare/v2.1.1...v2.1.2) (2020-11-07)
+
+
+### Bug Fixes
+
+* do not modify options object, use defaultScopes ([#398](https://www.github.com/googleapis/nodejs-cloud-container/issues/398)) ([e696b91](https://www.github.com/googleapis/nodejs-cloud-container/commit/e696b91a5cd57f213a0f2412f6f513ff44183d41))
+
 ### [2.1.1](https://www.github.com/googleapis/nodejs-cloud-container/compare/v2.1.0...v2.1.1) (2020-07-09)
 
 
