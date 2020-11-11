@@ -3,8 +3,16 @@
     {
       "git": {
         "name": ".",
-        "remote": "git@github.com:googleapis/nodejs-analytics-admin.git",
+        "remote": "https://github.com/googleapis/nodejs-analytics-admin.git",
         "sha": "7f1ae38141775e2ae2f45a2fb30e10ddfbc96664"
+      }
+    },
+    {
+      "git": {
+        "name": "googleapis",
+        "remote": "https://github.com/googleapis/googleapis.git",
+        "sha": "b365fff50d84fbe03ea16d02cc73d72fa1fc864d",
+        "internalRef": "340922897"
       }
     },
     {
