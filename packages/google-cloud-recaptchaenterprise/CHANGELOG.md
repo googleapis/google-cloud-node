@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/recaptcha-enterprise?activeTab=versions
 
+### [2.0.2](https://www.github.com/googleapis/nodejs-recaptcha-enterprise/compare/v2.0.1...v2.0.2) (2020-11-06)
+
+
+### Bug Fixes
+
+* do not modify options object, use defaultScopes ([#222](https://www.github.com/googleapis/nodejs-recaptcha-enterprise/issues/222)) ([807b692](https://www.github.com/googleapis/nodejs-recaptcha-enterprise/commit/807b6925ce52d14b3e7b2afa75fc54da805ce604))
+
 ### [2.0.1](https://www.github.com/googleapis/nodejs-recaptcha-enterprise/compare/v2.0.0...v2.0.1) (2020-07-06)
 
 
