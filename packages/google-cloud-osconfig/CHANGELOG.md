@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.0](https://www.github.com/googleapis/nodejs-os-config/compare/v1.2.3...v1.3.0) (2020-11-12)
+
+
+### Features
+
+* Added PatchRollout feature to PatchDeployments inventory proto definitions for VM Manager Inventory ([#62](https://www.github.com/googleapis/nodejs-os-config/issues/62)) ([7c4e2a1](https://www.github.com/googleapis/nodejs-os-config/commit/7c4e2a171346cb5f5ad5068c25b4c982450585c3))
+
 ### [1.2.3](https://www.github.com/googleapis/nodejs-os-config/compare/v1.2.2...v1.2.3) (2020-11-07)
 
 
