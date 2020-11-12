@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/phishing-protection?activeTab=versions
 
+### [2.3.2](https://www.github.com/googleapis/nodejs-phishing-protection/compare/v2.3.1...v2.3.2) (2020-11-12)
+
+
+### Bug Fixes
+
+* do not modify options object, use defaultScopes ([#220](https://www.github.com/googleapis/nodejs-phishing-protection/issues/220)) ([951b9ef](https://www.github.com/googleapis/nodejs-phishing-protection/commit/951b9ef0b357e57e54246ed54fa7fdae1e2198c4))
+
 ### [2.3.1](https://www.github.com/googleapis/nodejs-phishing-protection/compare/v2.3.0...v2.3.1) (2020-10-02)
 
 
