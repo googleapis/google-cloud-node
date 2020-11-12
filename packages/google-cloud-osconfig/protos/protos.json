@@ -2,1242 +2,6 @@
   "nested": {
     "google": {
       "nested": {
-        "cloud": {
-          "nested": {
-            "osconfig": {
-              "nested": {
-                "v1": {
-                  "options": {
-                    "csharp_namespace": "Google.Cloud.OsConfig.V1",
-                    "go_package": "google.golang.org/genproto/googleapis/cloud/osconfig/v1;osconfig",
-                    "java_outer_classname": "PatchJobs",
-                    "java_package": "com.google.cloud.osconfig.v1",
-                    "php_namespace": "Google\\Cloud\\OsConfig\\V1",
-                    "ruby_package": "Google::Cloud::OsConfig::V1",
-                    "(google.api.resource_definition).type": "compute.googleapis.com/Instance",
-                    "(google.api.resource_definition).pattern": "projects/{project}/zones/{zone}/instances/{instance}"
-                  },
-                  "nested": {
-                    "OsConfigService": {
-                      "options": {
-                        "(google.api.default_host)": "osconfig.googleapis.com",
-                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
-                      },
-                      "methods": {
-                        "ExecutePatchJob": {
-                          "requestType": "ExecutePatchJobRequest",
-                          "responseType": "PatchJob",
-                          "options": {
-                            "(google.api.http).post": "/v1/{parent=projects/*}/patchJobs:execute",
-                            "(google.api.http).body": "*"
-                          }
-                        },
-                        "GetPatchJob": {
-                          "requestType": "GetPatchJobRequest",
-                          "responseType": "PatchJob",
-                          "options": {
-                            "(google.api.http).get": "/v1/{name=projects/*/patchJobs/*}",
-                            "(google.api.method_signature)": "name"
-                          }
-                        },
-                        "CancelPatchJob": {
-                          "requestType": "CancelPatchJobRequest",
-                          "responseType": "PatchJob",
-                          "options": {
-                            "(google.api.http).post": "/v1/{name=projects/*/patchJobs/*}:cancel",
-                            "(google.api.http).body": "*"
-                          }
-                        },
-                        "ListPatchJobs": {
-                          "requestType": "ListPatchJobsRequest",
-                          "responseType": "ListPatchJobsResponse",
-                          "options": {
-                            "(google.api.http).get": "/v1/{parent=projects/*}/patchJobs",
-                            "(google.api.method_signature)": "parent"
-                          }
-                        },
-                        "ListPatchJobInstanceDetails": {
-                          "requestType": "ListPatchJobInstanceDetailsRequest",
-                          "responseType": "ListPatchJobInstanceDetailsResponse",
-                          "options": {
-                            "(google.api.http).get": "/v1/{parent=projects/*/patchJobs/*}/instanceDetails",
-                            "(google.api.method_signature)": "parent"
-                          }
-                        },
-                        "CreatePatchDeployment": {
-                          "requestType": "CreatePatchDeploymentRequest",
-                          "responseType": "PatchDeployment",
-                          "options": {
-                            "(google.api.http).post": "/v1/{parent=projects/*}/patchDeployments",
-                            "(google.api.http).body": "patch_deployment",
-                            "(google.api.method_signature)": "parent,patch_deployment,patch_deployment_id"
-                          }
-                        },
-                        "GetPatchDeployment": {
-                          "requestType": "GetPatchDeploymentRequest",
-                          "responseType": "PatchDeployment",
-                          "options": {
-                            "(google.api.http).get": "/v1/{name=projects/*/patchDeployments/*}",
-                            "(google.api.method_signature)": "name"
-                          }
-                        },
-                        "ListPatchDeployments": {
-                          "requestType": "ListPatchDeploymentsRequest",
-                          "responseType": "ListPatchDeploymentsResponse",
-                          "options": {
-                            "(google.api.http).get": "/v1/{parent=projects/*}/patchDeployments",
-                            "(google.api.method_signature)": "parent"
-                          }
-                        },
-                        "DeletePatchDeployment": {
-                          "requestType": "DeletePatchDeploymentRequest",
-                          "responseType": "google.protobuf.Empty",
-                          "options": {
-                            "(google.api.http).delete": "/v1/{name=projects/*/patchDeployments/*}",
-                            "(google.api.method_signature)": "name"
-                          }
-                        }
-                      }
-                    },
-                    "PatchDeployment": {
-                      "options": {
-                        "(google.api.resource).type": "osconfig.googleapis.com/PatchDeployment",
-                        "(google.api.resource).pattern": "projects/{project}/patchDeployments/{patch_deployment}"
-                      },
-                      "oneofs": {
-                        "schedule": {
-                          "oneof": [
-                            "oneTimeSchedule",
-                            "recurringSchedule"
-                          ]
-                        }
-                      },
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "description": {
-                          "type": "string",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "instanceFilter": {
-                          "type": "PatchInstanceFilter",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "patchConfig": {
-                          "type": "PatchConfig",
-                          "id": 4,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "duration": {
-                          "type": "google.protobuf.Duration",
-                          "id": 5,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "oneTimeSchedule": {
-                          "type": "OneTimeSchedule",
-                          "id": 6,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "recurringSchedule": {
-                          "type": "RecurringSchedule",
-                          "id": 7,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "createTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 8,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "updateTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 9,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "lastExecuteTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 10,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        }
-                      }
-                    },
-                    "OneTimeSchedule": {
-                      "fields": {
-                        "executeTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        }
-                      }
-                    },
-                    "RecurringSchedule": {
-                      "oneofs": {
-                        "scheduleConfig": {
-                          "oneof": [
-                            "weekly",
-                            "monthly"
-                          ]
-                        }
-                      },
-                      "fields": {
-                        "timeZone": {
-                          "type": "google.type.TimeZone",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "startTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "endTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "timeOfDay": {
-                          "type": "google.type.TimeOfDay",
-                          "id": 4,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "frequency": {
-                          "type": "Frequency",
-                          "id": 5,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "weekly": {
-                          "type": "WeeklySchedule",
-                          "id": 6,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "monthly": {
-                          "type": "MonthlySchedule",
-                          "id": 7,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "lastExecuteTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 9,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "nextExecuteTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 10,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        }
-                      },
-                      "nested": {
-                        "Frequency": {
-                          "values": {
-                            "FREQUENCY_UNSPECIFIED": 0,
-                            "WEEKLY": 1,
-                            "MONTHLY": 2
-                          }
-                        }
-                      }
-                    },
-                    "WeeklySchedule": {
-                      "fields": {
-                        "dayOfWeek": {
-                          "type": "google.type.DayOfWeek",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        }
-                      }
-                    },
-                    "MonthlySchedule": {
-                      "oneofs": {
-                        "dayOfMonth": {
-                          "oneof": [
-                            "weekDayOfMonth",
-                            "monthDay"
-                          ]
-                        }
-                      },
-                      "fields": {
-                        "weekDayOfMonth": {
-                          "type": "WeekDayOfMonth",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "monthDay": {
-                          "type": "int32",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        }
-                      }
-                    },
-                    "WeekDayOfMonth": {
-                      "fields": {
-                        "weekOrdinal": {
-                          "type": "int32",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "dayOfWeek": {
-                          "type": "google.type.DayOfWeek",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        }
-                      }
-                    },
-                    "CreatePatchDeploymentRequest": {
-                      "fields": {
-                        "parent": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "cloudresourcemanager.googleapis.com/Project"
-                          }
-                        },
-                        "patchDeploymentId": {
-                          "type": "string",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "patchDeployment": {
-                          "type": "PatchDeployment",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        }
-                      }
-                    },
-                    "GetPatchDeploymentRequest": {
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "osconfig.googleapis.com/PatchDeployment"
-                          }
-                        }
-                      }
-                    },
-                    "ListPatchDeploymentsRequest": {
-                      "fields": {
-                        "parent": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "cloudresourcemanager.googleapis.com/Project"
-                          }
-                        },
-                        "pageSize": {
-                          "type": "int32",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "pageToken": {
-                          "type": "string",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        }
-                      }
-                    },
-                    "ListPatchDeploymentsResponse": {
-                      "fields": {
-                        "patchDeployments": {
-                          "rule": "repeated",
-                          "type": "PatchDeployment",
-                          "id": 1
-                        },
-                        "nextPageToken": {
-                          "type": "string",
-                          "id": 2
-                        }
-                      }
-                    },
-                    "DeletePatchDeploymentRequest": {
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "osconfig.googleapis.com/PatchDeployment"
-                          }
-                        }
-                      }
-                    },
-                    "ExecutePatchJobRequest": {
-                      "fields": {
-                        "parent": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "cloudresourcemanager.googleapis.com/Project"
-                          }
-                        },
-                        "description": {
-                          "type": "string",
-                          "id": 2
-                        },
-                        "instanceFilter": {
-                          "type": "PatchInstanceFilter",
-                          "id": 7,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "patchConfig": {
-                          "type": "PatchConfig",
-                          "id": 4
-                        },
-                        "duration": {
-                          "type": "google.protobuf.Duration",
-                          "id": 5
-                        },
-                        "dryRun": {
-                          "type": "bool",
-                          "id": 6
-                        },
-                        "displayName": {
-                          "type": "string",
-                          "id": 8
-                        }
-                      }
-                    },
-                    "GetPatchJobRequest": {
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "osconfig.googleapis.com/PatchJob"
-                          }
-                        }
-                      }
-                    },
-                    "ListPatchJobInstanceDetailsRequest": {
-                      "fields": {
-                        "parent": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "osconfig.googleapis.com/PatchJob"
-                          }
-                        },
-                        "pageSize": {
-                          "type": "int32",
-                          "id": 2
-                        },
-                        "pageToken": {
-                          "type": "string",
-                          "id": 3
-                        },
-                        "filter": {
-                          "type": "string",
-                          "id": 4
-                        }
-                      }
-                    },
-                    "ListPatchJobInstanceDetailsResponse": {
-                      "fields": {
-                        "patchJobInstanceDetails": {
-                          "rule": "repeated",
-                          "type": "PatchJobInstanceDetails",
-                          "id": 1
-                        },
-                        "nextPageToken": {
-                          "type": "string",
-                          "id": 2
-                        }
-                      }
-                    },
-                    "PatchJobInstanceDetails": {
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.resource_reference).type": "compute.googleapis.com/Instance"
-                          }
-                        },
-                        "instanceSystemId": {
-                          "type": "string",
-                          "id": 2
-                        },
-                        "state": {
-                          "type": "Instance.PatchState",
-                          "id": 3
-                        },
-                        "failureReason": {
-                          "type": "string",
-                          "id": 4
-                        },
-                        "attemptCount": {
-                          "type": "int64",
-                          "id": 5
-                        }
-                      }
-                    },
-                    "ListPatchJobsRequest": {
-                      "fields": {
-                        "parent": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "cloudresourcemanager.googleapis.com/Project"
-                          }
-                        },
-                        "pageSize": {
-                          "type": "int32",
-                          "id": 2
-                        },
-                        "pageToken": {
-                          "type": "string",
-                          "id": 3
-                        },
-                        "filter": {
-                          "type": "string",
-                          "id": 4
-                        }
-                      }
-                    },
-                    "ListPatchJobsResponse": {
-                      "fields": {
-                        "patchJobs": {
-                          "rule": "repeated",
-                          "type": "PatchJob",
-                          "id": 1
-                        },
-                        "nextPageToken": {
-                          "type": "string",
-                          "id": 2
-                        }
-                      }
-                    },
-                    "PatchJob": {
-                      "options": {
-                        "(google.api.resource).type": "osconfig.googleapis.com/PatchJob",
-                        "(google.api.resource).pattern": "projects/{project}/patchJobs/{patch_job}"
-                      },
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "displayName": {
-                          "type": "string",
-                          "id": 14
-                        },
-                        "description": {
-                          "type": "string",
-                          "id": 2
-                        },
-                        "createTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 3
-                        },
-                        "updateTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 4
-                        },
-                        "state": {
-                          "type": "State",
-                          "id": 5
-                        },
-                        "instanceFilter": {
-                          "type": "PatchInstanceFilter",
-                          "id": 13
-                        },
-                        "patchConfig": {
-                          "type": "PatchConfig",
-                          "id": 7
-                        },
-                        "duration": {
-                          "type": "google.protobuf.Duration",
-                          "id": 8
-                        },
-                        "instanceDetailsSummary": {
-                          "type": "InstanceDetailsSummary",
-                          "id": 9
-                        },
-                        "dryRun": {
-                          "type": "bool",
-                          "id": 10
-                        },
-                        "errorMessage": {
-                          "type": "string",
-                          "id": 11
-                        },
-                        "percentComplete": {
-                          "type": "double",
-                          "id": 12
-                        },
-                        "patchDeployment": {
-                          "type": "string",
-                          "id": 15,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY",
-                            "(google.api.resource_reference).type": "osconfig.googleapis.com/PatchDeployment"
-                          }
-                        }
-                      },
-                      "nested": {
-                        "InstanceDetailsSummary": {
-                          "fields": {
-                            "pendingInstanceCount": {
-                              "type": "int64",
-                              "id": 1
-                            },
-                            "inactiveInstanceCount": {
-                              "type": "int64",
-                              "id": 2
-                            },
-                            "notifiedInstanceCount": {
-                              "type": "int64",
-                              "id": 3
-                            },
-                            "startedInstanceCount": {
-                              "type": "int64",
-                              "id": 4
-                            },
-                            "downloadingPatchesInstanceCount": {
-                              "type": "int64",
-                              "id": 5
-                            },
-                            "applyingPatchesInstanceCount": {
-                              "type": "int64",
-                              "id": 6
-                            },
-                            "rebootingInstanceCount": {
-                              "type": "int64",
-                              "id": 7
-                            },
-                            "succeededInstanceCount": {
-                              "type": "int64",
-                              "id": 8
-                            },
-                            "succeededRebootRequiredInstanceCount": {
-                              "type": "int64",
-                              "id": 9
-                            },
-                            "failedInstanceCount": {
-                              "type": "int64",
-                              "id": 10
-                            },
-                            "ackedInstanceCount": {
-                              "type": "int64",
-                              "id": 11
-                            },
-                            "timedOutInstanceCount": {
-                              "type": "int64",
-                              "id": 12
-                            },
-                            "prePatchStepInstanceCount": {
-                              "type": "int64",
-                              "id": 13
-                            },
-                            "postPatchStepInstanceCount": {
-                              "type": "int64",
-                              "id": 14
-                            },
-                            "noAgentDetectedInstanceCount": {
-                              "type": "int64",
-                              "id": 15
-                            }
-                          }
-                        },
-                        "State": {
-                          "values": {
-                            "STATE_UNSPECIFIED": 0,
-                            "STARTED": 1,
-                            "INSTANCE_LOOKUP": 2,
-                            "PATCHING": 3,
-                            "SUCCEEDED": 4,
-                            "COMPLETED_WITH_ERRORS": 5,
-                            "CANCELED": 6,
-                            "TIMED_OUT": 7
-                          }
-                        }
-                      }
-                    },
-                    "PatchConfig": {
-                      "fields": {
-                        "rebootConfig": {
-                          "type": "RebootConfig",
-                          "id": 1
-                        },
-                        "apt": {
-                          "type": "AptSettings",
-                          "id": 3
-                        },
-                        "yum": {
-                          "type": "YumSettings",
-                          "id": 4
-                        },
-                        "goo": {
-                          "type": "GooSettings",
-                          "id": 5
-                        },
-                        "zypper": {
-                          "type": "ZypperSettings",
-                          "id": 6
-                        },
-                        "windowsUpdate": {
-                          "type": "WindowsUpdateSettings",
-                          "id": 7
-                        },
-                        "preStep": {
-                          "type": "ExecStep",
-                          "id": 8
-                        },
-                        "postStep": {
-                          "type": "ExecStep",
-                          "id": 9
-                        }
-                      },
-                      "nested": {
-                        "RebootConfig": {
-                          "values": {
-                            "REBOOT_CONFIG_UNSPECIFIED": 0,
-                            "DEFAULT": 1,
-                            "ALWAYS": 2,
-                            "NEVER": 3
-                          }
-                        }
-                      }
-                    },
-                    "Instance": {
-                      "fields": {},
-                      "nested": {
-                        "PatchState": {
-                          "values": {
-                            "PATCH_STATE_UNSPECIFIED": 0,
-                            "PENDING": 1,
-                            "INACTIVE": 2,
-                            "NOTIFIED": 3,
-                            "STARTED": 4,
-                            "DOWNLOADING_PATCHES": 5,
-                            "APPLYING_PATCHES": 6,
-                            "REBOOTING": 7,
-                            "SUCCEEDED": 8,
-                            "SUCCEEDED_REBOOT_REQUIRED": 9,
-                            "FAILED": 10,
-                            "ACKED": 11,
-                            "TIMED_OUT": 12,
-                            "RUNNING_PRE_PATCH_STEP": 13,
-                            "RUNNING_POST_PATCH_STEP": 14,
-                            "NO_AGENT_DETECTED": 15
-                          }
-                        }
-                      }
-                    },
-                    "CancelPatchJobRequest": {
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "osconfig.googleapis.com/PatchJob"
-                          }
-                        }
-                      }
-                    },
-                    "AptSettings": {
-                      "fields": {
-                        "type": {
-                          "type": "Type",
-                          "id": 1
-                        },
-                        "excludes": {
-                          "rule": "repeated",
-                          "type": "string",
-                          "id": 2
-                        },
-                        "exclusivePackages": {
-                          "rule": "repeated",
-                          "type": "string",
-                          "id": 3
-                        }
-                      },
-                      "nested": {
-                        "Type": {
-                          "values": {
-                            "TYPE_UNSPECIFIED": 0,
-                            "DIST": 1,
-                            "UPGRADE": 2
-                          }
-                        }
-                      }
-                    },
-                    "YumSettings": {
-                      "fields": {
-                        "security": {
-                          "type": "bool",
-                          "id": 1
-                        },
-                        "minimal": {
-                          "type": "bool",
-                          "id": 2
-                        },
-                        "excludes": {
-                          "rule": "repeated",
-                          "type": "string",
-                          "id": 3
-                        },
-                        "exclusivePackages": {
-                          "rule": "repeated",
-                          "type": "string",
-                          "id": 4
-                        }
-                      }
-                    },
-                    "GooSettings": {
-                      "fields": {}
-                    },
-                    "ZypperSettings": {
-                      "fields": {
-                        "withOptional": {
-                          "type": "bool",
-                          "id": 1
-                        },
-                        "withUpdate": {
-                          "type": "bool",
-                          "id": 2
-                        },
-                        "categories": {
-                          "rule": "repeated",
-                          "type": "string",
-                          "id": 3
-                        },
-                        "severities": {
-                          "rule": "repeated",
-                          "type": "string",
-                          "id": 4
-                        },
-                        "excludes": {
-                          "rule": "repeated",
-                          "type": "string",
-                          "id": 5
-                        },
-                        "exclusivePatches": {
-                          "rule": "repeated",
-                          "type": "string",
-                          "id": 6
-                        }
-                      }
-                    },
-                    "WindowsUpdateSettings": {
-                      "fields": {
-                        "classifications": {
-                          "rule": "repeated",
-                          "type": "Classification",
-                          "id": 1
-                        },
-                        "excludes": {
-                          "rule": "repeated",
-                          "type": "string",
-                          "id": 2
-                        },
-                        "exclusivePatches": {
-                          "rule": "repeated",
-                          "type": "string",
-                          "id": 3
-                        }
-                      },
-                      "nested": {
-                        "Classification": {
-                          "values": {
-                            "CLASSIFICATION_UNSPECIFIED": 0,
-                            "CRITICAL": 1,
-                            "SECURITY": 2,
-                            "DEFINITION": 3,
-                            "DRIVER": 4,
-                            "FEATURE_PACK": 5,
-                            "SERVICE_PACK": 6,
-                            "TOOL": 7,
-                            "UPDATE_ROLLUP": 8,
-                            "UPDATE": 9
-                          }
-                        }
-                      }
-                    },
-                    "ExecStep": {
-                      "fields": {
-                        "linuxExecStepConfig": {
-                          "type": "ExecStepConfig",
-                          "id": 1
-                        },
-                        "windowsExecStepConfig": {
-                          "type": "ExecStepConfig",
-                          "id": 2
-                        }
-                      }
-                    },
-                    "ExecStepConfig": {
-                      "oneofs": {
-                        "executable": {
-                          "oneof": [
-                            "localPath",
-                            "gcsObject"
-                          ]
-                        }
-                      },
-                      "fields": {
-                        "localPath": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "gcsObject": {
-                          "type": "GcsObject",
-                          "id": 2
-                        },
-                        "allowedSuccessCodes": {
-                          "rule": "repeated",
-                          "type": "int32",
-                          "id": 3
-                        },
-                        "interpreter": {
-                          "type": "Interpreter",
-                          "id": 4
-                        }
-                      },
-                      "nested": {
-                        "Interpreter": {
-                          "values": {
-                            "INTERPRETER_UNSPECIFIED": 0,
-                            "SHELL": 1,
-                            "POWERSHELL": 2
-                          }
-                        }
-                      }
-                    },
-                    "GcsObject": {
-                      "fields": {
-                        "bucket": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "object": {
-                          "type": "string",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "generationNumber": {
-                          "type": "int64",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        }
-                      }
-                    },
-                    "PatchInstanceFilter": {
-                      "fields": {
-                        "all": {
-                          "type": "bool",
-                          "id": 1
-                        },
-                        "groupLabels": {
-                          "rule": "repeated",
-                          "type": "GroupLabel",
-                          "id": 2
-                        },
-                        "zones": {
-                          "rule": "repeated",
-                          "type": "string",
-                          "id": 3
-                        },
-                        "instances": {
-                          "rule": "repeated",
-                          "type": "string",
-                          "id": 4
-                        },
-                        "instanceNamePrefixes": {
-                          "rule": "repeated",
-                          "type": "string",
-                          "id": 5
-                        }
-                      },
-                      "nested": {
-                        "GroupLabel": {
-                          "fields": {
-                            "labels": {
-                              "keyType": "string",
-                              "type": "string",
-                              "id": 1
-                            }
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-        },
-        "api": {
-          "options": {
-            "go_package": "google.golang.org/genproto/googleapis/api/annotations;annotations",
-            "java_multiple_files": true,
-            "java_outer_classname": "FieldBehaviorProto",
-            "java_package": "com.google.api",
-            "objc_class_prefix": "GAPI",
-            "cc_enable_arenas": true
-          },
-          "nested": {
-            "http": {
-              "type": "HttpRule",
-              "id": 72295728,
-              "extend": "google.protobuf.MethodOptions"
-            },
-            "Http": {
-              "fields": {
-                "rules": {
-                  "rule": "repeated",
-                  "type": "HttpRule",
-                  "id": 1
-                },
-                "fullyDecodeReservedExpansion": {
-                  "type": "bool",
-                  "id": 2
-                }
-              }
-            },
-            "HttpRule": {
-              "oneofs": {
-                "pattern": {
-                  "oneof": [
-                    "get",
-                    "put",
-                    "post",
-                    "delete",
-                    "patch",
-                    "custom"
-                  ]
-                }
-              },
-              "fields": {
-                "selector": {
-                  "type": "string",
-                  "id": 1
-                },
-                "get": {
-                  "type": "string",
-                  "id": 2
-                },
-                "put": {
-                  "type": "string",
-                  "id": 3
-                },
-                "post": {
-                  "type": "string",
-                  "id": 4
-                },
-                "delete": {
-                  "type": "string",
-                  "id": 5
-                },
-                "patch": {
-                  "type": "string",
-                  "id": 6
-                },
-                "custom": {
-                  "type": "CustomHttpPattern",
-                  "id": 8
-                },
-                "body": {
-                  "type": "string",
-                  "id": 7
-                },
-                "responseBody": {
-                  "type": "string",
-                  "id": 12
-                },
-                "additionalBindings": {
-                  "rule": "repeated",
-                  "type": "HttpRule",
-                  "id": 11
-                }
-              }
-            },
-            "CustomHttpPattern": {
-              "fields": {
-                "kind": {
-                  "type": "string",
-                  "id": 1
-                },
-                "path": {
-                  "type": "string",
-                  "id": 2
-                }
-              }
-            },
-            "methodSignature": {
-              "rule": "repeated",
-              "type": "string",
-              "id": 1051,
-              "extend": "google.protobuf.MethodOptions"
-            },
-            "defaultHost": {
-              "type": "string",
-              "id": 1049,
-              "extend": "google.protobuf.ServiceOptions"
-            },
-            "oauthScopes": {
-              "type": "string",
-              "id": 1050,
-              "extend": "google.protobuf.ServiceOptions"
-            },
-            "resourceReference": {
-              "type": "google.api.ResourceReference",
-              "id": 1055,
-              "extend": "google.protobuf.FieldOptions"
-            },
-            "resourceDefinition": {
-              "rule": "repeated",
-              "type": "google.api.ResourceDescriptor",
-              "id": 1053,
-              "extend": "google.protobuf.FileOptions"
-            },
-            "resource": {
-              "type": "google.api.ResourceDescriptor",
-              "id": 1053,
-              "extend": "google.protobuf.MessageOptions"
-            },
-            "ResourceDescriptor": {
-              "fields": {
-                "type": {
-                  "type": "string",
-                  "id": 1
-                },
-                "pattern": {
-                  "rule": "repeated",
-                  "type": "string",
-                  "id": 2
-                },
-                "nameField": {
-                  "type": "string",
-                  "id": 3
-                },
-                "history": {
-                  "type": "History",
-                  "id": 4
-                },
-                "plural": {
-                  "type": "string",
-                  "id": 5
-                },
-                "singular": {
-                  "type": "string",
-                  "id": 6
-                }
-              },
-              "nested": {
-                "History": {
-                  "values": {
-                    "HISTORY_UNSPECIFIED": 0,
-                    "ORIGINALLY_SINGLE_PATTERN": 1,
-                    "FUTURE_MULTI_PATTERN": 2
-                  }
-                }
-              }
-            },
-            "ResourceReference": {
-              "fields": {
-                "type": {
-                  "type": "string",
-                  "id": 1
-                },
-                "childType": {
-                  "type": "string",
-                  "id": 2
-                }
-              }
-            },
-            "fieldBehavior": {
-              "rule": "repeated",
-              "type": "google.api.FieldBehavior",
-              "id": 1052,
-              "extend": "google.protobuf.FieldOptions"
-            },
-            "FieldBehavior": {
-              "values": {
-                "FIELD_BEHAVIOR_UNSPECIFIED": 0,
-                "OPTIONAL": 1,
-                "REQUIRED": 2,
-                "OUTPUT_ONLY": 3,
-                "INPUT_ONLY": 4,
-                "IMMUTABLE": 5
-              }
-            }
-          }
-        },
         "protobuf": {
           "options": {
             "go_package": "github.com/golang/protobuf/protoc-gen-go/descriptor;descriptor",
@@ -1249,6 +13,18 @@
             "optimize_for": "SPEED"
           },
           "nested": {
+            "Timestamp": {
+              "fields": {
+                "seconds": {
+                  "type": "int64",
+                  "id": 1
+                },
+                "nanos": {
+                  "type": "int32",
+                  "id": 2
+                }
+              }
+            },
             "FileDescriptorSet": {
               "fields": {
                 "file": {
@@ -2145,20 +921,1570 @@
                 }
               }
             },
-            "Timestamp": {
+            "Empty": {
+              "fields": {}
+            }
+          }
+        },
+        "cloud": {
+          "nested": {
+            "osconfig": {
+              "nested": {
+                "v1": {
+                  "options": {
+                    "csharp_namespace": "Google.Cloud.OsConfig.V1",
+                    "go_package": "google.golang.org/genproto/googleapis/cloud/osconfig/v1;osconfig",
+                    "java_multiple_files": true,
+                    "java_outer_classname": "PatchJobs",
+                    "java_package": "com.google.cloud.osconfig.v1",
+                    "php_namespace": "Google\\Cloud\\OsConfig\\V1",
+                    "ruby_package": "Google::Cloud::OsConfig::V1",
+                    "(google.api.resource_definition).type": "compute.googleapis.com/Instance",
+                    "(google.api.resource_definition).pattern": "projects/{project}/zones/{zone}/instances/{instance}"
+                  },
+                  "nested": {
+                    "Inventory": {
+                      "fields": {
+                        "osInfo": {
+                          "type": "OsInfo",
+                          "id": 1
+                        },
+                        "items": {
+                          "keyType": "string",
+                          "type": "Item",
+                          "id": 2
+                        }
+                      },
+                      "nested": {
+                        "OsInfo": {
+                          "fields": {
+                            "hostname": {
+                              "type": "string",
+                              "id": 9
+                            },
+                            "longName": {
+                              "type": "string",
+                              "id": 2
+                            },
+                            "shortName": {
+                              "type": "string",
+                              "id": 3
+                            },
+                            "version": {
+                              "type": "string",
+                              "id": 4
+                            },
+                            "architecture": {
+                              "type": "string",
+                              "id": 5
+                            },
+                            "kernelVersion": {
+                              "type": "string",
+                              "id": 6
+                            },
+                            "kernelRelease": {
+                              "type": "string",
+                              "id": 7
+                            },
+                            "osconfigAgentVersion": {
+                              "type": "string",
+                              "id": 8
+                            }
+                          }
+                        },
+                        "Item": {
+                          "oneofs": {
+                            "details": {
+                              "oneof": [
+                                "installedPackage",
+                                "availablePackage"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "id": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "originType": {
+                              "type": "OriginType",
+                              "id": 2
+                            },
+                            "createTime": {
+                              "type": "google.protobuf.Timestamp",
+                              "id": 8
+                            },
+                            "updateTime": {
+                              "type": "google.protobuf.Timestamp",
+                              "id": 9
+                            },
+                            "type": {
+                              "type": "Type",
+                              "id": 5
+                            },
+                            "installedPackage": {
+                              "type": "SoftwarePackage",
+                              "id": 6
+                            },
+                            "availablePackage": {
+                              "type": "SoftwarePackage",
+                              "id": 7
+                            }
+                          },
+                          "nested": {
+                            "OriginType": {
+                              "values": {
+                                "ORIGIN_TYPE_UNSPECIFIED": 0,
+                                "INVENTORY_REPORT": 1
+                              }
+                            },
+                            "Type": {
+                              "values": {
+                                "TYPE_UNSPECIFIED": 0,
+                                "INSTALLED_PACKAGE": 1,
+                                "AVAILABLE_PACKAGE": 2
+                              }
+                            }
+                          }
+                        },
+                        "SoftwarePackage": {
+                          "oneofs": {
+                            "details": {
+                              "oneof": [
+                                "yumPackage",
+                                "aptPackage",
+                                "zypperPackage",
+                                "googetPackage",
+                                "zypperPatch",
+                                "wuaPackage",
+                                "qfePackage",
+                                "cosPackage"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "yumPackage": {
+                              "type": "VersionedPackage",
+                              "id": 1
+                            },
+                            "aptPackage": {
+                              "type": "VersionedPackage",
+                              "id": 2
+                            },
+                            "zypperPackage": {
+                              "type": "VersionedPackage",
+                              "id": 3
+                            },
+                            "googetPackage": {
+                              "type": "VersionedPackage",
+                              "id": 4
+                            },
+                            "zypperPatch": {
+                              "type": "ZypperPatch",
+                              "id": 5
+                            },
+                            "wuaPackage": {
+                              "type": "WindowsUpdatePackage",
+                              "id": 6
+                            },
+                            "qfePackage": {
+                              "type": "WindowsQuickFixEngineeringPackage",
+                              "id": 7
+                            },
+                            "cosPackage": {
+                              "type": "VersionedPackage",
+                              "id": 8
+                            }
+                          }
+                        },
+                        "VersionedPackage": {
+                          "fields": {
+                            "packageName": {
+                              "type": "string",
+                              "id": 4
+                            },
+                            "architecture": {
+                              "type": "string",
+                              "id": 2
+                            },
+                            "version": {
+                              "type": "string",
+                              "id": 3
+                            }
+                          }
+                        },
+                        "WindowsUpdatePackage": {
+                          "fields": {
+                            "title": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "description": {
+                              "type": "string",
+                              "id": 2
+                            },
+                            "categories": {
+                              "rule": "repeated",
+                              "type": "WindowsUpdateCategory",
+                              "id": 3
+                            },
+                            "kbArticleIds": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 4
+                            },
+                            "supportUrl": {
+                              "type": "string",
+                              "id": 11
+                            },
+                            "moreInfoUrls": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 5
+                            },
+                            "updateId": {
+                              "type": "string",
+                              "id": 6
+                            },
+                            "revisionNumber": {
+                              "type": "int32",
+                              "id": 7
+                            },
+                            "lastDeploymentChangeTime": {
+                              "type": "google.protobuf.Timestamp",
+                              "id": 10
+                            }
+                          },
+                          "nested": {
+                            "WindowsUpdateCategory": {
+                              "fields": {
+                                "id": {
+                                  "type": "string",
+                                  "id": 1
+                                },
+                                "name": {
+                                  "type": "string",
+                                  "id": 2
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "ZypperPatch": {
+                          "fields": {
+                            "patchName": {
+                              "type": "string",
+                              "id": 5
+                            },
+                            "category": {
+                              "type": "string",
+                              "id": 2
+                            },
+                            "severity": {
+                              "type": "string",
+                              "id": 3
+                            },
+                            "summary": {
+                              "type": "string",
+                              "id": 4
+                            }
+                          }
+                        },
+                        "WindowsQuickFixEngineeringPackage": {
+                          "fields": {
+                            "caption": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "description": {
+                              "type": "string",
+                              "id": 2
+                            },
+                            "hotFixId": {
+                              "type": "string",
+                              "id": 3
+                            },
+                            "installTime": {
+                              "type": "google.protobuf.Timestamp",
+                              "id": 5
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "FixedOrPercent": {
+                      "oneofs": {
+                        "mode": {
+                          "oneof": [
+                            "fixed",
+                            "percent"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "fixed": {
+                          "type": "int32",
+                          "id": 1
+                        },
+                        "percent": {
+                          "type": "int32",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "OsConfigService": {
+                      "options": {
+                        "(google.api.default_host)": "osconfig.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
+                      },
+                      "methods": {
+                        "ExecutePatchJob": {
+                          "requestType": "ExecutePatchJobRequest",
+                          "responseType": "PatchJob",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=projects/*}/patchJobs:execute",
+                            "(google.api.http).body": "*"
+                          }
+                        },
+                        "GetPatchJob": {
+                          "requestType": "GetPatchJobRequest",
+                          "responseType": "PatchJob",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=projects/*/patchJobs/*}",
+                            "(google.api.method_signature)": "name"
+                          }
+                        },
+                        "CancelPatchJob": {
+                          "requestType": "CancelPatchJobRequest",
+                          "responseType": "PatchJob",
+                          "options": {
+                            "(google.api.http).post": "/v1/{name=projects/*/patchJobs/*}:cancel",
+                            "(google.api.http).body": "*"
+                          }
+                        },
+                        "ListPatchJobs": {
+                          "requestType": "ListPatchJobsRequest",
+                          "responseType": "ListPatchJobsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=projects/*}/patchJobs",
+                            "(google.api.method_signature)": "parent"
+                          }
+                        },
+                        "ListPatchJobInstanceDetails": {
+                          "requestType": "ListPatchJobInstanceDetailsRequest",
+                          "responseType": "ListPatchJobInstanceDetailsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=projects/*/patchJobs/*}/instanceDetails",
+                            "(google.api.method_signature)": "parent"
+                          }
+                        },
+                        "CreatePatchDeployment": {
+                          "requestType": "CreatePatchDeploymentRequest",
+                          "responseType": "PatchDeployment",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=projects/*}/patchDeployments",
+                            "(google.api.http).body": "patch_deployment",
+                            "(google.api.method_signature)": "parent,patch_deployment,patch_deployment_id"
+                          }
+                        },
+                        "GetPatchDeployment": {
+                          "requestType": "GetPatchDeploymentRequest",
+                          "responseType": "PatchDeployment",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=projects/*/patchDeployments/*}",
+                            "(google.api.method_signature)": "name"
+                          }
+                        },
+                        "ListPatchDeployments": {
+                          "requestType": "ListPatchDeploymentsRequest",
+                          "responseType": "ListPatchDeploymentsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=projects/*}/patchDeployments",
+                            "(google.api.method_signature)": "parent"
+                          }
+                        },
+                        "DeletePatchDeployment": {
+                          "requestType": "DeletePatchDeploymentRequest",
+                          "responseType": "google.protobuf.Empty",
+                          "options": {
+                            "(google.api.http).delete": "/v1/{name=projects/*/patchDeployments/*}",
+                            "(google.api.method_signature)": "name"
+                          }
+                        }
+                      }
+                    },
+                    "PatchDeployment": {
+                      "options": {
+                        "(google.api.resource).type": "osconfig.googleapis.com/PatchDeployment",
+                        "(google.api.resource).pattern": "projects/{project}/patchDeployments/{patch_deployment}"
+                      },
+                      "oneofs": {
+                        "schedule": {
+                          "oneof": [
+                            "oneTimeSchedule",
+                            "recurringSchedule"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "instanceFilter": {
+                          "type": "PatchInstanceFilter",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "patchConfig": {
+                          "type": "PatchConfig",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "duration": {
+                          "type": "google.protobuf.Duration",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "oneTimeSchedule": {
+                          "type": "OneTimeSchedule",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "recurringSchedule": {
+                          "type": "RecurringSchedule",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "lastExecuteTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "rollout": {
+                          "type": "PatchRollout",
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "OneTimeSchedule": {
+                      "fields": {
+                        "executeTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "RecurringSchedule": {
+                      "oneofs": {
+                        "scheduleConfig": {
+                          "oneof": [
+                            "weekly",
+                            "monthly"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "timeZone": {
+                          "type": "google.type.TimeZone",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "startTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "endTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "timeOfDay": {
+                          "type": "google.type.TimeOfDay",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "frequency": {
+                          "type": "Frequency",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "weekly": {
+                          "type": "WeeklySchedule",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "monthly": {
+                          "type": "MonthlySchedule",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "lastExecuteTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "nextExecuteTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "Frequency": {
+                          "values": {
+                            "FREQUENCY_UNSPECIFIED": 0,
+                            "WEEKLY": 1,
+                            "MONTHLY": 2
+                          }
+                        }
+                      }
+                    },
+                    "WeeklySchedule": {
+                      "fields": {
+                        "dayOfWeek": {
+                          "type": "google.type.DayOfWeek",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "MonthlySchedule": {
+                      "oneofs": {
+                        "dayOfMonth": {
+                          "oneof": [
+                            "weekDayOfMonth",
+                            "monthDay"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "weekDayOfMonth": {
+                          "type": "WeekDayOfMonth",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "monthDay": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "WeekDayOfMonth": {
+                      "fields": {
+                        "weekOrdinal": {
+                          "type": "int32",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "dayOfWeek": {
+                          "type": "google.type.DayOfWeek",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "CreatePatchDeploymentRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudresourcemanager.googleapis.com/Project"
+                          }
+                        },
+                        "patchDeploymentId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "patchDeployment": {
+                          "type": "PatchDeployment",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "GetPatchDeploymentRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "osconfig.googleapis.com/PatchDeployment"
+                          }
+                        }
+                      }
+                    },
+                    "ListPatchDeploymentsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudresourcemanager.googleapis.com/Project"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListPatchDeploymentsResponse": {
+                      "fields": {
+                        "patchDeployments": {
+                          "rule": "repeated",
+                          "type": "PatchDeployment",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "DeletePatchDeploymentRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "osconfig.googleapis.com/PatchDeployment"
+                          }
+                        }
+                      }
+                    },
+                    "ExecutePatchJobRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudresourcemanager.googleapis.com/Project"
+                          }
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "instanceFilter": {
+                          "type": "PatchInstanceFilter",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "patchConfig": {
+                          "type": "PatchConfig",
+                          "id": 4
+                        },
+                        "duration": {
+                          "type": "google.protobuf.Duration",
+                          "id": 5
+                        },
+                        "dryRun": {
+                          "type": "bool",
+                          "id": 6
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 8
+                        },
+                        "rollout": {
+                          "type": "PatchRollout",
+                          "id": 9
+                        }
+                      }
+                    },
+                    "GetPatchJobRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "osconfig.googleapis.com/PatchJob"
+                          }
+                        }
+                      }
+                    },
+                    "ListPatchJobInstanceDetailsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "osconfig.googleapis.com/PatchJob"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 4
+                        }
+                      }
+                    },
+                    "ListPatchJobInstanceDetailsResponse": {
+                      "fields": {
+                        "patchJobInstanceDetails": {
+                          "rule": "repeated",
+                          "type": "PatchJobInstanceDetails",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "PatchJobInstanceDetails": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.resource_reference).type": "compute.googleapis.com/Instance"
+                          }
+                        },
+                        "instanceSystemId": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "state": {
+                          "type": "Instance.PatchState",
+                          "id": 3
+                        },
+                        "failureReason": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "attemptCount": {
+                          "type": "int64",
+                          "id": 5
+                        }
+                      }
+                    },
+                    "ListPatchJobsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudresourcemanager.googleapis.com/Project"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 4
+                        }
+                      }
+                    },
+                    "ListPatchJobsResponse": {
+                      "fields": {
+                        "patchJobs": {
+                          "rule": "repeated",
+                          "type": "PatchJob",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "PatchJob": {
+                      "options": {
+                        "(google.api.resource).type": "osconfig.googleapis.com/PatchJob",
+                        "(google.api.resource).pattern": "projects/{project}/patchJobs/{patch_job}"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 14
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 3
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 4
+                        },
+                        "state": {
+                          "type": "State",
+                          "id": 5
+                        },
+                        "instanceFilter": {
+                          "type": "PatchInstanceFilter",
+                          "id": 13
+                        },
+                        "patchConfig": {
+                          "type": "PatchConfig",
+                          "id": 7
+                        },
+                        "duration": {
+                          "type": "google.protobuf.Duration",
+                          "id": 8
+                        },
+                        "instanceDetailsSummary": {
+                          "type": "InstanceDetailsSummary",
+                          "id": 9
+                        },
+                        "dryRun": {
+                          "type": "bool",
+                          "id": 10
+                        },
+                        "errorMessage": {
+                          "type": "string",
+                          "id": 11
+                        },
+                        "percentComplete": {
+                          "type": "double",
+                          "id": 12
+                        },
+                        "patchDeployment": {
+                          "type": "string",
+                          "id": 15,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "(google.api.resource_reference).type": "osconfig.googleapis.com/PatchDeployment"
+                          }
+                        },
+                        "rollout": {
+                          "type": "PatchRollout",
+                          "id": 16
+                        }
+                      },
+                      "nested": {
+                        "InstanceDetailsSummary": {
+                          "fields": {
+                            "pendingInstanceCount": {
+                              "type": "int64",
+                              "id": 1
+                            },
+                            "inactiveInstanceCount": {
+                              "type": "int64",
+                              "id": 2
+                            },
+                            "notifiedInstanceCount": {
+                              "type": "int64",
+                              "id": 3
+                            },
+                            "startedInstanceCount": {
+                              "type": "int64",
+                              "id": 4
+                            },
+                            "downloadingPatchesInstanceCount": {
+                              "type": "int64",
+                              "id": 5
+                            },
+                            "applyingPatchesInstanceCount": {
+                              "type": "int64",
+                              "id": 6
+                            },
+                            "rebootingInstanceCount": {
+                              "type": "int64",
+                              "id": 7
+                            },
+                            "succeededInstanceCount": {
+                              "type": "int64",
+                              "id": 8
+                            },
+                            "succeededRebootRequiredInstanceCount": {
+                              "type": "int64",
+                              "id": 9
+                            },
+                            "failedInstanceCount": {
+                              "type": "int64",
+                              "id": 10
+                            },
+                            "ackedInstanceCount": {
+                              "type": "int64",
+                              "id": 11
+                            },
+                            "timedOutInstanceCount": {
+                              "type": "int64",
+                              "id": 12
+                            },
+                            "prePatchStepInstanceCount": {
+                              "type": "int64",
+                              "id": 13
+                            },
+                            "postPatchStepInstanceCount": {
+                              "type": "int64",
+                              "id": 14
+                            },
+                            "noAgentDetectedInstanceCount": {
+                              "type": "int64",
+                              "id": 15
+                            }
+                          }
+                        },
+                        "State": {
+                          "values": {
+                            "STATE_UNSPECIFIED": 0,
+                            "STARTED": 1,
+                            "INSTANCE_LOOKUP": 2,
+                            "PATCHING": 3,
+                            "SUCCEEDED": 4,
+                            "COMPLETED_WITH_ERRORS": 5,
+                            "CANCELED": 6,
+                            "TIMED_OUT": 7
+                          }
+                        }
+                      }
+                    },
+                    "PatchConfig": {
+                      "fields": {
+                        "rebootConfig": {
+                          "type": "RebootConfig",
+                          "id": 1
+                        },
+                        "apt": {
+                          "type": "AptSettings",
+                          "id": 3
+                        },
+                        "yum": {
+                          "type": "YumSettings",
+                          "id": 4
+                        },
+                        "goo": {
+                          "type": "GooSettings",
+                          "id": 5
+                        },
+                        "zypper": {
+                          "type": "ZypperSettings",
+                          "id": 6
+                        },
+                        "windowsUpdate": {
+                          "type": "WindowsUpdateSettings",
+                          "id": 7
+                        },
+                        "preStep": {
+                          "type": "ExecStep",
+                          "id": 8
+                        },
+                        "postStep": {
+                          "type": "ExecStep",
+                          "id": 9
+                        }
+                      },
+                      "nested": {
+                        "RebootConfig": {
+                          "values": {
+                            "REBOOT_CONFIG_UNSPECIFIED": 0,
+                            "DEFAULT": 1,
+                            "ALWAYS": 2,
+                            "NEVER": 3
+                          }
+                        }
+                      }
+                    },
+                    "Instance": {
+                      "fields": {},
+                      "nested": {
+                        "PatchState": {
+                          "values": {
+                            "PATCH_STATE_UNSPECIFIED": 0,
+                            "PENDING": 1,
+                            "INACTIVE": 2,
+                            "NOTIFIED": 3,
+                            "STARTED": 4,
+                            "DOWNLOADING_PATCHES": 5,
+                            "APPLYING_PATCHES": 6,
+                            "REBOOTING": 7,
+                            "SUCCEEDED": 8,
+                            "SUCCEEDED_REBOOT_REQUIRED": 9,
+                            "FAILED": 10,
+                            "ACKED": 11,
+                            "TIMED_OUT": 12,
+                            "RUNNING_PRE_PATCH_STEP": 13,
+                            "RUNNING_POST_PATCH_STEP": 14,
+                            "NO_AGENT_DETECTED": 15
+                          }
+                        }
+                      }
+                    },
+                    "CancelPatchJobRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "osconfig.googleapis.com/PatchJob"
+                          }
+                        }
+                      }
+                    },
+                    "AptSettings": {
+                      "fields": {
+                        "type": {
+                          "type": "Type",
+                          "id": 1
+                        },
+                        "excludes": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 2
+                        },
+                        "exclusivePackages": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 3
+                        }
+                      },
+                      "nested": {
+                        "Type": {
+                          "values": {
+                            "TYPE_UNSPECIFIED": 0,
+                            "DIST": 1,
+                            "UPGRADE": 2
+                          }
+                        }
+                      }
+                    },
+                    "YumSettings": {
+                      "fields": {
+                        "security": {
+                          "type": "bool",
+                          "id": 1
+                        },
+                        "minimal": {
+                          "type": "bool",
+                          "id": 2
+                        },
+                        "excludes": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 3
+                        },
+                        "exclusivePackages": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 4
+                        }
+                      }
+                    },
+                    "GooSettings": {
+                      "fields": {}
+                    },
+                    "ZypperSettings": {
+                      "fields": {
+                        "withOptional": {
+                          "type": "bool",
+                          "id": 1
+                        },
+                        "withUpdate": {
+                          "type": "bool",
+                          "id": 2
+                        },
+                        "categories": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 3
+                        },
+                        "severities": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 4
+                        },
+                        "excludes": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 5
+                        },
+                        "exclusivePatches": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 6
+                        }
+                      }
+                    },
+                    "WindowsUpdateSettings": {
+                      "fields": {
+                        "classifications": {
+                          "rule": "repeated",
+                          "type": "Classification",
+                          "id": 1
+                        },
+                        "excludes": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 2
+                        },
+                        "exclusivePatches": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 3
+                        }
+                      },
+                      "nested": {
+                        "Classification": {
+                          "values": {
+                            "CLASSIFICATION_UNSPECIFIED": 0,
+                            "CRITICAL": 1,
+                            "SECURITY": 2,
+                            "DEFINITION": 3,
+                            "DRIVER": 4,
+                            "FEATURE_PACK": 5,
+                            "SERVICE_PACK": 6,
+                            "TOOL": 7,
+                            "UPDATE_ROLLUP": 8,
+                            "UPDATE": 9
+                          }
+                        }
+                      }
+                    },
+                    "ExecStep": {
+                      "fields": {
+                        "linuxExecStepConfig": {
+                          "type": "ExecStepConfig",
+                          "id": 1
+                        },
+                        "windowsExecStepConfig": {
+                          "type": "ExecStepConfig",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "ExecStepConfig": {
+                      "oneofs": {
+                        "executable": {
+                          "oneof": [
+                            "localPath",
+                            "gcsObject"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "localPath": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "gcsObject": {
+                          "type": "GcsObject",
+                          "id": 2
+                        },
+                        "allowedSuccessCodes": {
+                          "rule": "repeated",
+                          "type": "int32",
+                          "id": 3
+                        },
+                        "interpreter": {
+                          "type": "Interpreter",
+                          "id": 4
+                        }
+                      },
+                      "nested": {
+                        "Interpreter": {
+                          "values": {
+                            "INTERPRETER_UNSPECIFIED": 0,
+                            "SHELL": 1,
+                            "POWERSHELL": 2
+                          }
+                        }
+                      }
+                    },
+                    "GcsObject": {
+                      "fields": {
+                        "bucket": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "object": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "generationNumber": {
+                          "type": "int64",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "PatchInstanceFilter": {
+                      "fields": {
+                        "all": {
+                          "type": "bool",
+                          "id": 1
+                        },
+                        "groupLabels": {
+                          "rule": "repeated",
+                          "type": "GroupLabel",
+                          "id": 2
+                        },
+                        "zones": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 3
+                        },
+                        "instances": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 4
+                        },
+                        "instanceNamePrefixes": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 5
+                        }
+                      },
+                      "nested": {
+                        "GroupLabel": {
+                          "fields": {
+                            "labels": {
+                              "keyType": "string",
+                              "type": "string",
+                              "id": 1
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "PatchRollout": {
+                      "fields": {
+                        "mode": {
+                          "type": "Mode",
+                          "id": 1
+                        },
+                        "disruptionBudget": {
+                          "type": "FixedOrPercent",
+                          "id": 2
+                        }
+                      },
+                      "nested": {
+                        "Mode": {
+                          "values": {
+                            "MODE_UNSPECIFIED": 0,
+                            "ZONE_BY_ZONE": 1,
+                            "CONCURRENT_ZONES": 2
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "api": {
+          "options": {
+            "go_package": "google.golang.org/genproto/googleapis/api/annotations;annotations",
+            "java_multiple_files": true,
+            "java_outer_classname": "FieldBehaviorProto",
+            "java_package": "com.google.api",
+            "objc_class_prefix": "GAPI",
+            "cc_enable_arenas": true
+          },
+          "nested": {
+            "http": {
+              "type": "HttpRule",
+              "id": 72295728,
+              "extend": "google.protobuf.MethodOptions"
+            },
+            "Http": {
               "fields": {
-                "seconds": {
-                  "type": "int64",
+                "rules": {
+                  "rule": "repeated",
+                  "type": "HttpRule",
                   "id": 1
                 },
-                "nanos": {
-                  "type": "int32",
+                "fullyDecodeReservedExpansion": {
+                  "type": "bool",
                   "id": 2
                 }
               }
             },
-            "Empty": {
-              "fields": {}
+            "HttpRule": {
+              "oneofs": {
+                "pattern": {
+                  "oneof": [
+                    "get",
+                    "put",
+                    "post",
+                    "delete",
+                    "patch",
+                    "custom"
+                  ]
+                }
+              },
+              "fields": {
+                "selector": {
+                  "type": "string",
+                  "id": 1
+                },
+                "get": {
+                  "type": "string",
+                  "id": 2
+                },
+                "put": {
+                  "type": "string",
+                  "id": 3
+                },
+                "post": {
+                  "type": "string",
+                  "id": 4
+                },
+                "delete": {
+                  "type": "string",
+                  "id": 5
+                },
+                "patch": {
+                  "type": "string",
+                  "id": 6
+                },
+                "custom": {
+                  "type": "CustomHttpPattern",
+                  "id": 8
+                },
+                "body": {
+                  "type": "string",
+                  "id": 7
+                },
+                "responseBody": {
+                  "type": "string",
+                  "id": 12
+                },
+                "additionalBindings": {
+                  "rule": "repeated",
+                  "type": "HttpRule",
+                  "id": 11
+                }
+              }
+            },
+            "CustomHttpPattern": {
+              "fields": {
+                "kind": {
+                  "type": "string",
+                  "id": 1
+                },
+                "path": {
+                  "type": "string",
+                  "id": 2
+                }
+              }
+            },
+            "methodSignature": {
+              "rule": "repeated",
+              "type": "string",
+              "id": 1051,
+              "extend": "google.protobuf.MethodOptions"
+            },
+            "defaultHost": {
+              "type": "string",
+              "id": 1049,
+              "extend": "google.protobuf.ServiceOptions"
+            },
+            "oauthScopes": {
+              "type": "string",
+              "id": 1050,
+              "extend": "google.protobuf.ServiceOptions"
+            },
+            "resourceReference": {
+              "type": "google.api.ResourceReference",
+              "id": 1055,
+              "extend": "google.protobuf.FieldOptions"
+            },
+            "resourceDefinition": {
+              "rule": "repeated",
+              "type": "google.api.ResourceDescriptor",
+              "id": 1053,
+              "extend": "google.protobuf.FileOptions"
+            },
+            "resource": {
+              "type": "google.api.ResourceDescriptor",
+              "id": 1053,
+              "extend": "google.protobuf.MessageOptions"
+            },
+            "ResourceDescriptor": {
+              "fields": {
+                "type": {
+                  "type": "string",
+                  "id": 1
+                },
+                "pattern": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 2
+                },
+                "nameField": {
+                  "type": "string",
+                  "id": 3
+                },
+                "history": {
+                  "type": "History",
+                  "id": 4
+                },
+                "plural": {
+                  "type": "string",
+                  "id": 5
+                },
+                "singular": {
+                  "type": "string",
+                  "id": 6
+                }
+              },
+              "nested": {
+                "History": {
+                  "values": {
+                    "HISTORY_UNSPECIFIED": 0,
+                    "ORIGINALLY_SINGLE_PATTERN": 1,
+                    "FUTURE_MULTI_PATTERN": 2
+                  }
+                }
+              }
+            },
+            "ResourceReference": {
+              "fields": {
+                "type": {
+                  "type": "string",
+                  "id": 1
+                },
+                "childType": {
+                  "type": "string",
+                  "id": 2
+                }
+              }
+            },
+            "fieldBehavior": {
+              "rule": "repeated",
+              "type": "google.api.FieldBehavior",
+              "id": 1052,
+              "extend": "google.protobuf.FieldOptions"
+            },
+            "FieldBehavior": {
+              "values": {
+                "FIELD_BEHAVIOR_UNSPECIFIED": 0,
+                "OPTIONAL": 1,
+                "REQUIRED": 2,
+                "OUTPUT_ONLY": 3,
+                "INPUT_ONLY": 4,
+                "IMMUTABLE": 5
+              }
             }
           }
         },

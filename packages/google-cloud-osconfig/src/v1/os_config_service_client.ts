@@ -368,8 +368,8 @@ export class OsConfigServiceClient {
    *   Description of the patch job. Length of the description is limited
    *   to 1024 characters.
    * @param {google.cloud.osconfig.v1.PatchInstanceFilter} request.instanceFilter
-   *   Required. Instances to patch, either explicitly or filtered by some criteria such
-   *   as zone or labels.
+   *   Required. Instances to patch, either explicitly or filtered by some
+   *   criteria such as zone or labels.
    * @param {google.cloud.osconfig.v1.PatchConfig} request.patchConfig
    *   Patch configuration being applied. If omitted, instances are
    *   patched using the default configurations.
@@ -381,6 +381,8 @@ export class OsConfigServiceClient {
    *   will do nothing.
    * @param {string} request.displayName
    *   Display name for this patch job. This does not have to be unique.
+   * @param {google.cloud.osconfig.v1.PatchRollout} request.rollout
+   *   Rollout strategy of the patch job.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -646,10 +648,11 @@ export class OsConfigServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The project to apply this patch deployment to in the form `projects/*`.
+   *   Required. The project to apply this patch deployment to in the form
+   *   `projects/*`.
    * @param {string} request.patchDeploymentId
-   *   Required. A name for the patch deployment in the project. When creating a name
-   *   the following rules apply:
+   *   Required. A name for the patch deployment in the project. When creating a
+   *   name the following rules apply:
    *   * Must contain only lowercase letters, numbers, and hyphens.
    *   * Must start with a letter.
    *   * Must be between 1-63 characters.
@@ -1138,7 +1141,8 @@ export class OsConfigServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The parent for the instances are in the form of `projects/* /patchJobs/*`.
+   *   Required. The parent for the instances are in the form of
+   *   `projects/* /patchJobs/*`.
    * @param {number} request.pageSize
    *   The maximum number of instance details records to return.  Default is 100.
    * @param {string} request.pageToken
@@ -1215,7 +1219,8 @@ export class OsConfigServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The parent for the instances are in the form of `projects/* /patchJobs/*`.
+   *   Required. The parent for the instances are in the form of
+   *   `projects/* /patchJobs/*`.
    * @param {number} request.pageSize
    *   The maximum number of instance details records to return.  Default is 100.
    * @param {string} request.pageToken
@@ -1266,7 +1271,8 @@ export class OsConfigServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The parent for the instances are in the form of `projects/* /patchJobs/*`.
+   *   Required. The parent for the instances are in the form of
+   *   `projects/* /patchJobs/*`.
    * @param {number} request.pageSize
    *   The maximum number of instance details records to return.  Default is 100.
    * @param {string} request.pageToken
@@ -1355,10 +1361,12 @@ export class OsConfigServiceClient {
    * @param {string} request.parent
    *   Required. The resource name of the parent in the form `projects/*`.
    * @param {number} [request.pageSize]
-   *   Optional. The maximum number of patch deployments to return. Default is 100.
+   *   Optional. The maximum number of patch deployments to return. Default is
+   *   100.
    * @param {string} [request.pageToken]
-   *   Optional. A pagination token returned from a previous call to ListPatchDeployments
-   *   that indicates where this listing should continue from.
+   *   Optional. A pagination token returned from a previous call to
+   *   ListPatchDeployments that indicates where this listing should continue
+   *   from.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1424,10 +1432,12 @@ export class OsConfigServiceClient {
    * @param {string} request.parent
    *   Required. The resource name of the parent in the form `projects/*`.
    * @param {number} [request.pageSize]
-   *   Optional. The maximum number of patch deployments to return. Default is 100.
+   *   Optional. The maximum number of patch deployments to return. Default is
+   *   100.
    * @param {string} [request.pageToken]
-   *   Optional. A pagination token returned from a previous call to ListPatchDeployments
-   *   that indicates where this listing should continue from.
+   *   Optional. A pagination token returned from a previous call to
+   *   ListPatchDeployments that indicates where this listing should continue
+   *   from.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -1471,10 +1481,12 @@ export class OsConfigServiceClient {
    * @param {string} request.parent
    *   Required. The resource name of the parent in the form `projects/*`.
    * @param {number} [request.pageSize]
-   *   Optional. The maximum number of patch deployments to return. Default is 100.
+   *   Optional. The maximum number of patch deployments to return. Default is
+   *   100.
    * @param {string} [request.pageToken]
-   *   Optional. A pagination token returned from a previous call to ListPatchDeployments
-   *   that indicates where this listing should continue from.
+   *   Optional. A pagination token returned from a previous call to
+   *   ListPatchDeployments that indicates where this listing should continue
+   *   from.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
