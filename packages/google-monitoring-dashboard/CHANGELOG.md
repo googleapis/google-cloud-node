@@ -1,5 +1,12 @@
 # Changelog
 
+### [2.1.2](https://www.github.com/googleapis/nodejs-monitoring-dashboards/compare/v2.1.1...v2.1.2) (2020-11-07)
+
+
+### Bug Fixes
+
+* do not modify options object, use defaultScopes ([#134](https://www.github.com/googleapis/nodejs-monitoring-dashboards/issues/134)) ([a95ac89](https://www.github.com/googleapis/nodejs-monitoring-dashboards/commit/a95ac893c9f5d06205244b6b48e5db39a8c4b1e3))
+
 ### [2.1.1](https://www.github.com/googleapis/nodejs-monitoring-dashboards/compare/v2.1.0...v2.1.1) (2020-07-24)
 
 
