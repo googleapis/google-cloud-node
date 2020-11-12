@@ -1,5 +1,12 @@
 # Changelog
 
+### [2.2.1](https://www.github.com/googleapis/nodejs-media-translation/compare/v2.2.0...v2.2.1) (2020-11-07)
+
+
+### Bug Fixes
+
+* do not modify options object, use defaultScopes ([#94](https://www.github.com/googleapis/nodejs-media-translation/issues/94)) ([5c6d930](https://www.github.com/googleapis/nodejs-media-translation/commit/5c6d930f215a55b876fcda36a1c448aca2b92b8f))
+
 ## [2.2.0](https://www.github.com/googleapis/nodejs-media-translation/compare/v2.1.0...v2.2.0) (2020-06-28)
 
 
