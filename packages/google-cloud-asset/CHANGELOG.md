@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/asset?activeTab=versions
 
+### [3.9.1](https://www.github.com/googleapis/nodejs-asset/compare/v3.9.0...v3.9.1) (2020-11-12)
+
+
+### Bug Fixes
+
+* do not modify options object, use defaultScopes ([#419](https://www.github.com/googleapis/nodejs-asset/issues/419)) ([790ffd3](https://www.github.com/googleapis/nodejs-asset/commit/790ffd374b3bad580c2ba5dc5a7fd608d590cf32))
+
 ## [3.9.0](https://www.github.com/googleapis/nodejs-asset/compare/v3.8.0...v3.9.0) (2020-11-02)
 
 
