@@ -18,8 +18,19 @@
 
 import {PhishingProtectionServiceV1Beta1Client} from '@google-cloud/phishing-protection';
 
+// check that the client class type name can be used
+function doStuffWithPhishingProtectionServiceV1Beta1Client(
+  client: PhishingProtectionServiceV1Beta1Client
+) {
+  client.close();
+}
+
 function main() {
-  new PhishingProtectionServiceV1Beta1Client();
+  // check that the client instance can be created
+  const phishingProtectionServiceV1Beta1Client = new PhishingProtectionServiceV1Beta1Client();
+  doStuffWithPhishingProtectionServiceV1Beta1Client(
+    phishingProtectionServiceV1Beta1Client
+  );
 }
 
 main();
