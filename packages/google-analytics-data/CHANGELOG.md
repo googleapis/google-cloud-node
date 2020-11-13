@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0](https://www.github.com/googleapis/nodejs-analytics-data/compare/v1.0.2...v1.1.0) (2020-11-11)
+
+
+### Features
+
+* added RunRealtimeReport method that returns a customized report of realtime event data for a GA4 property docs: minor documentation updates ([#29](https://www.github.com/googleapis/nodejs-analytics-data/issues/29)) ([58da0fe](https://www.github.com/googleapis/nodejs-analytics-data/commit/58da0fe05418d91db1bbb698d787d3863266ff30))
+
 ### [1.0.2](https://www.github.com/googleapis/nodejs-analytics-data/compare/v1.0.1...v1.0.2) (2020-11-07)
 
 
