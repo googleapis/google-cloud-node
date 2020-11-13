@@ -36,6 +36,7 @@ import {operationsProtos} from 'google-gax';
 const version = require('../../../package.json').version;
 
 /**
+ *  Service for the AI Platform Data Labeling API.
  * @class
  * @memberof v1beta1
  */
