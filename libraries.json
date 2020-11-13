@@ -1,5 +1,19 @@
 [
   {
+    "name": "aiplatform",
+    "name_pretty": "AI Platform",
+    "product_documentation": "https://cloud.google.com/ai-platform/docs",
+    "client_documentation": "https://googleapis.dev/nodejs/aiplatform/latest",
+    "issue_tracker": "https://github.com/googleapis/nodejs-ai-platform/issues",
+    "release_level": "beta",
+    "language": "nodejs",
+    "repo": "googleapis/nodejs-ai-platform",
+    "distribution_name": "@google-cloud/aiplatform",
+    "api_id": "aiplatform.googleapis.com",
+    "requires_billing": true,
+    "support_documentation": "https://cloud.google.com/ai-platform/docs"
+  },
+  {
     "name": "notebooks",
     "name_pretty": "AI Platform Notebooks",
     "product_documentation": "https://cloud.google.com/ai-platform/notebooks/docs",
@@ -126,7 +140,7 @@
     "support_documentation": "https://cloud.google.com/cloud-build/docs/getting-support"
   },
   {
-    "name": "nodejs-security-private-ca",
+    "name": "security-private-ca",
     "name_pretty": "Certificate Authority Service",
     "product_documentation": "https://cloud.google.com/certificate-authority-service",
     "client_documentation": "https://googleapis.dev/nodejs/security-private-ca/latest/index.html",
