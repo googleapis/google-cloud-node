@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.2.2](https://www.github.com/googleapis/nodejs-analytics-admin/compare/v1.2.1...v1.2.2) (2020-11-11)
+
+
+### Bug Fixes
+
+* 'requests' field of CreateUserLink, UpdateUserLink, DeleteUserLink methods is now required docs: minor documentation updates ([#49](https://www.github.com/googleapis/nodejs-analytics-admin/issues/49)) ([ae75c0c](https://www.github.com/googleapis/nodejs-analytics-admin/commit/ae75c0c053ed203c0f8b142ce87a8622e0b6ee93))
+
 ### [1.2.1](https://www.github.com/googleapis/nodejs-analytics-admin/compare/v1.2.0...v1.2.1) (2020-11-07)
 
 
