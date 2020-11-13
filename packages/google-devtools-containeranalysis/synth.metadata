@@ -4,22 +4,22 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/nodejs-containeranalysis.git",
-        "sha": "389175744ed7fccffa351d96ca061ba013ebc402"
+        "sha": "fc9849e66ee179f6bff382e8d494f6a321f15b91"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "4c5071b615d96ef9dfd6a63d8429090f1f2872bb",
-        "internalRef": "327369997"
+        "sha": "5d703efd4096375bb95c8492bac975f49f5da94d",
+        "internalRef": "342284812"
       }
     },
     {
       "git": {
         "name": "synthtool",
         "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "fdd03c161003ab97657cc0218f25c82c89ddf4b6"
+        "sha": "d5fc0bcf9ea9789c5b0e3154a9e3b29e5cea6116"
       }
     }
   ],
@@ -29,8 +29,8 @@
         "source": "googleapis",
         "apiName": "containeranalysis",
         "apiVersion": "v1beta1",
-        "language": "typescript",
-        "generator": "gapic-generator-typescript"
+        "language": "nodejs",
+        "generator": "bazel"
       }
     },
     {
@@ -38,8 +38,8 @@
         "source": "googleapis",
         "apiName": "containeranalysis",
         "apiVersion": "v1",
-        "language": "typescript",
-        "generator": "gapic-generator-typescript"
+        "language": "nodejs",
+        "generator": "bazel"
       }
     }
   ],
@@ -84,17 +84,18 @@
     ".kokoro/test.bat",
     ".kokoro/test.sh",
     ".kokoro/trampoline.sh",
+    ".kokoro/trampoline_v2.sh",
     ".mocharc.js",
     ".nycrc",
     ".prettierignore",
     ".prettierrc.js",
+    ".trampolinerc",
     "CODE_OF_CONDUCT.md",
     "CONTRIBUTING.md",
     "LICENSE",
     "README.md",
     "api-extractor.json",
     "linkinator.config.json",
-    "protos/google/cloud/common_resources.proto",
     "protos/google/devtools/containeranalysis/v1/containeranalysis.proto",
     "protos/google/devtools/containeranalysis/v1beta1/attestation/attestation.proto",
     "protos/google/devtools/containeranalysis/v1beta1/build/build.proto",
@@ -136,9 +137,6 @@
     "src/v1beta1/container_analysis_v1_beta1_client.ts",
     "src/v1beta1/container_analysis_v1_beta1_client_config.json",
     "src/v1beta1/container_analysis_v1_beta1_proto_list.json",
-    "src/v1beta1/grafeas_client.ts",
-    "src/v1beta1/grafeas_client_config.json",
-    "src/v1beta1/grafeas_proto_list.json",
     "src/v1beta1/grafeas_v1_beta1_client.ts",
     "src/v1beta1/grafeas_v1_beta1_client_config.json",
     "src/v1beta1/grafeas_v1_beta1_proto_list.json",
@@ -149,7 +147,6 @@
     "test/gapic_container_analysis_v1_beta1_v1beta1.ts",
     "test/gapic_grafeas_v1.ts",
     "test/gapic_grafeas_v1_beta1_v1beta1.ts",
-    "test/gapic_grafeas_v1beta1.ts",
     "tsconfig.json",
     "webpack.config.js"
   ]

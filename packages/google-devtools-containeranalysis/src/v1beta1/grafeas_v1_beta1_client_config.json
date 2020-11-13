@@ -1,6 +1,6 @@
 {
   "interfaces": {
-    "google.devtools.containeranalysis.v1beta1.GrafeasV1Beta1": {
+    "grafeas.v1beta1.GrafeasV1Beta1": {
       "retry_codes": {
         "non_idempotent": [],
         "idempotent": [

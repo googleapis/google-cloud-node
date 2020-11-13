@@ -471,6 +471,125 @@ describe('v1.ContainerAnalysisClient', () => {
     });
   });
 
+  describe('getVulnerabilityOccurrencesSummary', () => {
+    it('invokes getVulnerabilityOccurrencesSummary without error', async () => {
+      const client = new containeranalysisModule.v1.ContainerAnalysisClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devtools.containeranalysis.v1.GetVulnerabilityOccurrencesSummaryRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.devtools.containeranalysis.v1.VulnerabilityOccurrencesSummary()
+      );
+      client.innerApiCalls.getVulnerabilityOccurrencesSummary = stubSimpleCall(
+        expectedResponse
+      );
+      const [response] = await client.getVulnerabilityOccurrencesSummary(
+        request
+      );
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.getVulnerabilityOccurrencesSummary as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes getVulnerabilityOccurrencesSummary without error using callback', async () => {
+      const client = new containeranalysisModule.v1.ContainerAnalysisClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devtools.containeranalysis.v1.GetVulnerabilityOccurrencesSummaryRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.devtools.containeranalysis.v1.VulnerabilityOccurrencesSummary()
+      );
+      client.innerApiCalls.getVulnerabilityOccurrencesSummary = stubSimpleCallWithCallback(
+        expectedResponse
+      );
+      const promise = new Promise((resolve, reject) => {
+        client.getVulnerabilityOccurrencesSummary(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.devtools.containeranalysis.v1.IVulnerabilityOccurrencesSummary | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.getVulnerabilityOccurrencesSummary as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes getVulnerabilityOccurrencesSummary with error', async () => {
+      const client = new containeranalysisModule.v1.ContainerAnalysisClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devtools.containeranalysis.v1.GetVulnerabilityOccurrencesSummaryRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getVulnerabilityOccurrencesSummary = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.getVulnerabilityOccurrencesSummary(request),
+        expectedError
+      );
+      assert(
+        (client.innerApiCalls.getVulnerabilityOccurrencesSummary as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+  });
+
   describe('Path templates', () => {
     describe('note', () => {
       const fakePath = '/rendered/path/note';
@@ -564,6 +683,44 @@ describe('v1.ContainerAnalysisClient', () => {
         assert.strictEqual(result, 'occurrenceValue');
         assert(
           (client.pathTemplates.occurrencePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('project', () => {
+      const fakePath = '/rendered/path/project';
+      const expectedParameters = {
+        project: 'projectValue',
+      };
+      const client = new containeranalysisModule.v1.ContainerAnalysisClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.projectPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.projectPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('projectPath', () => {
+        const result = client.projectPath('projectValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.projectPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromProjectName', () => {
+        const result = client.matchProjectFromProjectName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.projectPathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );

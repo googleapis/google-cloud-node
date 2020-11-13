@@ -12,34 +12,208 @@
             "(google.api.resource_definition).pattern": "projects/{project}"
           },
           "nested": {
-            "AttestationNote": {
+            "Severity": {
+              "values": {
+                "SEVERITY_UNSPECIFIED": 0,
+                "MINIMAL": 1,
+                "LOW": 2,
+                "MEDIUM": 3,
+                "HIGH": 4,
+                "CRITICAL": 5
+              }
+            },
+            "VulnerabilityNote": {
               "fields": {
-                "hint": {
-                  "type": "Hint",
+                "cvssScore": {
+                  "type": "float",
                   "id": 1
+                },
+                "severity": {
+                  "type": "Severity",
+                  "id": 2
+                },
+                "details": {
+                  "rule": "repeated",
+                  "type": "Detail",
+                  "id": 3
+                },
+                "cvssV3": {
+                  "type": "CVSSv3",
+                  "id": 4
+                },
+                "windowsDetails": {
+                  "rule": "repeated",
+                  "type": "WindowsDetail",
+                  "id": 5
+                },
+                "sourceUpdateTime": {
+                  "type": "google.protobuf.Timestamp",
+                  "id": 6
                 }
               },
               "nested": {
-                "Hint": {
+                "Detail": {
                   "fields": {
-                    "humanReadableName": {
+                    "severityName": {
                       "type": "string",
                       "id": 1
+                    },
+                    "description": {
+                      "type": "string",
+                      "id": 2
+                    },
+                    "packageType": {
+                      "type": "string",
+                      "id": 3
+                    },
+                    "affectedCpeUri": {
+                      "type": "string",
+                      "id": 4
+                    },
+                    "affectedPackage": {
+                      "type": "string",
+                      "id": 5
+                    },
+                    "affectedVersionStart": {
+                      "type": "grafeas.v1.Version",
+                      "id": 6
+                    },
+                    "affectedVersionEnd": {
+                      "type": "grafeas.v1.Version",
+                      "id": 7
+                    },
+                    "fixedCpeUri": {
+                      "type": "string",
+                      "id": 8
+                    },
+                    "fixedPackage": {
+                      "type": "string",
+                      "id": 9
+                    },
+                    "fixedVersion": {
+                      "type": "grafeas.v1.Version",
+                      "id": 10
+                    },
+                    "isObsolete": {
+                      "type": "bool",
+                      "id": 11
+                    },
+                    "sourceUpdateTime": {
+                      "type": "google.protobuf.Timestamp",
+                      "id": 12
+                    }
+                  }
+                },
+                "WindowsDetail": {
+                  "fields": {
+                    "cpeUri": {
+                      "type": "string",
+                      "id": 1
+                    },
+                    "name": {
+                      "type": "string",
+                      "id": 2
+                    },
+                    "description": {
+                      "type": "string",
+                      "id": 3
+                    },
+                    "fixingKbs": {
+                      "rule": "repeated",
+                      "type": "KnowledgeBase",
+                      "id": 4
+                    }
+                  },
+                  "nested": {
+                    "KnowledgeBase": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "url": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
                     }
                   }
                 }
               }
             },
-            "AttestationOccurrence": {
+            "VulnerabilityOccurrence": {
               "fields": {
-                "serializedPayload": {
-                  "type": "bytes",
+                "type": {
+                  "type": "string",
                   "id": 1
                 },
-                "signatures": {
-                  "rule": "repeated",
-                  "type": "Signature",
+                "severity": {
+                  "type": "Severity",
                   "id": 2
+                },
+                "cvssScore": {
+                  "type": "float",
+                  "id": 3
+                },
+                "packageIssue": {
+                  "rule": "repeated",
+                  "type": "PackageIssue",
+                  "id": 4
+                },
+                "shortDescription": {
+                  "type": "string",
+                  "id": 5
+                },
+                "longDescription": {
+                  "type": "string",
+                  "id": 6
+                },
+                "relatedUrls": {
+                  "rule": "repeated",
+                  "type": "grafeas.v1.RelatedUrl",
+                  "id": 7
+                },
+                "effectiveSeverity": {
+                  "type": "Severity",
+                  "id": 8
+                },
+                "fixAvailable": {
+                  "type": "bool",
+                  "id": 9
+                }
+              },
+              "nested": {
+                "PackageIssue": {
+                  "fields": {
+                    "affectedCpeUri": {
+                      "type": "string",
+                      "id": 1
+                    },
+                    "affectedPackage": {
+                      "type": "string",
+                      "id": 2
+                    },
+                    "affectedVersion": {
+                      "type": "grafeas.v1.Version",
+                      "id": 3
+                    },
+                    "fixedCpeUri": {
+                      "type": "string",
+                      "id": 4
+                    },
+                    "fixedPackage": {
+                      "type": "string",
+                      "id": 5
+                    },
+                    "fixedVersion": {
+                      "type": "grafeas.v1.Version",
+                      "id": 6
+                    },
+                    "fixAvailable": {
+                      "type": "bool",
+                      "id": 7
+                    }
+                  }
                 }
               }
             },
@@ -76,6 +250,244 @@
                 },
                 "publicKeyId": {
                   "type": "string",
+                  "id": 2
+                }
+              }
+            },
+            "CVSSv3": {
+              "fields": {
+                "baseScore": {
+                  "type": "float",
+                  "id": 1
+                },
+                "exploitabilityScore": {
+                  "type": "float",
+                  "id": 2
+                },
+                "impactScore": {
+                  "type": "float",
+                  "id": 3
+                },
+                "attackVector": {
+                  "type": "AttackVector",
+                  "id": 5
+                },
+                "attackComplexity": {
+                  "type": "AttackComplexity",
+                  "id": 6
+                },
+                "privilegesRequired": {
+                  "type": "PrivilegesRequired",
+                  "id": 7
+                },
+                "userInteraction": {
+                  "type": "UserInteraction",
+                  "id": 8
+                },
+                "scope": {
+                  "type": "Scope",
+                  "id": 9
+                },
+                "confidentialityImpact": {
+                  "type": "Impact",
+                  "id": 10
+                },
+                "integrityImpact": {
+                  "type": "Impact",
+                  "id": 11
+                },
+                "availabilityImpact": {
+                  "type": "Impact",
+                  "id": 12
+                }
+              },
+              "nested": {
+                "AttackVector": {
+                  "values": {
+                    "ATTACK_VECTOR_UNSPECIFIED": 0,
+                    "ATTACK_VECTOR_NETWORK": 1,
+                    "ATTACK_VECTOR_ADJACENT": 2,
+                    "ATTACK_VECTOR_LOCAL": 3,
+                    "ATTACK_VECTOR_PHYSICAL": 4
+                  }
+                },
+                "AttackComplexity": {
+                  "values": {
+                    "ATTACK_COMPLEXITY_UNSPECIFIED": 0,
+                    "ATTACK_COMPLEXITY_LOW": 1,
+                    "ATTACK_COMPLEXITY_HIGH": 2
+                  }
+                },
+                "PrivilegesRequired": {
+                  "values": {
+                    "PRIVILEGES_REQUIRED_UNSPECIFIED": 0,
+                    "PRIVILEGES_REQUIRED_NONE": 1,
+                    "PRIVILEGES_REQUIRED_LOW": 2,
+                    "PRIVILEGES_REQUIRED_HIGH": 3
+                  }
+                },
+                "UserInteraction": {
+                  "values": {
+                    "USER_INTERACTION_UNSPECIFIED": 0,
+                    "USER_INTERACTION_NONE": 1,
+                    "USER_INTERACTION_REQUIRED": 2
+                  }
+                },
+                "Scope": {
+                  "values": {
+                    "SCOPE_UNSPECIFIED": 0,
+                    "SCOPE_UNCHANGED": 1,
+                    "SCOPE_CHANGED": 2
+                  }
+                },
+                "Impact": {
+                  "values": {
+                    "IMPACT_UNSPECIFIED": 0,
+                    "IMPACT_HIGH": 1,
+                    "IMPACT_LOW": 2,
+                    "IMPACT_NONE": 3
+                  }
+                }
+              }
+            },
+            "Architecture": {
+              "values": {
+                "ARCHITECTURE_UNSPECIFIED": 0,
+                "X86": 1,
+                "X64": 2
+              }
+            },
+            "Distribution": {
+              "fields": {
+                "cpeUri": {
+                  "type": "string",
+                  "id": 1
+                },
+                "architecture": {
+                  "type": "Architecture",
+                  "id": 2
+                },
+                "latestVersion": {
+                  "type": "Version",
+                  "id": 3
+                },
+                "maintainer": {
+                  "type": "string",
+                  "id": 4
+                },
+                "url": {
+                  "type": "string",
+                  "id": 5
+                },
+                "description": {
+                  "type": "string",
+                  "id": 6
+                }
+              }
+            },
+            "Location": {
+              "fields": {
+                "cpeUri": {
+                  "type": "string",
+                  "id": 1
+                },
+                "version": {
+                  "type": "Version",
+                  "id": 2
+                },
+                "path": {
+                  "type": "string",
+                  "id": 3
+                }
+              }
+            },
+            "PackageNote": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "distribution": {
+                  "rule": "repeated",
+                  "type": "Distribution",
+                  "id": 10
+                }
+              }
+            },
+            "PackageOccurrence": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "location": {
+                  "rule": "repeated",
+                  "type": "Location",
+                  "id": 2
+                }
+              }
+            },
+            "Version": {
+              "fields": {
+                "epoch": {
+                  "type": "int32",
+                  "id": 1
+                },
+                "name": {
+                  "type": "string",
+                  "id": 2
+                },
+                "revision": {
+                  "type": "string",
+                  "id": 3
+                },
+                "kind": {
+                  "type": "VersionKind",
+                  "id": 4
+                },
+                "fullName": {
+                  "type": "string",
+                  "id": 5
+                }
+              },
+              "nested": {
+                "VersionKind": {
+                  "values": {
+                    "VERSION_KIND_UNSPECIFIED": 0,
+                    "NORMAL": 1,
+                    "MINIMUM": 2,
+                    "MAXIMUM": 3
+                  }
+                }
+              }
+            },
+            "AttestationNote": {
+              "fields": {
+                "hint": {
+                  "type": "Hint",
+                  "id": 1
+                }
+              },
+              "nested": {
+                "Hint": {
+                  "fields": {
+                    "humanReadableName": {
+                      "type": "string",
+                      "id": 1
+                    }
+                  }
+                }
+              }
+            },
+            "AttestationOccurrence": {
+              "fields": {
+                "serializedPayload": {
+                  "type": "bytes",
+                  "id": 1
+                },
+                "signatures": {
+                  "rule": "repeated",
+                  "type": "Signature",
                   "id": 2
                 }
               }
@@ -395,102 +807,6 @@
                 "repoName": {
                   "type": "string",
                   "id": 2
-                }
-              }
-            },
-            "CVSSv3": {
-              "fields": {
-                "baseScore": {
-                  "type": "float",
-                  "id": 1
-                },
-                "exploitabilityScore": {
-                  "type": "float",
-                  "id": 2
-                },
-                "impactScore": {
-                  "type": "float",
-                  "id": 3
-                },
-                "attackVector": {
-                  "type": "AttackVector",
-                  "id": 5
-                },
-                "attackComplexity": {
-                  "type": "AttackComplexity",
-                  "id": 6
-                },
-                "privilegesRequired": {
-                  "type": "PrivilegesRequired",
-                  "id": 7
-                },
-                "userInteraction": {
-                  "type": "UserInteraction",
-                  "id": 8
-                },
-                "scope": {
-                  "type": "Scope",
-                  "id": 9
-                },
-                "confidentialityImpact": {
-                  "type": "Impact",
-                  "id": 10
-                },
-                "integrityImpact": {
-                  "type": "Impact",
-                  "id": 11
-                },
-                "availabilityImpact": {
-                  "type": "Impact",
-                  "id": 12
-                }
-              },
-              "nested": {
-                "AttackVector": {
-                  "values": {
-                    "ATTACK_VECTOR_UNSPECIFIED": 0,
-                    "ATTACK_VECTOR_NETWORK": 1,
-                    "ATTACK_VECTOR_ADJACENT": 2,
-                    "ATTACK_VECTOR_LOCAL": 3,
-                    "ATTACK_VECTOR_PHYSICAL": 4
-                  }
-                },
-                "AttackComplexity": {
-                  "values": {
-                    "ATTACK_COMPLEXITY_UNSPECIFIED": 0,
-                    "ATTACK_COMPLEXITY_LOW": 1,
-                    "ATTACK_COMPLEXITY_HIGH": 2
-                  }
-                },
-                "PrivilegesRequired": {
-                  "values": {
-                    "PRIVILEGES_REQUIRED_UNSPECIFIED": 0,
-                    "PRIVILEGES_REQUIRED_NONE": 1,
-                    "PRIVILEGES_REQUIRED_LOW": 2,
-                    "PRIVILEGES_REQUIRED_HIGH": 3
-                  }
-                },
-                "UserInteraction": {
-                  "values": {
-                    "USER_INTERACTION_UNSPECIFIED": 0,
-                    "USER_INTERACTION_NONE": 1,
-                    "USER_INTERACTION_REQUIRED": 2
-                  }
-                },
-                "Scope": {
-                  "values": {
-                    "SCOPE_UNSPECIFIED": 0,
-                    "SCOPE_UNCHANGED": 1,
-                    "SCOPE_CHANGED": 2
-                  }
-                },
-                "Impact": {
-                  "values": {
-                    "IMPACT_UNSPECIFIED": 0,
-                    "IMPACT_HIGH": 1,
-                    "IMPACT_LOW": 2,
-                    "IMPACT_NONE": 3
-                  }
                 }
               }
             },
@@ -1278,117 +1594,6 @@
                 }
               }
             },
-            "Architecture": {
-              "values": {
-                "ARCHITECTURE_UNSPECIFIED": 0,
-                "X86": 1,
-                "X64": 2
-              }
-            },
-            "Distribution": {
-              "fields": {
-                "cpeUri": {
-                  "type": "string",
-                  "id": 1
-                },
-                "architecture": {
-                  "type": "Architecture",
-                  "id": 2
-                },
-                "latestVersion": {
-                  "type": "Version",
-                  "id": 3
-                },
-                "maintainer": {
-                  "type": "string",
-                  "id": 4
-                },
-                "url": {
-                  "type": "string",
-                  "id": 5
-                },
-                "description": {
-                  "type": "string",
-                  "id": 6
-                }
-              }
-            },
-            "Location": {
-              "fields": {
-                "cpeUri": {
-                  "type": "string",
-                  "id": 1
-                },
-                "version": {
-                  "type": "Version",
-                  "id": 2
-                },
-                "path": {
-                  "type": "string",
-                  "id": 3
-                }
-              }
-            },
-            "PackageNote": {
-              "fields": {
-                "name": {
-                  "type": "string",
-                  "id": 1
-                },
-                "distribution": {
-                  "rule": "repeated",
-                  "type": "Distribution",
-                  "id": 10
-                }
-              }
-            },
-            "PackageOccurrence": {
-              "fields": {
-                "name": {
-                  "type": "string",
-                  "id": 1
-                },
-                "location": {
-                  "rule": "repeated",
-                  "type": "Location",
-                  "id": 2
-                }
-              }
-            },
-            "Version": {
-              "fields": {
-                "epoch": {
-                  "type": "int32",
-                  "id": 1
-                },
-                "name": {
-                  "type": "string",
-                  "id": 2
-                },
-                "revision": {
-                  "type": "string",
-                  "id": 3
-                },
-                "kind": {
-                  "type": "VersionKind",
-                  "id": 4
-                },
-                "fullName": {
-                  "type": "string",
-                  "id": 5
-                }
-              },
-              "nested": {
-                "VersionKind": {
-                  "values": {
-                    "VERSION_KIND_UNSPECIFIED": 0,
-                    "NORMAL": 1,
-                    "MINIMUM": 2,
-                    "MAXIMUM": 3
-                  }
-                }
-              }
-            },
             "UpgradeNote": {
               "fields": {
                 "package": {
@@ -1508,211 +1713,6 @@
                 "windowsUpdate": {
                   "type": "WindowsUpdate",
                   "id": 5
-                }
-              }
-            },
-            "Severity": {
-              "values": {
-                "SEVERITY_UNSPECIFIED": 0,
-                "MINIMAL": 1,
-                "LOW": 2,
-                "MEDIUM": 3,
-                "HIGH": 4,
-                "CRITICAL": 5
-              }
-            },
-            "VulnerabilityNote": {
-              "fields": {
-                "cvssScore": {
-                  "type": "float",
-                  "id": 1
-                },
-                "severity": {
-                  "type": "Severity",
-                  "id": 2
-                },
-                "details": {
-                  "rule": "repeated",
-                  "type": "Detail",
-                  "id": 3
-                },
-                "cvssV3": {
-                  "type": "CVSSv3",
-                  "id": 4
-                },
-                "windowsDetails": {
-                  "rule": "repeated",
-                  "type": "WindowsDetail",
-                  "id": 5
-                },
-                "sourceUpdateTime": {
-                  "type": "google.protobuf.Timestamp",
-                  "id": 6
-                }
-              },
-              "nested": {
-                "Detail": {
-                  "fields": {
-                    "severityName": {
-                      "type": "string",
-                      "id": 1
-                    },
-                    "description": {
-                      "type": "string",
-                      "id": 2
-                    },
-                    "packageType": {
-                      "type": "string",
-                      "id": 3
-                    },
-                    "affectedCpeUri": {
-                      "type": "string",
-                      "id": 4
-                    },
-                    "affectedPackage": {
-                      "type": "string",
-                      "id": 5
-                    },
-                    "affectedVersionStart": {
-                      "type": "grafeas.v1.Version",
-                      "id": 6
-                    },
-                    "affectedVersionEnd": {
-                      "type": "grafeas.v1.Version",
-                      "id": 7
-                    },
-                    "fixedCpeUri": {
-                      "type": "string",
-                      "id": 8
-                    },
-                    "fixedPackage": {
-                      "type": "string",
-                      "id": 9
-                    },
-                    "fixedVersion": {
-                      "type": "grafeas.v1.Version",
-                      "id": 10
-                    },
-                    "isObsolete": {
-                      "type": "bool",
-                      "id": 11
-                    },
-                    "sourceUpdateTime": {
-                      "type": "google.protobuf.Timestamp",
-                      "id": 12
-                    }
-                  }
-                },
-                "WindowsDetail": {
-                  "fields": {
-                    "cpeUri": {
-                      "type": "string",
-                      "id": 1
-                    },
-                    "name": {
-                      "type": "string",
-                      "id": 2
-                    },
-                    "description": {
-                      "type": "string",
-                      "id": 3
-                    },
-                    "fixingKbs": {
-                      "rule": "repeated",
-                      "type": "KnowledgeBase",
-                      "id": 4
-                    }
-                  },
-                  "nested": {
-                    "KnowledgeBase": {
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "url": {
-                          "type": "string",
-                          "id": 2
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            },
-            "VulnerabilityOccurrence": {
-              "fields": {
-                "type": {
-                  "type": "string",
-                  "id": 1
-                },
-                "severity": {
-                  "type": "Severity",
-                  "id": 2
-                },
-                "cvssScore": {
-                  "type": "float",
-                  "id": 3
-                },
-                "packageIssue": {
-                  "rule": "repeated",
-                  "type": "PackageIssue",
-                  "id": 4
-                },
-                "shortDescription": {
-                  "type": "string",
-                  "id": 5
-                },
-                "longDescription": {
-                  "type": "string",
-                  "id": 6
-                },
-                "relatedUrls": {
-                  "rule": "repeated",
-                  "type": "grafeas.v1.RelatedUrl",
-                  "id": 7
-                },
-                "effectiveSeverity": {
-                  "type": "Severity",
-                  "id": 8
-                },
-                "fixAvailable": {
-                  "type": "bool",
-                  "id": 9
-                }
-              },
-              "nested": {
-                "PackageIssue": {
-                  "fields": {
-                    "affectedCpeUri": {
-                      "type": "string",
-                      "id": 1
-                    },
-                    "affectedPackage": {
-                      "type": "string",
-                      "id": 2
-                    },
-                    "affectedVersion": {
-                      "type": "grafeas.v1.Version",
-                      "id": 3
-                    },
-                    "fixedCpeUri": {
-                      "type": "string",
-                      "id": 4
-                    },
-                    "fixedPackage": {
-                      "type": "string",
-                      "id": 5
-                    },
-                    "fixedVersion": {
-                      "type": "grafeas.v1.Version",
-                      "id": 6
-                    },
-                    "fixAvailable": {
-                      "type": "bool",
-                      "id": 7
-                    }
-                  }
                 }
               }
             }
@@ -3558,6 +3558,61 @@
                             "(google.api.http).additional_bindings.post": "/v1/{resource=projects/*/occurrences/*}:testIamPermissions",
                             "(google.api.http).additional_bindings.body": "*",
                             "(google.api.method_signature)": "resource,permissions"
+                          }
+                        },
+                        "GetVulnerabilityOccurrencesSummary": {
+                          "requestType": "GetVulnerabilityOccurrencesSummaryRequest",
+                          "responseType": "VulnerabilityOccurrencesSummary",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=projects/*}/occurrences:vulnerabilitySummary",
+                            "(google.api.method_signature)": "parent,filter"
+                          }
+                        }
+                      }
+                    },
+                    "GetVulnerabilityOccurrencesSummaryRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.resource_reference).type": "cloudresourcemanager.googleapis.com/Project",
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "VulnerabilityOccurrencesSummary": {
+                      "fields": {
+                        "counts": {
+                          "rule": "repeated",
+                          "type": "FixableTotalByDigest",
+                          "id": 1
+                        }
+                      },
+                      "nested": {
+                        "FixableTotalByDigest": {
+                          "fields": {
+                            "resourceUri": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "severity": {
+                              "type": "grafeas.v1.Severity",
+                              "id": 2
+                            },
+                            "fixableCount": {
+                              "type": "int64",
+                              "id": 3
+                            },
+                            "totalCount": {
+                              "type": "int64",
+                              "id": 4
+                            }
                           }
                         }
                       }

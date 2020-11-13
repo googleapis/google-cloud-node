@@ -72,8 +72,10 @@ export class ContainerAnalysisV1Beta1Client {
   /**
    * Construct an instance of ContainerAnalysisV1Beta1Client.
    *
-   * @param {object} [options] - The configuration object. See the subsequent
-   *   parameters for more details.
+   * @param {object} [options] - The configuration object.
+   * The options accepted by the constructor are described in detail
+   * in [this document](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#creating-the-client-instance).
+   * The common options are:
    * @param {object} [options.credentials] - Credentials object.
    * @param {string} [options.credentials.client_email]
    * @param {string} [options.credentials.private_key]
@@ -93,44 +95,34 @@ export class ContainerAnalysisV1Beta1Client {
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
+   * @param {gax.ClientConfig} [options.clientConfig] - client configuration override.
+   *     TODO(@alexander-fenster): link to gax documentation.
+   * @param {boolean} fallback - Use HTTP fallback mode.
+   *     In fallback mode, a special browser-compatible transport implementation is used
+   *     instead of gRPC transport. In browser context (if the `window` object is defined)
+   *     the fallback mode is enabled automatically; set `options.fallback` to `false`
+   *     if you need to override this behavior.
    */
-
   constructor(opts?: ClientOptions) {
-    // Ensure that options include the service address and port.
+    // Ensure that options include all the required fields.
     const staticMembers = this
       .constructor as typeof ContainerAnalysisV1Beta1Client;
     const servicePath =
-      opts && opts.servicePath
-        ? opts.servicePath
-        : opts && opts.apiEndpoint
-        ? opts.apiEndpoint
-        : staticMembers.servicePath;
-    const port = opts && opts.port ? opts.port : staticMembers.port;
+      opts?.servicePath || opts?.apiEndpoint || staticMembers.servicePath;
+    const port = opts?.port || staticMembers.port;
+    const clientConfig = opts?.clientConfig ?? {};
+    const fallback = opts?.fallback ?? typeof window !== 'undefined';
+    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
-    if (!opts) {
-      opts = {servicePath, port};
+    // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
+    if (servicePath !== staticMembers.servicePath && !('scopes' in opts)) {
+      opts['scopes'] = staticMembers.scopes;
     }
-    opts.servicePath = opts.servicePath || servicePath;
-    opts.port = opts.port || port;
 
-    // users can override the config from client side, like retry codes name.
-    // The detailed structure of the clientConfig can be found here: https://github.com/googleapis/gax-nodejs/blob/master/src/gax.ts#L546
-    // The way to override client config for Showcase API:
-    //
-    // const customConfig = {"interfaces": {"google.showcase.v1beta1.Echo": {"methods": {"Echo": {"retry_codes_name": "idempotent", "retry_params_name": "default"}}}}}
-    // const showcaseClient = new showcaseClient({ projectId, customConfig });
-    opts.clientConfig = opts.clientConfig || {};
-
-    // If we're running in browser, it's OK to omit `fallback` since
-    // google-gax has `browser` field in its `package.json`.
-    // For Electron (which does not respect `browser` field),
-    // pass `{fallback: true}` to the ContainerAnalysisV1Beta1Client constructor.
+    // Choose either gRPC or proto-over-HTTP implementation of google-gax.
     this._gaxModule = opts.fallback ? gax.fallback : gax;
 
-    // Create a `gaxGrpc` object, with any grpc-specific options
-    // sent to the client.
-    opts.scopes = (this
-      .constructor as typeof ContainerAnalysisV1Beta1Client).scopes;
+    // Create a `gaxGrpc` object, with any grpc-specific options sent to the client.
     this._gaxGrpc = new this._gaxModule.GrpcClient(opts);
 
     // Save options to use in initialize() method.
@@ -138,6 +130,11 @@ export class ContainerAnalysisV1Beta1Client {
 
     // Save the auth object to the client, for use by other methods.
     this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+
+    // Set the default scopes in auth client if needed.
+    if (servicePath === staticMembers.servicePath) {
+      this.auth.defaultScopes = staticMembers.scopes;
+    }
 
     // Determine the client header string.
     const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
@@ -174,12 +171,6 @@ export class ContainerAnalysisV1Beta1Client {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this.pathTemplates = {
-      notePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/notes/{note}'
-      ),
-      occurrencePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/occurrences/{occurrence}'
-      ),
       projectPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}'
       ),
@@ -282,6 +273,7 @@ export class ContainerAnalysisV1Beta1Client {
 
   /**
    * The DNS address for this API service.
+   * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
     return 'containeranalysis.googleapis.com';
@@ -290,6 +282,7 @@ export class ContainerAnalysisV1Beta1Client {
   /**
    * The DNS address for this API service - same as servicePath(),
    * exists for compatibility reasons.
+   * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
     return 'containeranalysis.googleapis.com';
@@ -297,6 +290,7 @@ export class ContainerAnalysisV1Beta1Client {
 
   /**
    * The port for this API service.
+   * @returns {number} The default port for this service.
    */
   static get port() {
     return 443;
@@ -305,6 +299,7 @@ export class ContainerAnalysisV1Beta1Client {
   /**
    * The scopes needed to make gRPC calls for every method defined
    * in this service.
+   * @returns {string[]} List of default scopes.
    */
   static get scopes() {
     return ['https://www.googleapis.com/auth/cloud-platform'];
@@ -314,8 +309,7 @@ export class ContainerAnalysisV1Beta1Client {
   getProjectId(callback: Callback<string, undefined, undefined>): void;
   /**
    * Return the project ID used by this class.
-   * @param {function(Error, string)} callback - the callback to
-   *   be called with the current project Id.
+   * @returns {Promise} A promise that resolves to string containing the project ID.
    */
   getProjectId(
     callback?: Callback<string, undefined, undefined>
@@ -381,7 +375,11 @@ export class ContainerAnalysisV1Beta1Client {
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
    *   The first element of the array is an object representing [Policy]{@link google.iam.v1.Policy}.
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * const [response] = await client.setIamPolicy(request);
    */
   setIamPolicy(
     request: protos.google.iam.v1.ISetIamPolicyRequest,
@@ -472,7 +470,11 @@ export class ContainerAnalysisV1Beta1Client {
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
    *   The first element of the array is an object representing [Policy]{@link google.iam.v1.Policy}.
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * const [response] = await client.getIamPolicy(request);
    */
   getIamPolicy(
     request: protos.google.iam.v1.IGetIamPolicyRequest,
@@ -564,7 +566,11 @@ export class ContainerAnalysisV1Beta1Client {
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
    *   The first element of the array is an object representing [TestIamPermissionsResponse]{@link google.iam.v1.TestIamPermissionsResponse}.
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * const [response] = await client.testIamPermissions(request);
    */
   testIamPermissions(
     request: protos.google.iam.v1.ITestIamPermissionsRequest,
@@ -652,7 +658,11 @@ export class ContainerAnalysisV1Beta1Client {
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
    *   The first element of the array is an object representing [ScanConfig]{@link google.devtools.containeranalysis.v1beta1.ScanConfig}.
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * const [response] = await client.getScanConfig(request);
    */
   getScanConfig(
     request: protos.google.devtools.containeranalysis.v1beta1.IGetScanConfigRequest,
@@ -749,7 +759,11 @@ export class ContainerAnalysisV1Beta1Client {
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
    *   The first element of the array is an object representing [ScanConfig]{@link google.devtools.containeranalysis.v1beta1.ScanConfig}.
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * const [response] = await client.updateScanConfig(request);
    */
   updateScanConfig(
     request: protos.google.devtools.containeranalysis.v1beta1.IUpdateScanConfigRequest,
@@ -848,19 +862,14 @@ export class ContainerAnalysisV1Beta1Client {
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
    *   The first element of the array is Array of [ScanConfig]{@link google.devtools.containeranalysis.v1beta1.ScanConfig}.
-   *   The client library support auto-pagination by default: it will call the API as many
+   *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
-   *
-   *   When autoPaginate: false is specified through options, the array has three elements.
-   *   The first element is Array of [ScanConfig]{@link google.devtools.containeranalysis.v1beta1.ScanConfig} that corresponds to
-   *   the one page received from the API server.
-   *   If the second element is not null it contains the request object of type [ListScanConfigsRequest]{@link google.devtools.containeranalysis.v1beta1.ListScanConfigsRequest}
-   *   that can be used to obtain the next page of the results.
-   *   If it is null, the next page does not exist.
-   *   The third element contains the raw response received from the API server. Its type is
-   *   [ListScanConfigsResponse]{@link google.devtools.containeranalysis.v1beta1.ListScanConfigsResponse}.
-   *
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *   Note that it can affect your quota.
+   *   We recommend using `listScanConfigsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
    */
   listScanConfigs(
     request: protos.google.devtools.containeranalysis.v1beta1.IListScanConfigsRequest,
@@ -908,18 +917,7 @@ export class ContainerAnalysisV1Beta1Client {
   }
 
   /**
-   * Equivalent to {@link listScanConfigs}, but returns a NodeJS Stream object.
-   *
-   * This fetches the paged responses for {@link listScanConfigs} continuously
-   * and invokes the callback registered for 'data' event for each element in the
-   * responses.
-   *
-   * The returned object has 'end' method when no more elements are required.
-   *
-   * autoPaginate option will be ignored.
-   *
-   * @see {@link https://nodejs.org/api/stream.html}
-   *
+   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -935,6 +933,13 @@ export class ContainerAnalysisV1Beta1Client {
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
    *   An object stream which emits an object representing [ScanConfig]{@link google.devtools.containeranalysis.v1beta1.ScanConfig} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listScanConfigsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
    */
   listScanConfigsStream(
     request?: protos.google.devtools.containeranalysis.v1beta1.IListScanConfigsRequest,
@@ -959,10 +964,9 @@ export class ContainerAnalysisV1Beta1Client {
   }
 
   /**
-   * Equivalent to {@link listScanConfigs}, but returns an iterable object.
+   * Equivalent to `listScanConfigs`, but returns an iterable object.
    *
-   * for-await-of syntax is used with the iterable to recursively get response element on-demand.
-   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -977,7 +981,18 @@ export class ContainerAnalysisV1Beta1Client {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that conforms to @link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols.
+   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   [ScanConfig]{@link google.devtools.containeranalysis.v1beta1.ScanConfig}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   * @example
+   * const iterable = client.listScanConfigsAsync(request);
+   * for await (const response of iterable) {
+   *   // process response
+   * }
    */
   listScanConfigsAsync(
     request?: protos.google.devtools.containeranalysis.v1beta1.IListScanConfigsRequest,
@@ -1008,80 +1023,6 @@ export class ContainerAnalysisV1Beta1Client {
   // --------------------
   // -- Path templates --
   // --------------------
-
-  /**
-   * Return a fully-qualified note resource name string.
-   *
-   * @param {string} project
-   * @param {string} note
-   * @returns {string} Resource name string.
-   */
-  notePath(project: string, note: string) {
-    return this.pathTemplates.notePathTemplate.render({
-      project: project,
-      note: note,
-    });
-  }
-
-  /**
-   * Parse the project from Note resource.
-   *
-   * @param {string} noteName
-   *   A fully-qualified path representing Note resource.
-   * @returns {string} A string representing the project.
-   */
-  matchProjectFromNoteName(noteName: string) {
-    return this.pathTemplates.notePathTemplate.match(noteName).project;
-  }
-
-  /**
-   * Parse the note from Note resource.
-   *
-   * @param {string} noteName
-   *   A fully-qualified path representing Note resource.
-   * @returns {string} A string representing the note.
-   */
-  matchNoteFromNoteName(noteName: string) {
-    return this.pathTemplates.notePathTemplate.match(noteName).note;
-  }
-
-  /**
-   * Return a fully-qualified occurrence resource name string.
-   *
-   * @param {string} project
-   * @param {string} occurrence
-   * @returns {string} Resource name string.
-   */
-  occurrencePath(project: string, occurrence: string) {
-    return this.pathTemplates.occurrencePathTemplate.render({
-      project: project,
-      occurrence: occurrence,
-    });
-  }
-
-  /**
-   * Parse the project from Occurrence resource.
-   *
-   * @param {string} occurrenceName
-   *   A fully-qualified path representing Occurrence resource.
-   * @returns {string} A string representing the project.
-   */
-  matchProjectFromOccurrenceName(occurrenceName: string) {
-    return this.pathTemplates.occurrencePathTemplate.match(occurrenceName)
-      .project;
-  }
-
-  /**
-   * Parse the occurrence from Occurrence resource.
-   *
-   * @param {string} occurrenceName
-   *   A fully-qualified path representing Occurrence resource.
-   * @returns {string} A string representing the occurrence.
-   */
-  matchOccurrenceFromOccurrenceName(occurrenceName: string) {
-    return this.pathTemplates.occurrencePathTemplate.match(occurrenceName)
-      .occurrence;
-  }
 
   /**
    * Return a fully-qualified project resource name string.
@@ -1145,9 +1086,10 @@ export class ContainerAnalysisV1Beta1Client {
   }
 
   /**
-   * Terminate the GRPC channel and close the client.
+   * Terminate the gRPC channel and close the client.
    *
    * The client will no longer be usable and all future behavior is undefined.
+   * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
     this.initialize();
