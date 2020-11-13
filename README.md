@@ -9,6 +9,7 @@ applications that interact with individual Google Cloud services:
 
 | Repo | API Docs | Install Command | Enable    |  Free Tier |
 |------|----------|-----------------|-----------|------------|
+| [AI Platform](https://github.com/googleapis/nodejs-ai-platform) | [:notebook:](https://googleapis.dev/nodejs/aiplatform/latest) | `npm i @google-cloud/aiplatform` | [enable](https://console.cloud.google.com/flows/enableapi?apiid=aiplatform.googleapis.com) | ✖ |
 | [AI Platform Notebooks](https://github.com/googleapis/nodejs-notebooks) | [:notebook:](https://googleapis.dev/nodejs/notebooks/latest) | `npm i @google-cloud/notebooks` | [enable](https://console.cloud.google.com/flows/enableapi?apiid=notebooks.googleapis.com) | ✖ |
 | [Area120 Tables API](https://github.com/googleapis/nodejs-area120-tables) | [:notebook:](https://googleapis.dev/nodejs/area120tables/latest) | `npm i @google/area120-tables` | [enable](https://console.cloud.google.com/flows/enableapi?apiid=area120tables.googleapis.com) | ✖ |
 | [Asset Inventory](https://github.com/googleapis/nodejs-asset) | [:notebook:](https://googleapis.dev/nodejs/asset/latest) | `npm i @google-cloud/asset` | [enable](https://console.cloud.google.com/flows/enableapi?apiid=cloudasset.googleapis.com) | ✖ |
