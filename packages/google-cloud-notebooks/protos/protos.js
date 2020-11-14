@@ -1505,6 +1505,9 @@
                                 case 4:
                                 case 5:
                                 case 6:
+                                case 7:
+                                case 8:
+                                case 9:
                                     break;
                                 }
                             if (message.installGpuDriver != null && message.hasOwnProperty("installGpuDriver"))
@@ -1520,6 +1523,7 @@
                                 case 0:
                                 case 1:
                                 case 2:
+                                case 3:
                                     break;
                                 }
                             if (message.bootDiskSizeGb != null && message.hasOwnProperty("bootDiskSizeGb"))
@@ -1532,6 +1536,7 @@
                                 case 0:
                                 case 1:
                                 case 2:
+                                case 3:
                                     break;
                                 }
                             if (message.dataDiskSizeGb != null && message.hasOwnProperty("dataDiskSizeGb"))
@@ -1666,6 +1671,18 @@
                             case 6:
                                 message.state = 6;
                                 break;
+                            case "UPGRADING":
+                            case 7:
+                                message.state = 7;
+                                break;
+                            case "INITIALIZING":
+                            case 8:
+                                message.state = 8;
+                                break;
+                            case "REGISTERING":
+                            case 9:
+                                message.state = 9;
+                                break;
                             }
                             if (object.installGpuDriver != null)
                                 message.installGpuDriver = Boolean(object.installGpuDriver);
@@ -1683,6 +1700,10 @@
                             case "PD_SSD":
                             case 2:
                                 message.bootDiskType = 2;
+                                break;
+                            case "PD_BALANCED":
+                            case 3:
+                                message.bootDiskType = 3;
                                 break;
                             }
                             if (object.bootDiskSizeGb != null)
@@ -1706,6 +1727,10 @@
                             case "PD_SSD":
                             case 2:
                                 message.dataDiskType = 2;
+                                break;
+                            case "PD_BALANCED":
+                            case 3:
+                                message.dataDiskType = 3;
                                 break;
                             }
                             if (object.dataDiskSizeGb != null)
@@ -2236,6 +2261,9 @@
                          * @property {number} STOPPING=4 STOPPING value
                          * @property {number} STOPPED=5 STOPPED value
                          * @property {number} DELETED=6 DELETED value
+                         * @property {number} UPGRADING=7 UPGRADING value
+                         * @property {number} INITIALIZING=8 INITIALIZING value
+                         * @property {number} REGISTERING=9 REGISTERING value
                          */
                         Instance.State = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -2246,6 +2274,9 @@
                             values[valuesById[4] = "STOPPING"] = 4;
                             values[valuesById[5] = "STOPPED"] = 5;
                             values[valuesById[6] = "DELETED"] = 6;
+                            values[valuesById[7] = "UPGRADING"] = 7;
+                            values[valuesById[8] = "INITIALIZING"] = 8;
+                            values[valuesById[9] = "REGISTERING"] = 9;
                             return values;
                         })();
     
@@ -2256,12 +2287,14 @@
                          * @property {number} DISK_TYPE_UNSPECIFIED=0 DISK_TYPE_UNSPECIFIED value
                          * @property {number} PD_STANDARD=1 PD_STANDARD value
                          * @property {number} PD_SSD=2 PD_SSD value
+                         * @property {number} PD_BALANCED=3 PD_BALANCED value
                          */
                         Instance.DiskType = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
                             values[valuesById[0] = "DISK_TYPE_UNSPECIFIED"] = 0;
                             values[valuesById[1] = "PD_STANDARD"] = 1;
                             values[valuesById[2] = "PD_SSD"] = 2;
+                            values[valuesById[3] = "PD_BALANCED"] = 3;
                             return values;
                         })();
     
@@ -2959,6 +2992,7 @@
                          * @property {string|null} [statusMessage] OperationMetadata statusMessage
                          * @property {boolean|null} [requestedCancellation] OperationMetadata requestedCancellation
                          * @property {string|null} [apiVersion] OperationMetadata apiVersion
+                         * @property {string|null} [endpoint] OperationMetadata endpoint
                          */
     
                         /**
@@ -3033,6 +3067,14 @@
                         OperationMetadata.prototype.apiVersion = "";
     
                         /**
+                         * OperationMetadata endpoint.
+                         * @member {string} endpoint
+                         * @memberof google.cloud.notebooks.v1beta1.OperationMetadata
+                         * @instance
+                         */
+                        OperationMetadata.prototype.endpoint = "";
+    
+                        /**
                          * Creates a new OperationMetadata instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.notebooks.v1beta1.OperationMetadata
@@ -3070,6 +3112,8 @@
                                 writer.uint32(/* id 6, wireType 0 =*/48).bool(message.requestedCancellation);
                             if (message.apiVersion != null && Object.hasOwnProperty.call(message, "apiVersion"))
                                 writer.uint32(/* id 7, wireType 2 =*/58).string(message.apiVersion);
+                            if (message.endpoint != null && Object.hasOwnProperty.call(message, "endpoint"))
+                                writer.uint32(/* id 8, wireType 2 =*/66).string(message.endpoint);
                             return writer;
                         };
     
@@ -3124,6 +3168,9 @@
                                     break;
                                 case 7:
                                     message.apiVersion = reader.string();
+                                    break;
+                                case 8:
+                                    message.endpoint = reader.string();
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -3185,6 +3232,9 @@
                             if (message.apiVersion != null && message.hasOwnProperty("apiVersion"))
                                 if (!$util.isString(message.apiVersion))
                                     return "apiVersion: string expected";
+                            if (message.endpoint != null && message.hasOwnProperty("endpoint"))
+                                if (!$util.isString(message.endpoint))
+                                    return "endpoint: string expected";
                             return null;
                         };
     
@@ -3220,6 +3270,8 @@
                                 message.requestedCancellation = Boolean(object.requestedCancellation);
                             if (object.apiVersion != null)
                                 message.apiVersion = String(object.apiVersion);
+                            if (object.endpoint != null)
+                                message.endpoint = String(object.endpoint);
                             return message;
                         };
     
@@ -3244,6 +3296,7 @@
                                 object.statusMessage = "";
                                 object.requestedCancellation = false;
                                 object.apiVersion = "";
+                                object.endpoint = "";
                             }
                             if (message.createTime != null && message.hasOwnProperty("createTime"))
                                 object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
@@ -3259,6 +3312,8 @@
                                 object.requestedCancellation = message.requestedCancellation;
                             if (message.apiVersion != null && message.hasOwnProperty("apiVersion"))
                                 object.apiVersion = message.apiVersion;
+                            if (message.endpoint != null && message.hasOwnProperty("endpoint"))
+                                object.endpoint = message.endpoint;
                             return object;
                         };
     
@@ -6382,6 +6437,7 @@
                          * @interface IIsInstanceUpgradeableResponse
                          * @property {boolean|null} [upgradeable] IsInstanceUpgradeableResponse upgradeable
                          * @property {string|null} [upgradeVersion] IsInstanceUpgradeableResponse upgradeVersion
+                         * @property {string|null} [upgradeInfo] IsInstanceUpgradeableResponse upgradeInfo
                          */
     
                         /**
@@ -6416,6 +6472,14 @@
                         IsInstanceUpgradeableResponse.prototype.upgradeVersion = "";
     
                         /**
+                         * IsInstanceUpgradeableResponse upgradeInfo.
+                         * @member {string} upgradeInfo
+                         * @memberof google.cloud.notebooks.v1beta1.IsInstanceUpgradeableResponse
+                         * @instance
+                         */
+                        IsInstanceUpgradeableResponse.prototype.upgradeInfo = "";
+    
+                        /**
                          * Creates a new IsInstanceUpgradeableResponse instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.notebooks.v1beta1.IsInstanceUpgradeableResponse
@@ -6443,6 +6507,8 @@
                                 writer.uint32(/* id 1, wireType 0 =*/8).bool(message.upgradeable);
                             if (message.upgradeVersion != null && Object.hasOwnProperty.call(message, "upgradeVersion"))
                                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.upgradeVersion);
+                            if (message.upgradeInfo != null && Object.hasOwnProperty.call(message, "upgradeInfo"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.upgradeInfo);
                             return writer;
                         };
     
@@ -6482,6 +6548,9 @@
                                     break;
                                 case 2:
                                     message.upgradeVersion = reader.string();
+                                    break;
+                                case 3:
+                                    message.upgradeInfo = reader.string();
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -6524,6 +6593,9 @@
                             if (message.upgradeVersion != null && message.hasOwnProperty("upgradeVersion"))
                                 if (!$util.isString(message.upgradeVersion))
                                     return "upgradeVersion: string expected";
+                            if (message.upgradeInfo != null && message.hasOwnProperty("upgradeInfo"))
+                                if (!$util.isString(message.upgradeInfo))
+                                    return "upgradeInfo: string expected";
                             return null;
                         };
     
@@ -6543,6 +6615,8 @@
                                 message.upgradeable = Boolean(object.upgradeable);
                             if (object.upgradeVersion != null)
                                 message.upgradeVersion = String(object.upgradeVersion);
+                            if (object.upgradeInfo != null)
+                                message.upgradeInfo = String(object.upgradeInfo);
                             return message;
                         };
     
@@ -6562,11 +6636,14 @@
                             if (options.defaults) {
                                 object.upgradeable = false;
                                 object.upgradeVersion = "";
+                                object.upgradeInfo = "";
                             }
                             if (message.upgradeable != null && message.hasOwnProperty("upgradeable"))
                                 object.upgradeable = message.upgradeable;
                             if (message.upgradeVersion != null && message.hasOwnProperty("upgradeVersion"))
                                 object.upgradeVersion = message.upgradeVersion;
+                            if (message.upgradeInfo != null && message.hasOwnProperty("upgradeInfo"))
+                                object.upgradeInfo = message.upgradeInfo;
                             return object;
                         };
     

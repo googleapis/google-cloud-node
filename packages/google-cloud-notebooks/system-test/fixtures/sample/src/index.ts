@@ -18,8 +18,15 @@
 
 import {NotebookServiceClient} from '@google-cloud/notebooks';
 
+// check that the client class type name can be used
+function doStuffWithNotebookServiceClient(client: NotebookServiceClient) {
+  client.close();
+}
+
 function main() {
-  new NotebookServiceClient();
+  // check that the client instance can be created
+  const notebookServiceClient = new NotebookServiceClient();
+  doStuffWithNotebookServiceClient(notebookServiceClient);
 }
 
 main();

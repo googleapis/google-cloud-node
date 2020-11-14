@@ -36,7 +36,7 @@ import {operationsProtos} from 'google-gax';
 const version = require('../../../package.json').version;
 
 /**
- *  API service for Cloud AI Platform Notebooks.
+ *  API v1beta1 service for Cloud AI Platform Notebooks.
  * @class
  * @memberof v1beta1
  */
@@ -62,8 +62,10 @@ export class NotebookServiceClient {
   /**
    * Construct an instance of NotebookServiceClient.
    *
-   * @param {object} [options] - The configuration object. See the subsequent
-   *   parameters for more details.
+   * @param {object} [options] - The configuration object.
+   * The options accepted by the constructor are described in detail
+   * in [this document](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#creating-the-client-instance).
+   * The common options are:
    * @param {object} [options.credentials] - Credentials object.
    * @param {string} [options.credentials.client_email]
    * @param {string} [options.credentials.private_key]
@@ -83,42 +85,33 @@ export class NotebookServiceClient {
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
+   * @param {gax.ClientConfig} [options.clientConfig] - client configuration override.
+   *     TODO(@alexander-fenster): link to gax documentation.
+   * @param {boolean} fallback - Use HTTP fallback mode.
+   *     In fallback mode, a special browser-compatible transport implementation is used
+   *     instead of gRPC transport. In browser context (if the `window` object is defined)
+   *     the fallback mode is enabled automatically; set `options.fallback` to `false`
+   *     if you need to override this behavior.
    */
-
   constructor(opts?: ClientOptions) {
-    // Ensure that options include the service address and port.
+    // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof NotebookServiceClient;
     const servicePath =
-      opts && opts.servicePath
-        ? opts.servicePath
-        : opts && opts.apiEndpoint
-        ? opts.apiEndpoint
-        : staticMembers.servicePath;
-    const port = opts && opts.port ? opts.port : staticMembers.port;
+      opts?.servicePath || opts?.apiEndpoint || staticMembers.servicePath;
+    const port = opts?.port || staticMembers.port;
+    const clientConfig = opts?.clientConfig ?? {};
+    const fallback = opts?.fallback ?? typeof window !== 'undefined';
+    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
-    if (!opts) {
-      opts = {servicePath, port};
+    // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
+    if (servicePath !== staticMembers.servicePath && !('scopes' in opts)) {
+      opts['scopes'] = staticMembers.scopes;
     }
-    opts.servicePath = opts.servicePath || servicePath;
-    opts.port = opts.port || port;
 
-    // users can override the config from client side, like retry codes name.
-    // The detailed structure of the clientConfig can be found here: https://github.com/googleapis/gax-nodejs/blob/master/src/gax.ts#L546
-    // The way to override client config for Showcase API:
-    //
-    // const customConfig = {"interfaces": {"google.showcase.v1beta1.Echo": {"methods": {"Echo": {"retry_codes_name": "idempotent", "retry_params_name": "default"}}}}}
-    // const showcaseClient = new showcaseClient({ projectId, customConfig });
-    opts.clientConfig = opts.clientConfig || {};
-
-    // If we're running in browser, it's OK to omit `fallback` since
-    // google-gax has `browser` field in its `package.json`.
-    // For Electron (which does not respect `browser` field),
-    // pass `{fallback: true}` to the NotebookServiceClient constructor.
+    // Choose either gRPC or proto-over-HTTP implementation of google-gax.
     this._gaxModule = opts.fallback ? gax.fallback : gax;
 
-    // Create a `gaxGrpc` object, with any grpc-specific options
-    // sent to the client.
-    opts.scopes = (this.constructor as typeof NotebookServiceClient).scopes;
+    // Create a `gaxGrpc` object, with any grpc-specific options sent to the client.
     this._gaxGrpc = new this._gaxModule.GrpcClient(opts);
 
     // Save options to use in initialize() method.
@@ -126,6 +119,11 @@ export class NotebookServiceClient {
 
     // Save the auth object to the client, for use by other methods.
     this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+
+    // Set the default scopes in auth client if needed.
+    if (servicePath === staticMembers.servicePath) {
+      this.auth.defaultScopes = staticMembers.scopes;
+    }
 
     // Determine the client header string.
     const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
@@ -470,6 +468,7 @@ export class NotebookServiceClient {
 
   /**
    * The DNS address for this API service.
+   * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
     return 'notebooks.googleapis.com';
@@ -478,6 +477,7 @@ export class NotebookServiceClient {
   /**
    * The DNS address for this API service - same as servicePath(),
    * exists for compatibility reasons.
+   * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
     return 'notebooks.googleapis.com';
@@ -485,6 +485,7 @@ export class NotebookServiceClient {
 
   /**
    * The port for this API service.
+   * @returns {number} The default port for this service.
    */
   static get port() {
     return 443;
@@ -493,6 +494,7 @@ export class NotebookServiceClient {
   /**
    * The scopes needed to make gRPC calls for every method defined
    * in this service.
+   * @returns {string[]} List of default scopes.
    */
   static get scopes() {
     return ['https://www.googleapis.com/auth/cloud-platform'];
@@ -502,8 +504,7 @@ export class NotebookServiceClient {
   getProjectId(callback: Callback<string, undefined, undefined>): void;
   /**
    * Return the project ID used by this class.
-   * @param {function(Error, string)} callback - the callback to
-   *   be called with the current project Id.
+   * @returns {Promise} A promise that resolves to string containing the project ID.
    */
   getProjectId(
     callback?: Callback<string, undefined, undefined>
@@ -561,7 +562,11 @@ export class NotebookServiceClient {
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
    *   The first element of the array is an object representing [Instance]{@link google.cloud.notebooks.v1beta1.Instance}.
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * const [response] = await client.getInstance(request);
    */
   getInstance(
     request: protos.google.cloud.notebooks.v1beta1.IGetInstanceRequest,
@@ -653,7 +658,11 @@ export class NotebookServiceClient {
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
    *   The first element of the array is an object representing [IsInstanceUpgradeableResponse]{@link google.cloud.notebooks.v1beta1.IsInstanceUpgradeableResponse}.
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * const [response] = await client.isInstanceUpgradeable(request);
    */
   isInstanceUpgradeable(
     request: protos.google.cloud.notebooks.v1beta1.IIsInstanceUpgradeableRequest,
@@ -745,7 +754,11 @@ export class NotebookServiceClient {
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
    *   The first element of the array is an object representing [Environment]{@link google.cloud.notebooks.v1beta1.Environment}.
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * const [response] = await client.getEnvironment(request);
    */
   getEnvironment(
     request: protos.google.cloud.notebooks.v1beta1.IGetEnvironmentRequest,
@@ -843,8 +856,15 @@ export class NotebookServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Operation]{@link google.longrunning.Operation}.
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example
+   * const [operation] = await client.createInstance(request);
+   * const [response] = await operation.promise();
    */
   createInstance(
     request: protos.google.cloud.notebooks.v1beta1.ICreateInstanceRequest,
@@ -896,18 +916,19 @@ export class NotebookServiceClient {
     return this.innerApiCalls.createInstance(request, options, callback);
   }
   /**
-   * Check the status of the long running operation returned by the createInstance() method.
+   * Check the status of the long running operation returned by `createInstance()`.
    * @param {String} name
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *
-   * @example:
-   *   const decodedOperation = await checkCreateInstanceProgress(name);
-   *   console.log(decodedOperation.result);
-   *   console.log(decodedOperation.done);
-   *   console.log(decodedOperation.metadata);
-   *
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example
+   * const decodedOperation = await checkCreateInstanceProgress(name);
+   * console.log(decodedOperation.result);
+   * console.log(decodedOperation.done);
+   * console.log(decodedOperation.metadata);
    */
   async checkCreateInstanceProgress(
     name: string
@@ -986,8 +1007,15 @@ export class NotebookServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Operation]{@link google.longrunning.Operation}.
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example
+   * const [operation] = await client.registerInstance(request);
+   * const [response] = await operation.promise();
    */
   registerInstance(
     request: protos.google.cloud.notebooks.v1beta1.IRegisterInstanceRequest,
@@ -1039,18 +1067,19 @@ export class NotebookServiceClient {
     return this.innerApiCalls.registerInstance(request, options, callback);
   }
   /**
-   * Check the status of the long running operation returned by the registerInstance() method.
+   * Check the status of the long running operation returned by `registerInstance()`.
    * @param {String} name
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *
-   * @example:
-   *   const decodedOperation = await checkRegisterInstanceProgress(name);
-   *   console.log(decodedOperation.result);
-   *   console.log(decodedOperation.done);
-   *   console.log(decodedOperation.metadata);
-   *
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example
+   * const decodedOperation = await checkRegisterInstanceProgress(name);
+   * console.log(decodedOperation.result);
+   * console.log(decodedOperation.done);
+   * console.log(decodedOperation.metadata);
    */
   async checkRegisterInstanceProgress(
     name: string
@@ -1123,13 +1152,20 @@ export class NotebookServiceClient {
    * @param {number} request.coreCount
    *   Required. Count of cores of this accelerator. Note that not all combinations
    *   of `type` and `core_count` are valid. Check [GPUs on
-   *   Compute Engine](/compute/docs/gpus/#gpus-list) to find a valid
-   *   combination. TPUs are not supported.
+   *   Compute Engine](https://cloud.google.com/compute/docs/gpus/#gpus-list) to
+   *   find a valid combination. TPUs are not supported.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Operation]{@link google.longrunning.Operation}.
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example
+   * const [operation] = await client.setInstanceAccelerator(request);
+   * const [response] = await operation.promise();
    */
   setInstanceAccelerator(
     request: protos.google.cloud.notebooks.v1beta1.ISetInstanceAcceleratorRequest,
@@ -1185,18 +1221,19 @@ export class NotebookServiceClient {
     );
   }
   /**
-   * Check the status of the long running operation returned by the setInstanceAccelerator() method.
+   * Check the status of the long running operation returned by `setInstanceAccelerator()`.
    * @param {String} name
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *
-   * @example:
-   *   const decodedOperation = await checkSetInstanceAcceleratorProgress(name);
-   *   console.log(decodedOperation.result);
-   *   console.log(decodedOperation.done);
-   *   console.log(decodedOperation.metadata);
-   *
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example
+   * const decodedOperation = await checkSetInstanceAcceleratorProgress(name);
+   * console.log(decodedOperation.result);
+   * console.log(decodedOperation.done);
+   * console.log(decodedOperation.metadata);
    */
   async checkSetInstanceAcceleratorProgress(
     name: string
@@ -1265,12 +1302,20 @@ export class NotebookServiceClient {
    *   Required. Format:
    *   `projects/{project_id}/locations/{location}/instances/{instance_id}`
    * @param {string} request.machineType
-   *   Required. The [Compute Engine machine type](/compute/docs/machine-types).
+   *   Required. The [Compute Engine machine
+   *   type](https://cloud.google.com/compute/docs/machine-types).
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Operation]{@link google.longrunning.Operation}.
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example
+   * const [operation] = await client.setInstanceMachineType(request);
+   * const [response] = await operation.promise();
    */
   setInstanceMachineType(
     request: protos.google.cloud.notebooks.v1beta1.ISetInstanceMachineTypeRequest,
@@ -1326,18 +1371,19 @@ export class NotebookServiceClient {
     );
   }
   /**
-   * Check the status of the long running operation returned by the setInstanceMachineType() method.
+   * Check the status of the long running operation returned by `setInstanceMachineType()`.
    * @param {String} name
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *
-   * @example:
-   *   const decodedOperation = await checkSetInstanceMachineTypeProgress(name);
-   *   console.log(decodedOperation.result);
-   *   console.log(decodedOperation.done);
-   *   console.log(decodedOperation.metadata);
-   *
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example
+   * const decodedOperation = await checkSetInstanceMachineTypeProgress(name);
+   * console.log(decodedOperation.result);
+   * console.log(decodedOperation.done);
+   * console.log(decodedOperation.metadata);
    */
   async checkSetInstanceMachineTypeProgress(
     name: string
@@ -1411,8 +1457,15 @@ export class NotebookServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Operation]{@link google.longrunning.Operation}.
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example
+   * const [operation] = await client.setInstanceLabels(request);
+   * const [response] = await operation.promise();
    */
   setInstanceLabels(
     request: protos.google.cloud.notebooks.v1beta1.ISetInstanceLabelsRequest,
@@ -1464,18 +1517,19 @@ export class NotebookServiceClient {
     return this.innerApiCalls.setInstanceLabels(request, options, callback);
   }
   /**
-   * Check the status of the long running operation returned by the setInstanceLabels() method.
+   * Check the status of the long running operation returned by `setInstanceLabels()`.
    * @param {String} name
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *
-   * @example:
-   *   const decodedOperation = await checkSetInstanceLabelsProgress(name);
-   *   console.log(decodedOperation.result);
-   *   console.log(decodedOperation.done);
-   *   console.log(decodedOperation.metadata);
-   *
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example
+   * const decodedOperation = await checkSetInstanceLabelsProgress(name);
+   * console.log(decodedOperation.result);
+   * console.log(decodedOperation.done);
+   * console.log(decodedOperation.metadata);
    */
   async checkSetInstanceLabelsProgress(
     name: string
@@ -1546,8 +1600,15 @@ export class NotebookServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Operation]{@link google.longrunning.Operation}.
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example
+   * const [operation] = await client.deleteInstance(request);
+   * const [response] = await operation.promise();
    */
   deleteInstance(
     request: protos.google.cloud.notebooks.v1beta1.IDeleteInstanceRequest,
@@ -1599,18 +1660,19 @@ export class NotebookServiceClient {
     return this.innerApiCalls.deleteInstance(request, options, callback);
   }
   /**
-   * Check the status of the long running operation returned by the deleteInstance() method.
+   * Check the status of the long running operation returned by `deleteInstance()`.
    * @param {String} name
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *
-   * @example:
-   *   const decodedOperation = await checkDeleteInstanceProgress(name);
-   *   console.log(decodedOperation.result);
-   *   console.log(decodedOperation.done);
-   *   console.log(decodedOperation.metadata);
-   *
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example
+   * const decodedOperation = await checkDeleteInstanceProgress(name);
+   * console.log(decodedOperation.result);
+   * console.log(decodedOperation.done);
+   * console.log(decodedOperation.metadata);
    */
   async checkDeleteInstanceProgress(
     name: string
@@ -1681,8 +1743,15 @@ export class NotebookServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Operation]{@link google.longrunning.Operation}.
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example
+   * const [operation] = await client.startInstance(request);
+   * const [response] = await operation.promise();
    */
   startInstance(
     request: protos.google.cloud.notebooks.v1beta1.IStartInstanceRequest,
@@ -1734,18 +1803,19 @@ export class NotebookServiceClient {
     return this.innerApiCalls.startInstance(request, options, callback);
   }
   /**
-   * Check the status of the long running operation returned by the startInstance() method.
+   * Check the status of the long running operation returned by `startInstance()`.
    * @param {String} name
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *
-   * @example:
-   *   const decodedOperation = await checkStartInstanceProgress(name);
-   *   console.log(decodedOperation.result);
-   *   console.log(decodedOperation.done);
-   *   console.log(decodedOperation.metadata);
-   *
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example
+   * const decodedOperation = await checkStartInstanceProgress(name);
+   * console.log(decodedOperation.result);
+   * console.log(decodedOperation.done);
+   * console.log(decodedOperation.metadata);
    */
   async checkStartInstanceProgress(
     name: string
@@ -1816,8 +1886,15 @@ export class NotebookServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Operation]{@link google.longrunning.Operation}.
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example
+   * const [operation] = await client.stopInstance(request);
+   * const [response] = await operation.promise();
    */
   stopInstance(
     request: protos.google.cloud.notebooks.v1beta1.IStopInstanceRequest,
@@ -1869,18 +1946,19 @@ export class NotebookServiceClient {
     return this.innerApiCalls.stopInstance(request, options, callback);
   }
   /**
-   * Check the status of the long running operation returned by the stopInstance() method.
+   * Check the status of the long running operation returned by `stopInstance()`.
    * @param {String} name
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *
-   * @example:
-   *   const decodedOperation = await checkStopInstanceProgress(name);
-   *   console.log(decodedOperation.result);
-   *   console.log(decodedOperation.done);
-   *   console.log(decodedOperation.metadata);
-   *
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example
+   * const decodedOperation = await checkStopInstanceProgress(name);
+   * console.log(decodedOperation.result);
+   * console.log(decodedOperation.done);
+   * console.log(decodedOperation.metadata);
    */
   async checkStopInstanceProgress(
     name: string
@@ -1951,8 +2029,15 @@ export class NotebookServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Operation]{@link google.longrunning.Operation}.
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example
+   * const [operation] = await client.resetInstance(request);
+   * const [response] = await operation.promise();
    */
   resetInstance(
     request: protos.google.cloud.notebooks.v1beta1.IResetInstanceRequest,
@@ -2004,18 +2089,19 @@ export class NotebookServiceClient {
     return this.innerApiCalls.resetInstance(request, options, callback);
   }
   /**
-   * Check the status of the long running operation returned by the resetInstance() method.
+   * Check the status of the long running operation returned by `resetInstance()`.
    * @param {String} name
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *
-   * @example:
-   *   const decodedOperation = await checkResetInstanceProgress(name);
-   *   console.log(decodedOperation.result);
-   *   console.log(decodedOperation.done);
-   *   console.log(decodedOperation.metadata);
-   *
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example
+   * const decodedOperation = await checkResetInstanceProgress(name);
+   * console.log(decodedOperation.result);
+   * console.log(decodedOperation.done);
+   * console.log(decodedOperation.metadata);
    */
   async checkResetInstanceProgress(
     name: string
@@ -2095,8 +2181,15 @@ export class NotebookServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Operation]{@link google.longrunning.Operation}.
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example
+   * const [operation] = await client.reportInstanceInfo(request);
+   * const [response] = await operation.promise();
    */
   reportInstanceInfo(
     request: protos.google.cloud.notebooks.v1beta1.IReportInstanceInfoRequest,
@@ -2148,18 +2241,19 @@ export class NotebookServiceClient {
     return this.innerApiCalls.reportInstanceInfo(request, options, callback);
   }
   /**
-   * Check the status of the long running operation returned by the reportInstanceInfo() method.
+   * Check the status of the long running operation returned by `reportInstanceInfo()`.
    * @param {String} name
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *
-   * @example:
-   *   const decodedOperation = await checkReportInstanceInfoProgress(name);
-   *   console.log(decodedOperation.result);
-   *   console.log(decodedOperation.done);
-   *   console.log(decodedOperation.metadata);
-   *
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example
+   * const decodedOperation = await checkReportInstanceInfoProgress(name);
+   * console.log(decodedOperation.result);
+   * console.log(decodedOperation.done);
+   * console.log(decodedOperation.metadata);
    */
   async checkReportInstanceInfoProgress(
     name: string
@@ -2230,8 +2324,15 @@ export class NotebookServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Operation]{@link google.longrunning.Operation}.
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example
+   * const [operation] = await client.upgradeInstance(request);
+   * const [response] = await operation.promise();
    */
   upgradeInstance(
     request: protos.google.cloud.notebooks.v1beta1.IUpgradeInstanceRequest,
@@ -2283,18 +2384,19 @@ export class NotebookServiceClient {
     return this.innerApiCalls.upgradeInstance(request, options, callback);
   }
   /**
-   * Check the status of the long running operation returned by the upgradeInstance() method.
+   * Check the status of the long running operation returned by `upgradeInstance()`.
    * @param {String} name
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *
-   * @example:
-   *   const decodedOperation = await checkUpgradeInstanceProgress(name);
-   *   console.log(decodedOperation.result);
-   *   console.log(decodedOperation.done);
-   *   console.log(decodedOperation.metadata);
-   *
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example
+   * const decodedOperation = await checkUpgradeInstanceProgress(name);
+   * console.log(decodedOperation.result);
+   * console.log(decodedOperation.done);
+   * console.log(decodedOperation.metadata);
    */
   async checkUpgradeInstanceProgress(
     name: string
@@ -2369,8 +2471,15 @@ export class NotebookServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Operation]{@link google.longrunning.Operation}.
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example
+   * const [operation] = await client.upgradeInstanceInternal(request);
+   * const [response] = await operation.promise();
    */
   upgradeInstanceInternal(
     request: protos.google.cloud.notebooks.v1beta1.IUpgradeInstanceInternalRequest,
@@ -2426,18 +2535,19 @@ export class NotebookServiceClient {
     );
   }
   /**
-   * Check the status of the long running operation returned by the upgradeInstanceInternal() method.
+   * Check the status of the long running operation returned by `upgradeInstanceInternal()`.
    * @param {String} name
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *
-   * @example:
-   *   const decodedOperation = await checkUpgradeInstanceInternalProgress(name);
-   *   console.log(decodedOperation.result);
-   *   console.log(decodedOperation.done);
-   *   console.log(decodedOperation.metadata);
-   *
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example
+   * const decodedOperation = await checkUpgradeInstanceInternalProgress(name);
+   * console.log(decodedOperation.result);
+   * console.log(decodedOperation.done);
+   * console.log(decodedOperation.metadata);
    */
   async checkUpgradeInstanceInternalProgress(
     name: string
@@ -2514,8 +2624,15 @@ export class NotebookServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Operation]{@link google.longrunning.Operation}.
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example
+   * const [operation] = await client.createEnvironment(request);
+   * const [response] = await operation.promise();
    */
   createEnvironment(
     request: protos.google.cloud.notebooks.v1beta1.ICreateEnvironmentRequest,
@@ -2567,18 +2684,19 @@ export class NotebookServiceClient {
     return this.innerApiCalls.createEnvironment(request, options, callback);
   }
   /**
-   * Check the status of the long running operation returned by the createEnvironment() method.
+   * Check the status of the long running operation returned by `createEnvironment()`.
    * @param {String} name
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *
-   * @example:
-   *   const decodedOperation = await checkCreateEnvironmentProgress(name);
-   *   console.log(decodedOperation.result);
-   *   console.log(decodedOperation.done);
-   *   console.log(decodedOperation.metadata);
-   *
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example
+   * const decodedOperation = await checkCreateEnvironmentProgress(name);
+   * console.log(decodedOperation.result);
+   * console.log(decodedOperation.done);
+   * console.log(decodedOperation.metadata);
    */
   async checkCreateEnvironmentProgress(
     name: string
@@ -2649,8 +2767,15 @@ export class NotebookServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Operation]{@link google.longrunning.Operation}.
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example
+   * const [operation] = await client.deleteEnvironment(request);
+   * const [response] = await operation.promise();
    */
   deleteEnvironment(
     request: protos.google.cloud.notebooks.v1beta1.IDeleteEnvironmentRequest,
@@ -2702,18 +2827,19 @@ export class NotebookServiceClient {
     return this.innerApiCalls.deleteEnvironment(request, options, callback);
   }
   /**
-   * Check the status of the long running operation returned by the deleteEnvironment() method.
+   * Check the status of the long running operation returned by `deleteEnvironment()`.
    * @param {String} name
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *
-   * @example:
-   *   const decodedOperation = await checkDeleteEnvironmentProgress(name);
-   *   console.log(decodedOperation.result);
-   *   console.log(decodedOperation.done);
-   *   console.log(decodedOperation.metadata);
-   *
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example
+   * const decodedOperation = await checkDeleteEnvironmentProgress(name);
+   * console.log(decodedOperation.result);
+   * console.log(decodedOperation.done);
+   * console.log(decodedOperation.metadata);
    */
   async checkDeleteEnvironmentProgress(
     name: string
@@ -2785,19 +2911,14 @@ export class NotebookServiceClient {
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
    *   The first element of the array is Array of [Instance]{@link google.cloud.notebooks.v1beta1.Instance}.
-   *   The client library support auto-pagination by default: it will call the API as many
+   *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
-   *
-   *   When autoPaginate: false is specified through options, the array has three elements.
-   *   The first element is Array of [Instance]{@link google.cloud.notebooks.v1beta1.Instance} that corresponds to
-   *   the one page received from the API server.
-   *   If the second element is not null it contains the request object of type [ListInstancesRequest]{@link google.cloud.notebooks.v1beta1.ListInstancesRequest}
-   *   that can be used to obtain the next page of the results.
-   *   If it is null, the next page does not exist.
-   *   The third element contains the raw response received from the API server. Its type is
-   *   [ListInstancesResponse]{@link google.cloud.notebooks.v1beta1.ListInstancesResponse}.
-   *
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *   Note that it can affect your quota.
+   *   We recommend using `listInstancesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
    */
   listInstances(
     request: protos.google.cloud.notebooks.v1beta1.IListInstancesRequest,
@@ -2845,18 +2966,7 @@ export class NotebookServiceClient {
   }
 
   /**
-   * Equivalent to {@link listInstances}, but returns a NodeJS Stream object.
-   *
-   * This fetches the paged responses for {@link listInstances} continuously
-   * and invokes the callback registered for 'data' event for each element in the
-   * responses.
-   *
-   * The returned object has 'end' method when no more elements are required.
-   *
-   * autoPaginate option will be ignored.
-   *
-   * @see {@link https://nodejs.org/api/stream.html}
-   *
+   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -2871,6 +2981,13 @@ export class NotebookServiceClient {
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
    *   An object stream which emits an object representing [Instance]{@link google.cloud.notebooks.v1beta1.Instance} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listInstancesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
    */
   listInstancesStream(
     request?: protos.google.cloud.notebooks.v1beta1.IListInstancesRequest,
@@ -2895,10 +3012,9 @@ export class NotebookServiceClient {
   }
 
   /**
-   * Equivalent to {@link listInstances}, but returns an iterable object.
+   * Equivalent to `listInstances`, but returns an iterable object.
    *
-   * for-await-of syntax is used with the iterable to recursively get response element on-demand.
-   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -2912,7 +3028,18 @@ export class NotebookServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that conforms to @link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols.
+   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   [Instance]{@link google.cloud.notebooks.v1beta1.Instance}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   * @example
+   * const iterable = client.listInstancesAsync(request);
+   * for await (const response of iterable) {
+   *   // process response
+   * }
    */
   listInstancesAsync(
     request?: protos.google.cloud.notebooks.v1beta1.IListInstancesRequest,
@@ -2983,19 +3110,14 @@ export class NotebookServiceClient {
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
    *   The first element of the array is Array of [Environment]{@link google.cloud.notebooks.v1beta1.Environment}.
-   *   The client library support auto-pagination by default: it will call the API as many
+   *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
-   *
-   *   When autoPaginate: false is specified through options, the array has three elements.
-   *   The first element is Array of [Environment]{@link google.cloud.notebooks.v1beta1.Environment} that corresponds to
-   *   the one page received from the API server.
-   *   If the second element is not null it contains the request object of type [ListEnvironmentsRequest]{@link google.cloud.notebooks.v1beta1.ListEnvironmentsRequest}
-   *   that can be used to obtain the next page of the results.
-   *   If it is null, the next page does not exist.
-   *   The third element contains the raw response received from the API server. Its type is
-   *   [ListEnvironmentsResponse]{@link google.cloud.notebooks.v1beta1.ListEnvironmentsResponse}.
-   *
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *   Note that it can affect your quota.
+   *   We recommend using `listEnvironmentsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
    */
   listEnvironments(
     request: protos.google.cloud.notebooks.v1beta1.IListEnvironmentsRequest,
@@ -3043,18 +3165,7 @@ export class NotebookServiceClient {
   }
 
   /**
-   * Equivalent to {@link listEnvironments}, but returns a NodeJS Stream object.
-   *
-   * This fetches the paged responses for {@link listEnvironments} continuously
-   * and invokes the callback registered for 'data' event for each element in the
-   * responses.
-   *
-   * The returned object has 'end' method when no more elements are required.
-   *
-   * autoPaginate option will be ignored.
-   *
-   * @see {@link https://nodejs.org/api/stream.html}
-   *
+   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -3068,6 +3179,13 @@ export class NotebookServiceClient {
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
    *   An object stream which emits an object representing [Environment]{@link google.cloud.notebooks.v1beta1.Environment} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listEnvironmentsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
    */
   listEnvironmentsStream(
     request?: protos.google.cloud.notebooks.v1beta1.IListEnvironmentsRequest,
@@ -3092,10 +3210,9 @@ export class NotebookServiceClient {
   }
 
   /**
-   * Equivalent to {@link listEnvironments}, but returns an iterable object.
+   * Equivalent to `listEnvironments`, but returns an iterable object.
    *
-   * for-await-of syntax is used with the iterable to recursively get response element on-demand.
-   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -3108,7 +3225,18 @@ export class NotebookServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that conforms to @link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols.
+   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   [Environment]{@link google.cloud.notebooks.v1beta1.Environment}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   * @example
+   * const iterable = client.listEnvironmentsAsync(request);
+   * for await (const response of iterable) {
+   *   // process response
+   * }
    */
   listEnvironmentsAsync(
     request?: protos.google.cloud.notebooks.v1beta1.IListEnvironmentsRequest,
@@ -3211,9 +3339,10 @@ export class NotebookServiceClient {
   }
 
   /**
-   * Terminate the GRPC channel and close the client.
+   * Terminate the gRPC channel and close the client.
    *
    * The client will no longer be usable and all future behavior is undefined.
+   * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
     this.initialize();

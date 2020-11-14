@@ -726,14 +726,18 @@ export namespace google {
                         ACTIVE = 3,
                         STOPPING = 4,
                         STOPPED = 5,
-                        DELETED = 6
+                        DELETED = 6,
+                        UPGRADING = 7,
+                        INITIALIZING = 8,
+                        REGISTERING = 9
                     }
 
                     /** DiskType enum. */
                     enum DiskType {
                         DISK_TYPE_UNSPECIFIED = 0,
                         PD_STANDARD = 1,
-                        PD_SSD = 2
+                        PD_SSD = 2,
+                        PD_BALANCED = 3
                     }
 
                     /** DiskEncryption enum. */
@@ -1190,6 +1194,9 @@ export namespace google {
 
                     /** OperationMetadata apiVersion */
                     apiVersion?: (string|null);
+
+                    /** OperationMetadata endpoint */
+                    endpoint?: (string|null);
                 }
 
                 /** Represents an OperationMetadata. */
@@ -1221,6 +1228,9 @@ export namespace google {
 
                     /** OperationMetadata apiVersion. */
                     public apiVersion: string;
+
+                    /** OperationMetadata endpoint. */
+                    public endpoint: string;
 
                     /**
                      * Creates a new OperationMetadata instance using the specified properties.
@@ -2639,6 +2649,9 @@ export namespace google {
 
                     /** IsInstanceUpgradeableResponse upgradeVersion */
                     upgradeVersion?: (string|null);
+
+                    /** IsInstanceUpgradeableResponse upgradeInfo */
+                    upgradeInfo?: (string|null);
                 }
 
                 /** Represents an IsInstanceUpgradeableResponse. */
@@ -2655,6 +2668,9 @@ export namespace google {
 
                     /** IsInstanceUpgradeableResponse upgradeVersion. */
                     public upgradeVersion: string;
+
+                    /** IsInstanceUpgradeableResponse upgradeInfo. */
+                    public upgradeInfo: string;
 
                     /**
                      * Creates a new IsInstanceUpgradeableResponse instance using the specified properties.

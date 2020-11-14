@@ -4,15 +4,15 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/nodejs-notebooks.git",
-        "sha": "459e6a3f04fbbf62d6d21430e064603323468356"
+        "sha": "5b8bf62698cd382fcc1decb23a0131fe115b2119"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "3293ef20c714bb005f6a9c987e2ae8a1ad745272",
-        "internalRef": "330824843"
+        "sha": "b759c563bacf9cd15749be4d2bdd276d3f48ee29",
+        "internalRef": "341102751"
       }
     },
     {
@@ -85,7 +85,6 @@
     "README.md",
     "api-extractor.json",
     "linkinator.config.json",
-    "package-lock.json.523468008",
     "protos/google/cloud/notebooks/v1beta1/environment.proto",
     "protos/google/cloud/notebooks/v1beta1/instance.proto",
     "protos/google/cloud/notebooks/v1beta1/service.proto",
@@ -94,7 +93,6 @@
     "protos/protos.json",
     "renovate.json",
     "samples/README.md",
-    "samples/package-lock.json.856678770",
     "src/index.ts",
     "src/v1beta1/index.ts",
     "src/v1beta1/notebook_service_client.ts",

@@ -10,7 +10,7 @@
                   "options": {
                     "go_package": "google.golang.org/genproto/googleapis/cloud/notebooks/v1beta1;notebooks",
                     "csharp_namespace": "Google.Cloud.Notebooks.V1Beta1",
-                    "php_namespace": "Google\\Cloud\\Notebooks\\V1Beta1",
+                    "php_namespace": "Google\\Cloud\\Notebooks\\V1beta1",
                     "ruby_package": "Google::Cloud::Notebooks::V1beta1",
                     "java_multiple_files": true,
                     "java_outer_classname": "NotebooksProto",
@@ -313,14 +313,18 @@
                             "ACTIVE": 3,
                             "STOPPING": 4,
                             "STOPPED": 5,
-                            "DELETED": 6
+                            "DELETED": 6,
+                            "UPGRADING": 7,
+                            "INITIALIZING": 8,
+                            "REGISTERING": 9
                           }
                         },
                         "DiskType": {
                           "values": {
                             "DISK_TYPE_UNSPECIFIED": 0,
                             "PD_STANDARD": 1,
-                            "PD_SSD": 2
+                            "PD_SSD": 2,
+                            "PD_BALANCED": 3
                           }
                         },
                         "DiskEncryption": {
@@ -542,6 +546,10 @@
                         "apiVersion": {
                           "type": "string",
                           "id": 7
+                        },
+                        "endpoint": {
+                          "type": "string",
+                          "id": 8
                         }
                       }
                     },
@@ -782,6 +790,10 @@
                         "upgradeVersion": {
                           "type": "string",
                           "id": 2
+                        },
+                        "upgradeInfo": {
+                          "type": "string",
+                          "id": 3
                         }
                       }
                     },
