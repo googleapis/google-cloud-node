@@ -1,3 +1,9 @@
+# Copyright 2020 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
 #     http://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
@@ -24,7 +30,7 @@ for version in versions:
   name, 
   version,
   proto_path = f'google/cloud/websecurityscanner/{version}')
-  s.copy(library, excludes=[])
+  s.copy(library, excludes=["README.md", "package.json"])
 
 # Copy common templates
 common_templates = gcp.CommonTemplates()
