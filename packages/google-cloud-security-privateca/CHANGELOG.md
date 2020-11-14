@@ -1,5 +1,21 @@
 # Changelog
 
+## [2.0.0](https://www.github.com/googleapis/nodejs-security-private-ca/compare/v1.0.0...v2.0.0) (2020-11-11)
+
+
+### ⚠ BREAKING CHANGES
+
+* Updates to Certificate Authority Service for Beta release (#21)
+
+### Features
+
+* Updates to Certificate Authority Service for Beta release ([#21](https://www.github.com/googleapis/nodejs-security-private-ca/issues/21)) ([8e3fb52](https://www.github.com/googleapis/nodejs-security-private-ca/commit/8e3fb52688fc93bbbe4f627d06121384cca84785))
+
+
+### Bug Fixes
+
+* do not modify options object, use defaultScopes ([#28](https://www.github.com/googleapis/nodejs-security-private-ca/issues/28)) ([5e9de83](https://www.github.com/googleapis/nodejs-security-private-ca/commit/5e9de8377ad9d56037d86ac40e9765d6f3b60681))
+
 ## 1.0.0 (2020-09-24)
 
 
