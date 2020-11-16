@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/speech?activeTab=versions
 
+### [4.1.4](https://www.github.com/googleapis/nodejs-speech/compare/v4.1.3...v4.1.4) (2020-11-06)
+
+
+### Bug Fixes
+
+* do not modify options object, use defaultScopes ([#669](https://www.github.com/googleapis/nodejs-speech/issues/669)) ([eafbadd](https://www.github.com/googleapis/nodejs-speech/commit/eafbadd3b22943dd1002c0f523f4d06d15bb9928))
+
 ### [4.1.3](https://www.github.com/googleapis/nodejs-speech/compare/v4.1.2...v4.1.3) (2020-09-12)
 
 
