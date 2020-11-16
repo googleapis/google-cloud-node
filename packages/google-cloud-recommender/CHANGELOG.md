@@ -1,5 +1,13 @@
 # Changelog
 
+### [3.2.1](https://www.github.com/googleapis/nodejs-recommender/compare/v3.2.0...v3.2.1) (2020-11-06)
+
+
+### Bug Fixes
+
+* do not modify options object, use defaultScopes ([#131](https://www.github.com/googleapis/nodejs-recommender/issues/131)) ([3c11c71](https://www.github.com/googleapis/nodejs-recommender/commit/3c11c71f11a42930227cda2cbc939728afdc11fe))
+* updating the v1 retry params name for ListInsights, GetInsight, and MarkInsightAccepted. ([#128](https://www.github.com/googleapis/nodejs-recommender/issues/128)) ([7785604](https://www.github.com/googleapis/nodejs-recommender/commit/7785604f0bcc763224dc3bd13d552578c3cddb30))
+
 ## [3.2.0](https://www.github.com/googleapis/nodejs-recommender/compare/v3.1.1...v3.2.0) (2020-07-13)
 
 
