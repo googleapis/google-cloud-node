@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.0.1](https://www.github.com/googleapis/nodejs-bigquery-reservation/compare/v1.0.0...v1.0.1) (2020-11-06)
+
+
+### Bug Fixes
+
+* do not modify options object, use defaultScopes ([#28](https://www.github.com/googleapis/nodejs-bigquery-reservation/issues/28)) ([fa58436](https://www.github.com/googleapis/nodejs-bigquery-reservation/commit/fa584362f0c9ef485bbb8e76db143565cb144317))
+
 ## 1.0.0 (2020-07-14)
 
 
