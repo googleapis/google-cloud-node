@@ -1,5 +1,12 @@
 # Changelog
 
+### [2.2.2](https://www.github.com/googleapis/nodejs-bigquery-storage/compare/v2.2.1...v2.2.2) (2020-11-07)
+
+
+### Bug Fixes
+
+* do not modify options object, use defaultScopes ([#126](https://www.github.com/googleapis/nodejs-bigquery-storage/issues/126)) ([6f8eb24](https://www.github.com/googleapis/nodejs-bigquery-storage/commit/6f8eb244b1b06a928641550b2390e03964a14981))
+
 ### [2.2.1](https://www.github.com/googleapis/nodejs-bigquery-storage/compare/v2.2.0...v2.2.1) (2020-07-09)
 
 
