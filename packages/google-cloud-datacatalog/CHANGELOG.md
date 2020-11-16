@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/datacatalog?activeTab=versions
 
+### [2.1.3](https://www.github.com/googleapis/nodejs-datacatalog/compare/v2.1.2...v2.1.3) (2020-11-07)
+
+
+### Bug Fixes
+
+* do not modify options object, use defaultScopes ([#218](https://www.github.com/googleapis/nodejs-datacatalog/issues/218)) ([4dad92a](https://www.github.com/googleapis/nodejs-datacatalog/commit/4dad92a4781e0bf3b6bd799ca0aefe94b10e6254))
+
 ### [2.1.2](https://www.github.com/googleapis/nodejs-datacatalog/compare/v2.1.1...v2.1.2) (2020-07-27)
 
 
