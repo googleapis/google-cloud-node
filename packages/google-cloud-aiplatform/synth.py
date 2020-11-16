@@ -33,7 +33,11 @@ for version in versions:
 common_templates = gcp.CommonTemplates()
 templates = common_templates.node_library(
     source_location='build/src', versions=versions)
-s.copy(templates, excludes=[])
+# We override the default sample configuration with a custom
+# environment file:
+s.copy(templates, excludes=[
+  ".kokoro/continuous/node12/samples-test.cfg",
+  ".kokoro/presubmit/node12/samples-test.cfg"
+])
 
 node.postprocess_gapic_library()
-
