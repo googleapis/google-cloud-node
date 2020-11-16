@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/PACKAGE NAME?activeTab=versions
 
+### [3.0.5](https://www.github.com/googleapis/nodejs-dlp/compare/v3.0.4...v3.0.5) (2020-11-07)
+
+
+### Bug Fixes
+
+* do not modify options object, use defaultScopes ([#560](https://www.github.com/googleapis/nodejs-dlp/issues/560)) ([5b29b1d](https://www.github.com/googleapis/nodejs-dlp/commit/5b29b1df9205e4f59a48c31f9ce6a2e2a9f18936))
+
 ### [3.0.4](https://www.github.com/googleapis/nodejs-dlp/compare/v3.0.3...v3.0.4) (2020-10-15)
 
 
