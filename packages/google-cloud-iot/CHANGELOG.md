@@ -1,5 +1,13 @@
 # Changelog
 
+### [2.1.2](https://www.github.com/googleapis/nodejs-iot/compare/v2.1.1...v2.1.2) (2020-11-07)
+
+
+### Bug Fixes
+
+* do not modify options object, use defaultScopes ([#416](https://www.github.com/googleapis/nodejs-iot/issues/416)) ([00bf691](https://www.github.com/googleapis/nodejs-iot/commit/00bf691f327f596effc67679b1fb05f6614b57fe))
+* **deps:** update dependency gaxios to v4 ([#403](https://www.github.com/googleapis/nodejs-iot/issues/403)) ([0f05a18](https://www.github.com/googleapis/nodejs-iot/commit/0f05a18d4facda85735f7b7aafc04584b9234c81))
+
 ### [2.1.1](https://www.github.com/googleapis/nodejs-iot/compare/v2.1.0...v2.1.1) (2020-07-15)
 
 
