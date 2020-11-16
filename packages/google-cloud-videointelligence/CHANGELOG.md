@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/video-intelligence?activeTab=versions
 
+### [3.1.1](https://www.github.com/googleapis/nodejs-video-intelligence/compare/v3.1.0...v3.1.1) (2020-11-07)
+
+
+### Bug Fixes
+
+* do not modify options object, use defaultScopes ([#493](https://www.github.com/googleapis/nodejs-video-intelligence/issues/493)) ([10886ef](https://www.github.com/googleapis/nodejs-video-intelligence/commit/10886efd1287c37e97788f9c377427caa6c7ea22))
+
 ## [3.1.0](https://www.github.com/googleapis/nodejs-video-intelligence/compare/v3.0.1...v3.1.0) (2020-10-29)
 
 
