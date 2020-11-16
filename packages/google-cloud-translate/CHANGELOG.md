@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-translate?activeTab=versions
 
+### [6.0.4](https://www.github.com/googleapis/nodejs-translate/compare/v6.0.3...v6.0.4) (2020-11-07)
+
+
+### Bug Fixes
+
+* do not modify options object, use defaultScopes ([#593](https://www.github.com/googleapis/nodejs-translate/issues/593)) ([f38bbcd](https://www.github.com/googleapis/nodejs-translate/commit/f38bbcdb6df9f5e3849c20ff0cc2dfd020284c61))
+
 ### [6.0.3](https://www.github.com/googleapis/nodejs-translate/compare/v6.0.2...v6.0.3) (2020-09-17)
 
 
