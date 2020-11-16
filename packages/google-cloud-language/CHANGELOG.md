@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/language?activeTab=versions
 
+### [4.2.1](https://www.github.com/googleapis/nodejs-language/compare/v4.2.0...v4.2.1) (2020-11-07)
+
+
+### Bug Fixes
+
+* do not modify options object, use defaultScopes ([#528](https://www.github.com/googleapis/nodejs-language/issues/528)) ([f689a4e](https://www.github.com/googleapis/nodejs-language/commit/f689a4e03818471731509f12c9049b7cc6c849cd))
+
 ## [4.2.0](https://www.github.com/googleapis/nodejs-language/compare/v4.1.1...v4.2.0) (2020-10-16)
 
 
