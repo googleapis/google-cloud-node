@@ -2158,6 +2158,118 @@ describe('v1.ClusterManagerClient', () => {
     });
   });
 
+  describe('getJSONWebKeys', () => {
+    it('invokes getJSONWebKeys without error', async () => {
+      const client = new clustermanagerModule.v1.ClusterManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.container.v1.GetJSONWebKeysRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.container.v1.GetJSONWebKeysResponse()
+      );
+      client.innerApiCalls.getJSONWebKeys = stubSimpleCall(expectedResponse);
+      const [response] = await client.getJSONWebKeys(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.getJSONWebKeys as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes getJSONWebKeys without error using callback', async () => {
+      const client = new clustermanagerModule.v1.ClusterManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.container.v1.GetJSONWebKeysRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.container.v1.GetJSONWebKeysResponse()
+      );
+      client.innerApiCalls.getJSONWebKeys = stubSimpleCallWithCallback(
+        expectedResponse
+      );
+      const promise = new Promise((resolve, reject) => {
+        client.getJSONWebKeys(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.container.v1.IGetJSONWebKeysResponse | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.getJSONWebKeys as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes getJSONWebKeys with error', async () => {
+      const client = new clustermanagerModule.v1.ClusterManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.container.v1.GetJSONWebKeysRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getJSONWebKeys = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.getJSONWebKeys(request), expectedError);
+      assert(
+        (client.innerApiCalls.getJSONWebKeys as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+  });
+
   describe('listNodePools', () => {
     it('invokes listNodePools without error', async () => {
       const client = new clustermanagerModule.v1.ClusterManagerClient({

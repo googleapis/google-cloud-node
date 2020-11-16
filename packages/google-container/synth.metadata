@@ -4,22 +4,22 @@
       "git": {
         "name": ".",
         "remote": "git@github.com:googleapis/nodejs-cloud-container.git",
-        "sha": "8a18ada1eba87105614f495f005dca0d503e58a9"
+        "sha": "99ab34786dfd05c667f70f363c58cc7f46ae6be4"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "4c5071b615d96ef9dfd6a63d8429090f1f2872bb",
-        "internalRef": "327369997"
+        "sha": "1f8a5144b52f7677dc43c55b21ccaf9e1b425ceb",
+        "internalRef": "342689216"
       }
     },
     {
       "git": {
         "name": "synthtool",
         "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "1f1148d3c7a7a52f0c98077f976bd9b3c948ee2b"
+        "sha": "d5fc0bcf9ea9789c5b0e3154a9e3b29e5cea6116"
       }
     }
   ],
@@ -87,14 +87,12 @@
     "README.md",
     "api-extractor.json",
     "linkinator.config.json",
-    "package-lock.json.908320379",
     "protos/google/container/v1/cluster_service.proto",
     "protos/protos.d.ts",
     "protos/protos.js",
     "protos/protos.json",
     "renovate.json",
     "samples/README.md",
-    "samples/package-lock.json.1331714418",
     "src/index.ts",
     "src/v1/cluster_manager_client.ts",
     "src/v1/cluster_manager_client_config.json",
