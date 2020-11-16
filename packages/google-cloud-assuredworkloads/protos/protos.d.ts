@@ -781,6 +781,12 @@ export namespace google {
 
                     /** Workload labels */
                     labels?: ({ [k: string]: string }|null);
+
+                    /** Workload provisionedResourcesParent */
+                    provisionedResourcesParent?: (string|null);
+
+                    /** Workload kmsSettings */
+                    kmsSettings?: (google.cloud.assuredworkloads.v1beta1.Workload.IKMSSettings|null);
                 }
 
                 /** Represents a Workload. */
@@ -827,6 +833,12 @@ export namespace google {
 
                     /** Workload labels. */
                     public labels: { [k: string]: string };
+
+                    /** Workload provisionedResourcesParent. */
+                    public provisionedResourcesParent: string;
+
+                    /** Workload kmsSettings. */
+                    public kmsSettings?: (google.cloud.assuredworkloads.v1beta1.Workload.IKMSSettings|null);
 
                     /** Workload complianceRegimeSettings. */
                     public complianceRegimeSettings?: ("il4Settings"|"cjisSettings"|"fedrampHighSettings"|"fedrampModerateSettings");

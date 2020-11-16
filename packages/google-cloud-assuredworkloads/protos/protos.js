@@ -1623,6 +1623,8 @@
                          * @property {google.cloud.assuredworkloads.v1beta1.Workload.IFedrampModerateSettings|null} [fedrampModerateSettings] Workload fedrampModerateSettings
                          * @property {string|null} [etag] Workload etag
                          * @property {Object.<string,string>|null} [labels] Workload labels
+                         * @property {string|null} [provisionedResourcesParent] Workload provisionedResourcesParent
+                         * @property {google.cloud.assuredworkloads.v1beta1.Workload.IKMSSettings|null} [kmsSettings] Workload kmsSettings
                          */
     
                         /**
@@ -1738,6 +1740,22 @@
                          */
                         Workload.prototype.labels = $util.emptyObject;
     
+                        /**
+                         * Workload provisionedResourcesParent.
+                         * @member {string} provisionedResourcesParent
+                         * @memberof google.cloud.assuredworkloads.v1beta1.Workload
+                         * @instance
+                         */
+                        Workload.prototype.provisionedResourcesParent = "";
+    
+                        /**
+                         * Workload kmsSettings.
+                         * @member {google.cloud.assuredworkloads.v1beta1.Workload.IKMSSettings|null|undefined} kmsSettings
+                         * @memberof google.cloud.assuredworkloads.v1beta1.Workload
+                         * @instance
+                         */
+                        Workload.prototype.kmsSettings = null;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -1802,6 +1820,10 @@
                                 $root.google.cloud.assuredworkloads.v1beta1.Workload.FedrampHighSettings.encode(message.fedrampHighSettings, writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
                             if (message.fedrampModerateSettings != null && Object.hasOwnProperty.call(message, "fedrampModerateSettings"))
                                 $root.google.cloud.assuredworkloads.v1beta1.Workload.FedrampModerateSettings.encode(message.fedrampModerateSettings, writer.uint32(/* id 12, wireType 2 =*/98).fork()).ldelim();
+                            if (message.provisionedResourcesParent != null && Object.hasOwnProperty.call(message, "provisionedResourcesParent"))
+                                writer.uint32(/* id 13, wireType 2 =*/106).string(message.provisionedResourcesParent);
+                            if (message.kmsSettings != null && Object.hasOwnProperty.call(message, "kmsSettings"))
+                                $root.google.cloud.assuredworkloads.v1beta1.Workload.KMSSettings.encode(message.kmsSettings, writer.uint32(/* id 14, wireType 2 =*/114).fork()).ldelim();
                             return writer;
                         };
     
@@ -1892,6 +1914,12 @@
                                         }
                                     }
                                     message.labels[key] = value;
+                                    break;
+                                case 13:
+                                    message.provisionedResourcesParent = reader.string();
+                                    break;
+                                case 14:
+                                    message.kmsSettings = $root.google.cloud.assuredworkloads.v1beta1.Workload.KMSSettings.decode(reader, reader.uint32());
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -2012,6 +2040,14 @@
                                     if (!$util.isString(message.labels[key[i]]))
                                         return "labels: string{k:string} expected";
                             }
+                            if (message.provisionedResourcesParent != null && message.hasOwnProperty("provisionedResourcesParent"))
+                                if (!$util.isString(message.provisionedResourcesParent))
+                                    return "provisionedResourcesParent: string expected";
+                            if (message.kmsSettings != null && message.hasOwnProperty("kmsSettings")) {
+                                var error = $root.google.cloud.assuredworkloads.v1beta1.Workload.KMSSettings.verify(message.kmsSettings);
+                                if (error)
+                                    return "kmsSettings." + error;
+                            }
                             return null;
                         };
     
@@ -2099,6 +2135,13 @@
                                 for (var keys = Object.keys(object.labels), i = 0; i < keys.length; ++i)
                                     message.labels[keys[i]] = String(object.labels[keys[i]]);
                             }
+                            if (object.provisionedResourcesParent != null)
+                                message.provisionedResourcesParent = String(object.provisionedResourcesParent);
+                            if (object.kmsSettings != null) {
+                                if (typeof object.kmsSettings !== "object")
+                                    throw TypeError(".google.cloud.assuredworkloads.v1beta1.Workload.kmsSettings: object expected");
+                                message.kmsSettings = $root.google.cloud.assuredworkloads.v1beta1.Workload.KMSSettings.fromObject(object.kmsSettings);
+                            }
                             return message;
                         };
     
@@ -2126,6 +2169,8 @@
                                 object.createTime = null;
                                 object.billingAccount = "";
                                 object.etag = "";
+                                object.provisionedResourcesParent = "";
+                                object.kmsSettings = null;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -2170,6 +2215,10 @@
                                 if (options.oneofs)
                                     object.complianceRegimeSettings = "fedrampModerateSettings";
                             }
+                            if (message.provisionedResourcesParent != null && message.hasOwnProperty("provisionedResourcesParent"))
+                                object.provisionedResourcesParent = message.provisionedResourcesParent;
+                            if (message.kmsSettings != null && message.hasOwnProperty("kmsSettings"))
+                                object.kmsSettings = $root.google.cloud.assuredworkloads.v1beta1.Workload.KMSSettings.toObject(message.kmsSettings, options);
                             return object;
                         };
     

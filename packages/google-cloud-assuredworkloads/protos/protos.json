@@ -246,6 +246,7 @@
                           "type": "IL4Settings",
                           "id": 7,
                           "options": {
+                            "deprecated": true,
                             "(google.api.field_behavior)": "IMMUTABLE"
                           }
                         },
@@ -253,6 +254,7 @@
                           "type": "CJISSettings",
                           "id": 8,
                           "options": {
+                            "deprecated": true,
                             "(google.api.field_behavior)": "IMMUTABLE"
                           }
                         },
@@ -260,6 +262,7 @@
                           "type": "FedrampHighSettings",
                           "id": 11,
                           "options": {
+                            "deprecated": true,
                             "(google.api.field_behavior)": "IMMUTABLE"
                           }
                         },
@@ -267,6 +270,7 @@
                           "type": "FedrampModerateSettings",
                           "id": 12,
                           "options": {
+                            "deprecated": true,
                             "(google.api.field_behavior)": "IMMUTABLE"
                           }
                         },
@@ -283,6 +287,20 @@
                           "id": 10,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "provisionedResourcesParent": {
+                          "type": "string",
+                          "id": 13,
+                          "options": {
+                            "(google.api.field_behavior)": "INPUT_ONLY"
+                          }
+                        },
+                        "kmsSettings": {
+                          "type": "KMSSettings",
+                          "id": 14,
+                          "options": {
+                            "(google.api.field_behavior)": "INPUT_ONLY"
                           }
                         }
                       },
@@ -327,6 +345,9 @@
                           }
                         },
                         "IL4Settings": {
+                          "options": {
+                            "deprecated": true
+                          },
                           "fields": {
                             "kmsSettings": {
                               "type": "KMSSettings",
@@ -338,6 +359,9 @@
                           }
                         },
                         "CJISSettings": {
+                          "options": {
+                            "deprecated": true
+                          },
                           "fields": {
                             "kmsSettings": {
                               "type": "KMSSettings",
@@ -349,6 +373,9 @@
                           }
                         },
                         "FedrampHighSettings": {
+                          "options": {
+                            "deprecated": true
+                          },
                           "fields": {
                             "kmsSettings": {
                               "type": "KMSSettings",
@@ -360,6 +387,9 @@
                           }
                         },
                         "FedrampModerateSettings": {
+                          "options": {
+                            "deprecated": true
+                          },
                           "fields": {
                             "kmsSettings": {
                               "type": "KMSSettings",
