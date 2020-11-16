@@ -1,5 +1,12 @@
 # Changelog
 
+### [2.0.5](https://www.github.com/googleapis/nodejs-cloudbuild/compare/v2.0.4...v2.0.5) (2020-11-06)
+
+
+### Bug Fixes
+
+* do not modify options object, use defaultScopes ([#181](https://www.github.com/googleapis/nodejs-cloudbuild/issues/181)) ([c1a8c19](https://www.github.com/googleapis/nodejs-cloudbuild/commit/c1a8c1948441cbc4643692f039c5a4ddbd178162))
+
 ### [2.0.4](https://www.github.com/googleapis/nodejs-cloudbuild/compare/v2.0.3...v2.0.4) (2020-11-03)
 
 
