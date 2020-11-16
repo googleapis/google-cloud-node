@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/text-to-speech?activeTab=versions
 
+### [3.1.2](https://www.github.com/googleapis/nodejs-text-to-speech/compare/v3.1.1...v3.1.2) (2020-11-06)
+
+
+### Bug Fixes
+
+* do not modify options object, use defaultScopes ([#463](https://www.github.com/googleapis/nodejs-text-to-speech/issues/463)) ([c3558d8](https://www.github.com/googleapis/nodejs-text-to-speech/commit/c3558d84568ed53f794f8e8136ddaf96e84630d6))
+
 ### [3.1.1](https://www.github.com/googleapis/nodejs-text-to-speech/compare/v3.1.0...v3.1.1) (2020-09-12)
 
 
