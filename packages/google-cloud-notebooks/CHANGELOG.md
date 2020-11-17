@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.0.1](https://www.github.com/googleapis/nodejs-notebooks/compare/v1.0.0...v1.0.1) (2020-11-14)
+
+
+### Bug Fixes
+
+* export type for NotebookServiceClient ([#16](https://www.github.com/googleapis/nodejs-notebooks/issues/16)) ([a54fef9](https://www.github.com/googleapis/nodejs-notebooks/commit/a54fef99d2745b540f81421a2aff8c2f00bcf731))
+
 ## 1.0.0 (2020-09-03)
 
 
