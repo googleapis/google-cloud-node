@@ -4,7 +4,7 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/nodejs-ai-platform.git",
-        "sha": "d843bb3e554b7eb8aa9b4bc7a8f9e58a431f3134"
+        "sha": "9f7be51d7322216bf4e36229ae618cb449c2ff78"
       }
     },
     {
@@ -53,7 +53,6 @@
     ".kokoro/continuous/node10/test.cfg",
     ".kokoro/continuous/node12/common.cfg",
     ".kokoro/continuous/node12/lint.cfg",
-    ".kokoro/continuous/node12/samples-test.cfg",
     ".kokoro/continuous/node12/system-test.cfg",
     ".kokoro/continuous/node12/test.cfg",
     ".kokoro/docs.sh",
@@ -61,7 +60,6 @@
     ".kokoro/populate-secrets.sh",
     ".kokoro/presubmit/node10/common.cfg",
     ".kokoro/presubmit/node12/common.cfg",
-    ".kokoro/presubmit/node12/samples-test.cfg",
     ".kokoro/presubmit/node12/system-test.cfg",
     ".kokoro/presubmit/node12/test.cfg",
     ".kokoro/publish.sh",
