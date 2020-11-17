@@ -2537,6 +2537,10 @@
                               "type": "Intent",
                               "id": 1
                             },
+                            "event": {
+                              "type": "string",
+                              "id": 6
+                            },
                             "parameters": {
                               "type": "google.protobuf.Struct",
                               "id": 2
@@ -2562,7 +2566,8 @@
                                 "DIRECT_INTENT": 2,
                                 "PARAMETER_FILLING": 3,
                                 "NO_MATCH": 4,
-                                "NO_INPUT": 5
+                                "NO_INPUT": 5,
+                                "EVENT": 6
                               }
                             }
                           }

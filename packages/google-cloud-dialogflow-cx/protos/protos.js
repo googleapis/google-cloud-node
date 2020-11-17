@@ -25256,6 +25256,7 @@
                              * @memberof google.cloud.dialogflow.cx.v3beta1
                              * @interface IMatch
                              * @property {google.cloud.dialogflow.cx.v3beta1.IIntent|null} [intent] Match intent
+                             * @property {string|null} [event] Match event
                              * @property {google.protobuf.IStruct|null} [parameters] Match parameters
                              * @property {string|null} [resolvedInput] Match resolvedInput
                              * @property {google.cloud.dialogflow.cx.v3beta1.Match.MatchType|null} [matchType] Match matchType
@@ -25284,6 +25285,14 @@
                              * @instance
                              */
                             Match.prototype.intent = null;
+    
+                            /**
+                             * Match event.
+                             * @member {string} event
+                             * @memberof google.cloud.dialogflow.cx.v3beta1.Match
+                             * @instance
+                             */
+                            Match.prototype.event = "";
     
                             /**
                              * Match parameters.
@@ -25351,6 +25360,8 @@
                                     writer.uint32(/* id 4, wireType 0 =*/32).int32(message.matchType);
                                 if (message.confidence != null && Object.hasOwnProperty.call(message, "confidence"))
                                     writer.uint32(/* id 5, wireType 5 =*/45).float(message.confidence);
+                                if (message.event != null && Object.hasOwnProperty.call(message, "event"))
+                                    writer.uint32(/* id 6, wireType 2 =*/50).string(message.event);
                                 return writer;
                             };
     
@@ -25387,6 +25398,9 @@
                                     switch (tag >>> 3) {
                                     case 1:
                                         message.intent = $root.google.cloud.dialogflow.cx.v3beta1.Intent.decode(reader, reader.uint32());
+                                        break;
+                                    case 6:
+                                        message.event = reader.string();
                                         break;
                                     case 2:
                                         message.parameters = $root.google.protobuf.Struct.decode(reader, reader.uint32());
@@ -25440,6 +25454,9 @@
                                     if (error)
                                         return "intent." + error;
                                 }
+                                if (message.event != null && message.hasOwnProperty("event"))
+                                    if (!$util.isString(message.event))
+                                        return "event: string expected";
                                 if (message.parameters != null && message.hasOwnProperty("parameters")) {
                                     var error = $root.google.protobuf.Struct.verify(message.parameters);
                                     if (error)
@@ -25458,6 +25475,7 @@
                                     case 3:
                                     case 4:
                                     case 5:
+                                    case 6:
                                         break;
                                     }
                                 if (message.confidence != null && message.hasOwnProperty("confidence"))
@@ -25483,6 +25501,8 @@
                                         throw TypeError(".google.cloud.dialogflow.cx.v3beta1.Match.intent: object expected");
                                     message.intent = $root.google.cloud.dialogflow.cx.v3beta1.Intent.fromObject(object.intent);
                                 }
+                                if (object.event != null)
+                                    message.event = String(object.event);
                                 if (object.parameters != null) {
                                     if (typeof object.parameters !== "object")
                                         throw TypeError(".google.cloud.dialogflow.cx.v3beta1.Match.parameters: object expected");
@@ -25515,6 +25535,10 @@
                                 case 5:
                                     message.matchType = 5;
                                     break;
+                                case "EVENT":
+                                case 6:
+                                    message.matchType = 6;
+                                    break;
                                 }
                                 if (object.confidence != null)
                                     message.confidence = Number(object.confidence);
@@ -25540,6 +25564,7 @@
                                     object.resolvedInput = "";
                                     object.matchType = options.enums === String ? "MATCH_TYPE_UNSPECIFIED" : 0;
                                     object.confidence = 0;
+                                    object.event = "";
                                 }
                                 if (message.intent != null && message.hasOwnProperty("intent"))
                                     object.intent = $root.google.cloud.dialogflow.cx.v3beta1.Intent.toObject(message.intent, options);
@@ -25551,6 +25576,8 @@
                                     object.matchType = options.enums === String ? $root.google.cloud.dialogflow.cx.v3beta1.Match.MatchType[message.matchType] : message.matchType;
                                 if (message.confidence != null && message.hasOwnProperty("confidence"))
                                     object.confidence = options.json && !isFinite(message.confidence) ? String(message.confidence) : message.confidence;
+                                if (message.event != null && message.hasOwnProperty("event"))
+                                    object.event = message.event;
                                 return object;
                             };
     
@@ -25575,6 +25602,7 @@
                              * @property {number} PARAMETER_FILLING=3 PARAMETER_FILLING value
                              * @property {number} NO_MATCH=4 NO_MATCH value
                              * @property {number} NO_INPUT=5 NO_INPUT value
+                             * @property {number} EVENT=6 EVENT value
                              */
                             Match.MatchType = (function() {
                                 var valuesById = {}, values = Object.create(valuesById);
@@ -25584,6 +25612,7 @@
                                 values[valuesById[3] = "PARAMETER_FILLING"] = 3;
                                 values[valuesById[4] = "NO_MATCH"] = 4;
                                 values[valuesById[5] = "NO_INPUT"] = 5;
+                                values[valuesById[6] = "EVENT"] = 6;
                                 return values;
                             })();
     

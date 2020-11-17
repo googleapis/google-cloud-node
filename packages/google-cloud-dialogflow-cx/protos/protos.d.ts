@@ -10699,6 +10699,9 @@ export namespace google {
                         /** Match intent */
                         intent?: (google.cloud.dialogflow.cx.v3beta1.IIntent|null);
 
+                        /** Match event */
+                        event?: (string|null);
+
                         /** Match parameters */
                         parameters?: (google.protobuf.IStruct|null);
 
@@ -10723,6 +10726,9 @@ export namespace google {
 
                         /** Match intent. */
                         public intent?: (google.cloud.dialogflow.cx.v3beta1.IIntent|null);
+
+                        /** Match event. */
+                        public event: string;
 
                         /** Match parameters. */
                         public parameters?: (google.protobuf.IStruct|null);
@@ -10816,7 +10822,8 @@ export namespace google {
                             DIRECT_INTENT = 2,
                             PARAMETER_FILLING = 3,
                             NO_MATCH = 4,
-                            NO_INPUT = 5
+                            NO_INPUT = 5,
+                            EVENT = 6
                         }
                     }
 
