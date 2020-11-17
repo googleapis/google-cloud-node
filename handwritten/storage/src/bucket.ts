@@ -2074,11 +2074,15 @@ class Bucket extends ServiceObject {
   /**
    * @typedef {array} GetFilesResponse
    * @property {File[]} 0 Array of {@link File} instances.
+   * @param {object} nextQuery 1 A query object to receive more results.
+   * @param {object} apiResponse 2 The full API response.
    */
   /**
    * @callback GetFilesCallback
    * @param {?Error} err Request error, if any.
    * @param {File[]} files Array of {@link File} instances.
+   * @param {object} nextQuery A query object to receive more results.
+   * @param {object} apiResponse The full API response.
    */
   /**
    * Query object for listing files.
@@ -2103,7 +2107,11 @@ class Bucket extends ServiceObject {
    *     with this prefix.
    * @property {number} [maxApiCalls] Maximum number of API calls to make.
    * @property {number} [maxResults] Maximum number of items plus prefixes to
-   *     return.
+   *     return per call.
+   *     Note: By default will handle pagination automatically
+   *     if more than 1 page worth of results are requested per call.
+   *     When `autoPaginate` is set to `false` the smaller of `maxResults`
+   *     or 1 page of results will be returned per call.
    * @property {string} [pageToken] A previously-returned page token
    *     representing part of the larger set of results to view.
    * @property {string} [startOffset] Filter results to objects whose names are

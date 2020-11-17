@@ -179,6 +179,13 @@ describe('file', () => {
     assert.notMatch(output, new RegExp(copiedFileName));
   });
 
+  it('should list files with pagination', () => {
+    const output = execSync(`node listFilesPaginate.js ${bucketName}`);
+    assert.match(output, /Files:/);
+    assert.match(output, new RegExp(movedFileName));
+    assert.match(output, new RegExp(copiedFileName));
+  });
+
   it('should rename a file', async () => {
     const output = execSync(
       `node renameFile.js ${bucketName} ${movedFileName} ${renamedFileName}`
