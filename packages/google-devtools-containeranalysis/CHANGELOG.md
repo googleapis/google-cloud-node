@@ -4,6 +4,17 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/containeranalysis?activeTab=versions
 
+## [3.0.0](https://www.github.com/googleapis/nodejs-containeranalysis/compare/v2.1.1...v3.0.0) (2020-11-16)
+
+
+### ⚠ BREAKING CHANGES
+
+* added getVulnerabilityOccurrencesSummary to v1 (#263)
+
+### Features
+
+* added getVulnerabilityOccurrencesSummary to v1 ([#263](https://www.github.com/googleapis/nodejs-containeranalysis/issues/263)) ([8f3ff4c](https://www.github.com/googleapis/nodejs-containeranalysis/commit/8f3ff4c09d7272592e4599ff8f33c7d90b4dd308))
+
 ### [2.1.1](https://www.github.com/googleapis/nodejs-containeranalysis/compare/v2.1.0...v2.1.1) (2020-07-10)
 
 
