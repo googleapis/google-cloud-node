@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0](https://www.github.com/googleapis/nodejs-assured-workloads/compare/v1.0.1...v1.1.0) (2020-11-16)
+
+
+### Features
+
+* added provisionedResourcesParent and kmsSettings ([4b34991](https://www.github.com/googleapis/nodejs-assured-workloads/commit/4b34991f8c3a9878f6ca9583bfbccbad691fa69b))
+
 ### [1.0.1](https://www.github.com/googleapis/nodejs-assured-workloads/compare/v1.0.0...v1.0.1) (2020-11-06)
 
 
