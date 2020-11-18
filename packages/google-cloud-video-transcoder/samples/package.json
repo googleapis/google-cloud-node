@@ -7,7 +7,8 @@
     "node": ">=10"
   },
   "files": [
-    "*.js"
+    "*.js",
+    "!test"
   ],
   "scripts": {
     "test": "c8 mocha --timeout 600000 test/*.js"
@@ -16,7 +17,9 @@
     "@google-cloud/video-transcoder": "^1.0.1"
   },
   "devDependencies": {
+    "@google-cloud/storage": "^5.4.0",
     "c8": "^7.3.0",
-    "mocha": "^8.1.1"
+    "mocha": "^8.1.1",
+    "uuid": "^8.0.0"
   }
 }
