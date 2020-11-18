@@ -66,6 +66,7 @@ objects to users via direct download.
   * [List Buckets](#list-buckets)
   * [List Files](#list-files)
   * [List Files By Prefix](#list-files-by-prefix)
+  * [List Files Paginate](#list-files-paginate)
   * [List Files with Old Versions.](#list-files-with-old-versions.)
   * [List Notifications](#list-notifications)
   * [Lock Retention Policy](#lock-retention-policy)
@@ -943,6 +944,23 @@ __Usage:__
 
 
 `node samples/listFilesByPrefix.js`
+
+
+-----
+
+
+
+
+### List Files Paginate
+
+View the [source code](https://github.com/googleapis/nodejs-storage/blob/master/samples/listFilesPaginate.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-storage&page=editor&open_in_editor=samples/listFilesPaginate.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/listFilesPaginate.js`
 
 
 -----
