@@ -83,7 +83,7 @@ export namespace entity {
    * @param {*} value
    * @returns {boolean}
    */
-  export function isDsDouble(value?: {}) {
+  export function isDsDouble(value?: {}): value is entity.Double {
     return value instanceof entity.Double;
   }
 
@@ -95,7 +95,8 @@ export namespace entity {
    * @returns {boolean}
    */
   export function isDsDoubleLike(value: unknown) {
-    const maybeDsDouble = value as Double;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const maybeDsDouble = value as any;
     return (
       isDsDouble(maybeDsDouble) ||
       (is.object(maybeDsDouble) &&
@@ -198,7 +199,7 @@ export namespace entity {
    * @param {*} value
    * @returns {boolean}
    */
-  export function isDsInt(value?: {}) {
+  export function isDsInt(value?: {}): value is entity.Int {
     return value instanceof entity.Int;
   }
 
@@ -210,7 +211,8 @@ export namespace entity {
    * @returns {boolean}
    */
   export function isDsIntLike(value: unknown) {
-    const maybeDsInt = value as Int;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const maybeDsInt = value as any;
     return (
       isDsInt(maybeDsInt) ||
       (is.object(maybeDsInt) &&
@@ -264,7 +266,7 @@ export namespace entity {
    * @param {*} value
    * @returns {boolean}
    */
-  export function isDsGeoPoint(value?: {}) {
+  export function isDsGeoPoint(value?: {}): value is entity.GeoPoint {
     return value instanceof entity.GeoPoint;
   }
 
@@ -429,7 +431,7 @@ export namespace entity {
    * @param {*} value
    * @returns {boolean}
    */
-  export function isDsKey(value?: {}) {
+  export function isDsKey(value?: {}): value is entity.Key {
     return value instanceof entity.Key;
   }
 
@@ -596,17 +598,17 @@ export namespace entity {
     }
 
     if (isDsInt(value)) {
-      valueProto.integerValue = (value as Int).value;
+      valueProto.integerValue = value.value;
       return valueProto;
     }
 
     if (isDsDouble(value)) {
-      valueProto.doubleValue = (value as Double).value;
+      valueProto.doubleValue = value.value;
       return valueProto;
     }
 
     if (isDsGeoPoint(value)) {
-      valueProto.geoPointValue = (value as GeoPoint).value;
+      valueProto.geoPointValue = value.value;
       return valueProto;
     }
 
@@ -1390,9 +1392,7 @@ export namespace entity {
      */
     convertToBuffer_(val: string): Buffer {
       val = val.replace(/-/g, '+').replace(/_/g, '/');
-      while (val.length % 4) {
-        val += '=';
-      }
+      val += '='.repeat(val.length % 4);
 
       return Buffer.from(val, 'base64');
     }
