@@ -31,14 +31,35 @@
                             "(google.api.http).body": "*",
                             "(google.longrunning.operation_info).response_type": "google.cloud.asset.v1.ExportAssetsResponse",
                             "(google.longrunning.operation_info).metadata_type": "google.cloud.asset.v1.ExportAssetsRequest"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=*/*}:exportAssets",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.cloud.asset.v1.ExportAssetsResponse",
+                                "metadata_type": "google.cloud.asset.v1.ExportAssetsRequest"
+                              }
+                            }
+                          ]
                         },
                         "BatchGetAssetsHistory": {
                           "requestType": "BatchGetAssetsHistoryRequest",
                           "responseType": "BatchGetAssetsHistoryResponse",
                           "options": {
                             "(google.api.http).get": "/v1/{parent=*/*}:batchGetAssetsHistory"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=*/*}:batchGetAssetsHistory"
+                              }
+                            }
+                          ]
                         },
                         "CreateFeed": {
                           "requestType": "CreateFeedRequest",
@@ -47,7 +68,18 @@
                             "(google.api.http).post": "/v1/{parent=*/*}/feeds",
                             "(google.api.http).body": "*",
                             "(google.api.method_signature)": "parent"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=*/*}/feeds",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
                         },
                         "GetFeed": {
                           "requestType": "GetFeedRequest",
@@ -55,7 +87,17 @@
                           "options": {
                             "(google.api.http).get": "/v1/{name=*/*/feeds/*}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=*/*/feeds/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "ListFeeds": {
                           "requestType": "ListFeedsRequest",
@@ -63,7 +105,17 @@
                           "options": {
                             "(google.api.http).get": "/v1/{parent=*/*}/feeds",
                             "(google.api.method_signature)": "parent"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=*/*}/feeds"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
                         },
                         "UpdateFeed": {
                           "requestType": "UpdateFeedRequest",
@@ -72,7 +124,18 @@
                             "(google.api.http).patch": "/v1/{feed.name=*/*/feeds/*}",
                             "(google.api.http).body": "*",
                             "(google.api.method_signature)": "feed"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1/{feed.name=*/*/feeds/*}",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "feed"
+                            }
+                          ]
                         },
                         "DeleteFeed": {
                           "requestType": "DeleteFeedRequest",
@@ -80,7 +143,17 @@
                           "options": {
                             "(google.api.http).delete": "/v1/{name=*/*/feeds/*}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1/{name=*/*/feeds/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "SearchAllResources": {
                           "requestType": "SearchAllResourcesRequest",
@@ -88,7 +161,17 @@
                           "options": {
                             "(google.api.http).get": "/v1/{scope=*/*}:searchAllResources",
                             "(google.api.method_signature)": "scope,query,asset_types"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{scope=*/*}:searchAllResources"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "scope,query,asset_types"
+                            }
+                          ]
                         },
                         "SearchAllIamPolicies": {
                           "requestType": "SearchAllIamPoliciesRequest",
@@ -96,14 +179,31 @@
                           "options": {
                             "(google.api.http).get": "/v1/{scope=*/*}:searchAllIamPolicies",
                             "(google.api.method_signature)": "scope,query"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{scope=*/*}:searchAllIamPolicies"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "scope,query"
+                            }
+                          ]
                         },
                         "AnalyzeIamPolicy": {
                           "requestType": "AnalyzeIamPolicyRequest",
                           "responseType": "AnalyzeIamPolicyResponse",
                           "options": {
                             "(google.api.http).get": "/v1/{analysis_query.scope=*/*}:analyzeIamPolicy"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{analysis_query.scope=*/*}:analyzeIamPolicy"
+                              }
+                            }
+                          ]
                         },
                         "AnalyzeIamPolicyLongrunning": {
                           "requestType": "AnalyzeIamPolicyLongrunningRequest",
@@ -113,7 +213,21 @@
                             "(google.api.http).body": "*",
                             "(google.longrunning.operation_info).response_type": "google.cloud.asset.v1.AnalyzeIamPolicyLongrunningResponse",
                             "(google.longrunning.operation_info).metadata_type": "google.cloud.asset.v1.AnalyzeIamPolicyLongrunningRequest"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{analysis_query.scope=*/*}:analyzeIamPolicyLongrunning",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.cloud.asset.v1.AnalyzeIamPolicyLongrunningResponse",
+                                "metadata_type": "google.cloud.asset.v1.AnalyzeIamPolicyLongrunningRequest"
+                              }
+                            }
+                          ]
                         }
                       }
                     },
@@ -1243,7 +1357,31 @@
                             "(google.api.http).additional_bindings.body": "*",
                             "(google.longrunning.operation_info).response_type": "google.cloud.asset.v1beta1.ExportAssetsResponse",
                             "(google.longrunning.operation_info).metadata_type": "google.cloud.asset.v1beta1.ExportAssetsRequest"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta1/{parent=projects/*}:exportAssets",
+                                "body": "*",
+                                "additional_bindings": [
+                                  {
+                                    "post": "/v1beta1/{parent=folders/*}:exportAssets",
+                                    "body": "*"
+                                  },
+                                  {
+                                    "post": "/v1beta1/{parent=organizations/*}:exportAssets",
+                                    "body": "*"
+                                  }
+                                ]
+                              }
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.cloud.asset.v1beta1.ExportAssetsResponse",
+                                "metadata_type": "google.cloud.asset.v1beta1.ExportAssetsRequest"
+                              }
+                            }
+                          ]
                         },
                         "BatchGetAssetsHistory": {
                           "requestType": "BatchGetAssetsHistoryRequest",
@@ -1251,7 +1389,17 @@
                           "options": {
                             "(google.api.http).get": "/v1beta1/{parent=projects/*}:batchGetAssetsHistory",
                             "(google.api.http).additional_bindings.get": "/v1beta1/{parent=organizations/*}:batchGetAssetsHistory"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta1/{parent=projects/*}:batchGetAssetsHistory",
+                                "additional_bindings": {
+                                  "get": "/v1beta1/{parent=organizations/*}:batchGetAssetsHistory"
+                                }
+                              }
+                            }
+                          ]
                         }
                       }
                     },
@@ -1486,7 +1634,17 @@
                           "options": {
                             "(google.api.http).get": "/v1p1beta1/{scope=*/*}/resources:searchAll",
                             "(google.api.method_signature)": "scope,query,asset_types"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1p1beta1/{scope=*/*}/resources:searchAll"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "scope,query,asset_types"
+                            }
+                          ]
                         },
                         "SearchAllIamPolicies": {
                           "requestType": "SearchAllIamPoliciesRequest",
@@ -1494,7 +1652,17 @@
                           "options": {
                             "(google.api.http).get": "/v1p1beta1/{scope=*/*}/iamPolicies:searchAll",
                             "(google.api.method_signature)": "scope,query"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1p1beta1/{scope=*/*}/iamPolicies:searchAll"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "scope,query"
+                            }
+                          ]
                         }
                       }
                     },
@@ -1712,7 +1880,18 @@
                             "(google.api.http).post": "/v1p2beta1/{parent=*/*}/feeds",
                             "(google.api.http).body": "*",
                             "(google.api.method_signature)": "parent"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1p2beta1/{parent=*/*}/feeds",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
                         },
                         "GetFeed": {
                           "requestType": "GetFeedRequest",
@@ -1720,7 +1899,17 @@
                           "options": {
                             "(google.api.http).get": "/v1p2beta1/{name=*/*/feeds/*}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1p2beta1/{name=*/*/feeds/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "ListFeeds": {
                           "requestType": "ListFeedsRequest",
@@ -1728,7 +1917,17 @@
                           "options": {
                             "(google.api.http).get": "/v1p2beta1/{parent=*/*}/feeds",
                             "(google.api.method_signature)": "parent"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1p2beta1/{parent=*/*}/feeds"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
                         },
                         "UpdateFeed": {
                           "requestType": "UpdateFeedRequest",
@@ -1737,7 +1936,18 @@
                             "(google.api.http).patch": "/v1p2beta1/{feed.name=*/*/feeds/*}",
                             "(google.api.http).body": "*",
                             "(google.api.method_signature)": "feed"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1p2beta1/{feed.name=*/*/feeds/*}",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "feed"
+                            }
+                          ]
                         },
                         "DeleteFeed": {
                           "requestType": "DeleteFeedRequest",
@@ -1745,7 +1955,17 @@
                           "options": {
                             "(google.api.http).delete": "/v1p2beta1/{name=*/*/feeds/*}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1p2beta1/{name=*/*/feeds/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         }
                       }
                     },
@@ -2038,7 +2258,14 @@
                           "responseType": "AnalyzeIamPolicyResponse",
                           "options": {
                             "(google.api.http).get": "/v1p4beta1/{analysis_query.parent=*/*}:analyzeIamPolicy"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1p4beta1/{analysis_query.parent=*/*}:analyzeIamPolicy"
+                              }
+                            }
+                          ]
                         },
                         "ExportIamPolicyAnalysis": {
                           "requestType": "ExportIamPolicyAnalysisRequest",
@@ -2048,7 +2275,21 @@
                             "(google.api.http).body": "*",
                             "(google.longrunning.operation_info).response_type": "google.cloud.asset.v1p4beta1.ExportIamPolicyAnalysisResponse",
                             "(google.longrunning.operation_info).metadata_type": "google.cloud.asset.v1p4beta1.ExportIamPolicyAnalysisRequest"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1p4beta1/{analysis_query.parent=*/*}:exportIamPolicyAnalysis",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.cloud.asset.v1p4beta1.ExportIamPolicyAnalysisResponse",
+                                "metadata_type": "google.cloud.asset.v1p4beta1.ExportIamPolicyAnalysisRequest"
+                              }
+                            }
+                          ]
                         }
                       }
                     },
@@ -2507,7 +2748,14 @@
                           "responseType": "ListAssetsResponse",
                           "options": {
                             "(google.api.http).get": "/v1p5beta1/{parent=*/*}/assets"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1p5beta1/{parent=*/*}/assets"
+                              }
+                            }
+                          ]
                         }
                       }
                     },
@@ -4524,7 +4772,17 @@
                   "options": {
                     "(google.api.http).get": "/v1/{name=operations}",
                     "(google.api.method_signature)": "name,filter"
-                  }
+                  },
+                  "parsedOptions": [
+                    {
+                      "(google.api.http)": {
+                        "get": "/v1/{name=operations}"
+                      }
+                    },
+                    {
+                      "(google.api.method_signature)": "name,filter"
+                    }
+                  ]
                 },
                 "GetOperation": {
                   "requestType": "GetOperationRequest",
@@ -4532,7 +4790,17 @@
                   "options": {
                     "(google.api.http).get": "/v1/{name=operations/**}",
                     "(google.api.method_signature)": "name"
-                  }
+                  },
+                  "parsedOptions": [
+                    {
+                      "(google.api.http)": {
+                        "get": "/v1/{name=operations/**}"
+                      }
+                    },
+                    {
+                      "(google.api.method_signature)": "name"
+                    }
+                  ]
                 },
                 "DeleteOperation": {
                   "requestType": "DeleteOperationRequest",
@@ -4540,7 +4808,17 @@
                   "options": {
                     "(google.api.http).delete": "/v1/{name=operations/**}",
                     "(google.api.method_signature)": "name"
-                  }
+                  },
+                  "parsedOptions": [
+                    {
+                      "(google.api.http)": {
+                        "delete": "/v1/{name=operations/**}"
+                      }
+                    },
+                    {
+                      "(google.api.method_signature)": "name"
+                    }
+                  ]
                 },
                 "CancelOperation": {
                   "requestType": "CancelOperationRequest",
@@ -4549,7 +4827,18 @@
                     "(google.api.http).post": "/v1/{name=operations/**}:cancel",
                     "(google.api.http).body": "*",
                     "(google.api.method_signature)": "name"
-                  }
+                  },
+                  "parsedOptions": [
+                    {
+                      "(google.api.http)": {
+                        "post": "/v1/{name=operations/**}:cancel",
+                        "body": "*"
+                      }
+                    },
+                    {
+                      "(google.api.method_signature)": "name"
+                    }
+                  ]
                 },
                 "WaitOperation": {
                   "requestType": "WaitOperationRequest",
