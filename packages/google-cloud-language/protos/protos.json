@@ -27,7 +27,21 @@
                             "(google.api.http).post": "/v1/documents:analyzeSentiment",
                             "(google.api.http).body": "*",
                             "(google.api.method_signature)": "document"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/documents:analyzeSentiment",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "document,encoding_type"
+                            },
+                            {
+                              "(google.api.method_signature)": "document"
+                            }
+                          ]
                         },
                         "AnalyzeEntities": {
                           "requestType": "AnalyzeEntitiesRequest",
@@ -36,7 +50,21 @@
                             "(google.api.http).post": "/v1/documents:analyzeEntities",
                             "(google.api.http).body": "*",
                             "(google.api.method_signature)": "document"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/documents:analyzeEntities",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "document,encoding_type"
+                            },
+                            {
+                              "(google.api.method_signature)": "document"
+                            }
+                          ]
                         },
                         "AnalyzeEntitySentiment": {
                           "requestType": "AnalyzeEntitySentimentRequest",
@@ -45,7 +73,21 @@
                             "(google.api.http).post": "/v1/documents:analyzeEntitySentiment",
                             "(google.api.http).body": "*",
                             "(google.api.method_signature)": "document"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/documents:analyzeEntitySentiment",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "document,encoding_type"
+                            },
+                            {
+                              "(google.api.method_signature)": "document"
+                            }
+                          ]
                         },
                         "AnalyzeSyntax": {
                           "requestType": "AnalyzeSyntaxRequest",
@@ -54,7 +96,21 @@
                             "(google.api.http).post": "/v1/documents:analyzeSyntax",
                             "(google.api.http).body": "*",
                             "(google.api.method_signature)": "document"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/documents:analyzeSyntax",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "document,encoding_type"
+                            },
+                            {
+                              "(google.api.method_signature)": "document"
+                            }
+                          ]
                         },
                         "ClassifyText": {
                           "requestType": "ClassifyTextRequest",
@@ -63,7 +119,18 @@
                             "(google.api.http).post": "/v1/documents:classifyText",
                             "(google.api.http).body": "*",
                             "(google.api.method_signature)": "document"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/documents:classifyText",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "document"
+                            }
+                          ]
                         },
                         "AnnotateText": {
                           "requestType": "AnnotateTextRequest",
@@ -72,7 +139,21 @@
                             "(google.api.http).post": "/v1/documents:annotateText",
                             "(google.api.http).body": "*",
                             "(google.api.method_signature)": "document,features"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/documents:annotateText",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "document,features,encoding_type"
+                            },
+                            {
+                              "(google.api.method_signature)": "document,features"
+                            }
+                          ]
                         }
                       }
                     },
@@ -792,7 +873,21 @@
                             "(google.api.http).post": "/v1beta2/documents:analyzeSentiment",
                             "(google.api.http).body": "*",
                             "(google.api.method_signature)": "document"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta2/documents:analyzeSentiment",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "document,encoding_type"
+                            },
+                            {
+                              "(google.api.method_signature)": "document"
+                            }
+                          ]
                         },
                         "AnalyzeEntities": {
                           "requestType": "AnalyzeEntitiesRequest",
@@ -801,7 +896,21 @@
                             "(google.api.http).post": "/v1beta2/documents:analyzeEntities",
                             "(google.api.http).body": "*",
                             "(google.api.method_signature)": "document"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta2/documents:analyzeEntities",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "document,encoding_type"
+                            },
+                            {
+                              "(google.api.method_signature)": "document"
+                            }
+                          ]
                         },
                         "AnalyzeEntitySentiment": {
                           "requestType": "AnalyzeEntitySentimentRequest",
@@ -810,7 +919,21 @@
                             "(google.api.http).post": "/v1beta2/documents:analyzeEntitySentiment",
                             "(google.api.http).body": "*",
                             "(google.api.method_signature)": "document"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta2/documents:analyzeEntitySentiment",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "document,encoding_type"
+                            },
+                            {
+                              "(google.api.method_signature)": "document"
+                            }
+                          ]
                         },
                         "AnalyzeSyntax": {
                           "requestType": "AnalyzeSyntaxRequest",
@@ -819,7 +942,21 @@
                             "(google.api.http).post": "/v1beta2/documents:analyzeSyntax",
                             "(google.api.http).body": "*",
                             "(google.api.method_signature)": "document"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta2/documents:analyzeSyntax",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "document,encoding_type"
+                            },
+                            {
+                              "(google.api.method_signature)": "document"
+                            }
+                          ]
                         },
                         "ClassifyText": {
                           "requestType": "ClassifyTextRequest",
@@ -828,7 +965,18 @@
                             "(google.api.http).post": "/v1beta2/documents:classifyText",
                             "(google.api.http).body": "*",
                             "(google.api.method_signature)": "document"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta2/documents:classifyText",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "document"
+                            }
+                          ]
                         },
                         "AnnotateText": {
                           "requestType": "AnnotateTextRequest",
@@ -837,7 +985,21 @@
                             "(google.api.http).post": "/v1beta2/documents:annotateText",
                             "(google.api.http).body": "*",
                             "(google.api.method_signature)": "document,features"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta2/documents:annotateText",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "document,features,encoding_type"
+                            },
+                            {
+                              "(google.api.method_signature)": "document,features"
+                            }
+                          ]
                         }
                       }
                     },

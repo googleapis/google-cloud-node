@@ -16,11 +16,17 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
+/* global window */
 import * as gax from 'google-gax';
 import {Callback, CallOptions, Descriptors, ClientOptions} from 'google-gax';
 import * as path from 'path';
 
 import * as protos from '../../protos/protos';
+/**
+ * Client JSON configuration object, loaded from
+ * `src/v1beta2/language_service_client_config.json`.
+ * This file defines retry strategy and timeouts for all API methods in this library.
+ */
 import * as gapicConfig from './language_service_client_config.json';
 
 const version = require('../../../package.json').version;
@@ -74,9 +80,9 @@ export class LanguageServiceClient {
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
-   * @param {gax.ClientConfig} [options.clientConfig] - client configuration override.
-   *     TODO(@alexander-fenster): link to gax documentation.
-   * @param {boolean} fallback - Use HTTP fallback mode.
+   * @param {gax.ClientConfig} [options.clientConfig] - Client configuration override.
+   *     Follows the structure of {@link gapicConfig}.
+   * @param {boolean} [options.fallback] - Use HTTP fallback mode.
    *     In fallback mode, a special browser-compatible transport implementation is used
    *     instead of gRPC transport. In browser context (if the `window` object is defined)
    *     the fallback mode is enabled automatically; set `options.fallback` to `false`
@@ -89,7 +95,9 @@ export class LanguageServiceClient {
       opts?.servicePath || opts?.apiEndpoint || staticMembers.servicePath;
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback = opts?.fallback ?? typeof window !== 'undefined';
+    const fallback =
+      opts?.fallback ??
+      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
@@ -283,7 +291,7 @@ export class LanguageServiceClient {
   // -------------------
   analyzeSentiment(
     request: protos.google.cloud.language.v1beta2.IAnalyzeSentimentRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.language.v1beta2.IAnalyzeSentimentResponse,
@@ -293,7 +301,7 @@ export class LanguageServiceClient {
   >;
   analyzeSentiment(
     request: protos.google.cloud.language.v1beta2.IAnalyzeSentimentRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.cloud.language.v1beta2.IAnalyzeSentimentResponse,
       | protos.google.cloud.language.v1beta2.IAnalyzeSentimentRequest
@@ -335,7 +343,7 @@ export class LanguageServiceClient {
   analyzeSentiment(
     request: protos.google.cloud.language.v1beta2.IAnalyzeSentimentRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.cloud.language.v1beta2.IAnalyzeSentimentResponse,
           | protos.google.cloud.language.v1beta2.IAnalyzeSentimentRequest
@@ -358,12 +366,12 @@ export class LanguageServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     this.initialize();
@@ -371,7 +379,7 @@ export class LanguageServiceClient {
   }
   analyzeEntities(
     request: protos.google.cloud.language.v1beta2.IAnalyzeEntitiesRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.language.v1beta2.IAnalyzeEntitiesResponse,
@@ -381,7 +389,7 @@ export class LanguageServiceClient {
   >;
   analyzeEntities(
     request: protos.google.cloud.language.v1beta2.IAnalyzeEntitiesRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.cloud.language.v1beta2.IAnalyzeEntitiesResponse,
       | protos.google.cloud.language.v1beta2.IAnalyzeEntitiesRequest
@@ -424,7 +432,7 @@ export class LanguageServiceClient {
   analyzeEntities(
     request: protos.google.cloud.language.v1beta2.IAnalyzeEntitiesRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.cloud.language.v1beta2.IAnalyzeEntitiesResponse,
           | protos.google.cloud.language.v1beta2.IAnalyzeEntitiesRequest
@@ -447,12 +455,12 @@ export class LanguageServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     this.initialize();
@@ -460,7 +468,7 @@ export class LanguageServiceClient {
   }
   analyzeEntitySentiment(
     request: protos.google.cloud.language.v1beta2.IAnalyzeEntitySentimentRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.language.v1beta2.IAnalyzeEntitySentimentResponse,
@@ -473,7 +481,7 @@ export class LanguageServiceClient {
   >;
   analyzeEntitySentiment(
     request: protos.google.cloud.language.v1beta2.IAnalyzeEntitySentimentRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.cloud.language.v1beta2.IAnalyzeEntitySentimentResponse,
       | protos.google.cloud.language.v1beta2.IAnalyzeEntitySentimentRequest
@@ -515,7 +523,7 @@ export class LanguageServiceClient {
   analyzeEntitySentiment(
     request: protos.google.cloud.language.v1beta2.IAnalyzeEntitySentimentRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.cloud.language.v1beta2.IAnalyzeEntitySentimentResponse,
           | protos.google.cloud.language.v1beta2.IAnalyzeEntitySentimentRequest
@@ -541,12 +549,12 @@ export class LanguageServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     this.initialize();
@@ -558,7 +566,7 @@ export class LanguageServiceClient {
   }
   analyzeSyntax(
     request: protos.google.cloud.language.v1beta2.IAnalyzeSyntaxRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.language.v1beta2.IAnalyzeSyntaxResponse,
@@ -568,7 +576,7 @@ export class LanguageServiceClient {
   >;
   analyzeSyntax(
     request: protos.google.cloud.language.v1beta2.IAnalyzeSyntaxRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.cloud.language.v1beta2.IAnalyzeSyntaxResponse,
       | protos.google.cloud.language.v1beta2.IAnalyzeSyntaxRequest
@@ -611,7 +619,7 @@ export class LanguageServiceClient {
   analyzeSyntax(
     request: protos.google.cloud.language.v1beta2.IAnalyzeSyntaxRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.cloud.language.v1beta2.IAnalyzeSyntaxResponse,
           | protos.google.cloud.language.v1beta2.IAnalyzeSyntaxRequest
@@ -634,12 +642,12 @@ export class LanguageServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     this.initialize();
@@ -647,7 +655,7 @@ export class LanguageServiceClient {
   }
   classifyText(
     request: protos.google.cloud.language.v1beta2.IClassifyTextRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.language.v1beta2.IClassifyTextResponse,
@@ -657,7 +665,7 @@ export class LanguageServiceClient {
   >;
   classifyText(
     request: protos.google.cloud.language.v1beta2.IClassifyTextRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.cloud.language.v1beta2.IClassifyTextResponse,
       | protos.google.cloud.language.v1beta2.IClassifyTextRequest
@@ -696,7 +704,7 @@ export class LanguageServiceClient {
   classifyText(
     request: protos.google.cloud.language.v1beta2.IClassifyTextRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.cloud.language.v1beta2.IClassifyTextResponse,
           | protos.google.cloud.language.v1beta2.IClassifyTextRequest
@@ -719,12 +727,12 @@ export class LanguageServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     this.initialize();
@@ -732,7 +740,7 @@ export class LanguageServiceClient {
   }
   annotateText(
     request: protos.google.cloud.language.v1beta2.IAnnotateTextRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.language.v1beta2.IAnnotateTextResponse,
@@ -742,7 +750,7 @@ export class LanguageServiceClient {
   >;
   annotateText(
     request: protos.google.cloud.language.v1beta2.IAnnotateTextRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.cloud.language.v1beta2.IAnnotateTextResponse,
       | protos.google.cloud.language.v1beta2.IAnnotateTextRequest
@@ -786,7 +794,7 @@ export class LanguageServiceClient {
   annotateText(
     request: protos.google.cloud.language.v1beta2.IAnnotateTextRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.cloud.language.v1beta2.IAnnotateTextResponse,
           | protos.google.cloud.language.v1beta2.IAnnotateTextRequest
@@ -809,12 +817,12 @@ export class LanguageServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     this.initialize();
