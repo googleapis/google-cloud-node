@@ -16,6 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
+/* global window */
 import * as gax from 'google-gax';
 import {
   Callback,
@@ -30,6 +31,11 @@ import * as path from 'path';
 import {Transform} from 'stream';
 import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
+/**
+ * Client JSON configuration object, loaded from
+ * `src/v1beta1/registration_service_client_config.json`.
+ * This file defines retry strategy and timeouts for all API methods in this library.
+ */
 import * as gapicConfig from './registration_service_client_config.json';
 
 const version = require('../../../package.json').version;
@@ -97,9 +103,9 @@ export class RegistrationServiceClient {
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
-   * @param {gax.ClientConfig} [options.clientConfig] - client configuration override.
-   *     TODO(@alexander-fenster): link to gax documentation.
-   * @param {boolean} fallback - Use HTTP fallback mode.
+   * @param {gax.ClientConfig} [options.clientConfig] - Client configuration override.
+   *     Follows the structure of {@link gapicConfig}.
+   * @param {boolean} [options.fallback] - Use HTTP fallback mode.
    *     In fallback mode, a special browser-compatible transport implementation is used
    *     instead of gRPC transport. In browser context (if the `window` object is defined)
    *     the fallback mode is enabled automatically; set `options.fallback` to `false`
@@ -112,7 +118,9 @@ export class RegistrationServiceClient {
       opts?.servicePath || opts?.apiEndpoint || staticMembers.servicePath;
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback = opts?.fallback ?? typeof window !== 'undefined';
+    const fallback =
+      opts?.fallback ??
+      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
@@ -355,7 +363,7 @@ export class RegistrationServiceClient {
   // -------------------
   createNamespace(
     request: protos.google.cloud.servicedirectory.v1beta1.ICreateNamespaceRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.servicedirectory.v1beta1.INamespace,
@@ -368,7 +376,7 @@ export class RegistrationServiceClient {
   >;
   createNamespace(
     request: protos.google.cloud.servicedirectory.v1beta1.ICreateNamespaceRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.cloud.servicedirectory.v1beta1.INamespace,
       | protos.google.cloud.servicedirectory.v1beta1.ICreateNamespaceRequest
@@ -418,7 +426,7 @@ export class RegistrationServiceClient {
   createNamespace(
     request: protos.google.cloud.servicedirectory.v1beta1.ICreateNamespaceRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.cloud.servicedirectory.v1beta1.INamespace,
           | protos.google.cloud.servicedirectory.v1beta1.ICreateNamespaceRequest
@@ -444,12 +452,12 @@ export class RegistrationServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -464,7 +472,7 @@ export class RegistrationServiceClient {
   }
   getNamespace(
     request: protos.google.cloud.servicedirectory.v1beta1.IGetNamespaceRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.servicedirectory.v1beta1.INamespace,
@@ -477,7 +485,7 @@ export class RegistrationServiceClient {
   >;
   getNamespace(
     request: protos.google.cloud.servicedirectory.v1beta1.IGetNamespaceRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.cloud.servicedirectory.v1beta1.INamespace,
       | protos.google.cloud.servicedirectory.v1beta1.IGetNamespaceRequest
@@ -516,7 +524,7 @@ export class RegistrationServiceClient {
   getNamespace(
     request: protos.google.cloud.servicedirectory.v1beta1.IGetNamespaceRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.cloud.servicedirectory.v1beta1.INamespace,
           | protos.google.cloud.servicedirectory.v1beta1.IGetNamespaceRequest
@@ -542,12 +550,12 @@ export class RegistrationServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -562,7 +570,7 @@ export class RegistrationServiceClient {
   }
   updateNamespace(
     request: protos.google.cloud.servicedirectory.v1beta1.IUpdateNamespaceRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.servicedirectory.v1beta1.INamespace,
@@ -575,7 +583,7 @@ export class RegistrationServiceClient {
   >;
   updateNamespace(
     request: protos.google.cloud.servicedirectory.v1beta1.IUpdateNamespaceRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.cloud.servicedirectory.v1beta1.INamespace,
       | protos.google.cloud.servicedirectory.v1beta1.IUpdateNamespaceRequest
@@ -616,7 +624,7 @@ export class RegistrationServiceClient {
   updateNamespace(
     request: protos.google.cloud.servicedirectory.v1beta1.IUpdateNamespaceRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.cloud.servicedirectory.v1beta1.INamespace,
           | protos.google.cloud.servicedirectory.v1beta1.IUpdateNamespaceRequest
@@ -642,12 +650,12 @@ export class RegistrationServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -662,7 +670,7 @@ export class RegistrationServiceClient {
   }
   deleteNamespace(
     request: protos.google.cloud.servicedirectory.v1beta1.IDeleteNamespaceRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.protobuf.IEmpty,
@@ -675,7 +683,7 @@ export class RegistrationServiceClient {
   >;
   deleteNamespace(
     request: protos.google.cloud.servicedirectory.v1beta1.IDeleteNamespaceRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.protobuf.IEmpty,
       | protos.google.cloud.servicedirectory.v1beta1.IDeleteNamespaceRequest
@@ -715,7 +723,7 @@ export class RegistrationServiceClient {
   deleteNamespace(
     request: protos.google.cloud.servicedirectory.v1beta1.IDeleteNamespaceRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.protobuf.IEmpty,
           | protos.google.cloud.servicedirectory.v1beta1.IDeleteNamespaceRequest
@@ -741,12 +749,12 @@ export class RegistrationServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -761,7 +769,7 @@ export class RegistrationServiceClient {
   }
   createService(
     request: protos.google.cloud.servicedirectory.v1beta1.ICreateServiceRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.servicedirectory.v1beta1.IService,
@@ -774,7 +782,7 @@ export class RegistrationServiceClient {
   >;
   createService(
     request: protos.google.cloud.servicedirectory.v1beta1.ICreateServiceRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.cloud.servicedirectory.v1beta1.IService,
       | protos.google.cloud.servicedirectory.v1beta1.ICreateServiceRequest
@@ -823,7 +831,7 @@ export class RegistrationServiceClient {
   createService(
     request: protos.google.cloud.servicedirectory.v1beta1.ICreateServiceRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.cloud.servicedirectory.v1beta1.IService,
           | protos.google.cloud.servicedirectory.v1beta1.ICreateServiceRequest
@@ -849,12 +857,12 @@ export class RegistrationServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -869,7 +877,7 @@ export class RegistrationServiceClient {
   }
   getService(
     request: protos.google.cloud.servicedirectory.v1beta1.IGetServiceRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.servicedirectory.v1beta1.IService,
@@ -882,7 +890,7 @@ export class RegistrationServiceClient {
   >;
   getService(
     request: protos.google.cloud.servicedirectory.v1beta1.IGetServiceRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.cloud.servicedirectory.v1beta1.IService,
       | protos.google.cloud.servicedirectory.v1beta1.IGetServiceRequest
@@ -921,7 +929,7 @@ export class RegistrationServiceClient {
   getService(
     request: protos.google.cloud.servicedirectory.v1beta1.IGetServiceRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.cloud.servicedirectory.v1beta1.IService,
           | protos.google.cloud.servicedirectory.v1beta1.IGetServiceRequest
@@ -947,12 +955,12 @@ export class RegistrationServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -967,7 +975,7 @@ export class RegistrationServiceClient {
   }
   updateService(
     request: protos.google.cloud.servicedirectory.v1beta1.IUpdateServiceRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.servicedirectory.v1beta1.IService,
@@ -980,7 +988,7 @@ export class RegistrationServiceClient {
   >;
   updateService(
     request: protos.google.cloud.servicedirectory.v1beta1.IUpdateServiceRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.cloud.servicedirectory.v1beta1.IService,
       | protos.google.cloud.servicedirectory.v1beta1.IUpdateServiceRequest
@@ -1021,7 +1029,7 @@ export class RegistrationServiceClient {
   updateService(
     request: protos.google.cloud.servicedirectory.v1beta1.IUpdateServiceRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.cloud.servicedirectory.v1beta1.IService,
           | protos.google.cloud.servicedirectory.v1beta1.IUpdateServiceRequest
@@ -1047,12 +1055,12 @@ export class RegistrationServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1067,7 +1075,7 @@ export class RegistrationServiceClient {
   }
   deleteService(
     request: protos.google.cloud.servicedirectory.v1beta1.IDeleteServiceRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.protobuf.IEmpty,
@@ -1080,7 +1088,7 @@ export class RegistrationServiceClient {
   >;
   deleteService(
     request: protos.google.cloud.servicedirectory.v1beta1.IDeleteServiceRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.protobuf.IEmpty,
       | protos.google.cloud.servicedirectory.v1beta1.IDeleteServiceRequest
@@ -1120,7 +1128,7 @@ export class RegistrationServiceClient {
   deleteService(
     request: protos.google.cloud.servicedirectory.v1beta1.IDeleteServiceRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.protobuf.IEmpty,
           | protos.google.cloud.servicedirectory.v1beta1.IDeleteServiceRequest
@@ -1146,12 +1154,12 @@ export class RegistrationServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1166,7 +1174,7 @@ export class RegistrationServiceClient {
   }
   createEndpoint(
     request: protos.google.cloud.servicedirectory.v1beta1.ICreateEndpointRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.servicedirectory.v1beta1.IEndpoint,
@@ -1179,7 +1187,7 @@ export class RegistrationServiceClient {
   >;
   createEndpoint(
     request: protos.google.cloud.servicedirectory.v1beta1.ICreateEndpointRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.cloud.servicedirectory.v1beta1.IEndpoint,
       | protos.google.cloud.servicedirectory.v1beta1.ICreateEndpointRequest
@@ -1228,7 +1236,7 @@ export class RegistrationServiceClient {
   createEndpoint(
     request: protos.google.cloud.servicedirectory.v1beta1.ICreateEndpointRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.cloud.servicedirectory.v1beta1.IEndpoint,
           | protos.google.cloud.servicedirectory.v1beta1.ICreateEndpointRequest
@@ -1254,12 +1262,12 @@ export class RegistrationServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1274,7 +1282,7 @@ export class RegistrationServiceClient {
   }
   getEndpoint(
     request: protos.google.cloud.servicedirectory.v1beta1.IGetEndpointRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.servicedirectory.v1beta1.IEndpoint,
@@ -1287,7 +1295,7 @@ export class RegistrationServiceClient {
   >;
   getEndpoint(
     request: protos.google.cloud.servicedirectory.v1beta1.IGetEndpointRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.cloud.servicedirectory.v1beta1.IEndpoint,
       | protos.google.cloud.servicedirectory.v1beta1.IGetEndpointRequest
@@ -1326,7 +1334,7 @@ export class RegistrationServiceClient {
   getEndpoint(
     request: protos.google.cloud.servicedirectory.v1beta1.IGetEndpointRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.cloud.servicedirectory.v1beta1.IEndpoint,
           | protos.google.cloud.servicedirectory.v1beta1.IGetEndpointRequest
@@ -1352,12 +1360,12 @@ export class RegistrationServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1372,7 +1380,7 @@ export class RegistrationServiceClient {
   }
   updateEndpoint(
     request: protos.google.cloud.servicedirectory.v1beta1.IUpdateEndpointRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.servicedirectory.v1beta1.IEndpoint,
@@ -1385,7 +1393,7 @@ export class RegistrationServiceClient {
   >;
   updateEndpoint(
     request: protos.google.cloud.servicedirectory.v1beta1.IUpdateEndpointRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.cloud.servicedirectory.v1beta1.IEndpoint,
       | protos.google.cloud.servicedirectory.v1beta1.IUpdateEndpointRequest
@@ -1426,7 +1434,7 @@ export class RegistrationServiceClient {
   updateEndpoint(
     request: protos.google.cloud.servicedirectory.v1beta1.IUpdateEndpointRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.cloud.servicedirectory.v1beta1.IEndpoint,
           | protos.google.cloud.servicedirectory.v1beta1.IUpdateEndpointRequest
@@ -1452,12 +1460,12 @@ export class RegistrationServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1472,7 +1480,7 @@ export class RegistrationServiceClient {
   }
   deleteEndpoint(
     request: protos.google.cloud.servicedirectory.v1beta1.IDeleteEndpointRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.protobuf.IEmpty,
@@ -1485,7 +1493,7 @@ export class RegistrationServiceClient {
   >;
   deleteEndpoint(
     request: protos.google.cloud.servicedirectory.v1beta1.IDeleteEndpointRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.protobuf.IEmpty,
       | protos.google.cloud.servicedirectory.v1beta1.IDeleteEndpointRequest
@@ -1524,7 +1532,7 @@ export class RegistrationServiceClient {
   deleteEndpoint(
     request: protos.google.cloud.servicedirectory.v1beta1.IDeleteEndpointRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.protobuf.IEmpty,
           | protos.google.cloud.servicedirectory.v1beta1.IDeleteEndpointRequest
@@ -1550,12 +1558,12 @@ export class RegistrationServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1570,7 +1578,7 @@ export class RegistrationServiceClient {
   }
   getIamPolicy(
     request: protos.google.iam.v1.IGetIamPolicyRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.iam.v1.IPolicy,
@@ -1580,7 +1588,7 @@ export class RegistrationServiceClient {
   >;
   getIamPolicy(
     request: protos.google.iam.v1.IGetIamPolicyRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.iam.v1.IPolicy,
       protos.google.iam.v1.IGetIamPolicyRequest | null | undefined,
@@ -1619,7 +1627,7 @@ export class RegistrationServiceClient {
   getIamPolicy(
     request: protos.google.iam.v1.IGetIamPolicyRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.iam.v1.IPolicy,
           protos.google.iam.v1.IGetIamPolicyRequest | null | undefined,
@@ -1638,12 +1646,12 @@ export class RegistrationServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1658,7 +1666,7 @@ export class RegistrationServiceClient {
   }
   setIamPolicy(
     request: protos.google.iam.v1.ISetIamPolicyRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.iam.v1.IPolicy,
@@ -1668,7 +1676,7 @@ export class RegistrationServiceClient {
   >;
   setIamPolicy(
     request: protos.google.iam.v1.ISetIamPolicyRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.iam.v1.IPolicy,
       protos.google.iam.v1.ISetIamPolicyRequest | null | undefined,
@@ -1709,7 +1717,7 @@ export class RegistrationServiceClient {
   setIamPolicy(
     request: protos.google.iam.v1.ISetIamPolicyRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.iam.v1.IPolicy,
           protos.google.iam.v1.ISetIamPolicyRequest | null | undefined,
@@ -1728,12 +1736,12 @@ export class RegistrationServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1748,7 +1756,7 @@ export class RegistrationServiceClient {
   }
   testIamPermissions(
     request: protos.google.iam.v1.ITestIamPermissionsRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.iam.v1.ITestIamPermissionsResponse,
@@ -1758,7 +1766,7 @@ export class RegistrationServiceClient {
   >;
   testIamPermissions(
     request: protos.google.iam.v1.ITestIamPermissionsRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.iam.v1.ITestIamPermissionsResponse,
       protos.google.iam.v1.ITestIamPermissionsRequest | null | undefined,
@@ -1799,7 +1807,7 @@ export class RegistrationServiceClient {
   testIamPermissions(
     request: protos.google.iam.v1.ITestIamPermissionsRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.iam.v1.ITestIamPermissionsResponse,
           protos.google.iam.v1.ITestIamPermissionsRequest | null | undefined,
@@ -1818,12 +1826,12 @@ export class RegistrationServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1839,7 +1847,7 @@ export class RegistrationServiceClient {
 
   listNamespaces(
     request: protos.google.cloud.servicedirectory.v1beta1.IListNamespacesRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.servicedirectory.v1beta1.INamespace[],
@@ -1849,7 +1857,7 @@ export class RegistrationServiceClient {
   >;
   listNamespaces(
     request: protos.google.cloud.servicedirectory.v1beta1.IListNamespacesRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: PaginationCallback<
       protos.google.cloud.servicedirectory.v1beta1.IListNamespacesRequest,
       | protos.google.cloud.servicedirectory.v1beta1.IListNamespacesResponse
@@ -1930,7 +1938,7 @@ export class RegistrationServiceClient {
   listNamespaces(
     request: protos.google.cloud.servicedirectory.v1beta1.IListNamespacesRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | PaginationCallback<
           protos.google.cloud.servicedirectory.v1beta1.IListNamespacesRequest,
           | protos.google.cloud.servicedirectory.v1beta1.IListNamespacesResponse
@@ -1953,12 +1961,12 @@ export class RegistrationServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -2031,7 +2039,7 @@ export class RegistrationServiceClient {
    */
   listNamespacesStream(
     request?: protos.google.cloud.servicedirectory.v1beta1.IListNamespacesRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Transform {
     request = request || {};
     options = options || {};
@@ -2116,7 +2124,7 @@ export class RegistrationServiceClient {
    */
   listNamespacesAsync(
     request?: protos.google.cloud.servicedirectory.v1beta1.IListNamespacesRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): AsyncIterable<protos.google.cloud.servicedirectory.v1beta1.INamespace> {
     request = request || {};
     options = options || {};
@@ -2138,7 +2146,7 @@ export class RegistrationServiceClient {
   }
   listServices(
     request: protos.google.cloud.servicedirectory.v1beta1.IListServicesRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.servicedirectory.v1beta1.IService[],
@@ -2148,7 +2156,7 @@ export class RegistrationServiceClient {
   >;
   listServices(
     request: protos.google.cloud.servicedirectory.v1beta1.IListServicesRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: PaginationCallback<
       protos.google.cloud.servicedirectory.v1beta1.IListServicesRequest,
       | protos.google.cloud.servicedirectory.v1beta1.IListServicesResponse
@@ -2222,7 +2230,7 @@ export class RegistrationServiceClient {
   listServices(
     request: protos.google.cloud.servicedirectory.v1beta1.IListServicesRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | PaginationCallback<
           protos.google.cloud.servicedirectory.v1beta1.IListServicesRequest,
           | protos.google.cloud.servicedirectory.v1beta1.IListServicesResponse
@@ -2245,12 +2253,12 @@ export class RegistrationServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -2316,7 +2324,7 @@ export class RegistrationServiceClient {
    */
   listServicesStream(
     request?: protos.google.cloud.servicedirectory.v1beta1.IListServicesRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Transform {
     request = request || {};
     options = options || {};
@@ -2394,7 +2402,7 @@ export class RegistrationServiceClient {
    */
   listServicesAsync(
     request?: protos.google.cloud.servicedirectory.v1beta1.IListServicesRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): AsyncIterable<protos.google.cloud.servicedirectory.v1beta1.IService> {
     request = request || {};
     options = options || {};
@@ -2416,7 +2424,7 @@ export class RegistrationServiceClient {
   }
   listEndpoints(
     request: protos.google.cloud.servicedirectory.v1beta1.IListEndpointsRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.servicedirectory.v1beta1.IEndpoint[],
@@ -2426,7 +2434,7 @@ export class RegistrationServiceClient {
   >;
   listEndpoints(
     request: protos.google.cloud.servicedirectory.v1beta1.IListEndpointsRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: PaginationCallback<
       protos.google.cloud.servicedirectory.v1beta1.IListEndpointsRequest,
       | protos.google.cloud.servicedirectory.v1beta1.IListEndpointsResponse
@@ -2502,7 +2510,7 @@ export class RegistrationServiceClient {
   listEndpoints(
     request: protos.google.cloud.servicedirectory.v1beta1.IListEndpointsRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | PaginationCallback<
           protos.google.cloud.servicedirectory.v1beta1.IListEndpointsRequest,
           | protos.google.cloud.servicedirectory.v1beta1.IListEndpointsResponse
@@ -2525,12 +2533,12 @@ export class RegistrationServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -2598,7 +2606,7 @@ export class RegistrationServiceClient {
    */
   listEndpointsStream(
     request?: protos.google.cloud.servicedirectory.v1beta1.IListEndpointsRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Transform {
     request = request || {};
     options = options || {};
@@ -2678,7 +2686,7 @@ export class RegistrationServiceClient {
    */
   listEndpointsAsync(
     request?: protos.google.cloud.servicedirectory.v1beta1.IListEndpointsRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): AsyncIterable<protos.google.cloud.servicedirectory.v1beta1.IEndpoint> {
     request = request || {};
     options = options || {};

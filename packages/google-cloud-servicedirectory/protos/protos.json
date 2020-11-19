@@ -67,7 +67,15 @@
                           "options": {
                             "(google.api.http).post": "/v1beta1/{name=projects/*/locations/*/namespaces/*/services/*}:resolve",
                             "(google.api.http).body": "*"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta1/{name=projects/*/locations/*/namespaces/*/services/*}:resolve",
+                                "body": "*"
+                              }
+                            }
+                          ]
                         }
                       }
                     },
@@ -172,7 +180,18 @@
                             "(google.api.http).post": "/v1beta1/{parent=projects/*/locations/*}/namespaces",
                             "(google.api.http).body": "namespace",
                             "(google.api.method_signature)": "parent,namespace,namespace_id"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta1/{parent=projects/*/locations/*}/namespaces",
+                                "body": "namespace"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,namespace,namespace_id"
+                            }
+                          ]
                         },
                         "ListNamespaces": {
                           "requestType": "ListNamespacesRequest",
@@ -180,7 +199,17 @@
                           "options": {
                             "(google.api.http).get": "/v1beta1/{parent=projects/*/locations/*}/namespaces",
                             "(google.api.method_signature)": "parent"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta1/{parent=projects/*/locations/*}/namespaces"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
                         },
                         "GetNamespace": {
                           "requestType": "GetNamespaceRequest",
@@ -188,7 +217,17 @@
                           "options": {
                             "(google.api.http).get": "/v1beta1/{name=projects/*/locations/*/namespaces/*}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta1/{name=projects/*/locations/*/namespaces/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "UpdateNamespace": {
                           "requestType": "UpdateNamespaceRequest",
@@ -197,7 +236,18 @@
                             "(google.api.http).patch": "/v1beta1/{namespace.name=projects/*/locations/*/namespaces/*}",
                             "(google.api.http).body": "namespace",
                             "(google.api.method_signature)": "namespace,update_mask"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1beta1/{namespace.name=projects/*/locations/*/namespaces/*}",
+                                "body": "namespace"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "namespace,update_mask"
+                            }
+                          ]
                         },
                         "DeleteNamespace": {
                           "requestType": "DeleteNamespaceRequest",
@@ -205,7 +255,17 @@
                           "options": {
                             "(google.api.http).delete": "/v1beta1/{name=projects/*/locations/*/namespaces/*}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1beta1/{name=projects/*/locations/*/namespaces/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "CreateService": {
                           "requestType": "CreateServiceRequest",
@@ -214,7 +274,18 @@
                             "(google.api.http).post": "/v1beta1/{parent=projects/*/locations/*/namespaces/*}/services",
                             "(google.api.http).body": "service",
                             "(google.api.method_signature)": "parent,service,service_id"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta1/{parent=projects/*/locations/*/namespaces/*}/services",
+                                "body": "service"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,service,service_id"
+                            }
+                          ]
                         },
                         "ListServices": {
                           "requestType": "ListServicesRequest",
@@ -222,7 +293,17 @@
                           "options": {
                             "(google.api.http).get": "/v1beta1/{parent=projects/*/locations/*/namespaces/*}/services",
                             "(google.api.method_signature)": "parent"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta1/{parent=projects/*/locations/*/namespaces/*}/services"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
                         },
                         "GetService": {
                           "requestType": "GetServiceRequest",
@@ -230,7 +311,17 @@
                           "options": {
                             "(google.api.http).get": "/v1beta1/{name=projects/*/locations/*/namespaces/*/services/*}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta1/{name=projects/*/locations/*/namespaces/*/services/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "UpdateService": {
                           "requestType": "UpdateServiceRequest",
@@ -239,7 +330,18 @@
                             "(google.api.http).patch": "/v1beta1/{service.name=projects/*/locations/*/namespaces/*/services/*}",
                             "(google.api.http).body": "service",
                             "(google.api.method_signature)": "service,update_mask"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1beta1/{service.name=projects/*/locations/*/namespaces/*/services/*}",
+                                "body": "service"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "service,update_mask"
+                            }
+                          ]
                         },
                         "DeleteService": {
                           "requestType": "DeleteServiceRequest",
@@ -247,7 +349,17 @@
                           "options": {
                             "(google.api.http).delete": "/v1beta1/{name=projects/*/locations/*/namespaces/*/services/*}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1beta1/{name=projects/*/locations/*/namespaces/*/services/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "CreateEndpoint": {
                           "requestType": "CreateEndpointRequest",
@@ -256,7 +368,18 @@
                             "(google.api.http).post": "/v1beta1/{parent=projects/*/locations/*/namespaces/*/services/*}/endpoints",
                             "(google.api.http).body": "endpoint",
                             "(google.api.method_signature)": "parent,endpoint,endpoint_id"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta1/{parent=projects/*/locations/*/namespaces/*/services/*}/endpoints",
+                                "body": "endpoint"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,endpoint,endpoint_id"
+                            }
+                          ]
                         },
                         "ListEndpoints": {
                           "requestType": "ListEndpointsRequest",
@@ -264,7 +387,17 @@
                           "options": {
                             "(google.api.http).get": "/v1beta1/{parent=projects/*/locations/*/namespaces/*/services/*}/endpoints",
                             "(google.api.method_signature)": "parent"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta1/{parent=projects/*/locations/*/namespaces/*/services/*}/endpoints"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
                         },
                         "GetEndpoint": {
                           "requestType": "GetEndpointRequest",
@@ -272,7 +405,17 @@
                           "options": {
                             "(google.api.http).get": "/v1beta1/{name=projects/*/locations/*/namespaces/*/services/*/endpoints/*}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta1/{name=projects/*/locations/*/namespaces/*/services/*/endpoints/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "UpdateEndpoint": {
                           "requestType": "UpdateEndpointRequest",
@@ -281,7 +424,18 @@
                             "(google.api.http).patch": "/v1beta1/{endpoint.name=projects/*/locations/*/namespaces/*/services/*/endpoints/*}",
                             "(google.api.http).body": "endpoint",
                             "(google.api.method_signature)": "endpoint,update_mask"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1beta1/{endpoint.name=projects/*/locations/*/namespaces/*/services/*/endpoints/*}",
+                                "body": "endpoint"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "endpoint,update_mask"
+                            }
+                          ]
                         },
                         "DeleteEndpoint": {
                           "requestType": "DeleteEndpointRequest",
@@ -289,7 +443,17 @@
                           "options": {
                             "(google.api.http).delete": "/v1beta1/{name=projects/*/locations/*/namespaces/*/services/*/endpoints/*}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1beta1/{name=projects/*/locations/*/namespaces/*/services/*/endpoints/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "GetIamPolicy": {
                           "requestType": "google.iam.v1.GetIamPolicyRequest",
@@ -299,7 +463,19 @@
                             "(google.api.http).body": "*",
                             "(google.api.http).additional_bindings.post": "/v1beta1/{resource=projects/*/locations/*/namespaces/*/services/*}:getIamPolicy",
                             "(google.api.http).additional_bindings.body": "*"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta1/{resource=projects/*/locations/*/namespaces/*}:getIamPolicy",
+                                "body": "*",
+                                "additional_bindings": {
+                                  "post": "/v1beta1/{resource=projects/*/locations/*/namespaces/*/services/*}:getIamPolicy",
+                                  "body": "*"
+                                }
+                              }
+                            }
+                          ]
                         },
                         "SetIamPolicy": {
                           "requestType": "google.iam.v1.SetIamPolicyRequest",
@@ -309,7 +485,19 @@
                             "(google.api.http).body": "*",
                             "(google.api.http).additional_bindings.post": "/v1beta1/{resource=projects/*/locations/*/namespaces/*/services/*}:setIamPolicy",
                             "(google.api.http).additional_bindings.body": "*"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta1/{resource=projects/*/locations/*/namespaces/*}:setIamPolicy",
+                                "body": "*",
+                                "additional_bindings": {
+                                  "post": "/v1beta1/{resource=projects/*/locations/*/namespaces/*/services/*}:setIamPolicy",
+                                  "body": "*"
+                                }
+                              }
+                            }
+                          ]
                         },
                         "TestIamPermissions": {
                           "requestType": "google.iam.v1.TestIamPermissionsRequest",
@@ -319,7 +507,19 @@
                             "(google.api.http).body": "*",
                             "(google.api.http).additional_bindings.post": "/v1beta1/{resource=projects/*/locations/*/namespaces/*/services/*}:testIamPermissions",
                             "(google.api.http).additional_bindings.body": "*"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta1/{resource=projects/*/locations/*/namespaces/*}:testIamPermissions",
+                                "body": "*",
+                                "additional_bindings": {
+                                  "post": "/v1beta1/{resource=projects/*/locations/*/namespaces/*/services/*}:testIamPermissions",
+                                  "body": "*"
+                                }
+                              }
+                            }
+                          ]
                         }
                       }
                     },
@@ -1822,7 +2022,15 @@
                       "options": {
                         "(google.api.http).post": "/v1/{resource=**}:setIamPolicy",
                         "(google.api.http).body": "*"
-                      }
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "post": "/v1/{resource=**}:setIamPolicy",
+                            "body": "*"
+                          }
+                        }
+                      ]
                     },
                     "GetIamPolicy": {
                       "requestType": "GetIamPolicyRequest",
@@ -1830,7 +2038,15 @@
                       "options": {
                         "(google.api.http).post": "/v1/{resource=**}:getIamPolicy",
                         "(google.api.http).body": "*"
-                      }
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "post": "/v1/{resource=**}:getIamPolicy",
+                            "body": "*"
+                          }
+                        }
+                      ]
                     },
                     "TestIamPermissions": {
                       "requestType": "TestIamPermissionsRequest",
@@ -1838,7 +2054,15 @@
                       "options": {
                         "(google.api.http).post": "/v1/{resource=**}:testIamPermissions",
                         "(google.api.http).body": "*"
-                      }
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "post": "/v1/{resource=**}:testIamPermissions",
+                            "body": "*"
+                          }
+                        }
+                      ]
                     }
                   }
                 },
