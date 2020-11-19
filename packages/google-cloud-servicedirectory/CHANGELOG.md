@@ -1,5 +1,21 @@
 # Changelog
 
+## [3.0.0](https://www.github.com/googleapis/nodejs-service-directory/compare/v2.1.2...v3.0.0) (2020-11-19)
+
+
+### ⚠ BREAKING CHANGES
+
+* make v1 API default (#96)
+
+### Features
+
+* make v1 API default ([#96](https://www.github.com/googleapis/nodejs-service-directory/issues/96)) ([b269328](https://www.github.com/googleapis/nodejs-service-directory/commit/b269328de96363d3a2fb1e0c57d6658c3b9ada73)), closes [#4](https://www.github.com/googleapis/nodejs-service-directory/issues/4)
+
+
+### Bug Fixes
+
+* only fallback if fetch exists on window ([59233c1](https://www.github.com/googleapis/nodejs-service-directory/commit/59233c1499218aa107ab0688cf0d004a67c47c96))
+
 ### [2.1.2](https://www.github.com/googleapis/nodejs-service-directory/compare/v2.1.1...v2.1.2) (2020-11-06)
 
 
