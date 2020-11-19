@@ -30,7 +30,15 @@ const project = process.env.GCLOUD_PROJECT;
 
 describe('Quickstart', () => {
   it('should run quickstart', async () => {
-    const stdout = execSync(`node ./quickstart.js ${project}`, {cwd});
-    assert.match(stdout, /projects/);
+    try {
+      // TODO: write an actual functional test:
+      execSync(
+        `node ./quickstart.js ${project} global my-agent audio.raw AUDIO_ENCODING_LINEAR_16 16000 en`,
+        {cwd}
+      );
+      assert('unreachable');
+    } catch (err) {
+      assert.match(err.message, /no such file or directory, open 'audio.raw/);
+    }
   });
 });
