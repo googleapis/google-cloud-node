@@ -3,8 +3,16 @@
     {
       "git": {
         "name": ".",
-        "remote": "git@github.com:googleapis/nodejs-language.git",
-        "sha": "12e5c9964dea31c7a7ceb923f82b7ed88cf87c44"
+        "remote": "https://github.com/googleapis/nodejs-language.git",
+        "sha": "96cfd2cb7bceda8bc3df2b0a1064911e2e17fb5f"
+      }
+    },
+    {
+      "git": {
+        "name": "googleapis",
+        "remote": "https://github.com/googleapis/googleapis.git",
+        "sha": "2f019bf70bfe06f1e2af1b04011b0a2405190e43",
+        "internalRef": "343202295"
       }
     },
     {
@@ -88,7 +96,6 @@
     "README.md",
     "api-extractor.json",
     "linkinator.config.json",
-    "package-lock.json.1283994733",
     "protos/google/cloud/language/v1/language_service.proto",
     "protos/google/cloud/language/v1beta2/language_service.proto",
     "protos/protos.d.ts",
@@ -96,12 +103,13 @@
     "protos/protos.json",
     "renovate.json",
     "samples/README.md",
-    "samples/package-lock.json.1177269251",
     "src/index.ts",
+    "src/v1/gapic_metadata.json",
     "src/v1/index.ts",
     "src/v1/language_service_client.ts",
     "src/v1/language_service_client_config.json",
     "src/v1/language_service_proto_list.json",
+    "src/v1beta2/gapic_metadata.json",
     "src/v1beta2/index.ts",
     "src/v1beta2/language_service_client.ts",
     "src/v1beta2/language_service_client_config.json",
