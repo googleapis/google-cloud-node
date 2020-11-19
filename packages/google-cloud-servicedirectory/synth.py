@@ -25,15 +25,15 @@ AUTOSYNTH_MULTIPLE_COMMITS = True
 
 # run the gapic generator
 gapic = gcp.GAPICBazel()
-versions = ['v1beta1']
+versions = ['v1beta1', 'v1']
 name = 'servicedirectory'
 for version in versions:
   library = gapic.node_library(name, version)
-s.copy(library, excludes=['README.md', 'package.json'])
+  s.copy(library, excludes=['README.md', 'package.json'])
 
 # Copy common templates
 common_templates = gcp.CommonTemplates()
-templates = common_templates.node_library(source_location='build/src')
+templates = common_templates.node_library(source_location='build/src', versions=['v1', 'v1beta1'], default_version='v1')
 s.copy(templates, excludes=[])
 
 node.postprocess_gapic_library()

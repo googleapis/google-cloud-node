@@ -23,6 +23,2719 @@ export namespace google {
         /** Namespace servicedirectory. */
         namespace servicedirectory {
 
+            /** Namespace v1. */
+            namespace v1 {
+
+                /** Properties of an Endpoint. */
+                interface IEndpoint {
+
+                    /** Endpoint name */
+                    name?: (string|null);
+
+                    /** Endpoint address */
+                    address?: (string|null);
+
+                    /** Endpoint port */
+                    port?: (number|null);
+
+                    /** Endpoint annotations */
+                    annotations?: ({ [k: string]: string }|null);
+                }
+
+                /** Represents an Endpoint. */
+                class Endpoint implements IEndpoint {
+
+                    /**
+                     * Constructs a new Endpoint.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.servicedirectory.v1.IEndpoint);
+
+                    /** Endpoint name. */
+                    public name: string;
+
+                    /** Endpoint address. */
+                    public address: string;
+
+                    /** Endpoint port. */
+                    public port: number;
+
+                    /** Endpoint annotations. */
+                    public annotations: { [k: string]: string };
+
+                    /**
+                     * Creates a new Endpoint instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Endpoint instance
+                     */
+                    public static create(properties?: google.cloud.servicedirectory.v1.IEndpoint): google.cloud.servicedirectory.v1.Endpoint;
+
+                    /**
+                     * Encodes the specified Endpoint message. Does not implicitly {@link google.cloud.servicedirectory.v1.Endpoint.verify|verify} messages.
+                     * @param message Endpoint message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.servicedirectory.v1.IEndpoint, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Endpoint message, length delimited. Does not implicitly {@link google.cloud.servicedirectory.v1.Endpoint.verify|verify} messages.
+                     * @param message Endpoint message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.servicedirectory.v1.IEndpoint, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an Endpoint message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Endpoint
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.servicedirectory.v1.Endpoint;
+
+                    /**
+                     * Decodes an Endpoint message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Endpoint
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.servicedirectory.v1.Endpoint;
+
+                    /**
+                     * Verifies an Endpoint message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an Endpoint message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Endpoint
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.servicedirectory.v1.Endpoint;
+
+                    /**
+                     * Creates a plain object from an Endpoint message. Also converts values to other types if specified.
+                     * @param message Endpoint
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.servicedirectory.v1.Endpoint, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Endpoint to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Represents a LookupService */
+                class LookupService extends $protobuf.rpc.Service {
+
+                    /**
+                     * Constructs a new LookupService service.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     */
+                    constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                    /**
+                     * Creates new LookupService service using the specified rpc implementation.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     * @returns RPC service. Useful where requests and/or responses are streamed.
+                     */
+                    public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): LookupService;
+
+                    /**
+                     * Calls ResolveService.
+                     * @param request ResolveServiceRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ResolveServiceResponse
+                     */
+                    public resolveService(request: google.cloud.servicedirectory.v1.IResolveServiceRequest, callback: google.cloud.servicedirectory.v1.LookupService.ResolveServiceCallback): void;
+
+                    /**
+                     * Calls ResolveService.
+                     * @param request ResolveServiceRequest message or plain object
+                     * @returns Promise
+                     */
+                    public resolveService(request: google.cloud.servicedirectory.v1.IResolveServiceRequest): Promise<google.cloud.servicedirectory.v1.ResolveServiceResponse>;
+                }
+
+                namespace LookupService {
+
+                    /**
+                     * Callback as used by {@link google.cloud.servicedirectory.v1.LookupService#resolveService}.
+                     * @param error Error, if any
+                     * @param [response] ResolveServiceResponse
+                     */
+                    type ResolveServiceCallback = (error: (Error|null), response?: google.cloud.servicedirectory.v1.ResolveServiceResponse) => void;
+                }
+
+                /** Properties of a ResolveServiceRequest. */
+                interface IResolveServiceRequest {
+
+                    /** ResolveServiceRequest name */
+                    name?: (string|null);
+
+                    /** ResolveServiceRequest maxEndpoints */
+                    maxEndpoints?: (number|null);
+
+                    /** ResolveServiceRequest endpointFilter */
+                    endpointFilter?: (string|null);
+                }
+
+                /** Represents a ResolveServiceRequest. */
+                class ResolveServiceRequest implements IResolveServiceRequest {
+
+                    /**
+                     * Constructs a new ResolveServiceRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.servicedirectory.v1.IResolveServiceRequest);
+
+                    /** ResolveServiceRequest name. */
+                    public name: string;
+
+                    /** ResolveServiceRequest maxEndpoints. */
+                    public maxEndpoints: number;
+
+                    /** ResolveServiceRequest endpointFilter. */
+                    public endpointFilter: string;
+
+                    /**
+                     * Creates a new ResolveServiceRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ResolveServiceRequest instance
+                     */
+                    public static create(properties?: google.cloud.servicedirectory.v1.IResolveServiceRequest): google.cloud.servicedirectory.v1.ResolveServiceRequest;
+
+                    /**
+                     * Encodes the specified ResolveServiceRequest message. Does not implicitly {@link google.cloud.servicedirectory.v1.ResolveServiceRequest.verify|verify} messages.
+                     * @param message ResolveServiceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.servicedirectory.v1.IResolveServiceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ResolveServiceRequest message, length delimited. Does not implicitly {@link google.cloud.servicedirectory.v1.ResolveServiceRequest.verify|verify} messages.
+                     * @param message ResolveServiceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.servicedirectory.v1.IResolveServiceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ResolveServiceRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ResolveServiceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.servicedirectory.v1.ResolveServiceRequest;
+
+                    /**
+                     * Decodes a ResolveServiceRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ResolveServiceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.servicedirectory.v1.ResolveServiceRequest;
+
+                    /**
+                     * Verifies a ResolveServiceRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ResolveServiceRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ResolveServiceRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.servicedirectory.v1.ResolveServiceRequest;
+
+                    /**
+                     * Creates a plain object from a ResolveServiceRequest message. Also converts values to other types if specified.
+                     * @param message ResolveServiceRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.servicedirectory.v1.ResolveServiceRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ResolveServiceRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a ResolveServiceResponse. */
+                interface IResolveServiceResponse {
+
+                    /** ResolveServiceResponse service */
+                    service?: (google.cloud.servicedirectory.v1.IService|null);
+                }
+
+                /** Represents a ResolveServiceResponse. */
+                class ResolveServiceResponse implements IResolveServiceResponse {
+
+                    /**
+                     * Constructs a new ResolveServiceResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.servicedirectory.v1.IResolveServiceResponse);
+
+                    /** ResolveServiceResponse service. */
+                    public service?: (google.cloud.servicedirectory.v1.IService|null);
+
+                    /**
+                     * Creates a new ResolveServiceResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ResolveServiceResponse instance
+                     */
+                    public static create(properties?: google.cloud.servicedirectory.v1.IResolveServiceResponse): google.cloud.servicedirectory.v1.ResolveServiceResponse;
+
+                    /**
+                     * Encodes the specified ResolveServiceResponse message. Does not implicitly {@link google.cloud.servicedirectory.v1.ResolveServiceResponse.verify|verify} messages.
+                     * @param message ResolveServiceResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.servicedirectory.v1.IResolveServiceResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ResolveServiceResponse message, length delimited. Does not implicitly {@link google.cloud.servicedirectory.v1.ResolveServiceResponse.verify|verify} messages.
+                     * @param message ResolveServiceResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.servicedirectory.v1.IResolveServiceResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ResolveServiceResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ResolveServiceResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.servicedirectory.v1.ResolveServiceResponse;
+
+                    /**
+                     * Decodes a ResolveServiceResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ResolveServiceResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.servicedirectory.v1.ResolveServiceResponse;
+
+                    /**
+                     * Verifies a ResolveServiceResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ResolveServiceResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ResolveServiceResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.servicedirectory.v1.ResolveServiceResponse;
+
+                    /**
+                     * Creates a plain object from a ResolveServiceResponse message. Also converts values to other types if specified.
+                     * @param message ResolveServiceResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.servicedirectory.v1.ResolveServiceResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ResolveServiceResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a Service. */
+                interface IService {
+
+                    /** Service name */
+                    name?: (string|null);
+
+                    /** Service annotations */
+                    annotations?: ({ [k: string]: string }|null);
+
+                    /** Service endpoints */
+                    endpoints?: (google.cloud.servicedirectory.v1.IEndpoint[]|null);
+                }
+
+                /** Represents a Service. */
+                class Service implements IService {
+
+                    /**
+                     * Constructs a new Service.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.servicedirectory.v1.IService);
+
+                    /** Service name. */
+                    public name: string;
+
+                    /** Service annotations. */
+                    public annotations: { [k: string]: string };
+
+                    /** Service endpoints. */
+                    public endpoints: google.cloud.servicedirectory.v1.IEndpoint[];
+
+                    /**
+                     * Creates a new Service instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Service instance
+                     */
+                    public static create(properties?: google.cloud.servicedirectory.v1.IService): google.cloud.servicedirectory.v1.Service;
+
+                    /**
+                     * Encodes the specified Service message. Does not implicitly {@link google.cloud.servicedirectory.v1.Service.verify|verify} messages.
+                     * @param message Service message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.servicedirectory.v1.IService, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Service message, length delimited. Does not implicitly {@link google.cloud.servicedirectory.v1.Service.verify|verify} messages.
+                     * @param message Service message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.servicedirectory.v1.IService, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Service message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Service
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.servicedirectory.v1.Service;
+
+                    /**
+                     * Decodes a Service message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Service
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.servicedirectory.v1.Service;
+
+                    /**
+                     * Verifies a Service message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Service message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Service
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.servicedirectory.v1.Service;
+
+                    /**
+                     * Creates a plain object from a Service message. Also converts values to other types if specified.
+                     * @param message Service
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.servicedirectory.v1.Service, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Service to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a Namespace. */
+                interface INamespace {
+
+                    /** Namespace name */
+                    name?: (string|null);
+
+                    /** Namespace labels */
+                    labels?: ({ [k: string]: string }|null);
+                }
+
+                /** Represents a Namespace. */
+                class Namespace implements INamespace {
+
+                    /**
+                     * Constructs a new Namespace.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.servicedirectory.v1.INamespace);
+
+                    /** Namespace name. */
+                    public name: string;
+
+                    /** Namespace labels. */
+                    public labels: { [k: string]: string };
+
+                    /**
+                     * Creates a new Namespace instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Namespace instance
+                     */
+                    public static create(properties?: google.cloud.servicedirectory.v1.INamespace): google.cloud.servicedirectory.v1.Namespace;
+
+                    /**
+                     * Encodes the specified Namespace message. Does not implicitly {@link google.cloud.servicedirectory.v1.Namespace.verify|verify} messages.
+                     * @param message Namespace message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.servicedirectory.v1.INamespace, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Namespace message, length delimited. Does not implicitly {@link google.cloud.servicedirectory.v1.Namespace.verify|verify} messages.
+                     * @param message Namespace message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.servicedirectory.v1.INamespace, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Namespace message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Namespace
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.servicedirectory.v1.Namespace;
+
+                    /**
+                     * Decodes a Namespace message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Namespace
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.servicedirectory.v1.Namespace;
+
+                    /**
+                     * Verifies a Namespace message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Namespace message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Namespace
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.servicedirectory.v1.Namespace;
+
+                    /**
+                     * Creates a plain object from a Namespace message. Also converts values to other types if specified.
+                     * @param message Namespace
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.servicedirectory.v1.Namespace, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Namespace to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Represents a RegistrationService */
+                class RegistrationService extends $protobuf.rpc.Service {
+
+                    /**
+                     * Constructs a new RegistrationService service.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     */
+                    constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                    /**
+                     * Creates new RegistrationService service using the specified rpc implementation.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     * @returns RPC service. Useful where requests and/or responses are streamed.
+                     */
+                    public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): RegistrationService;
+
+                    /**
+                     * Calls CreateNamespace.
+                     * @param request CreateNamespaceRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Namespace
+                     */
+                    public createNamespace(request: google.cloud.servicedirectory.v1.ICreateNamespaceRequest, callback: google.cloud.servicedirectory.v1.RegistrationService.CreateNamespaceCallback): void;
+
+                    /**
+                     * Calls CreateNamespace.
+                     * @param request CreateNamespaceRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createNamespace(request: google.cloud.servicedirectory.v1.ICreateNamespaceRequest): Promise<google.cloud.servicedirectory.v1.Namespace>;
+
+                    /**
+                     * Calls ListNamespaces.
+                     * @param request ListNamespacesRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListNamespacesResponse
+                     */
+                    public listNamespaces(request: google.cloud.servicedirectory.v1.IListNamespacesRequest, callback: google.cloud.servicedirectory.v1.RegistrationService.ListNamespacesCallback): void;
+
+                    /**
+                     * Calls ListNamespaces.
+                     * @param request ListNamespacesRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listNamespaces(request: google.cloud.servicedirectory.v1.IListNamespacesRequest): Promise<google.cloud.servicedirectory.v1.ListNamespacesResponse>;
+
+                    /**
+                     * Calls GetNamespace.
+                     * @param request GetNamespaceRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Namespace
+                     */
+                    public getNamespace(request: google.cloud.servicedirectory.v1.IGetNamespaceRequest, callback: google.cloud.servicedirectory.v1.RegistrationService.GetNamespaceCallback): void;
+
+                    /**
+                     * Calls GetNamespace.
+                     * @param request GetNamespaceRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getNamespace(request: google.cloud.servicedirectory.v1.IGetNamespaceRequest): Promise<google.cloud.servicedirectory.v1.Namespace>;
+
+                    /**
+                     * Calls UpdateNamespace.
+                     * @param request UpdateNamespaceRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Namespace
+                     */
+                    public updateNamespace(request: google.cloud.servicedirectory.v1.IUpdateNamespaceRequest, callback: google.cloud.servicedirectory.v1.RegistrationService.UpdateNamespaceCallback): void;
+
+                    /**
+                     * Calls UpdateNamespace.
+                     * @param request UpdateNamespaceRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateNamespace(request: google.cloud.servicedirectory.v1.IUpdateNamespaceRequest): Promise<google.cloud.servicedirectory.v1.Namespace>;
+
+                    /**
+                     * Calls DeleteNamespace.
+                     * @param request DeleteNamespaceRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Empty
+                     */
+                    public deleteNamespace(request: google.cloud.servicedirectory.v1.IDeleteNamespaceRequest, callback: google.cloud.servicedirectory.v1.RegistrationService.DeleteNamespaceCallback): void;
+
+                    /**
+                     * Calls DeleteNamespace.
+                     * @param request DeleteNamespaceRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteNamespace(request: google.cloud.servicedirectory.v1.IDeleteNamespaceRequest): Promise<google.protobuf.Empty>;
+
+                    /**
+                     * Calls CreateService.
+                     * @param request CreateServiceRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Service
+                     */
+                    public createService(request: google.cloud.servicedirectory.v1.ICreateServiceRequest, callback: google.cloud.servicedirectory.v1.RegistrationService.CreateServiceCallback): void;
+
+                    /**
+                     * Calls CreateService.
+                     * @param request CreateServiceRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createService(request: google.cloud.servicedirectory.v1.ICreateServiceRequest): Promise<google.cloud.servicedirectory.v1.Service>;
+
+                    /**
+                     * Calls ListServices.
+                     * @param request ListServicesRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListServicesResponse
+                     */
+                    public listServices(request: google.cloud.servicedirectory.v1.IListServicesRequest, callback: google.cloud.servicedirectory.v1.RegistrationService.ListServicesCallback): void;
+
+                    /**
+                     * Calls ListServices.
+                     * @param request ListServicesRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listServices(request: google.cloud.servicedirectory.v1.IListServicesRequest): Promise<google.cloud.servicedirectory.v1.ListServicesResponse>;
+
+                    /**
+                     * Calls GetService.
+                     * @param request GetServiceRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Service
+                     */
+                    public getService(request: google.cloud.servicedirectory.v1.IGetServiceRequest, callback: google.cloud.servicedirectory.v1.RegistrationService.GetServiceCallback): void;
+
+                    /**
+                     * Calls GetService.
+                     * @param request GetServiceRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getService(request: google.cloud.servicedirectory.v1.IGetServiceRequest): Promise<google.cloud.servicedirectory.v1.Service>;
+
+                    /**
+                     * Calls UpdateService.
+                     * @param request UpdateServiceRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Service
+                     */
+                    public updateService(request: google.cloud.servicedirectory.v1.IUpdateServiceRequest, callback: google.cloud.servicedirectory.v1.RegistrationService.UpdateServiceCallback): void;
+
+                    /**
+                     * Calls UpdateService.
+                     * @param request UpdateServiceRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateService(request: google.cloud.servicedirectory.v1.IUpdateServiceRequest): Promise<google.cloud.servicedirectory.v1.Service>;
+
+                    /**
+                     * Calls DeleteService.
+                     * @param request DeleteServiceRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Empty
+                     */
+                    public deleteService(request: google.cloud.servicedirectory.v1.IDeleteServiceRequest, callback: google.cloud.servicedirectory.v1.RegistrationService.DeleteServiceCallback): void;
+
+                    /**
+                     * Calls DeleteService.
+                     * @param request DeleteServiceRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteService(request: google.cloud.servicedirectory.v1.IDeleteServiceRequest): Promise<google.protobuf.Empty>;
+
+                    /**
+                     * Calls CreateEndpoint.
+                     * @param request CreateEndpointRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Endpoint
+                     */
+                    public createEndpoint(request: google.cloud.servicedirectory.v1.ICreateEndpointRequest, callback: google.cloud.servicedirectory.v1.RegistrationService.CreateEndpointCallback): void;
+
+                    /**
+                     * Calls CreateEndpoint.
+                     * @param request CreateEndpointRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createEndpoint(request: google.cloud.servicedirectory.v1.ICreateEndpointRequest): Promise<google.cloud.servicedirectory.v1.Endpoint>;
+
+                    /**
+                     * Calls ListEndpoints.
+                     * @param request ListEndpointsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListEndpointsResponse
+                     */
+                    public listEndpoints(request: google.cloud.servicedirectory.v1.IListEndpointsRequest, callback: google.cloud.servicedirectory.v1.RegistrationService.ListEndpointsCallback): void;
+
+                    /**
+                     * Calls ListEndpoints.
+                     * @param request ListEndpointsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listEndpoints(request: google.cloud.servicedirectory.v1.IListEndpointsRequest): Promise<google.cloud.servicedirectory.v1.ListEndpointsResponse>;
+
+                    /**
+                     * Calls GetEndpoint.
+                     * @param request GetEndpointRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Endpoint
+                     */
+                    public getEndpoint(request: google.cloud.servicedirectory.v1.IGetEndpointRequest, callback: google.cloud.servicedirectory.v1.RegistrationService.GetEndpointCallback): void;
+
+                    /**
+                     * Calls GetEndpoint.
+                     * @param request GetEndpointRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getEndpoint(request: google.cloud.servicedirectory.v1.IGetEndpointRequest): Promise<google.cloud.servicedirectory.v1.Endpoint>;
+
+                    /**
+                     * Calls UpdateEndpoint.
+                     * @param request UpdateEndpointRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Endpoint
+                     */
+                    public updateEndpoint(request: google.cloud.servicedirectory.v1.IUpdateEndpointRequest, callback: google.cloud.servicedirectory.v1.RegistrationService.UpdateEndpointCallback): void;
+
+                    /**
+                     * Calls UpdateEndpoint.
+                     * @param request UpdateEndpointRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateEndpoint(request: google.cloud.servicedirectory.v1.IUpdateEndpointRequest): Promise<google.cloud.servicedirectory.v1.Endpoint>;
+
+                    /**
+                     * Calls DeleteEndpoint.
+                     * @param request DeleteEndpointRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Empty
+                     */
+                    public deleteEndpoint(request: google.cloud.servicedirectory.v1.IDeleteEndpointRequest, callback: google.cloud.servicedirectory.v1.RegistrationService.DeleteEndpointCallback): void;
+
+                    /**
+                     * Calls DeleteEndpoint.
+                     * @param request DeleteEndpointRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteEndpoint(request: google.cloud.servicedirectory.v1.IDeleteEndpointRequest): Promise<google.protobuf.Empty>;
+
+                    /**
+                     * Calls GetIamPolicy.
+                     * @param request GetIamPolicyRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Policy
+                     */
+                    public getIamPolicy(request: google.iam.v1.IGetIamPolicyRequest, callback: google.cloud.servicedirectory.v1.RegistrationService.GetIamPolicyCallback): void;
+
+                    /**
+                     * Calls GetIamPolicy.
+                     * @param request GetIamPolicyRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getIamPolicy(request: google.iam.v1.IGetIamPolicyRequest): Promise<google.iam.v1.Policy>;
+
+                    /**
+                     * Calls SetIamPolicy.
+                     * @param request SetIamPolicyRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Policy
+                     */
+                    public setIamPolicy(request: google.iam.v1.ISetIamPolicyRequest, callback: google.cloud.servicedirectory.v1.RegistrationService.SetIamPolicyCallback): void;
+
+                    /**
+                     * Calls SetIamPolicy.
+                     * @param request SetIamPolicyRequest message or plain object
+                     * @returns Promise
+                     */
+                    public setIamPolicy(request: google.iam.v1.ISetIamPolicyRequest): Promise<google.iam.v1.Policy>;
+
+                    /**
+                     * Calls TestIamPermissions.
+                     * @param request TestIamPermissionsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and TestIamPermissionsResponse
+                     */
+                    public testIamPermissions(request: google.iam.v1.ITestIamPermissionsRequest, callback: google.cloud.servicedirectory.v1.RegistrationService.TestIamPermissionsCallback): void;
+
+                    /**
+                     * Calls TestIamPermissions.
+                     * @param request TestIamPermissionsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public testIamPermissions(request: google.iam.v1.ITestIamPermissionsRequest): Promise<google.iam.v1.TestIamPermissionsResponse>;
+                }
+
+                namespace RegistrationService {
+
+                    /**
+                     * Callback as used by {@link google.cloud.servicedirectory.v1.RegistrationService#createNamespace}.
+                     * @param error Error, if any
+                     * @param [response] Namespace
+                     */
+                    type CreateNamespaceCallback = (error: (Error|null), response?: google.cloud.servicedirectory.v1.Namespace) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.servicedirectory.v1.RegistrationService#listNamespaces}.
+                     * @param error Error, if any
+                     * @param [response] ListNamespacesResponse
+                     */
+                    type ListNamespacesCallback = (error: (Error|null), response?: google.cloud.servicedirectory.v1.ListNamespacesResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.servicedirectory.v1.RegistrationService#getNamespace}.
+                     * @param error Error, if any
+                     * @param [response] Namespace
+                     */
+                    type GetNamespaceCallback = (error: (Error|null), response?: google.cloud.servicedirectory.v1.Namespace) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.servicedirectory.v1.RegistrationService#updateNamespace}.
+                     * @param error Error, if any
+                     * @param [response] Namespace
+                     */
+                    type UpdateNamespaceCallback = (error: (Error|null), response?: google.cloud.servicedirectory.v1.Namespace) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.servicedirectory.v1.RegistrationService#deleteNamespace}.
+                     * @param error Error, if any
+                     * @param [response] Empty
+                     */
+                    type DeleteNamespaceCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.servicedirectory.v1.RegistrationService#createService}.
+                     * @param error Error, if any
+                     * @param [response] Service
+                     */
+                    type CreateServiceCallback = (error: (Error|null), response?: google.cloud.servicedirectory.v1.Service) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.servicedirectory.v1.RegistrationService#listServices}.
+                     * @param error Error, if any
+                     * @param [response] ListServicesResponse
+                     */
+                    type ListServicesCallback = (error: (Error|null), response?: google.cloud.servicedirectory.v1.ListServicesResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.servicedirectory.v1.RegistrationService#getService}.
+                     * @param error Error, if any
+                     * @param [response] Service
+                     */
+                    type GetServiceCallback = (error: (Error|null), response?: google.cloud.servicedirectory.v1.Service) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.servicedirectory.v1.RegistrationService#updateService}.
+                     * @param error Error, if any
+                     * @param [response] Service
+                     */
+                    type UpdateServiceCallback = (error: (Error|null), response?: google.cloud.servicedirectory.v1.Service) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.servicedirectory.v1.RegistrationService#deleteService}.
+                     * @param error Error, if any
+                     * @param [response] Empty
+                     */
+                    type DeleteServiceCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.servicedirectory.v1.RegistrationService#createEndpoint}.
+                     * @param error Error, if any
+                     * @param [response] Endpoint
+                     */
+                    type CreateEndpointCallback = (error: (Error|null), response?: google.cloud.servicedirectory.v1.Endpoint) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.servicedirectory.v1.RegistrationService#listEndpoints}.
+                     * @param error Error, if any
+                     * @param [response] ListEndpointsResponse
+                     */
+                    type ListEndpointsCallback = (error: (Error|null), response?: google.cloud.servicedirectory.v1.ListEndpointsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.servicedirectory.v1.RegistrationService#getEndpoint}.
+                     * @param error Error, if any
+                     * @param [response] Endpoint
+                     */
+                    type GetEndpointCallback = (error: (Error|null), response?: google.cloud.servicedirectory.v1.Endpoint) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.servicedirectory.v1.RegistrationService#updateEndpoint}.
+                     * @param error Error, if any
+                     * @param [response] Endpoint
+                     */
+                    type UpdateEndpointCallback = (error: (Error|null), response?: google.cloud.servicedirectory.v1.Endpoint) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.servicedirectory.v1.RegistrationService#deleteEndpoint}.
+                     * @param error Error, if any
+                     * @param [response] Empty
+                     */
+                    type DeleteEndpointCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.servicedirectory.v1.RegistrationService#getIamPolicy}.
+                     * @param error Error, if any
+                     * @param [response] Policy
+                     */
+                    type GetIamPolicyCallback = (error: (Error|null), response?: google.iam.v1.Policy) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.servicedirectory.v1.RegistrationService#setIamPolicy}.
+                     * @param error Error, if any
+                     * @param [response] Policy
+                     */
+                    type SetIamPolicyCallback = (error: (Error|null), response?: google.iam.v1.Policy) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.servicedirectory.v1.RegistrationService#testIamPermissions}.
+                     * @param error Error, if any
+                     * @param [response] TestIamPermissionsResponse
+                     */
+                    type TestIamPermissionsCallback = (error: (Error|null), response?: google.iam.v1.TestIamPermissionsResponse) => void;
+                }
+
+                /** Properties of a CreateNamespaceRequest. */
+                interface ICreateNamespaceRequest {
+
+                    /** CreateNamespaceRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateNamespaceRequest namespaceId */
+                    namespaceId?: (string|null);
+
+                    /** CreateNamespaceRequest namespace */
+                    namespace?: (google.cloud.servicedirectory.v1.INamespace|null);
+                }
+
+                /** Represents a CreateNamespaceRequest. */
+                class CreateNamespaceRequest implements ICreateNamespaceRequest {
+
+                    /**
+                     * Constructs a new CreateNamespaceRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.servicedirectory.v1.ICreateNamespaceRequest);
+
+                    /** CreateNamespaceRequest parent. */
+                    public parent: string;
+
+                    /** CreateNamespaceRequest namespaceId. */
+                    public namespaceId: string;
+
+                    /** CreateNamespaceRequest namespace. */
+                    public namespace?: (google.cloud.servicedirectory.v1.INamespace|null);
+
+                    /**
+                     * Creates a new CreateNamespaceRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateNamespaceRequest instance
+                     */
+                    public static create(properties?: google.cloud.servicedirectory.v1.ICreateNamespaceRequest): google.cloud.servicedirectory.v1.CreateNamespaceRequest;
+
+                    /**
+                     * Encodes the specified CreateNamespaceRequest message. Does not implicitly {@link google.cloud.servicedirectory.v1.CreateNamespaceRequest.verify|verify} messages.
+                     * @param message CreateNamespaceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.servicedirectory.v1.ICreateNamespaceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateNamespaceRequest message, length delimited. Does not implicitly {@link google.cloud.servicedirectory.v1.CreateNamespaceRequest.verify|verify} messages.
+                     * @param message CreateNamespaceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.servicedirectory.v1.ICreateNamespaceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateNamespaceRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateNamespaceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.servicedirectory.v1.CreateNamespaceRequest;
+
+                    /**
+                     * Decodes a CreateNamespaceRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateNamespaceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.servicedirectory.v1.CreateNamespaceRequest;
+
+                    /**
+                     * Verifies a CreateNamespaceRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateNamespaceRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateNamespaceRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.servicedirectory.v1.CreateNamespaceRequest;
+
+                    /**
+                     * Creates a plain object from a CreateNamespaceRequest message. Also converts values to other types if specified.
+                     * @param message CreateNamespaceRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.servicedirectory.v1.CreateNamespaceRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateNamespaceRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a ListNamespacesRequest. */
+                interface IListNamespacesRequest {
+
+                    /** ListNamespacesRequest parent */
+                    parent?: (string|null);
+
+                    /** ListNamespacesRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListNamespacesRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListNamespacesRequest filter */
+                    filter?: (string|null);
+
+                    /** ListNamespacesRequest orderBy */
+                    orderBy?: (string|null);
+                }
+
+                /** Represents a ListNamespacesRequest. */
+                class ListNamespacesRequest implements IListNamespacesRequest {
+
+                    /**
+                     * Constructs a new ListNamespacesRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.servicedirectory.v1.IListNamespacesRequest);
+
+                    /** ListNamespacesRequest parent. */
+                    public parent: string;
+
+                    /** ListNamespacesRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListNamespacesRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListNamespacesRequest filter. */
+                    public filter: string;
+
+                    /** ListNamespacesRequest orderBy. */
+                    public orderBy: string;
+
+                    /**
+                     * Creates a new ListNamespacesRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListNamespacesRequest instance
+                     */
+                    public static create(properties?: google.cloud.servicedirectory.v1.IListNamespacesRequest): google.cloud.servicedirectory.v1.ListNamespacesRequest;
+
+                    /**
+                     * Encodes the specified ListNamespacesRequest message. Does not implicitly {@link google.cloud.servicedirectory.v1.ListNamespacesRequest.verify|verify} messages.
+                     * @param message ListNamespacesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.servicedirectory.v1.IListNamespacesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListNamespacesRequest message, length delimited. Does not implicitly {@link google.cloud.servicedirectory.v1.ListNamespacesRequest.verify|verify} messages.
+                     * @param message ListNamespacesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.servicedirectory.v1.IListNamespacesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListNamespacesRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListNamespacesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.servicedirectory.v1.ListNamespacesRequest;
+
+                    /**
+                     * Decodes a ListNamespacesRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListNamespacesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.servicedirectory.v1.ListNamespacesRequest;
+
+                    /**
+                     * Verifies a ListNamespacesRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListNamespacesRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListNamespacesRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.servicedirectory.v1.ListNamespacesRequest;
+
+                    /**
+                     * Creates a plain object from a ListNamespacesRequest message. Also converts values to other types if specified.
+                     * @param message ListNamespacesRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.servicedirectory.v1.ListNamespacesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListNamespacesRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a ListNamespacesResponse. */
+                interface IListNamespacesResponse {
+
+                    /** ListNamespacesResponse namespaces */
+                    namespaces?: (google.cloud.servicedirectory.v1.INamespace[]|null);
+
+                    /** ListNamespacesResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListNamespacesResponse. */
+                class ListNamespacesResponse implements IListNamespacesResponse {
+
+                    /**
+                     * Constructs a new ListNamespacesResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.servicedirectory.v1.IListNamespacesResponse);
+
+                    /** ListNamespacesResponse namespaces. */
+                    public namespaces: google.cloud.servicedirectory.v1.INamespace[];
+
+                    /** ListNamespacesResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListNamespacesResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListNamespacesResponse instance
+                     */
+                    public static create(properties?: google.cloud.servicedirectory.v1.IListNamespacesResponse): google.cloud.servicedirectory.v1.ListNamespacesResponse;
+
+                    /**
+                     * Encodes the specified ListNamespacesResponse message. Does not implicitly {@link google.cloud.servicedirectory.v1.ListNamespacesResponse.verify|verify} messages.
+                     * @param message ListNamespacesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.servicedirectory.v1.IListNamespacesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListNamespacesResponse message, length delimited. Does not implicitly {@link google.cloud.servicedirectory.v1.ListNamespacesResponse.verify|verify} messages.
+                     * @param message ListNamespacesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.servicedirectory.v1.IListNamespacesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListNamespacesResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListNamespacesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.servicedirectory.v1.ListNamespacesResponse;
+
+                    /**
+                     * Decodes a ListNamespacesResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListNamespacesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.servicedirectory.v1.ListNamespacesResponse;
+
+                    /**
+                     * Verifies a ListNamespacesResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListNamespacesResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListNamespacesResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.servicedirectory.v1.ListNamespacesResponse;
+
+                    /**
+                     * Creates a plain object from a ListNamespacesResponse message. Also converts values to other types if specified.
+                     * @param message ListNamespacesResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.servicedirectory.v1.ListNamespacesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListNamespacesResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a GetNamespaceRequest. */
+                interface IGetNamespaceRequest {
+
+                    /** GetNamespaceRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetNamespaceRequest. */
+                class GetNamespaceRequest implements IGetNamespaceRequest {
+
+                    /**
+                     * Constructs a new GetNamespaceRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.servicedirectory.v1.IGetNamespaceRequest);
+
+                    /** GetNamespaceRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetNamespaceRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetNamespaceRequest instance
+                     */
+                    public static create(properties?: google.cloud.servicedirectory.v1.IGetNamespaceRequest): google.cloud.servicedirectory.v1.GetNamespaceRequest;
+
+                    /**
+                     * Encodes the specified GetNamespaceRequest message. Does not implicitly {@link google.cloud.servicedirectory.v1.GetNamespaceRequest.verify|verify} messages.
+                     * @param message GetNamespaceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.servicedirectory.v1.IGetNamespaceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetNamespaceRequest message, length delimited. Does not implicitly {@link google.cloud.servicedirectory.v1.GetNamespaceRequest.verify|verify} messages.
+                     * @param message GetNamespaceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.servicedirectory.v1.IGetNamespaceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetNamespaceRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetNamespaceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.servicedirectory.v1.GetNamespaceRequest;
+
+                    /**
+                     * Decodes a GetNamespaceRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetNamespaceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.servicedirectory.v1.GetNamespaceRequest;
+
+                    /**
+                     * Verifies a GetNamespaceRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetNamespaceRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetNamespaceRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.servicedirectory.v1.GetNamespaceRequest;
+
+                    /**
+                     * Creates a plain object from a GetNamespaceRequest message. Also converts values to other types if specified.
+                     * @param message GetNamespaceRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.servicedirectory.v1.GetNamespaceRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetNamespaceRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of an UpdateNamespaceRequest. */
+                interface IUpdateNamespaceRequest {
+
+                    /** UpdateNamespaceRequest namespace */
+                    namespace?: (google.cloud.servicedirectory.v1.INamespace|null);
+
+                    /** UpdateNamespaceRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+                }
+
+                /** Represents an UpdateNamespaceRequest. */
+                class UpdateNamespaceRequest implements IUpdateNamespaceRequest {
+
+                    /**
+                     * Constructs a new UpdateNamespaceRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.servicedirectory.v1.IUpdateNamespaceRequest);
+
+                    /** UpdateNamespaceRequest namespace. */
+                    public namespace?: (google.cloud.servicedirectory.v1.INamespace|null);
+
+                    /** UpdateNamespaceRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /**
+                     * Creates a new UpdateNamespaceRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateNamespaceRequest instance
+                     */
+                    public static create(properties?: google.cloud.servicedirectory.v1.IUpdateNamespaceRequest): google.cloud.servicedirectory.v1.UpdateNamespaceRequest;
+
+                    /**
+                     * Encodes the specified UpdateNamespaceRequest message. Does not implicitly {@link google.cloud.servicedirectory.v1.UpdateNamespaceRequest.verify|verify} messages.
+                     * @param message UpdateNamespaceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.servicedirectory.v1.IUpdateNamespaceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateNamespaceRequest message, length delimited. Does not implicitly {@link google.cloud.servicedirectory.v1.UpdateNamespaceRequest.verify|verify} messages.
+                     * @param message UpdateNamespaceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.servicedirectory.v1.IUpdateNamespaceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateNamespaceRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateNamespaceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.servicedirectory.v1.UpdateNamespaceRequest;
+
+                    /**
+                     * Decodes an UpdateNamespaceRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateNamespaceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.servicedirectory.v1.UpdateNamespaceRequest;
+
+                    /**
+                     * Verifies an UpdateNamespaceRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateNamespaceRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateNamespaceRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.servicedirectory.v1.UpdateNamespaceRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateNamespaceRequest message. Also converts values to other types if specified.
+                     * @param message UpdateNamespaceRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.servicedirectory.v1.UpdateNamespaceRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateNamespaceRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a DeleteNamespaceRequest. */
+                interface IDeleteNamespaceRequest {
+
+                    /** DeleteNamespaceRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a DeleteNamespaceRequest. */
+                class DeleteNamespaceRequest implements IDeleteNamespaceRequest {
+
+                    /**
+                     * Constructs a new DeleteNamespaceRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.servicedirectory.v1.IDeleteNamespaceRequest);
+
+                    /** DeleteNamespaceRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new DeleteNamespaceRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteNamespaceRequest instance
+                     */
+                    public static create(properties?: google.cloud.servicedirectory.v1.IDeleteNamespaceRequest): google.cloud.servicedirectory.v1.DeleteNamespaceRequest;
+
+                    /**
+                     * Encodes the specified DeleteNamespaceRequest message. Does not implicitly {@link google.cloud.servicedirectory.v1.DeleteNamespaceRequest.verify|verify} messages.
+                     * @param message DeleteNamespaceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.servicedirectory.v1.IDeleteNamespaceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteNamespaceRequest message, length delimited. Does not implicitly {@link google.cloud.servicedirectory.v1.DeleteNamespaceRequest.verify|verify} messages.
+                     * @param message DeleteNamespaceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.servicedirectory.v1.IDeleteNamespaceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteNamespaceRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteNamespaceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.servicedirectory.v1.DeleteNamespaceRequest;
+
+                    /**
+                     * Decodes a DeleteNamespaceRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteNamespaceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.servicedirectory.v1.DeleteNamespaceRequest;
+
+                    /**
+                     * Verifies a DeleteNamespaceRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteNamespaceRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteNamespaceRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.servicedirectory.v1.DeleteNamespaceRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteNamespaceRequest message. Also converts values to other types if specified.
+                     * @param message DeleteNamespaceRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.servicedirectory.v1.DeleteNamespaceRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteNamespaceRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a CreateServiceRequest. */
+                interface ICreateServiceRequest {
+
+                    /** CreateServiceRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateServiceRequest serviceId */
+                    serviceId?: (string|null);
+
+                    /** CreateServiceRequest service */
+                    service?: (google.cloud.servicedirectory.v1.IService|null);
+                }
+
+                /** Represents a CreateServiceRequest. */
+                class CreateServiceRequest implements ICreateServiceRequest {
+
+                    /**
+                     * Constructs a new CreateServiceRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.servicedirectory.v1.ICreateServiceRequest);
+
+                    /** CreateServiceRequest parent. */
+                    public parent: string;
+
+                    /** CreateServiceRequest serviceId. */
+                    public serviceId: string;
+
+                    /** CreateServiceRequest service. */
+                    public service?: (google.cloud.servicedirectory.v1.IService|null);
+
+                    /**
+                     * Creates a new CreateServiceRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateServiceRequest instance
+                     */
+                    public static create(properties?: google.cloud.servicedirectory.v1.ICreateServiceRequest): google.cloud.servicedirectory.v1.CreateServiceRequest;
+
+                    /**
+                     * Encodes the specified CreateServiceRequest message. Does not implicitly {@link google.cloud.servicedirectory.v1.CreateServiceRequest.verify|verify} messages.
+                     * @param message CreateServiceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.servicedirectory.v1.ICreateServiceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateServiceRequest message, length delimited. Does not implicitly {@link google.cloud.servicedirectory.v1.CreateServiceRequest.verify|verify} messages.
+                     * @param message CreateServiceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.servicedirectory.v1.ICreateServiceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateServiceRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateServiceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.servicedirectory.v1.CreateServiceRequest;
+
+                    /**
+                     * Decodes a CreateServiceRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateServiceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.servicedirectory.v1.CreateServiceRequest;
+
+                    /**
+                     * Verifies a CreateServiceRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateServiceRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateServiceRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.servicedirectory.v1.CreateServiceRequest;
+
+                    /**
+                     * Creates a plain object from a CreateServiceRequest message. Also converts values to other types if specified.
+                     * @param message CreateServiceRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.servicedirectory.v1.CreateServiceRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateServiceRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a ListServicesRequest. */
+                interface IListServicesRequest {
+
+                    /** ListServicesRequest parent */
+                    parent?: (string|null);
+
+                    /** ListServicesRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListServicesRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListServicesRequest filter */
+                    filter?: (string|null);
+
+                    /** ListServicesRequest orderBy */
+                    orderBy?: (string|null);
+                }
+
+                /** Represents a ListServicesRequest. */
+                class ListServicesRequest implements IListServicesRequest {
+
+                    /**
+                     * Constructs a new ListServicesRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.servicedirectory.v1.IListServicesRequest);
+
+                    /** ListServicesRequest parent. */
+                    public parent: string;
+
+                    /** ListServicesRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListServicesRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListServicesRequest filter. */
+                    public filter: string;
+
+                    /** ListServicesRequest orderBy. */
+                    public orderBy: string;
+
+                    /**
+                     * Creates a new ListServicesRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListServicesRequest instance
+                     */
+                    public static create(properties?: google.cloud.servicedirectory.v1.IListServicesRequest): google.cloud.servicedirectory.v1.ListServicesRequest;
+
+                    /**
+                     * Encodes the specified ListServicesRequest message. Does not implicitly {@link google.cloud.servicedirectory.v1.ListServicesRequest.verify|verify} messages.
+                     * @param message ListServicesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.servicedirectory.v1.IListServicesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListServicesRequest message, length delimited. Does not implicitly {@link google.cloud.servicedirectory.v1.ListServicesRequest.verify|verify} messages.
+                     * @param message ListServicesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.servicedirectory.v1.IListServicesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListServicesRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListServicesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.servicedirectory.v1.ListServicesRequest;
+
+                    /**
+                     * Decodes a ListServicesRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListServicesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.servicedirectory.v1.ListServicesRequest;
+
+                    /**
+                     * Verifies a ListServicesRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListServicesRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListServicesRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.servicedirectory.v1.ListServicesRequest;
+
+                    /**
+                     * Creates a plain object from a ListServicesRequest message. Also converts values to other types if specified.
+                     * @param message ListServicesRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.servicedirectory.v1.ListServicesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListServicesRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a ListServicesResponse. */
+                interface IListServicesResponse {
+
+                    /** ListServicesResponse services */
+                    services?: (google.cloud.servicedirectory.v1.IService[]|null);
+
+                    /** ListServicesResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListServicesResponse. */
+                class ListServicesResponse implements IListServicesResponse {
+
+                    /**
+                     * Constructs a new ListServicesResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.servicedirectory.v1.IListServicesResponse);
+
+                    /** ListServicesResponse services. */
+                    public services: google.cloud.servicedirectory.v1.IService[];
+
+                    /** ListServicesResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListServicesResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListServicesResponse instance
+                     */
+                    public static create(properties?: google.cloud.servicedirectory.v1.IListServicesResponse): google.cloud.servicedirectory.v1.ListServicesResponse;
+
+                    /**
+                     * Encodes the specified ListServicesResponse message. Does not implicitly {@link google.cloud.servicedirectory.v1.ListServicesResponse.verify|verify} messages.
+                     * @param message ListServicesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.servicedirectory.v1.IListServicesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListServicesResponse message, length delimited. Does not implicitly {@link google.cloud.servicedirectory.v1.ListServicesResponse.verify|verify} messages.
+                     * @param message ListServicesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.servicedirectory.v1.IListServicesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListServicesResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListServicesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.servicedirectory.v1.ListServicesResponse;
+
+                    /**
+                     * Decodes a ListServicesResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListServicesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.servicedirectory.v1.ListServicesResponse;
+
+                    /**
+                     * Verifies a ListServicesResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListServicesResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListServicesResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.servicedirectory.v1.ListServicesResponse;
+
+                    /**
+                     * Creates a plain object from a ListServicesResponse message. Also converts values to other types if specified.
+                     * @param message ListServicesResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.servicedirectory.v1.ListServicesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListServicesResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a GetServiceRequest. */
+                interface IGetServiceRequest {
+
+                    /** GetServiceRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetServiceRequest. */
+                class GetServiceRequest implements IGetServiceRequest {
+
+                    /**
+                     * Constructs a new GetServiceRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.servicedirectory.v1.IGetServiceRequest);
+
+                    /** GetServiceRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetServiceRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetServiceRequest instance
+                     */
+                    public static create(properties?: google.cloud.servicedirectory.v1.IGetServiceRequest): google.cloud.servicedirectory.v1.GetServiceRequest;
+
+                    /**
+                     * Encodes the specified GetServiceRequest message. Does not implicitly {@link google.cloud.servicedirectory.v1.GetServiceRequest.verify|verify} messages.
+                     * @param message GetServiceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.servicedirectory.v1.IGetServiceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetServiceRequest message, length delimited. Does not implicitly {@link google.cloud.servicedirectory.v1.GetServiceRequest.verify|verify} messages.
+                     * @param message GetServiceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.servicedirectory.v1.IGetServiceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetServiceRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetServiceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.servicedirectory.v1.GetServiceRequest;
+
+                    /**
+                     * Decodes a GetServiceRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetServiceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.servicedirectory.v1.GetServiceRequest;
+
+                    /**
+                     * Verifies a GetServiceRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetServiceRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetServiceRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.servicedirectory.v1.GetServiceRequest;
+
+                    /**
+                     * Creates a plain object from a GetServiceRequest message. Also converts values to other types if specified.
+                     * @param message GetServiceRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.servicedirectory.v1.GetServiceRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetServiceRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of an UpdateServiceRequest. */
+                interface IUpdateServiceRequest {
+
+                    /** UpdateServiceRequest service */
+                    service?: (google.cloud.servicedirectory.v1.IService|null);
+
+                    /** UpdateServiceRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+                }
+
+                /** Represents an UpdateServiceRequest. */
+                class UpdateServiceRequest implements IUpdateServiceRequest {
+
+                    /**
+                     * Constructs a new UpdateServiceRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.servicedirectory.v1.IUpdateServiceRequest);
+
+                    /** UpdateServiceRequest service. */
+                    public service?: (google.cloud.servicedirectory.v1.IService|null);
+
+                    /** UpdateServiceRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /**
+                     * Creates a new UpdateServiceRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateServiceRequest instance
+                     */
+                    public static create(properties?: google.cloud.servicedirectory.v1.IUpdateServiceRequest): google.cloud.servicedirectory.v1.UpdateServiceRequest;
+
+                    /**
+                     * Encodes the specified UpdateServiceRequest message. Does not implicitly {@link google.cloud.servicedirectory.v1.UpdateServiceRequest.verify|verify} messages.
+                     * @param message UpdateServiceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.servicedirectory.v1.IUpdateServiceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateServiceRequest message, length delimited. Does not implicitly {@link google.cloud.servicedirectory.v1.UpdateServiceRequest.verify|verify} messages.
+                     * @param message UpdateServiceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.servicedirectory.v1.IUpdateServiceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateServiceRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateServiceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.servicedirectory.v1.UpdateServiceRequest;
+
+                    /**
+                     * Decodes an UpdateServiceRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateServiceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.servicedirectory.v1.UpdateServiceRequest;
+
+                    /**
+                     * Verifies an UpdateServiceRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateServiceRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateServiceRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.servicedirectory.v1.UpdateServiceRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateServiceRequest message. Also converts values to other types if specified.
+                     * @param message UpdateServiceRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.servicedirectory.v1.UpdateServiceRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateServiceRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a DeleteServiceRequest. */
+                interface IDeleteServiceRequest {
+
+                    /** DeleteServiceRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a DeleteServiceRequest. */
+                class DeleteServiceRequest implements IDeleteServiceRequest {
+
+                    /**
+                     * Constructs a new DeleteServiceRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.servicedirectory.v1.IDeleteServiceRequest);
+
+                    /** DeleteServiceRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new DeleteServiceRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteServiceRequest instance
+                     */
+                    public static create(properties?: google.cloud.servicedirectory.v1.IDeleteServiceRequest): google.cloud.servicedirectory.v1.DeleteServiceRequest;
+
+                    /**
+                     * Encodes the specified DeleteServiceRequest message. Does not implicitly {@link google.cloud.servicedirectory.v1.DeleteServiceRequest.verify|verify} messages.
+                     * @param message DeleteServiceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.servicedirectory.v1.IDeleteServiceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteServiceRequest message, length delimited. Does not implicitly {@link google.cloud.servicedirectory.v1.DeleteServiceRequest.verify|verify} messages.
+                     * @param message DeleteServiceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.servicedirectory.v1.IDeleteServiceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteServiceRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteServiceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.servicedirectory.v1.DeleteServiceRequest;
+
+                    /**
+                     * Decodes a DeleteServiceRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteServiceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.servicedirectory.v1.DeleteServiceRequest;
+
+                    /**
+                     * Verifies a DeleteServiceRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteServiceRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteServiceRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.servicedirectory.v1.DeleteServiceRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteServiceRequest message. Also converts values to other types if specified.
+                     * @param message DeleteServiceRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.servicedirectory.v1.DeleteServiceRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteServiceRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a CreateEndpointRequest. */
+                interface ICreateEndpointRequest {
+
+                    /** CreateEndpointRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateEndpointRequest endpointId */
+                    endpointId?: (string|null);
+
+                    /** CreateEndpointRequest endpoint */
+                    endpoint?: (google.cloud.servicedirectory.v1.IEndpoint|null);
+                }
+
+                /** Represents a CreateEndpointRequest. */
+                class CreateEndpointRequest implements ICreateEndpointRequest {
+
+                    /**
+                     * Constructs a new CreateEndpointRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.servicedirectory.v1.ICreateEndpointRequest);
+
+                    /** CreateEndpointRequest parent. */
+                    public parent: string;
+
+                    /** CreateEndpointRequest endpointId. */
+                    public endpointId: string;
+
+                    /** CreateEndpointRequest endpoint. */
+                    public endpoint?: (google.cloud.servicedirectory.v1.IEndpoint|null);
+
+                    /**
+                     * Creates a new CreateEndpointRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateEndpointRequest instance
+                     */
+                    public static create(properties?: google.cloud.servicedirectory.v1.ICreateEndpointRequest): google.cloud.servicedirectory.v1.CreateEndpointRequest;
+
+                    /**
+                     * Encodes the specified CreateEndpointRequest message. Does not implicitly {@link google.cloud.servicedirectory.v1.CreateEndpointRequest.verify|verify} messages.
+                     * @param message CreateEndpointRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.servicedirectory.v1.ICreateEndpointRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateEndpointRequest message, length delimited. Does not implicitly {@link google.cloud.servicedirectory.v1.CreateEndpointRequest.verify|verify} messages.
+                     * @param message CreateEndpointRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.servicedirectory.v1.ICreateEndpointRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateEndpointRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateEndpointRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.servicedirectory.v1.CreateEndpointRequest;
+
+                    /**
+                     * Decodes a CreateEndpointRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateEndpointRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.servicedirectory.v1.CreateEndpointRequest;
+
+                    /**
+                     * Verifies a CreateEndpointRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateEndpointRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateEndpointRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.servicedirectory.v1.CreateEndpointRequest;
+
+                    /**
+                     * Creates a plain object from a CreateEndpointRequest message. Also converts values to other types if specified.
+                     * @param message CreateEndpointRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.servicedirectory.v1.CreateEndpointRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateEndpointRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a ListEndpointsRequest. */
+                interface IListEndpointsRequest {
+
+                    /** ListEndpointsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListEndpointsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListEndpointsRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListEndpointsRequest filter */
+                    filter?: (string|null);
+
+                    /** ListEndpointsRequest orderBy */
+                    orderBy?: (string|null);
+                }
+
+                /** Represents a ListEndpointsRequest. */
+                class ListEndpointsRequest implements IListEndpointsRequest {
+
+                    /**
+                     * Constructs a new ListEndpointsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.servicedirectory.v1.IListEndpointsRequest);
+
+                    /** ListEndpointsRequest parent. */
+                    public parent: string;
+
+                    /** ListEndpointsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListEndpointsRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListEndpointsRequest filter. */
+                    public filter: string;
+
+                    /** ListEndpointsRequest orderBy. */
+                    public orderBy: string;
+
+                    /**
+                     * Creates a new ListEndpointsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListEndpointsRequest instance
+                     */
+                    public static create(properties?: google.cloud.servicedirectory.v1.IListEndpointsRequest): google.cloud.servicedirectory.v1.ListEndpointsRequest;
+
+                    /**
+                     * Encodes the specified ListEndpointsRequest message. Does not implicitly {@link google.cloud.servicedirectory.v1.ListEndpointsRequest.verify|verify} messages.
+                     * @param message ListEndpointsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.servicedirectory.v1.IListEndpointsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListEndpointsRequest message, length delimited. Does not implicitly {@link google.cloud.servicedirectory.v1.ListEndpointsRequest.verify|verify} messages.
+                     * @param message ListEndpointsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.servicedirectory.v1.IListEndpointsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListEndpointsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListEndpointsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.servicedirectory.v1.ListEndpointsRequest;
+
+                    /**
+                     * Decodes a ListEndpointsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListEndpointsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.servicedirectory.v1.ListEndpointsRequest;
+
+                    /**
+                     * Verifies a ListEndpointsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListEndpointsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListEndpointsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.servicedirectory.v1.ListEndpointsRequest;
+
+                    /**
+                     * Creates a plain object from a ListEndpointsRequest message. Also converts values to other types if specified.
+                     * @param message ListEndpointsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.servicedirectory.v1.ListEndpointsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListEndpointsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a ListEndpointsResponse. */
+                interface IListEndpointsResponse {
+
+                    /** ListEndpointsResponse endpoints */
+                    endpoints?: (google.cloud.servicedirectory.v1.IEndpoint[]|null);
+
+                    /** ListEndpointsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListEndpointsResponse. */
+                class ListEndpointsResponse implements IListEndpointsResponse {
+
+                    /**
+                     * Constructs a new ListEndpointsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.servicedirectory.v1.IListEndpointsResponse);
+
+                    /** ListEndpointsResponse endpoints. */
+                    public endpoints: google.cloud.servicedirectory.v1.IEndpoint[];
+
+                    /** ListEndpointsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListEndpointsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListEndpointsResponse instance
+                     */
+                    public static create(properties?: google.cloud.servicedirectory.v1.IListEndpointsResponse): google.cloud.servicedirectory.v1.ListEndpointsResponse;
+
+                    /**
+                     * Encodes the specified ListEndpointsResponse message. Does not implicitly {@link google.cloud.servicedirectory.v1.ListEndpointsResponse.verify|verify} messages.
+                     * @param message ListEndpointsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.servicedirectory.v1.IListEndpointsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListEndpointsResponse message, length delimited. Does not implicitly {@link google.cloud.servicedirectory.v1.ListEndpointsResponse.verify|verify} messages.
+                     * @param message ListEndpointsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.servicedirectory.v1.IListEndpointsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListEndpointsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListEndpointsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.servicedirectory.v1.ListEndpointsResponse;
+
+                    /**
+                     * Decodes a ListEndpointsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListEndpointsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.servicedirectory.v1.ListEndpointsResponse;
+
+                    /**
+                     * Verifies a ListEndpointsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListEndpointsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListEndpointsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.servicedirectory.v1.ListEndpointsResponse;
+
+                    /**
+                     * Creates a plain object from a ListEndpointsResponse message. Also converts values to other types if specified.
+                     * @param message ListEndpointsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.servicedirectory.v1.ListEndpointsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListEndpointsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a GetEndpointRequest. */
+                interface IGetEndpointRequest {
+
+                    /** GetEndpointRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetEndpointRequest. */
+                class GetEndpointRequest implements IGetEndpointRequest {
+
+                    /**
+                     * Constructs a new GetEndpointRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.servicedirectory.v1.IGetEndpointRequest);
+
+                    /** GetEndpointRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetEndpointRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetEndpointRequest instance
+                     */
+                    public static create(properties?: google.cloud.servicedirectory.v1.IGetEndpointRequest): google.cloud.servicedirectory.v1.GetEndpointRequest;
+
+                    /**
+                     * Encodes the specified GetEndpointRequest message. Does not implicitly {@link google.cloud.servicedirectory.v1.GetEndpointRequest.verify|verify} messages.
+                     * @param message GetEndpointRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.servicedirectory.v1.IGetEndpointRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetEndpointRequest message, length delimited. Does not implicitly {@link google.cloud.servicedirectory.v1.GetEndpointRequest.verify|verify} messages.
+                     * @param message GetEndpointRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.servicedirectory.v1.IGetEndpointRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetEndpointRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetEndpointRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.servicedirectory.v1.GetEndpointRequest;
+
+                    /**
+                     * Decodes a GetEndpointRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetEndpointRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.servicedirectory.v1.GetEndpointRequest;
+
+                    /**
+                     * Verifies a GetEndpointRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetEndpointRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetEndpointRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.servicedirectory.v1.GetEndpointRequest;
+
+                    /**
+                     * Creates a plain object from a GetEndpointRequest message. Also converts values to other types if specified.
+                     * @param message GetEndpointRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.servicedirectory.v1.GetEndpointRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetEndpointRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of an UpdateEndpointRequest. */
+                interface IUpdateEndpointRequest {
+
+                    /** UpdateEndpointRequest endpoint */
+                    endpoint?: (google.cloud.servicedirectory.v1.IEndpoint|null);
+
+                    /** UpdateEndpointRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+                }
+
+                /** Represents an UpdateEndpointRequest. */
+                class UpdateEndpointRequest implements IUpdateEndpointRequest {
+
+                    /**
+                     * Constructs a new UpdateEndpointRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.servicedirectory.v1.IUpdateEndpointRequest);
+
+                    /** UpdateEndpointRequest endpoint. */
+                    public endpoint?: (google.cloud.servicedirectory.v1.IEndpoint|null);
+
+                    /** UpdateEndpointRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /**
+                     * Creates a new UpdateEndpointRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateEndpointRequest instance
+                     */
+                    public static create(properties?: google.cloud.servicedirectory.v1.IUpdateEndpointRequest): google.cloud.servicedirectory.v1.UpdateEndpointRequest;
+
+                    /**
+                     * Encodes the specified UpdateEndpointRequest message. Does not implicitly {@link google.cloud.servicedirectory.v1.UpdateEndpointRequest.verify|verify} messages.
+                     * @param message UpdateEndpointRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.servicedirectory.v1.IUpdateEndpointRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateEndpointRequest message, length delimited. Does not implicitly {@link google.cloud.servicedirectory.v1.UpdateEndpointRequest.verify|verify} messages.
+                     * @param message UpdateEndpointRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.servicedirectory.v1.IUpdateEndpointRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateEndpointRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateEndpointRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.servicedirectory.v1.UpdateEndpointRequest;
+
+                    /**
+                     * Decodes an UpdateEndpointRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateEndpointRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.servicedirectory.v1.UpdateEndpointRequest;
+
+                    /**
+                     * Verifies an UpdateEndpointRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateEndpointRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateEndpointRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.servicedirectory.v1.UpdateEndpointRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateEndpointRequest message. Also converts values to other types if specified.
+                     * @param message UpdateEndpointRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.servicedirectory.v1.UpdateEndpointRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateEndpointRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a DeleteEndpointRequest. */
+                interface IDeleteEndpointRequest {
+
+                    /** DeleteEndpointRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a DeleteEndpointRequest. */
+                class DeleteEndpointRequest implements IDeleteEndpointRequest {
+
+                    /**
+                     * Constructs a new DeleteEndpointRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.servicedirectory.v1.IDeleteEndpointRequest);
+
+                    /** DeleteEndpointRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new DeleteEndpointRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteEndpointRequest instance
+                     */
+                    public static create(properties?: google.cloud.servicedirectory.v1.IDeleteEndpointRequest): google.cloud.servicedirectory.v1.DeleteEndpointRequest;
+
+                    /**
+                     * Encodes the specified DeleteEndpointRequest message. Does not implicitly {@link google.cloud.servicedirectory.v1.DeleteEndpointRequest.verify|verify} messages.
+                     * @param message DeleteEndpointRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.servicedirectory.v1.IDeleteEndpointRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteEndpointRequest message, length delimited. Does not implicitly {@link google.cloud.servicedirectory.v1.DeleteEndpointRequest.verify|verify} messages.
+                     * @param message DeleteEndpointRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.servicedirectory.v1.IDeleteEndpointRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteEndpointRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteEndpointRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.servicedirectory.v1.DeleteEndpointRequest;
+
+                    /**
+                     * Decodes a DeleteEndpointRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteEndpointRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.servicedirectory.v1.DeleteEndpointRequest;
+
+                    /**
+                     * Verifies a DeleteEndpointRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteEndpointRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteEndpointRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.servicedirectory.v1.DeleteEndpointRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteEndpointRequest message. Also converts values to other types if specified.
+                     * @param message DeleteEndpointRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.servicedirectory.v1.DeleteEndpointRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteEndpointRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+            }
+
             /** Namespace v1beta1. */
             namespace v1beta1 {
 
@@ -2741,242 +5454,6 @@ export namespace google {
     /** Namespace api. */
     namespace api {
 
-        /** FieldBehavior enum. */
-        enum FieldBehavior {
-            FIELD_BEHAVIOR_UNSPECIFIED = 0,
-            OPTIONAL = 1,
-            REQUIRED = 2,
-            OUTPUT_ONLY = 3,
-            INPUT_ONLY = 4,
-            IMMUTABLE = 5
-        }
-
-        /** Properties of a ResourceDescriptor. */
-        interface IResourceDescriptor {
-
-            /** ResourceDescriptor type */
-            type?: (string|null);
-
-            /** ResourceDescriptor pattern */
-            pattern?: (string[]|null);
-
-            /** ResourceDescriptor nameField */
-            nameField?: (string|null);
-
-            /** ResourceDescriptor history */
-            history?: (google.api.ResourceDescriptor.History|keyof typeof google.api.ResourceDescriptor.History|null);
-
-            /** ResourceDescriptor plural */
-            plural?: (string|null);
-
-            /** ResourceDescriptor singular */
-            singular?: (string|null);
-        }
-
-        /** Represents a ResourceDescriptor. */
-        class ResourceDescriptor implements IResourceDescriptor {
-
-            /**
-             * Constructs a new ResourceDescriptor.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.api.IResourceDescriptor);
-
-            /** ResourceDescriptor type. */
-            public type: string;
-
-            /** ResourceDescriptor pattern. */
-            public pattern: string[];
-
-            /** ResourceDescriptor nameField. */
-            public nameField: string;
-
-            /** ResourceDescriptor history. */
-            public history: (google.api.ResourceDescriptor.History|keyof typeof google.api.ResourceDescriptor.History);
-
-            /** ResourceDescriptor plural. */
-            public plural: string;
-
-            /** ResourceDescriptor singular. */
-            public singular: string;
-
-            /**
-             * Creates a new ResourceDescriptor instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns ResourceDescriptor instance
-             */
-            public static create(properties?: google.api.IResourceDescriptor): google.api.ResourceDescriptor;
-
-            /**
-             * Encodes the specified ResourceDescriptor message. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
-             * @param message ResourceDescriptor message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: google.api.IResourceDescriptor, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified ResourceDescriptor message, length delimited. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
-             * @param message ResourceDescriptor message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: google.api.IResourceDescriptor, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a ResourceDescriptor message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns ResourceDescriptor
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.ResourceDescriptor;
-
-            /**
-             * Decodes a ResourceDescriptor message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns ResourceDescriptor
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.ResourceDescriptor;
-
-            /**
-             * Verifies a ResourceDescriptor message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a ResourceDescriptor message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns ResourceDescriptor
-             */
-            public static fromObject(object: { [k: string]: any }): google.api.ResourceDescriptor;
-
-            /**
-             * Creates a plain object from a ResourceDescriptor message. Also converts values to other types if specified.
-             * @param message ResourceDescriptor
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.api.ResourceDescriptor, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this ResourceDescriptor to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-        }
-
-        namespace ResourceDescriptor {
-
-            /** History enum. */
-            enum History {
-                HISTORY_UNSPECIFIED = 0,
-                ORIGINALLY_SINGLE_PATTERN = 1,
-                FUTURE_MULTI_PATTERN = 2
-            }
-        }
-
-        /** Properties of a ResourceReference. */
-        interface IResourceReference {
-
-            /** ResourceReference type */
-            type?: (string|null);
-
-            /** ResourceReference childType */
-            childType?: (string|null);
-        }
-
-        /** Represents a ResourceReference. */
-        class ResourceReference implements IResourceReference {
-
-            /**
-             * Constructs a new ResourceReference.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.api.IResourceReference);
-
-            /** ResourceReference type. */
-            public type: string;
-
-            /** ResourceReference childType. */
-            public childType: string;
-
-            /**
-             * Creates a new ResourceReference instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns ResourceReference instance
-             */
-            public static create(properties?: google.api.IResourceReference): google.api.ResourceReference;
-
-            /**
-             * Encodes the specified ResourceReference message. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
-             * @param message ResourceReference message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: google.api.IResourceReference, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified ResourceReference message, length delimited. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
-             * @param message ResourceReference message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: google.api.IResourceReference, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a ResourceReference message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns ResourceReference
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.ResourceReference;
-
-            /**
-             * Decodes a ResourceReference message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns ResourceReference
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.ResourceReference;
-
-            /**
-             * Verifies a ResourceReference message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a ResourceReference message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns ResourceReference
-             */
-            public static fromObject(object: { [k: string]: any }): google.api.ResourceReference;
-
-            /**
-             * Creates a plain object from a ResourceReference message. Also converts values to other types if specified.
-             * @param message ResourceReference
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.api.ResourceReference, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this ResourceReference to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-        }
-
         /** Properties of a Http. */
         interface IHttp {
 
@@ -3311,6 +5788,242 @@ export namespace google {
 
             /**
              * Converts this CustomHttpPattern to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+        }
+
+        /** FieldBehavior enum. */
+        enum FieldBehavior {
+            FIELD_BEHAVIOR_UNSPECIFIED = 0,
+            OPTIONAL = 1,
+            REQUIRED = 2,
+            OUTPUT_ONLY = 3,
+            INPUT_ONLY = 4,
+            IMMUTABLE = 5
+        }
+
+        /** Properties of a ResourceDescriptor. */
+        interface IResourceDescriptor {
+
+            /** ResourceDescriptor type */
+            type?: (string|null);
+
+            /** ResourceDescriptor pattern */
+            pattern?: (string[]|null);
+
+            /** ResourceDescriptor nameField */
+            nameField?: (string|null);
+
+            /** ResourceDescriptor history */
+            history?: (google.api.ResourceDescriptor.History|keyof typeof google.api.ResourceDescriptor.History|null);
+
+            /** ResourceDescriptor plural */
+            plural?: (string|null);
+
+            /** ResourceDescriptor singular */
+            singular?: (string|null);
+        }
+
+        /** Represents a ResourceDescriptor. */
+        class ResourceDescriptor implements IResourceDescriptor {
+
+            /**
+             * Constructs a new ResourceDescriptor.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.IResourceDescriptor);
+
+            /** ResourceDescriptor type. */
+            public type: string;
+
+            /** ResourceDescriptor pattern. */
+            public pattern: string[];
+
+            /** ResourceDescriptor nameField. */
+            public nameField: string;
+
+            /** ResourceDescriptor history. */
+            public history: (google.api.ResourceDescriptor.History|keyof typeof google.api.ResourceDescriptor.History);
+
+            /** ResourceDescriptor plural. */
+            public plural: string;
+
+            /** ResourceDescriptor singular. */
+            public singular: string;
+
+            /**
+             * Creates a new ResourceDescriptor instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns ResourceDescriptor instance
+             */
+            public static create(properties?: google.api.IResourceDescriptor): google.api.ResourceDescriptor;
+
+            /**
+             * Encodes the specified ResourceDescriptor message. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
+             * @param message ResourceDescriptor message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.IResourceDescriptor, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified ResourceDescriptor message, length delimited. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
+             * @param message ResourceDescriptor message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.IResourceDescriptor, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a ResourceDescriptor message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns ResourceDescriptor
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.ResourceDescriptor;
+
+            /**
+             * Decodes a ResourceDescriptor message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns ResourceDescriptor
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.ResourceDescriptor;
+
+            /**
+             * Verifies a ResourceDescriptor message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a ResourceDescriptor message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns ResourceDescriptor
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.ResourceDescriptor;
+
+            /**
+             * Creates a plain object from a ResourceDescriptor message. Also converts values to other types if specified.
+             * @param message ResourceDescriptor
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.ResourceDescriptor, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this ResourceDescriptor to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+        }
+
+        namespace ResourceDescriptor {
+
+            /** History enum. */
+            enum History {
+                HISTORY_UNSPECIFIED = 0,
+                ORIGINALLY_SINGLE_PATTERN = 1,
+                FUTURE_MULTI_PATTERN = 2
+            }
+        }
+
+        /** Properties of a ResourceReference. */
+        interface IResourceReference {
+
+            /** ResourceReference type */
+            type?: (string|null);
+
+            /** ResourceReference childType */
+            childType?: (string|null);
+        }
+
+        /** Represents a ResourceReference. */
+        class ResourceReference implements IResourceReference {
+
+            /**
+             * Constructs a new ResourceReference.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.IResourceReference);
+
+            /** ResourceReference type. */
+            public type: string;
+
+            /** ResourceReference childType. */
+            public childType: string;
+
+            /**
+             * Creates a new ResourceReference instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns ResourceReference instance
+             */
+            public static create(properties?: google.api.IResourceReference): google.api.ResourceReference;
+
+            /**
+             * Encodes the specified ResourceReference message. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
+             * @param message ResourceReference message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.IResourceReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified ResourceReference message, length delimited. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
+             * @param message ResourceReference message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.IResourceReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a ResourceReference message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns ResourceReference
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.ResourceReference;
+
+            /**
+             * Decodes a ResourceReference message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns ResourceReference
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.ResourceReference;
+
+            /**
+             * Verifies a ResourceReference message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a ResourceReference message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns ResourceReference
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.ResourceReference;
+
+            /**
+             * Creates a plain object from a ResourceReference message. Also converts values to other types if specified.
+             * @param message ResourceReference
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.ResourceReference, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this ResourceReference to JSON.
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };

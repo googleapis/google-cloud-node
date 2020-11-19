@@ -57,6 +57,5977 @@
                  */
                 var servicedirectory = {};
     
+                servicedirectory.v1 = (function() {
+    
+                    /**
+                     * Namespace v1.
+                     * @memberof google.cloud.servicedirectory
+                     * @namespace
+                     */
+                    var v1 = {};
+    
+                    v1.Endpoint = (function() {
+    
+                        /**
+                         * Properties of an Endpoint.
+                         * @memberof google.cloud.servicedirectory.v1
+                         * @interface IEndpoint
+                         * @property {string|null} [name] Endpoint name
+                         * @property {string|null} [address] Endpoint address
+                         * @property {number|null} [port] Endpoint port
+                         * @property {Object.<string,string>|null} [annotations] Endpoint annotations
+                         */
+    
+                        /**
+                         * Constructs a new Endpoint.
+                         * @memberof google.cloud.servicedirectory.v1
+                         * @classdesc Represents an Endpoint.
+                         * @implements IEndpoint
+                         * @constructor
+                         * @param {google.cloud.servicedirectory.v1.IEndpoint=} [properties] Properties to set
+                         */
+                        function Endpoint(properties) {
+                            this.annotations = {};
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Endpoint name.
+                         * @member {string} name
+                         * @memberof google.cloud.servicedirectory.v1.Endpoint
+                         * @instance
+                         */
+                        Endpoint.prototype.name = "";
+    
+                        /**
+                         * Endpoint address.
+                         * @member {string} address
+                         * @memberof google.cloud.servicedirectory.v1.Endpoint
+                         * @instance
+                         */
+                        Endpoint.prototype.address = "";
+    
+                        /**
+                         * Endpoint port.
+                         * @member {number} port
+                         * @memberof google.cloud.servicedirectory.v1.Endpoint
+                         * @instance
+                         */
+                        Endpoint.prototype.port = 0;
+    
+                        /**
+                         * Endpoint annotations.
+                         * @member {Object.<string,string>} annotations
+                         * @memberof google.cloud.servicedirectory.v1.Endpoint
+                         * @instance
+                         */
+                        Endpoint.prototype.annotations = $util.emptyObject;
+    
+                        /**
+                         * Creates a new Endpoint instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.servicedirectory.v1.Endpoint
+                         * @static
+                         * @param {google.cloud.servicedirectory.v1.IEndpoint=} [properties] Properties to set
+                         * @returns {google.cloud.servicedirectory.v1.Endpoint} Endpoint instance
+                         */
+                        Endpoint.create = function create(properties) {
+                            return new Endpoint(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified Endpoint message. Does not implicitly {@link google.cloud.servicedirectory.v1.Endpoint.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.servicedirectory.v1.Endpoint
+                         * @static
+                         * @param {google.cloud.servicedirectory.v1.IEndpoint} message Endpoint message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Endpoint.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.address != null && Object.hasOwnProperty.call(message, "address"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.address);
+                            if (message.port != null && Object.hasOwnProperty.call(message, "port"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.port);
+                            if (message.annotations != null && Object.hasOwnProperty.call(message, "annotations"))
+                                for (var keys = Object.keys(message.annotations), i = 0; i < keys.length; ++i)
+                                    writer.uint32(/* id 5, wireType 2 =*/42).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.annotations[keys[i]]).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified Endpoint message, length delimited. Does not implicitly {@link google.cloud.servicedirectory.v1.Endpoint.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.servicedirectory.v1.Endpoint
+                         * @static
+                         * @param {google.cloud.servicedirectory.v1.IEndpoint} message Endpoint message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Endpoint.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an Endpoint message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.servicedirectory.v1.Endpoint
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.servicedirectory.v1.Endpoint} Endpoint
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Endpoint.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.servicedirectory.v1.Endpoint(), key, value;
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                case 2:
+                                    message.address = reader.string();
+                                    break;
+                                case 3:
+                                    message.port = reader.int32();
+                                    break;
+                                case 5:
+                                    if (message.annotations === $util.emptyObject)
+                                        message.annotations = {};
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = "";
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = reader.string();
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.annotations[key] = value;
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an Endpoint message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.servicedirectory.v1.Endpoint
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.servicedirectory.v1.Endpoint} Endpoint
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Endpoint.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an Endpoint message.
+                         * @function verify
+                         * @memberof google.cloud.servicedirectory.v1.Endpoint
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        Endpoint.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.address != null && message.hasOwnProperty("address"))
+                                if (!$util.isString(message.address))
+                                    return "address: string expected";
+                            if (message.port != null && message.hasOwnProperty("port"))
+                                if (!$util.isInteger(message.port))
+                                    return "port: integer expected";
+                            if (message.annotations != null && message.hasOwnProperty("annotations")) {
+                                if (!$util.isObject(message.annotations))
+                                    return "annotations: object expected";
+                                var key = Object.keys(message.annotations);
+                                for (var i = 0; i < key.length; ++i)
+                                    if (!$util.isString(message.annotations[key[i]]))
+                                        return "annotations: string{k:string} expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an Endpoint message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.servicedirectory.v1.Endpoint
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.servicedirectory.v1.Endpoint} Endpoint
+                         */
+                        Endpoint.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.servicedirectory.v1.Endpoint)
+                                return object;
+                            var message = new $root.google.cloud.servicedirectory.v1.Endpoint();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.address != null)
+                                message.address = String(object.address);
+                            if (object.port != null)
+                                message.port = object.port | 0;
+                            if (object.annotations) {
+                                if (typeof object.annotations !== "object")
+                                    throw TypeError(".google.cloud.servicedirectory.v1.Endpoint.annotations: object expected");
+                                message.annotations = {};
+                                for (var keys = Object.keys(object.annotations), i = 0; i < keys.length; ++i)
+                                    message.annotations[keys[i]] = String(object.annotations[keys[i]]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an Endpoint message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.servicedirectory.v1.Endpoint
+                         * @static
+                         * @param {google.cloud.servicedirectory.v1.Endpoint} message Endpoint
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        Endpoint.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.objects || options.defaults)
+                                object.annotations = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.address = "";
+                                object.port = 0;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.address != null && message.hasOwnProperty("address"))
+                                object.address = message.address;
+                            if (message.port != null && message.hasOwnProperty("port"))
+                                object.port = message.port;
+                            var keys2;
+                            if (message.annotations && (keys2 = Object.keys(message.annotations)).length) {
+                                object.annotations = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.annotations[keys2[j]] = message.annotations[keys2[j]];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this Endpoint to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.servicedirectory.v1.Endpoint
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        Endpoint.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return Endpoint;
+                    })();
+    
+                    v1.LookupService = (function() {
+    
+                        /**
+                         * Constructs a new LookupService service.
+                         * @memberof google.cloud.servicedirectory.v1
+                         * @classdesc Represents a LookupService
+                         * @extends $protobuf.rpc.Service
+                         * @constructor
+                         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                         */
+                        function LookupService(rpcImpl, requestDelimited, responseDelimited) {
+                            $protobuf.rpc.Service.call(this, rpcImpl, requestDelimited, responseDelimited);
+                        }
+    
+                        (LookupService.prototype = Object.create($protobuf.rpc.Service.prototype)).constructor = LookupService;
+    
+                        /**
+                         * Creates new LookupService service using the specified rpc implementation.
+                         * @function create
+                         * @memberof google.cloud.servicedirectory.v1.LookupService
+                         * @static
+                         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                         * @returns {LookupService} RPC service. Useful where requests and/or responses are streamed.
+                         */
+                        LookupService.create = function create(rpcImpl, requestDelimited, responseDelimited) {
+                            return new this(rpcImpl, requestDelimited, responseDelimited);
+                        };
+    
+                        /**
+                         * Callback as used by {@link google.cloud.servicedirectory.v1.LookupService#resolveService}.
+                         * @memberof google.cloud.servicedirectory.v1.LookupService
+                         * @typedef ResolveServiceCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.servicedirectory.v1.ResolveServiceResponse} [response] ResolveServiceResponse
+                         */
+    
+                        /**
+                         * Calls ResolveService.
+                         * @function resolveService
+                         * @memberof google.cloud.servicedirectory.v1.LookupService
+                         * @instance
+                         * @param {google.cloud.servicedirectory.v1.IResolveServiceRequest} request ResolveServiceRequest message or plain object
+                         * @param {google.cloud.servicedirectory.v1.LookupService.ResolveServiceCallback} callback Node-style callback called with the error, if any, and ResolveServiceResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(LookupService.prototype.resolveService = function resolveService(request, callback) {
+                            return this.rpcCall(resolveService, $root.google.cloud.servicedirectory.v1.ResolveServiceRequest, $root.google.cloud.servicedirectory.v1.ResolveServiceResponse, request, callback);
+                        }, "name", { value: "ResolveService" });
+    
+                        /**
+                         * Calls ResolveService.
+                         * @function resolveService
+                         * @memberof google.cloud.servicedirectory.v1.LookupService
+                         * @instance
+                         * @param {google.cloud.servicedirectory.v1.IResolveServiceRequest} request ResolveServiceRequest message or plain object
+                         * @returns {Promise<google.cloud.servicedirectory.v1.ResolveServiceResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        return LookupService;
+                    })();
+    
+                    v1.ResolveServiceRequest = (function() {
+    
+                        /**
+                         * Properties of a ResolveServiceRequest.
+                         * @memberof google.cloud.servicedirectory.v1
+                         * @interface IResolveServiceRequest
+                         * @property {string|null} [name] ResolveServiceRequest name
+                         * @property {number|null} [maxEndpoints] ResolveServiceRequest maxEndpoints
+                         * @property {string|null} [endpointFilter] ResolveServiceRequest endpointFilter
+                         */
+    
+                        /**
+                         * Constructs a new ResolveServiceRequest.
+                         * @memberof google.cloud.servicedirectory.v1
+                         * @classdesc Represents a ResolveServiceRequest.
+                         * @implements IResolveServiceRequest
+                         * @constructor
+                         * @param {google.cloud.servicedirectory.v1.IResolveServiceRequest=} [properties] Properties to set
+                         */
+                        function ResolveServiceRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ResolveServiceRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.servicedirectory.v1.ResolveServiceRequest
+                         * @instance
+                         */
+                        ResolveServiceRequest.prototype.name = "";
+    
+                        /**
+                         * ResolveServiceRequest maxEndpoints.
+                         * @member {number} maxEndpoints
+                         * @memberof google.cloud.servicedirectory.v1.ResolveServiceRequest
+                         * @instance
+                         */
+                        ResolveServiceRequest.prototype.maxEndpoints = 0;
+    
+                        /**
+                         * ResolveServiceRequest endpointFilter.
+                         * @member {string} endpointFilter
+                         * @memberof google.cloud.servicedirectory.v1.ResolveServiceRequest
+                         * @instance
+                         */
+                        ResolveServiceRequest.prototype.endpointFilter = "";
+    
+                        /**
+                         * Creates a new ResolveServiceRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.servicedirectory.v1.ResolveServiceRequest
+                         * @static
+                         * @param {google.cloud.servicedirectory.v1.IResolveServiceRequest=} [properties] Properties to set
+                         * @returns {google.cloud.servicedirectory.v1.ResolveServiceRequest} ResolveServiceRequest instance
+                         */
+                        ResolveServiceRequest.create = function create(properties) {
+                            return new ResolveServiceRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ResolveServiceRequest message. Does not implicitly {@link google.cloud.servicedirectory.v1.ResolveServiceRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.servicedirectory.v1.ResolveServiceRequest
+                         * @static
+                         * @param {google.cloud.servicedirectory.v1.IResolveServiceRequest} message ResolveServiceRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ResolveServiceRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.maxEndpoints != null && Object.hasOwnProperty.call(message, "maxEndpoints"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.maxEndpoints);
+                            if (message.endpointFilter != null && Object.hasOwnProperty.call(message, "endpointFilter"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.endpointFilter);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ResolveServiceRequest message, length delimited. Does not implicitly {@link google.cloud.servicedirectory.v1.ResolveServiceRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.servicedirectory.v1.ResolveServiceRequest
+                         * @static
+                         * @param {google.cloud.servicedirectory.v1.IResolveServiceRequest} message ResolveServiceRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ResolveServiceRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ResolveServiceRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.servicedirectory.v1.ResolveServiceRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.servicedirectory.v1.ResolveServiceRequest} ResolveServiceRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ResolveServiceRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.servicedirectory.v1.ResolveServiceRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                case 2:
+                                    message.maxEndpoints = reader.int32();
+                                    break;
+                                case 3:
+                                    message.endpointFilter = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ResolveServiceRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.servicedirectory.v1.ResolveServiceRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.servicedirectory.v1.ResolveServiceRequest} ResolveServiceRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ResolveServiceRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ResolveServiceRequest message.
+                         * @function verify
+                         * @memberof google.cloud.servicedirectory.v1.ResolveServiceRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ResolveServiceRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.maxEndpoints != null && message.hasOwnProperty("maxEndpoints"))
+                                if (!$util.isInteger(message.maxEndpoints))
+                                    return "maxEndpoints: integer expected";
+                            if (message.endpointFilter != null && message.hasOwnProperty("endpointFilter"))
+                                if (!$util.isString(message.endpointFilter))
+                                    return "endpointFilter: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ResolveServiceRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.servicedirectory.v1.ResolveServiceRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.servicedirectory.v1.ResolveServiceRequest} ResolveServiceRequest
+                         */
+                        ResolveServiceRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.servicedirectory.v1.ResolveServiceRequest)
+                                return object;
+                            var message = new $root.google.cloud.servicedirectory.v1.ResolveServiceRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.maxEndpoints != null)
+                                message.maxEndpoints = object.maxEndpoints | 0;
+                            if (object.endpointFilter != null)
+                                message.endpointFilter = String(object.endpointFilter);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ResolveServiceRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.servicedirectory.v1.ResolveServiceRequest
+                         * @static
+                         * @param {google.cloud.servicedirectory.v1.ResolveServiceRequest} message ResolveServiceRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ResolveServiceRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.maxEndpoints = 0;
+                                object.endpointFilter = "";
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.maxEndpoints != null && message.hasOwnProperty("maxEndpoints"))
+                                object.maxEndpoints = message.maxEndpoints;
+                            if (message.endpointFilter != null && message.hasOwnProperty("endpointFilter"))
+                                object.endpointFilter = message.endpointFilter;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ResolveServiceRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.servicedirectory.v1.ResolveServiceRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ResolveServiceRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ResolveServiceRequest;
+                    })();
+    
+                    v1.ResolveServiceResponse = (function() {
+    
+                        /**
+                         * Properties of a ResolveServiceResponse.
+                         * @memberof google.cloud.servicedirectory.v1
+                         * @interface IResolveServiceResponse
+                         * @property {google.cloud.servicedirectory.v1.IService|null} [service] ResolveServiceResponse service
+                         */
+    
+                        /**
+                         * Constructs a new ResolveServiceResponse.
+                         * @memberof google.cloud.servicedirectory.v1
+                         * @classdesc Represents a ResolveServiceResponse.
+                         * @implements IResolveServiceResponse
+                         * @constructor
+                         * @param {google.cloud.servicedirectory.v1.IResolveServiceResponse=} [properties] Properties to set
+                         */
+                        function ResolveServiceResponse(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ResolveServiceResponse service.
+                         * @member {google.cloud.servicedirectory.v1.IService|null|undefined} service
+                         * @memberof google.cloud.servicedirectory.v1.ResolveServiceResponse
+                         * @instance
+                         */
+                        ResolveServiceResponse.prototype.service = null;
+    
+                        /**
+                         * Creates a new ResolveServiceResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.servicedirectory.v1.ResolveServiceResponse
+                         * @static
+                         * @param {google.cloud.servicedirectory.v1.IResolveServiceResponse=} [properties] Properties to set
+                         * @returns {google.cloud.servicedirectory.v1.ResolveServiceResponse} ResolveServiceResponse instance
+                         */
+                        ResolveServiceResponse.create = function create(properties) {
+                            return new ResolveServiceResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ResolveServiceResponse message. Does not implicitly {@link google.cloud.servicedirectory.v1.ResolveServiceResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.servicedirectory.v1.ResolveServiceResponse
+                         * @static
+                         * @param {google.cloud.servicedirectory.v1.IResolveServiceResponse} message ResolveServiceResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ResolveServiceResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.service != null && Object.hasOwnProperty.call(message, "service"))
+                                $root.google.cloud.servicedirectory.v1.Service.encode(message.service, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ResolveServiceResponse message, length delimited. Does not implicitly {@link google.cloud.servicedirectory.v1.ResolveServiceResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.servicedirectory.v1.ResolveServiceResponse
+                         * @static
+                         * @param {google.cloud.servicedirectory.v1.IResolveServiceResponse} message ResolveServiceResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ResolveServiceResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ResolveServiceResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.servicedirectory.v1.ResolveServiceResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.servicedirectory.v1.ResolveServiceResponse} ResolveServiceResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ResolveServiceResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.servicedirectory.v1.ResolveServiceResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.service = $root.google.cloud.servicedirectory.v1.Service.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ResolveServiceResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.servicedirectory.v1.ResolveServiceResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.servicedirectory.v1.ResolveServiceResponse} ResolveServiceResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ResolveServiceResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ResolveServiceResponse message.
+                         * @function verify
+                         * @memberof google.cloud.servicedirectory.v1.ResolveServiceResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ResolveServiceResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.service != null && message.hasOwnProperty("service")) {
+                                var error = $root.google.cloud.servicedirectory.v1.Service.verify(message.service);
+                                if (error)
+                                    return "service." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ResolveServiceResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.servicedirectory.v1.ResolveServiceResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.servicedirectory.v1.ResolveServiceResponse} ResolveServiceResponse
+                         */
+                        ResolveServiceResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.servicedirectory.v1.ResolveServiceResponse)
+                                return object;
+                            var message = new $root.google.cloud.servicedirectory.v1.ResolveServiceResponse();
+                            if (object.service != null) {
+                                if (typeof object.service !== "object")
+                                    throw TypeError(".google.cloud.servicedirectory.v1.ResolveServiceResponse.service: object expected");
+                                message.service = $root.google.cloud.servicedirectory.v1.Service.fromObject(object.service);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ResolveServiceResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.servicedirectory.v1.ResolveServiceResponse
+                         * @static
+                         * @param {google.cloud.servicedirectory.v1.ResolveServiceResponse} message ResolveServiceResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ResolveServiceResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.service = null;
+                            if (message.service != null && message.hasOwnProperty("service"))
+                                object.service = $root.google.cloud.servicedirectory.v1.Service.toObject(message.service, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ResolveServiceResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.servicedirectory.v1.ResolveServiceResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ResolveServiceResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ResolveServiceResponse;
+                    })();
+    
+                    v1.Service = (function() {
+    
+                        /**
+                         * Properties of a Service.
+                         * @memberof google.cloud.servicedirectory.v1
+                         * @interface IService
+                         * @property {string|null} [name] Service name
+                         * @property {Object.<string,string>|null} [annotations] Service annotations
+                         * @property {Array.<google.cloud.servicedirectory.v1.IEndpoint>|null} [endpoints] Service endpoints
+                         */
+    
+                        /**
+                         * Constructs a new Service.
+                         * @memberof google.cloud.servicedirectory.v1
+                         * @classdesc Represents a Service.
+                         * @implements IService
+                         * @constructor
+                         * @param {google.cloud.servicedirectory.v1.IService=} [properties] Properties to set
+                         */
+                        function Service(properties) {
+                            this.annotations = {};
+                            this.endpoints = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Service name.
+                         * @member {string} name
+                         * @memberof google.cloud.servicedirectory.v1.Service
+                         * @instance
+                         */
+                        Service.prototype.name = "";
+    
+                        /**
+                         * Service annotations.
+                         * @member {Object.<string,string>} annotations
+                         * @memberof google.cloud.servicedirectory.v1.Service
+                         * @instance
+                         */
+                        Service.prototype.annotations = $util.emptyObject;
+    
+                        /**
+                         * Service endpoints.
+                         * @member {Array.<google.cloud.servicedirectory.v1.IEndpoint>} endpoints
+                         * @memberof google.cloud.servicedirectory.v1.Service
+                         * @instance
+                         */
+                        Service.prototype.endpoints = $util.emptyArray;
+    
+                        /**
+                         * Creates a new Service instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.servicedirectory.v1.Service
+                         * @static
+                         * @param {google.cloud.servicedirectory.v1.IService=} [properties] Properties to set
+                         * @returns {google.cloud.servicedirectory.v1.Service} Service instance
+                         */
+                        Service.create = function create(properties) {
+                            return new Service(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified Service message. Does not implicitly {@link google.cloud.servicedirectory.v1.Service.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.servicedirectory.v1.Service
+                         * @static
+                         * @param {google.cloud.servicedirectory.v1.IService} message Service message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Service.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.endpoints != null && message.endpoints.length)
+                                for (var i = 0; i < message.endpoints.length; ++i)
+                                    $root.google.cloud.servicedirectory.v1.Endpoint.encode(message.endpoints[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.annotations != null && Object.hasOwnProperty.call(message, "annotations"))
+                                for (var keys = Object.keys(message.annotations), i = 0; i < keys.length; ++i)
+                                    writer.uint32(/* id 4, wireType 2 =*/34).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.annotations[keys[i]]).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified Service message, length delimited. Does not implicitly {@link google.cloud.servicedirectory.v1.Service.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.servicedirectory.v1.Service
+                         * @static
+                         * @param {google.cloud.servicedirectory.v1.IService} message Service message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Service.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a Service message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.servicedirectory.v1.Service
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.servicedirectory.v1.Service} Service
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Service.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.servicedirectory.v1.Service(), key, value;
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                case 4:
+                                    if (message.annotations === $util.emptyObject)
+                                        message.annotations = {};
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = "";
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = reader.string();
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.annotations[key] = value;
+                                    break;
+                                case 3:
+                                    if (!(message.endpoints && message.endpoints.length))
+                                        message.endpoints = [];
+                                    message.endpoints.push($root.google.cloud.servicedirectory.v1.Endpoint.decode(reader, reader.uint32()));
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a Service message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.servicedirectory.v1.Service
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.servicedirectory.v1.Service} Service
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Service.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a Service message.
+                         * @function verify
+                         * @memberof google.cloud.servicedirectory.v1.Service
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        Service.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.annotations != null && message.hasOwnProperty("annotations")) {
+                                if (!$util.isObject(message.annotations))
+                                    return "annotations: object expected";
+                                var key = Object.keys(message.annotations);
+                                for (var i = 0; i < key.length; ++i)
+                                    if (!$util.isString(message.annotations[key[i]]))
+                                        return "annotations: string{k:string} expected";
+                            }
+                            if (message.endpoints != null && message.hasOwnProperty("endpoints")) {
+                                if (!Array.isArray(message.endpoints))
+                                    return "endpoints: array expected";
+                                for (var i = 0; i < message.endpoints.length; ++i) {
+                                    var error = $root.google.cloud.servicedirectory.v1.Endpoint.verify(message.endpoints[i]);
+                                    if (error)
+                                        return "endpoints." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a Service message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.servicedirectory.v1.Service
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.servicedirectory.v1.Service} Service
+                         */
+                        Service.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.servicedirectory.v1.Service)
+                                return object;
+                            var message = new $root.google.cloud.servicedirectory.v1.Service();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.annotations) {
+                                if (typeof object.annotations !== "object")
+                                    throw TypeError(".google.cloud.servicedirectory.v1.Service.annotations: object expected");
+                                message.annotations = {};
+                                for (var keys = Object.keys(object.annotations), i = 0; i < keys.length; ++i)
+                                    message.annotations[keys[i]] = String(object.annotations[keys[i]]);
+                            }
+                            if (object.endpoints) {
+                                if (!Array.isArray(object.endpoints))
+                                    throw TypeError(".google.cloud.servicedirectory.v1.Service.endpoints: array expected");
+                                message.endpoints = [];
+                                for (var i = 0; i < object.endpoints.length; ++i) {
+                                    if (typeof object.endpoints[i] !== "object")
+                                        throw TypeError(".google.cloud.servicedirectory.v1.Service.endpoints: object expected");
+                                    message.endpoints[i] = $root.google.cloud.servicedirectory.v1.Endpoint.fromObject(object.endpoints[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a Service message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.servicedirectory.v1.Service
+                         * @static
+                         * @param {google.cloud.servicedirectory.v1.Service} message Service
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        Service.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.endpoints = [];
+                            if (options.objects || options.defaults)
+                                object.annotations = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.endpoints && message.endpoints.length) {
+                                object.endpoints = [];
+                                for (var j = 0; j < message.endpoints.length; ++j)
+                                    object.endpoints[j] = $root.google.cloud.servicedirectory.v1.Endpoint.toObject(message.endpoints[j], options);
+                            }
+                            var keys2;
+                            if (message.annotations && (keys2 = Object.keys(message.annotations)).length) {
+                                object.annotations = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.annotations[keys2[j]] = message.annotations[keys2[j]];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this Service to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.servicedirectory.v1.Service
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        Service.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return Service;
+                    })();
+    
+                    v1.Namespace = (function() {
+    
+                        /**
+                         * Properties of a Namespace.
+                         * @memberof google.cloud.servicedirectory.v1
+                         * @interface INamespace
+                         * @property {string|null} [name] Namespace name
+                         * @property {Object.<string,string>|null} [labels] Namespace labels
+                         */
+    
+                        /**
+                         * Constructs a new Namespace.
+                         * @memberof google.cloud.servicedirectory.v1
+                         * @classdesc Represents a Namespace.
+                         * @implements INamespace
+                         * @constructor
+                         * @param {google.cloud.servicedirectory.v1.INamespace=} [properties] Properties to set
+                         */
+                        function Namespace(properties) {
+                            this.labels = {};
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Namespace name.
+                         * @member {string} name
+                         * @memberof google.cloud.servicedirectory.v1.Namespace
+                         * @instance
+                         */
+                        Namespace.prototype.name = "";
+    
+                        /**
+                         * Namespace labels.
+                         * @member {Object.<string,string>} labels
+                         * @memberof google.cloud.servicedirectory.v1.Namespace
+                         * @instance
+                         */
+                        Namespace.prototype.labels = $util.emptyObject;
+    
+                        /**
+                         * Creates a new Namespace instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.servicedirectory.v1.Namespace
+                         * @static
+                         * @param {google.cloud.servicedirectory.v1.INamespace=} [properties] Properties to set
+                         * @returns {google.cloud.servicedirectory.v1.Namespace} Namespace instance
+                         */
+                        Namespace.create = function create(properties) {
+                            return new Namespace(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified Namespace message. Does not implicitly {@link google.cloud.servicedirectory.v1.Namespace.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.servicedirectory.v1.Namespace
+                         * @static
+                         * @param {google.cloud.servicedirectory.v1.INamespace} message Namespace message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Namespace.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.labels != null && Object.hasOwnProperty.call(message, "labels"))
+                                for (var keys = Object.keys(message.labels), i = 0; i < keys.length; ++i)
+                                    writer.uint32(/* id 2, wireType 2 =*/18).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.labels[keys[i]]).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified Namespace message, length delimited. Does not implicitly {@link google.cloud.servicedirectory.v1.Namespace.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.servicedirectory.v1.Namespace
+                         * @static
+                         * @param {google.cloud.servicedirectory.v1.INamespace} message Namespace message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Namespace.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a Namespace message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.servicedirectory.v1.Namespace
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.servicedirectory.v1.Namespace} Namespace
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Namespace.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.servicedirectory.v1.Namespace(), key, value;
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                case 2:
+                                    if (message.labels === $util.emptyObject)
+                                        message.labels = {};
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = "";
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = reader.string();
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.labels[key] = value;
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a Namespace message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.servicedirectory.v1.Namespace
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.servicedirectory.v1.Namespace} Namespace
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Namespace.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a Namespace message.
+                         * @function verify
+                         * @memberof google.cloud.servicedirectory.v1.Namespace
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        Namespace.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.labels != null && message.hasOwnProperty("labels")) {
+                                if (!$util.isObject(message.labels))
+                                    return "labels: object expected";
+                                var key = Object.keys(message.labels);
+                                for (var i = 0; i < key.length; ++i)
+                                    if (!$util.isString(message.labels[key[i]]))
+                                        return "labels: string{k:string} expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a Namespace message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.servicedirectory.v1.Namespace
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.servicedirectory.v1.Namespace} Namespace
+                         */
+                        Namespace.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.servicedirectory.v1.Namespace)
+                                return object;
+                            var message = new $root.google.cloud.servicedirectory.v1.Namespace();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.labels) {
+                                if (typeof object.labels !== "object")
+                                    throw TypeError(".google.cloud.servicedirectory.v1.Namespace.labels: object expected");
+                                message.labels = {};
+                                for (var keys = Object.keys(object.labels), i = 0; i < keys.length; ++i)
+                                    message.labels[keys[i]] = String(object.labels[keys[i]]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a Namespace message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.servicedirectory.v1.Namespace
+                         * @static
+                         * @param {google.cloud.servicedirectory.v1.Namespace} message Namespace
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        Namespace.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.objects || options.defaults)
+                                object.labels = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            var keys2;
+                            if (message.labels && (keys2 = Object.keys(message.labels)).length) {
+                                object.labels = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.labels[keys2[j]] = message.labels[keys2[j]];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this Namespace to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.servicedirectory.v1.Namespace
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        Namespace.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return Namespace;
+                    })();
+    
+                    v1.RegistrationService = (function() {
+    
+                        /**
+                         * Constructs a new RegistrationService service.
+                         * @memberof google.cloud.servicedirectory.v1
+                         * @classdesc Represents a RegistrationService
+                         * @extends $protobuf.rpc.Service
+                         * @constructor
+                         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                         */
+                        function RegistrationService(rpcImpl, requestDelimited, responseDelimited) {
+                            $protobuf.rpc.Service.call(this, rpcImpl, requestDelimited, responseDelimited);
+                        }
+    
+                        (RegistrationService.prototype = Object.create($protobuf.rpc.Service.prototype)).constructor = RegistrationService;
+    
+                        /**
+                         * Creates new RegistrationService service using the specified rpc implementation.
+                         * @function create
+                         * @memberof google.cloud.servicedirectory.v1.RegistrationService
+                         * @static
+                         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                         * @returns {RegistrationService} RPC service. Useful where requests and/or responses are streamed.
+                         */
+                        RegistrationService.create = function create(rpcImpl, requestDelimited, responseDelimited) {
+                            return new this(rpcImpl, requestDelimited, responseDelimited);
+                        };
+    
+                        /**
+                         * Callback as used by {@link google.cloud.servicedirectory.v1.RegistrationService#createNamespace}.
+                         * @memberof google.cloud.servicedirectory.v1.RegistrationService
+                         * @typedef CreateNamespaceCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.servicedirectory.v1.Namespace} [response] Namespace
+                         */
+    
+                        /**
+                         * Calls CreateNamespace.
+                         * @function createNamespace
+                         * @memberof google.cloud.servicedirectory.v1.RegistrationService
+                         * @instance
+                         * @param {google.cloud.servicedirectory.v1.ICreateNamespaceRequest} request CreateNamespaceRequest message or plain object
+                         * @param {google.cloud.servicedirectory.v1.RegistrationService.CreateNamespaceCallback} callback Node-style callback called with the error, if any, and Namespace
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(RegistrationService.prototype.createNamespace = function createNamespace(request, callback) {
+                            return this.rpcCall(createNamespace, $root.google.cloud.servicedirectory.v1.CreateNamespaceRequest, $root.google.cloud.servicedirectory.v1.Namespace, request, callback);
+                        }, "name", { value: "CreateNamespace" });
+    
+                        /**
+                         * Calls CreateNamespace.
+                         * @function createNamespace
+                         * @memberof google.cloud.servicedirectory.v1.RegistrationService
+                         * @instance
+                         * @param {google.cloud.servicedirectory.v1.ICreateNamespaceRequest} request CreateNamespaceRequest message or plain object
+                         * @returns {Promise<google.cloud.servicedirectory.v1.Namespace>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.servicedirectory.v1.RegistrationService#listNamespaces}.
+                         * @memberof google.cloud.servicedirectory.v1.RegistrationService
+                         * @typedef ListNamespacesCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.servicedirectory.v1.ListNamespacesResponse} [response] ListNamespacesResponse
+                         */
+    
+                        /**
+                         * Calls ListNamespaces.
+                         * @function listNamespaces
+                         * @memberof google.cloud.servicedirectory.v1.RegistrationService
+                         * @instance
+                         * @param {google.cloud.servicedirectory.v1.IListNamespacesRequest} request ListNamespacesRequest message or plain object
+                         * @param {google.cloud.servicedirectory.v1.RegistrationService.ListNamespacesCallback} callback Node-style callback called with the error, if any, and ListNamespacesResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(RegistrationService.prototype.listNamespaces = function listNamespaces(request, callback) {
+                            return this.rpcCall(listNamespaces, $root.google.cloud.servicedirectory.v1.ListNamespacesRequest, $root.google.cloud.servicedirectory.v1.ListNamespacesResponse, request, callback);
+                        }, "name", { value: "ListNamespaces" });
+    
+                        /**
+                         * Calls ListNamespaces.
+                         * @function listNamespaces
+                         * @memberof google.cloud.servicedirectory.v1.RegistrationService
+                         * @instance
+                         * @param {google.cloud.servicedirectory.v1.IListNamespacesRequest} request ListNamespacesRequest message or plain object
+                         * @returns {Promise<google.cloud.servicedirectory.v1.ListNamespacesResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.servicedirectory.v1.RegistrationService#getNamespace}.
+                         * @memberof google.cloud.servicedirectory.v1.RegistrationService
+                         * @typedef GetNamespaceCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.servicedirectory.v1.Namespace} [response] Namespace
+                         */
+    
+                        /**
+                         * Calls GetNamespace.
+                         * @function getNamespace
+                         * @memberof google.cloud.servicedirectory.v1.RegistrationService
+                         * @instance
+                         * @param {google.cloud.servicedirectory.v1.IGetNamespaceRequest} request GetNamespaceRequest message or plain object
+                         * @param {google.cloud.servicedirectory.v1.RegistrationService.GetNamespaceCallback} callback Node-style callback called with the error, if any, and Namespace
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(RegistrationService.prototype.getNamespace = function getNamespace(request, callback) {
+                            return this.rpcCall(getNamespace, $root.google.cloud.servicedirectory.v1.GetNamespaceRequest, $root.google.cloud.servicedirectory.v1.Namespace, request, callback);
+                        }, "name", { value: "GetNamespace" });
+    
+                        /**
+                         * Calls GetNamespace.
+                         * @function getNamespace
+                         * @memberof google.cloud.servicedirectory.v1.RegistrationService
+                         * @instance
+                         * @param {google.cloud.servicedirectory.v1.IGetNamespaceRequest} request GetNamespaceRequest message or plain object
+                         * @returns {Promise<google.cloud.servicedirectory.v1.Namespace>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.servicedirectory.v1.RegistrationService#updateNamespace}.
+                         * @memberof google.cloud.servicedirectory.v1.RegistrationService
+                         * @typedef UpdateNamespaceCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.servicedirectory.v1.Namespace} [response] Namespace
+                         */
+    
+                        /**
+                         * Calls UpdateNamespace.
+                         * @function updateNamespace
+                         * @memberof google.cloud.servicedirectory.v1.RegistrationService
+                         * @instance
+                         * @param {google.cloud.servicedirectory.v1.IUpdateNamespaceRequest} request UpdateNamespaceRequest message or plain object
+                         * @param {google.cloud.servicedirectory.v1.RegistrationService.UpdateNamespaceCallback} callback Node-style callback called with the error, if any, and Namespace
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(RegistrationService.prototype.updateNamespace = function updateNamespace(request, callback) {
+                            return this.rpcCall(updateNamespace, $root.google.cloud.servicedirectory.v1.UpdateNamespaceRequest, $root.google.cloud.servicedirectory.v1.Namespace, request, callback);
+                        }, "name", { value: "UpdateNamespace" });
+    
+                        /**
+                         * Calls UpdateNamespace.
+                         * @function updateNamespace
+                         * @memberof google.cloud.servicedirectory.v1.RegistrationService
+                         * @instance
+                         * @param {google.cloud.servicedirectory.v1.IUpdateNamespaceRequest} request UpdateNamespaceRequest message or plain object
+                         * @returns {Promise<google.cloud.servicedirectory.v1.Namespace>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.servicedirectory.v1.RegistrationService#deleteNamespace}.
+                         * @memberof google.cloud.servicedirectory.v1.RegistrationService
+                         * @typedef DeleteNamespaceCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.protobuf.Empty} [response] Empty
+                         */
+    
+                        /**
+                         * Calls DeleteNamespace.
+                         * @function deleteNamespace
+                         * @memberof google.cloud.servicedirectory.v1.RegistrationService
+                         * @instance
+                         * @param {google.cloud.servicedirectory.v1.IDeleteNamespaceRequest} request DeleteNamespaceRequest message or plain object
+                         * @param {google.cloud.servicedirectory.v1.RegistrationService.DeleteNamespaceCallback} callback Node-style callback called with the error, if any, and Empty
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(RegistrationService.prototype.deleteNamespace = function deleteNamespace(request, callback) {
+                            return this.rpcCall(deleteNamespace, $root.google.cloud.servicedirectory.v1.DeleteNamespaceRequest, $root.google.protobuf.Empty, request, callback);
+                        }, "name", { value: "DeleteNamespace" });
+    
+                        /**
+                         * Calls DeleteNamespace.
+                         * @function deleteNamespace
+                         * @memberof google.cloud.servicedirectory.v1.RegistrationService
+                         * @instance
+                         * @param {google.cloud.servicedirectory.v1.IDeleteNamespaceRequest} request DeleteNamespaceRequest message or plain object
+                         * @returns {Promise<google.protobuf.Empty>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.servicedirectory.v1.RegistrationService#createService}.
+                         * @memberof google.cloud.servicedirectory.v1.RegistrationService
+                         * @typedef CreateServiceCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.servicedirectory.v1.Service} [response] Service
+                         */
+    
+                        /**
+                         * Calls CreateService.
+                         * @function createService
+                         * @memberof google.cloud.servicedirectory.v1.RegistrationService
+                         * @instance
+                         * @param {google.cloud.servicedirectory.v1.ICreateServiceRequest} request CreateServiceRequest message or plain object
+                         * @param {google.cloud.servicedirectory.v1.RegistrationService.CreateServiceCallback} callback Node-style callback called with the error, if any, and Service
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(RegistrationService.prototype.createService = function createService(request, callback) {
+                            return this.rpcCall(createService, $root.google.cloud.servicedirectory.v1.CreateServiceRequest, $root.google.cloud.servicedirectory.v1.Service, request, callback);
+                        }, "name", { value: "CreateService" });
+    
+                        /**
+                         * Calls CreateService.
+                         * @function createService
+                         * @memberof google.cloud.servicedirectory.v1.RegistrationService
+                         * @instance
+                         * @param {google.cloud.servicedirectory.v1.ICreateServiceRequest} request CreateServiceRequest message or plain object
+                         * @returns {Promise<google.cloud.servicedirectory.v1.Service>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.servicedirectory.v1.RegistrationService#listServices}.
+                         * @memberof google.cloud.servicedirectory.v1.RegistrationService
+                         * @typedef ListServicesCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.servicedirectory.v1.ListServicesResponse} [response] ListServicesResponse
+                         */
+    
+                        /**
+                         * Calls ListServices.
+                         * @function listServices
+                         * @memberof google.cloud.servicedirectory.v1.RegistrationService
+                         * @instance
+                         * @param {google.cloud.servicedirectory.v1.IListServicesRequest} request ListServicesRequest message or plain object
+                         * @param {google.cloud.servicedirectory.v1.RegistrationService.ListServicesCallback} callback Node-style callback called with the error, if any, and ListServicesResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(RegistrationService.prototype.listServices = function listServices(request, callback) {
+                            return this.rpcCall(listServices, $root.google.cloud.servicedirectory.v1.ListServicesRequest, $root.google.cloud.servicedirectory.v1.ListServicesResponse, request, callback);
+                        }, "name", { value: "ListServices" });
+    
+                        /**
+                         * Calls ListServices.
+                         * @function listServices
+                         * @memberof google.cloud.servicedirectory.v1.RegistrationService
+                         * @instance
+                         * @param {google.cloud.servicedirectory.v1.IListServicesRequest} request ListServicesRequest message or plain object
+                         * @returns {Promise<google.cloud.servicedirectory.v1.ListServicesResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.servicedirectory.v1.RegistrationService#getService}.
+                         * @memberof google.cloud.servicedirectory.v1.RegistrationService
+                         * @typedef GetServiceCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.servicedirectory.v1.Service} [response] Service
+                         */
+    
+                        /**
+                         * Calls GetService.
+                         * @function getService
+                         * @memberof google.cloud.servicedirectory.v1.RegistrationService
+                         * @instance
+                         * @param {google.cloud.servicedirectory.v1.IGetServiceRequest} request GetServiceRequest message or plain object
+                         * @param {google.cloud.servicedirectory.v1.RegistrationService.GetServiceCallback} callback Node-style callback called with the error, if any, and Service
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(RegistrationService.prototype.getService = function getService(request, callback) {
+                            return this.rpcCall(getService, $root.google.cloud.servicedirectory.v1.GetServiceRequest, $root.google.cloud.servicedirectory.v1.Service, request, callback);
+                        }, "name", { value: "GetService" });
+    
+                        /**
+                         * Calls GetService.
+                         * @function getService
+                         * @memberof google.cloud.servicedirectory.v1.RegistrationService
+                         * @instance
+                         * @param {google.cloud.servicedirectory.v1.IGetServiceRequest} request GetServiceRequest message or plain object
+                         * @returns {Promise<google.cloud.servicedirectory.v1.Service>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.servicedirectory.v1.RegistrationService#updateService}.
+                         * @memberof google.cloud.servicedirectory.v1.RegistrationService
+                         * @typedef UpdateServiceCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.servicedirectory.v1.Service} [response] Service
+                         */
+    
+                        /**
+                         * Calls UpdateService.
+                         * @function updateService
+                         * @memberof google.cloud.servicedirectory.v1.RegistrationService
+                         * @instance
+                         * @param {google.cloud.servicedirectory.v1.IUpdateServiceRequest} request UpdateServiceRequest message or plain object
+                         * @param {google.cloud.servicedirectory.v1.RegistrationService.UpdateServiceCallback} callback Node-style callback called with the error, if any, and Service
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(RegistrationService.prototype.updateService = function updateService(request, callback) {
+                            return this.rpcCall(updateService, $root.google.cloud.servicedirectory.v1.UpdateServiceRequest, $root.google.cloud.servicedirectory.v1.Service, request, callback);
+                        }, "name", { value: "UpdateService" });
+    
+                        /**
+                         * Calls UpdateService.
+                         * @function updateService
+                         * @memberof google.cloud.servicedirectory.v1.RegistrationService
+                         * @instance
+                         * @param {google.cloud.servicedirectory.v1.IUpdateServiceRequest} request UpdateServiceRequest message or plain object
+                         * @returns {Promise<google.cloud.servicedirectory.v1.Service>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.servicedirectory.v1.RegistrationService#deleteService}.
+                         * @memberof google.cloud.servicedirectory.v1.RegistrationService
+                         * @typedef DeleteServiceCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.protobuf.Empty} [response] Empty
+                         */
+    
+                        /**
+                         * Calls DeleteService.
+                         * @function deleteService
+                         * @memberof google.cloud.servicedirectory.v1.RegistrationService
+                         * @instance
+                         * @param {google.cloud.servicedirectory.v1.IDeleteServiceRequest} request DeleteServiceRequest message or plain object
+                         * @param {google.cloud.servicedirectory.v1.RegistrationService.DeleteServiceCallback} callback Node-style callback called with the error, if any, and Empty
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(RegistrationService.prototype.deleteService = function deleteService(request, callback) {
+                            return this.rpcCall(deleteService, $root.google.cloud.servicedirectory.v1.DeleteServiceRequest, $root.google.protobuf.Empty, request, callback);
+                        }, "name", { value: "DeleteService" });
+    
+                        /**
+                         * Calls DeleteService.
+                         * @function deleteService
+                         * @memberof google.cloud.servicedirectory.v1.RegistrationService
+                         * @instance
+                         * @param {google.cloud.servicedirectory.v1.IDeleteServiceRequest} request DeleteServiceRequest message or plain object
+                         * @returns {Promise<google.protobuf.Empty>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.servicedirectory.v1.RegistrationService#createEndpoint}.
+                         * @memberof google.cloud.servicedirectory.v1.RegistrationService
+                         * @typedef CreateEndpointCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.servicedirectory.v1.Endpoint} [response] Endpoint
+                         */
+    
+                        /**
+                         * Calls CreateEndpoint.
+                         * @function createEndpoint
+                         * @memberof google.cloud.servicedirectory.v1.RegistrationService
+                         * @instance
+                         * @param {google.cloud.servicedirectory.v1.ICreateEndpointRequest} request CreateEndpointRequest message or plain object
+                         * @param {google.cloud.servicedirectory.v1.RegistrationService.CreateEndpointCallback} callback Node-style callback called with the error, if any, and Endpoint
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(RegistrationService.prototype.createEndpoint = function createEndpoint(request, callback) {
+                            return this.rpcCall(createEndpoint, $root.google.cloud.servicedirectory.v1.CreateEndpointRequest, $root.google.cloud.servicedirectory.v1.Endpoint, request, callback);
+                        }, "name", { value: "CreateEndpoint" });
+    
+                        /**
+                         * Calls CreateEndpoint.
+                         * @function createEndpoint
+                         * @memberof google.cloud.servicedirectory.v1.RegistrationService
+                         * @instance
+                         * @param {google.cloud.servicedirectory.v1.ICreateEndpointRequest} request CreateEndpointRequest message or plain object
+                         * @returns {Promise<google.cloud.servicedirectory.v1.Endpoint>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.servicedirectory.v1.RegistrationService#listEndpoints}.
+                         * @memberof google.cloud.servicedirectory.v1.RegistrationService
+                         * @typedef ListEndpointsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.servicedirectory.v1.ListEndpointsResponse} [response] ListEndpointsResponse
+                         */
+    
+                        /**
+                         * Calls ListEndpoints.
+                         * @function listEndpoints
+                         * @memberof google.cloud.servicedirectory.v1.RegistrationService
+                         * @instance
+                         * @param {google.cloud.servicedirectory.v1.IListEndpointsRequest} request ListEndpointsRequest message or plain object
+                         * @param {google.cloud.servicedirectory.v1.RegistrationService.ListEndpointsCallback} callback Node-style callback called with the error, if any, and ListEndpointsResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(RegistrationService.prototype.listEndpoints = function listEndpoints(request, callback) {
+                            return this.rpcCall(listEndpoints, $root.google.cloud.servicedirectory.v1.ListEndpointsRequest, $root.google.cloud.servicedirectory.v1.ListEndpointsResponse, request, callback);
+                        }, "name", { value: "ListEndpoints" });
+    
+                        /**
+                         * Calls ListEndpoints.
+                         * @function listEndpoints
+                         * @memberof google.cloud.servicedirectory.v1.RegistrationService
+                         * @instance
+                         * @param {google.cloud.servicedirectory.v1.IListEndpointsRequest} request ListEndpointsRequest message or plain object
+                         * @returns {Promise<google.cloud.servicedirectory.v1.ListEndpointsResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.servicedirectory.v1.RegistrationService#getEndpoint}.
+                         * @memberof google.cloud.servicedirectory.v1.RegistrationService
+                         * @typedef GetEndpointCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.servicedirectory.v1.Endpoint} [response] Endpoint
+                         */
+    
+                        /**
+                         * Calls GetEndpoint.
+                         * @function getEndpoint
+                         * @memberof google.cloud.servicedirectory.v1.RegistrationService
+                         * @instance
+                         * @param {google.cloud.servicedirectory.v1.IGetEndpointRequest} request GetEndpointRequest message or plain object
+                         * @param {google.cloud.servicedirectory.v1.RegistrationService.GetEndpointCallback} callback Node-style callback called with the error, if any, and Endpoint
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(RegistrationService.prototype.getEndpoint = function getEndpoint(request, callback) {
+                            return this.rpcCall(getEndpoint, $root.google.cloud.servicedirectory.v1.GetEndpointRequest, $root.google.cloud.servicedirectory.v1.Endpoint, request, callback);
+                        }, "name", { value: "GetEndpoint" });
+    
+                        /**
+                         * Calls GetEndpoint.
+                         * @function getEndpoint
+                         * @memberof google.cloud.servicedirectory.v1.RegistrationService
+                         * @instance
+                         * @param {google.cloud.servicedirectory.v1.IGetEndpointRequest} request GetEndpointRequest message or plain object
+                         * @returns {Promise<google.cloud.servicedirectory.v1.Endpoint>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.servicedirectory.v1.RegistrationService#updateEndpoint}.
+                         * @memberof google.cloud.servicedirectory.v1.RegistrationService
+                         * @typedef UpdateEndpointCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.servicedirectory.v1.Endpoint} [response] Endpoint
+                         */
+    
+                        /**
+                         * Calls UpdateEndpoint.
+                         * @function updateEndpoint
+                         * @memberof google.cloud.servicedirectory.v1.RegistrationService
+                         * @instance
+                         * @param {google.cloud.servicedirectory.v1.IUpdateEndpointRequest} request UpdateEndpointRequest message or plain object
+                         * @param {google.cloud.servicedirectory.v1.RegistrationService.UpdateEndpointCallback} callback Node-style callback called with the error, if any, and Endpoint
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(RegistrationService.prototype.updateEndpoint = function updateEndpoint(request, callback) {
+                            return this.rpcCall(updateEndpoint, $root.google.cloud.servicedirectory.v1.UpdateEndpointRequest, $root.google.cloud.servicedirectory.v1.Endpoint, request, callback);
+                        }, "name", { value: "UpdateEndpoint" });
+    
+                        /**
+                         * Calls UpdateEndpoint.
+                         * @function updateEndpoint
+                         * @memberof google.cloud.servicedirectory.v1.RegistrationService
+                         * @instance
+                         * @param {google.cloud.servicedirectory.v1.IUpdateEndpointRequest} request UpdateEndpointRequest message or plain object
+                         * @returns {Promise<google.cloud.servicedirectory.v1.Endpoint>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.servicedirectory.v1.RegistrationService#deleteEndpoint}.
+                         * @memberof google.cloud.servicedirectory.v1.RegistrationService
+                         * @typedef DeleteEndpointCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.protobuf.Empty} [response] Empty
+                         */
+    
+                        /**
+                         * Calls DeleteEndpoint.
+                         * @function deleteEndpoint
+                         * @memberof google.cloud.servicedirectory.v1.RegistrationService
+                         * @instance
+                         * @param {google.cloud.servicedirectory.v1.IDeleteEndpointRequest} request DeleteEndpointRequest message or plain object
+                         * @param {google.cloud.servicedirectory.v1.RegistrationService.DeleteEndpointCallback} callback Node-style callback called with the error, if any, and Empty
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(RegistrationService.prototype.deleteEndpoint = function deleteEndpoint(request, callback) {
+                            return this.rpcCall(deleteEndpoint, $root.google.cloud.servicedirectory.v1.DeleteEndpointRequest, $root.google.protobuf.Empty, request, callback);
+                        }, "name", { value: "DeleteEndpoint" });
+    
+                        /**
+                         * Calls DeleteEndpoint.
+                         * @function deleteEndpoint
+                         * @memberof google.cloud.servicedirectory.v1.RegistrationService
+                         * @instance
+                         * @param {google.cloud.servicedirectory.v1.IDeleteEndpointRequest} request DeleteEndpointRequest message or plain object
+                         * @returns {Promise<google.protobuf.Empty>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.servicedirectory.v1.RegistrationService#getIamPolicy}.
+                         * @memberof google.cloud.servicedirectory.v1.RegistrationService
+                         * @typedef GetIamPolicyCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.iam.v1.Policy} [response] Policy
+                         */
+    
+                        /**
+                         * Calls GetIamPolicy.
+                         * @function getIamPolicy
+                         * @memberof google.cloud.servicedirectory.v1.RegistrationService
+                         * @instance
+                         * @param {google.iam.v1.IGetIamPolicyRequest} request GetIamPolicyRequest message or plain object
+                         * @param {google.cloud.servicedirectory.v1.RegistrationService.GetIamPolicyCallback} callback Node-style callback called with the error, if any, and Policy
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(RegistrationService.prototype.getIamPolicy = function getIamPolicy(request, callback) {
+                            return this.rpcCall(getIamPolicy, $root.google.iam.v1.GetIamPolicyRequest, $root.google.iam.v1.Policy, request, callback);
+                        }, "name", { value: "GetIamPolicy" });
+    
+                        /**
+                         * Calls GetIamPolicy.
+                         * @function getIamPolicy
+                         * @memberof google.cloud.servicedirectory.v1.RegistrationService
+                         * @instance
+                         * @param {google.iam.v1.IGetIamPolicyRequest} request GetIamPolicyRequest message or plain object
+                         * @returns {Promise<google.iam.v1.Policy>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.servicedirectory.v1.RegistrationService#setIamPolicy}.
+                         * @memberof google.cloud.servicedirectory.v1.RegistrationService
+                         * @typedef SetIamPolicyCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.iam.v1.Policy} [response] Policy
+                         */
+    
+                        /**
+                         * Calls SetIamPolicy.
+                         * @function setIamPolicy
+                         * @memberof google.cloud.servicedirectory.v1.RegistrationService
+                         * @instance
+                         * @param {google.iam.v1.ISetIamPolicyRequest} request SetIamPolicyRequest message or plain object
+                         * @param {google.cloud.servicedirectory.v1.RegistrationService.SetIamPolicyCallback} callback Node-style callback called with the error, if any, and Policy
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(RegistrationService.prototype.setIamPolicy = function setIamPolicy(request, callback) {
+                            return this.rpcCall(setIamPolicy, $root.google.iam.v1.SetIamPolicyRequest, $root.google.iam.v1.Policy, request, callback);
+                        }, "name", { value: "SetIamPolicy" });
+    
+                        /**
+                         * Calls SetIamPolicy.
+                         * @function setIamPolicy
+                         * @memberof google.cloud.servicedirectory.v1.RegistrationService
+                         * @instance
+                         * @param {google.iam.v1.ISetIamPolicyRequest} request SetIamPolicyRequest message or plain object
+                         * @returns {Promise<google.iam.v1.Policy>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.servicedirectory.v1.RegistrationService#testIamPermissions}.
+                         * @memberof google.cloud.servicedirectory.v1.RegistrationService
+                         * @typedef TestIamPermissionsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.iam.v1.TestIamPermissionsResponse} [response] TestIamPermissionsResponse
+                         */
+    
+                        /**
+                         * Calls TestIamPermissions.
+                         * @function testIamPermissions
+                         * @memberof google.cloud.servicedirectory.v1.RegistrationService
+                         * @instance
+                         * @param {google.iam.v1.ITestIamPermissionsRequest} request TestIamPermissionsRequest message or plain object
+                         * @param {google.cloud.servicedirectory.v1.RegistrationService.TestIamPermissionsCallback} callback Node-style callback called with the error, if any, and TestIamPermissionsResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(RegistrationService.prototype.testIamPermissions = function testIamPermissions(request, callback) {
+                            return this.rpcCall(testIamPermissions, $root.google.iam.v1.TestIamPermissionsRequest, $root.google.iam.v1.TestIamPermissionsResponse, request, callback);
+                        }, "name", { value: "TestIamPermissions" });
+    
+                        /**
+                         * Calls TestIamPermissions.
+                         * @function testIamPermissions
+                         * @memberof google.cloud.servicedirectory.v1.RegistrationService
+                         * @instance
+                         * @param {google.iam.v1.ITestIamPermissionsRequest} request TestIamPermissionsRequest message or plain object
+                         * @returns {Promise<google.iam.v1.TestIamPermissionsResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        return RegistrationService;
+                    })();
+    
+                    v1.CreateNamespaceRequest = (function() {
+    
+                        /**
+                         * Properties of a CreateNamespaceRequest.
+                         * @memberof google.cloud.servicedirectory.v1
+                         * @interface ICreateNamespaceRequest
+                         * @property {string|null} [parent] CreateNamespaceRequest parent
+                         * @property {string|null} [namespaceId] CreateNamespaceRequest namespaceId
+                         * @property {google.cloud.servicedirectory.v1.INamespace|null} [namespace] CreateNamespaceRequest namespace
+                         */
+    
+                        /**
+                         * Constructs a new CreateNamespaceRequest.
+                         * @memberof google.cloud.servicedirectory.v1
+                         * @classdesc Represents a CreateNamespaceRequest.
+                         * @implements ICreateNamespaceRequest
+                         * @constructor
+                         * @param {google.cloud.servicedirectory.v1.ICreateNamespaceRequest=} [properties] Properties to set
+                         */
+                        function CreateNamespaceRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CreateNamespaceRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.servicedirectory.v1.CreateNamespaceRequest
+                         * @instance
+                         */
+                        CreateNamespaceRequest.prototype.parent = "";
+    
+                        /**
+                         * CreateNamespaceRequest namespaceId.
+                         * @member {string} namespaceId
+                         * @memberof google.cloud.servicedirectory.v1.CreateNamespaceRequest
+                         * @instance
+                         */
+                        CreateNamespaceRequest.prototype.namespaceId = "";
+    
+                        /**
+                         * CreateNamespaceRequest namespace.
+                         * @member {google.cloud.servicedirectory.v1.INamespace|null|undefined} namespace
+                         * @memberof google.cloud.servicedirectory.v1.CreateNamespaceRequest
+                         * @instance
+                         */
+                        CreateNamespaceRequest.prototype.namespace = null;
+    
+                        /**
+                         * Creates a new CreateNamespaceRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.servicedirectory.v1.CreateNamespaceRequest
+                         * @static
+                         * @param {google.cloud.servicedirectory.v1.ICreateNamespaceRequest=} [properties] Properties to set
+                         * @returns {google.cloud.servicedirectory.v1.CreateNamespaceRequest} CreateNamespaceRequest instance
+                         */
+                        CreateNamespaceRequest.create = function create(properties) {
+                            return new CreateNamespaceRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CreateNamespaceRequest message. Does not implicitly {@link google.cloud.servicedirectory.v1.CreateNamespaceRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.servicedirectory.v1.CreateNamespaceRequest
+                         * @static
+                         * @param {google.cloud.servicedirectory.v1.ICreateNamespaceRequest} message CreateNamespaceRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateNamespaceRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.namespaceId != null && Object.hasOwnProperty.call(message, "namespaceId"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.namespaceId);
+                            if (message.namespace != null && Object.hasOwnProperty.call(message, "namespace"))
+                                $root.google.cloud.servicedirectory.v1.Namespace.encode(message.namespace, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CreateNamespaceRequest message, length delimited. Does not implicitly {@link google.cloud.servicedirectory.v1.CreateNamespaceRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.servicedirectory.v1.CreateNamespaceRequest
+                         * @static
+                         * @param {google.cloud.servicedirectory.v1.ICreateNamespaceRequest} message CreateNamespaceRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateNamespaceRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CreateNamespaceRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.servicedirectory.v1.CreateNamespaceRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.servicedirectory.v1.CreateNamespaceRequest} CreateNamespaceRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateNamespaceRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.servicedirectory.v1.CreateNamespaceRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.parent = reader.string();
+                                    break;
+                                case 2:
+                                    message.namespaceId = reader.string();
+                                    break;
+                                case 3:
+                                    message.namespace = $root.google.cloud.servicedirectory.v1.Namespace.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CreateNamespaceRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.servicedirectory.v1.CreateNamespaceRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.servicedirectory.v1.CreateNamespaceRequest} CreateNamespaceRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateNamespaceRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CreateNamespaceRequest message.
+                         * @function verify
+                         * @memberof google.cloud.servicedirectory.v1.CreateNamespaceRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CreateNamespaceRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.namespaceId != null && message.hasOwnProperty("namespaceId"))
+                                if (!$util.isString(message.namespaceId))
+                                    return "namespaceId: string expected";
+                            if (message.namespace != null && message.hasOwnProperty("namespace")) {
+                                var error = $root.google.cloud.servicedirectory.v1.Namespace.verify(message.namespace);
+                                if (error)
+                                    return "namespace." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CreateNamespaceRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.servicedirectory.v1.CreateNamespaceRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.servicedirectory.v1.CreateNamespaceRequest} CreateNamespaceRequest
+                         */
+                        CreateNamespaceRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.servicedirectory.v1.CreateNamespaceRequest)
+                                return object;
+                            var message = new $root.google.cloud.servicedirectory.v1.CreateNamespaceRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.namespaceId != null)
+                                message.namespaceId = String(object.namespaceId);
+                            if (object.namespace != null) {
+                                if (typeof object.namespace !== "object")
+                                    throw TypeError(".google.cloud.servicedirectory.v1.CreateNamespaceRequest.namespace: object expected");
+                                message.namespace = $root.google.cloud.servicedirectory.v1.Namespace.fromObject(object.namespace);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CreateNamespaceRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.servicedirectory.v1.CreateNamespaceRequest
+                         * @static
+                         * @param {google.cloud.servicedirectory.v1.CreateNamespaceRequest} message CreateNamespaceRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CreateNamespaceRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.namespaceId = "";
+                                object.namespace = null;
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.namespaceId != null && message.hasOwnProperty("namespaceId"))
+                                object.namespaceId = message.namespaceId;
+                            if (message.namespace != null && message.hasOwnProperty("namespace"))
+                                object.namespace = $root.google.cloud.servicedirectory.v1.Namespace.toObject(message.namespace, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CreateNamespaceRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.servicedirectory.v1.CreateNamespaceRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CreateNamespaceRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return CreateNamespaceRequest;
+                    })();
+    
+                    v1.ListNamespacesRequest = (function() {
+    
+                        /**
+                         * Properties of a ListNamespacesRequest.
+                         * @memberof google.cloud.servicedirectory.v1
+                         * @interface IListNamespacesRequest
+                         * @property {string|null} [parent] ListNamespacesRequest parent
+                         * @property {number|null} [pageSize] ListNamespacesRequest pageSize
+                         * @property {string|null} [pageToken] ListNamespacesRequest pageToken
+                         * @property {string|null} [filter] ListNamespacesRequest filter
+                         * @property {string|null} [orderBy] ListNamespacesRequest orderBy
+                         */
+    
+                        /**
+                         * Constructs a new ListNamespacesRequest.
+                         * @memberof google.cloud.servicedirectory.v1
+                         * @classdesc Represents a ListNamespacesRequest.
+                         * @implements IListNamespacesRequest
+                         * @constructor
+                         * @param {google.cloud.servicedirectory.v1.IListNamespacesRequest=} [properties] Properties to set
+                         */
+                        function ListNamespacesRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListNamespacesRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.servicedirectory.v1.ListNamespacesRequest
+                         * @instance
+                         */
+                        ListNamespacesRequest.prototype.parent = "";
+    
+                        /**
+                         * ListNamespacesRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.cloud.servicedirectory.v1.ListNamespacesRequest
+                         * @instance
+                         */
+                        ListNamespacesRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListNamespacesRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.cloud.servicedirectory.v1.ListNamespacesRequest
+                         * @instance
+                         */
+                        ListNamespacesRequest.prototype.pageToken = "";
+    
+                        /**
+                         * ListNamespacesRequest filter.
+                         * @member {string} filter
+                         * @memberof google.cloud.servicedirectory.v1.ListNamespacesRequest
+                         * @instance
+                         */
+                        ListNamespacesRequest.prototype.filter = "";
+    
+                        /**
+                         * ListNamespacesRequest orderBy.
+                         * @member {string} orderBy
+                         * @memberof google.cloud.servicedirectory.v1.ListNamespacesRequest
+                         * @instance
+                         */
+                        ListNamespacesRequest.prototype.orderBy = "";
+    
+                        /**
+                         * Creates a new ListNamespacesRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.servicedirectory.v1.ListNamespacesRequest
+                         * @static
+                         * @param {google.cloud.servicedirectory.v1.IListNamespacesRequest=} [properties] Properties to set
+                         * @returns {google.cloud.servicedirectory.v1.ListNamespacesRequest} ListNamespacesRequest instance
+                         */
+                        ListNamespacesRequest.create = function create(properties) {
+                            return new ListNamespacesRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListNamespacesRequest message. Does not implicitly {@link google.cloud.servicedirectory.v1.ListNamespacesRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.servicedirectory.v1.ListNamespacesRequest
+                         * @static
+                         * @param {google.cloud.servicedirectory.v1.IListNamespacesRequest} message ListNamespacesRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListNamespacesRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.filter);
+                            if (message.orderBy != null && Object.hasOwnProperty.call(message, "orderBy"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.orderBy);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListNamespacesRequest message, length delimited. Does not implicitly {@link google.cloud.servicedirectory.v1.ListNamespacesRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.servicedirectory.v1.ListNamespacesRequest
+                         * @static
+                         * @param {google.cloud.servicedirectory.v1.IListNamespacesRequest} message ListNamespacesRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListNamespacesRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListNamespacesRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.servicedirectory.v1.ListNamespacesRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.servicedirectory.v1.ListNamespacesRequest} ListNamespacesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListNamespacesRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.servicedirectory.v1.ListNamespacesRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.parent = reader.string();
+                                    break;
+                                case 2:
+                                    message.pageSize = reader.int32();
+                                    break;
+                                case 3:
+                                    message.pageToken = reader.string();
+                                    break;
+                                case 4:
+                                    message.filter = reader.string();
+                                    break;
+                                case 5:
+                                    message.orderBy = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListNamespacesRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.servicedirectory.v1.ListNamespacesRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.servicedirectory.v1.ListNamespacesRequest} ListNamespacesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListNamespacesRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListNamespacesRequest message.
+                         * @function verify
+                         * @memberof google.cloud.servicedirectory.v1.ListNamespacesRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListNamespacesRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                if (!$util.isString(message.filter))
+                                    return "filter: string expected";
+                            if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                if (!$util.isString(message.orderBy))
+                                    return "orderBy: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListNamespacesRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.servicedirectory.v1.ListNamespacesRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.servicedirectory.v1.ListNamespacesRequest} ListNamespacesRequest
+                         */
+                        ListNamespacesRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.servicedirectory.v1.ListNamespacesRequest)
+                                return object;
+                            var message = new $root.google.cloud.servicedirectory.v1.ListNamespacesRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            if (object.filter != null)
+                                message.filter = String(object.filter);
+                            if (object.orderBy != null)
+                                message.orderBy = String(object.orderBy);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListNamespacesRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.servicedirectory.v1.ListNamespacesRequest
+                         * @static
+                         * @param {google.cloud.servicedirectory.v1.ListNamespacesRequest} message ListNamespacesRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListNamespacesRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                                object.filter = "";
+                                object.orderBy = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                object.filter = message.filter;
+                            if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                object.orderBy = message.orderBy;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListNamespacesRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.servicedirectory.v1.ListNamespacesRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListNamespacesRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ListNamespacesRequest;
+                    })();
+    
+                    v1.ListNamespacesResponse = (function() {
+    
+                        /**
+                         * Properties of a ListNamespacesResponse.
+                         * @memberof google.cloud.servicedirectory.v1
+                         * @interface IListNamespacesResponse
+                         * @property {Array.<google.cloud.servicedirectory.v1.INamespace>|null} [namespaces] ListNamespacesResponse namespaces
+                         * @property {string|null} [nextPageToken] ListNamespacesResponse nextPageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListNamespacesResponse.
+                         * @memberof google.cloud.servicedirectory.v1
+                         * @classdesc Represents a ListNamespacesResponse.
+                         * @implements IListNamespacesResponse
+                         * @constructor
+                         * @param {google.cloud.servicedirectory.v1.IListNamespacesResponse=} [properties] Properties to set
+                         */
+                        function ListNamespacesResponse(properties) {
+                            this.namespaces = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListNamespacesResponse namespaces.
+                         * @member {Array.<google.cloud.servicedirectory.v1.INamespace>} namespaces
+                         * @memberof google.cloud.servicedirectory.v1.ListNamespacesResponse
+                         * @instance
+                         */
+                        ListNamespacesResponse.prototype.namespaces = $util.emptyArray;
+    
+                        /**
+                         * ListNamespacesResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.cloud.servicedirectory.v1.ListNamespacesResponse
+                         * @instance
+                         */
+                        ListNamespacesResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * Creates a new ListNamespacesResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.servicedirectory.v1.ListNamespacesResponse
+                         * @static
+                         * @param {google.cloud.servicedirectory.v1.IListNamespacesResponse=} [properties] Properties to set
+                         * @returns {google.cloud.servicedirectory.v1.ListNamespacesResponse} ListNamespacesResponse instance
+                         */
+                        ListNamespacesResponse.create = function create(properties) {
+                            return new ListNamespacesResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListNamespacesResponse message. Does not implicitly {@link google.cloud.servicedirectory.v1.ListNamespacesResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.servicedirectory.v1.ListNamespacesResponse
+                         * @static
+                         * @param {google.cloud.servicedirectory.v1.IListNamespacesResponse} message ListNamespacesResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListNamespacesResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.namespaces != null && message.namespaces.length)
+                                for (var i = 0; i < message.namespaces.length; ++i)
+                                    $root.google.cloud.servicedirectory.v1.Namespace.encode(message.namespaces[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListNamespacesResponse message, length delimited. Does not implicitly {@link google.cloud.servicedirectory.v1.ListNamespacesResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.servicedirectory.v1.ListNamespacesResponse
+                         * @static
+                         * @param {google.cloud.servicedirectory.v1.IListNamespacesResponse} message ListNamespacesResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListNamespacesResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListNamespacesResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.servicedirectory.v1.ListNamespacesResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.servicedirectory.v1.ListNamespacesResponse} ListNamespacesResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListNamespacesResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.servicedirectory.v1.ListNamespacesResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    if (!(message.namespaces && message.namespaces.length))
+                                        message.namespaces = [];
+                                    message.namespaces.push($root.google.cloud.servicedirectory.v1.Namespace.decode(reader, reader.uint32()));
+                                    break;
+                                case 2:
+                                    message.nextPageToken = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListNamespacesResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.servicedirectory.v1.ListNamespacesResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.servicedirectory.v1.ListNamespacesResponse} ListNamespacesResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListNamespacesResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListNamespacesResponse message.
+                         * @function verify
+                         * @memberof google.cloud.servicedirectory.v1.ListNamespacesResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListNamespacesResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.namespaces != null && message.hasOwnProperty("namespaces")) {
+                                if (!Array.isArray(message.namespaces))
+                                    return "namespaces: array expected";
+                                for (var i = 0; i < message.namespaces.length; ++i) {
+                                    var error = $root.google.cloud.servicedirectory.v1.Namespace.verify(message.namespaces[i]);
+                                    if (error)
+                                        return "namespaces." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListNamespacesResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.servicedirectory.v1.ListNamespacesResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.servicedirectory.v1.ListNamespacesResponse} ListNamespacesResponse
+                         */
+                        ListNamespacesResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.servicedirectory.v1.ListNamespacesResponse)
+                                return object;
+                            var message = new $root.google.cloud.servicedirectory.v1.ListNamespacesResponse();
+                            if (object.namespaces) {
+                                if (!Array.isArray(object.namespaces))
+                                    throw TypeError(".google.cloud.servicedirectory.v1.ListNamespacesResponse.namespaces: array expected");
+                                message.namespaces = [];
+                                for (var i = 0; i < object.namespaces.length; ++i) {
+                                    if (typeof object.namespaces[i] !== "object")
+                                        throw TypeError(".google.cloud.servicedirectory.v1.ListNamespacesResponse.namespaces: object expected");
+                                    message.namespaces[i] = $root.google.cloud.servicedirectory.v1.Namespace.fromObject(object.namespaces[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListNamespacesResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.servicedirectory.v1.ListNamespacesResponse
+                         * @static
+                         * @param {google.cloud.servicedirectory.v1.ListNamespacesResponse} message ListNamespacesResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListNamespacesResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.namespaces = [];
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.namespaces && message.namespaces.length) {
+                                object.namespaces = [];
+                                for (var j = 0; j < message.namespaces.length; ++j)
+                                    object.namespaces[j] = $root.google.cloud.servicedirectory.v1.Namespace.toObject(message.namespaces[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListNamespacesResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.servicedirectory.v1.ListNamespacesResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListNamespacesResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ListNamespacesResponse;
+                    })();
+    
+                    v1.GetNamespaceRequest = (function() {
+    
+                        /**
+                         * Properties of a GetNamespaceRequest.
+                         * @memberof google.cloud.servicedirectory.v1
+                         * @interface IGetNamespaceRequest
+                         * @property {string|null} [name] GetNamespaceRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetNamespaceRequest.
+                         * @memberof google.cloud.servicedirectory.v1
+                         * @classdesc Represents a GetNamespaceRequest.
+                         * @implements IGetNamespaceRequest
+                         * @constructor
+                         * @param {google.cloud.servicedirectory.v1.IGetNamespaceRequest=} [properties] Properties to set
+                         */
+                        function GetNamespaceRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetNamespaceRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.servicedirectory.v1.GetNamespaceRequest
+                         * @instance
+                         */
+                        GetNamespaceRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetNamespaceRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.servicedirectory.v1.GetNamespaceRequest
+                         * @static
+                         * @param {google.cloud.servicedirectory.v1.IGetNamespaceRequest=} [properties] Properties to set
+                         * @returns {google.cloud.servicedirectory.v1.GetNamespaceRequest} GetNamespaceRequest instance
+                         */
+                        GetNamespaceRequest.create = function create(properties) {
+                            return new GetNamespaceRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetNamespaceRequest message. Does not implicitly {@link google.cloud.servicedirectory.v1.GetNamespaceRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.servicedirectory.v1.GetNamespaceRequest
+                         * @static
+                         * @param {google.cloud.servicedirectory.v1.IGetNamespaceRequest} message GetNamespaceRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetNamespaceRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetNamespaceRequest message, length delimited. Does not implicitly {@link google.cloud.servicedirectory.v1.GetNamespaceRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.servicedirectory.v1.GetNamespaceRequest
+                         * @static
+                         * @param {google.cloud.servicedirectory.v1.IGetNamespaceRequest} message GetNamespaceRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetNamespaceRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetNamespaceRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.servicedirectory.v1.GetNamespaceRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.servicedirectory.v1.GetNamespaceRequest} GetNamespaceRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetNamespaceRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.servicedirectory.v1.GetNamespaceRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetNamespaceRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.servicedirectory.v1.GetNamespaceRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.servicedirectory.v1.GetNamespaceRequest} GetNamespaceRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetNamespaceRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetNamespaceRequest message.
+                         * @function verify
+                         * @memberof google.cloud.servicedirectory.v1.GetNamespaceRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetNamespaceRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetNamespaceRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.servicedirectory.v1.GetNamespaceRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.servicedirectory.v1.GetNamespaceRequest} GetNamespaceRequest
+                         */
+                        GetNamespaceRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.servicedirectory.v1.GetNamespaceRequest)
+                                return object;
+                            var message = new $root.google.cloud.servicedirectory.v1.GetNamespaceRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetNamespaceRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.servicedirectory.v1.GetNamespaceRequest
+                         * @static
+                         * @param {google.cloud.servicedirectory.v1.GetNamespaceRequest} message GetNamespaceRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetNamespaceRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetNamespaceRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.servicedirectory.v1.GetNamespaceRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetNamespaceRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return GetNamespaceRequest;
+                    })();
+    
+                    v1.UpdateNamespaceRequest = (function() {
+    
+                        /**
+                         * Properties of an UpdateNamespaceRequest.
+                         * @memberof google.cloud.servicedirectory.v1
+                         * @interface IUpdateNamespaceRequest
+                         * @property {google.cloud.servicedirectory.v1.INamespace|null} [namespace] UpdateNamespaceRequest namespace
+                         * @property {google.protobuf.IFieldMask|null} [updateMask] UpdateNamespaceRequest updateMask
+                         */
+    
+                        /**
+                         * Constructs a new UpdateNamespaceRequest.
+                         * @memberof google.cloud.servicedirectory.v1
+                         * @classdesc Represents an UpdateNamespaceRequest.
+                         * @implements IUpdateNamespaceRequest
+                         * @constructor
+                         * @param {google.cloud.servicedirectory.v1.IUpdateNamespaceRequest=} [properties] Properties to set
+                         */
+                        function UpdateNamespaceRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * UpdateNamespaceRequest namespace.
+                         * @member {google.cloud.servicedirectory.v1.INamespace|null|undefined} namespace
+                         * @memberof google.cloud.servicedirectory.v1.UpdateNamespaceRequest
+                         * @instance
+                         */
+                        UpdateNamespaceRequest.prototype.namespace = null;
+    
+                        /**
+                         * UpdateNamespaceRequest updateMask.
+                         * @member {google.protobuf.IFieldMask|null|undefined} updateMask
+                         * @memberof google.cloud.servicedirectory.v1.UpdateNamespaceRequest
+                         * @instance
+                         */
+                        UpdateNamespaceRequest.prototype.updateMask = null;
+    
+                        /**
+                         * Creates a new UpdateNamespaceRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.servicedirectory.v1.UpdateNamespaceRequest
+                         * @static
+                         * @param {google.cloud.servicedirectory.v1.IUpdateNamespaceRequest=} [properties] Properties to set
+                         * @returns {google.cloud.servicedirectory.v1.UpdateNamespaceRequest} UpdateNamespaceRequest instance
+                         */
+                        UpdateNamespaceRequest.create = function create(properties) {
+                            return new UpdateNamespaceRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateNamespaceRequest message. Does not implicitly {@link google.cloud.servicedirectory.v1.UpdateNamespaceRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.servicedirectory.v1.UpdateNamespaceRequest
+                         * @static
+                         * @param {google.cloud.servicedirectory.v1.IUpdateNamespaceRequest} message UpdateNamespaceRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateNamespaceRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.namespace != null && Object.hasOwnProperty.call(message, "namespace"))
+                                $root.google.cloud.servicedirectory.v1.Namespace.encode(message.namespace, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask"))
+                                $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateNamespaceRequest message, length delimited. Does not implicitly {@link google.cloud.servicedirectory.v1.UpdateNamespaceRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.servicedirectory.v1.UpdateNamespaceRequest
+                         * @static
+                         * @param {google.cloud.servicedirectory.v1.IUpdateNamespaceRequest} message UpdateNamespaceRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateNamespaceRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an UpdateNamespaceRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.servicedirectory.v1.UpdateNamespaceRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.servicedirectory.v1.UpdateNamespaceRequest} UpdateNamespaceRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateNamespaceRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.servicedirectory.v1.UpdateNamespaceRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.namespace = $root.google.cloud.servicedirectory.v1.Namespace.decode(reader, reader.uint32());
+                                    break;
+                                case 2:
+                                    message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an UpdateNamespaceRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.servicedirectory.v1.UpdateNamespaceRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.servicedirectory.v1.UpdateNamespaceRequest} UpdateNamespaceRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateNamespaceRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an UpdateNamespaceRequest message.
+                         * @function verify
+                         * @memberof google.cloud.servicedirectory.v1.UpdateNamespaceRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UpdateNamespaceRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.namespace != null && message.hasOwnProperty("namespace")) {
+                                var error = $root.google.cloud.servicedirectory.v1.Namespace.verify(message.namespace);
+                                if (error)
+                                    return "namespace." + error;
+                            }
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
+                                var error = $root.google.protobuf.FieldMask.verify(message.updateMask);
+                                if (error)
+                                    return "updateMask." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an UpdateNamespaceRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.servicedirectory.v1.UpdateNamespaceRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.servicedirectory.v1.UpdateNamespaceRequest} UpdateNamespaceRequest
+                         */
+                        UpdateNamespaceRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.servicedirectory.v1.UpdateNamespaceRequest)
+                                return object;
+                            var message = new $root.google.cloud.servicedirectory.v1.UpdateNamespaceRequest();
+                            if (object.namespace != null) {
+                                if (typeof object.namespace !== "object")
+                                    throw TypeError(".google.cloud.servicedirectory.v1.UpdateNamespaceRequest.namespace: object expected");
+                                message.namespace = $root.google.cloud.servicedirectory.v1.Namespace.fromObject(object.namespace);
+                            }
+                            if (object.updateMask != null) {
+                                if (typeof object.updateMask !== "object")
+                                    throw TypeError(".google.cloud.servicedirectory.v1.UpdateNamespaceRequest.updateMask: object expected");
+                                message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an UpdateNamespaceRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.servicedirectory.v1.UpdateNamespaceRequest
+                         * @static
+                         * @param {google.cloud.servicedirectory.v1.UpdateNamespaceRequest} message UpdateNamespaceRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UpdateNamespaceRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.namespace = null;
+                                object.updateMask = null;
+                            }
+                            if (message.namespace != null && message.hasOwnProperty("namespace"))
+                                object.namespace = $root.google.cloud.servicedirectory.v1.Namespace.toObject(message.namespace, options);
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask"))
+                                object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this UpdateNamespaceRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.servicedirectory.v1.UpdateNamespaceRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UpdateNamespaceRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return UpdateNamespaceRequest;
+                    })();
+    
+                    v1.DeleteNamespaceRequest = (function() {
+    
+                        /**
+                         * Properties of a DeleteNamespaceRequest.
+                         * @memberof google.cloud.servicedirectory.v1
+                         * @interface IDeleteNamespaceRequest
+                         * @property {string|null} [name] DeleteNamespaceRequest name
+                         */
+    
+                        /**
+                         * Constructs a new DeleteNamespaceRequest.
+                         * @memberof google.cloud.servicedirectory.v1
+                         * @classdesc Represents a DeleteNamespaceRequest.
+                         * @implements IDeleteNamespaceRequest
+                         * @constructor
+                         * @param {google.cloud.servicedirectory.v1.IDeleteNamespaceRequest=} [properties] Properties to set
+                         */
+                        function DeleteNamespaceRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DeleteNamespaceRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.servicedirectory.v1.DeleteNamespaceRequest
+                         * @instance
+                         */
+                        DeleteNamespaceRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new DeleteNamespaceRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.servicedirectory.v1.DeleteNamespaceRequest
+                         * @static
+                         * @param {google.cloud.servicedirectory.v1.IDeleteNamespaceRequest=} [properties] Properties to set
+                         * @returns {google.cloud.servicedirectory.v1.DeleteNamespaceRequest} DeleteNamespaceRequest instance
+                         */
+                        DeleteNamespaceRequest.create = function create(properties) {
+                            return new DeleteNamespaceRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteNamespaceRequest message. Does not implicitly {@link google.cloud.servicedirectory.v1.DeleteNamespaceRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.servicedirectory.v1.DeleteNamespaceRequest
+                         * @static
+                         * @param {google.cloud.servicedirectory.v1.IDeleteNamespaceRequest} message DeleteNamespaceRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteNamespaceRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteNamespaceRequest message, length delimited. Does not implicitly {@link google.cloud.servicedirectory.v1.DeleteNamespaceRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.servicedirectory.v1.DeleteNamespaceRequest
+                         * @static
+                         * @param {google.cloud.servicedirectory.v1.IDeleteNamespaceRequest} message DeleteNamespaceRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteNamespaceRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DeleteNamespaceRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.servicedirectory.v1.DeleteNamespaceRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.servicedirectory.v1.DeleteNamespaceRequest} DeleteNamespaceRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteNamespaceRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.servicedirectory.v1.DeleteNamespaceRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DeleteNamespaceRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.servicedirectory.v1.DeleteNamespaceRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.servicedirectory.v1.DeleteNamespaceRequest} DeleteNamespaceRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteNamespaceRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DeleteNamespaceRequest message.
+                         * @function verify
+                         * @memberof google.cloud.servicedirectory.v1.DeleteNamespaceRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DeleteNamespaceRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DeleteNamespaceRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.servicedirectory.v1.DeleteNamespaceRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.servicedirectory.v1.DeleteNamespaceRequest} DeleteNamespaceRequest
+                         */
+                        DeleteNamespaceRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.servicedirectory.v1.DeleteNamespaceRequest)
+                                return object;
+                            var message = new $root.google.cloud.servicedirectory.v1.DeleteNamespaceRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DeleteNamespaceRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.servicedirectory.v1.DeleteNamespaceRequest
+                         * @static
+                         * @param {google.cloud.servicedirectory.v1.DeleteNamespaceRequest} message DeleteNamespaceRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DeleteNamespaceRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DeleteNamespaceRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.servicedirectory.v1.DeleteNamespaceRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DeleteNamespaceRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return DeleteNamespaceRequest;
+                    })();
+    
+                    v1.CreateServiceRequest = (function() {
+    
+                        /**
+                         * Properties of a CreateServiceRequest.
+                         * @memberof google.cloud.servicedirectory.v1
+                         * @interface ICreateServiceRequest
+                         * @property {string|null} [parent] CreateServiceRequest parent
+                         * @property {string|null} [serviceId] CreateServiceRequest serviceId
+                         * @property {google.cloud.servicedirectory.v1.IService|null} [service] CreateServiceRequest service
+                         */
+    
+                        /**
+                         * Constructs a new CreateServiceRequest.
+                         * @memberof google.cloud.servicedirectory.v1
+                         * @classdesc Represents a CreateServiceRequest.
+                         * @implements ICreateServiceRequest
+                         * @constructor
+                         * @param {google.cloud.servicedirectory.v1.ICreateServiceRequest=} [properties] Properties to set
+                         */
+                        function CreateServiceRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CreateServiceRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.servicedirectory.v1.CreateServiceRequest
+                         * @instance
+                         */
+                        CreateServiceRequest.prototype.parent = "";
+    
+                        /**
+                         * CreateServiceRequest serviceId.
+                         * @member {string} serviceId
+                         * @memberof google.cloud.servicedirectory.v1.CreateServiceRequest
+                         * @instance
+                         */
+                        CreateServiceRequest.prototype.serviceId = "";
+    
+                        /**
+                         * CreateServiceRequest service.
+                         * @member {google.cloud.servicedirectory.v1.IService|null|undefined} service
+                         * @memberof google.cloud.servicedirectory.v1.CreateServiceRequest
+                         * @instance
+                         */
+                        CreateServiceRequest.prototype.service = null;
+    
+                        /**
+                         * Creates a new CreateServiceRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.servicedirectory.v1.CreateServiceRequest
+                         * @static
+                         * @param {google.cloud.servicedirectory.v1.ICreateServiceRequest=} [properties] Properties to set
+                         * @returns {google.cloud.servicedirectory.v1.CreateServiceRequest} CreateServiceRequest instance
+                         */
+                        CreateServiceRequest.create = function create(properties) {
+                            return new CreateServiceRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CreateServiceRequest message. Does not implicitly {@link google.cloud.servicedirectory.v1.CreateServiceRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.servicedirectory.v1.CreateServiceRequest
+                         * @static
+                         * @param {google.cloud.servicedirectory.v1.ICreateServiceRequest} message CreateServiceRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateServiceRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.serviceId != null && Object.hasOwnProperty.call(message, "serviceId"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.serviceId);
+                            if (message.service != null && Object.hasOwnProperty.call(message, "service"))
+                                $root.google.cloud.servicedirectory.v1.Service.encode(message.service, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CreateServiceRequest message, length delimited. Does not implicitly {@link google.cloud.servicedirectory.v1.CreateServiceRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.servicedirectory.v1.CreateServiceRequest
+                         * @static
+                         * @param {google.cloud.servicedirectory.v1.ICreateServiceRequest} message CreateServiceRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateServiceRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CreateServiceRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.servicedirectory.v1.CreateServiceRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.servicedirectory.v1.CreateServiceRequest} CreateServiceRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateServiceRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.servicedirectory.v1.CreateServiceRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.parent = reader.string();
+                                    break;
+                                case 2:
+                                    message.serviceId = reader.string();
+                                    break;
+                                case 3:
+                                    message.service = $root.google.cloud.servicedirectory.v1.Service.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CreateServiceRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.servicedirectory.v1.CreateServiceRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.servicedirectory.v1.CreateServiceRequest} CreateServiceRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateServiceRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CreateServiceRequest message.
+                         * @function verify
+                         * @memberof google.cloud.servicedirectory.v1.CreateServiceRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CreateServiceRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.serviceId != null && message.hasOwnProperty("serviceId"))
+                                if (!$util.isString(message.serviceId))
+                                    return "serviceId: string expected";
+                            if (message.service != null && message.hasOwnProperty("service")) {
+                                var error = $root.google.cloud.servicedirectory.v1.Service.verify(message.service);
+                                if (error)
+                                    return "service." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CreateServiceRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.servicedirectory.v1.CreateServiceRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.servicedirectory.v1.CreateServiceRequest} CreateServiceRequest
+                         */
+                        CreateServiceRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.servicedirectory.v1.CreateServiceRequest)
+                                return object;
+                            var message = new $root.google.cloud.servicedirectory.v1.CreateServiceRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.serviceId != null)
+                                message.serviceId = String(object.serviceId);
+                            if (object.service != null) {
+                                if (typeof object.service !== "object")
+                                    throw TypeError(".google.cloud.servicedirectory.v1.CreateServiceRequest.service: object expected");
+                                message.service = $root.google.cloud.servicedirectory.v1.Service.fromObject(object.service);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CreateServiceRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.servicedirectory.v1.CreateServiceRequest
+                         * @static
+                         * @param {google.cloud.servicedirectory.v1.CreateServiceRequest} message CreateServiceRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CreateServiceRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.serviceId = "";
+                                object.service = null;
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.serviceId != null && message.hasOwnProperty("serviceId"))
+                                object.serviceId = message.serviceId;
+                            if (message.service != null && message.hasOwnProperty("service"))
+                                object.service = $root.google.cloud.servicedirectory.v1.Service.toObject(message.service, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CreateServiceRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.servicedirectory.v1.CreateServiceRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CreateServiceRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return CreateServiceRequest;
+                    })();
+    
+                    v1.ListServicesRequest = (function() {
+    
+                        /**
+                         * Properties of a ListServicesRequest.
+                         * @memberof google.cloud.servicedirectory.v1
+                         * @interface IListServicesRequest
+                         * @property {string|null} [parent] ListServicesRequest parent
+                         * @property {number|null} [pageSize] ListServicesRequest pageSize
+                         * @property {string|null} [pageToken] ListServicesRequest pageToken
+                         * @property {string|null} [filter] ListServicesRequest filter
+                         * @property {string|null} [orderBy] ListServicesRequest orderBy
+                         */
+    
+                        /**
+                         * Constructs a new ListServicesRequest.
+                         * @memberof google.cloud.servicedirectory.v1
+                         * @classdesc Represents a ListServicesRequest.
+                         * @implements IListServicesRequest
+                         * @constructor
+                         * @param {google.cloud.servicedirectory.v1.IListServicesRequest=} [properties] Properties to set
+                         */
+                        function ListServicesRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListServicesRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.servicedirectory.v1.ListServicesRequest
+                         * @instance
+                         */
+                        ListServicesRequest.prototype.parent = "";
+    
+                        /**
+                         * ListServicesRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.cloud.servicedirectory.v1.ListServicesRequest
+                         * @instance
+                         */
+                        ListServicesRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListServicesRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.cloud.servicedirectory.v1.ListServicesRequest
+                         * @instance
+                         */
+                        ListServicesRequest.prototype.pageToken = "";
+    
+                        /**
+                         * ListServicesRequest filter.
+                         * @member {string} filter
+                         * @memberof google.cloud.servicedirectory.v1.ListServicesRequest
+                         * @instance
+                         */
+                        ListServicesRequest.prototype.filter = "";
+    
+                        /**
+                         * ListServicesRequest orderBy.
+                         * @member {string} orderBy
+                         * @memberof google.cloud.servicedirectory.v1.ListServicesRequest
+                         * @instance
+                         */
+                        ListServicesRequest.prototype.orderBy = "";
+    
+                        /**
+                         * Creates a new ListServicesRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.servicedirectory.v1.ListServicesRequest
+                         * @static
+                         * @param {google.cloud.servicedirectory.v1.IListServicesRequest=} [properties] Properties to set
+                         * @returns {google.cloud.servicedirectory.v1.ListServicesRequest} ListServicesRequest instance
+                         */
+                        ListServicesRequest.create = function create(properties) {
+                            return new ListServicesRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListServicesRequest message. Does not implicitly {@link google.cloud.servicedirectory.v1.ListServicesRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.servicedirectory.v1.ListServicesRequest
+                         * @static
+                         * @param {google.cloud.servicedirectory.v1.IListServicesRequest} message ListServicesRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListServicesRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.filter);
+                            if (message.orderBy != null && Object.hasOwnProperty.call(message, "orderBy"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.orderBy);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListServicesRequest message, length delimited. Does not implicitly {@link google.cloud.servicedirectory.v1.ListServicesRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.servicedirectory.v1.ListServicesRequest
+                         * @static
+                         * @param {google.cloud.servicedirectory.v1.IListServicesRequest} message ListServicesRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListServicesRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListServicesRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.servicedirectory.v1.ListServicesRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.servicedirectory.v1.ListServicesRequest} ListServicesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListServicesRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.servicedirectory.v1.ListServicesRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.parent = reader.string();
+                                    break;
+                                case 2:
+                                    message.pageSize = reader.int32();
+                                    break;
+                                case 3:
+                                    message.pageToken = reader.string();
+                                    break;
+                                case 4:
+                                    message.filter = reader.string();
+                                    break;
+                                case 5:
+                                    message.orderBy = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListServicesRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.servicedirectory.v1.ListServicesRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.servicedirectory.v1.ListServicesRequest} ListServicesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListServicesRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListServicesRequest message.
+                         * @function verify
+                         * @memberof google.cloud.servicedirectory.v1.ListServicesRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListServicesRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                if (!$util.isString(message.filter))
+                                    return "filter: string expected";
+                            if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                if (!$util.isString(message.orderBy))
+                                    return "orderBy: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListServicesRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.servicedirectory.v1.ListServicesRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.servicedirectory.v1.ListServicesRequest} ListServicesRequest
+                         */
+                        ListServicesRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.servicedirectory.v1.ListServicesRequest)
+                                return object;
+                            var message = new $root.google.cloud.servicedirectory.v1.ListServicesRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            if (object.filter != null)
+                                message.filter = String(object.filter);
+                            if (object.orderBy != null)
+                                message.orderBy = String(object.orderBy);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListServicesRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.servicedirectory.v1.ListServicesRequest
+                         * @static
+                         * @param {google.cloud.servicedirectory.v1.ListServicesRequest} message ListServicesRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListServicesRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                                object.filter = "";
+                                object.orderBy = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                object.filter = message.filter;
+                            if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                object.orderBy = message.orderBy;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListServicesRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.servicedirectory.v1.ListServicesRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListServicesRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ListServicesRequest;
+                    })();
+    
+                    v1.ListServicesResponse = (function() {
+    
+                        /**
+                         * Properties of a ListServicesResponse.
+                         * @memberof google.cloud.servicedirectory.v1
+                         * @interface IListServicesResponse
+                         * @property {Array.<google.cloud.servicedirectory.v1.IService>|null} [services] ListServicesResponse services
+                         * @property {string|null} [nextPageToken] ListServicesResponse nextPageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListServicesResponse.
+                         * @memberof google.cloud.servicedirectory.v1
+                         * @classdesc Represents a ListServicesResponse.
+                         * @implements IListServicesResponse
+                         * @constructor
+                         * @param {google.cloud.servicedirectory.v1.IListServicesResponse=} [properties] Properties to set
+                         */
+                        function ListServicesResponse(properties) {
+                            this.services = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListServicesResponse services.
+                         * @member {Array.<google.cloud.servicedirectory.v1.IService>} services
+                         * @memberof google.cloud.servicedirectory.v1.ListServicesResponse
+                         * @instance
+                         */
+                        ListServicesResponse.prototype.services = $util.emptyArray;
+    
+                        /**
+                         * ListServicesResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.cloud.servicedirectory.v1.ListServicesResponse
+                         * @instance
+                         */
+                        ListServicesResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * Creates a new ListServicesResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.servicedirectory.v1.ListServicesResponse
+                         * @static
+                         * @param {google.cloud.servicedirectory.v1.IListServicesResponse=} [properties] Properties to set
+                         * @returns {google.cloud.servicedirectory.v1.ListServicesResponse} ListServicesResponse instance
+                         */
+                        ListServicesResponse.create = function create(properties) {
+                            return new ListServicesResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListServicesResponse message. Does not implicitly {@link google.cloud.servicedirectory.v1.ListServicesResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.servicedirectory.v1.ListServicesResponse
+                         * @static
+                         * @param {google.cloud.servicedirectory.v1.IListServicesResponse} message ListServicesResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListServicesResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.services != null && message.services.length)
+                                for (var i = 0; i < message.services.length; ++i)
+                                    $root.google.cloud.servicedirectory.v1.Service.encode(message.services[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListServicesResponse message, length delimited. Does not implicitly {@link google.cloud.servicedirectory.v1.ListServicesResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.servicedirectory.v1.ListServicesResponse
+                         * @static
+                         * @param {google.cloud.servicedirectory.v1.IListServicesResponse} message ListServicesResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListServicesResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListServicesResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.servicedirectory.v1.ListServicesResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.servicedirectory.v1.ListServicesResponse} ListServicesResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListServicesResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.servicedirectory.v1.ListServicesResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    if (!(message.services && message.services.length))
+                                        message.services = [];
+                                    message.services.push($root.google.cloud.servicedirectory.v1.Service.decode(reader, reader.uint32()));
+                                    break;
+                                case 2:
+                                    message.nextPageToken = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListServicesResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.servicedirectory.v1.ListServicesResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.servicedirectory.v1.ListServicesResponse} ListServicesResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListServicesResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListServicesResponse message.
+                         * @function verify
+                         * @memberof google.cloud.servicedirectory.v1.ListServicesResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListServicesResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.services != null && message.hasOwnProperty("services")) {
+                                if (!Array.isArray(message.services))
+                                    return "services: array expected";
+                                for (var i = 0; i < message.services.length; ++i) {
+                                    var error = $root.google.cloud.servicedirectory.v1.Service.verify(message.services[i]);
+                                    if (error)
+                                        return "services." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListServicesResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.servicedirectory.v1.ListServicesResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.servicedirectory.v1.ListServicesResponse} ListServicesResponse
+                         */
+                        ListServicesResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.servicedirectory.v1.ListServicesResponse)
+                                return object;
+                            var message = new $root.google.cloud.servicedirectory.v1.ListServicesResponse();
+                            if (object.services) {
+                                if (!Array.isArray(object.services))
+                                    throw TypeError(".google.cloud.servicedirectory.v1.ListServicesResponse.services: array expected");
+                                message.services = [];
+                                for (var i = 0; i < object.services.length; ++i) {
+                                    if (typeof object.services[i] !== "object")
+                                        throw TypeError(".google.cloud.servicedirectory.v1.ListServicesResponse.services: object expected");
+                                    message.services[i] = $root.google.cloud.servicedirectory.v1.Service.fromObject(object.services[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListServicesResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.servicedirectory.v1.ListServicesResponse
+                         * @static
+                         * @param {google.cloud.servicedirectory.v1.ListServicesResponse} message ListServicesResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListServicesResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.services = [];
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.services && message.services.length) {
+                                object.services = [];
+                                for (var j = 0; j < message.services.length; ++j)
+                                    object.services[j] = $root.google.cloud.servicedirectory.v1.Service.toObject(message.services[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListServicesResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.servicedirectory.v1.ListServicesResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListServicesResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ListServicesResponse;
+                    })();
+    
+                    v1.GetServiceRequest = (function() {
+    
+                        /**
+                         * Properties of a GetServiceRequest.
+                         * @memberof google.cloud.servicedirectory.v1
+                         * @interface IGetServiceRequest
+                         * @property {string|null} [name] GetServiceRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetServiceRequest.
+                         * @memberof google.cloud.servicedirectory.v1
+                         * @classdesc Represents a GetServiceRequest.
+                         * @implements IGetServiceRequest
+                         * @constructor
+                         * @param {google.cloud.servicedirectory.v1.IGetServiceRequest=} [properties] Properties to set
+                         */
+                        function GetServiceRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetServiceRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.servicedirectory.v1.GetServiceRequest
+                         * @instance
+                         */
+                        GetServiceRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetServiceRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.servicedirectory.v1.GetServiceRequest
+                         * @static
+                         * @param {google.cloud.servicedirectory.v1.IGetServiceRequest=} [properties] Properties to set
+                         * @returns {google.cloud.servicedirectory.v1.GetServiceRequest} GetServiceRequest instance
+                         */
+                        GetServiceRequest.create = function create(properties) {
+                            return new GetServiceRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetServiceRequest message. Does not implicitly {@link google.cloud.servicedirectory.v1.GetServiceRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.servicedirectory.v1.GetServiceRequest
+                         * @static
+                         * @param {google.cloud.servicedirectory.v1.IGetServiceRequest} message GetServiceRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetServiceRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetServiceRequest message, length delimited. Does not implicitly {@link google.cloud.servicedirectory.v1.GetServiceRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.servicedirectory.v1.GetServiceRequest
+                         * @static
+                         * @param {google.cloud.servicedirectory.v1.IGetServiceRequest} message GetServiceRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetServiceRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetServiceRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.servicedirectory.v1.GetServiceRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.servicedirectory.v1.GetServiceRequest} GetServiceRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetServiceRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.servicedirectory.v1.GetServiceRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetServiceRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.servicedirectory.v1.GetServiceRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.servicedirectory.v1.GetServiceRequest} GetServiceRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetServiceRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetServiceRequest message.
+                         * @function verify
+                         * @memberof google.cloud.servicedirectory.v1.GetServiceRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetServiceRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetServiceRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.servicedirectory.v1.GetServiceRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.servicedirectory.v1.GetServiceRequest} GetServiceRequest
+                         */
+                        GetServiceRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.servicedirectory.v1.GetServiceRequest)
+                                return object;
+                            var message = new $root.google.cloud.servicedirectory.v1.GetServiceRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetServiceRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.servicedirectory.v1.GetServiceRequest
+                         * @static
+                         * @param {google.cloud.servicedirectory.v1.GetServiceRequest} message GetServiceRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetServiceRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetServiceRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.servicedirectory.v1.GetServiceRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetServiceRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return GetServiceRequest;
+                    })();
+    
+                    v1.UpdateServiceRequest = (function() {
+    
+                        /**
+                         * Properties of an UpdateServiceRequest.
+                         * @memberof google.cloud.servicedirectory.v1
+                         * @interface IUpdateServiceRequest
+                         * @property {google.cloud.servicedirectory.v1.IService|null} [service] UpdateServiceRequest service
+                         * @property {google.protobuf.IFieldMask|null} [updateMask] UpdateServiceRequest updateMask
+                         */
+    
+                        /**
+                         * Constructs a new UpdateServiceRequest.
+                         * @memberof google.cloud.servicedirectory.v1
+                         * @classdesc Represents an UpdateServiceRequest.
+                         * @implements IUpdateServiceRequest
+                         * @constructor
+                         * @param {google.cloud.servicedirectory.v1.IUpdateServiceRequest=} [properties] Properties to set
+                         */
+                        function UpdateServiceRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * UpdateServiceRequest service.
+                         * @member {google.cloud.servicedirectory.v1.IService|null|undefined} service
+                         * @memberof google.cloud.servicedirectory.v1.UpdateServiceRequest
+                         * @instance
+                         */
+                        UpdateServiceRequest.prototype.service = null;
+    
+                        /**
+                         * UpdateServiceRequest updateMask.
+                         * @member {google.protobuf.IFieldMask|null|undefined} updateMask
+                         * @memberof google.cloud.servicedirectory.v1.UpdateServiceRequest
+                         * @instance
+                         */
+                        UpdateServiceRequest.prototype.updateMask = null;
+    
+                        /**
+                         * Creates a new UpdateServiceRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.servicedirectory.v1.UpdateServiceRequest
+                         * @static
+                         * @param {google.cloud.servicedirectory.v1.IUpdateServiceRequest=} [properties] Properties to set
+                         * @returns {google.cloud.servicedirectory.v1.UpdateServiceRequest} UpdateServiceRequest instance
+                         */
+                        UpdateServiceRequest.create = function create(properties) {
+                            return new UpdateServiceRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateServiceRequest message. Does not implicitly {@link google.cloud.servicedirectory.v1.UpdateServiceRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.servicedirectory.v1.UpdateServiceRequest
+                         * @static
+                         * @param {google.cloud.servicedirectory.v1.IUpdateServiceRequest} message UpdateServiceRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateServiceRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.service != null && Object.hasOwnProperty.call(message, "service"))
+                                $root.google.cloud.servicedirectory.v1.Service.encode(message.service, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask"))
+                                $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateServiceRequest message, length delimited. Does not implicitly {@link google.cloud.servicedirectory.v1.UpdateServiceRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.servicedirectory.v1.UpdateServiceRequest
+                         * @static
+                         * @param {google.cloud.servicedirectory.v1.IUpdateServiceRequest} message UpdateServiceRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateServiceRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an UpdateServiceRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.servicedirectory.v1.UpdateServiceRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.servicedirectory.v1.UpdateServiceRequest} UpdateServiceRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateServiceRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.servicedirectory.v1.UpdateServiceRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.service = $root.google.cloud.servicedirectory.v1.Service.decode(reader, reader.uint32());
+                                    break;
+                                case 2:
+                                    message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an UpdateServiceRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.servicedirectory.v1.UpdateServiceRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.servicedirectory.v1.UpdateServiceRequest} UpdateServiceRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateServiceRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an UpdateServiceRequest message.
+                         * @function verify
+                         * @memberof google.cloud.servicedirectory.v1.UpdateServiceRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UpdateServiceRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.service != null && message.hasOwnProperty("service")) {
+                                var error = $root.google.cloud.servicedirectory.v1.Service.verify(message.service);
+                                if (error)
+                                    return "service." + error;
+                            }
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
+                                var error = $root.google.protobuf.FieldMask.verify(message.updateMask);
+                                if (error)
+                                    return "updateMask." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an UpdateServiceRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.servicedirectory.v1.UpdateServiceRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.servicedirectory.v1.UpdateServiceRequest} UpdateServiceRequest
+                         */
+                        UpdateServiceRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.servicedirectory.v1.UpdateServiceRequest)
+                                return object;
+                            var message = new $root.google.cloud.servicedirectory.v1.UpdateServiceRequest();
+                            if (object.service != null) {
+                                if (typeof object.service !== "object")
+                                    throw TypeError(".google.cloud.servicedirectory.v1.UpdateServiceRequest.service: object expected");
+                                message.service = $root.google.cloud.servicedirectory.v1.Service.fromObject(object.service);
+                            }
+                            if (object.updateMask != null) {
+                                if (typeof object.updateMask !== "object")
+                                    throw TypeError(".google.cloud.servicedirectory.v1.UpdateServiceRequest.updateMask: object expected");
+                                message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an UpdateServiceRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.servicedirectory.v1.UpdateServiceRequest
+                         * @static
+                         * @param {google.cloud.servicedirectory.v1.UpdateServiceRequest} message UpdateServiceRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UpdateServiceRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.service = null;
+                                object.updateMask = null;
+                            }
+                            if (message.service != null && message.hasOwnProperty("service"))
+                                object.service = $root.google.cloud.servicedirectory.v1.Service.toObject(message.service, options);
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask"))
+                                object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this UpdateServiceRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.servicedirectory.v1.UpdateServiceRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UpdateServiceRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return UpdateServiceRequest;
+                    })();
+    
+                    v1.DeleteServiceRequest = (function() {
+    
+                        /**
+                         * Properties of a DeleteServiceRequest.
+                         * @memberof google.cloud.servicedirectory.v1
+                         * @interface IDeleteServiceRequest
+                         * @property {string|null} [name] DeleteServiceRequest name
+                         */
+    
+                        /**
+                         * Constructs a new DeleteServiceRequest.
+                         * @memberof google.cloud.servicedirectory.v1
+                         * @classdesc Represents a DeleteServiceRequest.
+                         * @implements IDeleteServiceRequest
+                         * @constructor
+                         * @param {google.cloud.servicedirectory.v1.IDeleteServiceRequest=} [properties] Properties to set
+                         */
+                        function DeleteServiceRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DeleteServiceRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.servicedirectory.v1.DeleteServiceRequest
+                         * @instance
+                         */
+                        DeleteServiceRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new DeleteServiceRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.servicedirectory.v1.DeleteServiceRequest
+                         * @static
+                         * @param {google.cloud.servicedirectory.v1.IDeleteServiceRequest=} [properties] Properties to set
+                         * @returns {google.cloud.servicedirectory.v1.DeleteServiceRequest} DeleteServiceRequest instance
+                         */
+                        DeleteServiceRequest.create = function create(properties) {
+                            return new DeleteServiceRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteServiceRequest message. Does not implicitly {@link google.cloud.servicedirectory.v1.DeleteServiceRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.servicedirectory.v1.DeleteServiceRequest
+                         * @static
+                         * @param {google.cloud.servicedirectory.v1.IDeleteServiceRequest} message DeleteServiceRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteServiceRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteServiceRequest message, length delimited. Does not implicitly {@link google.cloud.servicedirectory.v1.DeleteServiceRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.servicedirectory.v1.DeleteServiceRequest
+                         * @static
+                         * @param {google.cloud.servicedirectory.v1.IDeleteServiceRequest} message DeleteServiceRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteServiceRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DeleteServiceRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.servicedirectory.v1.DeleteServiceRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.servicedirectory.v1.DeleteServiceRequest} DeleteServiceRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteServiceRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.servicedirectory.v1.DeleteServiceRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DeleteServiceRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.servicedirectory.v1.DeleteServiceRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.servicedirectory.v1.DeleteServiceRequest} DeleteServiceRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteServiceRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DeleteServiceRequest message.
+                         * @function verify
+                         * @memberof google.cloud.servicedirectory.v1.DeleteServiceRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DeleteServiceRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DeleteServiceRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.servicedirectory.v1.DeleteServiceRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.servicedirectory.v1.DeleteServiceRequest} DeleteServiceRequest
+                         */
+                        DeleteServiceRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.servicedirectory.v1.DeleteServiceRequest)
+                                return object;
+                            var message = new $root.google.cloud.servicedirectory.v1.DeleteServiceRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DeleteServiceRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.servicedirectory.v1.DeleteServiceRequest
+                         * @static
+                         * @param {google.cloud.servicedirectory.v1.DeleteServiceRequest} message DeleteServiceRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DeleteServiceRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DeleteServiceRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.servicedirectory.v1.DeleteServiceRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DeleteServiceRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return DeleteServiceRequest;
+                    })();
+    
+                    v1.CreateEndpointRequest = (function() {
+    
+                        /**
+                         * Properties of a CreateEndpointRequest.
+                         * @memberof google.cloud.servicedirectory.v1
+                         * @interface ICreateEndpointRequest
+                         * @property {string|null} [parent] CreateEndpointRequest parent
+                         * @property {string|null} [endpointId] CreateEndpointRequest endpointId
+                         * @property {google.cloud.servicedirectory.v1.IEndpoint|null} [endpoint] CreateEndpointRequest endpoint
+                         */
+    
+                        /**
+                         * Constructs a new CreateEndpointRequest.
+                         * @memberof google.cloud.servicedirectory.v1
+                         * @classdesc Represents a CreateEndpointRequest.
+                         * @implements ICreateEndpointRequest
+                         * @constructor
+                         * @param {google.cloud.servicedirectory.v1.ICreateEndpointRequest=} [properties] Properties to set
+                         */
+                        function CreateEndpointRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CreateEndpointRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.servicedirectory.v1.CreateEndpointRequest
+                         * @instance
+                         */
+                        CreateEndpointRequest.prototype.parent = "";
+    
+                        /**
+                         * CreateEndpointRequest endpointId.
+                         * @member {string} endpointId
+                         * @memberof google.cloud.servicedirectory.v1.CreateEndpointRequest
+                         * @instance
+                         */
+                        CreateEndpointRequest.prototype.endpointId = "";
+    
+                        /**
+                         * CreateEndpointRequest endpoint.
+                         * @member {google.cloud.servicedirectory.v1.IEndpoint|null|undefined} endpoint
+                         * @memberof google.cloud.servicedirectory.v1.CreateEndpointRequest
+                         * @instance
+                         */
+                        CreateEndpointRequest.prototype.endpoint = null;
+    
+                        /**
+                         * Creates a new CreateEndpointRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.servicedirectory.v1.CreateEndpointRequest
+                         * @static
+                         * @param {google.cloud.servicedirectory.v1.ICreateEndpointRequest=} [properties] Properties to set
+                         * @returns {google.cloud.servicedirectory.v1.CreateEndpointRequest} CreateEndpointRequest instance
+                         */
+                        CreateEndpointRequest.create = function create(properties) {
+                            return new CreateEndpointRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CreateEndpointRequest message. Does not implicitly {@link google.cloud.servicedirectory.v1.CreateEndpointRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.servicedirectory.v1.CreateEndpointRequest
+                         * @static
+                         * @param {google.cloud.servicedirectory.v1.ICreateEndpointRequest} message CreateEndpointRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateEndpointRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.endpointId != null && Object.hasOwnProperty.call(message, "endpointId"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.endpointId);
+                            if (message.endpoint != null && Object.hasOwnProperty.call(message, "endpoint"))
+                                $root.google.cloud.servicedirectory.v1.Endpoint.encode(message.endpoint, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CreateEndpointRequest message, length delimited. Does not implicitly {@link google.cloud.servicedirectory.v1.CreateEndpointRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.servicedirectory.v1.CreateEndpointRequest
+                         * @static
+                         * @param {google.cloud.servicedirectory.v1.ICreateEndpointRequest} message CreateEndpointRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateEndpointRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CreateEndpointRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.servicedirectory.v1.CreateEndpointRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.servicedirectory.v1.CreateEndpointRequest} CreateEndpointRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateEndpointRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.servicedirectory.v1.CreateEndpointRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.parent = reader.string();
+                                    break;
+                                case 2:
+                                    message.endpointId = reader.string();
+                                    break;
+                                case 3:
+                                    message.endpoint = $root.google.cloud.servicedirectory.v1.Endpoint.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CreateEndpointRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.servicedirectory.v1.CreateEndpointRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.servicedirectory.v1.CreateEndpointRequest} CreateEndpointRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateEndpointRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CreateEndpointRequest message.
+                         * @function verify
+                         * @memberof google.cloud.servicedirectory.v1.CreateEndpointRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CreateEndpointRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.endpointId != null && message.hasOwnProperty("endpointId"))
+                                if (!$util.isString(message.endpointId))
+                                    return "endpointId: string expected";
+                            if (message.endpoint != null && message.hasOwnProperty("endpoint")) {
+                                var error = $root.google.cloud.servicedirectory.v1.Endpoint.verify(message.endpoint);
+                                if (error)
+                                    return "endpoint." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CreateEndpointRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.servicedirectory.v1.CreateEndpointRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.servicedirectory.v1.CreateEndpointRequest} CreateEndpointRequest
+                         */
+                        CreateEndpointRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.servicedirectory.v1.CreateEndpointRequest)
+                                return object;
+                            var message = new $root.google.cloud.servicedirectory.v1.CreateEndpointRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.endpointId != null)
+                                message.endpointId = String(object.endpointId);
+                            if (object.endpoint != null) {
+                                if (typeof object.endpoint !== "object")
+                                    throw TypeError(".google.cloud.servicedirectory.v1.CreateEndpointRequest.endpoint: object expected");
+                                message.endpoint = $root.google.cloud.servicedirectory.v1.Endpoint.fromObject(object.endpoint);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CreateEndpointRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.servicedirectory.v1.CreateEndpointRequest
+                         * @static
+                         * @param {google.cloud.servicedirectory.v1.CreateEndpointRequest} message CreateEndpointRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CreateEndpointRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.endpointId = "";
+                                object.endpoint = null;
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.endpointId != null && message.hasOwnProperty("endpointId"))
+                                object.endpointId = message.endpointId;
+                            if (message.endpoint != null && message.hasOwnProperty("endpoint"))
+                                object.endpoint = $root.google.cloud.servicedirectory.v1.Endpoint.toObject(message.endpoint, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CreateEndpointRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.servicedirectory.v1.CreateEndpointRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CreateEndpointRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return CreateEndpointRequest;
+                    })();
+    
+                    v1.ListEndpointsRequest = (function() {
+    
+                        /**
+                         * Properties of a ListEndpointsRequest.
+                         * @memberof google.cloud.servicedirectory.v1
+                         * @interface IListEndpointsRequest
+                         * @property {string|null} [parent] ListEndpointsRequest parent
+                         * @property {number|null} [pageSize] ListEndpointsRequest pageSize
+                         * @property {string|null} [pageToken] ListEndpointsRequest pageToken
+                         * @property {string|null} [filter] ListEndpointsRequest filter
+                         * @property {string|null} [orderBy] ListEndpointsRequest orderBy
+                         */
+    
+                        /**
+                         * Constructs a new ListEndpointsRequest.
+                         * @memberof google.cloud.servicedirectory.v1
+                         * @classdesc Represents a ListEndpointsRequest.
+                         * @implements IListEndpointsRequest
+                         * @constructor
+                         * @param {google.cloud.servicedirectory.v1.IListEndpointsRequest=} [properties] Properties to set
+                         */
+                        function ListEndpointsRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListEndpointsRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.servicedirectory.v1.ListEndpointsRequest
+                         * @instance
+                         */
+                        ListEndpointsRequest.prototype.parent = "";
+    
+                        /**
+                         * ListEndpointsRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.cloud.servicedirectory.v1.ListEndpointsRequest
+                         * @instance
+                         */
+                        ListEndpointsRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListEndpointsRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.cloud.servicedirectory.v1.ListEndpointsRequest
+                         * @instance
+                         */
+                        ListEndpointsRequest.prototype.pageToken = "";
+    
+                        /**
+                         * ListEndpointsRequest filter.
+                         * @member {string} filter
+                         * @memberof google.cloud.servicedirectory.v1.ListEndpointsRequest
+                         * @instance
+                         */
+                        ListEndpointsRequest.prototype.filter = "";
+    
+                        /**
+                         * ListEndpointsRequest orderBy.
+                         * @member {string} orderBy
+                         * @memberof google.cloud.servicedirectory.v1.ListEndpointsRequest
+                         * @instance
+                         */
+                        ListEndpointsRequest.prototype.orderBy = "";
+    
+                        /**
+                         * Creates a new ListEndpointsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.servicedirectory.v1.ListEndpointsRequest
+                         * @static
+                         * @param {google.cloud.servicedirectory.v1.IListEndpointsRequest=} [properties] Properties to set
+                         * @returns {google.cloud.servicedirectory.v1.ListEndpointsRequest} ListEndpointsRequest instance
+                         */
+                        ListEndpointsRequest.create = function create(properties) {
+                            return new ListEndpointsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListEndpointsRequest message. Does not implicitly {@link google.cloud.servicedirectory.v1.ListEndpointsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.servicedirectory.v1.ListEndpointsRequest
+                         * @static
+                         * @param {google.cloud.servicedirectory.v1.IListEndpointsRequest} message ListEndpointsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListEndpointsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.filter);
+                            if (message.orderBy != null && Object.hasOwnProperty.call(message, "orderBy"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.orderBy);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListEndpointsRequest message, length delimited. Does not implicitly {@link google.cloud.servicedirectory.v1.ListEndpointsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.servicedirectory.v1.ListEndpointsRequest
+                         * @static
+                         * @param {google.cloud.servicedirectory.v1.IListEndpointsRequest} message ListEndpointsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListEndpointsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListEndpointsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.servicedirectory.v1.ListEndpointsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.servicedirectory.v1.ListEndpointsRequest} ListEndpointsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListEndpointsRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.servicedirectory.v1.ListEndpointsRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.parent = reader.string();
+                                    break;
+                                case 2:
+                                    message.pageSize = reader.int32();
+                                    break;
+                                case 3:
+                                    message.pageToken = reader.string();
+                                    break;
+                                case 4:
+                                    message.filter = reader.string();
+                                    break;
+                                case 5:
+                                    message.orderBy = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListEndpointsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.servicedirectory.v1.ListEndpointsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.servicedirectory.v1.ListEndpointsRequest} ListEndpointsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListEndpointsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListEndpointsRequest message.
+                         * @function verify
+                         * @memberof google.cloud.servicedirectory.v1.ListEndpointsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListEndpointsRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                if (!$util.isString(message.filter))
+                                    return "filter: string expected";
+                            if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                if (!$util.isString(message.orderBy))
+                                    return "orderBy: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListEndpointsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.servicedirectory.v1.ListEndpointsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.servicedirectory.v1.ListEndpointsRequest} ListEndpointsRequest
+                         */
+                        ListEndpointsRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.servicedirectory.v1.ListEndpointsRequest)
+                                return object;
+                            var message = new $root.google.cloud.servicedirectory.v1.ListEndpointsRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            if (object.filter != null)
+                                message.filter = String(object.filter);
+                            if (object.orderBy != null)
+                                message.orderBy = String(object.orderBy);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListEndpointsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.servicedirectory.v1.ListEndpointsRequest
+                         * @static
+                         * @param {google.cloud.servicedirectory.v1.ListEndpointsRequest} message ListEndpointsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListEndpointsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                                object.filter = "";
+                                object.orderBy = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                object.filter = message.filter;
+                            if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                object.orderBy = message.orderBy;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListEndpointsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.servicedirectory.v1.ListEndpointsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListEndpointsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ListEndpointsRequest;
+                    })();
+    
+                    v1.ListEndpointsResponse = (function() {
+    
+                        /**
+                         * Properties of a ListEndpointsResponse.
+                         * @memberof google.cloud.servicedirectory.v1
+                         * @interface IListEndpointsResponse
+                         * @property {Array.<google.cloud.servicedirectory.v1.IEndpoint>|null} [endpoints] ListEndpointsResponse endpoints
+                         * @property {string|null} [nextPageToken] ListEndpointsResponse nextPageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListEndpointsResponse.
+                         * @memberof google.cloud.servicedirectory.v1
+                         * @classdesc Represents a ListEndpointsResponse.
+                         * @implements IListEndpointsResponse
+                         * @constructor
+                         * @param {google.cloud.servicedirectory.v1.IListEndpointsResponse=} [properties] Properties to set
+                         */
+                        function ListEndpointsResponse(properties) {
+                            this.endpoints = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListEndpointsResponse endpoints.
+                         * @member {Array.<google.cloud.servicedirectory.v1.IEndpoint>} endpoints
+                         * @memberof google.cloud.servicedirectory.v1.ListEndpointsResponse
+                         * @instance
+                         */
+                        ListEndpointsResponse.prototype.endpoints = $util.emptyArray;
+    
+                        /**
+                         * ListEndpointsResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.cloud.servicedirectory.v1.ListEndpointsResponse
+                         * @instance
+                         */
+                        ListEndpointsResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * Creates a new ListEndpointsResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.servicedirectory.v1.ListEndpointsResponse
+                         * @static
+                         * @param {google.cloud.servicedirectory.v1.IListEndpointsResponse=} [properties] Properties to set
+                         * @returns {google.cloud.servicedirectory.v1.ListEndpointsResponse} ListEndpointsResponse instance
+                         */
+                        ListEndpointsResponse.create = function create(properties) {
+                            return new ListEndpointsResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListEndpointsResponse message. Does not implicitly {@link google.cloud.servicedirectory.v1.ListEndpointsResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.servicedirectory.v1.ListEndpointsResponse
+                         * @static
+                         * @param {google.cloud.servicedirectory.v1.IListEndpointsResponse} message ListEndpointsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListEndpointsResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.endpoints != null && message.endpoints.length)
+                                for (var i = 0; i < message.endpoints.length; ++i)
+                                    $root.google.cloud.servicedirectory.v1.Endpoint.encode(message.endpoints[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListEndpointsResponse message, length delimited. Does not implicitly {@link google.cloud.servicedirectory.v1.ListEndpointsResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.servicedirectory.v1.ListEndpointsResponse
+                         * @static
+                         * @param {google.cloud.servicedirectory.v1.IListEndpointsResponse} message ListEndpointsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListEndpointsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListEndpointsResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.servicedirectory.v1.ListEndpointsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.servicedirectory.v1.ListEndpointsResponse} ListEndpointsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListEndpointsResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.servicedirectory.v1.ListEndpointsResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    if (!(message.endpoints && message.endpoints.length))
+                                        message.endpoints = [];
+                                    message.endpoints.push($root.google.cloud.servicedirectory.v1.Endpoint.decode(reader, reader.uint32()));
+                                    break;
+                                case 2:
+                                    message.nextPageToken = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListEndpointsResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.servicedirectory.v1.ListEndpointsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.servicedirectory.v1.ListEndpointsResponse} ListEndpointsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListEndpointsResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListEndpointsResponse message.
+                         * @function verify
+                         * @memberof google.cloud.servicedirectory.v1.ListEndpointsResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListEndpointsResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.endpoints != null && message.hasOwnProperty("endpoints")) {
+                                if (!Array.isArray(message.endpoints))
+                                    return "endpoints: array expected";
+                                for (var i = 0; i < message.endpoints.length; ++i) {
+                                    var error = $root.google.cloud.servicedirectory.v1.Endpoint.verify(message.endpoints[i]);
+                                    if (error)
+                                        return "endpoints." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListEndpointsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.servicedirectory.v1.ListEndpointsResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.servicedirectory.v1.ListEndpointsResponse} ListEndpointsResponse
+                         */
+                        ListEndpointsResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.servicedirectory.v1.ListEndpointsResponse)
+                                return object;
+                            var message = new $root.google.cloud.servicedirectory.v1.ListEndpointsResponse();
+                            if (object.endpoints) {
+                                if (!Array.isArray(object.endpoints))
+                                    throw TypeError(".google.cloud.servicedirectory.v1.ListEndpointsResponse.endpoints: array expected");
+                                message.endpoints = [];
+                                for (var i = 0; i < object.endpoints.length; ++i) {
+                                    if (typeof object.endpoints[i] !== "object")
+                                        throw TypeError(".google.cloud.servicedirectory.v1.ListEndpointsResponse.endpoints: object expected");
+                                    message.endpoints[i] = $root.google.cloud.servicedirectory.v1.Endpoint.fromObject(object.endpoints[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListEndpointsResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.servicedirectory.v1.ListEndpointsResponse
+                         * @static
+                         * @param {google.cloud.servicedirectory.v1.ListEndpointsResponse} message ListEndpointsResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListEndpointsResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.endpoints = [];
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.endpoints && message.endpoints.length) {
+                                object.endpoints = [];
+                                for (var j = 0; j < message.endpoints.length; ++j)
+                                    object.endpoints[j] = $root.google.cloud.servicedirectory.v1.Endpoint.toObject(message.endpoints[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListEndpointsResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.servicedirectory.v1.ListEndpointsResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListEndpointsResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ListEndpointsResponse;
+                    })();
+    
+                    v1.GetEndpointRequest = (function() {
+    
+                        /**
+                         * Properties of a GetEndpointRequest.
+                         * @memberof google.cloud.servicedirectory.v1
+                         * @interface IGetEndpointRequest
+                         * @property {string|null} [name] GetEndpointRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetEndpointRequest.
+                         * @memberof google.cloud.servicedirectory.v1
+                         * @classdesc Represents a GetEndpointRequest.
+                         * @implements IGetEndpointRequest
+                         * @constructor
+                         * @param {google.cloud.servicedirectory.v1.IGetEndpointRequest=} [properties] Properties to set
+                         */
+                        function GetEndpointRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetEndpointRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.servicedirectory.v1.GetEndpointRequest
+                         * @instance
+                         */
+                        GetEndpointRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetEndpointRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.servicedirectory.v1.GetEndpointRequest
+                         * @static
+                         * @param {google.cloud.servicedirectory.v1.IGetEndpointRequest=} [properties] Properties to set
+                         * @returns {google.cloud.servicedirectory.v1.GetEndpointRequest} GetEndpointRequest instance
+                         */
+                        GetEndpointRequest.create = function create(properties) {
+                            return new GetEndpointRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetEndpointRequest message. Does not implicitly {@link google.cloud.servicedirectory.v1.GetEndpointRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.servicedirectory.v1.GetEndpointRequest
+                         * @static
+                         * @param {google.cloud.servicedirectory.v1.IGetEndpointRequest} message GetEndpointRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetEndpointRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetEndpointRequest message, length delimited. Does not implicitly {@link google.cloud.servicedirectory.v1.GetEndpointRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.servicedirectory.v1.GetEndpointRequest
+                         * @static
+                         * @param {google.cloud.servicedirectory.v1.IGetEndpointRequest} message GetEndpointRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetEndpointRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetEndpointRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.servicedirectory.v1.GetEndpointRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.servicedirectory.v1.GetEndpointRequest} GetEndpointRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetEndpointRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.servicedirectory.v1.GetEndpointRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetEndpointRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.servicedirectory.v1.GetEndpointRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.servicedirectory.v1.GetEndpointRequest} GetEndpointRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetEndpointRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetEndpointRequest message.
+                         * @function verify
+                         * @memberof google.cloud.servicedirectory.v1.GetEndpointRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetEndpointRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetEndpointRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.servicedirectory.v1.GetEndpointRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.servicedirectory.v1.GetEndpointRequest} GetEndpointRequest
+                         */
+                        GetEndpointRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.servicedirectory.v1.GetEndpointRequest)
+                                return object;
+                            var message = new $root.google.cloud.servicedirectory.v1.GetEndpointRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetEndpointRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.servicedirectory.v1.GetEndpointRequest
+                         * @static
+                         * @param {google.cloud.servicedirectory.v1.GetEndpointRequest} message GetEndpointRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetEndpointRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetEndpointRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.servicedirectory.v1.GetEndpointRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetEndpointRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return GetEndpointRequest;
+                    })();
+    
+                    v1.UpdateEndpointRequest = (function() {
+    
+                        /**
+                         * Properties of an UpdateEndpointRequest.
+                         * @memberof google.cloud.servicedirectory.v1
+                         * @interface IUpdateEndpointRequest
+                         * @property {google.cloud.servicedirectory.v1.IEndpoint|null} [endpoint] UpdateEndpointRequest endpoint
+                         * @property {google.protobuf.IFieldMask|null} [updateMask] UpdateEndpointRequest updateMask
+                         */
+    
+                        /**
+                         * Constructs a new UpdateEndpointRequest.
+                         * @memberof google.cloud.servicedirectory.v1
+                         * @classdesc Represents an UpdateEndpointRequest.
+                         * @implements IUpdateEndpointRequest
+                         * @constructor
+                         * @param {google.cloud.servicedirectory.v1.IUpdateEndpointRequest=} [properties] Properties to set
+                         */
+                        function UpdateEndpointRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * UpdateEndpointRequest endpoint.
+                         * @member {google.cloud.servicedirectory.v1.IEndpoint|null|undefined} endpoint
+                         * @memberof google.cloud.servicedirectory.v1.UpdateEndpointRequest
+                         * @instance
+                         */
+                        UpdateEndpointRequest.prototype.endpoint = null;
+    
+                        /**
+                         * UpdateEndpointRequest updateMask.
+                         * @member {google.protobuf.IFieldMask|null|undefined} updateMask
+                         * @memberof google.cloud.servicedirectory.v1.UpdateEndpointRequest
+                         * @instance
+                         */
+                        UpdateEndpointRequest.prototype.updateMask = null;
+    
+                        /**
+                         * Creates a new UpdateEndpointRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.servicedirectory.v1.UpdateEndpointRequest
+                         * @static
+                         * @param {google.cloud.servicedirectory.v1.IUpdateEndpointRequest=} [properties] Properties to set
+                         * @returns {google.cloud.servicedirectory.v1.UpdateEndpointRequest} UpdateEndpointRequest instance
+                         */
+                        UpdateEndpointRequest.create = function create(properties) {
+                            return new UpdateEndpointRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateEndpointRequest message. Does not implicitly {@link google.cloud.servicedirectory.v1.UpdateEndpointRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.servicedirectory.v1.UpdateEndpointRequest
+                         * @static
+                         * @param {google.cloud.servicedirectory.v1.IUpdateEndpointRequest} message UpdateEndpointRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateEndpointRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.endpoint != null && Object.hasOwnProperty.call(message, "endpoint"))
+                                $root.google.cloud.servicedirectory.v1.Endpoint.encode(message.endpoint, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask"))
+                                $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateEndpointRequest message, length delimited. Does not implicitly {@link google.cloud.servicedirectory.v1.UpdateEndpointRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.servicedirectory.v1.UpdateEndpointRequest
+                         * @static
+                         * @param {google.cloud.servicedirectory.v1.IUpdateEndpointRequest} message UpdateEndpointRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateEndpointRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an UpdateEndpointRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.servicedirectory.v1.UpdateEndpointRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.servicedirectory.v1.UpdateEndpointRequest} UpdateEndpointRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateEndpointRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.servicedirectory.v1.UpdateEndpointRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.endpoint = $root.google.cloud.servicedirectory.v1.Endpoint.decode(reader, reader.uint32());
+                                    break;
+                                case 2:
+                                    message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an UpdateEndpointRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.servicedirectory.v1.UpdateEndpointRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.servicedirectory.v1.UpdateEndpointRequest} UpdateEndpointRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateEndpointRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an UpdateEndpointRequest message.
+                         * @function verify
+                         * @memberof google.cloud.servicedirectory.v1.UpdateEndpointRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UpdateEndpointRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.endpoint != null && message.hasOwnProperty("endpoint")) {
+                                var error = $root.google.cloud.servicedirectory.v1.Endpoint.verify(message.endpoint);
+                                if (error)
+                                    return "endpoint." + error;
+                            }
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
+                                var error = $root.google.protobuf.FieldMask.verify(message.updateMask);
+                                if (error)
+                                    return "updateMask." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an UpdateEndpointRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.servicedirectory.v1.UpdateEndpointRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.servicedirectory.v1.UpdateEndpointRequest} UpdateEndpointRequest
+                         */
+                        UpdateEndpointRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.servicedirectory.v1.UpdateEndpointRequest)
+                                return object;
+                            var message = new $root.google.cloud.servicedirectory.v1.UpdateEndpointRequest();
+                            if (object.endpoint != null) {
+                                if (typeof object.endpoint !== "object")
+                                    throw TypeError(".google.cloud.servicedirectory.v1.UpdateEndpointRequest.endpoint: object expected");
+                                message.endpoint = $root.google.cloud.servicedirectory.v1.Endpoint.fromObject(object.endpoint);
+                            }
+                            if (object.updateMask != null) {
+                                if (typeof object.updateMask !== "object")
+                                    throw TypeError(".google.cloud.servicedirectory.v1.UpdateEndpointRequest.updateMask: object expected");
+                                message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an UpdateEndpointRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.servicedirectory.v1.UpdateEndpointRequest
+                         * @static
+                         * @param {google.cloud.servicedirectory.v1.UpdateEndpointRequest} message UpdateEndpointRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UpdateEndpointRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.endpoint = null;
+                                object.updateMask = null;
+                            }
+                            if (message.endpoint != null && message.hasOwnProperty("endpoint"))
+                                object.endpoint = $root.google.cloud.servicedirectory.v1.Endpoint.toObject(message.endpoint, options);
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask"))
+                                object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this UpdateEndpointRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.servicedirectory.v1.UpdateEndpointRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UpdateEndpointRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return UpdateEndpointRequest;
+                    })();
+    
+                    v1.DeleteEndpointRequest = (function() {
+    
+                        /**
+                         * Properties of a DeleteEndpointRequest.
+                         * @memberof google.cloud.servicedirectory.v1
+                         * @interface IDeleteEndpointRequest
+                         * @property {string|null} [name] DeleteEndpointRequest name
+                         */
+    
+                        /**
+                         * Constructs a new DeleteEndpointRequest.
+                         * @memberof google.cloud.servicedirectory.v1
+                         * @classdesc Represents a DeleteEndpointRequest.
+                         * @implements IDeleteEndpointRequest
+                         * @constructor
+                         * @param {google.cloud.servicedirectory.v1.IDeleteEndpointRequest=} [properties] Properties to set
+                         */
+                        function DeleteEndpointRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DeleteEndpointRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.servicedirectory.v1.DeleteEndpointRequest
+                         * @instance
+                         */
+                        DeleteEndpointRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new DeleteEndpointRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.servicedirectory.v1.DeleteEndpointRequest
+                         * @static
+                         * @param {google.cloud.servicedirectory.v1.IDeleteEndpointRequest=} [properties] Properties to set
+                         * @returns {google.cloud.servicedirectory.v1.DeleteEndpointRequest} DeleteEndpointRequest instance
+                         */
+                        DeleteEndpointRequest.create = function create(properties) {
+                            return new DeleteEndpointRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteEndpointRequest message. Does not implicitly {@link google.cloud.servicedirectory.v1.DeleteEndpointRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.servicedirectory.v1.DeleteEndpointRequest
+                         * @static
+                         * @param {google.cloud.servicedirectory.v1.IDeleteEndpointRequest} message DeleteEndpointRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteEndpointRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteEndpointRequest message, length delimited. Does not implicitly {@link google.cloud.servicedirectory.v1.DeleteEndpointRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.servicedirectory.v1.DeleteEndpointRequest
+                         * @static
+                         * @param {google.cloud.servicedirectory.v1.IDeleteEndpointRequest} message DeleteEndpointRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteEndpointRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DeleteEndpointRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.servicedirectory.v1.DeleteEndpointRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.servicedirectory.v1.DeleteEndpointRequest} DeleteEndpointRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteEndpointRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.servicedirectory.v1.DeleteEndpointRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DeleteEndpointRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.servicedirectory.v1.DeleteEndpointRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.servicedirectory.v1.DeleteEndpointRequest} DeleteEndpointRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteEndpointRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DeleteEndpointRequest message.
+                         * @function verify
+                         * @memberof google.cloud.servicedirectory.v1.DeleteEndpointRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DeleteEndpointRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DeleteEndpointRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.servicedirectory.v1.DeleteEndpointRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.servicedirectory.v1.DeleteEndpointRequest} DeleteEndpointRequest
+                         */
+                        DeleteEndpointRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.servicedirectory.v1.DeleteEndpointRequest)
+                                return object;
+                            var message = new $root.google.cloud.servicedirectory.v1.DeleteEndpointRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DeleteEndpointRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.servicedirectory.v1.DeleteEndpointRequest
+                         * @static
+                         * @param {google.cloud.servicedirectory.v1.DeleteEndpointRequest} message DeleteEndpointRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DeleteEndpointRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DeleteEndpointRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.servicedirectory.v1.DeleteEndpointRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DeleteEndpointRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return DeleteEndpointRequest;
+                    })();
+    
+                    return v1;
+                })();
+    
                 servicedirectory.v1beta1 = (function() {
     
                     /**
@@ -6043,587 +12014,6 @@
              */
             var api = {};
     
-            /**
-             * FieldBehavior enum.
-             * @name google.api.FieldBehavior
-             * @enum {number}
-             * @property {number} FIELD_BEHAVIOR_UNSPECIFIED=0 FIELD_BEHAVIOR_UNSPECIFIED value
-             * @property {number} OPTIONAL=1 OPTIONAL value
-             * @property {number} REQUIRED=2 REQUIRED value
-             * @property {number} OUTPUT_ONLY=3 OUTPUT_ONLY value
-             * @property {number} INPUT_ONLY=4 INPUT_ONLY value
-             * @property {number} IMMUTABLE=5 IMMUTABLE value
-             */
-            api.FieldBehavior = (function() {
-                var valuesById = {}, values = Object.create(valuesById);
-                values[valuesById[0] = "FIELD_BEHAVIOR_UNSPECIFIED"] = 0;
-                values[valuesById[1] = "OPTIONAL"] = 1;
-                values[valuesById[2] = "REQUIRED"] = 2;
-                values[valuesById[3] = "OUTPUT_ONLY"] = 3;
-                values[valuesById[4] = "INPUT_ONLY"] = 4;
-                values[valuesById[5] = "IMMUTABLE"] = 5;
-                return values;
-            })();
-    
-            api.ResourceDescriptor = (function() {
-    
-                /**
-                 * Properties of a ResourceDescriptor.
-                 * @memberof google.api
-                 * @interface IResourceDescriptor
-                 * @property {string|null} [type] ResourceDescriptor type
-                 * @property {Array.<string>|null} [pattern] ResourceDescriptor pattern
-                 * @property {string|null} [nameField] ResourceDescriptor nameField
-                 * @property {google.api.ResourceDescriptor.History|null} [history] ResourceDescriptor history
-                 * @property {string|null} [plural] ResourceDescriptor plural
-                 * @property {string|null} [singular] ResourceDescriptor singular
-                 */
-    
-                /**
-                 * Constructs a new ResourceDescriptor.
-                 * @memberof google.api
-                 * @classdesc Represents a ResourceDescriptor.
-                 * @implements IResourceDescriptor
-                 * @constructor
-                 * @param {google.api.IResourceDescriptor=} [properties] Properties to set
-                 */
-                function ResourceDescriptor(properties) {
-                    this.pattern = [];
-                    if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
-                                this[keys[i]] = properties[keys[i]];
-                }
-    
-                /**
-                 * ResourceDescriptor type.
-                 * @member {string} type
-                 * @memberof google.api.ResourceDescriptor
-                 * @instance
-                 */
-                ResourceDescriptor.prototype.type = "";
-    
-                /**
-                 * ResourceDescriptor pattern.
-                 * @member {Array.<string>} pattern
-                 * @memberof google.api.ResourceDescriptor
-                 * @instance
-                 */
-                ResourceDescriptor.prototype.pattern = $util.emptyArray;
-    
-                /**
-                 * ResourceDescriptor nameField.
-                 * @member {string} nameField
-                 * @memberof google.api.ResourceDescriptor
-                 * @instance
-                 */
-                ResourceDescriptor.prototype.nameField = "";
-    
-                /**
-                 * ResourceDescriptor history.
-                 * @member {google.api.ResourceDescriptor.History} history
-                 * @memberof google.api.ResourceDescriptor
-                 * @instance
-                 */
-                ResourceDescriptor.prototype.history = 0;
-    
-                /**
-                 * ResourceDescriptor plural.
-                 * @member {string} plural
-                 * @memberof google.api.ResourceDescriptor
-                 * @instance
-                 */
-                ResourceDescriptor.prototype.plural = "";
-    
-                /**
-                 * ResourceDescriptor singular.
-                 * @member {string} singular
-                 * @memberof google.api.ResourceDescriptor
-                 * @instance
-                 */
-                ResourceDescriptor.prototype.singular = "";
-    
-                /**
-                 * Creates a new ResourceDescriptor instance using the specified properties.
-                 * @function create
-                 * @memberof google.api.ResourceDescriptor
-                 * @static
-                 * @param {google.api.IResourceDescriptor=} [properties] Properties to set
-                 * @returns {google.api.ResourceDescriptor} ResourceDescriptor instance
-                 */
-                ResourceDescriptor.create = function create(properties) {
-                    return new ResourceDescriptor(properties);
-                };
-    
-                /**
-                 * Encodes the specified ResourceDescriptor message. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
-                 * @function encode
-                 * @memberof google.api.ResourceDescriptor
-                 * @static
-                 * @param {google.api.IResourceDescriptor} message ResourceDescriptor message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                ResourceDescriptor.encode = function encode(message, writer) {
-                    if (!writer)
-                        writer = $Writer.create();
-                    if (message.type != null && Object.hasOwnProperty.call(message, "type"))
-                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.type);
-                    if (message.pattern != null && message.pattern.length)
-                        for (var i = 0; i < message.pattern.length; ++i)
-                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.pattern[i]);
-                    if (message.nameField != null && Object.hasOwnProperty.call(message, "nameField"))
-                        writer.uint32(/* id 3, wireType 2 =*/26).string(message.nameField);
-                    if (message.history != null && Object.hasOwnProperty.call(message, "history"))
-                        writer.uint32(/* id 4, wireType 0 =*/32).int32(message.history);
-                    if (message.plural != null && Object.hasOwnProperty.call(message, "plural"))
-                        writer.uint32(/* id 5, wireType 2 =*/42).string(message.plural);
-                    if (message.singular != null && Object.hasOwnProperty.call(message, "singular"))
-                        writer.uint32(/* id 6, wireType 2 =*/50).string(message.singular);
-                    return writer;
-                };
-    
-                /**
-                 * Encodes the specified ResourceDescriptor message, length delimited. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
-                 * @function encodeDelimited
-                 * @memberof google.api.ResourceDescriptor
-                 * @static
-                 * @param {google.api.IResourceDescriptor} message ResourceDescriptor message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                ResourceDescriptor.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
-                };
-    
-                /**
-                 * Decodes a ResourceDescriptor message from the specified reader or buffer.
-                 * @function decode
-                 * @memberof google.api.ResourceDescriptor
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @param {number} [length] Message length if known beforehand
-                 * @returns {google.api.ResourceDescriptor} ResourceDescriptor
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                ResourceDescriptor.decode = function decode(reader, length) {
-                    if (!(reader instanceof $Reader))
-                        reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.ResourceDescriptor();
-                    while (reader.pos < end) {
-                        var tag = reader.uint32();
-                        switch (tag >>> 3) {
-                        case 1:
-                            message.type = reader.string();
-                            break;
-                        case 2:
-                            if (!(message.pattern && message.pattern.length))
-                                message.pattern = [];
-                            message.pattern.push(reader.string());
-                            break;
-                        case 3:
-                            message.nameField = reader.string();
-                            break;
-                        case 4:
-                            message.history = reader.int32();
-                            break;
-                        case 5:
-                            message.plural = reader.string();
-                            break;
-                        case 6:
-                            message.singular = reader.string();
-                            break;
-                        default:
-                            reader.skipType(tag & 7);
-                            break;
-                        }
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Decodes a ResourceDescriptor message from the specified reader or buffer, length delimited.
-                 * @function decodeDelimited
-                 * @memberof google.api.ResourceDescriptor
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {google.api.ResourceDescriptor} ResourceDescriptor
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                ResourceDescriptor.decodeDelimited = function decodeDelimited(reader) {
-                    if (!(reader instanceof $Reader))
-                        reader = new $Reader(reader);
-                    return this.decode(reader, reader.uint32());
-                };
-    
-                /**
-                 * Verifies a ResourceDescriptor message.
-                 * @function verify
-                 * @memberof google.api.ResourceDescriptor
-                 * @static
-                 * @param {Object.<string,*>} message Plain object to verify
-                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                 */
-                ResourceDescriptor.verify = function verify(message) {
-                    if (typeof message !== "object" || message === null)
-                        return "object expected";
-                    if (message.type != null && message.hasOwnProperty("type"))
-                        if (!$util.isString(message.type))
-                            return "type: string expected";
-                    if (message.pattern != null && message.hasOwnProperty("pattern")) {
-                        if (!Array.isArray(message.pattern))
-                            return "pattern: array expected";
-                        for (var i = 0; i < message.pattern.length; ++i)
-                            if (!$util.isString(message.pattern[i]))
-                                return "pattern: string[] expected";
-                    }
-                    if (message.nameField != null && message.hasOwnProperty("nameField"))
-                        if (!$util.isString(message.nameField))
-                            return "nameField: string expected";
-                    if (message.history != null && message.hasOwnProperty("history"))
-                        switch (message.history) {
-                        default:
-                            return "history: enum value expected";
-                        case 0:
-                        case 1:
-                        case 2:
-                            break;
-                        }
-                    if (message.plural != null && message.hasOwnProperty("plural"))
-                        if (!$util.isString(message.plural))
-                            return "plural: string expected";
-                    if (message.singular != null && message.hasOwnProperty("singular"))
-                        if (!$util.isString(message.singular))
-                            return "singular: string expected";
-                    return null;
-                };
-    
-                /**
-                 * Creates a ResourceDescriptor message from a plain object. Also converts values to their respective internal types.
-                 * @function fromObject
-                 * @memberof google.api.ResourceDescriptor
-                 * @static
-                 * @param {Object.<string,*>} object Plain object
-                 * @returns {google.api.ResourceDescriptor} ResourceDescriptor
-                 */
-                ResourceDescriptor.fromObject = function fromObject(object) {
-                    if (object instanceof $root.google.api.ResourceDescriptor)
-                        return object;
-                    var message = new $root.google.api.ResourceDescriptor();
-                    if (object.type != null)
-                        message.type = String(object.type);
-                    if (object.pattern) {
-                        if (!Array.isArray(object.pattern))
-                            throw TypeError(".google.api.ResourceDescriptor.pattern: array expected");
-                        message.pattern = [];
-                        for (var i = 0; i < object.pattern.length; ++i)
-                            message.pattern[i] = String(object.pattern[i]);
-                    }
-                    if (object.nameField != null)
-                        message.nameField = String(object.nameField);
-                    switch (object.history) {
-                    case "HISTORY_UNSPECIFIED":
-                    case 0:
-                        message.history = 0;
-                        break;
-                    case "ORIGINALLY_SINGLE_PATTERN":
-                    case 1:
-                        message.history = 1;
-                        break;
-                    case "FUTURE_MULTI_PATTERN":
-                    case 2:
-                        message.history = 2;
-                        break;
-                    }
-                    if (object.plural != null)
-                        message.plural = String(object.plural);
-                    if (object.singular != null)
-                        message.singular = String(object.singular);
-                    return message;
-                };
-    
-                /**
-                 * Creates a plain object from a ResourceDescriptor message. Also converts values to other types if specified.
-                 * @function toObject
-                 * @memberof google.api.ResourceDescriptor
-                 * @static
-                 * @param {google.api.ResourceDescriptor} message ResourceDescriptor
-                 * @param {$protobuf.IConversionOptions} [options] Conversion options
-                 * @returns {Object.<string,*>} Plain object
-                 */
-                ResourceDescriptor.toObject = function toObject(message, options) {
-                    if (!options)
-                        options = {};
-                    var object = {};
-                    if (options.arrays || options.defaults)
-                        object.pattern = [];
-                    if (options.defaults) {
-                        object.type = "";
-                        object.nameField = "";
-                        object.history = options.enums === String ? "HISTORY_UNSPECIFIED" : 0;
-                        object.plural = "";
-                        object.singular = "";
-                    }
-                    if (message.type != null && message.hasOwnProperty("type"))
-                        object.type = message.type;
-                    if (message.pattern && message.pattern.length) {
-                        object.pattern = [];
-                        for (var j = 0; j < message.pattern.length; ++j)
-                            object.pattern[j] = message.pattern[j];
-                    }
-                    if (message.nameField != null && message.hasOwnProperty("nameField"))
-                        object.nameField = message.nameField;
-                    if (message.history != null && message.hasOwnProperty("history"))
-                        object.history = options.enums === String ? $root.google.api.ResourceDescriptor.History[message.history] : message.history;
-                    if (message.plural != null && message.hasOwnProperty("plural"))
-                        object.plural = message.plural;
-                    if (message.singular != null && message.hasOwnProperty("singular"))
-                        object.singular = message.singular;
-                    return object;
-                };
-    
-                /**
-                 * Converts this ResourceDescriptor to JSON.
-                 * @function toJSON
-                 * @memberof google.api.ResourceDescriptor
-                 * @instance
-                 * @returns {Object.<string,*>} JSON object
-                 */
-                ResourceDescriptor.prototype.toJSON = function toJSON() {
-                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                };
-    
-                /**
-                 * History enum.
-                 * @name google.api.ResourceDescriptor.History
-                 * @enum {number}
-                 * @property {number} HISTORY_UNSPECIFIED=0 HISTORY_UNSPECIFIED value
-                 * @property {number} ORIGINALLY_SINGLE_PATTERN=1 ORIGINALLY_SINGLE_PATTERN value
-                 * @property {number} FUTURE_MULTI_PATTERN=2 FUTURE_MULTI_PATTERN value
-                 */
-                ResourceDescriptor.History = (function() {
-                    var valuesById = {}, values = Object.create(valuesById);
-                    values[valuesById[0] = "HISTORY_UNSPECIFIED"] = 0;
-                    values[valuesById[1] = "ORIGINALLY_SINGLE_PATTERN"] = 1;
-                    values[valuesById[2] = "FUTURE_MULTI_PATTERN"] = 2;
-                    return values;
-                })();
-    
-                return ResourceDescriptor;
-            })();
-    
-            api.ResourceReference = (function() {
-    
-                /**
-                 * Properties of a ResourceReference.
-                 * @memberof google.api
-                 * @interface IResourceReference
-                 * @property {string|null} [type] ResourceReference type
-                 * @property {string|null} [childType] ResourceReference childType
-                 */
-    
-                /**
-                 * Constructs a new ResourceReference.
-                 * @memberof google.api
-                 * @classdesc Represents a ResourceReference.
-                 * @implements IResourceReference
-                 * @constructor
-                 * @param {google.api.IResourceReference=} [properties] Properties to set
-                 */
-                function ResourceReference(properties) {
-                    if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
-                                this[keys[i]] = properties[keys[i]];
-                }
-    
-                /**
-                 * ResourceReference type.
-                 * @member {string} type
-                 * @memberof google.api.ResourceReference
-                 * @instance
-                 */
-                ResourceReference.prototype.type = "";
-    
-                /**
-                 * ResourceReference childType.
-                 * @member {string} childType
-                 * @memberof google.api.ResourceReference
-                 * @instance
-                 */
-                ResourceReference.prototype.childType = "";
-    
-                /**
-                 * Creates a new ResourceReference instance using the specified properties.
-                 * @function create
-                 * @memberof google.api.ResourceReference
-                 * @static
-                 * @param {google.api.IResourceReference=} [properties] Properties to set
-                 * @returns {google.api.ResourceReference} ResourceReference instance
-                 */
-                ResourceReference.create = function create(properties) {
-                    return new ResourceReference(properties);
-                };
-    
-                /**
-                 * Encodes the specified ResourceReference message. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
-                 * @function encode
-                 * @memberof google.api.ResourceReference
-                 * @static
-                 * @param {google.api.IResourceReference} message ResourceReference message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                ResourceReference.encode = function encode(message, writer) {
-                    if (!writer)
-                        writer = $Writer.create();
-                    if (message.type != null && Object.hasOwnProperty.call(message, "type"))
-                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.type);
-                    if (message.childType != null && Object.hasOwnProperty.call(message, "childType"))
-                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.childType);
-                    return writer;
-                };
-    
-                /**
-                 * Encodes the specified ResourceReference message, length delimited. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
-                 * @function encodeDelimited
-                 * @memberof google.api.ResourceReference
-                 * @static
-                 * @param {google.api.IResourceReference} message ResourceReference message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                ResourceReference.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
-                };
-    
-                /**
-                 * Decodes a ResourceReference message from the specified reader or buffer.
-                 * @function decode
-                 * @memberof google.api.ResourceReference
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @param {number} [length] Message length if known beforehand
-                 * @returns {google.api.ResourceReference} ResourceReference
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                ResourceReference.decode = function decode(reader, length) {
-                    if (!(reader instanceof $Reader))
-                        reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.ResourceReference();
-                    while (reader.pos < end) {
-                        var tag = reader.uint32();
-                        switch (tag >>> 3) {
-                        case 1:
-                            message.type = reader.string();
-                            break;
-                        case 2:
-                            message.childType = reader.string();
-                            break;
-                        default:
-                            reader.skipType(tag & 7);
-                            break;
-                        }
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Decodes a ResourceReference message from the specified reader or buffer, length delimited.
-                 * @function decodeDelimited
-                 * @memberof google.api.ResourceReference
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {google.api.ResourceReference} ResourceReference
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                ResourceReference.decodeDelimited = function decodeDelimited(reader) {
-                    if (!(reader instanceof $Reader))
-                        reader = new $Reader(reader);
-                    return this.decode(reader, reader.uint32());
-                };
-    
-                /**
-                 * Verifies a ResourceReference message.
-                 * @function verify
-                 * @memberof google.api.ResourceReference
-                 * @static
-                 * @param {Object.<string,*>} message Plain object to verify
-                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                 */
-                ResourceReference.verify = function verify(message) {
-                    if (typeof message !== "object" || message === null)
-                        return "object expected";
-                    if (message.type != null && message.hasOwnProperty("type"))
-                        if (!$util.isString(message.type))
-                            return "type: string expected";
-                    if (message.childType != null && message.hasOwnProperty("childType"))
-                        if (!$util.isString(message.childType))
-                            return "childType: string expected";
-                    return null;
-                };
-    
-                /**
-                 * Creates a ResourceReference message from a plain object. Also converts values to their respective internal types.
-                 * @function fromObject
-                 * @memberof google.api.ResourceReference
-                 * @static
-                 * @param {Object.<string,*>} object Plain object
-                 * @returns {google.api.ResourceReference} ResourceReference
-                 */
-                ResourceReference.fromObject = function fromObject(object) {
-                    if (object instanceof $root.google.api.ResourceReference)
-                        return object;
-                    var message = new $root.google.api.ResourceReference();
-                    if (object.type != null)
-                        message.type = String(object.type);
-                    if (object.childType != null)
-                        message.childType = String(object.childType);
-                    return message;
-                };
-    
-                /**
-                 * Creates a plain object from a ResourceReference message. Also converts values to other types if specified.
-                 * @function toObject
-                 * @memberof google.api.ResourceReference
-                 * @static
-                 * @param {google.api.ResourceReference} message ResourceReference
-                 * @param {$protobuf.IConversionOptions} [options] Conversion options
-                 * @returns {Object.<string,*>} Plain object
-                 */
-                ResourceReference.toObject = function toObject(message, options) {
-                    if (!options)
-                        options = {};
-                    var object = {};
-                    if (options.defaults) {
-                        object.type = "";
-                        object.childType = "";
-                    }
-                    if (message.type != null && message.hasOwnProperty("type"))
-                        object.type = message.type;
-                    if (message.childType != null && message.hasOwnProperty("childType"))
-                        object.childType = message.childType;
-                    return object;
-                };
-    
-                /**
-                 * Converts this ResourceReference to JSON.
-                 * @function toJSON
-                 * @memberof google.api.ResourceReference
-                 * @instance
-                 * @returns {Object.<string,*>} JSON object
-                 */
-                ResourceReference.prototype.toJSON = function toJSON() {
-                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                };
-    
-                return ResourceReference;
-            })();
-    
             api.Http = (function() {
     
                 /**
@@ -7526,6 +12916,587 @@
                 };
     
                 return CustomHttpPattern;
+            })();
+    
+            /**
+             * FieldBehavior enum.
+             * @name google.api.FieldBehavior
+             * @enum {number}
+             * @property {number} FIELD_BEHAVIOR_UNSPECIFIED=0 FIELD_BEHAVIOR_UNSPECIFIED value
+             * @property {number} OPTIONAL=1 OPTIONAL value
+             * @property {number} REQUIRED=2 REQUIRED value
+             * @property {number} OUTPUT_ONLY=3 OUTPUT_ONLY value
+             * @property {number} INPUT_ONLY=4 INPUT_ONLY value
+             * @property {number} IMMUTABLE=5 IMMUTABLE value
+             */
+            api.FieldBehavior = (function() {
+                var valuesById = {}, values = Object.create(valuesById);
+                values[valuesById[0] = "FIELD_BEHAVIOR_UNSPECIFIED"] = 0;
+                values[valuesById[1] = "OPTIONAL"] = 1;
+                values[valuesById[2] = "REQUIRED"] = 2;
+                values[valuesById[3] = "OUTPUT_ONLY"] = 3;
+                values[valuesById[4] = "INPUT_ONLY"] = 4;
+                values[valuesById[5] = "IMMUTABLE"] = 5;
+                return values;
+            })();
+    
+            api.ResourceDescriptor = (function() {
+    
+                /**
+                 * Properties of a ResourceDescriptor.
+                 * @memberof google.api
+                 * @interface IResourceDescriptor
+                 * @property {string|null} [type] ResourceDescriptor type
+                 * @property {Array.<string>|null} [pattern] ResourceDescriptor pattern
+                 * @property {string|null} [nameField] ResourceDescriptor nameField
+                 * @property {google.api.ResourceDescriptor.History|null} [history] ResourceDescriptor history
+                 * @property {string|null} [plural] ResourceDescriptor plural
+                 * @property {string|null} [singular] ResourceDescriptor singular
+                 */
+    
+                /**
+                 * Constructs a new ResourceDescriptor.
+                 * @memberof google.api
+                 * @classdesc Represents a ResourceDescriptor.
+                 * @implements IResourceDescriptor
+                 * @constructor
+                 * @param {google.api.IResourceDescriptor=} [properties] Properties to set
+                 */
+                function ResourceDescriptor(properties) {
+                    this.pattern = [];
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * ResourceDescriptor type.
+                 * @member {string} type
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 */
+                ResourceDescriptor.prototype.type = "";
+    
+                /**
+                 * ResourceDescriptor pattern.
+                 * @member {Array.<string>} pattern
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 */
+                ResourceDescriptor.prototype.pattern = $util.emptyArray;
+    
+                /**
+                 * ResourceDescriptor nameField.
+                 * @member {string} nameField
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 */
+                ResourceDescriptor.prototype.nameField = "";
+    
+                /**
+                 * ResourceDescriptor history.
+                 * @member {google.api.ResourceDescriptor.History} history
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 */
+                ResourceDescriptor.prototype.history = 0;
+    
+                /**
+                 * ResourceDescriptor plural.
+                 * @member {string} plural
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 */
+                ResourceDescriptor.prototype.plural = "";
+    
+                /**
+                 * ResourceDescriptor singular.
+                 * @member {string} singular
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 */
+                ResourceDescriptor.prototype.singular = "";
+    
+                /**
+                 * Creates a new ResourceDescriptor instance using the specified properties.
+                 * @function create
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {google.api.IResourceDescriptor=} [properties] Properties to set
+                 * @returns {google.api.ResourceDescriptor} ResourceDescriptor instance
+                 */
+                ResourceDescriptor.create = function create(properties) {
+                    return new ResourceDescriptor(properties);
+                };
+    
+                /**
+                 * Encodes the specified ResourceDescriptor message. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {google.api.IResourceDescriptor} message ResourceDescriptor message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ResourceDescriptor.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.type != null && Object.hasOwnProperty.call(message, "type"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.type);
+                    if (message.pattern != null && message.pattern.length)
+                        for (var i = 0; i < message.pattern.length; ++i)
+                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.pattern[i]);
+                    if (message.nameField != null && Object.hasOwnProperty.call(message, "nameField"))
+                        writer.uint32(/* id 3, wireType 2 =*/26).string(message.nameField);
+                    if (message.history != null && Object.hasOwnProperty.call(message, "history"))
+                        writer.uint32(/* id 4, wireType 0 =*/32).int32(message.history);
+                    if (message.plural != null && Object.hasOwnProperty.call(message, "plural"))
+                        writer.uint32(/* id 5, wireType 2 =*/42).string(message.plural);
+                    if (message.singular != null && Object.hasOwnProperty.call(message, "singular"))
+                        writer.uint32(/* id 6, wireType 2 =*/50).string(message.singular);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified ResourceDescriptor message, length delimited. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {google.api.IResourceDescriptor} message ResourceDescriptor message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ResourceDescriptor.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a ResourceDescriptor message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.api.ResourceDescriptor} ResourceDescriptor
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ResourceDescriptor.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.ResourceDescriptor();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            message.type = reader.string();
+                            break;
+                        case 2:
+                            if (!(message.pattern && message.pattern.length))
+                                message.pattern = [];
+                            message.pattern.push(reader.string());
+                            break;
+                        case 3:
+                            message.nameField = reader.string();
+                            break;
+                        case 4:
+                            message.history = reader.int32();
+                            break;
+                        case 5:
+                            message.plural = reader.string();
+                            break;
+                        case 6:
+                            message.singular = reader.string();
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a ResourceDescriptor message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.api.ResourceDescriptor} ResourceDescriptor
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ResourceDescriptor.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a ResourceDescriptor message.
+                 * @function verify
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                ResourceDescriptor.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.type != null && message.hasOwnProperty("type"))
+                        if (!$util.isString(message.type))
+                            return "type: string expected";
+                    if (message.pattern != null && message.hasOwnProperty("pattern")) {
+                        if (!Array.isArray(message.pattern))
+                            return "pattern: array expected";
+                        for (var i = 0; i < message.pattern.length; ++i)
+                            if (!$util.isString(message.pattern[i]))
+                                return "pattern: string[] expected";
+                    }
+                    if (message.nameField != null && message.hasOwnProperty("nameField"))
+                        if (!$util.isString(message.nameField))
+                            return "nameField: string expected";
+                    if (message.history != null && message.hasOwnProperty("history"))
+                        switch (message.history) {
+                        default:
+                            return "history: enum value expected";
+                        case 0:
+                        case 1:
+                        case 2:
+                            break;
+                        }
+                    if (message.plural != null && message.hasOwnProperty("plural"))
+                        if (!$util.isString(message.plural))
+                            return "plural: string expected";
+                    if (message.singular != null && message.hasOwnProperty("singular"))
+                        if (!$util.isString(message.singular))
+                            return "singular: string expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a ResourceDescriptor message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.api.ResourceDescriptor} ResourceDescriptor
+                 */
+                ResourceDescriptor.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.api.ResourceDescriptor)
+                        return object;
+                    var message = new $root.google.api.ResourceDescriptor();
+                    if (object.type != null)
+                        message.type = String(object.type);
+                    if (object.pattern) {
+                        if (!Array.isArray(object.pattern))
+                            throw TypeError(".google.api.ResourceDescriptor.pattern: array expected");
+                        message.pattern = [];
+                        for (var i = 0; i < object.pattern.length; ++i)
+                            message.pattern[i] = String(object.pattern[i]);
+                    }
+                    if (object.nameField != null)
+                        message.nameField = String(object.nameField);
+                    switch (object.history) {
+                    case "HISTORY_UNSPECIFIED":
+                    case 0:
+                        message.history = 0;
+                        break;
+                    case "ORIGINALLY_SINGLE_PATTERN":
+                    case 1:
+                        message.history = 1;
+                        break;
+                    case "FUTURE_MULTI_PATTERN":
+                    case 2:
+                        message.history = 2;
+                        break;
+                    }
+                    if (object.plural != null)
+                        message.plural = String(object.plural);
+                    if (object.singular != null)
+                        message.singular = String(object.singular);
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a ResourceDescriptor message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {google.api.ResourceDescriptor} message ResourceDescriptor
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                ResourceDescriptor.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.arrays || options.defaults)
+                        object.pattern = [];
+                    if (options.defaults) {
+                        object.type = "";
+                        object.nameField = "";
+                        object.history = options.enums === String ? "HISTORY_UNSPECIFIED" : 0;
+                        object.plural = "";
+                        object.singular = "";
+                    }
+                    if (message.type != null && message.hasOwnProperty("type"))
+                        object.type = message.type;
+                    if (message.pattern && message.pattern.length) {
+                        object.pattern = [];
+                        for (var j = 0; j < message.pattern.length; ++j)
+                            object.pattern[j] = message.pattern[j];
+                    }
+                    if (message.nameField != null && message.hasOwnProperty("nameField"))
+                        object.nameField = message.nameField;
+                    if (message.history != null && message.hasOwnProperty("history"))
+                        object.history = options.enums === String ? $root.google.api.ResourceDescriptor.History[message.history] : message.history;
+                    if (message.plural != null && message.hasOwnProperty("plural"))
+                        object.plural = message.plural;
+                    if (message.singular != null && message.hasOwnProperty("singular"))
+                        object.singular = message.singular;
+                    return object;
+                };
+    
+                /**
+                 * Converts this ResourceDescriptor to JSON.
+                 * @function toJSON
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                ResourceDescriptor.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * History enum.
+                 * @name google.api.ResourceDescriptor.History
+                 * @enum {number}
+                 * @property {number} HISTORY_UNSPECIFIED=0 HISTORY_UNSPECIFIED value
+                 * @property {number} ORIGINALLY_SINGLE_PATTERN=1 ORIGINALLY_SINGLE_PATTERN value
+                 * @property {number} FUTURE_MULTI_PATTERN=2 FUTURE_MULTI_PATTERN value
+                 */
+                ResourceDescriptor.History = (function() {
+                    var valuesById = {}, values = Object.create(valuesById);
+                    values[valuesById[0] = "HISTORY_UNSPECIFIED"] = 0;
+                    values[valuesById[1] = "ORIGINALLY_SINGLE_PATTERN"] = 1;
+                    values[valuesById[2] = "FUTURE_MULTI_PATTERN"] = 2;
+                    return values;
+                })();
+    
+                return ResourceDescriptor;
+            })();
+    
+            api.ResourceReference = (function() {
+    
+                /**
+                 * Properties of a ResourceReference.
+                 * @memberof google.api
+                 * @interface IResourceReference
+                 * @property {string|null} [type] ResourceReference type
+                 * @property {string|null} [childType] ResourceReference childType
+                 */
+    
+                /**
+                 * Constructs a new ResourceReference.
+                 * @memberof google.api
+                 * @classdesc Represents a ResourceReference.
+                 * @implements IResourceReference
+                 * @constructor
+                 * @param {google.api.IResourceReference=} [properties] Properties to set
+                 */
+                function ResourceReference(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * ResourceReference type.
+                 * @member {string} type
+                 * @memberof google.api.ResourceReference
+                 * @instance
+                 */
+                ResourceReference.prototype.type = "";
+    
+                /**
+                 * ResourceReference childType.
+                 * @member {string} childType
+                 * @memberof google.api.ResourceReference
+                 * @instance
+                 */
+                ResourceReference.prototype.childType = "";
+    
+                /**
+                 * Creates a new ResourceReference instance using the specified properties.
+                 * @function create
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {google.api.IResourceReference=} [properties] Properties to set
+                 * @returns {google.api.ResourceReference} ResourceReference instance
+                 */
+                ResourceReference.create = function create(properties) {
+                    return new ResourceReference(properties);
+                };
+    
+                /**
+                 * Encodes the specified ResourceReference message. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {google.api.IResourceReference} message ResourceReference message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ResourceReference.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.type != null && Object.hasOwnProperty.call(message, "type"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.type);
+                    if (message.childType != null && Object.hasOwnProperty.call(message, "childType"))
+                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.childType);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified ResourceReference message, length delimited. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {google.api.IResourceReference} message ResourceReference message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ResourceReference.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a ResourceReference message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.api.ResourceReference} ResourceReference
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ResourceReference.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.ResourceReference();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            message.type = reader.string();
+                            break;
+                        case 2:
+                            message.childType = reader.string();
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a ResourceReference message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.api.ResourceReference} ResourceReference
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ResourceReference.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a ResourceReference message.
+                 * @function verify
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                ResourceReference.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.type != null && message.hasOwnProperty("type"))
+                        if (!$util.isString(message.type))
+                            return "type: string expected";
+                    if (message.childType != null && message.hasOwnProperty("childType"))
+                        if (!$util.isString(message.childType))
+                            return "childType: string expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a ResourceReference message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.api.ResourceReference} ResourceReference
+                 */
+                ResourceReference.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.api.ResourceReference)
+                        return object;
+                    var message = new $root.google.api.ResourceReference();
+                    if (object.type != null)
+                        message.type = String(object.type);
+                    if (object.childType != null)
+                        message.childType = String(object.childType);
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a ResourceReference message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {google.api.ResourceReference} message ResourceReference
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                ResourceReference.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults) {
+                        object.type = "";
+                        object.childType = "";
+                    }
+                    if (message.type != null && message.hasOwnProperty("type"))
+                        object.type = message.type;
+                    if (message.childType != null && message.hasOwnProperty("childType"))
+                        object.childType = message.childType;
+                    return object;
+                };
+    
+                /**
+                 * Converts this ResourceReference to JSON.
+                 * @function toJSON
+                 * @memberof google.api.ResourceReference
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                ResourceReference.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                return ResourceReference;
             })();
     
             return api;

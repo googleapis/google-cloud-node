@@ -3,23 +3,16 @@
     {
       "git": {
         "name": ".",
-        "remote": "https://github.com/googleapis/nodejs-service-directory.git",
-        "sha": "6bb3e5d2080d01d8b1ff5c2d859e0c9e6e46377c"
+        "remote": "git@github.com:googleapis/nodejs-service-directory.git",
+        "sha": "77de3d45e6f2269f6eadfbd1d499b45d25892712"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "2f019bf70bfe06f1e2af1b04011b0a2405190e43",
-        "internalRef": "343202295"
-      }
-    },
-    {
-      "git": {
-        "name": "synthtool",
-        "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "1f1148d3c7a7a52f0c98077f976bd9b3c948ee2b"
+        "sha": "8ff09481bac31dc08ddba403ac6337fb304b60f6",
+        "internalRef": "343290645"
       }
     }
   ],
@@ -29,6 +22,15 @@
         "source": "googleapis",
         "apiName": "servicedirectory",
         "apiVersion": "v1beta1",
+        "language": "nodejs",
+        "generator": "bazel"
+      }
+    },
+    {
+      "client": {
+        "source": "googleapis",
+        "apiName": "servicedirectory",
+        "apiVersion": "v1",
         "language": "nodejs",
         "generator": "bazel"
       }
@@ -87,6 +89,11 @@
     "README.md",
     "api-extractor.json",
     "linkinator.config.json",
+    "protos/google/cloud/servicedirectory/v1/endpoint.proto",
+    "protos/google/cloud/servicedirectory/v1/lookup_service.proto",
+    "protos/google/cloud/servicedirectory/v1/namespace.proto",
+    "protos/google/cloud/servicedirectory/v1/registration_service.proto",
+    "protos/google/cloud/servicedirectory/v1/service.proto",
     "protos/google/cloud/servicedirectory/v1beta1/endpoint.proto",
     "protos/google/cloud/servicedirectory/v1beta1/lookup_service.proto",
     "protos/google/cloud/servicedirectory/v1beta1/namespace.proto",
@@ -98,6 +105,13 @@
     "renovate.json",
     "samples/README.md",
     "src/index.ts",
+    "src/v1/index.ts",
+    "src/v1/lookup_service_client.ts",
+    "src/v1/lookup_service_client_config.json",
+    "src/v1/lookup_service_proto_list.json",
+    "src/v1/registration_service_client.ts",
+    "src/v1/registration_service_client_config.json",
+    "src/v1/registration_service_proto_list.json",
     "src/v1beta1/index.ts",
     "src/v1beta1/lookup_service_client.ts",
     "src/v1beta1/lookup_service_client_config.json",
@@ -108,7 +122,9 @@
     "system-test/fixtures/sample/src/index.js",
     "system-test/fixtures/sample/src/index.ts",
     "system-test/install.ts",
+    "test/gapic_lookup_service_v1.ts",
     "test/gapic_lookup_service_v1beta1.ts",
+    "test/gapic_registration_service_v1.ts",
     "test/gapic_registration_service_v1beta1.ts",
     "tsconfig.json",
     "webpack.config.js"
