@@ -26,6 +26,7 @@ function main() {
   const flowsClient = new cx.FlowsClient();
   const intentsClient = new cx.IntentsClient();
   const pagesClient = new cx.PagesClient();
+  const securitySettingsServiceClient = new cx.SecuritySettingsServiceClient();
   const sessionEntityTypesClient = new cx.SessionEntityTypesClient();
   const sessionsClient = new cx.SessionsClient();
   const transitionRouteGroupsClient = new cx.TransitionRouteGroupsClient();

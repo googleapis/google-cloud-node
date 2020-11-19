@@ -8,14 +8,14 @@
               "nested": {
                 "cx": {
                   "nested": {
-                    "v3beta1": {
+                    "v3": {
                       "options": {
                         "cc_enable_arenas": true,
-                        "csharp_namespace": "Google.Cloud.Dialogflow.Cx.V3Beta1",
-                        "go_package": "google.golang.org/genproto/googleapis/cloud/dialogflow/cx/v3beta1;cx",
+                        "csharp_namespace": "Google.Cloud.Dialogflow.Cx.V3",
+                        "go_package": "google.golang.org/genproto/googleapis/cloud/dialogflow/cx/v3;cx",
                         "java_multiple_files": true,
                         "java_outer_classname": "WebhookProto",
-                        "java_package": "com.google.cloud.dialogflow.cx.v3beta1",
+                        "java_package": "com.google.cloud.dialogflow.cx.v3",
                         "objc_class_prefix": "DF",
                         "(google.api.resource_definition).type": "dialogflow.googleapis.com/Session",
                         "(google.api.resource_definition).pattern": "projects/{project}/locations/{location}/agents/{agent}/environments/{environment}/sessions/{session}"
@@ -31,13 +31,13 @@
                               "requestType": "ListAgentsRequest",
                               "responseType": "ListAgentsResponse",
                               "options": {
-                                "(google.api.http).get": "/v3beta1/{parent=projects/*/locations/*}/agents",
+                                "(google.api.http).get": "/v3/{parent=projects/*/locations/*}/agents",
                                 "(google.api.method_signature)": "parent"
                               },
                               "parsedOptions": [
                                 {
                                   "(google.api.http)": {
-                                    "get": "/v3beta1/{parent=projects/*/locations/*}/agents"
+                                    "get": "/v3/{parent=projects/*/locations/*}/agents"
                                   }
                                 },
                                 {
@@ -49,13 +49,13 @@
                               "requestType": "GetAgentRequest",
                               "responseType": "Agent",
                               "options": {
-                                "(google.api.http).get": "/v3beta1/{name=projects/*/locations/*/agents/*}",
+                                "(google.api.http).get": "/v3/{name=projects/*/locations/*/agents/*}",
                                 "(google.api.method_signature)": "name"
                               },
                               "parsedOptions": [
                                 {
                                   "(google.api.http)": {
-                                    "get": "/v3beta1/{name=projects/*/locations/*/agents/*}"
+                                    "get": "/v3/{name=projects/*/locations/*/agents/*}"
                                   }
                                 },
                                 {
@@ -67,14 +67,14 @@
                               "requestType": "CreateAgentRequest",
                               "responseType": "Agent",
                               "options": {
-                                "(google.api.http).post": "/v3beta1/{parent=projects/*/locations/*}/agents",
+                                "(google.api.http).post": "/v3/{parent=projects/*/locations/*}/agents",
                                 "(google.api.http).body": "agent",
                                 "(google.api.method_signature)": "parent,agent"
                               },
                               "parsedOptions": [
                                 {
                                   "(google.api.http)": {
-                                    "post": "/v3beta1/{parent=projects/*/locations/*}/agents",
+                                    "post": "/v3/{parent=projects/*/locations/*}/agents",
                                     "body": "agent"
                                   }
                                 },
@@ -87,14 +87,14 @@
                               "requestType": "UpdateAgentRequest",
                               "responseType": "Agent",
                               "options": {
-                                "(google.api.http).patch": "/v3beta1/{agent.name=projects/*/locations/*/agents/*}",
+                                "(google.api.http).patch": "/v3/{agent.name=projects/*/locations/*/agents/*}",
                                 "(google.api.http).body": "agent",
                                 "(google.api.method_signature)": "agent,update_mask"
                               },
                               "parsedOptions": [
                                 {
                                   "(google.api.http)": {
-                                    "patch": "/v3beta1/{agent.name=projects/*/locations/*/agents/*}",
+                                    "patch": "/v3/{agent.name=projects/*/locations/*/agents/*}",
                                     "body": "agent"
                                   }
                                 },
@@ -107,13 +107,13 @@
                               "requestType": "DeleteAgentRequest",
                               "responseType": "google.protobuf.Empty",
                               "options": {
-                                "(google.api.http).delete": "/v3beta1/{name=projects/*/locations/*/agents/*}",
+                                "(google.api.http).delete": "/v3/{name=projects/*/locations/*/agents/*}",
                                 "(google.api.method_signature)": "name"
                               },
                               "parsedOptions": [
                                 {
                                   "(google.api.http)": {
-                                    "delete": "/v3beta1/{name=projects/*/locations/*/agents/*}"
+                                    "delete": "/v3/{name=projects/*/locations/*/agents/*}"
                                   }
                                 },
                                 {
@@ -125,7 +125,7 @@
                               "requestType": "ExportAgentRequest",
                               "responseType": "google.longrunning.Operation",
                               "options": {
-                                "(google.api.http).post": "/v3beta1/{name=projects/*/locations/*/agents/*}:export",
+                                "(google.api.http).post": "/v3/{name=projects/*/locations/*/agents/*}:export",
                                 "(google.api.http).body": "*",
                                 "(google.longrunning.operation_info).response_type": "ExportAgentResponse",
                                 "(google.longrunning.operation_info).metadata_type": "google.protobuf.Struct"
@@ -133,7 +133,7 @@
                               "parsedOptions": [
                                 {
                                   "(google.api.http)": {
-                                    "post": "/v3beta1/{name=projects/*/locations/*/agents/*}:export",
+                                    "post": "/v3/{name=projects/*/locations/*/agents/*}:export",
                                     "body": "*"
                                   }
                                 },
@@ -149,7 +149,7 @@
                               "requestType": "RestoreAgentRequest",
                               "responseType": "google.longrunning.Operation",
                               "options": {
-                                "(google.api.http).post": "/v3beta1/{name=projects/*/locations/*/agents/*}:restore",
+                                "(google.api.http).post": "/v3/{name=projects/*/locations/*/agents/*}:restore",
                                 "(google.api.http).body": "*",
                                 "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
                                 "(google.longrunning.operation_info).metadata_type": "google.protobuf.Struct"
@@ -157,7 +157,7 @@
                               "parsedOptions": [
                                 {
                                   "(google.api.http)": {
-                                    "post": "/v3beta1/{name=projects/*/locations/*/agents/*}:restore",
+                                    "post": "/v3/{name=projects/*/locations/*/agents/*}:restore",
                                     "body": "*"
                                   }
                                 },
@@ -408,14 +408,14 @@
                               "requestType": "CreateFlowRequest",
                               "responseType": "Flow",
                               "options": {
-                                "(google.api.http).post": "/v3beta1/{parent=projects/*/locations/*/agents/*}/flows",
+                                "(google.api.http).post": "/v3/{parent=projects/*/locations/*/agents/*}/flows",
                                 "(google.api.http).body": "flow",
                                 "(google.api.method_signature)": "parent,flow"
                               },
                               "parsedOptions": [
                                 {
                                   "(google.api.http)": {
-                                    "post": "/v3beta1/{parent=projects/*/locations/*/agents/*}/flows",
+                                    "post": "/v3/{parent=projects/*/locations/*/agents/*}/flows",
                                     "body": "flow"
                                   }
                                 },
@@ -428,13 +428,13 @@
                               "requestType": "DeleteFlowRequest",
                               "responseType": "google.protobuf.Empty",
                               "options": {
-                                "(google.api.http).delete": "/v3beta1/{name=projects/*/locations/*/agents/*/flows/*}",
+                                "(google.api.http).delete": "/v3/{name=projects/*/locations/*/agents/*/flows/*}",
                                 "(google.api.method_signature)": "name"
                               },
                               "parsedOptions": [
                                 {
                                   "(google.api.http)": {
-                                    "delete": "/v3beta1/{name=projects/*/locations/*/agents/*/flows/*}"
+                                    "delete": "/v3/{name=projects/*/locations/*/agents/*/flows/*}"
                                   }
                                 },
                                 {
@@ -446,13 +446,13 @@
                               "requestType": "ListFlowsRequest",
                               "responseType": "ListFlowsResponse",
                               "options": {
-                                "(google.api.http).get": "/v3beta1/{parent=projects/*/locations/*/agents/*}/flows",
+                                "(google.api.http).get": "/v3/{parent=projects/*/locations/*/agents/*}/flows",
                                 "(google.api.method_signature)": "parent"
                               },
                               "parsedOptions": [
                                 {
                                   "(google.api.http)": {
-                                    "get": "/v3beta1/{parent=projects/*/locations/*/agents/*}/flows"
+                                    "get": "/v3/{parent=projects/*/locations/*/agents/*}/flows"
                                   }
                                 },
                                 {
@@ -464,13 +464,13 @@
                               "requestType": "GetFlowRequest",
                               "responseType": "Flow",
                               "options": {
-                                "(google.api.http).get": "/v3beta1/{name=projects/*/locations/*/agents/*/flows/*}",
+                                "(google.api.http).get": "/v3/{name=projects/*/locations/*/agents/*/flows/*}",
                                 "(google.api.method_signature)": "name"
                               },
                               "parsedOptions": [
                                 {
                                   "(google.api.http)": {
-                                    "get": "/v3beta1/{name=projects/*/locations/*/agents/*/flows/*}"
+                                    "get": "/v3/{name=projects/*/locations/*/agents/*/flows/*}"
                                   }
                                 },
                                 {
@@ -482,14 +482,14 @@
                               "requestType": "UpdateFlowRequest",
                               "responseType": "Flow",
                               "options": {
-                                "(google.api.http).patch": "/v3beta1/{flow.name=projects/*/locations/*/agents/*/flows/*}",
+                                "(google.api.http).patch": "/v3/{flow.name=projects/*/locations/*/agents/*/flows/*}",
                                 "(google.api.http).body": "flow",
                                 "(google.api.method_signature)": "flow,update_mask"
                               },
                               "parsedOptions": [
                                 {
                                   "(google.api.http)": {
-                                    "patch": "/v3beta1/{flow.name=projects/*/locations/*/agents/*/flows/*}",
+                                    "patch": "/v3/{flow.name=projects/*/locations/*/agents/*/flows/*}",
                                     "body": "flow"
                                   }
                                 },
@@ -502,7 +502,7 @@
                               "requestType": "TrainFlowRequest",
                               "responseType": "google.longrunning.Operation",
                               "options": {
-                                "(google.api.http).post": "/v3beta1/{name=projects/*/locations/*/agents/*/flows/*}:train",
+                                "(google.api.http).post": "/v3/{name=projects/*/locations/*/agents/*/flows/*}:train",
                                 "(google.api.http).body": "*",
                                 "(google.api.method_signature)": "name",
                                 "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
@@ -511,7 +511,7 @@
                               "parsedOptions": [
                                 {
                                   "(google.api.http)": {
-                                    "post": "/v3beta1/{name=projects/*/locations/*/agents/*/flows/*}:train",
+                                    "post": "/v3/{name=projects/*/locations/*/agents/*/flows/*}:train",
                                     "body": "*"
                                   }
                                 },
@@ -733,13 +733,13 @@
                               "requestType": "ListPagesRequest",
                               "responseType": "ListPagesResponse",
                               "options": {
-                                "(google.api.http).get": "/v3beta1/{parent=projects/*/locations/*/agents/*/flows/*}/pages",
+                                "(google.api.http).get": "/v3/{parent=projects/*/locations/*/agents/*/flows/*}/pages",
                                 "(google.api.method_signature)": "parent"
                               },
                               "parsedOptions": [
                                 {
                                   "(google.api.http)": {
-                                    "get": "/v3beta1/{parent=projects/*/locations/*/agents/*/flows/*}/pages"
+                                    "get": "/v3/{parent=projects/*/locations/*/agents/*/flows/*}/pages"
                                   }
                                 },
                                 {
@@ -751,13 +751,13 @@
                               "requestType": "GetPageRequest",
                               "responseType": "Page",
                               "options": {
-                                "(google.api.http).get": "/v3beta1/{name=projects/*/locations/*/agents/*/flows/*/pages/*}",
+                                "(google.api.http).get": "/v3/{name=projects/*/locations/*/agents/*/flows/*/pages/*}",
                                 "(google.api.method_signature)": "name"
                               },
                               "parsedOptions": [
                                 {
                                   "(google.api.http)": {
-                                    "get": "/v3beta1/{name=projects/*/locations/*/agents/*/flows/*/pages/*}"
+                                    "get": "/v3/{name=projects/*/locations/*/agents/*/flows/*/pages/*}"
                                   }
                                 },
                                 {
@@ -769,14 +769,14 @@
                               "requestType": "CreatePageRequest",
                               "responseType": "Page",
                               "options": {
-                                "(google.api.http).post": "/v3beta1/{parent=projects/*/locations/*/agents/*/flows/*}/pages",
+                                "(google.api.http).post": "/v3/{parent=projects/*/locations/*/agents/*/flows/*}/pages",
                                 "(google.api.http).body": "page",
                                 "(google.api.method_signature)": "parent,page"
                               },
                               "parsedOptions": [
                                 {
                                   "(google.api.http)": {
-                                    "post": "/v3beta1/{parent=projects/*/locations/*/agents/*/flows/*}/pages",
+                                    "post": "/v3/{parent=projects/*/locations/*/agents/*/flows/*}/pages",
                                     "body": "page"
                                   }
                                 },
@@ -789,14 +789,14 @@
                               "requestType": "UpdatePageRequest",
                               "responseType": "Page",
                               "options": {
-                                "(google.api.http).patch": "/v3beta1/{page.name=projects/*/locations/*/agents/*/flows/*/pages/*}",
+                                "(google.api.http).patch": "/v3/{page.name=projects/*/locations/*/agents/*/flows/*/pages/*}",
                                 "(google.api.http).body": "page",
                                 "(google.api.method_signature)": "page,update_mask"
                               },
                               "parsedOptions": [
                                 {
                                   "(google.api.http)": {
-                                    "patch": "/v3beta1/{page.name=projects/*/locations/*/agents/*/flows/*/pages/*}",
+                                    "patch": "/v3/{page.name=projects/*/locations/*/agents/*/flows/*/pages/*}",
                                     "body": "page"
                                   }
                                 },
@@ -809,13 +809,13 @@
                               "requestType": "DeletePageRequest",
                               "responseType": "google.protobuf.Empty",
                               "options": {
-                                "(google.api.http).delete": "/v3beta1/{name=projects/*/locations/*/agents/*/flows/*/pages/*}",
+                                "(google.api.http).delete": "/v3/{name=projects/*/locations/*/agents/*/flows/*/pages/*}",
                                 "(google.api.method_signature)": "name"
                               },
                               "parsedOptions": [
                                 {
                                   "(google.api.http)": {
-                                    "delete": "/v3beta1/{name=projects/*/locations/*/agents/*/flows/*/pages/*}"
+                                    "delete": "/v3/{name=projects/*/locations/*/agents/*/flows/*/pages/*}"
                                   }
                                 },
                                 {
@@ -1352,6 +1352,27 @@
                                 }
                               }
                             },
+                            "EndInteraction": {
+                              "fields": {}
+                            },
+                            "PlayAudio": {
+                              "fields": {
+                                "audioUri": {
+                                  "type": "string",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                },
+                                "allowPlaybackInterruption": {
+                                  "type": "bool",
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OUTPUT_ONLY"
+                                  }
+                                }
+                              }
+                            },
                             "MixedAudio": {
                               "fields": {
                                 "segments": {
@@ -1386,27 +1407,6 @@
                                         "(google.api.field_behavior)": "OUTPUT_ONLY"
                                       }
                                     }
-                                  }
-                                }
-                              }
-                            },
-                            "EndInteraction": {
-                              "fields": {}
-                            },
-                            "PlayAudio": {
-                              "fields": {
-                                "audioUri": {
-                                  "type": "string",
-                                  "id": 1,
-                                  "options": {
-                                    "(google.api.field_behavior)": "REQUIRED"
-                                  }
-                                },
-                                "allowPlaybackInterruption": {
-                                  "type": "bool",
-                                  "id": 2,
-                                  "options": {
-                                    "(google.api.field_behavior)": "OUTPUT_ONLY"
                                   }
                                 }
                               }
@@ -1573,13 +1573,13 @@
                               "requestType": "ListEntityTypesRequest",
                               "responseType": "ListEntityTypesResponse",
                               "options": {
-                                "(google.api.http).get": "/v3beta1/{parent=projects/*/locations/*/agents/*}/entityTypes",
+                                "(google.api.http).get": "/v3/{parent=projects/*/locations/*/agents/*}/entityTypes",
                                 "(google.api.method_signature)": "parent"
                               },
                               "parsedOptions": [
                                 {
                                   "(google.api.http)": {
-                                    "get": "/v3beta1/{parent=projects/*/locations/*/agents/*}/entityTypes"
+                                    "get": "/v3/{parent=projects/*/locations/*/agents/*}/entityTypes"
                                   }
                                 },
                                 {
@@ -1591,13 +1591,13 @@
                               "requestType": "GetEntityTypeRequest",
                               "responseType": "EntityType",
                               "options": {
-                                "(google.api.http).get": "/v3beta1/{name=projects/*/locations/*/agents/*/entityTypes/*}",
+                                "(google.api.http).get": "/v3/{name=projects/*/locations/*/agents/*/entityTypes/*}",
                                 "(google.api.method_signature)": "name"
                               },
                               "parsedOptions": [
                                 {
                                   "(google.api.http)": {
-                                    "get": "/v3beta1/{name=projects/*/locations/*/agents/*/entityTypes/*}"
+                                    "get": "/v3/{name=projects/*/locations/*/agents/*/entityTypes/*}"
                                   }
                                 },
                                 {
@@ -1609,14 +1609,14 @@
                               "requestType": "CreateEntityTypeRequest",
                               "responseType": "EntityType",
                               "options": {
-                                "(google.api.http).post": "/v3beta1/{parent=projects/*/locations/*/agents/*}/entityTypes",
+                                "(google.api.http).post": "/v3/{parent=projects/*/locations/*/agents/*}/entityTypes",
                                 "(google.api.http).body": "entity_type",
                                 "(google.api.method_signature)": "parent,entity_type"
                               },
                               "parsedOptions": [
                                 {
                                   "(google.api.http)": {
-                                    "post": "/v3beta1/{parent=projects/*/locations/*/agents/*}/entityTypes",
+                                    "post": "/v3/{parent=projects/*/locations/*/agents/*}/entityTypes",
                                     "body": "entity_type"
                                   }
                                 },
@@ -1629,14 +1629,14 @@
                               "requestType": "UpdateEntityTypeRequest",
                               "responseType": "EntityType",
                               "options": {
-                                "(google.api.http).patch": "/v3beta1/{entity_type.name=projects/*/locations/*/agents/*/entityTypes/*}",
+                                "(google.api.http).patch": "/v3/{entity_type.name=projects/*/locations/*/agents/*/entityTypes/*}",
                                 "(google.api.http).body": "entity_type",
                                 "(google.api.method_signature)": "entity_type,update_mask"
                               },
                               "parsedOptions": [
                                 {
                                   "(google.api.http)": {
-                                    "patch": "/v3beta1/{entity_type.name=projects/*/locations/*/agents/*/entityTypes/*}",
+                                    "patch": "/v3/{entity_type.name=projects/*/locations/*/agents/*/entityTypes/*}",
                                     "body": "entity_type"
                                   }
                                 },
@@ -1649,13 +1649,13 @@
                               "requestType": "DeleteEntityTypeRequest",
                               "responseType": "google.protobuf.Empty",
                               "options": {
-                                "(google.api.http).delete": "/v3beta1/{name=projects/*/locations/*/agents/*/entityTypes/*}",
+                                "(google.api.http).delete": "/v3/{name=projects/*/locations/*/agents/*/entityTypes/*}",
                                 "(google.api.method_signature)": "name"
                               },
                               "parsedOptions": [
                                 {
                                   "(google.api.http)": {
-                                    "delete": "/v3beta1/{name=projects/*/locations/*/agents/*/entityTypes/*}"
+                                    "delete": "/v3/{name=projects/*/locations/*/agents/*/entityTypes/*}"
                                   }
                                 },
                                 {
@@ -1876,13 +1876,13 @@
                               "requestType": "ListEnvironmentsRequest",
                               "responseType": "ListEnvironmentsResponse",
                               "options": {
-                                "(google.api.http).get": "/v3beta1/{parent=projects/*/locations/*/agents/*}/environments",
+                                "(google.api.http).get": "/v3/{parent=projects/*/locations/*/agents/*}/environments",
                                 "(google.api.method_signature)": "parent"
                               },
                               "parsedOptions": [
                                 {
                                   "(google.api.http)": {
-                                    "get": "/v3beta1/{parent=projects/*/locations/*/agents/*}/environments"
+                                    "get": "/v3/{parent=projects/*/locations/*/agents/*}/environments"
                                   }
                                 },
                                 {
@@ -1894,13 +1894,13 @@
                               "requestType": "GetEnvironmentRequest",
                               "responseType": "Environment",
                               "options": {
-                                "(google.api.http).get": "/v3beta1/{name=projects/*/locations/*/agents/*/environments/*}",
+                                "(google.api.http).get": "/v3/{name=projects/*/locations/*/agents/*/environments/*}",
                                 "(google.api.method_signature)": "name"
                               },
                               "parsedOptions": [
                                 {
                                   "(google.api.http)": {
-                                    "get": "/v3beta1/{name=projects/*/locations/*/agents/*/environments/*}"
+                                    "get": "/v3/{name=projects/*/locations/*/agents/*/environments/*}"
                                   }
                                 },
                                 {
@@ -1912,7 +1912,7 @@
                               "requestType": "CreateEnvironmentRequest",
                               "responseType": "google.longrunning.Operation",
                               "options": {
-                                "(google.api.http).post": "/v3beta1/{parent=projects/*/locations/*/agents/*}/environments",
+                                "(google.api.http).post": "/v3/{parent=projects/*/locations/*/agents/*}/environments",
                                 "(google.api.http).body": "environment",
                                 "(google.api.method_signature)": "parent,environment",
                                 "(google.longrunning.operation_info).response_type": "Environment",
@@ -1921,7 +1921,7 @@
                               "parsedOptions": [
                                 {
                                   "(google.api.http)": {
-                                    "post": "/v3beta1/{parent=projects/*/locations/*/agents/*}/environments",
+                                    "post": "/v3/{parent=projects/*/locations/*/agents/*}/environments",
                                     "body": "environment"
                                   }
                                 },
@@ -1940,7 +1940,7 @@
                               "requestType": "UpdateEnvironmentRequest",
                               "responseType": "google.longrunning.Operation",
                               "options": {
-                                "(google.api.http).patch": "/v3beta1/{environment.name=projects/*/locations/*/agents/*/environments/*}",
+                                "(google.api.http).patch": "/v3/{environment.name=projects/*/locations/*/agents/*/environments/*}",
                                 "(google.api.http).body": "environment",
                                 "(google.api.method_signature)": "environment,update_mask",
                                 "(google.longrunning.operation_info).response_type": "Environment",
@@ -1949,7 +1949,7 @@
                               "parsedOptions": [
                                 {
                                   "(google.api.http)": {
-                                    "patch": "/v3beta1/{environment.name=projects/*/locations/*/agents/*/environments/*}",
+                                    "patch": "/v3/{environment.name=projects/*/locations/*/agents/*/environments/*}",
                                     "body": "environment"
                                   }
                                 },
@@ -1968,13 +1968,13 @@
                               "requestType": "DeleteEnvironmentRequest",
                               "responseType": "google.protobuf.Empty",
                               "options": {
-                                "(google.api.http).delete": "/v3beta1/{name=projects/*/locations/*/agents/*/environments/*}",
+                                "(google.api.http).delete": "/v3/{name=projects/*/locations/*/agents/*/environments/*}",
                                 "(google.api.method_signature)": "name"
                               },
                               "parsedOptions": [
                                 {
                                   "(google.api.http)": {
-                                    "delete": "/v3beta1/{name=projects/*/locations/*/agents/*/environments/*}"
+                                    "delete": "/v3/{name=projects/*/locations/*/agents/*/environments/*}"
                                   }
                                 },
                                 {
@@ -1986,13 +1986,13 @@
                               "requestType": "LookupEnvironmentHistoryRequest",
                               "responseType": "LookupEnvironmentHistoryResponse",
                               "options": {
-                                "(google.api.http).get": "/v3beta1/{name=projects/*/locations/*/agents/*/environments/*}:lookupEnvironmentHistory",
+                                "(google.api.http).get": "/v3/{name=projects/*/locations/*/agents/*/environments/*}:lookupEnvironmentHistory",
                                 "(google.api.method_signature)": "name"
                               },
                               "parsedOptions": [
                                 {
                                   "(google.api.http)": {
-                                    "get": "/v3beta1/{name=projects/*/locations/*/agents/*/environments/*}:lookupEnvironmentHistory"
+                                    "get": "/v3/{name=projects/*/locations/*/agents/*/environments/*}:lookupEnvironmentHistory"
                                   }
                                 },
                                 {
@@ -2191,13 +2191,13 @@
                               "requestType": "ListIntentsRequest",
                               "responseType": "ListIntentsResponse",
                               "options": {
-                                "(google.api.http).get": "/v3beta1/{parent=projects/*/locations/*/agents/*}/intents",
+                                "(google.api.http).get": "/v3/{parent=projects/*/locations/*/agents/*}/intents",
                                 "(google.api.method_signature)": "parent"
                               },
                               "parsedOptions": [
                                 {
                                   "(google.api.http)": {
-                                    "get": "/v3beta1/{parent=projects/*/locations/*/agents/*}/intents"
+                                    "get": "/v3/{parent=projects/*/locations/*/agents/*}/intents"
                                   }
                                 },
                                 {
@@ -2209,13 +2209,13 @@
                               "requestType": "GetIntentRequest",
                               "responseType": "Intent",
                               "options": {
-                                "(google.api.http).get": "/v3beta1/{name=projects/*/locations/*/agents/*/intents/*}",
+                                "(google.api.http).get": "/v3/{name=projects/*/locations/*/agents/*/intents/*}",
                                 "(google.api.method_signature)": "name"
                               },
                               "parsedOptions": [
                                 {
                                   "(google.api.http)": {
-                                    "get": "/v3beta1/{name=projects/*/locations/*/agents/*/intents/*}"
+                                    "get": "/v3/{name=projects/*/locations/*/agents/*/intents/*}"
                                   }
                                 },
                                 {
@@ -2227,14 +2227,14 @@
                               "requestType": "CreateIntentRequest",
                               "responseType": "Intent",
                               "options": {
-                                "(google.api.http).post": "/v3beta1/{parent=projects/*/locations/*/agents/*}/intents",
+                                "(google.api.http).post": "/v3/{parent=projects/*/locations/*/agents/*}/intents",
                                 "(google.api.http).body": "intent",
                                 "(google.api.method_signature)": "parent,intent"
                               },
                               "parsedOptions": [
                                 {
                                   "(google.api.http)": {
-                                    "post": "/v3beta1/{parent=projects/*/locations/*/agents/*}/intents",
+                                    "post": "/v3/{parent=projects/*/locations/*/agents/*}/intents",
                                     "body": "intent"
                                   }
                                 },
@@ -2247,14 +2247,14 @@
                               "requestType": "UpdateIntentRequest",
                               "responseType": "Intent",
                               "options": {
-                                "(google.api.http).patch": "/v3beta1/{intent.name=projects/*/locations/*/agents/*/intents/*}",
+                                "(google.api.http).patch": "/v3/{intent.name=projects/*/locations/*/agents/*/intents/*}",
                                 "(google.api.http).body": "intent",
                                 "(google.api.method_signature)": "intent,update_mask"
                               },
                               "parsedOptions": [
                                 {
                                   "(google.api.http)": {
-                                    "patch": "/v3beta1/{intent.name=projects/*/locations/*/agents/*/intents/*}",
+                                    "patch": "/v3/{intent.name=projects/*/locations/*/agents/*/intents/*}",
                                     "body": "intent"
                                   }
                                 },
@@ -2267,13 +2267,13 @@
                               "requestType": "DeleteIntentRequest",
                               "responseType": "google.protobuf.Empty",
                               "options": {
-                                "(google.api.http).delete": "/v3beta1/{name=projects/*/locations/*/agents/*/intents/*}",
+                                "(google.api.http).delete": "/v3/{name=projects/*/locations/*/agents/*/intents/*}",
                                 "(google.api.method_signature)": "name"
                               },
                               "parsedOptions": [
                                 {
                                   "(google.api.http)": {
-                                    "delete": "/v3beta1/{name=projects/*/locations/*/agents/*/intents/*}"
+                                    "delete": "/v3/{name=projects/*/locations/*/agents/*/intents/*}"
                                   }
                                 },
                                 {
@@ -2519,6 +2519,272 @@
                             "INTENT_VIEW_FULL": 2
                           }
                         },
+                        "SecuritySettingsService": {
+                          "options": {
+                            "(google.api.default_host)": "dialogflow.googleapis.com",
+                            "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/dialogflow"
+                          },
+                          "methods": {
+                            "CreateSecuritySettings": {
+                              "requestType": "CreateSecuritySettingsRequest",
+                              "responseType": "SecuritySettings",
+                              "options": {
+                                "(google.api.http).post": "/v3/{parent=projects/*/locations/*}/securitySettings",
+                                "(google.api.http).body": "security_settings",
+                                "(google.api.method_signature)": "parent,security_settings"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "post": "/v3/{parent=projects/*/locations/*}/securitySettings",
+                                    "body": "security_settings"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "parent,security_settings"
+                                }
+                              ]
+                            },
+                            "GetSecuritySettings": {
+                              "requestType": "GetSecuritySettingsRequest",
+                              "responseType": "SecuritySettings",
+                              "options": {
+                                "(google.api.http).get": "/v3/{name=projects/*/locations/*/securitySettings/*}",
+                                "(google.api.method_signature)": "name"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "get": "/v3/{name=projects/*/locations/*/securitySettings/*}"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "name"
+                                }
+                              ]
+                            },
+                            "UpdateSecuritySettings": {
+                              "requestType": "UpdateSecuritySettingsRequest",
+                              "responseType": "SecuritySettings",
+                              "options": {
+                                "(google.api.http).patch": "/v3/{security_settings.name=projects/*/locations/*/securitySettings/*}",
+                                "(google.api.http).body": "security_settings",
+                                "(google.api.method_signature)": "security_settings,update_mask"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "patch": "/v3/{security_settings.name=projects/*/locations/*/securitySettings/*}",
+                                    "body": "security_settings"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "security_settings,update_mask"
+                                }
+                              ]
+                            },
+                            "ListSecuritySettings": {
+                              "requestType": "ListSecuritySettingsRequest",
+                              "responseType": "ListSecuritySettingsResponse",
+                              "options": {
+                                "(google.api.http).get": "/v3/{parent=projects/*/locations/*}/securitySettings",
+                                "(google.api.method_signature)": "parent"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "get": "/v3/{parent=projects/*/locations/*}/securitySettings"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "parent"
+                                }
+                              ]
+                            },
+                            "DeleteSecuritySettings": {
+                              "requestType": "DeleteSecuritySettingsRequest",
+                              "responseType": "google.protobuf.Empty",
+                              "options": {
+                                "(google.api.http).delete": "/v3/{name=projects/*/locations/*/securitySettings/*}",
+                                "(google.api.method_signature)": "name"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "delete": "/v3/{name=projects/*/locations/*/securitySettings/*}"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "name"
+                                }
+                              ]
+                            }
+                          }
+                        },
+                        "GetSecuritySettingsRequest": {
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "dialogflow.googleapis.com/SecuritySettings"
+                              }
+                            }
+                          }
+                        },
+                        "UpdateSecuritySettingsRequest": {
+                          "fields": {
+                            "securitySettings": {
+                              "type": "SecuritySettings",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "updateMask": {
+                              "type": "google.protobuf.FieldMask",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            }
+                          }
+                        },
+                        "ListSecuritySettingsRequest": {
+                          "fields": {
+                            "parent": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).child_type": "dialogflow.googleapis.com/SecuritySettings"
+                              }
+                            },
+                            "pageSize": {
+                              "type": "int32",
+                              "id": 2
+                            },
+                            "pageToken": {
+                              "type": "string",
+                              "id": 3
+                            }
+                          }
+                        },
+                        "ListSecuritySettingsResponse": {
+                          "fields": {
+                            "securitySettings": {
+                              "rule": "repeated",
+                              "type": "SecuritySettings",
+                              "id": 1
+                            },
+                            "nextPageToken": {
+                              "type": "string",
+                              "id": 2
+                            }
+                          }
+                        },
+                        "CreateSecuritySettingsRequest": {
+                          "fields": {
+                            "parent": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).child_type": "dialogflow.googleapis.com/SecuritySettings"
+                              }
+                            },
+                            "securitySettings": {
+                              "type": "SecuritySettings",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            }
+                          }
+                        },
+                        "DeleteSecuritySettingsRequest": {
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "dialogflow.googleapis.com/SecuritySettings"
+                              }
+                            }
+                          }
+                        },
+                        "SecuritySettings": {
+                          "options": {
+                            "(google.api.resource).type": "dialogflow.googleapis.com/SecuritySettings",
+                            "(google.api.resource).pattern": "projects/{project}/locations/{location}/securitySettings/{security_settings}"
+                          },
+                          "oneofs": {
+                            "dataRetention": {
+                              "oneof": [
+                                "retentionWindowDays"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "displayName": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "redactionStrategy": {
+                              "type": "RedactionStrategy",
+                              "id": 3
+                            },
+                            "redactionScope": {
+                              "type": "RedactionScope",
+                              "id": 4
+                            },
+                            "inspectTemplate": {
+                              "type": "string",
+                              "id": 9
+                            },
+                            "retentionWindowDays": {
+                              "type": "int32",
+                              "id": 6
+                            },
+                            "purgeDataTypes": {
+                              "rule": "repeated",
+                              "type": "PurgeDataType",
+                              "id": 8
+                            }
+                          },
+                          "nested": {
+                            "RedactionStrategy": {
+                              "values": {
+                                "REDACTION_STRATEGY_UNSPECIFIED": 0,
+                                "REDACT_WITH_SERVICE": 1
+                              }
+                            },
+                            "RedactionScope": {
+                              "values": {
+                                "REDACTION_SCOPE_UNSPECIFIED": 0,
+                                "REDACT_DISK_STORAGE": 2
+                              }
+                            },
+                            "PurgeDataType": {
+                              "values": {
+                                "PURGE_DATA_TYPE_UNSPECIFIED": 0,
+                                "DIALOGFLOW_HISTORY": 1
+                              }
+                            }
+                          }
+                        },
                         "Sessions": {
                           "options": {
                             "(google.api.default_host)": "dialogflow.googleapis.com",
@@ -2529,18 +2795,18 @@
                               "requestType": "DetectIntentRequest",
                               "responseType": "DetectIntentResponse",
                               "options": {
-                                "(google.api.http).post": "/v3beta1/{session=projects/*/locations/*/agents/*/sessions/*}:detectIntent",
+                                "(google.api.http).post": "/v3/{session=projects/*/locations/*/agents/*/sessions/*}:detectIntent",
                                 "(google.api.http).body": "*",
-                                "(google.api.http).additional_bindings.post": "/v3beta1/{session=projects/*/locations/*/agents/*/environments/*/sessions/*}:detectIntent",
+                                "(google.api.http).additional_bindings.post": "/v3/{session=projects/*/locations/*/agents/*/environments/*/sessions/*}:detectIntent",
                                 "(google.api.http).additional_bindings.body": "*"
                               },
                               "parsedOptions": [
                                 {
                                   "(google.api.http)": {
-                                    "post": "/v3beta1/{session=projects/*/locations/*/agents/*/sessions/*}:detectIntent",
+                                    "post": "/v3/{session=projects/*/locations/*/agents/*/sessions/*}:detectIntent",
                                     "body": "*",
                                     "additional_bindings": {
-                                      "post": "/v3beta1/{session=projects/*/locations/*/agents/*/environments/*/sessions/*}:detectIntent",
+                                      "post": "/v3/{session=projects/*/locations/*/agents/*/environments/*/sessions/*}:detectIntent",
                                       "body": "*"
                                     }
                                   }
@@ -2557,18 +2823,18 @@
                               "requestType": "MatchIntentRequest",
                               "responseType": "MatchIntentResponse",
                               "options": {
-                                "(google.api.http).post": "/v3beta1/{session=projects/*/locations/*/agents/*/sessions/*}:matchIntent",
+                                "(google.api.http).post": "/v3/{session=projects/*/locations/*/agents/*/sessions/*}:matchIntent",
                                 "(google.api.http).body": "*",
-                                "(google.api.http).additional_bindings.post": "/v3beta1/{session=projects/*/locations/*/agents/*/environments/*/sessions/*}:matchIntent",
+                                "(google.api.http).additional_bindings.post": "/v3/{session=projects/*/locations/*/agents/*/environments/*/sessions/*}:matchIntent",
                                 "(google.api.http).additional_bindings.body": "*"
                               },
                               "parsedOptions": [
                                 {
                                   "(google.api.http)": {
-                                    "post": "/v3beta1/{session=projects/*/locations/*/agents/*/sessions/*}:matchIntent",
+                                    "post": "/v3/{session=projects/*/locations/*/agents/*/sessions/*}:matchIntent",
                                     "body": "*",
                                     "additional_bindings": {
-                                      "post": "/v3beta1/{session=projects/*/locations/*/agents/*/environments/*/sessions/*}:matchIntent",
+                                      "post": "/v3/{session=projects/*/locations/*/agents/*/environments/*/sessions/*}:matchIntent",
                                       "body": "*"
                                     }
                                   }
@@ -2579,18 +2845,18 @@
                               "requestType": "FulfillIntentRequest",
                               "responseType": "FulfillIntentResponse",
                               "options": {
-                                "(google.api.http).post": "/v3beta1/{match_intent_request.session=projects/*/locations/*/agents/*/sessions/*}:fulfillIntent",
+                                "(google.api.http).post": "/v3/{match_intent_request.session=projects/*/locations/*/agents/*/sessions/*}:fulfillIntent",
                                 "(google.api.http).body": "*",
-                                "(google.api.http).additional_bindings.post": "/v3beta1/{match_intent_request.session=projects/*/locations/*/agents/*/environments/*/sessions/*}:fulfillIntent",
+                                "(google.api.http).additional_bindings.post": "/v3/{match_intent_request.session=projects/*/locations/*/agents/*/environments/*/sessions/*}:fulfillIntent",
                                 "(google.api.http).additional_bindings.body": "*"
                               },
                               "parsedOptions": [
                                 {
                                   "(google.api.http)": {
-                                    "post": "/v3beta1/{match_intent_request.session=projects/*/locations/*/agents/*/sessions/*}:fulfillIntent",
+                                    "post": "/v3/{match_intent_request.session=projects/*/locations/*/agents/*/sessions/*}:fulfillIntent",
                                     "body": "*",
                                     "additional_bindings": {
-                                      "post": "/v3beta1/{match_intent_request.session=projects/*/locations/*/agents/*/environments/*/sessions/*}:fulfillIntent",
+                                      "post": "/v3/{match_intent_request.session=projects/*/locations/*/agents/*/environments/*/sessions/*}:fulfillIntent",
                                       "body": "*"
                                     }
                                   }
@@ -3107,16 +3373,16 @@
                               "requestType": "ListSessionEntityTypesRequest",
                               "responseType": "ListSessionEntityTypesResponse",
                               "options": {
-                                "(google.api.http).get": "/v3beta1/{parent=projects/*/locations/*/agents/*/sessions/*}/entityTypes",
-                                "(google.api.http).additional_bindings.get": "/v3beta1/{parent=projects/*/locations/*/agents/*/environments/*/sessions/*}/entityTypes",
+                                "(google.api.http).get": "/v3/{parent=projects/*/locations/*/agents/*/sessions/*}/entityTypes",
+                                "(google.api.http).additional_bindings.get": "/v3/{parent=projects/*/locations/*/agents/*/environments/*/sessions/*}/entityTypes",
                                 "(google.api.method_signature)": "parent"
                               },
                               "parsedOptions": [
                                 {
                                   "(google.api.http)": {
-                                    "get": "/v3beta1/{parent=projects/*/locations/*/agents/*/sessions/*}/entityTypes",
+                                    "get": "/v3/{parent=projects/*/locations/*/agents/*/sessions/*}/entityTypes",
                                     "additional_bindings": {
-                                      "get": "/v3beta1/{parent=projects/*/locations/*/agents/*/environments/*/sessions/*}/entityTypes"
+                                      "get": "/v3/{parent=projects/*/locations/*/agents/*/environments/*/sessions/*}/entityTypes"
                                     }
                                   }
                                 },
@@ -3129,16 +3395,16 @@
                               "requestType": "GetSessionEntityTypeRequest",
                               "responseType": "SessionEntityType",
                               "options": {
-                                "(google.api.http).get": "/v3beta1/{name=projects/*/locations/*/agents/*/sessions/*/entityTypes/*}",
-                                "(google.api.http).additional_bindings.get": "/v3beta1/{name=projects/*/locations/*/agents/*/environments/*/sessions/*/entityTypes/*}",
+                                "(google.api.http).get": "/v3/{name=projects/*/locations/*/agents/*/sessions/*/entityTypes/*}",
+                                "(google.api.http).additional_bindings.get": "/v3/{name=projects/*/locations/*/agents/*/environments/*/sessions/*/entityTypes/*}",
                                 "(google.api.method_signature)": "name"
                               },
                               "parsedOptions": [
                                 {
                                   "(google.api.http)": {
-                                    "get": "/v3beta1/{name=projects/*/locations/*/agents/*/sessions/*/entityTypes/*}",
+                                    "get": "/v3/{name=projects/*/locations/*/agents/*/sessions/*/entityTypes/*}",
                                     "additional_bindings": {
-                                      "get": "/v3beta1/{name=projects/*/locations/*/agents/*/environments/*/sessions/*/entityTypes/*}"
+                                      "get": "/v3/{name=projects/*/locations/*/agents/*/environments/*/sessions/*/entityTypes/*}"
                                     }
                                   }
                                 },
@@ -3151,19 +3417,19 @@
                               "requestType": "CreateSessionEntityTypeRequest",
                               "responseType": "SessionEntityType",
                               "options": {
-                                "(google.api.http).post": "/v3beta1/{parent=projects/*/locations/*/agents/*/sessions/*}/entityTypes",
+                                "(google.api.http).post": "/v3/{parent=projects/*/locations/*/agents/*/sessions/*}/entityTypes",
                                 "(google.api.http).body": "session_entity_type",
-                                "(google.api.http).additional_bindings.post": "/v3beta1/{parent=projects/*/locations/*/agents/*/environments/*/sessions/*}/entityTypes",
+                                "(google.api.http).additional_bindings.post": "/v3/{parent=projects/*/locations/*/agents/*/environments/*/sessions/*}/entityTypes",
                                 "(google.api.http).additional_bindings.body": "session_entity_type",
                                 "(google.api.method_signature)": "parent,session_entity_type"
                               },
                               "parsedOptions": [
                                 {
                                   "(google.api.http)": {
-                                    "post": "/v3beta1/{parent=projects/*/locations/*/agents/*/sessions/*}/entityTypes",
+                                    "post": "/v3/{parent=projects/*/locations/*/agents/*/sessions/*}/entityTypes",
                                     "body": "session_entity_type",
                                     "additional_bindings": {
-                                      "post": "/v3beta1/{parent=projects/*/locations/*/agents/*/environments/*/sessions/*}/entityTypes",
+                                      "post": "/v3/{parent=projects/*/locations/*/agents/*/environments/*/sessions/*}/entityTypes",
                                       "body": "session_entity_type"
                                     }
                                   }
@@ -3177,19 +3443,19 @@
                               "requestType": "UpdateSessionEntityTypeRequest",
                               "responseType": "SessionEntityType",
                               "options": {
-                                "(google.api.http).patch": "/v3beta1/{session_entity_type.name=projects/*/locations/*/agents/*/sessions/*/entityTypes/*}",
+                                "(google.api.http).patch": "/v3/{session_entity_type.name=projects/*/locations/*/agents/*/sessions/*/entityTypes/*}",
                                 "(google.api.http).body": "session_entity_type",
-                                "(google.api.http).additional_bindings.patch": "/v3beta1/{session_entity_type.name=projects/*/locations/*/agents/*/environments/*/sessions/*/entityTypes/*}",
+                                "(google.api.http).additional_bindings.patch": "/v3/{session_entity_type.name=projects/*/locations/*/agents/*/environments/*/sessions/*/entityTypes/*}",
                                 "(google.api.http).additional_bindings.body": "session_entity_type",
                                 "(google.api.method_signature)": "session_entity_type,update_mask"
                               },
                               "parsedOptions": [
                                 {
                                   "(google.api.http)": {
-                                    "patch": "/v3beta1/{session_entity_type.name=projects/*/locations/*/agents/*/sessions/*/entityTypes/*}",
+                                    "patch": "/v3/{session_entity_type.name=projects/*/locations/*/agents/*/sessions/*/entityTypes/*}",
                                     "body": "session_entity_type",
                                     "additional_bindings": {
-                                      "patch": "/v3beta1/{session_entity_type.name=projects/*/locations/*/agents/*/environments/*/sessions/*/entityTypes/*}",
+                                      "patch": "/v3/{session_entity_type.name=projects/*/locations/*/agents/*/environments/*/sessions/*/entityTypes/*}",
                                       "body": "session_entity_type"
                                     }
                                   }
@@ -3203,16 +3469,16 @@
                               "requestType": "DeleteSessionEntityTypeRequest",
                               "responseType": "google.protobuf.Empty",
                               "options": {
-                                "(google.api.http).delete": "/v3beta1/{name=projects/*/locations/*/agents/*/sessions/*/entityTypes/*}",
-                                "(google.api.http).additional_bindings.delete": "/v3beta1/{name=projects/*/locations/*/agents/*/environments/*/sessions/*/entityTypes/*}",
+                                "(google.api.http).delete": "/v3/{name=projects/*/locations/*/agents/*/sessions/*/entityTypes/*}",
+                                "(google.api.http).additional_bindings.delete": "/v3/{name=projects/*/locations/*/agents/*/environments/*/sessions/*/entityTypes/*}",
                                 "(google.api.method_signature)": "name"
                               },
                               "parsedOptions": [
                                 {
                                   "(google.api.http)": {
-                                    "delete": "/v3beta1/{name=projects/*/locations/*/agents/*/sessions/*/entityTypes/*}",
+                                    "delete": "/v3/{name=projects/*/locations/*/agents/*/sessions/*/entityTypes/*}",
                                     "additional_bindings": {
-                                      "delete": "/v3beta1/{name=projects/*/locations/*/agents/*/environments/*/sessions/*/entityTypes/*}"
+                                      "delete": "/v3/{name=projects/*/locations/*/agents/*/environments/*/sessions/*/entityTypes/*}"
                                     }
                                   }
                                 },
@@ -3363,13 +3629,13 @@
                               "requestType": "ListTransitionRouteGroupsRequest",
                               "responseType": "ListTransitionRouteGroupsResponse",
                               "options": {
-                                "(google.api.http).get": "/v3beta1/{parent=projects/*/locations/*/agents/*/flows/*}/transitionRouteGroups",
+                                "(google.api.http).get": "/v3/{parent=projects/*/locations/*/agents/*/flows/*}/transitionRouteGroups",
                                 "(google.api.method_signature)": "parent"
                               },
                               "parsedOptions": [
                                 {
                                   "(google.api.http)": {
-                                    "get": "/v3beta1/{parent=projects/*/locations/*/agents/*/flows/*}/transitionRouteGroups"
+                                    "get": "/v3/{parent=projects/*/locations/*/agents/*/flows/*}/transitionRouteGroups"
                                   }
                                 },
                                 {
@@ -3381,13 +3647,13 @@
                               "requestType": "GetTransitionRouteGroupRequest",
                               "responseType": "TransitionRouteGroup",
                               "options": {
-                                "(google.api.http).get": "/v3beta1/{name=projects/*/locations/*/agents/*/flows/*/transitionRouteGroups/*}",
+                                "(google.api.http).get": "/v3/{name=projects/*/locations/*/agents/*/flows/*/transitionRouteGroups/*}",
                                 "(google.api.method_signature)": "name"
                               },
                               "parsedOptions": [
                                 {
                                   "(google.api.http)": {
-                                    "get": "/v3beta1/{name=projects/*/locations/*/agents/*/flows/*/transitionRouteGroups/*}"
+                                    "get": "/v3/{name=projects/*/locations/*/agents/*/flows/*/transitionRouteGroups/*}"
                                   }
                                 },
                                 {
@@ -3399,14 +3665,14 @@
                               "requestType": "CreateTransitionRouteGroupRequest",
                               "responseType": "TransitionRouteGroup",
                               "options": {
-                                "(google.api.http).post": "/v3beta1/{parent=projects/*/locations/*/agents/*/flows/*}/transitionRouteGroups",
+                                "(google.api.http).post": "/v3/{parent=projects/*/locations/*/agents/*/flows/*}/transitionRouteGroups",
                                 "(google.api.http).body": "transition_route_group",
                                 "(google.api.method_signature)": "parent,transition_route_group"
                               },
                               "parsedOptions": [
                                 {
                                   "(google.api.http)": {
-                                    "post": "/v3beta1/{parent=projects/*/locations/*/agents/*/flows/*}/transitionRouteGroups",
+                                    "post": "/v3/{parent=projects/*/locations/*/agents/*/flows/*}/transitionRouteGroups",
                                     "body": "transition_route_group"
                                   }
                                 },
@@ -3419,14 +3685,14 @@
                               "requestType": "UpdateTransitionRouteGroupRequest",
                               "responseType": "TransitionRouteGroup",
                               "options": {
-                                "(google.api.http).patch": "/v3beta1/{transition_route_group.name=projects/*/locations/*/agents/*/flows/*/transitionRouteGroups/*}",
+                                "(google.api.http).patch": "/v3/{transition_route_group.name=projects/*/locations/*/agents/*/flows/*/transitionRouteGroups/*}",
                                 "(google.api.http).body": "transition_route_group",
                                 "(google.api.method_signature)": "transition_route_group,update_mask"
                               },
                               "parsedOptions": [
                                 {
                                   "(google.api.http)": {
-                                    "patch": "/v3beta1/{transition_route_group.name=projects/*/locations/*/agents/*/flows/*/transitionRouteGroups/*}",
+                                    "patch": "/v3/{transition_route_group.name=projects/*/locations/*/agents/*/flows/*/transitionRouteGroups/*}",
                                     "body": "transition_route_group"
                                   }
                                 },
@@ -3439,13 +3705,13 @@
                               "requestType": "DeleteTransitionRouteGroupRequest",
                               "responseType": "google.protobuf.Empty",
                               "options": {
-                                "(google.api.http).delete": "/v3beta1/{name=projects/*/locations/*/agents/*/flows/*/transitionRouteGroups/*}",
+                                "(google.api.http).delete": "/v3/{name=projects/*/locations/*/agents/*/flows/*/transitionRouteGroups/*}",
                                 "(google.api.method_signature)": "name"
                               },
                               "parsedOptions": [
                                 {
                                   "(google.api.http)": {
-                                    "delete": "/v3beta1/{name=projects/*/locations/*/agents/*/flows/*/transitionRouteGroups/*}"
+                                    "delete": "/v3/{name=projects/*/locations/*/agents/*/flows/*/transitionRouteGroups/*}"
                                   }
                                 },
                                 {
@@ -3600,13 +3866,13 @@
                               "requestType": "ListVersionsRequest",
                               "responseType": "ListVersionsResponse",
                               "options": {
-                                "(google.api.http).get": "/v3beta1/{parent=projects/*/locations/*/agents/*/flows/*}/versions",
+                                "(google.api.http).get": "/v3/{parent=projects/*/locations/*/agents/*/flows/*}/versions",
                                 "(google.api.method_signature)": "parent"
                               },
                               "parsedOptions": [
                                 {
                                   "(google.api.http)": {
-                                    "get": "/v3beta1/{parent=projects/*/locations/*/agents/*/flows/*}/versions"
+                                    "get": "/v3/{parent=projects/*/locations/*/agents/*/flows/*}/versions"
                                   }
                                 },
                                 {
@@ -3618,13 +3884,13 @@
                               "requestType": "GetVersionRequest",
                               "responseType": "Version",
                               "options": {
-                                "(google.api.http).get": "/v3beta1/{name=projects/*/locations/*/agents/*/flows/*/versions/*}",
+                                "(google.api.http).get": "/v3/{name=projects/*/locations/*/agents/*/flows/*/versions/*}",
                                 "(google.api.method_signature)": "name"
                               },
                               "parsedOptions": [
                                 {
                                   "(google.api.http)": {
-                                    "get": "/v3beta1/{name=projects/*/locations/*/agents/*/flows/*/versions/*}"
+                                    "get": "/v3/{name=projects/*/locations/*/agents/*/flows/*/versions/*}"
                                   }
                                 },
                                 {
@@ -3636,7 +3902,7 @@
                               "requestType": "CreateVersionRequest",
                               "responseType": "google.longrunning.Operation",
                               "options": {
-                                "(google.api.http).post": "/v3beta1/{parent=projects/*/locations/*/agents/*/flows/*}/versions",
+                                "(google.api.http).post": "/v3/{parent=projects/*/locations/*/agents/*/flows/*}/versions",
                                 "(google.api.http).body": "version",
                                 "(google.api.method_signature)": "parent,version",
                                 "(google.longrunning.operation_info).response_type": "Version",
@@ -3645,7 +3911,7 @@
                               "parsedOptions": [
                                 {
                                   "(google.api.http)": {
-                                    "post": "/v3beta1/{parent=projects/*/locations/*/agents/*/flows/*}/versions",
+                                    "post": "/v3/{parent=projects/*/locations/*/agents/*/flows/*}/versions",
                                     "body": "version"
                                   }
                                 },
@@ -3664,14 +3930,14 @@
                               "requestType": "UpdateVersionRequest",
                               "responseType": "Version",
                               "options": {
-                                "(google.api.http).patch": "/v3beta1/{version.name=projects/*/locations/*/agents/*/flows/*/versions/*}",
+                                "(google.api.http).patch": "/v3/{version.name=projects/*/locations/*/agents/*/flows/*/versions/*}",
                                 "(google.api.http).body": "version",
                                 "(google.api.method_signature)": "version,update_mask"
                               },
                               "parsedOptions": [
                                 {
                                   "(google.api.http)": {
-                                    "patch": "/v3beta1/{version.name=projects/*/locations/*/agents/*/flows/*/versions/*}",
+                                    "patch": "/v3/{version.name=projects/*/locations/*/agents/*/flows/*/versions/*}",
                                     "body": "version"
                                   }
                                 },
@@ -3684,13 +3950,13 @@
                               "requestType": "DeleteVersionRequest",
                               "responseType": "google.protobuf.Empty",
                               "options": {
-                                "(google.api.http).delete": "/v3beta1/{name=projects/*/locations/*/agents/*/flows/*/versions/*}",
+                                "(google.api.http).delete": "/v3/{name=projects/*/locations/*/agents/*/flows/*/versions/*}",
                                 "(google.api.method_signature)": "name"
                               },
                               "parsedOptions": [
                                 {
                                   "(google.api.http)": {
-                                    "delete": "/v3beta1/{name=projects/*/locations/*/agents/*/flows/*/versions/*}"
+                                    "delete": "/v3/{name=projects/*/locations/*/agents/*/flows/*/versions/*}"
                                   }
                                 },
                                 {
@@ -3702,7 +3968,7 @@
                               "requestType": "LoadVersionRequest",
                               "responseType": "google.longrunning.Operation",
                               "options": {
-                                "(google.api.http).post": "/v3beta1/{name=projects/*/locations/*/agents/*/flows/*/versions/*}:load",
+                                "(google.api.http).post": "/v3/{name=projects/*/locations/*/agents/*/flows/*/versions/*}:load",
                                 "(google.api.http).body": "*",
                                 "(google.api.method_signature)": "name",
                                 "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
@@ -3711,7 +3977,7 @@
                               "parsedOptions": [
                                 {
                                   "(google.api.http)": {
-                                    "post": "/v3beta1/{name=projects/*/locations/*/agents/*/flows/*/versions/*}:load",
+                                    "post": "/v3/{name=projects/*/locations/*/agents/*/flows/*/versions/*}:load",
                                     "body": "*"
                                   }
                                 },
@@ -3913,13 +4179,13 @@
                               "requestType": "ListWebhooksRequest",
                               "responseType": "ListWebhooksResponse",
                               "options": {
-                                "(google.api.http).get": "/v3beta1/{parent=projects/*/locations/*/agents/*}/webhooks",
+                                "(google.api.http).get": "/v3/{parent=projects/*/locations/*/agents/*}/webhooks",
                                 "(google.api.method_signature)": "parent"
                               },
                               "parsedOptions": [
                                 {
                                   "(google.api.http)": {
-                                    "get": "/v3beta1/{parent=projects/*/locations/*/agents/*}/webhooks"
+                                    "get": "/v3/{parent=projects/*/locations/*/agents/*}/webhooks"
                                   }
                                 },
                                 {
@@ -3931,13 +4197,13 @@
                               "requestType": "GetWebhookRequest",
                               "responseType": "Webhook",
                               "options": {
-                                "(google.api.http).get": "/v3beta1/{name=projects/*/locations/*/agents/*/webhooks/*}",
+                                "(google.api.http).get": "/v3/{name=projects/*/locations/*/agents/*/webhooks/*}",
                                 "(google.api.method_signature)": "name"
                               },
                               "parsedOptions": [
                                 {
                                   "(google.api.http)": {
-                                    "get": "/v3beta1/{name=projects/*/locations/*/agents/*/webhooks/*}"
+                                    "get": "/v3/{name=projects/*/locations/*/agents/*/webhooks/*}"
                                   }
                                 },
                                 {
@@ -3949,14 +4215,14 @@
                               "requestType": "CreateWebhookRequest",
                               "responseType": "Webhook",
                               "options": {
-                                "(google.api.http).post": "/v3beta1/{parent=projects/*/locations/*/agents/*}/webhooks",
+                                "(google.api.http).post": "/v3/{parent=projects/*/locations/*/agents/*}/webhooks",
                                 "(google.api.http).body": "webhook",
                                 "(google.api.method_signature)": "parent,webhook"
                               },
                               "parsedOptions": [
                                 {
                                   "(google.api.http)": {
-                                    "post": "/v3beta1/{parent=projects/*/locations/*/agents/*}/webhooks",
+                                    "post": "/v3/{parent=projects/*/locations/*/agents/*}/webhooks",
                                     "body": "webhook"
                                   }
                                 },
@@ -3969,14 +4235,14 @@
                               "requestType": "UpdateWebhookRequest",
                               "responseType": "Webhook",
                               "options": {
-                                "(google.api.http).patch": "/v3beta1/{webhook.name=projects/*/locations/*/agents/*/webhooks/*}",
+                                "(google.api.http).patch": "/v3/{webhook.name=projects/*/locations/*/agents/*/webhooks/*}",
                                 "(google.api.http).body": "webhook",
                                 "(google.api.method_signature)": "webhook,update_mask"
                               },
                               "parsedOptions": [
                                 {
                                   "(google.api.http)": {
-                                    "patch": "/v3beta1/{webhook.name=projects/*/locations/*/agents/*/webhooks/*}",
+                                    "patch": "/v3/{webhook.name=projects/*/locations/*/agents/*/webhooks/*}",
                                     "body": "webhook"
                                   }
                                 },
@@ -3989,13 +4255,13 @@
                               "requestType": "DeleteWebhookRequest",
                               "responseType": "google.protobuf.Empty",
                               "options": {
-                                "(google.api.http).delete": "/v3beta1/{name=projects/*/locations/*/agents/*/webhooks/*}",
+                                "(google.api.http).delete": "/v3/{name=projects/*/locations/*/agents/*/webhooks/*}",
                                 "(google.api.method_signature)": "name"
                               },
                               "parsedOptions": [
                                 {
                                   "(google.api.http)": {
-                                    "delete": "/v3beta1/{name=projects/*/locations/*/agents/*/webhooks/*}"
+                                    "delete": "/v3/{name=projects/*/locations/*/agents/*/webhooks/*}"
                                   }
                                 },
                                 {

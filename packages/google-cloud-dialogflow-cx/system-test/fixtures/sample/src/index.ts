@@ -23,6 +23,7 @@ import {
   FlowsClient,
   IntentsClient,
   PagesClient,
+  SecuritySettingsServiceClient,
   SessionEntityTypesClient,
   SessionsClient,
   TransitionRouteGroupsClient,
@@ -47,6 +48,11 @@ function doStuffWithIntentsClient(client: IntentsClient) {
   client.close();
 }
 function doStuffWithPagesClient(client: PagesClient) {
+  client.close();
+}
+function doStuffWithSecuritySettingsServiceClient(
+  client: SecuritySettingsServiceClient
+) {
   client.close();
 }
 function doStuffWithSessionEntityTypesClient(client: SessionEntityTypesClient) {
@@ -86,6 +92,9 @@ function main() {
   // check that the client instance can be created
   const pagesClient = new PagesClient();
   doStuffWithPagesClient(pagesClient);
+  // check that the client instance can be created
+  const securitySettingsServiceClient = new SecuritySettingsServiceClient();
+  doStuffWithSecuritySettingsServiceClient(securitySettingsServiceClient);
   // check that the client instance can be created
   const sessionEntityTypesClient = new SessionEntityTypesClient();
   doStuffWithSessionEntityTypesClient(sessionEntityTypesClient);
