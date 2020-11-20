@@ -20,32 +20,32 @@ import {packNTest} from 'pack-n-play';
 import {readFileSync} from 'fs';
 import {describe, it} from 'mocha';
 
-describe('📦 pack-n-play test', () => {
-  it('TypeScript code', async function () {
+describe('typescript consumer tests', () => {
+  it('should have correct type signature for typescript users', async function () {
     this.timeout(300000);
     const options = {
-      packageDir: process.cwd(),
+      packageDir: process.cwd(), // path to your module.
       sample: {
-        description: 'TypeScript user can use the type definitions',
+        description: 'typescript based user can use the type definitions',
         ts: readFileSync(
           './system-test/fixtures/sample/src/index.ts'
         ).toString(),
       },
     };
-    await packNTest(options);
+    await packNTest(options); // will throw upon error.
   });
 
-  it('JavaScript code', async function () {
+  it('should have correct type signature for javascript users', async function () {
     this.timeout(300000);
     const options = {
-      packageDir: process.cwd(),
+      packageDir: process.cwd(), // path to your module.
       sample: {
-        description: 'JavaScript user can use the library',
+        description: 'typescript based user can use the type definitions',
         ts: readFileSync(
           './system-test/fixtures/sample/src/index.js'
         ).toString(),
       },
     };
-    await packNTest(options);
+    await packNTest(options); // will throw upon error.
   });
 });

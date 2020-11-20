@@ -26,7 +26,15 @@
                           "options": {
                             "(google.api.http).post": "/v1alpha:runReport",
                             "(google.api.http).body": "*"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1alpha:runReport",
+                                "body": "*"
+                              }
+                            }
+                          ]
                         },
                         "RunPivotReport": {
                           "requestType": "RunPivotReportRequest",
@@ -34,7 +42,15 @@
                           "options": {
                             "(google.api.http).post": "/v1alpha:runPivotReport",
                             "(google.api.http).body": "*"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1alpha:runPivotReport",
+                                "body": "*"
+                              }
+                            }
+                          ]
                         },
                         "BatchRunReports": {
                           "requestType": "BatchRunReportsRequest",
@@ -42,7 +58,15 @@
                           "options": {
                             "(google.api.http).post": "/v1alpha:batchRunReports",
                             "(google.api.http).body": "*"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1alpha:batchRunReports",
+                                "body": "*"
+                              }
+                            }
+                          ]
                         },
                         "BatchRunPivotReports": {
                           "requestType": "BatchRunPivotReportsRequest",
@@ -50,14 +74,29 @@
                           "options": {
                             "(google.api.http).post": "/v1alpha:batchRunPivotReports",
                             "(google.api.http).body": "*"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1alpha:batchRunPivotReports",
+                                "body": "*"
+                              }
+                            }
+                          ]
                         },
                         "GetUniversalMetadata": {
                           "requestType": "GetUniversalMetadataRequest",
                           "responseType": "UniversalMetadata",
                           "options": {
                             "(google.api.http).get": "/v1alpha/universalMetadata"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1alpha/universalMetadata"
+                              }
+                            }
+                          ]
                         },
                         "GetMetadata": {
                           "requestType": "GetMetadataRequest",
@@ -65,7 +104,17 @@
                           "options": {
                             "(google.api.http).get": "/v1alpha/{name=properties/*/metadata}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1alpha/{name=properties/*/metadata}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "RunRealtimeReport": {
                           "requestType": "RunRealtimeReportRequest",
@@ -73,7 +122,15 @@
                           "options": {
                             "(google.api.http).post": "/v1alpha/{property=properties/*}:runRealtimeReport",
                             "(google.api.http).body": "*"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1alpha/{property=properties/*}:runRealtimeReport",
+                                "body": "*"
+                              }
+                            }
+                          ]
                         }
                       }
                     },

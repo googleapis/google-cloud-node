@@ -4,7 +4,7 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/nodejs-analytics-data.git",
-        "sha": "a8c6801e5c934f160f50d6e8841350c832cbb0fe"
+        "sha": "6ecdf6c9c5e9083d53f23f1643c4301d5e19a761"
       }
     },
     {
@@ -87,7 +87,6 @@
     "README.md",
     "api-extractor.json",
     "linkinator.config.json",
-    "package-lock.json.4225629170",
     "protos/google/analytics/data/v1alpha/analytics_data_api.proto",
     "protos/google/analytics/data/v1alpha/data.proto",
     "protos/protos.d.ts",
@@ -95,7 +94,6 @@
     "protos/protos.json",
     "renovate.json",
     "samples/README.md",
-    "samples/package-lock.json.4262827248",
     "src/index.ts",
     "src/v1alpha/alpha_analytics_data_client.ts",
     "src/v1alpha/alpha_analytics_data_client_config.json",
