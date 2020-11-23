@@ -3,8 +3,16 @@
     {
       "git": {
         "name": ".",
-        "remote": "git@github.com:googleapis/nodejs-speech.git",
-        "sha": "8ca406d457f368cb99711c2d82db004f8e909b3d"
+        "remote": "https://github.com/googleapis/nodejs-speech.git",
+        "sha": "ae44dd86d60cc44b1d0c9767bd065de3f6febfcf"
+      }
+    },
+    {
+      "git": {
+        "name": "googleapis",
+        "remote": "https://github.com/googleapis/googleapis.git",
+        "sha": "2f019bf70bfe06f1e2af1b04011b0a2405190e43",
+        "internalRef": "343202295"
       }
     },
     {
@@ -88,7 +96,6 @@
     "README.md",
     "api-extractor.json",
     "linkinator.config.json",
-    "package-lock.json.4171998890",
     "protos/google/cloud/speech/v1/cloud_speech.proto",
     "protos/google/cloud/speech/v1p1beta1/cloud_speech.proto",
     "protos/google/cloud/speech/v1p1beta1/resource.proto",
@@ -97,7 +104,6 @@
     "protos/protos.json",
     "renovate.json",
     "samples/README.md",
-    "samples/package-lock.json.1363644213",
     "src/v1/index.ts",
     "src/v1/speech_client.ts",
     "src/v1/speech_client_config.json",

@@ -29,7 +29,18 @@
                             "(google.api.http).post": "/v1/speech:recognize",
                             "(google.api.http).body": "*",
                             "(google.api.method_signature)": "config,audio"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/speech:recognize",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "config,audio"
+                            }
+                          ]
                         },
                         "LongRunningRecognize": {
                           "requestType": "LongRunningRecognizeRequest",
@@ -40,7 +51,24 @@
                             "(google.api.method_signature)": "config,audio",
                             "(google.longrunning.operation_info).response_type": "LongRunningRecognizeResponse",
                             "(google.longrunning.operation_info).metadata_type": "LongRunningRecognizeMetadata"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/speech:longrunningrecognize",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "config,audio"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "LongRunningRecognizeResponse",
+                                "metadata_type": "LongRunningRecognizeMetadata"
+                              }
+                            }
+                          ]
                         },
                         "StreamingRecognize": {
                           "requestType": "StreamingRecognizeRequest",
@@ -502,7 +530,18 @@
                             "(google.api.http).post": "/v1p1beta1/speech:recognize",
                             "(google.api.http).body": "*",
                             "(google.api.method_signature)": "config,audio"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1p1beta1/speech:recognize",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "config,audio"
+                            }
+                          ]
                         },
                         "LongRunningRecognize": {
                           "requestType": "LongRunningRecognizeRequest",
@@ -513,7 +552,24 @@
                             "(google.api.method_signature)": "config,audio",
                             "(google.longrunning.operation_info).response_type": "LongRunningRecognizeResponse",
                             "(google.longrunning.operation_info).metadata_type": "LongRunningRecognizeMetadata"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1p1beta1/speech:longrunningrecognize",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "config,audio"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "LongRunningRecognizeResponse",
+                                "metadata_type": "LongRunningRecognizeMetadata"
+                              }
+                            }
+                          ]
                         },
                         "StreamingRecognize": {
                           "requestType": "StreamingRecognizeRequest",
@@ -2253,7 +2309,17 @@
                   "options": {
                     "(google.api.http).get": "/v1/{name=operations}",
                     "(google.api.method_signature)": "name,filter"
-                  }
+                  },
+                  "parsedOptions": [
+                    {
+                      "(google.api.http)": {
+                        "get": "/v1/{name=operations}"
+                      }
+                    },
+                    {
+                      "(google.api.method_signature)": "name,filter"
+                    }
+                  ]
                 },
                 "GetOperation": {
                   "requestType": "GetOperationRequest",
@@ -2261,7 +2327,17 @@
                   "options": {
                     "(google.api.http).get": "/v1/{name=operations/**}",
                     "(google.api.method_signature)": "name"
-                  }
+                  },
+                  "parsedOptions": [
+                    {
+                      "(google.api.http)": {
+                        "get": "/v1/{name=operations/**}"
+                      }
+                    },
+                    {
+                      "(google.api.method_signature)": "name"
+                    }
+                  ]
                 },
                 "DeleteOperation": {
                   "requestType": "DeleteOperationRequest",
@@ -2269,7 +2345,17 @@
                   "options": {
                     "(google.api.http).delete": "/v1/{name=operations/**}",
                     "(google.api.method_signature)": "name"
-                  }
+                  },
+                  "parsedOptions": [
+                    {
+                      "(google.api.http)": {
+                        "delete": "/v1/{name=operations/**}"
+                      }
+                    },
+                    {
+                      "(google.api.method_signature)": "name"
+                    }
+                  ]
                 },
                 "CancelOperation": {
                   "requestType": "CancelOperationRequest",
@@ -2278,7 +2364,18 @@
                     "(google.api.http).post": "/v1/{name=operations/**}:cancel",
                     "(google.api.http).body": "*",
                     "(google.api.method_signature)": "name"
-                  }
+                  },
+                  "parsedOptions": [
+                    {
+                      "(google.api.http)": {
+                        "post": "/v1/{name=operations/**}:cancel",
+                        "body": "*"
+                      }
+                    },
+                    {
+                      "(google.api.method_signature)": "name"
+                    }
+                  ]
                 },
                 "WaitOperation": {
                   "requestType": "WaitOperationRequest",
