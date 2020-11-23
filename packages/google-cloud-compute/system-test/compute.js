@@ -691,7 +691,7 @@ describe('Compute', () => {
     });
   });
 
-  describe('rules', () => {
+  describe.skip('rules', () => {
     const RULE_NAME = generateName('rule');
     const rule = compute.rule(RULE_NAME);
     const service = compute.service(generateName('service'));
