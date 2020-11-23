@@ -1268,7 +1268,18 @@
                             "(google.api.http).post": "/v1/{name=projects/*/locations/*/models/*}:predict",
                             "(google.api.http).body": "*",
                             "(google.api.method_signature)": "name,payload,params"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{name=projects/*/locations/*/models/*}:predict",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name,payload,params"
+                            }
+                          ]
                         },
                         "BatchPredict": {
                           "requestType": "BatchPredictRequest",
@@ -1279,7 +1290,24 @@
                             "(google.api.method_signature)": "name,input_config,output_config,params",
                             "(google.longrunning.operation_info).response_type": "BatchPredictResult",
                             "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{name=projects/*/locations/*/models/*}:batchPredict",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name,input_config,output_config,params"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "BatchPredictResult",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
                         }
                       }
                     },
@@ -1380,7 +1408,24 @@
                             "(google.api.method_signature)": "parent,dataset",
                             "(google.longrunning.operation_info).response_type": "Dataset",
                             "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=projects/*/locations/*}/datasets",
+                                "body": "dataset"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,dataset"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "Dataset",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
                         },
                         "GetDataset": {
                           "requestType": "GetDatasetRequest",
@@ -1388,7 +1433,17 @@
                           "options": {
                             "(google.api.http).get": "/v1/{name=projects/*/locations/*/datasets/*}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/locations/*/datasets/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "ListDatasets": {
                           "requestType": "ListDatasetsRequest",
@@ -1396,7 +1451,17 @@
                           "options": {
                             "(google.api.http).get": "/v1/{parent=projects/*/locations/*}/datasets",
                             "(google.api.method_signature)": "parent"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=projects/*/locations/*}/datasets"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
                         },
                         "UpdateDataset": {
                           "requestType": "UpdateDatasetRequest",
@@ -1405,7 +1470,18 @@
                             "(google.api.http).patch": "/v1/{dataset.name=projects/*/locations/*/datasets/*}",
                             "(google.api.http).body": "dataset",
                             "(google.api.method_signature)": "dataset,update_mask"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1/{dataset.name=projects/*/locations/*/datasets/*}",
+                                "body": "dataset"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "dataset,update_mask"
+                            }
+                          ]
                         },
                         "DeleteDataset": {
                           "requestType": "DeleteDatasetRequest",
@@ -1415,7 +1491,23 @@
                             "(google.api.method_signature)": "name",
                             "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
                             "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1/{name=projects/*/locations/*/datasets/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.protobuf.Empty",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
                         },
                         "ImportData": {
                           "requestType": "ImportDataRequest",
@@ -1426,7 +1518,24 @@
                             "(google.api.method_signature)": "name,input_config",
                             "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
                             "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{name=projects/*/locations/*/datasets/*}:importData",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name,input_config"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.protobuf.Empty",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
                         },
                         "ExportData": {
                           "requestType": "ExportDataRequest",
@@ -1437,7 +1546,24 @@
                             "(google.api.method_signature)": "name,output_config",
                             "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
                             "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{name=projects/*/locations/*/datasets/*}:exportData",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name,output_config"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.protobuf.Empty",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
                         },
                         "GetAnnotationSpec": {
                           "requestType": "GetAnnotationSpecRequest",
@@ -1445,7 +1571,17 @@
                           "options": {
                             "(google.api.http).get": "/v1/{name=projects/*/locations/*/datasets/*/annotationSpecs/*}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/locations/*/datasets/*/annotationSpecs/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "CreateModel": {
                           "requestType": "CreateModelRequest",
@@ -1456,7 +1592,24 @@
                             "(google.api.method_signature)": "parent,model",
                             "(google.longrunning.operation_info).response_type": "Model",
                             "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=projects/*/locations/*}/models",
+                                "body": "model"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,model"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "Model",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
                         },
                         "GetModel": {
                           "requestType": "GetModelRequest",
@@ -1464,7 +1617,17 @@
                           "options": {
                             "(google.api.http).get": "/v1/{name=projects/*/locations/*/models/*}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/locations/*/models/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "ListModels": {
                           "requestType": "ListModelsRequest",
@@ -1472,7 +1635,17 @@
                           "options": {
                             "(google.api.http).get": "/v1/{parent=projects/*/locations/*}/models",
                             "(google.api.method_signature)": "parent"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=projects/*/locations/*}/models"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
                         },
                         "DeleteModel": {
                           "requestType": "DeleteModelRequest",
@@ -1482,7 +1655,23 @@
                             "(google.api.method_signature)": "name",
                             "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
                             "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1/{name=projects/*/locations/*/models/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.protobuf.Empty",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
                         },
                         "UpdateModel": {
                           "requestType": "UpdateModelRequest",
@@ -1491,7 +1680,18 @@
                             "(google.api.http).patch": "/v1/{model.name=projects/*/locations/*/models/*}",
                             "(google.api.http).body": "model",
                             "(google.api.method_signature)": "model,update_mask"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1/{model.name=projects/*/locations/*/models/*}",
+                                "body": "model"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "model,update_mask"
+                            }
+                          ]
                         },
                         "DeployModel": {
                           "requestType": "DeployModelRequest",
@@ -1502,7 +1702,24 @@
                             "(google.api.method_signature)": "name",
                             "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
                             "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{name=projects/*/locations/*/models/*}:deploy",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.protobuf.Empty",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
                         },
                         "UndeployModel": {
                           "requestType": "UndeployModelRequest",
@@ -1513,7 +1730,24 @@
                             "(google.api.method_signature)": "name",
                             "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
                             "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{name=projects/*/locations/*/models/*}:undeploy",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.protobuf.Empty",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
                         },
                         "ExportModel": {
                           "requestType": "ExportModelRequest",
@@ -1524,7 +1758,24 @@
                             "(google.api.method_signature)": "name,output_config",
                             "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
                             "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{name=projects/*/locations/*/models/*}:export",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name,output_config"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.protobuf.Empty",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
                         },
                         "GetModelEvaluation": {
                           "requestType": "GetModelEvaluationRequest",
@@ -1532,7 +1783,17 @@
                           "options": {
                             "(google.api.http).get": "/v1/{name=projects/*/locations/*/models/*/modelEvaluations/*}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/locations/*/models/*/modelEvaluations/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "ListModelEvaluations": {
                           "requestType": "ListModelEvaluationsRequest",
@@ -1540,7 +1801,17 @@
                           "options": {
                             "(google.api.http).get": "/v1/{parent=projects/*/locations/*/models/*}/modelEvaluations",
                             "(google.api.method_signature)": "parent,filter"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=projects/*/locations/*/models/*}/modelEvaluations"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,filter"
+                            }
+                          ]
                         }
                       }
                     },
@@ -3840,7 +4111,18 @@
                             "(google.api.http).post": "/v1beta1/{name=projects/*/locations/*/models/*}:predict",
                             "(google.api.http).body": "*",
                             "(google.api.method_signature)": "name,payload,params"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta1/{name=projects/*/locations/*/models/*}:predict",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name,payload,params"
+                            }
+                          ]
                         },
                         "BatchPredict": {
                           "requestType": "BatchPredictRequest",
@@ -3851,7 +4133,24 @@
                             "(google.api.method_signature)": "name,input_config,output_config,params",
                             "(google.longrunning.operation_info).response_type": "BatchPredictResult",
                             "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta1/{name=projects/*/locations/*/models/*}:batchPredict",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name,input_config,output_config,params"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "BatchPredictResult",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
                         }
                       }
                     },
@@ -3953,7 +4252,18 @@
                             "(google.api.http).post": "/v1beta1/{parent=projects/*/locations/*}/datasets",
                             "(google.api.http).body": "dataset",
                             "(google.api.method_signature)": "parent,dataset"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta1/{parent=projects/*/locations/*}/datasets",
+                                "body": "dataset"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,dataset"
+                            }
+                          ]
                         },
                         "GetDataset": {
                           "requestType": "GetDatasetRequest",
@@ -3961,7 +4271,17 @@
                           "options": {
                             "(google.api.http).get": "/v1beta1/{name=projects/*/locations/*/datasets/*}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta1/{name=projects/*/locations/*/datasets/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "ListDatasets": {
                           "requestType": "ListDatasetsRequest",
@@ -3969,7 +4289,17 @@
                           "options": {
                             "(google.api.http).get": "/v1beta1/{parent=projects/*/locations/*}/datasets",
                             "(google.api.method_signature)": "parent"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta1/{parent=projects/*/locations/*}/datasets"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
                         },
                         "UpdateDataset": {
                           "requestType": "UpdateDatasetRequest",
@@ -3978,7 +4308,18 @@
                             "(google.api.http).patch": "/v1beta1/{dataset.name=projects/*/locations/*/datasets/*}",
                             "(google.api.http).body": "dataset",
                             "(google.api.method_signature)": "dataset"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1beta1/{dataset.name=projects/*/locations/*/datasets/*}",
+                                "body": "dataset"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "dataset"
+                            }
+                          ]
                         },
                         "DeleteDataset": {
                           "requestType": "DeleteDatasetRequest",
@@ -3988,7 +4329,23 @@
                             "(google.api.method_signature)": "name",
                             "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
                             "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1beta1/{name=projects/*/locations/*/datasets/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.protobuf.Empty",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
                         },
                         "ImportData": {
                           "requestType": "ImportDataRequest",
@@ -3999,7 +4356,24 @@
                             "(google.api.method_signature)": "name,input_config",
                             "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
                             "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta1/{name=projects/*/locations/*/datasets/*}:importData",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name,input_config"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.protobuf.Empty",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
                         },
                         "ExportData": {
                           "requestType": "ExportDataRequest",
@@ -4010,7 +4384,24 @@
                             "(google.api.method_signature)": "name,output_config",
                             "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
                             "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta1/{name=projects/*/locations/*/datasets/*}:exportData",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name,output_config"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.protobuf.Empty",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
                         },
                         "GetAnnotationSpec": {
                           "requestType": "GetAnnotationSpecRequest",
@@ -4018,7 +4409,17 @@
                           "options": {
                             "(google.api.http).get": "/v1beta1/{name=projects/*/locations/*/datasets/*/annotationSpecs/*}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta1/{name=projects/*/locations/*/datasets/*/annotationSpecs/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "GetTableSpec": {
                           "requestType": "GetTableSpecRequest",
@@ -4026,7 +4427,17 @@
                           "options": {
                             "(google.api.http).get": "/v1beta1/{name=projects/*/locations/*/datasets/*/tableSpecs/*}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta1/{name=projects/*/locations/*/datasets/*/tableSpecs/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "ListTableSpecs": {
                           "requestType": "ListTableSpecsRequest",
@@ -4034,7 +4445,17 @@
                           "options": {
                             "(google.api.http).get": "/v1beta1/{parent=projects/*/locations/*/datasets/*}/tableSpecs",
                             "(google.api.method_signature)": "parent"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta1/{parent=projects/*/locations/*/datasets/*}/tableSpecs"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
                         },
                         "UpdateTableSpec": {
                           "requestType": "UpdateTableSpecRequest",
@@ -4043,7 +4464,18 @@
                             "(google.api.http).patch": "/v1beta1/{table_spec.name=projects/*/locations/*/datasets/*/tableSpecs/*}",
                             "(google.api.http).body": "table_spec",
                             "(google.api.method_signature)": "table_spec"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1beta1/{table_spec.name=projects/*/locations/*/datasets/*/tableSpecs/*}",
+                                "body": "table_spec"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "table_spec"
+                            }
+                          ]
                         },
                         "GetColumnSpec": {
                           "requestType": "GetColumnSpecRequest",
@@ -4051,7 +4483,17 @@
                           "options": {
                             "(google.api.http).get": "/v1beta1/{name=projects/*/locations/*/datasets/*/tableSpecs/*/columnSpecs/*}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta1/{name=projects/*/locations/*/datasets/*/tableSpecs/*/columnSpecs/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "ListColumnSpecs": {
                           "requestType": "ListColumnSpecsRequest",
@@ -4059,7 +4501,17 @@
                           "options": {
                             "(google.api.http).get": "/v1beta1/{parent=projects/*/locations/*/datasets/*/tableSpecs/*}/columnSpecs",
                             "(google.api.method_signature)": "parent"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta1/{parent=projects/*/locations/*/datasets/*/tableSpecs/*}/columnSpecs"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
                         },
                         "UpdateColumnSpec": {
                           "requestType": "UpdateColumnSpecRequest",
@@ -4068,7 +4520,18 @@
                             "(google.api.http).patch": "/v1beta1/{column_spec.name=projects/*/locations/*/datasets/*/tableSpecs/*/columnSpecs/*}",
                             "(google.api.http).body": "column_spec",
                             "(google.api.method_signature)": "column_spec"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1beta1/{column_spec.name=projects/*/locations/*/datasets/*/tableSpecs/*/columnSpecs/*}",
+                                "body": "column_spec"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "column_spec"
+                            }
+                          ]
                         },
                         "CreateModel": {
                           "requestType": "CreateModelRequest",
@@ -4079,7 +4542,24 @@
                             "(google.api.method_signature)": "parent,model",
                             "(google.longrunning.operation_info).response_type": "Model",
                             "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta1/{parent=projects/*/locations/*}/models",
+                                "body": "model"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,model"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "Model",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
                         },
                         "GetModel": {
                           "requestType": "GetModelRequest",
@@ -4087,7 +4567,17 @@
                           "options": {
                             "(google.api.http).get": "/v1beta1/{name=projects/*/locations/*/models/*}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta1/{name=projects/*/locations/*/models/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "ListModels": {
                           "requestType": "ListModelsRequest",
@@ -4095,7 +4585,17 @@
                           "options": {
                             "(google.api.http).get": "/v1beta1/{parent=projects/*/locations/*}/models",
                             "(google.api.method_signature)": "parent"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta1/{parent=projects/*/locations/*}/models"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
                         },
                         "DeleteModel": {
                           "requestType": "DeleteModelRequest",
@@ -4105,7 +4605,23 @@
                             "(google.api.method_signature)": "name",
                             "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
                             "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1beta1/{name=projects/*/locations/*/models/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.protobuf.Empty",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
                         },
                         "DeployModel": {
                           "requestType": "DeployModelRequest",
@@ -4116,7 +4632,24 @@
                             "(google.api.method_signature)": "name",
                             "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
                             "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta1/{name=projects/*/locations/*/models/*}:deploy",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.protobuf.Empty",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
                         },
                         "UndeployModel": {
                           "requestType": "UndeployModelRequest",
@@ -4127,7 +4660,24 @@
                             "(google.api.method_signature)": "name",
                             "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
                             "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta1/{name=projects/*/locations/*/models/*}:undeploy",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.protobuf.Empty",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
                         },
                         "ExportModel": {
                           "requestType": "ExportModelRequest",
@@ -4138,7 +4688,24 @@
                             "(google.api.method_signature)": "name,output_config",
                             "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
                             "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta1/{name=projects/*/locations/*/models/*}:export",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name,output_config"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.protobuf.Empty",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
                         },
                         "ExportEvaluatedExamples": {
                           "requestType": "ExportEvaluatedExamplesRequest",
@@ -4149,7 +4716,24 @@
                             "(google.api.method_signature)": "name,output_config",
                             "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
                             "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta1/{name=projects/*/locations/*/models/*}:exportEvaluatedExamples",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name,output_config"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.protobuf.Empty",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
                         },
                         "GetModelEvaluation": {
                           "requestType": "GetModelEvaluationRequest",
@@ -4157,7 +4741,17 @@
                           "options": {
                             "(google.api.http).get": "/v1beta1/{name=projects/*/locations/*/models/*/modelEvaluations/*}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta1/{name=projects/*/locations/*/models/*/modelEvaluations/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "ListModelEvaluations": {
                           "requestType": "ListModelEvaluationsRequest",
@@ -4165,7 +4759,17 @@
                           "options": {
                             "(google.api.http).get": "/v1beta1/{parent=projects/*/locations/*/models/*}/modelEvaluations",
                             "(google.api.method_signature)": "parent"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta1/{parent=projects/*/locations/*/models/*}/modelEvaluations"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
                         }
                       }
                     },
@@ -5969,7 +6573,17 @@
                   "options": {
                     "(google.api.http).get": "/v1/{name=operations}",
                     "(google.api.method_signature)": "name,filter"
-                  }
+                  },
+                  "parsedOptions": [
+                    {
+                      "(google.api.http)": {
+                        "get": "/v1/{name=operations}"
+                      }
+                    },
+                    {
+                      "(google.api.method_signature)": "name,filter"
+                    }
+                  ]
                 },
                 "GetOperation": {
                   "requestType": "GetOperationRequest",
@@ -5977,7 +6591,17 @@
                   "options": {
                     "(google.api.http).get": "/v1/{name=operations/**}",
                     "(google.api.method_signature)": "name"
-                  }
+                  },
+                  "parsedOptions": [
+                    {
+                      "(google.api.http)": {
+                        "get": "/v1/{name=operations/**}"
+                      }
+                    },
+                    {
+                      "(google.api.method_signature)": "name"
+                    }
+                  ]
                 },
                 "DeleteOperation": {
                   "requestType": "DeleteOperationRequest",
@@ -5985,7 +6609,17 @@
                   "options": {
                     "(google.api.http).delete": "/v1/{name=operations/**}",
                     "(google.api.method_signature)": "name"
-                  }
+                  },
+                  "parsedOptions": [
+                    {
+                      "(google.api.http)": {
+                        "delete": "/v1/{name=operations/**}"
+                      }
+                    },
+                    {
+                      "(google.api.method_signature)": "name"
+                    }
+                  ]
                 },
                 "CancelOperation": {
                   "requestType": "CancelOperationRequest",
@@ -5994,7 +6628,18 @@
                     "(google.api.http).post": "/v1/{name=operations/**}:cancel",
                     "(google.api.http).body": "*",
                     "(google.api.method_signature)": "name"
-                  }
+                  },
+                  "parsedOptions": [
+                    {
+                      "(google.api.http)": {
+                        "post": "/v1/{name=operations/**}:cancel",
+                        "body": "*"
+                      }
+                    },
+                    {
+                      "(google.api.method_signature)": "name"
+                    }
+                  ]
                 },
                 "WaitOperation": {
                   "requestType": "WaitOperationRequest",

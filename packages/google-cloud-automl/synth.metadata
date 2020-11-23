@@ -4,15 +4,15 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/nodejs-automl.git",
-        "sha": "72dbf4824e61cfb1cdebb03b50b398f70f004c0a"
+        "sha": "8aa9acfa365a5a94faed9c8871a0dca94c81fd91"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "b3c2eb02e501d7eec36b4b08fcd981f32f8b4ff4",
-        "internalRef": "339152802"
+        "sha": "5587028631d4d743fd906c4eb4e4e4649a7ee5ce",
+        "internalRef": "343187793"
       }
     },
     {
@@ -93,7 +93,6 @@
     "README.md",
     "api-extractor.json",
     "linkinator.config.json",
-    "package-lock.json.874877354",
     "protos/google/cloud/automl/v1/annotation_payload.proto",
     "protos/google/cloud/automl/v1/annotation_spec.proto",
     "protos/google/cloud/automl/v1/classification.proto",
@@ -146,7 +145,6 @@
     "protos/protos.json",
     "renovate.json",
     "samples/README.md",
-    "samples/package-lock.json.3667293931",
     "src/index.ts",
     "src/v1/auto_ml_client.ts",
     "src/v1/auto_ml_client_config.json",

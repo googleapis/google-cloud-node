@@ -16,6 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
+/* global window */
 import * as gax from 'google-gax';
 import {
   Callback,
@@ -31,6 +32,11 @@ import * as path from 'path';
 import {Transform} from 'stream';
 import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
+/**
+ * Client JSON configuration object, loaded from
+ * `src/v1beta1/auto_ml_client_config.json`.
+ * This file defines retry strategy and timeouts for all API methods in this library.
+ */
 import * as gapicConfig from './auto_ml_client_config.json';
 import {operationsProtos} from 'google-gax';
 const version = require('../../../package.json').version;
@@ -98,9 +104,9 @@ export class AutoMlClient {
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
-   * @param {gax.ClientConfig} [options.clientConfig] - client configuration override.
-   *     TODO(@alexander-fenster): link to gax documentation.
-   * @param {boolean} fallback - Use HTTP fallback mode.
+   * @param {gax.ClientConfig} [options.clientConfig] - Client configuration override.
+   *     Follows the structure of {@link gapicConfig}.
+   * @param {boolean} [options.fallback] - Use HTTP fallback mode.
    *     In fallback mode, a special browser-compatible transport implementation is used
    *     instead of gRPC transport. In browser context (if the `window` object is defined)
    *     the fallback mode is enabled automatically; set `options.fallback` to `false`
@@ -113,7 +119,9 @@ export class AutoMlClient {
       opts?.servicePath || opts?.apiEndpoint || staticMembers.servicePath;
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback = opts?.fallback ?? typeof window !== 'undefined';
+    const fallback =
+      opts?.fallback ??
+      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
@@ -506,7 +514,7 @@ export class AutoMlClient {
   // -------------------
   createDataset(
     request: protos.google.cloud.automl.v1beta1.ICreateDatasetRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.automl.v1beta1.IDataset,
@@ -516,7 +524,7 @@ export class AutoMlClient {
   >;
   createDataset(
     request: protos.google.cloud.automl.v1beta1.ICreateDatasetRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.cloud.automl.v1beta1.IDataset,
       | protos.google.cloud.automl.v1beta1.ICreateDatasetRequest
@@ -557,7 +565,7 @@ export class AutoMlClient {
   createDataset(
     request: protos.google.cloud.automl.v1beta1.ICreateDatasetRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.cloud.automl.v1beta1.IDataset,
           | protos.google.cloud.automl.v1beta1.ICreateDatasetRequest
@@ -580,12 +588,12 @@ export class AutoMlClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -600,7 +608,7 @@ export class AutoMlClient {
   }
   getDataset(
     request: protos.google.cloud.automl.v1beta1.IGetDatasetRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.automl.v1beta1.IDataset,
@@ -610,7 +618,7 @@ export class AutoMlClient {
   >;
   getDataset(
     request: protos.google.cloud.automl.v1beta1.IGetDatasetRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.cloud.automl.v1beta1.IDataset,
       protos.google.cloud.automl.v1beta1.IGetDatasetRequest | null | undefined,
@@ -645,7 +653,7 @@ export class AutoMlClient {
   getDataset(
     request: protos.google.cloud.automl.v1beta1.IGetDatasetRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.cloud.automl.v1beta1.IDataset,
           | protos.google.cloud.automl.v1beta1.IGetDatasetRequest
@@ -666,12 +674,12 @@ export class AutoMlClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -686,7 +694,7 @@ export class AutoMlClient {
   }
   updateDataset(
     request: protos.google.cloud.automl.v1beta1.IUpdateDatasetRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.automl.v1beta1.IDataset,
@@ -696,7 +704,7 @@ export class AutoMlClient {
   >;
   updateDataset(
     request: protos.google.cloud.automl.v1beta1.IUpdateDatasetRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.cloud.automl.v1beta1.IDataset,
       | protos.google.cloud.automl.v1beta1.IUpdateDatasetRequest
@@ -737,7 +745,7 @@ export class AutoMlClient {
   updateDataset(
     request: protos.google.cloud.automl.v1beta1.IUpdateDatasetRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.cloud.automl.v1beta1.IDataset,
           | protos.google.cloud.automl.v1beta1.IUpdateDatasetRequest
@@ -760,12 +768,12 @@ export class AutoMlClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -780,7 +788,7 @@ export class AutoMlClient {
   }
   getAnnotationSpec(
     request: protos.google.cloud.automl.v1beta1.IGetAnnotationSpecRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.automl.v1beta1.IAnnotationSpec,
@@ -790,7 +798,7 @@ export class AutoMlClient {
   >;
   getAnnotationSpec(
     request: protos.google.cloud.automl.v1beta1.IGetAnnotationSpecRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.cloud.automl.v1beta1.IAnnotationSpec,
       | protos.google.cloud.automl.v1beta1.IGetAnnotationSpecRequest
@@ -829,7 +837,7 @@ export class AutoMlClient {
   getAnnotationSpec(
     request: protos.google.cloud.automl.v1beta1.IGetAnnotationSpecRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.cloud.automl.v1beta1.IAnnotationSpec,
           | protos.google.cloud.automl.v1beta1.IGetAnnotationSpecRequest
@@ -852,12 +860,12 @@ export class AutoMlClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -872,7 +880,7 @@ export class AutoMlClient {
   }
   getTableSpec(
     request: protos.google.cloud.automl.v1beta1.IGetTableSpecRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.automl.v1beta1.ITableSpec,
@@ -882,7 +890,7 @@ export class AutoMlClient {
   >;
   getTableSpec(
     request: protos.google.cloud.automl.v1beta1.IGetTableSpecRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.cloud.automl.v1beta1.ITableSpec,
       | protos.google.cloud.automl.v1beta1.IGetTableSpecRequest
@@ -923,7 +931,7 @@ export class AutoMlClient {
   getTableSpec(
     request: protos.google.cloud.automl.v1beta1.IGetTableSpecRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.cloud.automl.v1beta1.ITableSpec,
           | protos.google.cloud.automl.v1beta1.IGetTableSpecRequest
@@ -946,12 +954,12 @@ export class AutoMlClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -966,7 +974,7 @@ export class AutoMlClient {
   }
   updateTableSpec(
     request: protos.google.cloud.automl.v1beta1.IUpdateTableSpecRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.automl.v1beta1.ITableSpec,
@@ -976,7 +984,7 @@ export class AutoMlClient {
   >;
   updateTableSpec(
     request: protos.google.cloud.automl.v1beta1.IUpdateTableSpecRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.cloud.automl.v1beta1.ITableSpec,
       | protos.google.cloud.automl.v1beta1.IUpdateTableSpecRequest
@@ -1017,7 +1025,7 @@ export class AutoMlClient {
   updateTableSpec(
     request: protos.google.cloud.automl.v1beta1.IUpdateTableSpecRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.cloud.automl.v1beta1.ITableSpec,
           | protos.google.cloud.automl.v1beta1.IUpdateTableSpecRequest
@@ -1040,12 +1048,12 @@ export class AutoMlClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1060,7 +1068,7 @@ export class AutoMlClient {
   }
   getColumnSpec(
     request: protos.google.cloud.automl.v1beta1.IGetColumnSpecRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.automl.v1beta1.IColumnSpec,
@@ -1070,7 +1078,7 @@ export class AutoMlClient {
   >;
   getColumnSpec(
     request: protos.google.cloud.automl.v1beta1.IGetColumnSpecRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.cloud.automl.v1beta1.IColumnSpec,
       | protos.google.cloud.automl.v1beta1.IGetColumnSpecRequest
@@ -1111,7 +1119,7 @@ export class AutoMlClient {
   getColumnSpec(
     request: protos.google.cloud.automl.v1beta1.IGetColumnSpecRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.cloud.automl.v1beta1.IColumnSpec,
           | protos.google.cloud.automl.v1beta1.IGetColumnSpecRequest
@@ -1134,12 +1142,12 @@ export class AutoMlClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1154,7 +1162,7 @@ export class AutoMlClient {
   }
   updateColumnSpec(
     request: protos.google.cloud.automl.v1beta1.IUpdateColumnSpecRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.automl.v1beta1.IColumnSpec,
@@ -1164,7 +1172,7 @@ export class AutoMlClient {
   >;
   updateColumnSpec(
     request: protos.google.cloud.automl.v1beta1.IUpdateColumnSpecRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.cloud.automl.v1beta1.IColumnSpec,
       | protos.google.cloud.automl.v1beta1.IUpdateColumnSpecRequest
@@ -1205,7 +1213,7 @@ export class AutoMlClient {
   updateColumnSpec(
     request: protos.google.cloud.automl.v1beta1.IUpdateColumnSpecRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.cloud.automl.v1beta1.IColumnSpec,
           | protos.google.cloud.automl.v1beta1.IUpdateColumnSpecRequest
@@ -1228,12 +1236,12 @@ export class AutoMlClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1248,7 +1256,7 @@ export class AutoMlClient {
   }
   getModel(
     request: protos.google.cloud.automl.v1beta1.IGetModelRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.automl.v1beta1.IModel,
@@ -1258,7 +1266,7 @@ export class AutoMlClient {
   >;
   getModel(
     request: protos.google.cloud.automl.v1beta1.IGetModelRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.cloud.automl.v1beta1.IModel,
       protos.google.cloud.automl.v1beta1.IGetModelRequest | null | undefined,
@@ -1293,7 +1301,7 @@ export class AutoMlClient {
   getModel(
     request: protos.google.cloud.automl.v1beta1.IGetModelRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.cloud.automl.v1beta1.IModel,
           | protos.google.cloud.automl.v1beta1.IGetModelRequest
@@ -1314,12 +1322,12 @@ export class AutoMlClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1334,7 +1342,7 @@ export class AutoMlClient {
   }
   getModelEvaluation(
     request: protos.google.cloud.automl.v1beta1.IGetModelEvaluationRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.automl.v1beta1.IModelEvaluation,
@@ -1344,7 +1352,7 @@ export class AutoMlClient {
   >;
   getModelEvaluation(
     request: protos.google.cloud.automl.v1beta1.IGetModelEvaluationRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.cloud.automl.v1beta1.IModelEvaluation,
       | protos.google.cloud.automl.v1beta1.IGetModelEvaluationRequest
@@ -1383,7 +1391,7 @@ export class AutoMlClient {
   getModelEvaluation(
     request: protos.google.cloud.automl.v1beta1.IGetModelEvaluationRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.cloud.automl.v1beta1.IModelEvaluation,
           | protos.google.cloud.automl.v1beta1.IGetModelEvaluationRequest
@@ -1406,12 +1414,12 @@ export class AutoMlClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1427,7 +1435,7 @@ export class AutoMlClient {
 
   deleteDataset(
     request: protos.google.cloud.automl.v1beta1.IDeleteDatasetRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       LROperation<
@@ -1440,7 +1448,7 @@ export class AutoMlClient {
   >;
   deleteDataset(
     request: protos.google.cloud.automl.v1beta1.IDeleteDatasetRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       LROperation<
         protos.google.protobuf.IEmpty,
@@ -1488,7 +1496,7 @@ export class AutoMlClient {
   deleteDataset(
     request: protos.google.cloud.automl.v1beta1.IDeleteDatasetRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           LROperation<
             protos.google.protobuf.IEmpty,
@@ -1516,12 +1524,12 @@ export class AutoMlClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1573,7 +1581,7 @@ export class AutoMlClient {
   }
   importData(
     request: protos.google.cloud.automl.v1beta1.IImportDataRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       LROperation<
@@ -1586,7 +1594,7 @@ export class AutoMlClient {
   >;
   importData(
     request: protos.google.cloud.automl.v1beta1.IImportDataRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       LROperation<
         protos.google.protobuf.IEmpty,
@@ -1642,7 +1650,7 @@ export class AutoMlClient {
   importData(
     request: protos.google.cloud.automl.v1beta1.IImportDataRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           LROperation<
             protos.google.protobuf.IEmpty,
@@ -1670,12 +1678,12 @@ export class AutoMlClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1727,7 +1735,7 @@ export class AutoMlClient {
   }
   exportData(
     request: protos.google.cloud.automl.v1beta1.IExportDataRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       LROperation<
@@ -1740,7 +1748,7 @@ export class AutoMlClient {
   >;
   exportData(
     request: protos.google.cloud.automl.v1beta1.IExportDataRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       LROperation<
         protos.google.protobuf.IEmpty,
@@ -1788,7 +1796,7 @@ export class AutoMlClient {
   exportData(
     request: protos.google.cloud.automl.v1beta1.IExportDataRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           LROperation<
             protos.google.protobuf.IEmpty,
@@ -1816,12 +1824,12 @@ export class AutoMlClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1873,7 +1881,7 @@ export class AutoMlClient {
   }
   createModel(
     request: protos.google.cloud.automl.v1beta1.ICreateModelRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       LROperation<
@@ -1886,7 +1894,7 @@ export class AutoMlClient {
   >;
   createModel(
     request: protos.google.cloud.automl.v1beta1.ICreateModelRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       LROperation<
         protos.google.cloud.automl.v1beta1.IModel,
@@ -1936,7 +1944,7 @@ export class AutoMlClient {
   createModel(
     request: protos.google.cloud.automl.v1beta1.ICreateModelRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           LROperation<
             protos.google.cloud.automl.v1beta1.IModel,
@@ -1964,12 +1972,12 @@ export class AutoMlClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -2021,7 +2029,7 @@ export class AutoMlClient {
   }
   deleteModel(
     request: protos.google.cloud.automl.v1beta1.IDeleteModelRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       LROperation<
@@ -2034,7 +2042,7 @@ export class AutoMlClient {
   >;
   deleteModel(
     request: protos.google.cloud.automl.v1beta1.IDeleteModelRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       LROperation<
         protos.google.protobuf.IEmpty,
@@ -2082,7 +2090,7 @@ export class AutoMlClient {
   deleteModel(
     request: protos.google.cloud.automl.v1beta1.IDeleteModelRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           LROperation<
             protos.google.protobuf.IEmpty,
@@ -2110,12 +2118,12 @@ export class AutoMlClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -2167,7 +2175,7 @@ export class AutoMlClient {
   }
   deployModel(
     request: protos.google.cloud.automl.v1beta1.IDeployModelRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       LROperation<
@@ -2180,7 +2188,7 @@ export class AutoMlClient {
   >;
   deployModel(
     request: protos.google.cloud.automl.v1beta1.IDeployModelRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       LROperation<
         protos.google.protobuf.IEmpty,
@@ -2239,7 +2247,7 @@ export class AutoMlClient {
   deployModel(
     request: protos.google.cloud.automl.v1beta1.IDeployModelRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           LROperation<
             protos.google.protobuf.IEmpty,
@@ -2267,12 +2275,12 @@ export class AutoMlClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -2324,7 +2332,7 @@ export class AutoMlClient {
   }
   undeployModel(
     request: protos.google.cloud.automl.v1beta1.IUndeployModelRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       LROperation<
@@ -2337,7 +2345,7 @@ export class AutoMlClient {
   >;
   undeployModel(
     request: protos.google.cloud.automl.v1beta1.IUndeployModelRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       LROperation<
         protos.google.protobuf.IEmpty,
@@ -2387,7 +2395,7 @@ export class AutoMlClient {
   undeployModel(
     request: protos.google.cloud.automl.v1beta1.IUndeployModelRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           LROperation<
             protos.google.protobuf.IEmpty,
@@ -2415,12 +2423,12 @@ export class AutoMlClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -2472,7 +2480,7 @@ export class AutoMlClient {
   }
   exportModel(
     request: protos.google.cloud.automl.v1beta1.IExportModelRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       LROperation<
@@ -2485,7 +2493,7 @@ export class AutoMlClient {
   >;
   exportModel(
     request: protos.google.cloud.automl.v1beta1.IExportModelRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       LROperation<
         protos.google.protobuf.IEmpty,
@@ -2538,7 +2546,7 @@ export class AutoMlClient {
   exportModel(
     request: protos.google.cloud.automl.v1beta1.IExportModelRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           LROperation<
             protos.google.protobuf.IEmpty,
@@ -2566,12 +2574,12 @@ export class AutoMlClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -2623,7 +2631,7 @@ export class AutoMlClient {
   }
   exportEvaluatedExamples(
     request: protos.google.cloud.automl.v1beta1.IExportEvaluatedExamplesRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       LROperation<
@@ -2636,7 +2644,7 @@ export class AutoMlClient {
   >;
   exportEvaluatedExamples(
     request: protos.google.cloud.automl.v1beta1.IExportEvaluatedExamplesRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       LROperation<
         protos.google.protobuf.IEmpty,
@@ -2696,7 +2704,7 @@ export class AutoMlClient {
   exportEvaluatedExamples(
     request: protos.google.cloud.automl.v1beta1.IExportEvaluatedExamplesRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           LROperation<
             protos.google.protobuf.IEmpty,
@@ -2724,12 +2732,12 @@ export class AutoMlClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -2785,7 +2793,7 @@ export class AutoMlClient {
   }
   listDatasets(
     request: protos.google.cloud.automl.v1beta1.IListDatasetsRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.automl.v1beta1.IDataset[],
@@ -2795,7 +2803,7 @@ export class AutoMlClient {
   >;
   listDatasets(
     request: protos.google.cloud.automl.v1beta1.IListDatasetsRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: PaginationCallback<
       protos.google.cloud.automl.v1beta1.IListDatasetsRequest,
       | protos.google.cloud.automl.v1beta1.IListDatasetsResponse
@@ -2853,7 +2861,7 @@ export class AutoMlClient {
   listDatasets(
     request: protos.google.cloud.automl.v1beta1.IListDatasetsRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | PaginationCallback<
           protos.google.cloud.automl.v1beta1.IListDatasetsRequest,
           | protos.google.cloud.automl.v1beta1.IListDatasetsResponse
@@ -2876,12 +2884,12 @@ export class AutoMlClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -2931,7 +2939,7 @@ export class AutoMlClient {
    */
   listDatasetsStream(
     request?: protos.google.cloud.automl.v1beta1.IListDatasetsRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Transform {
     request = request || {};
     options = options || {};
@@ -2993,7 +3001,7 @@ export class AutoMlClient {
    */
   listDatasetsAsync(
     request?: protos.google.cloud.automl.v1beta1.IListDatasetsRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): AsyncIterable<protos.google.cloud.automl.v1beta1.IDataset> {
     request = request || {};
     options = options || {};
@@ -3015,7 +3023,7 @@ export class AutoMlClient {
   }
   listTableSpecs(
     request: protos.google.cloud.automl.v1beta1.IListTableSpecsRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.automl.v1beta1.ITableSpec[],
@@ -3025,7 +3033,7 @@ export class AutoMlClient {
   >;
   listTableSpecs(
     request: protos.google.cloud.automl.v1beta1.IListTableSpecsRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: PaginationCallback<
       protos.google.cloud.automl.v1beta1.IListTableSpecsRequest,
       | protos.google.cloud.automl.v1beta1.IListTableSpecsResponse
@@ -3079,7 +3087,7 @@ export class AutoMlClient {
   listTableSpecs(
     request: protos.google.cloud.automl.v1beta1.IListTableSpecsRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | PaginationCallback<
           protos.google.cloud.automl.v1beta1.IListTableSpecsRequest,
           | protos.google.cloud.automl.v1beta1.IListTableSpecsResponse
@@ -3102,12 +3110,12 @@ export class AutoMlClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -3153,7 +3161,7 @@ export class AutoMlClient {
    */
   listTableSpecsStream(
     request?: protos.google.cloud.automl.v1beta1.IListTableSpecsRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Transform {
     request = request || {};
     options = options || {};
@@ -3211,7 +3219,7 @@ export class AutoMlClient {
    */
   listTableSpecsAsync(
     request?: protos.google.cloud.automl.v1beta1.IListTableSpecsRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): AsyncIterable<protos.google.cloud.automl.v1beta1.ITableSpec> {
     request = request || {};
     options = options || {};
@@ -3233,7 +3241,7 @@ export class AutoMlClient {
   }
   listColumnSpecs(
     request: protos.google.cloud.automl.v1beta1.IListColumnSpecsRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.automl.v1beta1.IColumnSpec[],
@@ -3243,7 +3251,7 @@ export class AutoMlClient {
   >;
   listColumnSpecs(
     request: protos.google.cloud.automl.v1beta1.IListColumnSpecsRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: PaginationCallback<
       protos.google.cloud.automl.v1beta1.IListColumnSpecsRequest,
       | protos.google.cloud.automl.v1beta1.IListColumnSpecsResponse
@@ -3297,7 +3305,7 @@ export class AutoMlClient {
   listColumnSpecs(
     request: protos.google.cloud.automl.v1beta1.IListColumnSpecsRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | PaginationCallback<
           protos.google.cloud.automl.v1beta1.IListColumnSpecsRequest,
           | protos.google.cloud.automl.v1beta1.IListColumnSpecsResponse
@@ -3320,12 +3328,12 @@ export class AutoMlClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -3371,7 +3379,7 @@ export class AutoMlClient {
    */
   listColumnSpecsStream(
     request?: protos.google.cloud.automl.v1beta1.IListColumnSpecsRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Transform {
     request = request || {};
     options = options || {};
@@ -3429,7 +3437,7 @@ export class AutoMlClient {
    */
   listColumnSpecsAsync(
     request?: protos.google.cloud.automl.v1beta1.IListColumnSpecsRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): AsyncIterable<protos.google.cloud.automl.v1beta1.IColumnSpec> {
     request = request || {};
     options = options || {};
@@ -3451,7 +3459,7 @@ export class AutoMlClient {
   }
   listModels(
     request: protos.google.cloud.automl.v1beta1.IListModelsRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.automl.v1beta1.IModel[],
@@ -3461,7 +3469,7 @@ export class AutoMlClient {
   >;
   listModels(
     request: protos.google.cloud.automl.v1beta1.IListModelsRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: PaginationCallback<
       protos.google.cloud.automl.v1beta1.IListModelsRequest,
       protos.google.cloud.automl.v1beta1.IListModelsResponse | null | undefined,
@@ -3516,7 +3524,7 @@ export class AutoMlClient {
   listModels(
     request: protos.google.cloud.automl.v1beta1.IListModelsRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | PaginationCallback<
           protos.google.cloud.automl.v1beta1.IListModelsRequest,
           | protos.google.cloud.automl.v1beta1.IListModelsResponse
@@ -3537,12 +3545,12 @@ export class AutoMlClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -3593,7 +3601,7 @@ export class AutoMlClient {
    */
   listModelsStream(
     request?: protos.google.cloud.automl.v1beta1.IListModelsRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Transform {
     request = request || {};
     options = options || {};
@@ -3656,7 +3664,7 @@ export class AutoMlClient {
    */
   listModelsAsync(
     request?: protos.google.cloud.automl.v1beta1.IListModelsRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): AsyncIterable<protos.google.cloud.automl.v1beta1.IModel> {
     request = request || {};
     options = options || {};
@@ -3678,7 +3686,7 @@ export class AutoMlClient {
   }
   listModelEvaluations(
     request: protos.google.cloud.automl.v1beta1.IListModelEvaluationsRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.automl.v1beta1.IModelEvaluation[],
@@ -3688,7 +3696,7 @@ export class AutoMlClient {
   >;
   listModelEvaluations(
     request: protos.google.cloud.automl.v1beta1.IListModelEvaluationsRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: PaginationCallback<
       protos.google.cloud.automl.v1beta1.IListModelEvaluationsRequest,
       | protos.google.cloud.automl.v1beta1.IListModelEvaluationsResponse
@@ -3751,7 +3759,7 @@ export class AutoMlClient {
   listModelEvaluations(
     request: protos.google.cloud.automl.v1beta1.IListModelEvaluationsRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | PaginationCallback<
           protos.google.cloud.automl.v1beta1.IListModelEvaluationsRequest,
           | protos.google.cloud.automl.v1beta1.IListModelEvaluationsResponse
@@ -3774,12 +3782,12 @@ export class AutoMlClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -3834,7 +3842,7 @@ export class AutoMlClient {
    */
   listModelEvaluationsStream(
     request?: protos.google.cloud.automl.v1beta1.IListModelEvaluationsRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Transform {
     request = request || {};
     options = options || {};
@@ -3901,7 +3909,7 @@ export class AutoMlClient {
    */
   listModelEvaluationsAsync(
     request?: protos.google.cloud.automl.v1beta1.IListModelEvaluationsRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): AsyncIterable<protos.google.cloud.automl.v1beta1.IModelEvaluation> {
     request = request || {};
     options = options || {};
