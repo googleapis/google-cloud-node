@@ -31,7 +31,18 @@
                                 "(google.api.http).post": "/v1/{parent=projects/*/locations/*}/reservations",
                                 "(google.api.http).body": "reservation",
                                 "(google.api.method_signature)": "parent,reservation,reservation_id"
-                              }
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "post": "/v1/{parent=projects/*/locations/*}/reservations",
+                                    "body": "reservation"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "parent,reservation,reservation_id"
+                                }
+                              ]
                             },
                             "ListReservations": {
                               "requestType": "ListReservationsRequest",
@@ -39,7 +50,17 @@
                               "options": {
                                 "(google.api.http).get": "/v1/{parent=projects/*/locations/*}/reservations",
                                 "(google.api.method_signature)": "parent"
-                              }
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "get": "/v1/{parent=projects/*/locations/*}/reservations"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "parent"
+                                }
+                              ]
                             },
                             "GetReservation": {
                               "requestType": "GetReservationRequest",
@@ -47,7 +68,17 @@
                               "options": {
                                 "(google.api.http).get": "/v1/{name=projects/*/locations/*/reservations/*}",
                                 "(google.api.method_signature)": "name"
-                              }
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "get": "/v1/{name=projects/*/locations/*/reservations/*}"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "name"
+                                }
+                              ]
                             },
                             "DeleteReservation": {
                               "requestType": "DeleteReservationRequest",
@@ -55,7 +86,17 @@
                               "options": {
                                 "(google.api.http).delete": "/v1/{name=projects/*/locations/*/reservations/*}",
                                 "(google.api.method_signature)": "name"
-                              }
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "delete": "/v1/{name=projects/*/locations/*/reservations/*}"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "name"
+                                }
+                              ]
                             },
                             "UpdateReservation": {
                               "requestType": "UpdateReservationRequest",
@@ -64,7 +105,18 @@
                                 "(google.api.http).patch": "/v1/{reservation.name=projects/*/locations/*/reservations/*}",
                                 "(google.api.http).body": "reservation",
                                 "(google.api.method_signature)": "reservation,update_mask"
-                              }
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "patch": "/v1/{reservation.name=projects/*/locations/*/reservations/*}",
+                                    "body": "reservation"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "reservation,update_mask"
+                                }
+                              ]
                             },
                             "CreateCapacityCommitment": {
                               "requestType": "CreateCapacityCommitmentRequest",
@@ -73,7 +125,18 @@
                                 "(google.api.http).post": "/v1/{parent=projects/*/locations/*}/capacityCommitments",
                                 "(google.api.http).body": "capacity_commitment",
                                 "(google.api.method_signature)": "parent,capacity_commitment"
-                              }
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "post": "/v1/{parent=projects/*/locations/*}/capacityCommitments",
+                                    "body": "capacity_commitment"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "parent,capacity_commitment"
+                                }
+                              ]
                             },
                             "ListCapacityCommitments": {
                               "requestType": "ListCapacityCommitmentsRequest",
@@ -81,7 +144,17 @@
                               "options": {
                                 "(google.api.http).get": "/v1/{parent=projects/*/locations/*}/capacityCommitments",
                                 "(google.api.method_signature)": "parent"
-                              }
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "get": "/v1/{parent=projects/*/locations/*}/capacityCommitments"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "parent"
+                                }
+                              ]
                             },
                             "GetCapacityCommitment": {
                               "requestType": "GetCapacityCommitmentRequest",
@@ -89,7 +162,17 @@
                               "options": {
                                 "(google.api.http).get": "/v1/{name=projects/*/locations/*/capacityCommitments/*}",
                                 "(google.api.method_signature)": "name"
-                              }
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "get": "/v1/{name=projects/*/locations/*/capacityCommitments/*}"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "name"
+                                }
+                              ]
                             },
                             "DeleteCapacityCommitment": {
                               "requestType": "DeleteCapacityCommitmentRequest",
@@ -97,7 +180,17 @@
                               "options": {
                                 "(google.api.http).delete": "/v1/{name=projects/*/locations/*/capacityCommitments/*}",
                                 "(google.api.method_signature)": "name"
-                              }
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "delete": "/v1/{name=projects/*/locations/*/capacityCommitments/*}"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "name"
+                                }
+                              ]
                             },
                             "UpdateCapacityCommitment": {
                               "requestType": "UpdateCapacityCommitmentRequest",
@@ -106,7 +199,18 @@
                                 "(google.api.http).patch": "/v1/{capacity_commitment.name=projects/*/locations/*/capacityCommitments/*}",
                                 "(google.api.http).body": "capacity_commitment",
                                 "(google.api.method_signature)": "capacity_commitment,update_mask"
-                              }
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "patch": "/v1/{capacity_commitment.name=projects/*/locations/*/capacityCommitments/*}",
+                                    "body": "capacity_commitment"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "capacity_commitment,update_mask"
+                                }
+                              ]
                             },
                             "SplitCapacityCommitment": {
                               "requestType": "SplitCapacityCommitmentRequest",
@@ -115,7 +219,18 @@
                                 "(google.api.http).post": "/v1/{name=projects/*/locations/*/capacityCommitments/*}:split",
                                 "(google.api.http).body": "*",
                                 "(google.api.method_signature)": "name,slot_count"
-                              }
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "post": "/v1/{name=projects/*/locations/*/capacityCommitments/*}:split",
+                                    "body": "*"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "name,slot_count"
+                                }
+                              ]
                             },
                             "MergeCapacityCommitments": {
                               "requestType": "MergeCapacityCommitmentsRequest",
@@ -124,7 +239,18 @@
                                 "(google.api.http).post": "/v1/{parent=projects/*/locations/*}/capacityCommitments:merge",
                                 "(google.api.http).body": "*",
                                 "(google.api.method_signature)": "parent,capacity_commitment_ids"
-                              }
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "post": "/v1/{parent=projects/*/locations/*}/capacityCommitments:merge",
+                                    "body": "*"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "parent,capacity_commitment_ids"
+                                }
+                              ]
                             },
                             "CreateAssignment": {
                               "requestType": "CreateAssignmentRequest",
@@ -133,7 +259,18 @@
                                 "(google.api.http).post": "/v1/{parent=projects/*/locations/*/reservations/*}/assignments",
                                 "(google.api.http).body": "assignment",
                                 "(google.api.method_signature)": "parent,assignment"
-                              }
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "post": "/v1/{parent=projects/*/locations/*/reservations/*}/assignments",
+                                    "body": "assignment"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "parent,assignment"
+                                }
+                              ]
                             },
                             "ListAssignments": {
                               "requestType": "ListAssignmentsRequest",
@@ -141,7 +278,17 @@
                               "options": {
                                 "(google.api.http).get": "/v1/{parent=projects/*/locations/*/reservations/*}/assignments",
                                 "(google.api.method_signature)": "parent"
-                              }
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "get": "/v1/{parent=projects/*/locations/*/reservations/*}/assignments"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "parent"
+                                }
+                              ]
                             },
                             "DeleteAssignment": {
                               "requestType": "DeleteAssignmentRequest",
@@ -149,7 +296,17 @@
                               "options": {
                                 "(google.api.http).delete": "/v1/{name=projects/*/locations/*/reservations/*/assignments/*}",
                                 "(google.api.method_signature)": "name"
-                              }
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "delete": "/v1/{name=projects/*/locations/*/reservations/*/assignments/*}"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "name"
+                                }
+                              ]
                             },
                             "SearchAssignments": {
                               "requestType": "SearchAssignmentsRequest",
@@ -157,7 +314,17 @@
                               "options": {
                                 "(google.api.http).get": "/v1/{parent=projects/*/locations/*}:searchAssignments",
                                 "(google.api.method_signature)": "parent,query"
-                              }
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "get": "/v1/{parent=projects/*/locations/*}:searchAssignments"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "parent,query"
+                                }
+                              ]
                             },
                             "MoveAssignment": {
                               "requestType": "MoveAssignmentRequest",
@@ -166,7 +333,18 @@
                                 "(google.api.http).post": "/v1/{name=projects/*/locations/*/reservations/*/assignments/*}:move",
                                 "(google.api.http).body": "*",
                                 "(google.api.method_signature)": "name,destination_id"
-                              }
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "post": "/v1/{name=projects/*/locations/*/reservations/*/assignments/*}:move",
+                                    "body": "*"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "name,destination_id"
+                                }
+                              ]
                             },
                             "GetBiReservation": {
                               "requestType": "GetBiReservationRequest",
@@ -174,7 +352,17 @@
                               "options": {
                                 "(google.api.http).get": "/v1/{name=projects/*/locations/*/biReservation}",
                                 "(google.api.method_signature)": "name"
-                              }
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "get": "/v1/{name=projects/*/locations/*/biReservation}"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "name"
+                                }
+                              ]
                             },
                             "UpdateBiReservation": {
                               "requestType": "UpdateBiReservationRequest",
@@ -183,7 +371,18 @@
                                 "(google.api.http).patch": "/v1/{bi_reservation.name=projects/*/locations/*/biReservation}",
                                 "(google.api.http).body": "bi_reservation",
                                 "(google.api.method_signature)": "bi_reservation,update_mask"
-                              }
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "patch": "/v1/{bi_reservation.name=projects/*/locations/*/biReservation}",
+                                    "body": "bi_reservation"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "bi_reservation,update_mask"
+                                }
+                              ]
                             }
                           }
                         },

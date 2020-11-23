@@ -3,8 +3,16 @@
     {
       "git": {
         "name": ".",
-        "remote": "git@github.com:googleapis/nodejs-bigquery-reservation.git",
-        "sha": "0657268261a19710d1c2c76d093dd2f87fa7cfa4"
+        "remote": "https://github.com/googleapis/nodejs-bigquery-reservation.git",
+        "sha": "2dae800050325af1944c50b121a6dfd1b26f4639"
+      }
+    },
+    {
+      "git": {
+        "name": "googleapis",
+        "remote": "https://github.com/googleapis/googleapis.git",
+        "sha": "2f019bf70bfe06f1e2af1b04011b0a2405190e43",
+        "internalRef": "343202295"
       }
     },
     {
@@ -79,7 +87,6 @@
     "README.md",
     "api-extractor.json",
     "linkinator.config.json",
-    "package-lock.json.2966301757",
     "protos/google/cloud/bigquery/reservation/v1/reservation.proto",
     "protos/protos.d.ts",
     "protos/protos.js",
