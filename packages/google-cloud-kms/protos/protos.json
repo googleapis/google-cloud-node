@@ -440,7 +440,17 @@
                           "options": {
                             "(google.api.http).get": "/v1/{parent=projects/*/locations/*}/keyRings",
                             "(google.api.method_signature)": "parent"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=projects/*/locations/*}/keyRings"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
                         },
                         "ListCryptoKeys": {
                           "requestType": "ListCryptoKeysRequest",
@@ -448,7 +458,17 @@
                           "options": {
                             "(google.api.http).get": "/v1/{parent=projects/*/locations/*/keyRings/*}/cryptoKeys",
                             "(google.api.method_signature)": "parent"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=projects/*/locations/*/keyRings/*}/cryptoKeys"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
                         },
                         "ListCryptoKeyVersions": {
                           "requestType": "ListCryptoKeyVersionsRequest",
@@ -456,7 +476,17 @@
                           "options": {
                             "(google.api.http).get": "/v1/{parent=projects/*/locations/*/keyRings/*/cryptoKeys/*}/cryptoKeyVersions",
                             "(google.api.method_signature)": "parent"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=projects/*/locations/*/keyRings/*/cryptoKeys/*}/cryptoKeyVersions"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
                         },
                         "ListImportJobs": {
                           "requestType": "ListImportJobsRequest",
@@ -464,7 +494,17 @@
                           "options": {
                             "(google.api.http).get": "/v1/{parent=projects/*/locations/*/keyRings/*}/importJobs",
                             "(google.api.method_signature)": "parent"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=projects/*/locations/*/keyRings/*}/importJobs"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
                         },
                         "GetKeyRing": {
                           "requestType": "GetKeyRingRequest",
@@ -472,7 +512,17 @@
                           "options": {
                             "(google.api.http).get": "/v1/{name=projects/*/locations/*/keyRings/*}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/locations/*/keyRings/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "GetCryptoKey": {
                           "requestType": "GetCryptoKeyRequest",
@@ -480,7 +530,17 @@
                           "options": {
                             "(google.api.http).get": "/v1/{name=projects/*/locations/*/keyRings/*/cryptoKeys/*}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/locations/*/keyRings/*/cryptoKeys/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "GetCryptoKeyVersion": {
                           "requestType": "GetCryptoKeyVersionRequest",
@@ -488,7 +548,17 @@
                           "options": {
                             "(google.api.http).get": "/v1/{name=projects/*/locations/*/keyRings/*/cryptoKeys/*/cryptoKeyVersions/*}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/locations/*/keyRings/*/cryptoKeys/*/cryptoKeyVersions/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "GetPublicKey": {
                           "requestType": "GetPublicKeyRequest",
@@ -496,7 +566,17 @@
                           "options": {
                             "(google.api.http).get": "/v1/{name=projects/*/locations/*/keyRings/*/cryptoKeys/*/cryptoKeyVersions/*}/publicKey",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/locations/*/keyRings/*/cryptoKeys/*/cryptoKeyVersions/*}/publicKey"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "GetImportJob": {
                           "requestType": "GetImportJobRequest",
@@ -504,7 +584,17 @@
                           "options": {
                             "(google.api.http).get": "/v1/{name=projects/*/locations/*/keyRings/*/importJobs/*}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/locations/*/keyRings/*/importJobs/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "CreateKeyRing": {
                           "requestType": "CreateKeyRingRequest",
@@ -513,7 +603,18 @@
                             "(google.api.http).post": "/v1/{parent=projects/*/locations/*}/keyRings",
                             "(google.api.http).body": "key_ring",
                             "(google.api.method_signature)": "parent,key_ring_id,key_ring"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=projects/*/locations/*}/keyRings",
+                                "body": "key_ring"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,key_ring_id,key_ring"
+                            }
+                          ]
                         },
                         "CreateCryptoKey": {
                           "requestType": "CreateCryptoKeyRequest",
@@ -522,7 +623,18 @@
                             "(google.api.http).post": "/v1/{parent=projects/*/locations/*/keyRings/*}/cryptoKeys",
                             "(google.api.http).body": "crypto_key",
                             "(google.api.method_signature)": "parent,crypto_key_id,crypto_key"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=projects/*/locations/*/keyRings/*}/cryptoKeys",
+                                "body": "crypto_key"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,crypto_key_id,crypto_key"
+                            }
+                          ]
                         },
                         "CreateCryptoKeyVersion": {
                           "requestType": "CreateCryptoKeyVersionRequest",
@@ -531,7 +643,18 @@
                             "(google.api.http).post": "/v1/{parent=projects/*/locations/*/keyRings/*/cryptoKeys/*}/cryptoKeyVersions",
                             "(google.api.http).body": "crypto_key_version",
                             "(google.api.method_signature)": "parent,crypto_key_version"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=projects/*/locations/*/keyRings/*/cryptoKeys/*}/cryptoKeyVersions",
+                                "body": "crypto_key_version"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,crypto_key_version"
+                            }
+                          ]
                         },
                         "ImportCryptoKeyVersion": {
                           "requestType": "ImportCryptoKeyVersionRequest",
@@ -539,7 +662,15 @@
                           "options": {
                             "(google.api.http).post": "/v1/{parent=projects/*/locations/*/keyRings/*/cryptoKeys/*}/cryptoKeyVersions:import",
                             "(google.api.http).body": "*"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=projects/*/locations/*/keyRings/*/cryptoKeys/*}/cryptoKeyVersions:import",
+                                "body": "*"
+                              }
+                            }
+                          ]
                         },
                         "CreateImportJob": {
                           "requestType": "CreateImportJobRequest",
@@ -548,7 +679,18 @@
                             "(google.api.http).post": "/v1/{parent=projects/*/locations/*/keyRings/*}/importJobs",
                             "(google.api.http).body": "import_job",
                             "(google.api.method_signature)": "parent,import_job_id,import_job"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=projects/*/locations/*/keyRings/*}/importJobs",
+                                "body": "import_job"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,import_job_id,import_job"
+                            }
+                          ]
                         },
                         "UpdateCryptoKey": {
                           "requestType": "UpdateCryptoKeyRequest",
@@ -557,7 +699,18 @@
                             "(google.api.http).patch": "/v1/{crypto_key.name=projects/*/locations/*/keyRings/*/cryptoKeys/*}",
                             "(google.api.http).body": "crypto_key",
                             "(google.api.method_signature)": "crypto_key,update_mask"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1/{crypto_key.name=projects/*/locations/*/keyRings/*/cryptoKeys/*}",
+                                "body": "crypto_key"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "crypto_key,update_mask"
+                            }
+                          ]
                         },
                         "UpdateCryptoKeyVersion": {
                           "requestType": "UpdateCryptoKeyVersionRequest",
@@ -566,7 +719,18 @@
                             "(google.api.http).patch": "/v1/{crypto_key_version.name=projects/*/locations/*/keyRings/*/cryptoKeys/*/cryptoKeyVersions/*}",
                             "(google.api.http).body": "crypto_key_version",
                             "(google.api.method_signature)": "crypto_key_version,update_mask"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1/{crypto_key_version.name=projects/*/locations/*/keyRings/*/cryptoKeys/*/cryptoKeyVersions/*}",
+                                "body": "crypto_key_version"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "crypto_key_version,update_mask"
+                            }
+                          ]
                         },
                         "Encrypt": {
                           "requestType": "EncryptRequest",
@@ -575,7 +739,18 @@
                             "(google.api.http).post": "/v1/{name=projects/*/locations/*/keyRings/*/cryptoKeys/**}:encrypt",
                             "(google.api.http).body": "*",
                             "(google.api.method_signature)": "name,plaintext"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{name=projects/*/locations/*/keyRings/*/cryptoKeys/**}:encrypt",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name,plaintext"
+                            }
+                          ]
                         },
                         "Decrypt": {
                           "requestType": "DecryptRequest",
@@ -584,7 +759,18 @@
                             "(google.api.http).post": "/v1/{name=projects/*/locations/*/keyRings/*/cryptoKeys/*}:decrypt",
                             "(google.api.http).body": "*",
                             "(google.api.method_signature)": "name,ciphertext"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{name=projects/*/locations/*/keyRings/*/cryptoKeys/*}:decrypt",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name,ciphertext"
+                            }
+                          ]
                         },
                         "AsymmetricSign": {
                           "requestType": "AsymmetricSignRequest",
@@ -593,7 +779,18 @@
                             "(google.api.http).post": "/v1/{name=projects/*/locations/*/keyRings/*/cryptoKeys/*/cryptoKeyVersions/*}:asymmetricSign",
                             "(google.api.http).body": "*",
                             "(google.api.method_signature)": "name,digest"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{name=projects/*/locations/*/keyRings/*/cryptoKeys/*/cryptoKeyVersions/*}:asymmetricSign",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name,digest"
+                            }
+                          ]
                         },
                         "AsymmetricDecrypt": {
                           "requestType": "AsymmetricDecryptRequest",
@@ -602,7 +799,18 @@
                             "(google.api.http).post": "/v1/{name=projects/*/locations/*/keyRings/*/cryptoKeys/*/cryptoKeyVersions/*}:asymmetricDecrypt",
                             "(google.api.http).body": "*",
                             "(google.api.method_signature)": "name,ciphertext"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{name=projects/*/locations/*/keyRings/*/cryptoKeys/*/cryptoKeyVersions/*}:asymmetricDecrypt",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name,ciphertext"
+                            }
+                          ]
                         },
                         "UpdateCryptoKeyPrimaryVersion": {
                           "requestType": "UpdateCryptoKeyPrimaryVersionRequest",
@@ -611,7 +819,18 @@
                             "(google.api.http).post": "/v1/{name=projects/*/locations/*/keyRings/*/cryptoKeys/*}:updatePrimaryVersion",
                             "(google.api.http).body": "*",
                             "(google.api.method_signature)": "name,crypto_key_version_id"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{name=projects/*/locations/*/keyRings/*/cryptoKeys/*}:updatePrimaryVersion",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name,crypto_key_version_id"
+                            }
+                          ]
                         },
                         "DestroyCryptoKeyVersion": {
                           "requestType": "DestroyCryptoKeyVersionRequest",
@@ -620,7 +839,18 @@
                             "(google.api.http).post": "/v1/{name=projects/*/locations/*/keyRings/*/cryptoKeys/*/cryptoKeyVersions/*}:destroy",
                             "(google.api.http).body": "*",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{name=projects/*/locations/*/keyRings/*/cryptoKeys/*/cryptoKeyVersions/*}:destroy",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "RestoreCryptoKeyVersion": {
                           "requestType": "RestoreCryptoKeyVersionRequest",
@@ -629,7 +859,18 @@
                             "(google.api.http).post": "/v1/{name=projects/*/locations/*/keyRings/*/cryptoKeys/*/cryptoKeyVersions/*}:restore",
                             "(google.api.http).body": "*",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{name=projects/*/locations/*/keyRings/*/cryptoKeys/*/cryptoKeyVersions/*}:restore",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         }
                       }
                     },
