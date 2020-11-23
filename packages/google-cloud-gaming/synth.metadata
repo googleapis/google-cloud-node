@@ -4,15 +4,15 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/nodejs-game-servers.git",
-        "sha": "ee22980eb2c0af179d4e3cee35d13b99f9af2c32"
+        "sha": "2329129d18747e90074682649e86229ee43bce33"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "4c5071b615d96ef9dfd6a63d8429090f1f2872bb",
-        "internalRef": "327369997"
+        "sha": "5587028631d4d743fd906c4eb4e4e4649a7ee5ce",
+        "internalRef": "343187793"
       }
     },
     {
@@ -96,7 +96,6 @@
     "README.md",
     "api-extractor.json",
     "linkinator.config.json",
-    "package-lock.json.742240568",
     "protos/google/cloud/gaming/v1beta/common.proto",
     "protos/google/cloud/gaming/v1beta/game_server_clusters.proto",
     "protos/google/cloud/gaming/v1beta/game_server_clusters_service.proto",
@@ -111,7 +110,6 @@
     "protos/protos.json",
     "renovate.json",
     "samples/README.md",
-    "samples/package-lock.json.3225038820",
     "src/index.ts",
     "src/v1beta/game_server_clusters_service_client.ts",
     "src/v1beta/game_server_clusters_service_client_config.json",

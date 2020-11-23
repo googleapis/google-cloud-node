@@ -623,7 +623,17 @@
                           "options": {
                             "(google.api.http).get": "/v1/{parent=projects/*/locations/*/realms/*}/gameServerClusters",
                             "(google.api.method_signature)": "parent"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=projects/*/locations/*/realms/*}/gameServerClusters"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
                         },
                         "GetGameServerCluster": {
                           "requestType": "GetGameServerClusterRequest",
@@ -631,7 +641,17 @@
                           "options": {
                             "(google.api.http).get": "/v1/{name=projects/*/locations/*/realms/*/gameServerClusters/*}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/locations/*/realms/*/gameServerClusters/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "CreateGameServerCluster": {
                           "requestType": "CreateGameServerClusterRequest",
@@ -642,7 +662,24 @@
                             "(google.api.method_signature)": "parent,game_server_cluster,game_server_cluster_id",
                             "(google.longrunning.operation_info).response_type": "GameServerCluster",
                             "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=projects/*/locations/*/realms/*}/gameServerClusters",
+                                "body": "game_server_cluster"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,game_server_cluster,game_server_cluster_id"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "GameServerCluster",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
                         },
                         "PreviewCreateGameServerCluster": {
                           "requestType": "PreviewCreateGameServerClusterRequest",
@@ -650,7 +687,15 @@
                           "options": {
                             "(google.api.http).post": "/v1/{parent=projects/*/locations/*/realms/*}/gameServerClusters:previewCreate",
                             "(google.api.http).body": "game_server_cluster"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=projects/*/locations/*/realms/*}/gameServerClusters:previewCreate",
+                                "body": "game_server_cluster"
+                              }
+                            }
+                          ]
                         },
                         "DeleteGameServerCluster": {
                           "requestType": "DeleteGameServerClusterRequest",
@@ -660,14 +705,37 @@
                             "(google.api.method_signature)": "name",
                             "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
                             "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1/{name=projects/*/locations/*/realms/*/gameServerClusters/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.protobuf.Empty",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
                         },
                         "PreviewDeleteGameServerCluster": {
                           "requestType": "PreviewDeleteGameServerClusterRequest",
                           "responseType": "PreviewDeleteGameServerClusterResponse",
                           "options": {
                             "(google.api.http).delete": "/v1/{name=projects/*/locations/*/realms/*/gameServerClusters/*}:previewDelete"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1/{name=projects/*/locations/*/realms/*/gameServerClusters/*}:previewDelete"
+                              }
+                            }
+                          ]
                         },
                         "UpdateGameServerCluster": {
                           "requestType": "UpdateGameServerClusterRequest",
@@ -678,7 +746,24 @@
                             "(google.api.method_signature)": "game_server_cluster,update_mask",
                             "(google.longrunning.operation_info).response_type": "GameServerCluster",
                             "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1/{game_server_cluster.name=projects/*/locations/*/realms/*/gameServerClusters/*}",
+                                "body": "game_server_cluster"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "game_server_cluster,update_mask"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "GameServerCluster",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
                         },
                         "PreviewUpdateGameServerCluster": {
                           "requestType": "PreviewUpdateGameServerClusterRequest",
@@ -686,7 +771,15 @@
                           "options": {
                             "(google.api.http).patch": "/v1/{game_server_cluster.name=projects/*/locations/*/realms/*/gameServerClusters/*}:previewUpdate",
                             "(google.api.http).body": "game_server_cluster"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1/{game_server_cluster.name=projects/*/locations/*/realms/*/gameServerClusters/*}:previewUpdate",
+                                "body": "game_server_cluster"
+                              }
+                            }
+                          ]
                         }
                       }
                     },
@@ -895,7 +988,17 @@
                           "options": {
                             "(google.api.http).get": "/v1/{parent=projects/*/locations/*/gameServerDeployments/*}/configs",
                             "(google.api.method_signature)": "parent"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=projects/*/locations/*/gameServerDeployments/*}/configs"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
                         },
                         "GetGameServerConfig": {
                           "requestType": "GetGameServerConfigRequest",
@@ -903,7 +1006,17 @@
                           "options": {
                             "(google.api.http).get": "/v1/{name=projects/*/locations/*/gameServerDeployments/*/configs/*}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/locations/*/gameServerDeployments/*/configs/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "CreateGameServerConfig": {
                           "requestType": "CreateGameServerConfigRequest",
@@ -914,7 +1027,24 @@
                             "(google.api.method_signature)": "parent,game_server_config",
                             "(google.longrunning.operation_info).response_type": "GameServerConfig",
                             "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=projects/*/locations/*/gameServerDeployments/*}/configs",
+                                "body": "game_server_config"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,game_server_config"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "GameServerConfig",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
                         },
                         "DeleteGameServerConfig": {
                           "requestType": "DeleteGameServerConfigRequest",
@@ -924,7 +1054,23 @@
                             "(google.api.method_signature)": "name",
                             "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
                             "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1/{name=projects/*/locations/*/gameServerDeployments/*/configs/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.protobuf.Empty",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
                         }
                       }
                     },
@@ -1280,7 +1426,17 @@
                           "options": {
                             "(google.api.http).get": "/v1/{parent=projects/*/locations/*}/gameServerDeployments",
                             "(google.api.method_signature)": "parent"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=projects/*/locations/*}/gameServerDeployments"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
                         },
                         "GetGameServerDeployment": {
                           "requestType": "GetGameServerDeploymentRequest",
@@ -1288,7 +1444,17 @@
                           "options": {
                             "(google.api.http).get": "/v1/{name=projects/*/locations/*/gameServerDeployments/*}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/locations/*/gameServerDeployments/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "CreateGameServerDeployment": {
                           "requestType": "CreateGameServerDeploymentRequest",
@@ -1299,7 +1465,24 @@
                             "(google.api.method_signature)": "parent,game_server_deployment",
                             "(google.longrunning.operation_info).response_type": "GameServerDeployment",
                             "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=projects/*/locations/*}/gameServerDeployments",
+                                "body": "game_server_deployment"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,game_server_deployment"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "GameServerDeployment",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
                         },
                         "DeleteGameServerDeployment": {
                           "requestType": "DeleteGameServerDeploymentRequest",
@@ -1309,7 +1492,23 @@
                             "(google.api.method_signature)": "name",
                             "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
                             "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1/{name=projects/*/locations/*/gameServerDeployments/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.protobuf.Empty",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
                         },
                         "UpdateGameServerDeployment": {
                           "requestType": "UpdateGameServerDeploymentRequest",
@@ -1320,7 +1519,24 @@
                             "(google.api.method_signature)": "game_server_deployment,update_mask",
                             "(google.longrunning.operation_info).response_type": "GameServerDeployment",
                             "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1/{game_server_deployment.name=projects/*/locations/*/gameServerDeployments/*}",
+                                "body": "game_server_deployment"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "game_server_deployment,update_mask"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "GameServerDeployment",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
                         },
                         "GetGameServerDeploymentRollout": {
                           "requestType": "GetGameServerDeploymentRolloutRequest",
@@ -1328,7 +1544,17 @@
                           "options": {
                             "(google.api.http).get": "/v1/{name=projects/*/locations/*/gameServerDeployments/*}/rollout",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/locations/*/gameServerDeployments/*}/rollout"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "UpdateGameServerDeploymentRollout": {
                           "requestType": "UpdateGameServerDeploymentRolloutRequest",
@@ -1339,7 +1565,24 @@
                             "(google.api.method_signature)": "rollout,update_mask",
                             "(google.longrunning.operation_info).response_type": "GameServerDeployment",
                             "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1/{rollout.name=projects/*/locations/*/gameServerDeployments/*}/rollout",
+                                "body": "rollout"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "rollout,update_mask"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "GameServerDeployment",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
                         },
                         "PreviewGameServerDeploymentRollout": {
                           "requestType": "PreviewGameServerDeploymentRolloutRequest",
@@ -1347,7 +1590,15 @@
                           "options": {
                             "(google.api.http).patch": "/v1/{rollout.name=projects/*/locations/*/gameServerDeployments/*}/rollout:preview",
                             "(google.api.http).body": "rollout"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1/{rollout.name=projects/*/locations/*/gameServerDeployments/*}/rollout:preview",
+                                "body": "rollout"
+                              }
+                            }
+                          ]
                         },
                         "FetchDeploymentState": {
                           "requestType": "FetchDeploymentStateRequest",
@@ -1355,7 +1606,15 @@
                           "options": {
                             "(google.api.http).post": "/v1/{name=projects/*/locations/*/gameServerDeployments/*}:fetchDeploymentState",
                             "(google.api.http).body": "*"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{name=projects/*/locations/*/gameServerDeployments/*}:fetchDeploymentState",
+                                "body": "*"
+                              }
+                            }
+                          ]
                         }
                       }
                     },
@@ -1580,7 +1839,17 @@
                           "options": {
                             "(google.api.http).get": "/v1/{parent=projects/*/locations/*}/realms",
                             "(google.api.method_signature)": "parent"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=projects/*/locations/*}/realms"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
                         },
                         "GetRealm": {
                           "requestType": "GetRealmRequest",
@@ -1588,7 +1857,17 @@
                           "options": {
                             "(google.api.http).get": "/v1/{name=projects/*/locations/*/realms/*}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/locations/*/realms/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "CreateRealm": {
                           "requestType": "CreateRealmRequest",
@@ -1599,7 +1878,24 @@
                             "(google.api.method_signature)": "parent,realm,realm_id",
                             "(google.longrunning.operation_info).response_type": "Realm",
                             "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=projects/*/locations/*}/realms",
+                                "body": "realm"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,realm,realm_id"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "Realm",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
                         },
                         "DeleteRealm": {
                           "requestType": "DeleteRealmRequest",
@@ -1609,7 +1905,23 @@
                             "(google.api.method_signature)": "name",
                             "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
                             "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1/{name=projects/*/locations/*/realms/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.protobuf.Empty",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
                         },
                         "UpdateRealm": {
                           "requestType": "UpdateRealmRequest",
@@ -1620,7 +1932,24 @@
                             "(google.api.method_signature)": "realm,update_mask",
                             "(google.longrunning.operation_info).response_type": "Realm",
                             "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1/{realm.name=projects/*/locations/*/realms/*}",
+                                "body": "realm"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "realm,update_mask"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "Realm",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
                         },
                         "PreviewRealmUpdate": {
                           "requestType": "PreviewRealmUpdateRequest",
@@ -1628,7 +1957,15 @@
                           "options": {
                             "(google.api.http).patch": "/v1/{realm.name=projects/*/locations/*/realms/*}:previewUpdate",
                             "(google.api.http).body": "realm"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1/{realm.name=projects/*/locations/*/realms/*}:previewUpdate",
+                                "body": "realm"
+                              }
+                            }
+                          ]
                         }
                       }
                     }
@@ -2251,7 +2588,17 @@
                           "options": {
                             "(google.api.http).get": "/v1beta/{parent=projects/*/locations/*/realms/*}/gameServerClusters",
                             "(google.api.method_signature)": "parent"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta/{parent=projects/*/locations/*/realms/*}/gameServerClusters"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
                         },
                         "GetGameServerCluster": {
                           "requestType": "GetGameServerClusterRequest",
@@ -2259,7 +2606,17 @@
                           "options": {
                             "(google.api.http).get": "/v1beta/{name=projects/*/locations/*/realms/*/gameServerClusters/*}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta/{name=projects/*/locations/*/realms/*/gameServerClusters/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "CreateGameServerCluster": {
                           "requestType": "CreateGameServerClusterRequest",
@@ -2270,7 +2627,24 @@
                             "(google.api.method_signature)": "parent,game_server_cluster,game_server_cluster_id",
                             "(google.longrunning.operation_info).response_type": "GameServerCluster",
                             "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta/{parent=projects/*/locations/*/realms/*}/gameServerClusters",
+                                "body": "game_server_cluster"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,game_server_cluster,game_server_cluster_id"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "GameServerCluster",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
                         },
                         "PreviewCreateGameServerCluster": {
                           "requestType": "PreviewCreateGameServerClusterRequest",
@@ -2278,7 +2652,15 @@
                           "options": {
                             "(google.api.http).post": "/v1beta/{parent=projects/*/locations/*/realms/*}/gameServerClusters:previewCreate",
                             "(google.api.http).body": "game_server_cluster"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta/{parent=projects/*/locations/*/realms/*}/gameServerClusters:previewCreate",
+                                "body": "game_server_cluster"
+                              }
+                            }
+                          ]
                         },
                         "DeleteGameServerCluster": {
                           "requestType": "DeleteGameServerClusterRequest",
@@ -2288,14 +2670,37 @@
                             "(google.api.method_signature)": "name",
                             "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
                             "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1beta/{name=projects/*/locations/*/realms/*/gameServerClusters/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.protobuf.Empty",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
                         },
                         "PreviewDeleteGameServerCluster": {
                           "requestType": "PreviewDeleteGameServerClusterRequest",
                           "responseType": "PreviewDeleteGameServerClusterResponse",
                           "options": {
                             "(google.api.http).delete": "/v1beta/{name=projects/*/locations/*/realms/*/gameServerClusters/*}:previewDelete"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1beta/{name=projects/*/locations/*/realms/*/gameServerClusters/*}:previewDelete"
+                              }
+                            }
+                          ]
                         },
                         "UpdateGameServerCluster": {
                           "requestType": "UpdateGameServerClusterRequest",
@@ -2306,7 +2711,24 @@
                             "(google.api.method_signature)": "game_server_cluster,update_mask",
                             "(google.longrunning.operation_info).response_type": "GameServerCluster",
                             "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1beta/{game_server_cluster.name=projects/*/locations/*/realms/*/gameServerClusters/*}",
+                                "body": "game_server_cluster"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "game_server_cluster,update_mask"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "GameServerCluster",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
                         },
                         "PreviewUpdateGameServerCluster": {
                           "requestType": "PreviewUpdateGameServerClusterRequest",
@@ -2314,7 +2736,15 @@
                           "options": {
                             "(google.api.http).patch": "/v1beta/{game_server_cluster.name=projects/*/locations/*/realms/*/gameServerClusters/*}:previewUpdate",
                             "(google.api.http).body": "game_server_cluster"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1beta/{game_server_cluster.name=projects/*/locations/*/realms/*/gameServerClusters/*}:previewUpdate",
+                                "body": "game_server_cluster"
+                              }
+                            }
+                          ]
                         }
                       }
                     },
@@ -2523,7 +2953,17 @@
                           "options": {
                             "(google.api.http).get": "/v1beta/{parent=projects/*/locations/*/gameServerDeployments/*}/configs",
                             "(google.api.method_signature)": "parent"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta/{parent=projects/*/locations/*/gameServerDeployments/*}/configs"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
                         },
                         "GetGameServerConfig": {
                           "requestType": "GetGameServerConfigRequest",
@@ -2531,7 +2971,17 @@
                           "options": {
                             "(google.api.http).get": "/v1beta/{name=projects/*/locations/*/gameServerDeployments/*/configs/*}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta/{name=projects/*/locations/*/gameServerDeployments/*/configs/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "CreateGameServerConfig": {
                           "requestType": "CreateGameServerConfigRequest",
@@ -2542,7 +2992,24 @@
                             "(google.api.method_signature)": "parent,game_server_config",
                             "(google.longrunning.operation_info).response_type": "GameServerConfig",
                             "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta/{parent=projects/*/locations/*/gameServerDeployments/*}/configs",
+                                "body": "game_server_config"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,game_server_config"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "GameServerConfig",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
                         },
                         "DeleteGameServerConfig": {
                           "requestType": "DeleteGameServerConfigRequest",
@@ -2552,7 +3019,23 @@
                             "(google.api.method_signature)": "name",
                             "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
                             "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1beta/{name=projects/*/locations/*/gameServerDeployments/*/configs/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.protobuf.Empty",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
                         }
                       }
                     },
@@ -2908,7 +3391,17 @@
                           "options": {
                             "(google.api.http).get": "/v1beta/{parent=projects/*/locations/*}/gameServerDeployments",
                             "(google.api.method_signature)": "parent"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta/{parent=projects/*/locations/*}/gameServerDeployments"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
                         },
                         "GetGameServerDeployment": {
                           "requestType": "GetGameServerDeploymentRequest",
@@ -2916,7 +3409,17 @@
                           "options": {
                             "(google.api.http).get": "/v1beta/{name=projects/*/locations/*/gameServerDeployments/*}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta/{name=projects/*/locations/*/gameServerDeployments/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "CreateGameServerDeployment": {
                           "requestType": "CreateGameServerDeploymentRequest",
@@ -2927,7 +3430,24 @@
                             "(google.api.method_signature)": "parent,game_server_deployment",
                             "(google.longrunning.operation_info).response_type": "GameServerDeployment",
                             "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta/{parent=projects/*/locations/*}/gameServerDeployments",
+                                "body": "game_server_deployment"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,game_server_deployment"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "GameServerDeployment",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
                         },
                         "DeleteGameServerDeployment": {
                           "requestType": "DeleteGameServerDeploymentRequest",
@@ -2937,7 +3457,23 @@
                             "(google.api.method_signature)": "name",
                             "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
                             "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1beta/{name=projects/*/locations/*/gameServerDeployments/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.protobuf.Empty",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
                         },
                         "UpdateGameServerDeployment": {
                           "requestType": "UpdateGameServerDeploymentRequest",
@@ -2948,7 +3484,24 @@
                             "(google.api.method_signature)": "game_server_deployment,update_mask",
                             "(google.longrunning.operation_info).response_type": "GameServerDeployment",
                             "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1beta/{game_server_deployment.name=projects/*/locations/*/gameServerDeployments/*}",
+                                "body": "game_server_deployment"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "game_server_deployment,update_mask"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "GameServerDeployment",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
                         },
                         "GetGameServerDeploymentRollout": {
                           "requestType": "GetGameServerDeploymentRolloutRequest",
@@ -2956,7 +3509,17 @@
                           "options": {
                             "(google.api.http).get": "/v1beta/{name=projects/*/locations/*/gameServerDeployments/*}/rollout",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta/{name=projects/*/locations/*/gameServerDeployments/*}/rollout"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "UpdateGameServerDeploymentRollout": {
                           "requestType": "UpdateGameServerDeploymentRolloutRequest",
@@ -2967,7 +3530,24 @@
                             "(google.api.method_signature)": "rollout,update_mask",
                             "(google.longrunning.operation_info).response_type": "GameServerDeployment",
                             "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1beta/{rollout.name=projects/*/locations/*/gameServerDeployments/*}/rollout",
+                                "body": "rollout"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "rollout,update_mask"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "GameServerDeployment",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
                         },
                         "PreviewGameServerDeploymentRollout": {
                           "requestType": "PreviewGameServerDeploymentRolloutRequest",
@@ -2975,7 +3555,15 @@
                           "options": {
                             "(google.api.http).patch": "/v1beta/{rollout.name=projects/*/locations/*/gameServerDeployments/*}/rollout:preview",
                             "(google.api.http).body": "rollout"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1beta/{rollout.name=projects/*/locations/*/gameServerDeployments/*}/rollout:preview",
+                                "body": "rollout"
+                              }
+                            }
+                          ]
                         },
                         "FetchDeploymentState": {
                           "requestType": "FetchDeploymentStateRequest",
@@ -2983,7 +3571,15 @@
                           "options": {
                             "(google.api.http).post": "/v1beta/{name=projects/*/locations/*/gameServerDeployments/*}:fetchDeploymentState",
                             "(google.api.http).body": "*"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta/{name=projects/*/locations/*/gameServerDeployments/*}:fetchDeploymentState",
+                                "body": "*"
+                              }
+                            }
+                          ]
                         }
                       }
                     },
@@ -3208,7 +3804,17 @@
                           "options": {
                             "(google.api.http).get": "/v1beta/{parent=projects/*/locations/*}/realms",
                             "(google.api.method_signature)": "parent"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta/{parent=projects/*/locations/*}/realms"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
                         },
                         "GetRealm": {
                           "requestType": "GetRealmRequest",
@@ -3216,7 +3822,17 @@
                           "options": {
                             "(google.api.http).get": "/v1beta/{name=projects/*/locations/*/realms/*}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta/{name=projects/*/locations/*/realms/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "CreateRealm": {
                           "requestType": "CreateRealmRequest",
@@ -3227,7 +3843,24 @@
                             "(google.api.method_signature)": "parent,realm,realm_id",
                             "(google.longrunning.operation_info).response_type": "Realm",
                             "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta/{parent=projects/*/locations/*}/realms",
+                                "body": "realm"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,realm,realm_id"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "Realm",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
                         },
                         "DeleteRealm": {
                           "requestType": "DeleteRealmRequest",
@@ -3237,7 +3870,23 @@
                             "(google.api.method_signature)": "name",
                             "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
                             "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1beta/{name=projects/*/locations/*/realms/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.protobuf.Empty",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
                         },
                         "UpdateRealm": {
                           "requestType": "UpdateRealmRequest",
@@ -3248,7 +3897,24 @@
                             "(google.api.method_signature)": "realm,update_mask",
                             "(google.longrunning.operation_info).response_type": "Realm",
                             "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1beta/{realm.name=projects/*/locations/*/realms/*}",
+                                "body": "realm"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "realm,update_mask"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "Realm",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
                         },
                         "PreviewRealmUpdate": {
                           "requestType": "PreviewRealmUpdateRequest",
@@ -3256,7 +3922,15 @@
                           "options": {
                             "(google.api.http).patch": "/v1beta/{realm.name=projects/*/locations/*/realms/*}:previewUpdate",
                             "(google.api.http).body": "realm"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1beta/{realm.name=projects/*/locations/*/realms/*}:previewUpdate",
+                                "body": "realm"
+                              }
+                            }
+                          ]
                         }
                       }
                     }
@@ -4435,7 +5109,17 @@
                   "options": {
                     "(google.api.http).get": "/v1/{name=operations}",
                     "(google.api.method_signature)": "name,filter"
-                  }
+                  },
+                  "parsedOptions": [
+                    {
+                      "(google.api.http)": {
+                        "get": "/v1/{name=operations}"
+                      }
+                    },
+                    {
+                      "(google.api.method_signature)": "name,filter"
+                    }
+                  ]
                 },
                 "GetOperation": {
                   "requestType": "GetOperationRequest",
@@ -4443,7 +5127,17 @@
                   "options": {
                     "(google.api.http).get": "/v1/{name=operations/**}",
                     "(google.api.method_signature)": "name"
-                  }
+                  },
+                  "parsedOptions": [
+                    {
+                      "(google.api.http)": {
+                        "get": "/v1/{name=operations/**}"
+                      }
+                    },
+                    {
+                      "(google.api.method_signature)": "name"
+                    }
+                  ]
                 },
                 "DeleteOperation": {
                   "requestType": "DeleteOperationRequest",
@@ -4451,7 +5145,17 @@
                   "options": {
                     "(google.api.http).delete": "/v1/{name=operations/**}",
                     "(google.api.method_signature)": "name"
-                  }
+                  },
+                  "parsedOptions": [
+                    {
+                      "(google.api.http)": {
+                        "delete": "/v1/{name=operations/**}"
+                      }
+                    },
+                    {
+                      "(google.api.method_signature)": "name"
+                    }
+                  ]
                 },
                 "CancelOperation": {
                   "requestType": "CancelOperationRequest",
@@ -4460,7 +5164,18 @@
                     "(google.api.http).post": "/v1/{name=operations/**}:cancel",
                     "(google.api.http).body": "*",
                     "(google.api.method_signature)": "name"
-                  }
+                  },
+                  "parsedOptions": [
+                    {
+                      "(google.api.http)": {
+                        "post": "/v1/{name=operations/**}:cancel",
+                        "body": "*"
+                      }
+                    },
+                    {
+                      "(google.api.method_signature)": "name"
+                    }
+                  ]
                 },
                 "WaitOperation": {
                   "requestType": "WaitOperationRequest",
