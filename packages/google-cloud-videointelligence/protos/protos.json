@@ -32,7 +32,24 @@
                             "(google.api.method_signature)": "input_uri,features",
                             "(google.longrunning.operation_info).response_type": "AnnotateVideoResponse",
                             "(google.longrunning.operation_info).metadata_type": "AnnotateVideoProgress"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/videos:annotate",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "input_uri,features"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "AnnotateVideoResponse",
+                                "metadata_type": "AnnotateVideoProgress"
+                              }
+                            }
+                          ]
                         }
                       }
                     },
@@ -964,7 +981,24 @@
                             "(google.api.method_signature)": "input_uri,features",
                             "(google.longrunning.operation_info).response_type": "AnnotateVideoResponse",
                             "(google.longrunning.operation_info).metadata_type": "AnnotateVideoProgress"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta2/videos:annotate",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "input_uri,features"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "AnnotateVideoResponse",
+                                "metadata_type": "AnnotateVideoProgress"
+                              }
+                            }
+                          ]
                         }
                       }
                     },
@@ -1364,7 +1398,24 @@
                             "(google.api.method_signature)": "input_uri,features",
                             "(google.longrunning.operation_info).response_type": "AnnotateVideoResponse",
                             "(google.longrunning.operation_info).metadata_type": "AnnotateVideoProgress"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1p1beta1/videos:annotate",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "input_uri,features"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "AnnotateVideoResponse",
+                                "metadata_type": "AnnotateVideoProgress"
+                              }
+                            }
+                          ]
                         }
                       }
                     },
@@ -1798,7 +1849,24 @@
                             "(google.api.method_signature)": "input_uri,features",
                             "(google.longrunning.operation_info).response_type": "AnnotateVideoResponse",
                             "(google.longrunning.operation_info).metadata_type": "AnnotateVideoProgress"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1p2beta1/videos:annotate",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "input_uri,features"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "AnnotateVideoResponse",
+                                "metadata_type": "AnnotateVideoProgress"
+                              }
+                            }
+                          ]
                         }
                       }
                     },
@@ -2257,7 +2325,24 @@
                             "(google.api.method_signature)": "input_uri,features",
                             "(google.longrunning.operation_info).response_type": "AnnotateVideoResponse",
                             "(google.longrunning.operation_info).metadata_type": "AnnotateVideoProgress"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1p3beta1/videos:annotate",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "input_uri,features"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "AnnotateVideoResponse",
+                                "metadata_type": "AnnotateVideoProgress"
+                              }
+                            }
+                          ]
                         }
                       }
                     },
@@ -4441,7 +4526,17 @@
                   "options": {
                     "(google.api.http).get": "/v1/{name=operations}",
                     "(google.api.method_signature)": "name,filter"
-                  }
+                  },
+                  "parsedOptions": [
+                    {
+                      "(google.api.http)": {
+                        "get": "/v1/{name=operations}"
+                      }
+                    },
+                    {
+                      "(google.api.method_signature)": "name,filter"
+                    }
+                  ]
                 },
                 "GetOperation": {
                   "requestType": "GetOperationRequest",
@@ -4449,7 +4544,17 @@
                   "options": {
                     "(google.api.http).get": "/v1/{name=operations/**}",
                     "(google.api.method_signature)": "name"
-                  }
+                  },
+                  "parsedOptions": [
+                    {
+                      "(google.api.http)": {
+                        "get": "/v1/{name=operations/**}"
+                      }
+                    },
+                    {
+                      "(google.api.method_signature)": "name"
+                    }
+                  ]
                 },
                 "DeleteOperation": {
                   "requestType": "DeleteOperationRequest",
@@ -4457,7 +4562,17 @@
                   "options": {
                     "(google.api.http).delete": "/v1/{name=operations/**}",
                     "(google.api.method_signature)": "name"
-                  }
+                  },
+                  "parsedOptions": [
+                    {
+                      "(google.api.http)": {
+                        "delete": "/v1/{name=operations/**}"
+                      }
+                    },
+                    {
+                      "(google.api.method_signature)": "name"
+                    }
+                  ]
                 },
                 "CancelOperation": {
                   "requestType": "CancelOperationRequest",
@@ -4466,7 +4581,18 @@
                     "(google.api.http).post": "/v1/{name=operations/**}:cancel",
                     "(google.api.http).body": "*",
                     "(google.api.method_signature)": "name"
-                  }
+                  },
+                  "parsedOptions": [
+                    {
+                      "(google.api.http)": {
+                        "post": "/v1/{name=operations/**}:cancel",
+                        "body": "*"
+                      }
+                    },
+                    {
+                      "(google.api.method_signature)": "name"
+                    }
+                  ]
                 },
                 "WaitOperation": {
                   "requestType": "WaitOperationRequest",

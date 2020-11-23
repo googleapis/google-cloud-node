@@ -3,8 +3,16 @@
     {
       "git": {
         "name": ".",
-        "remote": "git@github.com:googleapis/nodejs-video-intelligence.git",
-        "sha": "78853bdb31bfd5ab192431be7104f146cd9019c6"
+        "remote": "https://github.com/googleapis/nodejs-video-intelligence.git",
+        "sha": "00e4715e30bfa33393ef501295275ec0615aa105"
+      }
+    },
+    {
+      "git": {
+        "name": "googleapis",
+        "remote": "https://github.com/googleapis/googleapis.git",
+        "sha": "2f019bf70bfe06f1e2af1b04011b0a2405190e43",
+        "internalRef": "343202295"
       }
     },
     {
@@ -115,7 +123,6 @@
     "README.md",
     "api-extractor.json",
     "linkinator.config.json",
-    "package-lock.json.1898363003",
     "protos/google/cloud/videointelligence/v1/video_intelligence.proto",
     "protos/google/cloud/videointelligence/v1beta2/video_intelligence.proto",
     "protos/google/cloud/videointelligence/v1p1beta1/video_intelligence.proto",
@@ -126,7 +133,6 @@
     "protos/protos.json",
     "renovate.json",
     "samples/README.md",
-    "samples/package-lock.json.1526100258",
     "src/index.ts",
     "src/v1/index.ts",
     "src/v1/video_intelligence_service_client.ts",
