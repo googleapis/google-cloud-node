@@ -33,7 +33,20 @@
                                 "(google.api.http).get": "/v1/{name=projects/*/locations/*/dataSources/*}",
                                 "(google.api.http).additional_bindings.get": "/v1/{name=projects/*/dataSources/*}",
                                 "(google.api.method_signature)": "name"
-                              }
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "get": "/v1/{name=projects/*/locations/*/dataSources/*}",
+                                    "additional_bindings": {
+                                      "get": "/v1/{name=projects/*/dataSources/*}"
+                                    }
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "name"
+                                }
+                              ]
                             },
                             "ListDataSources": {
                               "requestType": "ListDataSourcesRequest",
@@ -42,7 +55,20 @@
                                 "(google.api.http).get": "/v1/{parent=projects/*/locations/*}/dataSources",
                                 "(google.api.http).additional_bindings.get": "/v1/{parent=projects/*}/dataSources",
                                 "(google.api.method_signature)": "parent"
-                              }
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "get": "/v1/{parent=projects/*/locations/*}/dataSources",
+                                    "additional_bindings": {
+                                      "get": "/v1/{parent=projects/*}/dataSources"
+                                    }
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "parent"
+                                }
+                              ]
                             },
                             "CreateTransferConfig": {
                               "requestType": "CreateTransferConfigRequest",
@@ -53,7 +79,22 @@
                                 "(google.api.http).additional_bindings.post": "/v1/{parent=projects/*}/transferConfigs",
                                 "(google.api.http).additional_bindings.body": "transfer_config",
                                 "(google.api.method_signature)": "parent,transfer_config"
-                              }
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "post": "/v1/{parent=projects/*/locations/*}/transferConfigs",
+                                    "body": "transfer_config",
+                                    "additional_bindings": {
+                                      "post": "/v1/{parent=projects/*}/transferConfigs",
+                                      "body": "transfer_config"
+                                    }
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "parent,transfer_config"
+                                }
+                              ]
                             },
                             "UpdateTransferConfig": {
                               "requestType": "UpdateTransferConfigRequest",
@@ -64,7 +105,22 @@
                                 "(google.api.http).additional_bindings.patch": "/v1/{transfer_config.name=projects/*/transferConfigs/*}",
                                 "(google.api.http).additional_bindings.body": "transfer_config",
                                 "(google.api.method_signature)": "transfer_config,update_mask"
-                              }
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "patch": "/v1/{transfer_config.name=projects/*/locations/*/transferConfigs/*}",
+                                    "body": "transfer_config",
+                                    "additional_bindings": {
+                                      "patch": "/v1/{transfer_config.name=projects/*/transferConfigs/*}",
+                                      "body": "transfer_config"
+                                    }
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "transfer_config,update_mask"
+                                }
+                              ]
                             },
                             "DeleteTransferConfig": {
                               "requestType": "DeleteTransferConfigRequest",
@@ -73,7 +129,20 @@
                                 "(google.api.http).delete": "/v1/{name=projects/*/locations/*/transferConfigs/*}",
                                 "(google.api.http).additional_bindings.delete": "/v1/{name=projects/*/transferConfigs/*}",
                                 "(google.api.method_signature)": "name"
-                              }
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "delete": "/v1/{name=projects/*/locations/*/transferConfigs/*}",
+                                    "additional_bindings": {
+                                      "delete": "/v1/{name=projects/*/transferConfigs/*}"
+                                    }
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "name"
+                                }
+                              ]
                             },
                             "GetTransferConfig": {
                               "requestType": "GetTransferConfigRequest",
@@ -82,7 +151,20 @@
                                 "(google.api.http).get": "/v1/{name=projects/*/locations/*/transferConfigs/*}",
                                 "(google.api.http).additional_bindings.get": "/v1/{name=projects/*/transferConfigs/*}",
                                 "(google.api.method_signature)": "name"
-                              }
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "get": "/v1/{name=projects/*/locations/*/transferConfigs/*}",
+                                    "additional_bindings": {
+                                      "get": "/v1/{name=projects/*/transferConfigs/*}"
+                                    }
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "name"
+                                }
+                              ]
                             },
                             "ListTransferConfigs": {
                               "requestType": "ListTransferConfigsRequest",
@@ -91,7 +173,20 @@
                                 "(google.api.http).get": "/v1/{parent=projects/*/locations/*}/transferConfigs",
                                 "(google.api.http).additional_bindings.get": "/v1/{parent=projects/*}/transferConfigs",
                                 "(google.api.method_signature)": "parent"
-                              }
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "get": "/v1/{parent=projects/*/locations/*}/transferConfigs",
+                                    "additional_bindings": {
+                                      "get": "/v1/{parent=projects/*}/transferConfigs"
+                                    }
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "parent"
+                                }
+                              ]
                             },
                             "ScheduleTransferRuns": {
                               "requestType": "ScheduleTransferRunsRequest",
@@ -103,7 +198,25 @@
                                 "(google.api.http).additional_bindings.post": "/v1/{parent=projects/*/transferConfigs/*}:scheduleRuns",
                                 "(google.api.http).additional_bindings.body": "*",
                                 "(google.api.method_signature)": "parent,start_time,end_time"
-                              }
+                              },
+                              "parsedOptions": [
+                                {
+                                  "deprecated": true
+                                },
+                                {
+                                  "(google.api.http)": {
+                                    "post": "/v1/{parent=projects/*/locations/*/transferConfigs/*}:scheduleRuns",
+                                    "body": "*",
+                                    "additional_bindings": {
+                                      "post": "/v1/{parent=projects/*/transferConfigs/*}:scheduleRuns",
+                                      "body": "*"
+                                    }
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "parent,start_time,end_time"
+                                }
+                              ]
                             },
                             "StartManualTransferRuns": {
                               "requestType": "StartManualTransferRunsRequest",
@@ -113,7 +226,19 @@
                                 "(google.api.http).body": "*",
                                 "(google.api.http).additional_bindings.post": "/v1/{parent=projects/*/transferConfigs/*}:startManualRuns",
                                 "(google.api.http).additional_bindings.body": "*"
-                              }
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "post": "/v1/{parent=projects/*/locations/*/transferConfigs/*}:startManualRuns",
+                                    "body": "*",
+                                    "additional_bindings": {
+                                      "post": "/v1/{parent=projects/*/transferConfigs/*}:startManualRuns",
+                                      "body": "*"
+                                    }
+                                  }
+                                }
+                              ]
                             },
                             "GetTransferRun": {
                               "requestType": "GetTransferRunRequest",
@@ -122,7 +247,20 @@
                                 "(google.api.http).get": "/v1/{name=projects/*/locations/*/transferConfigs/*/runs/*}",
                                 "(google.api.http).additional_bindings.get": "/v1/{name=projects/*/transferConfigs/*/runs/*}",
                                 "(google.api.method_signature)": "name"
-                              }
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "get": "/v1/{name=projects/*/locations/*/transferConfigs/*/runs/*}",
+                                    "additional_bindings": {
+                                      "get": "/v1/{name=projects/*/transferConfigs/*/runs/*}"
+                                    }
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "name"
+                                }
+                              ]
                             },
                             "DeleteTransferRun": {
                               "requestType": "DeleteTransferRunRequest",
@@ -131,7 +269,20 @@
                                 "(google.api.http).delete": "/v1/{name=projects/*/locations/*/transferConfigs/*/runs/*}",
                                 "(google.api.http).additional_bindings.delete": "/v1/{name=projects/*/transferConfigs/*/runs/*}",
                                 "(google.api.method_signature)": "name"
-                              }
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "delete": "/v1/{name=projects/*/locations/*/transferConfigs/*/runs/*}",
+                                    "additional_bindings": {
+                                      "delete": "/v1/{name=projects/*/transferConfigs/*/runs/*}"
+                                    }
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "name"
+                                }
+                              ]
                             },
                             "ListTransferRuns": {
                               "requestType": "ListTransferRunsRequest",
@@ -140,7 +291,20 @@
                                 "(google.api.http).get": "/v1/{parent=projects/*/locations/*/transferConfigs/*}/runs",
                                 "(google.api.http).additional_bindings.get": "/v1/{parent=projects/*/transferConfigs/*}/runs",
                                 "(google.api.method_signature)": "parent"
-                              }
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "get": "/v1/{parent=projects/*/locations/*/transferConfigs/*}/runs",
+                                    "additional_bindings": {
+                                      "get": "/v1/{parent=projects/*/transferConfigs/*}/runs"
+                                    }
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "parent"
+                                }
+                              ]
                             },
                             "ListTransferLogs": {
                               "requestType": "ListTransferLogsRequest",
@@ -149,7 +313,20 @@
                                 "(google.api.http).get": "/v1/{parent=projects/*/locations/*/transferConfigs/*/runs/*}/transferLogs",
                                 "(google.api.http).additional_bindings.get": "/v1/{parent=projects/*/transferConfigs/*/runs/*}/transferLogs",
                                 "(google.api.method_signature)": "parent"
-                              }
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "get": "/v1/{parent=projects/*/locations/*/transferConfigs/*/runs/*}/transferLogs",
+                                    "additional_bindings": {
+                                      "get": "/v1/{parent=projects/*/transferConfigs/*/runs/*}/transferLogs"
+                                    }
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "parent"
+                                }
+                              ]
                             },
                             "CheckValidCreds": {
                               "requestType": "CheckValidCredsRequest",
@@ -160,7 +337,22 @@
                                 "(google.api.http).additional_bindings.post": "/v1/{name=projects/*/dataSources/*}:checkValidCreds",
                                 "(google.api.http).additional_bindings.body": "*",
                                 "(google.api.method_signature)": "name"
-                              }
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "post": "/v1/{name=projects/*/locations/*/dataSources/*}:checkValidCreds",
+                                    "body": "*",
+                                    "additional_bindings": {
+                                      "post": "/v1/{name=projects/*/dataSources/*}:checkValidCreds",
+                                      "body": "*"
+                                    }
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "name"
+                                }
+                              ]
                             }
                           }
                         },

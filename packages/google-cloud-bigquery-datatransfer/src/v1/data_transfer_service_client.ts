@@ -16,6 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
+/* global window */
 import * as gax from 'google-gax';
 import {
   Callback,
@@ -30,6 +31,11 @@ import * as path from 'path';
 import {Transform} from 'stream';
 import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
+/**
+ * Client JSON configuration object, loaded from
+ * `src/v1/data_transfer_service_client_config.json`.
+ * This file defines retry strategy and timeouts for all API methods in this library.
+ */
 import * as gapicConfig from './data_transfer_service_client_config.json';
 
 const version = require('../../../package.json').version;
@@ -86,9 +92,9 @@ export class DataTransferServiceClient {
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
-   * @param {gax.ClientConfig} [options.clientConfig] - client configuration override.
-   *     TODO(@alexander-fenster): link to gax documentation.
-   * @param {boolean} fallback - Use HTTP fallback mode.
+   * @param {gax.ClientConfig} [options.clientConfig] - Client configuration override.
+   *     Follows the structure of {@link gapicConfig}.
+   * @param {boolean} [options.fallback] - Use HTTP fallback mode.
    *     In fallback mode, a special browser-compatible transport implementation is used
    *     instead of gRPC transport. In browser context (if the `window` object is defined)
    *     the fallback mode is enabled automatically; set `options.fallback` to `false`
@@ -101,7 +107,9 @@ export class DataTransferServiceClient {
       opts?.servicePath || opts?.apiEndpoint || staticMembers.servicePath;
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback = opts?.fallback ?? typeof window !== 'undefined';
+    const fallback =
+      opts?.fallback ??
+      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
@@ -354,7 +362,7 @@ export class DataTransferServiceClient {
   // -------------------
   getDataSource(
     request: protos.google.cloud.bigquery.datatransfer.v1.IGetDataSourceRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.bigquery.datatransfer.v1.IDataSource,
@@ -367,7 +375,7 @@ export class DataTransferServiceClient {
   >;
   getDataSource(
     request: protos.google.cloud.bigquery.datatransfer.v1.IGetDataSourceRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.cloud.bigquery.datatransfer.v1.IDataSource,
       | protos.google.cloud.bigquery.datatransfer.v1.IGetDataSourceRequest
@@ -409,7 +417,7 @@ export class DataTransferServiceClient {
   getDataSource(
     request: protos.google.cloud.bigquery.datatransfer.v1.IGetDataSourceRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.cloud.bigquery.datatransfer.v1.IDataSource,
           | protos.google.cloud.bigquery.datatransfer.v1.IGetDataSourceRequest
@@ -435,12 +443,12 @@ export class DataTransferServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -455,7 +463,7 @@ export class DataTransferServiceClient {
   }
   createTransferConfig(
     request: protos.google.cloud.bigquery.datatransfer.v1.ICreateTransferConfigRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.bigquery.datatransfer.v1.ITransferConfig,
@@ -468,7 +476,7 @@ export class DataTransferServiceClient {
   >;
   createTransferConfig(
     request: protos.google.cloud.bigquery.datatransfer.v1.ICreateTransferConfigRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.cloud.bigquery.datatransfer.v1.ITransferConfig,
       | protos.google.cloud.bigquery.datatransfer.v1.ICreateTransferConfigRequest
@@ -541,7 +549,7 @@ export class DataTransferServiceClient {
   createTransferConfig(
     request: protos.google.cloud.bigquery.datatransfer.v1.ICreateTransferConfigRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.cloud.bigquery.datatransfer.v1.ITransferConfig,
           | protos.google.cloud.bigquery.datatransfer.v1.ICreateTransferConfigRequest
@@ -567,12 +575,12 @@ export class DataTransferServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -587,7 +595,7 @@ export class DataTransferServiceClient {
   }
   updateTransferConfig(
     request: protos.google.cloud.bigquery.datatransfer.v1.IUpdateTransferConfigRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.bigquery.datatransfer.v1.ITransferConfig,
@@ -600,7 +608,7 @@ export class DataTransferServiceClient {
   >;
   updateTransferConfig(
     request: protos.google.cloud.bigquery.datatransfer.v1.IUpdateTransferConfigRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.cloud.bigquery.datatransfer.v1.ITransferConfig,
       | protos.google.cloud.bigquery.datatransfer.v1.IUpdateTransferConfigRequest
@@ -672,7 +680,7 @@ export class DataTransferServiceClient {
   updateTransferConfig(
     request: protos.google.cloud.bigquery.datatransfer.v1.IUpdateTransferConfigRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.cloud.bigquery.datatransfer.v1.ITransferConfig,
           | protos.google.cloud.bigquery.datatransfer.v1.IUpdateTransferConfigRequest
@@ -698,12 +706,12 @@ export class DataTransferServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -718,7 +726,7 @@ export class DataTransferServiceClient {
   }
   deleteTransferConfig(
     request: protos.google.cloud.bigquery.datatransfer.v1.IDeleteTransferConfigRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.protobuf.IEmpty,
@@ -731,7 +739,7 @@ export class DataTransferServiceClient {
   >;
   deleteTransferConfig(
     request: protos.google.cloud.bigquery.datatransfer.v1.IDeleteTransferConfigRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.protobuf.IEmpty,
       | protos.google.cloud.bigquery.datatransfer.v1.IDeleteTransferConfigRequest
@@ -773,7 +781,7 @@ export class DataTransferServiceClient {
   deleteTransferConfig(
     request: protos.google.cloud.bigquery.datatransfer.v1.IDeleteTransferConfigRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.protobuf.IEmpty,
           | protos.google.cloud.bigquery.datatransfer.v1.IDeleteTransferConfigRequest
@@ -799,12 +807,12 @@ export class DataTransferServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -819,7 +827,7 @@ export class DataTransferServiceClient {
   }
   getTransferConfig(
     request: protos.google.cloud.bigquery.datatransfer.v1.IGetTransferConfigRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.bigquery.datatransfer.v1.ITransferConfig,
@@ -832,7 +840,7 @@ export class DataTransferServiceClient {
   >;
   getTransferConfig(
     request: protos.google.cloud.bigquery.datatransfer.v1.IGetTransferConfigRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.cloud.bigquery.datatransfer.v1.ITransferConfig,
       | protos.google.cloud.bigquery.datatransfer.v1.IGetTransferConfigRequest
@@ -873,7 +881,7 @@ export class DataTransferServiceClient {
   getTransferConfig(
     request: protos.google.cloud.bigquery.datatransfer.v1.IGetTransferConfigRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.cloud.bigquery.datatransfer.v1.ITransferConfig,
           | protos.google.cloud.bigquery.datatransfer.v1.IGetTransferConfigRequest
@@ -899,12 +907,12 @@ export class DataTransferServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -919,7 +927,7 @@ export class DataTransferServiceClient {
   }
   scheduleTransferRuns(
     request: protos.google.cloud.bigquery.datatransfer.v1.IScheduleTransferRunsRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.bigquery.datatransfer.v1.IScheduleTransferRunsResponse,
@@ -932,7 +940,7 @@ export class DataTransferServiceClient {
   >;
   scheduleTransferRuns(
     request: protos.google.cloud.bigquery.datatransfer.v1.IScheduleTransferRunsRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.cloud.bigquery.datatransfer.v1.IScheduleTransferRunsResponse,
       | protos.google.cloud.bigquery.datatransfer.v1.IScheduleTransferRunsRequest
@@ -983,7 +991,7 @@ export class DataTransferServiceClient {
   scheduleTransferRuns(
     request: protos.google.cloud.bigquery.datatransfer.v1.IScheduleTransferRunsRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.cloud.bigquery.datatransfer.v1.IScheduleTransferRunsResponse,
           | protos.google.cloud.bigquery.datatransfer.v1.IScheduleTransferRunsRequest
@@ -1009,12 +1017,12 @@ export class DataTransferServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1029,7 +1037,7 @@ export class DataTransferServiceClient {
   }
   startManualTransferRuns(
     request: protos.google.cloud.bigquery.datatransfer.v1.IStartManualTransferRunsRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.bigquery.datatransfer.v1.IStartManualTransferRunsResponse,
@@ -1042,7 +1050,7 @@ export class DataTransferServiceClient {
   >;
   startManualTransferRuns(
     request: protos.google.cloud.bigquery.datatransfer.v1.IStartManualTransferRunsRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.cloud.bigquery.datatransfer.v1.IStartManualTransferRunsResponse,
       | protos.google.cloud.bigquery.datatransfer.v1.IStartManualTransferRunsRequest
@@ -1091,7 +1099,7 @@ export class DataTransferServiceClient {
   startManualTransferRuns(
     request: protos.google.cloud.bigquery.datatransfer.v1.IStartManualTransferRunsRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.cloud.bigquery.datatransfer.v1.IStartManualTransferRunsResponse,
           | protos.google.cloud.bigquery.datatransfer.v1.IStartManualTransferRunsRequest
@@ -1117,12 +1125,12 @@ export class DataTransferServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1141,7 +1149,7 @@ export class DataTransferServiceClient {
   }
   getTransferRun(
     request: protos.google.cloud.bigquery.datatransfer.v1.IGetTransferRunRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.bigquery.datatransfer.v1.ITransferRun,
@@ -1154,7 +1162,7 @@ export class DataTransferServiceClient {
   >;
   getTransferRun(
     request: protos.google.cloud.bigquery.datatransfer.v1.IGetTransferRunRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.cloud.bigquery.datatransfer.v1.ITransferRun,
       | protos.google.cloud.bigquery.datatransfer.v1.IGetTransferRunRequest
@@ -1195,7 +1203,7 @@ export class DataTransferServiceClient {
   getTransferRun(
     request: protos.google.cloud.bigquery.datatransfer.v1.IGetTransferRunRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.cloud.bigquery.datatransfer.v1.ITransferRun,
           | protos.google.cloud.bigquery.datatransfer.v1.IGetTransferRunRequest
@@ -1221,12 +1229,12 @@ export class DataTransferServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1241,7 +1249,7 @@ export class DataTransferServiceClient {
   }
   deleteTransferRun(
     request: protos.google.cloud.bigquery.datatransfer.v1.IDeleteTransferRunRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.protobuf.IEmpty,
@@ -1254,7 +1262,7 @@ export class DataTransferServiceClient {
   >;
   deleteTransferRun(
     request: protos.google.cloud.bigquery.datatransfer.v1.IDeleteTransferRunRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.protobuf.IEmpty,
       | protos.google.cloud.bigquery.datatransfer.v1.IDeleteTransferRunRequest
@@ -1295,7 +1303,7 @@ export class DataTransferServiceClient {
   deleteTransferRun(
     request: protos.google.cloud.bigquery.datatransfer.v1.IDeleteTransferRunRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.protobuf.IEmpty,
           | protos.google.cloud.bigquery.datatransfer.v1.IDeleteTransferRunRequest
@@ -1321,12 +1329,12 @@ export class DataTransferServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1341,7 +1349,7 @@ export class DataTransferServiceClient {
   }
   checkValidCreds(
     request: protos.google.cloud.bigquery.datatransfer.v1.ICheckValidCredsRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.bigquery.datatransfer.v1.ICheckValidCredsResponse,
@@ -1354,7 +1362,7 @@ export class DataTransferServiceClient {
   >;
   checkValidCreds(
     request: protos.google.cloud.bigquery.datatransfer.v1.ICheckValidCredsRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.cloud.bigquery.datatransfer.v1.ICheckValidCredsResponse,
       | protos.google.cloud.bigquery.datatransfer.v1.ICheckValidCredsRequest
@@ -1400,7 +1408,7 @@ export class DataTransferServiceClient {
   checkValidCreds(
     request: protos.google.cloud.bigquery.datatransfer.v1.ICheckValidCredsRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.cloud.bigquery.datatransfer.v1.ICheckValidCredsResponse,
           | protos.google.cloud.bigquery.datatransfer.v1.ICheckValidCredsRequest
@@ -1426,12 +1434,12 @@ export class DataTransferServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1447,7 +1455,7 @@ export class DataTransferServiceClient {
 
   listDataSources(
     request: protos.google.cloud.bigquery.datatransfer.v1.IListDataSourcesRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.bigquery.datatransfer.v1.IDataSource[],
@@ -1457,7 +1465,7 @@ export class DataTransferServiceClient {
   >;
   listDataSources(
     request: protos.google.cloud.bigquery.datatransfer.v1.IListDataSourcesRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: PaginationCallback<
       protos.google.cloud.bigquery.datatransfer.v1.IListDataSourcesRequest,
       | protos.google.cloud.bigquery.datatransfer.v1.IListDataSourcesResponse
@@ -1510,7 +1518,7 @@ export class DataTransferServiceClient {
   listDataSources(
     request: protos.google.cloud.bigquery.datatransfer.v1.IListDataSourcesRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | PaginationCallback<
           protos.google.cloud.bigquery.datatransfer.v1.IListDataSourcesRequest,
           | protos.google.cloud.bigquery.datatransfer.v1.IListDataSourcesResponse
@@ -1533,12 +1541,12 @@ export class DataTransferServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1582,7 +1590,7 @@ export class DataTransferServiceClient {
    */
   listDataSourcesStream(
     request?: protos.google.cloud.bigquery.datatransfer.v1.IListDataSourcesRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Transform {
     request = request || {};
     options = options || {};
@@ -1638,7 +1646,7 @@ export class DataTransferServiceClient {
    */
   listDataSourcesAsync(
     request?: protos.google.cloud.bigquery.datatransfer.v1.IListDataSourcesRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): AsyncIterable<protos.google.cloud.bigquery.datatransfer.v1.IDataSource> {
     request = request || {};
     options = options || {};
@@ -1662,7 +1670,7 @@ export class DataTransferServiceClient {
   }
   listTransferConfigs(
     request: protos.google.cloud.bigquery.datatransfer.v1.IListTransferConfigsRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.bigquery.datatransfer.v1.ITransferConfig[],
@@ -1672,7 +1680,7 @@ export class DataTransferServiceClient {
   >;
   listTransferConfigs(
     request: protos.google.cloud.bigquery.datatransfer.v1.IListTransferConfigsRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: PaginationCallback<
       protos.google.cloud.bigquery.datatransfer.v1.IListTransferConfigsRequest,
       | protos.google.cloud.bigquery.datatransfer.v1.IListTransferConfigsResponse
@@ -1726,7 +1734,7 @@ export class DataTransferServiceClient {
   listTransferConfigs(
     request: protos.google.cloud.bigquery.datatransfer.v1.IListTransferConfigsRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | PaginationCallback<
           protos.google.cloud.bigquery.datatransfer.v1.IListTransferConfigsRequest,
           | protos.google.cloud.bigquery.datatransfer.v1.IListTransferConfigsResponse
@@ -1749,12 +1757,12 @@ export class DataTransferServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1800,7 +1808,7 @@ export class DataTransferServiceClient {
    */
   listTransferConfigsStream(
     request?: protos.google.cloud.bigquery.datatransfer.v1.IListTransferConfigsRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Transform {
     request = request || {};
     options = options || {};
@@ -1858,7 +1866,7 @@ export class DataTransferServiceClient {
    */
   listTransferConfigsAsync(
     request?: protos.google.cloud.bigquery.datatransfer.v1.IListTransferConfigsRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): AsyncIterable<
     protos.google.cloud.bigquery.datatransfer.v1.ITransferConfig
   > {
@@ -1884,7 +1892,7 @@ export class DataTransferServiceClient {
   }
   listTransferRuns(
     request: protos.google.cloud.bigquery.datatransfer.v1.IListTransferRunsRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.bigquery.datatransfer.v1.ITransferRun[],
@@ -1894,7 +1902,7 @@ export class DataTransferServiceClient {
   >;
   listTransferRuns(
     request: protos.google.cloud.bigquery.datatransfer.v1.IListTransferRunsRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: PaginationCallback<
       protos.google.cloud.bigquery.datatransfer.v1.IListTransferRunsRequest,
       | protos.google.cloud.bigquery.datatransfer.v1.IListTransferRunsResponse
@@ -1951,7 +1959,7 @@ export class DataTransferServiceClient {
   listTransferRuns(
     request: protos.google.cloud.bigquery.datatransfer.v1.IListTransferRunsRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | PaginationCallback<
           protos.google.cloud.bigquery.datatransfer.v1.IListTransferRunsRequest,
           | protos.google.cloud.bigquery.datatransfer.v1.IListTransferRunsResponse
@@ -1974,12 +1982,12 @@ export class DataTransferServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -2028,7 +2036,7 @@ export class DataTransferServiceClient {
    */
   listTransferRunsStream(
     request?: protos.google.cloud.bigquery.datatransfer.v1.IListTransferRunsRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Transform {
     request = request || {};
     options = options || {};
@@ -2089,7 +2097,7 @@ export class DataTransferServiceClient {
    */
   listTransferRunsAsync(
     request?: protos.google.cloud.bigquery.datatransfer.v1.IListTransferRunsRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): AsyncIterable<protos.google.cloud.bigquery.datatransfer.v1.ITransferRun> {
     request = request || {};
     options = options || {};
@@ -2113,7 +2121,7 @@ export class DataTransferServiceClient {
   }
   listTransferLogs(
     request: protos.google.cloud.bigquery.datatransfer.v1.IListTransferLogsRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.bigquery.datatransfer.v1.ITransferMessage[],
@@ -2123,7 +2131,7 @@ export class DataTransferServiceClient {
   >;
   listTransferLogs(
     request: protos.google.cloud.bigquery.datatransfer.v1.IListTransferLogsRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: PaginationCallback<
       protos.google.cloud.bigquery.datatransfer.v1.IListTransferLogsRequest,
       | protos.google.cloud.bigquery.datatransfer.v1.IListTransferLogsResponse
@@ -2178,7 +2186,7 @@ export class DataTransferServiceClient {
   listTransferLogs(
     request: protos.google.cloud.bigquery.datatransfer.v1.IListTransferLogsRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | PaginationCallback<
           protos.google.cloud.bigquery.datatransfer.v1.IListTransferLogsRequest,
           | protos.google.cloud.bigquery.datatransfer.v1.IListTransferLogsResponse
@@ -2201,12 +2209,12 @@ export class DataTransferServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -2253,7 +2261,7 @@ export class DataTransferServiceClient {
    */
   listTransferLogsStream(
     request?: protos.google.cloud.bigquery.datatransfer.v1.IListTransferLogsRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Transform {
     request = request || {};
     options = options || {};
@@ -2312,7 +2320,7 @@ export class DataTransferServiceClient {
    */
   listTransferLogsAsync(
     request?: protos.google.cloud.bigquery.datatransfer.v1.IListTransferLogsRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): AsyncIterable<
     protos.google.cloud.bigquery.datatransfer.v1.ITransferMessage
   > {

@@ -3,8 +3,16 @@
     {
       "git": {
         "name": ".",
-        "remote": "git@github.com:googleapis/nodejs-bigquery-data-transfer.git",
-        "sha": "fdd5815ed48fdb8bfe619c4303707c990b062436"
+        "remote": "https://github.com/googleapis/nodejs-bigquery-data-transfer.git",
+        "sha": "c2390614214c4c0c95972f4400785deba0d15a22"
+      }
+    },
+    {
+      "git": {
+        "name": "googleapis",
+        "remote": "https://github.com/googleapis/googleapis.git",
+        "sha": "2f019bf70bfe06f1e2af1b04011b0a2405190e43",
+        "internalRef": "343202295"
       }
     },
     {
@@ -79,7 +87,6 @@
     "README.md",
     "api-extractor.json",
     "linkinator.config.json",
-    "package-lock.json.3950038425",
     "protos/google/cloud/bigquery/datatransfer/v1/datatransfer.proto",
     "protos/google/cloud/bigquery/datatransfer/v1/transfer.proto",
     "protos/protos.d.ts",
@@ -87,7 +94,6 @@
     "protos/protos.json",
     "renovate.json",
     "samples/README.md",
-    "samples/package-lock.json.2364870502",
     "src/index.ts",
     "src/v1/data_transfer_service_client.ts",
     "src/v1/data_transfer_service_client_config.json",
