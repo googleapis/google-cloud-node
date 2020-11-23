@@ -4,15 +4,15 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/nodejs-monitoring.git",
-        "sha": "69f9bcf752172e6a5a793d0150176d6f9c6658b2"
+        "sha": "465f8982c765bb86dffe41a206da032edb973ba5"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "4c5071b615d96ef9dfd6a63d8429090f1f2872bb",
-        "internalRef": "327369997"
+        "sha": "5587028631d4d743fd906c4eb4e4e4649a7ee5ce",
+        "internalRef": "343187793"
       }
     },
     {
@@ -87,7 +87,6 @@
     "README.md",
     "api-extractor.json",
     "linkinator.config.json",
-    "package-lock.json.592367270",
     "protos/google/monitoring/v3/alert.proto",
     "protos/google/monitoring/v3/alert_service.proto",
     "protos/google/monitoring/v3/common.proto",
@@ -109,7 +108,6 @@
     "protos/protos.json",
     "renovate.json",
     "samples/README.md",
-    "samples/package-lock.json.4124165143",
     "src/index.ts",
     "src/v3/alert_policy_service_client.ts",
     "src/v3/alert_policy_service_client_config.json",

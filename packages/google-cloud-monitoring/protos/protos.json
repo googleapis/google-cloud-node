@@ -364,7 +364,17 @@
                       "options": {
                         "(google.api.http).get": "/v3/{name=projects/*}/alertPolicies",
                         "(google.api.method_signature)": "name"
-                      }
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "get": "/v3/{name=projects/*}/alertPolicies"
+                          }
+                        },
+                        {
+                          "(google.api.method_signature)": "name"
+                        }
+                      ]
                     },
                     "GetAlertPolicy": {
                       "requestType": "GetAlertPolicyRequest",
@@ -372,7 +382,17 @@
                       "options": {
                         "(google.api.http).get": "/v3/{name=projects/*/alertPolicies/*}",
                         "(google.api.method_signature)": "name"
-                      }
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "get": "/v3/{name=projects/*/alertPolicies/*}"
+                          }
+                        },
+                        {
+                          "(google.api.method_signature)": "name"
+                        }
+                      ]
                     },
                     "CreateAlertPolicy": {
                       "requestType": "CreateAlertPolicyRequest",
@@ -381,7 +401,18 @@
                         "(google.api.http).post": "/v3/{name=projects/*}/alertPolicies",
                         "(google.api.http).body": "alert_policy",
                         "(google.api.method_signature)": "name,alert_policy"
-                      }
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "post": "/v3/{name=projects/*}/alertPolicies",
+                            "body": "alert_policy"
+                          }
+                        },
+                        {
+                          "(google.api.method_signature)": "name,alert_policy"
+                        }
+                      ]
                     },
                     "DeleteAlertPolicy": {
                       "requestType": "DeleteAlertPolicyRequest",
@@ -389,7 +420,17 @@
                       "options": {
                         "(google.api.http).delete": "/v3/{name=projects/*/alertPolicies/*}",
                         "(google.api.method_signature)": "name"
-                      }
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "delete": "/v3/{name=projects/*/alertPolicies/*}"
+                          }
+                        },
+                        {
+                          "(google.api.method_signature)": "name"
+                        }
+                      ]
                     },
                     "UpdateAlertPolicy": {
                       "requestType": "UpdateAlertPolicyRequest",
@@ -398,7 +439,18 @@
                         "(google.api.http).patch": "/v3/{alert_policy.name=projects/*/alertPolicies/*}",
                         "(google.api.http).body": "alert_policy",
                         "(google.api.method_signature)": "update_mask,alert_policy"
-                      }
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "patch": "/v3/{alert_policy.name=projects/*/alertPolicies/*}",
+                            "body": "alert_policy"
+                          }
+                        },
+                        {
+                          "(google.api.method_signature)": "update_mask,alert_policy"
+                        }
+                      ]
                     }
                   }
                 },
@@ -550,7 +602,17 @@
                       "options": {
                         "(google.api.http).get": "/v3/{name=projects/*}/groups",
                         "(google.api.method_signature)": "name"
-                      }
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "get": "/v3/{name=projects/*}/groups"
+                          }
+                        },
+                        {
+                          "(google.api.method_signature)": "name"
+                        }
+                      ]
                     },
                     "GetGroup": {
                       "requestType": "GetGroupRequest",
@@ -558,7 +620,17 @@
                       "options": {
                         "(google.api.http).get": "/v3/{name=projects/*/groups/*}",
                         "(google.api.method_signature)": "name"
-                      }
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "get": "/v3/{name=projects/*/groups/*}"
+                          }
+                        },
+                        {
+                          "(google.api.method_signature)": "name"
+                        }
+                      ]
                     },
                     "CreateGroup": {
                       "requestType": "CreateGroupRequest",
@@ -567,7 +639,18 @@
                         "(google.api.http).post": "/v3/{name=projects/*}/groups",
                         "(google.api.http).body": "group",
                         "(google.api.method_signature)": "name,group"
-                      }
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "post": "/v3/{name=projects/*}/groups",
+                            "body": "group"
+                          }
+                        },
+                        {
+                          "(google.api.method_signature)": "name,group"
+                        }
+                      ]
                     },
                     "UpdateGroup": {
                       "requestType": "UpdateGroupRequest",
@@ -576,7 +659,18 @@
                         "(google.api.http).put": "/v3/{group.name=projects/*/groups/*}",
                         "(google.api.http).body": "group",
                         "(google.api.method_signature)": "group"
-                      }
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "put": "/v3/{group.name=projects/*/groups/*}",
+                            "body": "group"
+                          }
+                        },
+                        {
+                          "(google.api.method_signature)": "group"
+                        }
+                      ]
                     },
                     "DeleteGroup": {
                       "requestType": "DeleteGroupRequest",
@@ -584,7 +678,17 @@
                       "options": {
                         "(google.api.http).delete": "/v3/{name=projects/*/groups/*}",
                         "(google.api.method_signature)": "name"
-                      }
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "delete": "/v3/{name=projects/*/groups/*}"
+                          }
+                        },
+                        {
+                          "(google.api.method_signature)": "name"
+                        }
+                      ]
                     },
                     "ListGroupMembers": {
                       "requestType": "ListGroupMembersRequest",
@@ -592,7 +696,17 @@
                       "options": {
                         "(google.api.http).get": "/v3/{name=projects/*/groups/*}/members",
                         "(google.api.method_signature)": "name"
-                      }
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "get": "/v3/{name=projects/*/groups/*}/members"
+                          }
+                        },
+                        {
+                          "(google.api.method_signature)": "name"
+                        }
+                      ]
                     }
                   }
                 },
@@ -959,7 +1073,17 @@
                       "options": {
                         "(google.api.http).get": "/v3/{name=projects/*}/monitoredResourceDescriptors",
                         "(google.api.method_signature)": "name"
-                      }
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "get": "/v3/{name=projects/*}/monitoredResourceDescriptors"
+                          }
+                        },
+                        {
+                          "(google.api.method_signature)": "name"
+                        }
+                      ]
                     },
                     "GetMonitoredResourceDescriptor": {
                       "requestType": "GetMonitoredResourceDescriptorRequest",
@@ -967,7 +1091,17 @@
                       "options": {
                         "(google.api.http).get": "/v3/{name=projects/*/monitoredResourceDescriptors/**}",
                         "(google.api.method_signature)": "name"
-                      }
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "get": "/v3/{name=projects/*/monitoredResourceDescriptors/**}"
+                          }
+                        },
+                        {
+                          "(google.api.method_signature)": "name"
+                        }
+                      ]
                     },
                     "ListMetricDescriptors": {
                       "requestType": "ListMetricDescriptorsRequest",
@@ -975,7 +1109,17 @@
                       "options": {
                         "(google.api.http).get": "/v3/{name=projects/*}/metricDescriptors",
                         "(google.api.method_signature)": "name"
-                      }
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "get": "/v3/{name=projects/*}/metricDescriptors"
+                          }
+                        },
+                        {
+                          "(google.api.method_signature)": "name"
+                        }
+                      ]
                     },
                     "GetMetricDescriptor": {
                       "requestType": "GetMetricDescriptorRequest",
@@ -983,7 +1127,17 @@
                       "options": {
                         "(google.api.http).get": "/v3/{name=projects/*/metricDescriptors/**}",
                         "(google.api.method_signature)": "name"
-                      }
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "get": "/v3/{name=projects/*/metricDescriptors/**}"
+                          }
+                        },
+                        {
+                          "(google.api.method_signature)": "name"
+                        }
+                      ]
                     },
                     "CreateMetricDescriptor": {
                       "requestType": "CreateMetricDescriptorRequest",
@@ -992,7 +1146,18 @@
                         "(google.api.http).post": "/v3/{name=projects/*}/metricDescriptors",
                         "(google.api.http).body": "metric_descriptor",
                         "(google.api.method_signature)": "name,metric_descriptor"
-                      }
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "post": "/v3/{name=projects/*}/metricDescriptors",
+                            "body": "metric_descriptor"
+                          }
+                        },
+                        {
+                          "(google.api.method_signature)": "name,metric_descriptor"
+                        }
+                      ]
                     },
                     "DeleteMetricDescriptor": {
                       "requestType": "DeleteMetricDescriptorRequest",
@@ -1000,7 +1165,17 @@
                       "options": {
                         "(google.api.http).delete": "/v3/{name=projects/*/metricDescriptors/**}",
                         "(google.api.method_signature)": "name"
-                      }
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "delete": "/v3/{name=projects/*/metricDescriptors/**}"
+                          }
+                        },
+                        {
+                          "(google.api.method_signature)": "name"
+                        }
+                      ]
                     },
                     "ListTimeSeries": {
                       "requestType": "ListTimeSeriesRequest",
@@ -1008,7 +1183,17 @@
                       "options": {
                         "(google.api.http).get": "/v3/{name=projects/*}/timeSeries",
                         "(google.api.method_signature)": "name,filter,interval,view"
-                      }
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "get": "/v3/{name=projects/*}/timeSeries"
+                          }
+                        },
+                        {
+                          "(google.api.method_signature)": "name,filter,interval,view"
+                        }
+                      ]
                     },
                     "CreateTimeSeries": {
                       "requestType": "CreateTimeSeriesRequest",
@@ -1017,7 +1202,18 @@
                         "(google.api.http).post": "/v3/{name=projects/*}/timeSeries",
                         "(google.api.http).body": "*",
                         "(google.api.method_signature)": "name,time_series"
-                      }
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "post": "/v3/{name=projects/*}/timeSeries",
+                            "body": "*"
+                          }
+                        },
+                        {
+                          "(google.api.method_signature)": "name,time_series"
+                        }
+                      ]
                     }
                   }
                 },
@@ -1453,7 +1649,17 @@
                       "options": {
                         "(google.api.http).get": "/v3/{name=projects/*}/notificationChannelDescriptors",
                         "(google.api.method_signature)": "name"
-                      }
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "get": "/v3/{name=projects/*}/notificationChannelDescriptors"
+                          }
+                        },
+                        {
+                          "(google.api.method_signature)": "name"
+                        }
+                      ]
                     },
                     "GetNotificationChannelDescriptor": {
                       "requestType": "GetNotificationChannelDescriptorRequest",
@@ -1461,7 +1667,17 @@
                       "options": {
                         "(google.api.http).get": "/v3/{name=projects/*/notificationChannelDescriptors/*}",
                         "(google.api.method_signature)": "name"
-                      }
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "get": "/v3/{name=projects/*/notificationChannelDescriptors/*}"
+                          }
+                        },
+                        {
+                          "(google.api.method_signature)": "name"
+                        }
+                      ]
                     },
                     "ListNotificationChannels": {
                       "requestType": "ListNotificationChannelsRequest",
@@ -1469,7 +1685,17 @@
                       "options": {
                         "(google.api.http).get": "/v3/{name=projects/*}/notificationChannels",
                         "(google.api.method_signature)": "name"
-                      }
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "get": "/v3/{name=projects/*}/notificationChannels"
+                          }
+                        },
+                        {
+                          "(google.api.method_signature)": "name"
+                        }
+                      ]
                     },
                     "GetNotificationChannel": {
                       "requestType": "GetNotificationChannelRequest",
@@ -1477,7 +1703,17 @@
                       "options": {
                         "(google.api.http).get": "/v3/{name=projects/*/notificationChannels/*}",
                         "(google.api.method_signature)": "name"
-                      }
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "get": "/v3/{name=projects/*/notificationChannels/*}"
+                          }
+                        },
+                        {
+                          "(google.api.method_signature)": "name"
+                        }
+                      ]
                     },
                     "CreateNotificationChannel": {
                       "requestType": "CreateNotificationChannelRequest",
@@ -1486,7 +1722,18 @@
                         "(google.api.http).post": "/v3/{name=projects/*}/notificationChannels",
                         "(google.api.http).body": "notification_channel",
                         "(google.api.method_signature)": "name,notification_channel"
-                      }
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "post": "/v3/{name=projects/*}/notificationChannels",
+                            "body": "notification_channel"
+                          }
+                        },
+                        {
+                          "(google.api.method_signature)": "name,notification_channel"
+                        }
+                      ]
                     },
                     "UpdateNotificationChannel": {
                       "requestType": "UpdateNotificationChannelRequest",
@@ -1495,7 +1742,18 @@
                         "(google.api.http).patch": "/v3/{notification_channel.name=projects/*/notificationChannels/*}",
                         "(google.api.http).body": "notification_channel",
                         "(google.api.method_signature)": "update_mask,notification_channel"
-                      }
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "patch": "/v3/{notification_channel.name=projects/*/notificationChannels/*}",
+                            "body": "notification_channel"
+                          }
+                        },
+                        {
+                          "(google.api.method_signature)": "update_mask,notification_channel"
+                        }
+                      ]
                     },
                     "DeleteNotificationChannel": {
                       "requestType": "DeleteNotificationChannelRequest",
@@ -1503,7 +1761,17 @@
                       "options": {
                         "(google.api.http).delete": "/v3/{name=projects/*/notificationChannels/*}",
                         "(google.api.method_signature)": "name,force"
-                      }
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "delete": "/v3/{name=projects/*/notificationChannels/*}"
+                          }
+                        },
+                        {
+                          "(google.api.method_signature)": "name,force"
+                        }
+                      ]
                     },
                     "SendNotificationChannelVerificationCode": {
                       "requestType": "SendNotificationChannelVerificationCodeRequest",
@@ -1512,7 +1780,18 @@
                         "(google.api.http).post": "/v3/{name=projects/*/notificationChannels/*}:sendVerificationCode",
                         "(google.api.http).body": "*",
                         "(google.api.method_signature)": "name"
-                      }
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "post": "/v3/{name=projects/*/notificationChannels/*}:sendVerificationCode",
+                            "body": "*"
+                          }
+                        },
+                        {
+                          "(google.api.method_signature)": "name"
+                        }
+                      ]
                     },
                     "GetNotificationChannelVerificationCode": {
                       "requestType": "GetNotificationChannelVerificationCodeRequest",
@@ -1521,7 +1800,18 @@
                         "(google.api.http).post": "/v3/{name=projects/*/notificationChannels/*}:getVerificationCode",
                         "(google.api.http).body": "*",
                         "(google.api.method_signature)": "name"
-                      }
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "post": "/v3/{name=projects/*/notificationChannels/*}:getVerificationCode",
+                            "body": "*"
+                          }
+                        },
+                        {
+                          "(google.api.method_signature)": "name"
+                        }
+                      ]
                     },
                     "VerifyNotificationChannel": {
                       "requestType": "VerifyNotificationChannelRequest",
@@ -1530,7 +1820,18 @@
                         "(google.api.http).post": "/v3/{name=projects/*/notificationChannels/*}:verify",
                         "(google.api.http).body": "*",
                         "(google.api.method_signature)": "name,code"
-                      }
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "post": "/v3/{name=projects/*/notificationChannels/*}:verify",
+                            "body": "*"
+                          }
+                        },
+                        {
+                          "(google.api.method_signature)": "name,code"
+                        }
+                      ]
                     }
                   }
                 },
@@ -2131,7 +2432,18 @@
                         "(google.api.http).post": "/v3/{parent=*/*}/services",
                         "(google.api.http).body": "service",
                         "(google.api.method_signature)": "parent,service"
-                      }
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "post": "/v3/{parent=*/*}/services",
+                            "body": "service"
+                          }
+                        },
+                        {
+                          "(google.api.method_signature)": "parent,service"
+                        }
+                      ]
                     },
                     "GetService": {
                       "requestType": "GetServiceRequest",
@@ -2139,7 +2451,17 @@
                       "options": {
                         "(google.api.http).get": "/v3/{name=*/*/services/*}",
                         "(google.api.method_signature)": "name"
-                      }
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "get": "/v3/{name=*/*/services/*}"
+                          }
+                        },
+                        {
+                          "(google.api.method_signature)": "name"
+                        }
+                      ]
                     },
                     "ListServices": {
                       "requestType": "ListServicesRequest",
@@ -2147,7 +2469,17 @@
                       "options": {
                         "(google.api.http).get": "/v3/{parent=*/*}/services",
                         "(google.api.method_signature)": "parent"
-                      }
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "get": "/v3/{parent=*/*}/services"
+                          }
+                        },
+                        {
+                          "(google.api.method_signature)": "parent"
+                        }
+                      ]
                     },
                     "UpdateService": {
                       "requestType": "UpdateServiceRequest",
@@ -2156,7 +2488,18 @@
                         "(google.api.http).patch": "/v3/{service.name=*/*/services/*}",
                         "(google.api.http).body": "service",
                         "(google.api.method_signature)": "service"
-                      }
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "patch": "/v3/{service.name=*/*/services/*}",
+                            "body": "service"
+                          }
+                        },
+                        {
+                          "(google.api.method_signature)": "service"
+                        }
+                      ]
                     },
                     "DeleteService": {
                       "requestType": "DeleteServiceRequest",
@@ -2164,7 +2507,17 @@
                       "options": {
                         "(google.api.http).delete": "/v3/{name=*/*/services/*}",
                         "(google.api.method_signature)": "name"
-                      }
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "delete": "/v3/{name=*/*/services/*}"
+                          }
+                        },
+                        {
+                          "(google.api.method_signature)": "name"
+                        }
+                      ]
                     },
                     "CreateServiceLevelObjective": {
                       "requestType": "CreateServiceLevelObjectiveRequest",
@@ -2173,7 +2526,18 @@
                         "(google.api.http).post": "/v3/{parent=*/*/services/*}/serviceLevelObjectives",
                         "(google.api.http).body": "service_level_objective",
                         "(google.api.method_signature)": "parent,service_level_objective"
-                      }
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "post": "/v3/{parent=*/*/services/*}/serviceLevelObjectives",
+                            "body": "service_level_objective"
+                          }
+                        },
+                        {
+                          "(google.api.method_signature)": "parent,service_level_objective"
+                        }
+                      ]
                     },
                     "GetServiceLevelObjective": {
                       "requestType": "GetServiceLevelObjectiveRequest",
@@ -2181,7 +2545,17 @@
                       "options": {
                         "(google.api.http).get": "/v3/{name=*/*/services/*/serviceLevelObjectives/*}",
                         "(google.api.method_signature)": "name"
-                      }
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "get": "/v3/{name=*/*/services/*/serviceLevelObjectives/*}"
+                          }
+                        },
+                        {
+                          "(google.api.method_signature)": "name"
+                        }
+                      ]
                     },
                     "ListServiceLevelObjectives": {
                       "requestType": "ListServiceLevelObjectivesRequest",
@@ -2189,7 +2563,17 @@
                       "options": {
                         "(google.api.http).get": "/v3/{parent=*/*/services/*}/serviceLevelObjectives",
                         "(google.api.method_signature)": "parent"
-                      }
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "get": "/v3/{parent=*/*/services/*}/serviceLevelObjectives"
+                          }
+                        },
+                        {
+                          "(google.api.method_signature)": "parent"
+                        }
+                      ]
                     },
                     "UpdateServiceLevelObjective": {
                       "requestType": "UpdateServiceLevelObjectiveRequest",
@@ -2198,7 +2582,18 @@
                         "(google.api.http).patch": "/v3/{service_level_objective.name=*/*/services/*/serviceLevelObjectives/*}",
                         "(google.api.http).body": "service_level_objective",
                         "(google.api.method_signature)": "service_level_objective"
-                      }
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "patch": "/v3/{service_level_objective.name=*/*/services/*/serviceLevelObjectives/*}",
+                            "body": "service_level_objective"
+                          }
+                        },
+                        {
+                          "(google.api.method_signature)": "service_level_objective"
+                        }
+                      ]
                     },
                     "DeleteServiceLevelObjective": {
                       "requestType": "DeleteServiceLevelObjectiveRequest",
@@ -2206,7 +2601,17 @@
                       "options": {
                         "(google.api.http).delete": "/v3/{name=*/*/services/*/serviceLevelObjectives/*}",
                         "(google.api.method_signature)": "name"
-                      }
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "delete": "/v3/{name=*/*/services/*/serviceLevelObjectives/*}"
+                          }
+                        },
+                        {
+                          "(google.api.method_signature)": "name"
+                        }
+                      ]
                     }
                   }
                 },
@@ -2704,7 +3109,17 @@
                       "options": {
                         "(google.api.http).get": "/v3/{parent=projects/*}/uptimeCheckConfigs",
                         "(google.api.method_signature)": "parent"
-                      }
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "get": "/v3/{parent=projects/*}/uptimeCheckConfigs"
+                          }
+                        },
+                        {
+                          "(google.api.method_signature)": "parent"
+                        }
+                      ]
                     },
                     "GetUptimeCheckConfig": {
                       "requestType": "GetUptimeCheckConfigRequest",
@@ -2712,7 +3127,17 @@
                       "options": {
                         "(google.api.http).get": "/v3/{name=projects/*/uptimeCheckConfigs/*}",
                         "(google.api.method_signature)": "name"
-                      }
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "get": "/v3/{name=projects/*/uptimeCheckConfigs/*}"
+                          }
+                        },
+                        {
+                          "(google.api.method_signature)": "name"
+                        }
+                      ]
                     },
                     "CreateUptimeCheckConfig": {
                       "requestType": "CreateUptimeCheckConfigRequest",
@@ -2721,7 +3146,18 @@
                         "(google.api.http).post": "/v3/{parent=projects/*}/uptimeCheckConfigs",
                         "(google.api.http).body": "uptime_check_config",
                         "(google.api.method_signature)": "parent,uptime_check_config"
-                      }
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "post": "/v3/{parent=projects/*}/uptimeCheckConfigs",
+                            "body": "uptime_check_config"
+                          }
+                        },
+                        {
+                          "(google.api.method_signature)": "parent,uptime_check_config"
+                        }
+                      ]
                     },
                     "UpdateUptimeCheckConfig": {
                       "requestType": "UpdateUptimeCheckConfigRequest",
@@ -2730,7 +3166,18 @@
                         "(google.api.http).patch": "/v3/{uptime_check_config.name=projects/*/uptimeCheckConfigs/*}",
                         "(google.api.http).body": "uptime_check_config",
                         "(google.api.method_signature)": "uptime_check_config"
-                      }
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "patch": "/v3/{uptime_check_config.name=projects/*/uptimeCheckConfigs/*}",
+                            "body": "uptime_check_config"
+                          }
+                        },
+                        {
+                          "(google.api.method_signature)": "uptime_check_config"
+                        }
+                      ]
                     },
                     "DeleteUptimeCheckConfig": {
                       "requestType": "DeleteUptimeCheckConfigRequest",
@@ -2738,14 +3185,31 @@
                       "options": {
                         "(google.api.http).delete": "/v3/{name=projects/*/uptimeCheckConfigs/*}",
                         "(google.api.method_signature)": "name"
-                      }
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "delete": "/v3/{name=projects/*/uptimeCheckConfigs/*}"
+                          }
+                        },
+                        {
+                          "(google.api.method_signature)": "name"
+                        }
+                      ]
                     },
                     "ListUptimeCheckIps": {
                       "requestType": "ListUptimeCheckIpsRequest",
                       "responseType": "ListUptimeCheckIpsResponse",
                       "options": {
                         "(google.api.http).get": "/v3/uptimeCheckIps"
-                      }
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "get": "/v3/uptimeCheckIps"
+                          }
+                        }
+                      ]
                     }
                   }
                 },
