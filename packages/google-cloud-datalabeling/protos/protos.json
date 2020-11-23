@@ -452,7 +452,18 @@
                             "(google.api.http).post": "/v1beta1/{parent=projects/*}/datasets",
                             "(google.api.http).body": "*",
                             "(google.api.method_signature)": "parent,dataset"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta1/{parent=projects/*}/datasets",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,dataset"
+                            }
+                          ]
                         },
                         "GetDataset": {
                           "requestType": "GetDatasetRequest",
@@ -460,7 +471,17 @@
                           "options": {
                             "(google.api.http).get": "/v1beta1/{name=projects/*/datasets/*}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta1/{name=projects/*/datasets/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "ListDatasets": {
                           "requestType": "ListDatasetsRequest",
@@ -468,7 +489,17 @@
                           "options": {
                             "(google.api.http).get": "/v1beta1/{parent=projects/*}/datasets",
                             "(google.api.method_signature)": "parent,filter"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta1/{parent=projects/*}/datasets"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,filter"
+                            }
+                          ]
                         },
                         "DeleteDataset": {
                           "requestType": "DeleteDatasetRequest",
@@ -476,7 +507,17 @@
                           "options": {
                             "(google.api.http).delete": "/v1beta1/{name=projects/*/datasets/*}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1beta1/{name=projects/*/datasets/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "ImportData": {
                           "requestType": "ImportDataRequest",
@@ -487,7 +528,24 @@
                             "(google.api.method_signature)": "name,input_config",
                             "(google.longrunning.operation_info).response_type": "ImportDataOperationResponse",
                             "(google.longrunning.operation_info).metadata_type": "ImportDataOperationMetadata"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta1/{name=projects/*/datasets/*}:importData",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name,input_config"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "ImportDataOperationResponse",
+                                "metadata_type": "ImportDataOperationMetadata"
+                              }
+                            }
+                          ]
                         },
                         "ExportData": {
                           "requestType": "ExportDataRequest",
@@ -498,7 +556,24 @@
                             "(google.api.method_signature)": "name,annotated_dataset,filter,output_config",
                             "(google.longrunning.operation_info).response_type": "ExportDataOperationResponse",
                             "(google.longrunning.operation_info).metadata_type": "ExportDataOperationMetadata"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta1/{name=projects/*/datasets/*}:exportData",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name,annotated_dataset,filter,output_config"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "ExportDataOperationResponse",
+                                "metadata_type": "ExportDataOperationMetadata"
+                              }
+                            }
+                          ]
                         },
                         "GetDataItem": {
                           "requestType": "GetDataItemRequest",
@@ -506,7 +581,17 @@
                           "options": {
                             "(google.api.http).get": "/v1beta1/{name=projects/*/datasets/*/dataItems/*}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta1/{name=projects/*/datasets/*/dataItems/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "ListDataItems": {
                           "requestType": "ListDataItemsRequest",
@@ -514,7 +599,17 @@
                           "options": {
                             "(google.api.http).get": "/v1beta1/{parent=projects/*/datasets/*}/dataItems",
                             "(google.api.method_signature)": "parent,filter"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta1/{parent=projects/*/datasets/*}/dataItems"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,filter"
+                            }
+                          ]
                         },
                         "GetAnnotatedDataset": {
                           "requestType": "GetAnnotatedDatasetRequest",
@@ -522,7 +617,17 @@
                           "options": {
                             "(google.api.http).get": "/v1beta1/{name=projects/*/datasets/*/annotatedDatasets/*}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta1/{name=projects/*/datasets/*/annotatedDatasets/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "ListAnnotatedDatasets": {
                           "requestType": "ListAnnotatedDatasetsRequest",
@@ -530,14 +635,31 @@
                           "options": {
                             "(google.api.http).get": "/v1beta1/{parent=projects/*/datasets/*}/annotatedDatasets",
                             "(google.api.method_signature)": "parent,filter"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta1/{parent=projects/*/datasets/*}/annotatedDatasets"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,filter"
+                            }
+                          ]
                         },
                         "DeleteAnnotatedDataset": {
                           "requestType": "DeleteAnnotatedDatasetRequest",
                           "responseType": "google.protobuf.Empty",
                           "options": {
                             "(google.api.http).delete": "/v1beta1/{name=projects/*/datasets/*/annotatedDatasets/*}"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1beta1/{name=projects/*/datasets/*/annotatedDatasets/*}"
+                              }
+                            }
+                          ]
                         },
                         "LabelImage": {
                           "requestType": "LabelImageRequest",
@@ -548,7 +670,24 @@
                             "(google.api.method_signature)": "parent,basic_config,feature",
                             "(google.longrunning.operation_info).response_type": "AnnotatedDataset",
                             "(google.longrunning.operation_info).metadata_type": "LabelOperationMetadata"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta1/{parent=projects/*/datasets/*}/image:label",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,basic_config,feature"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "AnnotatedDataset",
+                                "metadata_type": "LabelOperationMetadata"
+                              }
+                            }
+                          ]
                         },
                         "LabelVideo": {
                           "requestType": "LabelVideoRequest",
@@ -559,7 +698,24 @@
                             "(google.api.method_signature)": "parent,basic_config,feature",
                             "(google.longrunning.operation_info).response_type": "AnnotatedDataset",
                             "(google.longrunning.operation_info).metadata_type": "LabelOperationMetadata"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta1/{parent=projects/*/datasets/*}/video:label",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,basic_config,feature"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "AnnotatedDataset",
+                                "metadata_type": "LabelOperationMetadata"
+                              }
+                            }
+                          ]
                         },
                         "LabelText": {
                           "requestType": "LabelTextRequest",
@@ -570,7 +726,24 @@
                             "(google.api.method_signature)": "parent,basic_config,feature",
                             "(google.longrunning.operation_info).response_type": "AnnotatedDataset",
                             "(google.longrunning.operation_info).metadata_type": "LabelOperationMetadata"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta1/{parent=projects/*/datasets/*}/text:label",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,basic_config,feature"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "AnnotatedDataset",
+                                "metadata_type": "LabelOperationMetadata"
+                              }
+                            }
+                          ]
                         },
                         "GetExample": {
                           "requestType": "GetExampleRequest",
@@ -578,7 +751,17 @@
                           "options": {
                             "(google.api.http).get": "/v1beta1/{name=projects/*/datasets/*/annotatedDatasets/*/examples/*}",
                             "(google.api.method_signature)": "name,filter"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta1/{name=projects/*/datasets/*/annotatedDatasets/*/examples/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name,filter"
+                            }
+                          ]
                         },
                         "ListExamples": {
                           "requestType": "ListExamplesRequest",
@@ -586,7 +769,17 @@
                           "options": {
                             "(google.api.http).get": "/v1beta1/{parent=projects/*/datasets/*/annotatedDatasets/*}/examples",
                             "(google.api.method_signature)": "parent,filter"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta1/{parent=projects/*/datasets/*/annotatedDatasets/*}/examples"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,filter"
+                            }
+                          ]
                         },
                         "CreateAnnotationSpecSet": {
                           "requestType": "CreateAnnotationSpecSetRequest",
@@ -595,7 +788,18 @@
                             "(google.api.http).post": "/v1beta1/{parent=projects/*}/annotationSpecSets",
                             "(google.api.http).body": "*",
                             "(google.api.method_signature)": "parent,annotation_spec_set"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta1/{parent=projects/*}/annotationSpecSets",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,annotation_spec_set"
+                            }
+                          ]
                         },
                         "GetAnnotationSpecSet": {
                           "requestType": "GetAnnotationSpecSetRequest",
@@ -603,7 +807,17 @@
                           "options": {
                             "(google.api.http).get": "/v1beta1/{name=projects/*/annotationSpecSets/*}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta1/{name=projects/*/annotationSpecSets/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "ListAnnotationSpecSets": {
                           "requestType": "ListAnnotationSpecSetsRequest",
@@ -611,7 +825,17 @@
                           "options": {
                             "(google.api.http).get": "/v1beta1/{parent=projects/*}/annotationSpecSets",
                             "(google.api.method_signature)": "parent,filter"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta1/{parent=projects/*}/annotationSpecSets"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,filter"
+                            }
+                          ]
                         },
                         "DeleteAnnotationSpecSet": {
                           "requestType": "DeleteAnnotationSpecSetRequest",
@@ -619,7 +843,17 @@
                           "options": {
                             "(google.api.http).delete": "/v1beta1/{name=projects/*/annotationSpecSets/*}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1beta1/{name=projects/*/annotationSpecSets/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "CreateInstruction": {
                           "requestType": "CreateInstructionRequest",
@@ -630,7 +864,24 @@
                             "(google.api.method_signature)": "parent,instruction",
                             "(google.longrunning.operation_info).response_type": "Instruction",
                             "(google.longrunning.operation_info).metadata_type": "CreateInstructionMetadata"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta1/{parent=projects/*}/instructions",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,instruction"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "Instruction",
+                                "metadata_type": "CreateInstructionMetadata"
+                              }
+                            }
+                          ]
                         },
                         "GetInstruction": {
                           "requestType": "GetInstructionRequest",
@@ -638,7 +889,17 @@
                           "options": {
                             "(google.api.http).get": "/v1beta1/{name=projects/*/instructions/*}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta1/{name=projects/*/instructions/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "ListInstructions": {
                           "requestType": "ListInstructionsRequest",
@@ -646,7 +907,17 @@
                           "options": {
                             "(google.api.http).get": "/v1beta1/{parent=projects/*}/instructions",
                             "(google.api.method_signature)": "parent,filter"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta1/{parent=projects/*}/instructions"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,filter"
+                            }
+                          ]
                         },
                         "DeleteInstruction": {
                           "requestType": "DeleteInstructionRequest",
@@ -654,7 +925,17 @@
                           "options": {
                             "(google.api.http).delete": "/v1beta1/{name=projects/*/instructions/*}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1beta1/{name=projects/*/instructions/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "GetEvaluation": {
                           "requestType": "GetEvaluationRequest",
@@ -662,7 +943,17 @@
                           "options": {
                             "(google.api.http).get": "/v1beta1/{name=projects/*/datasets/*/evaluations/*}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta1/{name=projects/*/datasets/*/evaluations/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "SearchEvaluations": {
                           "requestType": "SearchEvaluationsRequest",
@@ -670,7 +961,17 @@
                           "options": {
                             "(google.api.http).get": "/v1beta1/{parent=projects/*}/evaluations:search",
                             "(google.api.method_signature)": "parent,filter"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta1/{parent=projects/*}/evaluations:search"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,filter"
+                            }
+                          ]
                         },
                         "SearchExampleComparisons": {
                           "requestType": "SearchExampleComparisonsRequest",
@@ -679,7 +980,18 @@
                             "(google.api.http).post": "/v1beta1/{parent=projects/*/datasets/*/evaluations/*}/exampleComparisons:search",
                             "(google.api.http).body": "*",
                             "(google.api.method_signature)": "parent"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta1/{parent=projects/*/datasets/*/evaluations/*}/exampleComparisons:search",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
                         },
                         "CreateEvaluationJob": {
                           "requestType": "CreateEvaluationJobRequest",
@@ -688,7 +1000,18 @@
                             "(google.api.http).post": "/v1beta1/{parent=projects/*}/evaluationJobs",
                             "(google.api.http).body": "*",
                             "(google.api.method_signature)": "parent,job"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta1/{parent=projects/*}/evaluationJobs",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,job"
+                            }
+                          ]
                         },
                         "UpdateEvaluationJob": {
                           "requestType": "UpdateEvaluationJobRequest",
@@ -697,7 +1020,18 @@
                             "(google.api.http).patch": "/v1beta1/{evaluation_job.name=projects/*/evaluationJobs/*}",
                             "(google.api.http).body": "evaluation_job",
                             "(google.api.method_signature)": "evaluation_job,update_mask"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1beta1/{evaluation_job.name=projects/*/evaluationJobs/*}",
+                                "body": "evaluation_job"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "evaluation_job,update_mask"
+                            }
+                          ]
                         },
                         "GetEvaluationJob": {
                           "requestType": "GetEvaluationJobRequest",
@@ -705,7 +1039,17 @@
                           "options": {
                             "(google.api.http).get": "/v1beta1/{name=projects/*/evaluationJobs/*}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta1/{name=projects/*/evaluationJobs/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "PauseEvaluationJob": {
                           "requestType": "PauseEvaluationJobRequest",
@@ -714,7 +1058,18 @@
                             "(google.api.http).post": "/v1beta1/{name=projects/*/evaluationJobs/*}:pause",
                             "(google.api.http).body": "*",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta1/{name=projects/*/evaluationJobs/*}:pause",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "ResumeEvaluationJob": {
                           "requestType": "ResumeEvaluationJobRequest",
@@ -723,7 +1078,18 @@
                             "(google.api.http).post": "/v1beta1/{name=projects/*/evaluationJobs/*}:resume",
                             "(google.api.http).body": "*",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta1/{name=projects/*/evaluationJobs/*}:resume",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "DeleteEvaluationJob": {
                           "requestType": "DeleteEvaluationJobRequest",
@@ -731,7 +1097,17 @@
                           "options": {
                             "(google.api.http).delete": "/v1beta1/{name=projects/*/evaluationJobs/*}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1beta1/{name=projects/*/evaluationJobs/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "ListEvaluationJobs": {
                           "requestType": "ListEvaluationJobsRequest",
@@ -739,7 +1115,17 @@
                           "options": {
                             "(google.api.http).get": "/v1beta1/{parent=projects/*}/evaluationJobs",
                             "(google.api.method_signature)": "parent,filter"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta1/{parent=projects/*}/evaluationJobs"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,filter"
+                            }
+                          ]
                         }
                       }
                     },
@@ -4264,7 +4650,17 @@
                   "options": {
                     "(google.api.http).get": "/v1/{name=operations}",
                     "(google.api.method_signature)": "name,filter"
-                  }
+                  },
+                  "parsedOptions": [
+                    {
+                      "(google.api.http)": {
+                        "get": "/v1/{name=operations}"
+                      }
+                    },
+                    {
+                      "(google.api.method_signature)": "name,filter"
+                    }
+                  ]
                 },
                 "GetOperation": {
                   "requestType": "GetOperationRequest",
@@ -4272,7 +4668,17 @@
                   "options": {
                     "(google.api.http).get": "/v1/{name=operations/**}",
                     "(google.api.method_signature)": "name"
-                  }
+                  },
+                  "parsedOptions": [
+                    {
+                      "(google.api.http)": {
+                        "get": "/v1/{name=operations/**}"
+                      }
+                    },
+                    {
+                      "(google.api.method_signature)": "name"
+                    }
+                  ]
                 },
                 "DeleteOperation": {
                   "requestType": "DeleteOperationRequest",
@@ -4280,7 +4686,17 @@
                   "options": {
                     "(google.api.http).delete": "/v1/{name=operations/**}",
                     "(google.api.method_signature)": "name"
-                  }
+                  },
+                  "parsedOptions": [
+                    {
+                      "(google.api.http)": {
+                        "delete": "/v1/{name=operations/**}"
+                      }
+                    },
+                    {
+                      "(google.api.method_signature)": "name"
+                    }
+                  ]
                 },
                 "CancelOperation": {
                   "requestType": "CancelOperationRequest",
@@ -4289,7 +4705,18 @@
                     "(google.api.http).post": "/v1/{name=operations/**}:cancel",
                     "(google.api.http).body": "*",
                     "(google.api.method_signature)": "name"
-                  }
+                  },
+                  "parsedOptions": [
+                    {
+                      "(google.api.http)": {
+                        "post": "/v1/{name=operations/**}:cancel",
+                        "body": "*"
+                      }
+                    },
+                    {
+                      "(google.api.method_signature)": "name"
+                    }
+                  ]
                 },
                 "WaitOperation": {
                   "requestType": "WaitOperationRequest",

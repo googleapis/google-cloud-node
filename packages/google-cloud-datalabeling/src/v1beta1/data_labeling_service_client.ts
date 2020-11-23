@@ -16,6 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
+/* global window */
 import * as gax from 'google-gax';
 import {
   Callback,
@@ -31,6 +32,11 @@ import * as path from 'path';
 import {Transform} from 'stream';
 import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
+/**
+ * Client JSON configuration object, loaded from
+ * `src/v1beta1/data_labeling_service_client_config.json`.
+ * This file defines retry strategy and timeouts for all API methods in this library.
+ */
 import * as gapicConfig from './data_labeling_service_client_config.json';
 import {operationsProtos} from 'google-gax';
 const version = require('../../../package.json').version;
@@ -85,9 +91,9 @@ export class DataLabelingServiceClient {
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
-   * @param {gax.ClientConfig} [options.clientConfig] - client configuration override.
-   *     TODO(@alexander-fenster): link to gax documentation.
-   * @param {boolean} fallback - Use HTTP fallback mode.
+   * @param {gax.ClientConfig} [options.clientConfig] - Client configuration override.
+   *     Follows the structure of {@link gapicConfig}.
+   * @param {boolean} [options.fallback] - Use HTTP fallback mode.
    *     In fallback mode, a special browser-compatible transport implementation is used
    *     instead of gRPC transport. In browser context (if the `window` object is defined)
    *     the fallback mode is enabled automatically; set `options.fallback` to `false`
@@ -100,7 +106,9 @@ export class DataLabelingServiceClient {
       opts?.servicePath || opts?.apiEndpoint || staticMembers.servicePath;
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback = opts?.fallback ?? typeof window !== 'undefined';
+    const fallback =
+      opts?.fallback ??
+      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
@@ -493,7 +501,7 @@ export class DataLabelingServiceClient {
   // -------------------
   createDataset(
     request: protos.google.cloud.datalabeling.v1beta1.ICreateDatasetRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.datalabeling.v1beta1.IDataset,
@@ -506,7 +514,7 @@ export class DataLabelingServiceClient {
   >;
   createDataset(
     request: protos.google.cloud.datalabeling.v1beta1.ICreateDatasetRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.cloud.datalabeling.v1beta1.IDataset,
       | protos.google.cloud.datalabeling.v1beta1.ICreateDatasetRequest
@@ -548,7 +556,7 @@ export class DataLabelingServiceClient {
   createDataset(
     request: protos.google.cloud.datalabeling.v1beta1.ICreateDatasetRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.cloud.datalabeling.v1beta1.IDataset,
           | protos.google.cloud.datalabeling.v1beta1.ICreateDatasetRequest
@@ -574,12 +582,12 @@ export class DataLabelingServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -594,7 +602,7 @@ export class DataLabelingServiceClient {
   }
   getDataset(
     request: protos.google.cloud.datalabeling.v1beta1.IGetDatasetRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.datalabeling.v1beta1.IDataset,
@@ -604,7 +612,7 @@ export class DataLabelingServiceClient {
   >;
   getDataset(
     request: protos.google.cloud.datalabeling.v1beta1.IGetDatasetRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.cloud.datalabeling.v1beta1.IDataset,
       | protos.google.cloud.datalabeling.v1beta1.IGetDatasetRequest
@@ -644,7 +652,7 @@ export class DataLabelingServiceClient {
   getDataset(
     request: protos.google.cloud.datalabeling.v1beta1.IGetDatasetRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.cloud.datalabeling.v1beta1.IDataset,
           | protos.google.cloud.datalabeling.v1beta1.IGetDatasetRequest
@@ -667,12 +675,12 @@ export class DataLabelingServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -687,7 +695,7 @@ export class DataLabelingServiceClient {
   }
   deleteDataset(
     request: protos.google.cloud.datalabeling.v1beta1.IDeleteDatasetRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.protobuf.IEmpty,
@@ -700,7 +708,7 @@ export class DataLabelingServiceClient {
   >;
   deleteDataset(
     request: protos.google.cloud.datalabeling.v1beta1.IDeleteDatasetRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.protobuf.IEmpty,
       | protos.google.cloud.datalabeling.v1beta1.IDeleteDatasetRequest
@@ -740,7 +748,7 @@ export class DataLabelingServiceClient {
   deleteDataset(
     request: protos.google.cloud.datalabeling.v1beta1.IDeleteDatasetRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.protobuf.IEmpty,
           | protos.google.cloud.datalabeling.v1beta1.IDeleteDatasetRequest
@@ -766,12 +774,12 @@ export class DataLabelingServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -786,7 +794,7 @@ export class DataLabelingServiceClient {
   }
   getDataItem(
     request: protos.google.cloud.datalabeling.v1beta1.IGetDataItemRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.datalabeling.v1beta1.IDataItem,
@@ -796,7 +804,7 @@ export class DataLabelingServiceClient {
   >;
   getDataItem(
     request: protos.google.cloud.datalabeling.v1beta1.IGetDataItemRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.cloud.datalabeling.v1beta1.IDataItem,
       | protos.google.cloud.datalabeling.v1beta1.IGetDataItemRequest
@@ -837,7 +845,7 @@ export class DataLabelingServiceClient {
   getDataItem(
     request: protos.google.cloud.datalabeling.v1beta1.IGetDataItemRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.cloud.datalabeling.v1beta1.IDataItem,
           | protos.google.cloud.datalabeling.v1beta1.IGetDataItemRequest
@@ -860,12 +868,12 @@ export class DataLabelingServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -880,7 +888,7 @@ export class DataLabelingServiceClient {
   }
   getAnnotatedDataset(
     request: protos.google.cloud.datalabeling.v1beta1.IGetAnnotatedDatasetRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.datalabeling.v1beta1.IAnnotatedDataset,
@@ -893,7 +901,7 @@ export class DataLabelingServiceClient {
   >;
   getAnnotatedDataset(
     request: protos.google.cloud.datalabeling.v1beta1.IGetAnnotatedDatasetRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.cloud.datalabeling.v1beta1.IAnnotatedDataset,
       | protos.google.cloud.datalabeling.v1beta1.IGetAnnotatedDatasetRequest
@@ -934,7 +942,7 @@ export class DataLabelingServiceClient {
   getAnnotatedDataset(
     request: protos.google.cloud.datalabeling.v1beta1.IGetAnnotatedDatasetRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.cloud.datalabeling.v1beta1.IAnnotatedDataset,
           | protos.google.cloud.datalabeling.v1beta1.IGetAnnotatedDatasetRequest
@@ -960,12 +968,12 @@ export class DataLabelingServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -980,7 +988,7 @@ export class DataLabelingServiceClient {
   }
   deleteAnnotatedDataset(
     request: protos.google.cloud.datalabeling.v1beta1.IDeleteAnnotatedDatasetRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.protobuf.IEmpty,
@@ -993,7 +1001,7 @@ export class DataLabelingServiceClient {
   >;
   deleteAnnotatedDataset(
     request: protos.google.cloud.datalabeling.v1beta1.IDeleteAnnotatedDatasetRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.protobuf.IEmpty,
       | protos.google.cloud.datalabeling.v1beta1.IDeleteAnnotatedDatasetRequest
@@ -1034,7 +1042,7 @@ export class DataLabelingServiceClient {
   deleteAnnotatedDataset(
     request: protos.google.cloud.datalabeling.v1beta1.IDeleteAnnotatedDatasetRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.protobuf.IEmpty,
           | protos.google.cloud.datalabeling.v1beta1.IDeleteAnnotatedDatasetRequest
@@ -1060,12 +1068,12 @@ export class DataLabelingServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1084,7 +1092,7 @@ export class DataLabelingServiceClient {
   }
   getExample(
     request: protos.google.cloud.datalabeling.v1beta1.IGetExampleRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.datalabeling.v1beta1.IExample,
@@ -1094,7 +1102,7 @@ export class DataLabelingServiceClient {
   >;
   getExample(
     request: protos.google.cloud.datalabeling.v1beta1.IGetExampleRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.cloud.datalabeling.v1beta1.IExample,
       | protos.google.cloud.datalabeling.v1beta1.IGetExampleRequest
@@ -1139,7 +1147,7 @@ export class DataLabelingServiceClient {
   getExample(
     request: protos.google.cloud.datalabeling.v1beta1.IGetExampleRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.cloud.datalabeling.v1beta1.IExample,
           | protos.google.cloud.datalabeling.v1beta1.IGetExampleRequest
@@ -1162,12 +1170,12 @@ export class DataLabelingServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1182,7 +1190,7 @@ export class DataLabelingServiceClient {
   }
   createAnnotationSpecSet(
     request: protos.google.cloud.datalabeling.v1beta1.ICreateAnnotationSpecSetRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.datalabeling.v1beta1.IAnnotationSpecSet,
@@ -1195,7 +1203,7 @@ export class DataLabelingServiceClient {
   >;
   createAnnotationSpecSet(
     request: protos.google.cloud.datalabeling.v1beta1.ICreateAnnotationSpecSetRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.cloud.datalabeling.v1beta1.IAnnotationSpecSet,
       | protos.google.cloud.datalabeling.v1beta1.ICreateAnnotationSpecSetRequest
@@ -1239,7 +1247,7 @@ export class DataLabelingServiceClient {
   createAnnotationSpecSet(
     request: protos.google.cloud.datalabeling.v1beta1.ICreateAnnotationSpecSetRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.cloud.datalabeling.v1beta1.IAnnotationSpecSet,
           | protos.google.cloud.datalabeling.v1beta1.ICreateAnnotationSpecSetRequest
@@ -1265,12 +1273,12 @@ export class DataLabelingServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1289,7 +1297,7 @@ export class DataLabelingServiceClient {
   }
   getAnnotationSpecSet(
     request: protos.google.cloud.datalabeling.v1beta1.IGetAnnotationSpecSetRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.datalabeling.v1beta1.IAnnotationSpecSet,
@@ -1302,7 +1310,7 @@ export class DataLabelingServiceClient {
   >;
   getAnnotationSpecSet(
     request: protos.google.cloud.datalabeling.v1beta1.IGetAnnotationSpecSetRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.cloud.datalabeling.v1beta1.IAnnotationSpecSet,
       | protos.google.cloud.datalabeling.v1beta1.IGetAnnotationSpecSetRequest
@@ -1342,7 +1350,7 @@ export class DataLabelingServiceClient {
   getAnnotationSpecSet(
     request: protos.google.cloud.datalabeling.v1beta1.IGetAnnotationSpecSetRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.cloud.datalabeling.v1beta1.IAnnotationSpecSet,
           | protos.google.cloud.datalabeling.v1beta1.IGetAnnotationSpecSetRequest
@@ -1368,12 +1376,12 @@ export class DataLabelingServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1388,7 +1396,7 @@ export class DataLabelingServiceClient {
   }
   deleteAnnotationSpecSet(
     request: protos.google.cloud.datalabeling.v1beta1.IDeleteAnnotationSpecSetRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.protobuf.IEmpty,
@@ -1401,7 +1409,7 @@ export class DataLabelingServiceClient {
   >;
   deleteAnnotationSpecSet(
     request: protos.google.cloud.datalabeling.v1beta1.IDeleteAnnotationSpecSetRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.protobuf.IEmpty,
       | protos.google.cloud.datalabeling.v1beta1.IDeleteAnnotationSpecSetRequest
@@ -1441,7 +1449,7 @@ export class DataLabelingServiceClient {
   deleteAnnotationSpecSet(
     request: protos.google.cloud.datalabeling.v1beta1.IDeleteAnnotationSpecSetRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.protobuf.IEmpty,
           | protos.google.cloud.datalabeling.v1beta1.IDeleteAnnotationSpecSetRequest
@@ -1467,12 +1475,12 @@ export class DataLabelingServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1491,7 +1499,7 @@ export class DataLabelingServiceClient {
   }
   getInstruction(
     request: protos.google.cloud.datalabeling.v1beta1.IGetInstructionRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.datalabeling.v1beta1.IInstruction,
@@ -1504,7 +1512,7 @@ export class DataLabelingServiceClient {
   >;
   getInstruction(
     request: protos.google.cloud.datalabeling.v1beta1.IGetInstructionRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.cloud.datalabeling.v1beta1.IInstruction,
       | protos.google.cloud.datalabeling.v1beta1.IGetInstructionRequest
@@ -1544,7 +1552,7 @@ export class DataLabelingServiceClient {
   getInstruction(
     request: protos.google.cloud.datalabeling.v1beta1.IGetInstructionRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.cloud.datalabeling.v1beta1.IInstruction,
           | protos.google.cloud.datalabeling.v1beta1.IGetInstructionRequest
@@ -1570,12 +1578,12 @@ export class DataLabelingServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1590,7 +1598,7 @@ export class DataLabelingServiceClient {
   }
   deleteInstruction(
     request: protos.google.cloud.datalabeling.v1beta1.IDeleteInstructionRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.protobuf.IEmpty,
@@ -1603,7 +1611,7 @@ export class DataLabelingServiceClient {
   >;
   deleteInstruction(
     request: protos.google.cloud.datalabeling.v1beta1.IDeleteInstructionRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.protobuf.IEmpty,
       | protos.google.cloud.datalabeling.v1beta1.IDeleteInstructionRequest
@@ -1643,7 +1651,7 @@ export class DataLabelingServiceClient {
   deleteInstruction(
     request: protos.google.cloud.datalabeling.v1beta1.IDeleteInstructionRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.protobuf.IEmpty,
           | protos.google.cloud.datalabeling.v1beta1.IDeleteInstructionRequest
@@ -1669,12 +1677,12 @@ export class DataLabelingServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1689,7 +1697,7 @@ export class DataLabelingServiceClient {
   }
   getEvaluation(
     request: protos.google.cloud.datalabeling.v1beta1.IGetEvaluationRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.datalabeling.v1beta1.IEvaluation,
@@ -1702,7 +1710,7 @@ export class DataLabelingServiceClient {
   >;
   getEvaluation(
     request: protos.google.cloud.datalabeling.v1beta1.IGetEvaluationRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.cloud.datalabeling.v1beta1.IEvaluation,
       | protos.google.cloud.datalabeling.v1beta1.IGetEvaluationRequest
@@ -1744,7 +1752,7 @@ export class DataLabelingServiceClient {
   getEvaluation(
     request: protos.google.cloud.datalabeling.v1beta1.IGetEvaluationRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.cloud.datalabeling.v1beta1.IEvaluation,
           | protos.google.cloud.datalabeling.v1beta1.IGetEvaluationRequest
@@ -1770,12 +1778,12 @@ export class DataLabelingServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1790,7 +1798,7 @@ export class DataLabelingServiceClient {
   }
   createEvaluationJob(
     request: protos.google.cloud.datalabeling.v1beta1.ICreateEvaluationJobRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.datalabeling.v1beta1.IEvaluationJob,
@@ -1803,7 +1811,7 @@ export class DataLabelingServiceClient {
   >;
   createEvaluationJob(
     request: protos.google.cloud.datalabeling.v1beta1.ICreateEvaluationJobRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.cloud.datalabeling.v1beta1.IEvaluationJob,
       | protos.google.cloud.datalabeling.v1beta1.ICreateEvaluationJobRequest
@@ -1845,7 +1853,7 @@ export class DataLabelingServiceClient {
   createEvaluationJob(
     request: protos.google.cloud.datalabeling.v1beta1.ICreateEvaluationJobRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.cloud.datalabeling.v1beta1.IEvaluationJob,
           | protos.google.cloud.datalabeling.v1beta1.ICreateEvaluationJobRequest
@@ -1871,12 +1879,12 @@ export class DataLabelingServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1891,7 +1899,7 @@ export class DataLabelingServiceClient {
   }
   updateEvaluationJob(
     request: protos.google.cloud.datalabeling.v1beta1.IUpdateEvaluationJobRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.datalabeling.v1beta1.IEvaluationJob,
@@ -1904,7 +1912,7 @@ export class DataLabelingServiceClient {
   >;
   updateEvaluationJob(
     request: protos.google.cloud.datalabeling.v1beta1.IUpdateEvaluationJobRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.cloud.datalabeling.v1beta1.IEvaluationJob,
       | protos.google.cloud.datalabeling.v1beta1.IUpdateEvaluationJobRequest
@@ -1958,7 +1966,7 @@ export class DataLabelingServiceClient {
   updateEvaluationJob(
     request: protos.google.cloud.datalabeling.v1beta1.IUpdateEvaluationJobRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.cloud.datalabeling.v1beta1.IEvaluationJob,
           | protos.google.cloud.datalabeling.v1beta1.IUpdateEvaluationJobRequest
@@ -1984,12 +1992,12 @@ export class DataLabelingServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -2004,7 +2012,7 @@ export class DataLabelingServiceClient {
   }
   getEvaluationJob(
     request: protos.google.cloud.datalabeling.v1beta1.IGetEvaluationJobRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.datalabeling.v1beta1.IEvaluationJob,
@@ -2017,7 +2025,7 @@ export class DataLabelingServiceClient {
   >;
   getEvaluationJob(
     request: protos.google.cloud.datalabeling.v1beta1.IGetEvaluationJobRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.cloud.datalabeling.v1beta1.IEvaluationJob,
       | protos.google.cloud.datalabeling.v1beta1.IGetEvaluationJobRequest
@@ -2058,7 +2066,7 @@ export class DataLabelingServiceClient {
   getEvaluationJob(
     request: protos.google.cloud.datalabeling.v1beta1.IGetEvaluationJobRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.cloud.datalabeling.v1beta1.IEvaluationJob,
           | protos.google.cloud.datalabeling.v1beta1.IGetEvaluationJobRequest
@@ -2084,12 +2092,12 @@ export class DataLabelingServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -2104,7 +2112,7 @@ export class DataLabelingServiceClient {
   }
   pauseEvaluationJob(
     request: protos.google.cloud.datalabeling.v1beta1.IPauseEvaluationJobRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.protobuf.IEmpty,
@@ -2117,7 +2125,7 @@ export class DataLabelingServiceClient {
   >;
   pauseEvaluationJob(
     request: protos.google.cloud.datalabeling.v1beta1.IPauseEvaluationJobRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.protobuf.IEmpty,
       | protos.google.cloud.datalabeling.v1beta1.IPauseEvaluationJobRequest
@@ -2159,7 +2167,7 @@ export class DataLabelingServiceClient {
   pauseEvaluationJob(
     request: protos.google.cloud.datalabeling.v1beta1.IPauseEvaluationJobRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.protobuf.IEmpty,
           | protos.google.cloud.datalabeling.v1beta1.IPauseEvaluationJobRequest
@@ -2185,12 +2193,12 @@ export class DataLabelingServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -2205,7 +2213,7 @@ export class DataLabelingServiceClient {
   }
   resumeEvaluationJob(
     request: protos.google.cloud.datalabeling.v1beta1.IResumeEvaluationJobRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.protobuf.IEmpty,
@@ -2218,7 +2226,7 @@ export class DataLabelingServiceClient {
   >;
   resumeEvaluationJob(
     request: protos.google.cloud.datalabeling.v1beta1.IResumeEvaluationJobRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.protobuf.IEmpty,
       | protos.google.cloud.datalabeling.v1beta1.IResumeEvaluationJobRequest
@@ -2260,7 +2268,7 @@ export class DataLabelingServiceClient {
   resumeEvaluationJob(
     request: protos.google.cloud.datalabeling.v1beta1.IResumeEvaluationJobRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.protobuf.IEmpty,
           | protos.google.cloud.datalabeling.v1beta1.IResumeEvaluationJobRequest
@@ -2286,12 +2294,12 @@ export class DataLabelingServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -2306,7 +2314,7 @@ export class DataLabelingServiceClient {
   }
   deleteEvaluationJob(
     request: protos.google.cloud.datalabeling.v1beta1.IDeleteEvaluationJobRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.protobuf.IEmpty,
@@ -2319,7 +2327,7 @@ export class DataLabelingServiceClient {
   >;
   deleteEvaluationJob(
     request: protos.google.cloud.datalabeling.v1beta1.IDeleteEvaluationJobRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.protobuf.IEmpty,
       | protos.google.cloud.datalabeling.v1beta1.IDeleteEvaluationJobRequest
@@ -2360,7 +2368,7 @@ export class DataLabelingServiceClient {
   deleteEvaluationJob(
     request: protos.google.cloud.datalabeling.v1beta1.IDeleteEvaluationJobRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.protobuf.IEmpty,
           | protos.google.cloud.datalabeling.v1beta1.IDeleteEvaluationJobRequest
@@ -2386,12 +2394,12 @@ export class DataLabelingServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -2407,7 +2415,7 @@ export class DataLabelingServiceClient {
 
   importData(
     request: protos.google.cloud.datalabeling.v1beta1.IImportDataRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       LROperation<
@@ -2420,7 +2428,7 @@ export class DataLabelingServiceClient {
   >;
   importData(
     request: protos.google.cloud.datalabeling.v1beta1.IImportDataRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       LROperation<
         protos.google.cloud.datalabeling.v1beta1.IImportDataOperationResponse,
@@ -2474,7 +2482,7 @@ export class DataLabelingServiceClient {
   importData(
     request: protos.google.cloud.datalabeling.v1beta1.IImportDataRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           LROperation<
             protos.google.cloud.datalabeling.v1beta1.IImportDataOperationResponse,
@@ -2502,12 +2510,12 @@ export class DataLabelingServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -2559,7 +2567,7 @@ export class DataLabelingServiceClient {
   }
   exportData(
     request: protos.google.cloud.datalabeling.v1beta1.IExportDataRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       LROperation<
@@ -2572,7 +2580,7 @@ export class DataLabelingServiceClient {
   >;
   exportData(
     request: protos.google.cloud.datalabeling.v1beta1.IExportDataRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       LROperation<
         protos.google.cloud.datalabeling.v1beta1.IExportDataOperationResponse,
@@ -2630,7 +2638,7 @@ export class DataLabelingServiceClient {
   exportData(
     request: protos.google.cloud.datalabeling.v1beta1.IExportDataRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           LROperation<
             protos.google.cloud.datalabeling.v1beta1.IExportDataOperationResponse,
@@ -2658,12 +2666,12 @@ export class DataLabelingServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -2715,7 +2723,7 @@ export class DataLabelingServiceClient {
   }
   labelImage(
     request: protos.google.cloud.datalabeling.v1beta1.ILabelImageRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       LROperation<
@@ -2728,7 +2736,7 @@ export class DataLabelingServiceClient {
   >;
   labelImage(
     request: protos.google.cloud.datalabeling.v1beta1.ILabelImageRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       LROperation<
         protos.google.cloud.datalabeling.v1beta1.IAnnotatedDataset,
@@ -2794,7 +2802,7 @@ export class DataLabelingServiceClient {
   labelImage(
     request: protos.google.cloud.datalabeling.v1beta1.ILabelImageRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           LROperation<
             protos.google.cloud.datalabeling.v1beta1.IAnnotatedDataset,
@@ -2822,12 +2830,12 @@ export class DataLabelingServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -2879,7 +2887,7 @@ export class DataLabelingServiceClient {
   }
   labelVideo(
     request: protos.google.cloud.datalabeling.v1beta1.ILabelVideoRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       LROperation<
@@ -2892,7 +2900,7 @@ export class DataLabelingServiceClient {
   >;
   labelVideo(
     request: protos.google.cloud.datalabeling.v1beta1.ILabelVideoRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       LROperation<
         protos.google.cloud.datalabeling.v1beta1.IAnnotatedDataset,
@@ -2958,7 +2966,7 @@ export class DataLabelingServiceClient {
   labelVideo(
     request: protos.google.cloud.datalabeling.v1beta1.ILabelVideoRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           LROperation<
             protos.google.cloud.datalabeling.v1beta1.IAnnotatedDataset,
@@ -2986,12 +2994,12 @@ export class DataLabelingServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -3043,7 +3051,7 @@ export class DataLabelingServiceClient {
   }
   labelText(
     request: protos.google.cloud.datalabeling.v1beta1.ILabelTextRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       LROperation<
@@ -3056,7 +3064,7 @@ export class DataLabelingServiceClient {
   >;
   labelText(
     request: protos.google.cloud.datalabeling.v1beta1.ILabelTextRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       LROperation<
         protos.google.cloud.datalabeling.v1beta1.IAnnotatedDataset,
@@ -3114,7 +3122,7 @@ export class DataLabelingServiceClient {
   labelText(
     request: protos.google.cloud.datalabeling.v1beta1.ILabelTextRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           LROperation<
             protos.google.cloud.datalabeling.v1beta1.IAnnotatedDataset,
@@ -3142,12 +3150,12 @@ export class DataLabelingServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -3199,7 +3207,7 @@ export class DataLabelingServiceClient {
   }
   createInstruction(
     request: protos.google.cloud.datalabeling.v1beta1.ICreateInstructionRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       LROperation<
@@ -3212,7 +3220,7 @@ export class DataLabelingServiceClient {
   >;
   createInstruction(
     request: protos.google.cloud.datalabeling.v1beta1.ICreateInstructionRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       LROperation<
         protos.google.cloud.datalabeling.v1beta1.IInstruction,
@@ -3259,7 +3267,7 @@ export class DataLabelingServiceClient {
   createInstruction(
     request: protos.google.cloud.datalabeling.v1beta1.ICreateInstructionRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           LROperation<
             protos.google.cloud.datalabeling.v1beta1.IInstruction,
@@ -3287,12 +3295,12 @@ export class DataLabelingServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -3344,7 +3352,7 @@ export class DataLabelingServiceClient {
   }
   listDatasets(
     request: protos.google.cloud.datalabeling.v1beta1.IListDatasetsRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.datalabeling.v1beta1.IDataset[],
@@ -3354,7 +3362,7 @@ export class DataLabelingServiceClient {
   >;
   listDatasets(
     request: protos.google.cloud.datalabeling.v1beta1.IListDatasetsRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: PaginationCallback<
       protos.google.cloud.datalabeling.v1beta1.IListDatasetsRequest,
       | protos.google.cloud.datalabeling.v1beta1.IListDatasetsResponse
@@ -3408,7 +3416,7 @@ export class DataLabelingServiceClient {
   listDatasets(
     request: protos.google.cloud.datalabeling.v1beta1.IListDatasetsRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | PaginationCallback<
           protos.google.cloud.datalabeling.v1beta1.IListDatasetsRequest,
           | protos.google.cloud.datalabeling.v1beta1.IListDatasetsResponse
@@ -3431,12 +3439,12 @@ export class DataLabelingServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -3482,7 +3490,7 @@ export class DataLabelingServiceClient {
    */
   listDatasetsStream(
     request?: protos.google.cloud.datalabeling.v1beta1.IListDatasetsRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Transform {
     request = request || {};
     options = options || {};
@@ -3540,7 +3548,7 @@ export class DataLabelingServiceClient {
    */
   listDatasetsAsync(
     request?: protos.google.cloud.datalabeling.v1beta1.IListDatasetsRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): AsyncIterable<protos.google.cloud.datalabeling.v1beta1.IDataset> {
     request = request || {};
     options = options || {};
@@ -3562,7 +3570,7 @@ export class DataLabelingServiceClient {
   }
   listDataItems(
     request: protos.google.cloud.datalabeling.v1beta1.IListDataItemsRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.datalabeling.v1beta1.IDataItem[],
@@ -3572,7 +3580,7 @@ export class DataLabelingServiceClient {
   >;
   listDataItems(
     request: protos.google.cloud.datalabeling.v1beta1.IListDataItemsRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: PaginationCallback<
       protos.google.cloud.datalabeling.v1beta1.IListDataItemsRequest,
       | protos.google.cloud.datalabeling.v1beta1.IListDataItemsResponse
@@ -3627,7 +3635,7 @@ export class DataLabelingServiceClient {
   listDataItems(
     request: protos.google.cloud.datalabeling.v1beta1.IListDataItemsRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | PaginationCallback<
           protos.google.cloud.datalabeling.v1beta1.IListDataItemsRequest,
           | protos.google.cloud.datalabeling.v1beta1.IListDataItemsResponse
@@ -3650,12 +3658,12 @@ export class DataLabelingServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -3701,7 +3709,7 @@ export class DataLabelingServiceClient {
    */
   listDataItemsStream(
     request?: protos.google.cloud.datalabeling.v1beta1.IListDataItemsRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Transform {
     request = request || {};
     options = options || {};
@@ -3759,7 +3767,7 @@ export class DataLabelingServiceClient {
    */
   listDataItemsAsync(
     request?: protos.google.cloud.datalabeling.v1beta1.IListDataItemsRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): AsyncIterable<protos.google.cloud.datalabeling.v1beta1.IDataItem> {
     request = request || {};
     options = options || {};
@@ -3781,7 +3789,7 @@ export class DataLabelingServiceClient {
   }
   listAnnotatedDatasets(
     request: protos.google.cloud.datalabeling.v1beta1.IListAnnotatedDatasetsRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.datalabeling.v1beta1.IAnnotatedDataset[],
@@ -3791,7 +3799,7 @@ export class DataLabelingServiceClient {
   >;
   listAnnotatedDatasets(
     request: protos.google.cloud.datalabeling.v1beta1.IListAnnotatedDatasetsRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: PaginationCallback<
       protos.google.cloud.datalabeling.v1beta1.IListAnnotatedDatasetsRequest,
       | protos.google.cloud.datalabeling.v1beta1.IListAnnotatedDatasetsResponse
@@ -3845,7 +3853,7 @@ export class DataLabelingServiceClient {
   listAnnotatedDatasets(
     request: protos.google.cloud.datalabeling.v1beta1.IListAnnotatedDatasetsRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | PaginationCallback<
           protos.google.cloud.datalabeling.v1beta1.IListAnnotatedDatasetsRequest,
           | protos.google.cloud.datalabeling.v1beta1.IListAnnotatedDatasetsResponse
@@ -3868,12 +3876,12 @@ export class DataLabelingServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -3919,7 +3927,7 @@ export class DataLabelingServiceClient {
    */
   listAnnotatedDatasetsStream(
     request?: protos.google.cloud.datalabeling.v1beta1.IListAnnotatedDatasetsRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Transform {
     request = request || {};
     options = options || {};
@@ -3977,7 +3985,7 @@ export class DataLabelingServiceClient {
    */
   listAnnotatedDatasetsAsync(
     request?: protos.google.cloud.datalabeling.v1beta1.IListAnnotatedDatasetsRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): AsyncIterable<protos.google.cloud.datalabeling.v1beta1.IAnnotatedDataset> {
     request = request || {};
     options = options || {};
@@ -4001,7 +4009,7 @@ export class DataLabelingServiceClient {
   }
   listExamples(
     request: protos.google.cloud.datalabeling.v1beta1.IListExamplesRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.datalabeling.v1beta1.IExample[],
@@ -4011,7 +4019,7 @@ export class DataLabelingServiceClient {
   >;
   listExamples(
     request: protos.google.cloud.datalabeling.v1beta1.IListExamplesRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: PaginationCallback<
       protos.google.cloud.datalabeling.v1beta1.IListExamplesRequest,
       | protos.google.cloud.datalabeling.v1beta1.IListExamplesResponse
@@ -4067,7 +4075,7 @@ export class DataLabelingServiceClient {
   listExamples(
     request: protos.google.cloud.datalabeling.v1beta1.IListExamplesRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | PaginationCallback<
           protos.google.cloud.datalabeling.v1beta1.IListExamplesRequest,
           | protos.google.cloud.datalabeling.v1beta1.IListExamplesResponse
@@ -4090,12 +4098,12 @@ export class DataLabelingServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -4143,7 +4151,7 @@ export class DataLabelingServiceClient {
    */
   listExamplesStream(
     request?: protos.google.cloud.datalabeling.v1beta1.IListExamplesRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Transform {
     request = request || {};
     options = options || {};
@@ -4203,7 +4211,7 @@ export class DataLabelingServiceClient {
    */
   listExamplesAsync(
     request?: protos.google.cloud.datalabeling.v1beta1.IListExamplesRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): AsyncIterable<protos.google.cloud.datalabeling.v1beta1.IExample> {
     request = request || {};
     options = options || {};
@@ -4225,7 +4233,7 @@ export class DataLabelingServiceClient {
   }
   listAnnotationSpecSets(
     request: protos.google.cloud.datalabeling.v1beta1.IListAnnotationSpecSetsRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.datalabeling.v1beta1.IAnnotationSpecSet[],
@@ -4235,7 +4243,7 @@ export class DataLabelingServiceClient {
   >;
   listAnnotationSpecSets(
     request: protos.google.cloud.datalabeling.v1beta1.IListAnnotationSpecSetsRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: PaginationCallback<
       protos.google.cloud.datalabeling.v1beta1.IListAnnotationSpecSetsRequest,
       | protos.google.cloud.datalabeling.v1beta1.IListAnnotationSpecSetsResponse
@@ -4289,7 +4297,7 @@ export class DataLabelingServiceClient {
   listAnnotationSpecSets(
     request: protos.google.cloud.datalabeling.v1beta1.IListAnnotationSpecSetsRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | PaginationCallback<
           protos.google.cloud.datalabeling.v1beta1.IListAnnotationSpecSetsRequest,
           | protos.google.cloud.datalabeling.v1beta1.IListAnnotationSpecSetsResponse
@@ -4312,12 +4320,12 @@ export class DataLabelingServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -4367,7 +4375,7 @@ export class DataLabelingServiceClient {
    */
   listAnnotationSpecSetsStream(
     request?: protos.google.cloud.datalabeling.v1beta1.IListAnnotationSpecSetsRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Transform {
     request = request || {};
     options = options || {};
@@ -4425,7 +4433,7 @@ export class DataLabelingServiceClient {
    */
   listAnnotationSpecSetsAsync(
     request?: protos.google.cloud.datalabeling.v1beta1.IListAnnotationSpecSetsRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): AsyncIterable<
     protos.google.cloud.datalabeling.v1beta1.IAnnotationSpecSet
   > {
@@ -4451,7 +4459,7 @@ export class DataLabelingServiceClient {
   }
   listInstructions(
     request: protos.google.cloud.datalabeling.v1beta1.IListInstructionsRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.datalabeling.v1beta1.IInstruction[],
@@ -4461,7 +4469,7 @@ export class DataLabelingServiceClient {
   >;
   listInstructions(
     request: protos.google.cloud.datalabeling.v1beta1.IListInstructionsRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: PaginationCallback<
       protos.google.cloud.datalabeling.v1beta1.IListInstructionsRequest,
       | protos.google.cloud.datalabeling.v1beta1.IListInstructionsResponse
@@ -4515,7 +4523,7 @@ export class DataLabelingServiceClient {
   listInstructions(
     request: protos.google.cloud.datalabeling.v1beta1.IListInstructionsRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | PaginationCallback<
           protos.google.cloud.datalabeling.v1beta1.IListInstructionsRequest,
           | protos.google.cloud.datalabeling.v1beta1.IListInstructionsResponse
@@ -4538,12 +4546,12 @@ export class DataLabelingServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -4589,7 +4597,7 @@ export class DataLabelingServiceClient {
    */
   listInstructionsStream(
     request?: protos.google.cloud.datalabeling.v1beta1.IListInstructionsRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Transform {
     request = request || {};
     options = options || {};
@@ -4647,7 +4655,7 @@ export class DataLabelingServiceClient {
    */
   listInstructionsAsync(
     request?: protos.google.cloud.datalabeling.v1beta1.IListInstructionsRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): AsyncIterable<protos.google.cloud.datalabeling.v1beta1.IInstruction> {
     request = request || {};
     options = options || {};
@@ -4669,7 +4677,7 @@ export class DataLabelingServiceClient {
   }
   searchEvaluations(
     request: protos.google.cloud.datalabeling.v1beta1.ISearchEvaluationsRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.datalabeling.v1beta1.IEvaluation[],
@@ -4679,7 +4687,7 @@ export class DataLabelingServiceClient {
   >;
   searchEvaluations(
     request: protos.google.cloud.datalabeling.v1beta1.ISearchEvaluationsRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: PaginationCallback<
       protos.google.cloud.datalabeling.v1beta1.ISearchEvaluationsRequest,
       | protos.google.cloud.datalabeling.v1beta1.ISearchEvaluationsResponse
@@ -4765,7 +4773,7 @@ export class DataLabelingServiceClient {
   searchEvaluations(
     request: protos.google.cloud.datalabeling.v1beta1.ISearchEvaluationsRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | PaginationCallback<
           protos.google.cloud.datalabeling.v1beta1.ISearchEvaluationsRequest,
           | protos.google.cloud.datalabeling.v1beta1.ISearchEvaluationsResponse
@@ -4788,12 +4796,12 @@ export class DataLabelingServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -4871,7 +4879,7 @@ export class DataLabelingServiceClient {
    */
   searchEvaluationsStream(
     request?: protos.google.cloud.datalabeling.v1beta1.ISearchEvaluationsRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Transform {
     request = request || {};
     options = options || {};
@@ -4961,7 +4969,7 @@ export class DataLabelingServiceClient {
    */
   searchEvaluationsAsync(
     request?: protos.google.cloud.datalabeling.v1beta1.ISearchEvaluationsRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): AsyncIterable<protos.google.cloud.datalabeling.v1beta1.IEvaluation> {
     request = request || {};
     options = options || {};
@@ -4983,7 +4991,7 @@ export class DataLabelingServiceClient {
   }
   searchExampleComparisons(
     request: protos.google.cloud.datalabeling.v1beta1.ISearchExampleComparisonsRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.datalabeling.v1beta1.SearchExampleComparisonsResponse.IExampleComparison[],
@@ -4993,7 +5001,7 @@ export class DataLabelingServiceClient {
   >;
   searchExampleComparisons(
     request: protos.google.cloud.datalabeling.v1beta1.ISearchExampleComparisonsRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: PaginationCallback<
       protos.google.cloud.datalabeling.v1beta1.ISearchExampleComparisonsRequest,
       | protos.google.cloud.datalabeling.v1beta1.ISearchExampleComparisonsResponse
@@ -5051,7 +5059,7 @@ export class DataLabelingServiceClient {
   searchExampleComparisons(
     request: protos.google.cloud.datalabeling.v1beta1.ISearchExampleComparisonsRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | PaginationCallback<
           protos.google.cloud.datalabeling.v1beta1.ISearchExampleComparisonsRequest,
           | protos.google.cloud.datalabeling.v1beta1.ISearchExampleComparisonsResponse
@@ -5074,12 +5082,12 @@ export class DataLabelingServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -5131,7 +5139,7 @@ export class DataLabelingServiceClient {
    */
   searchExampleComparisonsStream(
     request?: protos.google.cloud.datalabeling.v1beta1.ISearchExampleComparisonsRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Transform {
     request = request || {};
     options = options || {};
@@ -5191,7 +5199,7 @@ export class DataLabelingServiceClient {
    */
   searchExampleComparisonsAsync(
     request?: protos.google.cloud.datalabeling.v1beta1.ISearchExampleComparisonsRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): AsyncIterable<
     protos.google.cloud.datalabeling.v1beta1.SearchExampleComparisonsResponse.IExampleComparison
   > {
@@ -5217,7 +5225,7 @@ export class DataLabelingServiceClient {
   }
   listEvaluationJobs(
     request: protos.google.cloud.datalabeling.v1beta1.IListEvaluationJobsRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.datalabeling.v1beta1.IEvaluationJob[],
@@ -5227,7 +5235,7 @@ export class DataLabelingServiceClient {
   >;
   listEvaluationJobs(
     request: protos.google.cloud.datalabeling.v1beta1.IListEvaluationJobsRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: PaginationCallback<
       protos.google.cloud.datalabeling.v1beta1.IListEvaluationJobsRequest,
       | protos.google.cloud.datalabeling.v1beta1.IListEvaluationJobsResponse
@@ -5289,7 +5297,7 @@ export class DataLabelingServiceClient {
   listEvaluationJobs(
     request: protos.google.cloud.datalabeling.v1beta1.IListEvaluationJobsRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | PaginationCallback<
           protos.google.cloud.datalabeling.v1beta1.IListEvaluationJobsRequest,
           | protos.google.cloud.datalabeling.v1beta1.IListEvaluationJobsResponse
@@ -5312,12 +5320,12 @@ export class DataLabelingServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -5370,7 +5378,7 @@ export class DataLabelingServiceClient {
    */
   listEvaluationJobsStream(
     request?: protos.google.cloud.datalabeling.v1beta1.IListEvaluationJobsRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Transform {
     request = request || {};
     options = options || {};
@@ -5435,7 +5443,7 @@ export class DataLabelingServiceClient {
    */
   listEvaluationJobsAsync(
     request?: protos.google.cloud.datalabeling.v1beta1.IListEvaluationJobsRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): AsyncIterable<protos.google.cloud.datalabeling.v1beta1.IEvaluationJob> {
     request = request || {};
     options = options || {};
