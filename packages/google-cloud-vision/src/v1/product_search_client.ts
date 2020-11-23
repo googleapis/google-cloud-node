@@ -16,6 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
+/* global window */
 import * as gax from 'google-gax';
 import {
   Callback,
@@ -31,6 +32,11 @@ import * as path from 'path';
 import {Transform} from 'stream';
 import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
+/**
+ * Client JSON configuration object, loaded from
+ * `src/v1/product_search_client_config.json`.
+ * This file defines retry strategy and timeouts for all API methods in this library.
+ */
 import * as gapicConfig from './product_search_client_config.json';
 import {operationsProtos} from 'google-gax';
 const version = require('../../../package.json').version;
@@ -98,9 +104,9 @@ export class ProductSearchClient {
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
-   * @param {gax.ClientConfig} [options.clientConfig] - client configuration override.
-   *     TODO(@alexander-fenster): link to gax documentation.
-   * @param {boolean} fallback - Use HTTP fallback mode.
+   * @param {gax.ClientConfig} [options.clientConfig] - Client configuration override.
+   *     Follows the structure of {@link gapicConfig}.
+   * @param {boolean} [options.fallback] - Use HTTP fallback mode.
    *     In fallback mode, a special browser-compatible transport implementation is used
    *     instead of gRPC transport. In browser context (if the `window` object is defined)
    *     the fallback mode is enabled automatically; set `options.fallback` to `false`
@@ -113,7 +119,9 @@ export class ProductSearchClient {
       opts?.servicePath || opts?.apiEndpoint || staticMembers.servicePath;
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback = opts?.fallback ?? typeof window !== 'undefined';
+    const fallback =
+      opts?.fallback ??
+      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
@@ -409,7 +417,7 @@ export class ProductSearchClient {
   // -------------------
   createProductSet(
     request: protos.google.cloud.vision.v1.ICreateProductSetRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.vision.v1.IProductSet,
@@ -419,7 +427,7 @@ export class ProductSearchClient {
   >;
   createProductSet(
     request: protos.google.cloud.vision.v1.ICreateProductSetRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.cloud.vision.v1.IProductSet,
       protos.google.cloud.vision.v1.ICreateProductSetRequest | null | undefined,
@@ -468,7 +476,7 @@ export class ProductSearchClient {
   createProductSet(
     request: protos.google.cloud.vision.v1.ICreateProductSetRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.cloud.vision.v1.IProductSet,
           | protos.google.cloud.vision.v1.ICreateProductSetRequest
@@ -489,12 +497,12 @@ export class ProductSearchClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -509,7 +517,7 @@ export class ProductSearchClient {
   }
   getProductSet(
     request: protos.google.cloud.vision.v1.IGetProductSetRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.vision.v1.IProductSet,
@@ -519,7 +527,7 @@ export class ProductSearchClient {
   >;
   getProductSet(
     request: protos.google.cloud.vision.v1.IGetProductSetRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.cloud.vision.v1.IProductSet,
       protos.google.cloud.vision.v1.IGetProductSetRequest | null | undefined,
@@ -561,7 +569,7 @@ export class ProductSearchClient {
   getProductSet(
     request: protos.google.cloud.vision.v1.IGetProductSetRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.cloud.vision.v1.IProductSet,
           | protos.google.cloud.vision.v1.IGetProductSetRequest
@@ -582,12 +590,12 @@ export class ProductSearchClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -602,7 +610,7 @@ export class ProductSearchClient {
   }
   updateProductSet(
     request: protos.google.cloud.vision.v1.IUpdateProductSetRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.vision.v1.IProductSet,
@@ -612,7 +620,7 @@ export class ProductSearchClient {
   >;
   updateProductSet(
     request: protos.google.cloud.vision.v1.IUpdateProductSetRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.cloud.vision.v1.IProductSet,
       protos.google.cloud.vision.v1.IUpdateProductSetRequest | null | undefined,
@@ -659,7 +667,7 @@ export class ProductSearchClient {
   updateProductSet(
     request: protos.google.cloud.vision.v1.IUpdateProductSetRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.cloud.vision.v1.IProductSet,
           | protos.google.cloud.vision.v1.IUpdateProductSetRequest
@@ -680,12 +688,12 @@ export class ProductSearchClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -700,7 +708,7 @@ export class ProductSearchClient {
   }
   deleteProductSet(
     request: protos.google.cloud.vision.v1.IDeleteProductSetRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.protobuf.IEmpty,
@@ -710,7 +718,7 @@ export class ProductSearchClient {
   >;
   deleteProductSet(
     request: protos.google.cloud.vision.v1.IDeleteProductSetRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.protobuf.IEmpty,
       protos.google.cloud.vision.v1.IDeleteProductSetRequest | null | undefined,
@@ -751,7 +759,7 @@ export class ProductSearchClient {
   deleteProductSet(
     request: protos.google.cloud.vision.v1.IDeleteProductSetRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.protobuf.IEmpty,
           | protos.google.cloud.vision.v1.IDeleteProductSetRequest
@@ -772,12 +780,12 @@ export class ProductSearchClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -792,7 +800,7 @@ export class ProductSearchClient {
   }
   createProduct(
     request: protos.google.cloud.vision.v1.ICreateProductRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.vision.v1.IProduct,
@@ -802,7 +810,7 @@ export class ProductSearchClient {
   >;
   createProduct(
     request: protos.google.cloud.vision.v1.ICreateProductRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.cloud.vision.v1.IProduct,
       protos.google.cloud.vision.v1.ICreateProductRequest | null | undefined,
@@ -854,7 +862,7 @@ export class ProductSearchClient {
   createProduct(
     request: protos.google.cloud.vision.v1.ICreateProductRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.cloud.vision.v1.IProduct,
           | protos.google.cloud.vision.v1.ICreateProductRequest
@@ -875,12 +883,12 @@ export class ProductSearchClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -895,7 +903,7 @@ export class ProductSearchClient {
   }
   getProduct(
     request: protos.google.cloud.vision.v1.IGetProductRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.vision.v1.IProduct,
@@ -905,7 +913,7 @@ export class ProductSearchClient {
   >;
   getProduct(
     request: protos.google.cloud.vision.v1.IGetProductRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.cloud.vision.v1.IProduct,
       protos.google.cloud.vision.v1.IGetProductRequest | null | undefined,
@@ -947,7 +955,7 @@ export class ProductSearchClient {
   getProduct(
     request: protos.google.cloud.vision.v1.IGetProductRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.cloud.vision.v1.IProduct,
           protos.google.cloud.vision.v1.IGetProductRequest | null | undefined,
@@ -966,12 +974,12 @@ export class ProductSearchClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -986,7 +994,7 @@ export class ProductSearchClient {
   }
   updateProduct(
     request: protos.google.cloud.vision.v1.IUpdateProductRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.vision.v1.IProduct,
@@ -996,7 +1004,7 @@ export class ProductSearchClient {
   >;
   updateProduct(
     request: protos.google.cloud.vision.v1.IUpdateProductRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.cloud.vision.v1.IProduct,
       protos.google.cloud.vision.v1.IUpdateProductRequest | null | undefined,
@@ -1052,7 +1060,7 @@ export class ProductSearchClient {
   updateProduct(
     request: protos.google.cloud.vision.v1.IUpdateProductRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.cloud.vision.v1.IProduct,
           | protos.google.cloud.vision.v1.IUpdateProductRequest
@@ -1073,12 +1081,12 @@ export class ProductSearchClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1093,7 +1101,7 @@ export class ProductSearchClient {
   }
   deleteProduct(
     request: protos.google.cloud.vision.v1.IDeleteProductRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.protobuf.IEmpty,
@@ -1103,7 +1111,7 @@ export class ProductSearchClient {
   >;
   deleteProduct(
     request: protos.google.cloud.vision.v1.IDeleteProductRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.protobuf.IEmpty,
       protos.google.cloud.vision.v1.IDeleteProductRequest | null | undefined,
@@ -1145,7 +1153,7 @@ export class ProductSearchClient {
   deleteProduct(
     request: protos.google.cloud.vision.v1.IDeleteProductRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.protobuf.IEmpty,
           | protos.google.cloud.vision.v1.IDeleteProductRequest
@@ -1166,12 +1174,12 @@ export class ProductSearchClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1186,7 +1194,7 @@ export class ProductSearchClient {
   }
   createReferenceImage(
     request: protos.google.cloud.vision.v1.ICreateReferenceImageRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.vision.v1.IReferenceImage,
@@ -1196,7 +1204,7 @@ export class ProductSearchClient {
   >;
   createReferenceImage(
     request: protos.google.cloud.vision.v1.ICreateReferenceImageRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.cloud.vision.v1.IReferenceImage,
       | protos.google.cloud.vision.v1.ICreateReferenceImageRequest
@@ -1264,7 +1272,7 @@ export class ProductSearchClient {
   createReferenceImage(
     request: protos.google.cloud.vision.v1.ICreateReferenceImageRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.cloud.vision.v1.IReferenceImage,
           | protos.google.cloud.vision.v1.ICreateReferenceImageRequest
@@ -1287,12 +1295,12 @@ export class ProductSearchClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1307,7 +1315,7 @@ export class ProductSearchClient {
   }
   deleteReferenceImage(
     request: protos.google.cloud.vision.v1.IDeleteReferenceImageRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.protobuf.IEmpty,
@@ -1317,7 +1325,7 @@ export class ProductSearchClient {
   >;
   deleteReferenceImage(
     request: protos.google.cloud.vision.v1.IDeleteReferenceImageRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.protobuf.IEmpty,
       | protos.google.cloud.vision.v1.IDeleteReferenceImageRequest
@@ -1366,7 +1374,7 @@ export class ProductSearchClient {
   deleteReferenceImage(
     request: protos.google.cloud.vision.v1.IDeleteReferenceImageRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.protobuf.IEmpty,
           | protos.google.cloud.vision.v1.IDeleteReferenceImageRequest
@@ -1389,12 +1397,12 @@ export class ProductSearchClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1409,7 +1417,7 @@ export class ProductSearchClient {
   }
   getReferenceImage(
     request: protos.google.cloud.vision.v1.IGetReferenceImageRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.vision.v1.IReferenceImage,
@@ -1419,7 +1427,7 @@ export class ProductSearchClient {
   >;
   getReferenceImage(
     request: protos.google.cloud.vision.v1.IGetReferenceImageRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.cloud.vision.v1.IReferenceImage,
       | protos.google.cloud.vision.v1.IGetReferenceImageRequest
@@ -1466,7 +1474,7 @@ export class ProductSearchClient {
   getReferenceImage(
     request: protos.google.cloud.vision.v1.IGetReferenceImageRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.cloud.vision.v1.IReferenceImage,
           | protos.google.cloud.vision.v1.IGetReferenceImageRequest
@@ -1489,12 +1497,12 @@ export class ProductSearchClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1509,7 +1517,7 @@ export class ProductSearchClient {
   }
   addProductToProductSet(
     request: protos.google.cloud.vision.v1.IAddProductToProductSetRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.protobuf.IEmpty,
@@ -1519,7 +1527,7 @@ export class ProductSearchClient {
   >;
   addProductToProductSet(
     request: protos.google.cloud.vision.v1.IAddProductToProductSetRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.protobuf.IEmpty,
       | protos.google.cloud.vision.v1.IAddProductToProductSetRequest
@@ -1573,7 +1581,7 @@ export class ProductSearchClient {
   addProductToProductSet(
     request: protos.google.cloud.vision.v1.IAddProductToProductSetRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.protobuf.IEmpty,
           | protos.google.cloud.vision.v1.IAddProductToProductSetRequest
@@ -1596,12 +1604,12 @@ export class ProductSearchClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1620,7 +1628,7 @@ export class ProductSearchClient {
   }
   removeProductFromProductSet(
     request: protos.google.cloud.vision.v1.IRemoveProductFromProductSetRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.protobuf.IEmpty,
@@ -1633,7 +1641,7 @@ export class ProductSearchClient {
   >;
   removeProductFromProductSet(
     request: protos.google.cloud.vision.v1.IRemoveProductFromProductSetRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.protobuf.IEmpty,
       | protos.google.cloud.vision.v1.IRemoveProductFromProductSetRequest
@@ -1680,7 +1688,7 @@ export class ProductSearchClient {
   removeProductFromProductSet(
     request: protos.google.cloud.vision.v1.IRemoveProductFromProductSetRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.protobuf.IEmpty,
           | protos.google.cloud.vision.v1.IRemoveProductFromProductSetRequest
@@ -1706,12 +1714,12 @@ export class ProductSearchClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1731,7 +1739,7 @@ export class ProductSearchClient {
 
   importProductSets(
     request: protos.google.cloud.vision.v1.IImportProductSetsRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       LROperation<
@@ -1744,7 +1752,7 @@ export class ProductSearchClient {
   >;
   importProductSets(
     request: protos.google.cloud.vision.v1.IImportProductSetsRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       LROperation<
         protos.google.cloud.vision.v1.IImportProductSetsResponse,
@@ -1802,7 +1810,7 @@ export class ProductSearchClient {
   importProductSets(
     request: protos.google.cloud.vision.v1.IImportProductSetsRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           LROperation<
             protos.google.cloud.vision.v1.IImportProductSetsResponse,
@@ -1830,12 +1838,12 @@ export class ProductSearchClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1887,7 +1895,7 @@ export class ProductSearchClient {
   }
   purgeProducts(
     request: protos.google.cloud.vision.v1.IPurgeProductsRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       LROperation<
@@ -1900,7 +1908,7 @@ export class ProductSearchClient {
   >;
   purgeProducts(
     request: protos.google.cloud.vision.v1.IPurgeProductsRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       LROperation<
         protos.google.protobuf.IEmpty,
@@ -1977,7 +1985,7 @@ export class ProductSearchClient {
   purgeProducts(
     request: protos.google.cloud.vision.v1.IPurgeProductsRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           LROperation<
             protos.google.protobuf.IEmpty,
@@ -2005,12 +2013,12 @@ export class ProductSearchClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -2062,7 +2070,7 @@ export class ProductSearchClient {
   }
   listProductSets(
     request: protos.google.cloud.vision.v1.IListProductSetsRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.vision.v1.IProductSet[],
@@ -2072,7 +2080,7 @@ export class ProductSearchClient {
   >;
   listProductSets(
     request: protos.google.cloud.vision.v1.IListProductSetsRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: PaginationCallback<
       protos.google.cloud.vision.v1.IListProductSetsRequest,
       protos.google.cloud.vision.v1.IListProductSetsResponse | null | undefined,
@@ -2121,7 +2129,7 @@ export class ProductSearchClient {
   listProductSets(
     request: protos.google.cloud.vision.v1.IListProductSetsRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | PaginationCallback<
           protos.google.cloud.vision.v1.IListProductSetsRequest,
           | protos.google.cloud.vision.v1.IListProductSetsResponse
@@ -2142,12 +2150,12 @@ export class ProductSearchClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -2187,7 +2195,7 @@ export class ProductSearchClient {
    */
   listProductSetsStream(
     request?: protos.google.cloud.vision.v1.IListProductSetsRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Transform {
     request = request || {};
     options = options || {};
@@ -2239,7 +2247,7 @@ export class ProductSearchClient {
    */
   listProductSetsAsync(
     request?: protos.google.cloud.vision.v1.IListProductSetsRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): AsyncIterable<protos.google.cloud.vision.v1.IProductSet> {
     request = request || {};
     options = options || {};
@@ -2261,7 +2269,7 @@ export class ProductSearchClient {
   }
   listProducts(
     request: protos.google.cloud.vision.v1.IListProductsRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.vision.v1.IProduct[],
@@ -2271,7 +2279,7 @@ export class ProductSearchClient {
   >;
   listProducts(
     request: protos.google.cloud.vision.v1.IListProductsRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: PaginationCallback<
       protos.google.cloud.vision.v1.IListProductsRequest,
       protos.google.cloud.vision.v1.IListProductsResponse | null | undefined,
@@ -2320,7 +2328,7 @@ export class ProductSearchClient {
   listProducts(
     request: protos.google.cloud.vision.v1.IListProductsRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | PaginationCallback<
           protos.google.cloud.vision.v1.IListProductsRequest,
           | protos.google.cloud.vision.v1.IListProductsResponse
@@ -2341,12 +2349,12 @@ export class ProductSearchClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -2387,7 +2395,7 @@ export class ProductSearchClient {
    */
   listProductsStream(
     request?: protos.google.cloud.vision.v1.IListProductsRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Transform {
     request = request || {};
     options = options || {};
@@ -2440,7 +2448,7 @@ export class ProductSearchClient {
    */
   listProductsAsync(
     request?: protos.google.cloud.vision.v1.IListProductsRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): AsyncIterable<protos.google.cloud.vision.v1.IProduct> {
     request = request || {};
     options = options || {};
@@ -2462,7 +2470,7 @@ export class ProductSearchClient {
   }
   listReferenceImages(
     request: protos.google.cloud.vision.v1.IListReferenceImagesRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.vision.v1.IReferenceImage[],
@@ -2472,7 +2480,7 @@ export class ProductSearchClient {
   >;
   listReferenceImages(
     request: protos.google.cloud.vision.v1.IListReferenceImagesRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: PaginationCallback<
       protos.google.cloud.vision.v1.IListReferenceImagesRequest,
       | protos.google.cloud.vision.v1.IListReferenceImagesResponse
@@ -2530,7 +2538,7 @@ export class ProductSearchClient {
   listReferenceImages(
     request: protos.google.cloud.vision.v1.IListReferenceImagesRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | PaginationCallback<
           protos.google.cloud.vision.v1.IListReferenceImagesRequest,
           | protos.google.cloud.vision.v1.IListReferenceImagesResponse
@@ -2553,12 +2561,12 @@ export class ProductSearchClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -2602,7 +2610,7 @@ export class ProductSearchClient {
    */
   listReferenceImagesStream(
     request?: protos.google.cloud.vision.v1.IListReferenceImagesRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Transform {
     request = request || {};
     options = options || {};
@@ -2658,7 +2666,7 @@ export class ProductSearchClient {
    */
   listReferenceImagesAsync(
     request?: protos.google.cloud.vision.v1.IListReferenceImagesRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): AsyncIterable<protos.google.cloud.vision.v1.IReferenceImage> {
     request = request || {};
     options = options || {};
@@ -2680,7 +2688,7 @@ export class ProductSearchClient {
   }
   listProductsInProductSet(
     request: protos.google.cloud.vision.v1.IListProductsInProductSetRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.vision.v1.IProduct[],
@@ -2690,7 +2698,7 @@ export class ProductSearchClient {
   >;
   listProductsInProductSet(
     request: protos.google.cloud.vision.v1.IListProductsInProductSetRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: PaginationCallback<
       protos.google.cloud.vision.v1.IListProductsInProductSetRequest,
       | protos.google.cloud.vision.v1.IListProductsInProductSetResponse
@@ -2745,7 +2753,7 @@ export class ProductSearchClient {
   listProductsInProductSet(
     request: protos.google.cloud.vision.v1.IListProductsInProductSetRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | PaginationCallback<
           protos.google.cloud.vision.v1.IListProductsInProductSetRequest,
           | protos.google.cloud.vision.v1.IListProductsInProductSetResponse
@@ -2768,12 +2776,12 @@ export class ProductSearchClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -2818,7 +2826,7 @@ export class ProductSearchClient {
    */
   listProductsInProductSetStream(
     request?: protos.google.cloud.vision.v1.IListProductsInProductSetRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Transform {
     request = request || {};
     options = options || {};
@@ -2871,7 +2879,7 @@ export class ProductSearchClient {
    */
   listProductsInProductSetAsync(
     request?: protos.google.cloud.vision.v1.IListProductsInProductSetRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): AsyncIterable<protos.google.cloud.vision.v1.IProduct> {
     request = request || {};
     options = options || {};

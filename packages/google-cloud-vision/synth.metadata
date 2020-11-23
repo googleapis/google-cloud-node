@@ -3,8 +3,16 @@
     {
       "git": {
         "name": ".",
-        "remote": "git@github.com:googleapis/nodejs-vision.git",
-        "sha": "7c79c2dbbbf57ee51666d0200fae39cdfdd8c0a7"
+        "remote": "https://github.com/googleapis/nodejs-vision.git",
+        "sha": "8377b4268a4ed4ef07869c75c1ae48f4ec3b01ce"
+      }
+    },
+    {
+      "git": {
+        "name": "googleapis",
+        "remote": "https://github.com/googleapis/googleapis.git",
+        "sha": "2f019bf70bfe06f1e2af1b04011b0a2405190e43",
+        "internalRef": "343202295"
       }
     },
     {
@@ -115,7 +123,6 @@
     "README.md",
     "api-extractor.json",
     "linkinator.config.json",
-    "package-lock.json.1696784860",
     "protos/google/cloud/vision/v1/geometry.proto",
     "protos/google/cloud/vision/v1/image_annotator.proto",
     "protos/google/cloud/vision/v1/product_search.proto",
@@ -148,7 +155,6 @@
     "protos/protos.json",
     "renovate.json",
     "samples/README.md",
-    "samples/package-lock.json.3159907851",
     "src/v1/image_annotator_client.ts",
     "src/v1/image_annotator_client_config.json",
     "src/v1/image_annotator_proto_list.json",
