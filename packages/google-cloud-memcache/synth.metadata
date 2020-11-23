@@ -3,8 +3,16 @@
     {
       "git": {
         "name": ".",
-        "remote": "git@github.com:googleapis/nodejs-memcache.git",
-        "sha": "5b738ad1e42cb45dd2906720b5689dad412d3adf"
+        "remote": "https://github.com/googleapis/nodejs-memcache.git",
+        "sha": "b48f1efd8df276d542cead808f5b602fabdc047b"
+      }
+    },
+    {
+      "git": {
+        "name": "googleapis",
+        "remote": "https://github.com/googleapis/googleapis.git",
+        "sha": "2f019bf70bfe06f1e2af1b04011b0a2405190e43",
+        "internalRef": "343202295"
       }
     },
     {
@@ -79,14 +87,12 @@
     "README.md",
     "api-extractor.json",
     "linkinator.config.json",
-    "package-lock.json.918313730",
     "protos/google/cloud/memcache/v1beta2/cloud_memcache.proto",
     "protos/protos.d.ts",
     "protos/protos.js",
     "protos/protos.json",
     "renovate.json",
     "samples/README.md",
-    "samples/package-lock.json.3145114051",
     "src/index.ts",
     "src/v1beta2/cloud_memcache_client.ts",
     "src/v1beta2/cloud_memcache_client_config.json",

@@ -26,7 +26,17 @@
                           "options": {
                             "(google.api.http).get": "/v1beta2/{parent=projects/*/locations/*}/instances",
                             "(google.api.method_signature)": "parent"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta2/{parent=projects/*/locations/*}/instances"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
                         },
                         "GetInstance": {
                           "requestType": "GetInstanceRequest",
@@ -34,7 +44,17 @@
                           "options": {
                             "(google.api.http).get": "/v1beta2/{name=projects/*/locations/*/instances/*}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta2/{name=projects/*/locations/*/instances/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "CreateInstance": {
                           "requestType": "CreateInstanceRequest",
@@ -45,7 +65,24 @@
                             "(google.api.method_signature)": "parent,instance_id,resource",
                             "(google.longrunning.operation_info).response_type": "google.cloud.memcache.v1beta2.Instance",
                             "(google.longrunning.operation_info).metadata_type": "google.cloud.memcache.v1beta2.OperationMetadata"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta2/{parent=projects/*/locations/*}/instances",
+                                "body": "resource"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,instance_id,resource"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.cloud.memcache.v1beta2.Instance",
+                                "metadata_type": "google.cloud.memcache.v1beta2.OperationMetadata"
+                              }
+                            }
+                          ]
                         },
                         "UpdateInstance": {
                           "requestType": "UpdateInstanceRequest",
@@ -56,7 +93,24 @@
                             "(google.api.method_signature)": "update_mask,resource",
                             "(google.longrunning.operation_info).response_type": "google.cloud.memcache.v1beta2.Instance",
                             "(google.longrunning.operation_info).metadata_type": "google.cloud.memcache.v1beta2.OperationMetadata"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1beta2/{resource.name=projects/*/locations/*/instances/*}",
+                                "body": "resource"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "update_mask,resource"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.cloud.memcache.v1beta2.Instance",
+                                "metadata_type": "google.cloud.memcache.v1beta2.OperationMetadata"
+                              }
+                            }
+                          ]
                         },
                         "UpdateParameters": {
                           "requestType": "UpdateParametersRequest",
@@ -67,7 +121,24 @@
                             "(google.api.method_signature)": "name,update_mask,parameters",
                             "(google.longrunning.operation_info).response_type": "google.cloud.memcache.v1beta2.Instance",
                             "(google.longrunning.operation_info).metadata_type": "google.cloud.memcache.v1beta2.OperationMetadata"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1beta2/{name=projects/*/locations/*/instances/*}:updateParameters",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name,update_mask,parameters"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.cloud.memcache.v1beta2.Instance",
+                                "metadata_type": "google.cloud.memcache.v1beta2.OperationMetadata"
+                              }
+                            }
+                          ]
                         },
                         "DeleteInstance": {
                           "requestType": "DeleteInstanceRequest",
@@ -77,7 +148,23 @@
                             "(google.api.method_signature)": "name",
                             "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
                             "(google.longrunning.operation_info).metadata_type": "google.cloud.memcache.v1beta2.OperationMetadata"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1beta2/{name=projects/*/locations/*/instances/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.protobuf.Empty",
+                                "metadata_type": "google.cloud.memcache.v1beta2.OperationMetadata"
+                              }
+                            }
+                          ]
                         },
                         "ApplyParameters": {
                           "requestType": "ApplyParametersRequest",
@@ -88,7 +175,24 @@
                             "(google.api.method_signature)": "name,node_ids,apply_all",
                             "(google.longrunning.operation_info).response_type": "google.cloud.memcache.v1beta2.Instance",
                             "(google.longrunning.operation_info).metadata_type": "google.cloud.memcache.v1beta2.OperationMetadata"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta2/{name=projects/*/locations/*/instances/*}:applyParameters",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name,node_ids,apply_all"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.cloud.memcache.v1beta2.Instance",
+                                "metadata_type": "google.cloud.memcache.v1beta2.OperationMetadata"
+                              }
+                            }
+                          ]
                         }
                       }
                     },
@@ -1696,7 +1800,17 @@
                   "options": {
                     "(google.api.http).get": "/v1/{name=operations}",
                     "(google.api.method_signature)": "name,filter"
-                  }
+                  },
+                  "parsedOptions": [
+                    {
+                      "(google.api.http)": {
+                        "get": "/v1/{name=operations}"
+                      }
+                    },
+                    {
+                      "(google.api.method_signature)": "name,filter"
+                    }
+                  ]
                 },
                 "GetOperation": {
                   "requestType": "GetOperationRequest",
@@ -1704,7 +1818,17 @@
                   "options": {
                     "(google.api.http).get": "/v1/{name=operations/**}",
                     "(google.api.method_signature)": "name"
-                  }
+                  },
+                  "parsedOptions": [
+                    {
+                      "(google.api.http)": {
+                        "get": "/v1/{name=operations/**}"
+                      }
+                    },
+                    {
+                      "(google.api.method_signature)": "name"
+                    }
+                  ]
                 },
                 "DeleteOperation": {
                   "requestType": "DeleteOperationRequest",
@@ -1712,7 +1836,17 @@
                   "options": {
                     "(google.api.http).delete": "/v1/{name=operations/**}",
                     "(google.api.method_signature)": "name"
-                  }
+                  },
+                  "parsedOptions": [
+                    {
+                      "(google.api.http)": {
+                        "delete": "/v1/{name=operations/**}"
+                      }
+                    },
+                    {
+                      "(google.api.method_signature)": "name"
+                    }
+                  ]
                 },
                 "CancelOperation": {
                   "requestType": "CancelOperationRequest",
@@ -1721,7 +1855,18 @@
                     "(google.api.http).post": "/v1/{name=operations/**}:cancel",
                     "(google.api.http).body": "*",
                     "(google.api.method_signature)": "name"
-                  }
+                  },
+                  "parsedOptions": [
+                    {
+                      "(google.api.http)": {
+                        "post": "/v1/{name=operations/**}:cancel",
+                        "body": "*"
+                      }
+                    },
+                    {
+                      "(google.api.method_signature)": "name"
+                    }
+                  ]
                 },
                 "WaitOperation": {
                   "requestType": "WaitOperationRequest",
