@@ -4,15 +4,15 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/nodejs-os-login.git",
-        "sha": "c16f65b890f6098e876ea059769a11e733f36ac7"
+        "sha": "51c5dd916f37f0d0975f0f53228d70b84764ddc9"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "4c5071b615d96ef9dfd6a63d8429090f1f2872bb",
-        "internalRef": "327369997"
+        "sha": "5587028631d4d743fd906c4eb4e4e4649a7ee5ce",
+        "internalRef": "343187793"
       }
     },
     {
@@ -96,7 +96,6 @@
     "README.md",
     "api-extractor.json",
     "linkinator.config.json",
-    "package-lock.json.1995042437",
     "protos/google/cloud/oslogin/common/common.proto",
     "protos/google/cloud/oslogin/v1/oslogin.proto",
     "protos/google/cloud/oslogin/v1beta/oslogin.proto",
@@ -105,7 +104,6 @@
     "protos/protos.json",
     "renovate.json",
     "samples/README.md",
-    "samples/package-lock.json.1452749784",
     "src/index.ts",
     "src/v1/index.ts",
     "src/v1/os_login_service_client.ts",
