@@ -3,8 +3,16 @@
     {
       "git": {
         "name": ".",
-        "remote": "git@github.com:googleapis/nodejs-dlp.git",
-        "sha": "e675d52e35cfe7bf1355d9ead289891cb2da2db4"
+        "remote": "https://github.com/googleapis/nodejs-dlp.git",
+        "sha": "22fca2526db39b35d867bc585b993fe80c788d44"
+      }
+    },
+    {
+      "git": {
+        "name": "googleapis",
+        "remote": "https://github.com/googleapis/googleapis.git",
+        "sha": "2f019bf70bfe06f1e2af1b04011b0a2405190e43",
+        "internalRef": "343202295"
       }
     },
     {
@@ -79,7 +87,6 @@
     "README.md",
     "api-extractor.json",
     "linkinator.config.json",
-    "package-lock.json.1493547946",
     "protos/google/privacy/dlp/v2/dlp.proto",
     "protos/google/privacy/dlp/v2/storage.proto",
     "protos/protos.d.ts",
@@ -87,7 +94,6 @@
     "protos/protos.json",
     "renovate.json",
     "samples/README.md",
-    "samples/package-lock.json.701286152",
     "src/index.ts",
     "src/v2/dlp_service_client.ts",
     "src/v2/dlp_service_client_config.json",

@@ -33,7 +33,19 @@
                             "(google.api.http).body": "*",
                             "(google.api.http).additional_bindings.post": "/v2/{parent=projects/*/locations/*}/content:inspect",
                             "(google.api.http).additional_bindings.body": "*"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v2/{parent=projects/*}/content:inspect",
+                                "body": "*",
+                                "additional_bindings": {
+                                  "post": "/v2/{parent=projects/*/locations/*}/content:inspect",
+                                  "body": "*"
+                                }
+                              }
+                            }
+                          ]
                         },
                         "RedactImage": {
                           "requestType": "RedactImageRequest",
@@ -43,7 +55,19 @@
                             "(google.api.http).body": "*",
                             "(google.api.http).additional_bindings.post": "/v2/{parent=projects/*/locations/*}/image:redact",
                             "(google.api.http).additional_bindings.body": "*"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v2/{parent=projects/*}/image:redact",
+                                "body": "*",
+                                "additional_bindings": {
+                                  "post": "/v2/{parent=projects/*/locations/*}/image:redact",
+                                  "body": "*"
+                                }
+                              }
+                            }
+                          ]
                         },
                         "DeidentifyContent": {
                           "requestType": "DeidentifyContentRequest",
@@ -53,7 +77,19 @@
                             "(google.api.http).body": "*",
                             "(google.api.http).additional_bindings.post": "/v2/{parent=projects/*/locations/*}/content:deidentify",
                             "(google.api.http).additional_bindings.body": "*"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v2/{parent=projects/*}/content:deidentify",
+                                "body": "*",
+                                "additional_bindings": {
+                                  "post": "/v2/{parent=projects/*/locations/*}/content:deidentify",
+                                  "body": "*"
+                                }
+                              }
+                            }
+                          ]
                         },
                         "ReidentifyContent": {
                           "requestType": "ReidentifyContentRequest",
@@ -63,7 +99,19 @@
                             "(google.api.http).body": "*",
                             "(google.api.http).additional_bindings.post": "/v2/{parent=projects/*/locations/*}/content:reidentify",
                             "(google.api.http).additional_bindings.body": "*"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v2/{parent=projects/*}/content:reidentify",
+                                "body": "*",
+                                "additional_bindings": {
+                                  "post": "/v2/{parent=projects/*/locations/*}/content:reidentify",
+                                  "body": "*"
+                                }
+                              }
+                            }
+                          ]
                         },
                         "ListInfoTypes": {
                           "requestType": "ListInfoTypesRequest",
@@ -72,7 +120,20 @@
                             "(google.api.http).get": "/v2/infoTypes",
                             "(google.api.http).additional_bindings.get": "/v2/{parent=locations/*}/infoTypes",
                             "(google.api.method_signature)": "parent"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v2/infoTypes",
+                                "additional_bindings": {
+                                  "get": "/v2/{parent=locations/*}/infoTypes"
+                                }
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
                         },
                         "CreateInspectTemplate": {
                           "requestType": "CreateInspectTemplateRequest",
@@ -83,7 +144,32 @@
                             "(google.api.http).additional_bindings.post": "/v2/{parent=projects/*/locations/*}/inspectTemplates",
                             "(google.api.http).additional_bindings.body": "*",
                             "(google.api.method_signature)": "parent,inspect_template"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v2/{parent=organizations/*}/inspectTemplates",
+                                "body": "*",
+                                "additional_bindings": [
+                                  {
+                                    "post": "/v2/{parent=organizations/*/locations/*}/inspectTemplates",
+                                    "body": "*"
+                                  },
+                                  {
+                                    "post": "/v2/{parent=projects/*}/inspectTemplates",
+                                    "body": "*"
+                                  },
+                                  {
+                                    "post": "/v2/{parent=projects/*/locations/*}/inspectTemplates",
+                                    "body": "*"
+                                  }
+                                ]
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,inspect_template"
+                            }
+                          ]
                         },
                         "UpdateInspectTemplate": {
                           "requestType": "UpdateInspectTemplateRequest",
@@ -94,7 +180,32 @@
                             "(google.api.http).additional_bindings.patch": "/v2/{name=projects/*/locations/*/inspectTemplates/*}",
                             "(google.api.http).additional_bindings.body": "*",
                             "(google.api.method_signature)": "name,inspect_template,update_mask"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v2/{name=organizations/*/inspectTemplates/*}",
+                                "body": "*",
+                                "additional_bindings": [
+                                  {
+                                    "patch": "/v2/{name=organizations/*/locations/*/inspectTemplates/*}",
+                                    "body": "*"
+                                  },
+                                  {
+                                    "patch": "/v2/{name=projects/*/inspectTemplates/*}",
+                                    "body": "*"
+                                  },
+                                  {
+                                    "patch": "/v2/{name=projects/*/locations/*/inspectTemplates/*}",
+                                    "body": "*"
+                                  }
+                                ]
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name,inspect_template,update_mask"
+                            }
+                          ]
                         },
                         "GetInspectTemplate": {
                           "requestType": "GetInspectTemplateRequest",
@@ -103,7 +214,28 @@
                             "(google.api.http).get": "/v2/{name=organizations/*/inspectTemplates/*}",
                             "(google.api.http).additional_bindings.get": "/v2/{name=projects/*/locations/*/inspectTemplates/*}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v2/{name=organizations/*/inspectTemplates/*}",
+                                "additional_bindings": [
+                                  {
+                                    "get": "/v2/{name=organizations/*/locations/*/inspectTemplates/*}"
+                                  },
+                                  {
+                                    "get": "/v2/{name=projects/*/inspectTemplates/*}"
+                                  },
+                                  {
+                                    "get": "/v2/{name=projects/*/locations/*/inspectTemplates/*}"
+                                  }
+                                ]
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "ListInspectTemplates": {
                           "requestType": "ListInspectTemplatesRequest",
@@ -112,7 +244,28 @@
                             "(google.api.http).get": "/v2/{parent=organizations/*}/inspectTemplates",
                             "(google.api.http).additional_bindings.get": "/v2/{parent=projects/*/locations/*}/inspectTemplates",
                             "(google.api.method_signature)": "parent"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v2/{parent=organizations/*}/inspectTemplates",
+                                "additional_bindings": [
+                                  {
+                                    "get": "/v2/{parent=organizations/*/locations/*}/inspectTemplates"
+                                  },
+                                  {
+                                    "get": "/v2/{parent=projects/*}/inspectTemplates"
+                                  },
+                                  {
+                                    "get": "/v2/{parent=projects/*/locations/*}/inspectTemplates"
+                                  }
+                                ]
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
                         },
                         "DeleteInspectTemplate": {
                           "requestType": "DeleteInspectTemplateRequest",
@@ -121,7 +274,28 @@
                             "(google.api.http).delete": "/v2/{name=organizations/*/inspectTemplates/*}",
                             "(google.api.http).additional_bindings.delete": "/v2/{name=projects/*/locations/*/inspectTemplates/*}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v2/{name=organizations/*/inspectTemplates/*}",
+                                "additional_bindings": [
+                                  {
+                                    "delete": "/v2/{name=organizations/*/locations/*/inspectTemplates/*}"
+                                  },
+                                  {
+                                    "delete": "/v2/{name=projects/*/inspectTemplates/*}"
+                                  },
+                                  {
+                                    "delete": "/v2/{name=projects/*/locations/*/inspectTemplates/*}"
+                                  }
+                                ]
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "CreateDeidentifyTemplate": {
                           "requestType": "CreateDeidentifyTemplateRequest",
@@ -132,7 +306,32 @@
                             "(google.api.http).additional_bindings.post": "/v2/{parent=projects/*/locations/*}/deidentifyTemplates",
                             "(google.api.http).additional_bindings.body": "*",
                             "(google.api.method_signature)": "parent,deidentify_template"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v2/{parent=organizations/*}/deidentifyTemplates",
+                                "body": "*",
+                                "additional_bindings": [
+                                  {
+                                    "post": "/v2/{parent=organizations/*/locations/*}/deidentifyTemplates",
+                                    "body": "*"
+                                  },
+                                  {
+                                    "post": "/v2/{parent=projects/*}/deidentifyTemplates",
+                                    "body": "*"
+                                  },
+                                  {
+                                    "post": "/v2/{parent=projects/*/locations/*}/deidentifyTemplates",
+                                    "body": "*"
+                                  }
+                                ]
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,deidentify_template"
+                            }
+                          ]
                         },
                         "UpdateDeidentifyTemplate": {
                           "requestType": "UpdateDeidentifyTemplateRequest",
@@ -143,7 +342,32 @@
                             "(google.api.http).additional_bindings.patch": "/v2/{name=projects/*/locations/*/deidentifyTemplates/*}",
                             "(google.api.http).additional_bindings.body": "*",
                             "(google.api.method_signature)": "name,deidentify_template,update_mask"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v2/{name=organizations/*/deidentifyTemplates/*}",
+                                "body": "*",
+                                "additional_bindings": [
+                                  {
+                                    "patch": "/v2/{name=organizations/*/locations/*/deidentifyTemplates/*}",
+                                    "body": "*"
+                                  },
+                                  {
+                                    "patch": "/v2/{name=projects/*/deidentifyTemplates/*}",
+                                    "body": "*"
+                                  },
+                                  {
+                                    "patch": "/v2/{name=projects/*/locations/*/deidentifyTemplates/*}",
+                                    "body": "*"
+                                  }
+                                ]
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name,deidentify_template,update_mask"
+                            }
+                          ]
                         },
                         "GetDeidentifyTemplate": {
                           "requestType": "GetDeidentifyTemplateRequest",
@@ -152,7 +376,28 @@
                             "(google.api.http).get": "/v2/{name=organizations/*/deidentifyTemplates/*}",
                             "(google.api.http).additional_bindings.get": "/v2/{name=projects/*/locations/*/deidentifyTemplates/*}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v2/{name=organizations/*/deidentifyTemplates/*}",
+                                "additional_bindings": [
+                                  {
+                                    "get": "/v2/{name=organizations/*/locations/*/deidentifyTemplates/*}"
+                                  },
+                                  {
+                                    "get": "/v2/{name=projects/*/deidentifyTemplates/*}"
+                                  },
+                                  {
+                                    "get": "/v2/{name=projects/*/locations/*/deidentifyTemplates/*}"
+                                  }
+                                ]
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "ListDeidentifyTemplates": {
                           "requestType": "ListDeidentifyTemplatesRequest",
@@ -161,7 +406,28 @@
                             "(google.api.http).get": "/v2/{parent=organizations/*}/deidentifyTemplates",
                             "(google.api.http).additional_bindings.get": "/v2/{parent=projects/*/locations/*}/deidentifyTemplates",
                             "(google.api.method_signature)": "parent"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v2/{parent=organizations/*}/deidentifyTemplates",
+                                "additional_bindings": [
+                                  {
+                                    "get": "/v2/{parent=organizations/*/locations/*}/deidentifyTemplates"
+                                  },
+                                  {
+                                    "get": "/v2/{parent=projects/*}/deidentifyTemplates"
+                                  },
+                                  {
+                                    "get": "/v2/{parent=projects/*/locations/*}/deidentifyTemplates"
+                                  }
+                                ]
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
                         },
                         "DeleteDeidentifyTemplate": {
                           "requestType": "DeleteDeidentifyTemplateRequest",
@@ -170,7 +436,28 @@
                             "(google.api.http).delete": "/v2/{name=organizations/*/deidentifyTemplates/*}",
                             "(google.api.http).additional_bindings.delete": "/v2/{name=projects/*/locations/*/deidentifyTemplates/*}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v2/{name=organizations/*/deidentifyTemplates/*}",
+                                "additional_bindings": [
+                                  {
+                                    "delete": "/v2/{name=organizations/*/locations/*/deidentifyTemplates/*}"
+                                  },
+                                  {
+                                    "delete": "/v2/{name=projects/*/deidentifyTemplates/*}"
+                                  },
+                                  {
+                                    "delete": "/v2/{name=projects/*/locations/*/deidentifyTemplates/*}"
+                                  }
+                                ]
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "CreateJobTrigger": {
                           "requestType": "CreateJobTriggerRequest",
@@ -181,7 +468,22 @@
                             "(google.api.http).additional_bindings.post": "/v2/{parent=projects/*/locations/*}/jobTriggers",
                             "(google.api.http).additional_bindings.body": "*",
                             "(google.api.method_signature)": "parent,job_trigger"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v2/{parent=projects/*}/jobTriggers",
+                                "body": "*",
+                                "additional_bindings": {
+                                  "post": "/v2/{parent=projects/*/locations/*}/jobTriggers",
+                                  "body": "*"
+                                }
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,job_trigger"
+                            }
+                          ]
                         },
                         "UpdateJobTrigger": {
                           "requestType": "UpdateJobTriggerRequest",
@@ -192,7 +494,22 @@
                             "(google.api.http).additional_bindings.patch": "/v2/{name=projects/*/locations/*/jobTriggers/*}",
                             "(google.api.http).additional_bindings.body": "*",
                             "(google.api.method_signature)": "name,job_trigger,update_mask"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v2/{name=projects/*/jobTriggers/*}",
+                                "body": "*",
+                                "additional_bindings": {
+                                  "patch": "/v2/{name=projects/*/locations/*/jobTriggers/*}",
+                                  "body": "*"
+                                }
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name,job_trigger,update_mask"
+                            }
+                          ]
                         },
                         "HybridInspectJobTrigger": {
                           "requestType": "HybridInspectJobTriggerRequest",
@@ -201,7 +518,18 @@
                             "(google.api.http).post": "/v2/{name=projects/*/locations/*/jobTriggers/*}:hybridInspect",
                             "(google.api.http).body": "*",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v2/{name=projects/*/locations/*/jobTriggers/*}:hybridInspect",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "GetJobTrigger": {
                           "requestType": "GetJobTriggerRequest",
@@ -210,7 +538,20 @@
                             "(google.api.http).get": "/v2/{name=projects/*/jobTriggers/*}",
                             "(google.api.http).additional_bindings.get": "/v2/{name=projects/*/locations/*/jobTriggers/*}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v2/{name=projects/*/jobTriggers/*}",
+                                "additional_bindings": {
+                                  "get": "/v2/{name=projects/*/locations/*/jobTriggers/*}"
+                                }
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "ListJobTriggers": {
                           "requestType": "ListJobTriggersRequest",
@@ -219,7 +560,20 @@
                             "(google.api.http).get": "/v2/{parent=projects/*}/jobTriggers",
                             "(google.api.http).additional_bindings.get": "/v2/{parent=projects/*/locations/*}/jobTriggers",
                             "(google.api.method_signature)": "parent"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v2/{parent=projects/*}/jobTriggers",
+                                "additional_bindings": {
+                                  "get": "/v2/{parent=projects/*/locations/*}/jobTriggers"
+                                }
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
                         },
                         "DeleteJobTrigger": {
                           "requestType": "DeleteJobTriggerRequest",
@@ -228,7 +582,20 @@
                             "(google.api.http).delete": "/v2/{name=projects/*/jobTriggers/*}",
                             "(google.api.http).additional_bindings.delete": "/v2/{name=projects/*/locations/*/jobTriggers/*}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v2/{name=projects/*/jobTriggers/*}",
+                                "additional_bindings": {
+                                  "delete": "/v2/{name=projects/*/locations/*/jobTriggers/*}"
+                                }
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "ActivateJobTrigger": {
                           "requestType": "ActivateJobTriggerRequest",
@@ -238,7 +605,19 @@
                             "(google.api.http).body": "*",
                             "(google.api.http).additional_bindings.post": "/v2/{name=projects/*/locations/*/jobTriggers/*}:activate",
                             "(google.api.http).additional_bindings.body": "*"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v2/{name=projects/*/jobTriggers/*}:activate",
+                                "body": "*",
+                                "additional_bindings": {
+                                  "post": "/v2/{name=projects/*/locations/*/jobTriggers/*}:activate",
+                                  "body": "*"
+                                }
+                              }
+                            }
+                          ]
                         },
                         "CreateDlpJob": {
                           "requestType": "CreateDlpJobRequest",
@@ -249,7 +628,25 @@
                             "(google.api.http).additional_bindings.post": "/v2/{parent=projects/*/locations/*}/dlpJobs",
                             "(google.api.http).additional_bindings.body": "*",
                             "(google.api.method_signature)": "parent,risk_job"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v2/{parent=projects/*}/dlpJobs",
+                                "body": "*",
+                                "additional_bindings": {
+                                  "post": "/v2/{parent=projects/*/locations/*}/dlpJobs",
+                                  "body": "*"
+                                }
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,inspect_job"
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,risk_job"
+                            }
+                          ]
                         },
                         "ListDlpJobs": {
                           "requestType": "ListDlpJobsRequest",
@@ -258,7 +655,20 @@
                             "(google.api.http).get": "/v2/{parent=projects/*}/dlpJobs",
                             "(google.api.http).additional_bindings.get": "/v2/{parent=projects/*/locations/*}/dlpJobs",
                             "(google.api.method_signature)": "parent"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v2/{parent=projects/*}/dlpJobs",
+                                "additional_bindings": {
+                                  "get": "/v2/{parent=projects/*/locations/*}/dlpJobs"
+                                }
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
                         },
                         "GetDlpJob": {
                           "requestType": "GetDlpJobRequest",
@@ -267,7 +677,20 @@
                             "(google.api.http).get": "/v2/{name=projects/*/dlpJobs/*}",
                             "(google.api.http).additional_bindings.get": "/v2/{name=projects/*/locations/*/dlpJobs/*}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v2/{name=projects/*/dlpJobs/*}",
+                                "additional_bindings": {
+                                  "get": "/v2/{name=projects/*/locations/*/dlpJobs/*}"
+                                }
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "DeleteDlpJob": {
                           "requestType": "DeleteDlpJobRequest",
@@ -276,7 +699,20 @@
                             "(google.api.http).delete": "/v2/{name=projects/*/dlpJobs/*}",
                             "(google.api.http).additional_bindings.delete": "/v2/{name=projects/*/locations/*/dlpJobs/*}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v2/{name=projects/*/dlpJobs/*}",
+                                "additional_bindings": {
+                                  "delete": "/v2/{name=projects/*/locations/*/dlpJobs/*}"
+                                }
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "CancelDlpJob": {
                           "requestType": "CancelDlpJobRequest",
@@ -286,7 +722,19 @@
                             "(google.api.http).body": "*",
                             "(google.api.http).additional_bindings.post": "/v2/{name=projects/*/locations/*/dlpJobs/*}:cancel",
                             "(google.api.http).additional_bindings.body": "*"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v2/{name=projects/*/dlpJobs/*}:cancel",
+                                "body": "*",
+                                "additional_bindings": {
+                                  "post": "/v2/{name=projects/*/locations/*/dlpJobs/*}:cancel",
+                                  "body": "*"
+                                }
+                              }
+                            }
+                          ]
                         },
                         "CreateStoredInfoType": {
                           "requestType": "CreateStoredInfoTypeRequest",
@@ -297,7 +745,32 @@
                             "(google.api.http).additional_bindings.post": "/v2/{parent=projects/*/locations/*}/storedInfoTypes",
                             "(google.api.http).additional_bindings.body": "*",
                             "(google.api.method_signature)": "parent,config"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v2/{parent=organizations/*}/storedInfoTypes",
+                                "body": "*",
+                                "additional_bindings": [
+                                  {
+                                    "post": "/v2/{parent=organizations/*/locations/*}/storedInfoTypes",
+                                    "body": "*"
+                                  },
+                                  {
+                                    "post": "/v2/{parent=projects/*}/storedInfoTypes",
+                                    "body": "*"
+                                  },
+                                  {
+                                    "post": "/v2/{parent=projects/*/locations/*}/storedInfoTypes",
+                                    "body": "*"
+                                  }
+                                ]
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,config"
+                            }
+                          ]
                         },
                         "UpdateStoredInfoType": {
                           "requestType": "UpdateStoredInfoTypeRequest",
@@ -308,7 +781,32 @@
                             "(google.api.http).additional_bindings.patch": "/v2/{name=projects/*/locations/*/storedInfoTypes/*}",
                             "(google.api.http).additional_bindings.body": "*",
                             "(google.api.method_signature)": "name,config,update_mask"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v2/{name=organizations/*/storedInfoTypes/*}",
+                                "body": "*",
+                                "additional_bindings": [
+                                  {
+                                    "patch": "/v2/{name=organizations/*/locations/*/storedInfoTypes/*}",
+                                    "body": "*"
+                                  },
+                                  {
+                                    "patch": "/v2/{name=projects/*/storedInfoTypes/*}",
+                                    "body": "*"
+                                  },
+                                  {
+                                    "patch": "/v2/{name=projects/*/locations/*/storedInfoTypes/*}",
+                                    "body": "*"
+                                  }
+                                ]
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name,config,update_mask"
+                            }
+                          ]
                         },
                         "GetStoredInfoType": {
                           "requestType": "GetStoredInfoTypeRequest",
@@ -317,7 +815,28 @@
                             "(google.api.http).get": "/v2/{name=organizations/*/storedInfoTypes/*}",
                             "(google.api.http).additional_bindings.get": "/v2/{name=projects/*/locations/*/storedInfoTypes/*}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v2/{name=organizations/*/storedInfoTypes/*}",
+                                "additional_bindings": [
+                                  {
+                                    "get": "/v2/{name=organizations/*/locations/*/storedInfoTypes/*}"
+                                  },
+                                  {
+                                    "get": "/v2/{name=projects/*/storedInfoTypes/*}"
+                                  },
+                                  {
+                                    "get": "/v2/{name=projects/*/locations/*/storedInfoTypes/*}"
+                                  }
+                                ]
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "ListStoredInfoTypes": {
                           "requestType": "ListStoredInfoTypesRequest",
@@ -326,7 +845,28 @@
                             "(google.api.http).get": "/v2/{parent=organizations/*}/storedInfoTypes",
                             "(google.api.http).additional_bindings.get": "/v2/{parent=projects/*/locations/*}/storedInfoTypes",
                             "(google.api.method_signature)": "parent"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v2/{parent=organizations/*}/storedInfoTypes",
+                                "additional_bindings": [
+                                  {
+                                    "get": "/v2/{parent=organizations/*/locations/*}/storedInfoTypes"
+                                  },
+                                  {
+                                    "get": "/v2/{parent=projects/*}/storedInfoTypes"
+                                  },
+                                  {
+                                    "get": "/v2/{parent=projects/*/locations/*}/storedInfoTypes"
+                                  }
+                                ]
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
                         },
                         "DeleteStoredInfoType": {
                           "requestType": "DeleteStoredInfoTypeRequest",
@@ -335,7 +875,28 @@
                             "(google.api.http).delete": "/v2/{name=organizations/*/storedInfoTypes/*}",
                             "(google.api.http).additional_bindings.delete": "/v2/{name=projects/*/locations/*/storedInfoTypes/*}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v2/{name=organizations/*/storedInfoTypes/*}",
+                                "additional_bindings": [
+                                  {
+                                    "delete": "/v2/{name=organizations/*/locations/*/storedInfoTypes/*}"
+                                  },
+                                  {
+                                    "delete": "/v2/{name=projects/*/storedInfoTypes/*}"
+                                  },
+                                  {
+                                    "delete": "/v2/{name=projects/*/locations/*/storedInfoTypes/*}"
+                                  }
+                                ]
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "HybridInspectDlpJob": {
                           "requestType": "HybridInspectDlpJobRequest",
@@ -344,7 +905,18 @@
                             "(google.api.http).post": "/v2/{name=projects/*/locations/*/dlpJobs/*}:hybridInspect",
                             "(google.api.http).body": "*",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v2/{name=projects/*/locations/*/dlpJobs/*}:hybridInspect",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "FinishDlpJob": {
                           "requestType": "FinishDlpJobRequest",
@@ -352,7 +924,15 @@
                           "options": {
                             "(google.api.http).post": "/v2/{name=projects/*/locations/*/dlpJobs/*}:finish",
                             "(google.api.http).body": "*"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v2/{name=projects/*/locations/*/dlpJobs/*}:finish",
+                                "body": "*"
+                              }
+                            }
+                          ]
                         }
                       }
                     },

@@ -16,6 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
+/* global window */
 import * as gax from 'google-gax';
 import {
   Callback,
@@ -30,6 +31,11 @@ import * as path from 'path';
 import {Transform} from 'stream';
 import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
+/**
+ * Client JSON configuration object, loaded from
+ * `src/v2/dlp_service_client_config.json`.
+ * This file defines retry strategy and timeouts for all API methods in this library.
+ */
 import * as gapicConfig from './dlp_service_client_config.json';
 
 const version = require('../../../package.json').version;
@@ -91,9 +97,9 @@ export class DlpServiceClient {
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
-   * @param {gax.ClientConfig} [options.clientConfig] - client configuration override.
-   *     TODO(@alexander-fenster): link to gax documentation.
-   * @param {boolean} fallback - Use HTTP fallback mode.
+   * @param {gax.ClientConfig} [options.clientConfig] - Client configuration override.
+   *     Follows the structure of {@link gapicConfig}.
+   * @param {boolean} [options.fallback] - Use HTTP fallback mode.
    *     In fallback mode, a special browser-compatible transport implementation is used
    *     instead of gRPC transport. In browser context (if the `window` object is defined)
    *     the fallback mode is enabled automatically; set `options.fallback` to `false`
@@ -106,7 +112,9 @@ export class DlpServiceClient {
       opts?.servicePath || opts?.apiEndpoint || staticMembers.servicePath;
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback = opts?.fallback ?? typeof window !== 'undefined';
+    const fallback =
+      opts?.fallback ??
+      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
@@ -422,7 +430,7 @@ export class DlpServiceClient {
   // -------------------
   inspectContent(
     request: protos.google.privacy.dlp.v2.IInspectContentRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.privacy.dlp.v2.IInspectContentResponse,
@@ -432,7 +440,7 @@ export class DlpServiceClient {
   >;
   inspectContent(
     request: protos.google.privacy.dlp.v2.IInspectContentRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.privacy.dlp.v2.IInspectContentResponse,
       protos.google.privacy.dlp.v2.IInspectContentRequest | null | undefined,
@@ -503,7 +511,7 @@ export class DlpServiceClient {
   inspectContent(
     request: protos.google.privacy.dlp.v2.IInspectContentRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.privacy.dlp.v2.IInspectContentResponse,
           | protos.google.privacy.dlp.v2.IInspectContentRequest
@@ -524,12 +532,12 @@ export class DlpServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -544,7 +552,7 @@ export class DlpServiceClient {
   }
   redactImage(
     request: protos.google.privacy.dlp.v2.IRedactImageRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.privacy.dlp.v2.IRedactImageResponse,
@@ -554,7 +562,7 @@ export class DlpServiceClient {
   >;
   redactImage(
     request: protos.google.privacy.dlp.v2.IRedactImageRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.privacy.dlp.v2.IRedactImageResponse,
       protos.google.privacy.dlp.v2.IRedactImageRequest | null | undefined,
@@ -622,7 +630,7 @@ export class DlpServiceClient {
   redactImage(
     request: protos.google.privacy.dlp.v2.IRedactImageRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.privacy.dlp.v2.IRedactImageResponse,
           protos.google.privacy.dlp.v2.IRedactImageRequest | null | undefined,
@@ -641,12 +649,12 @@ export class DlpServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -661,7 +669,7 @@ export class DlpServiceClient {
   }
   deidentifyContent(
     request: protos.google.privacy.dlp.v2.IDeidentifyContentRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.privacy.dlp.v2.IDeidentifyContentResponse,
@@ -671,7 +679,7 @@ export class DlpServiceClient {
   >;
   deidentifyContent(
     request: protos.google.privacy.dlp.v2.IDeidentifyContentRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.privacy.dlp.v2.IDeidentifyContentResponse,
       protos.google.privacy.dlp.v2.IDeidentifyContentRequest | null | undefined,
@@ -752,7 +760,7 @@ export class DlpServiceClient {
   deidentifyContent(
     request: protos.google.privacy.dlp.v2.IDeidentifyContentRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.privacy.dlp.v2.IDeidentifyContentResponse,
           | protos.google.privacy.dlp.v2.IDeidentifyContentRequest
@@ -773,12 +781,12 @@ export class DlpServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -793,7 +801,7 @@ export class DlpServiceClient {
   }
   reidentifyContent(
     request: protos.google.privacy.dlp.v2.IReidentifyContentRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.privacy.dlp.v2.IReidentifyContentResponse,
@@ -803,7 +811,7 @@ export class DlpServiceClient {
   >;
   reidentifyContent(
     request: protos.google.privacy.dlp.v2.IReidentifyContentRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.privacy.dlp.v2.IReidentifyContentResponse,
       protos.google.privacy.dlp.v2.IReidentifyContentRequest | null | undefined,
@@ -887,7 +895,7 @@ export class DlpServiceClient {
   reidentifyContent(
     request: protos.google.privacy.dlp.v2.IReidentifyContentRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.privacy.dlp.v2.IReidentifyContentResponse,
           | protos.google.privacy.dlp.v2.IReidentifyContentRequest
@@ -908,12 +916,12 @@ export class DlpServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -928,7 +936,7 @@ export class DlpServiceClient {
   }
   listInfoTypes(
     request: protos.google.privacy.dlp.v2.IListInfoTypesRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.privacy.dlp.v2.IListInfoTypesResponse,
@@ -938,7 +946,7 @@ export class DlpServiceClient {
   >;
   listInfoTypes(
     request: protos.google.privacy.dlp.v2.IListInfoTypesRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.privacy.dlp.v2.IListInfoTypesResponse,
       protos.google.privacy.dlp.v2.IListInfoTypesRequest | null | undefined,
@@ -988,7 +996,7 @@ export class DlpServiceClient {
   listInfoTypes(
     request: protos.google.privacy.dlp.v2.IListInfoTypesRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.privacy.dlp.v2.IListInfoTypesResponse,
           protos.google.privacy.dlp.v2.IListInfoTypesRequest | null | undefined,
@@ -1007,12 +1015,12 @@ export class DlpServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1027,7 +1035,7 @@ export class DlpServiceClient {
   }
   createInspectTemplate(
     request: protos.google.privacy.dlp.v2.ICreateInspectTemplateRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.privacy.dlp.v2.IInspectTemplate,
@@ -1037,7 +1045,7 @@ export class DlpServiceClient {
   >;
   createInspectTemplate(
     request: protos.google.privacy.dlp.v2.ICreateInspectTemplateRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.privacy.dlp.v2.IInspectTemplate,
       | protos.google.privacy.dlp.v2.ICreateInspectTemplateRequest
@@ -1106,7 +1114,7 @@ export class DlpServiceClient {
   createInspectTemplate(
     request: protos.google.privacy.dlp.v2.ICreateInspectTemplateRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.privacy.dlp.v2.IInspectTemplate,
           | protos.google.privacy.dlp.v2.ICreateInspectTemplateRequest
@@ -1129,12 +1137,12 @@ export class DlpServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1149,7 +1157,7 @@ export class DlpServiceClient {
   }
   updateInspectTemplate(
     request: protos.google.privacy.dlp.v2.IUpdateInspectTemplateRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.privacy.dlp.v2.IInspectTemplate,
@@ -1159,7 +1167,7 @@ export class DlpServiceClient {
   >;
   updateInspectTemplate(
     request: protos.google.privacy.dlp.v2.IUpdateInspectTemplateRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.privacy.dlp.v2.IInspectTemplate,
       | protos.google.privacy.dlp.v2.IUpdateInspectTemplateRequest
@@ -1205,7 +1213,7 @@ export class DlpServiceClient {
   updateInspectTemplate(
     request: protos.google.privacy.dlp.v2.IUpdateInspectTemplateRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.privacy.dlp.v2.IInspectTemplate,
           | protos.google.privacy.dlp.v2.IUpdateInspectTemplateRequest
@@ -1228,12 +1236,12 @@ export class DlpServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1248,7 +1256,7 @@ export class DlpServiceClient {
   }
   getInspectTemplate(
     request: protos.google.privacy.dlp.v2.IGetInspectTemplateRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.privacy.dlp.v2.IInspectTemplate,
@@ -1258,7 +1266,7 @@ export class DlpServiceClient {
   >;
   getInspectTemplate(
     request: protos.google.privacy.dlp.v2.IGetInspectTemplateRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.privacy.dlp.v2.IInspectTemplate,
       | protos.google.privacy.dlp.v2.IGetInspectTemplateRequest
@@ -1300,7 +1308,7 @@ export class DlpServiceClient {
   getInspectTemplate(
     request: protos.google.privacy.dlp.v2.IGetInspectTemplateRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.privacy.dlp.v2.IInspectTemplate,
           | protos.google.privacy.dlp.v2.IGetInspectTemplateRequest
@@ -1323,12 +1331,12 @@ export class DlpServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1343,7 +1351,7 @@ export class DlpServiceClient {
   }
   deleteInspectTemplate(
     request: protos.google.privacy.dlp.v2.IDeleteInspectTemplateRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.protobuf.IEmpty,
@@ -1353,7 +1361,7 @@ export class DlpServiceClient {
   >;
   deleteInspectTemplate(
     request: protos.google.privacy.dlp.v2.IDeleteInspectTemplateRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.protobuf.IEmpty,
       | protos.google.privacy.dlp.v2.IDeleteInspectTemplateRequest
@@ -1395,7 +1403,7 @@ export class DlpServiceClient {
   deleteInspectTemplate(
     request: protos.google.privacy.dlp.v2.IDeleteInspectTemplateRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.protobuf.IEmpty,
           | protos.google.privacy.dlp.v2.IDeleteInspectTemplateRequest
@@ -1418,12 +1426,12 @@ export class DlpServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1438,7 +1446,7 @@ export class DlpServiceClient {
   }
   createDeidentifyTemplate(
     request: protos.google.privacy.dlp.v2.ICreateDeidentifyTemplateRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.privacy.dlp.v2.IDeidentifyTemplate,
@@ -1448,7 +1456,7 @@ export class DlpServiceClient {
   >;
   createDeidentifyTemplate(
     request: protos.google.privacy.dlp.v2.ICreateDeidentifyTemplateRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.privacy.dlp.v2.IDeidentifyTemplate,
       | protos.google.privacy.dlp.v2.ICreateDeidentifyTemplateRequest
@@ -1518,7 +1526,7 @@ export class DlpServiceClient {
   createDeidentifyTemplate(
     request: protos.google.privacy.dlp.v2.ICreateDeidentifyTemplateRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.privacy.dlp.v2.IDeidentifyTemplate,
           | protos.google.privacy.dlp.v2.ICreateDeidentifyTemplateRequest
@@ -1541,12 +1549,12 @@ export class DlpServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1565,7 +1573,7 @@ export class DlpServiceClient {
   }
   updateDeidentifyTemplate(
     request: protos.google.privacy.dlp.v2.IUpdateDeidentifyTemplateRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.privacy.dlp.v2.IDeidentifyTemplate,
@@ -1575,7 +1583,7 @@ export class DlpServiceClient {
   >;
   updateDeidentifyTemplate(
     request: protos.google.privacy.dlp.v2.IUpdateDeidentifyTemplateRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.privacy.dlp.v2.IDeidentifyTemplate,
       | protos.google.privacy.dlp.v2.IUpdateDeidentifyTemplateRequest
@@ -1622,7 +1630,7 @@ export class DlpServiceClient {
   updateDeidentifyTemplate(
     request: protos.google.privacy.dlp.v2.IUpdateDeidentifyTemplateRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.privacy.dlp.v2.IDeidentifyTemplate,
           | protos.google.privacy.dlp.v2.IUpdateDeidentifyTemplateRequest
@@ -1645,12 +1653,12 @@ export class DlpServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1669,7 +1677,7 @@ export class DlpServiceClient {
   }
   getDeidentifyTemplate(
     request: protos.google.privacy.dlp.v2.IGetDeidentifyTemplateRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.privacy.dlp.v2.IDeidentifyTemplate,
@@ -1679,7 +1687,7 @@ export class DlpServiceClient {
   >;
   getDeidentifyTemplate(
     request: protos.google.privacy.dlp.v2.IGetDeidentifyTemplateRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.privacy.dlp.v2.IDeidentifyTemplate,
       | protos.google.privacy.dlp.v2.IGetDeidentifyTemplateRequest
@@ -1722,7 +1730,7 @@ export class DlpServiceClient {
   getDeidentifyTemplate(
     request: protos.google.privacy.dlp.v2.IGetDeidentifyTemplateRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.privacy.dlp.v2.IDeidentifyTemplate,
           | protos.google.privacy.dlp.v2.IGetDeidentifyTemplateRequest
@@ -1745,12 +1753,12 @@ export class DlpServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1765,7 +1773,7 @@ export class DlpServiceClient {
   }
   deleteDeidentifyTemplate(
     request: protos.google.privacy.dlp.v2.IDeleteDeidentifyTemplateRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.protobuf.IEmpty,
@@ -1775,7 +1783,7 @@ export class DlpServiceClient {
   >;
   deleteDeidentifyTemplate(
     request: protos.google.privacy.dlp.v2.IDeleteDeidentifyTemplateRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.protobuf.IEmpty,
       | protos.google.privacy.dlp.v2.IDeleteDeidentifyTemplateRequest
@@ -1818,7 +1826,7 @@ export class DlpServiceClient {
   deleteDeidentifyTemplate(
     request: protos.google.privacy.dlp.v2.IDeleteDeidentifyTemplateRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.protobuf.IEmpty,
           | protos.google.privacy.dlp.v2.IDeleteDeidentifyTemplateRequest
@@ -1841,12 +1849,12 @@ export class DlpServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1865,7 +1873,7 @@ export class DlpServiceClient {
   }
   createJobTrigger(
     request: protos.google.privacy.dlp.v2.ICreateJobTriggerRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.privacy.dlp.v2.IJobTrigger,
@@ -1875,7 +1883,7 @@ export class DlpServiceClient {
   >;
   createJobTrigger(
     request: protos.google.privacy.dlp.v2.ICreateJobTriggerRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.privacy.dlp.v2.IJobTrigger,
       protos.google.privacy.dlp.v2.ICreateJobTriggerRequest | null | undefined,
@@ -1936,7 +1944,7 @@ export class DlpServiceClient {
   createJobTrigger(
     request: protos.google.privacy.dlp.v2.ICreateJobTriggerRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.privacy.dlp.v2.IJobTrigger,
           | protos.google.privacy.dlp.v2.ICreateJobTriggerRequest
@@ -1957,12 +1965,12 @@ export class DlpServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1977,7 +1985,7 @@ export class DlpServiceClient {
   }
   updateJobTrigger(
     request: protos.google.privacy.dlp.v2.IUpdateJobTriggerRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.privacy.dlp.v2.IJobTrigger,
@@ -1987,7 +1995,7 @@ export class DlpServiceClient {
   >;
   updateJobTrigger(
     request: protos.google.privacy.dlp.v2.IUpdateJobTriggerRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.privacy.dlp.v2.IJobTrigger,
       protos.google.privacy.dlp.v2.IUpdateJobTriggerRequest | null | undefined,
@@ -2028,7 +2036,7 @@ export class DlpServiceClient {
   updateJobTrigger(
     request: protos.google.privacy.dlp.v2.IUpdateJobTriggerRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.privacy.dlp.v2.IJobTrigger,
           | protos.google.privacy.dlp.v2.IUpdateJobTriggerRequest
@@ -2049,12 +2057,12 @@ export class DlpServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -2069,7 +2077,7 @@ export class DlpServiceClient {
   }
   hybridInspectJobTrigger(
     request: protos.google.privacy.dlp.v2.IHybridInspectJobTriggerRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.privacy.dlp.v2.IHybridInspectResponse,
@@ -2079,7 +2087,7 @@ export class DlpServiceClient {
   >;
   hybridInspectJobTrigger(
     request: protos.google.privacy.dlp.v2.IHybridInspectJobTriggerRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.privacy.dlp.v2.IHybridInspectResponse,
       | protos.google.privacy.dlp.v2.IHybridInspectJobTriggerRequest
@@ -2126,7 +2134,7 @@ export class DlpServiceClient {
   hybridInspectJobTrigger(
     request: protos.google.privacy.dlp.v2.IHybridInspectJobTriggerRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.privacy.dlp.v2.IHybridInspectResponse,
           | protos.google.privacy.dlp.v2.IHybridInspectJobTriggerRequest
@@ -2149,12 +2157,12 @@ export class DlpServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -2173,7 +2181,7 @@ export class DlpServiceClient {
   }
   getJobTrigger(
     request: protos.google.privacy.dlp.v2.IGetJobTriggerRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.privacy.dlp.v2.IJobTrigger,
@@ -2183,7 +2191,7 @@ export class DlpServiceClient {
   >;
   getJobTrigger(
     request: protos.google.privacy.dlp.v2.IGetJobTriggerRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.privacy.dlp.v2.IJobTrigger,
       protos.google.privacy.dlp.v2.IGetJobTriggerRequest | null | undefined,
@@ -2220,7 +2228,7 @@ export class DlpServiceClient {
   getJobTrigger(
     request: protos.google.privacy.dlp.v2.IGetJobTriggerRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.privacy.dlp.v2.IJobTrigger,
           protos.google.privacy.dlp.v2.IGetJobTriggerRequest | null | undefined,
@@ -2239,12 +2247,12 @@ export class DlpServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -2259,7 +2267,7 @@ export class DlpServiceClient {
   }
   deleteJobTrigger(
     request: protos.google.privacy.dlp.v2.IDeleteJobTriggerRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.protobuf.IEmpty,
@@ -2269,7 +2277,7 @@ export class DlpServiceClient {
   >;
   deleteJobTrigger(
     request: protos.google.privacy.dlp.v2.IDeleteJobTriggerRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.protobuf.IEmpty,
       protos.google.privacy.dlp.v2.IDeleteJobTriggerRequest | null | undefined,
@@ -2306,7 +2314,7 @@ export class DlpServiceClient {
   deleteJobTrigger(
     request: protos.google.privacy.dlp.v2.IDeleteJobTriggerRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.protobuf.IEmpty,
           | protos.google.privacy.dlp.v2.IDeleteJobTriggerRequest
@@ -2327,12 +2335,12 @@ export class DlpServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -2347,7 +2355,7 @@ export class DlpServiceClient {
   }
   activateJobTrigger(
     request: protos.google.privacy.dlp.v2.IActivateJobTriggerRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.privacy.dlp.v2.IDlpJob,
@@ -2357,7 +2365,7 @@ export class DlpServiceClient {
   >;
   activateJobTrigger(
     request: protos.google.privacy.dlp.v2.IActivateJobTriggerRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.privacy.dlp.v2.IDlpJob,
       | protos.google.privacy.dlp.v2.IActivateJobTriggerRequest
@@ -2398,7 +2406,7 @@ export class DlpServiceClient {
   activateJobTrigger(
     request: protos.google.privacy.dlp.v2.IActivateJobTriggerRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.privacy.dlp.v2.IDlpJob,
           | protos.google.privacy.dlp.v2.IActivateJobTriggerRequest
@@ -2421,12 +2429,12 @@ export class DlpServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -2441,7 +2449,7 @@ export class DlpServiceClient {
   }
   createDlpJob(
     request: protos.google.privacy.dlp.v2.ICreateDlpJobRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.privacy.dlp.v2.IDlpJob,
@@ -2451,7 +2459,7 @@ export class DlpServiceClient {
   >;
   createDlpJob(
     request: protos.google.privacy.dlp.v2.ICreateDlpJobRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.privacy.dlp.v2.IDlpJob,
       protos.google.privacy.dlp.v2.ICreateDlpJobRequest | null | undefined,
@@ -2518,7 +2526,7 @@ export class DlpServiceClient {
   createDlpJob(
     request: protos.google.privacy.dlp.v2.ICreateDlpJobRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.privacy.dlp.v2.IDlpJob,
           protos.google.privacy.dlp.v2.ICreateDlpJobRequest | null | undefined,
@@ -2537,12 +2545,12 @@ export class DlpServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -2557,7 +2565,7 @@ export class DlpServiceClient {
   }
   getDlpJob(
     request: protos.google.privacy.dlp.v2.IGetDlpJobRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.privacy.dlp.v2.IDlpJob,
@@ -2567,7 +2575,7 @@ export class DlpServiceClient {
   >;
   getDlpJob(
     request: protos.google.privacy.dlp.v2.IGetDlpJobRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.privacy.dlp.v2.IDlpJob,
       protos.google.privacy.dlp.v2.IGetDlpJobRequest | null | undefined,
@@ -2604,7 +2612,7 @@ export class DlpServiceClient {
   getDlpJob(
     request: protos.google.privacy.dlp.v2.IGetDlpJobRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.privacy.dlp.v2.IDlpJob,
           protos.google.privacy.dlp.v2.IGetDlpJobRequest | null | undefined,
@@ -2623,12 +2631,12 @@ export class DlpServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -2643,7 +2651,7 @@ export class DlpServiceClient {
   }
   deleteDlpJob(
     request: protos.google.privacy.dlp.v2.IDeleteDlpJobRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.protobuf.IEmpty,
@@ -2653,7 +2661,7 @@ export class DlpServiceClient {
   >;
   deleteDlpJob(
     request: protos.google.privacy.dlp.v2.IDeleteDlpJobRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.protobuf.IEmpty,
       protos.google.privacy.dlp.v2.IDeleteDlpJobRequest | null | undefined,
@@ -2692,7 +2700,7 @@ export class DlpServiceClient {
   deleteDlpJob(
     request: protos.google.privacy.dlp.v2.IDeleteDlpJobRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.protobuf.IEmpty,
           protos.google.privacy.dlp.v2.IDeleteDlpJobRequest | null | undefined,
@@ -2711,12 +2719,12 @@ export class DlpServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -2731,7 +2739,7 @@ export class DlpServiceClient {
   }
   cancelDlpJob(
     request: protos.google.privacy.dlp.v2.ICancelDlpJobRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.protobuf.IEmpty,
@@ -2741,7 +2749,7 @@ export class DlpServiceClient {
   >;
   cancelDlpJob(
     request: protos.google.privacy.dlp.v2.ICancelDlpJobRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.protobuf.IEmpty,
       protos.google.privacy.dlp.v2.ICancelDlpJobRequest | null | undefined,
@@ -2780,7 +2788,7 @@ export class DlpServiceClient {
   cancelDlpJob(
     request: protos.google.privacy.dlp.v2.ICancelDlpJobRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.protobuf.IEmpty,
           protos.google.privacy.dlp.v2.ICancelDlpJobRequest | null | undefined,
@@ -2799,12 +2807,12 @@ export class DlpServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -2819,7 +2827,7 @@ export class DlpServiceClient {
   }
   createStoredInfoType(
     request: protos.google.privacy.dlp.v2.ICreateStoredInfoTypeRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.privacy.dlp.v2.IStoredInfoType,
@@ -2829,7 +2837,7 @@ export class DlpServiceClient {
   >;
   createStoredInfoType(
     request: protos.google.privacy.dlp.v2.ICreateStoredInfoTypeRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.privacy.dlp.v2.IStoredInfoType,
       | protos.google.privacy.dlp.v2.ICreateStoredInfoTypeRequest
@@ -2898,7 +2906,7 @@ export class DlpServiceClient {
   createStoredInfoType(
     request: protos.google.privacy.dlp.v2.ICreateStoredInfoTypeRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.privacy.dlp.v2.IStoredInfoType,
           | protos.google.privacy.dlp.v2.ICreateStoredInfoTypeRequest
@@ -2921,12 +2929,12 @@ export class DlpServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -2941,7 +2949,7 @@ export class DlpServiceClient {
   }
   updateStoredInfoType(
     request: protos.google.privacy.dlp.v2.IUpdateStoredInfoTypeRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.privacy.dlp.v2.IStoredInfoType,
@@ -2951,7 +2959,7 @@ export class DlpServiceClient {
   >;
   updateStoredInfoType(
     request: protos.google.privacy.dlp.v2.IUpdateStoredInfoTypeRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.privacy.dlp.v2.IStoredInfoType,
       | protos.google.privacy.dlp.v2.IUpdateStoredInfoTypeRequest
@@ -3001,7 +3009,7 @@ export class DlpServiceClient {
   updateStoredInfoType(
     request: protos.google.privacy.dlp.v2.IUpdateStoredInfoTypeRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.privacy.dlp.v2.IStoredInfoType,
           | protos.google.privacy.dlp.v2.IUpdateStoredInfoTypeRequest
@@ -3024,12 +3032,12 @@ export class DlpServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -3044,7 +3052,7 @@ export class DlpServiceClient {
   }
   getStoredInfoType(
     request: protos.google.privacy.dlp.v2.IGetStoredInfoTypeRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.privacy.dlp.v2.IStoredInfoType,
@@ -3054,7 +3062,7 @@ export class DlpServiceClient {
   >;
   getStoredInfoType(
     request: protos.google.privacy.dlp.v2.IGetStoredInfoTypeRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.privacy.dlp.v2.IStoredInfoType,
       protos.google.privacy.dlp.v2.IGetStoredInfoTypeRequest | null | undefined,
@@ -3093,7 +3101,7 @@ export class DlpServiceClient {
   getStoredInfoType(
     request: protos.google.privacy.dlp.v2.IGetStoredInfoTypeRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.privacy.dlp.v2.IStoredInfoType,
           | protos.google.privacy.dlp.v2.IGetStoredInfoTypeRequest
@@ -3114,12 +3122,12 @@ export class DlpServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -3134,7 +3142,7 @@ export class DlpServiceClient {
   }
   deleteStoredInfoType(
     request: protos.google.privacy.dlp.v2.IDeleteStoredInfoTypeRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.protobuf.IEmpty,
@@ -3144,7 +3152,7 @@ export class DlpServiceClient {
   >;
   deleteStoredInfoType(
     request: protos.google.privacy.dlp.v2.IDeleteStoredInfoTypeRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.protobuf.IEmpty,
       | protos.google.privacy.dlp.v2.IDeleteStoredInfoTypeRequest
@@ -3187,7 +3195,7 @@ export class DlpServiceClient {
   deleteStoredInfoType(
     request: protos.google.privacy.dlp.v2.IDeleteStoredInfoTypeRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.protobuf.IEmpty,
           | protos.google.privacy.dlp.v2.IDeleteStoredInfoTypeRequest
@@ -3210,12 +3218,12 @@ export class DlpServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -3230,7 +3238,7 @@ export class DlpServiceClient {
   }
   hybridInspectDlpJob(
     request: protos.google.privacy.dlp.v2.IHybridInspectDlpJobRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.privacy.dlp.v2.IHybridInspectResponse,
@@ -3240,7 +3248,7 @@ export class DlpServiceClient {
   >;
   hybridInspectDlpJob(
     request: protos.google.privacy.dlp.v2.IHybridInspectDlpJobRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.privacy.dlp.v2.IHybridInspectResponse,
       | protos.google.privacy.dlp.v2.IHybridInspectDlpJobRequest
@@ -3287,7 +3295,7 @@ export class DlpServiceClient {
   hybridInspectDlpJob(
     request: protos.google.privacy.dlp.v2.IHybridInspectDlpJobRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.privacy.dlp.v2.IHybridInspectResponse,
           | protos.google.privacy.dlp.v2.IHybridInspectDlpJobRequest
@@ -3310,12 +3318,12 @@ export class DlpServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -3330,7 +3338,7 @@ export class DlpServiceClient {
   }
   finishDlpJob(
     request: protos.google.privacy.dlp.v2.IFinishDlpJobRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.protobuf.IEmpty,
@@ -3340,7 +3348,7 @@ export class DlpServiceClient {
   >;
   finishDlpJob(
     request: protos.google.privacy.dlp.v2.IFinishDlpJobRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.protobuf.IEmpty,
       protos.google.privacy.dlp.v2.IFinishDlpJobRequest | null | undefined,
@@ -3379,7 +3387,7 @@ export class DlpServiceClient {
   finishDlpJob(
     request: protos.google.privacy.dlp.v2.IFinishDlpJobRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.protobuf.IEmpty,
           protos.google.privacy.dlp.v2.IFinishDlpJobRequest | null | undefined,
@@ -3398,12 +3406,12 @@ export class DlpServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -3419,7 +3427,7 @@ export class DlpServiceClient {
 
   listInspectTemplates(
     request: protos.google.privacy.dlp.v2.IListInspectTemplatesRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.privacy.dlp.v2.IInspectTemplate[],
@@ -3429,7 +3437,7 @@ export class DlpServiceClient {
   >;
   listInspectTemplates(
     request: protos.google.privacy.dlp.v2.IListInspectTemplatesRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: PaginationCallback<
       protos.google.privacy.dlp.v2.IListInspectTemplatesRequest,
       | protos.google.privacy.dlp.v2.IListInspectTemplatesResponse
@@ -3513,7 +3521,7 @@ export class DlpServiceClient {
   listInspectTemplates(
     request: protos.google.privacy.dlp.v2.IListInspectTemplatesRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | PaginationCallback<
           protos.google.privacy.dlp.v2.IListInspectTemplatesRequest,
           | protos.google.privacy.dlp.v2.IListInspectTemplatesResponse
@@ -3536,12 +3544,12 @@ export class DlpServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -3616,7 +3624,7 @@ export class DlpServiceClient {
    */
   listInspectTemplatesStream(
     request?: protos.google.privacy.dlp.v2.IListInspectTemplatesRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Transform {
     request = request || {};
     options = options || {};
@@ -3703,7 +3711,7 @@ export class DlpServiceClient {
    */
   listInspectTemplatesAsync(
     request?: protos.google.privacy.dlp.v2.IListInspectTemplatesRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): AsyncIterable<protos.google.privacy.dlp.v2.IInspectTemplate> {
     request = request || {};
     options = options || {};
@@ -3725,7 +3733,7 @@ export class DlpServiceClient {
   }
   listDeidentifyTemplates(
     request: protos.google.privacy.dlp.v2.IListDeidentifyTemplatesRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.privacy.dlp.v2.IDeidentifyTemplate[],
@@ -3735,7 +3743,7 @@ export class DlpServiceClient {
   >;
   listDeidentifyTemplates(
     request: protos.google.privacy.dlp.v2.IListDeidentifyTemplatesRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: PaginationCallback<
       protos.google.privacy.dlp.v2.IListDeidentifyTemplatesRequest,
       | protos.google.privacy.dlp.v2.IListDeidentifyTemplatesResponse
@@ -3820,7 +3828,7 @@ export class DlpServiceClient {
   listDeidentifyTemplates(
     request: protos.google.privacy.dlp.v2.IListDeidentifyTemplatesRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | PaginationCallback<
           protos.google.privacy.dlp.v2.IListDeidentifyTemplatesRequest,
           | protos.google.privacy.dlp.v2.IListDeidentifyTemplatesResponse
@@ -3843,12 +3851,12 @@ export class DlpServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -3927,7 +3935,7 @@ export class DlpServiceClient {
    */
   listDeidentifyTemplatesStream(
     request?: protos.google.privacy.dlp.v2.IListDeidentifyTemplatesRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Transform {
     request = request || {};
     options = options || {};
@@ -4014,7 +4022,7 @@ export class DlpServiceClient {
    */
   listDeidentifyTemplatesAsync(
     request?: protos.google.privacy.dlp.v2.IListDeidentifyTemplatesRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): AsyncIterable<protos.google.privacy.dlp.v2.IDeidentifyTemplate> {
     request = request || {};
     options = options || {};
@@ -4036,7 +4044,7 @@ export class DlpServiceClient {
   }
   listJobTriggers(
     request: protos.google.privacy.dlp.v2.IListJobTriggersRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.privacy.dlp.v2.IJobTrigger[],
@@ -4046,7 +4054,7 @@ export class DlpServiceClient {
   >;
   listJobTriggers(
     request: protos.google.privacy.dlp.v2.IListJobTriggersRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: PaginationCallback<
       protos.google.privacy.dlp.v2.IListJobTriggersRequest,
       protos.google.privacy.dlp.v2.IListJobTriggersResponse | null | undefined,
@@ -4149,7 +4157,7 @@ export class DlpServiceClient {
   listJobTriggers(
     request: protos.google.privacy.dlp.v2.IListJobTriggersRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | PaginationCallback<
           protos.google.privacy.dlp.v2.IListJobTriggersRequest,
           | protos.google.privacy.dlp.v2.IListJobTriggersResponse
@@ -4170,12 +4178,12 @@ export class DlpServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -4273,7 +4281,7 @@ export class DlpServiceClient {
    */
   listJobTriggersStream(
     request?: protos.google.privacy.dlp.v2.IListJobTriggersRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Transform {
     request = request || {};
     options = options || {};
@@ -4383,7 +4391,7 @@ export class DlpServiceClient {
    */
   listJobTriggersAsync(
     request?: protos.google.privacy.dlp.v2.IListJobTriggersRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): AsyncIterable<protos.google.privacy.dlp.v2.IJobTrigger> {
     request = request || {};
     options = options || {};
@@ -4405,7 +4413,7 @@ export class DlpServiceClient {
   }
   listDlpJobs(
     request: protos.google.privacy.dlp.v2.IListDlpJobsRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.privacy.dlp.v2.IDlpJob[],
@@ -4415,7 +4423,7 @@ export class DlpServiceClient {
   >;
   listDlpJobs(
     request: protos.google.privacy.dlp.v2.IListDlpJobsRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: PaginationCallback<
       protos.google.privacy.dlp.v2.IListDlpJobsRequest,
       protos.google.privacy.dlp.v2.IListDlpJobsResponse | null | undefined,
@@ -4521,7 +4529,7 @@ export class DlpServiceClient {
   listDlpJobs(
     request: protos.google.privacy.dlp.v2.IListDlpJobsRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | PaginationCallback<
           protos.google.privacy.dlp.v2.IListDlpJobsRequest,
           protos.google.privacy.dlp.v2.IListDlpJobsResponse | null | undefined,
@@ -4540,12 +4548,12 @@ export class DlpServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -4645,7 +4653,7 @@ export class DlpServiceClient {
    */
   listDlpJobsStream(
     request?: protos.google.privacy.dlp.v2.IListDlpJobsRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Transform {
     request = request || {};
     options = options || {};
@@ -4757,7 +4765,7 @@ export class DlpServiceClient {
    */
   listDlpJobsAsync(
     request?: protos.google.privacy.dlp.v2.IListDlpJobsRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): AsyncIterable<protos.google.privacy.dlp.v2.IDlpJob> {
     request = request || {};
     options = options || {};
@@ -4779,7 +4787,7 @@ export class DlpServiceClient {
   }
   listStoredInfoTypes(
     request: protos.google.privacy.dlp.v2.IListStoredInfoTypesRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.privacy.dlp.v2.IStoredInfoType[],
@@ -4789,7 +4797,7 @@ export class DlpServiceClient {
   >;
   listStoredInfoTypes(
     request: protos.google.privacy.dlp.v2.IListStoredInfoTypesRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: PaginationCallback<
       protos.google.privacy.dlp.v2.IListStoredInfoTypesRequest,
       | protos.google.privacy.dlp.v2.IListStoredInfoTypesResponse
@@ -4875,7 +4883,7 @@ export class DlpServiceClient {
   listStoredInfoTypes(
     request: protos.google.privacy.dlp.v2.IListStoredInfoTypesRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | PaginationCallback<
           protos.google.privacy.dlp.v2.IListStoredInfoTypesRequest,
           | protos.google.privacy.dlp.v2.IListStoredInfoTypesResponse
@@ -4898,12 +4906,12 @@ export class DlpServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -4979,7 +4987,7 @@ export class DlpServiceClient {
    */
   listStoredInfoTypesStream(
     request?: protos.google.privacy.dlp.v2.IListStoredInfoTypesRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Transform {
     request = request || {};
     options = options || {};
@@ -5067,7 +5075,7 @@ export class DlpServiceClient {
    */
   listStoredInfoTypesAsync(
     request?: protos.google.privacy.dlp.v2.IListStoredInfoTypesRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): AsyncIterable<protos.google.privacy.dlp.v2.IStoredInfoType> {
     request = request || {};
     options = options || {};
