@@ -3,16 +3,16 @@
     {
       "git": {
         "name": ".",
-        "remote": "git@github.com:googleapis/nodejs-cloud-container.git",
-        "sha": "99ab34786dfd05c667f70f363c58cc7f46ae6be4"
+        "remote": "https://github.com/googleapis/nodejs-cloud-container.git",
+        "sha": "f72f1210f63e1fd9b3dd02e0791b1d024d1cbe07"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "1f8a5144b52f7677dc43c55b21ccaf9e1b425ceb",
-        "internalRef": "342689216"
+        "sha": "5587028631d4d743fd906c4eb4e4e4649a7ee5ce",
+        "internalRef": "343187793"
       }
     },
     {
