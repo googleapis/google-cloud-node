@@ -16,6 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
+/* global window */
 import * as gax from 'google-gax';
 import {
   Callback,
@@ -31,6 +32,11 @@ import * as path from 'path';
 import {Transform} from 'stream';
 import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
+/**
+ * Client JSON configuration object, loaded from
+ * `src/v2/entity_types_client_config.json`.
+ * This file defines retry strategy and timeouts for all API methods in this library.
+ */
 import * as gapicConfig from './entity_types_client_config.json';
 import {operationsProtos} from 'google-gax';
 const version = require('../../../package.json').version;
@@ -85,9 +91,9 @@ export class EntityTypesClient {
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
-   * @param {gax.ClientConfig} [options.clientConfig] - client configuration override.
-   *     TODO(@alexander-fenster): link to gax documentation.
-   * @param {boolean} fallback - Use HTTP fallback mode.
+   * @param {gax.ClientConfig} [options.clientConfig] - Client configuration override.
+   *     Follows the structure of {@link gapicConfig}.
+   * @param {boolean} [options.fallback] - Use HTTP fallback mode.
    *     In fallback mode, a special browser-compatible transport implementation is used
    *     instead of gRPC transport. In browser context (if the `window` object is defined)
    *     the fallback mode is enabled automatically; set `options.fallback` to `false`
@@ -100,7 +106,9 @@ export class EntityTypesClient {
       opts?.servicePath || opts?.apiEndpoint || staticMembers.servicePath;
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback = opts?.fallback ?? typeof window !== 'undefined';
+    const fallback =
+      opts?.fallback ??
+      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
@@ -428,7 +436,7 @@ export class EntityTypesClient {
   // -------------------
   getEntityType(
     request: protos.google.cloud.dialogflow.v2.IGetEntityTypeRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.dialogflow.v2.IEntityType,
@@ -438,7 +446,7 @@ export class EntityTypesClient {
   >;
   getEntityType(
     request: protos.google.cloud.dialogflow.v2.IGetEntityTypeRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.cloud.dialogflow.v2.IEntityType,
       | protos.google.cloud.dialogflow.v2.IGetEntityTypeRequest
@@ -484,7 +492,7 @@ export class EntityTypesClient {
   getEntityType(
     request: protos.google.cloud.dialogflow.v2.IGetEntityTypeRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.cloud.dialogflow.v2.IEntityType,
           | protos.google.cloud.dialogflow.v2.IGetEntityTypeRequest
@@ -507,12 +515,12 @@ export class EntityTypesClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -527,7 +535,7 @@ export class EntityTypesClient {
   }
   createEntityType(
     request: protos.google.cloud.dialogflow.v2.ICreateEntityTypeRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.dialogflow.v2.IEntityType,
@@ -537,7 +545,7 @@ export class EntityTypesClient {
   >;
   createEntityType(
     request: protos.google.cloud.dialogflow.v2.ICreateEntityTypeRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.cloud.dialogflow.v2.IEntityType,
       | protos.google.cloud.dialogflow.v2.ICreateEntityTypeRequest
@@ -585,7 +593,7 @@ export class EntityTypesClient {
   createEntityType(
     request: protos.google.cloud.dialogflow.v2.ICreateEntityTypeRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.cloud.dialogflow.v2.IEntityType,
           | protos.google.cloud.dialogflow.v2.ICreateEntityTypeRequest
@@ -608,12 +616,12 @@ export class EntityTypesClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -628,7 +636,7 @@ export class EntityTypesClient {
   }
   updateEntityType(
     request: protos.google.cloud.dialogflow.v2.IUpdateEntityTypeRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.dialogflow.v2.IEntityType,
@@ -638,7 +646,7 @@ export class EntityTypesClient {
   >;
   updateEntityType(
     request: protos.google.cloud.dialogflow.v2.IUpdateEntityTypeRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.cloud.dialogflow.v2.IEntityType,
       | protos.google.cloud.dialogflow.v2.IUpdateEntityTypeRequest
@@ -685,7 +693,7 @@ export class EntityTypesClient {
   updateEntityType(
     request: protos.google.cloud.dialogflow.v2.IUpdateEntityTypeRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.cloud.dialogflow.v2.IEntityType,
           | protos.google.cloud.dialogflow.v2.IUpdateEntityTypeRequest
@@ -708,12 +716,12 @@ export class EntityTypesClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -728,7 +736,7 @@ export class EntityTypesClient {
   }
   deleteEntityType(
     request: protos.google.cloud.dialogflow.v2.IDeleteEntityTypeRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.protobuf.IEmpty,
@@ -738,7 +746,7 @@ export class EntityTypesClient {
   >;
   deleteEntityType(
     request: protos.google.cloud.dialogflow.v2.IDeleteEntityTypeRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.protobuf.IEmpty,
       | protos.google.cloud.dialogflow.v2.IDeleteEntityTypeRequest
@@ -778,7 +786,7 @@ export class EntityTypesClient {
   deleteEntityType(
     request: protos.google.cloud.dialogflow.v2.IDeleteEntityTypeRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.protobuf.IEmpty,
           | protos.google.cloud.dialogflow.v2.IDeleteEntityTypeRequest
@@ -801,12 +809,12 @@ export class EntityTypesClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -822,7 +830,7 @@ export class EntityTypesClient {
 
   batchUpdateEntityTypes(
     request: protos.google.cloud.dialogflow.v2.IBatchUpdateEntityTypesRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       LROperation<
@@ -835,7 +843,7 @@ export class EntityTypesClient {
   >;
   batchUpdateEntityTypes(
     request: protos.google.cloud.dialogflow.v2.IBatchUpdateEntityTypesRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       LROperation<
         protos.google.cloud.dialogflow.v2.IBatchUpdateEntityTypesResponse,
@@ -897,7 +905,7 @@ export class EntityTypesClient {
   batchUpdateEntityTypes(
     request: protos.google.cloud.dialogflow.v2.IBatchUpdateEntityTypesRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           LROperation<
             protos.google.cloud.dialogflow.v2.IBatchUpdateEntityTypesResponse,
@@ -925,12 +933,12 @@ export class EntityTypesClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -986,7 +994,7 @@ export class EntityTypesClient {
   }
   batchDeleteEntityTypes(
     request: protos.google.cloud.dialogflow.v2.IBatchDeleteEntityTypesRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       LROperation<
@@ -999,7 +1007,7 @@ export class EntityTypesClient {
   >;
   batchDeleteEntityTypes(
     request: protos.google.cloud.dialogflow.v2.IBatchDeleteEntityTypesRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       LROperation<
         protos.google.protobuf.IEmpty,
@@ -1049,7 +1057,7 @@ export class EntityTypesClient {
   batchDeleteEntityTypes(
     request: protos.google.cloud.dialogflow.v2.IBatchDeleteEntityTypesRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           LROperation<
             protos.google.protobuf.IEmpty,
@@ -1077,12 +1085,12 @@ export class EntityTypesClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1135,7 +1143,7 @@ export class EntityTypesClient {
   }
   batchCreateEntities(
     request: protos.google.cloud.dialogflow.v2.IBatchCreateEntitiesRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       LROperation<
@@ -1148,7 +1156,7 @@ export class EntityTypesClient {
   >;
   batchCreateEntities(
     request: protos.google.cloud.dialogflow.v2.IBatchCreateEntitiesRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       LROperation<
         protos.google.protobuf.IEmpty,
@@ -1203,7 +1211,7 @@ export class EntityTypesClient {
   batchCreateEntities(
     request: protos.google.cloud.dialogflow.v2.IBatchCreateEntitiesRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           LROperation<
             protos.google.protobuf.IEmpty,
@@ -1231,12 +1239,12 @@ export class EntityTypesClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1285,7 +1293,7 @@ export class EntityTypesClient {
   }
   batchUpdateEntities(
     request: protos.google.cloud.dialogflow.v2.IBatchUpdateEntitiesRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       LROperation<
@@ -1298,7 +1306,7 @@ export class EntityTypesClient {
   >;
   batchUpdateEntities(
     request: protos.google.cloud.dialogflow.v2.IBatchUpdateEntitiesRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       LROperation<
         protos.google.protobuf.IEmpty,
@@ -1358,7 +1366,7 @@ export class EntityTypesClient {
   batchUpdateEntities(
     request: protos.google.cloud.dialogflow.v2.IBatchUpdateEntitiesRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           LROperation<
             protos.google.protobuf.IEmpty,
@@ -1386,12 +1394,12 @@ export class EntityTypesClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1440,7 +1448,7 @@ export class EntityTypesClient {
   }
   batchDeleteEntities(
     request: protos.google.cloud.dialogflow.v2.IBatchDeleteEntitiesRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       LROperation<
@@ -1453,7 +1461,7 @@ export class EntityTypesClient {
   >;
   batchDeleteEntities(
     request: protos.google.cloud.dialogflow.v2.IBatchDeleteEntitiesRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       LROperation<
         protos.google.protobuf.IEmpty,
@@ -1511,7 +1519,7 @@ export class EntityTypesClient {
   batchDeleteEntities(
     request: protos.google.cloud.dialogflow.v2.IBatchDeleteEntitiesRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           LROperation<
             protos.google.protobuf.IEmpty,
@@ -1539,12 +1547,12 @@ export class EntityTypesClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1593,7 +1601,7 @@ export class EntityTypesClient {
   }
   listEntityTypes(
     request: protos.google.cloud.dialogflow.v2.IListEntityTypesRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.dialogflow.v2.IEntityType[],
@@ -1603,7 +1611,7 @@ export class EntityTypesClient {
   >;
   listEntityTypes(
     request: protos.google.cloud.dialogflow.v2.IListEntityTypesRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: PaginationCallback<
       protos.google.cloud.dialogflow.v2.IListEntityTypesRequest,
       | protos.google.cloud.dialogflow.v2.IListEntityTypesResponse
@@ -1657,7 +1665,7 @@ export class EntityTypesClient {
   listEntityTypes(
     request: protos.google.cloud.dialogflow.v2.IListEntityTypesRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | PaginationCallback<
           protos.google.cloud.dialogflow.v2.IListEntityTypesRequest,
           | protos.google.cloud.dialogflow.v2.IListEntityTypesResponse
@@ -1680,12 +1688,12 @@ export class EntityTypesClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1731,7 +1739,7 @@ export class EntityTypesClient {
    */
   listEntityTypesStream(
     request?: protos.google.cloud.dialogflow.v2.IListEntityTypesRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Transform {
     request = request || {};
     options = options || {};
@@ -1789,7 +1797,7 @@ export class EntityTypesClient {
    */
   listEntityTypesAsync(
     request?: protos.google.cloud.dialogflow.v2.IListEntityTypesRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): AsyncIterable<protos.google.cloud.dialogflow.v2.IEntityType> {
     request = request || {};
     options = options || {};
