@@ -31,7 +31,22 @@
                             "(google.api.http).additional_bindings.post": "/v1/{parent=projects/*/regions/*}/autoscalingPolicies",
                             "(google.api.http).additional_bindings.body": "policy",
                             "(google.api.method_signature)": "parent,policy"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=projects/*/locations/*}/autoscalingPolicies",
+                                "body": "policy",
+                                "additional_bindings": {
+                                  "post": "/v1/{parent=projects/*/regions/*}/autoscalingPolicies",
+                                  "body": "policy"
+                                }
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,policy"
+                            }
+                          ]
                         },
                         "UpdateAutoscalingPolicy": {
                           "requestType": "UpdateAutoscalingPolicyRequest",
@@ -42,7 +57,22 @@
                             "(google.api.http).additional_bindings.put": "/v1/{policy.name=projects/*/regions/*/autoscalingPolicies/*}",
                             "(google.api.http).additional_bindings.body": "policy",
                             "(google.api.method_signature)": "policy"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "put": "/v1/{policy.name=projects/*/locations/*/autoscalingPolicies/*}",
+                                "body": "policy",
+                                "additional_bindings": {
+                                  "put": "/v1/{policy.name=projects/*/regions/*/autoscalingPolicies/*}",
+                                  "body": "policy"
+                                }
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "policy"
+                            }
+                          ]
                         },
                         "GetAutoscalingPolicy": {
                           "requestType": "GetAutoscalingPolicyRequest",
@@ -51,7 +81,20 @@
                             "(google.api.http).get": "/v1/{name=projects/*/locations/*/autoscalingPolicies/*}",
                             "(google.api.http).additional_bindings.get": "/v1/{name=projects/*/regions/*/autoscalingPolicies/*}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/locations/*/autoscalingPolicies/*}",
+                                "additional_bindings": {
+                                  "get": "/v1/{name=projects/*/regions/*/autoscalingPolicies/*}"
+                                }
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "ListAutoscalingPolicies": {
                           "requestType": "ListAutoscalingPoliciesRequest",
@@ -60,7 +103,20 @@
                             "(google.api.http).get": "/v1/{parent=projects/*/locations/*}/autoscalingPolicies",
                             "(google.api.http).additional_bindings.get": "/v1/{parent=projects/*/regions/*}/autoscalingPolicies",
                             "(google.api.method_signature)": "parent"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=projects/*/locations/*}/autoscalingPolicies",
+                                "additional_bindings": {
+                                  "get": "/v1/{parent=projects/*/regions/*}/autoscalingPolicies"
+                                }
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
                         },
                         "DeleteAutoscalingPolicy": {
                           "requestType": "DeleteAutoscalingPolicyRequest",
@@ -69,7 +125,20 @@
                             "(google.api.http).delete": "/v1/{name=projects/*/locations/*/autoscalingPolicies/*}",
                             "(google.api.http).additional_bindings.delete": "/v1/{name=projects/*/regions/*/autoscalingPolicies/*}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1/{name=projects/*/locations/*/autoscalingPolicies/*}",
+                                "additional_bindings": {
+                                  "delete": "/v1/{name=projects/*/regions/*/autoscalingPolicies/*}"
+                                }
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         }
                       }
                     },
@@ -316,7 +385,24 @@
                             "(google.api.method_signature)": "project_id,region,cluster",
                             "(google.longrunning.operation_info).response_type": "Cluster",
                             "(google.longrunning.operation_info).metadata_type": "google.cloud.dataproc.v1.ClusterOperationMetadata"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/projects/{project_id}/regions/{region}/clusters",
+                                "body": "cluster"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project_id,region,cluster"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "Cluster",
+                                "metadata_type": "google.cloud.dataproc.v1.ClusterOperationMetadata"
+                              }
+                            }
+                          ]
                         },
                         "UpdateCluster": {
                           "requestType": "UpdateClusterRequest",
@@ -327,7 +413,24 @@
                             "(google.api.method_signature)": "project_id,region,cluster_name,cluster,update_mask",
                             "(google.longrunning.operation_info).response_type": "Cluster",
                             "(google.longrunning.operation_info).metadata_type": "google.cloud.dataproc.v1.ClusterOperationMetadata"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1/projects/{project_id}/regions/{region}/clusters/{cluster_name}",
+                                "body": "cluster"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project_id,region,cluster_name,cluster,update_mask"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "Cluster",
+                                "metadata_type": "google.cloud.dataproc.v1.ClusterOperationMetadata"
+                              }
+                            }
+                          ]
                         },
                         "DeleteCluster": {
                           "requestType": "DeleteClusterRequest",
@@ -337,7 +440,23 @@
                             "(google.api.method_signature)": "project_id,region,cluster_name",
                             "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
                             "(google.longrunning.operation_info).metadata_type": "google.cloud.dataproc.v1.ClusterOperationMetadata"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1/projects/{project_id}/regions/{region}/clusters/{cluster_name}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project_id,region,cluster_name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.protobuf.Empty",
+                                "metadata_type": "google.cloud.dataproc.v1.ClusterOperationMetadata"
+                              }
+                            }
+                          ]
                         },
                         "GetCluster": {
                           "requestType": "GetClusterRequest",
@@ -345,7 +464,17 @@
                           "options": {
                             "(google.api.http).get": "/v1/projects/{project_id}/regions/{region}/clusters/{cluster_name}",
                             "(google.api.method_signature)": "project_id,region,cluster_name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/projects/{project_id}/regions/{region}/clusters/{cluster_name}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project_id,region,cluster_name"
+                            }
+                          ]
                         },
                         "ListClusters": {
                           "requestType": "ListClustersRequest",
@@ -353,7 +482,20 @@
                           "options": {
                             "(google.api.http).get": "/v1/projects/{project_id}/regions/{region}/clusters",
                             "(google.api.method_signature)": "project_id,region,filter"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/projects/{project_id}/regions/{region}/clusters"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project_id,region"
+                            },
+                            {
+                              "(google.api.method_signature)": "project_id,region,filter"
+                            }
+                          ]
                         },
                         "DiagnoseCluster": {
                           "requestType": "DiagnoseClusterRequest",
@@ -364,7 +506,24 @@
                             "(google.api.method_signature)": "project_id,region,cluster_name",
                             "(google.longrunning.operation_info).response_type": "DiagnoseClusterResults",
                             "(google.longrunning.operation_info).metadata_type": "google.cloud.dataproc.v1.ClusterOperationMetadata"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/projects/{project_id}/regions/{region}/clusters/{cluster_name}:diagnose",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project_id,region,cluster_name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "DiagnoseClusterResults",
+                                "metadata_type": "google.cloud.dataproc.v1.ClusterOperationMetadata"
+                              }
+                            }
+                          ]
                         }
                       }
                     },
@@ -1341,7 +1500,18 @@
                             "(google.api.http).post": "/v1/projects/{project_id}/regions/{region}/jobs:submit",
                             "(google.api.http).body": "*",
                             "(google.api.method_signature)": "project_id,region,job"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/projects/{project_id}/regions/{region}/jobs:submit",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project_id,region,job"
+                            }
+                          ]
                         },
                         "SubmitJobAsOperation": {
                           "requestType": "SubmitJobRequest",
@@ -1352,7 +1522,24 @@
                             "(google.api.method_signature)": "project_id, region, job",
                             "(google.longrunning.operation_info).response_type": "Job",
                             "(google.longrunning.operation_info).metadata_type": "JobMetadata"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/projects/{project_id}/regions/{region}/jobs:submitAsOperation",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project_id, region, job"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "Job",
+                                "metadata_type": "JobMetadata"
+                              }
+                            }
+                          ]
                         },
                         "GetJob": {
                           "requestType": "GetJobRequest",
@@ -1360,7 +1547,17 @@
                           "options": {
                             "(google.api.http).get": "/v1/projects/{project_id}/regions/{region}/jobs/{job_id}",
                             "(google.api.method_signature)": "project_id,region,job_id"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/projects/{project_id}/regions/{region}/jobs/{job_id}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project_id,region,job_id"
+                            }
+                          ]
                         },
                         "ListJobs": {
                           "requestType": "ListJobsRequest",
@@ -1368,7 +1565,20 @@
                           "options": {
                             "(google.api.http).get": "/v1/projects/{project_id}/regions/{region}/jobs",
                             "(google.api.method_signature)": "project_id,region,filter"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/projects/{project_id}/regions/{region}/jobs"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project_id,region"
+                            },
+                            {
+                              "(google.api.method_signature)": "project_id,region,filter"
+                            }
+                          ]
                         },
                         "UpdateJob": {
                           "requestType": "UpdateJobRequest",
@@ -1376,7 +1586,15 @@
                           "options": {
                             "(google.api.http).patch": "/v1/projects/{project_id}/regions/{region}/jobs/{job_id}",
                             "(google.api.http).body": "job"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1/projects/{project_id}/regions/{region}/jobs/{job_id}",
+                                "body": "job"
+                              }
+                            }
+                          ]
                         },
                         "CancelJob": {
                           "requestType": "CancelJobRequest",
@@ -1385,7 +1603,18 @@
                             "(google.api.http).post": "/v1/projects/{project_id}/regions/{region}/jobs/{job_id}:cancel",
                             "(google.api.http).body": "*",
                             "(google.api.method_signature)": "project_id,region,job_id"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/projects/{project_id}/regions/{region}/jobs/{job_id}:cancel",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project_id,region,job_id"
+                            }
+                          ]
                         },
                         "DeleteJob": {
                           "requestType": "DeleteJobRequest",
@@ -1393,7 +1622,17 @@
                           "options": {
                             "(google.api.http).delete": "/v1/projects/{project_id}/regions/{region}/jobs/{job_id}",
                             "(google.api.method_signature)": "project_id,region,job_id"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1/projects/{project_id}/regions/{region}/jobs/{job_id}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project_id,region,job_id"
+                            }
+                          ]
                         }
                       }
                     },
@@ -2583,7 +2822,22 @@
                             "(google.api.http).additional_bindings.post": "/v1/{parent=projects/*/regions/*}/workflowTemplates",
                             "(google.api.http).additional_bindings.body": "template",
                             "(google.api.method_signature)": "parent,template"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=projects/*/locations/*}/workflowTemplates",
+                                "body": "template",
+                                "additional_bindings": {
+                                  "post": "/v1/{parent=projects/*/regions/*}/workflowTemplates",
+                                  "body": "template"
+                                }
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,template"
+                            }
+                          ]
                         },
                         "GetWorkflowTemplate": {
                           "requestType": "GetWorkflowTemplateRequest",
@@ -2592,7 +2846,20 @@
                             "(google.api.http).get": "/v1/{name=projects/*/locations/*/workflowTemplates/*}",
                             "(google.api.http).additional_bindings.get": "/v1/{name=projects/*/regions/*/workflowTemplates/*}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/locations/*/workflowTemplates/*}",
+                                "additional_bindings": {
+                                  "get": "/v1/{name=projects/*/regions/*/workflowTemplates/*}"
+                                }
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "InstantiateWorkflowTemplate": {
                           "requestType": "InstantiateWorkflowTemplateRequest",
@@ -2605,7 +2872,31 @@
                             "(google.api.method_signature)": "name,parameters",
                             "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
                             "(google.longrunning.operation_info).metadata_type": "WorkflowMetadata"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{name=projects/*/locations/*/workflowTemplates/*}:instantiate",
+                                "body": "*",
+                                "additional_bindings": {
+                                  "post": "/v1/{name=projects/*/regions/*/workflowTemplates/*}:instantiate",
+                                  "body": "*"
+                                }
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.api.method_signature)": "name,parameters"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.protobuf.Empty",
+                                "metadata_type": "WorkflowMetadata"
+                              }
+                            }
+                          ]
                         },
                         "InstantiateInlineWorkflowTemplate": {
                           "requestType": "InstantiateInlineWorkflowTemplateRequest",
@@ -2618,7 +2909,28 @@
                             "(google.api.method_signature)": "parent,template",
                             "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
                             "(google.longrunning.operation_info).metadata_type": "WorkflowMetadata"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=projects/*/locations/*}/workflowTemplates:instantiateInline",
+                                "body": "template",
+                                "additional_bindings": {
+                                  "post": "/v1/{parent=projects/*/regions/*}/workflowTemplates:instantiateInline",
+                                  "body": "template"
+                                }
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,template"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.protobuf.Empty",
+                                "metadata_type": "WorkflowMetadata"
+                              }
+                            }
+                          ]
                         },
                         "UpdateWorkflowTemplate": {
                           "requestType": "UpdateWorkflowTemplateRequest",
@@ -2629,7 +2941,22 @@
                             "(google.api.http).additional_bindings.put": "/v1/{template.name=projects/*/regions/*/workflowTemplates/*}",
                             "(google.api.http).additional_bindings.body": "template",
                             "(google.api.method_signature)": "template"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "put": "/v1/{template.name=projects/*/locations/*/workflowTemplates/*}",
+                                "body": "template",
+                                "additional_bindings": {
+                                  "put": "/v1/{template.name=projects/*/regions/*/workflowTemplates/*}",
+                                  "body": "template"
+                                }
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "template"
+                            }
+                          ]
                         },
                         "ListWorkflowTemplates": {
                           "requestType": "ListWorkflowTemplatesRequest",
@@ -2638,7 +2965,20 @@
                             "(google.api.http).get": "/v1/{parent=projects/*/locations/*}/workflowTemplates",
                             "(google.api.http).additional_bindings.get": "/v1/{parent=projects/*/regions/*}/workflowTemplates",
                             "(google.api.method_signature)": "parent"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=projects/*/locations/*}/workflowTemplates",
+                                "additional_bindings": {
+                                  "get": "/v1/{parent=projects/*/regions/*}/workflowTemplates"
+                                }
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
                         },
                         "DeleteWorkflowTemplate": {
                           "requestType": "DeleteWorkflowTemplateRequest",
@@ -2647,7 +2987,20 @@
                             "(google.api.http).delete": "/v1/{name=projects/*/locations/*/workflowTemplates/*}",
                             "(google.api.http).additional_bindings.delete": "/v1/{name=projects/*/regions/*/workflowTemplates/*}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1/{name=projects/*/locations/*/workflowTemplates/*}",
+                                "additional_bindings": {
+                                  "delete": "/v1/{name=projects/*/regions/*/workflowTemplates/*}"
+                                }
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         }
                       }
                     },
@@ -3350,7 +3703,22 @@
                             "(google.api.http).additional_bindings.post": "/v1beta2/{parent=projects/*/regions/*}/autoscalingPolicies",
                             "(google.api.http).additional_bindings.body": "policy",
                             "(google.api.method_signature)": "parent,policy"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta2/{parent=projects/*/locations/*}/autoscalingPolicies",
+                                "body": "policy",
+                                "additional_bindings": {
+                                  "post": "/v1beta2/{parent=projects/*/regions/*}/autoscalingPolicies",
+                                  "body": "policy"
+                                }
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,policy"
+                            }
+                          ]
                         },
                         "UpdateAutoscalingPolicy": {
                           "requestType": "UpdateAutoscalingPolicyRequest",
@@ -3361,7 +3729,22 @@
                             "(google.api.http).additional_bindings.put": "/v1beta2/{policy.name=projects/*/regions/*/autoscalingPolicies/*}",
                             "(google.api.http).additional_bindings.body": "policy",
                             "(google.api.method_signature)": "policy"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "put": "/v1beta2/{policy.name=projects/*/locations/*/autoscalingPolicies/*}",
+                                "body": "policy",
+                                "additional_bindings": {
+                                  "put": "/v1beta2/{policy.name=projects/*/regions/*/autoscalingPolicies/*}",
+                                  "body": "policy"
+                                }
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "policy"
+                            }
+                          ]
                         },
                         "GetAutoscalingPolicy": {
                           "requestType": "GetAutoscalingPolicyRequest",
@@ -3370,7 +3753,20 @@
                             "(google.api.http).get": "/v1beta2/{name=projects/*/locations/*/autoscalingPolicies/*}",
                             "(google.api.http).additional_bindings.get": "/v1beta2/{name=projects/*/regions/*/autoscalingPolicies/*}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta2/{name=projects/*/locations/*/autoscalingPolicies/*}",
+                                "additional_bindings": {
+                                  "get": "/v1beta2/{name=projects/*/regions/*/autoscalingPolicies/*}"
+                                }
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "ListAutoscalingPolicies": {
                           "requestType": "ListAutoscalingPoliciesRequest",
@@ -3379,7 +3775,20 @@
                             "(google.api.http).get": "/v1beta2/{parent=projects/*/locations/*}/autoscalingPolicies",
                             "(google.api.http).additional_bindings.get": "/v1beta2/{parent=projects/*/regions/*}/autoscalingPolicies",
                             "(google.api.method_signature)": "parent"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta2/{parent=projects/*/locations/*}/autoscalingPolicies",
+                                "additional_bindings": {
+                                  "get": "/v1beta2/{parent=projects/*/regions/*}/autoscalingPolicies"
+                                }
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
                         },
                         "DeleteAutoscalingPolicy": {
                           "requestType": "DeleteAutoscalingPolicyRequest",
@@ -3388,7 +3797,20 @@
                             "(google.api.http).delete": "/v1beta2/{name=projects/*/locations/*/autoscalingPolicies/*}",
                             "(google.api.http).additional_bindings.delete": "/v1beta2/{name=projects/*/regions/*/autoscalingPolicies/*}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1beta2/{name=projects/*/locations/*/autoscalingPolicies/*}",
+                                "additional_bindings": {
+                                  "delete": "/v1beta2/{name=projects/*/regions/*/autoscalingPolicies/*}"
+                                }
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         }
                       }
                     },
@@ -3636,7 +4058,24 @@
                             "(google.api.method_signature)": "project_id, region, cluster",
                             "(google.longrunning.operation_info).response_type": "Cluster",
                             "(google.longrunning.operation_info).metadata_type": "google.cloud.dataproc.v1beta2.ClusterOperationMetadata"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta2/projects/{project_id}/regions/{region}/clusters",
+                                "body": "cluster"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project_id, region, cluster"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "Cluster",
+                                "metadata_type": "google.cloud.dataproc.v1beta2.ClusterOperationMetadata"
+                              }
+                            }
+                          ]
                         },
                         "UpdateCluster": {
                           "requestType": "UpdateClusterRequest",
@@ -3647,7 +4086,24 @@
                             "(google.api.method_signature)": "project_id, region, cluster_name, cluster, update_mask",
                             "(google.longrunning.operation_info).response_type": "Cluster",
                             "(google.longrunning.operation_info).metadata_type": "google.cloud.dataproc.v1beta2.ClusterOperationMetadata"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1beta2/projects/{project_id}/regions/{region}/clusters/{cluster_name}",
+                                "body": "cluster"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project_id, region, cluster_name, cluster, update_mask"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "Cluster",
+                                "metadata_type": "google.cloud.dataproc.v1beta2.ClusterOperationMetadata"
+                              }
+                            }
+                          ]
                         },
                         "DeleteCluster": {
                           "requestType": "DeleteClusterRequest",
@@ -3657,7 +4113,23 @@
                             "(google.api.method_signature)": "project_id, region, cluster_name",
                             "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
                             "(google.longrunning.operation_info).metadata_type": "google.cloud.dataproc.v1beta2.ClusterOperationMetadata"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1beta2/projects/{project_id}/regions/{region}/clusters/{cluster_name}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project_id, region, cluster_name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.protobuf.Empty",
+                                "metadata_type": "google.cloud.dataproc.v1beta2.ClusterOperationMetadata"
+                              }
+                            }
+                          ]
                         },
                         "GetCluster": {
                           "requestType": "GetClusterRequest",
@@ -3665,7 +4137,17 @@
                           "options": {
                             "(google.api.http).get": "/v1beta2/projects/{project_id}/regions/{region}/clusters/{cluster_name}",
                             "(google.api.method_signature)": "project_id, region, cluster_name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta2/projects/{project_id}/regions/{region}/clusters/{cluster_name}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project_id, region, cluster_name"
+                            }
+                          ]
                         },
                         "ListClusters": {
                           "requestType": "ListClustersRequest",
@@ -3673,7 +4155,20 @@
                           "options": {
                             "(google.api.http).get": "/v1beta2/projects/{project_id}/regions/{region}/clusters",
                             "(google.api.method_signature)": "project_id, region, filter"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta2/projects/{project_id}/regions/{region}/clusters"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project_id, region"
+                            },
+                            {
+                              "(google.api.method_signature)": "project_id, region, filter"
+                            }
+                          ]
                         },
                         "DiagnoseCluster": {
                           "requestType": "DiagnoseClusterRequest",
@@ -3684,7 +4179,24 @@
                             "(google.api.method_signature)": "project_id, region, cluster_name",
                             "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
                             "(google.longrunning.operation_info).metadata_type": "google.cloud.dataproc.v1beta2.ClusterOperationMetadata"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta2/projects/{project_id}/regions/{region}/clusters/{cluster_name}:diagnose",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project_id, region, cluster_name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.protobuf.Empty",
+                                "metadata_type": "google.cloud.dataproc.v1beta2.ClusterOperationMetadata"
+                              }
+                            }
+                          ]
                         }
                       }
                     },
@@ -4677,7 +5189,18 @@
                             "(google.api.http).post": "/v1beta2/projects/{project_id}/regions/{region}/jobs:submit",
                             "(google.api.http).body": "*",
                             "(google.api.method_signature)": "project_id, region, job"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta2/projects/{project_id}/regions/{region}/jobs:submit",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project_id, region, job"
+                            }
+                          ]
                         },
                         "SubmitJobAsOperation": {
                           "requestType": "SubmitJobRequest",
@@ -4688,7 +5211,24 @@
                             "(google.api.method_signature)": "project_id, region, job",
                             "(google.longrunning.operation_info).response_type": "Job",
                             "(google.longrunning.operation_info).metadata_type": "JobMetadata"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta2/projects/{project_id}/regions/{region}/jobs:submitAsOperation",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project_id, region, job"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "Job",
+                                "metadata_type": "JobMetadata"
+                              }
+                            }
+                          ]
                         },
                         "GetJob": {
                           "requestType": "GetJobRequest",
@@ -4696,7 +5236,17 @@
                           "options": {
                             "(google.api.http).get": "/v1beta2/projects/{project_id}/regions/{region}/jobs/{job_id}",
                             "(google.api.method_signature)": "project_id, region, job_id"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta2/projects/{project_id}/regions/{region}/jobs/{job_id}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project_id, region, job_id"
+                            }
+                          ]
                         },
                         "ListJobs": {
                           "requestType": "ListJobsRequest",
@@ -4704,7 +5254,20 @@
                           "options": {
                             "(google.api.http).get": "/v1beta2/projects/{project_id}/regions/{region}/jobs",
                             "(google.api.method_signature)": "project_id, region, filter"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta2/projects/{project_id}/regions/{region}/jobs"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project_id, region"
+                            },
+                            {
+                              "(google.api.method_signature)": "project_id, region, filter"
+                            }
+                          ]
                         },
                         "UpdateJob": {
                           "requestType": "UpdateJobRequest",
@@ -4712,7 +5275,15 @@
                           "options": {
                             "(google.api.http).patch": "/v1beta2/projects/{project_id}/regions/{region}/jobs/{job_id}",
                             "(google.api.http).body": "job"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1beta2/projects/{project_id}/regions/{region}/jobs/{job_id}",
+                                "body": "job"
+                              }
+                            }
+                          ]
                         },
                         "CancelJob": {
                           "requestType": "CancelJobRequest",
@@ -4721,7 +5292,18 @@
                             "(google.api.http).post": "/v1beta2/projects/{project_id}/regions/{region}/jobs/{job_id}:cancel",
                             "(google.api.http).body": "*",
                             "(google.api.method_signature)": "project_id, region, job_id"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta2/projects/{project_id}/regions/{region}/jobs/{job_id}:cancel",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project_id, region, job_id"
+                            }
+                          ]
                         },
                         "DeleteJob": {
                           "requestType": "DeleteJobRequest",
@@ -4729,7 +5311,17 @@
                           "options": {
                             "(google.api.http).delete": "/v1beta2/projects/{project_id}/regions/{region}/jobs/{job_id}",
                             "(google.api.method_signature)": "project_id, region, job_id"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1beta2/projects/{project_id}/regions/{region}/jobs/{job_id}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project_id, region, job_id"
+                            }
+                          ]
                         }
                       }
                     },
@@ -5890,7 +6482,22 @@
                             "(google.api.http).additional_bindings.post": "/v1beta2/{parent=projects/*/locations/*}/workflowTemplates",
                             "(google.api.http).additional_bindings.body": "template",
                             "(google.api.method_signature)": "parent, template"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta2/{parent=projects/*/regions/*}/workflowTemplates",
+                                "body": "template",
+                                "additional_bindings": {
+                                  "post": "/v1beta2/{parent=projects/*/locations/*}/workflowTemplates",
+                                  "body": "template"
+                                }
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent, template"
+                            }
+                          ]
                         },
                         "GetWorkflowTemplate": {
                           "requestType": "GetWorkflowTemplateRequest",
@@ -5899,7 +6506,20 @@
                             "(google.api.http).get": "/v1beta2/{name=projects/*/regions/*/workflowTemplates/*}",
                             "(google.api.http).additional_bindings.get": "/v1beta2/{name=projects/*/locations/*/workflowTemplates/*}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta2/{name=projects/*/regions/*/workflowTemplates/*}",
+                                "additional_bindings": {
+                                  "get": "/v1beta2/{name=projects/*/locations/*/workflowTemplates/*}"
+                                }
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "InstantiateWorkflowTemplate": {
                           "requestType": "InstantiateWorkflowTemplateRequest",
@@ -5912,7 +6532,31 @@
                             "(google.api.method_signature)": "name, parameters",
                             "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
                             "(google.longrunning.operation_info).metadata_type": "WorkflowMetadata"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta2/{name=projects/*/regions/*/workflowTemplates/*}:instantiate",
+                                "body": "*",
+                                "additional_bindings": {
+                                  "post": "/v1beta2/{name=projects/*/locations/*/workflowTemplates/*}:instantiate",
+                                  "body": "*"
+                                }
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.api.method_signature)": "name, parameters"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.protobuf.Empty",
+                                "metadata_type": "WorkflowMetadata"
+                              }
+                            }
+                          ]
                         },
                         "InstantiateInlineWorkflowTemplate": {
                           "requestType": "InstantiateInlineWorkflowTemplateRequest",
@@ -5925,7 +6569,28 @@
                             "(google.api.method_signature)": "parent, template",
                             "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
                             "(google.longrunning.operation_info).metadata_type": "WorkflowMetadata"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta2/{parent=projects/*/locations/*}/workflowTemplates:instantiateInline",
+                                "body": "template",
+                                "additional_bindings": {
+                                  "post": "/v1beta2/{parent=projects/*/regions/*}/workflowTemplates:instantiateInline",
+                                  "body": "template"
+                                }
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent, template"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.protobuf.Empty",
+                                "metadata_type": "WorkflowMetadata"
+                              }
+                            }
+                          ]
                         },
                         "UpdateWorkflowTemplate": {
                           "requestType": "UpdateWorkflowTemplateRequest",
@@ -5936,7 +6601,22 @@
                             "(google.api.http).additional_bindings.put": "/v1beta2/{template.name=projects/*/locations/*/workflowTemplates/*}",
                             "(google.api.http).additional_bindings.body": "template",
                             "(google.api.method_signature)": "template"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "put": "/v1beta2/{template.name=projects/*/regions/*/workflowTemplates/*}",
+                                "body": "template",
+                                "additional_bindings": {
+                                  "put": "/v1beta2/{template.name=projects/*/locations/*/workflowTemplates/*}",
+                                  "body": "template"
+                                }
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "template"
+                            }
+                          ]
                         },
                         "ListWorkflowTemplates": {
                           "requestType": "ListWorkflowTemplatesRequest",
@@ -5945,7 +6625,20 @@
                             "(google.api.http).get": "/v1beta2/{parent=projects/*/regions/*}/workflowTemplates",
                             "(google.api.http).additional_bindings.get": "/v1beta2/{parent=projects/*/locations/*}/workflowTemplates",
                             "(google.api.method_signature)": "parent"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta2/{parent=projects/*/regions/*}/workflowTemplates",
+                                "additional_bindings": {
+                                  "get": "/v1beta2/{parent=projects/*/locations/*}/workflowTemplates"
+                                }
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
                         },
                         "DeleteWorkflowTemplate": {
                           "requestType": "DeleteWorkflowTemplateRequest",
@@ -5954,7 +6647,20 @@
                             "(google.api.http).delete": "/v1beta2/{name=projects/*/regions/*/workflowTemplates/*}",
                             "(google.api.http).additional_bindings.delete": "/v1beta2/{name=projects/*/locations/*/workflowTemplates/*}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1beta2/{name=projects/*/regions/*/workflowTemplates/*}",
+                                "additional_bindings": {
+                                  "delete": "/v1beta2/{name=projects/*/locations/*/workflowTemplates/*}"
+                                }
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         }
                       }
                     },
@@ -7729,7 +8435,17 @@
                   "options": {
                     "(google.api.http).get": "/v1/{name=operations}",
                     "(google.api.method_signature)": "name,filter"
-                  }
+                  },
+                  "parsedOptions": [
+                    {
+                      "(google.api.http)": {
+                        "get": "/v1/{name=operations}"
+                      }
+                    },
+                    {
+                      "(google.api.method_signature)": "name,filter"
+                    }
+                  ]
                 },
                 "GetOperation": {
                   "requestType": "GetOperationRequest",
@@ -7737,7 +8453,17 @@
                   "options": {
                     "(google.api.http).get": "/v1/{name=operations/**}",
                     "(google.api.method_signature)": "name"
-                  }
+                  },
+                  "parsedOptions": [
+                    {
+                      "(google.api.http)": {
+                        "get": "/v1/{name=operations/**}"
+                      }
+                    },
+                    {
+                      "(google.api.method_signature)": "name"
+                    }
+                  ]
                 },
                 "DeleteOperation": {
                   "requestType": "DeleteOperationRequest",
@@ -7745,7 +8471,17 @@
                   "options": {
                     "(google.api.http).delete": "/v1/{name=operations/**}",
                     "(google.api.method_signature)": "name"
-                  }
+                  },
+                  "parsedOptions": [
+                    {
+                      "(google.api.http)": {
+                        "delete": "/v1/{name=operations/**}"
+                      }
+                    },
+                    {
+                      "(google.api.method_signature)": "name"
+                    }
+                  ]
                 },
                 "CancelOperation": {
                   "requestType": "CancelOperationRequest",
@@ -7754,7 +8490,18 @@
                     "(google.api.http).post": "/v1/{name=operations/**}:cancel",
                     "(google.api.http).body": "*",
                     "(google.api.method_signature)": "name"
-                  }
+                  },
+                  "parsedOptions": [
+                    {
+                      "(google.api.http)": {
+                        "post": "/v1/{name=operations/**}:cancel",
+                        "body": "*"
+                      }
+                    },
+                    {
+                      "(google.api.method_signature)": "name"
+                    }
+                  ]
                 },
                 "WaitOperation": {
                   "requestType": "WaitOperationRequest",

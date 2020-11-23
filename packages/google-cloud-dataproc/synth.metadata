@@ -3,8 +3,16 @@
     {
       "git": {
         "name": ".",
-        "remote": "git@github.com:googleapis/nodejs-dataproc.git",
-        "sha": "b691ff20638f74b751e4c4dab9e45d033273a602"
+        "remote": "https://github.com/googleapis/nodejs-dataproc.git",
+        "sha": "c89bc662bd8387c82581a02026be5a6d6a40f5af"
+      }
+    },
+    {
+      "git": {
+        "name": "googleapis",
+        "remote": "https://github.com/googleapis/googleapis.git",
+        "sha": "2f019bf70bfe06f1e2af1b04011b0a2405190e43",
+        "internalRef": "343202295"
       }
     },
     {
@@ -88,7 +96,6 @@
     "README.md",
     "api-extractor.json",
     "linkinator.config.json",
-    "package-lock.json.1072978903",
     "protos/google/cloud/dataproc/v1/autoscaling_policies.proto",
     "protos/google/cloud/dataproc/v1/clusters.proto",
     "protos/google/cloud/dataproc/v1/jobs.proto",
@@ -106,7 +113,6 @@
     "protos/protos.json",
     "renovate.json",
     "samples/README.md",
-    "samples/package-lock.json.3467730444",
     "src/index.ts",
     "src/v1/autoscaling_policy_service_client.ts",
     "src/v1/autoscaling_policy_service_client_config.json",

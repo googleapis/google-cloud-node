@@ -16,6 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
+/* global window */
 import * as gax from 'google-gax';
 import {
   Callback,
@@ -30,6 +31,11 @@ import * as path from 'path';
 import {Transform} from 'stream';
 import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
+/**
+ * Client JSON configuration object, loaded from
+ * `src/v1beta2/autoscaling_policy_service_client_config.json`.
+ * This file defines retry strategy and timeouts for all API methods in this library.
+ */
 import * as gapicConfig from './autoscaling_policy_service_client_config.json';
 
 const version = require('../../../package.json').version;
@@ -84,9 +90,9 @@ export class AutoscalingPolicyServiceClient {
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
-   * @param {gax.ClientConfig} [options.clientConfig] - client configuration override.
-   *     TODO(@alexander-fenster): link to gax documentation.
-   * @param {boolean} fallback - Use HTTP fallback mode.
+   * @param {gax.ClientConfig} [options.clientConfig] - Client configuration override.
+   *     Follows the structure of {@link gapicConfig}.
+   * @param {boolean} [options.fallback] - Use HTTP fallback mode.
    *     In fallback mode, a special browser-compatible transport implementation is used
    *     instead of gRPC transport. In browser context (if the `window` object is defined)
    *     the fallback mode is enabled automatically; set `options.fallback` to `false`
@@ -100,7 +106,9 @@ export class AutoscalingPolicyServiceClient {
       opts?.servicePath || opts?.apiEndpoint || staticMembers.servicePath;
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback = opts?.fallback ?? typeof window !== 'undefined';
+    const fallback =
+      opts?.fallback ??
+      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
@@ -326,7 +334,7 @@ export class AutoscalingPolicyServiceClient {
   // -------------------
   createAutoscalingPolicy(
     request: protos.google.cloud.dataproc.v1beta2.ICreateAutoscalingPolicyRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.dataproc.v1beta2.IAutoscalingPolicy,
@@ -339,7 +347,7 @@ export class AutoscalingPolicyServiceClient {
   >;
   createAutoscalingPolicy(
     request: protos.google.cloud.dataproc.v1beta2.ICreateAutoscalingPolicyRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.cloud.dataproc.v1beta2.IAutoscalingPolicy,
       | protos.google.cloud.dataproc.v1beta2.ICreateAutoscalingPolicyRequest
@@ -389,7 +397,7 @@ export class AutoscalingPolicyServiceClient {
   createAutoscalingPolicy(
     request: protos.google.cloud.dataproc.v1beta2.ICreateAutoscalingPolicyRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.cloud.dataproc.v1beta2.IAutoscalingPolicy,
           | protos.google.cloud.dataproc.v1beta2.ICreateAutoscalingPolicyRequest
@@ -415,12 +423,12 @@ export class AutoscalingPolicyServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -439,7 +447,7 @@ export class AutoscalingPolicyServiceClient {
   }
   updateAutoscalingPolicy(
     request: protos.google.cloud.dataproc.v1beta2.IUpdateAutoscalingPolicyRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.dataproc.v1beta2.IAutoscalingPolicy,
@@ -452,7 +460,7 @@ export class AutoscalingPolicyServiceClient {
   >;
   updateAutoscalingPolicy(
     request: protos.google.cloud.dataproc.v1beta2.IUpdateAutoscalingPolicyRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.cloud.dataproc.v1beta2.IAutoscalingPolicy,
       | protos.google.cloud.dataproc.v1beta2.IUpdateAutoscalingPolicyRequest
@@ -494,7 +502,7 @@ export class AutoscalingPolicyServiceClient {
   updateAutoscalingPolicy(
     request: protos.google.cloud.dataproc.v1beta2.IUpdateAutoscalingPolicyRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.cloud.dataproc.v1beta2.IAutoscalingPolicy,
           | protos.google.cloud.dataproc.v1beta2.IUpdateAutoscalingPolicyRequest
@@ -520,12 +528,12 @@ export class AutoscalingPolicyServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -544,7 +552,7 @@ export class AutoscalingPolicyServiceClient {
   }
   getAutoscalingPolicy(
     request: protos.google.cloud.dataproc.v1beta2.IGetAutoscalingPolicyRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.dataproc.v1beta2.IAutoscalingPolicy,
@@ -557,7 +565,7 @@ export class AutoscalingPolicyServiceClient {
   >;
   getAutoscalingPolicy(
     request: protos.google.cloud.dataproc.v1beta2.IGetAutoscalingPolicyRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.cloud.dataproc.v1beta2.IAutoscalingPolicy,
       | protos.google.cloud.dataproc.v1beta2.IGetAutoscalingPolicyRequest
@@ -605,7 +613,7 @@ export class AutoscalingPolicyServiceClient {
   getAutoscalingPolicy(
     request: protos.google.cloud.dataproc.v1beta2.IGetAutoscalingPolicyRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.cloud.dataproc.v1beta2.IAutoscalingPolicy,
           | protos.google.cloud.dataproc.v1beta2.IGetAutoscalingPolicyRequest
@@ -631,12 +639,12 @@ export class AutoscalingPolicyServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -651,7 +659,7 @@ export class AutoscalingPolicyServiceClient {
   }
   deleteAutoscalingPolicy(
     request: protos.google.cloud.dataproc.v1beta2.IDeleteAutoscalingPolicyRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.protobuf.IEmpty,
@@ -664,7 +672,7 @@ export class AutoscalingPolicyServiceClient {
   >;
   deleteAutoscalingPolicy(
     request: protos.google.cloud.dataproc.v1beta2.IDeleteAutoscalingPolicyRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.protobuf.IEmpty,
       | protos.google.cloud.dataproc.v1beta2.IDeleteAutoscalingPolicyRequest
@@ -713,7 +721,7 @@ export class AutoscalingPolicyServiceClient {
   deleteAutoscalingPolicy(
     request: protos.google.cloud.dataproc.v1beta2.IDeleteAutoscalingPolicyRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.protobuf.IEmpty,
           | protos.google.cloud.dataproc.v1beta2.IDeleteAutoscalingPolicyRequest
@@ -739,12 +747,12 @@ export class AutoscalingPolicyServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -764,7 +772,7 @@ export class AutoscalingPolicyServiceClient {
 
   listAutoscalingPolicies(
     request: protos.google.cloud.dataproc.v1beta2.IListAutoscalingPoliciesRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.dataproc.v1beta2.IAutoscalingPolicy[],
@@ -774,7 +782,7 @@ export class AutoscalingPolicyServiceClient {
   >;
   listAutoscalingPolicies(
     request: protos.google.cloud.dataproc.v1beta2.IListAutoscalingPoliciesRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: PaginationCallback<
       protos.google.cloud.dataproc.v1beta2.IListAutoscalingPoliciesRequest,
       | protos.google.cloud.dataproc.v1beta2.IListAutoscalingPoliciesResponse
@@ -831,7 +839,7 @@ export class AutoscalingPolicyServiceClient {
   listAutoscalingPolicies(
     request: protos.google.cloud.dataproc.v1beta2.IListAutoscalingPoliciesRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | PaginationCallback<
           protos.google.cloud.dataproc.v1beta2.IListAutoscalingPoliciesRequest,
           | protos.google.cloud.dataproc.v1beta2.IListAutoscalingPoliciesResponse
@@ -854,12 +862,12 @@ export class AutoscalingPolicyServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -912,7 +920,7 @@ export class AutoscalingPolicyServiceClient {
    */
   listAutoscalingPoliciesStream(
     request?: protos.google.cloud.dataproc.v1beta2.IListAutoscalingPoliciesRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Transform {
     request = request || {};
     options = options || {};
@@ -973,7 +981,7 @@ export class AutoscalingPolicyServiceClient {
    */
   listAutoscalingPoliciesAsync(
     request?: protos.google.cloud.dataproc.v1beta2.IListAutoscalingPoliciesRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): AsyncIterable<protos.google.cloud.dataproc.v1beta2.IAutoscalingPolicy> {
     request = request || {};
     options = options || {};
