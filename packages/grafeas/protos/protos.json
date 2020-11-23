@@ -608,7 +608,17 @@
                   "options": {
                     "(google.api.http).get": "/v1/{name=projects/*/occurrences/*}",
                     "(google.api.method_signature)": "name"
-                  }
+                  },
+                  "parsedOptions": [
+                    {
+                      "(google.api.http)": {
+                        "get": "/v1/{name=projects/*/occurrences/*}"
+                      }
+                    },
+                    {
+                      "(google.api.method_signature)": "name"
+                    }
+                  ]
                 },
                 "ListOccurrences": {
                   "requestType": "ListOccurrencesRequest",
@@ -616,7 +626,17 @@
                   "options": {
                     "(google.api.http).get": "/v1/{parent=projects/*}/occurrences",
                     "(google.api.method_signature)": "parent,filter"
-                  }
+                  },
+                  "parsedOptions": [
+                    {
+                      "(google.api.http)": {
+                        "get": "/v1/{parent=projects/*}/occurrences"
+                      }
+                    },
+                    {
+                      "(google.api.method_signature)": "parent,filter"
+                    }
+                  ]
                 },
                 "DeleteOccurrence": {
                   "requestType": "DeleteOccurrenceRequest",
@@ -624,7 +644,17 @@
                   "options": {
                     "(google.api.http).delete": "/v1/{name=projects/*/occurrences/*}",
                     "(google.api.method_signature)": "name"
-                  }
+                  },
+                  "parsedOptions": [
+                    {
+                      "(google.api.http)": {
+                        "delete": "/v1/{name=projects/*/occurrences/*}"
+                      }
+                    },
+                    {
+                      "(google.api.method_signature)": "name"
+                    }
+                  ]
                 },
                 "CreateOccurrence": {
                   "requestType": "CreateOccurrenceRequest",
@@ -633,7 +663,18 @@
                     "(google.api.http).post": "/v1/{parent=projects/*}/occurrences",
                     "(google.api.http).body": "occurrence",
                     "(google.api.method_signature)": "parent,occurrence"
-                  }
+                  },
+                  "parsedOptions": [
+                    {
+                      "(google.api.http)": {
+                        "post": "/v1/{parent=projects/*}/occurrences",
+                        "body": "occurrence"
+                      }
+                    },
+                    {
+                      "(google.api.method_signature)": "parent,occurrence"
+                    }
+                  ]
                 },
                 "BatchCreateOccurrences": {
                   "requestType": "BatchCreateOccurrencesRequest",
@@ -642,7 +683,18 @@
                     "(google.api.http).post": "/v1/{parent=projects/*}/occurrences:batchCreate",
                     "(google.api.http).body": "*",
                     "(google.api.method_signature)": "parent,occurrences"
-                  }
+                  },
+                  "parsedOptions": [
+                    {
+                      "(google.api.http)": {
+                        "post": "/v1/{parent=projects/*}/occurrences:batchCreate",
+                        "body": "*"
+                      }
+                    },
+                    {
+                      "(google.api.method_signature)": "parent,occurrences"
+                    }
+                  ]
                 },
                 "UpdateOccurrence": {
                   "requestType": "UpdateOccurrenceRequest",
@@ -651,7 +703,18 @@
                     "(google.api.http).patch": "/v1/{name=projects/*/occurrences/*}",
                     "(google.api.http).body": "occurrence",
                     "(google.api.method_signature)": "name,occurrence,update_mask"
-                  }
+                  },
+                  "parsedOptions": [
+                    {
+                      "(google.api.http)": {
+                        "patch": "/v1/{name=projects/*/occurrences/*}",
+                        "body": "occurrence"
+                      }
+                    },
+                    {
+                      "(google.api.method_signature)": "name,occurrence,update_mask"
+                    }
+                  ]
                 },
                 "GetOccurrenceNote": {
                   "requestType": "GetOccurrenceNoteRequest",
@@ -659,7 +722,17 @@
                   "options": {
                     "(google.api.http).get": "/v1/{name=projects/*/occurrences/*}/notes",
                     "(google.api.method_signature)": "name"
-                  }
+                  },
+                  "parsedOptions": [
+                    {
+                      "(google.api.http)": {
+                        "get": "/v1/{name=projects/*/occurrences/*}/notes"
+                      }
+                    },
+                    {
+                      "(google.api.method_signature)": "name"
+                    }
+                  ]
                 },
                 "GetNote": {
                   "requestType": "GetNoteRequest",
@@ -667,7 +740,17 @@
                   "options": {
                     "(google.api.http).get": "/v1/{name=projects/*/notes/*}",
                     "(google.api.method_signature)": "name"
-                  }
+                  },
+                  "parsedOptions": [
+                    {
+                      "(google.api.http)": {
+                        "get": "/v1/{name=projects/*/notes/*}"
+                      }
+                    },
+                    {
+                      "(google.api.method_signature)": "name"
+                    }
+                  ]
                 },
                 "ListNotes": {
                   "requestType": "ListNotesRequest",
@@ -675,7 +758,17 @@
                   "options": {
                     "(google.api.http).get": "/v1/{parent=projects/*}/notes",
                     "(google.api.method_signature)": "parent,filter"
-                  }
+                  },
+                  "parsedOptions": [
+                    {
+                      "(google.api.http)": {
+                        "get": "/v1/{parent=projects/*}/notes"
+                      }
+                    },
+                    {
+                      "(google.api.method_signature)": "parent,filter"
+                    }
+                  ]
                 },
                 "DeleteNote": {
                   "requestType": "DeleteNoteRequest",
@@ -683,7 +776,17 @@
                   "options": {
                     "(google.api.http).delete": "/v1/{name=projects/*/notes/*}",
                     "(google.api.method_signature)": "name"
-                  }
+                  },
+                  "parsedOptions": [
+                    {
+                      "(google.api.http)": {
+                        "delete": "/v1/{name=projects/*/notes/*}"
+                      }
+                    },
+                    {
+                      "(google.api.method_signature)": "name"
+                    }
+                  ]
                 },
                 "CreateNote": {
                   "requestType": "CreateNoteRequest",
@@ -692,7 +795,18 @@
                     "(google.api.http).post": "/v1/{parent=projects/*}/notes",
                     "(google.api.http).body": "note",
                     "(google.api.method_signature)": "parent,note_id,note"
-                  }
+                  },
+                  "parsedOptions": [
+                    {
+                      "(google.api.http)": {
+                        "post": "/v1/{parent=projects/*}/notes",
+                        "body": "note"
+                      }
+                    },
+                    {
+                      "(google.api.method_signature)": "parent,note_id,note"
+                    }
+                  ]
                 },
                 "BatchCreateNotes": {
                   "requestType": "BatchCreateNotesRequest",
@@ -701,7 +815,18 @@
                     "(google.api.http).post": "/v1/{parent=projects/*}/notes:batchCreate",
                     "(google.api.http).body": "*",
                     "(google.api.method_signature)": "parent,notes"
-                  }
+                  },
+                  "parsedOptions": [
+                    {
+                      "(google.api.http)": {
+                        "post": "/v1/{parent=projects/*}/notes:batchCreate",
+                        "body": "*"
+                      }
+                    },
+                    {
+                      "(google.api.method_signature)": "parent,notes"
+                    }
+                  ]
                 },
                 "UpdateNote": {
                   "requestType": "UpdateNoteRequest",
@@ -710,7 +835,18 @@
                     "(google.api.http).patch": "/v1/{name=projects/*/notes/*}",
                     "(google.api.http).body": "note",
                     "(google.api.method_signature)": "name,note,update_mask"
-                  }
+                  },
+                  "parsedOptions": [
+                    {
+                      "(google.api.http)": {
+                        "patch": "/v1/{name=projects/*/notes/*}",
+                        "body": "note"
+                      }
+                    },
+                    {
+                      "(google.api.method_signature)": "name,note,update_mask"
+                    }
+                  ]
                 },
                 "ListNoteOccurrences": {
                   "requestType": "ListNoteOccurrencesRequest",
@@ -718,7 +854,17 @@
                   "options": {
                     "(google.api.http).get": "/v1/{name=projects/*/notes/*}/occurrences",
                     "(google.api.method_signature)": "name,filter"
-                  }
+                  },
+                  "parsedOptions": [
+                    {
+                      "(google.api.http)": {
+                        "get": "/v1/{name=projects/*/notes/*}/occurrences"
+                      }
+                    },
+                    {
+                      "(google.api.method_signature)": "name,filter"
+                    }
+                  ]
                 }
               }
             },

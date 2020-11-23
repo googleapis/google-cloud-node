@@ -16,6 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
+/* global window */
 import * as gax from 'google-gax';
 import {
   Callback,
@@ -30,6 +31,11 @@ import * as path from 'path';
 import {Transform} from 'stream';
 import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
+/**
+ * Client JSON configuration object, loaded from
+ * `src/v1/grafeas_client_config.json`.
+ * This file defines retry strategy and timeouts for all API methods in this library.
+ */
 import * as gapicConfig from './grafeas_client_config.json';
 
 const version = require('../../../package.json').version;
@@ -96,9 +102,9 @@ export class GrafeasClient {
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
-   * @param {gax.ClientConfig} [options.clientConfig] - client configuration override.
-   *     TODO(@alexander-fenster): link to gax documentation.
-   * @param {boolean} fallback - Use HTTP fallback mode.
+   * @param {gax.ClientConfig} [options.clientConfig] - Client configuration override.
+   *     Follows the structure of {@link gapicConfig}.
+   * @param {boolean} [options.fallback] - Use HTTP fallback mode.
    *     In fallback mode, a special browser-compatible transport implementation is used
    *     instead of gRPC transport. In browser context (if the `window` object is defined)
    *     the fallback mode is enabled automatically; set `options.fallback` to `false`
@@ -111,7 +117,9 @@ export class GrafeasClient {
       opts?.servicePath || opts?.apiEndpoint || staticMembers.servicePath;
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback = opts?.fallback ?? typeof window !== 'undefined';
+    const fallback =
+      opts?.fallback ??
+      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
@@ -344,7 +352,7 @@ export class GrafeasClient {
   // -------------------
   getOccurrence(
     request: protos.grafeas.v1.IGetOccurrenceRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.grafeas.v1.IOccurrence,
@@ -354,7 +362,7 @@ export class GrafeasClient {
   >;
   getOccurrence(
     request: protos.grafeas.v1.IGetOccurrenceRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.grafeas.v1.IOccurrence,
       protos.grafeas.v1.IGetOccurrenceRequest | null | undefined,
@@ -390,7 +398,7 @@ export class GrafeasClient {
   getOccurrence(
     request: protos.grafeas.v1.IGetOccurrenceRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.grafeas.v1.IOccurrence,
           protos.grafeas.v1.IGetOccurrenceRequest | null | undefined,
@@ -409,12 +417,12 @@ export class GrafeasClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -429,7 +437,7 @@ export class GrafeasClient {
   }
   deleteOccurrence(
     request: protos.grafeas.v1.IDeleteOccurrenceRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.protobuf.IEmpty,
@@ -439,7 +447,7 @@ export class GrafeasClient {
   >;
   deleteOccurrence(
     request: protos.grafeas.v1.IDeleteOccurrenceRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.protobuf.IEmpty,
       protos.grafeas.v1.IDeleteOccurrenceRequest | null | undefined,
@@ -477,7 +485,7 @@ export class GrafeasClient {
   deleteOccurrence(
     request: protos.grafeas.v1.IDeleteOccurrenceRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.protobuf.IEmpty,
           protos.grafeas.v1.IDeleteOccurrenceRequest | null | undefined,
@@ -496,12 +504,12 @@ export class GrafeasClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -516,7 +524,7 @@ export class GrafeasClient {
   }
   createOccurrence(
     request: protos.grafeas.v1.ICreateOccurrenceRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.grafeas.v1.IOccurrence,
@@ -526,7 +534,7 @@ export class GrafeasClient {
   >;
   createOccurrence(
     request: protos.grafeas.v1.ICreateOccurrenceRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.grafeas.v1.IOccurrence,
       protos.grafeas.v1.ICreateOccurrenceRequest | null | undefined,
@@ -564,7 +572,7 @@ export class GrafeasClient {
   createOccurrence(
     request: protos.grafeas.v1.ICreateOccurrenceRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.grafeas.v1.IOccurrence,
           protos.grafeas.v1.ICreateOccurrenceRequest | null | undefined,
@@ -583,12 +591,12 @@ export class GrafeasClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -603,7 +611,7 @@ export class GrafeasClient {
   }
   batchCreateOccurrences(
     request: protos.grafeas.v1.IBatchCreateOccurrencesRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.grafeas.v1.IBatchCreateOccurrencesResponse,
@@ -613,7 +621,7 @@ export class GrafeasClient {
   >;
   batchCreateOccurrences(
     request: protos.grafeas.v1.IBatchCreateOccurrencesRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.grafeas.v1.IBatchCreateOccurrencesResponse,
       protos.grafeas.v1.IBatchCreateOccurrencesRequest | null | undefined,
@@ -651,7 +659,7 @@ export class GrafeasClient {
   batchCreateOccurrences(
     request: protos.grafeas.v1.IBatchCreateOccurrencesRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.grafeas.v1.IBatchCreateOccurrencesResponse,
           protos.grafeas.v1.IBatchCreateOccurrencesRequest | null | undefined,
@@ -670,12 +678,12 @@ export class GrafeasClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -694,7 +702,7 @@ export class GrafeasClient {
   }
   updateOccurrence(
     request: protos.grafeas.v1.IUpdateOccurrenceRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.grafeas.v1.IOccurrence,
@@ -704,7 +712,7 @@ export class GrafeasClient {
   >;
   updateOccurrence(
     request: protos.grafeas.v1.IUpdateOccurrenceRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.grafeas.v1.IOccurrence,
       protos.grafeas.v1.IUpdateOccurrenceRequest | null | undefined,
@@ -744,7 +752,7 @@ export class GrafeasClient {
   updateOccurrence(
     request: protos.grafeas.v1.IUpdateOccurrenceRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.grafeas.v1.IOccurrence,
           protos.grafeas.v1.IUpdateOccurrenceRequest | null | undefined,
@@ -763,12 +771,12 @@ export class GrafeasClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -783,7 +791,7 @@ export class GrafeasClient {
   }
   getOccurrenceNote(
     request: protos.grafeas.v1.IGetOccurrenceNoteRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.grafeas.v1.INote,
@@ -793,7 +801,7 @@ export class GrafeasClient {
   >;
   getOccurrenceNote(
     request: protos.grafeas.v1.IGetOccurrenceNoteRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.grafeas.v1.INote,
       protos.grafeas.v1.IGetOccurrenceNoteRequest | null | undefined,
@@ -830,7 +838,7 @@ export class GrafeasClient {
   getOccurrenceNote(
     request: protos.grafeas.v1.IGetOccurrenceNoteRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.grafeas.v1.INote,
           protos.grafeas.v1.IGetOccurrenceNoteRequest | null | undefined,
@@ -849,12 +857,12 @@ export class GrafeasClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -869,7 +877,7 @@ export class GrafeasClient {
   }
   getNote(
     request: protos.grafeas.v1.IGetNoteRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.grafeas.v1.INote,
@@ -879,7 +887,7 @@ export class GrafeasClient {
   >;
   getNote(
     request: protos.grafeas.v1.IGetNoteRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.grafeas.v1.INote,
       protos.grafeas.v1.IGetNoteRequest | null | undefined,
@@ -915,7 +923,7 @@ export class GrafeasClient {
   getNote(
     request: protos.grafeas.v1.IGetNoteRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.grafeas.v1.INote,
           protos.grafeas.v1.IGetNoteRequest | null | undefined,
@@ -934,12 +942,12 @@ export class GrafeasClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -954,7 +962,7 @@ export class GrafeasClient {
   }
   deleteNote(
     request: protos.grafeas.v1.IDeleteNoteRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.protobuf.IEmpty,
@@ -964,7 +972,7 @@ export class GrafeasClient {
   >;
   deleteNote(
     request: protos.grafeas.v1.IDeleteNoteRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.protobuf.IEmpty,
       protos.grafeas.v1.IDeleteNoteRequest | null | undefined,
@@ -1000,7 +1008,7 @@ export class GrafeasClient {
   deleteNote(
     request: protos.grafeas.v1.IDeleteNoteRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.protobuf.IEmpty,
           protos.grafeas.v1.IDeleteNoteRequest | null | undefined,
@@ -1019,12 +1027,12 @@ export class GrafeasClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1039,7 +1047,7 @@ export class GrafeasClient {
   }
   createNote(
     request: protos.grafeas.v1.ICreateNoteRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.grafeas.v1.INote,
@@ -1049,7 +1057,7 @@ export class GrafeasClient {
   >;
   createNote(
     request: protos.grafeas.v1.ICreateNoteRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.grafeas.v1.INote,
       protos.grafeas.v1.ICreateNoteRequest | null | undefined,
@@ -1089,7 +1097,7 @@ export class GrafeasClient {
   createNote(
     request: protos.grafeas.v1.ICreateNoteRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.grafeas.v1.INote,
           protos.grafeas.v1.ICreateNoteRequest | null | undefined,
@@ -1108,12 +1116,12 @@ export class GrafeasClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1128,7 +1136,7 @@ export class GrafeasClient {
   }
   batchCreateNotes(
     request: protos.grafeas.v1.IBatchCreateNotesRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.grafeas.v1.IBatchCreateNotesResponse,
@@ -1138,7 +1146,7 @@ export class GrafeasClient {
   >;
   batchCreateNotes(
     request: protos.grafeas.v1.IBatchCreateNotesRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.grafeas.v1.IBatchCreateNotesResponse,
       protos.grafeas.v1.IBatchCreateNotesRequest | null | undefined,
@@ -1176,7 +1184,7 @@ export class GrafeasClient {
   batchCreateNotes(
     request: protos.grafeas.v1.IBatchCreateNotesRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.grafeas.v1.IBatchCreateNotesResponse,
           protos.grafeas.v1.IBatchCreateNotesRequest | null | undefined,
@@ -1195,12 +1203,12 @@ export class GrafeasClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1215,7 +1223,7 @@ export class GrafeasClient {
   }
   updateNote(
     request: protos.grafeas.v1.IUpdateNoteRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.grafeas.v1.INote,
@@ -1225,7 +1233,7 @@ export class GrafeasClient {
   >;
   updateNote(
     request: protos.grafeas.v1.IUpdateNoteRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.grafeas.v1.INote,
       protos.grafeas.v1.IUpdateNoteRequest | null | undefined,
@@ -1265,7 +1273,7 @@ export class GrafeasClient {
   updateNote(
     request: protos.grafeas.v1.IUpdateNoteRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.grafeas.v1.INote,
           protos.grafeas.v1.IUpdateNoteRequest | null | undefined,
@@ -1284,12 +1292,12 @@ export class GrafeasClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1305,7 +1313,7 @@ export class GrafeasClient {
 
   listOccurrences(
     request: protos.grafeas.v1.IListOccurrencesRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.grafeas.v1.IOccurrence[],
@@ -1315,7 +1323,7 @@ export class GrafeasClient {
   >;
   listOccurrences(
     request: protos.grafeas.v1.IListOccurrencesRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: PaginationCallback<
       protos.grafeas.v1.IListOccurrencesRequest,
       protos.grafeas.v1.IListOccurrencesResponse | null | undefined,
@@ -1361,7 +1369,7 @@ export class GrafeasClient {
   listOccurrences(
     request: protos.grafeas.v1.IListOccurrencesRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | PaginationCallback<
           protos.grafeas.v1.IListOccurrencesRequest,
           protos.grafeas.v1.IListOccurrencesResponse | null | undefined,
@@ -1380,12 +1388,12 @@ export class GrafeasClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1427,7 +1435,7 @@ export class GrafeasClient {
    */
   listOccurrencesStream(
     request?: protos.grafeas.v1.IListOccurrencesRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Transform {
     request = request || {};
     options = options || {};
@@ -1481,7 +1489,7 @@ export class GrafeasClient {
    */
   listOccurrencesAsync(
     request?: protos.grafeas.v1.IListOccurrencesRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): AsyncIterable<protos.grafeas.v1.IOccurrence> {
     request = request || {};
     options = options || {};
@@ -1503,7 +1511,7 @@ export class GrafeasClient {
   }
   listNotes(
     request: protos.grafeas.v1.IListNotesRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.grafeas.v1.INote[],
@@ -1513,7 +1521,7 @@ export class GrafeasClient {
   >;
   listNotes(
     request: protos.grafeas.v1.IListNotesRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: PaginationCallback<
       protos.grafeas.v1.IListNotesRequest,
       protos.grafeas.v1.IListNotesResponse | null | undefined,
@@ -1559,7 +1567,7 @@ export class GrafeasClient {
   listNotes(
     request: protos.grafeas.v1.IListNotesRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | PaginationCallback<
           protos.grafeas.v1.IListNotesRequest,
           protos.grafeas.v1.IListNotesResponse | null | undefined,
@@ -1578,12 +1586,12 @@ export class GrafeasClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1625,7 +1633,7 @@ export class GrafeasClient {
    */
   listNotesStream(
     request?: protos.grafeas.v1.IListNotesRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Transform {
     request = request || {};
     options = options || {};
@@ -1679,7 +1687,7 @@ export class GrafeasClient {
    */
   listNotesAsync(
     request?: protos.grafeas.v1.IListNotesRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): AsyncIterable<protos.grafeas.v1.INote> {
     request = request || {};
     options = options || {};
@@ -1701,7 +1709,7 @@ export class GrafeasClient {
   }
   listNoteOccurrences(
     request: protos.grafeas.v1.IListNoteOccurrencesRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.grafeas.v1.IOccurrence[],
@@ -1711,7 +1719,7 @@ export class GrafeasClient {
   >;
   listNoteOccurrences(
     request: protos.grafeas.v1.IListNoteOccurrencesRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: PaginationCallback<
       protos.grafeas.v1.IListNoteOccurrencesRequest,
       protos.grafeas.v1.IListNoteOccurrencesResponse | null | undefined,
@@ -1758,7 +1766,7 @@ export class GrafeasClient {
   listNoteOccurrences(
     request: protos.grafeas.v1.IListNoteOccurrencesRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | PaginationCallback<
           protos.grafeas.v1.IListNoteOccurrencesRequest,
           protos.grafeas.v1.IListNoteOccurrencesResponse | null | undefined,
@@ -1777,12 +1785,12 @@ export class GrafeasClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1823,7 +1831,7 @@ export class GrafeasClient {
    */
   listNoteOccurrencesStream(
     request?: protos.grafeas.v1.IListNoteOccurrencesRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Transform {
     request = request || {};
     options = options || {};
@@ -1876,7 +1884,7 @@ export class GrafeasClient {
    */
   listNoteOccurrencesAsync(
     request?: protos.grafeas.v1.IListNoteOccurrencesRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): AsyncIterable<protos.grafeas.v1.IOccurrence> {
     request = request || {};
     options = options || {};
