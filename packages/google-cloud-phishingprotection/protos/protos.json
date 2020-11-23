@@ -31,7 +31,18 @@
                             "(google.api.http).post": "/v1beta1/{parent=projects/*}/phishing:report",
                             "(google.api.http).body": "*",
                             "(google.api.method_signature)": "parent,uri"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta1/{parent=projects/*}/phishing:report",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,uri"
+                            }
+                          ]
                         }
                       }
                     },
