@@ -3,8 +3,16 @@
     {
       "git": {
         "name": ".",
-        "remote": "git@github.com:googleapis/nodejs-billing.git",
-        "sha": "f76fe0026d03a8a8f3c0b3d4f352628ca7e9b7de"
+        "remote": "https://github.com/googleapis/nodejs-billing.git",
+        "sha": "be029ad5c807cc8d04b8bddde83eb2d53f580a1c"
+      }
+    },
+    {
+      "git": {
+        "name": "googleapis",
+        "remote": "https://github.com/googleapis/googleapis.git",
+        "sha": "2f019bf70bfe06f1e2af1b04011b0a2405190e43",
+        "internalRef": "343202295"
       }
     },
     {
@@ -79,7 +87,6 @@
     "README.md",
     "api-extractor.json",
     "linkinator.config.json",
-    "package-lock.json.2677892991",
     "protos/google/cloud/billing/v1/cloud_billing.proto",
     "protos/google/cloud/billing/v1/cloud_catalog.proto",
     "protos/protos.d.ts",
@@ -87,7 +94,6 @@
     "protos/protos.json",
     "renovate.json",
     "samples/README.md",
-    "samples/package-lock.json.1460149391",
     "src/index.ts",
     "src/v1/cloud_billing_client.ts",
     "src/v1/cloud_billing_client_config.json",

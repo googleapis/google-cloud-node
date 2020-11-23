@@ -28,7 +28,17 @@
                           "options": {
                             "(google.api.http).get": "/v1/{name=billingAccounts/*}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=billingAccounts/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "ListBillingAccounts": {
                           "requestType": "ListBillingAccountsRequest",
@@ -36,7 +46,17 @@
                           "options": {
                             "(google.api.http).get": "/v1/billingAccounts",
                             "(google.api.method_signature)": ""
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/billingAccounts"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": ""
+                            }
+                          ]
                         },
                         "UpdateBillingAccount": {
                           "requestType": "UpdateBillingAccountRequest",
@@ -45,7 +65,18 @@
                             "(google.api.http).patch": "/v1/{name=billingAccounts/*}",
                             "(google.api.http).body": "account",
                             "(google.api.method_signature)": "name,account"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1/{name=billingAccounts/*}",
+                                "body": "account"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name,account"
+                            }
+                          ]
                         },
                         "CreateBillingAccount": {
                           "requestType": "CreateBillingAccountRequest",
@@ -54,7 +85,18 @@
                             "(google.api.http).post": "/v1/billingAccounts",
                             "(google.api.http).body": "billing_account",
                             "(google.api.method_signature)": "billing_account"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/billingAccounts",
+                                "body": "billing_account"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "billing_account"
+                            }
+                          ]
                         },
                         "ListProjectBillingInfo": {
                           "requestType": "ListProjectBillingInfoRequest",
@@ -62,7 +104,17 @@
                           "options": {
                             "(google.api.http).get": "/v1/{name=billingAccounts/*}/projects",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=billingAccounts/*}/projects"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "GetProjectBillingInfo": {
                           "requestType": "GetProjectBillingInfoRequest",
@@ -70,7 +122,17 @@
                           "options": {
                             "(google.api.http).get": "/v1/{name=projects/*}/billingInfo",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*}/billingInfo"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "UpdateProjectBillingInfo": {
                           "requestType": "UpdateProjectBillingInfoRequest",
@@ -79,7 +141,18 @@
                             "(google.api.http).put": "/v1/{name=projects/*}/billingInfo",
                             "(google.api.http).body": "project_billing_info",
                             "(google.api.method_signature)": "name,project_billing_info"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "put": "/v1/{name=projects/*}/billingInfo",
+                                "body": "project_billing_info"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name,project_billing_info"
+                            }
+                          ]
                         },
                         "GetIamPolicy": {
                           "requestType": "google.iam.v1.GetIamPolicyRequest",
@@ -87,7 +160,17 @@
                           "options": {
                             "(google.api.http).get": "/v1/{resource=billingAccounts/*}:getIamPolicy",
                             "(google.api.method_signature)": "resource"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{resource=billingAccounts/*}:getIamPolicy"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "resource"
+                            }
+                          ]
                         },
                         "SetIamPolicy": {
                           "requestType": "google.iam.v1.SetIamPolicyRequest",
@@ -96,7 +179,18 @@
                             "(google.api.http).post": "/v1/{resource=billingAccounts/*}:setIamPolicy",
                             "(google.api.http).body": "*",
                             "(google.api.method_signature)": "resource,policy"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{resource=billingAccounts/*}:setIamPolicy",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "resource,policy"
+                            }
+                          ]
                         },
                         "TestIamPermissions": {
                           "requestType": "google.iam.v1.TestIamPermissionsRequest",
@@ -105,7 +199,18 @@
                             "(google.api.http).post": "/v1/{resource=billingAccounts/*}:testIamPermissions",
                             "(google.api.http).body": "*",
                             "(google.api.method_signature)": "resource,permissions"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{resource=billingAccounts/*}:testIamPermissions",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "resource,permissions"
+                            }
+                          ]
                         }
                       }
                     },
@@ -301,7 +406,17 @@
                           "options": {
                             "(google.api.http).get": "/v1/services",
                             "(google.api.method_signature)": ""
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/services"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": ""
+                            }
+                          ]
                         },
                         "ListSkus": {
                           "requestType": "ListSkusRequest",
@@ -309,7 +424,17 @@
                           "options": {
                             "(google.api.http).get": "/v1/{parent=services/*}/skus",
                             "(google.api.method_signature)": "parent"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=services/*}/skus"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
                         }
                       }
                     },
@@ -1713,7 +1838,15 @@
                       "options": {
                         "(google.api.http).post": "/v1/{resource=**}:setIamPolicy",
                         "(google.api.http).body": "*"
-                      }
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "post": "/v1/{resource=**}:setIamPolicy",
+                            "body": "*"
+                          }
+                        }
+                      ]
                     },
                     "GetIamPolicy": {
                       "requestType": "GetIamPolicyRequest",
@@ -1721,7 +1854,15 @@
                       "options": {
                         "(google.api.http).post": "/v1/{resource=**}:getIamPolicy",
                         "(google.api.http).body": "*"
-                      }
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "post": "/v1/{resource=**}:getIamPolicy",
+                            "body": "*"
+                          }
+                        }
+                      ]
                     },
                     "TestIamPermissions": {
                       "requestType": "TestIamPermissionsRequest",
@@ -1729,7 +1870,15 @@
                       "options": {
                         "(google.api.http).post": "/v1/{resource=**}:testIamPermissions",
                         "(google.api.http).body": "*"
-                      }
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "post": "/v1/{resource=**}:testIamPermissions",
+                            "body": "*"
+                          }
+                        }
+                      ]
                     }
                   }
                 },
