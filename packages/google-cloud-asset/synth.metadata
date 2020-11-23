@@ -4,7 +4,7 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/nodejs-asset.git",
-        "sha": "e05a3168955f8590db9581766530ef546d61a363"
+        "sha": "678ce5433f478b81698c68e0ffc52ff7a21ce692"
       }
     },
     {
