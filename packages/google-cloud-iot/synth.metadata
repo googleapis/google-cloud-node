@@ -3,8 +3,16 @@
     {
       "git": {
         "name": ".",
-        "remote": "git@github.com:googleapis/nodejs-iot.git",
-        "sha": "6e416f7f428f1d653f9364a051d468c607fe2d91"
+        "remote": "https://github.com/googleapis/nodejs-iot.git",
+        "sha": "c10e50e443b788d1e4a476a550484484f887f367"
+      }
+    },
+    {
+      "git": {
+        "name": "googleapis",
+        "remote": "https://github.com/googleapis/googleapis.git",
+        "sha": "2f019bf70bfe06f1e2af1b04011b0a2405190e43",
+        "internalRef": "343202295"
       }
     },
     {
@@ -79,7 +87,6 @@
     "README.md",
     "api-extractor.json",
     "linkinator.config.json",
-    "package-lock.json.1462975402",
     "protos/google/cloud/iot/v1/device_manager.proto",
     "protos/google/cloud/iot/v1/resources.proto",
     "protos/protos.d.ts",
@@ -87,7 +94,6 @@
     "protos/protos.json",
     "renovate.json",
     "samples/README.md",
-    "samples/package-lock.json.1264602173",
     "src/index.ts",
     "src/v1/device_manager_client.ts",
     "src/v1/device_manager_client_config.json",

@@ -28,7 +28,18 @@
                             "(google.api.http).post": "/v1/{parent=projects/*/locations/*}/registries",
                             "(google.api.http).body": "device_registry",
                             "(google.api.method_signature)": "parent,device_registry"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=projects/*/locations/*}/registries",
+                                "body": "device_registry"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,device_registry"
+                            }
+                          ]
                         },
                         "GetDeviceRegistry": {
                           "requestType": "GetDeviceRegistryRequest",
@@ -36,7 +47,17 @@
                           "options": {
                             "(google.api.http).get": "/v1/{name=projects/*/locations/*/registries/*}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/locations/*/registries/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "UpdateDeviceRegistry": {
                           "requestType": "UpdateDeviceRegistryRequest",
@@ -45,7 +66,18 @@
                             "(google.api.http).patch": "/v1/{device_registry.name=projects/*/locations/*/registries/*}",
                             "(google.api.http).body": "device_registry",
                             "(google.api.method_signature)": "device_registry,update_mask"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1/{device_registry.name=projects/*/locations/*/registries/*}",
+                                "body": "device_registry"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "device_registry,update_mask"
+                            }
+                          ]
                         },
                         "DeleteDeviceRegistry": {
                           "requestType": "DeleteDeviceRegistryRequest",
@@ -53,7 +85,17 @@
                           "options": {
                             "(google.api.http).delete": "/v1/{name=projects/*/locations/*/registries/*}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1/{name=projects/*/locations/*/registries/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "ListDeviceRegistries": {
                           "requestType": "ListDeviceRegistriesRequest",
@@ -61,7 +103,17 @@
                           "options": {
                             "(google.api.http).get": "/v1/{parent=projects/*/locations/*}/registries",
                             "(google.api.method_signature)": "parent"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=projects/*/locations/*}/registries"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
                         },
                         "CreateDevice": {
                           "requestType": "CreateDeviceRequest",
@@ -70,7 +122,18 @@
                             "(google.api.http).post": "/v1/{parent=projects/*/locations/*/registries/*}/devices",
                             "(google.api.http).body": "device",
                             "(google.api.method_signature)": "parent,device"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=projects/*/locations/*/registries/*}/devices",
+                                "body": "device"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,device"
+                            }
+                          ]
                         },
                         "GetDevice": {
                           "requestType": "GetDeviceRequest",
@@ -79,7 +142,20 @@
                             "(google.api.http).get": "/v1/{name=projects/*/locations/*/registries/*/devices/*}",
                             "(google.api.http).additional_bindings.get": "/v1/{name=projects/*/locations/*/registries/*/groups/*/devices/*}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/locations/*/registries/*/devices/*}",
+                                "additional_bindings": {
+                                  "get": "/v1/{name=projects/*/locations/*/registries/*/groups/*/devices/*}"
+                                }
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "UpdateDevice": {
                           "requestType": "UpdateDeviceRequest",
@@ -90,7 +166,22 @@
                             "(google.api.http).additional_bindings.patch": "/v1/{device.name=projects/*/locations/*/registries/*/groups/*/devices/*}",
                             "(google.api.http).additional_bindings.body": "device",
                             "(google.api.method_signature)": "device,update_mask"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1/{device.name=projects/*/locations/*/registries/*/devices/*}",
+                                "body": "device",
+                                "additional_bindings": {
+                                  "patch": "/v1/{device.name=projects/*/locations/*/registries/*/groups/*/devices/*}",
+                                  "body": "device"
+                                }
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "device,update_mask"
+                            }
+                          ]
                         },
                         "DeleteDevice": {
                           "requestType": "DeleteDeviceRequest",
@@ -98,7 +189,17 @@
                           "options": {
                             "(google.api.http).delete": "/v1/{name=projects/*/locations/*/registries/*/devices/*}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1/{name=projects/*/locations/*/registries/*/devices/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "ListDevices": {
                           "requestType": "ListDevicesRequest",
@@ -107,7 +208,20 @@
                             "(google.api.http).get": "/v1/{parent=projects/*/locations/*/registries/*}/devices",
                             "(google.api.http).additional_bindings.get": "/v1/{parent=projects/*/locations/*/registries/*/groups/*}/devices",
                             "(google.api.method_signature)": "parent"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=projects/*/locations/*/registries/*}/devices",
+                                "additional_bindings": {
+                                  "get": "/v1/{parent=projects/*/locations/*/registries/*/groups/*}/devices"
+                                }
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
                         },
                         "ModifyCloudToDeviceConfig": {
                           "requestType": "ModifyCloudToDeviceConfigRequest",
@@ -118,7 +232,22 @@
                             "(google.api.http).additional_bindings.post": "/v1/{name=projects/*/locations/*/registries/*/groups/*/devices/*}:modifyCloudToDeviceConfig",
                             "(google.api.http).additional_bindings.body": "*",
                             "(google.api.method_signature)": "name,binary_data"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{name=projects/*/locations/*/registries/*/devices/*}:modifyCloudToDeviceConfig",
+                                "body": "*",
+                                "additional_bindings": {
+                                  "post": "/v1/{name=projects/*/locations/*/registries/*/groups/*/devices/*}:modifyCloudToDeviceConfig",
+                                  "body": "*"
+                                }
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name,binary_data"
+                            }
+                          ]
                         },
                         "ListDeviceConfigVersions": {
                           "requestType": "ListDeviceConfigVersionsRequest",
@@ -127,7 +256,20 @@
                             "(google.api.http).get": "/v1/{name=projects/*/locations/*/registries/*/devices/*}/configVersions",
                             "(google.api.http).additional_bindings.get": "/v1/{name=projects/*/locations/*/registries/*/groups/*/devices/*}/configVersions",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/locations/*/registries/*/devices/*}/configVersions",
+                                "additional_bindings": {
+                                  "get": "/v1/{name=projects/*/locations/*/registries/*/groups/*/devices/*}/configVersions"
+                                }
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "ListDeviceStates": {
                           "requestType": "ListDeviceStatesRequest",
@@ -136,7 +278,20 @@
                             "(google.api.http).get": "/v1/{name=projects/*/locations/*/registries/*/devices/*}/states",
                             "(google.api.http).additional_bindings.get": "/v1/{name=projects/*/locations/*/registries/*/groups/*/devices/*}/states",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/locations/*/registries/*/devices/*}/states",
+                                "additional_bindings": {
+                                  "get": "/v1/{name=projects/*/locations/*/registries/*/groups/*/devices/*}/states"
+                                }
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "SetIamPolicy": {
                           "requestType": "google.iam.v1.SetIamPolicyRequest",
@@ -147,7 +302,22 @@
                             "(google.api.http).additional_bindings.post": "/v1/{resource=projects/*/locations/*/registries/*/groups/*}:setIamPolicy",
                             "(google.api.http).additional_bindings.body": "*",
                             "(google.api.method_signature)": "resource,policy"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{resource=projects/*/locations/*/registries/*}:setIamPolicy",
+                                "body": "*",
+                                "additional_bindings": {
+                                  "post": "/v1/{resource=projects/*/locations/*/registries/*/groups/*}:setIamPolicy",
+                                  "body": "*"
+                                }
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "resource,policy"
+                            }
+                          ]
                         },
                         "GetIamPolicy": {
                           "requestType": "google.iam.v1.GetIamPolicyRequest",
@@ -158,7 +328,22 @@
                             "(google.api.http).additional_bindings.post": "/v1/{resource=projects/*/locations/*/registries/*/groups/*}:getIamPolicy",
                             "(google.api.http).additional_bindings.body": "*",
                             "(google.api.method_signature)": "resource"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{resource=projects/*/locations/*/registries/*}:getIamPolicy",
+                                "body": "*",
+                                "additional_bindings": {
+                                  "post": "/v1/{resource=projects/*/locations/*/registries/*/groups/*}:getIamPolicy",
+                                  "body": "*"
+                                }
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "resource"
+                            }
+                          ]
                         },
                         "TestIamPermissions": {
                           "requestType": "google.iam.v1.TestIamPermissionsRequest",
@@ -169,7 +354,22 @@
                             "(google.api.http).additional_bindings.post": "/v1/{resource=projects/*/locations/*/registries/*/groups/*}:testIamPermissions",
                             "(google.api.http).additional_bindings.body": "*",
                             "(google.api.method_signature)": "resource,permissions"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{resource=projects/*/locations/*/registries/*}:testIamPermissions",
+                                "body": "*",
+                                "additional_bindings": {
+                                  "post": "/v1/{resource=projects/*/locations/*/registries/*/groups/*}:testIamPermissions",
+                                  "body": "*"
+                                }
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "resource,permissions"
+                            }
+                          ]
                         },
                         "SendCommandToDevice": {
                           "requestType": "SendCommandToDeviceRequest",
@@ -180,7 +380,25 @@
                             "(google.api.http).additional_bindings.post": "/v1/{name=projects/*/locations/*/registries/*/groups/*/devices/*}:sendCommandToDevice",
                             "(google.api.http).additional_bindings.body": "*",
                             "(google.api.method_signature)": "name,binary_data,subfolder"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{name=projects/*/locations/*/registries/*/devices/*}:sendCommandToDevice",
+                                "body": "*",
+                                "additional_bindings": {
+                                  "post": "/v1/{name=projects/*/locations/*/registries/*/groups/*/devices/*}:sendCommandToDevice",
+                                  "body": "*"
+                                }
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name,binary_data"
+                            },
+                            {
+                              "(google.api.method_signature)": "name,binary_data,subfolder"
+                            }
+                          ]
                         },
                         "BindDeviceToGateway": {
                           "requestType": "BindDeviceToGatewayRequest",
@@ -191,7 +409,22 @@
                             "(google.api.http).additional_bindings.post": "/v1/{parent=projects/*/locations/*/registries/*/groups/*}:bindDeviceToGateway",
                             "(google.api.http).additional_bindings.body": "*",
                             "(google.api.method_signature)": "parent,gateway_id,device_id"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=projects/*/locations/*/registries/*}:bindDeviceToGateway",
+                                "body": "*",
+                                "additional_bindings": {
+                                  "post": "/v1/{parent=projects/*/locations/*/registries/*/groups/*}:bindDeviceToGateway",
+                                  "body": "*"
+                                }
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,gateway_id,device_id"
+                            }
+                          ]
                         },
                         "UnbindDeviceFromGateway": {
                           "requestType": "UnbindDeviceFromGatewayRequest",
@@ -202,7 +435,22 @@
                             "(google.api.http).additional_bindings.post": "/v1/{parent=projects/*/locations/*/registries/*/groups/*}:unbindDeviceFromGateway",
                             "(google.api.http).additional_bindings.body": "*",
                             "(google.api.method_signature)": "parent,gateway_id,device_id"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=projects/*/locations/*/registries/*}:unbindDeviceFromGateway",
+                                "body": "*",
+                                "additional_bindings": {
+                                  "post": "/v1/{parent=projects/*/locations/*/registries/*/groups/*}:unbindDeviceFromGateway",
+                                  "body": "*"
+                                }
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,gateway_id,device_id"
+                            }
+                          ]
                         }
                       }
                     },
@@ -2138,7 +2386,15 @@
                       "options": {
                         "(google.api.http).post": "/v1/{resource=**}:setIamPolicy",
                         "(google.api.http).body": "*"
-                      }
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "post": "/v1/{resource=**}:setIamPolicy",
+                            "body": "*"
+                          }
+                        }
+                      ]
                     },
                     "GetIamPolicy": {
                       "requestType": "GetIamPolicyRequest",
@@ -2146,7 +2402,15 @@
                       "options": {
                         "(google.api.http).post": "/v1/{resource=**}:getIamPolicy",
                         "(google.api.http).body": "*"
-                      }
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "post": "/v1/{resource=**}:getIamPolicy",
+                            "body": "*"
+                          }
+                        }
+                      ]
                     },
                     "TestIamPermissions": {
                       "requestType": "TestIamPermissionsRequest",
@@ -2154,7 +2418,15 @@
                       "options": {
                         "(google.api.http).post": "/v1/{resource=**}:testIamPermissions",
                         "(google.api.http).body": "*"
-                      }
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "post": "/v1/{resource=**}:testIamPermissions",
+                            "body": "*"
+                          }
+                        }
+                      ]
                     }
                   }
                 },

@@ -16,6 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
+/* global window */
 import * as gax from 'google-gax';
 import {
   Callback,
@@ -30,6 +31,11 @@ import * as path from 'path';
 import {Transform} from 'stream';
 import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
+/**
+ * Client JSON configuration object, loaded from
+ * `src/v1/device_manager_client_config.json`.
+ * This file defines retry strategy and timeouts for all API methods in this library.
+ */
 import * as gapicConfig from './device_manager_client_config.json';
 
 const version = require('../../../package.json').version;
@@ -83,9 +89,9 @@ export class DeviceManagerClient {
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
-   * @param {gax.ClientConfig} [options.clientConfig] - client configuration override.
-   *     TODO(@alexander-fenster): link to gax documentation.
-   * @param {boolean} fallback - Use HTTP fallback mode.
+   * @param {gax.ClientConfig} [options.clientConfig] - Client configuration override.
+   *     Follows the structure of {@link gapicConfig}.
+   * @param {boolean} [options.fallback] - Use HTTP fallback mode.
    *     In fallback mode, a special browser-compatible transport implementation is used
    *     instead of gRPC transport. In browser context (if the `window` object is defined)
    *     the fallback mode is enabled automatically; set `options.fallback` to `false`
@@ -98,7 +104,9 @@ export class DeviceManagerClient {
       opts?.servicePath || opts?.apiEndpoint || staticMembers.servicePath;
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback = opts?.fallback ?? typeof window !== 'undefined';
+    const fallback =
+      opts?.fallback ??
+      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
@@ -336,7 +344,7 @@ export class DeviceManagerClient {
   // -------------------
   createDeviceRegistry(
     request: protos.google.cloud.iot.v1.ICreateDeviceRegistryRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.iot.v1.IDeviceRegistry,
@@ -346,7 +354,7 @@ export class DeviceManagerClient {
   >;
   createDeviceRegistry(
     request: protos.google.cloud.iot.v1.ICreateDeviceRegistryRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.cloud.iot.v1.IDeviceRegistry,
       | protos.google.cloud.iot.v1.ICreateDeviceRegistryRequest
@@ -390,7 +398,7 @@ export class DeviceManagerClient {
   createDeviceRegistry(
     request: protos.google.cloud.iot.v1.ICreateDeviceRegistryRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.cloud.iot.v1.IDeviceRegistry,
           | protos.google.cloud.iot.v1.ICreateDeviceRegistryRequest
@@ -413,12 +421,12 @@ export class DeviceManagerClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -433,7 +441,7 @@ export class DeviceManagerClient {
   }
   getDeviceRegistry(
     request: protos.google.cloud.iot.v1.IGetDeviceRegistryRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.iot.v1.IDeviceRegistry,
@@ -443,7 +451,7 @@ export class DeviceManagerClient {
   >;
   getDeviceRegistry(
     request: protos.google.cloud.iot.v1.IGetDeviceRegistryRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.cloud.iot.v1.IDeviceRegistry,
       protos.google.cloud.iot.v1.IGetDeviceRegistryRequest | null | undefined,
@@ -479,7 +487,7 @@ export class DeviceManagerClient {
   getDeviceRegistry(
     request: protos.google.cloud.iot.v1.IGetDeviceRegistryRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.cloud.iot.v1.IDeviceRegistry,
           | protos.google.cloud.iot.v1.IGetDeviceRegistryRequest
@@ -500,12 +508,12 @@ export class DeviceManagerClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -520,7 +528,7 @@ export class DeviceManagerClient {
   }
   updateDeviceRegistry(
     request: protos.google.cloud.iot.v1.IUpdateDeviceRegistryRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.iot.v1.IDeviceRegistry,
@@ -530,7 +538,7 @@ export class DeviceManagerClient {
   >;
   updateDeviceRegistry(
     request: protos.google.cloud.iot.v1.IUpdateDeviceRegistryRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.cloud.iot.v1.IDeviceRegistry,
       | protos.google.cloud.iot.v1.IUpdateDeviceRegistryRequest
@@ -577,7 +585,7 @@ export class DeviceManagerClient {
   updateDeviceRegistry(
     request: protos.google.cloud.iot.v1.IUpdateDeviceRegistryRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.cloud.iot.v1.IDeviceRegistry,
           | protos.google.cloud.iot.v1.IUpdateDeviceRegistryRequest
@@ -600,12 +608,12 @@ export class DeviceManagerClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -620,7 +628,7 @@ export class DeviceManagerClient {
   }
   deleteDeviceRegistry(
     request: protos.google.cloud.iot.v1.IDeleteDeviceRegistryRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.protobuf.IEmpty,
@@ -630,7 +638,7 @@ export class DeviceManagerClient {
   >;
   deleteDeviceRegistry(
     request: protos.google.cloud.iot.v1.IDeleteDeviceRegistryRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.protobuf.IEmpty,
       | protos.google.cloud.iot.v1.IDeleteDeviceRegistryRequest
@@ -670,7 +678,7 @@ export class DeviceManagerClient {
   deleteDeviceRegistry(
     request: protos.google.cloud.iot.v1.IDeleteDeviceRegistryRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.protobuf.IEmpty,
           | protos.google.cloud.iot.v1.IDeleteDeviceRegistryRequest
@@ -693,12 +701,12 @@ export class DeviceManagerClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -713,7 +721,7 @@ export class DeviceManagerClient {
   }
   createDevice(
     request: protos.google.cloud.iot.v1.ICreateDeviceRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.iot.v1.IDevice,
@@ -723,7 +731,7 @@ export class DeviceManagerClient {
   >;
   createDevice(
     request: protos.google.cloud.iot.v1.ICreateDeviceRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.cloud.iot.v1.IDevice,
       protos.google.cloud.iot.v1.ICreateDeviceRequest | null | undefined,
@@ -764,7 +772,7 @@ export class DeviceManagerClient {
   createDevice(
     request: protos.google.cloud.iot.v1.ICreateDeviceRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.cloud.iot.v1.IDevice,
           protos.google.cloud.iot.v1.ICreateDeviceRequest | null | undefined,
@@ -783,12 +791,12 @@ export class DeviceManagerClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -803,7 +811,7 @@ export class DeviceManagerClient {
   }
   getDevice(
     request: protos.google.cloud.iot.v1.IGetDeviceRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.iot.v1.IDevice,
@@ -813,7 +821,7 @@ export class DeviceManagerClient {
   >;
   getDevice(
     request: protos.google.cloud.iot.v1.IGetDeviceRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.cloud.iot.v1.IDevice,
       protos.google.cloud.iot.v1.IGetDeviceRequest | null | undefined,
@@ -853,7 +861,7 @@ export class DeviceManagerClient {
   getDevice(
     request: protos.google.cloud.iot.v1.IGetDeviceRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.cloud.iot.v1.IDevice,
           protos.google.cloud.iot.v1.IGetDeviceRequest | null | undefined,
@@ -872,12 +880,12 @@ export class DeviceManagerClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -892,7 +900,7 @@ export class DeviceManagerClient {
   }
   updateDevice(
     request: protos.google.cloud.iot.v1.IUpdateDeviceRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.iot.v1.IDevice,
@@ -902,7 +910,7 @@ export class DeviceManagerClient {
   >;
   updateDevice(
     request: protos.google.cloud.iot.v1.IUpdateDeviceRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.cloud.iot.v1.IDevice,
       protos.google.cloud.iot.v1.IUpdateDeviceRequest | null | undefined,
@@ -945,7 +953,7 @@ export class DeviceManagerClient {
   updateDevice(
     request: protos.google.cloud.iot.v1.IUpdateDeviceRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.cloud.iot.v1.IDevice,
           protos.google.cloud.iot.v1.IUpdateDeviceRequest | null | undefined,
@@ -964,12 +972,12 @@ export class DeviceManagerClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -984,7 +992,7 @@ export class DeviceManagerClient {
   }
   deleteDevice(
     request: protos.google.cloud.iot.v1.IDeleteDeviceRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.protobuf.IEmpty,
@@ -994,7 +1002,7 @@ export class DeviceManagerClient {
   >;
   deleteDevice(
     request: protos.google.cloud.iot.v1.IDeleteDeviceRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.protobuf.IEmpty,
       protos.google.cloud.iot.v1.IDeleteDeviceRequest | null | undefined,
@@ -1031,7 +1039,7 @@ export class DeviceManagerClient {
   deleteDevice(
     request: protos.google.cloud.iot.v1.IDeleteDeviceRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.protobuf.IEmpty,
           protos.google.cloud.iot.v1.IDeleteDeviceRequest | null | undefined,
@@ -1050,12 +1058,12 @@ export class DeviceManagerClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1070,7 +1078,7 @@ export class DeviceManagerClient {
   }
   modifyCloudToDeviceConfig(
     request: protos.google.cloud.iot.v1.IModifyCloudToDeviceConfigRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.iot.v1.IDeviceConfig,
@@ -1080,7 +1088,7 @@ export class DeviceManagerClient {
   >;
   modifyCloudToDeviceConfig(
     request: protos.google.cloud.iot.v1.IModifyCloudToDeviceConfigRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.cloud.iot.v1.IDeviceConfig,
       | protos.google.cloud.iot.v1.IModifyCloudToDeviceConfigRequest
@@ -1131,7 +1139,7 @@ export class DeviceManagerClient {
   modifyCloudToDeviceConfig(
     request: protos.google.cloud.iot.v1.IModifyCloudToDeviceConfigRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.cloud.iot.v1.IDeviceConfig,
           | protos.google.cloud.iot.v1.IModifyCloudToDeviceConfigRequest
@@ -1154,12 +1162,12 @@ export class DeviceManagerClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1178,7 +1186,7 @@ export class DeviceManagerClient {
   }
   listDeviceConfigVersions(
     request: protos.google.cloud.iot.v1.IListDeviceConfigVersionsRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.iot.v1.IListDeviceConfigVersionsResponse,
@@ -1188,7 +1196,7 @@ export class DeviceManagerClient {
   >;
   listDeviceConfigVersions(
     request: protos.google.cloud.iot.v1.IListDeviceConfigVersionsRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.cloud.iot.v1.IListDeviceConfigVersionsResponse,
       | protos.google.cloud.iot.v1.IListDeviceConfigVersionsRequest
@@ -1234,7 +1242,7 @@ export class DeviceManagerClient {
   listDeviceConfigVersions(
     request: protos.google.cloud.iot.v1.IListDeviceConfigVersionsRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.cloud.iot.v1.IListDeviceConfigVersionsResponse,
           | protos.google.cloud.iot.v1.IListDeviceConfigVersionsRequest
@@ -1257,12 +1265,12 @@ export class DeviceManagerClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1281,7 +1289,7 @@ export class DeviceManagerClient {
   }
   listDeviceStates(
     request: protos.google.cloud.iot.v1.IListDeviceStatesRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.iot.v1.IListDeviceStatesResponse,
@@ -1291,7 +1299,7 @@ export class DeviceManagerClient {
   >;
   listDeviceStates(
     request: protos.google.cloud.iot.v1.IListDeviceStatesRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.cloud.iot.v1.IListDeviceStatesResponse,
       protos.google.cloud.iot.v1.IListDeviceStatesRequest | null | undefined,
@@ -1333,7 +1341,7 @@ export class DeviceManagerClient {
   listDeviceStates(
     request: protos.google.cloud.iot.v1.IListDeviceStatesRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.cloud.iot.v1.IListDeviceStatesResponse,
           | protos.google.cloud.iot.v1.IListDeviceStatesRequest
@@ -1354,12 +1362,12 @@ export class DeviceManagerClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1374,7 +1382,7 @@ export class DeviceManagerClient {
   }
   setIamPolicy(
     request: protos.google.iam.v1.ISetIamPolicyRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.iam.v1.IPolicy,
@@ -1384,7 +1392,7 @@ export class DeviceManagerClient {
   >;
   setIamPolicy(
     request: protos.google.iam.v1.ISetIamPolicyRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.iam.v1.IPolicy,
       protos.google.iam.v1.ISetIamPolicyRequest | null | undefined,
@@ -1426,7 +1434,7 @@ export class DeviceManagerClient {
   setIamPolicy(
     request: protos.google.iam.v1.ISetIamPolicyRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.iam.v1.IPolicy,
           protos.google.iam.v1.ISetIamPolicyRequest | null | undefined,
@@ -1445,12 +1453,12 @@ export class DeviceManagerClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1465,7 +1473,7 @@ export class DeviceManagerClient {
   }
   getIamPolicy(
     request: protos.google.iam.v1.IGetIamPolicyRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.iam.v1.IPolicy,
@@ -1475,7 +1483,7 @@ export class DeviceManagerClient {
   >;
   getIamPolicy(
     request: protos.google.iam.v1.IGetIamPolicyRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.iam.v1.IPolicy,
       protos.google.iam.v1.IGetIamPolicyRequest | null | undefined,
@@ -1516,7 +1524,7 @@ export class DeviceManagerClient {
   getIamPolicy(
     request: protos.google.iam.v1.IGetIamPolicyRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.iam.v1.IPolicy,
           protos.google.iam.v1.IGetIamPolicyRequest | null | undefined,
@@ -1535,12 +1543,12 @@ export class DeviceManagerClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1555,7 +1563,7 @@ export class DeviceManagerClient {
   }
   testIamPermissions(
     request: protos.google.iam.v1.ITestIamPermissionsRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.iam.v1.ITestIamPermissionsResponse,
@@ -1565,7 +1573,7 @@ export class DeviceManagerClient {
   >;
   testIamPermissions(
     request: protos.google.iam.v1.ITestIamPermissionsRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.iam.v1.ITestIamPermissionsResponse,
       protos.google.iam.v1.ITestIamPermissionsRequest | null | undefined,
@@ -1608,7 +1616,7 @@ export class DeviceManagerClient {
   testIamPermissions(
     request: protos.google.iam.v1.ITestIamPermissionsRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.iam.v1.ITestIamPermissionsResponse,
           protos.google.iam.v1.ITestIamPermissionsRequest | null | undefined,
@@ -1627,12 +1635,12 @@ export class DeviceManagerClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1647,7 +1655,7 @@ export class DeviceManagerClient {
   }
   sendCommandToDevice(
     request: protos.google.cloud.iot.v1.ISendCommandToDeviceRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.iot.v1.ISendCommandToDeviceResponse,
@@ -1657,7 +1665,7 @@ export class DeviceManagerClient {
   >;
   sendCommandToDevice(
     request: protos.google.cloud.iot.v1.ISendCommandToDeviceRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.cloud.iot.v1.ISendCommandToDeviceResponse,
       protos.google.cloud.iot.v1.ISendCommandToDeviceRequest | null | undefined,
@@ -1714,7 +1722,7 @@ export class DeviceManagerClient {
   sendCommandToDevice(
     request: protos.google.cloud.iot.v1.ISendCommandToDeviceRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.cloud.iot.v1.ISendCommandToDeviceResponse,
           | protos.google.cloud.iot.v1.ISendCommandToDeviceRequest
@@ -1735,12 +1743,12 @@ export class DeviceManagerClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1755,7 +1763,7 @@ export class DeviceManagerClient {
   }
   bindDeviceToGateway(
     request: protos.google.cloud.iot.v1.IBindDeviceToGatewayRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.iot.v1.IBindDeviceToGatewayResponse,
@@ -1765,7 +1773,7 @@ export class DeviceManagerClient {
   >;
   bindDeviceToGateway(
     request: protos.google.cloud.iot.v1.IBindDeviceToGatewayRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.cloud.iot.v1.IBindDeviceToGatewayResponse,
       protos.google.cloud.iot.v1.IBindDeviceToGatewayRequest | null | undefined,
@@ -1808,7 +1816,7 @@ export class DeviceManagerClient {
   bindDeviceToGateway(
     request: protos.google.cloud.iot.v1.IBindDeviceToGatewayRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.cloud.iot.v1.IBindDeviceToGatewayResponse,
           | protos.google.cloud.iot.v1.IBindDeviceToGatewayRequest
@@ -1829,12 +1837,12 @@ export class DeviceManagerClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1849,7 +1857,7 @@ export class DeviceManagerClient {
   }
   unbindDeviceFromGateway(
     request: protos.google.cloud.iot.v1.IUnbindDeviceFromGatewayRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.iot.v1.IUnbindDeviceFromGatewayResponse,
@@ -1859,7 +1867,7 @@ export class DeviceManagerClient {
   >;
   unbindDeviceFromGateway(
     request: protos.google.cloud.iot.v1.IUnbindDeviceFromGatewayRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.cloud.iot.v1.IUnbindDeviceFromGatewayResponse,
       | protos.google.cloud.iot.v1.IUnbindDeviceFromGatewayRequest
@@ -1906,7 +1914,7 @@ export class DeviceManagerClient {
   unbindDeviceFromGateway(
     request: protos.google.cloud.iot.v1.IUnbindDeviceFromGatewayRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.cloud.iot.v1.IUnbindDeviceFromGatewayResponse,
           | protos.google.cloud.iot.v1.IUnbindDeviceFromGatewayRequest
@@ -1929,12 +1937,12 @@ export class DeviceManagerClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1954,7 +1962,7 @@ export class DeviceManagerClient {
 
   listDeviceRegistries(
     request: protos.google.cloud.iot.v1.IListDeviceRegistriesRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.iot.v1.IDeviceRegistry[],
@@ -1964,7 +1972,7 @@ export class DeviceManagerClient {
   >;
   listDeviceRegistries(
     request: protos.google.cloud.iot.v1.IListDeviceRegistriesRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: PaginationCallback<
       protos.google.cloud.iot.v1.IListDeviceRegistriesRequest,
       | protos.google.cloud.iot.v1.IListDeviceRegistriesResponse
@@ -2016,7 +2024,7 @@ export class DeviceManagerClient {
   listDeviceRegistries(
     request: protos.google.cloud.iot.v1.IListDeviceRegistriesRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | PaginationCallback<
           protos.google.cloud.iot.v1.IListDeviceRegistriesRequest,
           | protos.google.cloud.iot.v1.IListDeviceRegistriesResponse
@@ -2039,12 +2047,12 @@ export class DeviceManagerClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -2088,7 +2096,7 @@ export class DeviceManagerClient {
    */
   listDeviceRegistriesStream(
     request?: protos.google.cloud.iot.v1.IListDeviceRegistriesRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Transform {
     request = request || {};
     options = options || {};
@@ -2144,7 +2152,7 @@ export class DeviceManagerClient {
    */
   listDeviceRegistriesAsync(
     request?: protos.google.cloud.iot.v1.IListDeviceRegistriesRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): AsyncIterable<protos.google.cloud.iot.v1.IDeviceRegistry> {
     request = request || {};
     options = options || {};
@@ -2166,7 +2174,7 @@ export class DeviceManagerClient {
   }
   listDevices(
     request: protos.google.cloud.iot.v1.IListDevicesRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.iot.v1.IDevice[],
@@ -2176,7 +2184,7 @@ export class DeviceManagerClient {
   >;
   listDevices(
     request: protos.google.cloud.iot.v1.IListDevicesRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: PaginationCallback<
       protos.google.cloud.iot.v1.IListDevicesRequest,
       protos.google.cloud.iot.v1.IListDevicesResponse | null | undefined,
@@ -2236,7 +2244,7 @@ export class DeviceManagerClient {
   listDevices(
     request: protos.google.cloud.iot.v1.IListDevicesRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | PaginationCallback<
           protos.google.cloud.iot.v1.IListDevicesRequest,
           protos.google.cloud.iot.v1.IListDevicesResponse | null | undefined,
@@ -2255,12 +2263,12 @@ export class DeviceManagerClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -2316,7 +2324,7 @@ export class DeviceManagerClient {
    */
   listDevicesStream(
     request?: protos.google.cloud.iot.v1.IListDevicesRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Transform {
     request = request || {};
     options = options || {};
@@ -2384,7 +2392,7 @@ export class DeviceManagerClient {
    */
   listDevicesAsync(
     request?: protos.google.cloud.iot.v1.IListDevicesRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): AsyncIterable<protos.google.cloud.iot.v1.IDevice> {
     request = request || {};
     options = options || {};
