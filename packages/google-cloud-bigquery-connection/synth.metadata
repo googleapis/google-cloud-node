@@ -3,8 +3,16 @@
     {
       "git": {
         "name": ".",
-        "remote": "git@github.com:googleapis/nodejs-bigquery-connection.git",
-        "sha": "96f7696047a8b935b878805637ffa285a63e99ab"
+        "remote": "https://github.com/googleapis/nodejs-bigquery-connection.git",
+        "sha": "07244e4c6375bdbee47db6c7a2b018594c9b34e5"
+      }
+    },
+    {
+      "git": {
+        "name": "googleapis",
+        "remote": "https://github.com/googleapis/googleapis.git",
+        "sha": "2f019bf70bfe06f1e2af1b04011b0a2405190e43",
+        "internalRef": "343202295"
       }
     },
     {
@@ -79,14 +87,12 @@
     "README.md",
     "api-extractor.json",
     "linkinator.config.json",
-    "package-lock.json.247729600",
     "protos/google/cloud/bigquery/connection/v1/connection.proto",
     "protos/protos.d.ts",
     "protos/protos.js",
     "protos/protos.json",
     "renovate.json",
     "samples/README.md",
-    "samples/package-lock.json.2458163518",
     "src/index.ts",
     "src/v1/connection_service_client.ts",
     "src/v1/connection_service_client_config.json",

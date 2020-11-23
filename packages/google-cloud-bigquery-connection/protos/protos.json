@@ -30,7 +30,18 @@
                                 "(google.api.http).post": "/v1/{parent=projects/*/locations/*}/connections",
                                 "(google.api.http).body": "connection",
                                 "(google.api.method_signature)": "parent,connection,connection_id"
-                              }
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "post": "/v1/{parent=projects/*/locations/*}/connections",
+                                    "body": "connection"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "parent,connection,connection_id"
+                                }
+                              ]
                             },
                             "GetConnection": {
                               "requestType": "GetConnectionRequest",
@@ -38,7 +49,17 @@
                               "options": {
                                 "(google.api.http).get": "/v1/{name=projects/*/locations/*/connections/*}",
                                 "(google.api.method_signature)": "name"
-                              }
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "get": "/v1/{name=projects/*/locations/*/connections/*}"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "name"
+                                }
+                              ]
                             },
                             "ListConnections": {
                               "requestType": "ListConnectionsRequest",
@@ -46,7 +67,17 @@
                               "options": {
                                 "(google.api.http).get": "/v1/{parent=projects/*/locations/*}/connections",
                                 "(google.api.method_signature)": "parent"
-                              }
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "get": "/v1/{parent=projects/*/locations/*}/connections"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "parent"
+                                }
+                              ]
                             },
                             "UpdateConnection": {
                               "requestType": "UpdateConnectionRequest",
@@ -55,7 +86,18 @@
                                 "(google.api.http).patch": "/v1/{name=projects/*/locations/*/connections/*}",
                                 "(google.api.http).body": "connection",
                                 "(google.api.method_signature)": "name,connection,update_mask"
-                              }
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "patch": "/v1/{name=projects/*/locations/*/connections/*}",
+                                    "body": "connection"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "name,connection,update_mask"
+                                }
+                              ]
                             },
                             "DeleteConnection": {
                               "requestType": "DeleteConnectionRequest",
@@ -63,7 +105,17 @@
                               "options": {
                                 "(google.api.http).delete": "/v1/{name=projects/*/locations/*/connections/*}",
                                 "(google.api.method_signature)": "name"
-                              }
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "delete": "/v1/{name=projects/*/locations/*/connections/*}"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "name"
+                                }
+                              ]
                             },
                             "GetIamPolicy": {
                               "requestType": "google.iam.v1.GetIamPolicyRequest",
@@ -72,7 +124,18 @@
                                 "(google.api.http).post": "/v1/{resource=projects/*/locations/*/connections/*}:getIamPolicy",
                                 "(google.api.http).body": "*",
                                 "(google.api.method_signature)": "resource,options"
-                              }
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "post": "/v1/{resource=projects/*/locations/*/connections/*}:getIamPolicy",
+                                    "body": "*"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "resource,options"
+                                }
+                              ]
                             },
                             "SetIamPolicy": {
                               "requestType": "google.iam.v1.SetIamPolicyRequest",
@@ -81,7 +144,18 @@
                                 "(google.api.http).post": "/v1/{resource=projects/*/locations/*/connections/*}:setIamPolicy",
                                 "(google.api.http).body": "*",
                                 "(google.api.method_signature)": "resource,policy"
-                              }
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "post": "/v1/{resource=projects/*/locations/*/connections/*}:setIamPolicy",
+                                    "body": "*"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "resource,policy"
+                                }
+                              ]
                             },
                             "TestIamPermissions": {
                               "requestType": "google.iam.v1.TestIamPermissionsRequest",
@@ -90,7 +164,18 @@
                                 "(google.api.http).post": "/v1/{resource=projects/*/locations/*/connections/*}:testIamPermissions",
                                 "(google.api.http).body": "*",
                                 "(google.api.method_signature)": "resource,permissions"
-                              }
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "post": "/v1/{resource=projects/*/locations/*/connections/*}:testIamPermissions",
+                                    "body": "*"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "resource,permissions"
+                                }
+                              ]
                             }
                           }
                         },
@@ -1554,7 +1639,15 @@
                       "options": {
                         "(google.api.http).post": "/v1/{resource=**}:setIamPolicy",
                         "(google.api.http).body": "*"
-                      }
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "post": "/v1/{resource=**}:setIamPolicy",
+                            "body": "*"
+                          }
+                        }
+                      ]
                     },
                     "GetIamPolicy": {
                       "requestType": "GetIamPolicyRequest",
@@ -1562,7 +1655,15 @@
                       "options": {
                         "(google.api.http).post": "/v1/{resource=**}:getIamPolicy",
                         "(google.api.http).body": "*"
-                      }
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "post": "/v1/{resource=**}:getIamPolicy",
+                            "body": "*"
+                          }
+                        }
+                      ]
                     },
                     "TestIamPermissions": {
                       "requestType": "TestIamPermissionsRequest",
@@ -1570,7 +1671,15 @@
                       "options": {
                         "(google.api.http).post": "/v1/{resource=**}:testIamPermissions",
                         "(google.api.http).body": "*"
-                      }
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "post": "/v1/{resource=**}:testIamPermissions",
+                            "body": "*"
+                          }
+                        }
+                      ]
                     }
                   }
                 },
