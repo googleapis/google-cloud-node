@@ -16,6 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
+/* global window */
 import * as gax from 'google-gax';
 import {
   Callback,
@@ -31,6 +32,11 @@ import * as path from 'path';
 import {Transform} from 'stream';
 import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
+/**
+ * Client JSON configuration object, loaded from
+ * `src/v3/translation_service_client_config.json`.
+ * This file defines retry strategy and timeouts for all API methods in this library.
+ */
 import * as gapicConfig from './translation_service_client_config.json';
 import {operationsProtos} from 'google-gax';
 const version = require('../../../package.json').version;
@@ -85,9 +91,9 @@ export class TranslationServiceClient {
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
-   * @param {gax.ClientConfig} [options.clientConfig] - client configuration override.
-   *     TODO(@alexander-fenster): link to gax documentation.
-   * @param {boolean} fallback - Use HTTP fallback mode.
+   * @param {gax.ClientConfig} [options.clientConfig] - Client configuration override.
+   *     Follows the structure of {@link gapicConfig}.
+   * @param {boolean} [options.fallback] - Use HTTP fallback mode.
    *     In fallback mode, a special browser-compatible transport implementation is used
    *     instead of gRPC transport. In browser context (if the `window` object is defined)
    *     the fallback mode is enabled automatically; set `options.fallback` to `false`
@@ -100,7 +106,9 @@ export class TranslationServiceClient {
       opts?.servicePath || opts?.apiEndpoint || staticMembers.servicePath;
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback = opts?.fallback ?? typeof window !== 'undefined';
+    const fallback =
+      opts?.fallback ??
+      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
@@ -375,7 +383,7 @@ export class TranslationServiceClient {
   // -------------------
   translateText(
     request: protos.google.cloud.translation.v3.ITranslateTextRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.translation.v3.ITranslateTextResponse,
@@ -385,7 +393,7 @@ export class TranslationServiceClient {
   >;
   translateText(
     request: protos.google.cloud.translation.v3.ITranslateTextRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.cloud.translation.v3.ITranslateTextResponse,
       | protos.google.cloud.translation.v3.ITranslateTextRequest
@@ -484,7 +492,7 @@ export class TranslationServiceClient {
   translateText(
     request: protos.google.cloud.translation.v3.ITranslateTextRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.cloud.translation.v3.ITranslateTextResponse,
           | protos.google.cloud.translation.v3.ITranslateTextRequest
@@ -507,12 +515,12 @@ export class TranslationServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -527,7 +535,7 @@ export class TranslationServiceClient {
   }
   detectLanguage(
     request: protos.google.cloud.translation.v3.IDetectLanguageRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.translation.v3.IDetectLanguageResponse,
@@ -537,7 +545,7 @@ export class TranslationServiceClient {
   >;
   detectLanguage(
     request: protos.google.cloud.translation.v3.IDetectLanguageRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.cloud.translation.v3.IDetectLanguageResponse,
       | protos.google.cloud.translation.v3.IDetectLanguageRequest
@@ -610,7 +618,7 @@ export class TranslationServiceClient {
   detectLanguage(
     request: protos.google.cloud.translation.v3.IDetectLanguageRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.cloud.translation.v3.IDetectLanguageResponse,
           | protos.google.cloud.translation.v3.IDetectLanguageRequest
@@ -633,12 +641,12 @@ export class TranslationServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -653,7 +661,7 @@ export class TranslationServiceClient {
   }
   getSupportedLanguages(
     request: protos.google.cloud.translation.v3.IGetSupportedLanguagesRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.translation.v3.ISupportedLanguages,
@@ -666,7 +674,7 @@ export class TranslationServiceClient {
   >;
   getSupportedLanguages(
     request: protos.google.cloud.translation.v3.IGetSupportedLanguagesRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.cloud.translation.v3.ISupportedLanguages,
       | protos.google.cloud.translation.v3.IGetSupportedLanguagesRequest
@@ -736,7 +744,7 @@ export class TranslationServiceClient {
   getSupportedLanguages(
     request: protos.google.cloud.translation.v3.IGetSupportedLanguagesRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.cloud.translation.v3.ISupportedLanguages,
           | protos.google.cloud.translation.v3.IGetSupportedLanguagesRequest
@@ -762,12 +770,12 @@ export class TranslationServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -782,7 +790,7 @@ export class TranslationServiceClient {
   }
   getGlossary(
     request: protos.google.cloud.translation.v3.IGetGlossaryRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.translation.v3.IGlossary,
@@ -792,7 +800,7 @@ export class TranslationServiceClient {
   >;
   getGlossary(
     request: protos.google.cloud.translation.v3.IGetGlossaryRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.cloud.translation.v3.IGlossary,
       protos.google.cloud.translation.v3.IGetGlossaryRequest | null | undefined,
@@ -828,7 +836,7 @@ export class TranslationServiceClient {
   getGlossary(
     request: protos.google.cloud.translation.v3.IGetGlossaryRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.cloud.translation.v3.IGlossary,
           | protos.google.cloud.translation.v3.IGetGlossaryRequest
@@ -849,12 +857,12 @@ export class TranslationServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -870,7 +878,7 @@ export class TranslationServiceClient {
 
   batchTranslateText(
     request: protos.google.cloud.translation.v3.IBatchTranslateTextRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       LROperation<
@@ -883,7 +891,7 @@ export class TranslationServiceClient {
   >;
   batchTranslateText(
     request: protos.google.cloud.translation.v3.IBatchTranslateTextRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       LROperation<
         protos.google.cloud.translation.v3.IBatchTranslateResponse,
@@ -983,7 +991,7 @@ export class TranslationServiceClient {
   batchTranslateText(
     request: protos.google.cloud.translation.v3.IBatchTranslateTextRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           LROperation<
             protos.google.cloud.translation.v3.IBatchTranslateResponse,
@@ -1011,12 +1019,12 @@ export class TranslationServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1068,7 +1076,7 @@ export class TranslationServiceClient {
   }
   createGlossary(
     request: protos.google.cloud.translation.v3.ICreateGlossaryRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       LROperation<
@@ -1081,7 +1089,7 @@ export class TranslationServiceClient {
   >;
   createGlossary(
     request: protos.google.cloud.translation.v3.ICreateGlossaryRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       LROperation<
         protos.google.cloud.translation.v3.IGlossary,
@@ -1128,7 +1136,7 @@ export class TranslationServiceClient {
   createGlossary(
     request: protos.google.cloud.translation.v3.ICreateGlossaryRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           LROperation<
             protos.google.cloud.translation.v3.IGlossary,
@@ -1156,12 +1164,12 @@ export class TranslationServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1213,7 +1221,7 @@ export class TranslationServiceClient {
   }
   deleteGlossary(
     request: protos.google.cloud.translation.v3.IDeleteGlossaryRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       LROperation<
@@ -1226,7 +1234,7 @@ export class TranslationServiceClient {
   >;
   deleteGlossary(
     request: protos.google.cloud.translation.v3.IDeleteGlossaryRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       LROperation<
         protos.google.cloud.translation.v3.IDeleteGlossaryResponse,
@@ -1272,7 +1280,7 @@ export class TranslationServiceClient {
   deleteGlossary(
     request: protos.google.cloud.translation.v3.IDeleteGlossaryRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           LROperation<
             protos.google.cloud.translation.v3.IDeleteGlossaryResponse,
@@ -1300,12 +1308,12 @@ export class TranslationServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1357,7 +1365,7 @@ export class TranslationServiceClient {
   }
   listGlossaries(
     request: protos.google.cloud.translation.v3.IListGlossariesRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.translation.v3.IGlossary[],
@@ -1367,7 +1375,7 @@ export class TranslationServiceClient {
   >;
   listGlossaries(
     request: protos.google.cloud.translation.v3.IListGlossariesRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: PaginationCallback<
       protos.google.cloud.translation.v3.IListGlossariesRequest,
       | protos.google.cloud.translation.v3.IListGlossariesResponse
@@ -1422,7 +1430,7 @@ export class TranslationServiceClient {
   listGlossaries(
     request: protos.google.cloud.translation.v3.IListGlossariesRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | PaginationCallback<
           protos.google.cloud.translation.v3.IListGlossariesRequest,
           | protos.google.cloud.translation.v3.IListGlossariesResponse
@@ -1445,12 +1453,12 @@ export class TranslationServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1496,7 +1504,7 @@ export class TranslationServiceClient {
    */
   listGlossariesStream(
     request?: protos.google.cloud.translation.v3.IListGlossariesRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Transform {
     request = request || {};
     options = options || {};
@@ -1554,7 +1562,7 @@ export class TranslationServiceClient {
    */
   listGlossariesAsync(
     request?: protos.google.cloud.translation.v3.IListGlossariesRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): AsyncIterable<protos.google.cloud.translation.v3.IGlossary> {
     request = request || {};
     options = options || {};

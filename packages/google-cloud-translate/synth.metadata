@@ -3,8 +3,16 @@
     {
       "git": {
         "name": ".",
-        "remote": "git@github.com:googleapis/nodejs-translate.git",
-        "sha": "205c645cdf08fbf94a583b06ff921b54e5b56f7b"
+        "remote": "https://github.com/googleapis/nodejs-translate.git",
+        "sha": "cea46334c98eae24183ff42af5b15887a86d1b96"
+      }
+    },
+    {
+      "git": {
+        "name": "googleapis",
+        "remote": "https://github.com/googleapis/googleapis.git",
+        "sha": "2f019bf70bfe06f1e2af1b04011b0a2405190e43",
+        "internalRef": "343202295"
       }
     },
     {
@@ -88,7 +96,6 @@
     "README.md",
     "api-extractor.json",
     "linkinator.config.json",
-    "package-lock.json.515292936",
     "protos/google/cloud/translate/v3/translation_service.proto",
     "protos/google/cloud/translate/v3beta1/translation_service.proto",
     "protos/protos.d.ts",
@@ -96,7 +103,6 @@
     "protos/protos.json",
     "renovate.json",
     "samples/README.md",
-    "samples/package-lock.json.3537124090",
     "src/v3/index.ts",
     "src/v3/translation_service_client.ts",
     "src/v3/translation_service_client_config.json",

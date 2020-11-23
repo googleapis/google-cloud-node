@@ -33,7 +33,25 @@
                             "(google.api.http).additional_bindings.post": "/v3/{parent=projects/*}:translateText",
                             "(google.api.http).additional_bindings.body": "*",
                             "(google.api.method_signature)": "parent,model,mime_type,source_language_code,target_language_code,contents"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v3/{parent=projects/*/locations/*}:translateText",
+                                "body": "*",
+                                "additional_bindings": {
+                                  "post": "/v3/{parent=projects/*}:translateText",
+                                  "body": "*"
+                                }
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,target_language_code,contents"
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,model,mime_type,source_language_code,target_language_code,contents"
+                            }
+                          ]
                         },
                         "DetectLanguage": {
                           "requestType": "DetectLanguageRequest",
@@ -44,7 +62,22 @@
                             "(google.api.http).additional_bindings.post": "/v3/{parent=projects/*}:detectLanguage",
                             "(google.api.http).additional_bindings.body": "*",
                             "(google.api.method_signature)": "parent,model,mime_type,content"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v3/{parent=projects/*/locations/*}:detectLanguage",
+                                "body": "*",
+                                "additional_bindings": {
+                                  "post": "/v3/{parent=projects/*}:detectLanguage",
+                                  "body": "*"
+                                }
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,model,mime_type,content"
+                            }
+                          ]
                         },
                         "GetSupportedLanguages": {
                           "requestType": "GetSupportedLanguagesRequest",
@@ -53,7 +86,20 @@
                             "(google.api.http).get": "/v3/{parent=projects/*/locations/*}/supportedLanguages",
                             "(google.api.http).additional_bindings.get": "/v3/{parent=projects/*}/supportedLanguages",
                             "(google.api.method_signature)": "parent,model,display_language_code"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v3/{parent=projects/*/locations/*}/supportedLanguages",
+                                "additional_bindings": {
+                                  "get": "/v3/{parent=projects/*}/supportedLanguages"
+                                }
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,model,display_language_code"
+                            }
+                          ]
                         },
                         "BatchTranslateText": {
                           "requestType": "BatchTranslateTextRequest",
@@ -63,7 +109,21 @@
                             "(google.api.http).body": "*",
                             "(google.longrunning.operation_info).response_type": "BatchTranslateResponse",
                             "(google.longrunning.operation_info).metadata_type": "BatchTranslateMetadata"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v3/{parent=projects/*/locations/*}:batchTranslateText",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "BatchTranslateResponse",
+                                "metadata_type": "BatchTranslateMetadata"
+                              }
+                            }
+                          ]
                         },
                         "CreateGlossary": {
                           "requestType": "CreateGlossaryRequest",
@@ -74,7 +134,24 @@
                             "(google.api.method_signature)": "parent,glossary",
                             "(google.longrunning.operation_info).response_type": "Glossary",
                             "(google.longrunning.operation_info).metadata_type": "CreateGlossaryMetadata"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v3/{parent=projects/*/locations/*}/glossaries",
+                                "body": "glossary"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,glossary"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "Glossary",
+                                "metadata_type": "CreateGlossaryMetadata"
+                              }
+                            }
+                          ]
                         },
                         "ListGlossaries": {
                           "requestType": "ListGlossariesRequest",
@@ -82,7 +159,17 @@
                           "options": {
                             "(google.api.http).get": "/v3/{parent=projects/*/locations/*}/glossaries",
                             "(google.api.method_signature)": "parent"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v3/{parent=projects/*/locations/*}/glossaries"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
                         },
                         "GetGlossary": {
                           "requestType": "GetGlossaryRequest",
@@ -90,7 +177,17 @@
                           "options": {
                             "(google.api.http).get": "/v3/{name=projects/*/locations/*/glossaries/*}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v3/{name=projects/*/locations/*/glossaries/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "DeleteGlossary": {
                           "requestType": "DeleteGlossaryRequest",
@@ -100,7 +197,23 @@
                             "(google.api.method_signature)": "name",
                             "(google.longrunning.operation_info).response_type": "DeleteGlossaryResponse",
                             "(google.longrunning.operation_info).metadata_type": "DeleteGlossaryMetadata"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v3/{name=projects/*/locations/*/glossaries/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "DeleteGlossaryResponse",
+                                "metadata_type": "DeleteGlossaryMetadata"
+                              }
+                            }
+                          ]
                         }
                       }
                     },
@@ -799,7 +912,19 @@
                             "(google.api.http).body": "*",
                             "(google.api.http).additional_bindings.post": "/v3beta1/{parent=projects/*}:translateText",
                             "(google.api.http).additional_bindings.body": "*"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v3beta1/{parent=projects/*/locations/*}:translateText",
+                                "body": "*",
+                                "additional_bindings": {
+                                  "post": "/v3beta1/{parent=projects/*}:translateText",
+                                  "body": "*"
+                                }
+                              }
+                            }
+                          ]
                         },
                         "DetectLanguage": {
                           "requestType": "DetectLanguageRequest",
@@ -810,7 +935,22 @@
                             "(google.api.http).additional_bindings.post": "/v3beta1/{parent=projects/*}:detectLanguage",
                             "(google.api.http).additional_bindings.body": "*",
                             "(google.api.method_signature)": "parent,model,mime_type"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v3beta1/{parent=projects/*/locations/*}:detectLanguage",
+                                "body": "*",
+                                "additional_bindings": {
+                                  "post": "/v3beta1/{parent=projects/*}:detectLanguage",
+                                  "body": "*"
+                                }
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,model,mime_type"
+                            }
+                          ]
                         },
                         "GetSupportedLanguages": {
                           "requestType": "GetSupportedLanguagesRequest",
@@ -819,7 +959,20 @@
                             "(google.api.http).get": "/v3beta1/{parent=projects/*/locations/*}/supportedLanguages",
                             "(google.api.http).additional_bindings.get": "/v3beta1/{parent=projects/*}/supportedLanguages",
                             "(google.api.method_signature)": "parent,display_language_code,model"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v3beta1/{parent=projects/*/locations/*}/supportedLanguages",
+                                "additional_bindings": {
+                                  "get": "/v3beta1/{parent=projects/*}/supportedLanguages"
+                                }
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,display_language_code,model"
+                            }
+                          ]
                         },
                         "BatchTranslateText": {
                           "requestType": "BatchTranslateTextRequest",
@@ -829,7 +982,21 @@
                             "(google.api.http).body": "*",
                             "(google.longrunning.operation_info).response_type": "BatchTranslateResponse",
                             "(google.longrunning.operation_info).metadata_type": "BatchTranslateMetadata"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v3beta1/{parent=projects/*/locations/*}:batchTranslateText",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "BatchTranslateResponse",
+                                "metadata_type": "BatchTranslateMetadata"
+                              }
+                            }
+                          ]
                         },
                         "CreateGlossary": {
                           "requestType": "CreateGlossaryRequest",
@@ -840,7 +1007,24 @@
                             "(google.api.method_signature)": "parent,glossary",
                             "(google.longrunning.operation_info).response_type": "Glossary",
                             "(google.longrunning.operation_info).metadata_type": "CreateGlossaryMetadata"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v3beta1/{parent=projects/*/locations/*}/glossaries",
+                                "body": "glossary"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,glossary"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "Glossary",
+                                "metadata_type": "CreateGlossaryMetadata"
+                              }
+                            }
+                          ]
                         },
                         "ListGlossaries": {
                           "requestType": "ListGlossariesRequest",
@@ -848,7 +1032,20 @@
                           "options": {
                             "(google.api.http).get": "/v3beta1/{parent=projects/*/locations/*}/glossaries",
                             "(google.api.method_signature)": "parent,filter"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v3beta1/{parent=projects/*/locations/*}/glossaries"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,filter"
+                            }
+                          ]
                         },
                         "GetGlossary": {
                           "requestType": "GetGlossaryRequest",
@@ -856,7 +1053,17 @@
                           "options": {
                             "(google.api.http).get": "/v3beta1/{name=projects/*/locations/*/glossaries/*}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v3beta1/{name=projects/*/locations/*/glossaries/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "DeleteGlossary": {
                           "requestType": "DeleteGlossaryRequest",
@@ -866,7 +1073,23 @@
                             "(google.api.method_signature)": "name",
                             "(google.longrunning.operation_info).response_type": "DeleteGlossaryResponse",
                             "(google.longrunning.operation_info).metadata_type": "DeleteGlossaryMetadata"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v3beta1/{name=projects/*/locations/*/glossaries/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "DeleteGlossaryResponse",
+                                "metadata_type": "DeleteGlossaryMetadata"
+                              }
+                            }
+                          ]
                         }
                       }
                     },
@@ -2709,7 +2932,17 @@
                   "options": {
                     "(google.api.http).get": "/v1/{name=operations}",
                     "(google.api.method_signature)": "name,filter"
-                  }
+                  },
+                  "parsedOptions": [
+                    {
+                      "(google.api.http)": {
+                        "get": "/v1/{name=operations}"
+                      }
+                    },
+                    {
+                      "(google.api.method_signature)": "name,filter"
+                    }
+                  ]
                 },
                 "GetOperation": {
                   "requestType": "GetOperationRequest",
@@ -2717,7 +2950,17 @@
                   "options": {
                     "(google.api.http).get": "/v1/{name=operations/**}",
                     "(google.api.method_signature)": "name"
-                  }
+                  },
+                  "parsedOptions": [
+                    {
+                      "(google.api.http)": {
+                        "get": "/v1/{name=operations/**}"
+                      }
+                    },
+                    {
+                      "(google.api.method_signature)": "name"
+                    }
+                  ]
                 },
                 "DeleteOperation": {
                   "requestType": "DeleteOperationRequest",
@@ -2725,7 +2968,17 @@
                   "options": {
                     "(google.api.http).delete": "/v1/{name=operations/**}",
                     "(google.api.method_signature)": "name"
-                  }
+                  },
+                  "parsedOptions": [
+                    {
+                      "(google.api.http)": {
+                        "delete": "/v1/{name=operations/**}"
+                      }
+                    },
+                    {
+                      "(google.api.method_signature)": "name"
+                    }
+                  ]
                 },
                 "CancelOperation": {
                   "requestType": "CancelOperationRequest",
@@ -2734,7 +2987,18 @@
                     "(google.api.http).post": "/v1/{name=operations/**}:cancel",
                     "(google.api.http).body": "*",
                     "(google.api.method_signature)": "name"
-                  }
+                  },
+                  "parsedOptions": [
+                    {
+                      "(google.api.http)": {
+                        "post": "/v1/{name=operations/**}:cancel",
+                        "body": "*"
+                      }
+                    },
+                    {
+                      "(google.api.method_signature)": "name"
+                    }
+                  ]
                 },
                 "WaitOperation": {
                   "requestType": "WaitOperationRequest",
