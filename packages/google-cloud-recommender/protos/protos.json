@@ -340,7 +340,17 @@
                           "options": {
                             "(google.api.http).get": "/v1/{parent=projects/*/locations/*/insightTypes/*}/insights",
                             "(google.api.method_signature)": "parent"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=projects/*/locations/*/insightTypes/*}/insights"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
                         },
                         "GetInsight": {
                           "requestType": "GetInsightRequest",
@@ -348,7 +358,17 @@
                           "options": {
                             "(google.api.http).get": "/v1/{name=projects/*/locations/*/insightTypes/*/insights/*}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/locations/*/insightTypes/*/insights/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "MarkInsightAccepted": {
                           "requestType": "MarkInsightAcceptedRequest",
@@ -357,7 +377,18 @@
                             "(google.api.http).post": "/v1/{name=projects/*/locations/*/insightTypes/*/insights/*}:markAccepted",
                             "(google.api.http).body": "*",
                             "(google.api.method_signature)": "name,state_metadata,etag"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{name=projects/*/locations/*/insightTypes/*/insights/*}:markAccepted",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name,state_metadata,etag"
+                            }
+                          ]
                         },
                         "ListRecommendations": {
                           "requestType": "ListRecommendationsRequest",
@@ -365,7 +396,20 @@
                           "options": {
                             "(google.api.http).get": "/v1/{parent=projects/*/locations/*/recommenders/*}/recommendations",
                             "(google.api.method_signature)": "parent,filter"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=projects/*/locations/*/recommenders/*}/recommendations"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,filter"
+                            }
+                          ]
                         },
                         "GetRecommendation": {
                           "requestType": "GetRecommendationRequest",
@@ -373,7 +417,17 @@
                           "options": {
                             "(google.api.http).get": "/v1/{name=projects/*/locations/*/recommenders/*/recommendations/*}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/locations/*/recommenders/*/recommendations/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "MarkRecommendationClaimed": {
                           "requestType": "MarkRecommendationClaimedRequest",
@@ -382,7 +436,18 @@
                             "(google.api.http).post": "/v1/{name=projects/*/locations/*/recommenders/*/recommendations/*}:markClaimed",
                             "(google.api.http).body": "*",
                             "(google.api.method_signature)": "name,state_metadata,etag"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{name=projects/*/locations/*/recommenders/*/recommendations/*}:markClaimed",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name,state_metadata,etag"
+                            }
+                          ]
                         },
                         "MarkRecommendationSucceeded": {
                           "requestType": "MarkRecommendationSucceededRequest",
@@ -391,7 +456,18 @@
                             "(google.api.http).post": "/v1/{name=projects/*/locations/*/recommenders/*/recommendations/*}:markSucceeded",
                             "(google.api.http).body": "*",
                             "(google.api.method_signature)": "name,state_metadata,etag"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{name=projects/*/locations/*/recommenders/*/recommendations/*}:markSucceeded",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name,state_metadata,etag"
+                            }
+                          ]
                         },
                         "MarkRecommendationFailed": {
                           "requestType": "MarkRecommendationFailedRequest",
@@ -400,7 +476,18 @@
                             "(google.api.http).post": "/v1/{name=projects/*/locations/*/recommenders/*/recommendations/*}:markFailed",
                             "(google.api.http).body": "*",
                             "(google.api.method_signature)": "name,state_metadata,etag"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{name=projects/*/locations/*/recommenders/*/recommendations/*}:markFailed",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name,state_metadata,etag"
+                            }
+                          ]
                         }
                       }
                     },

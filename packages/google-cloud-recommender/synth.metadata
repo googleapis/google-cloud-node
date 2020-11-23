@@ -3,8 +3,16 @@
     {
       "git": {
         "name": ".",
-        "remote": "git@github.com:googleapis/nodejs-recommender.git",
-        "sha": "781c03217d79f2cf94c61376fb05a7e38c474b4b"
+        "remote": "https://github.com/googleapis/nodejs-recommender.git",
+        "sha": "dbd234064eb60b580befa61fa7c0285b6712e0ee"
+      }
+    },
+    {
+      "git": {
+        "name": "googleapis",
+        "remote": "https://github.com/googleapis/googleapis.git",
+        "sha": "2f019bf70bfe06f1e2af1b04011b0a2405190e43",
+        "internalRef": "343202295"
       }
     },
     {
@@ -79,7 +87,6 @@
     "README.md",
     "api-extractor.json",
     "linkinator.config.json",
-    "package-lock.json.2534061630",
     "protos/google/cloud/recommender/v1/insight.proto",
     "protos/google/cloud/recommender/v1/recommendation.proto",
     "protos/google/cloud/recommender/v1/recommender_service.proto",
@@ -88,7 +95,6 @@
     "protos/protos.json",
     "renovate.json",
     "samples/README.md",
-    "samples/package-lock.json.69962807",
     "src/index.ts",
     "src/v1/index.ts",
     "src/v1/recommender_client.ts",
