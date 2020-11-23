@@ -30,7 +30,17 @@
                           "options": {
                             "(google.api.http).get": "/v1/voices",
                             "(google.api.method_signature)": "language_code"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/voices"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "language_code"
+                            }
+                          ]
                         },
                         "SynthesizeSpeech": {
                           "requestType": "SynthesizeSpeechRequest",
@@ -39,7 +49,18 @@
                             "(google.api.http).post": "/v1/text:synthesize",
                             "(google.api.http).body": "*",
                             "(google.api.method_signature)": "input,voice,audio_config"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/text:synthesize",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "input,voice,audio_config"
+                            }
+                          ]
                         }
                       }
                     },
@@ -245,7 +266,17 @@
                           "options": {
                             "(google.api.http).get": "/v1beta1/voices",
                             "(google.api.method_signature)": "language_code"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta1/voices"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "language_code"
+                            }
+                          ]
                         },
                         "SynthesizeSpeech": {
                           "requestType": "SynthesizeSpeechRequest",
@@ -254,7 +285,18 @@
                             "(google.api.http).post": "/v1beta1/text:synthesize",
                             "(google.api.http).body": "*",
                             "(google.api.method_signature)": "input,voice,audio_config"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta1/text:synthesize",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "input,voice,audio_config"
+                            }
+                          ]
                         }
                       }
                     },
