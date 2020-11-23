@@ -3,8 +3,16 @@
     {
       "git": {
         "name": ".",
-        "remote": "git@github.com:googleapis/nodejs-secret-manager.git",
-        "sha": "fab0613c57c6518effd2f65403c1b2da3d6083ba"
+        "remote": "https://github.com/googleapis/nodejs-secret-manager.git",
+        "sha": "5fb771312979ebb823cea52c1d133e445c8ae87f"
+      }
+    },
+    {
+      "git": {
+        "name": "googleapis",
+        "remote": "https://github.com/googleapis/googleapis.git",
+        "sha": "2f019bf70bfe06f1e2af1b04011b0a2405190e43",
+        "internalRef": "343202295"
       }
     },
     {
@@ -88,7 +96,6 @@
     "README.md",
     "api-extractor.json",
     "linkinator.config.json",
-    "package-lock.json.3839715624",
     "protos/google/cloud/secretmanager/v1/resources.proto",
     "protos/google/cloud/secretmanager/v1/service.proto",
     "protos/google/cloud/secrets/v1beta1/resources.proto",
@@ -98,7 +105,6 @@
     "protos/protos.json",
     "renovate.json",
     "samples/README.md",
-    "samples/package-lock.json.1688447932",
     "src/index.ts",
     "src/v1/index.ts",
     "src/v1/secret_manager_service_client.ts",

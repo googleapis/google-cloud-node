@@ -272,7 +272,17 @@
                           "options": {
                             "(google.api.http).get": "/v1/{parent=projects/*}/secrets",
                             "(google.api.method_signature)": "parent"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=projects/*}/secrets"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
                         },
                         "CreateSecret": {
                           "requestType": "CreateSecretRequest",
@@ -281,7 +291,18 @@
                             "(google.api.http).post": "/v1/{parent=projects/*}/secrets",
                             "(google.api.http).body": "secret",
                             "(google.api.method_signature)": "parent,secret_id,secret"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=projects/*}/secrets",
+                                "body": "secret"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,secret_id,secret"
+                            }
+                          ]
                         },
                         "AddSecretVersion": {
                           "requestType": "AddSecretVersionRequest",
@@ -290,7 +311,18 @@
                             "(google.api.http).post": "/v1/{parent=projects/*/secrets/*}:addVersion",
                             "(google.api.http).body": "*",
                             "(google.api.method_signature)": "parent,payload"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=projects/*/secrets/*}:addVersion",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,payload"
+                            }
+                          ]
                         },
                         "GetSecret": {
                           "requestType": "GetSecretRequest",
@@ -298,7 +330,17 @@
                           "options": {
                             "(google.api.http).get": "/v1/{name=projects/*/secrets/*}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/secrets/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "UpdateSecret": {
                           "requestType": "UpdateSecretRequest",
@@ -307,7 +349,18 @@
                             "(google.api.http).patch": "/v1/{secret.name=projects/*/secrets/*}",
                             "(google.api.http).body": "secret",
                             "(google.api.method_signature)": "secret,update_mask"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1/{secret.name=projects/*/secrets/*}",
+                                "body": "secret"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "secret,update_mask"
+                            }
+                          ]
                         },
                         "DeleteSecret": {
                           "requestType": "DeleteSecretRequest",
@@ -315,7 +368,17 @@
                           "options": {
                             "(google.api.http).delete": "/v1/{name=projects/*/secrets/*}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1/{name=projects/*/secrets/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "ListSecretVersions": {
                           "requestType": "ListSecretVersionsRequest",
@@ -323,7 +386,17 @@
                           "options": {
                             "(google.api.http).get": "/v1/{parent=projects/*/secrets/*}/versions",
                             "(google.api.method_signature)": "parent"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=projects/*/secrets/*}/versions"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
                         },
                         "GetSecretVersion": {
                           "requestType": "GetSecretVersionRequest",
@@ -331,7 +404,17 @@
                           "options": {
                             "(google.api.http).get": "/v1/{name=projects/*/secrets/*/versions/*}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/secrets/*/versions/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "AccessSecretVersion": {
                           "requestType": "AccessSecretVersionRequest",
@@ -339,7 +422,17 @@
                           "options": {
                             "(google.api.http).get": "/v1/{name=projects/*/secrets/*/versions/*}:access",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/secrets/*/versions/*}:access"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "DisableSecretVersion": {
                           "requestType": "DisableSecretVersionRequest",
@@ -348,7 +441,18 @@
                             "(google.api.http).post": "/v1/{name=projects/*/secrets/*/versions/*}:disable",
                             "(google.api.http).body": "*",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{name=projects/*/secrets/*/versions/*}:disable",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "EnableSecretVersion": {
                           "requestType": "EnableSecretVersionRequest",
@@ -357,7 +461,18 @@
                             "(google.api.http).post": "/v1/{name=projects/*/secrets/*/versions/*}:enable",
                             "(google.api.http).body": "*",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{name=projects/*/secrets/*/versions/*}:enable",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "DestroySecretVersion": {
                           "requestType": "DestroySecretVersionRequest",
@@ -366,7 +481,18 @@
                             "(google.api.http).post": "/v1/{name=projects/*/secrets/*/versions/*}:destroy",
                             "(google.api.http).body": "*",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{name=projects/*/secrets/*/versions/*}:destroy",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "SetIamPolicy": {
                           "requestType": "google.iam.v1.SetIamPolicyRequest",
@@ -374,14 +500,29 @@
                           "options": {
                             "(google.api.http).post": "/v1/{resource=projects/*/secrets/*}:setIamPolicy",
                             "(google.api.http).body": "*"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{resource=projects/*/secrets/*}:setIamPolicy",
+                                "body": "*"
+                              }
+                            }
+                          ]
                         },
                         "GetIamPolicy": {
                           "requestType": "google.iam.v1.GetIamPolicyRequest",
                           "responseType": "google.iam.v1.Policy",
                           "options": {
                             "(google.api.http).get": "/v1/{resource=projects/*/secrets/*}:getIamPolicy"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{resource=projects/*/secrets/*}:getIamPolicy"
+                              }
+                            }
+                          ]
                         },
                         "TestIamPermissions": {
                           "requestType": "google.iam.v1.TestIamPermissionsRequest",
@@ -389,7 +530,15 @@
                           "options": {
                             "(google.api.http).post": "/v1/{resource=projects/*/secrets/*}:testIamPermissions",
                             "(google.api.http).body": "*"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{resource=projects/*/secrets/*}:testIamPermissions",
+                                "body": "*"
+                              }
+                            }
+                          ]
                         }
                       }
                     },
@@ -807,7 +956,17 @@
                           "options": {
                             "(google.api.http).get": "/v1beta1/{parent=projects/*}/secrets",
                             "(google.api.method_signature)": "parent"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta1/{parent=projects/*}/secrets"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
                         },
                         "CreateSecret": {
                           "requestType": "CreateSecretRequest",
@@ -816,7 +975,18 @@
                             "(google.api.http).post": "/v1beta1/{parent=projects/*}/secrets",
                             "(google.api.http).body": "secret",
                             "(google.api.method_signature)": "parent,secret_id,secret"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta1/{parent=projects/*}/secrets",
+                                "body": "secret"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,secret_id,secret"
+                            }
+                          ]
                         },
                         "AddSecretVersion": {
                           "requestType": "AddSecretVersionRequest",
@@ -825,7 +995,18 @@
                             "(google.api.http).post": "/v1beta1/{parent=projects/*/secrets/*}:addVersion",
                             "(google.api.http).body": "*",
                             "(google.api.method_signature)": "parent,payload"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta1/{parent=projects/*/secrets/*}:addVersion",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,payload"
+                            }
+                          ]
                         },
                         "GetSecret": {
                           "requestType": "GetSecretRequest",
@@ -833,7 +1014,17 @@
                           "options": {
                             "(google.api.http).get": "/v1beta1/{name=projects/*/secrets/*}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta1/{name=projects/*/secrets/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "UpdateSecret": {
                           "requestType": "UpdateSecretRequest",
@@ -842,7 +1033,18 @@
                             "(google.api.http).patch": "/v1beta1/{secret.name=projects/*/secrets/*}",
                             "(google.api.http).body": "secret",
                             "(google.api.method_signature)": "secret,update_mask"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1beta1/{secret.name=projects/*/secrets/*}",
+                                "body": "secret"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "secret,update_mask"
+                            }
+                          ]
                         },
                         "DeleteSecret": {
                           "requestType": "DeleteSecretRequest",
@@ -850,7 +1052,17 @@
                           "options": {
                             "(google.api.http).delete": "/v1beta1/{name=projects/*/secrets/*}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1beta1/{name=projects/*/secrets/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "ListSecretVersions": {
                           "requestType": "ListSecretVersionsRequest",
@@ -858,7 +1070,17 @@
                           "options": {
                             "(google.api.http).get": "/v1beta1/{parent=projects/*/secrets/*}/versions",
                             "(google.api.method_signature)": "parent"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta1/{parent=projects/*/secrets/*}/versions"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
                         },
                         "GetSecretVersion": {
                           "requestType": "GetSecretVersionRequest",
@@ -866,7 +1088,17 @@
                           "options": {
                             "(google.api.http).get": "/v1beta1/{name=projects/*/secrets/*/versions/*}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta1/{name=projects/*/secrets/*/versions/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "AccessSecretVersion": {
                           "requestType": "AccessSecretVersionRequest",
@@ -874,7 +1106,17 @@
                           "options": {
                             "(google.api.http).get": "/v1beta1/{name=projects/*/secrets/*/versions/*}:access",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta1/{name=projects/*/secrets/*/versions/*}:access"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "DisableSecretVersion": {
                           "requestType": "DisableSecretVersionRequest",
@@ -883,7 +1125,18 @@
                             "(google.api.http).post": "/v1beta1/{name=projects/*/secrets/*/versions/*}:disable",
                             "(google.api.http).body": "*",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta1/{name=projects/*/secrets/*/versions/*}:disable",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "EnableSecretVersion": {
                           "requestType": "EnableSecretVersionRequest",
@@ -892,7 +1145,18 @@
                             "(google.api.http).post": "/v1beta1/{name=projects/*/secrets/*/versions/*}:enable",
                             "(google.api.http).body": "*",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta1/{name=projects/*/secrets/*/versions/*}:enable",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "DestroySecretVersion": {
                           "requestType": "DestroySecretVersionRequest",
@@ -901,7 +1165,18 @@
                             "(google.api.http).post": "/v1beta1/{name=projects/*/secrets/*/versions/*}:destroy",
                             "(google.api.http).body": "*",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta1/{name=projects/*/secrets/*/versions/*}:destroy",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "SetIamPolicy": {
                           "requestType": "google.iam.v1.SetIamPolicyRequest",
@@ -909,14 +1184,29 @@
                           "options": {
                             "(google.api.http).post": "/v1beta1/{resource=projects/*/secrets/*}:setIamPolicy",
                             "(google.api.http).body": "*"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta1/{resource=projects/*/secrets/*}:setIamPolicy",
+                                "body": "*"
+                              }
+                            }
+                          ]
                         },
                         "GetIamPolicy": {
                           "requestType": "google.iam.v1.GetIamPolicyRequest",
                           "responseType": "google.iam.v1.Policy",
                           "options": {
                             "(google.api.http).get": "/v1beta1/{resource=projects/*/secrets/*}:getIamPolicy"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta1/{resource=projects/*/secrets/*}:getIamPolicy"
+                              }
+                            }
+                          ]
                         },
                         "TestIamPermissions": {
                           "requestType": "google.iam.v1.TestIamPermissionsRequest",
@@ -924,7 +1214,15 @@
                           "options": {
                             "(google.api.http).post": "/v1beta1/{resource=projects/*/secrets/*}:testIamPermissions",
                             "(google.api.http).body": "*"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta1/{resource=projects/*/secrets/*}:testIamPermissions",
+                                "body": "*"
+                              }
+                            }
+                          ]
                         }
                       }
                     },
@@ -2324,7 +2622,15 @@
                       "options": {
                         "(google.api.http).post": "/v1/{resource=**}:setIamPolicy",
                         "(google.api.http).body": "*"
-                      }
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "post": "/v1/{resource=**}:setIamPolicy",
+                            "body": "*"
+                          }
+                        }
+                      ]
                     },
                     "GetIamPolicy": {
                       "requestType": "GetIamPolicyRequest",
@@ -2332,7 +2638,15 @@
                       "options": {
                         "(google.api.http).post": "/v1/{resource=**}:getIamPolicy",
                         "(google.api.http).body": "*"
-                      }
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "post": "/v1/{resource=**}:getIamPolicy",
+                            "body": "*"
+                          }
+                        }
+                      ]
                     },
                     "TestIamPermissions": {
                       "requestType": "TestIamPermissionsRequest",
@@ -2340,7 +2654,15 @@
                       "options": {
                         "(google.api.http).post": "/v1/{resource=**}:testIamPermissions",
                         "(google.api.http).body": "*"
-                      }
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "post": "/v1/{resource=**}:testIamPermissions",
+                            "body": "*"
+                          }
+                        }
+                      ]
                     }
                   }
                 },
