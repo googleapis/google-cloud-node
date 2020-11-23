@@ -3,8 +3,16 @@
     {
       "git": {
         "name": ".",
-        "remote": "git@github.com:googleapis/nodejs-redis.git",
-        "sha": "9009fb32cdb8f275efaa3678ffff09f41562fed1"
+        "remote": "https://github.com/googleapis/nodejs-redis.git",
+        "sha": "7813bb10e01b18de8fb390f2d0fcdb22a728002b"
+      }
+    },
+    {
+      "git": {
+        "name": "googleapis",
+        "remote": "https://github.com/googleapis/googleapis.git",
+        "sha": "2f019bf70bfe06f1e2af1b04011b0a2405190e43",
+        "internalRef": "343202295"
       }
     },
     {
@@ -88,7 +96,6 @@
     "README.md",
     "api-extractor.json",
     "linkinator.config.json",
-    "package-lock.json.1823875956",
     "protos/google/cloud/redis/v1/cloud_redis.proto",
     "protos/google/cloud/redis/v1beta1/cloud_redis.proto",
     "protos/protos.d.ts",
@@ -96,7 +103,6 @@
     "protos/protos.json",
     "renovate.json",
     "samples/README.md",
-    "samples/package-lock.json.906857948",
     "src/index.ts",
     "src/v1/cloud_redis_client.ts",
     "src/v1/cloud_redis_client_config.json",

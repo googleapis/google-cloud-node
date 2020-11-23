@@ -26,7 +26,17 @@
                           "options": {
                             "(google.api.http).get": "/v1/{parent=projects/*/locations/*}/instances",
                             "(google.api.method_signature)": "parent"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=projects/*/locations/*}/instances"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
                         },
                         "GetInstance": {
                           "requestType": "GetInstanceRequest",
@@ -34,7 +44,17 @@
                           "options": {
                             "(google.api.http).get": "/v1/{name=projects/*/locations/*/instances/*}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/locations/*/instances/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "CreateInstance": {
                           "requestType": "CreateInstanceRequest",
@@ -45,7 +65,24 @@
                             "(google.api.method_signature)": "parent,instance_id,instance",
                             "(google.longrunning.operation_info).response_type": "google.cloud.redis.v1.Instance",
                             "(google.longrunning.operation_info).metadata_type": "google.cloud.redis.v1.OperationMetadata"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=projects/*/locations/*}/instances",
+                                "body": "instance"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,instance_id,instance"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.cloud.redis.v1.Instance",
+                                "metadata_type": "google.cloud.redis.v1.OperationMetadata"
+                              }
+                            }
+                          ]
                         },
                         "UpdateInstance": {
                           "requestType": "UpdateInstanceRequest",
@@ -56,7 +93,24 @@
                             "(google.api.method_signature)": "update_mask,instance",
                             "(google.longrunning.operation_info).response_type": "google.cloud.redis.v1.Instance",
                             "(google.longrunning.operation_info).metadata_type": "google.cloud.redis.v1.OperationMetadata"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1/{instance.name=projects/*/locations/*/instances/*}",
+                                "body": "instance"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "update_mask,instance"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.cloud.redis.v1.Instance",
+                                "metadata_type": "google.cloud.redis.v1.OperationMetadata"
+                              }
+                            }
+                          ]
                         },
                         "UpgradeInstance": {
                           "requestType": "UpgradeInstanceRequest",
@@ -67,7 +121,24 @@
                             "(google.api.method_signature)": "name,redis_version",
                             "(google.longrunning.operation_info).response_type": "google.cloud.redis.v1.Instance",
                             "(google.longrunning.operation_info).metadata_type": "google.cloud.redis.v1.OperationMetadata"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{name=projects/*/locations/*/instances/*}:upgrade",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name,redis_version"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.cloud.redis.v1.Instance",
+                                "metadata_type": "google.cloud.redis.v1.OperationMetadata"
+                              }
+                            }
+                          ]
                         },
                         "ImportInstance": {
                           "requestType": "ImportInstanceRequest",
@@ -78,7 +149,24 @@
                             "(google.api.method_signature)": "name,input_config",
                             "(google.longrunning.operation_info).response_type": "google.cloud.redis.v1.Instance",
                             "(google.longrunning.operation_info).metadata_type": "google.cloud.redis.v1.OperationMetadata"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{name=projects/*/locations/*/instances/*}:import",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name,input_config"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.cloud.redis.v1.Instance",
+                                "metadata_type": "google.cloud.redis.v1.OperationMetadata"
+                              }
+                            }
+                          ]
                         },
                         "ExportInstance": {
                           "requestType": "ExportInstanceRequest",
@@ -89,7 +177,24 @@
                             "(google.api.method_signature)": "name,output_config",
                             "(google.longrunning.operation_info).response_type": "google.cloud.redis.v1.Instance",
                             "(google.longrunning.operation_info).metadata_type": "google.cloud.redis.v1.OperationMetadata"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{name=projects/*/locations/*/instances/*}:export",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name,output_config"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.cloud.redis.v1.Instance",
+                                "metadata_type": "google.cloud.redis.v1.OperationMetadata"
+                              }
+                            }
+                          ]
                         },
                         "FailoverInstance": {
                           "requestType": "FailoverInstanceRequest",
@@ -100,7 +205,24 @@
                             "(google.api.method_signature)": "name,data_protection_mode",
                             "(google.longrunning.operation_info).response_type": "google.cloud.redis.v1.Instance",
                             "(google.longrunning.operation_info).metadata_type": "google.cloud.redis.v1.OperationMetadata"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{name=projects/*/locations/*/instances/*}:failover",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name,data_protection_mode"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.cloud.redis.v1.Instance",
+                                "metadata_type": "google.cloud.redis.v1.OperationMetadata"
+                              }
+                            }
+                          ]
                         },
                         "DeleteInstance": {
                           "requestType": "DeleteInstanceRequest",
@@ -110,7 +232,23 @@
                             "(google.api.method_signature)": "name",
                             "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
                             "(google.longrunning.operation_info).metadata_type": "google.cloud.redis.v1.OperationMetadata"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1/{name=projects/*/locations/*/instances/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.protobuf.Empty",
+                                "metadata_type": "google.cloud.redis.v1.OperationMetadata"
+                              }
+                            }
+                          ]
                         }
                       }
                     },
@@ -590,7 +728,17 @@
                           "options": {
                             "(google.api.http).get": "/v1beta1/{parent=projects/*/locations/*}/instances",
                             "(google.api.method_signature)": "parent"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta1/{parent=projects/*/locations/*}/instances"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
                         },
                         "GetInstance": {
                           "requestType": "GetInstanceRequest",
@@ -598,7 +746,17 @@
                           "options": {
                             "(google.api.http).get": "/v1beta1/{name=projects/*/locations/*/instances/*}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta1/{name=projects/*/locations/*/instances/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "CreateInstance": {
                           "requestType": "CreateInstanceRequest",
@@ -609,7 +767,24 @@
                             "(google.api.method_signature)": "parent,instance_id,instance",
                             "(google.longrunning.operation_info).response_type": "google.cloud.redis.v1beta1.Instance",
                             "(google.longrunning.operation_info).metadata_type": "google.protobuf.Any"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta1/{parent=projects/*/locations/*}/instances",
+                                "body": "instance"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,instance_id,instance"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.cloud.redis.v1beta1.Instance",
+                                "metadata_type": "google.protobuf.Any"
+                              }
+                            }
+                          ]
                         },
                         "UpdateInstance": {
                           "requestType": "UpdateInstanceRequest",
@@ -620,7 +795,24 @@
                             "(google.api.method_signature)": "update_mask,instance",
                             "(google.longrunning.operation_info).response_type": "google.cloud.redis.v1beta1.Instance",
                             "(google.longrunning.operation_info).metadata_type": "google.protobuf.Any"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1beta1/{instance.name=projects/*/locations/*/instances/*}",
+                                "body": "instance"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "update_mask,instance"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.cloud.redis.v1beta1.Instance",
+                                "metadata_type": "google.protobuf.Any"
+                              }
+                            }
+                          ]
                         },
                         "UpgradeInstance": {
                           "requestType": "UpgradeInstanceRequest",
@@ -631,7 +823,24 @@
                             "(google.api.method_signature)": "name,redis_version",
                             "(google.longrunning.operation_info).response_type": "google.cloud.redis.v1beta1.Instance",
                             "(google.longrunning.operation_info).metadata_type": "google.protobuf.Any"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta1/{name=projects/*/locations/*/instances/*}:upgrade",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name,redis_version"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.cloud.redis.v1beta1.Instance",
+                                "metadata_type": "google.protobuf.Any"
+                              }
+                            }
+                          ]
                         },
                         "ImportInstance": {
                           "requestType": "ImportInstanceRequest",
@@ -642,7 +851,24 @@
                             "(google.api.method_signature)": "name,input_config",
                             "(google.longrunning.operation_info).response_type": "google.cloud.redis.v1beta1.Instance",
                             "(google.longrunning.operation_info).metadata_type": "google.protobuf.Any"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta1/{name=projects/*/locations/*/instances/*}:import",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name,input_config"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.cloud.redis.v1beta1.Instance",
+                                "metadata_type": "google.protobuf.Any"
+                              }
+                            }
+                          ]
                         },
                         "ExportInstance": {
                           "requestType": "ExportInstanceRequest",
@@ -653,7 +879,24 @@
                             "(google.api.method_signature)": "name,output_config",
                             "(google.longrunning.operation_info).response_type": "google.cloud.redis.v1beta1.Instance",
                             "(google.longrunning.operation_info).metadata_type": "google.protobuf.Any"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta1/{name=projects/*/locations/*/instances/*}:export",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name,output_config"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.cloud.redis.v1beta1.Instance",
+                                "metadata_type": "google.protobuf.Any"
+                              }
+                            }
+                          ]
                         },
                         "FailoverInstance": {
                           "requestType": "FailoverInstanceRequest",
@@ -664,7 +907,24 @@
                             "(google.api.method_signature)": "name,data_protection_mode",
                             "(google.longrunning.operation_info).response_type": "google.cloud.redis.v1beta1.Instance",
                             "(google.longrunning.operation_info).metadata_type": "google.protobuf.Any"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta1/{name=projects/*/locations/*/instances/*}:failover",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name,data_protection_mode"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.cloud.redis.v1beta1.Instance",
+                                "metadata_type": "google.protobuf.Any"
+                              }
+                            }
+                          ]
                         },
                         "DeleteInstance": {
                           "requestType": "DeleteInstanceRequest",
@@ -674,7 +934,23 @@
                             "(google.api.method_signature)": "name",
                             "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
                             "(google.longrunning.operation_info).metadata_type": "google.protobuf.Any"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1beta1/{name=projects/*/locations/*/instances/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.protobuf.Empty",
+                                "metadata_type": "google.protobuf.Any"
+                              }
+                            }
+                          ]
                         }
                       }
                     },
@@ -2275,7 +2551,17 @@
                   "options": {
                     "(google.api.http).get": "/v1/{name=operations}",
                     "(google.api.method_signature)": "name,filter"
-                  }
+                  },
+                  "parsedOptions": [
+                    {
+                      "(google.api.http)": {
+                        "get": "/v1/{name=operations}"
+                      }
+                    },
+                    {
+                      "(google.api.method_signature)": "name,filter"
+                    }
+                  ]
                 },
                 "GetOperation": {
                   "requestType": "GetOperationRequest",
@@ -2283,7 +2569,17 @@
                   "options": {
                     "(google.api.http).get": "/v1/{name=operations/**}",
                     "(google.api.method_signature)": "name"
-                  }
+                  },
+                  "parsedOptions": [
+                    {
+                      "(google.api.http)": {
+                        "get": "/v1/{name=operations/**}"
+                      }
+                    },
+                    {
+                      "(google.api.method_signature)": "name"
+                    }
+                  ]
                 },
                 "DeleteOperation": {
                   "requestType": "DeleteOperationRequest",
@@ -2291,7 +2587,17 @@
                   "options": {
                     "(google.api.http).delete": "/v1/{name=operations/**}",
                     "(google.api.method_signature)": "name"
-                  }
+                  },
+                  "parsedOptions": [
+                    {
+                      "(google.api.http)": {
+                        "delete": "/v1/{name=operations/**}"
+                      }
+                    },
+                    {
+                      "(google.api.method_signature)": "name"
+                    }
+                  ]
                 },
                 "CancelOperation": {
                   "requestType": "CancelOperationRequest",
@@ -2300,7 +2606,18 @@
                     "(google.api.http).post": "/v1/{name=operations/**}:cancel",
                     "(google.api.http).body": "*",
                     "(google.api.method_signature)": "name"
-                  }
+                  },
+                  "parsedOptions": [
+                    {
+                      "(google.api.http)": {
+                        "post": "/v1/{name=operations/**}:cancel",
+                        "body": "*"
+                      }
+                    },
+                    {
+                      "(google.api.method_signature)": "name"
+                    }
+                  ]
                 },
                 "WaitOperation": {
                   "requestType": "WaitOperationRequest",

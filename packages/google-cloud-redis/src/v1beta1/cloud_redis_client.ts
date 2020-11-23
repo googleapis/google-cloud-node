@@ -16,6 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
+/* global window */
 import * as gax from 'google-gax';
 import {
   Callback,
@@ -31,6 +32,11 @@ import * as path from 'path';
 import {Transform} from 'stream';
 import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
+/**
+ * Client JSON configuration object, loaded from
+ * `src/v1beta1/cloud_redis_client_config.json`.
+ * This file defines retry strategy and timeouts for all API methods in this library.
+ */
 import * as gapicConfig from './cloud_redis_client_config.json';
 import {operationsProtos} from 'google-gax';
 const version = require('../../../package.json').version;
@@ -99,9 +105,9 @@ export class CloudRedisClient {
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
-   * @param {gax.ClientConfig} [options.clientConfig] - client configuration override.
-   *     TODO(@alexander-fenster): link to gax documentation.
-   * @param {boolean} fallback - Use HTTP fallback mode.
+   * @param {gax.ClientConfig} [options.clientConfig] - Client configuration override.
+   *     Follows the structure of {@link gapicConfig}.
+   * @param {boolean} [options.fallback] - Use HTTP fallback mode.
    *     In fallback mode, a special browser-compatible transport implementation is used
    *     instead of gRPC transport. In browser context (if the `window` object is defined)
    *     the fallback mode is enabled automatically; set `options.fallback` to `false`
@@ -114,7 +120,9 @@ export class CloudRedisClient {
       opts?.servicePath || opts?.apiEndpoint || staticMembers.servicePath;
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback = opts?.fallback ?? typeof window !== 'undefined';
+    const fallback =
+      opts?.fallback ??
+      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
@@ -431,7 +439,7 @@ export class CloudRedisClient {
   // -------------------
   getInstance(
     request: protos.google.cloud.redis.v1beta1.IGetInstanceRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.redis.v1beta1.IInstance,
@@ -441,7 +449,7 @@ export class CloudRedisClient {
   >;
   getInstance(
     request: protos.google.cloud.redis.v1beta1.IGetInstanceRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.cloud.redis.v1beta1.IInstance,
       protos.google.cloud.redis.v1beta1.IGetInstanceRequest | null | undefined,
@@ -478,7 +486,7 @@ export class CloudRedisClient {
   getInstance(
     request: protos.google.cloud.redis.v1beta1.IGetInstanceRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.cloud.redis.v1beta1.IInstance,
           | protos.google.cloud.redis.v1beta1.IGetInstanceRequest
@@ -499,12 +507,12 @@ export class CloudRedisClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -520,7 +528,7 @@ export class CloudRedisClient {
 
   createInstance(
     request: protos.google.cloud.redis.v1beta1.ICreateInstanceRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       LROperation<
@@ -533,7 +541,7 @@ export class CloudRedisClient {
   >;
   createInstance(
     request: protos.google.cloud.redis.v1beta1.ICreateInstanceRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       LROperation<
         protos.google.cloud.redis.v1beta1.IInstance,
@@ -601,7 +609,7 @@ export class CloudRedisClient {
   createInstance(
     request: protos.google.cloud.redis.v1beta1.ICreateInstanceRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           LROperation<
             protos.google.cloud.redis.v1beta1.IInstance,
@@ -629,12 +637,12 @@ export class CloudRedisClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -686,7 +694,7 @@ export class CloudRedisClient {
   }
   updateInstance(
     request: protos.google.cloud.redis.v1beta1.IUpdateInstanceRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       LROperation<
@@ -699,7 +707,7 @@ export class CloudRedisClient {
   >;
   updateInstance(
     request: protos.google.cloud.redis.v1beta1.IUpdateInstanceRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       LROperation<
         protos.google.cloud.redis.v1beta1.IInstance,
@@ -757,7 +765,7 @@ export class CloudRedisClient {
   updateInstance(
     request: protos.google.cloud.redis.v1beta1.IUpdateInstanceRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           LROperation<
             protos.google.cloud.redis.v1beta1.IInstance,
@@ -785,12 +793,12 @@ export class CloudRedisClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -842,7 +850,7 @@ export class CloudRedisClient {
   }
   upgradeInstance(
     request: protos.google.cloud.redis.v1beta1.IUpgradeInstanceRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       LROperation<
@@ -855,7 +863,7 @@ export class CloudRedisClient {
   >;
   upgradeInstance(
     request: protos.google.cloud.redis.v1beta1.IUpgradeInstanceRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       LROperation<
         protos.google.cloud.redis.v1beta1.IInstance,
@@ -904,7 +912,7 @@ export class CloudRedisClient {
   upgradeInstance(
     request: protos.google.cloud.redis.v1beta1.IUpgradeInstanceRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           LROperation<
             protos.google.cloud.redis.v1beta1.IInstance,
@@ -932,12 +940,12 @@ export class CloudRedisClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -989,7 +997,7 @@ export class CloudRedisClient {
   }
   importInstance(
     request: protos.google.cloud.redis.v1beta1.IImportInstanceRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       LROperation<
@@ -1002,7 +1010,7 @@ export class CloudRedisClient {
   >;
   importInstance(
     request: protos.google.cloud.redis.v1beta1.IImportInstanceRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       LROperation<
         protos.google.cloud.redis.v1beta1.IInstance,
@@ -1057,7 +1065,7 @@ export class CloudRedisClient {
   importInstance(
     request: protos.google.cloud.redis.v1beta1.IImportInstanceRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           LROperation<
             protos.google.cloud.redis.v1beta1.IInstance,
@@ -1085,12 +1093,12 @@ export class CloudRedisClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1142,7 +1150,7 @@ export class CloudRedisClient {
   }
   exportInstance(
     request: protos.google.cloud.redis.v1beta1.IExportInstanceRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       LROperation<
@@ -1155,7 +1163,7 @@ export class CloudRedisClient {
   >;
   exportInstance(
     request: protos.google.cloud.redis.v1beta1.IExportInstanceRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       LROperation<
         protos.google.cloud.redis.v1beta1.IInstance,
@@ -1208,7 +1216,7 @@ export class CloudRedisClient {
   exportInstance(
     request: protos.google.cloud.redis.v1beta1.IExportInstanceRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           LROperation<
             protos.google.cloud.redis.v1beta1.IInstance,
@@ -1236,12 +1244,12 @@ export class CloudRedisClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1293,7 +1301,7 @@ export class CloudRedisClient {
   }
   failoverInstance(
     request: protos.google.cloud.redis.v1beta1.IFailoverInstanceRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       LROperation<
@@ -1306,7 +1314,7 @@ export class CloudRedisClient {
   >;
   failoverInstance(
     request: protos.google.cloud.redis.v1beta1.IFailoverInstanceRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       LROperation<
         protos.google.cloud.redis.v1beta1.IInstance,
@@ -1356,7 +1364,7 @@ export class CloudRedisClient {
   failoverInstance(
     request: protos.google.cloud.redis.v1beta1.IFailoverInstanceRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           LROperation<
             protos.google.cloud.redis.v1beta1.IInstance,
@@ -1384,12 +1392,12 @@ export class CloudRedisClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1441,7 +1449,7 @@ export class CloudRedisClient {
   }
   deleteInstance(
     request: protos.google.cloud.redis.v1beta1.IDeleteInstanceRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       LROperation<protos.google.protobuf.IEmpty, protos.google.protobuf.IAny>,
@@ -1451,7 +1459,7 @@ export class CloudRedisClient {
   >;
   deleteInstance(
     request: protos.google.cloud.redis.v1beta1.IDeleteInstanceRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       LROperation<protos.google.protobuf.IEmpty, protos.google.protobuf.IAny>,
       protos.google.longrunning.IOperation | null | undefined,
@@ -1492,7 +1500,7 @@ export class CloudRedisClient {
   deleteInstance(
     request: protos.google.cloud.redis.v1beta1.IDeleteInstanceRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           LROperation<
             protos.google.protobuf.IEmpty,
@@ -1514,12 +1522,12 @@ export class CloudRedisClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1568,7 +1576,7 @@ export class CloudRedisClient {
   }
   listInstances(
     request: protos.google.cloud.redis.v1beta1.IListInstancesRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.redis.v1beta1.IInstance[],
@@ -1578,7 +1586,7 @@ export class CloudRedisClient {
   >;
   listInstances(
     request: protos.google.cloud.redis.v1beta1.IListInstancesRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: PaginationCallback<
       protos.google.cloud.redis.v1beta1.IListInstancesRequest,
       | protos.google.cloud.redis.v1beta1.IListInstancesResponse
@@ -1641,7 +1649,7 @@ export class CloudRedisClient {
   listInstances(
     request: protos.google.cloud.redis.v1beta1.IListInstancesRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | PaginationCallback<
           protos.google.cloud.redis.v1beta1.IListInstancesRequest,
           | protos.google.cloud.redis.v1beta1.IListInstancesResponse
@@ -1664,12 +1672,12 @@ export class CloudRedisClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1716,7 +1724,7 @@ export class CloudRedisClient {
    */
   listInstancesStream(
     request?: protos.google.cloud.redis.v1beta1.IListInstancesRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Transform {
     request = request || {};
     options = options || {};
@@ -1775,7 +1783,7 @@ export class CloudRedisClient {
    */
   listInstancesAsync(
     request?: protos.google.cloud.redis.v1beta1.IListInstancesRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): AsyncIterable<protos.google.cloud.redis.v1beta1.IInstance> {
     request = request || {};
     options = options || {};
