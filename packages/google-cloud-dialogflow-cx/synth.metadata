@@ -3,8 +3,8 @@
     {
       "git": {
         "name": ".",
-        "remote": "git@github.com:googleapis/nodejs-dialogflow-cx.git",
-        "sha": "f11519471b8642fa6624dcd90e8867b9945eafde"
+        "remote": "https://github.com/googleapis/nodejs-dialogflow-cx.git",
+        "sha": "d37aec2b9995135cb4904e816ba8ce068d54b7db"
       }
     },
     {
@@ -13,6 +13,13 @@
         "remote": "https://github.com/googleapis/googleapis.git",
         "sha": "7ea91db77f53f169a08726bd33efb73042c38284",
         "internalRef": "343321102"
+      }
+    },
+    {
+      "git": {
+        "name": "synthtool",
+        "remote": "https://github.com/googleapis/synthtool.git",
+        "sha": "68742c6016bf0d16948a572633d17955a8737414"
       }
     }
   ],
@@ -100,7 +107,6 @@
     "protos/protos.json",
     "renovate.json",
     "samples/README.md",
-    "samples/package-lock.json.492727105",
     "src/index.ts",
     "src/v3/agents_client.ts",
     "src/v3/agents_client_config.json",

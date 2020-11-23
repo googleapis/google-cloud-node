@@ -1050,9 +1050,7 @@ export class TransitionRouteGroupsClient {
       this.innerApiCalls['listTransitionRouteGroups'] as GaxCall,
       (request as unknown) as RequestType,
       callSettings
-    ) as AsyncIterable<
-      protos.google.cloud.dialogflow.cx.v3.ITransitionRouteGroup
-    >;
+    ) as AsyncIterable<protos.google.cloud.dialogflow.cx.v3.ITransitionRouteGroup>;
   }
   // --------------------
   // -- Path templates --
