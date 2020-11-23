@@ -542,9 +542,7 @@ export class AssetServiceClient {
   searchAllResourcesAsync(
     request?: protos.google.cloud.asset.v1p1beta1.ISearchAllResourcesRequest,
     options?: gax.CallOptions
-  ): AsyncIterable<
-    protos.google.cloud.asset.v1p1beta1.IStandardResourceMetadata
-  > {
+  ): AsyncIterable<protos.google.cloud.asset.v1p1beta1.IStandardResourceMetadata> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -561,9 +559,7 @@ export class AssetServiceClient {
       this.innerApiCalls['searchAllResources'] as GaxCall,
       (request as unknown) as RequestType,
       callSettings
-    ) as AsyncIterable<
-      protos.google.cloud.asset.v1p1beta1.IStandardResourceMetadata
-    >;
+    ) as AsyncIterable<protos.google.cloud.asset.v1p1beta1.IStandardResourceMetadata>;
   }
   searchAllIamPolicies(
     request: protos.google.cloud.asset.v1p1beta1.ISearchAllIamPoliciesRequest,
@@ -810,9 +806,7 @@ export class AssetServiceClient {
       this.innerApiCalls['searchAllIamPolicies'] as GaxCall,
       (request as unknown) as RequestType,
       callSettings
-    ) as AsyncIterable<
-      protos.google.cloud.asset.v1p1beta1.IIamPolicySearchResult
-    >;
+    ) as AsyncIterable<protos.google.cloud.asset.v1p1beta1.IIamPolicySearchResult>;
   }
 
   /**
