@@ -29,7 +29,17 @@
                           "options": {
                             "(google.api.http).delete": "/v1/{name=users/*/projects/*}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1/{name=users/*/projects/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "DeleteSshPublicKey": {
                           "requestType": "DeleteSshPublicKeyRequest",
@@ -37,7 +47,17 @@
                           "options": {
                             "(google.api.http).delete": "/v1/{name=users/*/sshPublicKeys/*}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1/{name=users/*/sshPublicKeys/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "GetLoginProfile": {
                           "requestType": "GetLoginProfileRequest",
@@ -45,7 +65,17 @@
                           "options": {
                             "(google.api.http).get": "/v1/{name=users/*}/loginProfile",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=users/*}/loginProfile"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "GetSshPublicKey": {
                           "requestType": "GetSshPublicKeyRequest",
@@ -53,7 +83,17 @@
                           "options": {
                             "(google.api.http).get": "/v1/{name=users/*/sshPublicKeys/*}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=users/*/sshPublicKeys/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "ImportSshPublicKey": {
                           "requestType": "ImportSshPublicKeyRequest",
@@ -62,7 +102,21 @@
                             "(google.api.http).post": "/v1/{parent=users/*}:importSshPublicKey",
                             "(google.api.http).body": "ssh_public_key",
                             "(google.api.method_signature)": "parent,ssh_public_key,project_id"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=users/*}:importSshPublicKey",
+                                "body": "ssh_public_key"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,ssh_public_key"
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,ssh_public_key,project_id"
+                            }
+                          ]
                         },
                         "UpdateSshPublicKey": {
                           "requestType": "UpdateSshPublicKeyRequest",
@@ -71,7 +125,21 @@
                             "(google.api.http).patch": "/v1/{name=users/*/sshPublicKeys/*}",
                             "(google.api.http).body": "ssh_public_key",
                             "(google.api.method_signature)": "name,ssh_public_key,update_mask"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1/{name=users/*/sshPublicKeys/*}",
+                                "body": "ssh_public_key"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name,ssh_public_key"
+                            },
+                            {
+                              "(google.api.method_signature)": "name,ssh_public_key,update_mask"
+                            }
+                          ]
                         }
                       }
                     },
@@ -340,7 +408,17 @@
                           "options": {
                             "(google.api.http).delete": "/v1beta/{name=users/*/projects/*}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1beta/{name=users/*/projects/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "DeleteSshPublicKey": {
                           "requestType": "DeleteSshPublicKeyRequest",
@@ -348,7 +426,17 @@
                           "options": {
                             "(google.api.http).delete": "/v1beta/{name=users/*/sshPublicKeys/*}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1beta/{name=users/*/sshPublicKeys/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "GetLoginProfile": {
                           "requestType": "GetLoginProfileRequest",
@@ -356,7 +444,17 @@
                           "options": {
                             "(google.api.http).get": "/v1beta/{name=users/*}/loginProfile",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta/{name=users/*}/loginProfile"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "GetSshPublicKey": {
                           "requestType": "GetSshPublicKeyRequest",
@@ -364,7 +462,17 @@
                           "options": {
                             "(google.api.http).get": "/v1beta/{name=users/*/sshPublicKeys/*}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta/{name=users/*/sshPublicKeys/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "ImportSshPublicKey": {
                           "requestType": "ImportSshPublicKeyRequest",
@@ -373,7 +481,21 @@
                             "(google.api.http).post": "/v1beta/{parent=users/*}:importSshPublicKey",
                             "(google.api.http).body": "ssh_public_key",
                             "(google.api.method_signature)": "parent,ssh_public_key,project_id"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta/{parent=users/*}:importSshPublicKey",
+                                "body": "ssh_public_key"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,ssh_public_key"
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,ssh_public_key,project_id"
+                            }
+                          ]
                         },
                         "UpdateSshPublicKey": {
                           "requestType": "UpdateSshPublicKeyRequest",
@@ -382,7 +504,21 @@
                             "(google.api.http).patch": "/v1beta/{name=users/*/sshPublicKeys/*}",
                             "(google.api.http).body": "ssh_public_key",
                             "(google.api.method_signature)": "name,ssh_public_key,update_mask"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1beta/{name=users/*/sshPublicKeys/*}",
+                                "body": "ssh_public_key"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name,ssh_public_key"
+                            },
+                            {
+                              "(google.api.method_signature)": "name,ssh_public_key,update_mask"
+                            }
+                          ]
                         }
                       }
                     },
