@@ -31,7 +31,18 @@
                             "(google.api.http).post": "/v1/{parent=projects/*}/assessments",
                             "(google.api.http).body": "assessment",
                             "(google.api.method_signature)": "parent,assessment"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=projects/*}/assessments",
+                                "body": "assessment"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,assessment"
+                            }
+                          ]
                         },
                         "AnnotateAssessment": {
                           "requestType": "AnnotateAssessmentRequest",
@@ -40,7 +51,18 @@
                             "(google.api.http).post": "/v1/{name=projects/*/assessments/*}:annotate",
                             "(google.api.http).body": "*",
                             "(google.api.method_signature)": "name,annotation"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{name=projects/*/assessments/*}:annotate",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name,annotation"
+                            }
+                          ]
                         },
                         "CreateKey": {
                           "requestType": "CreateKeyRequest",
@@ -48,21 +70,43 @@
                           "options": {
                             "(google.api.http).post": "/v1/{parent=projects/*}/keys",
                             "(google.api.http).body": "key"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=projects/*}/keys",
+                                "body": "key"
+                              }
+                            }
+                          ]
                         },
                         "ListKeys": {
                           "requestType": "ListKeysRequest",
                           "responseType": "ListKeysResponse",
                           "options": {
                             "(google.api.http).get": "/v1/{parent=projects/*}/keys"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=projects/*}/keys"
+                              }
+                            }
+                          ]
                         },
                         "GetKey": {
                           "requestType": "GetKeyRequest",
                           "responseType": "Key",
                           "options": {
                             "(google.api.http).get": "/v1/{name=projects/*/keys/*}"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/keys/*}"
+                              }
+                            }
+                          ]
                         },
                         "UpdateKey": {
                           "requestType": "UpdateKeyRequest",
@@ -70,14 +114,29 @@
                           "options": {
                             "(google.api.http).patch": "/v1/{key.name=projects/*/keys/*}",
                             "(google.api.http).body": "key"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1/{key.name=projects/*/keys/*}",
+                                "body": "key"
+                              }
+                            }
+                          ]
                         },
                         "DeleteKey": {
                           "requestType": "DeleteKeyRequest",
                           "responseType": "google.protobuf.Empty",
                           "options": {
                             "(google.api.http).delete": "/v1/{name=projects/*/keys/*}"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1/{name=projects/*/keys/*}"
+                              }
+                            }
+                          ]
                         }
                       }
                     },
@@ -509,7 +568,18 @@
                             "(google.api.http).post": "/v1beta1/{parent=projects/*}/assessments",
                             "(google.api.http).body": "assessment",
                             "(google.api.method_signature)": "parent,assessment"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta1/{parent=projects/*}/assessments",
+                                "body": "assessment"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,assessment"
+                            }
+                          ]
                         },
                         "AnnotateAssessment": {
                           "requestType": "AnnotateAssessmentRequest",
@@ -518,7 +588,18 @@
                             "(google.api.http).post": "/v1beta1/{name=projects/*/assessments/*}:annotate",
                             "(google.api.http).body": "*",
                             "(google.api.method_signature)": "name,annotation"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta1/{name=projects/*/assessments/*}:annotate",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name,annotation"
+                            }
+                          ]
                         },
                         "CreateKey": {
                           "requestType": "CreateKeyRequest",
@@ -526,21 +607,43 @@
                           "options": {
                             "(google.api.http).post": "/v1beta1/{parent=projects/*}/keys",
                             "(google.api.http).body": "key"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta1/{parent=projects/*}/keys",
+                                "body": "key"
+                              }
+                            }
+                          ]
                         },
                         "ListKeys": {
                           "requestType": "ListKeysRequest",
                           "responseType": "ListKeysResponse",
                           "options": {
                             "(google.api.http).get": "/v1beta1/{parent=projects/*}/keys"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta1/{parent=projects/*}/keys"
+                              }
+                            }
+                          ]
                         },
                         "GetKey": {
                           "requestType": "GetKeyRequest",
                           "responseType": "Key",
                           "options": {
                             "(google.api.http).get": "/v1beta1/{name=projects/*/keys/*}"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta1/{name=projects/*/keys/*}"
+                              }
+                            }
+                          ]
                         },
                         "UpdateKey": {
                           "requestType": "UpdateKeyRequest",
@@ -548,14 +651,29 @@
                           "options": {
                             "(google.api.http).patch": "/v1beta1/{key.name=projects/*/keys/*}",
                             "(google.api.http).body": "key"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1beta1/{key.name=projects/*/keys/*}",
+                                "body": "key"
+                              }
+                            }
+                          ]
                         },
                         "DeleteKey": {
                           "requestType": "DeleteKeyRequest",
                           "responseType": "google.protobuf.Empty",
                           "options": {
                             "(google.api.http).delete": "/v1beta1/{name=projects/*/keys/*}"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1beta1/{name=projects/*/keys/*}"
+                              }
+                            }
+                          ]
                         }
                       }
                     },

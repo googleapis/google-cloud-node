@@ -4,15 +4,15 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/nodejs-recaptcha-enterprise.git",
-        "sha": "630d2aa2d0ac82055ce137c874bcf5998e3c4474"
+        "sha": "3c20aed6c6f2baf15cd6bbe3fdb1dfe2ba8141da"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "4c5071b615d96ef9dfd6a63d8429090f1f2872bb",
-        "internalRef": "327369997"
+        "sha": "5587028631d4d743fd906c4eb4e4e4649a7ee5ce",
+        "internalRef": "343187793"
       }
     },
     {
@@ -96,7 +96,6 @@
     "README.md",
     "api-extractor.json",
     "linkinator.config.json",
-    "package-lock.json.41252956",
     "protos/google/cloud/recaptchaenterprise/v1/recaptchaenterprise.proto",
     "protos/google/cloud/recaptchaenterprise/v1beta1/recaptchaenterprise.proto",
     "protos/protos.d.ts",
@@ -104,7 +103,6 @@
     "protos/protos.json",
     "renovate.json",
     "samples/README.md",
-    "samples/package-lock.json.3671243477",
     "src/index.ts",
     "src/v1/index.ts",
     "src/v1/recaptcha_enterprise_service_client.ts",
