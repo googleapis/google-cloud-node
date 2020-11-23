@@ -3,8 +3,16 @@
     {
       "git": {
         "name": ".",
-        "remote": "git@github.com:googleapis/nodejs-tasks.git",
-        "sha": "c7104dc7bee055124c687555d2ed7fd00e1489ba"
+        "remote": "https://github.com/googleapis/nodejs-tasks.git",
+        "sha": "039becb02c12ee0911d536edcfb796664c4b6525"
+      }
+    },
+    {
+      "git": {
+        "name": "googleapis",
+        "remote": "https://github.com/googleapis/googleapis.git",
+        "sha": "2f019bf70bfe06f1e2af1b04011b0a2405190e43",
+        "internalRef": "343202295"
       }
     },
     {
@@ -97,7 +105,6 @@
     "README.md",
     "api-extractor.json",
     "linkinator.config.json",
-    "package-lock.json.2001645315",
     "protos/google/cloud/tasks/v2/cloudtasks.proto",
     "protos/google/cloud/tasks/v2/queue.proto",
     "protos/google/cloud/tasks/v2/target.proto",
@@ -115,7 +122,6 @@
     "protos/protos.json",
     "renovate.json",
     "samples/README.md",
-    "samples/package-lock.json.2594585339",
     "src/index.ts",
     "src/v2/cloud_tasks_client.ts",
     "src/v2/cloud_tasks_client_config.json",

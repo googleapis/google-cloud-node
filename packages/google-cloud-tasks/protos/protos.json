@@ -27,7 +27,17 @@
                           "options": {
                             "(google.api.http).get": "/v2/{parent=projects/*/locations/*}/queues",
                             "(google.api.method_signature)": "parent"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v2/{parent=projects/*/locations/*}/queues"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
                         },
                         "GetQueue": {
                           "requestType": "GetQueueRequest",
@@ -35,7 +45,17 @@
                           "options": {
                             "(google.api.http).get": "/v2/{name=projects/*/locations/*/queues/*}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v2/{name=projects/*/locations/*/queues/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "CreateQueue": {
                           "requestType": "CreateQueueRequest",
@@ -44,7 +64,18 @@
                             "(google.api.http).post": "/v2/{parent=projects/*/locations/*}/queues",
                             "(google.api.http).body": "queue",
                             "(google.api.method_signature)": "parent,queue"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v2/{parent=projects/*/locations/*}/queues",
+                                "body": "queue"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,queue"
+                            }
+                          ]
                         },
                         "UpdateQueue": {
                           "requestType": "UpdateQueueRequest",
@@ -53,7 +84,18 @@
                             "(google.api.http).patch": "/v2/{queue.name=projects/*/locations/*/queues/*}",
                             "(google.api.http).body": "queue",
                             "(google.api.method_signature)": "queue,update_mask"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v2/{queue.name=projects/*/locations/*/queues/*}",
+                                "body": "queue"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "queue,update_mask"
+                            }
+                          ]
                         },
                         "DeleteQueue": {
                           "requestType": "DeleteQueueRequest",
@@ -61,7 +103,17 @@
                           "options": {
                             "(google.api.http).delete": "/v2/{name=projects/*/locations/*/queues/*}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v2/{name=projects/*/locations/*/queues/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "PurgeQueue": {
                           "requestType": "PurgeQueueRequest",
@@ -70,7 +122,18 @@
                             "(google.api.http).post": "/v2/{name=projects/*/locations/*/queues/*}:purge",
                             "(google.api.http).body": "*",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v2/{name=projects/*/locations/*/queues/*}:purge",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "PauseQueue": {
                           "requestType": "PauseQueueRequest",
@@ -79,7 +142,18 @@
                             "(google.api.http).post": "/v2/{name=projects/*/locations/*/queues/*}:pause",
                             "(google.api.http).body": "*",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v2/{name=projects/*/locations/*/queues/*}:pause",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "ResumeQueue": {
                           "requestType": "ResumeQueueRequest",
@@ -88,7 +162,18 @@
                             "(google.api.http).post": "/v2/{name=projects/*/locations/*/queues/*}:resume",
                             "(google.api.http).body": "*",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v2/{name=projects/*/locations/*/queues/*}:resume",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "GetIamPolicy": {
                           "requestType": "google.iam.v1.GetIamPolicyRequest",
@@ -97,7 +182,18 @@
                             "(google.api.http).post": "/v2/{resource=projects/*/locations/*/queues/*}:getIamPolicy",
                             "(google.api.http).body": "*",
                             "(google.api.method_signature)": "resource"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v2/{resource=projects/*/locations/*/queues/*}:getIamPolicy",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "resource"
+                            }
+                          ]
                         },
                         "SetIamPolicy": {
                           "requestType": "google.iam.v1.SetIamPolicyRequest",
@@ -106,7 +202,18 @@
                             "(google.api.http).post": "/v2/{resource=projects/*/locations/*/queues/*}:setIamPolicy",
                             "(google.api.http).body": "*",
                             "(google.api.method_signature)": "resource,policy"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v2/{resource=projects/*/locations/*/queues/*}:setIamPolicy",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "resource,policy"
+                            }
+                          ]
                         },
                         "TestIamPermissions": {
                           "requestType": "google.iam.v1.TestIamPermissionsRequest",
@@ -115,7 +222,18 @@
                             "(google.api.http).post": "/v2/{resource=projects/*/locations/*/queues/*}:testIamPermissions",
                             "(google.api.http).body": "*",
                             "(google.api.method_signature)": "resource,permissions"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v2/{resource=projects/*/locations/*/queues/*}:testIamPermissions",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "resource,permissions"
+                            }
+                          ]
                         },
                         "ListTasks": {
                           "requestType": "ListTasksRequest",
@@ -123,7 +241,17 @@
                           "options": {
                             "(google.api.http).get": "/v2/{parent=projects/*/locations/*/queues/*}/tasks",
                             "(google.api.method_signature)": "parent"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v2/{parent=projects/*/locations/*/queues/*}/tasks"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
                         },
                         "GetTask": {
                           "requestType": "GetTaskRequest",
@@ -131,7 +259,17 @@
                           "options": {
                             "(google.api.http).get": "/v2/{name=projects/*/locations/*/queues/*/tasks/*}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v2/{name=projects/*/locations/*/queues/*/tasks/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "CreateTask": {
                           "requestType": "CreateTaskRequest",
@@ -140,7 +278,18 @@
                             "(google.api.http).post": "/v2/{parent=projects/*/locations/*/queues/*}/tasks",
                             "(google.api.http).body": "*",
                             "(google.api.method_signature)": "parent,task"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v2/{parent=projects/*/locations/*/queues/*}/tasks",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,task"
+                            }
+                          ]
                         },
                         "DeleteTask": {
                           "requestType": "DeleteTaskRequest",
@@ -148,7 +297,17 @@
                           "options": {
                             "(google.api.http).delete": "/v2/{name=projects/*/locations/*/queues/*/tasks/*}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v2/{name=projects/*/locations/*/queues/*/tasks/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "RunTask": {
                           "requestType": "RunTaskRequest",
@@ -157,7 +316,18 @@
                             "(google.api.http).post": "/v2/{name=projects/*/locations/*/queues/*/tasks/*}:run",
                             "(google.api.http).body": "*",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v2/{name=projects/*/locations/*/queues/*/tasks/*}:run",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         }
                       }
                     },
@@ -723,7 +893,17 @@
                           "options": {
                             "(google.api.http).get": "/v2beta2/{parent=projects/*/locations/*}/queues",
                             "(google.api.method_signature)": "parent"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v2beta2/{parent=projects/*/locations/*}/queues"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
                         },
                         "GetQueue": {
                           "requestType": "GetQueueRequest",
@@ -731,7 +911,17 @@
                           "options": {
                             "(google.api.http).get": "/v2beta2/{name=projects/*/locations/*/queues/*}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v2beta2/{name=projects/*/locations/*/queues/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "CreateQueue": {
                           "requestType": "CreateQueueRequest",
@@ -740,7 +930,18 @@
                             "(google.api.http).post": "/v2beta2/{parent=projects/*/locations/*}/queues",
                             "(google.api.http).body": "queue",
                             "(google.api.method_signature)": "parent,queue"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v2beta2/{parent=projects/*/locations/*}/queues",
+                                "body": "queue"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,queue"
+                            }
+                          ]
                         },
                         "UpdateQueue": {
                           "requestType": "UpdateQueueRequest",
@@ -749,7 +950,18 @@
                             "(google.api.http).patch": "/v2beta2/{queue.name=projects/*/locations/*/queues/*}",
                             "(google.api.http).body": "queue",
                             "(google.api.method_signature)": "queue,update_mask"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v2beta2/{queue.name=projects/*/locations/*/queues/*}",
+                                "body": "queue"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "queue,update_mask"
+                            }
+                          ]
                         },
                         "DeleteQueue": {
                           "requestType": "DeleteQueueRequest",
@@ -757,7 +969,17 @@
                           "options": {
                             "(google.api.http).delete": "/v2beta2/{name=projects/*/locations/*/queues/*}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v2beta2/{name=projects/*/locations/*/queues/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "PurgeQueue": {
                           "requestType": "PurgeQueueRequest",
@@ -766,7 +988,18 @@
                             "(google.api.http).post": "/v2beta2/{name=projects/*/locations/*/queues/*}:purge",
                             "(google.api.http).body": "*",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v2beta2/{name=projects/*/locations/*/queues/*}:purge",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "PauseQueue": {
                           "requestType": "PauseQueueRequest",
@@ -775,7 +1008,18 @@
                             "(google.api.http).post": "/v2beta2/{name=projects/*/locations/*/queues/*}:pause",
                             "(google.api.http).body": "*",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v2beta2/{name=projects/*/locations/*/queues/*}:pause",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "ResumeQueue": {
                           "requestType": "ResumeQueueRequest",
@@ -784,7 +1028,18 @@
                             "(google.api.http).post": "/v2beta2/{name=projects/*/locations/*/queues/*}:resume",
                             "(google.api.http).body": "*",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v2beta2/{name=projects/*/locations/*/queues/*}:resume",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "GetIamPolicy": {
                           "requestType": "google.iam.v1.GetIamPolicyRequest",
@@ -793,7 +1048,18 @@
                             "(google.api.http).post": "/v2beta2/{resource=projects/*/locations/*/queues/*}:getIamPolicy",
                             "(google.api.http).body": "*",
                             "(google.api.method_signature)": "resource"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v2beta2/{resource=projects/*/locations/*/queues/*}:getIamPolicy",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "resource"
+                            }
+                          ]
                         },
                         "SetIamPolicy": {
                           "requestType": "google.iam.v1.SetIamPolicyRequest",
@@ -802,7 +1068,18 @@
                             "(google.api.http).post": "/v2beta2/{resource=projects/*/locations/*/queues/*}:setIamPolicy",
                             "(google.api.http).body": "*",
                             "(google.api.method_signature)": "resource,policy"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v2beta2/{resource=projects/*/locations/*/queues/*}:setIamPolicy",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "resource,policy"
+                            }
+                          ]
                         },
                         "TestIamPermissions": {
                           "requestType": "google.iam.v1.TestIamPermissionsRequest",
@@ -811,7 +1088,18 @@
                             "(google.api.http).post": "/v2beta2/{resource=projects/*/locations/*/queues/*}:testIamPermissions",
                             "(google.api.http).body": "*",
                             "(google.api.method_signature)": "resource,permissions"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v2beta2/{resource=projects/*/locations/*/queues/*}:testIamPermissions",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "resource,permissions"
+                            }
+                          ]
                         },
                         "ListTasks": {
                           "requestType": "ListTasksRequest",
@@ -819,7 +1107,17 @@
                           "options": {
                             "(google.api.http).get": "/v2beta2/{parent=projects/*/locations/*/queues/*}/tasks",
                             "(google.api.method_signature)": "parent"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v2beta2/{parent=projects/*/locations/*/queues/*}/tasks"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
                         },
                         "GetTask": {
                           "requestType": "GetTaskRequest",
@@ -827,7 +1125,17 @@
                           "options": {
                             "(google.api.http).get": "/v2beta2/{name=projects/*/locations/*/queues/*/tasks/*}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v2beta2/{name=projects/*/locations/*/queues/*/tasks/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "CreateTask": {
                           "requestType": "CreateTaskRequest",
@@ -836,7 +1144,18 @@
                             "(google.api.http).post": "/v2beta2/{parent=projects/*/locations/*/queues/*}/tasks",
                             "(google.api.http).body": "*",
                             "(google.api.method_signature)": "parent,task"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v2beta2/{parent=projects/*/locations/*/queues/*}/tasks",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,task"
+                            }
+                          ]
                         },
                         "DeleteTask": {
                           "requestType": "DeleteTaskRequest",
@@ -844,7 +1163,17 @@
                           "options": {
                             "(google.api.http).delete": "/v2beta2/{name=projects/*/locations/*/queues/*/tasks/*}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v2beta2/{name=projects/*/locations/*/queues/*/tasks/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "LeaseTasks": {
                           "requestType": "LeaseTasksRequest",
@@ -853,7 +1182,18 @@
                             "(google.api.http).post": "/v2beta2/{parent=projects/*/locations/*/queues/*}/tasks:lease",
                             "(google.api.http).body": "*",
                             "(google.api.method_signature)": "parent,lease_duration"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v2beta2/{parent=projects/*/locations/*/queues/*}/tasks:lease",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,lease_duration"
+                            }
+                          ]
                         },
                         "AcknowledgeTask": {
                           "requestType": "AcknowledgeTaskRequest",
@@ -862,7 +1202,18 @@
                             "(google.api.http).post": "/v2beta2/{name=projects/*/locations/*/queues/*/tasks/*}:acknowledge",
                             "(google.api.http).body": "*",
                             "(google.api.method_signature)": "name,schedule_time"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v2beta2/{name=projects/*/locations/*/queues/*/tasks/*}:acknowledge",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name,schedule_time"
+                            }
+                          ]
                         },
                         "RenewLease": {
                           "requestType": "RenewLeaseRequest",
@@ -871,7 +1222,18 @@
                             "(google.api.http).post": "/v2beta2/{name=projects/*/locations/*/queues/*/tasks/*}:renewLease",
                             "(google.api.http).body": "*",
                             "(google.api.method_signature)": "name,schedule_time,lease_duration"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v2beta2/{name=projects/*/locations/*/queues/*/tasks/*}:renewLease",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name,schedule_time,lease_duration"
+                            }
+                          ]
                         },
                         "CancelLease": {
                           "requestType": "CancelLeaseRequest",
@@ -880,7 +1242,18 @@
                             "(google.api.http).post": "/v2beta2/{name=projects/*/locations/*/queues/*/tasks/*}:cancelLease",
                             "(google.api.http).body": "*",
                             "(google.api.method_signature)": "name,schedule_time"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v2beta2/{name=projects/*/locations/*/queues/*/tasks/*}:cancelLease",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name,schedule_time"
+                            }
+                          ]
                         },
                         "RunTask": {
                           "requestType": "RunTaskRequest",
@@ -889,7 +1262,18 @@
                             "(google.api.http).post": "/v2beta2/{name=projects/*/locations/*/queues/*/tasks/*}:run",
                             "(google.api.http).body": "*",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v2beta2/{name=projects/*/locations/*/queues/*/tasks/*}:run",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         }
                       }
                     },
@@ -1540,7 +1924,17 @@
                           "options": {
                             "(google.api.http).get": "/v2beta3/{parent=projects/*/locations/*}/queues",
                             "(google.api.method_signature)": "parent"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v2beta3/{parent=projects/*/locations/*}/queues"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
                         },
                         "GetQueue": {
                           "requestType": "GetQueueRequest",
@@ -1548,7 +1942,17 @@
                           "options": {
                             "(google.api.http).get": "/v2beta3/{name=projects/*/locations/*/queues/*}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v2beta3/{name=projects/*/locations/*/queues/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "CreateQueue": {
                           "requestType": "CreateQueueRequest",
@@ -1557,7 +1961,18 @@
                             "(google.api.http).post": "/v2beta3/{parent=projects/*/locations/*}/queues",
                             "(google.api.http).body": "queue",
                             "(google.api.method_signature)": "parent,queue"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v2beta3/{parent=projects/*/locations/*}/queues",
+                                "body": "queue"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,queue"
+                            }
+                          ]
                         },
                         "UpdateQueue": {
                           "requestType": "UpdateQueueRequest",
@@ -1566,7 +1981,18 @@
                             "(google.api.http).patch": "/v2beta3/{queue.name=projects/*/locations/*/queues/*}",
                             "(google.api.http).body": "queue",
                             "(google.api.method_signature)": "queue,update_mask"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v2beta3/{queue.name=projects/*/locations/*/queues/*}",
+                                "body": "queue"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "queue,update_mask"
+                            }
+                          ]
                         },
                         "DeleteQueue": {
                           "requestType": "DeleteQueueRequest",
@@ -1574,7 +2000,17 @@
                           "options": {
                             "(google.api.http).delete": "/v2beta3/{name=projects/*/locations/*/queues/*}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v2beta3/{name=projects/*/locations/*/queues/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "PurgeQueue": {
                           "requestType": "PurgeQueueRequest",
@@ -1583,7 +2019,18 @@
                             "(google.api.http).post": "/v2beta3/{name=projects/*/locations/*/queues/*}:purge",
                             "(google.api.http).body": "*",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v2beta3/{name=projects/*/locations/*/queues/*}:purge",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "PauseQueue": {
                           "requestType": "PauseQueueRequest",
@@ -1592,7 +2039,18 @@
                             "(google.api.http).post": "/v2beta3/{name=projects/*/locations/*/queues/*}:pause",
                             "(google.api.http).body": "*",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v2beta3/{name=projects/*/locations/*/queues/*}:pause",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "ResumeQueue": {
                           "requestType": "ResumeQueueRequest",
@@ -1601,7 +2059,18 @@
                             "(google.api.http).post": "/v2beta3/{name=projects/*/locations/*/queues/*}:resume",
                             "(google.api.http).body": "*",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v2beta3/{name=projects/*/locations/*/queues/*}:resume",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "GetIamPolicy": {
                           "requestType": "google.iam.v1.GetIamPolicyRequest",
@@ -1610,7 +2079,18 @@
                             "(google.api.http).post": "/v2beta3/{resource=projects/*/locations/*/queues/*}:getIamPolicy",
                             "(google.api.http).body": "*",
                             "(google.api.method_signature)": "resource"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v2beta3/{resource=projects/*/locations/*/queues/*}:getIamPolicy",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "resource"
+                            }
+                          ]
                         },
                         "SetIamPolicy": {
                           "requestType": "google.iam.v1.SetIamPolicyRequest",
@@ -1619,7 +2099,18 @@
                             "(google.api.http).post": "/v2beta3/{resource=projects/*/locations/*/queues/*}:setIamPolicy",
                             "(google.api.http).body": "*",
                             "(google.api.method_signature)": "resource,policy"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v2beta3/{resource=projects/*/locations/*/queues/*}:setIamPolicy",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "resource,policy"
+                            }
+                          ]
                         },
                         "TestIamPermissions": {
                           "requestType": "google.iam.v1.TestIamPermissionsRequest",
@@ -1628,7 +2119,18 @@
                             "(google.api.http).post": "/v2beta3/{resource=projects/*/locations/*/queues/*}:testIamPermissions",
                             "(google.api.http).body": "*",
                             "(google.api.method_signature)": "resource,permissions"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v2beta3/{resource=projects/*/locations/*/queues/*}:testIamPermissions",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "resource,permissions"
+                            }
+                          ]
                         },
                         "ListTasks": {
                           "requestType": "ListTasksRequest",
@@ -1636,7 +2138,17 @@
                           "options": {
                             "(google.api.http).get": "/v2beta3/{parent=projects/*/locations/*/queues/*}/tasks",
                             "(google.api.method_signature)": "parent"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v2beta3/{parent=projects/*/locations/*/queues/*}/tasks"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
                         },
                         "GetTask": {
                           "requestType": "GetTaskRequest",
@@ -1644,7 +2156,17 @@
                           "options": {
                             "(google.api.http).get": "/v2beta3/{name=projects/*/locations/*/queues/*/tasks/*}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v2beta3/{name=projects/*/locations/*/queues/*/tasks/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "CreateTask": {
                           "requestType": "CreateTaskRequest",
@@ -1653,7 +2175,18 @@
                             "(google.api.http).post": "/v2beta3/{parent=projects/*/locations/*/queues/*}/tasks",
                             "(google.api.http).body": "*",
                             "(google.api.method_signature)": "parent,task"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v2beta3/{parent=projects/*/locations/*/queues/*}/tasks",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,task"
+                            }
+                          ]
                         },
                         "DeleteTask": {
                           "requestType": "DeleteTaskRequest",
@@ -1661,7 +2194,17 @@
                           "options": {
                             "(google.api.http).delete": "/v2beta3/{name=projects/*/locations/*/queues/*/tasks/*}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v2beta3/{name=projects/*/locations/*/queues/*/tasks/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "RunTask": {
                           "requestType": "RunTaskRequest",
@@ -1670,7 +2213,18 @@
                             "(google.api.http).post": "/v2beta3/{name=projects/*/locations/*/queues/*/tasks/*}:run",
                             "(google.api.http).body": "*",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v2beta3/{name=projects/*/locations/*/queues/*/tasks/*}:run",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         }
                       }
                     },
@@ -3440,7 +3994,15 @@
                       "options": {
                         "(google.api.http).post": "/v1/{resource=**}:setIamPolicy",
                         "(google.api.http).body": "*"
-                      }
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "post": "/v1/{resource=**}:setIamPolicy",
+                            "body": "*"
+                          }
+                        }
+                      ]
                     },
                     "GetIamPolicy": {
                       "requestType": "GetIamPolicyRequest",
@@ -3448,7 +4010,15 @@
                       "options": {
                         "(google.api.http).post": "/v1/{resource=**}:getIamPolicy",
                         "(google.api.http).body": "*"
-                      }
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "post": "/v1/{resource=**}:getIamPolicy",
+                            "body": "*"
+                          }
+                        }
+                      ]
                     },
                     "TestIamPermissions": {
                       "requestType": "TestIamPermissionsRequest",
@@ -3456,7 +4026,15 @@
                       "options": {
                         "(google.api.http).post": "/v1/{resource=**}:testIamPermissions",
                         "(google.api.http).body": "*"
-                      }
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "post": "/v1/{resource=**}:testIamPermissions",
+                            "body": "*"
+                          }
+                        }
+                      ]
                     }
                   }
                 },

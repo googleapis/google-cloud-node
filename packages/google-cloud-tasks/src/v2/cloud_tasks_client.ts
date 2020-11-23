@@ -16,6 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
+/* global window */
 import * as gax from 'google-gax';
 import {
   Callback,
@@ -30,6 +31,11 @@ import * as path from 'path';
 import {Transform} from 'stream';
 import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
+/**
+ * Client JSON configuration object, loaded from
+ * `src/v2/cloud_tasks_client_config.json`.
+ * This file defines retry strategy and timeouts for all API methods in this library.
+ */
 import * as gapicConfig from './cloud_tasks_client_config.json';
 
 const version = require('../../../package.json').version;
@@ -84,9 +90,9 @@ export class CloudTasksClient {
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
-   * @param {gax.ClientConfig} [options.clientConfig] - client configuration override.
-   *     TODO(@alexander-fenster): link to gax documentation.
-   * @param {boolean} fallback - Use HTTP fallback mode.
+   * @param {gax.ClientConfig} [options.clientConfig] - Client configuration override.
+   *     Follows the structure of {@link gapicConfig}.
+   * @param {boolean} [options.fallback] - Use HTTP fallback mode.
    *     In fallback mode, a special browser-compatible transport implementation is used
    *     instead of gRPC transport. In browser context (if the `window` object is defined)
    *     the fallback mode is enabled automatically; set `options.fallback` to `false`
@@ -99,7 +105,9 @@ export class CloudTasksClient {
       opts?.servicePath || opts?.apiEndpoint || staticMembers.servicePath;
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback = opts?.fallback ?? typeof window !== 'undefined';
+    const fallback =
+      opts?.fallback ??
+      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
@@ -334,7 +342,7 @@ export class CloudTasksClient {
   // -------------------
   getQueue(
     request: protos.google.cloud.tasks.v2.IGetQueueRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.tasks.v2.IQueue,
@@ -344,7 +352,7 @@ export class CloudTasksClient {
   >;
   getQueue(
     request: protos.google.cloud.tasks.v2.IGetQueueRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.cloud.tasks.v2.IQueue,
       protos.google.cloud.tasks.v2.IGetQueueRequest | null | undefined,
@@ -380,7 +388,7 @@ export class CloudTasksClient {
   getQueue(
     request: protos.google.cloud.tasks.v2.IGetQueueRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.cloud.tasks.v2.IQueue,
           protos.google.cloud.tasks.v2.IGetQueueRequest | null | undefined,
@@ -399,12 +407,12 @@ export class CloudTasksClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -419,7 +427,7 @@ export class CloudTasksClient {
   }
   createQueue(
     request: protos.google.cloud.tasks.v2.ICreateQueueRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.tasks.v2.IQueue,
@@ -429,7 +437,7 @@ export class CloudTasksClient {
   >;
   createQueue(
     request: protos.google.cloud.tasks.v2.ICreateQueueRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.cloud.tasks.v2.IQueue,
       protos.google.cloud.tasks.v2.ICreateQueueRequest | null | undefined,
@@ -484,7 +492,7 @@ export class CloudTasksClient {
   createQueue(
     request: protos.google.cloud.tasks.v2.ICreateQueueRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.cloud.tasks.v2.IQueue,
           protos.google.cloud.tasks.v2.ICreateQueueRequest | null | undefined,
@@ -503,12 +511,12 @@ export class CloudTasksClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -523,7 +531,7 @@ export class CloudTasksClient {
   }
   updateQueue(
     request: protos.google.cloud.tasks.v2.IUpdateQueueRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.tasks.v2.IQueue,
@@ -533,7 +541,7 @@ export class CloudTasksClient {
   >;
   updateQueue(
     request: protos.google.cloud.tasks.v2.IUpdateQueueRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.cloud.tasks.v2.IQueue,
       protos.google.cloud.tasks.v2.IUpdateQueueRequest | null | undefined,
@@ -592,7 +600,7 @@ export class CloudTasksClient {
   updateQueue(
     request: protos.google.cloud.tasks.v2.IUpdateQueueRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.cloud.tasks.v2.IQueue,
           protos.google.cloud.tasks.v2.IUpdateQueueRequest | null | undefined,
@@ -611,12 +619,12 @@ export class CloudTasksClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -631,7 +639,7 @@ export class CloudTasksClient {
   }
   deleteQueue(
     request: protos.google.cloud.tasks.v2.IDeleteQueueRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.protobuf.IEmpty,
@@ -641,7 +649,7 @@ export class CloudTasksClient {
   >;
   deleteQueue(
     request: protos.google.cloud.tasks.v2.IDeleteQueueRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.protobuf.IEmpty,
       protos.google.cloud.tasks.v2.IDeleteQueueRequest | null | undefined,
@@ -689,7 +697,7 @@ export class CloudTasksClient {
   deleteQueue(
     request: protos.google.cloud.tasks.v2.IDeleteQueueRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.protobuf.IEmpty,
           protos.google.cloud.tasks.v2.IDeleteQueueRequest | null | undefined,
@@ -708,12 +716,12 @@ export class CloudTasksClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -728,7 +736,7 @@ export class CloudTasksClient {
   }
   purgeQueue(
     request: protos.google.cloud.tasks.v2.IPurgeQueueRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.tasks.v2.IQueue,
@@ -738,7 +746,7 @@ export class CloudTasksClient {
   >;
   purgeQueue(
     request: protos.google.cloud.tasks.v2.IPurgeQueueRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.cloud.tasks.v2.IQueue,
       protos.google.cloud.tasks.v2.IPurgeQueueRequest | null | undefined,
@@ -779,7 +787,7 @@ export class CloudTasksClient {
   purgeQueue(
     request: protos.google.cloud.tasks.v2.IPurgeQueueRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.cloud.tasks.v2.IQueue,
           protos.google.cloud.tasks.v2.IPurgeQueueRequest | null | undefined,
@@ -798,12 +806,12 @@ export class CloudTasksClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -818,7 +826,7 @@ export class CloudTasksClient {
   }
   pauseQueue(
     request: protos.google.cloud.tasks.v2.IPauseQueueRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.tasks.v2.IQueue,
@@ -828,7 +836,7 @@ export class CloudTasksClient {
   >;
   pauseQueue(
     request: protos.google.cloud.tasks.v2.IPauseQueueRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.cloud.tasks.v2.IQueue,
       protos.google.cloud.tasks.v2.IPauseQueueRequest | null | undefined,
@@ -870,7 +878,7 @@ export class CloudTasksClient {
   pauseQueue(
     request: protos.google.cloud.tasks.v2.IPauseQueueRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.cloud.tasks.v2.IQueue,
           protos.google.cloud.tasks.v2.IPauseQueueRequest | null | undefined,
@@ -889,12 +897,12 @@ export class CloudTasksClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -909,7 +917,7 @@ export class CloudTasksClient {
   }
   resumeQueue(
     request: protos.google.cloud.tasks.v2.IResumeQueueRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.tasks.v2.IQueue,
@@ -919,7 +927,7 @@ export class CloudTasksClient {
   >;
   resumeQueue(
     request: protos.google.cloud.tasks.v2.IResumeQueueRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.cloud.tasks.v2.IQueue,
       protos.google.cloud.tasks.v2.IResumeQueueRequest | null | undefined,
@@ -967,7 +975,7 @@ export class CloudTasksClient {
   resumeQueue(
     request: protos.google.cloud.tasks.v2.IResumeQueueRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.cloud.tasks.v2.IQueue,
           protos.google.cloud.tasks.v2.IResumeQueueRequest | null | undefined,
@@ -986,12 +994,12 @@ export class CloudTasksClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1006,7 +1014,7 @@ export class CloudTasksClient {
   }
   getIamPolicy(
     request: protos.google.iam.v1.IGetIamPolicyRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.iam.v1.IPolicy,
@@ -1016,7 +1024,7 @@ export class CloudTasksClient {
   >;
   getIamPolicy(
     request: protos.google.iam.v1.IGetIamPolicyRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.iam.v1.IPolicy,
       protos.google.iam.v1.IGetIamPolicyRequest | null | undefined,
@@ -1063,7 +1071,7 @@ export class CloudTasksClient {
   getIamPolicy(
     request: protos.google.iam.v1.IGetIamPolicyRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.iam.v1.IPolicy,
           protos.google.iam.v1.IGetIamPolicyRequest | null | undefined,
@@ -1082,12 +1090,12 @@ export class CloudTasksClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1102,7 +1110,7 @@ export class CloudTasksClient {
   }
   setIamPolicy(
     request: protos.google.iam.v1.ISetIamPolicyRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.iam.v1.IPolicy,
@@ -1112,7 +1120,7 @@ export class CloudTasksClient {
   >;
   setIamPolicy(
     request: protos.google.iam.v1.ISetIamPolicyRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.iam.v1.IPolicy,
       protos.google.iam.v1.ISetIamPolicyRequest | null | undefined,
@@ -1163,7 +1171,7 @@ export class CloudTasksClient {
   setIamPolicy(
     request: protos.google.iam.v1.ISetIamPolicyRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.iam.v1.IPolicy,
           protos.google.iam.v1.ISetIamPolicyRequest | null | undefined,
@@ -1182,12 +1190,12 @@ export class CloudTasksClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1202,7 +1210,7 @@ export class CloudTasksClient {
   }
   testIamPermissions(
     request: protos.google.iam.v1.ITestIamPermissionsRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.iam.v1.ITestIamPermissionsResponse,
@@ -1212,7 +1220,7 @@ export class CloudTasksClient {
   >;
   testIamPermissions(
     request: protos.google.iam.v1.ITestIamPermissionsRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.iam.v1.ITestIamPermissionsResponse,
       protos.google.iam.v1.ITestIamPermissionsRequest | null | undefined,
@@ -1259,7 +1267,7 @@ export class CloudTasksClient {
   testIamPermissions(
     request: protos.google.iam.v1.ITestIamPermissionsRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.iam.v1.ITestIamPermissionsResponse,
           protos.google.iam.v1.ITestIamPermissionsRequest | null | undefined,
@@ -1278,12 +1286,12 @@ export class CloudTasksClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1298,7 +1306,7 @@ export class CloudTasksClient {
   }
   getTask(
     request: protos.google.cloud.tasks.v2.IGetTaskRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.tasks.v2.ITask,
@@ -1308,7 +1316,7 @@ export class CloudTasksClient {
   >;
   getTask(
     request: protos.google.cloud.tasks.v2.IGetTaskRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.cloud.tasks.v2.ITask,
       protos.google.cloud.tasks.v2.IGetTaskRequest | null | undefined,
@@ -1357,7 +1365,7 @@ export class CloudTasksClient {
   getTask(
     request: protos.google.cloud.tasks.v2.IGetTaskRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.cloud.tasks.v2.ITask,
           protos.google.cloud.tasks.v2.IGetTaskRequest | null | undefined,
@@ -1376,12 +1384,12 @@ export class CloudTasksClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1396,7 +1404,7 @@ export class CloudTasksClient {
   }
   createTask(
     request: protos.google.cloud.tasks.v2.ICreateTaskRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.tasks.v2.ITask,
@@ -1406,7 +1414,7 @@ export class CloudTasksClient {
   >;
   createTask(
     request: protos.google.cloud.tasks.v2.ICreateTaskRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.cloud.tasks.v2.ITask,
       protos.google.cloud.tasks.v2.ICreateTaskRequest | null | undefined,
@@ -1495,7 +1503,7 @@ export class CloudTasksClient {
   createTask(
     request: protos.google.cloud.tasks.v2.ICreateTaskRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.cloud.tasks.v2.ITask,
           protos.google.cloud.tasks.v2.ICreateTaskRequest | null | undefined,
@@ -1514,12 +1522,12 @@ export class CloudTasksClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1534,7 +1542,7 @@ export class CloudTasksClient {
   }
   deleteTask(
     request: protos.google.cloud.tasks.v2.IDeleteTaskRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.protobuf.IEmpty,
@@ -1544,7 +1552,7 @@ export class CloudTasksClient {
   >;
   deleteTask(
     request: protos.google.cloud.tasks.v2.IDeleteTaskRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.protobuf.IEmpty,
       protos.google.cloud.tasks.v2.IDeleteTaskRequest | null | undefined,
@@ -1584,7 +1592,7 @@ export class CloudTasksClient {
   deleteTask(
     request: protos.google.cloud.tasks.v2.IDeleteTaskRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.protobuf.IEmpty,
           protos.google.cloud.tasks.v2.IDeleteTaskRequest | null | undefined,
@@ -1603,12 +1611,12 @@ export class CloudTasksClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1623,7 +1631,7 @@ export class CloudTasksClient {
   }
   runTask(
     request: protos.google.cloud.tasks.v2.IRunTaskRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.tasks.v2.ITask,
@@ -1633,7 +1641,7 @@ export class CloudTasksClient {
   >;
   runTask(
     request: protos.google.cloud.tasks.v2.IRunTaskRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.cloud.tasks.v2.ITask,
       protos.google.cloud.tasks.v2.IRunTaskRequest | null | undefined,
@@ -1705,7 +1713,7 @@ export class CloudTasksClient {
   runTask(
     request: protos.google.cloud.tasks.v2.IRunTaskRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.cloud.tasks.v2.ITask,
           protos.google.cloud.tasks.v2.IRunTaskRequest | null | undefined,
@@ -1724,12 +1732,12 @@ export class CloudTasksClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1745,7 +1753,7 @@ export class CloudTasksClient {
 
   listQueues(
     request: protos.google.cloud.tasks.v2.IListQueuesRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.tasks.v2.IQueue[],
@@ -1755,7 +1763,7 @@ export class CloudTasksClient {
   >;
   listQueues(
     request: protos.google.cloud.tasks.v2.IListQueuesRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: PaginationCallback<
       protos.google.cloud.tasks.v2.IListQueuesRequest,
       protos.google.cloud.tasks.v2.IListQueuesResponse | null | undefined,
@@ -1825,7 +1833,7 @@ export class CloudTasksClient {
   listQueues(
     request: protos.google.cloud.tasks.v2.IListQueuesRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | PaginationCallback<
           protos.google.cloud.tasks.v2.IListQueuesRequest,
           protos.google.cloud.tasks.v2.IListQueuesResponse | null | undefined,
@@ -1844,12 +1852,12 @@ export class CloudTasksClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1913,7 +1921,7 @@ export class CloudTasksClient {
    */
   listQueuesStream(
     request?: protos.google.cloud.tasks.v2.IListQueuesRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Transform {
     request = request || {};
     options = options || {};
@@ -1989,7 +1997,7 @@ export class CloudTasksClient {
    */
   listQueuesAsync(
     request?: protos.google.cloud.tasks.v2.IListQueuesRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): AsyncIterable<protos.google.cloud.tasks.v2.IQueue> {
     request = request || {};
     options = options || {};
@@ -2011,7 +2019,7 @@ export class CloudTasksClient {
   }
   listTasks(
     request: protos.google.cloud.tasks.v2.IListTasksRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.tasks.v2.ITask[],
@@ -2021,7 +2029,7 @@ export class CloudTasksClient {
   >;
   listTasks(
     request: protos.google.cloud.tasks.v2.IListTasksRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: PaginationCallback<
       protos.google.cloud.tasks.v2.IListTasksRequest,
       protos.google.cloud.tasks.v2.IListTasksResponse | null | undefined,
@@ -2100,7 +2108,7 @@ export class CloudTasksClient {
   listTasks(
     request: protos.google.cloud.tasks.v2.IListTasksRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | PaginationCallback<
           protos.google.cloud.tasks.v2.IListTasksRequest,
           protos.google.cloud.tasks.v2.IListTasksResponse | null | undefined,
@@ -2119,12 +2127,12 @@ export class CloudTasksClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -2191,7 +2199,7 @@ export class CloudTasksClient {
    */
   listTasksStream(
     request?: protos.google.cloud.tasks.v2.IListTasksRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Transform {
     request = request || {};
     options = options || {};
@@ -2270,7 +2278,7 @@ export class CloudTasksClient {
    */
   listTasksAsync(
     request?: protos.google.cloud.tasks.v2.IListTasksRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): AsyncIterable<protos.google.cloud.tasks.v2.ITask> {
     request = request || {};
     options = options || {};
