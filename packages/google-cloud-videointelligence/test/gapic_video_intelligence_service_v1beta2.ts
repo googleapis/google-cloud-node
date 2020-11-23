@@ -41,15 +41,6 @@ function stubSimpleCall<ResponseType>(response?: ResponseType, error?: Error) {
     : sinon.stub().resolves([response]);
 }
 
-function stubSimpleCallWithCallback<ResponseType>(
-  response?: ResponseType,
-  error?: Error
-) {
-  return error
-    ? sinon.stub().callsArgWith(2, error)
-    : sinon.stub().callsArgWith(2, null, response);
-}
-
 function stubLongRunningCall<ResponseType>(
   response?: ResponseType,
   callError?: Error,
