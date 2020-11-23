@@ -3,8 +3,16 @@
     {
       "git": {
         "name": ".",
-        "remote": "git@github.com:googleapis/nodejs-monitoring-dashboards.git",
-        "sha": "e167bd3589436f617422a665496934bd5f89f4cc"
+        "remote": "https://github.com/googleapis/nodejs-monitoring-dashboards.git",
+        "sha": "ba7268317fe29c6055d1504e8a35678bb82eb2db"
+      }
+    },
+    {
+      "git": {
+        "name": "googleapis",
+        "remote": "https://github.com/googleapis/googleapis.git",
+        "sha": "2f019bf70bfe06f1e2af1b04011b0a2405190e43",
+        "internalRef": "343202295"
       }
     },
     {
@@ -78,7 +86,6 @@
     "README.md",
     "api-extractor.json",
     "linkinator.config.json",
-    "package-lock.json.3928346606",
     "protos/google/monitoring/dashboard/v1/common.proto",
     "protos/google/monitoring/dashboard/v1/dashboard.proto",
     "protos/google/monitoring/dashboard/v1/dashboards_service.proto",
@@ -95,7 +102,6 @@
     "protos/protos.json",
     "renovate.json",
     "samples/README.md",
-    "samples/package-lock.json.3115811802",
     "src/index.ts",
     "src/v1/dashboards_service_client.ts",
     "src/v1/dashboards_service_client_config.json",

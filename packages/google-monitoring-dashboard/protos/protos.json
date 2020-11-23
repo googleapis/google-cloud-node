@@ -1591,28 +1591,57 @@
                           "options": {
                             "(google.api.http).post": "/v1/{parent=projects/*}/dashboards",
                             "(google.api.http).body": "dashboard"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=projects/*}/dashboards",
+                                "body": "dashboard"
+                              }
+                            }
+                          ]
                         },
                         "ListDashboards": {
                           "requestType": "ListDashboardsRequest",
                           "responseType": "ListDashboardsResponse",
                           "options": {
                             "(google.api.http).get": "/v1/{parent=projects/*}/dashboards"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=projects/*}/dashboards"
+                              }
+                            }
+                          ]
                         },
                         "GetDashboard": {
                           "requestType": "GetDashboardRequest",
                           "responseType": "Dashboard",
                           "options": {
                             "(google.api.http).get": "/v1/{name=projects/*/dashboards/*}"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/dashboards/*}"
+                              }
+                            }
+                          ]
                         },
                         "DeleteDashboard": {
                           "requestType": "DeleteDashboardRequest",
                           "responseType": "google.protobuf.Empty",
                           "options": {
                             "(google.api.http).delete": "/v1/{name=projects/*/dashboards/*}"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1/{name=projects/*/dashboards/*}"
+                              }
+                            }
+                          ]
                         },
                         "UpdateDashboard": {
                           "requestType": "UpdateDashboardRequest",
@@ -1620,7 +1649,15 @@
                           "options": {
                             "(google.api.http).patch": "/v1/{dashboard.name=projects/*/dashboards/*}",
                             "(google.api.http).body": "dashboard"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1/{dashboard.name=projects/*/dashboards/*}",
+                                "body": "dashboard"
+                              }
+                            }
+                          ]
                         }
                       }
                     },
