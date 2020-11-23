@@ -1318,9 +1318,7 @@ export class OsConfigServiceClient {
       this.innerApiCalls['listPatchJobInstanceDetails'] as GaxCall,
       (request as unknown) as RequestType,
       callSettings
-    ) as AsyncIterable<
-      protos.google.cloud.osconfig.v1.IPatchJobInstanceDetails
-    >;
+    ) as AsyncIterable<protos.google.cloud.osconfig.v1.IPatchJobInstanceDetails>;
   }
   listPatchDeployments(
     request: protos.google.cloud.osconfig.v1.IListPatchDeploymentsRequest,

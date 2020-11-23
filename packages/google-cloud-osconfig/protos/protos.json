@@ -1244,7 +1244,15 @@
                           "options": {
                             "(google.api.http).post": "/v1/{parent=projects/*}/patchJobs:execute",
                             "(google.api.http).body": "*"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=projects/*}/patchJobs:execute",
+                                "body": "*"
+                              }
+                            }
+                          ]
                         },
                         "GetPatchJob": {
                           "requestType": "GetPatchJobRequest",
@@ -1252,7 +1260,17 @@
                           "options": {
                             "(google.api.http).get": "/v1/{name=projects/*/patchJobs/*}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/patchJobs/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "CancelPatchJob": {
                           "requestType": "CancelPatchJobRequest",
@@ -1260,7 +1278,15 @@
                           "options": {
                             "(google.api.http).post": "/v1/{name=projects/*/patchJobs/*}:cancel",
                             "(google.api.http).body": "*"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{name=projects/*/patchJobs/*}:cancel",
+                                "body": "*"
+                              }
+                            }
+                          ]
                         },
                         "ListPatchJobs": {
                           "requestType": "ListPatchJobsRequest",
@@ -1268,7 +1294,17 @@
                           "options": {
                             "(google.api.http).get": "/v1/{parent=projects/*}/patchJobs",
                             "(google.api.method_signature)": "parent"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=projects/*}/patchJobs"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
                         },
                         "ListPatchJobInstanceDetails": {
                           "requestType": "ListPatchJobInstanceDetailsRequest",
@@ -1276,7 +1312,17 @@
                           "options": {
                             "(google.api.http).get": "/v1/{parent=projects/*/patchJobs/*}/instanceDetails",
                             "(google.api.method_signature)": "parent"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=projects/*/patchJobs/*}/instanceDetails"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
                         },
                         "CreatePatchDeployment": {
                           "requestType": "CreatePatchDeploymentRequest",
@@ -1285,7 +1331,18 @@
                             "(google.api.http).post": "/v1/{parent=projects/*}/patchDeployments",
                             "(google.api.http).body": "patch_deployment",
                             "(google.api.method_signature)": "parent,patch_deployment,patch_deployment_id"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=projects/*}/patchDeployments",
+                                "body": "patch_deployment"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,patch_deployment,patch_deployment_id"
+                            }
+                          ]
                         },
                         "GetPatchDeployment": {
                           "requestType": "GetPatchDeploymentRequest",
@@ -1293,7 +1350,17 @@
                           "options": {
                             "(google.api.http).get": "/v1/{name=projects/*/patchDeployments/*}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/patchDeployments/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "ListPatchDeployments": {
                           "requestType": "ListPatchDeploymentsRequest",
@@ -1301,7 +1368,17 @@
                           "options": {
                             "(google.api.http).get": "/v1/{parent=projects/*}/patchDeployments",
                             "(google.api.method_signature)": "parent"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=projects/*}/patchDeployments"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
                         },
                         "DeletePatchDeployment": {
                           "requestType": "DeletePatchDeploymentRequest",
@@ -1309,7 +1386,17 @@
                           "options": {
                             "(google.api.http).delete": "/v1/{name=projects/*/patchDeployments/*}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1/{name=projects/*/patchDeployments/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         }
                       }
                     },
