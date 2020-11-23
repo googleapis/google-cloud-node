@@ -34,7 +34,28 @@
                             "(google.api.method_signature)": "project_id,build",
                             "(google.longrunning.operation_info).response_type": "Build",
                             "(google.longrunning.operation_info).metadata_type": "BuildOperationMetadata"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/projects/{project_id}/builds",
+                                "body": "build",
+                                "additional_bindings": {
+                                  "post": "/v1/{parent=projects/*/locations/*}/builds",
+                                  "body": "*"
+                                }
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project_id,build"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "Build",
+                                "metadata_type": "BuildOperationMetadata"
+                              }
+                            }
+                          ]
                         },
                         "GetBuild": {
                           "requestType": "GetBuildRequest",
@@ -43,7 +64,20 @@
                             "(google.api.http).get": "/v1/projects/{project_id}/builds/{id}",
                             "(google.api.http).additional_bindings.get": "/v1/{name=projects/*/locations/*/builds/*}",
                             "(google.api.method_signature)": "project_id,id"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/projects/{project_id}/builds/{id}",
+                                "additional_bindings": {
+                                  "get": "/v1/{name=projects/*/locations/*/builds/*}"
+                                }
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project_id,id"
+                            }
+                          ]
                         },
                         "ListBuilds": {
                           "requestType": "ListBuildsRequest",
@@ -52,7 +86,20 @@
                             "(google.api.http).get": "/v1/projects/{project_id}/builds",
                             "(google.api.http).additional_bindings.get": "/v1/{parent=projects/*/locations/*}/builds",
                             "(google.api.method_signature)": "project_id,filter"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/projects/{project_id}/builds",
+                                "additional_bindings": {
+                                  "get": "/v1/{parent=projects/*/locations/*}/builds"
+                                }
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project_id,filter"
+                            }
+                          ]
                         },
                         "CancelBuild": {
                           "requestType": "CancelBuildRequest",
@@ -63,7 +110,22 @@
                             "(google.api.http).additional_bindings.post": "/v1/{name=projects/*/locations/*/builds/*}:cancel",
                             "(google.api.http).additional_bindings.body": "*",
                             "(google.api.method_signature)": "project_id,id"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/projects/{project_id}/builds/{id}:cancel",
+                                "body": "*",
+                                "additional_bindings": {
+                                  "post": "/v1/{name=projects/*/locations/*/builds/*}:cancel",
+                                  "body": "*"
+                                }
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project_id,id"
+                            }
+                          ]
                         },
                         "RetryBuild": {
                           "requestType": "RetryBuildRequest",
@@ -76,7 +138,28 @@
                             "(google.api.method_signature)": "project_id,id",
                             "(google.longrunning.operation_info).response_type": "Build",
                             "(google.longrunning.operation_info).metadata_type": "BuildOperationMetadata"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/projects/{project_id}/builds/{id}:retry",
+                                "body": "*",
+                                "additional_bindings": {
+                                  "post": "/v1/{name=projects/*/locations/*/builds/*}:retry",
+                                  "body": "*"
+                                }
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project_id,id"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "Build",
+                                "metadata_type": "BuildOperationMetadata"
+                              }
+                            }
+                          ]
                         },
                         "CreateBuildTrigger": {
                           "requestType": "CreateBuildTriggerRequest",
@@ -85,7 +168,18 @@
                             "(google.api.http).post": "/v1/projects/{project_id}/triggers",
                             "(google.api.http).body": "trigger",
                             "(google.api.method_signature)": "project_id,trigger"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/projects/{project_id}/triggers",
+                                "body": "trigger"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project_id,trigger"
+                            }
+                          ]
                         },
                         "GetBuildTrigger": {
                           "requestType": "GetBuildTriggerRequest",
@@ -93,7 +187,17 @@
                           "options": {
                             "(google.api.http).get": "/v1/projects/{project_id}/triggers/{trigger_id}",
                             "(google.api.method_signature)": "project_id,trigger_id"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/projects/{project_id}/triggers/{trigger_id}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project_id,trigger_id"
+                            }
+                          ]
                         },
                         "ListBuildTriggers": {
                           "requestType": "ListBuildTriggersRequest",
@@ -101,7 +205,17 @@
                           "options": {
                             "(google.api.http).get": "/v1/projects/{project_id}/triggers",
                             "(google.api.method_signature)": "project_id"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/projects/{project_id}/triggers"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project_id"
+                            }
+                          ]
                         },
                         "DeleteBuildTrigger": {
                           "requestType": "DeleteBuildTriggerRequest",
@@ -109,7 +223,17 @@
                           "options": {
                             "(google.api.http).delete": "/v1/projects/{project_id}/triggers/{trigger_id}",
                             "(google.api.method_signature)": "project_id,trigger_id"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1/projects/{project_id}/triggers/{trigger_id}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project_id,trigger_id"
+                            }
+                          ]
                         },
                         "UpdateBuildTrigger": {
                           "requestType": "UpdateBuildTriggerRequest",
@@ -118,7 +242,18 @@
                             "(google.api.http).patch": "/v1/projects/{project_id}/triggers/{trigger_id}",
                             "(google.api.http).body": "trigger",
                             "(google.api.method_signature)": "project_id,trigger_id,trigger"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1/projects/{project_id}/triggers/{trigger_id}",
+                                "body": "trigger"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project_id,trigger_id,trigger"
+                            }
+                          ]
                         },
                         "RunBuildTrigger": {
                           "requestType": "RunBuildTriggerRequest",
@@ -129,7 +264,24 @@
                             "(google.api.method_signature)": "project_id,trigger_id,source",
                             "(google.longrunning.operation_info).response_type": "Build",
                             "(google.longrunning.operation_info).metadata_type": "BuildOperationMetadata"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/projects/{project_id}/triggers/{trigger_id}:run",
+                                "body": "source"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project_id,trigger_id,source"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "Build",
+                                "metadata_type": "BuildOperationMetadata"
+                              }
+                            }
+                          ]
                         },
                         "CreateWorkerPool": {
                           "requestType": "CreateWorkerPoolRequest",
@@ -2543,7 +2695,17 @@
                   "options": {
                     "(google.api.http).get": "/v1/{name=operations}",
                     "(google.api.method_signature)": "name,filter"
-                  }
+                  },
+                  "parsedOptions": [
+                    {
+                      "(google.api.http)": {
+                        "get": "/v1/{name=operations}"
+                      }
+                    },
+                    {
+                      "(google.api.method_signature)": "name,filter"
+                    }
+                  ]
                 },
                 "GetOperation": {
                   "requestType": "GetOperationRequest",
@@ -2551,7 +2713,17 @@
                   "options": {
                     "(google.api.http).get": "/v1/{name=operations/**}",
                     "(google.api.method_signature)": "name"
-                  }
+                  },
+                  "parsedOptions": [
+                    {
+                      "(google.api.http)": {
+                        "get": "/v1/{name=operations/**}"
+                      }
+                    },
+                    {
+                      "(google.api.method_signature)": "name"
+                    }
+                  ]
                 },
                 "DeleteOperation": {
                   "requestType": "DeleteOperationRequest",
@@ -2559,7 +2731,17 @@
                   "options": {
                     "(google.api.http).delete": "/v1/{name=operations/**}",
                     "(google.api.method_signature)": "name"
-                  }
+                  },
+                  "parsedOptions": [
+                    {
+                      "(google.api.http)": {
+                        "delete": "/v1/{name=operations/**}"
+                      }
+                    },
+                    {
+                      "(google.api.method_signature)": "name"
+                    }
+                  ]
                 },
                 "CancelOperation": {
                   "requestType": "CancelOperationRequest",
@@ -2568,7 +2750,18 @@
                     "(google.api.http).post": "/v1/{name=operations/**}:cancel",
                     "(google.api.http).body": "*",
                     "(google.api.method_signature)": "name"
-                  }
+                  },
+                  "parsedOptions": [
+                    {
+                      "(google.api.http)": {
+                        "post": "/v1/{name=operations/**}:cancel",
+                        "body": "*"
+                      }
+                    },
+                    {
+                      "(google.api.method_signature)": "name"
+                    }
+                  ]
                 },
                 "WaitOperation": {
                   "requestType": "WaitOperationRequest",
