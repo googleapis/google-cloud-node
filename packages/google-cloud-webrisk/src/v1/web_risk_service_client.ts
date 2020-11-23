@@ -16,11 +16,17 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
+/* global window */
 import * as gax from 'google-gax';
 import {Callback, CallOptions, Descriptors, ClientOptions} from 'google-gax';
 import * as path from 'path';
 
 import * as protos from '../../protos/protos';
+/**
+ * Client JSON configuration object, loaded from
+ * `src/v1/web_risk_service_client_config.json`.
+ * This file defines retry strategy and timeouts for all API methods in this library.
+ */
 import * as gapicConfig from './web_risk_service_client_config.json';
 
 const version = require('../../../package.json').version;
@@ -75,9 +81,9 @@ export class WebRiskServiceClient {
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
-   * @param {gax.ClientConfig} [options.clientConfig] - client configuration override.
-   *     TODO(@alexander-fenster): link to gax documentation.
-   * @param {boolean} fallback - Use HTTP fallback mode.
+   * @param {gax.ClientConfig} [options.clientConfig] - Client configuration override.
+   *     Follows the structure of {@link gapicConfig}.
+   * @param {boolean} [options.fallback] - Use HTTP fallback mode.
    *     In fallback mode, a special browser-compatible transport implementation is used
    *     instead of gRPC transport. In browser context (if the `window` object is defined)
    *     the fallback mode is enabled automatically; set `options.fallback` to `false`
@@ -90,7 +96,9 @@ export class WebRiskServiceClient {
       opts?.servicePath || opts?.apiEndpoint || staticMembers.servicePath;
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback = opts?.fallback ?? typeof window !== 'undefined';
+    const fallback =
+      opts?.fallback ??
+      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
@@ -288,7 +296,7 @@ export class WebRiskServiceClient {
   // -------------------
   computeThreatListDiff(
     request: protos.google.cloud.webrisk.v1.IComputeThreatListDiffRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.webrisk.v1.IComputeThreatListDiffResponse,
@@ -298,7 +306,7 @@ export class WebRiskServiceClient {
   >;
   computeThreatListDiff(
     request: protos.google.cloud.webrisk.v1.IComputeThreatListDiffRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.cloud.webrisk.v1.IComputeThreatListDiffResponse,
       | protos.google.cloud.webrisk.v1.IComputeThreatListDiffRequest
@@ -350,7 +358,7 @@ export class WebRiskServiceClient {
   computeThreatListDiff(
     request: protos.google.cloud.webrisk.v1.IComputeThreatListDiffRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.cloud.webrisk.v1.IComputeThreatListDiffResponse,
           | protos.google.cloud.webrisk.v1.IComputeThreatListDiffRequest
@@ -373,12 +381,12 @@ export class WebRiskServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     this.initialize();
@@ -386,7 +394,7 @@ export class WebRiskServiceClient {
   }
   searchUris(
     request: protos.google.cloud.webrisk.v1.ISearchUrisRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.webrisk.v1.ISearchUrisResponse,
@@ -396,7 +404,7 @@ export class WebRiskServiceClient {
   >;
   searchUris(
     request: protos.google.cloud.webrisk.v1.ISearchUrisRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.cloud.webrisk.v1.ISearchUrisResponse,
       protos.google.cloud.webrisk.v1.ISearchUrisRequest | null | undefined,
@@ -437,7 +445,7 @@ export class WebRiskServiceClient {
   searchUris(
     request: protos.google.cloud.webrisk.v1.ISearchUrisRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.cloud.webrisk.v1.ISearchUrisResponse,
           protos.google.cloud.webrisk.v1.ISearchUrisRequest | null | undefined,
@@ -456,12 +464,12 @@ export class WebRiskServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     this.initialize();
@@ -469,7 +477,7 @@ export class WebRiskServiceClient {
   }
   searchHashes(
     request: protos.google.cloud.webrisk.v1.ISearchHashesRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.webrisk.v1.ISearchHashesResponse,
@@ -479,7 +487,7 @@ export class WebRiskServiceClient {
   >;
   searchHashes(
     request: protos.google.cloud.webrisk.v1.ISearchHashesRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.cloud.webrisk.v1.ISearchHashesResponse,
       protos.google.cloud.webrisk.v1.ISearchHashesRequest | null | undefined,
@@ -521,7 +529,7 @@ export class WebRiskServiceClient {
   searchHashes(
     request: protos.google.cloud.webrisk.v1.ISearchHashesRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.cloud.webrisk.v1.ISearchHashesResponse,
           | protos.google.cloud.webrisk.v1.ISearchHashesRequest
@@ -542,12 +550,12 @@ export class WebRiskServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     this.initialize();
@@ -555,7 +563,7 @@ export class WebRiskServiceClient {
   }
   createSubmission(
     request: protos.google.cloud.webrisk.v1.ICreateSubmissionRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.webrisk.v1.ISubmission,
@@ -565,7 +573,7 @@ export class WebRiskServiceClient {
   >;
   createSubmission(
     request: protos.google.cloud.webrisk.v1.ICreateSubmissionRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.cloud.webrisk.v1.ISubmission,
       | protos.google.cloud.webrisk.v1.ICreateSubmissionRequest
@@ -612,7 +620,7 @@ export class WebRiskServiceClient {
   createSubmission(
     request: protos.google.cloud.webrisk.v1.ICreateSubmissionRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.cloud.webrisk.v1.ISubmission,
           | protos.google.cloud.webrisk.v1.ICreateSubmissionRequest
@@ -635,12 +643,12 @@ export class WebRiskServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
