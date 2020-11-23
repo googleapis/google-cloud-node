@@ -1120,9 +1120,7 @@ export class PipelineServiceClient {
       this.innerApiCalls['listTrainingPipelines'] as GaxCall,
       (request as unknown) as RequestType,
       callSettings
-    ) as AsyncIterable<
-      protos.google.cloud.aiplatform.v1beta1.ITrainingPipeline
-    >;
+    ) as AsyncIterable<protos.google.cloud.aiplatform.v1beta1.ITrainingPipeline>;
   }
   // --------------------
   // -- Path templates --

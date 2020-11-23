@@ -747,9 +747,7 @@ export class MigrationServiceClient {
       this.innerApiCalls['searchMigratableResources'] as GaxCall,
       (request as unknown) as RequestType,
       callSettings
-    ) as AsyncIterable<
-      protos.google.cloud.aiplatform.v1beta1.IMigratableResource
-    >;
+    ) as AsyncIterable<protos.google.cloud.aiplatform.v1beta1.IMigratableResource>;
   }
   // --------------------
   // -- Path templates --
