@@ -16,6 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
+/* global window */
 import * as gax from 'google-gax';
 import {
   Callback,
@@ -31,6 +32,11 @@ import * as path from 'path';
 import {Transform} from 'stream';
 import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
+/**
+ * Client JSON configuration object, loaded from
+ * `src/v1beta1/security_center_client_config.json`.
+ * This file defines retry strategy and timeouts for all API methods in this library.
+ */
 import * as gapicConfig from './security_center_client_config.json';
 import {operationsProtos} from 'google-gax';
 const version = require('../../../package.json').version;
@@ -85,9 +91,9 @@ export class SecurityCenterClient {
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
-   * @param {gax.ClientConfig} [options.clientConfig] - client configuration override.
-   *     TODO(@alexander-fenster): link to gax documentation.
-   * @param {boolean} fallback - Use HTTP fallback mode.
+   * @param {gax.ClientConfig} [options.clientConfig] - Client configuration override.
+   *     Follows the structure of {@link gapicConfig}.
+   * @param {boolean} [options.fallback] - Use HTTP fallback mode.
    *     In fallback mode, a special browser-compatible transport implementation is used
    *     instead of gRPC transport. In browser context (if the `window` object is defined)
    *     the fallback mode is enabled automatically; set `options.fallback` to `false`
@@ -100,7 +106,9 @@ export class SecurityCenterClient {
       opts?.servicePath || opts?.apiEndpoint || staticMembers.servicePath;
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback = opts?.fallback ?? typeof window !== 'undefined';
+    const fallback =
+      opts?.fallback ??
+      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
@@ -396,7 +404,7 @@ export class SecurityCenterClient {
   // -------------------
   createSource(
     request: protos.google.cloud.securitycenter.v1beta1.ICreateSourceRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.securitycenter.v1beta1.ISource,
@@ -409,7 +417,7 @@ export class SecurityCenterClient {
   >;
   createSource(
     request: protos.google.cloud.securitycenter.v1beta1.ICreateSourceRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.cloud.securitycenter.v1beta1.ISource,
       | protos.google.cloud.securitycenter.v1beta1.ICreateSourceRequest
@@ -452,7 +460,7 @@ export class SecurityCenterClient {
   createSource(
     request: protos.google.cloud.securitycenter.v1beta1.ICreateSourceRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.cloud.securitycenter.v1beta1.ISource,
           | protos.google.cloud.securitycenter.v1beta1.ICreateSourceRequest
@@ -478,12 +486,12 @@ export class SecurityCenterClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -498,7 +506,7 @@ export class SecurityCenterClient {
   }
   createFinding(
     request: protos.google.cloud.securitycenter.v1beta1.ICreateFindingRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.securitycenter.v1beta1.IFinding,
@@ -511,7 +519,7 @@ export class SecurityCenterClient {
   >;
   createFinding(
     request: protos.google.cloud.securitycenter.v1beta1.ICreateFindingRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.cloud.securitycenter.v1beta1.IFinding,
       | protos.google.cloud.securitycenter.v1beta1.ICreateFindingRequest
@@ -559,7 +567,7 @@ export class SecurityCenterClient {
   createFinding(
     request: protos.google.cloud.securitycenter.v1beta1.ICreateFindingRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.cloud.securitycenter.v1beta1.IFinding,
           | protos.google.cloud.securitycenter.v1beta1.ICreateFindingRequest
@@ -585,12 +593,12 @@ export class SecurityCenterClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -605,7 +613,7 @@ export class SecurityCenterClient {
   }
   getIamPolicy(
     request: protos.google.iam.v1.IGetIamPolicyRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.iam.v1.IPolicy,
@@ -615,7 +623,7 @@ export class SecurityCenterClient {
   >;
   getIamPolicy(
     request: protos.google.iam.v1.IGetIamPolicyRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.iam.v1.IPolicy,
       protos.google.iam.v1.IGetIamPolicyRequest | null | undefined,
@@ -654,7 +662,7 @@ export class SecurityCenterClient {
   getIamPolicy(
     request: protos.google.iam.v1.IGetIamPolicyRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.iam.v1.IPolicy,
           protos.google.iam.v1.IGetIamPolicyRequest | null | undefined,
@@ -673,12 +681,12 @@ export class SecurityCenterClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -693,7 +701,7 @@ export class SecurityCenterClient {
   }
   getOrganizationSettings(
     request: protos.google.cloud.securitycenter.v1beta1.IGetOrganizationSettingsRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.securitycenter.v1beta1.IOrganizationSettings,
@@ -706,7 +714,7 @@ export class SecurityCenterClient {
   >;
   getOrganizationSettings(
     request: protos.google.cloud.securitycenter.v1beta1.IGetOrganizationSettingsRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.cloud.securitycenter.v1beta1.IOrganizationSettings,
       | protos.google.cloud.securitycenter.v1beta1.IGetOrganizationSettingsRequest
@@ -746,7 +754,7 @@ export class SecurityCenterClient {
   getOrganizationSettings(
     request: protos.google.cloud.securitycenter.v1beta1.IGetOrganizationSettingsRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.cloud.securitycenter.v1beta1.IOrganizationSettings,
           | protos.google.cloud.securitycenter.v1beta1.IGetOrganizationSettingsRequest
@@ -772,12 +780,12 @@ export class SecurityCenterClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -796,7 +804,7 @@ export class SecurityCenterClient {
   }
   getSource(
     request: protos.google.cloud.securitycenter.v1beta1.IGetSourceRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.securitycenter.v1beta1.ISource,
@@ -806,7 +814,7 @@ export class SecurityCenterClient {
   >;
   getSource(
     request: protos.google.cloud.securitycenter.v1beta1.IGetSourceRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.cloud.securitycenter.v1beta1.ISource,
       | protos.google.cloud.securitycenter.v1beta1.IGetSourceRequest
@@ -846,7 +854,7 @@ export class SecurityCenterClient {
   getSource(
     request: protos.google.cloud.securitycenter.v1beta1.IGetSourceRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.cloud.securitycenter.v1beta1.ISource,
           | protos.google.cloud.securitycenter.v1beta1.IGetSourceRequest
@@ -869,12 +877,12 @@ export class SecurityCenterClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -889,7 +897,7 @@ export class SecurityCenterClient {
   }
   setFindingState(
     request: protos.google.cloud.securitycenter.v1beta1.ISetFindingStateRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.securitycenter.v1beta1.IFinding,
@@ -902,7 +910,7 @@ export class SecurityCenterClient {
   >;
   setFindingState(
     request: protos.google.cloud.securitycenter.v1beta1.ISetFindingStateRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.cloud.securitycenter.v1beta1.IFinding,
       | protos.google.cloud.securitycenter.v1beta1.ISetFindingStateRequest
@@ -948,7 +956,7 @@ export class SecurityCenterClient {
   setFindingState(
     request: protos.google.cloud.securitycenter.v1beta1.ISetFindingStateRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.cloud.securitycenter.v1beta1.IFinding,
           | protos.google.cloud.securitycenter.v1beta1.ISetFindingStateRequest
@@ -974,12 +982,12 @@ export class SecurityCenterClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -994,7 +1002,7 @@ export class SecurityCenterClient {
   }
   setIamPolicy(
     request: protos.google.iam.v1.ISetIamPolicyRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.iam.v1.IPolicy,
@@ -1004,7 +1012,7 @@ export class SecurityCenterClient {
   >;
   setIamPolicy(
     request: protos.google.iam.v1.ISetIamPolicyRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.iam.v1.IPolicy,
       protos.google.iam.v1.ISetIamPolicyRequest | null | undefined,
@@ -1045,7 +1053,7 @@ export class SecurityCenterClient {
   setIamPolicy(
     request: protos.google.iam.v1.ISetIamPolicyRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.iam.v1.IPolicy,
           protos.google.iam.v1.ISetIamPolicyRequest | null | undefined,
@@ -1064,12 +1072,12 @@ export class SecurityCenterClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1084,7 +1092,7 @@ export class SecurityCenterClient {
   }
   testIamPermissions(
     request: protos.google.iam.v1.ITestIamPermissionsRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.iam.v1.ITestIamPermissionsResponse,
@@ -1094,7 +1102,7 @@ export class SecurityCenterClient {
   >;
   testIamPermissions(
     request: protos.google.iam.v1.ITestIamPermissionsRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.iam.v1.ITestIamPermissionsResponse,
       protos.google.iam.v1.ITestIamPermissionsRequest | null | undefined,
@@ -1135,7 +1143,7 @@ export class SecurityCenterClient {
   testIamPermissions(
     request: protos.google.iam.v1.ITestIamPermissionsRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.iam.v1.ITestIamPermissionsResponse,
           protos.google.iam.v1.ITestIamPermissionsRequest | null | undefined,
@@ -1154,12 +1162,12 @@ export class SecurityCenterClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1174,7 +1182,7 @@ export class SecurityCenterClient {
   }
   updateFinding(
     request: protos.google.cloud.securitycenter.v1beta1.IUpdateFindingRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.securitycenter.v1beta1.IFinding,
@@ -1187,7 +1195,7 @@ export class SecurityCenterClient {
   >;
   updateFinding(
     request: protos.google.cloud.securitycenter.v1beta1.IUpdateFindingRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.cloud.securitycenter.v1beta1.IFinding,
       | protos.google.cloud.securitycenter.v1beta1.IUpdateFindingRequest
@@ -1235,7 +1243,7 @@ export class SecurityCenterClient {
   updateFinding(
     request: protos.google.cloud.securitycenter.v1beta1.IUpdateFindingRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.cloud.securitycenter.v1beta1.IFinding,
           | protos.google.cloud.securitycenter.v1beta1.IUpdateFindingRequest
@@ -1261,12 +1269,12 @@ export class SecurityCenterClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1281,7 +1289,7 @@ export class SecurityCenterClient {
   }
   updateOrganizationSettings(
     request: protos.google.cloud.securitycenter.v1beta1.IUpdateOrganizationSettingsRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.securitycenter.v1beta1.IOrganizationSettings,
@@ -1294,7 +1302,7 @@ export class SecurityCenterClient {
   >;
   updateOrganizationSettings(
     request: protos.google.cloud.securitycenter.v1beta1.IUpdateOrganizationSettingsRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.cloud.securitycenter.v1beta1.IOrganizationSettings,
       | protos.google.cloud.securitycenter.v1beta1.IUpdateOrganizationSettingsRequest
@@ -1335,7 +1343,7 @@ export class SecurityCenterClient {
   updateOrganizationSettings(
     request: protos.google.cloud.securitycenter.v1beta1.IUpdateOrganizationSettingsRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.cloud.securitycenter.v1beta1.IOrganizationSettings,
           | protos.google.cloud.securitycenter.v1beta1.IUpdateOrganizationSettingsRequest
@@ -1361,12 +1369,12 @@ export class SecurityCenterClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1385,7 +1393,7 @@ export class SecurityCenterClient {
   }
   updateSource(
     request: protos.google.cloud.securitycenter.v1beta1.IUpdateSourceRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.securitycenter.v1beta1.ISource,
@@ -1398,7 +1406,7 @@ export class SecurityCenterClient {
   >;
   updateSource(
     request: protos.google.cloud.securitycenter.v1beta1.IUpdateSourceRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.cloud.securitycenter.v1beta1.ISource,
       | protos.google.cloud.securitycenter.v1beta1.IUpdateSourceRequest
@@ -1439,7 +1447,7 @@ export class SecurityCenterClient {
   updateSource(
     request: protos.google.cloud.securitycenter.v1beta1.IUpdateSourceRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.cloud.securitycenter.v1beta1.ISource,
           | protos.google.cloud.securitycenter.v1beta1.IUpdateSourceRequest
@@ -1465,12 +1473,12 @@ export class SecurityCenterClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1485,7 +1493,7 @@ export class SecurityCenterClient {
   }
   updateSecurityMarks(
     request: protos.google.cloud.securitycenter.v1beta1.IUpdateSecurityMarksRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.securitycenter.v1beta1.ISecurityMarks,
@@ -1498,7 +1506,7 @@ export class SecurityCenterClient {
   >;
   updateSecurityMarks(
     request: protos.google.cloud.securitycenter.v1beta1.IUpdateSecurityMarksRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.cloud.securitycenter.v1beta1.ISecurityMarks,
       | protos.google.cloud.securitycenter.v1beta1.IUpdateSecurityMarksRequest
@@ -1541,7 +1549,7 @@ export class SecurityCenterClient {
   updateSecurityMarks(
     request: protos.google.cloud.securitycenter.v1beta1.IUpdateSecurityMarksRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.cloud.securitycenter.v1beta1.ISecurityMarks,
           | protos.google.cloud.securitycenter.v1beta1.IUpdateSecurityMarksRequest
@@ -1567,12 +1575,12 @@ export class SecurityCenterClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1588,7 +1596,7 @@ export class SecurityCenterClient {
 
   runAssetDiscovery(
     request: protos.google.cloud.securitycenter.v1beta1.IRunAssetDiscoveryRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       LROperation<protos.google.protobuf.IEmpty, protos.google.protobuf.IEmpty>,
@@ -1598,7 +1606,7 @@ export class SecurityCenterClient {
   >;
   runAssetDiscovery(
     request: protos.google.cloud.securitycenter.v1beta1.IRunAssetDiscoveryRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       LROperation<protos.google.protobuf.IEmpty, protos.google.protobuf.IEmpty>,
       protos.google.longrunning.IOperation | null | undefined,
@@ -1642,7 +1650,7 @@ export class SecurityCenterClient {
   runAssetDiscovery(
     request: protos.google.cloud.securitycenter.v1beta1.IRunAssetDiscoveryRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           LROperation<
             protos.google.protobuf.IEmpty,
@@ -1664,12 +1672,12 @@ export class SecurityCenterClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1718,7 +1726,7 @@ export class SecurityCenterClient {
   }
   groupAssets(
     request: protos.google.cloud.securitycenter.v1beta1.IGroupAssetsRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.securitycenter.v1beta1.IGroupResult[],
@@ -1728,7 +1736,7 @@ export class SecurityCenterClient {
   >;
   groupAssets(
     request: protos.google.cloud.securitycenter.v1beta1.IGroupAssetsRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: PaginationCallback<
       protos.google.cloud.securitycenter.v1beta1.IGroupAssetsRequest,
       | protos.google.cloud.securitycenter.v1beta1.IGroupAssetsResponse
@@ -1849,7 +1857,7 @@ export class SecurityCenterClient {
   groupAssets(
     request: protos.google.cloud.securitycenter.v1beta1.IGroupAssetsRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | PaginationCallback<
           protos.google.cloud.securitycenter.v1beta1.IGroupAssetsRequest,
           | protos.google.cloud.securitycenter.v1beta1.IGroupAssetsResponse
@@ -1872,12 +1880,12 @@ export class SecurityCenterClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1989,7 +1997,7 @@ export class SecurityCenterClient {
    */
   groupAssetsStream(
     request?: protos.google.cloud.securitycenter.v1beta1.IGroupAssetsRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Transform {
     request = request || {};
     options = options || {};
@@ -2113,7 +2121,7 @@ export class SecurityCenterClient {
    */
   groupAssetsAsync(
     request?: protos.google.cloud.securitycenter.v1beta1.IGroupAssetsRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): AsyncIterable<protos.google.cloud.securitycenter.v1beta1.IGroupResult> {
     request = request || {};
     options = options || {};
@@ -2135,7 +2143,7 @@ export class SecurityCenterClient {
   }
   groupFindings(
     request: protos.google.cloud.securitycenter.v1beta1.IGroupFindingsRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.securitycenter.v1beta1.IGroupResult[],
@@ -2145,7 +2153,7 @@ export class SecurityCenterClient {
   >;
   groupFindings(
     request: protos.google.cloud.securitycenter.v1beta1.IGroupFindingsRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: PaginationCallback<
       protos.google.cloud.securitycenter.v1beta1.IGroupFindingsRequest,
       | protos.google.cloud.securitycenter.v1beta1.IGroupFindingsResponse
@@ -2244,7 +2252,7 @@ export class SecurityCenterClient {
   groupFindings(
     request: protos.google.cloud.securitycenter.v1beta1.IGroupFindingsRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | PaginationCallback<
           protos.google.cloud.securitycenter.v1beta1.IGroupFindingsRequest,
           | protos.google.cloud.securitycenter.v1beta1.IGroupFindingsResponse
@@ -2267,12 +2275,12 @@ export class SecurityCenterClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -2359,7 +2367,7 @@ export class SecurityCenterClient {
    */
   groupFindingsStream(
     request?: protos.google.cloud.securitycenter.v1beta1.IGroupFindingsRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Transform {
     request = request || {};
     options = options || {};
@@ -2458,7 +2466,7 @@ export class SecurityCenterClient {
    */
   groupFindingsAsync(
     request?: protos.google.cloud.securitycenter.v1beta1.IGroupFindingsRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): AsyncIterable<protos.google.cloud.securitycenter.v1beta1.IGroupResult> {
     request = request || {};
     options = options || {};
@@ -2480,7 +2488,7 @@ export class SecurityCenterClient {
   }
   listAssets(
     request: protos.google.cloud.securitycenter.v1beta1.IListAssetsRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.securitycenter.v1beta1.ListAssetsResponse.IListAssetsResult[],
@@ -2490,7 +2498,7 @@ export class SecurityCenterClient {
   >;
   listAssets(
     request: protos.google.cloud.securitycenter.v1beta1.IListAssetsRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: PaginationCallback<
       protos.google.cloud.securitycenter.v1beta1.IListAssetsRequest,
       | protos.google.cloud.securitycenter.v1beta1.IListAssetsResponse
@@ -2610,7 +2618,7 @@ export class SecurityCenterClient {
   listAssets(
     request: protos.google.cloud.securitycenter.v1beta1.IListAssetsRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | PaginationCallback<
           protos.google.cloud.securitycenter.v1beta1.IListAssetsRequest,
           | protos.google.cloud.securitycenter.v1beta1.IListAssetsResponse
@@ -2633,12 +2641,12 @@ export class SecurityCenterClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -2750,7 +2758,7 @@ export class SecurityCenterClient {
    */
   listAssetsStream(
     request?: protos.google.cloud.securitycenter.v1beta1.IListAssetsRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Transform {
     request = request || {};
     options = options || {};
@@ -2874,10 +2882,8 @@ export class SecurityCenterClient {
    */
   listAssetsAsync(
     request?: protos.google.cloud.securitycenter.v1beta1.IListAssetsRequest,
-    options?: gax.CallOptions
-  ): AsyncIterable<
-    protos.google.cloud.securitycenter.v1beta1.ListAssetsResponse.IListAssetsResult
-  > {
+    options?: CallOptions
+  ): AsyncIterable<protos.google.cloud.securitycenter.v1beta1.ListAssetsResponse.IListAssetsResult> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -2894,13 +2900,11 @@ export class SecurityCenterClient {
       this.innerApiCalls['listAssets'] as GaxCall,
       (request as unknown) as RequestType,
       callSettings
-    ) as AsyncIterable<
-      protos.google.cloud.securitycenter.v1beta1.ListAssetsResponse.IListAssetsResult
-    >;
+    ) as AsyncIterable<protos.google.cloud.securitycenter.v1beta1.ListAssetsResponse.IListAssetsResult>;
   }
   listFindings(
     request: protos.google.cloud.securitycenter.v1beta1.IListFindingsRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.securitycenter.v1beta1.IFinding[],
@@ -2910,7 +2914,7 @@ export class SecurityCenterClient {
   >;
   listFindings(
     request: protos.google.cloud.securitycenter.v1beta1.IListFindingsRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: PaginationCallback<
       protos.google.cloud.securitycenter.v1beta1.IListFindingsRequest,
       | protos.google.cloud.securitycenter.v1beta1.IListFindingsResponse
@@ -3008,7 +3012,7 @@ export class SecurityCenterClient {
   listFindings(
     request: protos.google.cloud.securitycenter.v1beta1.IListFindingsRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | PaginationCallback<
           protos.google.cloud.securitycenter.v1beta1.IListFindingsRequest,
           | protos.google.cloud.securitycenter.v1beta1.IListFindingsResponse
@@ -3031,12 +3035,12 @@ export class SecurityCenterClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -3123,7 +3127,7 @@ export class SecurityCenterClient {
    */
   listFindingsStream(
     request?: protos.google.cloud.securitycenter.v1beta1.IListFindingsRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Transform {
     request = request || {};
     options = options || {};
@@ -3222,7 +3226,7 @@ export class SecurityCenterClient {
    */
   listFindingsAsync(
     request?: protos.google.cloud.securitycenter.v1beta1.IListFindingsRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): AsyncIterable<protos.google.cloud.securitycenter.v1beta1.IFinding> {
     request = request || {};
     options = options || {};
@@ -3244,7 +3248,7 @@ export class SecurityCenterClient {
   }
   listSources(
     request: protos.google.cloud.securitycenter.v1beta1.IListSourcesRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.securitycenter.v1beta1.ISource[],
@@ -3254,7 +3258,7 @@ export class SecurityCenterClient {
   >;
   listSources(
     request: protos.google.cloud.securitycenter.v1beta1.IListSourcesRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: PaginationCallback<
       protos.google.cloud.securitycenter.v1beta1.IListSourcesRequest,
       | protos.google.cloud.securitycenter.v1beta1.IListSourcesResponse
@@ -3304,7 +3308,7 @@ export class SecurityCenterClient {
   listSources(
     request: protos.google.cloud.securitycenter.v1beta1.IListSourcesRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | PaginationCallback<
           protos.google.cloud.securitycenter.v1beta1.IListSourcesRequest,
           | protos.google.cloud.securitycenter.v1beta1.IListSourcesResponse
@@ -3327,12 +3331,12 @@ export class SecurityCenterClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -3374,7 +3378,7 @@ export class SecurityCenterClient {
    */
   listSourcesStream(
     request?: protos.google.cloud.securitycenter.v1beta1.IListSourcesRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Transform {
     request = request || {};
     options = options || {};
@@ -3428,7 +3432,7 @@ export class SecurityCenterClient {
    */
   listSourcesAsync(
     request?: protos.google.cloud.securitycenter.v1beta1.IListSourcesRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): AsyncIterable<protos.google.cloud.securitycenter.v1beta1.ISource> {
     request = request || {};
     options = options || {};

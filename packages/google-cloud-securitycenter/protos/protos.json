@@ -358,7 +358,18 @@
                             "(google.api.http).post": "/v1/{parent=organizations/*}/sources",
                             "(google.api.http).body": "source",
                             "(google.api.method_signature)": "parent,source"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=organizations/*}/sources",
+                                "body": "source"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,source"
+                            }
+                          ]
                         },
                         "CreateFinding": {
                           "requestType": "CreateFindingRequest",
@@ -367,7 +378,18 @@
                             "(google.api.http).post": "/v1/{parent=organizations/*/sources/*}/findings",
                             "(google.api.http).body": "finding",
                             "(google.api.method_signature)": "parent,finding_id,finding"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=organizations/*/sources/*}/findings",
+                                "body": "finding"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,finding_id,finding"
+                            }
+                          ]
                         },
                         "CreateNotificationConfig": {
                           "requestType": "CreateNotificationConfigRequest",
@@ -376,7 +398,21 @@
                             "(google.api.http).post": "/v1/{parent=organizations/*}/notificationConfigs",
                             "(google.api.http).body": "notification_config",
                             "(google.api.method_signature)": "parent,notification_config"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=organizations/*}/notificationConfigs",
+                                "body": "notification_config"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,config_id,notification_config"
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,notification_config"
+                            }
+                          ]
                         },
                         "DeleteNotificationConfig": {
                           "requestType": "DeleteNotificationConfigRequest",
@@ -384,7 +420,17 @@
                           "options": {
                             "(google.api.http).delete": "/v1/{name=organizations/*/notificationConfigs/*}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1/{name=organizations/*/notificationConfigs/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "GetIamPolicy": {
                           "requestType": "google.iam.v1.GetIamPolicyRequest",
@@ -393,7 +439,18 @@
                             "(google.api.http).post": "/v1/{resource=organizations/*/sources/*}:getIamPolicy",
                             "(google.api.http).body": "*",
                             "(google.api.method_signature)": "resource"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{resource=organizations/*/sources/*}:getIamPolicy",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "resource"
+                            }
+                          ]
                         },
                         "GetNotificationConfig": {
                           "requestType": "GetNotificationConfigRequest",
@@ -401,7 +458,17 @@
                           "options": {
                             "(google.api.http).get": "/v1/{name=organizations/*/notificationConfigs/*}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=organizations/*/notificationConfigs/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "GetOrganizationSettings": {
                           "requestType": "GetOrganizationSettingsRequest",
@@ -409,7 +476,17 @@
                           "options": {
                             "(google.api.http).get": "/v1/{name=organizations/*/organizationSettings}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=organizations/*/organizationSettings}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "GetSource": {
                           "requestType": "GetSourceRequest",
@@ -417,7 +494,17 @@
                           "options": {
                             "(google.api.http).get": "/v1/{name=organizations/*/sources/*}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=organizations/*/sources/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "GroupAssets": {
                           "requestType": "GroupAssetsRequest",
@@ -425,7 +512,15 @@
                           "options": {
                             "(google.api.http).post": "/v1/{parent=organizations/*}/assets:group",
                             "(google.api.http).body": "*"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=organizations/*}/assets:group",
+                                "body": "*"
+                              }
+                            }
+                          ]
                         },
                         "GroupFindings": {
                           "requestType": "GroupFindingsRequest",
@@ -434,21 +529,46 @@
                             "(google.api.http).post": "/v1/{parent=organizations/*/sources/*}/findings:group",
                             "(google.api.http).body": "*",
                             "(google.api.method_signature)": "parent,group_by"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=organizations/*/sources/*}/findings:group",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,group_by"
+                            }
+                          ]
                         },
                         "ListAssets": {
                           "requestType": "ListAssetsRequest",
                           "responseType": "ListAssetsResponse",
                           "options": {
                             "(google.api.http).get": "/v1/{parent=organizations/*}/assets"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=organizations/*}/assets"
+                              }
+                            }
+                          ]
                         },
                         "ListFindings": {
                           "requestType": "ListFindingsRequest",
                           "responseType": "ListFindingsResponse",
                           "options": {
                             "(google.api.http).get": "/v1/{parent=organizations/*/sources/*}/findings"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=organizations/*/sources/*}/findings"
+                              }
+                            }
+                          ]
                         },
                         "ListNotificationConfigs": {
                           "requestType": "ListNotificationConfigsRequest",
@@ -456,7 +576,17 @@
                           "options": {
                             "(google.api.http).get": "/v1/{parent=organizations/*}/notificationConfigs",
                             "(google.api.method_signature)": "parent"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=organizations/*}/notificationConfigs"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
                         },
                         "ListSources": {
                           "requestType": "ListSourcesRequest",
@@ -464,7 +594,17 @@
                           "options": {
                             "(google.api.http).get": "/v1/{parent=organizations/*}/sources",
                             "(google.api.method_signature)": "parent"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=organizations/*}/sources"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
                         },
                         "RunAssetDiscovery": {
                           "requestType": "RunAssetDiscoveryRequest",
@@ -475,7 +615,24 @@
                             "(google.api.method_signature)": "parent",
                             "(google.longrunning.operation_info).response_type": "google.cloud.securitycenter.v1.RunAssetDiscoveryResponse",
                             "(google.longrunning.operation_info).metadata_type": "google.protobuf.Empty"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=organizations/*}/assets:runDiscovery",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.cloud.securitycenter.v1.RunAssetDiscoveryResponse",
+                                "metadata_type": "google.protobuf.Empty"
+                              }
+                            }
+                          ]
                         },
                         "SetFindingState": {
                           "requestType": "SetFindingStateRequest",
@@ -484,7 +641,18 @@
                             "(google.api.http).post": "/v1/{name=organizations/*/sources/*/findings/*}:setState",
                             "(google.api.http).body": "*",
                             "(google.api.method_signature)": "name,state,start_time"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{name=organizations/*/sources/*/findings/*}:setState",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name,state,start_time"
+                            }
+                          ]
                         },
                         "SetIamPolicy": {
                           "requestType": "google.iam.v1.SetIamPolicyRequest",
@@ -493,7 +661,18 @@
                             "(google.api.http).post": "/v1/{resource=organizations/*/sources/*}:setIamPolicy",
                             "(google.api.http).body": "*",
                             "(google.api.method_signature)": "resource,policy"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{resource=organizations/*/sources/*}:setIamPolicy",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "resource,policy"
+                            }
+                          ]
                         },
                         "TestIamPermissions": {
                           "requestType": "google.iam.v1.TestIamPermissionsRequest",
@@ -502,7 +681,18 @@
                             "(google.api.http).post": "/v1/{resource=organizations/*/sources/*}:testIamPermissions",
                             "(google.api.http).body": "*",
                             "(google.api.method_signature)": "resource,permissions"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{resource=organizations/*/sources/*}:testIamPermissions",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "resource,permissions"
+                            }
+                          ]
                         },
                         "UpdateFinding": {
                           "requestType": "UpdateFindingRequest",
@@ -511,7 +701,18 @@
                             "(google.api.http).patch": "/v1/{finding.name=organizations/*/sources/*/findings/*}",
                             "(google.api.http).body": "finding",
                             "(google.api.method_signature)": "finding"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1/{finding.name=organizations/*/sources/*/findings/*}",
+                                "body": "finding"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "finding"
+                            }
+                          ]
                         },
                         "UpdateNotificationConfig": {
                           "requestType": "UpdateNotificationConfigRequest",
@@ -520,7 +721,21 @@
                             "(google.api.http).patch": "/v1/{notification_config.name=organizations/*/notificationConfigs/*}",
                             "(google.api.http).body": "notification_config",
                             "(google.api.method_signature)": "notification_config,update_mask"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1/{notification_config.name=organizations/*/notificationConfigs/*}",
+                                "body": "notification_config"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "notification_config"
+                            },
+                            {
+                              "(google.api.method_signature)": "notification_config,update_mask"
+                            }
+                          ]
                         },
                         "UpdateOrganizationSettings": {
                           "requestType": "UpdateOrganizationSettingsRequest",
@@ -529,7 +744,18 @@
                             "(google.api.http).patch": "/v1/{organization_settings.name=organizations/*/organizationSettings}",
                             "(google.api.http).body": "organization_settings",
                             "(google.api.method_signature)": "organization_settings"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1/{organization_settings.name=organizations/*/organizationSettings}",
+                                "body": "organization_settings"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "organization_settings"
+                            }
+                          ]
                         },
                         "UpdateSource": {
                           "requestType": "UpdateSourceRequest",
@@ -538,7 +764,18 @@
                             "(google.api.http).patch": "/v1/{source.name=organizations/*/sources/*}",
                             "(google.api.http).body": "source",
                             "(google.api.method_signature)": "source"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1/{source.name=organizations/*/sources/*}",
+                                "body": "source"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "source"
+                            }
+                          ]
                         },
                         "UpdateSecurityMarks": {
                           "requestType": "UpdateSecurityMarksRequest",
@@ -549,7 +786,22 @@
                             "(google.api.http).additional_bindings.patch": "/v1/{security_marks.name=organizations/*/sources/*/findings/*/securityMarks}",
                             "(google.api.http).additional_bindings.body": "security_marks",
                             "(google.api.method_signature)": "security_marks"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1/{security_marks.name=organizations/*/assets/*/securityMarks}",
+                                "body": "security_marks",
+                                "additional_bindings": {
+                                  "patch": "/v1/{security_marks.name=organizations/*/sources/*/findings/*/securityMarks}",
+                                  "body": "security_marks"
+                                }
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "security_marks"
+                            }
+                          ]
                         }
                       }
                     },
@@ -1445,7 +1697,18 @@
                             "(google.api.http).post": "/v1beta1/{parent=organizations/*}/sources",
                             "(google.api.http).body": "source",
                             "(google.api.method_signature)": "parent,source"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta1/{parent=organizations/*}/sources",
+                                "body": "source"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,source"
+                            }
+                          ]
                         },
                         "CreateFinding": {
                           "requestType": "CreateFindingRequest",
@@ -1454,7 +1717,18 @@
                             "(google.api.http).post": "/v1beta1/{parent=organizations/*/sources/*}/findings",
                             "(google.api.http).body": "finding",
                             "(google.api.method_signature)": "parent,finding_id,finding"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta1/{parent=organizations/*/sources/*}/findings",
+                                "body": "finding"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,finding_id,finding"
+                            }
+                          ]
                         },
                         "GetIamPolicy": {
                           "requestType": "google.iam.v1.GetIamPolicyRequest",
@@ -1463,7 +1737,18 @@
                             "(google.api.http).post": "/v1beta1/{resource=organizations/*/sources/*}:getIamPolicy",
                             "(google.api.http).body": "*",
                             "(google.api.method_signature)": "resource"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta1/{resource=organizations/*/sources/*}:getIamPolicy",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "resource"
+                            }
+                          ]
                         },
                         "GetOrganizationSettings": {
                           "requestType": "GetOrganizationSettingsRequest",
@@ -1471,7 +1756,17 @@
                           "options": {
                             "(google.api.http).get": "/v1beta1/{name=organizations/*/organizationSettings}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta1/{name=organizations/*/organizationSettings}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "GetSource": {
                           "requestType": "GetSourceRequest",
@@ -1479,7 +1774,17 @@
                           "options": {
                             "(google.api.http).get": "/v1beta1/{name=organizations/*/sources/*}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta1/{name=organizations/*/sources/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "GroupAssets": {
                           "requestType": "GroupAssetsRequest",
@@ -1487,7 +1792,15 @@
                           "options": {
                             "(google.api.http).post": "/v1beta1/{parent=organizations/*}/assets:group",
                             "(google.api.http).body": "*"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta1/{parent=organizations/*}/assets:group",
+                                "body": "*"
+                              }
+                            }
+                          ]
                         },
                         "GroupFindings": {
                           "requestType": "GroupFindingsRequest",
@@ -1496,21 +1809,46 @@
                             "(google.api.http).post": "/v1beta1/{parent=organizations/*/sources/*}/findings:group",
                             "(google.api.http).body": "*",
                             "(google.api.method_signature)": "parent,group_by"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta1/{parent=organizations/*/sources/*}/findings:group",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,group_by"
+                            }
+                          ]
                         },
                         "ListAssets": {
                           "requestType": "ListAssetsRequest",
                           "responseType": "ListAssetsResponse",
                           "options": {
                             "(google.api.http).get": "/v1beta1/{parent=organizations/*}/assets"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta1/{parent=organizations/*}/assets"
+                              }
+                            }
+                          ]
                         },
                         "ListFindings": {
                           "requestType": "ListFindingsRequest",
                           "responseType": "ListFindingsResponse",
                           "options": {
                             "(google.api.http).get": "/v1beta1/{parent=organizations/*/sources/*}/findings"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta1/{parent=organizations/*/sources/*}/findings"
+                              }
+                            }
+                          ]
                         },
                         "ListSources": {
                           "requestType": "ListSourcesRequest",
@@ -1518,7 +1856,17 @@
                           "options": {
                             "(google.api.http).get": "/v1beta1/{parent=organizations/*}/sources",
                             "(google.api.method_signature)": "parent"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta1/{parent=organizations/*}/sources"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
                         },
                         "RunAssetDiscovery": {
                           "requestType": "RunAssetDiscoveryRequest",
@@ -1529,7 +1877,24 @@
                             "(google.api.method_signature)": "parent",
                             "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
                             "(google.longrunning.operation_info).metadata_type": "google.protobuf.Empty"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta1/{parent=organizations/*}/assets:runDiscovery",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.protobuf.Empty",
+                                "metadata_type": "google.protobuf.Empty"
+                              }
+                            }
+                          ]
                         },
                         "SetFindingState": {
                           "requestType": "SetFindingStateRequest",
@@ -1538,7 +1903,18 @@
                             "(google.api.http).post": "/v1beta1/{name=organizations/*/sources/*/findings/*}:setState",
                             "(google.api.http).body": "*",
                             "(google.api.method_signature)": "name,state,start_time"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta1/{name=organizations/*/sources/*/findings/*}:setState",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name,state,start_time"
+                            }
+                          ]
                         },
                         "SetIamPolicy": {
                           "requestType": "google.iam.v1.SetIamPolicyRequest",
@@ -1547,7 +1923,18 @@
                             "(google.api.http).post": "/v1beta1/{resource=organizations/*/sources/*}:setIamPolicy",
                             "(google.api.http).body": "*",
                             "(google.api.method_signature)": "resource,policy"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta1/{resource=organizations/*/sources/*}:setIamPolicy",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "resource,policy"
+                            }
+                          ]
                         },
                         "TestIamPermissions": {
                           "requestType": "google.iam.v1.TestIamPermissionsRequest",
@@ -1556,7 +1943,18 @@
                             "(google.api.http).post": "/v1beta1/{resource=organizations/*/sources/*}:testIamPermissions",
                             "(google.api.http).body": "*",
                             "(google.api.method_signature)": "resource,permissions"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta1/{resource=organizations/*/sources/*}:testIamPermissions",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "resource,permissions"
+                            }
+                          ]
                         },
                         "UpdateFinding": {
                           "requestType": "UpdateFindingRequest",
@@ -1565,7 +1963,18 @@
                             "(google.api.http).patch": "/v1beta1/{finding.name=organizations/*/sources/*/findings/*}",
                             "(google.api.http).body": "finding",
                             "(google.api.method_signature)": "finding"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1beta1/{finding.name=organizations/*/sources/*/findings/*}",
+                                "body": "finding"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "finding"
+                            }
+                          ]
                         },
                         "UpdateOrganizationSettings": {
                           "requestType": "UpdateOrganizationSettingsRequest",
@@ -1574,7 +1983,18 @@
                             "(google.api.http).patch": "/v1beta1/{organization_settings.name=organizations/*/organizationSettings}",
                             "(google.api.http).body": "organization_settings",
                             "(google.api.method_signature)": "organization_settings"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1beta1/{organization_settings.name=organizations/*/organizationSettings}",
+                                "body": "organization_settings"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "organization_settings"
+                            }
+                          ]
                         },
                         "UpdateSource": {
                           "requestType": "UpdateSourceRequest",
@@ -1583,7 +2003,18 @@
                             "(google.api.http).patch": "/v1beta1/{source.name=organizations/*/sources/*}",
                             "(google.api.http).body": "source",
                             "(google.api.method_signature)": "source"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1beta1/{source.name=organizations/*/sources/*}",
+                                "body": "source"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "source"
+                            }
+                          ]
                         },
                         "UpdateSecurityMarks": {
                           "requestType": "UpdateSecurityMarksRequest",
@@ -1594,7 +2025,22 @@
                             "(google.api.http).additional_bindings.patch": "/v1beta1/{security_marks.name=organizations/*/sources/*/findings/*/securityMarks}",
                             "(google.api.http).additional_bindings.body": "security_marks",
                             "(google.api.method_signature)": "security_marks"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1beta1/{security_marks.name=organizations/*/assets/*/securityMarks}",
+                                "body": "security_marks",
+                                "additional_bindings": {
+                                  "patch": "/v1beta1/{security_marks.name=organizations/*/sources/*/findings/*/securityMarks}",
+                                  "body": "security_marks"
+                                }
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "security_marks"
+                            }
+                          ]
                         }
                       }
                     },
@@ -2469,7 +2915,18 @@
                             "(google.api.http).post": "/v1p1beta1/{parent=organizations/*}/sources",
                             "(google.api.http).body": "source",
                             "(google.api.method_signature)": "parent,source"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1p1beta1/{parent=organizations/*}/sources",
+                                "body": "source"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,source"
+                            }
+                          ]
                         },
                         "CreateFinding": {
                           "requestType": "CreateFindingRequest",
@@ -2478,7 +2935,21 @@
                             "(google.api.http).post": "/v1p1beta1/{parent=organizations/*/sources/*}/findings",
                             "(google.api.http).body": "finding",
                             "(google.api.method_signature)": "parent,finding,finding_id"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1p1beta1/{parent=organizations/*/sources/*}/findings",
+                                "body": "finding"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,finding_id,finding"
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,finding,finding_id"
+                            }
+                          ]
                         },
                         "CreateNotificationConfig": {
                           "requestType": "CreateNotificationConfigRequest",
@@ -2487,7 +2958,21 @@
                             "(google.api.http).post": "/v1p1beta1/{parent=organizations/*}/notificationConfigs",
                             "(google.api.http).body": "notification_config",
                             "(google.api.method_signature)": "parent,notification_config"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1p1beta1/{parent=organizations/*}/notificationConfigs",
+                                "body": "notification_config"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,config_id,notification_config"
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,notification_config"
+                            }
+                          ]
                         },
                         "DeleteNotificationConfig": {
                           "requestType": "DeleteNotificationConfigRequest",
@@ -2495,7 +2980,17 @@
                           "options": {
                             "(google.api.http).delete": "/v1p1beta1/{name=organizations/*/notificationConfigs/*}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1p1beta1/{name=organizations/*/notificationConfigs/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "GetIamPolicy": {
                           "requestType": "google.iam.v1.GetIamPolicyRequest",
@@ -2504,7 +2999,18 @@
                             "(google.api.http).post": "/v1p1beta1/{resource=organizations/*/sources/*}:getIamPolicy",
                             "(google.api.http).body": "*",
                             "(google.api.method_signature)": "resource"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1p1beta1/{resource=organizations/*/sources/*}:getIamPolicy",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "resource"
+                            }
+                          ]
                         },
                         "GetNotificationConfig": {
                           "requestType": "GetNotificationConfigRequest",
@@ -2512,7 +3018,17 @@
                           "options": {
                             "(google.api.http).get": "/v1p1beta1/{name=organizations/*/notificationConfigs/*}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1p1beta1/{name=organizations/*/notificationConfigs/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "GetOrganizationSettings": {
                           "requestType": "GetOrganizationSettingsRequest",
@@ -2520,7 +3036,17 @@
                           "options": {
                             "(google.api.http).get": "/v1p1beta1/{name=organizations/*/organizationSettings}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1p1beta1/{name=organizations/*/organizationSettings}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "GetSource": {
                           "requestType": "GetSourceRequest",
@@ -2528,7 +3054,17 @@
                           "options": {
                             "(google.api.http).get": "/v1p1beta1/{name=organizations/*/sources/*}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1p1beta1/{name=organizations/*/sources/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "GroupAssets": {
                           "requestType": "GroupAssetsRequest",
@@ -2536,7 +3072,15 @@
                           "options": {
                             "(google.api.http).post": "/v1p1beta1/{parent=organizations/*}/assets:group",
                             "(google.api.http).body": "*"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1p1beta1/{parent=organizations/*}/assets:group",
+                                "body": "*"
+                              }
+                            }
+                          ]
                         },
                         "GroupFindings": {
                           "requestType": "GroupFindingsRequest",
@@ -2545,7 +3089,18 @@
                             "(google.api.http).post": "/v1p1beta1/{parent=organizations/*/sources/*}/findings:group",
                             "(google.api.http).body": "*",
                             "(google.api.method_signature)": "parent,group_by"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1p1beta1/{parent=organizations/*/sources/*}/findings:group",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,group_by"
+                            }
+                          ]
                         },
                         "ListAssets": {
                           "requestType": "ListAssetsRequest",
@@ -2553,7 +3108,17 @@
                           "options": {
                             "(google.api.http).get": "/v1p1beta1/{parent=organizations/*}/assets",
                             "(google.api.method_signature)": "parent"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1p1beta1/{parent=organizations/*}/assets"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
                         },
                         "ListFindings": {
                           "requestType": "ListFindingsRequest",
@@ -2561,7 +3126,17 @@
                           "options": {
                             "(google.api.http).get": "/v1p1beta1/{parent=organizations/*/sources/*}/findings",
                             "(google.api.method_signature)": "parent"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1p1beta1/{parent=organizations/*/sources/*}/findings"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
                         },
                         "ListNotificationConfigs": {
                           "requestType": "ListNotificationConfigsRequest",
@@ -2569,7 +3144,17 @@
                           "options": {
                             "(google.api.http).get": "/v1p1beta1/{parent=organizations/*}/notificationConfigs",
                             "(google.api.method_signature)": "parent"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1p1beta1/{parent=organizations/*}/notificationConfigs"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
                         },
                         "ListSources": {
                           "requestType": "ListSourcesRequest",
@@ -2577,7 +3162,17 @@
                           "options": {
                             "(google.api.http).get": "/v1p1beta1/{parent=organizations/*}/sources",
                             "(google.api.method_signature)": "parent"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1p1beta1/{parent=organizations/*}/sources"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
                         },
                         "RunAssetDiscovery": {
                           "requestType": "RunAssetDiscoveryRequest",
@@ -2588,7 +3183,24 @@
                             "(google.api.method_signature)": "parent",
                             "(google.longrunning.operation_info).response_type": "google.cloud.securitycenter.v1p1beta1.RunAssetDiscoveryResponse",
                             "(google.longrunning.operation_info).metadata_type": "google.protobuf.Empty"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1p1beta1/{parent=organizations/*}/assets:runDiscovery",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.cloud.securitycenter.v1p1beta1.RunAssetDiscoveryResponse",
+                                "metadata_type": "google.protobuf.Empty"
+                              }
+                            }
+                          ]
                         },
                         "SetFindingState": {
                           "requestType": "SetFindingStateRequest",
@@ -2597,7 +3209,18 @@
                             "(google.api.http).post": "/v1p1beta1/{name=organizations/*/sources/*/findings/*}:setState",
                             "(google.api.http).body": "*",
                             "(google.api.method_signature)": "name,state,start_time"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1p1beta1/{name=organizations/*/sources/*/findings/*}:setState",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name,state,start_time"
+                            }
+                          ]
                         },
                         "SetIamPolicy": {
                           "requestType": "google.iam.v1.SetIamPolicyRequest",
@@ -2606,7 +3229,18 @@
                             "(google.api.http).post": "/v1p1beta1/{resource=organizations/*/sources/*}:setIamPolicy",
                             "(google.api.http).body": "*",
                             "(google.api.method_signature)": "resource,policy"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1p1beta1/{resource=organizations/*/sources/*}:setIamPolicy",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "resource,policy"
+                            }
+                          ]
                         },
                         "TestIamPermissions": {
                           "requestType": "google.iam.v1.TestIamPermissionsRequest",
@@ -2615,7 +3249,18 @@
                             "(google.api.http).post": "/v1p1beta1/{resource=organizations/*/sources/*}:testIamPermissions",
                             "(google.api.http).body": "*",
                             "(google.api.method_signature)": "resource,permissions"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1p1beta1/{resource=organizations/*/sources/*}:testIamPermissions",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "resource,permissions"
+                            }
+                          ]
                         },
                         "UpdateFinding": {
                           "requestType": "UpdateFindingRequest",
@@ -2624,7 +3269,21 @@
                             "(google.api.http).patch": "/v1p1beta1/{finding.name=organizations/*/sources/*/findings/*}",
                             "(google.api.http).body": "finding",
                             "(google.api.method_signature)": "finding,update_mask"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1p1beta1/{finding.name=organizations/*/sources/*/findings/*}",
+                                "body": "finding"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "finding"
+                            },
+                            {
+                              "(google.api.method_signature)": "finding,update_mask"
+                            }
+                          ]
                         },
                         "UpdateNotificationConfig": {
                           "requestType": "UpdateNotificationConfigRequest",
@@ -2633,7 +3292,21 @@
                             "(google.api.http).patch": "/v1p1beta1/{notification_config.name=organizations/*/notificationConfigs/*}",
                             "(google.api.http).body": "notification_config",
                             "(google.api.method_signature)": "notification_config,update_mask"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1p1beta1/{notification_config.name=organizations/*/notificationConfigs/*}",
+                                "body": "notification_config"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "notification_config"
+                            },
+                            {
+                              "(google.api.method_signature)": "notification_config,update_mask"
+                            }
+                          ]
                         },
                         "UpdateOrganizationSettings": {
                           "requestType": "UpdateOrganizationSettingsRequest",
@@ -2642,7 +3315,18 @@
                             "(google.api.http).patch": "/v1p1beta1/{organization_settings.name=organizations/*/organizationSettings}",
                             "(google.api.http).body": "organization_settings",
                             "(google.api.method_signature)": "organization_settings"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1p1beta1/{organization_settings.name=organizations/*/organizationSettings}",
+                                "body": "organization_settings"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "organization_settings"
+                            }
+                          ]
                         },
                         "UpdateSource": {
                           "requestType": "UpdateSourceRequest",
@@ -2651,7 +3335,21 @@
                             "(google.api.http).patch": "/v1p1beta1/{source.name=organizations/*/sources/*}",
                             "(google.api.http).body": "source",
                             "(google.api.method_signature)": "source,update_mask"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1p1beta1/{source.name=organizations/*/sources/*}",
+                                "body": "source"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "source"
+                            },
+                            {
+                              "(google.api.method_signature)": "source,update_mask"
+                            }
+                          ]
                         },
                         "UpdateSecurityMarks": {
                           "requestType": "UpdateSecurityMarksRequest",
@@ -2662,7 +3360,25 @@
                             "(google.api.http).additional_bindings.patch": "/v1p1beta1/{security_marks.name=organizations/*/sources/*/findings/*/securityMarks}",
                             "(google.api.http).additional_bindings.body": "security_marks",
                             "(google.api.method_signature)": "security_marks,update_mask"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1p1beta1/{security_marks.name=organizations/*/assets/*/securityMarks}",
+                                "body": "security_marks",
+                                "additional_bindings": {
+                                  "patch": "/v1p1beta1/{security_marks.name=organizations/*/sources/*/findings/*/securityMarks}",
+                                  "body": "security_marks"
+                                }
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "security_marks"
+                            },
+                            {
+                              "(google.api.method_signature)": "security_marks,update_mask"
+                            }
+                          ]
                         }
                       }
                     },
@@ -4558,7 +5274,15 @@
                       "options": {
                         "(google.api.http).post": "/v1/{resource=**}:setIamPolicy",
                         "(google.api.http).body": "*"
-                      }
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "post": "/v1/{resource=**}:setIamPolicy",
+                            "body": "*"
+                          }
+                        }
+                      ]
                     },
                     "GetIamPolicy": {
                       "requestType": "GetIamPolicyRequest",
@@ -4566,7 +5290,15 @@
                       "options": {
                         "(google.api.http).post": "/v1/{resource=**}:getIamPolicy",
                         "(google.api.http).body": "*"
-                      }
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "post": "/v1/{resource=**}:getIamPolicy",
+                            "body": "*"
+                          }
+                        }
+                      ]
                     },
                     "TestIamPermissions": {
                       "requestType": "TestIamPermissionsRequest",
@@ -4574,7 +5306,15 @@
                       "options": {
                         "(google.api.http).post": "/v1/{resource=**}:testIamPermissions",
                         "(google.api.http).body": "*"
-                      }
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "post": "/v1/{resource=**}:testIamPermissions",
+                            "body": "*"
+                          }
+                        }
+                      ]
                     }
                   }
                 },
@@ -4818,7 +5558,17 @@
                   "options": {
                     "(google.api.http).get": "/v1/{name=operations}",
                     "(google.api.method_signature)": "name,filter"
-                  }
+                  },
+                  "parsedOptions": [
+                    {
+                      "(google.api.http)": {
+                        "get": "/v1/{name=operations}"
+                      }
+                    },
+                    {
+                      "(google.api.method_signature)": "name,filter"
+                    }
+                  ]
                 },
                 "GetOperation": {
                   "requestType": "GetOperationRequest",
@@ -4826,7 +5576,17 @@
                   "options": {
                     "(google.api.http).get": "/v1/{name=operations/**}",
                     "(google.api.method_signature)": "name"
-                  }
+                  },
+                  "parsedOptions": [
+                    {
+                      "(google.api.http)": {
+                        "get": "/v1/{name=operations/**}"
+                      }
+                    },
+                    {
+                      "(google.api.method_signature)": "name"
+                    }
+                  ]
                 },
                 "DeleteOperation": {
                   "requestType": "DeleteOperationRequest",
@@ -4834,7 +5594,17 @@
                   "options": {
                     "(google.api.http).delete": "/v1/{name=operations/**}",
                     "(google.api.method_signature)": "name"
-                  }
+                  },
+                  "parsedOptions": [
+                    {
+                      "(google.api.http)": {
+                        "delete": "/v1/{name=operations/**}"
+                      }
+                    },
+                    {
+                      "(google.api.method_signature)": "name"
+                    }
+                  ]
                 },
                 "CancelOperation": {
                   "requestType": "CancelOperationRequest",
@@ -4843,7 +5613,18 @@
                     "(google.api.http).post": "/v1/{name=operations/**}:cancel",
                     "(google.api.http).body": "*",
                     "(google.api.method_signature)": "name"
-                  }
+                  },
+                  "parsedOptions": [
+                    {
+                      "(google.api.http)": {
+                        "post": "/v1/{name=operations/**}:cancel",
+                        "body": "*"
+                      }
+                    },
+                    {
+                      "(google.api.method_signature)": "name"
+                    }
+                  ]
                 },
                 "WaitOperation": {
                   "requestType": "WaitOperationRequest",
