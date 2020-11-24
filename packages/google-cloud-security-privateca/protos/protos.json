@@ -1163,7 +1163,18 @@
                                 "(google.api.http).post": "/v1beta1/{parent=projects/*/locations/*/certificateAuthorities/*}/certificates",
                                 "(google.api.http).body": "certificate",
                                 "(google.api.method_signature)": "parent,certificate,certificate_id"
-                              }
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "post": "/v1beta1/{parent=projects/*/locations/*/certificateAuthorities/*}/certificates",
+                                    "body": "certificate"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "parent,certificate,certificate_id"
+                                }
+                              ]
                             },
                             "GetCertificate": {
                               "requestType": "GetCertificateRequest",
@@ -1171,7 +1182,17 @@
                               "options": {
                                 "(google.api.http).get": "/v1beta1/{name=projects/*/locations/*/certificateAuthorities/*/certificates/*}",
                                 "(google.api.method_signature)": "name"
-                              }
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "get": "/v1beta1/{name=projects/*/locations/*/certificateAuthorities/*/certificates/*}"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "name"
+                                }
+                              ]
                             },
                             "ListCertificates": {
                               "requestType": "ListCertificatesRequest",
@@ -1179,7 +1200,17 @@
                               "options": {
                                 "(google.api.http).get": "/v1beta1/{parent=projects/*/locations/*/certificateAuthorities/*}/certificates",
                                 "(google.api.method_signature)": "parent"
-                              }
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "get": "/v1beta1/{parent=projects/*/locations/*/certificateAuthorities/*}/certificates"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "parent"
+                                }
+                              ]
                             },
                             "RevokeCertificate": {
                               "requestType": "RevokeCertificateRequest",
@@ -1188,7 +1219,18 @@
                                 "(google.api.http).post": "/v1beta1/{name=projects/*/locations/*/certificateAuthorities/*/certificates/*}:revoke",
                                 "(google.api.http).body": "*",
                                 "(google.api.method_signature)": "name"
-                              }
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "post": "/v1beta1/{name=projects/*/locations/*/certificateAuthorities/*/certificates/*}:revoke",
+                                    "body": "*"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "name"
+                                }
+                              ]
                             },
                             "UpdateCertificate": {
                               "requestType": "UpdateCertificateRequest",
@@ -1197,7 +1239,18 @@
                                 "(google.api.http).patch": "/v1beta1/{certificate.name=projects/*/locations/*/certificateAuthorities/*/certificates/*}",
                                 "(google.api.http).body": "certificate",
                                 "(google.api.method_signature)": "certificate,update_mask"
-                              }
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "patch": "/v1beta1/{certificate.name=projects/*/locations/*/certificateAuthorities/*/certificates/*}",
+                                    "body": "certificate"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "certificate,update_mask"
+                                }
+                              ]
                             },
                             "ActivateCertificateAuthority": {
                               "requestType": "ActivateCertificateAuthorityRequest",
@@ -1208,7 +1261,24 @@
                                 "(google.api.method_signature)": "name",
                                 "(google.longrunning.operation_info).response_type": "CertificateAuthority",
                                 "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
-                              }
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "post": "/v1beta1/{name=projects/*/locations/*/certificateAuthorities/*}:activate",
+                                    "body": "*"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "name"
+                                },
+                                {
+                                  "(google.longrunning.operation_info)": {
+                                    "response_type": "CertificateAuthority",
+                                    "metadata_type": "OperationMetadata"
+                                  }
+                                }
+                              ]
                             },
                             "CreateCertificateAuthority": {
                               "requestType": "CreateCertificateAuthorityRequest",
@@ -1219,7 +1289,24 @@
                                 "(google.api.method_signature)": "parent,certificate_authority,certificate_authority_id",
                                 "(google.longrunning.operation_info).response_type": "CertificateAuthority",
                                 "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
-                              }
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "post": "/v1beta1/{parent=projects/*/locations/*}/certificateAuthorities",
+                                    "body": "certificate_authority"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "parent,certificate_authority,certificate_authority_id"
+                                },
+                                {
+                                  "(google.longrunning.operation_info)": {
+                                    "response_type": "CertificateAuthority",
+                                    "metadata_type": "OperationMetadata"
+                                  }
+                                }
+                              ]
                             },
                             "DisableCertificateAuthority": {
                               "requestType": "DisableCertificateAuthorityRequest",
@@ -1230,7 +1317,24 @@
                                 "(google.api.method_signature)": "name",
                                 "(google.longrunning.operation_info).response_type": "CertificateAuthority",
                                 "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
-                              }
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "post": "/v1beta1/{name=projects/*/locations/*/certificateAuthorities/*}:disable",
+                                    "body": "*"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "name"
+                                },
+                                {
+                                  "(google.longrunning.operation_info)": {
+                                    "response_type": "CertificateAuthority",
+                                    "metadata_type": "OperationMetadata"
+                                  }
+                                }
+                              ]
                             },
                             "EnableCertificateAuthority": {
                               "requestType": "EnableCertificateAuthorityRequest",
@@ -1241,7 +1345,24 @@
                                 "(google.api.method_signature)": "name",
                                 "(google.longrunning.operation_info).response_type": "CertificateAuthority",
                                 "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
-                              }
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "post": "/v1beta1/{name=projects/*/locations/*/certificateAuthorities/*}:enable",
+                                    "body": "*"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "name"
+                                },
+                                {
+                                  "(google.longrunning.operation_info)": {
+                                    "response_type": "CertificateAuthority",
+                                    "metadata_type": "OperationMetadata"
+                                  }
+                                }
+                              ]
                             },
                             "FetchCertificateAuthorityCsr": {
                               "requestType": "FetchCertificateAuthorityCsrRequest",
@@ -1249,7 +1370,17 @@
                               "options": {
                                 "(google.api.http).get": "/v1beta1/{name=projects/*/locations/*/certificateAuthorities/*}:fetch",
                                 "(google.api.method_signature)": "name"
-                              }
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "get": "/v1beta1/{name=projects/*/locations/*/certificateAuthorities/*}:fetch"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "name"
+                                }
+                              ]
                             },
                             "GetCertificateAuthority": {
                               "requestType": "GetCertificateAuthorityRequest",
@@ -1257,7 +1388,17 @@
                               "options": {
                                 "(google.api.http).get": "/v1beta1/{name=projects/*/locations/*/certificateAuthorities/*}",
                                 "(google.api.method_signature)": "name"
-                              }
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "get": "/v1beta1/{name=projects/*/locations/*/certificateAuthorities/*}"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "name"
+                                }
+                              ]
                             },
                             "ListCertificateAuthorities": {
                               "requestType": "ListCertificateAuthoritiesRequest",
@@ -1265,7 +1406,17 @@
                               "options": {
                                 "(google.api.http).get": "/v1beta1/{parent=projects/*/locations/*}/certificateAuthorities",
                                 "(google.api.method_signature)": "parent"
-                              }
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "get": "/v1beta1/{parent=projects/*/locations/*}/certificateAuthorities"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "parent"
+                                }
+                              ]
                             },
                             "RestoreCertificateAuthority": {
                               "requestType": "RestoreCertificateAuthorityRequest",
@@ -1276,7 +1427,24 @@
                                 "(google.api.method_signature)": "name",
                                 "(google.longrunning.operation_info).response_type": "CertificateAuthority",
                                 "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
-                              }
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "post": "/v1beta1/{name=projects/*/locations/*/certificateAuthorities/*}:restore",
+                                    "body": "*"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "name"
+                                },
+                                {
+                                  "(google.longrunning.operation_info)": {
+                                    "response_type": "CertificateAuthority",
+                                    "metadata_type": "OperationMetadata"
+                                  }
+                                }
+                              ]
                             },
                             "ScheduleDeleteCertificateAuthority": {
                               "requestType": "ScheduleDeleteCertificateAuthorityRequest",
@@ -1287,7 +1455,24 @@
                                 "(google.api.method_signature)": "name",
                                 "(google.longrunning.operation_info).response_type": "CertificateAuthority",
                                 "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
-                              }
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "post": "/v1beta1/{name=projects/*/locations/*/certificateAuthorities/*}:scheduleDelete",
+                                    "body": "*"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "name"
+                                },
+                                {
+                                  "(google.longrunning.operation_info)": {
+                                    "response_type": "CertificateAuthority",
+                                    "metadata_type": "OperationMetadata"
+                                  }
+                                }
+                              ]
                             },
                             "UpdateCertificateAuthority": {
                               "requestType": "UpdateCertificateAuthorityRequest",
@@ -1298,7 +1483,24 @@
                                 "(google.api.method_signature)": "certificate_authority,update_mask",
                                 "(google.longrunning.operation_info).response_type": "CertificateAuthority",
                                 "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
-                              }
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "patch": "/v1beta1/{certificate_authority.name=projects/*/locations/*/certificateAuthorities/*}",
+                                    "body": "certificate_authority"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "certificate_authority,update_mask"
+                                },
+                                {
+                                  "(google.longrunning.operation_info)": {
+                                    "response_type": "CertificateAuthority",
+                                    "metadata_type": "OperationMetadata"
+                                  }
+                                }
+                              ]
                             },
                             "GetCertificateRevocationList": {
                               "requestType": "GetCertificateRevocationListRequest",
@@ -1306,7 +1508,17 @@
                               "options": {
                                 "(google.api.http).get": "/v1beta1/{name=projects/*/locations/*/certificateAuthorities/*/certificateRevocationLists/*}",
                                 "(google.api.method_signature)": "name"
-                              }
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "get": "/v1beta1/{name=projects/*/locations/*/certificateAuthorities/*/certificateRevocationLists/*}"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "name"
+                                }
+                              ]
                             },
                             "ListCertificateRevocationLists": {
                               "requestType": "ListCertificateRevocationListsRequest",
@@ -1314,7 +1526,17 @@
                               "options": {
                                 "(google.api.http).get": "/v1beta1/{parent=projects/*/locations/*/certificateAuthorities/*}/certificateRevocationLists",
                                 "(google.api.method_signature)": "parent"
-                              }
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "get": "/v1beta1/{parent=projects/*/locations/*/certificateAuthorities/*}/certificateRevocationLists"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "parent"
+                                }
+                              ]
                             },
                             "UpdateCertificateRevocationList": {
                               "requestType": "UpdateCertificateRevocationListRequest",
@@ -1325,7 +1547,24 @@
                                 "(google.api.method_signature)": "certificate_revocation_list,update_mask",
                                 "(google.longrunning.operation_info).response_type": "CertificateRevocationList",
                                 "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
-                              }
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "patch": "/v1beta1/{certificate_revocation_list.name=projects/*/locations/*/certificateAuthorities/*/certificateRevocationLists/*}",
+                                    "body": "certificate_revocation_list"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "certificate_revocation_list,update_mask"
+                                },
+                                {
+                                  "(google.longrunning.operation_info)": {
+                                    "response_type": "CertificateRevocationList",
+                                    "metadata_type": "OperationMetadata"
+                                  }
+                                }
+                              ]
                             },
                             "GetReusableConfig": {
                               "requestType": "GetReusableConfigRequest",
@@ -1333,7 +1572,17 @@
                               "options": {
                                 "(google.api.http).get": "/v1beta1/{name=projects/*/locations/*/reusableConfigs/*}",
                                 "(google.api.method_signature)": "name"
-                              }
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "get": "/v1beta1/{name=projects/*/locations/*/reusableConfigs/*}"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "name"
+                                }
+                              ]
                             },
                             "ListReusableConfigs": {
                               "requestType": "ListReusableConfigsRequest",
@@ -1341,7 +1590,17 @@
                               "options": {
                                 "(google.api.http).get": "/v1beta1/{parent=projects/*/locations/*}/reusableConfigs",
                                 "(google.api.method_signature)": "parent"
-                              }
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "get": "/v1beta1/{parent=projects/*/locations/*}/reusableConfigs"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "parent"
+                                }
+                              ]
                             }
                           }
                         },
@@ -3226,7 +3485,17 @@
                   "options": {
                     "(google.api.http).get": "/v1/{name=operations}",
                     "(google.api.method_signature)": "name,filter"
-                  }
+                  },
+                  "parsedOptions": [
+                    {
+                      "(google.api.http)": {
+                        "get": "/v1/{name=operations}"
+                      }
+                    },
+                    {
+                      "(google.api.method_signature)": "name,filter"
+                    }
+                  ]
                 },
                 "GetOperation": {
                   "requestType": "GetOperationRequest",
@@ -3234,7 +3503,17 @@
                   "options": {
                     "(google.api.http).get": "/v1/{name=operations/**}",
                     "(google.api.method_signature)": "name"
-                  }
+                  },
+                  "parsedOptions": [
+                    {
+                      "(google.api.http)": {
+                        "get": "/v1/{name=operations/**}"
+                      }
+                    },
+                    {
+                      "(google.api.method_signature)": "name"
+                    }
+                  ]
                 },
                 "DeleteOperation": {
                   "requestType": "DeleteOperationRequest",
@@ -3242,7 +3521,17 @@
                   "options": {
                     "(google.api.http).delete": "/v1/{name=operations/**}",
                     "(google.api.method_signature)": "name"
-                  }
+                  },
+                  "parsedOptions": [
+                    {
+                      "(google.api.http)": {
+                        "delete": "/v1/{name=operations/**}"
+                      }
+                    },
+                    {
+                      "(google.api.method_signature)": "name"
+                    }
+                  ]
                 },
                 "CancelOperation": {
                   "requestType": "CancelOperationRequest",
@@ -3251,7 +3540,18 @@
                     "(google.api.http).post": "/v1/{name=operations/**}:cancel",
                     "(google.api.http).body": "*",
                     "(google.api.method_signature)": "name"
-                  }
+                  },
+                  "parsedOptions": [
+                    {
+                      "(google.api.http)": {
+                        "post": "/v1/{name=operations/**}:cancel",
+                        "body": "*"
+                      }
+                    },
+                    {
+                      "(google.api.method_signature)": "name"
+                    }
+                  ]
                 },
                 "WaitOperation": {
                   "requestType": "WaitOperationRequest",

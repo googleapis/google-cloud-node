@@ -2899,9 +2899,7 @@ export class CertificateAuthorityServiceClient {
   listCertificatesAsync(
     request?: protos.google.cloud.security.privateca.v1beta1.IListCertificatesRequest,
     options?: gax.CallOptions
-  ): AsyncIterable<
-    protos.google.cloud.security.privateca.v1beta1.ICertificate
-  > {
+  ): AsyncIterable<protos.google.cloud.security.privateca.v1beta1.ICertificate> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -2918,9 +2916,7 @@ export class CertificateAuthorityServiceClient {
       this.innerApiCalls['listCertificates'] as GaxCall,
       (request as unknown) as RequestType,
       callSettings
-    ) as AsyncIterable<
-      protos.google.cloud.security.privateca.v1beta1.ICertificate
-    >;
+    ) as AsyncIterable<protos.google.cloud.security.privateca.v1beta1.ICertificate>;
   }
   listCertificateAuthorities(
     request: protos.google.cloud.security.privateca.v1beta1.IListCertificateAuthoritiesRequest,
@@ -3137,9 +3133,7 @@ export class CertificateAuthorityServiceClient {
   listCertificateAuthoritiesAsync(
     request?: protos.google.cloud.security.privateca.v1beta1.IListCertificateAuthoritiesRequest,
     options?: gax.CallOptions
-  ): AsyncIterable<
-    protos.google.cloud.security.privateca.v1beta1.ICertificateAuthority
-  > {
+  ): AsyncIterable<protos.google.cloud.security.privateca.v1beta1.ICertificateAuthority> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -3156,9 +3150,7 @@ export class CertificateAuthorityServiceClient {
       this.innerApiCalls['listCertificateAuthorities'] as GaxCall,
       (request as unknown) as RequestType,
       callSettings
-    ) as AsyncIterable<
-      protos.google.cloud.security.privateca.v1beta1.ICertificateAuthority
-    >;
+    ) as AsyncIterable<protos.google.cloud.security.privateca.v1beta1.ICertificateAuthority>;
   }
   listCertificateRevocationLists(
     request: protos.google.cloud.security.privateca.v1beta1.IListCertificateRevocationListsRequest,
@@ -3375,9 +3367,7 @@ export class CertificateAuthorityServiceClient {
   listCertificateRevocationListsAsync(
     request?: protos.google.cloud.security.privateca.v1beta1.IListCertificateRevocationListsRequest,
     options?: gax.CallOptions
-  ): AsyncIterable<
-    protos.google.cloud.security.privateca.v1beta1.ICertificateRevocationList
-  > {
+  ): AsyncIterable<protos.google.cloud.security.privateca.v1beta1.ICertificateRevocationList> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -3394,9 +3384,7 @@ export class CertificateAuthorityServiceClient {
       this.innerApiCalls['listCertificateRevocationLists'] as GaxCall,
       (request as unknown) as RequestType,
       callSettings
-    ) as AsyncIterable<
-      protos.google.cloud.security.privateca.v1beta1.ICertificateRevocationList
-    >;
+    ) as AsyncIterable<protos.google.cloud.security.privateca.v1beta1.ICertificateRevocationList>;
   }
   listReusableConfigs(
     request: protos.google.cloud.security.privateca.v1beta1.IListReusableConfigsRequest,
@@ -3609,9 +3597,7 @@ export class CertificateAuthorityServiceClient {
   listReusableConfigsAsync(
     request?: protos.google.cloud.security.privateca.v1beta1.IListReusableConfigsRequest,
     options?: gax.CallOptions
-  ): AsyncIterable<
-    protos.google.cloud.security.privateca.v1beta1.IReusableConfig
-  > {
+  ): AsyncIterable<protos.google.cloud.security.privateca.v1beta1.IReusableConfig> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -3628,9 +3614,7 @@ export class CertificateAuthorityServiceClient {
       this.innerApiCalls['listReusableConfigs'] as GaxCall,
       (request as unknown) as RequestType,
       callSettings
-    ) as AsyncIterable<
-      protos.google.cloud.security.privateca.v1beta1.IReusableConfig
-    >;
+    ) as AsyncIterable<protos.google.cloud.security.privateca.v1beta1.IReusableConfig>;
   }
   // --------------------
   // -- Path templates --
