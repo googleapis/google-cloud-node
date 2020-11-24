@@ -1014,7 +1014,18 @@
                                 "(google.api.http).post": "/v1beta1/{parent=projects/*/locations/*}/jobs",
                                 "(google.api.http).body": "job",
                                 "(google.api.method_signature)": "parent,job"
-                              }
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "post": "/v1beta1/{parent=projects/*/locations/*}/jobs",
+                                    "body": "job"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "parent,job"
+                                }
+                              ]
                             },
                             "ListJobs": {
                               "requestType": "ListJobsRequest",
@@ -1022,7 +1033,17 @@
                               "options": {
                                 "(google.api.http).get": "/v1beta1/{parent=projects/*/locations/*}/jobs",
                                 "(google.api.method_signature)": "parent"
-                              }
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "get": "/v1beta1/{parent=projects/*/locations/*}/jobs"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "parent"
+                                }
+                              ]
                             },
                             "GetJob": {
                               "requestType": "GetJobRequest",
@@ -1030,7 +1051,17 @@
                               "options": {
                                 "(google.api.http).get": "/v1beta1/{name=projects/*/locations/*/jobs/*}",
                                 "(google.api.method_signature)": "name"
-                              }
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "get": "/v1beta1/{name=projects/*/locations/*/jobs/*}"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "name"
+                                }
+                              ]
                             },
                             "DeleteJob": {
                               "requestType": "DeleteJobRequest",
@@ -1038,7 +1069,17 @@
                               "options": {
                                 "(google.api.http).delete": "/v1beta1/{name=projects/*/locations/*/jobs/*}",
                                 "(google.api.method_signature)": "name"
-                              }
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "delete": "/v1beta1/{name=projects/*/locations/*/jobs/*}"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "name"
+                                }
+                              ]
                             },
                             "CreateJobTemplate": {
                               "requestType": "CreateJobTemplateRequest",
@@ -1047,7 +1088,18 @@
                                 "(google.api.http).post": "/v1beta1/{parent=projects/*/locations/*}/jobTemplates",
                                 "(google.api.http).body": "job_template",
                                 "(google.api.method_signature)": "parent,job_template,job_template_id"
-                              }
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "post": "/v1beta1/{parent=projects/*/locations/*}/jobTemplates",
+                                    "body": "job_template"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "parent,job_template,job_template_id"
+                                }
+                              ]
                             },
                             "ListJobTemplates": {
                               "requestType": "ListJobTemplatesRequest",
@@ -1055,7 +1107,17 @@
                               "options": {
                                 "(google.api.http).get": "/v1beta1/{parent=projects/*/locations/*}/jobTemplates",
                                 "(google.api.method_signature)": "parent"
-                              }
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "get": "/v1beta1/{parent=projects/*/locations/*}/jobTemplates"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "parent"
+                                }
+                              ]
                             },
                             "GetJobTemplate": {
                               "requestType": "GetJobTemplateRequest",
@@ -1063,7 +1125,17 @@
                               "options": {
                                 "(google.api.http).get": "/v1beta1/{name=projects/*/locations/*/jobTemplates/*}",
                                 "(google.api.method_signature)": "name"
-                              }
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "get": "/v1beta1/{name=projects/*/locations/*/jobTemplates/*}"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "name"
+                                }
+                              ]
                             },
                             "DeleteJobTemplate": {
                               "requestType": "DeleteJobTemplateRequest",
@@ -1071,7 +1143,17 @@
                               "options": {
                                 "(google.api.http).delete": "/v1beta1/{name=projects/*/locations/*/jobTemplates/*}",
                                 "(google.api.method_signature)": "name"
-                              }
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "delete": "/v1beta1/{name=projects/*/locations/*/jobTemplates/*}"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "name"
+                                }
+                              ]
                             }
                           }
                         },

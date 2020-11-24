@@ -12,6 +12,17 @@
 
 * [Before you begin](#before-you-begin)
 * [Samples](#samples)
+  * [Create Job From Ad Hoc](#create-job-from-ad-hoc)
+  * [Create Job From Preset](#create-job-from-preset)
+  * [Create Job From Template](#create-job-from-template)
+  * [Create Job Template](#create-job-template)
+  * [Delete Job](#delete-job)
+  * [Delete Job Template](#delete-job-template)
+  * [Get Job](#get-job)
+  * [Get Job State](#get-job-state)
+  * [Get Job Template](#get-job-template)
+  * [List Job Templates](#list-job-templates)
+  * [List Jobs](#list-jobs)
   * [Quickstart](#quickstart)
 
 ## Before you begin
@@ -26,6 +37,193 @@ Before running the samples, make sure you've followed the steps outlined in
 `cd ..`
 
 ## Samples
+
+
+
+### Create Job From Ad Hoc
+
+View the [source code](https://github.com/googleapis/nodejs-video-transcoder/blob/master/samples/createJobFromAdHoc.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-video-transcoder&page=editor&open_in_editor=samples/createJobFromAdHoc.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/createJobFromAdHoc.js`
+
+
+-----
+
+
+
+
+### Create Job From Preset
+
+View the [source code](https://github.com/googleapis/nodejs-video-transcoder/blob/master/samples/createJobFromPreset.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-video-transcoder&page=editor&open_in_editor=samples/createJobFromPreset.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/createJobFromPreset.js`
+
+
+-----
+
+
+
+
+### Create Job From Template
+
+View the [source code](https://github.com/googleapis/nodejs-video-transcoder/blob/master/samples/createJobFromTemplate.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-video-transcoder&page=editor&open_in_editor=samples/createJobFromTemplate.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/createJobFromTemplate.js`
+
+
+-----
+
+
+
+
+### Create Job Template
+
+View the [source code](https://github.com/googleapis/nodejs-video-transcoder/blob/master/samples/createJobTemplate.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-video-transcoder&page=editor&open_in_editor=samples/createJobTemplate.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/createJobTemplate.js`
+
+
+-----
+
+
+
+
+### Delete Job
+
+View the [source code](https://github.com/googleapis/nodejs-video-transcoder/blob/master/samples/deleteJob.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-video-transcoder&page=editor&open_in_editor=samples/deleteJob.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/deleteJob.js`
+
+
+-----
+
+
+
+
+### Delete Job Template
+
+View the [source code](https://github.com/googleapis/nodejs-video-transcoder/blob/master/samples/deleteJobTemplate.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-video-transcoder&page=editor&open_in_editor=samples/deleteJobTemplate.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/deleteJobTemplate.js`
+
+
+-----
+
+
+
+
+### Get Job
+
+View the [source code](https://github.com/googleapis/nodejs-video-transcoder/blob/master/samples/getJob.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-video-transcoder&page=editor&open_in_editor=samples/getJob.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/getJob.js`
+
+
+-----
+
+
+
+
+### Get Job State
+
+View the [source code](https://github.com/googleapis/nodejs-video-transcoder/blob/master/samples/getJobState.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-video-transcoder&page=editor&open_in_editor=samples/getJobState.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/getJobState.js`
+
+
+-----
+
+
+
+
+### Get Job Template
+
+View the [source code](https://github.com/googleapis/nodejs-video-transcoder/blob/master/samples/getJobTemplate.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-video-transcoder&page=editor&open_in_editor=samples/getJobTemplate.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/getJobTemplate.js`
+
+
+-----
+
+
+
+
+### List Job Templates
+
+View the [source code](https://github.com/googleapis/nodejs-video-transcoder/blob/master/samples/listJobTemplates.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-video-transcoder&page=editor&open_in_editor=samples/listJobTemplates.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/listJobTemplates.js`
+
+
+-----
+
+
+
+
+### List Jobs
+
+View the [source code](https://github.com/googleapis/nodejs-video-transcoder/blob/master/samples/listJobs.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-video-transcoder&page=editor&open_in_editor=samples/listJobs.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/listJobs.js`
+
+
+-----
+
 
 
 
