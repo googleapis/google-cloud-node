@@ -536,7 +536,18 @@
                             "(google.api.http).post": "/v4/{parent=projects/*/tenants/*}/companies",
                             "(google.api.http).body": "company",
                             "(google.api.method_signature)": "parent,company"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v4/{parent=projects/*/tenants/*}/companies",
+                                "body": "company"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,company"
+                            }
+                          ]
                         },
                         "GetCompany": {
                           "requestType": "GetCompanyRequest",
@@ -544,7 +555,17 @@
                           "options": {
                             "(google.api.http).get": "/v4/{name=projects/*/tenants/*/companies/*}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v4/{name=projects/*/tenants/*/companies/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "UpdateCompany": {
                           "requestType": "UpdateCompanyRequest",
@@ -553,7 +574,18 @@
                             "(google.api.http).patch": "/v4/{company.name=projects/*/tenants/*/companies/*}",
                             "(google.api.http).body": "company",
                             "(google.api.method_signature)": "company,update_mask"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v4/{company.name=projects/*/tenants/*/companies/*}",
+                                "body": "company"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "company,update_mask"
+                            }
+                          ]
                         },
                         "DeleteCompany": {
                           "requestType": "DeleteCompanyRequest",
@@ -561,7 +593,17 @@
                           "options": {
                             "(google.api.http).delete": "/v4/{name=projects/*/tenants/*/companies/*}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v4/{name=projects/*/tenants/*/companies/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "ListCompanies": {
                           "requestType": "ListCompaniesRequest",
@@ -569,7 +611,17 @@
                           "options": {
                             "(google.api.http).get": "/v4/{parent=projects/*/tenants/*}/companies",
                             "(google.api.method_signature)": "parent"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v4/{parent=projects/*/tenants/*}/companies"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
                         }
                       }
                     },
@@ -683,7 +735,14 @@
                           "responseType": "CompleteQueryResponse",
                           "options": {
                             "(google.api.http).get": "/v4/{tenant=projects/*/tenants/*}:completeQuery"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v4/{tenant=projects/*/tenants/*}:completeQuery"
+                              }
+                            }
+                          ]
                         }
                       }
                     },
@@ -872,7 +931,18 @@
                             "(google.api.http).post": "/v4/{parent=projects/*/tenants/*}/clientEvents",
                             "(google.api.http).body": "client_event",
                             "(google.api.method_signature)": "parent,client_event"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v4/{parent=projects/*/tenants/*}/clientEvents",
+                                "body": "client_event"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,client_event"
+                            }
+                          ]
                         }
                       }
                     },
@@ -1328,7 +1398,18 @@
                             "(google.api.http).post": "/v4/{parent=projects/*/tenants/*}/jobs",
                             "(google.api.http).body": "job",
                             "(google.api.method_signature)": "parent,job"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v4/{parent=projects/*/tenants/*}/jobs",
+                                "body": "job"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,job"
+                            }
+                          ]
                         },
                         "BatchCreateJobs": {
                           "requestType": "BatchCreateJobsRequest",
@@ -1339,7 +1420,24 @@
                             "(google.api.method_signature)": "parent,jobs",
                             "(google.longrunning.operation_info).response_type": "BatchCreateJobsResponse",
                             "(google.longrunning.operation_info).metadata_type": "BatchOperationMetadata"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v4/{parent=projects/*/tenants/*}/jobs:batchCreate",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,jobs"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "BatchCreateJobsResponse",
+                                "metadata_type": "BatchOperationMetadata"
+                              }
+                            }
+                          ]
                         },
                         "GetJob": {
                           "requestType": "GetJobRequest",
@@ -1347,7 +1445,17 @@
                           "options": {
                             "(google.api.http).get": "/v4/{name=projects/*/tenants/*/jobs/*}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v4/{name=projects/*/tenants/*/jobs/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "UpdateJob": {
                           "requestType": "UpdateJobRequest",
@@ -1356,7 +1464,18 @@
                             "(google.api.http).patch": "/v4/{job.name=projects/*/tenants/*/jobs/*}",
                             "(google.api.http).body": "job",
                             "(google.api.method_signature)": "job,update_mask"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v4/{job.name=projects/*/tenants/*/jobs/*}",
+                                "body": "job"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "job,update_mask"
+                            }
+                          ]
                         },
                         "BatchUpdateJobs": {
                           "requestType": "BatchUpdateJobsRequest",
@@ -1367,7 +1486,24 @@
                             "(google.api.method_signature)": "parent,jobs",
                             "(google.longrunning.operation_info).response_type": "BatchUpdateJobsResponse",
                             "(google.longrunning.operation_info).metadata_type": "BatchOperationMetadata"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v4/{parent=projects/*/tenants/*}/jobs:batchUpdate",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,jobs"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "BatchUpdateJobsResponse",
+                                "metadata_type": "BatchOperationMetadata"
+                              }
+                            }
+                          ]
                         },
                         "DeleteJob": {
                           "requestType": "DeleteJobRequest",
@@ -1375,7 +1511,17 @@
                           "options": {
                             "(google.api.http).delete": "/v4/{name=projects/*/tenants/*/jobs/*}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v4/{name=projects/*/tenants/*/jobs/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "BatchDeleteJobs": {
                           "requestType": "BatchDeleteJobsRequest",
@@ -1386,7 +1532,24 @@
                             "(google.api.method_signature)": "parent,names",
                             "(google.longrunning.operation_info).response_type": "BatchDeleteJobsResponse",
                             "(google.longrunning.operation_info).metadata_type": "BatchOperationMetadata"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v4/{parent=projects/*/tenants/*}/jobs:batchDelete",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,names"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "BatchDeleteJobsResponse",
+                                "metadata_type": "BatchOperationMetadata"
+                              }
+                            }
+                          ]
                         },
                         "ListJobs": {
                           "requestType": "ListJobsRequest",
@@ -1394,7 +1557,17 @@
                           "options": {
                             "(google.api.http).get": "/v4/{parent=projects/*/tenants/*}/jobs",
                             "(google.api.method_signature)": "parent,filter"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v4/{parent=projects/*/tenants/*}/jobs"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,filter"
+                            }
+                          ]
                         },
                         "SearchJobs": {
                           "requestType": "SearchJobsRequest",
@@ -1402,7 +1575,15 @@
                           "options": {
                             "(google.api.http).post": "/v4/{parent=projects/*/tenants/*}/jobs:search",
                             "(google.api.http).body": "*"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v4/{parent=projects/*/tenants/*}/jobs:search",
+                                "body": "*"
+                              }
+                            }
+                          ]
                         },
                         "SearchJobsForAlert": {
                           "requestType": "SearchJobsRequest",
@@ -1410,7 +1591,15 @@
                           "options": {
                             "(google.api.http).post": "/v4/{parent=projects/*/tenants/*}/jobs:searchForAlert",
                             "(google.api.http).body": "*"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v4/{parent=projects/*/tenants/*}/jobs:searchForAlert",
+                                "body": "*"
+                              }
+                            }
+                          ]
                         }
                       }
                     },
@@ -1856,7 +2045,18 @@
                             "(google.api.http).post": "/v4/{parent=projects/*}/tenants",
                             "(google.api.http).body": "tenant",
                             "(google.api.method_signature)": "parent,tenant"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v4/{parent=projects/*}/tenants",
+                                "body": "tenant"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,tenant"
+                            }
+                          ]
                         },
                         "GetTenant": {
                           "requestType": "GetTenantRequest",
@@ -1864,7 +2064,17 @@
                           "options": {
                             "(google.api.http).get": "/v4/{name=projects/*/tenants/*}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v4/{name=projects/*/tenants/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "UpdateTenant": {
                           "requestType": "UpdateTenantRequest",
@@ -1873,7 +2083,18 @@
                             "(google.api.http).patch": "/v4/{tenant.name=projects/*/tenants/*}",
                             "(google.api.http).body": "tenant",
                             "(google.api.method_signature)": "tenant,update_mask"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v4/{tenant.name=projects/*/tenants/*}",
+                                "body": "tenant"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "tenant,update_mask"
+                            }
+                          ]
                         },
                         "DeleteTenant": {
                           "requestType": "DeleteTenantRequest",
@@ -1881,7 +2102,17 @@
                           "options": {
                             "(google.api.http).delete": "/v4/{name=projects/*/tenants/*}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v4/{name=projects/*/tenants/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "ListTenants": {
                           "requestType": "ListTenantsRequest",
@@ -1889,7 +2120,17 @@
                           "options": {
                             "(google.api.http).get": "/v4/{parent=projects/*}/tenants",
                             "(google.api.method_signature)": "parent"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v4/{parent=projects/*}/tenants"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
                         }
                       }
                     },
@@ -2680,7 +2921,18 @@
                             "(google.api.http).post": "/v4beta1/{parent=projects/*/tenants/*/profiles/*}/applications",
                             "(google.api.http).body": "*",
                             "(google.api.method_signature)": "parent,application"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v4beta1/{parent=projects/*/tenants/*/profiles/*}/applications",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,application"
+                            }
+                          ]
                         },
                         "GetApplication": {
                           "requestType": "GetApplicationRequest",
@@ -2688,7 +2940,17 @@
                           "options": {
                             "(google.api.http).get": "/v4beta1/{name=projects/*/tenants/*/profiles/*/applications/*}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v4beta1/{name=projects/*/tenants/*/profiles/*/applications/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "UpdateApplication": {
                           "requestType": "UpdateApplicationRequest",
@@ -2697,7 +2959,18 @@
                             "(google.api.http).patch": "/v4beta1/{application.name=projects/*/tenants/*/profiles/*/applications/*}",
                             "(google.api.http).body": "*",
                             "(google.api.method_signature)": "application"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v4beta1/{application.name=projects/*/tenants/*/profiles/*/applications/*}",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "application"
+                            }
+                          ]
                         },
                         "DeleteApplication": {
                           "requestType": "DeleteApplicationRequest",
@@ -2705,7 +2978,17 @@
                           "options": {
                             "(google.api.http).delete": "/v4beta1/{name=projects/*/tenants/*/profiles/*/applications/*}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v4beta1/{name=projects/*/tenants/*/profiles/*/applications/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "ListApplications": {
                           "requestType": "ListApplicationsRequest",
@@ -2713,7 +2996,17 @@
                           "options": {
                             "(google.api.http).get": "/v4beta1/{parent=projects/*/tenants/*/profiles/*}/applications",
                             "(google.api.method_signature)": "parent"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v4beta1/{parent=projects/*/tenants/*/profiles/*}/applications"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
                         }
                       }
                     },
@@ -2910,7 +3203,22 @@
                             "(google.api.http).additional_bindings.post": "/v4beta1/{parent=projects/*}/companies",
                             "(google.api.http).additional_bindings.body": "*",
                             "(google.api.method_signature)": "parent,company"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v4beta1/{parent=projects/*/tenants/*}/companies",
+                                "body": "*",
+                                "additional_bindings": {
+                                  "post": "/v4beta1/{parent=projects/*}/companies",
+                                  "body": "*"
+                                }
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,company"
+                            }
+                          ]
                         },
                         "GetCompany": {
                           "requestType": "GetCompanyRequest",
@@ -2919,7 +3227,20 @@
                             "(google.api.http).get": "/v4beta1/{name=projects/*/tenants/*/companies/*}",
                             "(google.api.http).additional_bindings.get": "/v4beta1/{name=projects/*/companies/*}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v4beta1/{name=projects/*/tenants/*/companies/*}",
+                                "additional_bindings": {
+                                  "get": "/v4beta1/{name=projects/*/companies/*}"
+                                }
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "UpdateCompany": {
                           "requestType": "UpdateCompanyRequest",
@@ -2930,7 +3251,22 @@
                             "(google.api.http).additional_bindings.patch": "/v4beta1/{company.name=projects/*/companies/*}",
                             "(google.api.http).additional_bindings.body": "*",
                             "(google.api.method_signature)": "company"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v4beta1/{company.name=projects/*/tenants/*/companies/*}",
+                                "body": "*",
+                                "additional_bindings": {
+                                  "patch": "/v4beta1/{company.name=projects/*/companies/*}",
+                                  "body": "*"
+                                }
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "company"
+                            }
+                          ]
                         },
                         "DeleteCompany": {
                           "requestType": "DeleteCompanyRequest",
@@ -2939,7 +3275,20 @@
                             "(google.api.http).delete": "/v4beta1/{name=projects/*/tenants/*/companies/*}",
                             "(google.api.http).additional_bindings.delete": "/v4beta1/{name=projects/*/companies/*}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v4beta1/{name=projects/*/tenants/*/companies/*}",
+                                "additional_bindings": {
+                                  "delete": "/v4beta1/{name=projects/*/companies/*}"
+                                }
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "ListCompanies": {
                           "requestType": "ListCompaniesRequest",
@@ -2948,7 +3297,20 @@
                             "(google.api.http).get": "/v4beta1/{parent=projects/*/tenants/*}/companies",
                             "(google.api.http).additional_bindings.get": "/v4beta1/{parent=projects/*}/companies",
                             "(google.api.method_signature)": "parent"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v4beta1/{parent=projects/*/tenants/*}/companies",
+                                "additional_bindings": {
+                                  "get": "/v4beta1/{parent=projects/*}/companies"
+                                }
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
                         }
                       }
                     },
@@ -3063,7 +3425,17 @@
                           "options": {
                             "(google.api.http).get": "/v4beta1/{parent=projects/*/tenants/*}:complete",
                             "(google.api.http).additional_bindings.get": "/v4beta1/{parent=projects/*}:complete"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v4beta1/{parent=projects/*/tenants/*}:complete",
+                                "additional_bindings": {
+                                  "get": "/v4beta1/{parent=projects/*}:complete"
+                                }
+                              }
+                            }
+                          ]
                         }
                       }
                     },
@@ -3297,7 +3669,22 @@
                             "(google.api.http).additional_bindings.post": "/v4beta1/{parent=projects/*}/clientEvents",
                             "(google.api.http).additional_bindings.body": "*",
                             "(google.api.method_signature)": "parent,client_event"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v4beta1/{parent=projects/*/tenants/*}/clientEvents",
+                                "body": "*",
+                                "additional_bindings": {
+                                  "post": "/v4beta1/{parent=projects/*}/clientEvents",
+                                  "body": "*"
+                                }
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,client_event"
+                            }
+                          ]
                         }
                       }
                     },
@@ -4045,7 +4432,22 @@
                             "(google.api.http).additional_bindings.post": "/v4beta1/{parent=projects/*}/jobs",
                             "(google.api.http).additional_bindings.body": "*",
                             "(google.api.method_signature)": "parent,job"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v4beta1/{parent=projects/*/tenants/*}/jobs",
+                                "body": "*",
+                                "additional_bindings": {
+                                  "post": "/v4beta1/{parent=projects/*}/jobs",
+                                  "body": "*"
+                                }
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,job"
+                            }
+                          ]
                         },
                         "BatchCreateJobs": {
                           "requestType": "BatchCreateJobsRequest",
@@ -4058,7 +4460,28 @@
                             "(google.api.method_signature)": "parent,jobs",
                             "(google.longrunning.operation_info).response_type": "JobOperationResult",
                             "(google.longrunning.operation_info).metadata_type": "BatchOperationMetadata"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v4beta1/{parent=projects/*/tenants/*}/jobs:batchCreate",
+                                "body": "*",
+                                "additional_bindings": {
+                                  "post": "/v4beta1/{parent=projects/*}/jobs:batchCreate",
+                                  "body": "*"
+                                }
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,jobs"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "JobOperationResult",
+                                "metadata_type": "BatchOperationMetadata"
+                              }
+                            }
+                          ]
                         },
                         "GetJob": {
                           "requestType": "GetJobRequest",
@@ -4067,7 +4490,20 @@
                             "(google.api.http).get": "/v4beta1/{name=projects/*/tenants/*/jobs/*}",
                             "(google.api.http).additional_bindings.get": "/v4beta1/{name=projects/*/jobs/*}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v4beta1/{name=projects/*/tenants/*/jobs/*}",
+                                "additional_bindings": {
+                                  "get": "/v4beta1/{name=projects/*/jobs/*}"
+                                }
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "UpdateJob": {
                           "requestType": "UpdateJobRequest",
@@ -4078,7 +4514,22 @@
                             "(google.api.http).additional_bindings.patch": "/v4beta1/{job.name=projects/*/jobs/*}",
                             "(google.api.http).additional_bindings.body": "*",
                             "(google.api.method_signature)": "job"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v4beta1/{job.name=projects/*/tenants/*/jobs/*}",
+                                "body": "*",
+                                "additional_bindings": {
+                                  "patch": "/v4beta1/{job.name=projects/*/jobs/*}",
+                                  "body": "*"
+                                }
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "job"
+                            }
+                          ]
                         },
                         "BatchUpdateJobs": {
                           "requestType": "BatchUpdateJobsRequest",
@@ -4091,7 +4542,28 @@
                             "(google.api.method_signature)": "parent,jobs",
                             "(google.longrunning.operation_info).response_type": "JobOperationResult",
                             "(google.longrunning.operation_info).metadata_type": "BatchOperationMetadata"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v4beta1/{parent=projects/*/tenants/*}/jobs:batchUpdate",
+                                "body": "*",
+                                "additional_bindings": {
+                                  "post": "/v4beta1/{parent=projects/*}/jobs:batchUpdate",
+                                  "body": "*"
+                                }
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,jobs"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "JobOperationResult",
+                                "metadata_type": "BatchOperationMetadata"
+                              }
+                            }
+                          ]
                         },
                         "DeleteJob": {
                           "requestType": "DeleteJobRequest",
@@ -4100,7 +4572,20 @@
                             "(google.api.http).delete": "/v4beta1/{name=projects/*/tenants/*/jobs/*}",
                             "(google.api.http).additional_bindings.delete": "/v4beta1/{name=projects/*/jobs/*}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v4beta1/{name=projects/*/tenants/*/jobs/*}",
+                                "additional_bindings": {
+                                  "delete": "/v4beta1/{name=projects/*/jobs/*}"
+                                }
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "BatchDeleteJobs": {
                           "requestType": "BatchDeleteJobsRequest",
@@ -4110,7 +4595,21 @@
                             "(google.api.http).body": "*",
                             "(google.api.http).additional_bindings.post": "/v4beta1/{parent=projects/*}/jobs:batchDelete",
                             "(google.api.method_signature)": "parent,filter"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v4beta1/{parent=projects/*/tenants/*}/jobs:batchDelete",
+                                "body": "*",
+                                "additional_bindings": {
+                                  "post": "/v4beta1/{parent=projects/*}/jobs:batchDelete"
+                                }
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,filter"
+                            }
+                          ]
                         },
                         "ListJobs": {
                           "requestType": "ListJobsRequest",
@@ -4119,7 +4618,20 @@
                             "(google.api.http).get": "/v4beta1/{parent=projects/*/tenants/*}/jobs",
                             "(google.api.http).additional_bindings.get": "/v4beta1/{parent=projects/*}/jobs",
                             "(google.api.method_signature)": "parent,filter"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v4beta1/{parent=projects/*/tenants/*}/jobs",
+                                "additional_bindings": {
+                                  "get": "/v4beta1/{parent=projects/*}/jobs"
+                                }
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,filter"
+                            }
+                          ]
                         },
                         "SearchJobs": {
                           "requestType": "SearchJobsRequest",
@@ -4129,7 +4641,19 @@
                             "(google.api.http).body": "*",
                             "(google.api.http).additional_bindings.post": "/v4beta1/{parent=projects/*}/jobs:search",
                             "(google.api.http).additional_bindings.body": "*"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v4beta1/{parent=projects/*/tenants/*}/jobs:search",
+                                "body": "*",
+                                "additional_bindings": {
+                                  "post": "/v4beta1/{parent=projects/*}/jobs:search",
+                                  "body": "*"
+                                }
+                              }
+                            }
+                          ]
                         },
                         "SearchJobsForAlert": {
                           "requestType": "SearchJobsRequest",
@@ -4139,7 +4663,19 @@
                             "(google.api.http).body": "*",
                             "(google.api.http).additional_bindings.post": "/v4beta1/{parent=projects/*}/jobs:searchForAlert",
                             "(google.api.http).additional_bindings.body": "*"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v4beta1/{parent=projects/*/tenants/*}/jobs:searchForAlert",
+                                "body": "*",
+                                "additional_bindings": {
+                                  "post": "/v4beta1/{parent=projects/*}/jobs:searchForAlert",
+                                  "body": "*"
+                                }
+                              }
+                            }
+                          ]
                         }
                       }
                     },
@@ -5200,7 +5736,17 @@
                           "options": {
                             "(google.api.http).get": "/v4beta1/{parent=projects/*/tenants/*}/profiles",
                             "(google.api.method_signature)": "parent"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v4beta1/{parent=projects/*/tenants/*}/profiles"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
                         },
                         "CreateProfile": {
                           "requestType": "CreateProfileRequest",
@@ -5209,7 +5755,18 @@
                             "(google.api.http).post": "/v4beta1/{parent=projects/*/tenants/*}/profiles",
                             "(google.api.http).body": "*",
                             "(google.api.method_signature)": "parent,profile"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v4beta1/{parent=projects/*/tenants/*}/profiles",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,profile"
+                            }
+                          ]
                         },
                         "GetProfile": {
                           "requestType": "GetProfileRequest",
@@ -5217,7 +5774,17 @@
                           "options": {
                             "(google.api.http).get": "/v4beta1/{name=projects/*/tenants/*/profiles/*}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v4beta1/{name=projects/*/tenants/*/profiles/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "UpdateProfile": {
                           "requestType": "UpdateProfileRequest",
@@ -5226,7 +5793,18 @@
                             "(google.api.http).patch": "/v4beta1/{profile.name=projects/*/tenants/*/profiles/*}",
                             "(google.api.http).body": "*",
                             "(google.api.method_signature)": "profile"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v4beta1/{profile.name=projects/*/tenants/*/profiles/*}",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "profile"
+                            }
+                          ]
                         },
                         "DeleteProfile": {
                           "requestType": "DeleteProfileRequest",
@@ -5234,7 +5812,17 @@
                           "options": {
                             "(google.api.http).delete": "/v4beta1/{name=projects/*/tenants/*/profiles/*}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v4beta1/{name=projects/*/tenants/*/profiles/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "SearchProfiles": {
                           "requestType": "SearchProfilesRequest",
@@ -5242,7 +5830,15 @@
                           "options": {
                             "(google.api.http).post": "/v4beta1/{parent=projects/*/tenants/*}:search",
                             "(google.api.http).body": "*"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v4beta1/{parent=projects/*/tenants/*}:search",
+                                "body": "*"
+                              }
+                            }
+                          ]
                         }
                       }
                     },
@@ -5502,7 +6098,18 @@
                             "(google.api.http).post": "/v4beta1/{parent=projects/*}/tenants",
                             "(google.api.http).body": "*",
                             "(google.api.method_signature)": "parent,tenant"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v4beta1/{parent=projects/*}/tenants",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,tenant"
+                            }
+                          ]
                         },
                         "GetTenant": {
                           "requestType": "GetTenantRequest",
@@ -5510,7 +6117,17 @@
                           "options": {
                             "(google.api.http).get": "/v4beta1/{name=projects/*/tenants/*}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v4beta1/{name=projects/*/tenants/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "UpdateTenant": {
                           "requestType": "UpdateTenantRequest",
@@ -5519,7 +6136,18 @@
                             "(google.api.http).patch": "/v4beta1/{tenant.name=projects/*/tenants/*}",
                             "(google.api.http).body": "*",
                             "(google.api.method_signature)": "tenant"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v4beta1/{tenant.name=projects/*/tenants/*}",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "tenant"
+                            }
+                          ]
                         },
                         "DeleteTenant": {
                           "requestType": "DeleteTenantRequest",
@@ -5527,7 +6155,17 @@
                           "options": {
                             "(google.api.http).delete": "/v4beta1/{name=projects/*/tenants/*}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v4beta1/{name=projects/*/tenants/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "ListTenants": {
                           "requestType": "ListTenantsRequest",
@@ -5535,7 +6173,17 @@
                           "options": {
                             "(google.api.http).get": "/v4beta1/{parent=projects/*}/tenants",
                             "(google.api.method_signature)": "parent"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v4beta1/{parent=projects/*}/tenants"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
                         }
                       }
                     },
@@ -7007,7 +7655,17 @@
                   "options": {
                     "(google.api.http).get": "/v1/{name=operations}",
                     "(google.api.method_signature)": "name,filter"
-                  }
+                  },
+                  "parsedOptions": [
+                    {
+                      "(google.api.http)": {
+                        "get": "/v1/{name=operations}"
+                      }
+                    },
+                    {
+                      "(google.api.method_signature)": "name,filter"
+                    }
+                  ]
                 },
                 "GetOperation": {
                   "requestType": "GetOperationRequest",
@@ -7015,7 +7673,17 @@
                   "options": {
                     "(google.api.http).get": "/v1/{name=operations/**}",
                     "(google.api.method_signature)": "name"
-                  }
+                  },
+                  "parsedOptions": [
+                    {
+                      "(google.api.http)": {
+                        "get": "/v1/{name=operations/**}"
+                      }
+                    },
+                    {
+                      "(google.api.method_signature)": "name"
+                    }
+                  ]
                 },
                 "DeleteOperation": {
                   "requestType": "DeleteOperationRequest",
@@ -7023,7 +7691,17 @@
                   "options": {
                     "(google.api.http).delete": "/v1/{name=operations/**}",
                     "(google.api.method_signature)": "name"
-                  }
+                  },
+                  "parsedOptions": [
+                    {
+                      "(google.api.http)": {
+                        "delete": "/v1/{name=operations/**}"
+                      }
+                    },
+                    {
+                      "(google.api.method_signature)": "name"
+                    }
+                  ]
                 },
                 "CancelOperation": {
                   "requestType": "CancelOperationRequest",
@@ -7032,7 +7710,18 @@
                     "(google.api.http).post": "/v1/{name=operations/**}:cancel",
                     "(google.api.http).body": "*",
                     "(google.api.method_signature)": "name"
-                  }
+                  },
+                  "parsedOptions": [
+                    {
+                      "(google.api.http)": {
+                        "post": "/v1/{name=operations/**}:cancel",
+                        "body": "*"
+                      }
+                    },
+                    {
+                      "(google.api.method_signature)": "name"
+                    }
+                  ]
                 },
                 "WaitOperation": {
                   "requestType": "WaitOperationRequest",
