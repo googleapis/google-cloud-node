@@ -2181,9 +2181,7 @@ export class ReservationServiceClient {
       this.innerApiCalls['listReservations'] as GaxCall,
       (request as unknown) as RequestType,
       callSettings
-    ) as AsyncIterable<
-      protos.google.cloud.bigquery.reservation.v1.IReservation
-    >;
+    ) as AsyncIterable<protos.google.cloud.bigquery.reservation.v1.IReservation>;
   }
   listCapacityCommitments(
     request: protos.google.cloud.bigquery.reservation.v1.IListCapacityCommitmentsRequest,
@@ -2367,9 +2365,7 @@ export class ReservationServiceClient {
   listCapacityCommitmentsAsync(
     request?: protos.google.cloud.bigquery.reservation.v1.IListCapacityCommitmentsRequest,
     options?: CallOptions
-  ): AsyncIterable<
-    protos.google.cloud.bigquery.reservation.v1.ICapacityCommitment
-  > {
+  ): AsyncIterable<protos.google.cloud.bigquery.reservation.v1.ICapacityCommitment> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -2386,9 +2382,7 @@ export class ReservationServiceClient {
       this.innerApiCalls['listCapacityCommitments'] as GaxCall,
       (request as unknown) as RequestType,
       callSettings
-    ) as AsyncIterable<
-      protos.google.cloud.bigquery.reservation.v1.ICapacityCommitment
-    >;
+    ) as AsyncIterable<protos.google.cloud.bigquery.reservation.v1.ICapacityCommitment>;
   }
   listAssignments(
     request: protos.google.cloud.bigquery.reservation.v1.IListAssignmentsRequest,
