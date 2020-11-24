@@ -26,14 +26,31 @@
                           "options": {
                             "(google.api.http).get": "/v1alpha/{name=accounts/*}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1alpha/{name=accounts/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "ListAccounts": {
                           "requestType": "ListAccountsRequest",
                           "responseType": "ListAccountsResponse",
                           "options": {
                             "(google.api.http).get": "/v1alpha/accounts"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1alpha/accounts"
+                              }
+                            }
+                          ]
                         },
                         "DeleteAccount": {
                           "requestType": "DeleteAccountRequest",
@@ -41,7 +58,17 @@
                           "options": {
                             "(google.api.http).delete": "/v1alpha/{name=accounts/*}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1alpha/{name=accounts/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "UpdateAccount": {
                           "requestType": "UpdateAccountRequest",
@@ -50,7 +77,18 @@
                             "(google.api.http).patch": "/v1alpha/{account.name=accounts/*}",
                             "(google.api.http).body": "account",
                             "(google.api.method_signature)": "account,update_mask"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1alpha/{account.name=accounts/*}",
+                                "body": "account"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "account,update_mask"
+                            }
+                          ]
                         },
                         "ProvisionAccountTicket": {
                           "requestType": "ProvisionAccountTicketRequest",
@@ -58,14 +96,29 @@
                           "options": {
                             "(google.api.http).post": "/v1alpha/accounts:provisionAccountTicket",
                             "(google.api.http).body": "*"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1alpha/accounts:provisionAccountTicket",
+                                "body": "*"
+                              }
+                            }
+                          ]
                         },
                         "ListAccountSummaries": {
                           "requestType": "ListAccountSummariesRequest",
                           "responseType": "ListAccountSummariesResponse",
                           "options": {
                             "(google.api.http).get": "/v1alpha/accountSummaries"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1alpha/accountSummaries"
+                              }
+                            }
+                          ]
                         },
                         "GetProperty": {
                           "requestType": "GetPropertyRequest",
@@ -73,14 +126,31 @@
                           "options": {
                             "(google.api.http).get": "/v1alpha/{name=properties/*}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1alpha/{name=properties/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "ListProperties": {
                           "requestType": "ListPropertiesRequest",
                           "responseType": "ListPropertiesResponse",
                           "options": {
                             "(google.api.http).get": "/v1alpha/properties"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1alpha/properties"
+                              }
+                            }
+                          ]
                         },
                         "CreateProperty": {
                           "requestType": "CreatePropertyRequest",
@@ -89,7 +159,18 @@
                             "(google.api.http).post": "/v1alpha/properties",
                             "(google.api.http).body": "property",
                             "(google.api.method_signature)": "property"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1alpha/properties",
+                                "body": "property"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "property"
+                            }
+                          ]
                         },
                         "DeleteProperty": {
                           "requestType": "DeletePropertyRequest",
@@ -97,7 +178,17 @@
                           "options": {
                             "(google.api.http).delete": "/v1alpha/{name=properties/*}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1alpha/{name=properties/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "UpdateProperty": {
                           "requestType": "UpdatePropertyRequest",
@@ -106,7 +197,18 @@
                             "(google.api.http).patch": "/v1alpha/{property.name=properties/*}",
                             "(google.api.http).body": "property",
                             "(google.api.method_signature)": "property,update_mask"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1alpha/{property.name=properties/*}",
+                                "body": "property"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "property,update_mask"
+                            }
+                          ]
                         },
                         "GetUserLink": {
                           "requestType": "GetUserLinkRequest",
@@ -115,7 +217,20 @@
                             "(google.api.http).get": "/v1alpha/{name=accounts/*/userLinks/*}",
                             "(google.api.http).additional_bindings.get": "/v1alpha/{name=properties/*/userLinks/*}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1alpha/{name=accounts/*/userLinks/*}",
+                                "additional_bindings": {
+                                  "get": "/v1alpha/{name=properties/*/userLinks/*}"
+                                }
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "BatchGetUserLinks": {
                           "requestType": "BatchGetUserLinksRequest",
@@ -123,7 +238,17 @@
                           "options": {
                             "(google.api.http).get": "/v1alpha/{parent=accounts/*}/userLinks:batchGet",
                             "(google.api.http).additional_bindings.get": "/v1alpha/{parent=properties/*}/userLinks:batchGet"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1alpha/{parent=accounts/*}/userLinks:batchGet",
+                                "additional_bindings": {
+                                  "get": "/v1alpha/{parent=properties/*}/userLinks:batchGet"
+                                }
+                              }
+                            }
+                          ]
                         },
                         "ListUserLinks": {
                           "requestType": "ListUserLinksRequest",
@@ -132,7 +257,20 @@
                             "(google.api.http).get": "/v1alpha/{parent=accounts/*}/userLinks",
                             "(google.api.http).additional_bindings.get": "/v1alpha/{parent=properties/*}/userLinks",
                             "(google.api.method_signature)": "parent"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1alpha/{parent=accounts/*}/userLinks",
+                                "additional_bindings": {
+                                  "get": "/v1alpha/{parent=properties/*}/userLinks"
+                                }
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
                         },
                         "AuditUserLinks": {
                           "requestType": "AuditUserLinksRequest",
@@ -142,7 +280,19 @@
                             "(google.api.http).body": "*",
                             "(google.api.http).additional_bindings.post": "/v1alpha/{parent=properties/*}/userLinks:audit",
                             "(google.api.http).additional_bindings.body": "*"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1alpha/{parent=accounts/*}/userLinks:audit",
+                                "body": "*",
+                                "additional_bindings": {
+                                  "post": "/v1alpha/{parent=properties/*}/userLinks:audit",
+                                  "body": "*"
+                                }
+                              }
+                            }
+                          ]
                         },
                         "CreateUserLink": {
                           "requestType": "CreateUserLinkRequest",
@@ -153,7 +303,22 @@
                             "(google.api.http).additional_bindings.post": "/v1alpha/{parent=properties/*}/userLinks",
                             "(google.api.http).additional_bindings.body": "user_link",
                             "(google.api.method_signature)": "parent,user_link"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1alpha/{parent=accounts/*}/userLinks",
+                                "body": "user_link",
+                                "additional_bindings": {
+                                  "post": "/v1alpha/{parent=properties/*}/userLinks",
+                                  "body": "user_link"
+                                }
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,user_link"
+                            }
+                          ]
                         },
                         "BatchCreateUserLinks": {
                           "requestType": "BatchCreateUserLinksRequest",
@@ -163,7 +328,19 @@
                             "(google.api.http).body": "*",
                             "(google.api.http).additional_bindings.post": "/v1alpha/{parent=properties/*}/userLinks:batchCreate",
                             "(google.api.http).additional_bindings.body": "*"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1alpha/{parent=accounts/*}/userLinks:batchCreate",
+                                "body": "*",
+                                "additional_bindings": {
+                                  "post": "/v1alpha/{parent=properties/*}/userLinks:batchCreate",
+                                  "body": "*"
+                                }
+                              }
+                            }
+                          ]
                         },
                         "UpdateUserLink": {
                           "requestType": "UpdateUserLinkRequest",
@@ -174,7 +351,22 @@
                             "(google.api.http).additional_bindings.patch": "/v1alpha/{user_link.name=properties/*/userLinks/*}",
                             "(google.api.http).additional_bindings.body": "user_link",
                             "(google.api.method_signature)": "user_link"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1alpha/{user_link.name=accounts/*/userLinks/*}",
+                                "body": "user_link",
+                                "additional_bindings": {
+                                  "patch": "/v1alpha/{user_link.name=properties/*/userLinks/*}",
+                                  "body": "user_link"
+                                }
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "user_link"
+                            }
+                          ]
                         },
                         "BatchUpdateUserLinks": {
                           "requestType": "BatchUpdateUserLinksRequest",
@@ -184,7 +376,19 @@
                             "(google.api.http).body": "*",
                             "(google.api.http).additional_bindings.post": "/v1alpha/{parent=properties/*}/userLinks:batchUpdate",
                             "(google.api.http).additional_bindings.body": "*"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1alpha/{parent=accounts/*}/userLinks:batchUpdate",
+                                "body": "*",
+                                "additional_bindings": {
+                                  "post": "/v1alpha/{parent=properties/*}/userLinks:batchUpdate",
+                                  "body": "*"
+                                }
+                              }
+                            }
+                          ]
                         },
                         "DeleteUserLink": {
                           "requestType": "DeleteUserLinkRequest",
@@ -193,7 +397,20 @@
                             "(google.api.http).delete": "/v1alpha/{name=accounts/*/userLinks/*}",
                             "(google.api.http).additional_bindings.delete": "/v1alpha/{name=properties/*/userLinks/*}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1alpha/{name=accounts/*/userLinks/*}",
+                                "additional_bindings": {
+                                  "delete": "/v1alpha/{name=properties/*/userLinks/*}"
+                                }
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "BatchDeleteUserLinks": {
                           "requestType": "BatchDeleteUserLinksRequest",
@@ -203,7 +420,19 @@
                             "(google.api.http).body": "*",
                             "(google.api.http).additional_bindings.post": "/v1alpha/{parent=properties/*}/userLinks:batchDelete",
                             "(google.api.http).additional_bindings.body": "*"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1alpha/{parent=accounts/*}/userLinks:batchDelete",
+                                "body": "*",
+                                "additional_bindings": {
+                                  "post": "/v1alpha/{parent=properties/*}/userLinks:batchDelete",
+                                  "body": "*"
+                                }
+                              }
+                            }
+                          ]
                         },
                         "GetWebDataStream": {
                           "requestType": "GetWebDataStreamRequest",
@@ -211,7 +440,17 @@
                           "options": {
                             "(google.api.http).get": "/v1alpha/{name=properties/*/webDataStreams/*}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1alpha/{name=properties/*/webDataStreams/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "DeleteWebDataStream": {
                           "requestType": "DeleteWebDataStreamRequest",
@@ -219,7 +458,17 @@
                           "options": {
                             "(google.api.http).delete": "/v1alpha/{name=properties/*/webDataStreams/*}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1alpha/{name=properties/*/webDataStreams/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "UpdateWebDataStream": {
                           "requestType": "UpdateWebDataStreamRequest",
@@ -228,7 +477,18 @@
                             "(google.api.http).patch": "/v1alpha/{web_data_stream.name=properties/*/webDataStreams/*}",
                             "(google.api.http).body": "web_data_stream",
                             "(google.api.method_signature)": "web_data_stream,update_mask"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1alpha/{web_data_stream.name=properties/*/webDataStreams/*}",
+                                "body": "web_data_stream"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "web_data_stream,update_mask"
+                            }
+                          ]
                         },
                         "CreateWebDataStream": {
                           "requestType": "CreateWebDataStreamRequest",
@@ -237,7 +497,18 @@
                             "(google.api.http).post": "/v1alpha/{parent=properties/*}/webDataStreams",
                             "(google.api.http).body": "web_data_stream",
                             "(google.api.method_signature)": "parent,web_data_stream"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1alpha/{parent=properties/*}/webDataStreams",
+                                "body": "web_data_stream"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,web_data_stream"
+                            }
+                          ]
                         },
                         "ListWebDataStreams": {
                           "requestType": "ListWebDataStreamsRequest",
@@ -245,7 +516,17 @@
                           "options": {
                             "(google.api.http).get": "/v1alpha/{parent=properties/*}/webDataStreams",
                             "(google.api.method_signature)": "parent"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1alpha/{parent=properties/*}/webDataStreams"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
                         },
                         "GetIosAppDataStream": {
                           "requestType": "GetIosAppDataStreamRequest",
@@ -253,7 +534,17 @@
                           "options": {
                             "(google.api.http).get": "/v1alpha/{name=properties/*/iosAppDataStreams/*}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1alpha/{name=properties/*/iosAppDataStreams/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "DeleteIosAppDataStream": {
                           "requestType": "DeleteIosAppDataStreamRequest",
@@ -261,7 +552,17 @@
                           "options": {
                             "(google.api.http).delete": "/v1alpha/{name=properties/*/iosAppDataStreams/*}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1alpha/{name=properties/*/iosAppDataStreams/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "UpdateIosAppDataStream": {
                           "requestType": "UpdateIosAppDataStreamRequest",
@@ -270,7 +571,18 @@
                             "(google.api.http).patch": "/v1alpha/{ios_app_data_stream.name=properties/*/iosAppDataStreams/*}",
                             "(google.api.http).body": "ios_app_data_stream",
                             "(google.api.method_signature)": "ios_app_data_stream,update_mask"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1alpha/{ios_app_data_stream.name=properties/*/iosAppDataStreams/*}",
+                                "body": "ios_app_data_stream"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "ios_app_data_stream,update_mask"
+                            }
+                          ]
                         },
                         "CreateIosAppDataStream": {
                           "requestType": "CreateIosAppDataStreamRequest",
@@ -279,7 +591,18 @@
                             "(google.api.http).post": "/v1alpha/{parent=properties/*}/iosAppDataStreams",
                             "(google.api.http).body": "ios_app_data_stream",
                             "(google.api.method_signature)": "parent,ios_app_data_stream"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1alpha/{parent=properties/*}/iosAppDataStreams",
+                                "body": "ios_app_data_stream"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,ios_app_data_stream"
+                            }
+                          ]
                         },
                         "ListIosAppDataStreams": {
                           "requestType": "ListIosAppDataStreamsRequest",
@@ -287,7 +610,17 @@
                           "options": {
                             "(google.api.http).get": "/v1alpha/{parent=properties/*}/iosAppDataStreams",
                             "(google.api.method_signature)": "parent"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1alpha/{parent=properties/*}/iosAppDataStreams"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
                         },
                         "GetAndroidAppDataStream": {
                           "requestType": "GetAndroidAppDataStreamRequest",
@@ -295,7 +628,17 @@
                           "options": {
                             "(google.api.http).get": "/v1alpha/{name=properties/*/androidAppDataStreams/*}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1alpha/{name=properties/*/androidAppDataStreams/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "DeleteAndroidAppDataStream": {
                           "requestType": "DeleteAndroidAppDataStreamRequest",
@@ -303,7 +646,17 @@
                           "options": {
                             "(google.api.http).delete": "/v1alpha/{name=properties/*/androidAppDataStreams/*}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1alpha/{name=properties/*/androidAppDataStreams/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "UpdateAndroidAppDataStream": {
                           "requestType": "UpdateAndroidAppDataStreamRequest",
@@ -312,7 +665,18 @@
                             "(google.api.http).patch": "/v1alpha/{android_app_data_stream.name=properties/*/androidAppDataStreams/*}",
                             "(google.api.http).body": "android_app_data_stream",
                             "(google.api.method_signature)": "android_app_data_stream,update_mask"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1alpha/{android_app_data_stream.name=properties/*/androidAppDataStreams/*}",
+                                "body": "android_app_data_stream"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "android_app_data_stream,update_mask"
+                            }
+                          ]
                         },
                         "CreateAndroidAppDataStream": {
                           "requestType": "CreateAndroidAppDataStreamRequest",
@@ -321,7 +685,18 @@
                             "(google.api.http).post": "/v1alpha/{parent=properties/*}/androidAppDataStreams",
                             "(google.api.http).body": "android_app_data_stream",
                             "(google.api.method_signature)": "parent,android_app_data_stream"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1alpha/{parent=properties/*}/androidAppDataStreams",
+                                "body": "android_app_data_stream"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,android_app_data_stream"
+                            }
+                          ]
                         },
                         "ListAndroidAppDataStreams": {
                           "requestType": "ListAndroidAppDataStreamsRequest",
@@ -329,7 +704,17 @@
                           "options": {
                             "(google.api.http).get": "/v1alpha/{parent=properties/*}/androidAppDataStreams",
                             "(google.api.method_signature)": "parent"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1alpha/{parent=properties/*}/androidAppDataStreams"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
                         },
                         "GetEnhancedMeasurementSettings": {
                           "requestType": "GetEnhancedMeasurementSettingsRequest",
@@ -337,7 +722,17 @@
                           "options": {
                             "(google.api.http).get": "/v1alpha/{name=properties/*/webDataStreams/*/enhancedMeasurementSettings}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1alpha/{name=properties/*/webDataStreams/*/enhancedMeasurementSettings}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "UpdateEnhancedMeasurementSettings": {
                           "requestType": "UpdateEnhancedMeasurementSettingsRequest",
@@ -346,7 +741,18 @@
                             "(google.api.http).patch": "/v1alpha/{enhanced_measurement_settings.name=properties/*/webDataStreams/*/enhancedMeasurementSettings}",
                             "(google.api.http).body": "enhanced_measurement_settings",
                             "(google.api.method_signature)": "enhanced_measurement_settings,update_mask"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1alpha/{enhanced_measurement_settings.name=properties/*/webDataStreams/*/enhancedMeasurementSettings}",
+                                "body": "enhanced_measurement_settings"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "enhanced_measurement_settings,update_mask"
+                            }
+                          ]
                         },
                         "CreateFirebaseLink": {
                           "requestType": "CreateFirebaseLinkRequest",
@@ -355,7 +761,18 @@
                             "(google.api.http).post": "/v1alpha/{parent=properties/*}/firebaseLinks",
                             "(google.api.http).body": "firebase_link",
                             "(google.api.method_signature)": "parent,firebase_link"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1alpha/{parent=properties/*}/firebaseLinks",
+                                "body": "firebase_link"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,firebase_link"
+                            }
+                          ]
                         },
                         "UpdateFirebaseLink": {
                           "requestType": "UpdateFirebaseLinkRequest",
@@ -364,7 +781,18 @@
                             "(google.api.http).patch": "/v1alpha/{firebase_link.name=properties/*/firebaseLinks/*}",
                             "(google.api.http).body": "firebase_link",
                             "(google.api.method_signature)": "firebase_link,update_mask"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1alpha/{firebase_link.name=properties/*/firebaseLinks/*}",
+                                "body": "firebase_link"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "firebase_link,update_mask"
+                            }
+                          ]
                         },
                         "DeleteFirebaseLink": {
                           "requestType": "DeleteFirebaseLinkRequest",
@@ -372,7 +800,17 @@
                           "options": {
                             "(google.api.http).delete": "/v1alpha/{name=properties/*/firebaseLinks/*}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1alpha/{name=properties/*/firebaseLinks/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "ListFirebaseLinks": {
                           "requestType": "ListFirebaseLinksRequest",
@@ -380,7 +818,17 @@
                           "options": {
                             "(google.api.http).get": "/v1alpha/{parent=properties/*}/firebaseLinks",
                             "(google.api.method_signature)": "parent"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1alpha/{parent=properties/*}/firebaseLinks"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
                         },
                         "GetGlobalSiteTag": {
                           "requestType": "GetGlobalSiteTagRequest",
@@ -388,7 +836,17 @@
                           "options": {
                             "(google.api.http).get": "/v1alpha/{name=properties/*/webDataStreams/*/globalSiteTag}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1alpha/{name=properties/*/webDataStreams/*/globalSiteTag}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "CreateGoogleAdsLink": {
                           "requestType": "CreateGoogleAdsLinkRequest",
@@ -397,7 +855,18 @@
                             "(google.api.http).post": "/v1alpha/{parent=properties/*}/googleAdsLinks",
                             "(google.api.http).body": "google_ads_link",
                             "(google.api.method_signature)": "parent,google_ads_link"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1alpha/{parent=properties/*}/googleAdsLinks",
+                                "body": "google_ads_link"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,google_ads_link"
+                            }
+                          ]
                         },
                         "UpdateGoogleAdsLink": {
                           "requestType": "UpdateGoogleAdsLinkRequest",
@@ -406,7 +875,18 @@
                             "(google.api.http).patch": "/v1alpha/{google_ads_link.name=properties/*/googleAdsLinks/*}",
                             "(google.api.http).body": "google_ads_link",
                             "(google.api.method_signature)": "google_ads_link,update_mask"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1alpha/{google_ads_link.name=properties/*/googleAdsLinks/*}",
+                                "body": "google_ads_link"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "google_ads_link,update_mask"
+                            }
+                          ]
                         },
                         "DeleteGoogleAdsLink": {
                           "requestType": "DeleteGoogleAdsLinkRequest",
@@ -414,7 +894,17 @@
                           "options": {
                             "(google.api.http).delete": "/v1alpha/{name=properties/*/googleAdsLinks/*}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1alpha/{name=properties/*/googleAdsLinks/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "ListGoogleAdsLinks": {
                           "requestType": "ListGoogleAdsLinksRequest",
@@ -422,7 +912,17 @@
                           "options": {
                             "(google.api.http).get": "/v1alpha/{parent=properties/*}/googleAdsLinks",
                             "(google.api.method_signature)": "parent"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1alpha/{parent=properties/*}/googleAdsLinks"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
                         },
                         "GetDataSharingSettings": {
                           "requestType": "GetDataSharingSettingsRequest",
@@ -430,7 +930,17 @@
                           "options": {
                             "(google.api.http).get": "/v1alpha/{name=accounts/*/dataSharingSettings}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1alpha/{name=accounts/*/dataSharingSettings}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         }
                       }
                     },
