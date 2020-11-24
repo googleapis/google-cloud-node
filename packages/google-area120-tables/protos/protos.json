@@ -26,14 +26,31 @@
                           "options": {
                             "(google.api.http).get": "/v1alpha1/{name=tables/*}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1alpha1/{name=tables/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "ListTables": {
                           "requestType": "ListTablesRequest",
                           "responseType": "ListTablesResponse",
                           "options": {
                             "(google.api.http).get": "/v1alpha1/tables"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1alpha1/tables"
+                              }
+                            }
+                          ]
                         },
                         "GetRow": {
                           "requestType": "GetRowRequest",
@@ -41,7 +58,17 @@
                           "options": {
                             "(google.api.http).get": "/v1alpha1/{name=tables/*/rows/*}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1alpha1/{name=tables/*/rows/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "ListRows": {
                           "requestType": "ListRowsRequest",
@@ -49,7 +76,17 @@
                           "options": {
                             "(google.api.http).get": "/v1alpha1/{parent=tables/*}/rows",
                             "(google.api.method_signature)": "parent"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1alpha1/{parent=tables/*}/rows"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
                         },
                         "CreateRow": {
                           "requestType": "CreateRowRequest",
@@ -58,7 +95,18 @@
                             "(google.api.http).post": "/v1alpha1/{parent=tables/*}/rows",
                             "(google.api.http).body": "row",
                             "(google.api.method_signature)": "parent,row"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1alpha1/{parent=tables/*}/rows",
+                                "body": "row"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,row"
+                            }
+                          ]
                         },
                         "BatchCreateRows": {
                           "requestType": "BatchCreateRowsRequest",
@@ -66,7 +114,15 @@
                           "options": {
                             "(google.api.http).post": "/v1alpha1/{parent=tables/*}/rows:batchCreate",
                             "(google.api.http).body": "*"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1alpha1/{parent=tables/*}/rows:batchCreate",
+                                "body": "*"
+                              }
+                            }
+                          ]
                         },
                         "UpdateRow": {
                           "requestType": "UpdateRowRequest",
@@ -75,7 +131,18 @@
                             "(google.api.http).patch": "/v1alpha1/{row.name=tables/*/rows/*}",
                             "(google.api.http).body": "row",
                             "(google.api.method_signature)": "row,update_mask"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1alpha1/{row.name=tables/*/rows/*}",
+                                "body": "row"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "row,update_mask"
+                            }
+                          ]
                         },
                         "BatchUpdateRows": {
                           "requestType": "BatchUpdateRowsRequest",
@@ -83,7 +150,15 @@
                           "options": {
                             "(google.api.http).post": "/v1alpha1/{parent=tables/*}/rows:batchUpdate",
                             "(google.api.http).body": "*"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1alpha1/{parent=tables/*}/rows:batchUpdate",
+                                "body": "*"
+                              }
+                            }
+                          ]
                         },
                         "DeleteRow": {
                           "requestType": "DeleteRowRequest",
@@ -91,7 +166,17 @@
                           "options": {
                             "(google.api.http).delete": "/v1alpha1/{name=tables/*/rows/*}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1alpha1/{name=tables/*/rows/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         }
                       }
                     },
