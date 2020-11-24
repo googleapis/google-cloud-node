@@ -49,7 +49,7 @@
     "@types/node": "^14.0.22",
     "@types/sinon": "^9.0.4",
     "c8": "^7.2.0",
-    "gts": "^2.0.2",
+    "gts": "^3.0.0",
     "jsdoc": "^3.6.4",
     "jsdoc-fresh": "^1.0.2",
     "jsdoc-region-tag": "^1.0.4",
