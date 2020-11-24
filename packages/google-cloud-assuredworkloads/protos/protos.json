@@ -34,7 +34,24 @@
                             "(google.api.method_signature)": "parent,workload",
                             "(google.longrunning.operation_info).response_type": "Workload",
                             "(google.longrunning.operation_info).metadata_type": "CreateWorkloadOperationMetadata"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta1/{parent=organizations/*/locations/*}/workloads",
+                                "body": "workload"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,workload"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "Workload",
+                                "metadata_type": "CreateWorkloadOperationMetadata"
+                              }
+                            }
+                          ]
                         },
                         "UpdateWorkload": {
                           "requestType": "UpdateWorkloadRequest",
@@ -43,7 +60,18 @@
                             "(google.api.http).patch": "/v1beta1/{workload.name=organizations/*/locations/*/workloads/*}",
                             "(google.api.http).body": "workload",
                             "(google.api.method_signature)": "workload,update_mask"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1beta1/{workload.name=organizations/*/locations/*/workloads/*}",
+                                "body": "workload"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "workload,update_mask"
+                            }
+                          ]
                         },
                         "DeleteWorkload": {
                           "requestType": "DeleteWorkloadRequest",
@@ -51,7 +79,17 @@
                           "options": {
                             "(google.api.http).delete": "/v1beta1/{name=organizations/*/locations/*/workloads/*}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1beta1/{name=organizations/*/locations/*/workloads/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "GetWorkload": {
                           "requestType": "GetWorkloadRequest",
@@ -59,7 +97,17 @@
                           "options": {
                             "(google.api.http).get": "/v1beta1/{name=organizations/*/locations/*/workloads/*}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta1/{name=organizations/*/locations/*/workloads/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "ListWorkloads": {
                           "requestType": "ListWorkloadsRequest",
@@ -67,7 +115,17 @@
                           "options": {
                             "(google.api.http).get": "/v1beta1/{parent=organizations/*/locations/*}/workloads",
                             "(google.api.method_signature)": "parent"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta1/{parent=organizations/*/locations/*}/workloads"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
                         }
                       }
                     },
@@ -1618,7 +1676,17 @@
                   "options": {
                     "(google.api.http).get": "/v1/{name=operations}",
                     "(google.api.method_signature)": "name,filter"
-                  }
+                  },
+                  "parsedOptions": [
+                    {
+                      "(google.api.http)": {
+                        "get": "/v1/{name=operations}"
+                      }
+                    },
+                    {
+                      "(google.api.method_signature)": "name,filter"
+                    }
+                  ]
                 },
                 "GetOperation": {
                   "requestType": "GetOperationRequest",
@@ -1626,7 +1694,17 @@
                   "options": {
                     "(google.api.http).get": "/v1/{name=operations/**}",
                     "(google.api.method_signature)": "name"
-                  }
+                  },
+                  "parsedOptions": [
+                    {
+                      "(google.api.http)": {
+                        "get": "/v1/{name=operations/**}"
+                      }
+                    },
+                    {
+                      "(google.api.method_signature)": "name"
+                    }
+                  ]
                 },
                 "DeleteOperation": {
                   "requestType": "DeleteOperationRequest",
@@ -1634,7 +1712,17 @@
                   "options": {
                     "(google.api.http).delete": "/v1/{name=operations/**}",
                     "(google.api.method_signature)": "name"
-                  }
+                  },
+                  "parsedOptions": [
+                    {
+                      "(google.api.http)": {
+                        "delete": "/v1/{name=operations/**}"
+                      }
+                    },
+                    {
+                      "(google.api.method_signature)": "name"
+                    }
+                  ]
                 },
                 "CancelOperation": {
                   "requestType": "CancelOperationRequest",
@@ -1643,7 +1731,18 @@
                     "(google.api.http).post": "/v1/{name=operations/**}:cancel",
                     "(google.api.http).body": "*",
                     "(google.api.method_signature)": "name"
-                  }
+                  },
+                  "parsedOptions": [
+                    {
+                      "(google.api.http)": {
+                        "post": "/v1/{name=operations/**}:cancel",
+                        "body": "*"
+                      }
+                    },
+                    {
+                      "(google.api.method_signature)": "name"
+                    }
+                  ]
                 },
                 "WaitOperation": {
                   "requestType": "WaitOperationRequest",
