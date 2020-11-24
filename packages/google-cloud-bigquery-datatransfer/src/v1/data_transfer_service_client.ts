@@ -1664,9 +1664,7 @@ export class DataTransferServiceClient {
       this.innerApiCalls['listDataSources'] as GaxCall,
       (request as unknown) as RequestType,
       callSettings
-    ) as AsyncIterable<
-      protos.google.cloud.bigquery.datatransfer.v1.IDataSource
-    >;
+    ) as AsyncIterable<protos.google.cloud.bigquery.datatransfer.v1.IDataSource>;
   }
   listTransferConfigs(
     request: protos.google.cloud.bigquery.datatransfer.v1.IListTransferConfigsRequest,
@@ -1867,9 +1865,7 @@ export class DataTransferServiceClient {
   listTransferConfigsAsync(
     request?: protos.google.cloud.bigquery.datatransfer.v1.IListTransferConfigsRequest,
     options?: CallOptions
-  ): AsyncIterable<
-    protos.google.cloud.bigquery.datatransfer.v1.ITransferConfig
-  > {
+  ): AsyncIterable<protos.google.cloud.bigquery.datatransfer.v1.ITransferConfig> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1886,9 +1882,7 @@ export class DataTransferServiceClient {
       this.innerApiCalls['listTransferConfigs'] as GaxCall,
       (request as unknown) as RequestType,
       callSettings
-    ) as AsyncIterable<
-      protos.google.cloud.bigquery.datatransfer.v1.ITransferConfig
-    >;
+    ) as AsyncIterable<protos.google.cloud.bigquery.datatransfer.v1.ITransferConfig>;
   }
   listTransferRuns(
     request: protos.google.cloud.bigquery.datatransfer.v1.IListTransferRunsRequest,
@@ -2115,9 +2109,7 @@ export class DataTransferServiceClient {
       this.innerApiCalls['listTransferRuns'] as GaxCall,
       (request as unknown) as RequestType,
       callSettings
-    ) as AsyncIterable<
-      protos.google.cloud.bigquery.datatransfer.v1.ITransferRun
-    >;
+    ) as AsyncIterable<protos.google.cloud.bigquery.datatransfer.v1.ITransferRun>;
   }
   listTransferLogs(
     request: protos.google.cloud.bigquery.datatransfer.v1.IListTransferLogsRequest,
@@ -2321,9 +2313,7 @@ export class DataTransferServiceClient {
   listTransferLogsAsync(
     request?: protos.google.cloud.bigquery.datatransfer.v1.IListTransferLogsRequest,
     options?: CallOptions
-  ): AsyncIterable<
-    protos.google.cloud.bigquery.datatransfer.v1.ITransferMessage
-  > {
+  ): AsyncIterable<protos.google.cloud.bigquery.datatransfer.v1.ITransferMessage> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -2340,9 +2330,7 @@ export class DataTransferServiceClient {
       this.innerApiCalls['listTransferLogs'] as GaxCall,
       (request as unknown) as RequestType,
       callSettings
-    ) as AsyncIterable<
-      protos.google.cloud.bigquery.datatransfer.v1.ITransferMessage
-    >;
+    ) as AsyncIterable<protos.google.cloud.bigquery.datatransfer.v1.ITransferMessage>;
   }
   // --------------------
   // -- Path templates --
