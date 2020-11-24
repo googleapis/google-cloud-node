@@ -855,9 +855,7 @@ export class ExecutionsClient {
       this.innerApiCalls['listExecutions'] as GaxCall,
       (request as unknown) as RequestType,
       callSettings
-    ) as AsyncIterable<
-      protos.google.cloud.workflows.executions.v1beta.IExecution
-    >;
+    ) as AsyncIterable<protos.google.cloud.workflows.executions.v1beta.IExecution>;
   }
   // --------------------
   // -- Path templates --
