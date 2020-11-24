@@ -1005,9 +1005,7 @@ export class ContainerAnalysisV1Beta1Client {
   listScanConfigsAsync(
     request?: protos.google.devtools.containeranalysis.v1beta1.IListScanConfigsRequest,
     options?: CallOptions
-  ): AsyncIterable<
-    protos.google.devtools.containeranalysis.v1beta1.IScanConfig
-  > {
+  ): AsyncIterable<protos.google.devtools.containeranalysis.v1beta1.IScanConfig> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1024,9 +1022,7 @@ export class ContainerAnalysisV1Beta1Client {
       this.innerApiCalls['listScanConfigs'] as GaxCall,
       (request as unknown) as RequestType,
       callSettings
-    ) as AsyncIterable<
-      protos.google.devtools.containeranalysis.v1beta1.IScanConfig
-    >;
+    ) as AsyncIterable<protos.google.devtools.containeranalysis.v1beta1.IScanConfig>;
   }
   // --------------------
   // -- Path templates --
