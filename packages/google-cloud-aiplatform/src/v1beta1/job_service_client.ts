@@ -16,6 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
+/* global window */
 import * as gax from 'google-gax';
 import {
   Callback,
@@ -31,6 +32,11 @@ import * as path from 'path';
 import {Transform} from 'stream';
 import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
+/**
+ * Client JSON configuration object, loaded from
+ * `src/v1beta1/job_service_client_config.json`.
+ * This file defines retry strategy and timeouts for all API methods in this library.
+ */
 import * as gapicConfig from './job_service_client_config.json';
 import {operationsProtos} from 'google-gax';
 const version = require('../../../package.json').version;
@@ -85,9 +91,9 @@ export class JobServiceClient {
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
-   * @param {gax.ClientConfig} [options.clientConfig] - client configuration override.
-   *     TODO(@alexander-fenster): link to gax documentation.
-   * @param {boolean} fallback - Use HTTP fallback mode.
+   * @param {gax.ClientConfig} [options.clientConfig] - Client configuration override.
+   *     Follows the structure of {@link gapicConfig}.
+   * @param {boolean} [options.fallback] - Use HTTP fallback mode.
    *     In fallback mode, a special browser-compatible transport implementation is used
    *     instead of gRPC transport. In browser context (if the `window` object is defined)
    *     the fallback mode is enabled automatically; set `options.fallback` to `false`
@@ -100,7 +106,9 @@ export class JobServiceClient {
       opts?.servicePath || opts?.apiEndpoint || staticMembers.servicePath;
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback = opts?.fallback ?? typeof window !== 'undefined';
+    const fallback =
+      opts?.fallback ??
+      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
@@ -459,7 +467,7 @@ export class JobServiceClient {
   // -------------------
   createCustomJob(
     request: protos.google.cloud.aiplatform.v1beta1.ICreateCustomJobRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.aiplatform.v1beta1.ICustomJob,
@@ -472,7 +480,7 @@ export class JobServiceClient {
   >;
   createCustomJob(
     request: protos.google.cloud.aiplatform.v1beta1.ICreateCustomJobRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.cloud.aiplatform.v1beta1.ICustomJob,
       | protos.google.cloud.aiplatform.v1beta1.ICreateCustomJobRequest
@@ -515,7 +523,7 @@ export class JobServiceClient {
   createCustomJob(
     request: protos.google.cloud.aiplatform.v1beta1.ICreateCustomJobRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.cloud.aiplatform.v1beta1.ICustomJob,
           | protos.google.cloud.aiplatform.v1beta1.ICreateCustomJobRequest
@@ -541,12 +549,12 @@ export class JobServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -561,7 +569,7 @@ export class JobServiceClient {
   }
   getCustomJob(
     request: protos.google.cloud.aiplatform.v1beta1.IGetCustomJobRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.aiplatform.v1beta1.ICustomJob,
@@ -571,7 +579,7 @@ export class JobServiceClient {
   >;
   getCustomJob(
     request: protos.google.cloud.aiplatform.v1beta1.IGetCustomJobRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.cloud.aiplatform.v1beta1.ICustomJob,
       | protos.google.cloud.aiplatform.v1beta1.IGetCustomJobRequest
@@ -612,7 +620,7 @@ export class JobServiceClient {
   getCustomJob(
     request: protos.google.cloud.aiplatform.v1beta1.IGetCustomJobRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.cloud.aiplatform.v1beta1.ICustomJob,
           | protos.google.cloud.aiplatform.v1beta1.IGetCustomJobRequest
@@ -635,12 +643,12 @@ export class JobServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -655,7 +663,7 @@ export class JobServiceClient {
   }
   cancelCustomJob(
     request: protos.google.cloud.aiplatform.v1beta1.ICancelCustomJobRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.protobuf.IEmpty,
@@ -668,7 +676,7 @@ export class JobServiceClient {
   >;
   cancelCustomJob(
     request: protos.google.cloud.aiplatform.v1beta1.ICancelCustomJobRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.protobuf.IEmpty,
       | protos.google.cloud.aiplatform.v1beta1.ICancelCustomJobRequest
@@ -718,7 +726,7 @@ export class JobServiceClient {
   cancelCustomJob(
     request: protos.google.cloud.aiplatform.v1beta1.ICancelCustomJobRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.protobuf.IEmpty,
           | protos.google.cloud.aiplatform.v1beta1.ICancelCustomJobRequest
@@ -744,12 +752,12 @@ export class JobServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -764,7 +772,7 @@ export class JobServiceClient {
   }
   createDataLabelingJob(
     request: protos.google.cloud.aiplatform.v1beta1.ICreateDataLabelingJobRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.aiplatform.v1beta1.IDataLabelingJob,
@@ -777,7 +785,7 @@ export class JobServiceClient {
   >;
   createDataLabelingJob(
     request: protos.google.cloud.aiplatform.v1beta1.ICreateDataLabelingJobRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.cloud.aiplatform.v1beta1.IDataLabelingJob,
       | protos.google.cloud.aiplatform.v1beta1.ICreateDataLabelingJobRequest
@@ -819,7 +827,7 @@ export class JobServiceClient {
   createDataLabelingJob(
     request: protos.google.cloud.aiplatform.v1beta1.ICreateDataLabelingJobRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.cloud.aiplatform.v1beta1.IDataLabelingJob,
           | protos.google.cloud.aiplatform.v1beta1.ICreateDataLabelingJobRequest
@@ -845,12 +853,12 @@ export class JobServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -865,7 +873,7 @@ export class JobServiceClient {
   }
   getDataLabelingJob(
     request: protos.google.cloud.aiplatform.v1beta1.IGetDataLabelingJobRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.aiplatform.v1beta1.IDataLabelingJob,
@@ -878,7 +886,7 @@ export class JobServiceClient {
   >;
   getDataLabelingJob(
     request: protos.google.cloud.aiplatform.v1beta1.IGetDataLabelingJobRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.cloud.aiplatform.v1beta1.IDataLabelingJob,
       | protos.google.cloud.aiplatform.v1beta1.IGetDataLabelingJobRequest
@@ -920,7 +928,7 @@ export class JobServiceClient {
   getDataLabelingJob(
     request: protos.google.cloud.aiplatform.v1beta1.IGetDataLabelingJobRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.cloud.aiplatform.v1beta1.IDataLabelingJob,
           | protos.google.cloud.aiplatform.v1beta1.IGetDataLabelingJobRequest
@@ -946,12 +954,12 @@ export class JobServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -966,7 +974,7 @@ export class JobServiceClient {
   }
   cancelDataLabelingJob(
     request: protos.google.cloud.aiplatform.v1beta1.ICancelDataLabelingJobRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.protobuf.IEmpty,
@@ -979,7 +987,7 @@ export class JobServiceClient {
   >;
   cancelDataLabelingJob(
     request: protos.google.cloud.aiplatform.v1beta1.ICancelDataLabelingJobRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.protobuf.IEmpty,
       | protos.google.cloud.aiplatform.v1beta1.ICancelDataLabelingJobRequest
@@ -1021,7 +1029,7 @@ export class JobServiceClient {
   cancelDataLabelingJob(
     request: protos.google.cloud.aiplatform.v1beta1.ICancelDataLabelingJobRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.protobuf.IEmpty,
           | protos.google.cloud.aiplatform.v1beta1.ICancelDataLabelingJobRequest
@@ -1047,12 +1055,12 @@ export class JobServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1067,7 +1075,7 @@ export class JobServiceClient {
   }
   createHyperparameterTuningJob(
     request: protos.google.cloud.aiplatform.v1beta1.ICreateHyperparameterTuningJobRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.aiplatform.v1beta1.IHyperparameterTuningJob,
@@ -1080,7 +1088,7 @@ export class JobServiceClient {
   >;
   createHyperparameterTuningJob(
     request: protos.google.cloud.aiplatform.v1beta1.ICreateHyperparameterTuningJobRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.cloud.aiplatform.v1beta1.IHyperparameterTuningJob,
       | protos.google.cloud.aiplatform.v1beta1.ICreateHyperparameterTuningJobRequest
@@ -1122,7 +1130,7 @@ export class JobServiceClient {
   createHyperparameterTuningJob(
     request: protos.google.cloud.aiplatform.v1beta1.ICreateHyperparameterTuningJobRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.cloud.aiplatform.v1beta1.IHyperparameterTuningJob,
           | protos.google.cloud.aiplatform.v1beta1.ICreateHyperparameterTuningJobRequest
@@ -1148,12 +1156,12 @@ export class JobServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1172,7 +1180,7 @@ export class JobServiceClient {
   }
   getHyperparameterTuningJob(
     request: protos.google.cloud.aiplatform.v1beta1.IGetHyperparameterTuningJobRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.aiplatform.v1beta1.IHyperparameterTuningJob,
@@ -1185,7 +1193,7 @@ export class JobServiceClient {
   >;
   getHyperparameterTuningJob(
     request: protos.google.cloud.aiplatform.v1beta1.IGetHyperparameterTuningJobRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.cloud.aiplatform.v1beta1.IHyperparameterTuningJob,
       | protos.google.cloud.aiplatform.v1beta1.IGetHyperparameterTuningJobRequest
@@ -1227,7 +1235,7 @@ export class JobServiceClient {
   getHyperparameterTuningJob(
     request: protos.google.cloud.aiplatform.v1beta1.IGetHyperparameterTuningJobRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.cloud.aiplatform.v1beta1.IHyperparameterTuningJob,
           | protos.google.cloud.aiplatform.v1beta1.IGetHyperparameterTuningJobRequest
@@ -1253,12 +1261,12 @@ export class JobServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1277,7 +1285,7 @@ export class JobServiceClient {
   }
   cancelHyperparameterTuningJob(
     request: protos.google.cloud.aiplatform.v1beta1.ICancelHyperparameterTuningJobRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.protobuf.IEmpty,
@@ -1290,7 +1298,7 @@ export class JobServiceClient {
   >;
   cancelHyperparameterTuningJob(
     request: protos.google.cloud.aiplatform.v1beta1.ICancelHyperparameterTuningJobRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.protobuf.IEmpty,
       | protos.google.cloud.aiplatform.v1beta1.ICancelHyperparameterTuningJobRequest
@@ -1341,7 +1349,7 @@ export class JobServiceClient {
   cancelHyperparameterTuningJob(
     request: protos.google.cloud.aiplatform.v1beta1.ICancelHyperparameterTuningJobRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.protobuf.IEmpty,
           | protos.google.cloud.aiplatform.v1beta1.ICancelHyperparameterTuningJobRequest
@@ -1367,12 +1375,12 @@ export class JobServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1391,7 +1399,7 @@ export class JobServiceClient {
   }
   createBatchPredictionJob(
     request: protos.google.cloud.aiplatform.v1beta1.ICreateBatchPredictionJobRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.aiplatform.v1beta1.IBatchPredictionJob,
@@ -1404,7 +1412,7 @@ export class JobServiceClient {
   >;
   createBatchPredictionJob(
     request: protos.google.cloud.aiplatform.v1beta1.ICreateBatchPredictionJobRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.cloud.aiplatform.v1beta1.IBatchPredictionJob,
       | protos.google.cloud.aiplatform.v1beta1.ICreateBatchPredictionJobRequest
@@ -1447,7 +1455,7 @@ export class JobServiceClient {
   createBatchPredictionJob(
     request: protos.google.cloud.aiplatform.v1beta1.ICreateBatchPredictionJobRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.cloud.aiplatform.v1beta1.IBatchPredictionJob,
           | protos.google.cloud.aiplatform.v1beta1.ICreateBatchPredictionJobRequest
@@ -1473,12 +1481,12 @@ export class JobServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1497,7 +1505,7 @@ export class JobServiceClient {
   }
   getBatchPredictionJob(
     request: protos.google.cloud.aiplatform.v1beta1.IGetBatchPredictionJobRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.aiplatform.v1beta1.IBatchPredictionJob,
@@ -1510,7 +1518,7 @@ export class JobServiceClient {
   >;
   getBatchPredictionJob(
     request: protos.google.cloud.aiplatform.v1beta1.IGetBatchPredictionJobRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.cloud.aiplatform.v1beta1.IBatchPredictionJob,
       | protos.google.cloud.aiplatform.v1beta1.IGetBatchPredictionJobRequest
@@ -1552,7 +1560,7 @@ export class JobServiceClient {
   getBatchPredictionJob(
     request: protos.google.cloud.aiplatform.v1beta1.IGetBatchPredictionJobRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.cloud.aiplatform.v1beta1.IBatchPredictionJob,
           | protos.google.cloud.aiplatform.v1beta1.IGetBatchPredictionJobRequest
@@ -1578,12 +1586,12 @@ export class JobServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1598,7 +1606,7 @@ export class JobServiceClient {
   }
   cancelBatchPredictionJob(
     request: protos.google.cloud.aiplatform.v1beta1.ICancelBatchPredictionJobRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.protobuf.IEmpty,
@@ -1611,7 +1619,7 @@ export class JobServiceClient {
   >;
   cancelBatchPredictionJob(
     request: protos.google.cloud.aiplatform.v1beta1.ICancelBatchPredictionJobRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.protobuf.IEmpty,
       | protos.google.cloud.aiplatform.v1beta1.ICancelBatchPredictionJobRequest
@@ -1662,7 +1670,7 @@ export class JobServiceClient {
   cancelBatchPredictionJob(
     request: protos.google.cloud.aiplatform.v1beta1.ICancelBatchPredictionJobRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.protobuf.IEmpty,
           | protos.google.cloud.aiplatform.v1beta1.ICancelBatchPredictionJobRequest
@@ -1688,12 +1696,12 @@ export class JobServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1713,7 +1721,7 @@ export class JobServiceClient {
 
   deleteCustomJob(
     request: protos.google.cloud.aiplatform.v1beta1.IDeleteCustomJobRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       LROperation<
@@ -1726,7 +1734,7 @@ export class JobServiceClient {
   >;
   deleteCustomJob(
     request: protos.google.cloud.aiplatform.v1beta1.IDeleteCustomJobRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       LROperation<
         protos.google.protobuf.IEmpty,
@@ -1772,7 +1780,7 @@ export class JobServiceClient {
   deleteCustomJob(
     request: protos.google.cloud.aiplatform.v1beta1.IDeleteCustomJobRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           LROperation<
             protos.google.protobuf.IEmpty,
@@ -1800,12 +1808,12 @@ export class JobServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1857,7 +1865,7 @@ export class JobServiceClient {
   }
   deleteDataLabelingJob(
     request: protos.google.cloud.aiplatform.v1beta1.IDeleteDataLabelingJobRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       LROperation<
@@ -1870,7 +1878,7 @@ export class JobServiceClient {
   >;
   deleteDataLabelingJob(
     request: protos.google.cloud.aiplatform.v1beta1.IDeleteDataLabelingJobRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       LROperation<
         protos.google.protobuf.IEmpty,
@@ -1917,7 +1925,7 @@ export class JobServiceClient {
   deleteDataLabelingJob(
     request: protos.google.cloud.aiplatform.v1beta1.IDeleteDataLabelingJobRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           LROperation<
             protos.google.protobuf.IEmpty,
@@ -1945,12 +1953,12 @@ export class JobServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -2002,7 +2010,7 @@ export class JobServiceClient {
   }
   deleteHyperparameterTuningJob(
     request: protos.google.cloud.aiplatform.v1beta1.IDeleteHyperparameterTuningJobRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       LROperation<
@@ -2015,7 +2023,7 @@ export class JobServiceClient {
   >;
   deleteHyperparameterTuningJob(
     request: protos.google.cloud.aiplatform.v1beta1.IDeleteHyperparameterTuningJobRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       LROperation<
         protos.google.protobuf.IEmpty,
@@ -2062,7 +2070,7 @@ export class JobServiceClient {
   deleteHyperparameterTuningJob(
     request: protos.google.cloud.aiplatform.v1beta1.IDeleteHyperparameterTuningJobRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           LROperation<
             protos.google.protobuf.IEmpty,
@@ -2090,12 +2098,12 @@ export class JobServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -2151,7 +2159,7 @@ export class JobServiceClient {
   }
   deleteBatchPredictionJob(
     request: protos.google.cloud.aiplatform.v1beta1.IDeleteBatchPredictionJobRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       LROperation<
@@ -2164,7 +2172,7 @@ export class JobServiceClient {
   >;
   deleteBatchPredictionJob(
     request: protos.google.cloud.aiplatform.v1beta1.IDeleteBatchPredictionJobRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       LROperation<
         protos.google.protobuf.IEmpty,
@@ -2212,7 +2220,7 @@ export class JobServiceClient {
   deleteBatchPredictionJob(
     request: protos.google.cloud.aiplatform.v1beta1.IDeleteBatchPredictionJobRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           LROperation<
             protos.google.protobuf.IEmpty,
@@ -2240,12 +2248,12 @@ export class JobServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -2301,7 +2309,7 @@ export class JobServiceClient {
   }
   listCustomJobs(
     request: protos.google.cloud.aiplatform.v1beta1.IListCustomJobsRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.aiplatform.v1beta1.ICustomJob[],
@@ -2311,7 +2319,7 @@ export class JobServiceClient {
   >;
   listCustomJobs(
     request: protos.google.cloud.aiplatform.v1beta1.IListCustomJobsRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: PaginationCallback<
       protos.google.cloud.aiplatform.v1beta1.IListCustomJobsRequest,
       | protos.google.cloud.aiplatform.v1beta1.IListCustomJobsResponse
@@ -2381,7 +2389,7 @@ export class JobServiceClient {
   listCustomJobs(
     request: protos.google.cloud.aiplatform.v1beta1.IListCustomJobsRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | PaginationCallback<
           protos.google.cloud.aiplatform.v1beta1.IListCustomJobsRequest,
           | protos.google.cloud.aiplatform.v1beta1.IListCustomJobsResponse
@@ -2404,12 +2412,12 @@ export class JobServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -2471,7 +2479,7 @@ export class JobServiceClient {
    */
   listCustomJobsStream(
     request?: protos.google.cloud.aiplatform.v1beta1.IListCustomJobsRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Transform {
     request = request || {};
     options = options || {};
@@ -2545,7 +2553,7 @@ export class JobServiceClient {
    */
   listCustomJobsAsync(
     request?: protos.google.cloud.aiplatform.v1beta1.IListCustomJobsRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): AsyncIterable<protos.google.cloud.aiplatform.v1beta1.ICustomJob> {
     request = request || {};
     options = options || {};
@@ -2567,7 +2575,7 @@ export class JobServiceClient {
   }
   listDataLabelingJobs(
     request: protos.google.cloud.aiplatform.v1beta1.IListDataLabelingJobsRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.aiplatform.v1beta1.IDataLabelingJob[],
@@ -2577,7 +2585,7 @@ export class JobServiceClient {
   >;
   listDataLabelingJobs(
     request: protos.google.cloud.aiplatform.v1beta1.IListDataLabelingJobsRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: PaginationCallback<
       protos.google.cloud.aiplatform.v1beta1.IListDataLabelingJobsRequest,
       | protos.google.cloud.aiplatform.v1beta1.IListDataLabelingJobsResponse
@@ -2651,7 +2659,7 @@ export class JobServiceClient {
   listDataLabelingJobs(
     request: protos.google.cloud.aiplatform.v1beta1.IListDataLabelingJobsRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | PaginationCallback<
           protos.google.cloud.aiplatform.v1beta1.IListDataLabelingJobsRequest,
           | protos.google.cloud.aiplatform.v1beta1.IListDataLabelingJobsResponse
@@ -2674,12 +2682,12 @@ export class JobServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -2745,7 +2753,7 @@ export class JobServiceClient {
    */
   listDataLabelingJobsStream(
     request?: protos.google.cloud.aiplatform.v1beta1.IListDataLabelingJobsRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Transform {
     request = request || {};
     options = options || {};
@@ -2823,7 +2831,7 @@ export class JobServiceClient {
    */
   listDataLabelingJobsAsync(
     request?: protos.google.cloud.aiplatform.v1beta1.IListDataLabelingJobsRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): AsyncIterable<protos.google.cloud.aiplatform.v1beta1.IDataLabelingJob> {
     request = request || {};
     options = options || {};
@@ -2845,7 +2853,7 @@ export class JobServiceClient {
   }
   listHyperparameterTuningJobs(
     request: protos.google.cloud.aiplatform.v1beta1.IListHyperparameterTuningJobsRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.aiplatform.v1beta1.IHyperparameterTuningJob[],
@@ -2855,7 +2863,7 @@ export class JobServiceClient {
   >;
   listHyperparameterTuningJobs(
     request: protos.google.cloud.aiplatform.v1beta1.IListHyperparameterTuningJobsRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: PaginationCallback<
       protos.google.cloud.aiplatform.v1beta1.IListHyperparameterTuningJobsRequest,
       | protos.google.cloud.aiplatform.v1beta1.IListHyperparameterTuningJobsResponse
@@ -2925,7 +2933,7 @@ export class JobServiceClient {
   listHyperparameterTuningJobs(
     request: protos.google.cloud.aiplatform.v1beta1.IListHyperparameterTuningJobsRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | PaginationCallback<
           protos.google.cloud.aiplatform.v1beta1.IListHyperparameterTuningJobsRequest,
           | protos.google.cloud.aiplatform.v1beta1.IListHyperparameterTuningJobsResponse
@@ -2948,12 +2956,12 @@ export class JobServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -3019,7 +3027,7 @@ export class JobServiceClient {
    */
   listHyperparameterTuningJobsStream(
     request?: protos.google.cloud.aiplatform.v1beta1.IListHyperparameterTuningJobsRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Transform {
     request = request || {};
     options = options || {};
@@ -3093,7 +3101,7 @@ export class JobServiceClient {
    */
   listHyperparameterTuningJobsAsync(
     request?: protos.google.cloud.aiplatform.v1beta1.IListHyperparameterTuningJobsRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): AsyncIterable<protos.google.cloud.aiplatform.v1beta1.IHyperparameterTuningJob> {
     request = request || {};
     options = options || {};
@@ -3115,7 +3123,7 @@ export class JobServiceClient {
   }
   listBatchPredictionJobs(
     request: protos.google.cloud.aiplatform.v1beta1.IListBatchPredictionJobsRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.aiplatform.v1beta1.IBatchPredictionJob[],
@@ -3125,7 +3133,7 @@ export class JobServiceClient {
   >;
   listBatchPredictionJobs(
     request: protos.google.cloud.aiplatform.v1beta1.IListBatchPredictionJobsRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: PaginationCallback<
       protos.google.cloud.aiplatform.v1beta1.IListBatchPredictionJobsRequest,
       | protos.google.cloud.aiplatform.v1beta1.IListBatchPredictionJobsResponse
@@ -3195,7 +3203,7 @@ export class JobServiceClient {
   listBatchPredictionJobs(
     request: protos.google.cloud.aiplatform.v1beta1.IListBatchPredictionJobsRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | PaginationCallback<
           protos.google.cloud.aiplatform.v1beta1.IListBatchPredictionJobsRequest,
           | protos.google.cloud.aiplatform.v1beta1.IListBatchPredictionJobsResponse
@@ -3218,12 +3226,12 @@ export class JobServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -3289,7 +3297,7 @@ export class JobServiceClient {
    */
   listBatchPredictionJobsStream(
     request?: protos.google.cloud.aiplatform.v1beta1.IListBatchPredictionJobsRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Transform {
     request = request || {};
     options = options || {};
@@ -3363,7 +3371,7 @@ export class JobServiceClient {
    */
   listBatchPredictionJobsAsync(
     request?: protos.google.cloud.aiplatform.v1beta1.IListBatchPredictionJobsRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): AsyncIterable<protos.google.cloud.aiplatform.v1beta1.IBatchPredictionJob> {
     request = request || {};
     options = options || {};
