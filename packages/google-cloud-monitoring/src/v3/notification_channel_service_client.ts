@@ -1497,9 +1497,7 @@ export class NotificationChannelServiceClient {
       this.innerApiCalls['listNotificationChannelDescriptors'] as GaxCall,
       (request as unknown) as RequestType,
       callSettings
-    ) as AsyncIterable<
-      protos.google.monitoring.v3.INotificationChannelDescriptor
-    >;
+    ) as AsyncIterable<protos.google.monitoring.v3.INotificationChannelDescriptor>;
   }
   listNotificationChannels(
     request: protos.google.monitoring.v3.IListNotificationChannelsRequest,
