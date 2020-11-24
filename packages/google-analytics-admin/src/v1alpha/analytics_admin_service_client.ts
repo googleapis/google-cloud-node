@@ -6085,9 +6085,7 @@ export class AnalyticsAdminServiceClient {
   listAndroidAppDataStreamsAsync(
     request?: protos.google.analytics.admin.v1alpha.IListAndroidAppDataStreamsRequest,
     options?: CallOptions
-  ): AsyncIterable<
-    protos.google.analytics.admin.v1alpha.IAndroidAppDataStream
-  > {
+  ): AsyncIterable<protos.google.analytics.admin.v1alpha.IAndroidAppDataStream> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -6104,9 +6102,7 @@ export class AnalyticsAdminServiceClient {
       this.innerApiCalls['listAndroidAppDataStreams'] as GaxCall,
       (request as unknown) as RequestType,
       callSettings
-    ) as AsyncIterable<
-      protos.google.analytics.admin.v1alpha.IAndroidAppDataStream
-    >;
+    ) as AsyncIterable<protos.google.analytics.admin.v1alpha.IAndroidAppDataStream>;
   }
   listGoogleAdsLinks(
     request: protos.google.analytics.admin.v1alpha.IListGoogleAdsLinksRequest,
