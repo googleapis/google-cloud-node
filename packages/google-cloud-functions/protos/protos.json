@@ -26,7 +26,14 @@
                           "responseType": "ListFunctionsResponse",
                           "options": {
                             "(google.api.http).get": "/v1/{parent=projects/*/locations/*}/functions"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=projects/*/locations/*}/functions"
+                              }
+                            }
+                          ]
                         },
                         "GetFunction": {
                           "requestType": "GetFunctionRequest",
@@ -34,7 +41,17 @@
                           "options": {
                             "(google.api.http).get": "/v1/{name=projects/*/locations/*/functions/*}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/locations/*/functions/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "CreateFunction": {
                           "requestType": "CreateFunctionRequest",
@@ -45,7 +62,24 @@
                             "(google.api.method_signature)": "location,function",
                             "(google.longrunning.operation_info).response_type": "CloudFunction",
                             "(google.longrunning.operation_info).metadata_type": "OperationMetadataV1"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{location=projects/*/locations/*}/functions",
+                                "body": "function"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "location,function"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "CloudFunction",
+                                "metadata_type": "OperationMetadataV1"
+                              }
+                            }
+                          ]
                         },
                         "UpdateFunction": {
                           "requestType": "UpdateFunctionRequest",
@@ -56,7 +90,24 @@
                             "(google.api.method_signature)": "function",
                             "(google.longrunning.operation_info).response_type": "CloudFunction",
                             "(google.longrunning.operation_info).metadata_type": "OperationMetadataV1"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1/{function.name=projects/*/locations/*/functions/*}",
+                                "body": "function"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "function"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "CloudFunction",
+                                "metadata_type": "OperationMetadataV1"
+                              }
+                            }
+                          ]
                         },
                         "DeleteFunction": {
                           "requestType": "DeleteFunctionRequest",
@@ -66,7 +117,23 @@
                             "(google.api.method_signature)": "name",
                             "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
                             "(google.longrunning.operation_info).metadata_type": "OperationMetadataV1"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1/{name=projects/*/locations/*/functions/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.protobuf.Empty",
+                                "metadata_type": "OperationMetadataV1"
+                              }
+                            }
+                          ]
                         },
                         "CallFunction": {
                           "requestType": "CallFunctionRequest",
@@ -75,7 +142,18 @@
                             "(google.api.http).post": "/v1/{name=projects/*/locations/*/functions/*}:call",
                             "(google.api.http).body": "*",
                             "(google.api.method_signature)": "name,data"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{name=projects/*/locations/*/functions/*}:call",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name,data"
+                            }
+                          ]
                         },
                         "GenerateUploadUrl": {
                           "requestType": "GenerateUploadUrlRequest",
@@ -83,7 +161,15 @@
                           "options": {
                             "(google.api.http).post": "/v1/{parent=projects/*/locations/*}/functions:generateUploadUrl",
                             "(google.api.http).body": "*"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=projects/*/locations/*}/functions:generateUploadUrl",
+                                "body": "*"
+                              }
+                            }
+                          ]
                         },
                         "GenerateDownloadUrl": {
                           "requestType": "GenerateDownloadUrlRequest",
@@ -91,7 +177,15 @@
                           "options": {
                             "(google.api.http).post": "/v1/{name=projects/*/locations/*/functions/*}:generateDownloadUrl",
                             "(google.api.http).body": "*"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{name=projects/*/locations/*/functions/*}:generateDownloadUrl",
+                                "body": "*"
+                              }
+                            }
+                          ]
                         },
                         "SetIamPolicy": {
                           "requestType": "google.iam.v1.SetIamPolicyRequest",
@@ -99,14 +193,29 @@
                           "options": {
                             "(google.api.http).post": "/v1/{resource=projects/*/locations/*/functions/*}:setIamPolicy",
                             "(google.api.http).body": "*"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{resource=projects/*/locations/*/functions/*}:setIamPolicy",
+                                "body": "*"
+                              }
+                            }
+                          ]
                         },
                         "GetIamPolicy": {
                           "requestType": "google.iam.v1.GetIamPolicyRequest",
                           "responseType": "google.iam.v1.Policy",
                           "options": {
                             "(google.api.http).get": "/v1/{resource=projects/*/locations/*/functions/*}:getIamPolicy"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{resource=projects/*/locations/*/functions/*}:getIamPolicy"
+                              }
+                            }
+                          ]
                         },
                         "TestIamPermissions": {
                           "requestType": "google.iam.v1.TestIamPermissionsRequest",
@@ -114,7 +223,15 @@
                           "options": {
                             "(google.api.http).post": "/v1/{resource=projects/*/locations/*/functions/*}:testIamPermissions",
                             "(google.api.http).body": "*"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{resource=projects/*/locations/*/functions/*}:testIamPermissions",
+                                "body": "*"
+                              }
+                            }
+                          ]
                         }
                       }
                     },
@@ -1714,7 +1831,15 @@
                       "options": {
                         "(google.api.http).post": "/v1/{resource=**}:setIamPolicy",
                         "(google.api.http).body": "*"
-                      }
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "post": "/v1/{resource=**}:setIamPolicy",
+                            "body": "*"
+                          }
+                        }
+                      ]
                     },
                     "GetIamPolicy": {
                       "requestType": "GetIamPolicyRequest",
@@ -1722,7 +1847,15 @@
                       "options": {
                         "(google.api.http).post": "/v1/{resource=**}:getIamPolicy",
                         "(google.api.http).body": "*"
-                      }
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "post": "/v1/{resource=**}:getIamPolicy",
+                            "body": "*"
+                          }
+                        }
+                      ]
                     },
                     "TestIamPermissions": {
                       "requestType": "TestIamPermissionsRequest",
@@ -1730,7 +1863,15 @@
                       "options": {
                         "(google.api.http).post": "/v1/{resource=**}:testIamPermissions",
                         "(google.api.http).body": "*"
-                      }
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "post": "/v1/{resource=**}:testIamPermissions",
+                            "body": "*"
+                          }
+                        }
+                      ]
                     }
                   }
                 },
@@ -1974,7 +2115,17 @@
                   "options": {
                     "(google.api.http).get": "/v1/{name=operations}",
                     "(google.api.method_signature)": "name,filter"
-                  }
+                  },
+                  "parsedOptions": [
+                    {
+                      "(google.api.http)": {
+                        "get": "/v1/{name=operations}"
+                      }
+                    },
+                    {
+                      "(google.api.method_signature)": "name,filter"
+                    }
+                  ]
                 },
                 "GetOperation": {
                   "requestType": "GetOperationRequest",
@@ -1982,7 +2133,17 @@
                   "options": {
                     "(google.api.http).get": "/v1/{name=operations/**}",
                     "(google.api.method_signature)": "name"
-                  }
+                  },
+                  "parsedOptions": [
+                    {
+                      "(google.api.http)": {
+                        "get": "/v1/{name=operations/**}"
+                      }
+                    },
+                    {
+                      "(google.api.method_signature)": "name"
+                    }
+                  ]
                 },
                 "DeleteOperation": {
                   "requestType": "DeleteOperationRequest",
@@ -1990,7 +2151,17 @@
                   "options": {
                     "(google.api.http).delete": "/v1/{name=operations/**}",
                     "(google.api.method_signature)": "name"
-                  }
+                  },
+                  "parsedOptions": [
+                    {
+                      "(google.api.http)": {
+                        "delete": "/v1/{name=operations/**}"
+                      }
+                    },
+                    {
+                      "(google.api.method_signature)": "name"
+                    }
+                  ]
                 },
                 "CancelOperation": {
                   "requestType": "CancelOperationRequest",
@@ -1999,7 +2170,18 @@
                     "(google.api.http).post": "/v1/{name=operations/**}:cancel",
                     "(google.api.http).body": "*",
                     "(google.api.method_signature)": "name"
-                  }
+                  },
+                  "parsedOptions": [
+                    {
+                      "(google.api.http)": {
+                        "post": "/v1/{name=operations/**}:cancel",
+                        "body": "*"
+                      }
+                    },
+                    {
+                      "(google.api.method_signature)": "name"
+                    }
+                  ]
                 },
                 "WaitOperation": {
                   "requestType": "WaitOperationRequest",

@@ -16,6 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
+/* global window */
 import * as gax from 'google-gax';
 import {
   Callback,
@@ -31,6 +32,11 @@ import * as path from 'path';
 import {Transform} from 'stream';
 import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
+/**
+ * Client JSON configuration object, loaded from
+ * `src/v1/cloud_functions_service_client_config.json`.
+ * This file defines retry strategy and timeouts for all API methods in this library.
+ */
 import * as gapicConfig from './cloud_functions_service_client_config.json';
 import {operationsProtos} from 'google-gax';
 const version = require('../../../package.json').version;
@@ -85,9 +91,9 @@ export class CloudFunctionsServiceClient {
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
-   * @param {gax.ClientConfig} [options.clientConfig] - client configuration override.
-   *     TODO(@alexander-fenster): link to gax documentation.
-   * @param {boolean} fallback - Use HTTP fallback mode.
+   * @param {gax.ClientConfig} [options.clientConfig] - Client configuration override.
+   *     Follows the structure of {@link gapicConfig}.
+   * @param {boolean} [options.fallback] - Use HTTP fallback mode.
    *     In fallback mode, a special browser-compatible transport implementation is used
    *     instead of gRPC transport. In browser context (if the `window` object is defined)
    *     the fallback mode is enabled automatically; set `options.fallback` to `false`
@@ -101,7 +107,9 @@ export class CloudFunctionsServiceClient {
       opts?.servicePath || opts?.apiEndpoint || staticMembers.servicePath;
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback = opts?.fallback ?? typeof window !== 'undefined';
+    const fallback =
+      opts?.fallback ??
+      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
@@ -376,7 +384,7 @@ export class CloudFunctionsServiceClient {
   // -------------------
   getFunction(
     request: protos.google.cloud.functions.v1.IGetFunctionRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.functions.v1.ICloudFunction,
@@ -386,7 +394,7 @@ export class CloudFunctionsServiceClient {
   >;
   getFunction(
     request: protos.google.cloud.functions.v1.IGetFunctionRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.cloud.functions.v1.ICloudFunction,
       protos.google.cloud.functions.v1.IGetFunctionRequest | null | undefined,
@@ -421,7 +429,7 @@ export class CloudFunctionsServiceClient {
   getFunction(
     request: protos.google.cloud.functions.v1.IGetFunctionRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.cloud.functions.v1.ICloudFunction,
           | protos.google.cloud.functions.v1.IGetFunctionRequest
@@ -442,12 +450,12 @@ export class CloudFunctionsServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -462,7 +470,7 @@ export class CloudFunctionsServiceClient {
   }
   callFunction(
     request: protos.google.cloud.functions.v1.ICallFunctionRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.functions.v1.ICallFunctionResponse,
@@ -472,7 +480,7 @@ export class CloudFunctionsServiceClient {
   >;
   callFunction(
     request: protos.google.cloud.functions.v1.ICallFunctionRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.cloud.functions.v1.ICallFunctionResponse,
       protos.google.cloud.functions.v1.ICallFunctionRequest | null | undefined,
@@ -512,7 +520,7 @@ export class CloudFunctionsServiceClient {
   callFunction(
     request: protos.google.cloud.functions.v1.ICallFunctionRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.cloud.functions.v1.ICallFunctionResponse,
           | protos.google.cloud.functions.v1.ICallFunctionRequest
@@ -533,12 +541,12 @@ export class CloudFunctionsServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -553,7 +561,7 @@ export class CloudFunctionsServiceClient {
   }
   generateUploadUrl(
     request: protos.google.cloud.functions.v1.IGenerateUploadUrlRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.functions.v1.IGenerateUploadUrlResponse,
@@ -563,7 +571,7 @@ export class CloudFunctionsServiceClient {
   >;
   generateUploadUrl(
     request: protos.google.cloud.functions.v1.IGenerateUploadUrlRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.cloud.functions.v1.IGenerateUploadUrlResponse,
       | protos.google.cloud.functions.v1.IGenerateUploadUrlRequest
@@ -627,7 +635,7 @@ export class CloudFunctionsServiceClient {
   generateUploadUrl(
     request: protos.google.cloud.functions.v1.IGenerateUploadUrlRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.cloud.functions.v1.IGenerateUploadUrlResponse,
           | protos.google.cloud.functions.v1.IGenerateUploadUrlRequest
@@ -650,12 +658,12 @@ export class CloudFunctionsServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -670,7 +678,7 @@ export class CloudFunctionsServiceClient {
   }
   generateDownloadUrl(
     request: protos.google.cloud.functions.v1.IGenerateDownloadUrlRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.functions.v1.IGenerateDownloadUrlResponse,
@@ -680,7 +688,7 @@ export class CloudFunctionsServiceClient {
   >;
   generateDownloadUrl(
     request: protos.google.cloud.functions.v1.IGenerateDownloadUrlRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.cloud.functions.v1.IGenerateDownloadUrlResponse,
       | protos.google.cloud.functions.v1.IGenerateDownloadUrlRequest
@@ -727,7 +735,7 @@ export class CloudFunctionsServiceClient {
   generateDownloadUrl(
     request: protos.google.cloud.functions.v1.IGenerateDownloadUrlRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.cloud.functions.v1.IGenerateDownloadUrlResponse,
           | protos.google.cloud.functions.v1.IGenerateDownloadUrlRequest
@@ -750,12 +758,12 @@ export class CloudFunctionsServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -770,7 +778,7 @@ export class CloudFunctionsServiceClient {
   }
   setIamPolicy(
     request: protos.google.iam.v1.ISetIamPolicyRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.iam.v1.IPolicy,
@@ -780,7 +788,7 @@ export class CloudFunctionsServiceClient {
   >;
   setIamPolicy(
     request: protos.google.iam.v1.ISetIamPolicyRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.iam.v1.IPolicy,
       protos.google.iam.v1.ISetIamPolicyRequest | null | undefined,
@@ -822,7 +830,7 @@ export class CloudFunctionsServiceClient {
   setIamPolicy(
     request: protos.google.iam.v1.ISetIamPolicyRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.iam.v1.IPolicy,
           protos.google.iam.v1.ISetIamPolicyRequest | null | undefined,
@@ -841,12 +849,12 @@ export class CloudFunctionsServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -861,7 +869,7 @@ export class CloudFunctionsServiceClient {
   }
   getIamPolicy(
     request: protos.google.iam.v1.IGetIamPolicyRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.iam.v1.IPolicy,
@@ -871,7 +879,7 @@ export class CloudFunctionsServiceClient {
   >;
   getIamPolicy(
     request: protos.google.iam.v1.IGetIamPolicyRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.iam.v1.IPolicy,
       protos.google.iam.v1.IGetIamPolicyRequest | null | undefined,
@@ -912,7 +920,7 @@ export class CloudFunctionsServiceClient {
   getIamPolicy(
     request: protos.google.iam.v1.IGetIamPolicyRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.iam.v1.IPolicy,
           protos.google.iam.v1.IGetIamPolicyRequest | null | undefined,
@@ -931,12 +939,12 @@ export class CloudFunctionsServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -951,7 +959,7 @@ export class CloudFunctionsServiceClient {
   }
   testIamPermissions(
     request: protos.google.iam.v1.ITestIamPermissionsRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.iam.v1.ITestIamPermissionsResponse,
@@ -961,7 +969,7 @@ export class CloudFunctionsServiceClient {
   >;
   testIamPermissions(
     request: protos.google.iam.v1.ITestIamPermissionsRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.iam.v1.ITestIamPermissionsResponse,
       protos.google.iam.v1.ITestIamPermissionsRequest | null | undefined,
@@ -1005,7 +1013,7 @@ export class CloudFunctionsServiceClient {
   testIamPermissions(
     request: protos.google.iam.v1.ITestIamPermissionsRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.iam.v1.ITestIamPermissionsResponse,
           protos.google.iam.v1.ITestIamPermissionsRequest | null | undefined,
@@ -1024,12 +1032,12 @@ export class CloudFunctionsServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1045,7 +1053,7 @@ export class CloudFunctionsServiceClient {
 
   createFunction(
     request: protos.google.cloud.functions.v1.ICreateFunctionRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       LROperation<
@@ -1058,7 +1066,7 @@ export class CloudFunctionsServiceClient {
   >;
   createFunction(
     request: protos.google.cloud.functions.v1.ICreateFunctionRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       LROperation<
         protos.google.cloud.functions.v1.ICloudFunction,
@@ -1107,7 +1115,7 @@ export class CloudFunctionsServiceClient {
   createFunction(
     request: protos.google.cloud.functions.v1.ICreateFunctionRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           LROperation<
             protos.google.cloud.functions.v1.ICloudFunction,
@@ -1135,12 +1143,12 @@ export class CloudFunctionsServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1192,7 +1200,7 @@ export class CloudFunctionsServiceClient {
   }
   updateFunction(
     request: protos.google.cloud.functions.v1.IUpdateFunctionRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       LROperation<
@@ -1205,7 +1213,7 @@ export class CloudFunctionsServiceClient {
   >;
   updateFunction(
     request: protos.google.cloud.functions.v1.IUpdateFunctionRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       LROperation<
         protos.google.cloud.functions.v1.ICloudFunction,
@@ -1251,7 +1259,7 @@ export class CloudFunctionsServiceClient {
   updateFunction(
     request: protos.google.cloud.functions.v1.IUpdateFunctionRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           LROperation<
             protos.google.cloud.functions.v1.ICloudFunction,
@@ -1279,12 +1287,12 @@ export class CloudFunctionsServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1336,7 +1344,7 @@ export class CloudFunctionsServiceClient {
   }
   deleteFunction(
     request: protos.google.cloud.functions.v1.IDeleteFunctionRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       LROperation<
@@ -1349,7 +1357,7 @@ export class CloudFunctionsServiceClient {
   >;
   deleteFunction(
     request: protos.google.cloud.functions.v1.IDeleteFunctionRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       LROperation<
         protos.google.protobuf.IEmpty,
@@ -1395,7 +1403,7 @@ export class CloudFunctionsServiceClient {
   deleteFunction(
     request: protos.google.cloud.functions.v1.IDeleteFunctionRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           LROperation<
             protos.google.protobuf.IEmpty,
@@ -1423,12 +1431,12 @@ export class CloudFunctionsServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1480,7 +1488,7 @@ export class CloudFunctionsServiceClient {
   }
   listFunctions(
     request: protos.google.cloud.functions.v1.IListFunctionsRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.functions.v1.ICloudFunction[],
@@ -1490,7 +1498,7 @@ export class CloudFunctionsServiceClient {
   >;
   listFunctions(
     request: protos.google.cloud.functions.v1.IListFunctionsRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: PaginationCallback<
       protos.google.cloud.functions.v1.IListFunctionsRequest,
       | protos.google.cloud.functions.v1.IListFunctionsResponse
@@ -1544,7 +1552,7 @@ export class CloudFunctionsServiceClient {
   listFunctions(
     request: protos.google.cloud.functions.v1.IListFunctionsRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | PaginationCallback<
           protos.google.cloud.functions.v1.IListFunctionsRequest,
           | protos.google.cloud.functions.v1.IListFunctionsResponse
@@ -1567,12 +1575,12 @@ export class CloudFunctionsServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1618,7 +1626,7 @@ export class CloudFunctionsServiceClient {
    */
   listFunctionsStream(
     request?: protos.google.cloud.functions.v1.IListFunctionsRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Transform {
     request = request || {};
     options = options || {};
@@ -1676,7 +1684,7 @@ export class CloudFunctionsServiceClient {
    */
   listFunctionsAsync(
     request?: protos.google.cloud.functions.v1.IListFunctionsRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): AsyncIterable<protos.google.cloud.functions.v1.ICloudFunction> {
     request = request || {};
     options = options || {};
