@@ -4003,9 +4003,7 @@ export class DataLabelingServiceClient {
       this.innerApiCalls['listAnnotatedDatasets'] as GaxCall,
       (request as unknown) as RequestType,
       callSettings
-    ) as AsyncIterable<
-      protos.google.cloud.datalabeling.v1beta1.IAnnotatedDataset
-    >;
+    ) as AsyncIterable<protos.google.cloud.datalabeling.v1beta1.IAnnotatedDataset>;
   }
   listExamples(
     request: protos.google.cloud.datalabeling.v1beta1.IListExamplesRequest,
@@ -4434,9 +4432,7 @@ export class DataLabelingServiceClient {
   listAnnotationSpecSetsAsync(
     request?: protos.google.cloud.datalabeling.v1beta1.IListAnnotationSpecSetsRequest,
     options?: CallOptions
-  ): AsyncIterable<
-    protos.google.cloud.datalabeling.v1beta1.IAnnotationSpecSet
-  > {
+  ): AsyncIterable<protos.google.cloud.datalabeling.v1beta1.IAnnotationSpecSet> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -4453,9 +4449,7 @@ export class DataLabelingServiceClient {
       this.innerApiCalls['listAnnotationSpecSets'] as GaxCall,
       (request as unknown) as RequestType,
       callSettings
-    ) as AsyncIterable<
-      protos.google.cloud.datalabeling.v1beta1.IAnnotationSpecSet
-    >;
+    ) as AsyncIterable<protos.google.cloud.datalabeling.v1beta1.IAnnotationSpecSet>;
   }
   listInstructions(
     request: protos.google.cloud.datalabeling.v1beta1.IListInstructionsRequest,
@@ -5200,9 +5194,7 @@ export class DataLabelingServiceClient {
   searchExampleComparisonsAsync(
     request?: protos.google.cloud.datalabeling.v1beta1.ISearchExampleComparisonsRequest,
     options?: CallOptions
-  ): AsyncIterable<
-    protos.google.cloud.datalabeling.v1beta1.SearchExampleComparisonsResponse.IExampleComparison
-  > {
+  ): AsyncIterable<protos.google.cloud.datalabeling.v1beta1.SearchExampleComparisonsResponse.IExampleComparison> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -5219,9 +5211,7 @@ export class DataLabelingServiceClient {
       this.innerApiCalls['searchExampleComparisons'] as GaxCall,
       (request as unknown) as RequestType,
       callSettings
-    ) as AsyncIterable<
-      protos.google.cloud.datalabeling.v1beta1.SearchExampleComparisonsResponse.IExampleComparison
-    >;
+    ) as AsyncIterable<protos.google.cloud.datalabeling.v1beta1.SearchExampleComparisonsResponse.IExampleComparison>;
   }
   listEvaluationJobs(
     request: protos.google.cloud.datalabeling.v1beta1.IListEvaluationJobsRequest,
