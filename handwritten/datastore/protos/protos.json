@@ -31,7 +31,24 @@
                             "(google.api.method_signature)": "project_id,labels,entity_filter,output_url_prefix",
                             "(google.longrunning.operation_info).response_type": "ExportEntitiesResponse",
                             "(google.longrunning.operation_info).metadata_type": "ExportEntitiesMetadata"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/projects/{project_id}:export",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project_id,labels,entity_filter,output_url_prefix"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "ExportEntitiesResponse",
+                                "metadata_type": "ExportEntitiesMetadata"
+                              }
+                            }
+                          ]
                         },
                         "ImportEntities": {
                           "requestType": "ImportEntitiesRequest",
@@ -42,21 +59,52 @@
                             "(google.api.method_signature)": "project_id,labels,input_url,entity_filter",
                             "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
                             "(google.longrunning.operation_info).metadata_type": "ImportEntitiesMetadata"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/projects/{project_id}:import",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project_id,labels,input_url,entity_filter"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.protobuf.Empty",
+                                "metadata_type": "ImportEntitiesMetadata"
+                              }
+                            }
+                          ]
                         },
                         "GetIndex": {
                           "requestType": "GetIndexRequest",
                           "responseType": "Index",
                           "options": {
                             "(google.api.http).get": "/v1/projects/{project_id}/indexes/{index_id}"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/projects/{project_id}/indexes/{index_id}"
+                              }
+                            }
+                          ]
                         },
                         "ListIndexes": {
                           "requestType": "ListIndexesRequest",
                           "responseType": "ListIndexesResponse",
                           "options": {
                             "(google.api.http).get": "/v1/projects/{project_id}/indexes"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/projects/{project_id}/indexes"
+                              }
+                            }
+                          ]
                         }
                       }
                     },
@@ -423,7 +471,18 @@
                         "(google.api.http).post": "/v1/projects/{project_id}:lookup",
                         "(google.api.http).body": "*",
                         "(google.api.method_signature)": "project_id,read_options,keys"
-                      }
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "post": "/v1/projects/{project_id}:lookup",
+                            "body": "*"
+                          }
+                        },
+                        {
+                          "(google.api.method_signature)": "project_id,read_options,keys"
+                        }
+                      ]
                     },
                     "RunQuery": {
                       "requestType": "RunQueryRequest",
@@ -431,7 +490,15 @@
                       "options": {
                         "(google.api.http).post": "/v1/projects/{project_id}:runQuery",
                         "(google.api.http).body": "*"
-                      }
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "post": "/v1/projects/{project_id}:runQuery",
+                            "body": "*"
+                          }
+                        }
+                      ]
                     },
                     "BeginTransaction": {
                       "requestType": "BeginTransactionRequest",
@@ -440,7 +507,18 @@
                         "(google.api.http).post": "/v1/projects/{project_id}:beginTransaction",
                         "(google.api.http).body": "*",
                         "(google.api.method_signature)": "project_id"
-                      }
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "post": "/v1/projects/{project_id}:beginTransaction",
+                            "body": "*"
+                          }
+                        },
+                        {
+                          "(google.api.method_signature)": "project_id"
+                        }
+                      ]
                     },
                     "Commit": {
                       "requestType": "CommitRequest",
@@ -449,7 +527,21 @@
                         "(google.api.http).post": "/v1/projects/{project_id}:commit",
                         "(google.api.http).body": "*",
                         "(google.api.method_signature)": "project_id,mode,mutations"
-                      }
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "post": "/v1/projects/{project_id}:commit",
+                            "body": "*"
+                          }
+                        },
+                        {
+                          "(google.api.method_signature)": "project_id,mode,transaction,mutations"
+                        },
+                        {
+                          "(google.api.method_signature)": "project_id,mode,mutations"
+                        }
+                      ]
                     },
                     "Rollback": {
                       "requestType": "RollbackRequest",
@@ -458,7 +550,18 @@
                         "(google.api.http).post": "/v1/projects/{project_id}:rollback",
                         "(google.api.http).body": "*",
                         "(google.api.method_signature)": "project_id,transaction"
-                      }
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "post": "/v1/projects/{project_id}:rollback",
+                            "body": "*"
+                          }
+                        },
+                        {
+                          "(google.api.method_signature)": "project_id,transaction"
+                        }
+                      ]
                     },
                     "AllocateIds": {
                       "requestType": "AllocateIdsRequest",
@@ -467,7 +570,18 @@
                         "(google.api.http).post": "/v1/projects/{project_id}:allocateIds",
                         "(google.api.http).body": "*",
                         "(google.api.method_signature)": "project_id,keys"
-                      }
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "post": "/v1/projects/{project_id}:allocateIds",
+                            "body": "*"
+                          }
+                        },
+                        {
+                          "(google.api.method_signature)": "project_id,keys"
+                        }
+                      ]
                     },
                     "ReserveIds": {
                       "requestType": "ReserveIdsRequest",
@@ -476,7 +590,18 @@
                         "(google.api.http).post": "/v1/projects/{project_id}:reserveIds",
                         "(google.api.http).body": "*",
                         "(google.api.method_signature)": "project_id,keys"
-                      }
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "post": "/v1/projects/{project_id}:reserveIds",
+                            "body": "*"
+                          }
+                        },
+                        {
+                          "(google.api.method_signature)": "project_id,keys"
+                        }
+                      ]
                     }
                   }
                 },
@@ -2487,7 +2612,17 @@
                   "options": {
                     "(google.api.http).get": "/v1/{name=operations}",
                     "(google.api.method_signature)": "name,filter"
-                  }
+                  },
+                  "parsedOptions": [
+                    {
+                      "(google.api.http)": {
+                        "get": "/v1/{name=operations}"
+                      }
+                    },
+                    {
+                      "(google.api.method_signature)": "name,filter"
+                    }
+                  ]
                 },
                 "GetOperation": {
                   "requestType": "GetOperationRequest",
@@ -2495,7 +2630,17 @@
                   "options": {
                     "(google.api.http).get": "/v1/{name=operations/**}",
                     "(google.api.method_signature)": "name"
-                  }
+                  },
+                  "parsedOptions": [
+                    {
+                      "(google.api.http)": {
+                        "get": "/v1/{name=operations/**}"
+                      }
+                    },
+                    {
+                      "(google.api.method_signature)": "name"
+                    }
+                  ]
                 },
                 "DeleteOperation": {
                   "requestType": "DeleteOperationRequest",
@@ -2503,7 +2648,17 @@
                   "options": {
                     "(google.api.http).delete": "/v1/{name=operations/**}",
                     "(google.api.method_signature)": "name"
-                  }
+                  },
+                  "parsedOptions": [
+                    {
+                      "(google.api.http)": {
+                        "delete": "/v1/{name=operations/**}"
+                      }
+                    },
+                    {
+                      "(google.api.method_signature)": "name"
+                    }
+                  ]
                 },
                 "CancelOperation": {
                   "requestType": "CancelOperationRequest",
@@ -2512,7 +2667,18 @@
                     "(google.api.http).post": "/v1/{name=operations/**}:cancel",
                     "(google.api.http).body": "*",
                     "(google.api.method_signature)": "name"
-                  }
+                  },
+                  "parsedOptions": [
+                    {
+                      "(google.api.http)": {
+                        "post": "/v1/{name=operations/**}:cancel",
+                        "body": "*"
+                      }
+                    },
+                    {
+                      "(google.api.method_signature)": "name"
+                    }
+                  ]
                 },
                 "WaitOperation": {
                   "requestType": "WaitOperationRequest",
