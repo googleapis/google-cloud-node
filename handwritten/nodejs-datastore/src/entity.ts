@@ -629,7 +629,10 @@ export namespace entity {
     }
 
     if (value instanceof Buffer) {
-      valueProto.blobValue = value;
+      // Convert the buffer to a base 64 string to workaround a bug of
+      // protobufs encoding empty buffer.
+      // See https://github.com/googleapis/nodejs-datastore/issues/755
+      valueProto.blobValue = value.toString('base64');
       return valueProto;
     }
 

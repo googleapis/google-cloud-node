@@ -326,6 +326,20 @@ describe('Datastore', () => {
       await datastore.delete(datastore.key(['Post', assignedId as string]));
     });
 
+    it('should save/get/delete an empty buffer', async () => {
+      const postKey = datastore.key(['Post']);
+      const data = {
+        buf: Buffer.from([]),
+      };
+      await datastore.save({key: postKey, data});
+      const assignedId = postKey.id;
+      assert(assignedId);
+      const [entity] = await datastore.get(postKey);
+      delete entity[datastore.KEY];
+      assert.deepStrictEqual(entity, data);
+      await datastore.delete(datastore.key(['Post', assignedId as string]));
+    });
+
     it('should save/get/delete with a generated key id', async () => {
       const postKey = datastore.key('Post');
       await datastore.save({key: postKey, data: post});
