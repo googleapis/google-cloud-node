@@ -46,7 +46,8 @@
     "prelint": "cd samples; npm link ../; npm i",
     "prepare": "npm run compile-protos && npm run compile",
     "system-test": "c8 mocha build/system-test",
-    "test": "c8 mocha build/test",
+    "test": "c8 npm run test:all",
+    "test:all": "mocha 'build/test/*v3.js' && mocha 'build/test/*v3beta1.js'",
     "samples-test": "cd samples/ && npm link ../ && npm test"
   },
   "dependencies": {

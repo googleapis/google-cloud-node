@@ -23,7 +23,7 @@ AUTOSYNTH_MULTIPLE_COMMITS = True
 
 gapic = gcp.GAPICBazel()
 # note: default version must be the last one to generate the correct system test
-versions = ['v3']
+versions = ['v3beta1', 'v3']
 
 for version in versions:
   library = gapic.node_library('dialogflow', version, bazel_target=f"//google/cloud/dialogflow/cx/{version}:dialogflow-cx-{version}-nodejs")
