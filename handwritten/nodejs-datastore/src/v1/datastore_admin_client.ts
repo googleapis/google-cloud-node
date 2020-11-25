@@ -16,6 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
+/* global window */
 import * as gax from 'google-gax';
 import {
   Callback,
@@ -31,6 +32,11 @@ import * as path from 'path';
 import {Transform} from 'stream';
 import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
+/**
+ * Client JSON configuration object, loaded from
+ * `src/v1/datastore_admin_client_config.json`.
+ * This file defines retry strategy and timeouts for all API methods in this library.
+ */
 import * as gapicConfig from './datastore_admin_client_config.json';
 import {operationsProtos} from 'google-gax';
 const version = require('../../../package.json').version;
@@ -144,9 +150,9 @@ export class DatastoreAdminClient {
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
-   * @param {gax.ClientConfig} [options.clientConfig] - client configuration override.
-   *     TODO(@alexander-fenster): link to gax documentation.
-   * @param {boolean} fallback - Use HTTP fallback mode.
+   * @param {gax.ClientConfig} [options.clientConfig] - Client configuration override.
+   *     Follows the structure of {@link gapicConfig}.
+   * @param {boolean} [options.fallback] - Use HTTP fallback mode.
    *     In fallback mode, a special browser-compatible transport implementation is used
    *     instead of gRPC transport. In browser context (if the `window` object is defined)
    *     the fallback mode is enabled automatically; set `options.fallback` to `false`
@@ -159,7 +165,9 @@ export class DatastoreAdminClient {
       opts?.servicePath || opts?.apiEndpoint || staticMembers.servicePath;
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback = opts?.fallback ?? typeof window !== 'undefined';
+    const fallback =
+      opts?.fallback ??
+      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
@@ -407,7 +415,7 @@ export class DatastoreAdminClient {
   // -------------------
   getIndex(
     request: protos.google.datastore.admin.v1.IGetIndexRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.datastore.admin.v1.IIndex,
@@ -417,7 +425,7 @@ export class DatastoreAdminClient {
   >;
   getIndex(
     request: protos.google.datastore.admin.v1.IGetIndexRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.datastore.admin.v1.IIndex,
       protos.google.datastore.admin.v1.IGetIndexRequest | null | undefined,
@@ -454,7 +462,7 @@ export class DatastoreAdminClient {
   getIndex(
     request: protos.google.datastore.admin.v1.IGetIndexRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.datastore.admin.v1.IIndex,
           protos.google.datastore.admin.v1.IGetIndexRequest | null | undefined,
@@ -473,12 +481,12 @@ export class DatastoreAdminClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -494,7 +502,7 @@ export class DatastoreAdminClient {
 
   exportEntities(
     request: protos.google.datastore.admin.v1.IExportEntitiesRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       LROperation<
@@ -507,7 +515,7 @@ export class DatastoreAdminClient {
   >;
   exportEntities(
     request: protos.google.datastore.admin.v1.IExportEntitiesRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       LROperation<
         protos.google.datastore.admin.v1.IExportEntitiesResponse,
@@ -581,7 +589,7 @@ export class DatastoreAdminClient {
   exportEntities(
     request: protos.google.datastore.admin.v1.IExportEntitiesRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           LROperation<
             protos.google.datastore.admin.v1.IExportEntitiesResponse,
@@ -609,12 +617,12 @@ export class DatastoreAdminClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -666,7 +674,7 @@ export class DatastoreAdminClient {
   }
   importEntities(
     request: protos.google.datastore.admin.v1.IImportEntitiesRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       LROperation<
@@ -679,7 +687,7 @@ export class DatastoreAdminClient {
   >;
   importEntities(
     request: protos.google.datastore.admin.v1.IImportEntitiesRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       LROperation<
         protos.google.protobuf.IEmpty,
@@ -748,7 +756,7 @@ export class DatastoreAdminClient {
   importEntities(
     request: protos.google.datastore.admin.v1.IImportEntitiesRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           LROperation<
             protos.google.protobuf.IEmpty,
@@ -776,12 +784,12 @@ export class DatastoreAdminClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -833,7 +841,7 @@ export class DatastoreAdminClient {
   }
   listIndexes(
     request: protos.google.datastore.admin.v1.IListIndexesRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.datastore.admin.v1.IIndex[],
@@ -843,7 +851,7 @@ export class DatastoreAdminClient {
   >;
   listIndexes(
     request: protos.google.datastore.admin.v1.IListIndexesRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: PaginationCallback<
       protos.google.datastore.admin.v1.IListIndexesRequest,
       protos.google.datastore.admin.v1.IListIndexesResponse | null | undefined,
@@ -889,7 +897,7 @@ export class DatastoreAdminClient {
   listIndexes(
     request: protos.google.datastore.admin.v1.IListIndexesRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | PaginationCallback<
           protos.google.datastore.admin.v1.IListIndexesRequest,
           | protos.google.datastore.admin.v1.IListIndexesResponse
@@ -910,12 +918,12 @@ export class DatastoreAdminClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -955,7 +963,7 @@ export class DatastoreAdminClient {
    */
   listIndexesStream(
     request?: protos.google.datastore.admin.v1.IListIndexesRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Transform {
     request = request || {};
     options = options || {};
@@ -1007,7 +1015,7 @@ export class DatastoreAdminClient {
    */
   listIndexesAsync(
     request?: protos.google.datastore.admin.v1.IListIndexesRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): AsyncIterable<protos.google.datastore.admin.v1.IIndex> {
     request = request || {};
     options = options || {};
