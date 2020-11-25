@@ -29,7 +29,17 @@
                           "options": {
                             "(google.api.http).get": "/v1/{parent=projects/*/locations/*}/jobs",
                             "(google.api.method_signature)": "parent"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=projects/*/locations/*}/jobs"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
                         },
                         "GetJob": {
                           "requestType": "GetJobRequest",
@@ -37,7 +47,17 @@
                           "options": {
                             "(google.api.http).get": "/v1/{name=projects/*/locations/*/jobs/*}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/locations/*/jobs/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "CreateJob": {
                           "requestType": "CreateJobRequest",
@@ -46,7 +66,18 @@
                             "(google.api.http).post": "/v1/{parent=projects/*/locations/*}/jobs",
                             "(google.api.http).body": "job",
                             "(google.api.method_signature)": "parent,job"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=projects/*/locations/*}/jobs",
+                                "body": "job"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,job"
+                            }
+                          ]
                         },
                         "UpdateJob": {
                           "requestType": "UpdateJobRequest",
@@ -55,7 +86,18 @@
                             "(google.api.http).patch": "/v1/{job.name=projects/*/locations/*/jobs/*}",
                             "(google.api.http).body": "job",
                             "(google.api.method_signature)": "job,update_mask"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1/{job.name=projects/*/locations/*/jobs/*}",
+                                "body": "job"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "job,update_mask"
+                            }
+                          ]
                         },
                         "DeleteJob": {
                           "requestType": "DeleteJobRequest",
@@ -63,7 +105,17 @@
                           "options": {
                             "(google.api.http).delete": "/v1/{name=projects/*/locations/*/jobs/*}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1/{name=projects/*/locations/*/jobs/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "PauseJob": {
                           "requestType": "PauseJobRequest",
@@ -72,7 +124,18 @@
                             "(google.api.http).post": "/v1/{name=projects/*/locations/*/jobs/*}:pause",
                             "(google.api.http).body": "*",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{name=projects/*/locations/*/jobs/*}:pause",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "ResumeJob": {
                           "requestType": "ResumeJobRequest",
@@ -81,7 +144,18 @@
                             "(google.api.http).post": "/v1/{name=projects/*/locations/*/jobs/*}:resume",
                             "(google.api.http).body": "*",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{name=projects/*/locations/*/jobs/*}:resume",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "RunJob": {
                           "requestType": "RunJobRequest",
@@ -90,7 +164,18 @@
                             "(google.api.http).post": "/v1/{name=projects/*/locations/*/jobs/*}:run",
                             "(google.api.http).body": "*",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{name=projects/*/locations/*/jobs/*}:run",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         }
                       }
                     },
@@ -495,7 +580,17 @@
                           "options": {
                             "(google.api.http).get": "/v1beta1/{parent=projects/*/locations/*}/jobs",
                             "(google.api.method_signature)": "parent"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta1/{parent=projects/*/locations/*}/jobs"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
                         },
                         "GetJob": {
                           "requestType": "GetJobRequest",
@@ -503,7 +598,17 @@
                           "options": {
                             "(google.api.http).get": "/v1beta1/{name=projects/*/locations/*/jobs/*}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta1/{name=projects/*/locations/*/jobs/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "CreateJob": {
                           "requestType": "CreateJobRequest",
@@ -512,7 +617,18 @@
                             "(google.api.http).post": "/v1beta1/{parent=projects/*/locations/*}/jobs",
                             "(google.api.http).body": "job",
                             "(google.api.method_signature)": "parent,job"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta1/{parent=projects/*/locations/*}/jobs",
+                                "body": "job"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,job"
+                            }
+                          ]
                         },
                         "UpdateJob": {
                           "requestType": "UpdateJobRequest",
@@ -521,7 +637,18 @@
                             "(google.api.http).patch": "/v1beta1/{job.name=projects/*/locations/*/jobs/*}",
                             "(google.api.http).body": "job",
                             "(google.api.method_signature)": "job,update_mask"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1beta1/{job.name=projects/*/locations/*/jobs/*}",
+                                "body": "job"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "job,update_mask"
+                            }
+                          ]
                         },
                         "DeleteJob": {
                           "requestType": "DeleteJobRequest",
@@ -529,7 +656,17 @@
                           "options": {
                             "(google.api.http).delete": "/v1beta1/{name=projects/*/locations/*/jobs/*}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1beta1/{name=projects/*/locations/*/jobs/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "PauseJob": {
                           "requestType": "PauseJobRequest",
@@ -538,7 +675,18 @@
                             "(google.api.http).post": "/v1beta1/{name=projects/*/locations/*/jobs/*}:pause",
                             "(google.api.http).body": "*",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta1/{name=projects/*/locations/*/jobs/*}:pause",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "ResumeJob": {
                           "requestType": "ResumeJobRequest",
@@ -547,7 +695,18 @@
                             "(google.api.http).post": "/v1beta1/{name=projects/*/locations/*/jobs/*}:resume",
                             "(google.api.http).body": "*",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta1/{name=projects/*/locations/*/jobs/*}:resume",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "RunJob": {
                           "requestType": "RunJobRequest",
@@ -556,7 +715,18 @@
                             "(google.api.http).post": "/v1beta1/{name=projects/*/locations/*/jobs/*}:run",
                             "(google.api.http).body": "*",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta1/{name=projects/*/locations/*/jobs/*}:run",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         }
                       }
                     },

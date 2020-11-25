@@ -16,6 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
+/* global window */
 import * as gax from 'google-gax';
 import {
   Callback,
@@ -30,6 +31,11 @@ import * as path from 'path';
 import {Transform} from 'stream';
 import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
+/**
+ * Client JSON configuration object, loaded from
+ * `src/v1/cloud_scheduler_client_config.json`.
+ * This file defines retry strategy and timeouts for all API methods in this library.
+ */
 import * as gapicConfig from './cloud_scheduler_client_config.json';
 
 const version = require('../../../package.json').version;
@@ -84,9 +90,9 @@ export class CloudSchedulerClient {
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
-   * @param {gax.ClientConfig} [options.clientConfig] - client configuration override.
-   *     TODO(@alexander-fenster): link to gax documentation.
-   * @param {boolean} fallback - Use HTTP fallback mode.
+   * @param {gax.ClientConfig} [options.clientConfig] - Client configuration override.
+   *     Follows the structure of {@link gapicConfig}.
+   * @param {boolean} [options.fallback] - Use HTTP fallback mode.
    *     In fallback mode, a special browser-compatible transport implementation is used
    *     instead of gRPC transport. In browser context (if the `window` object is defined)
    *     the fallback mode is enabled automatically; set `options.fallback` to `false`
@@ -99,7 +105,9 @@ export class CloudSchedulerClient {
       opts?.servicePath || opts?.apiEndpoint || staticMembers.servicePath;
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback = opts?.fallback ?? typeof window !== 'undefined';
+    const fallback =
+      opts?.fallback ??
+      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
@@ -318,7 +326,7 @@ export class CloudSchedulerClient {
   // -------------------
   getJob(
     request: protos.google.cloud.scheduler.v1.IGetJobRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.scheduler.v1.IJob,
@@ -328,7 +336,7 @@ export class CloudSchedulerClient {
   >;
   getJob(
     request: protos.google.cloud.scheduler.v1.IGetJobRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.cloud.scheduler.v1.IJob,
       protos.google.cloud.scheduler.v1.IGetJobRequest | null | undefined,
@@ -364,7 +372,7 @@ export class CloudSchedulerClient {
   getJob(
     request: protos.google.cloud.scheduler.v1.IGetJobRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.cloud.scheduler.v1.IJob,
           protos.google.cloud.scheduler.v1.IGetJobRequest | null | undefined,
@@ -383,12 +391,12 @@ export class CloudSchedulerClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -403,7 +411,7 @@ export class CloudSchedulerClient {
   }
   createJob(
     request: protos.google.cloud.scheduler.v1.ICreateJobRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.scheduler.v1.IJob,
@@ -413,7 +421,7 @@ export class CloudSchedulerClient {
   >;
   createJob(
     request: protos.google.cloud.scheduler.v1.ICreateJobRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.cloud.scheduler.v1.IJob,
       protos.google.cloud.scheduler.v1.ICreateJobRequest | null | undefined,
@@ -455,7 +463,7 @@ export class CloudSchedulerClient {
   createJob(
     request: protos.google.cloud.scheduler.v1.ICreateJobRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.cloud.scheduler.v1.IJob,
           protos.google.cloud.scheduler.v1.ICreateJobRequest | null | undefined,
@@ -474,12 +482,12 @@ export class CloudSchedulerClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -494,7 +502,7 @@ export class CloudSchedulerClient {
   }
   updateJob(
     request: protos.google.cloud.scheduler.v1.IUpdateJobRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.scheduler.v1.IJob,
@@ -504,7 +512,7 @@ export class CloudSchedulerClient {
   >;
   updateJob(
     request: protos.google.cloud.scheduler.v1.IUpdateJobRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.cloud.scheduler.v1.IJob,
       protos.google.cloud.scheduler.v1.IUpdateJobRequest | null | undefined,
@@ -552,7 +560,7 @@ export class CloudSchedulerClient {
   updateJob(
     request: protos.google.cloud.scheduler.v1.IUpdateJobRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.cloud.scheduler.v1.IJob,
           protos.google.cloud.scheduler.v1.IUpdateJobRequest | null | undefined,
@@ -571,12 +579,12 @@ export class CloudSchedulerClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -591,7 +599,7 @@ export class CloudSchedulerClient {
   }
   deleteJob(
     request: protos.google.cloud.scheduler.v1.IDeleteJobRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.protobuf.IEmpty,
@@ -601,7 +609,7 @@ export class CloudSchedulerClient {
   >;
   deleteJob(
     request: protos.google.cloud.scheduler.v1.IDeleteJobRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.protobuf.IEmpty,
       protos.google.cloud.scheduler.v1.IDeleteJobRequest | null | undefined,
@@ -637,7 +645,7 @@ export class CloudSchedulerClient {
   deleteJob(
     request: protos.google.cloud.scheduler.v1.IDeleteJobRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.protobuf.IEmpty,
           protos.google.cloud.scheduler.v1.IDeleteJobRequest | null | undefined,
@@ -656,12 +664,12 @@ export class CloudSchedulerClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -676,7 +684,7 @@ export class CloudSchedulerClient {
   }
   pauseJob(
     request: protos.google.cloud.scheduler.v1.IPauseJobRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.scheduler.v1.IJob,
@@ -686,7 +694,7 @@ export class CloudSchedulerClient {
   >;
   pauseJob(
     request: protos.google.cloud.scheduler.v1.IPauseJobRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.cloud.scheduler.v1.IJob,
       protos.google.cloud.scheduler.v1.IPauseJobRequest | null | undefined,
@@ -728,7 +736,7 @@ export class CloudSchedulerClient {
   pauseJob(
     request: protos.google.cloud.scheduler.v1.IPauseJobRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.cloud.scheduler.v1.IJob,
           protos.google.cloud.scheduler.v1.IPauseJobRequest | null | undefined,
@@ -747,12 +755,12 @@ export class CloudSchedulerClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -767,7 +775,7 @@ export class CloudSchedulerClient {
   }
   resumeJob(
     request: protos.google.cloud.scheduler.v1.IResumeJobRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.scheduler.v1.IJob,
@@ -777,7 +785,7 @@ export class CloudSchedulerClient {
   >;
   resumeJob(
     request: protos.google.cloud.scheduler.v1.IResumeJobRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.cloud.scheduler.v1.IJob,
       protos.google.cloud.scheduler.v1.IResumeJobRequest | null | undefined,
@@ -818,7 +826,7 @@ export class CloudSchedulerClient {
   resumeJob(
     request: protos.google.cloud.scheduler.v1.IResumeJobRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.cloud.scheduler.v1.IJob,
           protos.google.cloud.scheduler.v1.IResumeJobRequest | null | undefined,
@@ -837,12 +845,12 @@ export class CloudSchedulerClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -857,7 +865,7 @@ export class CloudSchedulerClient {
   }
   runJob(
     request: protos.google.cloud.scheduler.v1.IRunJobRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.scheduler.v1.IJob,
@@ -867,7 +875,7 @@ export class CloudSchedulerClient {
   >;
   runJob(
     request: protos.google.cloud.scheduler.v1.IRunJobRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.cloud.scheduler.v1.IJob,
       protos.google.cloud.scheduler.v1.IRunJobRequest | null | undefined,
@@ -906,7 +914,7 @@ export class CloudSchedulerClient {
   runJob(
     request: protos.google.cloud.scheduler.v1.IRunJobRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.cloud.scheduler.v1.IJob,
           protos.google.cloud.scheduler.v1.IRunJobRequest | null | undefined,
@@ -925,12 +933,12 @@ export class CloudSchedulerClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -946,7 +954,7 @@ export class CloudSchedulerClient {
 
   listJobs(
     request: protos.google.cloud.scheduler.v1.IListJobsRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.scheduler.v1.IJob[],
@@ -956,7 +964,7 @@ export class CloudSchedulerClient {
   >;
   listJobs(
     request: protos.google.cloud.scheduler.v1.IListJobsRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: PaginationCallback<
       protos.google.cloud.scheduler.v1.IListJobsRequest,
       protos.google.cloud.scheduler.v1.IListJobsResponse | null | undefined,
@@ -1010,7 +1018,7 @@ export class CloudSchedulerClient {
   listJobs(
     request: protos.google.cloud.scheduler.v1.IListJobsRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | PaginationCallback<
           protos.google.cloud.scheduler.v1.IListJobsRequest,
           protos.google.cloud.scheduler.v1.IListJobsResponse | null | undefined,
@@ -1029,12 +1037,12 @@ export class CloudSchedulerClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1084,7 +1092,7 @@ export class CloudSchedulerClient {
    */
   listJobsStream(
     request?: protos.google.cloud.scheduler.v1.IListJobsRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Transform {
     request = request || {};
     options = options || {};
@@ -1146,7 +1154,7 @@ export class CloudSchedulerClient {
    */
   listJobsAsync(
     request?: protos.google.cloud.scheduler.v1.IListJobsRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): AsyncIterable<protos.google.cloud.scheduler.v1.IJob> {
     request = request || {};
     options = options || {};
