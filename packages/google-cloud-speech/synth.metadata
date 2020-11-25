@@ -4,7 +4,7 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/nodejs-speech.git",
-        "sha": "ae44dd86d60cc44b1d0c9767bd065de3f6febfcf"
+        "sha": "6378dc193da2f792645ed0ec221c9a3495264486"
       }
     },
     {
@@ -19,7 +19,7 @@
       "git": {
         "name": "synthtool",
         "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "1f1148d3c7a7a52f0c98077f976bd9b3c948ee2b"
+        "sha": "15013eff642a7e7e855aed5a29e6e83c39beba2a"
       }
     }
   ],
@@ -42,82 +42,5 @@
         "generator": "bazel"
       }
     }
-  ],
-  "generatedFiles": [
-    ".eslintignore",
-    ".eslintrc.json",
-    ".gitattributes",
-    ".github/ISSUE_TEMPLATE/bug_report.md",
-    ".github/ISSUE_TEMPLATE/feature_request.md",
-    ".github/ISSUE_TEMPLATE/support_request.md",
-    ".github/PULL_REQUEST_TEMPLATE.md",
-    ".github/release-please.yml",
-    ".github/workflows/ci.yaml",
-    ".gitignore",
-    ".jsdoc.js",
-    ".kokoro/.gitattributes",
-    ".kokoro/common.cfg",
-    ".kokoro/continuous/node10/common.cfg",
-    ".kokoro/continuous/node10/docs.cfg",
-    ".kokoro/continuous/node10/test.cfg",
-    ".kokoro/continuous/node12/common.cfg",
-    ".kokoro/continuous/node12/lint.cfg",
-    ".kokoro/continuous/node12/samples-test.cfg",
-    ".kokoro/continuous/node12/system-test.cfg",
-    ".kokoro/continuous/node12/test.cfg",
-    ".kokoro/docs.sh",
-    ".kokoro/lint.sh",
-    ".kokoro/populate-secrets.sh",
-    ".kokoro/presubmit/node10/common.cfg",
-    ".kokoro/presubmit/node12/common.cfg",
-    ".kokoro/presubmit/node12/samples-test.cfg",
-    ".kokoro/presubmit/node12/system-test.cfg",
-    ".kokoro/presubmit/node12/test.cfg",
-    ".kokoro/publish.sh",
-    ".kokoro/release/docs-devsite.cfg",
-    ".kokoro/release/docs-devsite.sh",
-    ".kokoro/release/docs.cfg",
-    ".kokoro/release/docs.sh",
-    ".kokoro/release/publish.cfg",
-    ".kokoro/samples-test.sh",
-    ".kokoro/system-test.sh",
-    ".kokoro/test.bat",
-    ".kokoro/test.sh",
-    ".kokoro/trampoline.sh",
-    ".kokoro/trampoline_v2.sh",
-    ".mocharc.js",
-    ".nycrc",
-    ".prettierignore",
-    ".prettierrc.js",
-    ".trampolinerc",
-    "CODE_OF_CONDUCT.md",
-    "CONTRIBUTING.md",
-    "LICENSE",
-    "README.md",
-    "api-extractor.json",
-    "linkinator.config.json",
-    "protos/google/cloud/speech/v1/cloud_speech.proto",
-    "protos/google/cloud/speech/v1p1beta1/cloud_speech.proto",
-    "protos/google/cloud/speech/v1p1beta1/resource.proto",
-    "protos/protos.d.ts",
-    "protos/protos.js",
-    "protos/protos.json",
-    "renovate.json",
-    "samples/README.md",
-    "src/v1/index.ts",
-    "src/v1/speech_client.ts",
-    "src/v1/speech_client_config.json",
-    "src/v1/speech_proto_list.json",
-    "src/v1p1beta1/index.ts",
-    "src/v1p1beta1/speech_client.ts",
-    "src/v1p1beta1/speech_client_config.json",
-    "src/v1p1beta1/speech_proto_list.json",
-    "system-test/fixtures/sample/src/index.js",
-    "system-test/fixtures/sample/src/index.ts",
-    "system-test/install.ts",
-    "test/gapic_speech_v1.ts",
-    "test/gapic_speech_v1p1beta1.ts",
-    "tsconfig.json",
-    "webpack.config.js"
   ]
 }
