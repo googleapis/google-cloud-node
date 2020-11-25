@@ -16,6 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
+/* global window */
 import * as gax from 'google-gax';
 import {
   Callback,
@@ -31,6 +32,11 @@ import * as path from 'path';
 import {Transform} from 'stream';
 import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
+/**
+ * Client JSON configuration object, loaded from
+ * `src/v1beta1/certificate_authority_service_client_config.json`.
+ * This file defines retry strategy and timeouts for all API methods in this library.
+ */
 import * as gapicConfig from './certificate_authority_service_client_config.json';
 import {operationsProtos} from 'google-gax';
 const version = require('../../../package.json').version;
@@ -86,9 +92,9 @@ export class CertificateAuthorityServiceClient {
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
-   * @param {gax.ClientConfig} [options.clientConfig] - client configuration override.
-   *     TODO(@alexander-fenster): link to gax documentation.
-   * @param {boolean} fallback - Use HTTP fallback mode.
+   * @param {gax.ClientConfig} [options.clientConfig] - Client configuration override.
+   *     Follows the structure of {@link gapicConfig}.
+   * @param {boolean} [options.fallback] - Use HTTP fallback mode.
    *     In fallback mode, a special browser-compatible transport implementation is used
    *     instead of gRPC transport. In browser context (if the `window` object is defined)
    *     the fallback mode is enabled automatically; set `options.fallback` to `false`
@@ -102,7 +108,9 @@ export class CertificateAuthorityServiceClient {
       opts?.servicePath || opts?.apiEndpoint || staticMembers.servicePath;
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback = opts?.fallback ?? typeof window !== 'undefined';
+    const fallback =
+      opts?.fallback ??
+      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
@@ -498,7 +506,7 @@ export class CertificateAuthorityServiceClient {
   // -------------------
   createCertificate(
     request: protos.google.cloud.security.privateca.v1beta1.ICreateCertificateRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.security.privateca.v1beta1.ICertificate,
@@ -511,7 +519,7 @@ export class CertificateAuthorityServiceClient {
   >;
   createCertificate(
     request: protos.google.cloud.security.privateca.v1beta1.ICreateCertificateRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.cloud.security.privateca.v1beta1.ICertificate,
       | protos.google.cloud.security.privateca.v1beta1.ICreateCertificateRequest
@@ -574,7 +582,7 @@ export class CertificateAuthorityServiceClient {
   createCertificate(
     request: protos.google.cloud.security.privateca.v1beta1.ICreateCertificateRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.cloud.security.privateca.v1beta1.ICertificate,
           | protos.google.cloud.security.privateca.v1beta1.ICreateCertificateRequest
@@ -600,12 +608,12 @@ export class CertificateAuthorityServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -620,7 +628,7 @@ export class CertificateAuthorityServiceClient {
   }
   getCertificate(
     request: protos.google.cloud.security.privateca.v1beta1.IGetCertificateRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.security.privateca.v1beta1.ICertificate,
@@ -633,7 +641,7 @@ export class CertificateAuthorityServiceClient {
   >;
   getCertificate(
     request: protos.google.cloud.security.privateca.v1beta1.IGetCertificateRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.cloud.security.privateca.v1beta1.ICertificate,
       | protos.google.cloud.security.privateca.v1beta1.IGetCertificateRequest
@@ -672,7 +680,7 @@ export class CertificateAuthorityServiceClient {
   getCertificate(
     request: protos.google.cloud.security.privateca.v1beta1.IGetCertificateRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.cloud.security.privateca.v1beta1.ICertificate,
           | protos.google.cloud.security.privateca.v1beta1.IGetCertificateRequest
@@ -698,12 +706,12 @@ export class CertificateAuthorityServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -718,7 +726,7 @@ export class CertificateAuthorityServiceClient {
   }
   revokeCertificate(
     request: protos.google.cloud.security.privateca.v1beta1.IRevokeCertificateRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.security.privateca.v1beta1.ICertificate,
@@ -731,7 +739,7 @@ export class CertificateAuthorityServiceClient {
   >;
   revokeCertificate(
     request: protos.google.cloud.security.privateca.v1beta1.IRevokeCertificateRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.cloud.security.privateca.v1beta1.ICertificate,
       | protos.google.cloud.security.privateca.v1beta1.IRevokeCertificateRequest
@@ -787,7 +795,7 @@ export class CertificateAuthorityServiceClient {
   revokeCertificate(
     request: protos.google.cloud.security.privateca.v1beta1.IRevokeCertificateRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.cloud.security.privateca.v1beta1.ICertificate,
           | protos.google.cloud.security.privateca.v1beta1.IRevokeCertificateRequest
@@ -813,12 +821,12 @@ export class CertificateAuthorityServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -833,7 +841,7 @@ export class CertificateAuthorityServiceClient {
   }
   updateCertificate(
     request: protos.google.cloud.security.privateca.v1beta1.IUpdateCertificateRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.security.privateca.v1beta1.ICertificate,
@@ -846,7 +854,7 @@ export class CertificateAuthorityServiceClient {
   >;
   updateCertificate(
     request: protos.google.cloud.security.privateca.v1beta1.IUpdateCertificateRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.cloud.security.privateca.v1beta1.ICertificate,
       | protos.google.cloud.security.privateca.v1beta1.IUpdateCertificateRequest
@@ -902,7 +910,7 @@ export class CertificateAuthorityServiceClient {
   updateCertificate(
     request: protos.google.cloud.security.privateca.v1beta1.IUpdateCertificateRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.cloud.security.privateca.v1beta1.ICertificate,
           | protos.google.cloud.security.privateca.v1beta1.IUpdateCertificateRequest
@@ -928,12 +936,12 @@ export class CertificateAuthorityServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -948,7 +956,7 @@ export class CertificateAuthorityServiceClient {
   }
   fetchCertificateAuthorityCsr(
     request: protos.google.cloud.security.privateca.v1beta1.IFetchCertificateAuthorityCsrRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.security.privateca.v1beta1.IFetchCertificateAuthorityCsrResponse,
@@ -961,7 +969,7 @@ export class CertificateAuthorityServiceClient {
   >;
   fetchCertificateAuthorityCsr(
     request: protos.google.cloud.security.privateca.v1beta1.IFetchCertificateAuthorityCsrRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.cloud.security.privateca.v1beta1.IFetchCertificateAuthorityCsrResponse,
       | protos.google.cloud.security.privateca.v1beta1.IFetchCertificateAuthorityCsrRequest
@@ -1007,7 +1015,7 @@ export class CertificateAuthorityServiceClient {
   fetchCertificateAuthorityCsr(
     request: protos.google.cloud.security.privateca.v1beta1.IFetchCertificateAuthorityCsrRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.cloud.security.privateca.v1beta1.IFetchCertificateAuthorityCsrResponse,
           | protos.google.cloud.security.privateca.v1beta1.IFetchCertificateAuthorityCsrRequest
@@ -1033,12 +1041,12 @@ export class CertificateAuthorityServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1057,7 +1065,7 @@ export class CertificateAuthorityServiceClient {
   }
   getCertificateAuthority(
     request: protos.google.cloud.security.privateca.v1beta1.IGetCertificateAuthorityRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.security.privateca.v1beta1.ICertificateAuthority,
@@ -1070,7 +1078,7 @@ export class CertificateAuthorityServiceClient {
   >;
   getCertificateAuthority(
     request: protos.google.cloud.security.privateca.v1beta1.IGetCertificateAuthorityRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.cloud.security.privateca.v1beta1.ICertificateAuthority,
       | protos.google.cloud.security.privateca.v1beta1.IGetCertificateAuthorityRequest
@@ -1110,7 +1118,7 @@ export class CertificateAuthorityServiceClient {
   getCertificateAuthority(
     request: protos.google.cloud.security.privateca.v1beta1.IGetCertificateAuthorityRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.cloud.security.privateca.v1beta1.ICertificateAuthority,
           | protos.google.cloud.security.privateca.v1beta1.IGetCertificateAuthorityRequest
@@ -1136,12 +1144,12 @@ export class CertificateAuthorityServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1160,7 +1168,7 @@ export class CertificateAuthorityServiceClient {
   }
   getCertificateRevocationList(
     request: protos.google.cloud.security.privateca.v1beta1.IGetCertificateRevocationListRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.security.privateca.v1beta1.ICertificateRevocationList,
@@ -1173,7 +1181,7 @@ export class CertificateAuthorityServiceClient {
   >;
   getCertificateRevocationList(
     request: protos.google.cloud.security.privateca.v1beta1.IGetCertificateRevocationListRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.cloud.security.privateca.v1beta1.ICertificateRevocationList,
       | protos.google.cloud.security.privateca.v1beta1.IGetCertificateRevocationListRequest
@@ -1213,7 +1221,7 @@ export class CertificateAuthorityServiceClient {
   getCertificateRevocationList(
     request: protos.google.cloud.security.privateca.v1beta1.IGetCertificateRevocationListRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.cloud.security.privateca.v1beta1.ICertificateRevocationList,
           | protos.google.cloud.security.privateca.v1beta1.IGetCertificateRevocationListRequest
@@ -1239,12 +1247,12 @@ export class CertificateAuthorityServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1263,7 +1271,7 @@ export class CertificateAuthorityServiceClient {
   }
   getReusableConfig(
     request: protos.google.cloud.security.privateca.v1beta1.IGetReusableConfigRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.security.privateca.v1beta1.IReusableConfig,
@@ -1276,7 +1284,7 @@ export class CertificateAuthorityServiceClient {
   >;
   getReusableConfig(
     request: protos.google.cloud.security.privateca.v1beta1.IGetReusableConfigRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.cloud.security.privateca.v1beta1.IReusableConfig,
       | protos.google.cloud.security.privateca.v1beta1.IGetReusableConfigRequest
@@ -1315,7 +1323,7 @@ export class CertificateAuthorityServiceClient {
   getReusableConfig(
     request: protos.google.cloud.security.privateca.v1beta1.IGetReusableConfigRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.cloud.security.privateca.v1beta1.IReusableConfig,
           | protos.google.cloud.security.privateca.v1beta1.IGetReusableConfigRequest
@@ -1341,12 +1349,12 @@ export class CertificateAuthorityServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1362,7 +1370,7 @@ export class CertificateAuthorityServiceClient {
 
   activateCertificateAuthority(
     request: protos.google.cloud.security.privateca.v1beta1.IActivateCertificateAuthorityRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       LROperation<
@@ -1375,7 +1383,7 @@ export class CertificateAuthorityServiceClient {
   >;
   activateCertificateAuthority(
     request: protos.google.cloud.security.privateca.v1beta1.IActivateCertificateAuthorityRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       LROperation<
         protos.google.cloud.security.privateca.v1beta1.ICertificateAuthority,
@@ -1445,7 +1453,7 @@ export class CertificateAuthorityServiceClient {
   activateCertificateAuthority(
     request: protos.google.cloud.security.privateca.v1beta1.IActivateCertificateAuthorityRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           LROperation<
             protos.google.cloud.security.privateca.v1beta1.ICertificateAuthority,
@@ -1473,12 +1481,12 @@ export class CertificateAuthorityServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1534,7 +1542,7 @@ export class CertificateAuthorityServiceClient {
   }
   createCertificateAuthority(
     request: protos.google.cloud.security.privateca.v1beta1.ICreateCertificateAuthorityRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       LROperation<
@@ -1547,7 +1555,7 @@ export class CertificateAuthorityServiceClient {
   >;
   createCertificateAuthority(
     request: protos.google.cloud.security.privateca.v1beta1.ICreateCertificateAuthorityRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       LROperation<
         protos.google.cloud.security.privateca.v1beta1.ICertificateAuthority,
@@ -1612,7 +1620,7 @@ export class CertificateAuthorityServiceClient {
   createCertificateAuthority(
     request: protos.google.cloud.security.privateca.v1beta1.ICreateCertificateAuthorityRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           LROperation<
             protos.google.cloud.security.privateca.v1beta1.ICertificateAuthority,
@@ -1640,12 +1648,12 @@ export class CertificateAuthorityServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1701,7 +1709,7 @@ export class CertificateAuthorityServiceClient {
   }
   disableCertificateAuthority(
     request: protos.google.cloud.security.privateca.v1beta1.IDisableCertificateAuthorityRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       LROperation<
@@ -1714,7 +1722,7 @@ export class CertificateAuthorityServiceClient {
   >;
   disableCertificateAuthority(
     request: protos.google.cloud.security.privateca.v1beta1.IDisableCertificateAuthorityRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       LROperation<
         protos.google.cloud.security.privateca.v1beta1.ICertificateAuthority,
@@ -1773,7 +1781,7 @@ export class CertificateAuthorityServiceClient {
   disableCertificateAuthority(
     request: protos.google.cloud.security.privateca.v1beta1.IDisableCertificateAuthorityRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           LROperation<
             protos.google.cloud.security.privateca.v1beta1.ICertificateAuthority,
@@ -1801,12 +1809,12 @@ export class CertificateAuthorityServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1862,7 +1870,7 @@ export class CertificateAuthorityServiceClient {
   }
   enableCertificateAuthority(
     request: protos.google.cloud.security.privateca.v1beta1.IEnableCertificateAuthorityRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       LROperation<
@@ -1875,7 +1883,7 @@ export class CertificateAuthorityServiceClient {
   >;
   enableCertificateAuthority(
     request: protos.google.cloud.security.privateca.v1beta1.IEnableCertificateAuthorityRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       LROperation<
         protos.google.cloud.security.privateca.v1beta1.ICertificateAuthority,
@@ -1934,7 +1942,7 @@ export class CertificateAuthorityServiceClient {
   enableCertificateAuthority(
     request: protos.google.cloud.security.privateca.v1beta1.IEnableCertificateAuthorityRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           LROperation<
             protos.google.cloud.security.privateca.v1beta1.ICertificateAuthority,
@@ -1962,12 +1970,12 @@ export class CertificateAuthorityServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -2023,7 +2031,7 @@ export class CertificateAuthorityServiceClient {
   }
   restoreCertificateAuthority(
     request: protos.google.cloud.security.privateca.v1beta1.IRestoreCertificateAuthorityRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       LROperation<
@@ -2036,7 +2044,7 @@ export class CertificateAuthorityServiceClient {
   >;
   restoreCertificateAuthority(
     request: protos.google.cloud.security.privateca.v1beta1.IRestoreCertificateAuthorityRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       LROperation<
         protos.google.cloud.security.privateca.v1beta1.ICertificateAuthority,
@@ -2095,7 +2103,7 @@ export class CertificateAuthorityServiceClient {
   restoreCertificateAuthority(
     request: protos.google.cloud.security.privateca.v1beta1.IRestoreCertificateAuthorityRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           LROperation<
             protos.google.cloud.security.privateca.v1beta1.ICertificateAuthority,
@@ -2123,12 +2131,12 @@ export class CertificateAuthorityServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -2184,7 +2192,7 @@ export class CertificateAuthorityServiceClient {
   }
   scheduleDeleteCertificateAuthority(
     request: protos.google.cloud.security.privateca.v1beta1.IScheduleDeleteCertificateAuthorityRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       LROperation<
@@ -2197,7 +2205,7 @@ export class CertificateAuthorityServiceClient {
   >;
   scheduleDeleteCertificateAuthority(
     request: protos.google.cloud.security.privateca.v1beta1.IScheduleDeleteCertificateAuthorityRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       LROperation<
         protos.google.cloud.security.privateca.v1beta1.ICertificateAuthority,
@@ -2256,7 +2264,7 @@ export class CertificateAuthorityServiceClient {
   scheduleDeleteCertificateAuthority(
     request: protos.google.cloud.security.privateca.v1beta1.IScheduleDeleteCertificateAuthorityRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           LROperation<
             protos.google.cloud.security.privateca.v1beta1.ICertificateAuthority,
@@ -2284,12 +2292,12 @@ export class CertificateAuthorityServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -2345,7 +2353,7 @@ export class CertificateAuthorityServiceClient {
   }
   updateCertificateAuthority(
     request: protos.google.cloud.security.privateca.v1beta1.IUpdateCertificateAuthorityRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       LROperation<
@@ -2358,7 +2366,7 @@ export class CertificateAuthorityServiceClient {
   >;
   updateCertificateAuthority(
     request: protos.google.cloud.security.privateca.v1beta1.IUpdateCertificateAuthorityRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       LROperation<
         protos.google.cloud.security.privateca.v1beta1.ICertificateAuthority,
@@ -2418,7 +2426,7 @@ export class CertificateAuthorityServiceClient {
   updateCertificateAuthority(
     request: protos.google.cloud.security.privateca.v1beta1.IUpdateCertificateAuthorityRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           LROperation<
             protos.google.cloud.security.privateca.v1beta1.ICertificateAuthority,
@@ -2446,12 +2454,12 @@ export class CertificateAuthorityServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -2507,7 +2515,7 @@ export class CertificateAuthorityServiceClient {
   }
   updateCertificateRevocationList(
     request: protos.google.cloud.security.privateca.v1beta1.IUpdateCertificateRevocationListRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       LROperation<
@@ -2520,7 +2528,7 @@ export class CertificateAuthorityServiceClient {
   >;
   updateCertificateRevocationList(
     request: protos.google.cloud.security.privateca.v1beta1.IUpdateCertificateRevocationListRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       LROperation<
         protos.google.cloud.security.privateca.v1beta1.ICertificateRevocationList,
@@ -2580,7 +2588,7 @@ export class CertificateAuthorityServiceClient {
   updateCertificateRevocationList(
     request: protos.google.cloud.security.privateca.v1beta1.IUpdateCertificateRevocationListRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           LROperation<
             protos.google.cloud.security.privateca.v1beta1.ICertificateRevocationList,
@@ -2608,12 +2616,12 @@ export class CertificateAuthorityServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -2632,18 +2640,19 @@ export class CertificateAuthorityServiceClient {
     );
   }
   /**
-   * Check the status of the long running operation returned by the updateCertificateRevocationList() method.
+   * Check the status of the long running operation returned by `updateCertificateRevocationList()`.
    * @param {String} name
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *
-   * @example:
-   *   const decodedOperation = await checkUpdateCertificateRevocationListProgress(name);
-   *   console.log(decodedOperation.result);
-   *   console.log(decodedOperation.done);
-   *   console.log(decodedOperation.metadata);
-   *
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example
+   * const decodedOperation = await checkUpdateCertificateRevocationListProgress(name);
+   * console.log(decodedOperation.result);
+   * console.log(decodedOperation.done);
+   * console.log(decodedOperation.metadata);
    */
   async checkUpdateCertificateRevocationListProgress(
     name: string
@@ -2669,7 +2678,7 @@ export class CertificateAuthorityServiceClient {
   }
   listCertificates(
     request: protos.google.cloud.security.privateca.v1beta1.IListCertificatesRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.security.privateca.v1beta1.ICertificate[],
@@ -2679,7 +2688,7 @@ export class CertificateAuthorityServiceClient {
   >;
   listCertificates(
     request: protos.google.cloud.security.privateca.v1beta1.IListCertificatesRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: PaginationCallback<
       protos.google.cloud.security.privateca.v1beta1.IListCertificatesRequest,
       | protos.google.cloud.security.privateca.v1beta1.IListCertificatesResponse
@@ -2729,24 +2738,19 @@ export class CertificateAuthorityServiceClient {
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
    *   The first element of the array is Array of [Certificate]{@link google.cloud.security.privateca.v1beta1.Certificate}.
-   *   The client library support auto-pagination by default: it will call the API as many
+   *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
-   *
-   *   When autoPaginate: false is specified through options, the array has three elements.
-   *   The first element is Array of [Certificate]{@link google.cloud.security.privateca.v1beta1.Certificate} that corresponds to
-   *   the one page received from the API server.
-   *   If the second element is not null it contains the request object of type [ListCertificatesRequest]{@link google.cloud.security.privateca.v1beta1.ListCertificatesRequest}
-   *   that can be used to obtain the next page of the results.
-   *   If it is null, the next page does not exist.
-   *   The third element contains the raw response received from the API server. Its type is
-   *   [ListCertificatesResponse]{@link google.cloud.security.privateca.v1beta1.ListCertificatesResponse}.
-   *
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *   Note that it can affect your quota.
+   *   We recommend using `listCertificatesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
    */
   listCertificates(
     request: protos.google.cloud.security.privateca.v1beta1.IListCertificatesRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | PaginationCallback<
           protos.google.cloud.security.privateca.v1beta1.IListCertificatesRequest,
           | protos.google.cloud.security.privateca.v1beta1.IListCertificatesResponse
@@ -2769,12 +2773,12 @@ export class CertificateAuthorityServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -2789,18 +2793,7 @@ export class CertificateAuthorityServiceClient {
   }
 
   /**
-   * Equivalent to {@link listCertificates}, but returns a NodeJS Stream object.
-   *
-   * This fetches the paged responses for {@link listCertificates} continuously
-   * and invokes the callback registered for 'data' event for each element in the
-   * responses.
-   *
-   * The returned object has 'end' method when no more elements are required.
-   *
-   * autoPaginate option will be ignored.
-   *
-   * @see {@link https://nodejs.org/api/stream.html}
-   *
+   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -2829,10 +2822,17 @@ export class CertificateAuthorityServiceClient {
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
    *   An object stream which emits an object representing [Certificate]{@link google.cloud.security.privateca.v1beta1.Certificate} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listCertificatesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
    */
   listCertificatesStream(
     request?: protos.google.cloud.security.privateca.v1beta1.IListCertificatesRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Transform {
     request = request || {};
     options = options || {};
@@ -2898,7 +2898,7 @@ export class CertificateAuthorityServiceClient {
    */
   listCertificatesAsync(
     request?: protos.google.cloud.security.privateca.v1beta1.IListCertificatesRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): AsyncIterable<protos.google.cloud.security.privateca.v1beta1.ICertificate> {
     request = request || {};
     options = options || {};
@@ -2920,7 +2920,7 @@ export class CertificateAuthorityServiceClient {
   }
   listCertificateAuthorities(
     request: protos.google.cloud.security.privateca.v1beta1.IListCertificateAuthoritiesRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.security.privateca.v1beta1.ICertificateAuthority[],
@@ -2930,7 +2930,7 @@ export class CertificateAuthorityServiceClient {
   >;
   listCertificateAuthorities(
     request: protos.google.cloud.security.privateca.v1beta1.IListCertificateAuthoritiesRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: PaginationCallback<
       protos.google.cloud.security.privateca.v1beta1.IListCertificateAuthoritiesRequest,
       | protos.google.cloud.security.privateca.v1beta1.IListCertificateAuthoritiesResponse
@@ -2988,7 +2988,7 @@ export class CertificateAuthorityServiceClient {
   listCertificateAuthorities(
     request: protos.google.cloud.security.privateca.v1beta1.IListCertificateAuthoritiesRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | PaginationCallback<
           protos.google.cloud.security.privateca.v1beta1.IListCertificateAuthoritiesRequest,
           | protos.google.cloud.security.privateca.v1beta1.IListCertificateAuthoritiesResponse
@@ -3011,12 +3011,12 @@ export class CertificateAuthorityServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -3070,7 +3070,7 @@ export class CertificateAuthorityServiceClient {
    */
   listCertificateAuthoritiesStream(
     request?: protos.google.cloud.security.privateca.v1beta1.IListCertificateAuthoritiesRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Transform {
     request = request || {};
     options = options || {};
@@ -3132,7 +3132,7 @@ export class CertificateAuthorityServiceClient {
    */
   listCertificateAuthoritiesAsync(
     request?: protos.google.cloud.security.privateca.v1beta1.IListCertificateAuthoritiesRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): AsyncIterable<protos.google.cloud.security.privateca.v1beta1.ICertificateAuthority> {
     request = request || {};
     options = options || {};
@@ -3154,7 +3154,7 @@ export class CertificateAuthorityServiceClient {
   }
   listCertificateRevocationLists(
     request: protos.google.cloud.security.privateca.v1beta1.IListCertificateRevocationListsRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.security.privateca.v1beta1.ICertificateRevocationList[],
@@ -3164,7 +3164,7 @@ export class CertificateAuthorityServiceClient {
   >;
   listCertificateRevocationLists(
     request: protos.google.cloud.security.privateca.v1beta1.IListCertificateRevocationListsRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: PaginationCallback<
       protos.google.cloud.security.privateca.v1beta1.IListCertificateRevocationListsRequest,
       | protos.google.cloud.security.privateca.v1beta1.IListCertificateRevocationListsResponse
@@ -3222,7 +3222,7 @@ export class CertificateAuthorityServiceClient {
   listCertificateRevocationLists(
     request: protos.google.cloud.security.privateca.v1beta1.IListCertificateRevocationListsRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | PaginationCallback<
           protos.google.cloud.security.privateca.v1beta1.IListCertificateRevocationListsRequest,
           | protos.google.cloud.security.privateca.v1beta1.IListCertificateRevocationListsResponse
@@ -3245,12 +3245,12 @@ export class CertificateAuthorityServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -3304,7 +3304,7 @@ export class CertificateAuthorityServiceClient {
    */
   listCertificateRevocationListsStream(
     request?: protos.google.cloud.security.privateca.v1beta1.IListCertificateRevocationListsRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Transform {
     request = request || {};
     options = options || {};
@@ -3366,7 +3366,7 @@ export class CertificateAuthorityServiceClient {
    */
   listCertificateRevocationListsAsync(
     request?: protos.google.cloud.security.privateca.v1beta1.IListCertificateRevocationListsRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): AsyncIterable<protos.google.cloud.security.privateca.v1beta1.ICertificateRevocationList> {
     request = request || {};
     options = options || {};
@@ -3388,7 +3388,7 @@ export class CertificateAuthorityServiceClient {
   }
   listReusableConfigs(
     request: protos.google.cloud.security.privateca.v1beta1.IListReusableConfigsRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.security.privateca.v1beta1.IReusableConfig[],
@@ -3398,7 +3398,7 @@ export class CertificateAuthorityServiceClient {
   >;
   listReusableConfigs(
     request: protos.google.cloud.security.privateca.v1beta1.IListReusableConfigsRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: PaginationCallback<
       protos.google.cloud.security.privateca.v1beta1.IListReusableConfigsRequest,
       | protos.google.cloud.security.privateca.v1beta1.IListReusableConfigsResponse
@@ -3456,7 +3456,7 @@ export class CertificateAuthorityServiceClient {
   listReusableConfigs(
     request: protos.google.cloud.security.privateca.v1beta1.IListReusableConfigsRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | PaginationCallback<
           protos.google.cloud.security.privateca.v1beta1.IListReusableConfigsRequest,
           | protos.google.cloud.security.privateca.v1beta1.IListReusableConfigsResponse
@@ -3479,12 +3479,12 @@ export class CertificateAuthorityServiceClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -3534,7 +3534,7 @@ export class CertificateAuthorityServiceClient {
    */
   listReusableConfigsStream(
     request?: protos.google.cloud.security.privateca.v1beta1.IListReusableConfigsRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Transform {
     request = request || {};
     options = options || {};
@@ -3596,7 +3596,7 @@ export class CertificateAuthorityServiceClient {
    */
   listReusableConfigsAsync(
     request?: protos.google.cloud.security.privateca.v1beta1.IListReusableConfigsRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): AsyncIterable<protos.google.cloud.security.privateca.v1beta1.IReusableConfig> {
     request = request || {};
     options = options || {};
