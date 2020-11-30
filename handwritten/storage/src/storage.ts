@@ -641,6 +641,11 @@ export class Storage extends Service {
 
     Object.keys(storageClasses).forEach(storageClass => {
       if (body[storageClass]) {
+        if (metadata.storageClass) {
+          throw new Error(
+            `Both \`${storageClass}\` and \`storageClass\` were provided.`
+          );
+        }
         body.storageClass = storageClasses[storageClass];
         delete body[storageClass];
       }
