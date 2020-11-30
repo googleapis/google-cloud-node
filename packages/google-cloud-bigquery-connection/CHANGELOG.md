@@ -1,5 +1,13 @@
 # Changelog
 
+### [1.2.1](https://www.github.com/googleapis/nodejs-bigquery-connection/compare/v1.2.0...v1.2.1) (2020-11-25)
+
+
+### Bug Fixes
+
+* **browser:** check for fetch on window ([5413d69](https://www.github.com/googleapis/nodejs-bigquery-connection/commit/5413d694d4b70eb338a17a5eb4a682f1673abfee))
+* do not modify options object, use defaultScopes ([#46](https://www.github.com/googleapis/nodejs-bigquery-connection/issues/46)) ([07244e4](https://www.github.com/googleapis/nodejs-bigquery-connection/commit/07244e4c6375bdbee47db6c7a2b018594c9b34e5))
+
 ## [1.2.0](https://www.github.com/googleapis/nodejs-bigquery-connection/compare/v1.1.0...v1.2.0) (2020-10-17)
 
 
