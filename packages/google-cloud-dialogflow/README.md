@@ -47,7 +47,7 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 ### Installing the client library
 
 ```bash
-npm install dialogflow
+npm install @google-cloud/dialogflow
 ```
 
 

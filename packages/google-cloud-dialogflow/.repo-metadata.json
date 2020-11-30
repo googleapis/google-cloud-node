@@ -7,7 +7,7 @@
   "release_level": "ga",
   "language": "nodejs",
   "repo": "googleapis/nodejs-dialogflow",
-  "distribution_name": "dialogflow",
+  "distribution_name": "@google-cloud/dialogflow",
   "api_id": "dialogflow.googleapis.com",
   "requires_billing": true
 }
