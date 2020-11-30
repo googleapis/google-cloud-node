@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.0.2](https://www.github.com/googleapis/nodejs-bigquery-reservation/compare/v1.0.1...v1.0.2) (2020-11-25)
+
+
+### Bug Fixes
+
+* **browser:** check for fetch on window ([5a32067](https://www.github.com/googleapis/nodejs-bigquery-reservation/commit/5a32067bdc000025c3166c72069db861800be5d8))
+
 ### [1.0.1](https://www.github.com/googleapis/nodejs-bigquery-reservation/compare/v1.0.0...v1.0.1) (2020-11-06)
 
 
