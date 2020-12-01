@@ -678,6 +678,7 @@
                                 case 2:
                                 case 4:
                                 case 5:
+                                case 6:
                                     break;
                                 }
                             if (message.outputConfig != null && message.hasOwnProperty("outputConfig")) {
@@ -734,6 +735,10 @@
                             case "ACCESS_POLICY":
                             case 5:
                                 message.contentType = 5;
+                                break;
+                            case "OS_INVENTORY":
+                            case 6:
+                                message.contentType = 6;
                                 break;
                             }
                             if (object.outputConfig != null) {
@@ -1237,6 +1242,7 @@
                                 case 2:
                                 case 4:
                                 case 5:
+                                case 6:
                                     break;
                                 }
                             if (message.readTimeWindow != null && message.hasOwnProperty("readTimeWindow")) {
@@ -1288,6 +1294,10 @@
                             case "ACCESS_POLICY":
                             case 5:
                                 message.contentType = 5;
+                                break;
+                            case "OS_INVENTORY":
+                            case 6:
+                                message.contentType = 6;
                                 break;
                             }
                             if (object.readTimeWindow != null) {
@@ -4806,6 +4816,7 @@
                                 case 2:
                                 case 4:
                                 case 5:
+                                case 6:
                                     break;
                                 }
                             if (message.feedOutputConfig != null && message.hasOwnProperty("feedOutputConfig")) {
@@ -4869,6 +4880,10 @@
                             case "ACCESS_POLICY":
                             case 5:
                                 message.contentType = 5;
+                                break;
+                            case "OS_INVENTORY":
+                            case 6:
+                                message.contentType = 6;
                                 break;
                             }
                             if (object.feedOutputConfig != null) {
@@ -9067,6 +9082,7 @@
                      * @property {number} IAM_POLICY=2 IAM_POLICY value
                      * @property {number} ORG_POLICY=4 ORG_POLICY value
                      * @property {number} ACCESS_POLICY=5 ACCESS_POLICY value
+                     * @property {number} OS_INVENTORY=6 OS_INVENTORY value
                      */
                     v1.ContentType = (function() {
                         var valuesById = {}, values = Object.create(valuesById);
@@ -9075,6 +9091,7 @@
                         values[valuesById[2] = "IAM_POLICY"] = 2;
                         values[valuesById[4] = "ORG_POLICY"] = 4;
                         values[valuesById[5] = "ACCESS_POLICY"] = 5;
+                        values[valuesById[6] = "OS_INVENTORY"] = 6;
                         return values;
                     })();
     
@@ -9652,6 +9669,7 @@
                          * @property {google.identity.accesscontextmanager.v1.IAccessPolicy|null} [accessPolicy] Asset accessPolicy
                          * @property {google.identity.accesscontextmanager.v1.IAccessLevel|null} [accessLevel] Asset accessLevel
                          * @property {google.identity.accesscontextmanager.v1.IServicePerimeter|null} [servicePerimeter] Asset servicePerimeter
+                         * @property {google.cloud.osconfig.v1.IInventory|null} [osInventory] Asset osInventory
                          * @property {Array.<string>|null} [ancestors] Asset ancestors
                          */
     
@@ -9745,6 +9763,14 @@
                         Asset.prototype.servicePerimeter = null;
     
                         /**
+                         * Asset osInventory.
+                         * @member {google.cloud.osconfig.v1.IInventory|null|undefined} osInventory
+                         * @memberof google.cloud.asset.v1.Asset
+                         * @instance
+                         */
+                        Asset.prototype.osInventory = null;
+    
+                        /**
                          * Asset ancestors.
                          * @member {Array.<string>} ancestors
                          * @memberof google.cloud.asset.v1.Asset
@@ -9812,6 +9838,8 @@
                                     writer.uint32(/* id 10, wireType 2 =*/82).string(message.ancestors[i]);
                             if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
                                 $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
+                            if (message.osInventory != null && Object.hasOwnProperty.call(message, "osInventory"))
+                                $root.google.cloud.osconfig.v1.Inventory.encode(message.osInventory, writer.uint32(/* id 12, wireType 2 =*/98).fork()).ldelim();
                             return writer;
                         };
     
@@ -9874,6 +9902,9 @@
                                     break;
                                 case 9:
                                     message.servicePerimeter = $root.google.identity.accesscontextmanager.v1.ServicePerimeter.decode(reader, reader.uint32());
+                                    break;
+                                case 12:
+                                    message.osInventory = $root.google.cloud.osconfig.v1.Inventory.decode(reader, reader.uint32());
                                     break;
                                 case 10:
                                     if (!(message.ancestors && message.ancestors.length))
@@ -9974,6 +10005,11 @@
                                         return "servicePerimeter." + error;
                                 }
                             }
+                            if (message.osInventory != null && message.hasOwnProperty("osInventory")) {
+                                var error = $root.google.cloud.osconfig.v1.Inventory.verify(message.osInventory);
+                                if (error)
+                                    return "osInventory." + error;
+                            }
                             if (message.ancestors != null && message.hasOwnProperty("ancestors")) {
                                 if (!Array.isArray(message.ancestors))
                                     return "ancestors: array expected";
@@ -10040,6 +10076,11 @@
                                     throw TypeError(".google.cloud.asset.v1.Asset.servicePerimeter: object expected");
                                 message.servicePerimeter = $root.google.identity.accesscontextmanager.v1.ServicePerimeter.fromObject(object.servicePerimeter);
                             }
+                            if (object.osInventory != null) {
+                                if (typeof object.osInventory !== "object")
+                                    throw TypeError(".google.cloud.asset.v1.Asset.osInventory: object expected");
+                                message.osInventory = $root.google.cloud.osconfig.v1.Inventory.fromObject(object.osInventory);
+                            }
                             if (object.ancestors) {
                                 if (!Array.isArray(object.ancestors))
                                     throw TypeError(".google.cloud.asset.v1.Asset.ancestors: array expected");
@@ -10073,6 +10114,7 @@
                                 object.resource = null;
                                 object.iamPolicy = null;
                                 object.updateTime = null;
+                                object.osInventory = null;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -10109,6 +10151,8 @@
                             }
                             if (message.updateTime != null && message.hasOwnProperty("updateTime"))
                                 object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
+                            if (message.osInventory != null && message.hasOwnProperty("osInventory"))
+                                object.osInventory = $root.google.cloud.osconfig.v1.Inventory.toObject(message.osInventory, options);
                             return object;
                         };
     
@@ -30079,6 +30123,2885 @@
                 })();
     
                 return orgpolicy;
+            })();
+    
+            cloud.osconfig = (function() {
+    
+                /**
+                 * Namespace osconfig.
+                 * @memberof google.cloud
+                 * @namespace
+                 */
+                var osconfig = {};
+    
+                osconfig.v1 = (function() {
+    
+                    /**
+                     * Namespace v1.
+                     * @memberof google.cloud.osconfig
+                     * @namespace
+                     */
+                    var v1 = {};
+    
+                    v1.Inventory = (function() {
+    
+                        /**
+                         * Properties of an Inventory.
+                         * @memberof google.cloud.osconfig.v1
+                         * @interface IInventory
+                         * @property {google.cloud.osconfig.v1.Inventory.IOsInfo|null} [osInfo] Inventory osInfo
+                         * @property {Object.<string,google.cloud.osconfig.v1.Inventory.IItem>|null} [items] Inventory items
+                         */
+    
+                        /**
+                         * Constructs a new Inventory.
+                         * @memberof google.cloud.osconfig.v1
+                         * @classdesc Represents an Inventory.
+                         * @implements IInventory
+                         * @constructor
+                         * @param {google.cloud.osconfig.v1.IInventory=} [properties] Properties to set
+                         */
+                        function Inventory(properties) {
+                            this.items = {};
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Inventory osInfo.
+                         * @member {google.cloud.osconfig.v1.Inventory.IOsInfo|null|undefined} osInfo
+                         * @memberof google.cloud.osconfig.v1.Inventory
+                         * @instance
+                         */
+                        Inventory.prototype.osInfo = null;
+    
+                        /**
+                         * Inventory items.
+                         * @member {Object.<string,google.cloud.osconfig.v1.Inventory.IItem>} items
+                         * @memberof google.cloud.osconfig.v1.Inventory
+                         * @instance
+                         */
+                        Inventory.prototype.items = $util.emptyObject;
+    
+                        /**
+                         * Creates a new Inventory instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.osconfig.v1.Inventory
+                         * @static
+                         * @param {google.cloud.osconfig.v1.IInventory=} [properties] Properties to set
+                         * @returns {google.cloud.osconfig.v1.Inventory} Inventory instance
+                         */
+                        Inventory.create = function create(properties) {
+                            return new Inventory(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified Inventory message. Does not implicitly {@link google.cloud.osconfig.v1.Inventory.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.osconfig.v1.Inventory
+                         * @static
+                         * @param {google.cloud.osconfig.v1.IInventory} message Inventory message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Inventory.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.osInfo != null && Object.hasOwnProperty.call(message, "osInfo"))
+                                $root.google.cloud.osconfig.v1.Inventory.OsInfo.encode(message.osInfo, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.items != null && Object.hasOwnProperty.call(message, "items"))
+                                for (var keys = Object.keys(message.items), i = 0; i < keys.length; ++i) {
+                                    writer.uint32(/* id 2, wireType 2 =*/18).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]);
+                                    $root.google.cloud.osconfig.v1.Inventory.Item.encode(message.items[keys[i]], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim().ldelim();
+                                }
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified Inventory message, length delimited. Does not implicitly {@link google.cloud.osconfig.v1.Inventory.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.osconfig.v1.Inventory
+                         * @static
+                         * @param {google.cloud.osconfig.v1.IInventory} message Inventory message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Inventory.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an Inventory message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.osconfig.v1.Inventory
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.osconfig.v1.Inventory} Inventory
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Inventory.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.osconfig.v1.Inventory(), key, value;
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.osInfo = $root.google.cloud.osconfig.v1.Inventory.OsInfo.decode(reader, reader.uint32());
+                                    break;
+                                case 2:
+                                    if (message.items === $util.emptyObject)
+                                        message.items = {};
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = null;
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = $root.google.cloud.osconfig.v1.Inventory.Item.decode(reader, reader.uint32());
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.items[key] = value;
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an Inventory message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.osconfig.v1.Inventory
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.osconfig.v1.Inventory} Inventory
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Inventory.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an Inventory message.
+                         * @function verify
+                         * @memberof google.cloud.osconfig.v1.Inventory
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        Inventory.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.osInfo != null && message.hasOwnProperty("osInfo")) {
+                                var error = $root.google.cloud.osconfig.v1.Inventory.OsInfo.verify(message.osInfo);
+                                if (error)
+                                    return "osInfo." + error;
+                            }
+                            if (message.items != null && message.hasOwnProperty("items")) {
+                                if (!$util.isObject(message.items))
+                                    return "items: object expected";
+                                var key = Object.keys(message.items);
+                                for (var i = 0; i < key.length; ++i) {
+                                    var error = $root.google.cloud.osconfig.v1.Inventory.Item.verify(message.items[key[i]]);
+                                    if (error)
+                                        return "items." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an Inventory message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.osconfig.v1.Inventory
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.osconfig.v1.Inventory} Inventory
+                         */
+                        Inventory.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.osconfig.v1.Inventory)
+                                return object;
+                            var message = new $root.google.cloud.osconfig.v1.Inventory();
+                            if (object.osInfo != null) {
+                                if (typeof object.osInfo !== "object")
+                                    throw TypeError(".google.cloud.osconfig.v1.Inventory.osInfo: object expected");
+                                message.osInfo = $root.google.cloud.osconfig.v1.Inventory.OsInfo.fromObject(object.osInfo);
+                            }
+                            if (object.items) {
+                                if (typeof object.items !== "object")
+                                    throw TypeError(".google.cloud.osconfig.v1.Inventory.items: object expected");
+                                message.items = {};
+                                for (var keys = Object.keys(object.items), i = 0; i < keys.length; ++i) {
+                                    if (typeof object.items[keys[i]] !== "object")
+                                        throw TypeError(".google.cloud.osconfig.v1.Inventory.items: object expected");
+                                    message.items[keys[i]] = $root.google.cloud.osconfig.v1.Inventory.Item.fromObject(object.items[keys[i]]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an Inventory message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.osconfig.v1.Inventory
+                         * @static
+                         * @param {google.cloud.osconfig.v1.Inventory} message Inventory
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        Inventory.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.objects || options.defaults)
+                                object.items = {};
+                            if (options.defaults)
+                                object.osInfo = null;
+                            if (message.osInfo != null && message.hasOwnProperty("osInfo"))
+                                object.osInfo = $root.google.cloud.osconfig.v1.Inventory.OsInfo.toObject(message.osInfo, options);
+                            var keys2;
+                            if (message.items && (keys2 = Object.keys(message.items)).length) {
+                                object.items = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.items[keys2[j]] = $root.google.cloud.osconfig.v1.Inventory.Item.toObject(message.items[keys2[j]], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this Inventory to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.osconfig.v1.Inventory
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        Inventory.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        Inventory.OsInfo = (function() {
+    
+                            /**
+                             * Properties of an OsInfo.
+                             * @memberof google.cloud.osconfig.v1.Inventory
+                             * @interface IOsInfo
+                             * @property {string|null} [hostname] OsInfo hostname
+                             * @property {string|null} [longName] OsInfo longName
+                             * @property {string|null} [shortName] OsInfo shortName
+                             * @property {string|null} [version] OsInfo version
+                             * @property {string|null} [architecture] OsInfo architecture
+                             * @property {string|null} [kernelVersion] OsInfo kernelVersion
+                             * @property {string|null} [kernelRelease] OsInfo kernelRelease
+                             * @property {string|null} [osconfigAgentVersion] OsInfo osconfigAgentVersion
+                             */
+    
+                            /**
+                             * Constructs a new OsInfo.
+                             * @memberof google.cloud.osconfig.v1.Inventory
+                             * @classdesc Represents an OsInfo.
+                             * @implements IOsInfo
+                             * @constructor
+                             * @param {google.cloud.osconfig.v1.Inventory.IOsInfo=} [properties] Properties to set
+                             */
+                            function OsInfo(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * OsInfo hostname.
+                             * @member {string} hostname
+                             * @memberof google.cloud.osconfig.v1.Inventory.OsInfo
+                             * @instance
+                             */
+                            OsInfo.prototype.hostname = "";
+    
+                            /**
+                             * OsInfo longName.
+                             * @member {string} longName
+                             * @memberof google.cloud.osconfig.v1.Inventory.OsInfo
+                             * @instance
+                             */
+                            OsInfo.prototype.longName = "";
+    
+                            /**
+                             * OsInfo shortName.
+                             * @member {string} shortName
+                             * @memberof google.cloud.osconfig.v1.Inventory.OsInfo
+                             * @instance
+                             */
+                            OsInfo.prototype.shortName = "";
+    
+                            /**
+                             * OsInfo version.
+                             * @member {string} version
+                             * @memberof google.cloud.osconfig.v1.Inventory.OsInfo
+                             * @instance
+                             */
+                            OsInfo.prototype.version = "";
+    
+                            /**
+                             * OsInfo architecture.
+                             * @member {string} architecture
+                             * @memberof google.cloud.osconfig.v1.Inventory.OsInfo
+                             * @instance
+                             */
+                            OsInfo.prototype.architecture = "";
+    
+                            /**
+                             * OsInfo kernelVersion.
+                             * @member {string} kernelVersion
+                             * @memberof google.cloud.osconfig.v1.Inventory.OsInfo
+                             * @instance
+                             */
+                            OsInfo.prototype.kernelVersion = "";
+    
+                            /**
+                             * OsInfo kernelRelease.
+                             * @member {string} kernelRelease
+                             * @memberof google.cloud.osconfig.v1.Inventory.OsInfo
+                             * @instance
+                             */
+                            OsInfo.prototype.kernelRelease = "";
+    
+                            /**
+                             * OsInfo osconfigAgentVersion.
+                             * @member {string} osconfigAgentVersion
+                             * @memberof google.cloud.osconfig.v1.Inventory.OsInfo
+                             * @instance
+                             */
+                            OsInfo.prototype.osconfigAgentVersion = "";
+    
+                            /**
+                             * Creates a new OsInfo instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.osconfig.v1.Inventory.OsInfo
+                             * @static
+                             * @param {google.cloud.osconfig.v1.Inventory.IOsInfo=} [properties] Properties to set
+                             * @returns {google.cloud.osconfig.v1.Inventory.OsInfo} OsInfo instance
+                             */
+                            OsInfo.create = function create(properties) {
+                                return new OsInfo(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified OsInfo message. Does not implicitly {@link google.cloud.osconfig.v1.Inventory.OsInfo.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.osconfig.v1.Inventory.OsInfo
+                             * @static
+                             * @param {google.cloud.osconfig.v1.Inventory.IOsInfo} message OsInfo message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            OsInfo.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.longName != null && Object.hasOwnProperty.call(message, "longName"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.longName);
+                                if (message.shortName != null && Object.hasOwnProperty.call(message, "shortName"))
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.shortName);
+                                if (message.version != null && Object.hasOwnProperty.call(message, "version"))
+                                    writer.uint32(/* id 4, wireType 2 =*/34).string(message.version);
+                                if (message.architecture != null && Object.hasOwnProperty.call(message, "architecture"))
+                                    writer.uint32(/* id 5, wireType 2 =*/42).string(message.architecture);
+                                if (message.kernelVersion != null && Object.hasOwnProperty.call(message, "kernelVersion"))
+                                    writer.uint32(/* id 6, wireType 2 =*/50).string(message.kernelVersion);
+                                if (message.kernelRelease != null && Object.hasOwnProperty.call(message, "kernelRelease"))
+                                    writer.uint32(/* id 7, wireType 2 =*/58).string(message.kernelRelease);
+                                if (message.osconfigAgentVersion != null && Object.hasOwnProperty.call(message, "osconfigAgentVersion"))
+                                    writer.uint32(/* id 8, wireType 2 =*/66).string(message.osconfigAgentVersion);
+                                if (message.hostname != null && Object.hasOwnProperty.call(message, "hostname"))
+                                    writer.uint32(/* id 9, wireType 2 =*/74).string(message.hostname);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified OsInfo message, length delimited. Does not implicitly {@link google.cloud.osconfig.v1.Inventory.OsInfo.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.osconfig.v1.Inventory.OsInfo
+                             * @static
+                             * @param {google.cloud.osconfig.v1.Inventory.IOsInfo} message OsInfo message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            OsInfo.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes an OsInfo message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.osconfig.v1.Inventory.OsInfo
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.osconfig.v1.Inventory.OsInfo} OsInfo
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            OsInfo.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.osconfig.v1.Inventory.OsInfo();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 9:
+                                        message.hostname = reader.string();
+                                        break;
+                                    case 2:
+                                        message.longName = reader.string();
+                                        break;
+                                    case 3:
+                                        message.shortName = reader.string();
+                                        break;
+                                    case 4:
+                                        message.version = reader.string();
+                                        break;
+                                    case 5:
+                                        message.architecture = reader.string();
+                                        break;
+                                    case 6:
+                                        message.kernelVersion = reader.string();
+                                        break;
+                                    case 7:
+                                        message.kernelRelease = reader.string();
+                                        break;
+                                    case 8:
+                                        message.osconfigAgentVersion = reader.string();
+                                        break;
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes an OsInfo message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.osconfig.v1.Inventory.OsInfo
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.osconfig.v1.Inventory.OsInfo} OsInfo
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            OsInfo.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies an OsInfo message.
+                             * @function verify
+                             * @memberof google.cloud.osconfig.v1.Inventory.OsInfo
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            OsInfo.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.hostname != null && message.hasOwnProperty("hostname"))
+                                    if (!$util.isString(message.hostname))
+                                        return "hostname: string expected";
+                                if (message.longName != null && message.hasOwnProperty("longName"))
+                                    if (!$util.isString(message.longName))
+                                        return "longName: string expected";
+                                if (message.shortName != null && message.hasOwnProperty("shortName"))
+                                    if (!$util.isString(message.shortName))
+                                        return "shortName: string expected";
+                                if (message.version != null && message.hasOwnProperty("version"))
+                                    if (!$util.isString(message.version))
+                                        return "version: string expected";
+                                if (message.architecture != null && message.hasOwnProperty("architecture"))
+                                    if (!$util.isString(message.architecture))
+                                        return "architecture: string expected";
+                                if (message.kernelVersion != null && message.hasOwnProperty("kernelVersion"))
+                                    if (!$util.isString(message.kernelVersion))
+                                        return "kernelVersion: string expected";
+                                if (message.kernelRelease != null && message.hasOwnProperty("kernelRelease"))
+                                    if (!$util.isString(message.kernelRelease))
+                                        return "kernelRelease: string expected";
+                                if (message.osconfigAgentVersion != null && message.hasOwnProperty("osconfigAgentVersion"))
+                                    if (!$util.isString(message.osconfigAgentVersion))
+                                        return "osconfigAgentVersion: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates an OsInfo message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.osconfig.v1.Inventory.OsInfo
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.osconfig.v1.Inventory.OsInfo} OsInfo
+                             */
+                            OsInfo.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.osconfig.v1.Inventory.OsInfo)
+                                    return object;
+                                var message = new $root.google.cloud.osconfig.v1.Inventory.OsInfo();
+                                if (object.hostname != null)
+                                    message.hostname = String(object.hostname);
+                                if (object.longName != null)
+                                    message.longName = String(object.longName);
+                                if (object.shortName != null)
+                                    message.shortName = String(object.shortName);
+                                if (object.version != null)
+                                    message.version = String(object.version);
+                                if (object.architecture != null)
+                                    message.architecture = String(object.architecture);
+                                if (object.kernelVersion != null)
+                                    message.kernelVersion = String(object.kernelVersion);
+                                if (object.kernelRelease != null)
+                                    message.kernelRelease = String(object.kernelRelease);
+                                if (object.osconfigAgentVersion != null)
+                                    message.osconfigAgentVersion = String(object.osconfigAgentVersion);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from an OsInfo message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.osconfig.v1.Inventory.OsInfo
+                             * @static
+                             * @param {google.cloud.osconfig.v1.Inventory.OsInfo} message OsInfo
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            OsInfo.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.longName = "";
+                                    object.shortName = "";
+                                    object.version = "";
+                                    object.architecture = "";
+                                    object.kernelVersion = "";
+                                    object.kernelRelease = "";
+                                    object.osconfigAgentVersion = "";
+                                    object.hostname = "";
+                                }
+                                if (message.longName != null && message.hasOwnProperty("longName"))
+                                    object.longName = message.longName;
+                                if (message.shortName != null && message.hasOwnProperty("shortName"))
+                                    object.shortName = message.shortName;
+                                if (message.version != null && message.hasOwnProperty("version"))
+                                    object.version = message.version;
+                                if (message.architecture != null && message.hasOwnProperty("architecture"))
+                                    object.architecture = message.architecture;
+                                if (message.kernelVersion != null && message.hasOwnProperty("kernelVersion"))
+                                    object.kernelVersion = message.kernelVersion;
+                                if (message.kernelRelease != null && message.hasOwnProperty("kernelRelease"))
+                                    object.kernelRelease = message.kernelRelease;
+                                if (message.osconfigAgentVersion != null && message.hasOwnProperty("osconfigAgentVersion"))
+                                    object.osconfigAgentVersion = message.osconfigAgentVersion;
+                                if (message.hostname != null && message.hasOwnProperty("hostname"))
+                                    object.hostname = message.hostname;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this OsInfo to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.osconfig.v1.Inventory.OsInfo
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            OsInfo.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            return OsInfo;
+                        })();
+    
+                        Inventory.Item = (function() {
+    
+                            /**
+                             * Properties of an Item.
+                             * @memberof google.cloud.osconfig.v1.Inventory
+                             * @interface IItem
+                             * @property {string|null} [id] Item id
+                             * @property {google.cloud.osconfig.v1.Inventory.Item.OriginType|null} [originType] Item originType
+                             * @property {google.protobuf.ITimestamp|null} [createTime] Item createTime
+                             * @property {google.protobuf.ITimestamp|null} [updateTime] Item updateTime
+                             * @property {google.cloud.osconfig.v1.Inventory.Item.Type|null} [type] Item type
+                             * @property {google.cloud.osconfig.v1.Inventory.ISoftwarePackage|null} [installedPackage] Item installedPackage
+                             * @property {google.cloud.osconfig.v1.Inventory.ISoftwarePackage|null} [availablePackage] Item availablePackage
+                             */
+    
+                            /**
+                             * Constructs a new Item.
+                             * @memberof google.cloud.osconfig.v1.Inventory
+                             * @classdesc Represents an Item.
+                             * @implements IItem
+                             * @constructor
+                             * @param {google.cloud.osconfig.v1.Inventory.IItem=} [properties] Properties to set
+                             */
+                            function Item(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * Item id.
+                             * @member {string} id
+                             * @memberof google.cloud.osconfig.v1.Inventory.Item
+                             * @instance
+                             */
+                            Item.prototype.id = "";
+    
+                            /**
+                             * Item originType.
+                             * @member {google.cloud.osconfig.v1.Inventory.Item.OriginType} originType
+                             * @memberof google.cloud.osconfig.v1.Inventory.Item
+                             * @instance
+                             */
+                            Item.prototype.originType = 0;
+    
+                            /**
+                             * Item createTime.
+                             * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                             * @memberof google.cloud.osconfig.v1.Inventory.Item
+                             * @instance
+                             */
+                            Item.prototype.createTime = null;
+    
+                            /**
+                             * Item updateTime.
+                             * @member {google.protobuf.ITimestamp|null|undefined} updateTime
+                             * @memberof google.cloud.osconfig.v1.Inventory.Item
+                             * @instance
+                             */
+                            Item.prototype.updateTime = null;
+    
+                            /**
+                             * Item type.
+                             * @member {google.cloud.osconfig.v1.Inventory.Item.Type} type
+                             * @memberof google.cloud.osconfig.v1.Inventory.Item
+                             * @instance
+                             */
+                            Item.prototype.type = 0;
+    
+                            /**
+                             * Item installedPackage.
+                             * @member {google.cloud.osconfig.v1.Inventory.ISoftwarePackage|null|undefined} installedPackage
+                             * @memberof google.cloud.osconfig.v1.Inventory.Item
+                             * @instance
+                             */
+                            Item.prototype.installedPackage = null;
+    
+                            /**
+                             * Item availablePackage.
+                             * @member {google.cloud.osconfig.v1.Inventory.ISoftwarePackage|null|undefined} availablePackage
+                             * @memberof google.cloud.osconfig.v1.Inventory.Item
+                             * @instance
+                             */
+                            Item.prototype.availablePackage = null;
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            /**
+                             * Item details.
+                             * @member {"installedPackage"|"availablePackage"|undefined} details
+                             * @memberof google.cloud.osconfig.v1.Inventory.Item
+                             * @instance
+                             */
+                            Object.defineProperty(Item.prototype, "details", {
+                                get: $util.oneOfGetter($oneOfFields = ["installedPackage", "availablePackage"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * Creates a new Item instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.osconfig.v1.Inventory.Item
+                             * @static
+                             * @param {google.cloud.osconfig.v1.Inventory.IItem=} [properties] Properties to set
+                             * @returns {google.cloud.osconfig.v1.Inventory.Item} Item instance
+                             */
+                            Item.create = function create(properties) {
+                                return new Item(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified Item message. Does not implicitly {@link google.cloud.osconfig.v1.Inventory.Item.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.osconfig.v1.Inventory.Item
+                             * @static
+                             * @param {google.cloud.osconfig.v1.Inventory.IItem} message Item message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Item.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.id != null && Object.hasOwnProperty.call(message, "id"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.id);
+                                if (message.originType != null && Object.hasOwnProperty.call(message, "originType"))
+                                    writer.uint32(/* id 2, wireType 0 =*/16).int32(message.originType);
+                                if (message.type != null && Object.hasOwnProperty.call(message, "type"))
+                                    writer.uint32(/* id 5, wireType 0 =*/40).int32(message.type);
+                                if (message.installedPackage != null && Object.hasOwnProperty.call(message, "installedPackage"))
+                                    $root.google.cloud.osconfig.v1.Inventory.SoftwarePackage.encode(message.installedPackage, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                                if (message.availablePackage != null && Object.hasOwnProperty.call(message, "availablePackage"))
+                                    $root.google.cloud.osconfig.v1.Inventory.SoftwarePackage.encode(message.availablePackage, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                                if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                                    $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                                if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
+                                    $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified Item message, length delimited. Does not implicitly {@link google.cloud.osconfig.v1.Inventory.Item.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.osconfig.v1.Inventory.Item
+                             * @static
+                             * @param {google.cloud.osconfig.v1.Inventory.IItem} message Item message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Item.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes an Item message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.osconfig.v1.Inventory.Item
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.osconfig.v1.Inventory.Item} Item
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Item.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.osconfig.v1.Inventory.Item();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1:
+                                        message.id = reader.string();
+                                        break;
+                                    case 2:
+                                        message.originType = reader.int32();
+                                        break;
+                                    case 8:
+                                        message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    case 9:
+                                        message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    case 5:
+                                        message.type = reader.int32();
+                                        break;
+                                    case 6:
+                                        message.installedPackage = $root.google.cloud.osconfig.v1.Inventory.SoftwarePackage.decode(reader, reader.uint32());
+                                        break;
+                                    case 7:
+                                        message.availablePackage = $root.google.cloud.osconfig.v1.Inventory.SoftwarePackage.decode(reader, reader.uint32());
+                                        break;
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes an Item message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.osconfig.v1.Inventory.Item
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.osconfig.v1.Inventory.Item} Item
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Item.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies an Item message.
+                             * @function verify
+                             * @memberof google.cloud.osconfig.v1.Inventory.Item
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            Item.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                var properties = {};
+                                if (message.id != null && message.hasOwnProperty("id"))
+                                    if (!$util.isString(message.id))
+                                        return "id: string expected";
+                                if (message.originType != null && message.hasOwnProperty("originType"))
+                                    switch (message.originType) {
+                                    default:
+                                        return "originType: enum value expected";
+                                    case 0:
+                                    case 1:
+                                        break;
+                                    }
+                                if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                    var error = $root.google.protobuf.Timestamp.verify(message.createTime);
+                                    if (error)
+                                        return "createTime." + error;
+                                }
+                                if (message.updateTime != null && message.hasOwnProperty("updateTime")) {
+                                    var error = $root.google.protobuf.Timestamp.verify(message.updateTime);
+                                    if (error)
+                                        return "updateTime." + error;
+                                }
+                                if (message.type != null && message.hasOwnProperty("type"))
+                                    switch (message.type) {
+                                    default:
+                                        return "type: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                        break;
+                                    }
+                                if (message.installedPackage != null && message.hasOwnProperty("installedPackage")) {
+                                    properties.details = 1;
+                                    {
+                                        var error = $root.google.cloud.osconfig.v1.Inventory.SoftwarePackage.verify(message.installedPackage);
+                                        if (error)
+                                            return "installedPackage." + error;
+                                    }
+                                }
+                                if (message.availablePackage != null && message.hasOwnProperty("availablePackage")) {
+                                    if (properties.details === 1)
+                                        return "details: multiple values";
+                                    properties.details = 1;
+                                    {
+                                        var error = $root.google.cloud.osconfig.v1.Inventory.SoftwarePackage.verify(message.availablePackage);
+                                        if (error)
+                                            return "availablePackage." + error;
+                                    }
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates an Item message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.osconfig.v1.Inventory.Item
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.osconfig.v1.Inventory.Item} Item
+                             */
+                            Item.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.osconfig.v1.Inventory.Item)
+                                    return object;
+                                var message = new $root.google.cloud.osconfig.v1.Inventory.Item();
+                                if (object.id != null)
+                                    message.id = String(object.id);
+                                switch (object.originType) {
+                                case "ORIGIN_TYPE_UNSPECIFIED":
+                                case 0:
+                                    message.originType = 0;
+                                    break;
+                                case "INVENTORY_REPORT":
+                                case 1:
+                                    message.originType = 1;
+                                    break;
+                                }
+                                if (object.createTime != null) {
+                                    if (typeof object.createTime !== "object")
+                                        throw TypeError(".google.cloud.osconfig.v1.Inventory.Item.createTime: object expected");
+                                    message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                                }
+                                if (object.updateTime != null) {
+                                    if (typeof object.updateTime !== "object")
+                                        throw TypeError(".google.cloud.osconfig.v1.Inventory.Item.updateTime: object expected");
+                                    message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime);
+                                }
+                                switch (object.type) {
+                                case "TYPE_UNSPECIFIED":
+                                case 0:
+                                    message.type = 0;
+                                    break;
+                                case "INSTALLED_PACKAGE":
+                                case 1:
+                                    message.type = 1;
+                                    break;
+                                case "AVAILABLE_PACKAGE":
+                                case 2:
+                                    message.type = 2;
+                                    break;
+                                }
+                                if (object.installedPackage != null) {
+                                    if (typeof object.installedPackage !== "object")
+                                        throw TypeError(".google.cloud.osconfig.v1.Inventory.Item.installedPackage: object expected");
+                                    message.installedPackage = $root.google.cloud.osconfig.v1.Inventory.SoftwarePackage.fromObject(object.installedPackage);
+                                }
+                                if (object.availablePackage != null) {
+                                    if (typeof object.availablePackage !== "object")
+                                        throw TypeError(".google.cloud.osconfig.v1.Inventory.Item.availablePackage: object expected");
+                                    message.availablePackage = $root.google.cloud.osconfig.v1.Inventory.SoftwarePackage.fromObject(object.availablePackage);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from an Item message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.osconfig.v1.Inventory.Item
+                             * @static
+                             * @param {google.cloud.osconfig.v1.Inventory.Item} message Item
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            Item.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.id = "";
+                                    object.originType = options.enums === String ? "ORIGIN_TYPE_UNSPECIFIED" : 0;
+                                    object.type = options.enums === String ? "TYPE_UNSPECIFIED" : 0;
+                                    object.createTime = null;
+                                    object.updateTime = null;
+                                }
+                                if (message.id != null && message.hasOwnProperty("id"))
+                                    object.id = message.id;
+                                if (message.originType != null && message.hasOwnProperty("originType"))
+                                    object.originType = options.enums === String ? $root.google.cloud.osconfig.v1.Inventory.Item.OriginType[message.originType] : message.originType;
+                                if (message.type != null && message.hasOwnProperty("type"))
+                                    object.type = options.enums === String ? $root.google.cloud.osconfig.v1.Inventory.Item.Type[message.type] : message.type;
+                                if (message.installedPackage != null && message.hasOwnProperty("installedPackage")) {
+                                    object.installedPackage = $root.google.cloud.osconfig.v1.Inventory.SoftwarePackage.toObject(message.installedPackage, options);
+                                    if (options.oneofs)
+                                        object.details = "installedPackage";
+                                }
+                                if (message.availablePackage != null && message.hasOwnProperty("availablePackage")) {
+                                    object.availablePackage = $root.google.cloud.osconfig.v1.Inventory.SoftwarePackage.toObject(message.availablePackage, options);
+                                    if (options.oneofs)
+                                        object.details = "availablePackage";
+                                }
+                                if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                    object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                                if (message.updateTime != null && message.hasOwnProperty("updateTime"))
+                                    object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this Item to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.osconfig.v1.Inventory.Item
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            Item.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * OriginType enum.
+                             * @name google.cloud.osconfig.v1.Inventory.Item.OriginType
+                             * @enum {number}
+                             * @property {number} ORIGIN_TYPE_UNSPECIFIED=0 ORIGIN_TYPE_UNSPECIFIED value
+                             * @property {number} INVENTORY_REPORT=1 INVENTORY_REPORT value
+                             */
+                            Item.OriginType = (function() {
+                                var valuesById = {}, values = Object.create(valuesById);
+                                values[valuesById[0] = "ORIGIN_TYPE_UNSPECIFIED"] = 0;
+                                values[valuesById[1] = "INVENTORY_REPORT"] = 1;
+                                return values;
+                            })();
+    
+                            /**
+                             * Type enum.
+                             * @name google.cloud.osconfig.v1.Inventory.Item.Type
+                             * @enum {number}
+                             * @property {number} TYPE_UNSPECIFIED=0 TYPE_UNSPECIFIED value
+                             * @property {number} INSTALLED_PACKAGE=1 INSTALLED_PACKAGE value
+                             * @property {number} AVAILABLE_PACKAGE=2 AVAILABLE_PACKAGE value
+                             */
+                            Item.Type = (function() {
+                                var valuesById = {}, values = Object.create(valuesById);
+                                values[valuesById[0] = "TYPE_UNSPECIFIED"] = 0;
+                                values[valuesById[1] = "INSTALLED_PACKAGE"] = 1;
+                                values[valuesById[2] = "AVAILABLE_PACKAGE"] = 2;
+                                return values;
+                            })();
+    
+                            return Item;
+                        })();
+    
+                        Inventory.SoftwarePackage = (function() {
+    
+                            /**
+                             * Properties of a SoftwarePackage.
+                             * @memberof google.cloud.osconfig.v1.Inventory
+                             * @interface ISoftwarePackage
+                             * @property {google.cloud.osconfig.v1.Inventory.IVersionedPackage|null} [yumPackage] SoftwarePackage yumPackage
+                             * @property {google.cloud.osconfig.v1.Inventory.IVersionedPackage|null} [aptPackage] SoftwarePackage aptPackage
+                             * @property {google.cloud.osconfig.v1.Inventory.IVersionedPackage|null} [zypperPackage] SoftwarePackage zypperPackage
+                             * @property {google.cloud.osconfig.v1.Inventory.IVersionedPackage|null} [googetPackage] SoftwarePackage googetPackage
+                             * @property {google.cloud.osconfig.v1.Inventory.IZypperPatch|null} [zypperPatch] SoftwarePackage zypperPatch
+                             * @property {google.cloud.osconfig.v1.Inventory.IWindowsUpdatePackage|null} [wuaPackage] SoftwarePackage wuaPackage
+                             * @property {google.cloud.osconfig.v1.Inventory.IWindowsQuickFixEngineeringPackage|null} [qfePackage] SoftwarePackage qfePackage
+                             * @property {google.cloud.osconfig.v1.Inventory.IVersionedPackage|null} [cosPackage] SoftwarePackage cosPackage
+                             */
+    
+                            /**
+                             * Constructs a new SoftwarePackage.
+                             * @memberof google.cloud.osconfig.v1.Inventory
+                             * @classdesc Represents a SoftwarePackage.
+                             * @implements ISoftwarePackage
+                             * @constructor
+                             * @param {google.cloud.osconfig.v1.Inventory.ISoftwarePackage=} [properties] Properties to set
+                             */
+                            function SoftwarePackage(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * SoftwarePackage yumPackage.
+                             * @member {google.cloud.osconfig.v1.Inventory.IVersionedPackage|null|undefined} yumPackage
+                             * @memberof google.cloud.osconfig.v1.Inventory.SoftwarePackage
+                             * @instance
+                             */
+                            SoftwarePackage.prototype.yumPackage = null;
+    
+                            /**
+                             * SoftwarePackage aptPackage.
+                             * @member {google.cloud.osconfig.v1.Inventory.IVersionedPackage|null|undefined} aptPackage
+                             * @memberof google.cloud.osconfig.v1.Inventory.SoftwarePackage
+                             * @instance
+                             */
+                            SoftwarePackage.prototype.aptPackage = null;
+    
+                            /**
+                             * SoftwarePackage zypperPackage.
+                             * @member {google.cloud.osconfig.v1.Inventory.IVersionedPackage|null|undefined} zypperPackage
+                             * @memberof google.cloud.osconfig.v1.Inventory.SoftwarePackage
+                             * @instance
+                             */
+                            SoftwarePackage.prototype.zypperPackage = null;
+    
+                            /**
+                             * SoftwarePackage googetPackage.
+                             * @member {google.cloud.osconfig.v1.Inventory.IVersionedPackage|null|undefined} googetPackage
+                             * @memberof google.cloud.osconfig.v1.Inventory.SoftwarePackage
+                             * @instance
+                             */
+                            SoftwarePackage.prototype.googetPackage = null;
+    
+                            /**
+                             * SoftwarePackage zypperPatch.
+                             * @member {google.cloud.osconfig.v1.Inventory.IZypperPatch|null|undefined} zypperPatch
+                             * @memberof google.cloud.osconfig.v1.Inventory.SoftwarePackage
+                             * @instance
+                             */
+                            SoftwarePackage.prototype.zypperPatch = null;
+    
+                            /**
+                             * SoftwarePackage wuaPackage.
+                             * @member {google.cloud.osconfig.v1.Inventory.IWindowsUpdatePackage|null|undefined} wuaPackage
+                             * @memberof google.cloud.osconfig.v1.Inventory.SoftwarePackage
+                             * @instance
+                             */
+                            SoftwarePackage.prototype.wuaPackage = null;
+    
+                            /**
+                             * SoftwarePackage qfePackage.
+                             * @member {google.cloud.osconfig.v1.Inventory.IWindowsQuickFixEngineeringPackage|null|undefined} qfePackage
+                             * @memberof google.cloud.osconfig.v1.Inventory.SoftwarePackage
+                             * @instance
+                             */
+                            SoftwarePackage.prototype.qfePackage = null;
+    
+                            /**
+                             * SoftwarePackage cosPackage.
+                             * @member {google.cloud.osconfig.v1.Inventory.IVersionedPackage|null|undefined} cosPackage
+                             * @memberof google.cloud.osconfig.v1.Inventory.SoftwarePackage
+                             * @instance
+                             */
+                            SoftwarePackage.prototype.cosPackage = null;
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            /**
+                             * SoftwarePackage details.
+                             * @member {"yumPackage"|"aptPackage"|"zypperPackage"|"googetPackage"|"zypperPatch"|"wuaPackage"|"qfePackage"|"cosPackage"|undefined} details
+                             * @memberof google.cloud.osconfig.v1.Inventory.SoftwarePackage
+                             * @instance
+                             */
+                            Object.defineProperty(SoftwarePackage.prototype, "details", {
+                                get: $util.oneOfGetter($oneOfFields = ["yumPackage", "aptPackage", "zypperPackage", "googetPackage", "zypperPatch", "wuaPackage", "qfePackage", "cosPackage"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * Creates a new SoftwarePackage instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.osconfig.v1.Inventory.SoftwarePackage
+                             * @static
+                             * @param {google.cloud.osconfig.v1.Inventory.ISoftwarePackage=} [properties] Properties to set
+                             * @returns {google.cloud.osconfig.v1.Inventory.SoftwarePackage} SoftwarePackage instance
+                             */
+                            SoftwarePackage.create = function create(properties) {
+                                return new SoftwarePackage(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified SoftwarePackage message. Does not implicitly {@link google.cloud.osconfig.v1.Inventory.SoftwarePackage.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.osconfig.v1.Inventory.SoftwarePackage
+                             * @static
+                             * @param {google.cloud.osconfig.v1.Inventory.ISoftwarePackage} message SoftwarePackage message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            SoftwarePackage.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.yumPackage != null && Object.hasOwnProperty.call(message, "yumPackage"))
+                                    $root.google.cloud.osconfig.v1.Inventory.VersionedPackage.encode(message.yumPackage, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                if (message.aptPackage != null && Object.hasOwnProperty.call(message, "aptPackage"))
+                                    $root.google.cloud.osconfig.v1.Inventory.VersionedPackage.encode(message.aptPackage, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                if (message.zypperPackage != null && Object.hasOwnProperty.call(message, "zypperPackage"))
+                                    $root.google.cloud.osconfig.v1.Inventory.VersionedPackage.encode(message.zypperPackage, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                                if (message.googetPackage != null && Object.hasOwnProperty.call(message, "googetPackage"))
+                                    $root.google.cloud.osconfig.v1.Inventory.VersionedPackage.encode(message.googetPackage, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                                if (message.zypperPatch != null && Object.hasOwnProperty.call(message, "zypperPatch"))
+                                    $root.google.cloud.osconfig.v1.Inventory.ZypperPatch.encode(message.zypperPatch, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                                if (message.wuaPackage != null && Object.hasOwnProperty.call(message, "wuaPackage"))
+                                    $root.google.cloud.osconfig.v1.Inventory.WindowsUpdatePackage.encode(message.wuaPackage, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                                if (message.qfePackage != null && Object.hasOwnProperty.call(message, "qfePackage"))
+                                    $root.google.cloud.osconfig.v1.Inventory.WindowsQuickFixEngineeringPackage.encode(message.qfePackage, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                                if (message.cosPackage != null && Object.hasOwnProperty.call(message, "cosPackage"))
+                                    $root.google.cloud.osconfig.v1.Inventory.VersionedPackage.encode(message.cosPackage, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified SoftwarePackage message, length delimited. Does not implicitly {@link google.cloud.osconfig.v1.Inventory.SoftwarePackage.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.osconfig.v1.Inventory.SoftwarePackage
+                             * @static
+                             * @param {google.cloud.osconfig.v1.Inventory.ISoftwarePackage} message SoftwarePackage message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            SoftwarePackage.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a SoftwarePackage message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.osconfig.v1.Inventory.SoftwarePackage
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.osconfig.v1.Inventory.SoftwarePackage} SoftwarePackage
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            SoftwarePackage.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.osconfig.v1.Inventory.SoftwarePackage();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1:
+                                        message.yumPackage = $root.google.cloud.osconfig.v1.Inventory.VersionedPackage.decode(reader, reader.uint32());
+                                        break;
+                                    case 2:
+                                        message.aptPackage = $root.google.cloud.osconfig.v1.Inventory.VersionedPackage.decode(reader, reader.uint32());
+                                        break;
+                                    case 3:
+                                        message.zypperPackage = $root.google.cloud.osconfig.v1.Inventory.VersionedPackage.decode(reader, reader.uint32());
+                                        break;
+                                    case 4:
+                                        message.googetPackage = $root.google.cloud.osconfig.v1.Inventory.VersionedPackage.decode(reader, reader.uint32());
+                                        break;
+                                    case 5:
+                                        message.zypperPatch = $root.google.cloud.osconfig.v1.Inventory.ZypperPatch.decode(reader, reader.uint32());
+                                        break;
+                                    case 6:
+                                        message.wuaPackage = $root.google.cloud.osconfig.v1.Inventory.WindowsUpdatePackage.decode(reader, reader.uint32());
+                                        break;
+                                    case 7:
+                                        message.qfePackage = $root.google.cloud.osconfig.v1.Inventory.WindowsQuickFixEngineeringPackage.decode(reader, reader.uint32());
+                                        break;
+                                    case 8:
+                                        message.cosPackage = $root.google.cloud.osconfig.v1.Inventory.VersionedPackage.decode(reader, reader.uint32());
+                                        break;
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a SoftwarePackage message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.osconfig.v1.Inventory.SoftwarePackage
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.osconfig.v1.Inventory.SoftwarePackage} SoftwarePackage
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            SoftwarePackage.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a SoftwarePackage message.
+                             * @function verify
+                             * @memberof google.cloud.osconfig.v1.Inventory.SoftwarePackage
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            SoftwarePackage.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                var properties = {};
+                                if (message.yumPackage != null && message.hasOwnProperty("yumPackage")) {
+                                    properties.details = 1;
+                                    {
+                                        var error = $root.google.cloud.osconfig.v1.Inventory.VersionedPackage.verify(message.yumPackage);
+                                        if (error)
+                                            return "yumPackage." + error;
+                                    }
+                                }
+                                if (message.aptPackage != null && message.hasOwnProperty("aptPackage")) {
+                                    if (properties.details === 1)
+                                        return "details: multiple values";
+                                    properties.details = 1;
+                                    {
+                                        var error = $root.google.cloud.osconfig.v1.Inventory.VersionedPackage.verify(message.aptPackage);
+                                        if (error)
+                                            return "aptPackage." + error;
+                                    }
+                                }
+                                if (message.zypperPackage != null && message.hasOwnProperty("zypperPackage")) {
+                                    if (properties.details === 1)
+                                        return "details: multiple values";
+                                    properties.details = 1;
+                                    {
+                                        var error = $root.google.cloud.osconfig.v1.Inventory.VersionedPackage.verify(message.zypperPackage);
+                                        if (error)
+                                            return "zypperPackage." + error;
+                                    }
+                                }
+                                if (message.googetPackage != null && message.hasOwnProperty("googetPackage")) {
+                                    if (properties.details === 1)
+                                        return "details: multiple values";
+                                    properties.details = 1;
+                                    {
+                                        var error = $root.google.cloud.osconfig.v1.Inventory.VersionedPackage.verify(message.googetPackage);
+                                        if (error)
+                                            return "googetPackage." + error;
+                                    }
+                                }
+                                if (message.zypperPatch != null && message.hasOwnProperty("zypperPatch")) {
+                                    if (properties.details === 1)
+                                        return "details: multiple values";
+                                    properties.details = 1;
+                                    {
+                                        var error = $root.google.cloud.osconfig.v1.Inventory.ZypperPatch.verify(message.zypperPatch);
+                                        if (error)
+                                            return "zypperPatch." + error;
+                                    }
+                                }
+                                if (message.wuaPackage != null && message.hasOwnProperty("wuaPackage")) {
+                                    if (properties.details === 1)
+                                        return "details: multiple values";
+                                    properties.details = 1;
+                                    {
+                                        var error = $root.google.cloud.osconfig.v1.Inventory.WindowsUpdatePackage.verify(message.wuaPackage);
+                                        if (error)
+                                            return "wuaPackage." + error;
+                                    }
+                                }
+                                if (message.qfePackage != null && message.hasOwnProperty("qfePackage")) {
+                                    if (properties.details === 1)
+                                        return "details: multiple values";
+                                    properties.details = 1;
+                                    {
+                                        var error = $root.google.cloud.osconfig.v1.Inventory.WindowsQuickFixEngineeringPackage.verify(message.qfePackage);
+                                        if (error)
+                                            return "qfePackage." + error;
+                                    }
+                                }
+                                if (message.cosPackage != null && message.hasOwnProperty("cosPackage")) {
+                                    if (properties.details === 1)
+                                        return "details: multiple values";
+                                    properties.details = 1;
+                                    {
+                                        var error = $root.google.cloud.osconfig.v1.Inventory.VersionedPackage.verify(message.cosPackage);
+                                        if (error)
+                                            return "cosPackage." + error;
+                                    }
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a SoftwarePackage message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.osconfig.v1.Inventory.SoftwarePackage
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.osconfig.v1.Inventory.SoftwarePackage} SoftwarePackage
+                             */
+                            SoftwarePackage.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.osconfig.v1.Inventory.SoftwarePackage)
+                                    return object;
+                                var message = new $root.google.cloud.osconfig.v1.Inventory.SoftwarePackage();
+                                if (object.yumPackage != null) {
+                                    if (typeof object.yumPackage !== "object")
+                                        throw TypeError(".google.cloud.osconfig.v1.Inventory.SoftwarePackage.yumPackage: object expected");
+                                    message.yumPackage = $root.google.cloud.osconfig.v1.Inventory.VersionedPackage.fromObject(object.yumPackage);
+                                }
+                                if (object.aptPackage != null) {
+                                    if (typeof object.aptPackage !== "object")
+                                        throw TypeError(".google.cloud.osconfig.v1.Inventory.SoftwarePackage.aptPackage: object expected");
+                                    message.aptPackage = $root.google.cloud.osconfig.v1.Inventory.VersionedPackage.fromObject(object.aptPackage);
+                                }
+                                if (object.zypperPackage != null) {
+                                    if (typeof object.zypperPackage !== "object")
+                                        throw TypeError(".google.cloud.osconfig.v1.Inventory.SoftwarePackage.zypperPackage: object expected");
+                                    message.zypperPackage = $root.google.cloud.osconfig.v1.Inventory.VersionedPackage.fromObject(object.zypperPackage);
+                                }
+                                if (object.googetPackage != null) {
+                                    if (typeof object.googetPackage !== "object")
+                                        throw TypeError(".google.cloud.osconfig.v1.Inventory.SoftwarePackage.googetPackage: object expected");
+                                    message.googetPackage = $root.google.cloud.osconfig.v1.Inventory.VersionedPackage.fromObject(object.googetPackage);
+                                }
+                                if (object.zypperPatch != null) {
+                                    if (typeof object.zypperPatch !== "object")
+                                        throw TypeError(".google.cloud.osconfig.v1.Inventory.SoftwarePackage.zypperPatch: object expected");
+                                    message.zypperPatch = $root.google.cloud.osconfig.v1.Inventory.ZypperPatch.fromObject(object.zypperPatch);
+                                }
+                                if (object.wuaPackage != null) {
+                                    if (typeof object.wuaPackage !== "object")
+                                        throw TypeError(".google.cloud.osconfig.v1.Inventory.SoftwarePackage.wuaPackage: object expected");
+                                    message.wuaPackage = $root.google.cloud.osconfig.v1.Inventory.WindowsUpdatePackage.fromObject(object.wuaPackage);
+                                }
+                                if (object.qfePackage != null) {
+                                    if (typeof object.qfePackage !== "object")
+                                        throw TypeError(".google.cloud.osconfig.v1.Inventory.SoftwarePackage.qfePackage: object expected");
+                                    message.qfePackage = $root.google.cloud.osconfig.v1.Inventory.WindowsQuickFixEngineeringPackage.fromObject(object.qfePackage);
+                                }
+                                if (object.cosPackage != null) {
+                                    if (typeof object.cosPackage !== "object")
+                                        throw TypeError(".google.cloud.osconfig.v1.Inventory.SoftwarePackage.cosPackage: object expected");
+                                    message.cosPackage = $root.google.cloud.osconfig.v1.Inventory.VersionedPackage.fromObject(object.cosPackage);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a SoftwarePackage message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.osconfig.v1.Inventory.SoftwarePackage
+                             * @static
+                             * @param {google.cloud.osconfig.v1.Inventory.SoftwarePackage} message SoftwarePackage
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            SoftwarePackage.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (message.yumPackage != null && message.hasOwnProperty("yumPackage")) {
+                                    object.yumPackage = $root.google.cloud.osconfig.v1.Inventory.VersionedPackage.toObject(message.yumPackage, options);
+                                    if (options.oneofs)
+                                        object.details = "yumPackage";
+                                }
+                                if (message.aptPackage != null && message.hasOwnProperty("aptPackage")) {
+                                    object.aptPackage = $root.google.cloud.osconfig.v1.Inventory.VersionedPackage.toObject(message.aptPackage, options);
+                                    if (options.oneofs)
+                                        object.details = "aptPackage";
+                                }
+                                if (message.zypperPackage != null && message.hasOwnProperty("zypperPackage")) {
+                                    object.zypperPackage = $root.google.cloud.osconfig.v1.Inventory.VersionedPackage.toObject(message.zypperPackage, options);
+                                    if (options.oneofs)
+                                        object.details = "zypperPackage";
+                                }
+                                if (message.googetPackage != null && message.hasOwnProperty("googetPackage")) {
+                                    object.googetPackage = $root.google.cloud.osconfig.v1.Inventory.VersionedPackage.toObject(message.googetPackage, options);
+                                    if (options.oneofs)
+                                        object.details = "googetPackage";
+                                }
+                                if (message.zypperPatch != null && message.hasOwnProperty("zypperPatch")) {
+                                    object.zypperPatch = $root.google.cloud.osconfig.v1.Inventory.ZypperPatch.toObject(message.zypperPatch, options);
+                                    if (options.oneofs)
+                                        object.details = "zypperPatch";
+                                }
+                                if (message.wuaPackage != null && message.hasOwnProperty("wuaPackage")) {
+                                    object.wuaPackage = $root.google.cloud.osconfig.v1.Inventory.WindowsUpdatePackage.toObject(message.wuaPackage, options);
+                                    if (options.oneofs)
+                                        object.details = "wuaPackage";
+                                }
+                                if (message.qfePackage != null && message.hasOwnProperty("qfePackage")) {
+                                    object.qfePackage = $root.google.cloud.osconfig.v1.Inventory.WindowsQuickFixEngineeringPackage.toObject(message.qfePackage, options);
+                                    if (options.oneofs)
+                                        object.details = "qfePackage";
+                                }
+                                if (message.cosPackage != null && message.hasOwnProperty("cosPackage")) {
+                                    object.cosPackage = $root.google.cloud.osconfig.v1.Inventory.VersionedPackage.toObject(message.cosPackage, options);
+                                    if (options.oneofs)
+                                        object.details = "cosPackage";
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this SoftwarePackage to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.osconfig.v1.Inventory.SoftwarePackage
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            SoftwarePackage.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            return SoftwarePackage;
+                        })();
+    
+                        Inventory.VersionedPackage = (function() {
+    
+                            /**
+                             * Properties of a VersionedPackage.
+                             * @memberof google.cloud.osconfig.v1.Inventory
+                             * @interface IVersionedPackage
+                             * @property {string|null} [packageName] VersionedPackage packageName
+                             * @property {string|null} [architecture] VersionedPackage architecture
+                             * @property {string|null} [version] VersionedPackage version
+                             */
+    
+                            /**
+                             * Constructs a new VersionedPackage.
+                             * @memberof google.cloud.osconfig.v1.Inventory
+                             * @classdesc Represents a VersionedPackage.
+                             * @implements IVersionedPackage
+                             * @constructor
+                             * @param {google.cloud.osconfig.v1.Inventory.IVersionedPackage=} [properties] Properties to set
+                             */
+                            function VersionedPackage(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * VersionedPackage packageName.
+                             * @member {string} packageName
+                             * @memberof google.cloud.osconfig.v1.Inventory.VersionedPackage
+                             * @instance
+                             */
+                            VersionedPackage.prototype.packageName = "";
+    
+                            /**
+                             * VersionedPackage architecture.
+                             * @member {string} architecture
+                             * @memberof google.cloud.osconfig.v1.Inventory.VersionedPackage
+                             * @instance
+                             */
+                            VersionedPackage.prototype.architecture = "";
+    
+                            /**
+                             * VersionedPackage version.
+                             * @member {string} version
+                             * @memberof google.cloud.osconfig.v1.Inventory.VersionedPackage
+                             * @instance
+                             */
+                            VersionedPackage.prototype.version = "";
+    
+                            /**
+                             * Creates a new VersionedPackage instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.osconfig.v1.Inventory.VersionedPackage
+                             * @static
+                             * @param {google.cloud.osconfig.v1.Inventory.IVersionedPackage=} [properties] Properties to set
+                             * @returns {google.cloud.osconfig.v1.Inventory.VersionedPackage} VersionedPackage instance
+                             */
+                            VersionedPackage.create = function create(properties) {
+                                return new VersionedPackage(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified VersionedPackage message. Does not implicitly {@link google.cloud.osconfig.v1.Inventory.VersionedPackage.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.osconfig.v1.Inventory.VersionedPackage
+                             * @static
+                             * @param {google.cloud.osconfig.v1.Inventory.IVersionedPackage} message VersionedPackage message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            VersionedPackage.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.architecture != null && Object.hasOwnProperty.call(message, "architecture"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.architecture);
+                                if (message.version != null && Object.hasOwnProperty.call(message, "version"))
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.version);
+                                if (message.packageName != null && Object.hasOwnProperty.call(message, "packageName"))
+                                    writer.uint32(/* id 4, wireType 2 =*/34).string(message.packageName);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified VersionedPackage message, length delimited. Does not implicitly {@link google.cloud.osconfig.v1.Inventory.VersionedPackage.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.osconfig.v1.Inventory.VersionedPackage
+                             * @static
+                             * @param {google.cloud.osconfig.v1.Inventory.IVersionedPackage} message VersionedPackage message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            VersionedPackage.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a VersionedPackage message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.osconfig.v1.Inventory.VersionedPackage
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.osconfig.v1.Inventory.VersionedPackage} VersionedPackage
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            VersionedPackage.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.osconfig.v1.Inventory.VersionedPackage();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 4:
+                                        message.packageName = reader.string();
+                                        break;
+                                    case 2:
+                                        message.architecture = reader.string();
+                                        break;
+                                    case 3:
+                                        message.version = reader.string();
+                                        break;
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a VersionedPackage message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.osconfig.v1.Inventory.VersionedPackage
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.osconfig.v1.Inventory.VersionedPackage} VersionedPackage
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            VersionedPackage.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a VersionedPackage message.
+                             * @function verify
+                             * @memberof google.cloud.osconfig.v1.Inventory.VersionedPackage
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            VersionedPackage.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.packageName != null && message.hasOwnProperty("packageName"))
+                                    if (!$util.isString(message.packageName))
+                                        return "packageName: string expected";
+                                if (message.architecture != null && message.hasOwnProperty("architecture"))
+                                    if (!$util.isString(message.architecture))
+                                        return "architecture: string expected";
+                                if (message.version != null && message.hasOwnProperty("version"))
+                                    if (!$util.isString(message.version))
+                                        return "version: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a VersionedPackage message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.osconfig.v1.Inventory.VersionedPackage
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.osconfig.v1.Inventory.VersionedPackage} VersionedPackage
+                             */
+                            VersionedPackage.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.osconfig.v1.Inventory.VersionedPackage)
+                                    return object;
+                                var message = new $root.google.cloud.osconfig.v1.Inventory.VersionedPackage();
+                                if (object.packageName != null)
+                                    message.packageName = String(object.packageName);
+                                if (object.architecture != null)
+                                    message.architecture = String(object.architecture);
+                                if (object.version != null)
+                                    message.version = String(object.version);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a VersionedPackage message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.osconfig.v1.Inventory.VersionedPackage
+                             * @static
+                             * @param {google.cloud.osconfig.v1.Inventory.VersionedPackage} message VersionedPackage
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            VersionedPackage.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.architecture = "";
+                                    object.version = "";
+                                    object.packageName = "";
+                                }
+                                if (message.architecture != null && message.hasOwnProperty("architecture"))
+                                    object.architecture = message.architecture;
+                                if (message.version != null && message.hasOwnProperty("version"))
+                                    object.version = message.version;
+                                if (message.packageName != null && message.hasOwnProperty("packageName"))
+                                    object.packageName = message.packageName;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this VersionedPackage to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.osconfig.v1.Inventory.VersionedPackage
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            VersionedPackage.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            return VersionedPackage;
+                        })();
+    
+                        Inventory.WindowsUpdatePackage = (function() {
+    
+                            /**
+                             * Properties of a WindowsUpdatePackage.
+                             * @memberof google.cloud.osconfig.v1.Inventory
+                             * @interface IWindowsUpdatePackage
+                             * @property {string|null} [title] WindowsUpdatePackage title
+                             * @property {string|null} [description] WindowsUpdatePackage description
+                             * @property {Array.<google.cloud.osconfig.v1.Inventory.WindowsUpdatePackage.IWindowsUpdateCategory>|null} [categories] WindowsUpdatePackage categories
+                             * @property {Array.<string>|null} [kbArticleIds] WindowsUpdatePackage kbArticleIds
+                             * @property {string|null} [supportUrl] WindowsUpdatePackage supportUrl
+                             * @property {Array.<string>|null} [moreInfoUrls] WindowsUpdatePackage moreInfoUrls
+                             * @property {string|null} [updateId] WindowsUpdatePackage updateId
+                             * @property {number|null} [revisionNumber] WindowsUpdatePackage revisionNumber
+                             * @property {google.protobuf.ITimestamp|null} [lastDeploymentChangeTime] WindowsUpdatePackage lastDeploymentChangeTime
+                             */
+    
+                            /**
+                             * Constructs a new WindowsUpdatePackage.
+                             * @memberof google.cloud.osconfig.v1.Inventory
+                             * @classdesc Represents a WindowsUpdatePackage.
+                             * @implements IWindowsUpdatePackage
+                             * @constructor
+                             * @param {google.cloud.osconfig.v1.Inventory.IWindowsUpdatePackage=} [properties] Properties to set
+                             */
+                            function WindowsUpdatePackage(properties) {
+                                this.categories = [];
+                                this.kbArticleIds = [];
+                                this.moreInfoUrls = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * WindowsUpdatePackage title.
+                             * @member {string} title
+                             * @memberof google.cloud.osconfig.v1.Inventory.WindowsUpdatePackage
+                             * @instance
+                             */
+                            WindowsUpdatePackage.prototype.title = "";
+    
+                            /**
+                             * WindowsUpdatePackage description.
+                             * @member {string} description
+                             * @memberof google.cloud.osconfig.v1.Inventory.WindowsUpdatePackage
+                             * @instance
+                             */
+                            WindowsUpdatePackage.prototype.description = "";
+    
+                            /**
+                             * WindowsUpdatePackage categories.
+                             * @member {Array.<google.cloud.osconfig.v1.Inventory.WindowsUpdatePackage.IWindowsUpdateCategory>} categories
+                             * @memberof google.cloud.osconfig.v1.Inventory.WindowsUpdatePackage
+                             * @instance
+                             */
+                            WindowsUpdatePackage.prototype.categories = $util.emptyArray;
+    
+                            /**
+                             * WindowsUpdatePackage kbArticleIds.
+                             * @member {Array.<string>} kbArticleIds
+                             * @memberof google.cloud.osconfig.v1.Inventory.WindowsUpdatePackage
+                             * @instance
+                             */
+                            WindowsUpdatePackage.prototype.kbArticleIds = $util.emptyArray;
+    
+                            /**
+                             * WindowsUpdatePackage supportUrl.
+                             * @member {string} supportUrl
+                             * @memberof google.cloud.osconfig.v1.Inventory.WindowsUpdatePackage
+                             * @instance
+                             */
+                            WindowsUpdatePackage.prototype.supportUrl = "";
+    
+                            /**
+                             * WindowsUpdatePackage moreInfoUrls.
+                             * @member {Array.<string>} moreInfoUrls
+                             * @memberof google.cloud.osconfig.v1.Inventory.WindowsUpdatePackage
+                             * @instance
+                             */
+                            WindowsUpdatePackage.prototype.moreInfoUrls = $util.emptyArray;
+    
+                            /**
+                             * WindowsUpdatePackage updateId.
+                             * @member {string} updateId
+                             * @memberof google.cloud.osconfig.v1.Inventory.WindowsUpdatePackage
+                             * @instance
+                             */
+                            WindowsUpdatePackage.prototype.updateId = "";
+    
+                            /**
+                             * WindowsUpdatePackage revisionNumber.
+                             * @member {number} revisionNumber
+                             * @memberof google.cloud.osconfig.v1.Inventory.WindowsUpdatePackage
+                             * @instance
+                             */
+                            WindowsUpdatePackage.prototype.revisionNumber = 0;
+    
+                            /**
+                             * WindowsUpdatePackage lastDeploymentChangeTime.
+                             * @member {google.protobuf.ITimestamp|null|undefined} lastDeploymentChangeTime
+                             * @memberof google.cloud.osconfig.v1.Inventory.WindowsUpdatePackage
+                             * @instance
+                             */
+                            WindowsUpdatePackage.prototype.lastDeploymentChangeTime = null;
+    
+                            /**
+                             * Creates a new WindowsUpdatePackage instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.osconfig.v1.Inventory.WindowsUpdatePackage
+                             * @static
+                             * @param {google.cloud.osconfig.v1.Inventory.IWindowsUpdatePackage=} [properties] Properties to set
+                             * @returns {google.cloud.osconfig.v1.Inventory.WindowsUpdatePackage} WindowsUpdatePackage instance
+                             */
+                            WindowsUpdatePackage.create = function create(properties) {
+                                return new WindowsUpdatePackage(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified WindowsUpdatePackage message. Does not implicitly {@link google.cloud.osconfig.v1.Inventory.WindowsUpdatePackage.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.osconfig.v1.Inventory.WindowsUpdatePackage
+                             * @static
+                             * @param {google.cloud.osconfig.v1.Inventory.IWindowsUpdatePackage} message WindowsUpdatePackage message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            WindowsUpdatePackage.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.title != null && Object.hasOwnProperty.call(message, "title"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.title);
+                                if (message.description != null && Object.hasOwnProperty.call(message, "description"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.description);
+                                if (message.categories != null && message.categories.length)
+                                    for (var i = 0; i < message.categories.length; ++i)
+                                        $root.google.cloud.osconfig.v1.Inventory.WindowsUpdatePackage.WindowsUpdateCategory.encode(message.categories[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                                if (message.kbArticleIds != null && message.kbArticleIds.length)
+                                    for (var i = 0; i < message.kbArticleIds.length; ++i)
+                                        writer.uint32(/* id 4, wireType 2 =*/34).string(message.kbArticleIds[i]);
+                                if (message.moreInfoUrls != null && message.moreInfoUrls.length)
+                                    for (var i = 0; i < message.moreInfoUrls.length; ++i)
+                                        writer.uint32(/* id 5, wireType 2 =*/42).string(message.moreInfoUrls[i]);
+                                if (message.updateId != null && Object.hasOwnProperty.call(message, "updateId"))
+                                    writer.uint32(/* id 6, wireType 2 =*/50).string(message.updateId);
+                                if (message.revisionNumber != null && Object.hasOwnProperty.call(message, "revisionNumber"))
+                                    writer.uint32(/* id 7, wireType 0 =*/56).int32(message.revisionNumber);
+                                if (message.lastDeploymentChangeTime != null && Object.hasOwnProperty.call(message, "lastDeploymentChangeTime"))
+                                    $root.google.protobuf.Timestamp.encode(message.lastDeploymentChangeTime, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
+                                if (message.supportUrl != null && Object.hasOwnProperty.call(message, "supportUrl"))
+                                    writer.uint32(/* id 11, wireType 2 =*/90).string(message.supportUrl);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified WindowsUpdatePackage message, length delimited. Does not implicitly {@link google.cloud.osconfig.v1.Inventory.WindowsUpdatePackage.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.osconfig.v1.Inventory.WindowsUpdatePackage
+                             * @static
+                             * @param {google.cloud.osconfig.v1.Inventory.IWindowsUpdatePackage} message WindowsUpdatePackage message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            WindowsUpdatePackage.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a WindowsUpdatePackage message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.osconfig.v1.Inventory.WindowsUpdatePackage
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.osconfig.v1.Inventory.WindowsUpdatePackage} WindowsUpdatePackage
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            WindowsUpdatePackage.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.osconfig.v1.Inventory.WindowsUpdatePackage();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1:
+                                        message.title = reader.string();
+                                        break;
+                                    case 2:
+                                        message.description = reader.string();
+                                        break;
+                                    case 3:
+                                        if (!(message.categories && message.categories.length))
+                                            message.categories = [];
+                                        message.categories.push($root.google.cloud.osconfig.v1.Inventory.WindowsUpdatePackage.WindowsUpdateCategory.decode(reader, reader.uint32()));
+                                        break;
+                                    case 4:
+                                        if (!(message.kbArticleIds && message.kbArticleIds.length))
+                                            message.kbArticleIds = [];
+                                        message.kbArticleIds.push(reader.string());
+                                        break;
+                                    case 11:
+                                        message.supportUrl = reader.string();
+                                        break;
+                                    case 5:
+                                        if (!(message.moreInfoUrls && message.moreInfoUrls.length))
+                                            message.moreInfoUrls = [];
+                                        message.moreInfoUrls.push(reader.string());
+                                        break;
+                                    case 6:
+                                        message.updateId = reader.string();
+                                        break;
+                                    case 7:
+                                        message.revisionNumber = reader.int32();
+                                        break;
+                                    case 10:
+                                        message.lastDeploymentChangeTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a WindowsUpdatePackage message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.osconfig.v1.Inventory.WindowsUpdatePackage
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.osconfig.v1.Inventory.WindowsUpdatePackage} WindowsUpdatePackage
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            WindowsUpdatePackage.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a WindowsUpdatePackage message.
+                             * @function verify
+                             * @memberof google.cloud.osconfig.v1.Inventory.WindowsUpdatePackage
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            WindowsUpdatePackage.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.title != null && message.hasOwnProperty("title"))
+                                    if (!$util.isString(message.title))
+                                        return "title: string expected";
+                                if (message.description != null && message.hasOwnProperty("description"))
+                                    if (!$util.isString(message.description))
+                                        return "description: string expected";
+                                if (message.categories != null && message.hasOwnProperty("categories")) {
+                                    if (!Array.isArray(message.categories))
+                                        return "categories: array expected";
+                                    for (var i = 0; i < message.categories.length; ++i) {
+                                        var error = $root.google.cloud.osconfig.v1.Inventory.WindowsUpdatePackage.WindowsUpdateCategory.verify(message.categories[i]);
+                                        if (error)
+                                            return "categories." + error;
+                                    }
+                                }
+                                if (message.kbArticleIds != null && message.hasOwnProperty("kbArticleIds")) {
+                                    if (!Array.isArray(message.kbArticleIds))
+                                        return "kbArticleIds: array expected";
+                                    for (var i = 0; i < message.kbArticleIds.length; ++i)
+                                        if (!$util.isString(message.kbArticleIds[i]))
+                                            return "kbArticleIds: string[] expected";
+                                }
+                                if (message.supportUrl != null && message.hasOwnProperty("supportUrl"))
+                                    if (!$util.isString(message.supportUrl))
+                                        return "supportUrl: string expected";
+                                if (message.moreInfoUrls != null && message.hasOwnProperty("moreInfoUrls")) {
+                                    if (!Array.isArray(message.moreInfoUrls))
+                                        return "moreInfoUrls: array expected";
+                                    for (var i = 0; i < message.moreInfoUrls.length; ++i)
+                                        if (!$util.isString(message.moreInfoUrls[i]))
+                                            return "moreInfoUrls: string[] expected";
+                                }
+                                if (message.updateId != null && message.hasOwnProperty("updateId"))
+                                    if (!$util.isString(message.updateId))
+                                        return "updateId: string expected";
+                                if (message.revisionNumber != null && message.hasOwnProperty("revisionNumber"))
+                                    if (!$util.isInteger(message.revisionNumber))
+                                        return "revisionNumber: integer expected";
+                                if (message.lastDeploymentChangeTime != null && message.hasOwnProperty("lastDeploymentChangeTime")) {
+                                    var error = $root.google.protobuf.Timestamp.verify(message.lastDeploymentChangeTime);
+                                    if (error)
+                                        return "lastDeploymentChangeTime." + error;
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a WindowsUpdatePackage message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.osconfig.v1.Inventory.WindowsUpdatePackage
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.osconfig.v1.Inventory.WindowsUpdatePackage} WindowsUpdatePackage
+                             */
+                            WindowsUpdatePackage.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.osconfig.v1.Inventory.WindowsUpdatePackage)
+                                    return object;
+                                var message = new $root.google.cloud.osconfig.v1.Inventory.WindowsUpdatePackage();
+                                if (object.title != null)
+                                    message.title = String(object.title);
+                                if (object.description != null)
+                                    message.description = String(object.description);
+                                if (object.categories) {
+                                    if (!Array.isArray(object.categories))
+                                        throw TypeError(".google.cloud.osconfig.v1.Inventory.WindowsUpdatePackage.categories: array expected");
+                                    message.categories = [];
+                                    for (var i = 0; i < object.categories.length; ++i) {
+                                        if (typeof object.categories[i] !== "object")
+                                            throw TypeError(".google.cloud.osconfig.v1.Inventory.WindowsUpdatePackage.categories: object expected");
+                                        message.categories[i] = $root.google.cloud.osconfig.v1.Inventory.WindowsUpdatePackage.WindowsUpdateCategory.fromObject(object.categories[i]);
+                                    }
+                                }
+                                if (object.kbArticleIds) {
+                                    if (!Array.isArray(object.kbArticleIds))
+                                        throw TypeError(".google.cloud.osconfig.v1.Inventory.WindowsUpdatePackage.kbArticleIds: array expected");
+                                    message.kbArticleIds = [];
+                                    for (var i = 0; i < object.kbArticleIds.length; ++i)
+                                        message.kbArticleIds[i] = String(object.kbArticleIds[i]);
+                                }
+                                if (object.supportUrl != null)
+                                    message.supportUrl = String(object.supportUrl);
+                                if (object.moreInfoUrls) {
+                                    if (!Array.isArray(object.moreInfoUrls))
+                                        throw TypeError(".google.cloud.osconfig.v1.Inventory.WindowsUpdatePackage.moreInfoUrls: array expected");
+                                    message.moreInfoUrls = [];
+                                    for (var i = 0; i < object.moreInfoUrls.length; ++i)
+                                        message.moreInfoUrls[i] = String(object.moreInfoUrls[i]);
+                                }
+                                if (object.updateId != null)
+                                    message.updateId = String(object.updateId);
+                                if (object.revisionNumber != null)
+                                    message.revisionNumber = object.revisionNumber | 0;
+                                if (object.lastDeploymentChangeTime != null) {
+                                    if (typeof object.lastDeploymentChangeTime !== "object")
+                                        throw TypeError(".google.cloud.osconfig.v1.Inventory.WindowsUpdatePackage.lastDeploymentChangeTime: object expected");
+                                    message.lastDeploymentChangeTime = $root.google.protobuf.Timestamp.fromObject(object.lastDeploymentChangeTime);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a WindowsUpdatePackage message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.osconfig.v1.Inventory.WindowsUpdatePackage
+                             * @static
+                             * @param {google.cloud.osconfig.v1.Inventory.WindowsUpdatePackage} message WindowsUpdatePackage
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            WindowsUpdatePackage.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults) {
+                                    object.categories = [];
+                                    object.kbArticleIds = [];
+                                    object.moreInfoUrls = [];
+                                }
+                                if (options.defaults) {
+                                    object.title = "";
+                                    object.description = "";
+                                    object.updateId = "";
+                                    object.revisionNumber = 0;
+                                    object.lastDeploymentChangeTime = null;
+                                    object.supportUrl = "";
+                                }
+                                if (message.title != null && message.hasOwnProperty("title"))
+                                    object.title = message.title;
+                                if (message.description != null && message.hasOwnProperty("description"))
+                                    object.description = message.description;
+                                if (message.categories && message.categories.length) {
+                                    object.categories = [];
+                                    for (var j = 0; j < message.categories.length; ++j)
+                                        object.categories[j] = $root.google.cloud.osconfig.v1.Inventory.WindowsUpdatePackage.WindowsUpdateCategory.toObject(message.categories[j], options);
+                                }
+                                if (message.kbArticleIds && message.kbArticleIds.length) {
+                                    object.kbArticleIds = [];
+                                    for (var j = 0; j < message.kbArticleIds.length; ++j)
+                                        object.kbArticleIds[j] = message.kbArticleIds[j];
+                                }
+                                if (message.moreInfoUrls && message.moreInfoUrls.length) {
+                                    object.moreInfoUrls = [];
+                                    for (var j = 0; j < message.moreInfoUrls.length; ++j)
+                                        object.moreInfoUrls[j] = message.moreInfoUrls[j];
+                                }
+                                if (message.updateId != null && message.hasOwnProperty("updateId"))
+                                    object.updateId = message.updateId;
+                                if (message.revisionNumber != null && message.hasOwnProperty("revisionNumber"))
+                                    object.revisionNumber = message.revisionNumber;
+                                if (message.lastDeploymentChangeTime != null && message.hasOwnProperty("lastDeploymentChangeTime"))
+                                    object.lastDeploymentChangeTime = $root.google.protobuf.Timestamp.toObject(message.lastDeploymentChangeTime, options);
+                                if (message.supportUrl != null && message.hasOwnProperty("supportUrl"))
+                                    object.supportUrl = message.supportUrl;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this WindowsUpdatePackage to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.osconfig.v1.Inventory.WindowsUpdatePackage
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            WindowsUpdatePackage.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            WindowsUpdatePackage.WindowsUpdateCategory = (function() {
+    
+                                /**
+                                 * Properties of a WindowsUpdateCategory.
+                                 * @memberof google.cloud.osconfig.v1.Inventory.WindowsUpdatePackage
+                                 * @interface IWindowsUpdateCategory
+                                 * @property {string|null} [id] WindowsUpdateCategory id
+                                 * @property {string|null} [name] WindowsUpdateCategory name
+                                 */
+    
+                                /**
+                                 * Constructs a new WindowsUpdateCategory.
+                                 * @memberof google.cloud.osconfig.v1.Inventory.WindowsUpdatePackage
+                                 * @classdesc Represents a WindowsUpdateCategory.
+                                 * @implements IWindowsUpdateCategory
+                                 * @constructor
+                                 * @param {google.cloud.osconfig.v1.Inventory.WindowsUpdatePackage.IWindowsUpdateCategory=} [properties] Properties to set
+                                 */
+                                function WindowsUpdateCategory(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * WindowsUpdateCategory id.
+                                 * @member {string} id
+                                 * @memberof google.cloud.osconfig.v1.Inventory.WindowsUpdatePackage.WindowsUpdateCategory
+                                 * @instance
+                                 */
+                                WindowsUpdateCategory.prototype.id = "";
+    
+                                /**
+                                 * WindowsUpdateCategory name.
+                                 * @member {string} name
+                                 * @memberof google.cloud.osconfig.v1.Inventory.WindowsUpdatePackage.WindowsUpdateCategory
+                                 * @instance
+                                 */
+                                WindowsUpdateCategory.prototype.name = "";
+    
+                                /**
+                                 * Creates a new WindowsUpdateCategory instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.osconfig.v1.Inventory.WindowsUpdatePackage.WindowsUpdateCategory
+                                 * @static
+                                 * @param {google.cloud.osconfig.v1.Inventory.WindowsUpdatePackage.IWindowsUpdateCategory=} [properties] Properties to set
+                                 * @returns {google.cloud.osconfig.v1.Inventory.WindowsUpdatePackage.WindowsUpdateCategory} WindowsUpdateCategory instance
+                                 */
+                                WindowsUpdateCategory.create = function create(properties) {
+                                    return new WindowsUpdateCategory(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified WindowsUpdateCategory message. Does not implicitly {@link google.cloud.osconfig.v1.Inventory.WindowsUpdatePackage.WindowsUpdateCategory.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.osconfig.v1.Inventory.WindowsUpdatePackage.WindowsUpdateCategory
+                                 * @static
+                                 * @param {google.cloud.osconfig.v1.Inventory.WindowsUpdatePackage.IWindowsUpdateCategory} message WindowsUpdateCategory message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                WindowsUpdateCategory.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.id != null && Object.hasOwnProperty.call(message, "id"))
+                                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.id);
+                                    if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.name);
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified WindowsUpdateCategory message, length delimited. Does not implicitly {@link google.cloud.osconfig.v1.Inventory.WindowsUpdatePackage.WindowsUpdateCategory.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.osconfig.v1.Inventory.WindowsUpdatePackage.WindowsUpdateCategory
+                                 * @static
+                                 * @param {google.cloud.osconfig.v1.Inventory.WindowsUpdatePackage.IWindowsUpdateCategory} message WindowsUpdateCategory message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                WindowsUpdateCategory.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a WindowsUpdateCategory message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.osconfig.v1.Inventory.WindowsUpdatePackage.WindowsUpdateCategory
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.osconfig.v1.Inventory.WindowsUpdatePackage.WindowsUpdateCategory} WindowsUpdateCategory
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                WindowsUpdateCategory.decode = function decode(reader, length) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.osconfig.v1.Inventory.WindowsUpdatePackage.WindowsUpdateCategory();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        switch (tag >>> 3) {
+                                        case 1:
+                                            message.id = reader.string();
+                                            break;
+                                        case 2:
+                                            message.name = reader.string();
+                                            break;
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a WindowsUpdateCategory message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.osconfig.v1.Inventory.WindowsUpdatePackage.WindowsUpdateCategory
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.osconfig.v1.Inventory.WindowsUpdatePackage.WindowsUpdateCategory} WindowsUpdateCategory
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                WindowsUpdateCategory.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a WindowsUpdateCategory message.
+                                 * @function verify
+                                 * @memberof google.cloud.osconfig.v1.Inventory.WindowsUpdatePackage.WindowsUpdateCategory
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                WindowsUpdateCategory.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.id != null && message.hasOwnProperty("id"))
+                                        if (!$util.isString(message.id))
+                                            return "id: string expected";
+                                    if (message.name != null && message.hasOwnProperty("name"))
+                                        if (!$util.isString(message.name))
+                                            return "name: string expected";
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a WindowsUpdateCategory message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.osconfig.v1.Inventory.WindowsUpdatePackage.WindowsUpdateCategory
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.osconfig.v1.Inventory.WindowsUpdatePackage.WindowsUpdateCategory} WindowsUpdateCategory
+                                 */
+                                WindowsUpdateCategory.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.osconfig.v1.Inventory.WindowsUpdatePackage.WindowsUpdateCategory)
+                                        return object;
+                                    var message = new $root.google.cloud.osconfig.v1.Inventory.WindowsUpdatePackage.WindowsUpdateCategory();
+                                    if (object.id != null)
+                                        message.id = String(object.id);
+                                    if (object.name != null)
+                                        message.name = String(object.name);
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a WindowsUpdateCategory message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.osconfig.v1.Inventory.WindowsUpdatePackage.WindowsUpdateCategory
+                                 * @static
+                                 * @param {google.cloud.osconfig.v1.Inventory.WindowsUpdatePackage.WindowsUpdateCategory} message WindowsUpdateCategory
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                WindowsUpdateCategory.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults) {
+                                        object.id = "";
+                                        object.name = "";
+                                    }
+                                    if (message.id != null && message.hasOwnProperty("id"))
+                                        object.id = message.id;
+                                    if (message.name != null && message.hasOwnProperty("name"))
+                                        object.name = message.name;
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this WindowsUpdateCategory to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.osconfig.v1.Inventory.WindowsUpdatePackage.WindowsUpdateCategory
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                WindowsUpdateCategory.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                return WindowsUpdateCategory;
+                            })();
+    
+                            return WindowsUpdatePackage;
+                        })();
+    
+                        Inventory.ZypperPatch = (function() {
+    
+                            /**
+                             * Properties of a ZypperPatch.
+                             * @memberof google.cloud.osconfig.v1.Inventory
+                             * @interface IZypperPatch
+                             * @property {string|null} [patchName] ZypperPatch patchName
+                             * @property {string|null} [category] ZypperPatch category
+                             * @property {string|null} [severity] ZypperPatch severity
+                             * @property {string|null} [summary] ZypperPatch summary
+                             */
+    
+                            /**
+                             * Constructs a new ZypperPatch.
+                             * @memberof google.cloud.osconfig.v1.Inventory
+                             * @classdesc Represents a ZypperPatch.
+                             * @implements IZypperPatch
+                             * @constructor
+                             * @param {google.cloud.osconfig.v1.Inventory.IZypperPatch=} [properties] Properties to set
+                             */
+                            function ZypperPatch(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * ZypperPatch patchName.
+                             * @member {string} patchName
+                             * @memberof google.cloud.osconfig.v1.Inventory.ZypperPatch
+                             * @instance
+                             */
+                            ZypperPatch.prototype.patchName = "";
+    
+                            /**
+                             * ZypperPatch category.
+                             * @member {string} category
+                             * @memberof google.cloud.osconfig.v1.Inventory.ZypperPatch
+                             * @instance
+                             */
+                            ZypperPatch.prototype.category = "";
+    
+                            /**
+                             * ZypperPatch severity.
+                             * @member {string} severity
+                             * @memberof google.cloud.osconfig.v1.Inventory.ZypperPatch
+                             * @instance
+                             */
+                            ZypperPatch.prototype.severity = "";
+    
+                            /**
+                             * ZypperPatch summary.
+                             * @member {string} summary
+                             * @memberof google.cloud.osconfig.v1.Inventory.ZypperPatch
+                             * @instance
+                             */
+                            ZypperPatch.prototype.summary = "";
+    
+                            /**
+                             * Creates a new ZypperPatch instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.osconfig.v1.Inventory.ZypperPatch
+                             * @static
+                             * @param {google.cloud.osconfig.v1.Inventory.IZypperPatch=} [properties] Properties to set
+                             * @returns {google.cloud.osconfig.v1.Inventory.ZypperPatch} ZypperPatch instance
+                             */
+                            ZypperPatch.create = function create(properties) {
+                                return new ZypperPatch(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified ZypperPatch message. Does not implicitly {@link google.cloud.osconfig.v1.Inventory.ZypperPatch.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.osconfig.v1.Inventory.ZypperPatch
+                             * @static
+                             * @param {google.cloud.osconfig.v1.Inventory.IZypperPatch} message ZypperPatch message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ZypperPatch.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.category != null && Object.hasOwnProperty.call(message, "category"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.category);
+                                if (message.severity != null && Object.hasOwnProperty.call(message, "severity"))
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.severity);
+                                if (message.summary != null && Object.hasOwnProperty.call(message, "summary"))
+                                    writer.uint32(/* id 4, wireType 2 =*/34).string(message.summary);
+                                if (message.patchName != null && Object.hasOwnProperty.call(message, "patchName"))
+                                    writer.uint32(/* id 5, wireType 2 =*/42).string(message.patchName);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified ZypperPatch message, length delimited. Does not implicitly {@link google.cloud.osconfig.v1.Inventory.ZypperPatch.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.osconfig.v1.Inventory.ZypperPatch
+                             * @static
+                             * @param {google.cloud.osconfig.v1.Inventory.IZypperPatch} message ZypperPatch message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ZypperPatch.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a ZypperPatch message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.osconfig.v1.Inventory.ZypperPatch
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.osconfig.v1.Inventory.ZypperPatch} ZypperPatch
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ZypperPatch.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.osconfig.v1.Inventory.ZypperPatch();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 5:
+                                        message.patchName = reader.string();
+                                        break;
+                                    case 2:
+                                        message.category = reader.string();
+                                        break;
+                                    case 3:
+                                        message.severity = reader.string();
+                                        break;
+                                    case 4:
+                                        message.summary = reader.string();
+                                        break;
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a ZypperPatch message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.osconfig.v1.Inventory.ZypperPatch
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.osconfig.v1.Inventory.ZypperPatch} ZypperPatch
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ZypperPatch.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a ZypperPatch message.
+                             * @function verify
+                             * @memberof google.cloud.osconfig.v1.Inventory.ZypperPatch
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            ZypperPatch.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.patchName != null && message.hasOwnProperty("patchName"))
+                                    if (!$util.isString(message.patchName))
+                                        return "patchName: string expected";
+                                if (message.category != null && message.hasOwnProperty("category"))
+                                    if (!$util.isString(message.category))
+                                        return "category: string expected";
+                                if (message.severity != null && message.hasOwnProperty("severity"))
+                                    if (!$util.isString(message.severity))
+                                        return "severity: string expected";
+                                if (message.summary != null && message.hasOwnProperty("summary"))
+                                    if (!$util.isString(message.summary))
+                                        return "summary: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a ZypperPatch message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.osconfig.v1.Inventory.ZypperPatch
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.osconfig.v1.Inventory.ZypperPatch} ZypperPatch
+                             */
+                            ZypperPatch.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.osconfig.v1.Inventory.ZypperPatch)
+                                    return object;
+                                var message = new $root.google.cloud.osconfig.v1.Inventory.ZypperPatch();
+                                if (object.patchName != null)
+                                    message.patchName = String(object.patchName);
+                                if (object.category != null)
+                                    message.category = String(object.category);
+                                if (object.severity != null)
+                                    message.severity = String(object.severity);
+                                if (object.summary != null)
+                                    message.summary = String(object.summary);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a ZypperPatch message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.osconfig.v1.Inventory.ZypperPatch
+                             * @static
+                             * @param {google.cloud.osconfig.v1.Inventory.ZypperPatch} message ZypperPatch
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            ZypperPatch.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.category = "";
+                                    object.severity = "";
+                                    object.summary = "";
+                                    object.patchName = "";
+                                }
+                                if (message.category != null && message.hasOwnProperty("category"))
+                                    object.category = message.category;
+                                if (message.severity != null && message.hasOwnProperty("severity"))
+                                    object.severity = message.severity;
+                                if (message.summary != null && message.hasOwnProperty("summary"))
+                                    object.summary = message.summary;
+                                if (message.patchName != null && message.hasOwnProperty("patchName"))
+                                    object.patchName = message.patchName;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this ZypperPatch to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.osconfig.v1.Inventory.ZypperPatch
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            ZypperPatch.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            return ZypperPatch;
+                        })();
+    
+                        Inventory.WindowsQuickFixEngineeringPackage = (function() {
+    
+                            /**
+                             * Properties of a WindowsQuickFixEngineeringPackage.
+                             * @memberof google.cloud.osconfig.v1.Inventory
+                             * @interface IWindowsQuickFixEngineeringPackage
+                             * @property {string|null} [caption] WindowsQuickFixEngineeringPackage caption
+                             * @property {string|null} [description] WindowsQuickFixEngineeringPackage description
+                             * @property {string|null} [hotFixId] WindowsQuickFixEngineeringPackage hotFixId
+                             * @property {google.protobuf.ITimestamp|null} [installTime] WindowsQuickFixEngineeringPackage installTime
+                             */
+    
+                            /**
+                             * Constructs a new WindowsQuickFixEngineeringPackage.
+                             * @memberof google.cloud.osconfig.v1.Inventory
+                             * @classdesc Represents a WindowsQuickFixEngineeringPackage.
+                             * @implements IWindowsQuickFixEngineeringPackage
+                             * @constructor
+                             * @param {google.cloud.osconfig.v1.Inventory.IWindowsQuickFixEngineeringPackage=} [properties] Properties to set
+                             */
+                            function WindowsQuickFixEngineeringPackage(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * WindowsQuickFixEngineeringPackage caption.
+                             * @member {string} caption
+                             * @memberof google.cloud.osconfig.v1.Inventory.WindowsQuickFixEngineeringPackage
+                             * @instance
+                             */
+                            WindowsQuickFixEngineeringPackage.prototype.caption = "";
+    
+                            /**
+                             * WindowsQuickFixEngineeringPackage description.
+                             * @member {string} description
+                             * @memberof google.cloud.osconfig.v1.Inventory.WindowsQuickFixEngineeringPackage
+                             * @instance
+                             */
+                            WindowsQuickFixEngineeringPackage.prototype.description = "";
+    
+                            /**
+                             * WindowsQuickFixEngineeringPackage hotFixId.
+                             * @member {string} hotFixId
+                             * @memberof google.cloud.osconfig.v1.Inventory.WindowsQuickFixEngineeringPackage
+                             * @instance
+                             */
+                            WindowsQuickFixEngineeringPackage.prototype.hotFixId = "";
+    
+                            /**
+                             * WindowsQuickFixEngineeringPackage installTime.
+                             * @member {google.protobuf.ITimestamp|null|undefined} installTime
+                             * @memberof google.cloud.osconfig.v1.Inventory.WindowsQuickFixEngineeringPackage
+                             * @instance
+                             */
+                            WindowsQuickFixEngineeringPackage.prototype.installTime = null;
+    
+                            /**
+                             * Creates a new WindowsQuickFixEngineeringPackage instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.osconfig.v1.Inventory.WindowsQuickFixEngineeringPackage
+                             * @static
+                             * @param {google.cloud.osconfig.v1.Inventory.IWindowsQuickFixEngineeringPackage=} [properties] Properties to set
+                             * @returns {google.cloud.osconfig.v1.Inventory.WindowsQuickFixEngineeringPackage} WindowsQuickFixEngineeringPackage instance
+                             */
+                            WindowsQuickFixEngineeringPackage.create = function create(properties) {
+                                return new WindowsQuickFixEngineeringPackage(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified WindowsQuickFixEngineeringPackage message. Does not implicitly {@link google.cloud.osconfig.v1.Inventory.WindowsQuickFixEngineeringPackage.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.osconfig.v1.Inventory.WindowsQuickFixEngineeringPackage
+                             * @static
+                             * @param {google.cloud.osconfig.v1.Inventory.IWindowsQuickFixEngineeringPackage} message WindowsQuickFixEngineeringPackage message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            WindowsQuickFixEngineeringPackage.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.caption != null && Object.hasOwnProperty.call(message, "caption"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.caption);
+                                if (message.description != null && Object.hasOwnProperty.call(message, "description"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.description);
+                                if (message.hotFixId != null && Object.hasOwnProperty.call(message, "hotFixId"))
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.hotFixId);
+                                if (message.installTime != null && Object.hasOwnProperty.call(message, "installTime"))
+                                    $root.google.protobuf.Timestamp.encode(message.installTime, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified WindowsQuickFixEngineeringPackage message, length delimited. Does not implicitly {@link google.cloud.osconfig.v1.Inventory.WindowsQuickFixEngineeringPackage.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.osconfig.v1.Inventory.WindowsQuickFixEngineeringPackage
+                             * @static
+                             * @param {google.cloud.osconfig.v1.Inventory.IWindowsQuickFixEngineeringPackage} message WindowsQuickFixEngineeringPackage message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            WindowsQuickFixEngineeringPackage.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a WindowsQuickFixEngineeringPackage message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.osconfig.v1.Inventory.WindowsQuickFixEngineeringPackage
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.osconfig.v1.Inventory.WindowsQuickFixEngineeringPackage} WindowsQuickFixEngineeringPackage
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            WindowsQuickFixEngineeringPackage.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.osconfig.v1.Inventory.WindowsQuickFixEngineeringPackage();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1:
+                                        message.caption = reader.string();
+                                        break;
+                                    case 2:
+                                        message.description = reader.string();
+                                        break;
+                                    case 3:
+                                        message.hotFixId = reader.string();
+                                        break;
+                                    case 5:
+                                        message.installTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a WindowsQuickFixEngineeringPackage message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.osconfig.v1.Inventory.WindowsQuickFixEngineeringPackage
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.osconfig.v1.Inventory.WindowsQuickFixEngineeringPackage} WindowsQuickFixEngineeringPackage
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            WindowsQuickFixEngineeringPackage.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a WindowsQuickFixEngineeringPackage message.
+                             * @function verify
+                             * @memberof google.cloud.osconfig.v1.Inventory.WindowsQuickFixEngineeringPackage
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            WindowsQuickFixEngineeringPackage.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.caption != null && message.hasOwnProperty("caption"))
+                                    if (!$util.isString(message.caption))
+                                        return "caption: string expected";
+                                if (message.description != null && message.hasOwnProperty("description"))
+                                    if (!$util.isString(message.description))
+                                        return "description: string expected";
+                                if (message.hotFixId != null && message.hasOwnProperty("hotFixId"))
+                                    if (!$util.isString(message.hotFixId))
+                                        return "hotFixId: string expected";
+                                if (message.installTime != null && message.hasOwnProperty("installTime")) {
+                                    var error = $root.google.protobuf.Timestamp.verify(message.installTime);
+                                    if (error)
+                                        return "installTime." + error;
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a WindowsQuickFixEngineeringPackage message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.osconfig.v1.Inventory.WindowsQuickFixEngineeringPackage
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.osconfig.v1.Inventory.WindowsQuickFixEngineeringPackage} WindowsQuickFixEngineeringPackage
+                             */
+                            WindowsQuickFixEngineeringPackage.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.osconfig.v1.Inventory.WindowsQuickFixEngineeringPackage)
+                                    return object;
+                                var message = new $root.google.cloud.osconfig.v1.Inventory.WindowsQuickFixEngineeringPackage();
+                                if (object.caption != null)
+                                    message.caption = String(object.caption);
+                                if (object.description != null)
+                                    message.description = String(object.description);
+                                if (object.hotFixId != null)
+                                    message.hotFixId = String(object.hotFixId);
+                                if (object.installTime != null) {
+                                    if (typeof object.installTime !== "object")
+                                        throw TypeError(".google.cloud.osconfig.v1.Inventory.WindowsQuickFixEngineeringPackage.installTime: object expected");
+                                    message.installTime = $root.google.protobuf.Timestamp.fromObject(object.installTime);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a WindowsQuickFixEngineeringPackage message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.osconfig.v1.Inventory.WindowsQuickFixEngineeringPackage
+                             * @static
+                             * @param {google.cloud.osconfig.v1.Inventory.WindowsQuickFixEngineeringPackage} message WindowsQuickFixEngineeringPackage
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            WindowsQuickFixEngineeringPackage.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.caption = "";
+                                    object.description = "";
+                                    object.hotFixId = "";
+                                    object.installTime = null;
+                                }
+                                if (message.caption != null && message.hasOwnProperty("caption"))
+                                    object.caption = message.caption;
+                                if (message.description != null && message.hasOwnProperty("description"))
+                                    object.description = message.description;
+                                if (message.hotFixId != null && message.hasOwnProperty("hotFixId"))
+                                    object.hotFixId = message.hotFixId;
+                                if (message.installTime != null && message.hasOwnProperty("installTime"))
+                                    object.installTime = $root.google.protobuf.Timestamp.toObject(message.installTime, options);
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this WindowsQuickFixEngineeringPackage to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.osconfig.v1.Inventory.WindowsQuickFixEngineeringPackage
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            WindowsQuickFixEngineeringPackage.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            return WindowsQuickFixEngineeringPackage;
+                        })();
+    
+                        return Inventory;
+                    })();
+    
+                    return v1;
+                })();
+    
+                return osconfig;
             })();
     
             return cloud;
