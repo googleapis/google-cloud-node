@@ -619,7 +619,29 @@ describe('Storage', () => {
       storage.createBucket(BUCKET_NAME, {storageClass}, done);
     });
 
-    it('should throw when both `storageClass` and storageClass name are provided', () => {
+    it('should allow settings `storageClass` to same value as provided storage class name', done => {
+      const storageClass = 'coldline';
+      storage.request = (
+        reqOpts: DecorateRequestOptions,
+        callback: Function
+      ) => {
+        assert.strictEqual(
+          reqOpts.json.storageClass,
+          storageClass.toUpperCase()
+        );
+        callback(); // done
+      };
+
+      assert.doesNotThrow(() => {
+        storage.createBucket(
+          BUCKET_NAME,
+          {storageClass, [storageClass]: true},
+          done
+        );
+      });
+    });
+
+    it('should throw when `storageClass` is set to different value than provided storageClass name', () => {
       assert.throws(() => {
         storage.createBucket(
           BUCKET_NAME,
