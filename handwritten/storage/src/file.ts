@@ -3798,7 +3798,7 @@ class File extends ServiceObject<File> {
  * that a callback is omitted.
  */
 promisifyAll(File, {
-  exclude: ['request', 'setEncryptionKey'],
+  exclude: ['publicUrl', 'request', 'setEncryptionKey'],
 });
 
 /**
