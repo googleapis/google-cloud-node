@@ -63,7 +63,7 @@ npm install @google-cloud/documentai
  */
 // const projectId = 'YOUR_PROJECT_ID';
 // const location = 'YOUR_PROJECT_LOCATION'; // Format is 'us' or 'eu'
-// const processor = 'YOUR_PROCESSOR_ID'; // Create processor in Cloud Console
+// const processorId = 'YOUR_PROCESSOR_ID'; // Create processor in Cloud Console
 // const filePath = '/path/to/local/pdf';
 
 const {
