@@ -15,6 +15,7 @@
   * [Create Cluster](#create-cluster)
   * [Instantiate an inline workflow template](#instantiate-an-inline-workflow-template)
   * [Quickstart](#quickstart)
+  * [Submit Job](#submit-job)
 
 ## Before you begin
 
@@ -75,6 +76,23 @@ __Usage:__
 
 
 `node quickstart.js <PROJECT_ID> <REGION> <CLUSTER_NAME> <JOB_FILE_PATH>`
+
+
+-----
+
+
+
+
+### Submit Job
+
+View the [source code](https://github.com/googleapis/nodejs-dataproc/blob/master/samples/submitJob.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dataproc&page=editor&open_in_editor=samples/submitJob.js,samples/README.md)
+
+__Usage:__
+
+
+`node submitJob.js <PROJECT_ID> <REGION> <CLUSTER_NAME>`
 
 
 

@@ -4,7 +4,7 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/nodejs-dataproc.git",
-        "sha": "64fd55c3d42281f01dbabab5d823039dc5a26416"
+        "sha": "50ad66350821317417bb2859afd91cb3fb3a3ca6"
       }
     },
     {
