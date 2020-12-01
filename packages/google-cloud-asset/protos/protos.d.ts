@@ -3888,7 +3888,8 @@ export namespace google {
                     RESOURCE = 1,
                     IAM_POLICY = 2,
                     ORG_POLICY = 4,
-                    ACCESS_POLICY = 5
+                    ACCESS_POLICY = 5,
+                    OS_INVENTORY = 6
                 }
 
                 /** Properties of a TemporalAsset. */
@@ -4143,6 +4144,9 @@ export namespace google {
                     /** Asset servicePerimeter */
                     servicePerimeter?: (google.identity.accesscontextmanager.v1.IServicePerimeter|null);
 
+                    /** Asset osInventory */
+                    osInventory?: (google.cloud.osconfig.v1.IInventory|null);
+
                     /** Asset ancestors */
                     ancestors?: (string[]|null);
                 }
@@ -4182,6 +4186,9 @@ export namespace google {
 
                     /** Asset servicePerimeter. */
                     public servicePerimeter?: (google.identity.accesscontextmanager.v1.IServicePerimeter|null);
+
+                    /** Asset osInventory. */
+                    public osInventory?: (google.cloud.osconfig.v1.IInventory|null);
 
                     /** Asset ancestors. */
                     public ancestors: string[];
@@ -12430,6 +12437,1080 @@ export namespace google {
 
                         /**
                          * Converts this RestoreDefault to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+                }
+            }
+        }
+
+        /** Namespace osconfig. */
+        namespace osconfig {
+
+            /** Namespace v1. */
+            namespace v1 {
+
+                /** Properties of an Inventory. */
+                interface IInventory {
+
+                    /** Inventory osInfo */
+                    osInfo?: (google.cloud.osconfig.v1.Inventory.IOsInfo|null);
+
+                    /** Inventory items */
+                    items?: ({ [k: string]: google.cloud.osconfig.v1.Inventory.IItem }|null);
+                }
+
+                /** Represents an Inventory. */
+                class Inventory implements IInventory {
+
+                    /**
+                     * Constructs a new Inventory.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.osconfig.v1.IInventory);
+
+                    /** Inventory osInfo. */
+                    public osInfo?: (google.cloud.osconfig.v1.Inventory.IOsInfo|null);
+
+                    /** Inventory items. */
+                    public items: { [k: string]: google.cloud.osconfig.v1.Inventory.IItem };
+
+                    /**
+                     * Creates a new Inventory instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Inventory instance
+                     */
+                    public static create(properties?: google.cloud.osconfig.v1.IInventory): google.cloud.osconfig.v1.Inventory;
+
+                    /**
+                     * Encodes the specified Inventory message. Does not implicitly {@link google.cloud.osconfig.v1.Inventory.verify|verify} messages.
+                     * @param message Inventory message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.osconfig.v1.IInventory, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Inventory message, length delimited. Does not implicitly {@link google.cloud.osconfig.v1.Inventory.verify|verify} messages.
+                     * @param message Inventory message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.osconfig.v1.IInventory, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an Inventory message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Inventory
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.osconfig.v1.Inventory;
+
+                    /**
+                     * Decodes an Inventory message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Inventory
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.osconfig.v1.Inventory;
+
+                    /**
+                     * Verifies an Inventory message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an Inventory message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Inventory
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.osconfig.v1.Inventory;
+
+                    /**
+                     * Creates a plain object from an Inventory message. Also converts values to other types if specified.
+                     * @param message Inventory
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.osconfig.v1.Inventory, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Inventory to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                namespace Inventory {
+
+                    /** Properties of an OsInfo. */
+                    interface IOsInfo {
+
+                        /** OsInfo hostname */
+                        hostname?: (string|null);
+
+                        /** OsInfo longName */
+                        longName?: (string|null);
+
+                        /** OsInfo shortName */
+                        shortName?: (string|null);
+
+                        /** OsInfo version */
+                        version?: (string|null);
+
+                        /** OsInfo architecture */
+                        architecture?: (string|null);
+
+                        /** OsInfo kernelVersion */
+                        kernelVersion?: (string|null);
+
+                        /** OsInfo kernelRelease */
+                        kernelRelease?: (string|null);
+
+                        /** OsInfo osconfigAgentVersion */
+                        osconfigAgentVersion?: (string|null);
+                    }
+
+                    /** Represents an OsInfo. */
+                    class OsInfo implements IOsInfo {
+
+                        /**
+                         * Constructs a new OsInfo.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.osconfig.v1.Inventory.IOsInfo);
+
+                        /** OsInfo hostname. */
+                        public hostname: string;
+
+                        /** OsInfo longName. */
+                        public longName: string;
+
+                        /** OsInfo shortName. */
+                        public shortName: string;
+
+                        /** OsInfo version. */
+                        public version: string;
+
+                        /** OsInfo architecture. */
+                        public architecture: string;
+
+                        /** OsInfo kernelVersion. */
+                        public kernelVersion: string;
+
+                        /** OsInfo kernelRelease. */
+                        public kernelRelease: string;
+
+                        /** OsInfo osconfigAgentVersion. */
+                        public osconfigAgentVersion: string;
+
+                        /**
+                         * Creates a new OsInfo instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns OsInfo instance
+                         */
+                        public static create(properties?: google.cloud.osconfig.v1.Inventory.IOsInfo): google.cloud.osconfig.v1.Inventory.OsInfo;
+
+                        /**
+                         * Encodes the specified OsInfo message. Does not implicitly {@link google.cloud.osconfig.v1.Inventory.OsInfo.verify|verify} messages.
+                         * @param message OsInfo message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.osconfig.v1.Inventory.IOsInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified OsInfo message, length delimited. Does not implicitly {@link google.cloud.osconfig.v1.Inventory.OsInfo.verify|verify} messages.
+                         * @param message OsInfo message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.osconfig.v1.Inventory.IOsInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an OsInfo message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns OsInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.osconfig.v1.Inventory.OsInfo;
+
+                        /**
+                         * Decodes an OsInfo message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns OsInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.osconfig.v1.Inventory.OsInfo;
+
+                        /**
+                         * Verifies an OsInfo message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an OsInfo message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns OsInfo
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.osconfig.v1.Inventory.OsInfo;
+
+                        /**
+                         * Creates a plain object from an OsInfo message. Also converts values to other types if specified.
+                         * @param message OsInfo
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.osconfig.v1.Inventory.OsInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this OsInfo to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    /** Properties of an Item. */
+                    interface IItem {
+
+                        /** Item id */
+                        id?: (string|null);
+
+                        /** Item originType */
+                        originType?: (google.cloud.osconfig.v1.Inventory.Item.OriginType|keyof typeof google.cloud.osconfig.v1.Inventory.Item.OriginType|null);
+
+                        /** Item createTime */
+                        createTime?: (google.protobuf.ITimestamp|null);
+
+                        /** Item updateTime */
+                        updateTime?: (google.protobuf.ITimestamp|null);
+
+                        /** Item type */
+                        type?: (google.cloud.osconfig.v1.Inventory.Item.Type|keyof typeof google.cloud.osconfig.v1.Inventory.Item.Type|null);
+
+                        /** Item installedPackage */
+                        installedPackage?: (google.cloud.osconfig.v1.Inventory.ISoftwarePackage|null);
+
+                        /** Item availablePackage */
+                        availablePackage?: (google.cloud.osconfig.v1.Inventory.ISoftwarePackage|null);
+                    }
+
+                    /** Represents an Item. */
+                    class Item implements IItem {
+
+                        /**
+                         * Constructs a new Item.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.osconfig.v1.Inventory.IItem);
+
+                        /** Item id. */
+                        public id: string;
+
+                        /** Item originType. */
+                        public originType: (google.cloud.osconfig.v1.Inventory.Item.OriginType|keyof typeof google.cloud.osconfig.v1.Inventory.Item.OriginType);
+
+                        /** Item createTime. */
+                        public createTime?: (google.protobuf.ITimestamp|null);
+
+                        /** Item updateTime. */
+                        public updateTime?: (google.protobuf.ITimestamp|null);
+
+                        /** Item type. */
+                        public type: (google.cloud.osconfig.v1.Inventory.Item.Type|keyof typeof google.cloud.osconfig.v1.Inventory.Item.Type);
+
+                        /** Item installedPackage. */
+                        public installedPackage?: (google.cloud.osconfig.v1.Inventory.ISoftwarePackage|null);
+
+                        /** Item availablePackage. */
+                        public availablePackage?: (google.cloud.osconfig.v1.Inventory.ISoftwarePackage|null);
+
+                        /** Item details. */
+                        public details?: ("installedPackage"|"availablePackage");
+
+                        /**
+                         * Creates a new Item instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns Item instance
+                         */
+                        public static create(properties?: google.cloud.osconfig.v1.Inventory.IItem): google.cloud.osconfig.v1.Inventory.Item;
+
+                        /**
+                         * Encodes the specified Item message. Does not implicitly {@link google.cloud.osconfig.v1.Inventory.Item.verify|verify} messages.
+                         * @param message Item message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.osconfig.v1.Inventory.IItem, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified Item message, length delimited. Does not implicitly {@link google.cloud.osconfig.v1.Inventory.Item.verify|verify} messages.
+                         * @param message Item message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.osconfig.v1.Inventory.IItem, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an Item message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns Item
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.osconfig.v1.Inventory.Item;
+
+                        /**
+                         * Decodes an Item message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns Item
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.osconfig.v1.Inventory.Item;
+
+                        /**
+                         * Verifies an Item message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an Item message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns Item
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.osconfig.v1.Inventory.Item;
+
+                        /**
+                         * Creates a plain object from an Item message. Also converts values to other types if specified.
+                         * @param message Item
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.osconfig.v1.Inventory.Item, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this Item to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    namespace Item {
+
+                        /** OriginType enum. */
+                        enum OriginType {
+                            ORIGIN_TYPE_UNSPECIFIED = 0,
+                            INVENTORY_REPORT = 1
+                        }
+
+                        /** Type enum. */
+                        enum Type {
+                            TYPE_UNSPECIFIED = 0,
+                            INSTALLED_PACKAGE = 1,
+                            AVAILABLE_PACKAGE = 2
+                        }
+                    }
+
+                    /** Properties of a SoftwarePackage. */
+                    interface ISoftwarePackage {
+
+                        /** SoftwarePackage yumPackage */
+                        yumPackage?: (google.cloud.osconfig.v1.Inventory.IVersionedPackage|null);
+
+                        /** SoftwarePackage aptPackage */
+                        aptPackage?: (google.cloud.osconfig.v1.Inventory.IVersionedPackage|null);
+
+                        /** SoftwarePackage zypperPackage */
+                        zypperPackage?: (google.cloud.osconfig.v1.Inventory.IVersionedPackage|null);
+
+                        /** SoftwarePackage googetPackage */
+                        googetPackage?: (google.cloud.osconfig.v1.Inventory.IVersionedPackage|null);
+
+                        /** SoftwarePackage zypperPatch */
+                        zypperPatch?: (google.cloud.osconfig.v1.Inventory.IZypperPatch|null);
+
+                        /** SoftwarePackage wuaPackage */
+                        wuaPackage?: (google.cloud.osconfig.v1.Inventory.IWindowsUpdatePackage|null);
+
+                        /** SoftwarePackage qfePackage */
+                        qfePackage?: (google.cloud.osconfig.v1.Inventory.IWindowsQuickFixEngineeringPackage|null);
+
+                        /** SoftwarePackage cosPackage */
+                        cosPackage?: (google.cloud.osconfig.v1.Inventory.IVersionedPackage|null);
+                    }
+
+                    /** Represents a SoftwarePackage. */
+                    class SoftwarePackage implements ISoftwarePackage {
+
+                        /**
+                         * Constructs a new SoftwarePackage.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.osconfig.v1.Inventory.ISoftwarePackage);
+
+                        /** SoftwarePackage yumPackage. */
+                        public yumPackage?: (google.cloud.osconfig.v1.Inventory.IVersionedPackage|null);
+
+                        /** SoftwarePackage aptPackage. */
+                        public aptPackage?: (google.cloud.osconfig.v1.Inventory.IVersionedPackage|null);
+
+                        /** SoftwarePackage zypperPackage. */
+                        public zypperPackage?: (google.cloud.osconfig.v1.Inventory.IVersionedPackage|null);
+
+                        /** SoftwarePackage googetPackage. */
+                        public googetPackage?: (google.cloud.osconfig.v1.Inventory.IVersionedPackage|null);
+
+                        /** SoftwarePackage zypperPatch. */
+                        public zypperPatch?: (google.cloud.osconfig.v1.Inventory.IZypperPatch|null);
+
+                        /** SoftwarePackage wuaPackage. */
+                        public wuaPackage?: (google.cloud.osconfig.v1.Inventory.IWindowsUpdatePackage|null);
+
+                        /** SoftwarePackage qfePackage. */
+                        public qfePackage?: (google.cloud.osconfig.v1.Inventory.IWindowsQuickFixEngineeringPackage|null);
+
+                        /** SoftwarePackage cosPackage. */
+                        public cosPackage?: (google.cloud.osconfig.v1.Inventory.IVersionedPackage|null);
+
+                        /** SoftwarePackage details. */
+                        public details?: ("yumPackage"|"aptPackage"|"zypperPackage"|"googetPackage"|"zypperPatch"|"wuaPackage"|"qfePackage"|"cosPackage");
+
+                        /**
+                         * Creates a new SoftwarePackage instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns SoftwarePackage instance
+                         */
+                        public static create(properties?: google.cloud.osconfig.v1.Inventory.ISoftwarePackage): google.cloud.osconfig.v1.Inventory.SoftwarePackage;
+
+                        /**
+                         * Encodes the specified SoftwarePackage message. Does not implicitly {@link google.cloud.osconfig.v1.Inventory.SoftwarePackage.verify|verify} messages.
+                         * @param message SoftwarePackage message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.osconfig.v1.Inventory.ISoftwarePackage, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified SoftwarePackage message, length delimited. Does not implicitly {@link google.cloud.osconfig.v1.Inventory.SoftwarePackage.verify|verify} messages.
+                         * @param message SoftwarePackage message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.osconfig.v1.Inventory.ISoftwarePackage, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a SoftwarePackage message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns SoftwarePackage
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.osconfig.v1.Inventory.SoftwarePackage;
+
+                        /**
+                         * Decodes a SoftwarePackage message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns SoftwarePackage
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.osconfig.v1.Inventory.SoftwarePackage;
+
+                        /**
+                         * Verifies a SoftwarePackage message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a SoftwarePackage message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns SoftwarePackage
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.osconfig.v1.Inventory.SoftwarePackage;
+
+                        /**
+                         * Creates a plain object from a SoftwarePackage message. Also converts values to other types if specified.
+                         * @param message SoftwarePackage
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.osconfig.v1.Inventory.SoftwarePackage, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this SoftwarePackage to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    /** Properties of a VersionedPackage. */
+                    interface IVersionedPackage {
+
+                        /** VersionedPackage packageName */
+                        packageName?: (string|null);
+
+                        /** VersionedPackage architecture */
+                        architecture?: (string|null);
+
+                        /** VersionedPackage version */
+                        version?: (string|null);
+                    }
+
+                    /** Represents a VersionedPackage. */
+                    class VersionedPackage implements IVersionedPackage {
+
+                        /**
+                         * Constructs a new VersionedPackage.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.osconfig.v1.Inventory.IVersionedPackage);
+
+                        /** VersionedPackage packageName. */
+                        public packageName: string;
+
+                        /** VersionedPackage architecture. */
+                        public architecture: string;
+
+                        /** VersionedPackage version. */
+                        public version: string;
+
+                        /**
+                         * Creates a new VersionedPackage instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns VersionedPackage instance
+                         */
+                        public static create(properties?: google.cloud.osconfig.v1.Inventory.IVersionedPackage): google.cloud.osconfig.v1.Inventory.VersionedPackage;
+
+                        /**
+                         * Encodes the specified VersionedPackage message. Does not implicitly {@link google.cloud.osconfig.v1.Inventory.VersionedPackage.verify|verify} messages.
+                         * @param message VersionedPackage message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.osconfig.v1.Inventory.IVersionedPackage, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified VersionedPackage message, length delimited. Does not implicitly {@link google.cloud.osconfig.v1.Inventory.VersionedPackage.verify|verify} messages.
+                         * @param message VersionedPackage message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.osconfig.v1.Inventory.IVersionedPackage, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a VersionedPackage message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns VersionedPackage
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.osconfig.v1.Inventory.VersionedPackage;
+
+                        /**
+                         * Decodes a VersionedPackage message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns VersionedPackage
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.osconfig.v1.Inventory.VersionedPackage;
+
+                        /**
+                         * Verifies a VersionedPackage message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a VersionedPackage message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns VersionedPackage
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.osconfig.v1.Inventory.VersionedPackage;
+
+                        /**
+                         * Creates a plain object from a VersionedPackage message. Also converts values to other types if specified.
+                         * @param message VersionedPackage
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.osconfig.v1.Inventory.VersionedPackage, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this VersionedPackage to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    /** Properties of a WindowsUpdatePackage. */
+                    interface IWindowsUpdatePackage {
+
+                        /** WindowsUpdatePackage title */
+                        title?: (string|null);
+
+                        /** WindowsUpdatePackage description */
+                        description?: (string|null);
+
+                        /** WindowsUpdatePackage categories */
+                        categories?: (google.cloud.osconfig.v1.Inventory.WindowsUpdatePackage.IWindowsUpdateCategory[]|null);
+
+                        /** WindowsUpdatePackage kbArticleIds */
+                        kbArticleIds?: (string[]|null);
+
+                        /** WindowsUpdatePackage supportUrl */
+                        supportUrl?: (string|null);
+
+                        /** WindowsUpdatePackage moreInfoUrls */
+                        moreInfoUrls?: (string[]|null);
+
+                        /** WindowsUpdatePackage updateId */
+                        updateId?: (string|null);
+
+                        /** WindowsUpdatePackage revisionNumber */
+                        revisionNumber?: (number|null);
+
+                        /** WindowsUpdatePackage lastDeploymentChangeTime */
+                        lastDeploymentChangeTime?: (google.protobuf.ITimestamp|null);
+                    }
+
+                    /** Represents a WindowsUpdatePackage. */
+                    class WindowsUpdatePackage implements IWindowsUpdatePackage {
+
+                        /**
+                         * Constructs a new WindowsUpdatePackage.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.osconfig.v1.Inventory.IWindowsUpdatePackage);
+
+                        /** WindowsUpdatePackage title. */
+                        public title: string;
+
+                        /** WindowsUpdatePackage description. */
+                        public description: string;
+
+                        /** WindowsUpdatePackage categories. */
+                        public categories: google.cloud.osconfig.v1.Inventory.WindowsUpdatePackage.IWindowsUpdateCategory[];
+
+                        /** WindowsUpdatePackage kbArticleIds. */
+                        public kbArticleIds: string[];
+
+                        /** WindowsUpdatePackage supportUrl. */
+                        public supportUrl: string;
+
+                        /** WindowsUpdatePackage moreInfoUrls. */
+                        public moreInfoUrls: string[];
+
+                        /** WindowsUpdatePackage updateId. */
+                        public updateId: string;
+
+                        /** WindowsUpdatePackage revisionNumber. */
+                        public revisionNumber: number;
+
+                        /** WindowsUpdatePackage lastDeploymentChangeTime. */
+                        public lastDeploymentChangeTime?: (google.protobuf.ITimestamp|null);
+
+                        /**
+                         * Creates a new WindowsUpdatePackage instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns WindowsUpdatePackage instance
+                         */
+                        public static create(properties?: google.cloud.osconfig.v1.Inventory.IWindowsUpdatePackage): google.cloud.osconfig.v1.Inventory.WindowsUpdatePackage;
+
+                        /**
+                         * Encodes the specified WindowsUpdatePackage message. Does not implicitly {@link google.cloud.osconfig.v1.Inventory.WindowsUpdatePackage.verify|verify} messages.
+                         * @param message WindowsUpdatePackage message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.osconfig.v1.Inventory.IWindowsUpdatePackage, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified WindowsUpdatePackage message, length delimited. Does not implicitly {@link google.cloud.osconfig.v1.Inventory.WindowsUpdatePackage.verify|verify} messages.
+                         * @param message WindowsUpdatePackage message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.osconfig.v1.Inventory.IWindowsUpdatePackage, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a WindowsUpdatePackage message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns WindowsUpdatePackage
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.osconfig.v1.Inventory.WindowsUpdatePackage;
+
+                        /**
+                         * Decodes a WindowsUpdatePackage message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns WindowsUpdatePackage
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.osconfig.v1.Inventory.WindowsUpdatePackage;
+
+                        /**
+                         * Verifies a WindowsUpdatePackage message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a WindowsUpdatePackage message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns WindowsUpdatePackage
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.osconfig.v1.Inventory.WindowsUpdatePackage;
+
+                        /**
+                         * Creates a plain object from a WindowsUpdatePackage message. Also converts values to other types if specified.
+                         * @param message WindowsUpdatePackage
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.osconfig.v1.Inventory.WindowsUpdatePackage, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this WindowsUpdatePackage to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    namespace WindowsUpdatePackage {
+
+                        /** Properties of a WindowsUpdateCategory. */
+                        interface IWindowsUpdateCategory {
+
+                            /** WindowsUpdateCategory id */
+                            id?: (string|null);
+
+                            /** WindowsUpdateCategory name */
+                            name?: (string|null);
+                        }
+
+                        /** Represents a WindowsUpdateCategory. */
+                        class WindowsUpdateCategory implements IWindowsUpdateCategory {
+
+                            /**
+                             * Constructs a new WindowsUpdateCategory.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.osconfig.v1.Inventory.WindowsUpdatePackage.IWindowsUpdateCategory);
+
+                            /** WindowsUpdateCategory id. */
+                            public id: string;
+
+                            /** WindowsUpdateCategory name. */
+                            public name: string;
+
+                            /**
+                             * Creates a new WindowsUpdateCategory instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns WindowsUpdateCategory instance
+                             */
+                            public static create(properties?: google.cloud.osconfig.v1.Inventory.WindowsUpdatePackage.IWindowsUpdateCategory): google.cloud.osconfig.v1.Inventory.WindowsUpdatePackage.WindowsUpdateCategory;
+
+                            /**
+                             * Encodes the specified WindowsUpdateCategory message. Does not implicitly {@link google.cloud.osconfig.v1.Inventory.WindowsUpdatePackage.WindowsUpdateCategory.verify|verify} messages.
+                             * @param message WindowsUpdateCategory message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.osconfig.v1.Inventory.WindowsUpdatePackage.IWindowsUpdateCategory, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified WindowsUpdateCategory message, length delimited. Does not implicitly {@link google.cloud.osconfig.v1.Inventory.WindowsUpdatePackage.WindowsUpdateCategory.verify|verify} messages.
+                             * @param message WindowsUpdateCategory message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.osconfig.v1.Inventory.WindowsUpdatePackage.IWindowsUpdateCategory, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a WindowsUpdateCategory message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns WindowsUpdateCategory
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.osconfig.v1.Inventory.WindowsUpdatePackage.WindowsUpdateCategory;
+
+                            /**
+                             * Decodes a WindowsUpdateCategory message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns WindowsUpdateCategory
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.osconfig.v1.Inventory.WindowsUpdatePackage.WindowsUpdateCategory;
+
+                            /**
+                             * Verifies a WindowsUpdateCategory message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a WindowsUpdateCategory message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns WindowsUpdateCategory
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.osconfig.v1.Inventory.WindowsUpdatePackage.WindowsUpdateCategory;
+
+                            /**
+                             * Creates a plain object from a WindowsUpdateCategory message. Also converts values to other types if specified.
+                             * @param message WindowsUpdateCategory
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.osconfig.v1.Inventory.WindowsUpdatePackage.WindowsUpdateCategory, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this WindowsUpdateCategory to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+                        }
+                    }
+
+                    /** Properties of a ZypperPatch. */
+                    interface IZypperPatch {
+
+                        /** ZypperPatch patchName */
+                        patchName?: (string|null);
+
+                        /** ZypperPatch category */
+                        category?: (string|null);
+
+                        /** ZypperPatch severity */
+                        severity?: (string|null);
+
+                        /** ZypperPatch summary */
+                        summary?: (string|null);
+                    }
+
+                    /** Represents a ZypperPatch. */
+                    class ZypperPatch implements IZypperPatch {
+
+                        /**
+                         * Constructs a new ZypperPatch.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.osconfig.v1.Inventory.IZypperPatch);
+
+                        /** ZypperPatch patchName. */
+                        public patchName: string;
+
+                        /** ZypperPatch category. */
+                        public category: string;
+
+                        /** ZypperPatch severity. */
+                        public severity: string;
+
+                        /** ZypperPatch summary. */
+                        public summary: string;
+
+                        /**
+                         * Creates a new ZypperPatch instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ZypperPatch instance
+                         */
+                        public static create(properties?: google.cloud.osconfig.v1.Inventory.IZypperPatch): google.cloud.osconfig.v1.Inventory.ZypperPatch;
+
+                        /**
+                         * Encodes the specified ZypperPatch message. Does not implicitly {@link google.cloud.osconfig.v1.Inventory.ZypperPatch.verify|verify} messages.
+                         * @param message ZypperPatch message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.osconfig.v1.Inventory.IZypperPatch, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ZypperPatch message, length delimited. Does not implicitly {@link google.cloud.osconfig.v1.Inventory.ZypperPatch.verify|verify} messages.
+                         * @param message ZypperPatch message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.osconfig.v1.Inventory.IZypperPatch, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ZypperPatch message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ZypperPatch
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.osconfig.v1.Inventory.ZypperPatch;
+
+                        /**
+                         * Decodes a ZypperPatch message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ZypperPatch
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.osconfig.v1.Inventory.ZypperPatch;
+
+                        /**
+                         * Verifies a ZypperPatch message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ZypperPatch message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ZypperPatch
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.osconfig.v1.Inventory.ZypperPatch;
+
+                        /**
+                         * Creates a plain object from a ZypperPatch message. Also converts values to other types if specified.
+                         * @param message ZypperPatch
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.osconfig.v1.Inventory.ZypperPatch, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ZypperPatch to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    /** Properties of a WindowsQuickFixEngineeringPackage. */
+                    interface IWindowsQuickFixEngineeringPackage {
+
+                        /** WindowsQuickFixEngineeringPackage caption */
+                        caption?: (string|null);
+
+                        /** WindowsQuickFixEngineeringPackage description */
+                        description?: (string|null);
+
+                        /** WindowsQuickFixEngineeringPackage hotFixId */
+                        hotFixId?: (string|null);
+
+                        /** WindowsQuickFixEngineeringPackage installTime */
+                        installTime?: (google.protobuf.ITimestamp|null);
+                    }
+
+                    /** Represents a WindowsQuickFixEngineeringPackage. */
+                    class WindowsQuickFixEngineeringPackage implements IWindowsQuickFixEngineeringPackage {
+
+                        /**
+                         * Constructs a new WindowsQuickFixEngineeringPackage.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.osconfig.v1.Inventory.IWindowsQuickFixEngineeringPackage);
+
+                        /** WindowsQuickFixEngineeringPackage caption. */
+                        public caption: string;
+
+                        /** WindowsQuickFixEngineeringPackage description. */
+                        public description: string;
+
+                        /** WindowsQuickFixEngineeringPackage hotFixId. */
+                        public hotFixId: string;
+
+                        /** WindowsQuickFixEngineeringPackage installTime. */
+                        public installTime?: (google.protobuf.ITimestamp|null);
+
+                        /**
+                         * Creates a new WindowsQuickFixEngineeringPackage instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns WindowsQuickFixEngineeringPackage instance
+                         */
+                        public static create(properties?: google.cloud.osconfig.v1.Inventory.IWindowsQuickFixEngineeringPackage): google.cloud.osconfig.v1.Inventory.WindowsQuickFixEngineeringPackage;
+
+                        /**
+                         * Encodes the specified WindowsQuickFixEngineeringPackage message. Does not implicitly {@link google.cloud.osconfig.v1.Inventory.WindowsQuickFixEngineeringPackage.verify|verify} messages.
+                         * @param message WindowsQuickFixEngineeringPackage message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.osconfig.v1.Inventory.IWindowsQuickFixEngineeringPackage, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified WindowsQuickFixEngineeringPackage message, length delimited. Does not implicitly {@link google.cloud.osconfig.v1.Inventory.WindowsQuickFixEngineeringPackage.verify|verify} messages.
+                         * @param message WindowsQuickFixEngineeringPackage message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.osconfig.v1.Inventory.IWindowsQuickFixEngineeringPackage, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a WindowsQuickFixEngineeringPackage message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns WindowsQuickFixEngineeringPackage
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.osconfig.v1.Inventory.WindowsQuickFixEngineeringPackage;
+
+                        /**
+                         * Decodes a WindowsQuickFixEngineeringPackage message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns WindowsQuickFixEngineeringPackage
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.osconfig.v1.Inventory.WindowsQuickFixEngineeringPackage;
+
+                        /**
+                         * Verifies a WindowsQuickFixEngineeringPackage message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a WindowsQuickFixEngineeringPackage message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns WindowsQuickFixEngineeringPackage
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.osconfig.v1.Inventory.WindowsQuickFixEngineeringPackage;
+
+                        /**
+                         * Creates a plain object from a WindowsQuickFixEngineeringPackage message. Also converts values to other types if specified.
+                         * @param message WindowsQuickFixEngineeringPackage
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.osconfig.v1.Inventory.WindowsQuickFixEngineeringPackage, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this WindowsQuickFixEngineeringPackage to JSON.
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };

@@ -971,7 +971,8 @@
                         "RESOURCE": 1,
                         "IAM_POLICY": 2,
                         "ORG_POLICY": 4,
-                        "ACCESS_POLICY": 5
+                        "ACCESS_POLICY": 5,
+                        "OS_INVENTORY": 6
                       }
                     },
                     "TemporalAsset": {
@@ -1072,6 +1073,10 @@
                         "servicePerimeter": {
                           "type": "google.identity.accesscontextmanager.v1.ServicePerimeter",
                           "id": 9
+                        },
+                        "osInventory": {
+                          "type": "google.cloud.osconfig.v1.Inventory",
+                          "id": 12
                         },
                         "ancestors": {
                           "rule": "repeated",
@@ -3003,6 +3008,292 @@
                         },
                         "RestoreDefault": {
                           "fields": {}
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "osconfig": {
+              "nested": {
+                "v1": {
+                  "options": {
+                    "csharp_namespace": "Google.Cloud.OsConfig.V1",
+                    "go_package": "google.golang.org/genproto/googleapis/cloud/osconfig/v1;osconfig",
+                    "java_multiple_files": true,
+                    "java_outer_classname": "Inventories",
+                    "java_package": "com.google.cloud.osconfig.v1",
+                    "php_namespace": "Google\\Cloud\\OsConfig\\V1",
+                    "ruby_package": "Google::Cloud::OsConfig::V1"
+                  },
+                  "nested": {
+                    "Inventory": {
+                      "fields": {
+                        "osInfo": {
+                          "type": "OsInfo",
+                          "id": 1
+                        },
+                        "items": {
+                          "keyType": "string",
+                          "type": "Item",
+                          "id": 2
+                        }
+                      },
+                      "nested": {
+                        "OsInfo": {
+                          "fields": {
+                            "hostname": {
+                              "type": "string",
+                              "id": 9
+                            },
+                            "longName": {
+                              "type": "string",
+                              "id": 2
+                            },
+                            "shortName": {
+                              "type": "string",
+                              "id": 3
+                            },
+                            "version": {
+                              "type": "string",
+                              "id": 4
+                            },
+                            "architecture": {
+                              "type": "string",
+                              "id": 5
+                            },
+                            "kernelVersion": {
+                              "type": "string",
+                              "id": 6
+                            },
+                            "kernelRelease": {
+                              "type": "string",
+                              "id": 7
+                            },
+                            "osconfigAgentVersion": {
+                              "type": "string",
+                              "id": 8
+                            }
+                          }
+                        },
+                        "Item": {
+                          "oneofs": {
+                            "details": {
+                              "oneof": [
+                                "installedPackage",
+                                "availablePackage"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "id": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "originType": {
+                              "type": "OriginType",
+                              "id": 2
+                            },
+                            "createTime": {
+                              "type": "google.protobuf.Timestamp",
+                              "id": 8
+                            },
+                            "updateTime": {
+                              "type": "google.protobuf.Timestamp",
+                              "id": 9
+                            },
+                            "type": {
+                              "type": "Type",
+                              "id": 5
+                            },
+                            "installedPackage": {
+                              "type": "SoftwarePackage",
+                              "id": 6
+                            },
+                            "availablePackage": {
+                              "type": "SoftwarePackage",
+                              "id": 7
+                            }
+                          },
+                          "nested": {
+                            "OriginType": {
+                              "values": {
+                                "ORIGIN_TYPE_UNSPECIFIED": 0,
+                                "INVENTORY_REPORT": 1
+                              }
+                            },
+                            "Type": {
+                              "values": {
+                                "TYPE_UNSPECIFIED": 0,
+                                "INSTALLED_PACKAGE": 1,
+                                "AVAILABLE_PACKAGE": 2
+                              }
+                            }
+                          }
+                        },
+                        "SoftwarePackage": {
+                          "oneofs": {
+                            "details": {
+                              "oneof": [
+                                "yumPackage",
+                                "aptPackage",
+                                "zypperPackage",
+                                "googetPackage",
+                                "zypperPatch",
+                                "wuaPackage",
+                                "qfePackage",
+                                "cosPackage"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "yumPackage": {
+                              "type": "VersionedPackage",
+                              "id": 1
+                            },
+                            "aptPackage": {
+                              "type": "VersionedPackage",
+                              "id": 2
+                            },
+                            "zypperPackage": {
+                              "type": "VersionedPackage",
+                              "id": 3
+                            },
+                            "googetPackage": {
+                              "type": "VersionedPackage",
+                              "id": 4
+                            },
+                            "zypperPatch": {
+                              "type": "ZypperPatch",
+                              "id": 5
+                            },
+                            "wuaPackage": {
+                              "type": "WindowsUpdatePackage",
+                              "id": 6
+                            },
+                            "qfePackage": {
+                              "type": "WindowsQuickFixEngineeringPackage",
+                              "id": 7
+                            },
+                            "cosPackage": {
+                              "type": "VersionedPackage",
+                              "id": 8
+                            }
+                          }
+                        },
+                        "VersionedPackage": {
+                          "fields": {
+                            "packageName": {
+                              "type": "string",
+                              "id": 4
+                            },
+                            "architecture": {
+                              "type": "string",
+                              "id": 2
+                            },
+                            "version": {
+                              "type": "string",
+                              "id": 3
+                            }
+                          }
+                        },
+                        "WindowsUpdatePackage": {
+                          "fields": {
+                            "title": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "description": {
+                              "type": "string",
+                              "id": 2
+                            },
+                            "categories": {
+                              "rule": "repeated",
+                              "type": "WindowsUpdateCategory",
+                              "id": 3
+                            },
+                            "kbArticleIds": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 4
+                            },
+                            "supportUrl": {
+                              "type": "string",
+                              "id": 11
+                            },
+                            "moreInfoUrls": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 5
+                            },
+                            "updateId": {
+                              "type": "string",
+                              "id": 6
+                            },
+                            "revisionNumber": {
+                              "type": "int32",
+                              "id": 7
+                            },
+                            "lastDeploymentChangeTime": {
+                              "type": "google.protobuf.Timestamp",
+                              "id": 10
+                            }
+                          },
+                          "nested": {
+                            "WindowsUpdateCategory": {
+                              "fields": {
+                                "id": {
+                                  "type": "string",
+                                  "id": 1
+                                },
+                                "name": {
+                                  "type": "string",
+                                  "id": 2
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "ZypperPatch": {
+                          "fields": {
+                            "patchName": {
+                              "type": "string",
+                              "id": 5
+                            },
+                            "category": {
+                              "type": "string",
+                              "id": 2
+                            },
+                            "severity": {
+                              "type": "string",
+                              "id": 3
+                            },
+                            "summary": {
+                              "type": "string",
+                              "id": 4
+                            }
+                          }
+                        },
+                        "WindowsQuickFixEngineeringPackage": {
+                          "fields": {
+                            "caption": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "description": {
+                              "type": "string",
+                              "id": 2
+                            },
+                            "hotFixId": {
+                              "type": "string",
+                              "id": 3
+                            },
+                            "installTime": {
+                              "type": "google.protobuf.Timestamp",
+                              "id": 5
+                            }
+                          }
                         }
                       }
                     }
