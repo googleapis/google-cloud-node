@@ -1280,6 +1280,15 @@ class Datastore extends DatastoreRequest {
    * };
    *
    * const geoPoint = datastore.geoPoint(coordinates);
+   *
+   * //-
+   * // List all companies that are located at 40.123 latitude
+   * // and -74.0447 longitude.
+   * //-
+   * const query = datastore.createQuery('Company');
+   * const companyQuery = query
+   *   .filter('geoPoint.latitude', datastore.double(40.123))
+   *   .filter('geoPoint.longitude', datastore.double(-74.0447));
    */
   static geoPoint(coordinates: entity.Coordinates) {
     return new entity.GeoPoint(coordinates);
