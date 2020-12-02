@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/PACKAGE NAME?activeTab=versions
 
+### [3.0.6](https://www.github.com/googleapis/nodejs-dlp/compare/v3.0.5...v3.0.6) (2020-11-25)
+
+
+### Bug Fixes
+
+* **window:** check for fetch on window ([8d9d49f](https://www.github.com/googleapis/nodejs-dlp/commit/8d9d49f9d9fbfec291ca0c3cf1bef64870cc8e3d))
+
 ### [3.0.5](https://www.github.com/googleapis/nodejs-dlp/compare/v3.0.4...v3.0.5) (2020-11-07)
 
 
