@@ -1,5 +1,13 @@
 # Changelog
 
+### [1.2.1](https://www.github.com/googleapis/nodejs-memcache/compare/v1.2.0...v1.2.1) (2020-11-25)
+
+
+### Bug Fixes
+
+* **browser:** check for fetch on window ([8d54934](https://www.github.com/googleapis/nodejs-memcache/commit/8d54934fcd7d4ef97f6adbbff383414bd0c23c58))
+* do not modify options object, use defaultScopes ([#76](https://www.github.com/googleapis/nodejs-memcache/issues/76)) ([b48f1ef](https://www.github.com/googleapis/nodejs-memcache/commit/b48f1efd8df276d542cead808f5b602fabdc047b))
+
 ## [1.2.0](https://www.github.com/googleapis/nodejs-memcache/compare/v1.1.0...v1.2.0) (2020-06-28)
 
 
