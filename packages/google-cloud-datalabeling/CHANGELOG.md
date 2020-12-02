@@ -4,6 +4,14 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/datalabeling?activeTab=versions
 
+### [2.1.2](https://www.github.com/googleapis/nodejs-datalabeling/compare/v2.1.1...v2.1.2) (2020-11-25)
+
+
+### Bug Fixes
+
+* **browser:** check for fetch on window ([#236](https://www.github.com/googleapis/nodejs-datalabeling/issues/236)) ([a861cd0](https://www.github.com/googleapis/nodejs-datalabeling/commit/a861cd0671cb04baf0f2b40f376fcb974e4c7159))
+* do not modify options object, use defaultScopes ([#231](https://www.github.com/googleapis/nodejs-datalabeling/issues/231)) ([6bcb17b](https://www.github.com/googleapis/nodejs-datalabeling/commit/6bcb17b6cc40cbc2448e8722e8918324ae2261e4))
+
 ### [2.1.1](https://www.github.com/googleapis/nodejs-datalabeling/compare/v2.1.0...v2.1.1) (2020-07-10)
 
 
