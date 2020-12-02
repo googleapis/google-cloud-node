@@ -4,6 +4,14 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/datastore?activeTab=versions
 
+### [6.3.1](https://www.github.com/googleapis/nodejs-datastore/compare/v6.3.0...v6.3.1) (2020-11-25)
+
+
+### Bug Fixes
+
+* **browser:** check for fetch on window ([#768](https://www.github.com/googleapis/nodejs-datastore/issues/768)) ([282dc99](https://www.github.com/googleapis/nodejs-datastore/commit/282dc99bd78ff086f57fca1a22ce530d44784dd7))
+* storing an empty Buffer ([#767](https://www.github.com/googleapis/nodejs-datastore/issues/767)) ([cf88927](https://www.github.com/googleapis/nodejs-datastore/commit/cf88927998ada76614fbe500c6e59e0d81c1b78b))
+
 ## [6.3.0](https://www.github.com/googleapis/nodejs-datastore/compare/v6.2.0...v6.3.0) (2020-11-09)
 
 
