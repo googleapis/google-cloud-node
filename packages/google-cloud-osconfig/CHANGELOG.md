@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.3.1](https://www.github.com/googleapis/nodejs-os-config/compare/v1.3.0...v1.3.1) (2020-11-25)
+
+
+### Bug Fixes
+
+* check for fetch on window ([#69](https://www.github.com/googleapis/nodejs-os-config/issues/69)) ([02a5374](https://www.github.com/googleapis/nodejs-os-config/commit/02a53747e1b52d4a5d05714d8868ceee2c9eabb1))
+
 ## [1.3.0](https://www.github.com/googleapis/nodejs-os-config/compare/v1.2.3...v1.3.0) (2020-11-12)
 
 
