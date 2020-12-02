@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/monitoring?activeTab=versions
 
+### [2.1.4](https://www.github.com/googleapis/nodejs-monitoring/compare/v2.1.3...v2.1.4) (2020-11-25)
+
+
+### Bug Fixes
+
+* **browser:** check for fetch on window ([#501](https://www.github.com/googleapis/nodejs-monitoring/issues/501)) ([a923606](https://www.github.com/googleapis/nodejs-monitoring/commit/a9236060fdd4516e5f3fa31a5bf76895ad8bf6c1))
+
 ### [2.1.3](https://www.github.com/googleapis/nodejs-monitoring/compare/v2.1.2...v2.1.3) (2020-11-07)
 
 
