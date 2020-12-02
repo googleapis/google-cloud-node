@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/web-risk?activeTab=versions
 
+### [2.0.3](https://www.github.com/googleapis/nodejs-web-risk/compare/v2.0.2...v2.0.3) (2020-11-25)
+
+
+### Bug Fixes
+
+* **browser:** check for fetch on window ([#214](https://www.github.com/googleapis/nodejs-web-risk/issues/214)) ([db8ef52](https://www.github.com/googleapis/nodejs-web-risk/commit/db8ef52b1cd557e2d334c718265d5abf47946f13))
+
 ### [2.0.2](https://www.github.com/googleapis/nodejs-web-risk/compare/v2.0.1...v2.0.2) (2020-11-09)
 
 
