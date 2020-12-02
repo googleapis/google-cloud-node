@@ -4,6 +4,14 @@
 
 [1]: https://www.npmjs.com/package/nodejs-redis?activeTab=versions
 
+### [2.1.2](https://www.github.com/googleapis/nodejs-redis/compare/v2.1.1...v2.1.2) (2020-11-25)
+
+
+### Bug Fixes
+
+* **browser:** check for fetch on window ([e37bbaf](https://www.github.com/googleapis/nodejs-redis/commit/e37bbaf378de803390ad86dfe038c55b28cdd5ed))
+* do not modify options object, use defaultScopes ([#447](https://www.github.com/googleapis/nodejs-redis/issues/447)) ([7813bb1](https://www.github.com/googleapis/nodejs-redis/commit/7813bb10e01b18de8fb390f2d0fcdb22a728002b))
+
 ### [2.1.1](https://www.github.com/googleapis/nodejs-redis/compare/v2.1.0...v2.1.1) (2020-07-06)
 
 
