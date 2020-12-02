@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/security-center?activeTab=versions
 
+### [5.1.3](https://www.github.com/googleapis/nodejs-security-center/compare/v5.1.2...v5.1.3) (2020-11-25)
+
+
+### Bug Fixes
+
+* check for fetch on window ([#344](https://www.github.com/googleapis/nodejs-security-center/issues/344)) ([85c6d55](https://www.github.com/googleapis/nodejs-security-center/commit/85c6d55fa245fb2508423d2f0ba94f2e1c25c53f))
+
 ### [5.1.2](https://www.github.com/googleapis/nodejs-security-center/compare/v5.1.1...v5.1.2) (2020-11-07)
 
 
