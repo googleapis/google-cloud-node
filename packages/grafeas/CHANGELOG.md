@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/grafeas?activeTab=versions
 
+### [3.3.3](https://www.github.com/googleapis/nodejs-grafeas/compare/v3.3.2...v3.3.3) (2020-11-25)
+
+
+### Bug Fixes
+
+* **browser:** check for fetch on window ([#217](https://www.github.com/googleapis/nodejs-grafeas/issues/217)) ([9fe7715](https://www.github.com/googleapis/nodejs-grafeas/commit/9fe77152c54eb74f40cbfc9ba42f1a497a1642fb))
+
 ### [3.3.2](https://www.github.com/googleapis/nodejs-grafeas/compare/v3.3.1...v3.3.2) (2020-11-07)
 
 
