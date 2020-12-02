@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.1.2](https://www.github.com/googleapis/nodejs-functions/compare/v1.1.1...v1.1.2) (2020-11-25)
+
+
+### Bug Fixes
+
+* **browser:** check for fetch on window ([0aa94fa](https://www.github.com/googleapis/nodejs-functions/commit/0aa94fa222e4ef0bb5a09d4aa3fa957bd8cc80cf))
+
 ### [1.1.1](https://www.github.com/googleapis/nodejs-functions/compare/v1.1.0...v1.1.1) (2020-11-06)
 
 
