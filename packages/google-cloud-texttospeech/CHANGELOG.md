@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/text-to-speech?activeTab=versions
 
+### [3.1.3](https://www.github.com/googleapis/nodejs-text-to-speech/compare/v3.1.2...v3.1.3) (2020-11-25)
+
+
+### Bug Fixes
+
+* **browser:** check for fetch on window ([a0925b3](https://www.github.com/googleapis/nodejs-text-to-speech/commit/a0925b35d4e39587388cfe05685891d523f1bc49))
+
 ### [3.1.2](https://www.github.com/googleapis/nodejs-text-to-speech/compare/v3.1.1...v3.1.2) (2020-11-06)
 
 
