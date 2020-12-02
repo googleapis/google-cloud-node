@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/video-intelligence?activeTab=versions
 
+### [3.1.2](https://www.github.com/googleapis/nodejs-video-intelligence/compare/v3.1.1...v3.1.2) (2020-11-25)
+
+
+### Bug Fixes
+
+* **browser:** check for fetch on window ([#501](https://www.github.com/googleapis/nodejs-video-intelligence/issues/501)) ([2d3aa08](https://www.github.com/googleapis/nodejs-video-intelligence/commit/2d3aa086d02e3ee0f238c4d81daeefbe2b355c11))
+
 ### [3.1.1](https://www.github.com/googleapis/nodejs-video-intelligence/compare/v3.1.0...v3.1.1) (2020-11-07)
 
 
