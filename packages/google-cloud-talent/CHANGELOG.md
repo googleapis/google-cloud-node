@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/talent?activeTab=versions
 
+### [3.0.2](https://www.github.com/googleapis/nodejs-talent/compare/v3.0.1...v3.0.2) (2020-11-25)
+
+
+### Bug Fixes
+
+* **browser:** check for fetch on window ([#274](https://www.github.com/googleapis/nodejs-talent/issues/274)) ([a25c71f](https://www.github.com/googleapis/nodejs-talent/commit/a25c71ff62a46138e088f01d5b9cd8b165588bbd))
+
 ### [3.0.1](https://www.github.com/googleapis/nodejs-talent/compare/v3.0.0...v3.0.1) (2020-11-07)
 
 
