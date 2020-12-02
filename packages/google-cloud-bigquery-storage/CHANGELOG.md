@@ -1,5 +1,12 @@
 # Changelog
 
+### [2.2.3](https://www.github.com/googleapis/nodejs-bigquery-storage/compare/v2.2.2...v2.2.3) (2020-11-25)
+
+
+### Bug Fixes
+
+* **browser:** check for fetch on window ([d837dfc](https://www.github.com/googleapis/nodejs-bigquery-storage/commit/d837dfc841cf3e77fbc2482dbabb149e2fc4f76a))
+
 ### [2.2.2](https://www.github.com/googleapis/nodejs-bigquery-storage/compare/v2.2.1...v2.2.2) (2020-11-07)
 
 
