@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.2.3](https://www.github.com/googleapis/nodejs-analytics-admin/compare/v1.2.2...v1.2.3) (2020-11-25)
+
+
+### Bug Fixes
+
+* do not modify options object, use defaultScopes docs: regenerated jsdoc comments with examples build: use gapic-generator-typescript v1.2.1 ([#55](https://www.github.com/googleapis/nodejs-analytics-admin/issues/55)) ([126618a](https://www.github.com/googleapis/nodejs-analytics-admin/commit/126618a4a1fb1c17be5a6a3e3a4b96cdc844b361))
+
 ### [1.2.2](https://www.github.com/googleapis/nodejs-analytics-admin/compare/v1.2.1...v1.2.2) (2020-11-11)
 
 
