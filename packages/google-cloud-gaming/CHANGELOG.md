@@ -1,5 +1,12 @@
 # Changelog
 
+### [2.1.2](https://www.github.com/googleapis/nodejs-game-servers/compare/v2.1.1...v2.1.2) (2020-11-25)
+
+
+### Bug Fixes
+
+* **browser:** check for fetch on window ([#136](https://www.github.com/googleapis/nodejs-game-servers/issues/136)) ([3c28ff7](https://www.github.com/googleapis/nodejs-game-servers/commit/3c28ff7c610caf58df0dfbd4b3acd2954ae7f019))
+
 ### [2.1.1](https://www.github.com/googleapis/nodejs-game-servers/compare/v2.1.0...v2.1.1) (2020-11-07)
 
 
