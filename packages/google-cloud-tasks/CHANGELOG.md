@@ -4,6 +4,14 @@
 
 [1]: https://www.npmjs.com/package/nodejs-tasks?activeTab=versions
 
+### [2.1.3](https://www.github.com/googleapis/nodejs-tasks/compare/v2.1.2...v2.1.3) (2020-11-25)
+
+
+### Bug Fixes
+
+* **browser:** check for fetch on window ([6abe685](https://www.github.com/googleapis/nodejs-tasks/commit/6abe6853909b5c897b80854eaa5a7f8b1da26e0b))
+* do not modify options object, use defaultScopes ([#484](https://www.github.com/googleapis/nodejs-tasks/issues/484)) ([039becb](https://www.github.com/googleapis/nodejs-tasks/commit/039becb02c12ee0911d536edcfb796664c4b6525))
+
 ### [2.1.2](https://www.github.com/googleapis/nodejs-tasks/compare/v2.1.1...v2.1.2) (2020-10-27)
 
 
