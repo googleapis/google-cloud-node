@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/speech?activeTab=versions
 
+### [4.1.5](https://www.github.com/googleapis/nodejs-speech/compare/v4.1.4...v4.1.5) (2020-12-02)
+
+
+### Bug Fixes
+
+* **browser:** check for fetch on window ([6378dc1](https://www.github.com/googleapis/nodejs-speech/commit/6378dc193da2f792645ed0ec221c9a3495264486))
+
 ### [4.1.4](https://www.github.com/googleapis/nodejs-speech/compare/v4.1.3...v4.1.4) (2020-11-06)
 
 
