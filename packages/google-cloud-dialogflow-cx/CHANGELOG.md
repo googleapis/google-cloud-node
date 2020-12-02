@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.1.0](https://www.github.com/googleapis/nodejs-dialogflow-cx/compare/v2.0.0...v2.1.0) (2020-11-25)
+
+
+### Features
+
+* add back v3beta1 API surface ([#39](https://www.github.com/googleapis/nodejs-dialogflow-cx/issues/39)) ([36ba8fa](https://www.github.com/googleapis/nodejs-dialogflow-cx/commit/36ba8fa857ae34a21ce0710986689667f909349f))
+
 ## [2.0.0](https://www.github.com/googleapis/nodejs-dialogflow-cx/compare/v1.2.0...v2.0.0) (2020-11-19)
 
 
