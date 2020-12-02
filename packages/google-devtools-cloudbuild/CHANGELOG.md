@@ -1,5 +1,12 @@
 # Changelog
 
+### [2.0.6](https://www.github.com/googleapis/nodejs-cloudbuild/compare/v2.0.5...v2.0.6) (2020-11-25)
+
+
+### Bug Fixes
+
+* check for fetch on window ([#185](https://www.github.com/googleapis/nodejs-cloudbuild/issues/185)) ([115de71](https://www.github.com/googleapis/nodejs-cloudbuild/commit/115de7141262c119113759aee5ddc141d129b55d))
+
 ### [2.0.5](https://www.github.com/googleapis/nodejs-cloudbuild/compare/v2.0.4...v2.0.5) (2020-11-06)
 
 
