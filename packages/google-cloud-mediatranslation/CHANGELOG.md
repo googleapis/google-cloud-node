@@ -1,5 +1,12 @@
 # Changelog
 
+### [2.2.2](https://www.github.com/googleapis/nodejs-media-translation/compare/v2.2.1...v2.2.2) (2020-11-25)
+
+
+### Bug Fixes
+
+* **browser:** check for fetch on window ([c0245c5](https://www.github.com/googleapis/nodejs-media-translation/commit/c0245c54d8c45f1f3171e9066bc7bab3c4162b69))
+
 ### [2.2.1](https://www.github.com/googleapis/nodejs-media-translation/compare/v2.2.0...v2.2.1) (2020-11-07)
 
 
