@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/os-login?activeTab=versions
 
+### [3.1.3](https://www.github.com/googleapis/nodejs-os-login/compare/v3.1.2...v3.1.3) (2020-11-25)
+
+
+### Bug Fixes
+
+* check for fetch on window ([#401](https://www.github.com/googleapis/nodejs-os-login/issues/401)) ([e2547a9](https://www.github.com/googleapis/nodejs-os-login/commit/e2547a90031a46a4ad044318c26c160d8fb04ff6))
+
 ### [3.1.2](https://www.github.com/googleapis/nodejs-os-login/compare/v3.1.1...v3.1.2) (2020-11-07)
 
 
