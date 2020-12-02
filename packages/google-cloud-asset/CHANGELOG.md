@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/asset?activeTab=versions
 
+## [3.10.0](https://www.github.com/googleapis/nodejs-asset/compare/v3.9.1...v3.10.0) (2020-12-02)
+
+
+### Features
+
+* added support OSInventory in Assets ([#436](https://www.github.com/googleapis/nodejs-asset/issues/436)) ([68298fd](https://www.github.com/googleapis/nodejs-asset/commit/68298fd9ebee3ae119bdb7dc6b848276804e2cda))
+
 ### [3.9.1](https://www.github.com/googleapis/nodejs-asset/compare/v3.9.0...v3.9.1) (2020-11-12)
 
 
