@@ -1,5 +1,13 @@
 # Changelog
 
+### [2.1.3](https://www.github.com/googleapis/nodejs-billing/compare/v2.1.2...v2.1.3) (2020-11-25)
+
+
+### Bug Fixes
+
+* **browser:** check for fetch on window ([abd3067](https://www.github.com/googleapis/nodejs-billing/commit/abd30678d328bdb62c54dc892c5300342c275e72))
+* do not modify options object, use defaultScopes ([#111](https://www.github.com/googleapis/nodejs-billing/issues/111)) ([be029ad](https://www.github.com/googleapis/nodejs-billing/commit/be029ad5c807cc8d04b8bddde83eb2d53f580a1c))
+
 ### [2.1.2](https://www.github.com/googleapis/nodejs-billing/compare/v2.1.1...v2.1.2) (2020-07-09)
 
 
