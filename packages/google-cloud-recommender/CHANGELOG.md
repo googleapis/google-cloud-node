@@ -1,5 +1,12 @@
 # Changelog
 
+### [3.2.2](https://www.github.com/googleapis/nodejs-recommender/compare/v3.2.1...v3.2.2) (2020-11-25)
+
+
+### Bug Fixes
+
+* **browser:** check for fetch on window ([733f1d3](https://www.github.com/googleapis/nodejs-recommender/commit/733f1d3fb81fcf435be32aded223fcae0a9c414e))
+
 ### [3.2.1](https://www.github.com/googleapis/nodejs-recommender/compare/v3.2.0...v3.2.1) (2020-11-06)
 
 
