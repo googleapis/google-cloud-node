@@ -169,6 +169,7 @@ export interface CreateNotificationCallback {
 export type CreateNotificationResponse = [Notification, Metadata];
 
 export interface DeleteBucketOptions {
+  ignoreNotFound?: boolean;
   userProject?: string;
 }
 
@@ -666,6 +667,8 @@ class Bucket extends ServiceObject {
        *
        * @method Bucket#delete
        * @param {DeleteBucketOptions} [options] Configuration options.
+       * @param {boolean} [options.ignoreNotFound = false] Ignore an error if
+       *     the bucket does not exist.
        * @param {DeleteBucketCallback} [callback] Callback function.
        * @returns {Promise<DeleteBucketResponse>}
        *

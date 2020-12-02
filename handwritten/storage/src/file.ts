@@ -172,6 +172,7 @@ export interface FileExistsCallback {
 }
 
 export interface DeleteFileOptions {
+  ignoreNotFound?: boolean;
   userProject?: string;
 }
 
@@ -513,6 +514,8 @@ class File extends ServiceObject<File> {
        *
        * @method File#delete
        * @param {object} [options] Configuration options.
+       * @param {boolean} [options.ignoreNotFound = false] Ignore an error if
+       *     the file does not exist.
        * @param {string} [options.userProject] The ID of the project which will be
        *     billed for the request.
        * @param {DeleteFileCallback} [callback] Callback function.
