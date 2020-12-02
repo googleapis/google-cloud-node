@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-storage?activeTab=versions
 
+## [5.6.0](https://www.github.com/googleapis/nodejs-storage/compare/v5.5.1...v5.6.0) (2020-12-02)
+
+
+### Features
+
+* allow ignoring 404 errors during delete() operations ([#1347](https://www.github.com/googleapis/nodejs-storage/issues/1347)) ([dab0e7d](https://www.github.com/googleapis/nodejs-storage/commit/dab0e7d9345499411cec57186ef7404026f041eb))
+
 ### [5.5.1](https://www.github.com/googleapis/nodejs-storage/compare/v5.5.0...v5.5.1) (2020-12-01)
 
 
