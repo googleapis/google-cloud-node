@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/kms?activeTab=versions
 
+### [2.1.4](https://www.github.com/googleapis/nodejs-kms/compare/v2.1.3...v2.1.4) (2020-11-25)
+
+
+### Bug Fixes
+
+* **browser:** check for fetch on window ([#404](https://www.github.com/googleapis/nodejs-kms/issues/404)) ([96a90e3](https://www.github.com/googleapis/nodejs-kms/commit/96a90e3bea1c8b7e8e2d57cc1eb6204ed326b915))
+
 ### [2.1.3](https://www.github.com/googleapis/nodejs-kms/compare/v2.1.2...v2.1.3) (2020-11-07)
 
 
