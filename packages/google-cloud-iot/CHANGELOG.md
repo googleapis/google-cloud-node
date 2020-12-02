@@ -1,5 +1,12 @@
 # Changelog
 
+### [2.1.3](https://www.github.com/googleapis/nodejs-iot/compare/v2.1.2...v2.1.3) (2020-11-25)
+
+
+### Bug Fixes
+
+* **browser:** check for fetch on window ([84ca7b6](https://www.github.com/googleapis/nodejs-iot/commit/84ca7b6f4d6a696713e02a1f9d4b3aebb30a5589))
+
 ### [2.1.2](https://www.github.com/googleapis/nodejs-iot/compare/v2.1.1...v2.1.2) (2020-11-07)
 
 
