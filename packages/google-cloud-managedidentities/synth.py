@@ -1,4 +1,4 @@
-# Copyright 2018 Google LLC
+# Copyright 2020 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -29,7 +29,7 @@ for version in versions:
   library = gapic.node_library(
   name, 
   version,
-  proto_path = f'google/cloud/managedidentities/{version}')
+  bazel_target=f"//google/cloud/managedidentities/{version}:managedidentities-{version}-nodejs")
   s.copy(library, excludes=[])
 
 # Copy common templates
