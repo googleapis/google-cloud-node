@@ -3,8 +3,8 @@
     {
       "git": {
         "name": ".",
-        "remote": "sso://user/sofialeon/nodejs-managed-identities",
-        "sha": "3aeceafda0860e938586cbb03bb6ec2a54c53e3f"
+        "remote": "git@github.com:googleapis/nodejs-managed-identities.git",
+        "sha": "9ba66879114ae668046dcd103008a212ac62a492"
       }
     },
     {
