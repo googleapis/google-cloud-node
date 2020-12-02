@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.0.2](https://www.github.com/googleapis/nodejs-notebooks/compare/v1.0.1...v1.0.2) (2020-11-25)
+
+
+### Bug Fixes
+
+* **browser:** check for fetch on window ([#22](https://www.github.com/googleapis/nodejs-notebooks/issues/22)) ([9ef7f23](https://www.github.com/googleapis/nodejs-notebooks/commit/9ef7f235e134404a70ab95a96205d0bdf9610a85))
+
 ### [1.0.1](https://www.github.com/googleapis/nodejs-notebooks/compare/v1.0.0...v1.0.1) (2020-11-14)
 
 
