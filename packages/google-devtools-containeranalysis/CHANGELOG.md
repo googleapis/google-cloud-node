@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/containeranalysis?activeTab=versions
 
+### [3.0.1](https://www.github.com/googleapis/nodejs-containeranalysis/compare/v3.0.0...v3.0.1) (2020-11-25)
+
+
+### Bug Fixes
+
+* **browser:** check for fetch on window ([#267](https://www.github.com/googleapis/nodejs-containeranalysis/issues/267)) ([003a128](https://www.github.com/googleapis/nodejs-containeranalysis/commit/003a128f84f0a7cdcff34ba77dc60d88a4d7969b))
+
 ## [3.0.0](https://www.github.com/googleapis/nodejs-containeranalysis/compare/v2.1.1...v3.0.0) (2020-11-16)
 
 
