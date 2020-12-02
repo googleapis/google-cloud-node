@@ -4,6 +4,18 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/container?activeTab=versions
 
+## [2.2.0](https://www.github.com/googleapis/nodejs-cloud-container/compare/v2.1.2...v2.2.0) (2020-11-25)
+
+
+### Features
+
+* update GKE v1 API ([#401](https://www.github.com/googleapis/nodejs-cloud-container/issues/401)) ([f72f121](https://www.github.com/googleapis/nodejs-cloud-container/commit/f72f1210f63e1fd9b3dd02e0791b1d024d1cbe07))
+
+
+### Bug Fixes
+
+* **browser:** check for fetch on window ([#403](https://www.github.com/googleapis/nodejs-cloud-container/issues/403)) ([40f207e](https://www.github.com/googleapis/nodejs-cloud-container/commit/40f207e3e1ae02f63b9b34c9e957c0caae89c7fb))
+
 ### [2.1.2](https://www.github.com/googleapis/nodejs-cloud-container/compare/v2.1.1...v2.1.2) (2020-11-07)
 
 
