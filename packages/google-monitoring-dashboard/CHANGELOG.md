@@ -1,5 +1,12 @@
 # Changelog
 
+### [2.1.3](https://www.github.com/googleapis/nodejs-monitoring-dashboards/compare/v2.1.2...v2.1.3) (2020-11-25)
+
+
+### Bug Fixes
+
+* **browser:** check for fetch on window ([23f9595](https://www.github.com/googleapis/nodejs-monitoring-dashboards/commit/23f9595ba7622f3f6eb4d705506996e1e34fc107))
+
 ### [2.1.2](https://www.github.com/googleapis/nodejs-monitoring-dashboards/compare/v2.1.1...v2.1.2) (2020-11-07)
 
 
