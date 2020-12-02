@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.1.1](https://www.github.com/googleapis/nodejs-assured-workloads/compare/v1.1.0...v1.1.1) (2020-11-25)
+
+
+### Bug Fixes
+
+* better fallback feature detection, linting, use optional chaining for window.fetch feature detection, mark window as global for linter ([#19](https://www.github.com/googleapis/nodejs-assured-workloads/issues/19)) ([3143b2f](https://www.github.com/googleapis/nodejs-assured-workloads/commit/3143b2ff3ced03469ee569e3bfd9528b1f27ca64))
+
 ## [1.1.0](https://www.github.com/googleapis/nodejs-assured-workloads/compare/v1.0.1...v1.1.0) (2020-11-16)
 
 
