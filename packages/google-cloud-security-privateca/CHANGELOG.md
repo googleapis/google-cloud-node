@@ -1,5 +1,12 @@
 # Changelog
 
+### [2.0.1](https://www.github.com/googleapis/nodejs-security-private-ca/compare/v2.0.0...v2.0.1) (2020-11-25)
+
+
+### Bug Fixes
+
+* **browser:** check for fetch on window ([#36](https://www.github.com/googleapis/nodejs-security-private-ca/issues/36)) ([673c8d5](https://www.github.com/googleapis/nodejs-security-private-ca/commit/673c8d518f538a78bd6cf4dcb3878c22d52d8038))
+
 ## [2.0.0](https://www.github.com/googleapis/nodejs-security-private-ca/compare/v1.0.0...v2.0.0) (2020-11-11)
 
 
