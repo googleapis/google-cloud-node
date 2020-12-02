@@ -126,6 +126,20 @@
     "support_documentation": "https://cloud.google.com/billing/docs/how-to/budget-api-overview "
   },
   {
+    "name": "binaryauthorization",
+    "name_pretty": "Binary Authorization",
+    "product_documentation": "https://cloud.google.com/binary-authorization/",
+    "client_documentation": "https://googleapis.dev/nodejs/binaryauthorization/latest/",
+    "issue_tracker": "https://github.com/googleapis/nodejs-binary-authorization/issues",
+    "release_level": "GA",
+    "language": "nodejs",
+    "repo": "googleapis/nodejs-binary-authorization",
+    "distribution_name": "@google-cloud/binary-authorization",
+    "api_id": "binaryauthorization.googleapis.com",
+    "requires_billing": true,
+    "support_documentation": "https://cloud.google.com/binary-authorization/docs/getting-support"
+  },
+  {
     "name": "cloudbuild",
     "name_pretty": "Build",
     "product_documentation": "https://cloud.google.com/cloud-build/docs/",
@@ -582,6 +596,20 @@
     "api_id": "logging.googleapis.com",
     "codeowner_team": "@googleapis/api-logging",
     "support_documentation": "https://cloud.google.com/logging"
+  },
+  {
+    "name": "managedidentities",
+    "name_pretty": "Managed Service for Microsoft Active Directory",
+    "product_documentation": "https://cloud.google.com/managed-microsoft-ad/",
+    "client_documentation": "https://googleapis.dev/nodejs/managedidentities/latest/",
+    "issue_tracker": "https://github.com/googleapis/nodejs-managed-identities/issues",
+    "release_level": "GA",
+    "language": "nodejs",
+    "repo": "googleapis/nodejs-managed-identities",
+    "distribution_name": "@google-cloud/managed-identities",
+    "api_id": "managedidentities.googleapis.com",
+    "requires_billing": true,
+    "support_documentation": "https://cloud.google.com/managed-microsoft-ad/"
   },
   {
     "name": "mediatranslation",
