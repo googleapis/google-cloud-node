@@ -1,5 +1,12 @@
 # Changelog
 
+### [2.2.2](https://www.github.com/googleapis/nodejs-document-ai/compare/v2.2.1...v2.2.2) (2020-12-01)
+
+
+### Bug Fixes
+
+* **browser:** check for fetch on window ([#131](https://www.github.com/googleapis/nodejs-document-ai/issues/131)) ([b7b016e](https://www.github.com/googleapis/nodejs-document-ai/commit/b7b016ed8c45c4da57cbe3eb652cd6b27f3be0f0))
+
 ### [2.2.1](https://www.github.com/googleapis/nodejs-document-ai/compare/v2.2.0...v2.2.1) (2020-11-10)
 
 
