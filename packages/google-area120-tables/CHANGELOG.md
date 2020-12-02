@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.0.2](https://www.github.com/googleapis/nodejs-area120-tables/compare/v1.0.1...v1.0.2) (2020-11-24)
+
+
+### Bug Fixes
+
+* better fallback feature detection, linting, use optional chaining for window.fetch feature detection, mark window as global for linter ([#21](https://www.github.com/googleapis/nodejs-area120-tables/issues/21)) ([bc9a40c](https://www.github.com/googleapis/nodejs-area120-tables/commit/bc9a40c42311fa2a6748a9841bc632d3fe87705b))
+
 ### [1.0.1](https://www.github.com/googleapis/nodejs-area120-tables/compare/v1.0.0...v1.0.1) (2020-11-07)
 
 
