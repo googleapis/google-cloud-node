@@ -4,6 +4,14 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/automl?activeTab=versions
 
+### [2.3.1](https://www.github.com/googleapis/nodejs-automl/compare/v2.3.0...v2.3.1) (2020-11-25)
+
+
+### Bug Fixes
+
+* **browser:** check for fetch on window ([50a3083](https://www.github.com/googleapis/nodejs-automl/commit/50a308349f819b06867b13d0300175b3ee5f43b7))
+* do not modify options object, use defaultScopes ([#466](https://www.github.com/googleapis/nodejs-automl/issues/466)) ([8aaf0c3](https://www.github.com/googleapis/nodejs-automl/commit/8aaf0c3aed7f4c2c705d14d4277223e11ba7349f))
+
 ## [2.3.0](https://www.github.com/googleapis/nodejs-automl/compare/v2.2.0...v2.3.0) (2020-10-27)
 
 
