@@ -1,5 +1,12 @@
 # Changelog
 
+### [3.0.2](https://www.github.com/googleapis/nodejs-billing-budgets/compare/v3.0.1...v3.0.2) (2020-11-25)
+
+
+### Bug Fixes
+
+* **browser:** check for fetch on window ([#187](https://www.github.com/googleapis/nodejs-billing-budgets/issues/187)) ([99b573b](https://www.github.com/googleapis/nodejs-billing-budgets/commit/99b573bd9976b714a101150c7bd90213f5f018d7))
+
 ### [3.0.1](https://www.github.com/googleapis/nodejs-billing-budgets/compare/v3.0.0...v3.0.1) (2020-11-07)
 
 
