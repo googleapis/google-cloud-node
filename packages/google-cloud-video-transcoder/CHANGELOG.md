@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0](https://www.github.com/googleapis/nodejs-video-transcoder/compare/v1.0.1...v1.1.0) (2020-11-30)
+
+
+### Features
+
+* **samples:** add Transcoder samples ([#8](https://www.github.com/googleapis/nodejs-video-transcoder/issues/8)) ([7bf59c3](https://www.github.com/googleapis/nodejs-video-transcoder/commit/7bf59c3c9defa1675d07083578b3d3acc9f3fca8))
+
 ### [1.0.1](https://www.github.com/googleapis/nodejs-video-transcoder/compare/v1.0.0...v1.0.1) (2020-11-06)
 
 
