@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.0.2](https://www.github.com/googleapis/nodejs-workflows/compare/v1.0.1...v1.0.2) (2020-11-25)
+
+
+### Bug Fixes
+
+* better fallback feature detection, jsdoc update ([#23](https://www.github.com/googleapis/nodejs-workflows/issues/23)) ([2d4e44d](https://www.github.com/googleapis/nodejs-workflows/commit/2d4e44d789185b02735acb295c2431d9f02441e5))
+
 ### [1.0.1](https://www.github.com/googleapis/nodejs-workflows/compare/v1.0.0...v1.0.1) (2020-11-07)
 
 
