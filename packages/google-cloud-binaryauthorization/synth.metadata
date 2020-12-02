@@ -1,0 +1,37 @@
+{
+  "sources": [
+    {
+      "git": {
+        "name": ".",
+        "remote": "sso://user/sofialeon/nodejs-binary-authorization",
+        "sha": "d3d05fef718afeba84001ba095be778b18d86dda"
+      }
+    },
+    {
+      "git": {
+        "name": "googleapis",
+        "remote": "https://github.com/googleapis/googleapis.git",
+        "sha": "b7038c181dcaa75c4fe8270b842c941d1df3128c",
+        "internalRef": "341924087"
+      }
+    },
+    {
+      "git": {
+        "name": "synthtool",
+        "remote": "https://github.com/googleapis/synthtool.git",
+        "sha": "7db8a6c5ffb12a6e4c2f799c18f00f7f3d60e279"
+      }
+    }
+  ],
+  "destinations": [
+    {
+      "client": {
+        "source": "googleapis",
+        "apiName": "binaryauthorization",
+        "apiVersion": "v1beta1",
+        "language": "nodejs",
+        "generator": "bazel"
+      }
+    }
+  ]
+}
