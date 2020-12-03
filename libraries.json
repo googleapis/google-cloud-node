@@ -1,5 +1,19 @@
 [
   {
+    "name": "accessapproval",
+    "name_pretty": "Access Approval",
+    "product_documentation": "https://cloud.google.com/access-approval/",
+    "client_documentation": "https://googleapis.dev/nodejs/accessapproval/latest/",
+    "issue_tracker": "https://github.com/googleapis/nodejs-access-approval/issues",
+    "release_level": "GA",
+    "language": "nodejs",
+    "repo": "googleapis/nodejs-access-approval",
+    "distribution_name": "@google-cloud/access-approval",
+    "api_id": "accessapproval.googleapis.com",
+    "requires_billing": true,
+    "support_documentation": "https://cloud.google.com/access-approval/"
+  },
+  {
     "name": "aiplatform",
     "name_pretty": "AI Platform",
     "product_documentation": "https://cloud.google.com/ai-platform/docs",
@@ -751,6 +765,20 @@
     "support_documentation": "https://cloud.google.com/recaptcha-enterprise/docs/getting-support"
   },
   {
+    "name": "recommendationengine",
+    "name_pretty": "Recommendations AI",
+    "product_documentation": "https://cloud.google.com/recommendations-ai/",
+    "client_documentation": "https://googleapis.dev/nodejs/recommendationengine/latest/",
+    "issue_tracker": "https://github.com/googleapis/nodejs-recommendation-engine/issues",
+    "release_level": "BETA",
+    "language": "nodejs",
+    "repo": "googleapis/nodejs-recommendation-engine",
+    "distribution_name": "@google-cloud/recommendation-engine",
+    "api_id": "recommendationengine.googleapis.com",
+    "requires_billing": true,
+    "support_documentation": "https://cloud.google.com/recommendations-ai/docs/getting-support"
+  },
+  {
     "name": "recommender",
     "name_pretty": "Recommender",
     "product_documentation": "https://cloud.google.com/recommender/docs",
@@ -1051,6 +1079,20 @@
     "api_id": "webrisk.googleapis.com",
     "requires_billing": true,
     "support_documentation": "https://cloud.google.com/web-risk/docs/getting-support"
+  },
+  {
+    "name": "websecurityscanner",
+    "name_pretty": "Web Security Scanner",
+    "product_documentation": "https://cloud.google.com/security-scanner/",
+    "client_documentation": "https://googleapis.dev/nodejs/websecurityscanner/latest/",
+    "issue_tracker": "https://github.com/googleapis/nodejs-web-security-scanner/issues",
+    "release_level": "GA",
+    "language": "nodejs",
+    "repo": "googleapis/nodejs-web-security-scanner",
+    "distribution_name": "@google-cloud/web-security-scanner",
+    "api_id": "websecurityscanner.googleapis.com",
+    "requires_billing": true,
+    "support_documentation": "https://cloud.google.com/security-scanner/docs/getting-support"
   },
   {
     "name": "workflows",

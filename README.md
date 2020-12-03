@@ -9,6 +9,7 @@ applications that interact with individual Google Cloud services:
 
 | Repo | API Docs | Install Command | Enable    |  Free Tier |
 |------|----------|-----------------|-----------|------------|
+| [Access Approval](https://github.com/googleapis/nodejs-access-approval) | [:notebook:](https://googleapis.dev/nodejs/accessapproval/latest/) | `npm i @google-cloud/access-approval` | [enable](https://console.cloud.google.com/flows/enableapi?apiid=accessapproval.googleapis.com) | ✖ |
 | [AI Platform](https://github.com/googleapis/nodejs-ai-platform) | [:notebook:](https://googleapis.dev/nodejs/aiplatform/latest) | `npm i @google-cloud/aiplatform` | [enable](https://console.cloud.google.com/flows/enableapi?apiid=aiplatform.googleapis.com) | ✖ |
 | [AI Platform Notebooks](https://github.com/googleapis/nodejs-notebooks) | [:notebook:](https://googleapis.dev/nodejs/notebooks/latest) | `npm i @google-cloud/notebooks` | [enable](https://console.cloud.google.com/flows/enableapi?apiid=notebooks.googleapis.com) | ✖ |
 | [Area120 Tables API](https://github.com/googleapis/nodejs-area120-tables) | [:notebook:](https://googleapis.dev/nodejs/area120tables/latest) | `npm i @google/area120-tables` | [enable](https://console.cloud.google.com/flows/enableapi?apiid=area120tables.googleapis.com) | ✖ |
@@ -63,6 +64,7 @@ applications that interact with individual Google Cloud services:
 | [Profiler](https://github.com/googleapis/cloud-profiler-nodejs) | [:notebook:](https://googleapis.dev/nodejs/profiler/latest/) | `npm i @google-cloud/profiler` | [enable](https://console.cloud.google.com/flows/enableapi?apiid=cloudprofiler.googleapis.com) | ✔ |
 | [Pub/Sub](https://github.com/googleapis/nodejs-pubsub) | [:notebook:](https://googleapis.dev/nodejs/pubsub/latest) | `npm i @google-cloud/pubsub` | [enable](https://console.cloud.google.com/flows/enableapi?apiid=pubsub.googleapis.com) | ✖ |
 | [reCAPTCHA Enterprise](https://github.com/googleapis/nodejs-recaptcha-enterprise) | [:notebook:](https://googleapis.dev/nodejs/recaptcha-enterprise/latest) | `npm i @google-cloud/recaptcha-enterprise` | [enable](https://console.cloud.google.com/flows/enableapi?apiid=recaptchaenterprise.googleapis.com) | ✖ |
+| [Recommendations AI](https://github.com/googleapis/nodejs-recommendation-engine) | [:notebook:](https://googleapis.dev/nodejs/recommendationengine/latest/) | `npm i @google-cloud/recommendation-engine` | [enable](https://console.cloud.google.com/flows/enableapi?apiid=recommendationengine.googleapis.com) | ✖ |
 | [Recommender](https://github.com/googleapis/nodejs-recommender) | [:notebook:](https://googleapis.dev/nodejs/recommender/latest/index.html) | `npm i @google-cloud/recommender` | [enable](https://console.cloud.google.com/flows/enableapi?apiid=recommender.googleapis.com) | ✖ |
 | [Redis](https://github.com/googleapis/nodejs-redis) | [:notebook:](https://googleapis.dev/nodejs/redis/latest) | `npm i @google-cloud/redis` | [enable](https://console.cloud.google.com/flows/enableapi?apiid=redis.googleapis.com) | ✖ |
 | [Resource Manager API](https://github.com/googleapis/nodejs-resource) | [:notebook:](https://googleapis.dev/nodejs/resource/latest) | `npm i @google-cloud/resource` | [enable](https://console.cloud.google.com/flows/enableapi?apiid=cloudresourcemanager.googleapis.com) | ✖ |
@@ -85,6 +87,7 @@ applications that interact with individual Google Cloud services:
 | [Video Intelligence](https://github.com/googleapis/nodejs-video-intelligence) | [:notebook:](https://googleapis.dev/nodejs/video/latest) | `npm i @google-cloud/video-intelligence` | [enable](https://console.cloud.google.com/flows/enableapi?apiid=videointelligence.googleapis.com) | ✖ |
 | [Vision API](https://github.com/googleapis/nodejs-vision) | [:notebook:](https://googleapis.dev/nodejs/vision/latest) | `npm i @google-cloud/vision` | [enable](https://console.cloud.google.com/flows/enableapi?apiid=vision.googleapis.com) | ✖ |
 | [Web Risk API](https://github.com/googleapis/nodejs-web-risk) | [:notebook:](https://googleapis.dev/nodejs/web-risk/latest) | `npm i @google-cloud/web-risk` | [enable](https://console.cloud.google.com/flows/enableapi?apiid=webrisk.googleapis.com) | ✖ |
+| [Web Security Scanner](https://github.com/googleapis/nodejs-web-security-scanner) | [:notebook:](https://googleapis.dev/nodejs/websecurityscanner/latest/) | `npm i @google-cloud/web-security-scanner` | [enable](https://console.cloud.google.com/flows/enableapi?apiid=websecurityscanner.googleapis.com) | ✖ |
 | [Workflows](https://github.com/googleapis/nodejs-workflows) | [:notebook:](https://googleapis.dev/nodejs/workflows/latest/index.html) | `npm i @google-cloud/workflows` | [enable](https://console.cloud.google.com/flows/enableapi?apiid=workflows.googleapis.com) | ✖ |
 
 
