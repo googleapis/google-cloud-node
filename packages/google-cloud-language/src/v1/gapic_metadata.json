@@ -6,50 +6,76 @@
   "libraryPackage": "@google-cloud/language",
   "services": {
     "LanguageService": {
-      "grpc": {
-        "libraryClient": "LanguageServiceClient",
-        "rpcs": {
-          "AnalyzeSentiment": [
-            "analyzeSentiment"
-          ],
-          "AnalyzeEntities": [
-            "analyzeEntities"
-          ],
-          "AnalyzeEntitySentiment": [
-            "analyzeEntitySentiment"
-          ],
-          "AnalyzeSyntax": [
-            "analyzeSyntax"
-          ],
-          "ClassifyText": [
-            "classifyText"
-          ],
-          "AnnotateText": [
-            "annotateText"
-          ]
-        }
-      },
-      "grpc-fallback": {
-        "libraryClient": "LanguageServiceClient",
-        "rpcs": {
-          "AnalyzeSentiment": [
-            "analyzeSentiment"
-          ],
-          "AnalyzeEntities": [
-            "analyzeEntities"
-          ],
-          "AnalyzeEntitySentiment": [
-            "analyzeEntitySentiment"
-          ],
-          "AnalyzeSyntax": [
-            "analyzeSyntax"
-          ],
-          "ClassifyText": [
-            "classifyText"
-          ],
-          "AnnotateText": [
-            "annotateText"
-          ]
+      "clients": {
+        "grpc": {
+          "libraryClient": "LanguageServiceClient",
+          "rpcs": {
+            "AnalyzeSentiment": {
+              "methods": [
+                "analyzeSentiment"
+              ]
+            },
+            "AnalyzeEntities": {
+              "methods": [
+                "analyzeEntities"
+              ]
+            },
+            "AnalyzeEntitySentiment": {
+              "methods": [
+                "analyzeEntitySentiment"
+              ]
+            },
+            "AnalyzeSyntax": {
+              "methods": [
+                "analyzeSyntax"
+              ]
+            },
+            "ClassifyText": {
+              "methods": [
+                "classifyText"
+              ]
+            },
+            "AnnotateText": {
+              "methods": [
+                "annotateText"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "LanguageServiceClient",
+          "rpcs": {
+            "AnalyzeSentiment": {
+              "methods": [
+                "analyzeSentiment"
+              ]
+            },
+            "AnalyzeEntities": {
+              "methods": [
+                "analyzeEntities"
+              ]
+            },
+            "AnalyzeEntitySentiment": {
+              "methods": [
+                "analyzeEntitySentiment"
+              ]
+            },
+            "AnalyzeSyntax": {
+              "methods": [
+                "analyzeSyntax"
+              ]
+            },
+            "ClassifyText": {
+              "methods": [
+                "classifyText"
+              ]
+            },
+            "AnnotateText": {
+              "methods": [
+                "annotateText"
+              ]
+            }
+          }
         }
       }
     }
