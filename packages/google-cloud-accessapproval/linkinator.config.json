@@ -1,0 +1,1 @@
+{"recurse":true,"skip":["https://github.com/googleapis/nodejs-recommendation-engine/blob/master/CHANGELOG.md","http://localhost:5740/recommendations-ai/docs/setting-up","http://localhost:5740/","http://localhost:5740/v1beta1.PredictionServiceClient.html","https://codecov.io/gh/googleapis/","www.googleapis.com","img.shields.io"],"silent":true,"concurrency":10}
