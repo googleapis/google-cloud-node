@@ -29,8 +29,8 @@ for version in versions:
   library = gapic.node_library(
   name, 
   version,
-  proto_path = f'google/cloud/websecurityscanner/{version}')
-  s.copy(library, excludes=["README.md", "package.json"])
+  bazel_target=f"//google/cloud/websecurityscanner/{version}:websecurityscanner-{version}-nodejs")
+  s.copy(library, excludes=[])
 
 # Copy common templates
 common_templates = gcp.CommonTemplates()

@@ -32,8 +32,8 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 * [Quickstart](#quickstart)
   * [Before you begin](#before-you-begin)
   * [Installing the client library](#installing-the-client-library)
-
-
+  * [Using the client library](#using-the-client-library)
+* [Samples](#samples)
 * [Versioning](#versioning)
 * [Contributing](#contributing)
 * [License](#license)
@@ -55,6 +55,47 @@ npm install websecurityscanner
 ```
 
 
+### Using the client library
+
+```javascript
+// Imports the Google Cloud client library
+
+// remove this line after package is released
+// eslint-disable-next-line node/no-missing-require
+const {
+  WebSecurityScannerClient,
+} = require('@google-cloud/web-security-scanner');
+
+// TODO(developer): replace with your prefered project ID.
+// const projectId = 'my-project'
+
+// Creates a client
+// eslint-disable-next-line no-unused-vars
+const client = new {WebSecurityScannerClient}();
+
+//TODO(library generator): write the actual function you will be testing
+async function doSomething() {
+  console.log(
+    'Developer! Change this code so that it shows how to use the library! See comments below on structure.'
+  );
+  // const [thing] = await client.methodName({
+  // });
+  // console.info(thing);
+}
+doSomething();
+
+```
+
+
+
+## Samples
+
+Samples are in the [`samples/`](https://github.com/googleapis/nodejs-web-security-scanner/tree/master/samples) directory. The samples' `README.md`
+has instructions for running the samples.
+
+| Sample                      | Source Code                       | Try it |
+| --------------------------- | --------------------------------- | ------ |
+| Quickstart | [source code](https://github.com/googleapis/nodejs-web-security-scanner/blob/master/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-web-security-scanner&page=editor&open_in_editor=samples/quickstart.js,samples/README.md) |
 
 
 
@@ -67,7 +108,7 @@ Our client libraries follow the [Node.js release schedule](https://nodejs.org/en
 Libraries are compatible with all current _active_ and _maintenance_ versions of
 Node.js.
 
-Client libraries targetting some end-of-life versions of Node.js are available, and
+Client libraries targeting some end-of-life versions of Node.js are available, and
 can be installed via npm [dist-tags](https://docs.npmjs.com/cli/dist-tag).
 The dist-tags follow the naming convention `legacy-(version)`.
 
