@@ -5,7 +5,7 @@
 # [Web Security Scanner: Node.js Client](https://github.com/googleapis/nodejs-web-security-scanner)
 
 [![release level](https://img.shields.io/badge/release%20level-general%20availability%20%28GA%29-brightgreen.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
-[![npm version](https://img.shields.io/npm/v/websecurityscanner.svg)](https://www.npmjs.org/package/websecurityscanner)
+[![npm version](https://img.shields.io/npm/v/@google-cloud/web-security-scanner.svg)](https://www.npmjs.org/package/@google-cloud/web-security-scanner)
 [![codecov](https://img.shields.io/codecov/c/github/googleapis/nodejs-web-security-scanner/master.svg?style=flat)](https://codecov.io/gh/googleapis/nodejs-web-security-scanner)
 
 
@@ -51,7 +51,7 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 ### Installing the client library
 
 ```bash
-npm install websecurityscanner
+npm install @google-cloud/web-security-scanner
 ```
 
 
@@ -62,9 +62,7 @@ npm install websecurityscanner
 
 // remove this line after package is released
 // eslint-disable-next-line node/no-missing-require
-const {
-  WebSecurityScannerClient,
-} = require('@google-cloud/web-security-scanner');
+const {WebSecurityScannerClient} = require('@google-cloud/web-security-scanner');
 
 // TODO(developer): replace with your prefered project ID.
 // const projectId = 'my-project'
@@ -75,12 +73,10 @@ const client = new {WebSecurityScannerClient}();
 
 //TODO(library generator): write the actual function you will be testing
 async function doSomething() {
-  console.log(
-    'Developer! Change this code so that it shows how to use the library! See comments below on structure.'
-  );
-  // const [thing] = await client.methodName({
-  // });
-  // console.info(thing);
+ console.log('Developer! Change this code so that it shows how to use the library! See comments below on structure.')
+ // const [thing] = await client.methodName({
+ // });
+ // console.info(thing);
 }
 doSomething();
 

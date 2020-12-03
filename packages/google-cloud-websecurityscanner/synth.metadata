@@ -1,0 +1,55 @@
+{
+  "sources": [
+    {
+      "git": {
+        "name": ".",
+        "remote": "sso://user/sofialeon/nodejs-web-security-scanner",
+        "sha": "ab8db1f221f4cad427bd374cb0bfd9b031573509"
+      }
+    },
+    {
+      "git": {
+        "name": "googleapis",
+        "remote": "https://github.com/googleapis/googleapis.git",
+        "sha": "539f0d44c80ef331ae1a50d92d61b91e77d500dd",
+        "internalRef": "345358447"
+      }
+    },
+    {
+      "git": {
+        "name": "synthtool",
+        "remote": "https://github.com/googleapis/synthtool.git",
+        "sha": "f94318521f63085b9ccb43d42af89f153fb39f15"
+      }
+    }
+  ],
+  "destinations": [
+    {
+      "client": {
+        "source": "googleapis",
+        "apiName": "websecurityscanner",
+        "apiVersion": "v1",
+        "language": "nodejs",
+        "generator": "bazel"
+      }
+    },
+    {
+      "client": {
+        "source": "googleapis",
+        "apiName": "websecurityscanner",
+        "apiVersion": "v1alpha",
+        "language": "nodejs",
+        "generator": "bazel"
+      }
+    },
+    {
+      "client": {
+        "source": "googleapis",
+        "apiName": "websecurityscanner",
+        "apiVersion": "v1beta",
+        "language": "nodejs",
+        "generator": "bazel"
+      }
+    }
+  ]
+}

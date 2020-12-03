@@ -1,0 +1,1 @@
+{"recurse":true,"skip":["https://googleapis.dev/nodejs/websecurityscanner/latest/","http://localhost:5423/","https://codecov.io/gh/googleapis/","www.googleapis.com","img.shields.io"],"silent":true,"concurrency":10}
