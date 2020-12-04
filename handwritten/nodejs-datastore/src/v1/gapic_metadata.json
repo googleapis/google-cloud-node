@@ -1,0 +1,67 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.datastore.admin.v1",
+  "libraryPackage": "admin",
+  "services": {
+    "DatastoreAdmin": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "DatastoreAdminClient",
+          "rpcs": {
+            "GetIndex": {
+              "methods": [
+                "getIndex"
+              ]
+            },
+            "ExportEntities": {
+              "methods": [
+                "exportEntities"
+              ]
+            },
+            "ImportEntities": {
+              "methods": [
+                "importEntities"
+              ]
+            },
+            "ListIndexes": {
+              "methods": [
+                "listIndexes",
+                "listIndexesStream",
+                "listIndexesAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "DatastoreAdminClient",
+          "rpcs": {
+            "GetIndex": {
+              "methods": [
+                "getIndex"
+              ]
+            },
+            "ExportEntities": {
+              "methods": [
+                "exportEntities"
+              ]
+            },
+            "ImportEntities": {
+              "methods": [
+                "importEntities"
+              ]
+            },
+            "ListIndexes": {
+              "methods": [
+                "listIndexes",
+                "listIndexesStream",
+                "listIndexesAsync"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
