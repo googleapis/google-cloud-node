@@ -1,0 +1,48 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.cloud.speech.v1p1beta1",
+  "libraryPackage": "@google-cloud/speech",
+  "services": {
+    "Speech": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "SpeechClient",
+          "rpcs": {
+            "Recognize": {
+              "methods": [
+                "recognize"
+              ]
+            },
+            "StreamingRecognize": {
+              "methods": [
+                "streamingRecognize"
+              ]
+            },
+            "LongRunningRecognize": {
+              "methods": [
+                "longRunningRecognize"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "SpeechClient",
+          "rpcs": {
+            "Recognize": {
+              "methods": [
+                "recognize"
+              ]
+            },
+            "LongRunningRecognize": {
+              "methods": [
+                "longRunningRecognize"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
