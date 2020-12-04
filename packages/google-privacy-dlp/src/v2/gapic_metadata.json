@@ -1,0 +1,383 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.privacy.dlp.v2",
+  "libraryPackage": "@google-cloud/dlp",
+  "services": {
+    "DlpService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "DlpServiceClient",
+          "rpcs": {
+            "InspectContent": {
+              "methods": [
+                "inspectContent"
+              ]
+            },
+            "RedactImage": {
+              "methods": [
+                "redactImage"
+              ]
+            },
+            "DeidentifyContent": {
+              "methods": [
+                "deidentifyContent"
+              ]
+            },
+            "ReidentifyContent": {
+              "methods": [
+                "reidentifyContent"
+              ]
+            },
+            "ListInfoTypes": {
+              "methods": [
+                "listInfoTypes"
+              ]
+            },
+            "CreateInspectTemplate": {
+              "methods": [
+                "createInspectTemplate"
+              ]
+            },
+            "UpdateInspectTemplate": {
+              "methods": [
+                "updateInspectTemplate"
+              ]
+            },
+            "GetInspectTemplate": {
+              "methods": [
+                "getInspectTemplate"
+              ]
+            },
+            "DeleteInspectTemplate": {
+              "methods": [
+                "deleteInspectTemplate"
+              ]
+            },
+            "CreateDeidentifyTemplate": {
+              "methods": [
+                "createDeidentifyTemplate"
+              ]
+            },
+            "UpdateDeidentifyTemplate": {
+              "methods": [
+                "updateDeidentifyTemplate"
+              ]
+            },
+            "GetDeidentifyTemplate": {
+              "methods": [
+                "getDeidentifyTemplate"
+              ]
+            },
+            "DeleteDeidentifyTemplate": {
+              "methods": [
+                "deleteDeidentifyTemplate"
+              ]
+            },
+            "CreateJobTrigger": {
+              "methods": [
+                "createJobTrigger"
+              ]
+            },
+            "UpdateJobTrigger": {
+              "methods": [
+                "updateJobTrigger"
+              ]
+            },
+            "HybridInspectJobTrigger": {
+              "methods": [
+                "hybridInspectJobTrigger"
+              ]
+            },
+            "GetJobTrigger": {
+              "methods": [
+                "getJobTrigger"
+              ]
+            },
+            "DeleteJobTrigger": {
+              "methods": [
+                "deleteJobTrigger"
+              ]
+            },
+            "ActivateJobTrigger": {
+              "methods": [
+                "activateJobTrigger"
+              ]
+            },
+            "CreateDlpJob": {
+              "methods": [
+                "createDlpJob"
+              ]
+            },
+            "GetDlpJob": {
+              "methods": [
+                "getDlpJob"
+              ]
+            },
+            "DeleteDlpJob": {
+              "methods": [
+                "deleteDlpJob"
+              ]
+            },
+            "CancelDlpJob": {
+              "methods": [
+                "cancelDlpJob"
+              ]
+            },
+            "CreateStoredInfoType": {
+              "methods": [
+                "createStoredInfoType"
+              ]
+            },
+            "UpdateStoredInfoType": {
+              "methods": [
+                "updateStoredInfoType"
+              ]
+            },
+            "GetStoredInfoType": {
+              "methods": [
+                "getStoredInfoType"
+              ]
+            },
+            "DeleteStoredInfoType": {
+              "methods": [
+                "deleteStoredInfoType"
+              ]
+            },
+            "HybridInspectDlpJob": {
+              "methods": [
+                "hybridInspectDlpJob"
+              ]
+            },
+            "FinishDlpJob": {
+              "methods": [
+                "finishDlpJob"
+              ]
+            },
+            "ListInspectTemplates": {
+              "methods": [
+                "listInspectTemplates",
+                "listInspectTemplatesStream",
+                "listInspectTemplatesAsync"
+              ]
+            },
+            "ListDeidentifyTemplates": {
+              "methods": [
+                "listDeidentifyTemplates",
+                "listDeidentifyTemplatesStream",
+                "listDeidentifyTemplatesAsync"
+              ]
+            },
+            "ListJobTriggers": {
+              "methods": [
+                "listJobTriggers",
+                "listJobTriggersStream",
+                "listJobTriggersAsync"
+              ]
+            },
+            "ListDlpJobs": {
+              "methods": [
+                "listDlpJobs",
+                "listDlpJobsStream",
+                "listDlpJobsAsync"
+              ]
+            },
+            "ListStoredInfoTypes": {
+              "methods": [
+                "listStoredInfoTypes",
+                "listStoredInfoTypesStream",
+                "listStoredInfoTypesAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "DlpServiceClient",
+          "rpcs": {
+            "InspectContent": {
+              "methods": [
+                "inspectContent"
+              ]
+            },
+            "RedactImage": {
+              "methods": [
+                "redactImage"
+              ]
+            },
+            "DeidentifyContent": {
+              "methods": [
+                "deidentifyContent"
+              ]
+            },
+            "ReidentifyContent": {
+              "methods": [
+                "reidentifyContent"
+              ]
+            },
+            "ListInfoTypes": {
+              "methods": [
+                "listInfoTypes"
+              ]
+            },
+            "CreateInspectTemplate": {
+              "methods": [
+                "createInspectTemplate"
+              ]
+            },
+            "UpdateInspectTemplate": {
+              "methods": [
+                "updateInspectTemplate"
+              ]
+            },
+            "GetInspectTemplate": {
+              "methods": [
+                "getInspectTemplate"
+              ]
+            },
+            "DeleteInspectTemplate": {
+              "methods": [
+                "deleteInspectTemplate"
+              ]
+            },
+            "CreateDeidentifyTemplate": {
+              "methods": [
+                "createDeidentifyTemplate"
+              ]
+            },
+            "UpdateDeidentifyTemplate": {
+              "methods": [
+                "updateDeidentifyTemplate"
+              ]
+            },
+            "GetDeidentifyTemplate": {
+              "methods": [
+                "getDeidentifyTemplate"
+              ]
+            },
+            "DeleteDeidentifyTemplate": {
+              "methods": [
+                "deleteDeidentifyTemplate"
+              ]
+            },
+            "CreateJobTrigger": {
+              "methods": [
+                "createJobTrigger"
+              ]
+            },
+            "UpdateJobTrigger": {
+              "methods": [
+                "updateJobTrigger"
+              ]
+            },
+            "HybridInspectJobTrigger": {
+              "methods": [
+                "hybridInspectJobTrigger"
+              ]
+            },
+            "GetJobTrigger": {
+              "methods": [
+                "getJobTrigger"
+              ]
+            },
+            "DeleteJobTrigger": {
+              "methods": [
+                "deleteJobTrigger"
+              ]
+            },
+            "ActivateJobTrigger": {
+              "methods": [
+                "activateJobTrigger"
+              ]
+            },
+            "CreateDlpJob": {
+              "methods": [
+                "createDlpJob"
+              ]
+            },
+            "GetDlpJob": {
+              "methods": [
+                "getDlpJob"
+              ]
+            },
+            "DeleteDlpJob": {
+              "methods": [
+                "deleteDlpJob"
+              ]
+            },
+            "CancelDlpJob": {
+              "methods": [
+                "cancelDlpJob"
+              ]
+            },
+            "CreateStoredInfoType": {
+              "methods": [
+                "createStoredInfoType"
+              ]
+            },
+            "UpdateStoredInfoType": {
+              "methods": [
+                "updateStoredInfoType"
+              ]
+            },
+            "GetStoredInfoType": {
+              "methods": [
+                "getStoredInfoType"
+              ]
+            },
+            "DeleteStoredInfoType": {
+              "methods": [
+                "deleteStoredInfoType"
+              ]
+            },
+            "HybridInspectDlpJob": {
+              "methods": [
+                "hybridInspectDlpJob"
+              ]
+            },
+            "FinishDlpJob": {
+              "methods": [
+                "finishDlpJob"
+              ]
+            },
+            "ListInspectTemplates": {
+              "methods": [
+                "listInspectTemplates",
+                "listInspectTemplatesStream",
+                "listInspectTemplatesAsync"
+              ]
+            },
+            "ListDeidentifyTemplates": {
+              "methods": [
+                "listDeidentifyTemplates",
+                "listDeidentifyTemplatesStream",
+                "listDeidentifyTemplatesAsync"
+              ]
+            },
+            "ListJobTriggers": {
+              "methods": [
+                "listJobTriggers",
+                "listJobTriggersStream",
+                "listJobTriggersAsync"
+              ]
+            },
+            "ListDlpJobs": {
+              "methods": [
+                "listDlpJobs",
+                "listDlpJobsStream",
+                "listDlpJobsAsync"
+              ]
+            },
+            "ListStoredInfoTypes": {
+              "methods": [
+                "listStoredInfoTypes",
+                "listStoredInfoTypesStream",
+                "listStoredInfoTypesAsync"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
