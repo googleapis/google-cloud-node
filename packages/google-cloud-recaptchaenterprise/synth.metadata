@@ -4,15 +4,15 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/nodejs-recaptcha-enterprise.git",
-        "sha": "8eb79dd2b9f1eb7d4848aef63bf3bf236928fc67"
+        "sha": "ec3c7200c339820a65a65365c9af44a2ee13b8d6"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "5587028631d4d743fd906c4eb4e4e4649a7ee5ce",
-        "internalRef": "343187793"
+        "sha": "d189e871205fea665a9648f7c4676f027495ccaf",
+        "internalRef": "345596855"
       }
     },
     {

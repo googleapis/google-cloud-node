@@ -1,0 +1,97 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.cloud.recaptchaenterprise.v1beta1",
+  "libraryPackage": "@google-cloud/recaptcha-enterprise",
+  "services": {
+    "RecaptchaEnterpriseServiceV1Beta1": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "RecaptchaEnterpriseServiceV1Beta1Client",
+          "rpcs": {
+            "CreateAssessment": {
+              "methods": [
+                "createAssessment"
+              ]
+            },
+            "AnnotateAssessment": {
+              "methods": [
+                "annotateAssessment"
+              ]
+            },
+            "CreateKey": {
+              "methods": [
+                "createKey"
+              ]
+            },
+            "GetKey": {
+              "methods": [
+                "getKey"
+              ]
+            },
+            "UpdateKey": {
+              "methods": [
+                "updateKey"
+              ]
+            },
+            "DeleteKey": {
+              "methods": [
+                "deleteKey"
+              ]
+            },
+            "ListKeys": {
+              "methods": [
+                "listKeys",
+                "listKeysStream",
+                "listKeysAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "RecaptchaEnterpriseServiceV1Beta1Client",
+          "rpcs": {
+            "CreateAssessment": {
+              "methods": [
+                "createAssessment"
+              ]
+            },
+            "AnnotateAssessment": {
+              "methods": [
+                "annotateAssessment"
+              ]
+            },
+            "CreateKey": {
+              "methods": [
+                "createKey"
+              ]
+            },
+            "GetKey": {
+              "methods": [
+                "getKey"
+              ]
+            },
+            "UpdateKey": {
+              "methods": [
+                "updateKey"
+              ]
+            },
+            "DeleteKey": {
+              "methods": [
+                "deleteKey"
+              ]
+            },
+            "ListKeys": {
+              "methods": [
+                "listKeys",
+                "listKeysStream",
+                "listKeysAsync"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
