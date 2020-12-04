@@ -4,15 +4,15 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/nodejs-bigquery-reservation.git",
-        "sha": "6a7743c63b1e360823b5065f26f1f493baf3fd3b"
+        "sha": "b4ee172520adbbdff077d2a1db7d72c88401f98a"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "2f019bf70bfe06f1e2af1b04011b0a2405190e43",
-        "internalRef": "343202295"
+        "sha": "d189e871205fea665a9648f7c4676f027495ccaf",
+        "internalRef": "345596855"
       }
     },
     {
