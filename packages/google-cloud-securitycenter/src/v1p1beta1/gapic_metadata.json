@@ -1,0 +1,277 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.cloud.securitycenter.v1p1beta1",
+  "libraryPackage": "@google-cloud/security-center",
+  "services": {
+    "SecurityCenter": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "SecurityCenterClient",
+          "rpcs": {
+            "CreateSource": {
+              "methods": [
+                "createSource"
+              ]
+            },
+            "CreateFinding": {
+              "methods": [
+                "createFinding"
+              ]
+            },
+            "CreateNotificationConfig": {
+              "methods": [
+                "createNotificationConfig"
+              ]
+            },
+            "DeleteNotificationConfig": {
+              "methods": [
+                "deleteNotificationConfig"
+              ]
+            },
+            "GetIamPolicy": {
+              "methods": [
+                "getIamPolicy"
+              ]
+            },
+            "GetNotificationConfig": {
+              "methods": [
+                "getNotificationConfig"
+              ]
+            },
+            "GetOrganizationSettings": {
+              "methods": [
+                "getOrganizationSettings"
+              ]
+            },
+            "GetSource": {
+              "methods": [
+                "getSource"
+              ]
+            },
+            "SetFindingState": {
+              "methods": [
+                "setFindingState"
+              ]
+            },
+            "SetIamPolicy": {
+              "methods": [
+                "setIamPolicy"
+              ]
+            },
+            "TestIamPermissions": {
+              "methods": [
+                "testIamPermissions"
+              ]
+            },
+            "UpdateFinding": {
+              "methods": [
+                "updateFinding"
+              ]
+            },
+            "UpdateNotificationConfig": {
+              "methods": [
+                "updateNotificationConfig"
+              ]
+            },
+            "UpdateOrganizationSettings": {
+              "methods": [
+                "updateOrganizationSettings"
+              ]
+            },
+            "UpdateSource": {
+              "methods": [
+                "updateSource"
+              ]
+            },
+            "UpdateSecurityMarks": {
+              "methods": [
+                "updateSecurityMarks"
+              ]
+            },
+            "RunAssetDiscovery": {
+              "methods": [
+                "runAssetDiscovery"
+              ]
+            },
+            "GroupAssets": {
+              "methods": [
+                "groupAssets",
+                "groupAssetsStream",
+                "groupAssetsAsync"
+              ]
+            },
+            "GroupFindings": {
+              "methods": [
+                "groupFindings",
+                "groupFindingsStream",
+                "groupFindingsAsync"
+              ]
+            },
+            "ListAssets": {
+              "methods": [
+                "listAssets",
+                "listAssetsStream",
+                "listAssetsAsync"
+              ]
+            },
+            "ListFindings": {
+              "methods": [
+                "listFindings",
+                "listFindingsStream",
+                "listFindingsAsync"
+              ]
+            },
+            "ListNotificationConfigs": {
+              "methods": [
+                "listNotificationConfigs",
+                "listNotificationConfigsStream",
+                "listNotificationConfigsAsync"
+              ]
+            },
+            "ListSources": {
+              "methods": [
+                "listSources",
+                "listSourcesStream",
+                "listSourcesAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "SecurityCenterClient",
+          "rpcs": {
+            "CreateSource": {
+              "methods": [
+                "createSource"
+              ]
+            },
+            "CreateFinding": {
+              "methods": [
+                "createFinding"
+              ]
+            },
+            "CreateNotificationConfig": {
+              "methods": [
+                "createNotificationConfig"
+              ]
+            },
+            "DeleteNotificationConfig": {
+              "methods": [
+                "deleteNotificationConfig"
+              ]
+            },
+            "GetIamPolicy": {
+              "methods": [
+                "getIamPolicy"
+              ]
+            },
+            "GetNotificationConfig": {
+              "methods": [
+                "getNotificationConfig"
+              ]
+            },
+            "GetOrganizationSettings": {
+              "methods": [
+                "getOrganizationSettings"
+              ]
+            },
+            "GetSource": {
+              "methods": [
+                "getSource"
+              ]
+            },
+            "SetFindingState": {
+              "methods": [
+                "setFindingState"
+              ]
+            },
+            "SetIamPolicy": {
+              "methods": [
+                "setIamPolicy"
+              ]
+            },
+            "TestIamPermissions": {
+              "methods": [
+                "testIamPermissions"
+              ]
+            },
+            "UpdateFinding": {
+              "methods": [
+                "updateFinding"
+              ]
+            },
+            "UpdateNotificationConfig": {
+              "methods": [
+                "updateNotificationConfig"
+              ]
+            },
+            "UpdateOrganizationSettings": {
+              "methods": [
+                "updateOrganizationSettings"
+              ]
+            },
+            "UpdateSource": {
+              "methods": [
+                "updateSource"
+              ]
+            },
+            "UpdateSecurityMarks": {
+              "methods": [
+                "updateSecurityMarks"
+              ]
+            },
+            "RunAssetDiscovery": {
+              "methods": [
+                "runAssetDiscovery"
+              ]
+            },
+            "GroupAssets": {
+              "methods": [
+                "groupAssets",
+                "groupAssetsStream",
+                "groupAssetsAsync"
+              ]
+            },
+            "GroupFindings": {
+              "methods": [
+                "groupFindings",
+                "groupFindingsStream",
+                "groupFindingsAsync"
+              ]
+            },
+            "ListAssets": {
+              "methods": [
+                "listAssets",
+                "listAssetsStream",
+                "listAssetsAsync"
+              ]
+            },
+            "ListFindings": {
+              "methods": [
+                "listFindings",
+                "listFindingsStream",
+                "listFindingsAsync"
+              ]
+            },
+            "ListNotificationConfigs": {
+              "methods": [
+                "listNotificationConfigs",
+                "listNotificationConfigsStream",
+                "listNotificationConfigsAsync"
+              ]
+            },
+            "ListSources": {
+              "methods": [
+                "listSources",
+                "listSourcesStream",
+                "listSourcesAsync"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
