@@ -1,0 +1,111 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.cloud.recommender.v1",
+  "libraryPackage": "@google-cloud/recommender",
+  "services": {
+    "Recommender": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "RecommenderClient",
+          "rpcs": {
+            "GetInsight": {
+              "methods": [
+                "getInsight"
+              ]
+            },
+            "MarkInsightAccepted": {
+              "methods": [
+                "markInsightAccepted"
+              ]
+            },
+            "GetRecommendation": {
+              "methods": [
+                "getRecommendation"
+              ]
+            },
+            "MarkRecommendationClaimed": {
+              "methods": [
+                "markRecommendationClaimed"
+              ]
+            },
+            "MarkRecommendationSucceeded": {
+              "methods": [
+                "markRecommendationSucceeded"
+              ]
+            },
+            "MarkRecommendationFailed": {
+              "methods": [
+                "markRecommendationFailed"
+              ]
+            },
+            "ListInsights": {
+              "methods": [
+                "listInsights",
+                "listInsightsStream",
+                "listInsightsAsync"
+              ]
+            },
+            "ListRecommendations": {
+              "methods": [
+                "listRecommendations",
+                "listRecommendationsStream",
+                "listRecommendationsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "RecommenderClient",
+          "rpcs": {
+            "GetInsight": {
+              "methods": [
+                "getInsight"
+              ]
+            },
+            "MarkInsightAccepted": {
+              "methods": [
+                "markInsightAccepted"
+              ]
+            },
+            "GetRecommendation": {
+              "methods": [
+                "getRecommendation"
+              ]
+            },
+            "MarkRecommendationClaimed": {
+              "methods": [
+                "markRecommendationClaimed"
+              ]
+            },
+            "MarkRecommendationSucceeded": {
+              "methods": [
+                "markRecommendationSucceeded"
+              ]
+            },
+            "MarkRecommendationFailed": {
+              "methods": [
+                "markRecommendationFailed"
+              ]
+            },
+            "ListInsights": {
+              "methods": [
+                "listInsights",
+                "listInsightsStream",
+                "listInsightsAsync"
+              ]
+            },
+            "ListRecommendations": {
+              "methods": [
+                "listRecommendations",
+                "listRecommendationsStream",
+                "listRecommendationsAsync"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
