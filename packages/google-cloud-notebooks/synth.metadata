@@ -4,15 +4,15 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/nodejs-notebooks.git",
-        "sha": "9ef7f235e134404a70ab95a96205d0bdf9610a85"
+        "sha": "277afd710ed4830b340f0c0f2a8f87764e8c2b84"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "5587028631d4d743fd906c4eb4e4e4649a7ee5ce",
-        "internalRef": "343187793"
+        "sha": "d189e871205fea665a9648f7c4676f027495ccaf",
+        "internalRef": "345596855"
       }
     },
     {
