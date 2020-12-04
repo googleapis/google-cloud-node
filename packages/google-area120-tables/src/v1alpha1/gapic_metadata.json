@@ -1,0 +1,121 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.area120.tables.v1alpha1",
+  "libraryPackage": "@google/area120-tables",
+  "services": {
+    "TablesService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "TablesServiceClient",
+          "rpcs": {
+            "GetTable": {
+              "methods": [
+                "getTable"
+              ]
+            },
+            "GetRow": {
+              "methods": [
+                "getRow"
+              ]
+            },
+            "CreateRow": {
+              "methods": [
+                "createRow"
+              ]
+            },
+            "BatchCreateRows": {
+              "methods": [
+                "batchCreateRows"
+              ]
+            },
+            "UpdateRow": {
+              "methods": [
+                "updateRow"
+              ]
+            },
+            "BatchUpdateRows": {
+              "methods": [
+                "batchUpdateRows"
+              ]
+            },
+            "DeleteRow": {
+              "methods": [
+                "deleteRow"
+              ]
+            },
+            "ListTables": {
+              "methods": [
+                "listTables",
+                "listTablesStream",
+                "listTablesAsync"
+              ]
+            },
+            "ListRows": {
+              "methods": [
+                "listRows",
+                "listRowsStream",
+                "listRowsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "TablesServiceClient",
+          "rpcs": {
+            "GetTable": {
+              "methods": [
+                "getTable"
+              ]
+            },
+            "GetRow": {
+              "methods": [
+                "getRow"
+              ]
+            },
+            "CreateRow": {
+              "methods": [
+                "createRow"
+              ]
+            },
+            "BatchCreateRows": {
+              "methods": [
+                "batchCreateRows"
+              ]
+            },
+            "UpdateRow": {
+              "methods": [
+                "updateRow"
+              ]
+            },
+            "BatchUpdateRows": {
+              "methods": [
+                "batchUpdateRows"
+              ]
+            },
+            "DeleteRow": {
+              "methods": [
+                "deleteRow"
+              ]
+            },
+            "ListTables": {
+              "methods": [
+                "listTables",
+                "listTablesStream",
+                "listTablesAsync"
+              ]
+            },
+            "ListRows": {
+              "methods": [
+                "listRows",
+                "listRowsStream",
+                "listRowsAsync"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
