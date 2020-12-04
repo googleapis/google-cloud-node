@@ -1,0 +1,125 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.cloud.osconfig.v1",
+  "libraryPackage": "@google-cloud/os-config",
+  "services": {
+    "OsConfigService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "OsConfigServiceClient",
+          "rpcs": {
+            "ExecutePatchJob": {
+              "methods": [
+                "executePatchJob"
+              ]
+            },
+            "GetPatchJob": {
+              "methods": [
+                "getPatchJob"
+              ]
+            },
+            "CancelPatchJob": {
+              "methods": [
+                "cancelPatchJob"
+              ]
+            },
+            "CreatePatchDeployment": {
+              "methods": [
+                "createPatchDeployment"
+              ]
+            },
+            "GetPatchDeployment": {
+              "methods": [
+                "getPatchDeployment"
+              ]
+            },
+            "DeletePatchDeployment": {
+              "methods": [
+                "deletePatchDeployment"
+              ]
+            },
+            "ListPatchJobs": {
+              "methods": [
+                "listPatchJobs",
+                "listPatchJobsStream",
+                "listPatchJobsAsync"
+              ]
+            },
+            "ListPatchJobInstanceDetails": {
+              "methods": [
+                "listPatchJobInstanceDetails",
+                "listPatchJobInstanceDetailsStream",
+                "listPatchJobInstanceDetailsAsync"
+              ]
+            },
+            "ListPatchDeployments": {
+              "methods": [
+                "listPatchDeployments",
+                "listPatchDeploymentsStream",
+                "listPatchDeploymentsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "OsConfigServiceClient",
+          "rpcs": {
+            "ExecutePatchJob": {
+              "methods": [
+                "executePatchJob"
+              ]
+            },
+            "GetPatchJob": {
+              "methods": [
+                "getPatchJob"
+              ]
+            },
+            "CancelPatchJob": {
+              "methods": [
+                "cancelPatchJob"
+              ]
+            },
+            "CreatePatchDeployment": {
+              "methods": [
+                "createPatchDeployment"
+              ]
+            },
+            "GetPatchDeployment": {
+              "methods": [
+                "getPatchDeployment"
+              ]
+            },
+            "DeletePatchDeployment": {
+              "methods": [
+                "deletePatchDeployment"
+              ]
+            },
+            "ListPatchJobs": {
+              "methods": [
+                "listPatchJobs",
+                "listPatchJobsStream",
+                "listPatchJobsAsync"
+              ]
+            },
+            "ListPatchJobInstanceDetails": {
+              "methods": [
+                "listPatchJobInstanceDetails",
+                "listPatchJobInstanceDetailsStream",
+                "listPatchJobInstanceDetailsAsync"
+              ]
+            },
+            "ListPatchDeployments": {
+              "methods": [
+                "listPatchDeployments",
+                "listPatchDeploymentsStream",
+                "listPatchDeploymentsAsync"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
