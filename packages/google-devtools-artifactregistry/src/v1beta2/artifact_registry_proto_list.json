@@ -1,0 +1,9 @@
+[
+  "../../protos/google/devtools/artifactregistry/v1beta2/file.proto",
+  "../../protos/google/devtools/artifactregistry/v1beta2/package.proto",
+  "../../protos/google/devtools/artifactregistry/v1beta2/repository.proto",
+  "../../protos/google/devtools/artifactregistry/v1beta2/service.proto",
+  "../../protos/google/devtools/artifactregistry/v1beta2/settings.proto",
+  "../../protos/google/devtools/artifactregistry/v1beta2/tag.proto",
+  "../../protos/google/devtools/artifactregistry/v1beta2/version.proto"
+]

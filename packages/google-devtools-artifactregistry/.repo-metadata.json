@@ -1,0 +1,14 @@
+{
+  "name": "artifactregistry",
+  "name_pretty": "Artifact Registry",
+  "product_documentation": "https://cloud.google.com/artifact-registry/",
+  "client_documentation": "https://googleapis.dev/nodejs/artifactregistry/latest/",
+  "issue_tracker": "https://github.com/googleapis/nodejs-artifact-registry/issues",
+  "release_level": "BETA",
+  "language": "nodejs",
+  "repo": "googleapis/nodejs-artifact-registry",
+  "distribution_name": "@google-devtools/artifact-registry",
+  "api_id": "artifactregistry.googleapis.com",
+  "requires_billing": true
+}
+
