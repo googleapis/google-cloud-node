@@ -4,15 +4,15 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/nodejs-redis.git",
-        "sha": "e37bbaf378de803390ad86dfe038c55b28cdd5ed"
+        "sha": "ef35e98abec46ef7e642f333a4063b28a032d7e0"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "2f019bf70bfe06f1e2af1b04011b0a2405190e43",
-        "internalRef": "343202295"
+        "sha": "d189e871205fea665a9648f7c4676f027495ccaf",
+        "internalRef": "345596855"
       }
     },
     {
