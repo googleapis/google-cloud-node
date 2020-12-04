@@ -4,15 +4,15 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/nodejs-video-transcoder.git",
-        "sha": "a568a4726cc5674d7e442abeab72783402f1b338"
+        "sha": "96a64935a99bc00e2f850791487e4a6e5060741a"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "37ba54d7ed4da3052ceff96292631c3b6aae0e63",
-        "internalRef": "343563501"
+        "sha": "d189e871205fea665a9648f7c4676f027495ccaf",
+        "internalRef": "345596855"
       }
     },
     {
