@@ -92,6 +92,15 @@ export interface DeleteNotificationCallback {
 }
 
 /**
+ * The API-formatted resource description of the notification.
+ *
+ * Note: This is not guaranteed to be up-to-date when accessed. To get the
+ * latest record, call the `getMetadata()` method.
+ *
+ * @name Notification#metadata
+ * @type {object}
+ */
+/**
  * A Notification object is created from your {@link Bucket} object using
  * {@link Bucket#notification}. Use it to interact with Cloud Pub/Sub
  * notifications.

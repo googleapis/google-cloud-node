@@ -49,6 +49,15 @@ export interface HmacKeyMetadataCallback {
 export type HmacKeyMetadataResponse = [HmacKeyMetadata, Metadata];
 
 /**
+ * The API-formatted resource description of the HMAC key.
+ *
+ * Note: This is not guaranteed to be up-to-date when accessed. To get the
+ * latest record, call the `getMetadata()` method.
+ *
+ * @name HmacKey#metadata
+ * @type {object}
+ */
+/**
  * An HmacKey object contains metadata of an HMAC key created from a
  * service account through the {@link Storage} client using
  * {@link Storage#createHmacKey}.

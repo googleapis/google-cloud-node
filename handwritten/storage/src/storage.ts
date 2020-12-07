@@ -168,6 +168,118 @@ export const PROTOCOL_REGEX = /^(\w*):\/\//;
  * they can be instantiated without use of the `new` keyword.
  */
 /**
+ * Cloud Storage uses access control lists (ACLs) to manage object and
+ * bucket access. ACLs are the mechanism you use to share objects with other
+ * users and allow other users to access your buckets and objects.
+ *
+ * This object provides constants to refer to the three permission levels that
+ * can be granted to an entity:
+ *
+ *   - `gcs.acl.OWNER_ROLE` - ("OWNER")
+ *   - `gcs.acl.READER_ROLE` - ("READER")
+ *   - `gcs.acl.WRITER_ROLE` - ("WRITER")
+ *
+ * @see [About Access Control Lists]{@link https://cloud.google.com/storage/docs/access-control/lists}
+ *
+ * @name Storage#acl
+ * @type {object}
+ * @property {string} OWNER_ROLE
+ * @property {string} READER_ROLE
+ * @property {string} WRITER_ROLE
+ *
+ * @example
+ * const {Storage} = require('@google-cloud/storage');
+ * const storage = new Storage();
+ * const albums = storage.bucket('albums');
+ *
+ * //-
+ * // Make all of the files currently in a bucket publicly readable.
+ * //-
+ * const options = {
+ *   entity: 'allUsers',
+ *   role: storage.acl.READER_ROLE
+ * };
+ *
+ * albums.acl.add(options, function(err, aclObject) {});
+ *
+ * //-
+ * // Make any new objects added to a bucket publicly readable.
+ * //-
+ * albums.acl.default.add(options, function(err, aclObject) {});
+ *
+ * //-
+ * // Grant a user ownership permissions to a bucket.
+ * //-
+ * albums.acl.add({
+ *   entity: 'user-useremail@example.com',
+ *   role: storage.acl.OWNER_ROLE
+ * }, function(err, aclObject) {});
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * albums.acl.add(options).then(function(data) {
+ *   const aclObject = data[0];
+ *   const apiResponse = data[1];
+ * });
+ */
+/**
+ * Get {@link Bucket} objects for all of the buckets in your project as
+ * a readable object stream.
+ *
+ * @method Storage#getBucketsStream
+ * @param {GetBucketsRequest} [query] Query object for listing buckets.
+ * @returns {ReadableStream} A readable stream that emits {@link Bucket}
+ *     instances.
+ *
+ * @example
+ * storage.getBucketsStream()
+ *   .on('error', console.error)
+ *   .on('data', function(bucket) {
+ *     // bucket is a Bucket object.
+ *   })
+ *   .on('end', function() {
+ *     // All buckets retrieved.
+ *   });
+ *
+ * //-
+ * // If you anticipate many results, you can end a stream early to prevent
+ * // unnecessary processing and API requests.
+ * //-
+ * storage.getBucketsStream()
+ *   .on('data', function(bucket) {
+ *     this.end();
+ *   });
+ */
+/**
+ * Get {@link HmacKey} objects for all of the HMAC keys in the project in a
+ * readable object stream.
+ *
+ * @method Storage#getHmacKeysStream
+ * @param {GetHmacKeysOptions} [options] Configuration options.
+ * @returns {ReadableStream} A readable stream that emits {@link HmacKey}
+ *     instances.
+ *
+ * @example
+ * storage.getHmacKeysStream()
+ *   .on('error', console.error)
+ *   .on('data', function(hmacKey) {
+ *     // hmacKey is an HmacKey object.
+ *   })
+ *   .on('end', function() {
+ *     // All HmacKey retrieved.
+ *   });
+ *
+ * //-
+ * // If you anticipate many results, you can end a stream early to prevent
+ * // unnecessary processing and API requests.
+ * //-
+ * storage.getHmacKeysStream()
+ *   .on('data', function(bucket) {
+ *     this.end();
+ *   });
+ */
+/**
  * <h4>ACLs</h4>
  * Cloud Storage uses access control lists (ACLs) to manage object and
  * bucket access. ACLs are the mechanism you use to share files with other users
@@ -218,62 +330,6 @@ export class Storage extends Service {
    */
   static HmacKey: typeof HmacKey = HmacKey;
 
-  /**
-   * Cloud Storage uses access control lists (ACLs) to manage object and
-   * bucket access. ACLs are the mechanism you use to share objects with other
-   * users and allow other users to access your buckets and objects.
-   *
-   * This object provides constants to refer to the three permission levels that
-   * can be granted to an entity:
-   *
-   *   - `gcs.acl.OWNER_ROLE` - ("OWNER")
-   *   - `gcs.acl.READER_ROLE` - ("READER")
-   *   - `gcs.acl.WRITER_ROLE` - ("WRITER")
-   *
-   * @see [About Access Control Lists]{@link https://cloud.google.com/storage/docs/access-control/lists}
-   *
-   * @name Storage.acl
-   * @type {object}
-   * @property {string} OWNER_ROLE
-   * @property {string} READER_ROLE
-   * @property {string} WRITER_ROLE
-   *
-   * @example
-   * const {Storage} = require('@google-cloud/storage');
-   * const storage = new Storage();
-   * const albums = storage.bucket('albums');
-   *
-   * //-
-   * // Make all of the files currently in a bucket publicly readable.
-   * //-
-   * const options = {
-   *   entity: 'allUsers',
-   *   role: storage.acl.READER_ROLE
-   * };
-   *
-   * albums.acl.add(options, function(err, aclObject) {});
-   *
-   * //-
-   * // Make any new objects added to a bucket publicly readable.
-   * //-
-   * albums.acl.default.add(options, function(err, aclObject) {});
-   *
-   * //-
-   * // Grant a user ownership permissions to a bucket.
-   * //-
-   * albums.acl.add({
-   *   entity: 'user-useremail@example.com',
-   *   role: storage.acl.OWNER_ROLE
-   * }, function(err, aclObject) {});
-   *
-   * //-
-   * // If the callback is omitted, we'll return a Promise.
-   * //-
-   * albums.acl.add(options).then(function(data) {
-   *   const aclObject = data[0];
-   *   const apiResponse = data[1];
-   * });
-   */
   static acl = {
     OWNER_ROLE: 'OWNER',
     READER_ROLE: 'READER',
@@ -288,62 +344,7 @@ export class Storage extends Service {
    */
   acl: typeof Storage.acl;
 
-  /**
-   * Get {@link Bucket} objects for all of the buckets in your project as
-   * a readable object stream.
-   *
-   * @method Storage#getBucketsStream
-   * @param {GetBucketsRequest} [query] Query object for listing buckets.
-   * @returns {ReadableStream} A readable stream that emits {@link Bucket} instances.
-   *
-   * @example
-   * storage.getBucketsStream()
-   *   .on('error', console.error)
-   *   .on('data', function(bucket) {
-   *     // bucket is a Bucket object.
-   *   })
-   *   .on('end', function() {
-   *     // All buckets retrieved.
-   *   });
-   *
-   * //-
-   * // If you anticipate many results, you can end a stream early to prevent
-   * // unnecessary processing and API requests.
-   * //-
-   * storage.getBucketsStream()
-   *   .on('data', function(bucket) {
-   *     this.end();
-   *   });
-   */
   getBucketsStream: () => Readable;
-
-  /**
-   * Get {@link HmacKey} objects for all of the HMAC keys in the project in
-   * a readable object stream.
-   *
-   * @method Storage#getHmacKeysStream
-   * @param {GetHmacKeysOptions} [options] Configuration options.
-   * @returns {ReadableStream} A readable stream that emits {@link HmacKey} instances.
-   *
-   * @example
-   * storage.getHmacKeysStream()
-   *   .on('error', console.error)
-   *   .on('data', function(hmacKey) {
-   *     // hmacKey is an HmacKey object.
-   *   })
-   *   .on('end', function() {
-   *     // All HmacKey retrieved.
-   *   });
-   *
-   * //-
-   * // If you anticipate many results, you can end a stream early to prevent
-   * // unnecessary processing and API requests.
-   * //-
-   * storage.getHmacKeysStream()
-   *   .on('data', function(bucket) {
-   *     this.end();
-   *   });
-   */
   getHmacKeysStream: () => Readable;
 
   /**

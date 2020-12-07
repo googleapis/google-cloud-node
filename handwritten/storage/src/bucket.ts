@@ -379,6 +379,197 @@ type MakeAllFilesPublicPrivateResponse = [File[]];
 const RESUMABLE_THRESHOLD = 5000000;
 
 /**
+ * Get and set IAM policies for your bucket.
+ *
+ * @name Bucket#iam
+ * @mixes Iam
+ *
+ * @see [Cloud Storage IAM Management](https://cloud.google.com/storage/docs/access-control/iam#short_title_iam_management)
+ * @see [Granting, Changing, and Revoking Access](https://cloud.google.com/iam/docs/granting-changing-revoking-access)
+ * @see [IAM Roles](https://cloud.google.com/iam/docs/understanding-roles)
+ *
+ * @example
+ * const {Storage} = require('@google-cloud/storage');
+ * const storage = new Storage();
+ * const bucket = storage.bucket('albums');
+ *
+ * //-
+ * // Get the IAM policy for your bucket.
+ * //-
+ * bucket.iam.getPolicy(function(err, policy) {
+ *   console.log(policy);
+ * });
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * bucket.iam.getPolicy().then(function(data) {
+ *   const policy = data[0];
+ *   const apiResponse = data[1];
+ * });
+ *
+ * @example <caption>include:samples/iam.js</caption>
+ * region_tag:storage_view_bucket_iam_members
+ * Example of retrieving a bucket's IAM policy:
+ *
+ * @example <caption>include:samples/iam.js</caption>
+ * region_tag:storage_add_bucket_iam_member
+ * Example of adding to a bucket's IAM policy:
+ *
+ * @example <caption>include:samples/iam.js</caption>
+ * region_tag:storage_remove_bucket_iam_member
+ * Example of removing from a bucket's IAM policy:
+ */
+/**
+ * Cloud Storage uses access control lists (ACLs) to manage object and
+ * bucket access. ACLs are the mechanism you use to share objects with other
+ * users and allow other users to access your buckets and objects.
+ *
+ * An ACL consists of one or more entries, where each entry grants permissions
+ * to an entity. Permissions define the actions that can be performed against
+ * an object or bucket (for example, `READ` or `WRITE`); the entity defines
+ * who the permission applies to (for example, a specific user or group of
+ * users).
+ *
+ * The `acl` object on a Bucket instance provides methods to get you a list of
+ * the ACLs defined on your bucket, as well as set, update, and delete them.
+ *
+ * Buckets also have
+ * [default
+ * ACLs](https://cloud.google.com/storage/docs/access-control/lists#default)
+ * for all created files. Default ACLs specify permissions that all new
+ * objects added to the bucket will inherit by default. You can add, delete,
+ * get, and update entities and permissions for these as well with
+ * {@link Bucket#acl.default}.
+ *
+ * @see [About Access Control Lists]{@link http://goo.gl/6qBBPO}
+ * @see [Default ACLs]{@link https://cloud.google.com/storage/docs/access-control/lists#default}
+ *
+ * @name Bucket#acl
+ * @mixes Acl
+ * @property {Acl} default Cloud Storage Buckets have
+ * [default
+ * ACLs](https://cloud.google.com/storage/docs/access-control/lists#default)
+ * for all created files. You can add, delete, get, and update entities and
+ * permissions for these as well. The method signatures and examples are all
+ * the same, after only prefixing the method call with `default`.
+ *
+ * @example
+ * const {Storage} = require('@google-cloud/storage');
+ * const storage = new Storage();
+ *
+ * //-
+ * // Make a bucket's contents publicly readable.
+ * //-
+ * const myBucket = storage.bucket('my-bucket');
+ *
+ * const options = {
+ *   entity: 'allUsers',
+ *   role: storage.acl.READER_ROLE
+ * };
+ *
+ * myBucket.acl.add(options, function(err, aclObject) {});
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * myBucket.acl.add(options).then(function(data) {
+ *   const aclObject = data[0];
+ *   const apiResponse = data[1];
+ * });
+ *
+ * @example <caption>include:samples/acl.js</caption>
+ * region_tag:storage_print_bucket_acl
+ * Example of printing a bucket's ACL:
+ *
+ * @example <caption>include:samples/acl.js</caption>
+ * region_tag:storage_print_bucket_acl_for_user
+ * Example of printing a bucket's ACL for a specific user:
+ *
+ * @example <caption>include:samples/acl.js</caption>
+ * region_tag:storage_add_bucket_owner
+ * Example of adding an owner to a bucket:
+ *
+ * @example <caption>include:samples/acl.js</caption>
+ * region_tag:storage_remove_bucket_owner
+ * Example of removing an owner from a bucket:
+ *
+ * @example <caption>include:samples/acl.js</caption>
+ * region_tag:storage_add_bucket_default_owner
+ * Example of adding a default owner to a bucket:
+ *
+ * @example <caption>include:samples/acl.js</caption>
+ * region_tag:storage_remove_bucket_default_owner
+ * Example of removing a default owner from a bucket:
+ */
+/**
+ * The API-formatted resource description of the bucket.
+ *
+ * Note: This is not guaranteed to be up-to-date when accessed. To get the
+ * latest record, call the `getMetadata()` method.
+ *
+ * @name Bucket#metadata
+ * @type {object}
+ */
+/**
+ * The bucket's name.
+ * @name Bucket#name
+ * @type {string}
+ */
+/**
+ * Get {@link File} objects for the files currently in the bucket as a
+ * readable object stream.
+ *
+ * @method Bucket#getFilesStream
+ * @param {GetFilesOptions} [query] Query object for listing files.
+ * @returns {ReadableStream} A readable stream that emits {@link File} instances.
+ *
+ * @example
+ * const {Storage} = require('@google-cloud/storage');
+ * const storage = new Storage();
+ * const bucket = storage.bucket('albums');
+ *
+ * bucket.getFilesStream()
+ *   .on('error', console.error)
+ *   .on('data', function(file) {
+ *     // file is a File object.
+ *   })
+ *   .on('end', function() {
+ *     // All files retrieved.
+ *   });
+ *
+ * //-
+ * // If you anticipate many results, you can end a stream early to prevent
+ * // unnecessary processing and API requests.
+ * //-
+ * bucket.getFilesStream()
+ *   .on('data', function(file) {
+ *     this.end();
+ *   });
+ *
+ * //-
+ * // If you're filtering files with a delimiter, you should use
+ * // {@link Bucket#getFiles} and set `autoPaginate: false` in order to
+ * // preserve the `apiResponse` argument.
+ * //-
+ * const prefixes = [];
+ *
+ * function callback(err, files, nextQuery, apiResponse) {
+ *   prefixes = prefixes.concat(apiResponse.prefixes);
+ *
+ *   if (nextQuery) {
+ *     bucket.getFiles(nextQuery, callback);
+ *   } else {
+ *     // prefixes = The finished array of prefixes.
+ *   }
+ * }
+ *
+ * bucket.getFiles({
+ *   autoPaginate: false,
+ *   delimiter: '/'
+ * }, callback);
+ */
+/**
  * Create a Bucket object to interact with a Cloud Storage bucket.
  *
  * @class
@@ -395,11 +586,7 @@ const RESUMABLE_THRESHOLD = 5000000;
  * const bucket = storage.bucket('albums');
  */
 class Bucket extends ServiceObject {
-  /**
-   * The bucket's name.
-   * @name Bucket#name
-   * @type {string}
-   */
+  metadata: Metadata;
   name: string;
 
   /**
@@ -417,187 +604,9 @@ class Bucket extends ServiceObject {
    */
   userProject?: string;
 
-  /**
-   * Cloud Storage uses access control lists (ACLs) to manage object and
-   * bucket access. ACLs are the mechanism you use to share objects with other
-   * users and allow other users to access your buckets and objects.
-   *
-   * An ACL consists of one or more entries, where each entry grants permissions
-   * to an entity. Permissions define the actions that can be performed against
-   * an object or bucket (for example, `READ` or `WRITE`); the entity defines
-   * who the permission applies to (for example, a specific user or group of
-   * users).
-   *
-   * The `acl` object on a Bucket instance provides methods to get you a list of
-   * the ACLs defined on your bucket, as well as set, update, and delete them.
-   *
-   * Buckets also have
-   * [default
-   * ACLs](https://cloud.google.com/storage/docs/access-control/lists#default)
-   * for all created files. Default ACLs specify permissions that all new
-   * objects added to the bucket will inherit by default. You can add, delete,
-   * get, and update entities and permissions for these as well with
-   * {@link Bucket#acl.default}.
-   *
-   * @see [About Access Control Lists]{@link http://goo.gl/6qBBPO}
-   * @see [Default ACLs]{@link https://cloud.google.com/storage/docs/access-control/lists#default}
-   *
-   * @name Bucket#acl
-   * @mixes Acl
-   * @property {Acl} default Cloud Storage Buckets have
-   * [default
-   * ACLs](https://cloud.google.com/storage/docs/access-control/lists#default)
-   * for all created files. You can add, delete, get, and update entities and
-   * permissions for these as well. The method signatures and examples are all
-   * the same, after only prefixing the method call with `default`.
-   *
-   * @example
-   * const {Storage} = require('@google-cloud/storage');
-   * const storage = new Storage();
-   *
-   * //-
-   * // Make a bucket's contents publicly readable.
-   * //-
-   * const myBucket = storage.bucket('my-bucket');
-   *
-   * const options = {
-   *   entity: 'allUsers',
-   *   role: storage.acl.READER_ROLE
-   * };
-   *
-   * myBucket.acl.add(options, function(err, aclObject) {});
-   *
-   * //-
-   * // If the callback is omitted, we'll return a Promise.
-   * //-
-   * myBucket.acl.add(options).then(function(data) {
-   *   const aclObject = data[0];
-   *   const apiResponse = data[1];
-   * });
-   *
-   * @example <caption>include:samples/acl.js</caption>
-   * region_tag:storage_print_bucket_acl
-   * Example of printing a bucket's ACL:
-   *
-   * @example <caption>include:samples/acl.js</caption>
-   * region_tag:storage_print_bucket_acl_for_user
-   * Example of printing a bucket's ACL for a specific user:
-   *
-   * @example <caption>include:samples/acl.js</caption>
-   * region_tag:storage_add_bucket_owner
-   * Example of adding an owner to a bucket:
-   *
-   * @example <caption>include:samples/acl.js</caption>
-   * region_tag:storage_remove_bucket_owner
-   * Example of removing an owner from a bucket:
-   *
-   * @example <caption>include:samples/acl.js</caption>
-   * region_tag:storage_add_bucket_default_owner
-   * Example of adding a default owner to a bucket:
-   *
-   * @example <caption>include:samples/acl.js</caption>
-   * region_tag:storage_remove_bucket_default_owner
-   * Example of removing a default owner from a bucket:
-   */
   acl: Acl;
-
-  /**
-   * Get and set IAM policies for your bucket.
-   *
-   * @name Bucket#iam
-   * @mixes Iam
-   *
-   * @see [Cloud Storage IAM Management](https://cloud.google.com/storage/docs/access-control/iam#short_title_iam_management)
-   * @see [Granting, Changing, and Revoking Access](https://cloud.google.com/iam/docs/granting-changing-revoking-access)
-   * @see [IAM Roles](https://cloud.google.com/iam/docs/understanding-roles)
-   *
-   * @example
-   * const {Storage} = require('@google-cloud/storage');
-   * const storage = new Storage();
-   * const bucket = storage.bucket('albums');
-   *
-   * //-
-   * // Get the IAM policy for your bucket.
-   * //-
-   * bucket.iam.getPolicy(function(err, policy) {
-   *   console.log(policy);
-   * });
-   *
-   * //-
-   * // If the callback is omitted, we'll return a Promise.
-   * //-
-   * bucket.iam.getPolicy().then(function(data) {
-   *   const policy = data[0];
-   *   const apiResponse = data[1];
-   * });
-   *
-   * @example <caption>include:samples/iam.js</caption>
-   * region_tag:storage_view_bucket_iam_members
-   * Example of retrieving a bucket's IAM policy:
-   *
-   * @example <caption>include:samples/iam.js</caption>
-   * region_tag:storage_add_bucket_iam_member
-   * Example of adding to a bucket's IAM policy:
-   *
-   * @example <caption>include:samples/iam.js</caption>
-   * region_tag:storage_remove_bucket_iam_member
-   * Example of removing from a bucket's IAM policy:
-   */
   iam: Iam;
 
-  /**
-   * Get {@link File} objects for the files currently in the bucket as a
-   * readable object stream.
-   *
-   * @method Bucket#getFilesStream
-   * @param {GetFilesOptions} [query] Query object for listing files.
-   * @returns {ReadableStream} A readable stream that emits {@link File} instances.
-   *
-   * @example
-   * const {Storage} = require('@google-cloud/storage');
-   * const storage = new Storage();
-   * const bucket = storage.bucket('albums');
-   *
-   * bucket.getFilesStream()
-   *   .on('error', console.error)
-   *   .on('data', function(file) {
-   *     // file is a File object.
-   *   })
-   *   .on('end', function() {
-   *     // All files retrieved.
-   *   });
-   *
-   * //-
-   * // If you anticipate many results, you can end a stream early to prevent
-   * // unnecessary processing and API requests.
-   * //-
-   * bucket.getFilesStream()
-   *   .on('data', function(file) {
-   *     this.end();
-   *   });
-   *
-   * //-
-   * // If you're filtering files with a delimiter, you should use
-   * // {@link Bucket#getFiles} and set `autoPaginate: false` in order to
-   * // preserve the `apiResponse` argument.
-   * //-
-   * const prefixes = [];
-   *
-   * function callback(err, files, nextQuery, apiResponse) {
-   *   prefixes = prefixes.concat(apiResponse.prefixes);
-   *
-   *   if (nextQuery) {
-   *     bucket.getFiles(nextQuery, callback);
-   *   } else {
-   *     // prefixes = The finished array of prefixes.
-   *   }
-   * }
-   *
-   * bucket.getFiles({
-   *   autoPaginate: false,
-   *   delimiter: '/'
-   * }, callback);
-   */
   getFilesStream: Function;
   signer?: URLSigner;
 

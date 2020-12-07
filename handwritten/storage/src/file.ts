@@ -394,6 +394,24 @@ const SEVEN_DAYS = 7 * 24 * 60 * 60;
  * @class
  */
 class File extends ServiceObject<File> {
+  acl: Acl;
+
+  bucket: Bucket;
+  storage: Storage;
+  kmsKeyName?: string;
+  userProject?: string;
+  signer?: URLSigner;
+  metadata: Metadata;
+  name: string;
+
+  generation?: number;
+  parent!: Bucket;
+
+  private encryptionKey?: string | Buffer;
+  private encryptionKeyBase64?: string;
+  private encryptionKeyHash?: string;
+  private encryptionKeyInterceptor?: Interceptor;
+
   /**
    * Cloud Storage uses access control lists (ACLs) to manage object and
    * bucket access. ACLs are the mechanism you use to share objects with other
@@ -437,22 +455,20 @@ class File extends ServiceObject<File> {
    *   const apiResponse = data[1];
    * });
    */
-  acl: Acl;
-
-  bucket: Bucket;
-  storage: Storage;
-  kmsKeyName?: string;
-  userProject?: string;
-  signer?: URLSigner;
-  name: string;
-  generation?: number;
-  parent!: Bucket;
-
-  private encryptionKey?: string | Buffer;
-  private encryptionKeyBase64?: string;
-  private encryptionKeyHash?: string;
-  private encryptionKeyInterceptor?: Interceptor;
-
+  /**
+   * The API-formatted resource description of the file.
+   *
+   * Note: This is not guaranteed to be up-to-date when accessed. To get the
+   * latest record, call the `getMetadata()` method.
+   *
+   * @name File#metadata
+   * @type {object}
+   */
+  /**
+   * The file's name.
+   * @name File#name
+   * @type {string}
+   */
   /**
    * @typedef {object} FileOptions Options passed to the File constructor.
    * @property {string} [encryptionKey] A custom encryption key.
