@@ -4,27 +4,34 @@
   "language": "typescript",
   "protoPackage": "google.cloud.asset.v1p5beta1",
   "libraryPackage": "asset",
-  "services": {"AssetService": {"clients": {
+  "services": {
+    "AssetService": {
+      "clients": {
         "grpc": {
           "libraryClient": "AssetServiceClient",
-          "rpcs": {"ListAssets": {
+          "rpcs": {
+            "ListAssets": {
               "methods": [
-                            "listAssets",
-                            "listAssetsStream",
-                            "listAssetsAsync"
+                "listAssets",
+                "listAssetsStream",
+                "listAssetsAsync"
               ]
-            }}
+            }
+          }
         },
         "grpc-fallback": {
           "libraryClient": "AssetServiceClient",
-          "rpcs": {,"ListAssets": {
+          "rpcs": {
+            "ListAssets": {
               "methods": [
-                            "listAssets",
-                            "listAssetsStream",
-                            "listAssetsAsync"
+                "listAssets",
+                "listAssetsStream",
+                "listAssetsAsync"
               ]
-            }}
+            }
+          }
         }
       }
-    }}
+    }
+  }
 }
