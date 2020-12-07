@@ -4,105 +4,170 @@
   "language": "typescript",
   "protoPackage": "google.cloud.billing.v1",
   "libraryPackage": "@google-cloud/billing",
-  "services": {"CloudBilling": {"clients": {
+  "services": {
+    "CloudBilling": {
+      "clients": {
         "grpc": {
           "libraryClient": "CloudBillingClient",
-          "rpcs": {"GetBillingAccount": {
-              "methods": ["getBillingAccount"]
-            },"UpdateBillingAccount": {
-              "methods": ["updateBillingAccount"]
-            },"CreateBillingAccount": {
-              "methods": ["createBillingAccount"]
-            },"GetProjectBillingInfo": {
-              "methods": ["getProjectBillingInfo"]
-            },"UpdateProjectBillingInfo": {
-              "methods": ["updateProjectBillingInfo"]
-            },"GetIamPolicy": {
-              "methods": ["getIamPolicy"]
-            },"SetIamPolicy": {
-              "methods": ["setIamPolicy"]
-            },"TestIamPermissions": {
-              "methods": ["testIamPermissions"]
-            },"ListBillingAccounts": {
+          "rpcs": {
+            "GetBillingAccount": {
               "methods": [
-                            "listBillingAccounts",
-                            "listBillingAccountsStream",
-                            "listBillingAccountsAsync"
+                "getBillingAccount"
               ]
-            },"ListProjectBillingInfo": {
+            },
+            "UpdateBillingAccount": {
               "methods": [
-                            "listProjectBillingInfo",
-                            "listProjectBillingInfoStream",
-                            "listProjectBillingInfoAsync"
+                "updateBillingAccount"
               ]
-            }}
+            },
+            "CreateBillingAccount": {
+              "methods": [
+                "createBillingAccount"
+              ]
+            },
+            "GetProjectBillingInfo": {
+              "methods": [
+                "getProjectBillingInfo"
+              ]
+            },
+            "UpdateProjectBillingInfo": {
+              "methods": [
+                "updateProjectBillingInfo"
+              ]
+            },
+            "GetIamPolicy": {
+              "methods": [
+                "getIamPolicy"
+              ]
+            },
+            "SetIamPolicy": {
+              "methods": [
+                "setIamPolicy"
+              ]
+            },
+            "TestIamPermissions": {
+              "methods": [
+                "testIamPermissions"
+              ]
+            },
+            "ListBillingAccounts": {
+              "methods": [
+                "listBillingAccounts",
+                "listBillingAccountsStream",
+                "listBillingAccountsAsync"
+              ]
+            },
+            "ListProjectBillingInfo": {
+              "methods": [
+                "listProjectBillingInfo",
+                "listProjectBillingInfoStream",
+                "listProjectBillingInfoAsync"
+              ]
+            }
+          }
         },
         "grpc-fallback": {
           "libraryClient": "CloudBillingClient",
-          "rpcs": {"GetBillingAccount": {
-              "methods": ["getBillingAccount"]
-            },"UpdateBillingAccount": {
-              "methods": ["updateBillingAccount"]
-            },"CreateBillingAccount": {
-              "methods": ["createBillingAccount"]
-            },"GetProjectBillingInfo": {
-              "methods": ["getProjectBillingInfo"]
-            },"UpdateProjectBillingInfo": {
-              "methods": ["updateProjectBillingInfo"]
-            },"GetIamPolicy": {
-              "methods": ["getIamPolicy"]
-            },"SetIamPolicy": {
-              "methods": ["setIamPolicy"]
-            },"TestIamPermissions": {
-              "methods": ["testIamPermissions"]
-            },"ListBillingAccounts": {
+          "rpcs": {
+            "GetBillingAccount": {
               "methods": [
-                            "listBillingAccounts",
-                            "listBillingAccountsStream",
-                            "listBillingAccountsAsync"
+                "getBillingAccount"
               ]
-            },"ListProjectBillingInfo": {
+            },
+            "UpdateBillingAccount": {
               "methods": [
-                            "listProjectBillingInfo",
-                            "listProjectBillingInfoStream",
-                            "listProjectBillingInfoAsync"
+                "updateBillingAccount"
               ]
-            }}
+            },
+            "CreateBillingAccount": {
+              "methods": [
+                "createBillingAccount"
+              ]
+            },
+            "GetProjectBillingInfo": {
+              "methods": [
+                "getProjectBillingInfo"
+              ]
+            },
+            "UpdateProjectBillingInfo": {
+              "methods": [
+                "updateProjectBillingInfo"
+              ]
+            },
+            "GetIamPolicy": {
+              "methods": [
+                "getIamPolicy"
+              ]
+            },
+            "SetIamPolicy": {
+              "methods": [
+                "setIamPolicy"
+              ]
+            },
+            "TestIamPermissions": {
+              "methods": [
+                "testIamPermissions"
+              ]
+            },
+            "ListBillingAccounts": {
+              "methods": [
+                "listBillingAccounts",
+                "listBillingAccountsStream",
+                "listBillingAccountsAsync"
+              ]
+            },
+            "ListProjectBillingInfo": {
+              "methods": [
+                "listProjectBillingInfo",
+                "listProjectBillingInfoStream",
+                "listProjectBillingInfoAsync"
+              ]
+            }
+          }
         }
       }
-    },"CloudCatalog": {"clients": {
+    },
+    "CloudCatalog": {
+      "clients": {
         "grpc": {
           "libraryClient": "CloudCatalogClient",
-          "rpcs": {"ListServices": {
+          "rpcs": {
+            "ListServices": {
               "methods": [
-                            "listServices",
-                            "listServicesStream",
-                            "listServicesAsync"
+                "listServices",
+                "listServicesStream",
+                "listServicesAsync"
               ]
-            },"ListSkus": {
+            },
+            "ListSkus": {
               "methods": [
-                            "listSkus",
-                            "listSkusStream",
-                            "listSkusAsync"
+                "listSkus",
+                "listSkusStream",
+                "listSkusAsync"
               ]
-            }}
+            }
+          }
         },
         "grpc-fallback": {
           "libraryClient": "CloudCatalogClient",
-          "rpcs": {,"ListServices": {
+          "rpcs": {
+            "ListServices": {
               "methods": [
-                            "listServices",
-                            "listServicesStream",
-                            "listServicesAsync"
+                "listServices",
+                "listServicesStream",
+                "listServicesAsync"
               ]
-            },"ListSkus": {
+            },
+            "ListSkus": {
               "methods": [
-                            "listSkus",
-                            "listSkusStream",
-                            "listSkusAsync"
+                "listSkus",
+                "listSkusStream",
+                "listSkusAsync"
               ]
-            }}
+            }
+          }
         }
       }
-    }}
+    }
+  }
 }
