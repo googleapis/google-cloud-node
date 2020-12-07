@@ -276,6 +276,7 @@ export type GetNotificationsResponse = [Notification[], Metadata];
 export interface MakeBucketPrivateOptions {
   includeFiles?: boolean;
   force?: boolean;
+  metadata?: Metadata;
   userProject?: string;
 }
 
@@ -2657,6 +2658,8 @@ class Bucket extends ServiceObject {
    * @typedef {object} MakeBucketPrivateOptions
    * @param {boolean} [includeFiles=false] Make each file in the bucket
    *     private.
+   * @param {Metadata} [metadata] Define custom metadata properties to define
+   *     along with the operation.
    * @param {boolean} [force] Queue errors occurred while making files
    *     private until all files have been processed.
    * @param {string} [userProject] The ID of the project which will be
@@ -2752,14 +2755,11 @@ class Bucket extends ServiceObject {
       query.userProject = options.userProject;
     }
 
-    this.setMetadata(
-      {
-        // You aren't allowed to set both predefinedAcl & acl properties on
-        // a bucket so acl must explicitly be nullified.
-        acl: null,
-      },
-      query
-    )
+    // You aren't allowed to set both predefinedAcl & acl properties on a bucket
+    // so acl must explicitly be nullified.
+    const metadata = extend({}, options.metadata, {acl: null});
+
+    this.setMetadata(metadata, query)
       .then(() => {
         if (options.includeFiles) {
           return promisify(this.makeAllFilesPublicPrivate_).call(this, options);

@@ -3429,6 +3429,22 @@ describe('File', () => {
       file.makePrivate({strict: true}, util.noop);
     });
 
+    it('should accept metadata', done => {
+      const options = {
+        metadata: {a: 'b', c: 'd'},
+      };
+      file.setMetadata = (metadata: {}) => {
+        assert.deepStrictEqual(metadata, {
+          acl: null,
+          ...options.metadata,
+        });
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        assert.strictEqual(typeof (options.metadata as any).acl, 'undefined');
+        done();
+      };
+      file.makePrivate(options, assert.ifError);
+    });
+
     it('should accept userProject', done => {
       const options = {
         userProject: 'user-project-id',

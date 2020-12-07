@@ -217,6 +217,7 @@ export interface CreateWriteStreamOptions extends CreateResumableUploadOptions {
 }
 
 export interface MakeFilePrivateOptions {
+  metadata?: Metadata;
   strict?: boolean;
   userProject?: string;
 }
@@ -2977,6 +2978,8 @@ class File extends ServiceObject<File> {
   ): void;
   /**
    * @typedef {object} MakeFilePrivateOptions Configuration options for File#makePrivate().
+   * @property {Metadata} [metadata] Define custom metadata properties to define
+   *     along with the operation.
    * @property {boolean} [strict] If true, set the file to be private to
    *     only the owner user. Otherwise, it will be private to the project.
    * @property {string} [userProject] The ID of the project which will be
@@ -3043,16 +3046,12 @@ class File extends ServiceObject<File> {
       query.userProject = options.userProject;
     }
 
-    this.setMetadata(
-      {
-        // You aren't allowed to set both predefinedAcl & acl properties on a
-        // file, so acl must explicitly be nullified, destroying all previous
-        // acls on the file.
-        acl: null,
-      },
-      query,
-      callback!
-    );
+    // You aren't allowed to set both predefinedAcl & acl properties on a file,
+    // so acl must explicitly be nullified, destroying all previous acls on the
+    // file.
+    const metadata = extend({}, options.metadata, {acl: null});
+
+    this.setMetadata(metadata, query, callback!);
   }
 
   makePublic(): Promise<MakeFilePublicResponse>;
