@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-translate?activeTab=versions
 
+### [6.0.5](https://www.github.com/googleapis/nodejs-translate/compare/v6.0.4...v6.0.5) (2020-12-04)
+
+
+### Bug Fixes
+
+* **browser:** check for fetch on window ([de3e562](https://www.github.com/googleapis/nodejs-translate/commit/de3e5624981cd07249bd2aad6fcb0f53a6383a3f))
+
 ### [6.0.4](https://www.github.com/googleapis/nodejs-translate/compare/v6.0.3...v6.0.4) (2020-11-07)
 
 
