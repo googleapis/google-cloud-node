@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/video-intelligence?activeTab=versions
 
+## [3.2.0](https://www.github.com/googleapis/nodejs-video-intelligence/compare/v3.1.2...v3.2.0) (2020-12-08)
+
+
+### Features
+
+* person detection samples to GA ([#504](https://www.github.com/googleapis/nodejs-video-intelligence/issues/504)) ([eec2a65](https://www.github.com/googleapis/nodejs-video-intelligence/commit/eec2a653aa635716c2d455152867ea2eef10d284))
+
 ### [3.1.2](https://www.github.com/googleapis/nodejs-video-intelligence/compare/v3.1.1...v3.1.2) (2020-11-25)
 
 
