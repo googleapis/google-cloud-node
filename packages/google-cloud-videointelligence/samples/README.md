@@ -12,6 +12,8 @@
 
 * [Before you begin](#before-you-begin)
 * [Samples](#samples)
+  * [Analyze-person-detection-gcs](#analyze-person-detection-gcs)
+  * [Analyze-person-detection](#analyze-person-detection)
   * [Analyze-streaming-annotation-to-storage](#analyze-streaming-annotation-to-storage)
   * [Analyze-streaming-automl-classification](#analyze-streaming-automl-classification)
   * [Analyze-streaming-labels](#analyze-streaming-labels)
@@ -22,8 +24,6 @@
   * [Analyze.v1p2beta1](#analyze.v1p2beta1)
   * [Analyze_face_detection](#analyze_face_detection)
   * [Analyze_face_detection_gcs](#analyze_face_detection_gcs)
-  * [Analyze_person_detection](#analyze_person_detection)
-  * [Analyze_person_detection_gcs](#analyze_person_detection_gcs)
   * [Detect_logo](#detect_logo)
   * [Detect_logo_gcs](#detect_logo_gcs)
   * [Quickstart](#quickstart)
@@ -40,6 +40,40 @@ Before running the samples, make sure you've followed the steps outlined in
 `cd ..`
 
 ## Samples
+
+
+
+### Analyze-person-detection-gcs
+
+View the [source code](https://github.com/googleapis/nodejs-video-intelligence/blob/master/samples/analyze-person-detection-gcs.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-video-intelligence&page=editor&open_in_editor=samples/analyze-person-detection-gcs.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/analyze-person-detection-gcs.js`
+
+
+-----
+
+
+
+
+### Analyze-person-detection
+
+View the [source code](https://github.com/googleapis/nodejs-video-intelligence/blob/master/samples/analyze-person-detection.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-video-intelligence&page=editor&open_in_editor=samples/analyze-person-detection.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/analyze-person-detection.js`
+
+
+-----
+
 
 
 
@@ -206,40 +240,6 @@ __Usage:__
 
 
 `node samples/analyze_face_detection_gcs.js`
-
-
------
-
-
-
-
-### Analyze_person_detection
-
-View the [source code](https://github.com/googleapis/nodejs-video-intelligence/blob/master/samples/analyze_person_detection.js).
-
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-video-intelligence&page=editor&open_in_editor=samples/analyze_person_detection.js,samples/README.md)
-
-__Usage:__
-
-
-`node samples/analyze_person_detection.js`
-
-
------
-
-
-
-
-### Analyze_person_detection_gcs
-
-View the [source code](https://github.com/googleapis/nodejs-video-intelligence/blob/master/samples/analyze_person_detection_gcs.js).
-
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-video-intelligence&page=editor&open_in_editor=samples/analyze_person_detection_gcs.js,samples/README.md)
-
-__Usage:__
-
-
-`node samples/analyze_person_detection_gcs.js`
 
 
 -----
