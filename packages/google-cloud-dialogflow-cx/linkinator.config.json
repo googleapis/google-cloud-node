@@ -3,10 +3,7 @@
   "skip": [
     "https://codecov.io/gh/googleapis/",
     "www.googleapis.com",
-    "img.shields.io",
-    "https://github.com/googleapis/nodejs-dialogflow-cx/blob/master/samples/detect-intent-audio.js",
-    "https://github.com/googleapis/nodejs-dialogflow-cx/blob/master/samples/detect-intent-streaming.js",
-    "https://github.com/googleapis/nodejs-dialogflow-cx/blob/master/samples/detect-intent-text.js"
+    "img.shields.io"
   ],
   "silent": true,
   "concurrency": 10

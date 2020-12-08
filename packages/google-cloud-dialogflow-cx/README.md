@@ -71,6 +71,11 @@ npm install @google-cloud/dialogflow-cx
 
 // Imports the Google Cloud Some API library
 const {SessionsClient} = require('@google-cloud/dialogflow-cx');
+/**
+ * Example for regional endpoint:
+ *   const location = 'us-central1'
+ *   const client = new SessionsClient({apiEndpoint: 'us-central1-dialogflow.googleapis.com'})
+ */
 const client = new SessionsClient();
 
 const fs = require('fs');

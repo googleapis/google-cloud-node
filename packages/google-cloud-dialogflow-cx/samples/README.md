@@ -12,9 +12,9 @@
 
 * [Before you begin](#before-you-begin)
 * [Samples](#samples)
-  * [Detect_intent_audio](#detect_intent_audio)
-  * [Detect_intent_streaming](#detect_intent_streaming)
-  * [Detect_intent_text](#detect_intent_text)
+  * [Detect-intent-audio](#detect-intent-audio)
+  * [Detect-intent-streaming](#detect-intent-streaming)
+  * [Detect-intent-text](#detect-intent-text)
   * [List-intents](#list-intents)
   * [Quickstart](#quickstart)
 
@@ -33,16 +33,16 @@ Before running the samples, make sure you've followed the steps outlined in
 
 
 
-### Detect_intent_audio
+### Detect-intent-audio
 
-View the [source code](https://github.com/googleapis/nodejs-dialogflow-cx/blob/master/samples/detect_intent_audio.js).
+View the [source code](https://github.com/googleapis/nodejs-dialogflow-cx/blob/master/samples/detect-intent-audio.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dialogflow-cx&page=editor&open_in_editor=samples/detect_intent_audio.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dialogflow-cx&page=editor&open_in_editor=samples/detect-intent-audio.js,samples/README.md)
 
 __Usage:__
 
 
-`node samples/detect_intent_audio.js`
+`node samples/detect-intent-audio.js`
 
 
 -----
@@ -50,16 +50,16 @@ __Usage:__
 
 
 
-### Detect_intent_streaming
+### Detect-intent-streaming
 
-View the [source code](https://github.com/googleapis/nodejs-dialogflow-cx/blob/master/samples/detect_intent_streaming.js).
+View the [source code](https://github.com/googleapis/nodejs-dialogflow-cx/blob/master/samples/detect-intent-streaming.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dialogflow-cx&page=editor&open_in_editor=samples/detect_intent_streaming.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dialogflow-cx&page=editor&open_in_editor=samples/detect-intent-streaming.js,samples/README.md)
 
 __Usage:__
 
 
-`node samples/detect_intent_streaming.js`
+`node samples/detect-intent-streaming.js`
 
 
 -----
@@ -67,16 +67,16 @@ __Usage:__
 
 
 
-### Detect_intent_text
+### Detect-intent-text
 
-View the [source code](https://github.com/googleapis/nodejs-dialogflow-cx/blob/master/samples/detect_intent_text.js).
+View the [source code](https://github.com/googleapis/nodejs-dialogflow-cx/blob/master/samples/detect-intent-text.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dialogflow-cx&page=editor&open_in_editor=samples/detect_intent_text.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dialogflow-cx&page=editor&open_in_editor=samples/detect-intent-text.js,samples/README.md)
 
 __Usage:__
 
 
-`node samples/detect_intent_text.js`
+`node samples/detect-intent-text.js`
 
 
 -----
