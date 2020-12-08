@@ -8105,6 +8105,9 @@ export namespace google {
 
                     /** GlobalSiteTag snippet */
                     snippet?: (string|null);
+
+                    /** GlobalSiteTag name */
+                    name?: (string|null);
                 }
 
                 /** Represents a GlobalSiteTag. */
@@ -8118,6 +8121,9 @@ export namespace google {
 
                     /** GlobalSiteTag snippet. */
                     public snippet: string;
+
+                    /** GlobalSiteTag name. */
+                    public name: string;
 
                     /**
                      * Creates a new GlobalSiteTag instance using the specified properties.

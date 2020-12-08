@@ -18093,6 +18093,7 @@
                          * @memberof google.analytics.admin.v1alpha
                          * @interface IGlobalSiteTag
                          * @property {string|null} [snippet] GlobalSiteTag snippet
+                         * @property {string|null} [name] GlobalSiteTag name
                          */
     
                         /**
@@ -18117,6 +18118,14 @@
                          * @instance
                          */
                         GlobalSiteTag.prototype.snippet = "";
+    
+                        /**
+                         * GlobalSiteTag name.
+                         * @member {string} name
+                         * @memberof google.analytics.admin.v1alpha.GlobalSiteTag
+                         * @instance
+                         */
+                        GlobalSiteTag.prototype.name = "";
     
                         /**
                          * Creates a new GlobalSiteTag instance using the specified properties.
@@ -18144,6 +18153,8 @@
                                 writer = $Writer.create();
                             if (message.snippet != null && Object.hasOwnProperty.call(message, "snippet"))
                                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.snippet);
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.name);
                             return writer;
                         };
     
@@ -18180,6 +18191,9 @@
                                 switch (tag >>> 3) {
                                 case 1:
                                     message.snippet = reader.string();
+                                    break;
+                                case 2:
+                                    message.name = reader.string();
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -18219,6 +18233,9 @@
                             if (message.snippet != null && message.hasOwnProperty("snippet"))
                                 if (!$util.isString(message.snippet))
                                     return "snippet: string expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
                             return null;
                         };
     
@@ -18236,6 +18253,8 @@
                             var message = new $root.google.analytics.admin.v1alpha.GlobalSiteTag();
                             if (object.snippet != null)
                                 message.snippet = String(object.snippet);
+                            if (object.name != null)
+                                message.name = String(object.name);
                             return message;
                         };
     
@@ -18252,10 +18271,14 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.defaults)
+                            if (options.defaults) {
                                 object.snippet = "";
+                                object.name = "";
+                            }
                             if (message.snippet != null && message.hasOwnProperty("snippet"))
                                 object.snippet = message.snippet;
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
                             return object;
                         };
     
