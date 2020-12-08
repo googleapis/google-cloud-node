@@ -168,12 +168,6 @@ export class DocumentsClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this.pathTemplates = {
-      documentPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/knowledgeBases/{knowledge_base}/documents/{document}'
-      ),
-      knowledgeBasePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/knowledgeBases/{knowledge_base}'
-      ),
       projectPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}'
       ),
@@ -201,6 +195,12 @@ export class DocumentsClient {
       projectAgentSessionEntityTypePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/agent/sessions/{session}/entityTypes/{entity_type}'
       ),
+      projectKnowledgeBasePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/knowledgeBases/{knowledge_base}'
+      ),
+      projectKnowledgeBaseDocumentPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/knowledgeBases/{knowledge_base}/documents/{document}'
+      ),
       projectLocationAgentPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/agent'
       ),
@@ -218,6 +218,12 @@ export class DocumentsClient {
       ),
       projectLocationAgentSessionEntityTypePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/agent/sessions/{session}/entityTypes/{entity_type}'
+      ),
+      projectLocationKnowledgeBasePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/knowledgeBases/{knowledge_base}'
+      ),
+      projectLocationKnowledgeBaseDocumentPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/knowledgeBases/{knowledge_base}/documents/{document}'
       ),
     };
 
@@ -476,8 +482,8 @@ export class DocumentsClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. The name of the document to retrieve.
-   *   Format `projects/<Project ID>/knowledgeBases/<Knowledge Base
-   *   ID>/documents/<Document ID>`.
+   *   Format `projects/<Project ID>/locations/<Location
+   *   ID>/knowledgeBases/<Knowledge Base ID>/documents/<Document ID>`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -579,9 +585,13 @@ export class DocumentsClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The knowledge base to create a document for.
-   *   Format: `projects/<Project ID>/knowledgeBases/<Knowledge Base ID>`.
+   *   Format: `projects/<Project ID>/locations/<Location
+   *   ID>/knowledgeBases/<Knowledge Base ID>`.
    * @param {google.cloud.dialogflow.v2beta1.Document} request.document
    *   Required. The document to create.
+   * @param {boolean} request.importGcsCustomMetadata
+   *   Whether to import custom metadata from Google Cloud Storage.
+   *   Only valid when the document source is Google Cloud Storage URI.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -727,8 +737,8 @@ export class DocumentsClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. The name of the document to delete.
-   *   Format: `projects/<Project ID>/knowledgeBases/<Knowledge Base
-   *   ID>/documents/<Document ID>`.
+   *   Format: `projects/<Project ID>/locations/<Location
+   *   ID>/knowledgeBases/<Knowledge Base ID>/documents/<Document ID>`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1029,11 +1039,14 @@ export class DocumentsClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. The name of the document to reload.
-   *   Format: `projects/<Project ID>/knowledgeBases/<Knowledge Base
-   *   ID>/documents/<Document ID>`
+   *   Format: `projects/<Project ID>/locations/<Location
+   *   ID>/knowledgeBases/<Knowledge Base ID>/documents/<Document ID>`
    * @param {google.cloud.dialogflow.v2beta1.GcsSource} request.gcsSource
    *   The path for a Cloud Storage source file for reloading document content.
    *   If not provided, the Document's existing source will be reloaded.
+   * @param {boolean} request.importGcsCustomMetadata
+   *   Whether to import custom metadata from Google Cloud Storage.
+   *   Only valid when the document source is Google Cloud Storage URI.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1174,7 +1187,8 @@ export class DocumentsClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The knowledge base to list all documents for.
-   *   Format: `projects/<Project ID>/knowledgeBases/<Knowledge Base ID>`.
+   *   Format: `projects/<Project ID>/locations/<Location
+   *   ID>/knowledgeBases/<Knowledge Base ID>`.
    * @param {number} request.pageSize
    *   The maximum number of items to return in a single page. By
    *   default 10 and at most 100.
@@ -1266,7 +1280,8 @@ export class DocumentsClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The knowledge base to list all documents for.
-   *   Format: `projects/<Project ID>/knowledgeBases/<Knowledge Base ID>`.
+   *   Format: `projects/<Project ID>/locations/<Location
+   *   ID>/knowledgeBases/<Knowledge Base ID>`.
    * @param {number} request.pageSize
    *   The maximum number of items to return in a single page. By
    *   default 10 and at most 100.
@@ -1336,7 +1351,8 @@ export class DocumentsClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The knowledge base to list all documents for.
-   *   Format: `projects/<Project ID>/knowledgeBases/<Knowledge Base ID>`.
+   *   Format: `projects/<Project ID>/locations/<Location
+   *   ID>/knowledgeBases/<Knowledge Base ID>`.
    * @param {number} request.pageSize
    *   The maximum number of items to return in a single page. By
    *   default 10 and at most 100.
@@ -1405,94 +1421,6 @@ export class DocumentsClient {
   // --------------------
   // -- Path templates --
   // --------------------
-
-  /**
-   * Return a fully-qualified document resource name string.
-   *
-   * @param {string} project
-   * @param {string} knowledge_base
-   * @param {string} document
-   * @returns {string} Resource name string.
-   */
-  documentPath(project: string, knowledgeBase: string, document: string) {
-    return this.pathTemplates.documentPathTemplate.render({
-      project: project,
-      knowledge_base: knowledgeBase,
-      document: document,
-    });
-  }
-
-  /**
-   * Parse the project from Document resource.
-   *
-   * @param {string} documentName
-   *   A fully-qualified path representing Document resource.
-   * @returns {string} A string representing the project.
-   */
-  matchProjectFromDocumentName(documentName: string) {
-    return this.pathTemplates.documentPathTemplate.match(documentName).project;
-  }
-
-  /**
-   * Parse the knowledge_base from Document resource.
-   *
-   * @param {string} documentName
-   *   A fully-qualified path representing Document resource.
-   * @returns {string} A string representing the knowledge_base.
-   */
-  matchKnowledgeBaseFromDocumentName(documentName: string) {
-    return this.pathTemplates.documentPathTemplate.match(documentName)
-      .knowledge_base;
-  }
-
-  /**
-   * Parse the document from Document resource.
-   *
-   * @param {string} documentName
-   *   A fully-qualified path representing Document resource.
-   * @returns {string} A string representing the document.
-   */
-  matchDocumentFromDocumentName(documentName: string) {
-    return this.pathTemplates.documentPathTemplate.match(documentName).document;
-  }
-
-  /**
-   * Return a fully-qualified knowledgeBase resource name string.
-   *
-   * @param {string} project
-   * @param {string} knowledge_base
-   * @returns {string} Resource name string.
-   */
-  knowledgeBasePath(project: string, knowledgeBase: string) {
-    return this.pathTemplates.knowledgeBasePathTemplate.render({
-      project: project,
-      knowledge_base: knowledgeBase,
-    });
-  }
-
-  /**
-   * Parse the project from KnowledgeBase resource.
-   *
-   * @param {string} knowledgeBaseName
-   *   A fully-qualified path representing KnowledgeBase resource.
-   * @returns {string} A string representing the project.
-   */
-  matchProjectFromKnowledgeBaseName(knowledgeBaseName: string) {
-    return this.pathTemplates.knowledgeBasePathTemplate.match(knowledgeBaseName)
-      .project;
-  }
-
-  /**
-   * Parse the knowledge_base from KnowledgeBase resource.
-   *
-   * @param {string} knowledgeBaseName
-   *   A fully-qualified path representing KnowledgeBase resource.
-   * @returns {string} A string representing the knowledge_base.
-   */
-  matchKnowledgeBaseFromKnowledgeBaseName(knowledgeBaseName: string) {
-    return this.pathTemplates.knowledgeBasePathTemplate.match(knowledgeBaseName)
-      .knowledge_base;
-  }
 
   /**
    * Return a fully-qualified project resource name string.
@@ -2006,6 +1934,113 @@ export class DocumentsClient {
   }
 
   /**
+   * Return a fully-qualified projectKnowledgeBase resource name string.
+   *
+   * @param {string} project
+   * @param {string} knowledge_base
+   * @returns {string} Resource name string.
+   */
+  projectKnowledgeBasePath(project: string, knowledgeBase: string) {
+    return this.pathTemplates.projectKnowledgeBasePathTemplate.render({
+      project: project,
+      knowledge_base: knowledgeBase,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectKnowledgeBase resource.
+   *
+   * @param {string} projectKnowledgeBaseName
+   *   A fully-qualified path representing project_knowledge_base resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectKnowledgeBaseName(projectKnowledgeBaseName: string) {
+    return this.pathTemplates.projectKnowledgeBasePathTemplate.match(
+      projectKnowledgeBaseName
+    ).project;
+  }
+
+  /**
+   * Parse the knowledge_base from ProjectKnowledgeBase resource.
+   *
+   * @param {string} projectKnowledgeBaseName
+   *   A fully-qualified path representing project_knowledge_base resource.
+   * @returns {string} A string representing the knowledge_base.
+   */
+  matchKnowledgeBaseFromProjectKnowledgeBaseName(
+    projectKnowledgeBaseName: string
+  ) {
+    return this.pathTemplates.projectKnowledgeBasePathTemplate.match(
+      projectKnowledgeBaseName
+    ).knowledge_base;
+  }
+
+  /**
+   * Return a fully-qualified projectKnowledgeBaseDocument resource name string.
+   *
+   * @param {string} project
+   * @param {string} knowledge_base
+   * @param {string} document
+   * @returns {string} Resource name string.
+   */
+  projectKnowledgeBaseDocumentPath(
+    project: string,
+    knowledgeBase: string,
+    document: string
+  ) {
+    return this.pathTemplates.projectKnowledgeBaseDocumentPathTemplate.render({
+      project: project,
+      knowledge_base: knowledgeBase,
+      document: document,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectKnowledgeBaseDocument resource.
+   *
+   * @param {string} projectKnowledgeBaseDocumentName
+   *   A fully-qualified path representing project_knowledge_base_document resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectKnowledgeBaseDocumentName(
+    projectKnowledgeBaseDocumentName: string
+  ) {
+    return this.pathTemplates.projectKnowledgeBaseDocumentPathTemplate.match(
+      projectKnowledgeBaseDocumentName
+    ).project;
+  }
+
+  /**
+   * Parse the knowledge_base from ProjectKnowledgeBaseDocument resource.
+   *
+   * @param {string} projectKnowledgeBaseDocumentName
+   *   A fully-qualified path representing project_knowledge_base_document resource.
+   * @returns {string} A string representing the knowledge_base.
+   */
+  matchKnowledgeBaseFromProjectKnowledgeBaseDocumentName(
+    projectKnowledgeBaseDocumentName: string
+  ) {
+    return this.pathTemplates.projectKnowledgeBaseDocumentPathTemplate.match(
+      projectKnowledgeBaseDocumentName
+    ).knowledge_base;
+  }
+
+  /**
+   * Parse the document from ProjectKnowledgeBaseDocument resource.
+   *
+   * @param {string} projectKnowledgeBaseDocumentName
+   *   A fully-qualified path representing project_knowledge_base_document resource.
+   * @returns {string} A string representing the document.
+   */
+  matchDocumentFromProjectKnowledgeBaseDocumentName(
+    projectKnowledgeBaseDocumentName: string
+  ) {
+    return this.pathTemplates.projectKnowledgeBaseDocumentPathTemplate.match(
+      projectKnowledgeBaseDocumentName
+    ).document;
+  }
+
+  /**
    * Return a fully-qualified projectLocationAgent resource name string.
    *
    * @param {string} project
@@ -2412,6 +2447,156 @@ export class DocumentsClient {
     return this.pathTemplates.projectLocationAgentSessionEntityTypePathTemplate.match(
       projectLocationAgentSessionEntityTypeName
     ).entity_type;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationKnowledgeBase resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} knowledge_base
+   * @returns {string} Resource name string.
+   */
+  projectLocationKnowledgeBasePath(
+    project: string,
+    location: string,
+    knowledgeBase: string
+  ) {
+    return this.pathTemplates.projectLocationKnowledgeBasePathTemplate.render({
+      project: project,
+      location: location,
+      knowledge_base: knowledgeBase,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectLocationKnowledgeBase resource.
+   *
+   * @param {string} projectLocationKnowledgeBaseName
+   *   A fully-qualified path representing project_location_knowledge_base resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationKnowledgeBaseName(
+    projectLocationKnowledgeBaseName: string
+  ) {
+    return this.pathTemplates.projectLocationKnowledgeBasePathTemplate.match(
+      projectLocationKnowledgeBaseName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationKnowledgeBase resource.
+   *
+   * @param {string} projectLocationKnowledgeBaseName
+   *   A fully-qualified path representing project_location_knowledge_base resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationKnowledgeBaseName(
+    projectLocationKnowledgeBaseName: string
+  ) {
+    return this.pathTemplates.projectLocationKnowledgeBasePathTemplate.match(
+      projectLocationKnowledgeBaseName
+    ).location;
+  }
+
+  /**
+   * Parse the knowledge_base from ProjectLocationKnowledgeBase resource.
+   *
+   * @param {string} projectLocationKnowledgeBaseName
+   *   A fully-qualified path representing project_location_knowledge_base resource.
+   * @returns {string} A string representing the knowledge_base.
+   */
+  matchKnowledgeBaseFromProjectLocationKnowledgeBaseName(
+    projectLocationKnowledgeBaseName: string
+  ) {
+    return this.pathTemplates.projectLocationKnowledgeBasePathTemplate.match(
+      projectLocationKnowledgeBaseName
+    ).knowledge_base;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationKnowledgeBaseDocument resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} knowledge_base
+   * @param {string} document
+   * @returns {string} Resource name string.
+   */
+  projectLocationKnowledgeBaseDocumentPath(
+    project: string,
+    location: string,
+    knowledgeBase: string,
+    document: string
+  ) {
+    return this.pathTemplates.projectLocationKnowledgeBaseDocumentPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        knowledge_base: knowledgeBase,
+        document: document,
+      }
+    );
+  }
+
+  /**
+   * Parse the project from ProjectLocationKnowledgeBaseDocument resource.
+   *
+   * @param {string} projectLocationKnowledgeBaseDocumentName
+   *   A fully-qualified path representing project_location_knowledge_base_document resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationKnowledgeBaseDocumentName(
+    projectLocationKnowledgeBaseDocumentName: string
+  ) {
+    return this.pathTemplates.projectLocationKnowledgeBaseDocumentPathTemplate.match(
+      projectLocationKnowledgeBaseDocumentName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationKnowledgeBaseDocument resource.
+   *
+   * @param {string} projectLocationKnowledgeBaseDocumentName
+   *   A fully-qualified path representing project_location_knowledge_base_document resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationKnowledgeBaseDocumentName(
+    projectLocationKnowledgeBaseDocumentName: string
+  ) {
+    return this.pathTemplates.projectLocationKnowledgeBaseDocumentPathTemplate.match(
+      projectLocationKnowledgeBaseDocumentName
+    ).location;
+  }
+
+  /**
+   * Parse the knowledge_base from ProjectLocationKnowledgeBaseDocument resource.
+   *
+   * @param {string} projectLocationKnowledgeBaseDocumentName
+   *   A fully-qualified path representing project_location_knowledge_base_document resource.
+   * @returns {string} A string representing the knowledge_base.
+   */
+  matchKnowledgeBaseFromProjectLocationKnowledgeBaseDocumentName(
+    projectLocationKnowledgeBaseDocumentName: string
+  ) {
+    return this.pathTemplates.projectLocationKnowledgeBaseDocumentPathTemplate.match(
+      projectLocationKnowledgeBaseDocumentName
+    ).knowledge_base;
+  }
+
+  /**
+   * Parse the document from ProjectLocationKnowledgeBaseDocument resource.
+   *
+   * @param {string} projectLocationKnowledgeBaseDocumentName
+   *   A fully-qualified path representing project_location_knowledge_base_document resource.
+   * @returns {string} A string representing the document.
+   */
+  matchDocumentFromProjectLocationKnowledgeBaseDocumentName(
+    projectLocationKnowledgeBaseDocumentName: string
+  ) {
+    return this.pathTemplates.projectLocationKnowledgeBaseDocumentPathTemplate.match(
+      projectLocationKnowledgeBaseDocumentName
+    ).document;
   }
 
   /**

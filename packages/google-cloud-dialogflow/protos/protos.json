@@ -4249,7 +4249,10 @@
                         },
                         "matchMode": {
                           "type": "MatchMode",
-                          "id": 9
+                          "id": 9,
+                          "options": {
+                            "deprecated": true
+                          }
                         },
                         "classificationThreshold": {
                           "type": "float",
@@ -4619,6 +4622,18 @@
                         }
                       }
                     },
+                    "AudioEncoding": {
+                      "values": {
+                        "AUDIO_ENCODING_UNSPECIFIED": 0,
+                        "AUDIO_ENCODING_LINEAR_16": 1,
+                        "AUDIO_ENCODING_FLAC": 2,
+                        "AUDIO_ENCODING_MULAW": 3,
+                        "AUDIO_ENCODING_AMR": 4,
+                        "AUDIO_ENCODING_AMR_WB": 5,
+                        "AUDIO_ENCODING_OGG_OPUS": 6,
+                        "AUDIO_ENCODING_SPEEX_WITH_HEADER_BYTE": 7
+                      }
+                    },
                     "SpeechContext": {
                       "fields": {
                         "phrases": {
@@ -4630,18 +4645,6 @@
                           "type": "float",
                           "id": 2
                         }
-                      }
-                    },
-                    "AudioEncoding": {
-                      "values": {
-                        "AUDIO_ENCODING_UNSPECIFIED": 0,
-                        "AUDIO_ENCODING_LINEAR_16": 1,
-                        "AUDIO_ENCODING_FLAC": 2,
-                        "AUDIO_ENCODING_MULAW": 3,
-                        "AUDIO_ENCODING_AMR": 4,
-                        "AUDIO_ENCODING_AMR_WB": 5,
-                        "AUDIO_ENCODING_OGG_OPUS": 6,
-                        "AUDIO_ENCODING_SPEEX_WITH_HEADER_BYTE": 7
                       }
                     },
                     "SpeechWordInfo": {
@@ -5203,9 +5206,14 @@
                             {
                               "(google.api.http)": {
                                 "get": "/v2beta1/{parent=projects/*/knowledgeBases/*}/documents",
-                                "additional_bindings": {
-                                  "get": "/v2beta1/{parent=projects/*/agent/knowledgeBases/*}/documents"
-                                }
+                                "additional_bindings": [
+                                  {
+                                    "get": "/v2beta1/{parent=projects/*/locations/*/knowledgeBases/*}/documents"
+                                  },
+                                  {
+                                    "get": "/v2beta1/{parent=projects/*/agent/knowledgeBases/*}/documents"
+                                  }
+                                ]
                               }
                             },
                             {
@@ -5225,9 +5233,14 @@
                             {
                               "(google.api.http)": {
                                 "get": "/v2beta1/{name=projects/*/knowledgeBases/*/documents/*}",
-                                "additional_bindings": {
-                                  "get": "/v2beta1/{name=projects/*/agent/knowledgeBases/*/documents/*}"
-                                }
+                                "additional_bindings": [
+                                  {
+                                    "get": "/v2beta1/{name=projects/*/locations/*/knowledgeBases/*/documents/*}"
+                                  },
+                                  {
+                                    "get": "/v2beta1/{name=projects/*/agent/knowledgeBases/*/documents/*}"
+                                  }
+                                ]
                               }
                             },
                             {
@@ -5252,10 +5265,16 @@
                               "(google.api.http)": {
                                 "post": "/v2beta1/{parent=projects/*/knowledgeBases/*}/documents",
                                 "body": "document",
-                                "additional_bindings": {
-                                  "post": "/v2beta1/{parent=projects/*/agent/knowledgeBases/*}/documents",
-                                  "body": "document"
-                                }
+                                "additional_bindings": [
+                                  {
+                                    "post": "/v2beta1/{parent=projects/*/locations/*/knowledgeBases/*}/documents",
+                                    "body": "document"
+                                  },
+                                  {
+                                    "post": "/v2beta1/{parent=projects/*/agent/knowledgeBases/*}/documents",
+                                    "body": "document"
+                                  }
+                                ]
                               }
                             },
                             {
@@ -5283,9 +5302,14 @@
                             {
                               "(google.api.http)": {
                                 "delete": "/v2beta1/{name=projects/*/knowledgeBases/*/documents/*}",
-                                "additional_bindings": {
-                                  "delete": "/v2beta1/{name=projects/*/agent/knowledgeBases/*/documents/*}"
-                                }
+                                "additional_bindings": [
+                                  {
+                                    "delete": "/v2beta1/{name=projects/*/locations/*/knowledgeBases/*/documents/*}"
+                                  },
+                                  {
+                                    "delete": "/v2beta1/{name=projects/*/agent/knowledgeBases/*/documents/*}"
+                                  }
+                                ]
                               }
                             },
                             {
@@ -5316,10 +5340,16 @@
                               "(google.api.http)": {
                                 "patch": "/v2beta1/{document.name=projects/*/knowledgeBases/*/documents/*}",
                                 "body": "document",
-                                "additional_bindings": {
-                                  "patch": "/v2beta1/{document.name=projects/*/agent/knowledgeBases/*/documents/*}",
-                                  "body": "document"
-                                }
+                                "additional_bindings": [
+                                  {
+                                    "patch": "/v2beta1/{document.name=projects/*/locations/*/knowledgeBases/*/documents/*}",
+                                    "body": "document"
+                                  },
+                                  {
+                                    "patch": "/v2beta1/{document.name=projects/*/agent/knowledgeBases/*/documents/*}",
+                                    "body": "document"
+                                  }
+                                ]
                               }
                             },
                             {
@@ -5353,10 +5383,16 @@
                               "(google.api.http)": {
                                 "post": "/v2beta1/{name=projects/*/knowledgeBases/*/documents/*}:reload",
                                 "body": "*",
-                                "additional_bindings": {
-                                  "post": "/v2beta1/{name=projects/*/agent/knowledgeBases/*/documents/*}:reload",
-                                  "body": "*"
-                                }
+                                "additional_bindings": [
+                                  {
+                                    "post": "/v2beta1/{name=projects/*/locations/*/knowledgeBases/*/documents/*}:reload",
+                                    "body": "*"
+                                  },
+                                  {
+                                    "post": "/v2beta1/{name=projects/*/agent/knowledgeBases/*/documents/*}:reload",
+                                    "body": "*"
+                                  }
+                                ]
                               }
                             },
                             {
@@ -5375,7 +5411,7 @@
                     "Document": {
                       "options": {
                         "(google.api.resource).type": "dialogflow.googleapis.com/Document",
-                        "(google.api.resource).pattern": "projects/{project}/knowledgeBases/{knowledge_base}/documents/{document}"
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/knowledgeBases/{knowledge_base}/documents/{document}"
                       },
                       "oneofs": {
                         "source": {
@@ -5533,6 +5569,10 @@
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
                           }
+                        },
+                        "importGcsCustomMetadata": {
+                          "type": "bool",
+                          "id": 3
                         }
                       }
                     },
@@ -5607,6 +5647,10 @@
                         "gcsSource": {
                           "type": "GcsSource",
                           "id": 3
+                        },
+                        "importGcsCustomMetadata": {
+                          "type": "bool",
+                          "id": 4
                         }
                       }
                     },
@@ -7861,9 +7905,14 @@
                             {
                               "(google.api.http)": {
                                 "get": "/v2beta1/{parent=projects/*}/knowledgeBases",
-                                "additional_bindings": {
-                                  "get": "/v2beta1/{parent=projects/*/agent}/knowledgeBases"
-                                }
+                                "additional_bindings": [
+                                  {
+                                    "get": "/v2beta1/{parent=projects/*/locations/*}/knowledgeBases"
+                                  },
+                                  {
+                                    "get": "/v2beta1/{parent=projects/*/agent}/knowledgeBases"
+                                  }
+                                ]
                               }
                             },
                             {
@@ -7883,9 +7932,14 @@
                             {
                               "(google.api.http)": {
                                 "get": "/v2beta1/{name=projects/*/knowledgeBases/*}",
-                                "additional_bindings": {
-                                  "get": "/v2beta1/{name=projects/*/agent/knowledgeBases/*}"
-                                }
+                                "additional_bindings": [
+                                  {
+                                    "get": "/v2beta1/{name=projects/*/locations/*/knowledgeBases/*}"
+                                  },
+                                  {
+                                    "get": "/v2beta1/{name=projects/*/agent/knowledgeBases/*}"
+                                  }
+                                ]
                               }
                             },
                             {
@@ -7908,10 +7962,16 @@
                               "(google.api.http)": {
                                 "post": "/v2beta1/{parent=projects/*}/knowledgeBases",
                                 "body": "knowledge_base",
-                                "additional_bindings": {
-                                  "post": "/v2beta1/{parent=projects/*/agent}/knowledgeBases",
-                                  "body": "knowledge_base"
-                                }
+                                "additional_bindings": [
+                                  {
+                                    "post": "/v2beta1/{parent=projects/*/locations/*}/knowledgeBases",
+                                    "body": "knowledge_base"
+                                  },
+                                  {
+                                    "post": "/v2beta1/{parent=projects/*/agent}/knowledgeBases",
+                                    "body": "knowledge_base"
+                                  }
+                                ]
                               }
                             },
                             {
@@ -7931,9 +7991,14 @@
                             {
                               "(google.api.http)": {
                                 "delete": "/v2beta1/{name=projects/*/knowledgeBases/*}",
-                                "additional_bindings": {
-                                  "delete": "/v2beta1/{name=projects/*/agent/knowledgeBases/*}"
-                                }
+                                "additional_bindings": [
+                                  {
+                                    "delete": "/v2beta1/{name=projects/*/locations/*/knowledgeBases/*}"
+                                  },
+                                  {
+                                    "delete": "/v2beta1/{name=projects/*/agent/knowledgeBases/*}"
+                                  }
+                                ]
                               }
                             },
                             {
@@ -7956,10 +8021,16 @@
                               "(google.api.http)": {
                                 "patch": "/v2beta1/{knowledge_base.name=projects/*/knowledgeBases/*}",
                                 "body": "knowledge_base",
-                                "additional_bindings": {
-                                  "patch": "/v2beta1/{knowledge_base.name=projects/*/agent/knowledgeBases/*}",
-                                  "body": "knowledge_base"
-                                }
+                                "additional_bindings": [
+                                  {
+                                    "patch": "/v2beta1/{knowledge_base.name=projects/*/locations/*/knowledgeBases/*}",
+                                    "body": "knowledge_base"
+                                  },
+                                  {
+                                    "patch": "/v2beta1/{knowledge_base.name=projects/*/agent/knowledgeBases/*}",
+                                    "body": "knowledge_base"
+                                  }
+                                ]
                               }
                             },
                             {
@@ -7975,7 +8046,7 @@
                     "KnowledgeBase": {
                       "options": {
                         "(google.api.resource).type": "dialogflow.googleapis.com/KnowledgeBase",
-                        "(google.api.resource).pattern": "projects/{project}/knowledgeBases/{knowledge_base}"
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/knowledgeBases/{knowledge_base}"
                       },
                       "fields": {
                         "name": {

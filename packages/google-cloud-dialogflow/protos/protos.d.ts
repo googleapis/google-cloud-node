@@ -14839,6 +14839,18 @@ export namespace google {
                     public toJSON(): { [k: string]: any };
                 }
 
+                /** AudioEncoding enum. */
+                enum AudioEncoding {
+                    AUDIO_ENCODING_UNSPECIFIED = 0,
+                    AUDIO_ENCODING_LINEAR_16 = 1,
+                    AUDIO_ENCODING_FLAC = 2,
+                    AUDIO_ENCODING_MULAW = 3,
+                    AUDIO_ENCODING_AMR = 4,
+                    AUDIO_ENCODING_AMR_WB = 5,
+                    AUDIO_ENCODING_OGG_OPUS = 6,
+                    AUDIO_ENCODING_SPEEX_WITH_HEADER_BYTE = 7
+                }
+
                 /** Properties of a SpeechContext. */
                 interface ISpeechContext {
 
@@ -14933,18 +14945,6 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
-                }
-
-                /** AudioEncoding enum. */
-                enum AudioEncoding {
-                    AUDIO_ENCODING_UNSPECIFIED = 0,
-                    AUDIO_ENCODING_LINEAR_16 = 1,
-                    AUDIO_ENCODING_FLAC = 2,
-                    AUDIO_ENCODING_MULAW = 3,
-                    AUDIO_ENCODING_AMR = 4,
-                    AUDIO_ENCODING_AMR_WB = 5,
-                    AUDIO_ENCODING_OGG_OPUS = 6,
-                    AUDIO_ENCODING_SPEEX_WITH_HEADER_BYTE = 7
                 }
 
                 /** Properties of a SpeechWordInfo. */
@@ -17455,6 +17455,9 @@ export namespace google {
 
                     /** CreateDocumentRequest document */
                     document?: (google.cloud.dialogflow.v2beta1.IDocument|null);
+
+                    /** CreateDocumentRequest importGcsCustomMetadata */
+                    importGcsCustomMetadata?: (boolean|null);
                 }
 
                 /** Represents a CreateDocumentRequest. */
@@ -17471,6 +17474,9 @@ export namespace google {
 
                     /** CreateDocumentRequest document. */
                     public document?: (google.cloud.dialogflow.v2beta1.IDocument|null);
+
+                    /** CreateDocumentRequest importGcsCustomMetadata. */
+                    public importGcsCustomMetadata: boolean;
 
                     /**
                      * Creates a new CreateDocumentRequest instance using the specified properties.
@@ -17838,6 +17844,9 @@ export namespace google {
 
                     /** ReloadDocumentRequest gcsSource */
                     gcsSource?: (google.cloud.dialogflow.v2beta1.IGcsSource|null);
+
+                    /** ReloadDocumentRequest importGcsCustomMetadata */
+                    importGcsCustomMetadata?: (boolean|null);
                 }
 
                 /** Represents a ReloadDocumentRequest. */
@@ -17854,6 +17863,9 @@ export namespace google {
 
                     /** ReloadDocumentRequest gcsSource. */
                     public gcsSource?: (google.cloud.dialogflow.v2beta1.IGcsSource|null);
+
+                    /** ReloadDocumentRequest importGcsCustomMetadata. */
+                    public importGcsCustomMetadata: boolean;
 
                     /** ReloadDocumentRequest source. */
                     public source?: "gcsSource";

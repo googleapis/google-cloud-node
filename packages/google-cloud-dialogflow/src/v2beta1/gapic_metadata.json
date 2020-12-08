@@ -1,0 +1,364 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.cloud.dialogflow.v2beta1",
+  "libraryPackage": "@google-cloud/dialogflow",
+  "services": {"Agents": {"clients": {
+        "grpc": {
+          "libraryClient": "AgentsClient",
+          "rpcs": {"GetAgent": {
+              "methods": ["getAgent"]
+            },"SetAgent": {
+              "methods": ["setAgent"]
+            },"DeleteAgent": {
+              "methods": ["deleteAgent"]
+            },"GetValidationResult": {
+              "methods": ["getValidationResult"]
+            },"TrainAgent": {
+              "methods": ["trainAgent"]
+            },"ExportAgent": {
+              "methods": ["exportAgent"]
+            },"ImportAgent": {
+              "methods": ["importAgent"]
+            },"RestoreAgent": {
+              "methods": ["restoreAgent"]
+            },"SearchAgents": {
+              "methods": [
+                            "searchAgents",
+                            "searchAgentsStream",
+                            "searchAgentsAsync"
+              ]
+            }}
+        },
+        "grpc-fallback": {
+          "libraryClient": "AgentsClient",
+          "rpcs": {"GetAgent": {
+              "methods": ["getAgent"]
+            },"SetAgent": {
+              "methods": ["setAgent"]
+            },"DeleteAgent": {
+              "methods": ["deleteAgent"]
+            },"GetValidationResult": {
+              "methods": ["getValidationResult"]
+            },"TrainAgent": {
+              "methods": ["trainAgent"]
+            },"ExportAgent": {
+              "methods": ["exportAgent"]
+            },"ImportAgent": {
+              "methods": ["importAgent"]
+            },"RestoreAgent": {
+              "methods": ["restoreAgent"]
+            },"SearchAgents": {
+              "methods": [
+                            "searchAgents",
+                            "searchAgentsStream",
+                            "searchAgentsAsync"
+              ]
+            }}
+        }
+      }
+    },"Contexts": {"clients": {
+        "grpc": {
+          "libraryClient": "ContextsClient",
+          "rpcs": {"GetContext": {
+              "methods": ["getContext"]
+            },"CreateContext": {
+              "methods": ["createContext"]
+            },"UpdateContext": {
+              "methods": ["updateContext"]
+            },"DeleteContext": {
+              "methods": ["deleteContext"]
+            },"DeleteAllContexts": {
+              "methods": ["deleteAllContexts"]
+            },"ListContexts": {
+              "methods": [
+                            "listContexts",
+                            "listContextsStream",
+                            "listContextsAsync"
+              ]
+            }}
+        },
+        "grpc-fallback": {
+          "libraryClient": "ContextsClient",
+          "rpcs": {"GetContext": {
+              "methods": ["getContext"]
+            },"CreateContext": {
+              "methods": ["createContext"]
+            },"UpdateContext": {
+              "methods": ["updateContext"]
+            },"DeleteContext": {
+              "methods": ["deleteContext"]
+            },"DeleteAllContexts": {
+              "methods": ["deleteAllContexts"]
+            },"ListContexts": {
+              "methods": [
+                            "listContexts",
+                            "listContextsStream",
+                            "listContextsAsync"
+              ]
+            }}
+        }
+      }
+    },"Documents": {"clients": {
+        "grpc": {
+          "libraryClient": "DocumentsClient",
+          "rpcs": {"GetDocument": {
+              "methods": ["getDocument"]
+            },"CreateDocument": {
+              "methods": ["createDocument"]
+            },"DeleteDocument": {
+              "methods": ["deleteDocument"]
+            },"UpdateDocument": {
+              "methods": ["updateDocument"]
+            },"ReloadDocument": {
+              "methods": ["reloadDocument"]
+            },"ListDocuments": {
+              "methods": [
+                            "listDocuments",
+                            "listDocumentsStream",
+                            "listDocumentsAsync"
+              ]
+            }}
+        },
+        "grpc-fallback": {
+          "libraryClient": "DocumentsClient",
+          "rpcs": {"GetDocument": {
+              "methods": ["getDocument"]
+            },"CreateDocument": {
+              "methods": ["createDocument"]
+            },"DeleteDocument": {
+              "methods": ["deleteDocument"]
+            },"UpdateDocument": {
+              "methods": ["updateDocument"]
+            },"ReloadDocument": {
+              "methods": ["reloadDocument"]
+            },"ListDocuments": {
+              "methods": [
+                            "listDocuments",
+                            "listDocumentsStream",
+                            "listDocumentsAsync"
+              ]
+            }}
+        }
+      }
+    },"EntityTypes": {"clients": {
+        "grpc": {
+          "libraryClient": "EntityTypesClient",
+          "rpcs": {"GetEntityType": {
+              "methods": ["getEntityType"]
+            },"CreateEntityType": {
+              "methods": ["createEntityType"]
+            },"UpdateEntityType": {
+              "methods": ["updateEntityType"]
+            },"DeleteEntityType": {
+              "methods": ["deleteEntityType"]
+            },"BatchUpdateEntityTypes": {
+              "methods": ["batchUpdateEntityTypes"]
+            },"BatchDeleteEntityTypes": {
+              "methods": ["batchDeleteEntityTypes"]
+            },"BatchCreateEntities": {
+              "methods": ["batchCreateEntities"]
+            },"BatchUpdateEntities": {
+              "methods": ["batchUpdateEntities"]
+            },"BatchDeleteEntities": {
+              "methods": ["batchDeleteEntities"]
+            },"ListEntityTypes": {
+              "methods": [
+                            "listEntityTypes",
+                            "listEntityTypesStream",
+                            "listEntityTypesAsync"
+              ]
+            }}
+        },
+        "grpc-fallback": {
+          "libraryClient": "EntityTypesClient",
+          "rpcs": {"GetEntityType": {
+              "methods": ["getEntityType"]
+            },"CreateEntityType": {
+              "methods": ["createEntityType"]
+            },"UpdateEntityType": {
+              "methods": ["updateEntityType"]
+            },"DeleteEntityType": {
+              "methods": ["deleteEntityType"]
+            },"BatchUpdateEntityTypes": {
+              "methods": ["batchUpdateEntityTypes"]
+            },"BatchDeleteEntityTypes": {
+              "methods": ["batchDeleteEntityTypes"]
+            },"BatchCreateEntities": {
+              "methods": ["batchCreateEntities"]
+            },"BatchUpdateEntities": {
+              "methods": ["batchUpdateEntities"]
+            },"BatchDeleteEntities": {
+              "methods": ["batchDeleteEntities"]
+            },"ListEntityTypes": {
+              "methods": [
+                            "listEntityTypes",
+                            "listEntityTypesStream",
+                            "listEntityTypesAsync"
+              ]
+            }}
+        }
+      }
+    },"Environments": {"clients": {
+        "grpc": {
+          "libraryClient": "EnvironmentsClient",
+          "rpcs": {"ListEnvironments": {
+              "methods": [
+                            "listEnvironments",
+                            "listEnvironmentsStream",
+                            "listEnvironmentsAsync"
+              ]
+            }}
+        },
+        "grpc-fallback": {
+          "libraryClient": "EnvironmentsClient",
+          "rpcs": {,"ListEnvironments": {
+              "methods": [
+                            "listEnvironments",
+                            "listEnvironmentsStream",
+                            "listEnvironmentsAsync"
+              ]
+            }}
+        }
+      }
+    },"Intents": {"clients": {
+        "grpc": {
+          "libraryClient": "IntentsClient",
+          "rpcs": {"GetIntent": {
+              "methods": ["getIntent"]
+            },"CreateIntent": {
+              "methods": ["createIntent"]
+            },"UpdateIntent": {
+              "methods": ["updateIntent"]
+            },"DeleteIntent": {
+              "methods": ["deleteIntent"]
+            },"BatchUpdateIntents": {
+              "methods": ["batchUpdateIntents"]
+            },"BatchDeleteIntents": {
+              "methods": ["batchDeleteIntents"]
+            },"ListIntents": {
+              "methods": [
+                            "listIntents",
+                            "listIntentsStream",
+                            "listIntentsAsync"
+              ]
+            }}
+        },
+        "grpc-fallback": {
+          "libraryClient": "IntentsClient",
+          "rpcs": {"GetIntent": {
+              "methods": ["getIntent"]
+            },"CreateIntent": {
+              "methods": ["createIntent"]
+            },"UpdateIntent": {
+              "methods": ["updateIntent"]
+            },"DeleteIntent": {
+              "methods": ["deleteIntent"]
+            },"BatchUpdateIntents": {
+              "methods": ["batchUpdateIntents"]
+            },"BatchDeleteIntents": {
+              "methods": ["batchDeleteIntents"]
+            },"ListIntents": {
+              "methods": [
+                            "listIntents",
+                            "listIntentsStream",
+                            "listIntentsAsync"
+              ]
+            }}
+        }
+      }
+    },"KnowledgeBases": {"clients": {
+        "grpc": {
+          "libraryClient": "KnowledgeBasesClient",
+          "rpcs": {"GetKnowledgeBase": {
+              "methods": ["getKnowledgeBase"]
+            },"CreateKnowledgeBase": {
+              "methods": ["createKnowledgeBase"]
+            },"DeleteKnowledgeBase": {
+              "methods": ["deleteKnowledgeBase"]
+            },"UpdateKnowledgeBase": {
+              "methods": ["updateKnowledgeBase"]
+            },"ListKnowledgeBases": {
+              "methods": [
+                            "listKnowledgeBases",
+                            "listKnowledgeBasesStream",
+                            "listKnowledgeBasesAsync"
+              ]
+            }}
+        },
+        "grpc-fallback": {
+          "libraryClient": "KnowledgeBasesClient",
+          "rpcs": {"GetKnowledgeBase": {
+              "methods": ["getKnowledgeBase"]
+            },"CreateKnowledgeBase": {
+              "methods": ["createKnowledgeBase"]
+            },"DeleteKnowledgeBase": {
+              "methods": ["deleteKnowledgeBase"]
+            },"UpdateKnowledgeBase": {
+              "methods": ["updateKnowledgeBase"]
+            },"ListKnowledgeBases": {
+              "methods": [
+                            "listKnowledgeBases",
+                            "listKnowledgeBasesStream",
+                            "listKnowledgeBasesAsync"
+              ]
+            }}
+        }
+      }
+    },"SessionEntityTypes": {"clients": {
+        "grpc": {
+          "libraryClient": "SessionEntityTypesClient",
+          "rpcs": {"GetSessionEntityType": {
+              "methods": ["getSessionEntityType"]
+            },"CreateSessionEntityType": {
+              "methods": ["createSessionEntityType"]
+            },"UpdateSessionEntityType": {
+              "methods": ["updateSessionEntityType"]
+            },"DeleteSessionEntityType": {
+              "methods": ["deleteSessionEntityType"]
+            },"ListSessionEntityTypes": {
+              "methods": [
+                            "listSessionEntityTypes",
+                            "listSessionEntityTypesStream",
+                            "listSessionEntityTypesAsync"
+              ]
+            }}
+        },
+        "grpc-fallback": {
+          "libraryClient": "SessionEntityTypesClient",
+          "rpcs": {"GetSessionEntityType": {
+              "methods": ["getSessionEntityType"]
+            },"CreateSessionEntityType": {
+              "methods": ["createSessionEntityType"]
+            },"UpdateSessionEntityType": {
+              "methods": ["updateSessionEntityType"]
+            },"DeleteSessionEntityType": {
+              "methods": ["deleteSessionEntityType"]
+            },"ListSessionEntityTypes": {
+              "methods": [
+                            "listSessionEntityTypes",
+                            "listSessionEntityTypesStream",
+                            "listSessionEntityTypesAsync"
+              ]
+            }}
+        }
+      }
+    },"Sessions": {"clients": {
+        "grpc": {
+          "libraryClient": "SessionsClient",
+          "rpcs": {"DetectIntent": {
+              "methods": ["detectIntent"]
+            },"StreamingDetectIntent": {
+              "methods": ["streamingDetectIntent"]
+            }}
+        },
+        "grpc-fallback": {
+          "libraryClient": "SessionsClient",
+          "rpcs": {"DetectIntent": {
+              "methods": ["detectIntent"]
+            }}
+        }
+      }
+    }}
+}

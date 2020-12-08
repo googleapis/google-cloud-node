@@ -1978,122 +1978,6 @@ describe('v2beta1.EntityTypesClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('document', () => {
-      const fakePath = '/rendered/path/document';
-      const expectedParameters = {
-        project: 'projectValue',
-        knowledge_base: 'knowledgeBaseValue',
-        document: 'documentValue',
-      };
-      const client = new entitytypesModule.v2beta1.EntityTypesClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      client.pathTemplates.documentPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.documentPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('documentPath', () => {
-        const result = client.documentPath(
-          'projectValue',
-          'knowledgeBaseValue',
-          'documentValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.documentPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromDocumentName', () => {
-        const result = client.matchProjectFromDocumentName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.documentPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchKnowledgeBaseFromDocumentName', () => {
-        const result = client.matchKnowledgeBaseFromDocumentName(fakePath);
-        assert.strictEqual(result, 'knowledgeBaseValue');
-        assert(
-          (client.pathTemplates.documentPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchDocumentFromDocumentName', () => {
-        const result = client.matchDocumentFromDocumentName(fakePath);
-        assert.strictEqual(result, 'documentValue');
-        assert(
-          (client.pathTemplates.documentPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('knowledgeBase', () => {
-      const fakePath = '/rendered/path/knowledgeBase';
-      const expectedParameters = {
-        project: 'projectValue',
-        knowledge_base: 'knowledgeBaseValue',
-      };
-      const client = new entitytypesModule.v2beta1.EntityTypesClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      client.pathTemplates.knowledgeBasePathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.knowledgeBasePathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('knowledgeBasePath', () => {
-        const result = client.knowledgeBasePath(
-          'projectValue',
-          'knowledgeBaseValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.knowledgeBasePathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromKnowledgeBaseName', () => {
-        const result = client.matchProjectFromKnowledgeBaseName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.knowledgeBasePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchKnowledgeBaseFromKnowledgeBaseName', () => {
-        const result = client.matchKnowledgeBaseFromKnowledgeBaseName(fakePath);
-        assert.strictEqual(result, 'knowledgeBaseValue');
-        assert(
-          (client.pathTemplates.knowledgeBasePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
     describe('project', () => {
       const fakePath = '/rendered/path/project';
       const expectedParameters = {
@@ -2713,6 +2597,139 @@ describe('v2beta1.EntityTypesClient', () => {
       });
     });
 
+    describe('projectKnowledgeBase', () => {
+      const fakePath = '/rendered/path/projectKnowledgeBase';
+      const expectedParameters = {
+        project: 'projectValue',
+        knowledge_base: 'knowledgeBaseValue',
+      };
+      const client = new entitytypesModule.v2beta1.EntityTypesClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.projectKnowledgeBasePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.projectKnowledgeBasePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('projectKnowledgeBasePath', () => {
+        const result = client.projectKnowledgeBasePath(
+          'projectValue',
+          'knowledgeBaseValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.projectKnowledgeBasePathTemplate
+            .render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromProjectKnowledgeBaseName', () => {
+        const result = client.matchProjectFromProjectKnowledgeBaseName(
+          fakePath
+        );
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.projectKnowledgeBasePathTemplate
+            .match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchKnowledgeBaseFromProjectKnowledgeBaseName', () => {
+        const result = client.matchKnowledgeBaseFromProjectKnowledgeBaseName(
+          fakePath
+        );
+        assert.strictEqual(result, 'knowledgeBaseValue');
+        assert(
+          (client.pathTemplates.projectKnowledgeBasePathTemplate
+            .match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('projectKnowledgeBaseDocument', () => {
+      const fakePath = '/rendered/path/projectKnowledgeBaseDocument';
+      const expectedParameters = {
+        project: 'projectValue',
+        knowledge_base: 'knowledgeBaseValue',
+        document: 'documentValue',
+      };
+      const client = new entitytypesModule.v2beta1.EntityTypesClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.projectKnowledgeBaseDocumentPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.projectKnowledgeBaseDocumentPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('projectKnowledgeBaseDocumentPath', () => {
+        const result = client.projectKnowledgeBaseDocumentPath(
+          'projectValue',
+          'knowledgeBaseValue',
+          'documentValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.projectKnowledgeBaseDocumentPathTemplate
+            .render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromProjectKnowledgeBaseDocumentName', () => {
+        const result = client.matchProjectFromProjectKnowledgeBaseDocumentName(
+          fakePath
+        );
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.projectKnowledgeBaseDocumentPathTemplate
+            .match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchKnowledgeBaseFromProjectKnowledgeBaseDocumentName', () => {
+        const result = client.matchKnowledgeBaseFromProjectKnowledgeBaseDocumentName(
+          fakePath
+        );
+        assert.strictEqual(result, 'knowledgeBaseValue');
+        assert(
+          (client.pathTemplates.projectKnowledgeBaseDocumentPathTemplate
+            .match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchDocumentFromProjectKnowledgeBaseDocumentName', () => {
+        const result = client.matchDocumentFromProjectKnowledgeBaseDocumentName(
+          fakePath
+        );
+        assert.strictEqual(result, 'documentValue');
+        assert(
+          (client.pathTemplates.projectKnowledgeBaseDocumentPathTemplate
+            .match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
     describe('projectLocationAgent', () => {
       const fakePath = '/rendered/path/projectLocationAgent';
       const expectedParameters = {
@@ -3170,6 +3187,169 @@ describe('v2beta1.EntityTypesClient', () => {
         assert(
           (client.pathTemplates
             .projectLocationAgentSessionEntityTypePathTemplate
+            .match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('projectLocationKnowledgeBase', () => {
+      const fakePath = '/rendered/path/projectLocationKnowledgeBase';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        knowledge_base: 'knowledgeBaseValue',
+      };
+      const client = new entitytypesModule.v2beta1.EntityTypesClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.projectLocationKnowledgeBasePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.projectLocationKnowledgeBasePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('projectLocationKnowledgeBasePath', () => {
+        const result = client.projectLocationKnowledgeBasePath(
+          'projectValue',
+          'locationValue',
+          'knowledgeBaseValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.projectLocationKnowledgeBasePathTemplate
+            .render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromProjectLocationKnowledgeBaseName', () => {
+        const result = client.matchProjectFromProjectLocationKnowledgeBaseName(
+          fakePath
+        );
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.projectLocationKnowledgeBasePathTemplate
+            .match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromProjectLocationKnowledgeBaseName', () => {
+        const result = client.matchLocationFromProjectLocationKnowledgeBaseName(
+          fakePath
+        );
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.projectLocationKnowledgeBasePathTemplate
+            .match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchKnowledgeBaseFromProjectLocationKnowledgeBaseName', () => {
+        const result = client.matchKnowledgeBaseFromProjectLocationKnowledgeBaseName(
+          fakePath
+        );
+        assert.strictEqual(result, 'knowledgeBaseValue');
+        assert(
+          (client.pathTemplates.projectLocationKnowledgeBasePathTemplate
+            .match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('projectLocationKnowledgeBaseDocument', () => {
+      const fakePath = '/rendered/path/projectLocationKnowledgeBaseDocument';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        knowledge_base: 'knowledgeBaseValue',
+        document: 'documentValue',
+      };
+      const client = new entitytypesModule.v2beta1.EntityTypesClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.projectLocationKnowledgeBaseDocumentPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.projectLocationKnowledgeBaseDocumentPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('projectLocationKnowledgeBaseDocumentPath', () => {
+        const result = client.projectLocationKnowledgeBaseDocumentPath(
+          'projectValue',
+          'locationValue',
+          'knowledgeBaseValue',
+          'documentValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.projectLocationKnowledgeBaseDocumentPathTemplate
+            .render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromProjectLocationKnowledgeBaseDocumentName', () => {
+        const result = client.matchProjectFromProjectLocationKnowledgeBaseDocumentName(
+          fakePath
+        );
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.projectLocationKnowledgeBaseDocumentPathTemplate
+            .match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromProjectLocationKnowledgeBaseDocumentName', () => {
+        const result = client.matchLocationFromProjectLocationKnowledgeBaseDocumentName(
+          fakePath
+        );
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.projectLocationKnowledgeBaseDocumentPathTemplate
+            .match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchKnowledgeBaseFromProjectLocationKnowledgeBaseDocumentName', () => {
+        const result = client.matchKnowledgeBaseFromProjectLocationKnowledgeBaseDocumentName(
+          fakePath
+        );
+        assert.strictEqual(result, 'knowledgeBaseValue');
+        assert(
+          (client.pathTemplates.projectLocationKnowledgeBaseDocumentPathTemplate
+            .match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchDocumentFromProjectLocationKnowledgeBaseDocumentName', () => {
+        const result = client.matchDocumentFromProjectLocationKnowledgeBaseDocumentName(
+          fakePath
+        );
+        assert.strictEqual(result, 'documentValue');
+        assert(
+          (client.pathTemplates.projectLocationKnowledgeBaseDocumentPathTemplate
             .match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
