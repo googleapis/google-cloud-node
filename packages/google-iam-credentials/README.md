@@ -5,7 +5,7 @@
 # [IAM Service Account Credentials API: Node.js Client](https://github.com/googleapis/nodejs-iam-credentials)
 
 [![release level](https://img.shields.io/badge/release%20level-general%20availability%20%28GA%29-brightgreen.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
-[![npm version](https://img.shields.io/npm/v/credentials.svg)](https://www.npmjs.org/package/credentials)
+[![npm version](https://img.shields.io/npm/v/@google-iam/credentials.svg)](https://www.npmjs.org/package/@google-iam/credentials)
 [![codecov](https://img.shields.io/codecov/c/github/googleapis/nodejs-iam-credentials/master.svg?style=flat)](https://codecov.io/gh/googleapis/nodejs-iam-credentials)
 
 
@@ -51,7 +51,7 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 ### Installing the client library
 
 ```bash
-npm install credentials
+npm install @google-iam/credentials
 ```
 
 
@@ -73,12 +73,10 @@ const client = new {IAMCredentialsClient}();
 
 //TODO(library generator): write the actual function you will be testing
 async function doSomething() {
-  console.log(
-    'Developer! Change this code so that it shows how to use the library! See comments below on structure.'
-  );
-  // const [thing] = await client.methodName({
-  // });
-  // console.info(thing);
+ console.log('Developer! Change this code so that it shows how to use the library! See comments below on structure.')
+ // const [thing] = await client.methodName({
+ // });
+ // console.info(thing);
 }
 doSomething();
 
