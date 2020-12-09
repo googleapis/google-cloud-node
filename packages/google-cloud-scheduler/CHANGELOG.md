@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/scheduler?activeTab=versions
 
+### [2.1.3](https://www.github.com/googleapis/nodejs-scheduler/compare/v2.1.2...v2.1.3) (2020-12-07)
+
+
+### Bug Fixes
+
+* check for fetch on window ([#311](https://www.github.com/googleapis/nodejs-scheduler/issues/311)) ([0302443](https://www.github.com/googleapis/nodejs-scheduler/commit/0302443d18941ba91b01a463e007b6e2560c2d2d))
+
 ### [2.1.2](https://www.github.com/googleapis/nodejs-scheduler/compare/v2.1.1...v2.1.2) (2020-11-25)
 
 
