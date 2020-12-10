@@ -1165,11 +1165,12 @@ describe('storage', () => {
         },
       });
       await bucket.addLifecycleRule({
-        action: 'delete',
+        action: 'setStorageClass',
         condition: {
           age: 60,
           isLive: true,
         },
+        storageClass: 'coldline',
       });
       assert.strictEqual(
         bucket.metadata.lifecycle.rule.length,

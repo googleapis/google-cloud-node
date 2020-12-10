@@ -1171,7 +1171,6 @@ class Bucket extends ServiceObject {
     }
 
     options = options || {};
-    callback = callback || util.noop;
 
     const newLifecycleRules = arrify(rule).map(rule => {
       if (typeof rule.action === 'object') {
@@ -1184,13 +1183,8 @@ class Bucket extends ServiceObject {
 
       apiFormattedRule.condition = {};
       apiFormattedRule.action = {
-        type: rule.action,
+        type: rule.action.charAt(0).toUpperCase() + rule.action.slice(1),
       };
-
-      // @TODO: Remove if the API becomes less picky.
-      if (rule.action === 'delete') {
-        apiFormattedRule.action.type = 'Delete';
-      }
 
       if (rule.storageClass) {
         apiFormattedRule.action.storageClass = rule.storageClass;
