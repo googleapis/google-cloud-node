@@ -4,6 +4,19 @@
 
 [1]: https://www.npmjs.com/package/nodejs-storage?activeTab=versions
 
+## [5.7.0](https://www.github.com/googleapis/nodejs-storage/compare/v5.6.0...v5.7.0) (2020-12-10)
+
+
+### Features
+
+* support metadata updates from makePrivate() methods ([#1355](https://www.github.com/googleapis/nodejs-storage/issues/1355)) ([3db1e83](https://www.github.com/googleapis/nodejs-storage/commit/3db1e832af1cd3a394305b0a1120953d85f86249))
+
+
+### Bug Fixes
+
+* capitalize action in Bucket#addLifecycleRule ([#1358](https://www.github.com/googleapis/nodejs-storage/issues/1358)) ([205f39f](https://www.github.com/googleapis/nodejs-storage/commit/205f39f970639c06258fb1e0cd18a4d963729262))
+* jsdoc for bucket ([#1359](https://www.github.com/googleapis/nodejs-storage/issues/1359)) ([5fa530a](https://www.github.com/googleapis/nodejs-storage/commit/5fa530ab909e837558deecd7e1aa50a7cc4f5830))
+
 ## [5.6.0](https://www.github.com/googleapis/nodejs-storage/compare/v5.5.1...v5.6.0) (2020-12-02)
 
 
