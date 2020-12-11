@@ -383,6 +383,15 @@
                     },
                     "FaceDetectionAnnotation": {
                       "fields": {
+                        "tracks": {
+                          "rule": "repeated",
+                          "type": "Track",
+                          "id": 3
+                        },
+                        "thumbnail": {
+                          "type": "bytes",
+                          "id": 4
+                        },
                         "version": {
                           "type": "string",
                           "id": 5

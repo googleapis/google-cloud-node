@@ -4539,6 +4539,8 @@
                          * Properties of a FaceDetectionAnnotation.
                          * @memberof google.cloud.videointelligence.v1
                          * @interface IFaceDetectionAnnotation
+                         * @property {Array.<google.cloud.videointelligence.v1.ITrack>|null} [tracks] FaceDetectionAnnotation tracks
+                         * @property {Uint8Array|null} [thumbnail] FaceDetectionAnnotation thumbnail
                          * @property {string|null} [version] FaceDetectionAnnotation version
                          */
     
@@ -4551,11 +4553,28 @@
                          * @param {google.cloud.videointelligence.v1.IFaceDetectionAnnotation=} [properties] Properties to set
                          */
                         function FaceDetectionAnnotation(properties) {
+                            this.tracks = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
                                         this[keys[i]] = properties[keys[i]];
                         }
+    
+                        /**
+                         * FaceDetectionAnnotation tracks.
+                         * @member {Array.<google.cloud.videointelligence.v1.ITrack>} tracks
+                         * @memberof google.cloud.videointelligence.v1.FaceDetectionAnnotation
+                         * @instance
+                         */
+                        FaceDetectionAnnotation.prototype.tracks = $util.emptyArray;
+    
+                        /**
+                         * FaceDetectionAnnotation thumbnail.
+                         * @member {Uint8Array} thumbnail
+                         * @memberof google.cloud.videointelligence.v1.FaceDetectionAnnotation
+                         * @instance
+                         */
+                        FaceDetectionAnnotation.prototype.thumbnail = $util.newBuffer([]);
     
                         /**
                          * FaceDetectionAnnotation version.
@@ -4589,6 +4608,11 @@
                         FaceDetectionAnnotation.encode = function encode(message, writer) {
                             if (!writer)
                                 writer = $Writer.create();
+                            if (message.tracks != null && message.tracks.length)
+                                for (var i = 0; i < message.tracks.length; ++i)
+                                    $root.google.cloud.videointelligence.v1.Track.encode(message.tracks[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.thumbnail != null && Object.hasOwnProperty.call(message, "thumbnail"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).bytes(message.thumbnail);
                             if (message.version != null && Object.hasOwnProperty.call(message, "version"))
                                 writer.uint32(/* id 5, wireType 2 =*/42).string(message.version);
                             return writer;
@@ -4625,6 +4649,14 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
+                                case 3:
+                                    if (!(message.tracks && message.tracks.length))
+                                        message.tracks = [];
+                                    message.tracks.push($root.google.cloud.videointelligence.v1.Track.decode(reader, reader.uint32()));
+                                    break;
+                                case 4:
+                                    message.thumbnail = reader.bytes();
+                                    break;
                                 case 5:
                                     message.version = reader.string();
                                     break;
@@ -4663,6 +4695,18 @@
                         FaceDetectionAnnotation.verify = function verify(message) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            if (message.tracks != null && message.hasOwnProperty("tracks")) {
+                                if (!Array.isArray(message.tracks))
+                                    return "tracks: array expected";
+                                for (var i = 0; i < message.tracks.length; ++i) {
+                                    var error = $root.google.cloud.videointelligence.v1.Track.verify(message.tracks[i]);
+                                    if (error)
+                                        return "tracks." + error;
+                                }
+                            }
+                            if (message.thumbnail != null && message.hasOwnProperty("thumbnail"))
+                                if (!(message.thumbnail && typeof message.thumbnail.length === "number" || $util.isString(message.thumbnail)))
+                                    return "thumbnail: buffer expected";
                             if (message.version != null && message.hasOwnProperty("version"))
                                 if (!$util.isString(message.version))
                                     return "version: string expected";
@@ -4681,6 +4725,21 @@
                             if (object instanceof $root.google.cloud.videointelligence.v1.FaceDetectionAnnotation)
                                 return object;
                             var message = new $root.google.cloud.videointelligence.v1.FaceDetectionAnnotation();
+                            if (object.tracks) {
+                                if (!Array.isArray(object.tracks))
+                                    throw TypeError(".google.cloud.videointelligence.v1.FaceDetectionAnnotation.tracks: array expected");
+                                message.tracks = [];
+                                for (var i = 0; i < object.tracks.length; ++i) {
+                                    if (typeof object.tracks[i] !== "object")
+                                        throw TypeError(".google.cloud.videointelligence.v1.FaceDetectionAnnotation.tracks: object expected");
+                                    message.tracks[i] = $root.google.cloud.videointelligence.v1.Track.fromObject(object.tracks[i]);
+                                }
+                            }
+                            if (object.thumbnail != null)
+                                if (typeof object.thumbnail === "string")
+                                    $util.base64.decode(object.thumbnail, message.thumbnail = $util.newBuffer($util.base64.length(object.thumbnail)), 0);
+                                else if (object.thumbnail.length)
+                                    message.thumbnail = object.thumbnail;
                             if (object.version != null)
                                 message.version = String(object.version);
                             return message;
@@ -4699,8 +4758,25 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.defaults)
+                            if (options.arrays || options.defaults)
+                                object.tracks = [];
+                            if (options.defaults) {
+                                if (options.bytes === String)
+                                    object.thumbnail = "";
+                                else {
+                                    object.thumbnail = [];
+                                    if (options.bytes !== Array)
+                                        object.thumbnail = $util.newBuffer(object.thumbnail);
+                                }
                                 object.version = "";
+                            }
+                            if (message.tracks && message.tracks.length) {
+                                object.tracks = [];
+                                for (var j = 0; j < message.tracks.length; ++j)
+                                    object.tracks[j] = $root.google.cloud.videointelligence.v1.Track.toObject(message.tracks[j], options);
+                            }
+                            if (message.thumbnail != null && message.hasOwnProperty("thumbnail"))
+                                object.thumbnail = options.bytes === String ? $util.base64.encode(message.thumbnail, 0, message.thumbnail.length) : options.bytes === Array ? Array.prototype.slice.call(message.thumbnail) : message.thumbnail;
                             if (message.version != null && message.hasOwnProperty("version"))
                                 object.version = message.version;
                             return object;
