@@ -320,6 +320,18 @@ describe('file', () => {
     assert.match(output, new RegExp(`modified: '${userMetadata.modified}'`));
   });
 
+  it('should set storage class for a file', async () => {
+    const output = execSync(
+      `node fileChangeStorageClass.js ${bucketName} ${copiedFileName} standard`
+    );
+    assert.include(output, `${copiedFileName} has been set to standard.`);
+    const [metadata] = await storage
+      .bucket(bucketName)
+      .file(copiedFileName)
+      .getMetadata();
+    assert.strictEqual(metadata.storageClass, 'STANDARD');
+  });
+
   it('should delete a file', async () => {
     const output = execSync(
       `node deleteFile.js ${bucketName} ${copiedFileName}`
