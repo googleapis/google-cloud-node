@@ -10532,6 +10532,9 @@ export namespace google {
 
                     /** QueryParameters sentimentAnalysisRequestConfig */
                     sentimentAnalysisRequestConfig?: (google.cloud.dialogflow.v2.ISentimentAnalysisRequestConfig|null);
+
+                    /** QueryParameters webhookHeaders */
+                    webhookHeaders?: ({ [k: string]: string }|null);
                 }
 
                 /** Represents a QueryParameters. */
@@ -10563,6 +10566,9 @@ export namespace google {
 
                     /** QueryParameters sentimentAnalysisRequestConfig. */
                     public sentimentAnalysisRequestConfig?: (google.cloud.dialogflow.v2.ISentimentAnalysisRequestConfig|null);
+
+                    /** QueryParameters webhookHeaders. */
+                    public webhookHeaders: { [k: string]: string };
 
                     /**
                      * Creates a new QueryParameters instance using the specified properties.

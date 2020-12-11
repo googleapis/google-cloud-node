@@ -287,6 +287,7 @@
                           "type": "MatchMode",
                           "id": 9,
                           "options": {
+                            "deprecated": true,
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
@@ -3334,6 +3335,11 @@
                         "sentimentAnalysisRequestConfig": {
                           "type": "SentimentAnalysisRequestConfig",
                           "id": 10
+                        },
+                        "webhookHeaders": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 14
                         }
                       }
                     },

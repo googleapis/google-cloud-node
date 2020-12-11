@@ -362,6 +362,10 @@ export class SessionsClient {
    * and session entity types to be updated, which in turn might affect
    * results of future queries.
    *
+   * Note: Always use agent versions for production traffic.
+   * See [Versions and
+   * environments](https://cloud.google.com/dialogflow/es/docs/agents-versions).
+   *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.session
@@ -377,6 +381,10 @@ export class SessionsClient {
    *
    *   For more information, see the [API interactions
    *   guide](https://cloud.google.com/dialogflow/docs/api-overview).
+   *
+   *   Note: Always use agent versions for production traffic.
+   *   See [Versions and
+   *   environments](https://cloud.google.com/dialogflow/es/docs/agents-versions).
    * @param {google.cloud.dialogflow.v2.QueryParameters} request.queryParams
    *   The parameters of this query.
    * @param {google.cloud.dialogflow.v2.QueryInput} request.queryInput
@@ -393,12 +401,14 @@ export class SessionsClient {
    *   audio. If this field is not set and agent-level speech synthesizer is not
    *   configured, no output audio is generated.
    * @param {google.protobuf.FieldMask} request.outputAudioConfigMask
-   *   Mask for {@link google.cloud.dialogflow.v2.DetectIntentRequest.output_audio_config|output_audio_config} indicating which settings in this
-   *   request-level config should override speech synthesizer settings defined at
-   *   agent-level.
+   *   Mask for
+   *   {@link google.cloud.dialogflow.v2.DetectIntentRequest.output_audio_config|output_audio_config}
+   *   indicating which settings in this request-level config should override
+   *   speech synthesizer settings defined at agent-level.
    *
-   *   If unspecified or empty, {@link google.cloud.dialogflow.v2.DetectIntentRequest.output_audio_config|output_audio_config} replaces the agent-level
-   *   config in its entirety.
+   *   If unspecified or empty,
+   *   {@link google.cloud.dialogflow.v2.DetectIntentRequest.output_audio_config|output_audio_config}
+   *   replaces the agent-level config in its entirety.
    * @param {Buffer} request.inputAudio
    *   The natural language speech audio to be processed. This field
    *   should be populated iff `query_input` is set to an input audio config.
@@ -460,6 +470,10 @@ export class SessionsClient {
    * Processes a natural language query in audio format in a streaming fashion
    * and returns structured, actionable data as a result. This method is only
    * available via the gRPC API (not REST).
+   *
+   * Note: Always use agent versions for production traffic.
+   * See [Versions and
+   * environments](https://cloud.google.com/dialogflow/es/docs/agents-versions).
    *
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
