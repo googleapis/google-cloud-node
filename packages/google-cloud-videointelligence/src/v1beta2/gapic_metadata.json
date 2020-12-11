@@ -4,19 +4,30 @@
   "language": "typescript",
   "protoPackage": "google.cloud.videointelligence.v1beta2",
   "libraryPackage": "@google-cloud/video-intelligence",
-  "services": {"VideoIntelligenceService": {"clients": {
+  "services": {
+    "VideoIntelligenceService": {
+      "clients": {
         "grpc": {
           "libraryClient": "VideoIntelligenceServiceClient",
-          "rpcs": {"AnnotateVideo": {
-              "methods": ["annotateVideo"]
-            }}
+          "rpcs": {
+            "AnnotateVideo": {
+              "methods": [
+                "annotateVideo"
+              ]
+            }
+          }
         },
         "grpc-fallback": {
           "libraryClient": "VideoIntelligenceServiceClient",
-          "rpcs": {,"AnnotateVideo": {
-              "methods": ["annotateVideo"]
-            }}
+          "rpcs": {
+            "AnnotateVideo": {
+              "methods": [
+                "annotateVideo"
+              ]
+            }
+          }
         }
       }
-    }}
+    }
+  }
 }

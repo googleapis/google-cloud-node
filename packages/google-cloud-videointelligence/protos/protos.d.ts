@@ -1852,6 +1852,12 @@ export namespace google {
                 /** Properties of a FaceDetectionAnnotation. */
                 interface IFaceDetectionAnnotation {
 
+                    /** FaceDetectionAnnotation tracks */
+                    tracks?: (google.cloud.videointelligence.v1.ITrack[]|null);
+
+                    /** FaceDetectionAnnotation thumbnail */
+                    thumbnail?: (Uint8Array|string|null);
+
                     /** FaceDetectionAnnotation version */
                     version?: (string|null);
                 }
@@ -1864,6 +1870,12 @@ export namespace google {
                      * @param [properties] Properties to set
                      */
                     constructor(properties?: google.cloud.videointelligence.v1.IFaceDetectionAnnotation);
+
+                    /** FaceDetectionAnnotation tracks. */
+                    public tracks: google.cloud.videointelligence.v1.ITrack[];
+
+                    /** FaceDetectionAnnotation thumbnail. */
+                    public thumbnail: (Uint8Array|string);
 
                     /** FaceDetectionAnnotation version. */
                     public version: string;
