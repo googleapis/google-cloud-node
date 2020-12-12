@@ -2,7 +2,7 @@
   "name": "@google-cloud/binary-authorization",
   "version": "0.1.0",
   "description": "Binaryauthorization client for Node.js",
-  "repository": "googleapis/nodejs-binaryauthorization",
+  "repository": "googleapis/nodejs-binary-authorization",
   "license": "Apache-2.0",
   "author": "Google LLC",
   "main": "build/src/index.js",

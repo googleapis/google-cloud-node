@@ -13,11 +13,10 @@
 
 'use strict';
 
-async function main() {
+async function main(parent) {
   // [START nodejs_binary_authorization_quickstart]
   // Imports the Google Cloud client library
 
-  // remove this line after package is released
   // eslint-disable-next-line node/no-missing-require
   const {
     BinauthzManagementServiceV1Beta1Client,
@@ -27,19 +26,13 @@ async function main() {
   // const projectId = 'my-project'
 
   // Creates a client
-  // eslint-disable-next-line no-unused-vars
-  const client = new {BinauthzManagementServiceV1Beta1Client}();
+  const client = new BinauthzManagementServiceV1Beta1Client();
 
-  //TODO(library generator): write the actual function you will be testing
-  async function doSomething() {
-    console.log(
-      'Developer! Change this code so that it shows how to use the library! See comments below on structure.'
-    );
-    // const [thing] = await client.methodName({
-    // });
-    // console.info(thing);
+  async function listAttestors() {
+    const attestors = await client.listAttestors({parent});
+    console.info(attestors);
   }
-  doSomething();
+  listAttestors();
   // [END nodejs_binary_authorization_quickstart]
 }
 

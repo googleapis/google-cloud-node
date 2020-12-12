@@ -16,7 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {BinauthzManagementServiceV1Beta1Client} from 'binaryauthorization';
+import {BinauthzManagementServiceV1Beta1Client} from '@google-cloud/binary-authorization';
 
 // check that the client class type name can be used
 function doStuffWithBinauthzManagementServiceV1Beta1Client(

@@ -3,7 +3,9 @@
   "skip": [
     "https://codecov.io/gh/googleapis/",
     "www.googleapis.com",
-    "img.shields.io"
+    "img.shields.io",
+    "https://googleapis.dev/nodejs/binaryauthorization/latest/",
+    "https://github.com/googleapis/nodejs-binary-authorization/blob/master/CHANGELOG.md"
   ],
   "silent": true,
   "concurrency": 10

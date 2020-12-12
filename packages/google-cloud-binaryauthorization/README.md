@@ -60,25 +60,22 @@ npm install @google-cloud/binary-authorization
 ```javascript
 // Imports the Google Cloud client library
 
-// remove this line after package is released
 // eslint-disable-next-line node/no-missing-require
-const {BinauthzManagementServiceV1Beta1Client} = require('@google-cloud/binary-authorization');
+const {
+  BinauthzManagementServiceV1Beta1Client,
+} = require('@google-cloud/binary-authorization');
 
 // TODO(developer): replace with your prefered project ID.
 // const projectId = 'my-project'
 
 // Creates a client
-// eslint-disable-next-line no-unused-vars
-const client = new {BinauthzManagementServiceV1Beta1Client}();
+const client = new BinauthzManagementServiceV1Beta1Client();
 
-//TODO(library generator): write the actual function you will be testing
-async function doSomething() {
- console.log('Developer! Change this code so that it shows how to use the library! See comments below on structure.')
- // const [thing] = await client.methodName({
- // });
- // console.info(thing);
+async function listAttestors() {
+  const attestors = await client.listAttestors({parent});
+  console.info(attestors);
 }
-doSomething();
+listAttestors();
 
 ```
 
@@ -104,7 +101,7 @@ Our client libraries follow the [Node.js release schedule](https://nodejs.org/en
 Libraries are compatible with all current _active_ and _maintenance_ versions of
 Node.js.
 
-Client libraries targetting some end-of-life versions of Node.js are available, and
+Client libraries targeting some end-of-life versions of Node.js are available, and
 can be installed via npm [dist-tags](https://docs.npmjs.com/cli/dist-tag).
 The dist-tags follow the naming convention `legacy-(version)`.
 

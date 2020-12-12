@@ -20,33 +20,28 @@
 const path = require('path');
 const cp = require('child_process');
 const {before, describe, it} = require('mocha');
-// eslint-disable-next-line node/no-missing-require
 const {
   BinauthzManagementServiceV1Beta1Client,
 } = require('@google-cloud/binary-authorization');
-// eslint-disable-next-line no-unused-vars
 const {assert} = require('chai');
 
 const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
 
 const cwd = path.join(__dirname, '..');
 
-const client = new {BinauthzManagementServiceV1Beta1Client}();
+const client = new BinauthzManagementServiceV1Beta1Client();
 
 describe('Quickstart', () => {
-  //TODO: remove this if not using the projectId
-  // eslint-disable-next-line no-unused-vars
   let projectId;
 
   before(async () => {
-    // eslint-disable-next-line no-unused-vars
     projectId = await client.getProjectId();
   });
 
   it('should run quickstart', async () => {
-    //TODO: remove this disability
-    // eslint-disable-next-line no-unused-vars
-    const stdout = execSync('node ./quickstart.js', {cwd});
-    //assert(stdout, stdout !== null);
+    const stdout = execSync(`node ./quickstart.js projects/${projectId}`, {
+      cwd,
+    });
+    assert(stdout.match(/\[\]/));
   });
 });

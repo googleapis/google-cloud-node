@@ -273,7 +273,17 @@
                           "options": {
                             "(google.api.http).get": "/v1beta1/{name=projects/*/policy}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta1/{name=projects/*/policy}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "UpdatePolicy": {
                           "requestType": "UpdatePolicyRequest",
@@ -282,7 +292,18 @@
                             "(google.api.http).put": "/v1beta1/{policy.name=projects/*/policy}",
                             "(google.api.http).body": "policy",
                             "(google.api.method_signature)": "policy"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "put": "/v1beta1/{policy.name=projects/*/policy}",
+                                "body": "policy"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "policy"
+                            }
+                          ]
                         },
                         "CreateAttestor": {
                           "requestType": "CreateAttestorRequest",
@@ -291,7 +312,18 @@
                             "(google.api.http).post": "/v1beta1/{parent=projects/*}/attestors",
                             "(google.api.http).body": "attestor",
                             "(google.api.method_signature)": "parent,attestor_id,attestor"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta1/{parent=projects/*}/attestors",
+                                "body": "attestor"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,attestor_id,attestor"
+                            }
+                          ]
                         },
                         "GetAttestor": {
                           "requestType": "GetAttestorRequest",
@@ -299,7 +331,17 @@
                           "options": {
                             "(google.api.http).get": "/v1beta1/{name=projects/*/attestors/*}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta1/{name=projects/*/attestors/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "UpdateAttestor": {
                           "requestType": "UpdateAttestorRequest",
@@ -308,7 +350,18 @@
                             "(google.api.http).put": "/v1beta1/{attestor.name=projects/*/attestors/*}",
                             "(google.api.http).body": "attestor",
                             "(google.api.method_signature)": "attestor"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "put": "/v1beta1/{attestor.name=projects/*/attestors/*}",
+                                "body": "attestor"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "attestor"
+                            }
+                          ]
                         },
                         "ListAttestors": {
                           "requestType": "ListAttestorsRequest",
@@ -316,7 +369,17 @@
                           "options": {
                             "(google.api.http).get": "/v1beta1/{parent=projects/*}/attestors",
                             "(google.api.method_signature)": "parent"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta1/{parent=projects/*}/attestors"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
                         },
                         "DeleteAttestor": {
                           "requestType": "DeleteAttestorRequest",
@@ -324,7 +387,17 @@
                           "options": {
                             "(google.api.http).delete": "/v1beta1/{name=projects/*/attestors/*}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1beta1/{name=projects/*/attestors/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         }
                       }
                     },

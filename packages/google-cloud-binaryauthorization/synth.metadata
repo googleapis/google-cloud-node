@@ -3,23 +3,23 @@
     {
       "git": {
         "name": ".",
-        "remote": "sso://user/sofialeon/nodejs-binary-authorization",
-        "sha": "d3d05fef718afeba84001ba095be778b18d86dda"
+        "remote": "git@github.com:googleapis/nodejs-binary-authorization.git",
+        "sha": "719880356444440b73ee81bfd20984ab2bd5db44"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "b7038c181dcaa75c4fe8270b842c941d1df3128c",
-        "internalRef": "341924087"
+        "sha": "6bf92d7ceaf8841f77fe960163f5c607f4edc59a",
+        "internalRef": "345578804"
       }
     },
     {
       "git": {
         "name": "synthtool",
         "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "7db8a6c5ffb12a6e4c2f799c18f00f7f3d60e279"
+        "sha": "18c5dbdb4ac8cf75d4d8174e7b4558f48e76f8a1"
       }
     }
   ],
