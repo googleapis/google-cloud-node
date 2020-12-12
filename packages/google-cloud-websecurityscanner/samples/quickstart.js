@@ -13,7 +13,7 @@
 
 'use strict';
 
-async function main() {
+async function main(projectId) {
   // [START nodejs_web_security_scanner_quickstart]
   // Imports the Google Cloud client library
 
@@ -28,18 +28,16 @@ async function main() {
 
   // Creates a client
   // eslint-disable-next-line no-unused-vars
-  const client = new {WebSecurityScannerClient}();
+  const client = new WebSecurityScannerClient();
 
   //TODO(library generator): write the actual function you will be testing
-  async function doSomething() {
-    console.log(
-      'Developer! Change this code so that it shows how to use the library! See comments below on structure.'
-    );
-    // const [thing] = await client.methodName({
-    // });
-    // console.info(thing);
+  async function listConfigs() {
+    const stats = await client.listScanConfigs({
+      parent: `projects/${projectId}`,
+    });
+    console.info(stats);
   }
-  doSomething();
+  listConfigs();
   // [END nodejs_web_security_scanner_quickstart]
 }
 

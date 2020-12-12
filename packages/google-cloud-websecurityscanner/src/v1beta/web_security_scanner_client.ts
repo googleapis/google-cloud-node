@@ -1459,9 +1459,7 @@ export class WebSecurityScannerClient {
       this.innerApiCalls['listScanConfigs'] as GaxCall,
       (request as unknown) as RequestType,
       callSettings
-    ) as AsyncIterable<
-      protos.google.cloud.websecurityscanner.v1beta.IScanConfig
-    >;
+    ) as AsyncIterable<protos.google.cloud.websecurityscanner.v1beta.IScanConfig>;
   }
   listScanRuns(
     request: protos.google.cloud.websecurityscanner.v1beta.IListScanRunsRequest,
@@ -1883,9 +1881,7 @@ export class WebSecurityScannerClient {
       this.innerApiCalls['listCrawledUrls'] as GaxCall,
       (request as unknown) as RequestType,
       callSettings
-    ) as AsyncIterable<
-      protos.google.cloud.websecurityscanner.v1beta.ICrawledUrl
-    >;
+    ) as AsyncIterable<protos.google.cloud.websecurityscanner.v1beta.ICrawledUrl>;
   }
   listFindings(
     request: protos.google.cloud.websecurityscanner.v1beta.IListFindingsRequest,

@@ -24,18 +24,16 @@ const {before, describe, it} = require('mocha');
 const {
   WebSecurityScannerClient,
 } = require('@google-cloud/web-security-scanner');
-// eslint-disable-next-line no-unused-vars, node/no-missing-require
 const {assert} = require('chai');
 
 const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
 
 const cwd = path.join(__dirname, '..');
 
-const client = new {WebSecurityScannerClient}();
+const client = new WebSecurityScannerClient();
 
 describe('Quickstart', () => {
   //TODO: remove this if not using the projectId
-  // eslint-disable-next-line no-unused-vars
   let projectId;
 
   before(async () => {
@@ -44,9 +42,9 @@ describe('Quickstart', () => {
   });
 
   it('should run quickstart', async () => {
-    //TODO: remove this disability
-    // eslint-disable-next-line no-unused-vars
-    const stdout = execSync('node ./quickstart.js', {cwd});
-    //assert(stdout, stdout !== null);
+    const stdout = execSync(`node ./quickstart.js ${projectId}`, {
+      cwd,
+    });
+    assert(stdout, stdout.match(/\[\]/));
   });
 });

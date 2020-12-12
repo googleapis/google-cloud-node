@@ -1,0 +1,169 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.cloud.websecurityscanner.v1",
+  "libraryPackage": "websecurityscanner",
+  "services": {
+    "WebSecurityScanner": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "WebSecurityScannerClient",
+          "rpcs": {
+            "CreateScanConfig": {
+              "methods": [
+                "createScanConfig"
+              ]
+            },
+            "DeleteScanConfig": {
+              "methods": [
+                "deleteScanConfig"
+              ]
+            },
+            "GetScanConfig": {
+              "methods": [
+                "getScanConfig"
+              ]
+            },
+            "UpdateScanConfig": {
+              "methods": [
+                "updateScanConfig"
+              ]
+            },
+            "StartScanRun": {
+              "methods": [
+                "startScanRun"
+              ]
+            },
+            "GetScanRun": {
+              "methods": [
+                "getScanRun"
+              ]
+            },
+            "StopScanRun": {
+              "methods": [
+                "stopScanRun"
+              ]
+            },
+            "GetFinding": {
+              "methods": [
+                "getFinding"
+              ]
+            },
+            "ListFindingTypeStats": {
+              "methods": [
+                "listFindingTypeStats"
+              ]
+            },
+            "ListScanConfigs": {
+              "methods": [
+                "listScanConfigs",
+                "listScanConfigsStream",
+                "listScanConfigsAsync"
+              ]
+            },
+            "ListScanRuns": {
+              "methods": [
+                "listScanRuns",
+                "listScanRunsStream",
+                "listScanRunsAsync"
+              ]
+            },
+            "ListCrawledUrls": {
+              "methods": [
+                "listCrawledUrls",
+                "listCrawledUrlsStream",
+                "listCrawledUrlsAsync"
+              ]
+            },
+            "ListFindings": {
+              "methods": [
+                "listFindings",
+                "listFindingsStream",
+                "listFindingsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "WebSecurityScannerClient",
+          "rpcs": {
+            "CreateScanConfig": {
+              "methods": [
+                "createScanConfig"
+              ]
+            },
+            "DeleteScanConfig": {
+              "methods": [
+                "deleteScanConfig"
+              ]
+            },
+            "GetScanConfig": {
+              "methods": [
+                "getScanConfig"
+              ]
+            },
+            "UpdateScanConfig": {
+              "methods": [
+                "updateScanConfig"
+              ]
+            },
+            "StartScanRun": {
+              "methods": [
+                "startScanRun"
+              ]
+            },
+            "GetScanRun": {
+              "methods": [
+                "getScanRun"
+              ]
+            },
+            "StopScanRun": {
+              "methods": [
+                "stopScanRun"
+              ]
+            },
+            "GetFinding": {
+              "methods": [
+                "getFinding"
+              ]
+            },
+            "ListFindingTypeStats": {
+              "methods": [
+                "listFindingTypeStats"
+              ]
+            },
+            "ListScanConfigs": {
+              "methods": [
+                "listScanConfigs",
+                "listScanConfigsStream",
+                "listScanConfigsAsync"
+              ]
+            },
+            "ListScanRuns": {
+              "methods": [
+                "listScanRuns",
+                "listScanRunsStream",
+                "listScanRunsAsync"
+              ]
+            },
+            "ListCrawledUrls": {
+              "methods": [
+                "listCrawledUrls",
+                "listCrawledUrlsStream",
+                "listCrawledUrlsAsync"
+              ]
+            },
+            "ListFindings": {
+              "methods": [
+                "listFindings",
+                "listFindingsStream",
+                "listFindingsAsync"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

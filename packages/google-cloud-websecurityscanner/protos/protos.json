@@ -620,28 +620,57 @@
                           "options": {
                             "(google.api.http).post": "/v1/{parent=projects/*}/scanConfigs",
                             "(google.api.http).body": "scan_config"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=projects/*}/scanConfigs",
+                                "body": "scan_config"
+                              }
+                            }
+                          ]
                         },
                         "DeleteScanConfig": {
                           "requestType": "DeleteScanConfigRequest",
                           "responseType": "google.protobuf.Empty",
                           "options": {
                             "(google.api.http).delete": "/v1/{name=projects/*/scanConfigs/*}"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1/{name=projects/*/scanConfigs/*}"
+                              }
+                            }
+                          ]
                         },
                         "GetScanConfig": {
                           "requestType": "GetScanConfigRequest",
                           "responseType": "ScanConfig",
                           "options": {
                             "(google.api.http).get": "/v1/{name=projects/*/scanConfigs/*}"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/scanConfigs/*}"
+                              }
+                            }
+                          ]
                         },
                         "ListScanConfigs": {
                           "requestType": "ListScanConfigsRequest",
                           "responseType": "ListScanConfigsResponse",
                           "options": {
                             "(google.api.http).get": "/v1/{parent=projects/*}/scanConfigs"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=projects/*}/scanConfigs"
+                              }
+                            }
+                          ]
                         },
                         "UpdateScanConfig": {
                           "requestType": "UpdateScanConfigRequest",
@@ -649,7 +678,15 @@
                           "options": {
                             "(google.api.http).patch": "/v1/{scan_config.name=projects/*/scanConfigs/*}",
                             "(google.api.http).body": "scan_config"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1/{scan_config.name=projects/*/scanConfigs/*}",
+                                "body": "scan_config"
+                              }
+                            }
+                          ]
                         },
                         "StartScanRun": {
                           "requestType": "StartScanRunRequest",
@@ -657,21 +694,43 @@
                           "options": {
                             "(google.api.http).post": "/v1/{name=projects/*/scanConfigs/*}:start",
                             "(google.api.http).body": "*"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{name=projects/*/scanConfigs/*}:start",
+                                "body": "*"
+                              }
+                            }
+                          ]
                         },
                         "GetScanRun": {
                           "requestType": "GetScanRunRequest",
                           "responseType": "ScanRun",
                           "options": {
                             "(google.api.http).get": "/v1/{name=projects/*/scanConfigs/*/scanRuns/*}"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/scanConfigs/*/scanRuns/*}"
+                              }
+                            }
+                          ]
                         },
                         "ListScanRuns": {
                           "requestType": "ListScanRunsRequest",
                           "responseType": "ListScanRunsResponse",
                           "options": {
                             "(google.api.http).get": "/v1/{parent=projects/*/scanConfigs/*}/scanRuns"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=projects/*/scanConfigs/*}/scanRuns"
+                              }
+                            }
+                          ]
                         },
                         "StopScanRun": {
                           "requestType": "StopScanRunRequest",
@@ -679,35 +738,71 @@
                           "options": {
                             "(google.api.http).post": "/v1/{name=projects/*/scanConfigs/*/scanRuns/*}:stop",
                             "(google.api.http).body": "*"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{name=projects/*/scanConfigs/*/scanRuns/*}:stop",
+                                "body": "*"
+                              }
+                            }
+                          ]
                         },
                         "ListCrawledUrls": {
                           "requestType": "ListCrawledUrlsRequest",
                           "responseType": "ListCrawledUrlsResponse",
                           "options": {
                             "(google.api.http).get": "/v1/{parent=projects/*/scanConfigs/*/scanRuns/*}/crawledUrls"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=projects/*/scanConfigs/*/scanRuns/*}/crawledUrls"
+                              }
+                            }
+                          ]
                         },
                         "GetFinding": {
                           "requestType": "GetFindingRequest",
                           "responseType": "Finding",
                           "options": {
                             "(google.api.http).get": "/v1/{name=projects/*/scanConfigs/*/scanRuns/*/findings/*}"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/scanConfigs/*/scanRuns/*/findings/*}"
+                              }
+                            }
+                          ]
                         },
                         "ListFindings": {
                           "requestType": "ListFindingsRequest",
                           "responseType": "ListFindingsResponse",
                           "options": {
                             "(google.api.http).get": "/v1/{parent=projects/*/scanConfigs/*/scanRuns/*}/findings"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=projects/*/scanConfigs/*/scanRuns/*}/findings"
+                              }
+                            }
+                          ]
                         },
                         "ListFindingTypeStats": {
                           "requestType": "ListFindingTypeStatsRequest",
                           "responseType": "ListFindingTypeStatsResponse",
                           "options": {
                             "(google.api.http).get": "/v1/{parent=projects/*/scanConfigs/*/scanRuns/*}/findingTypeStats"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=projects/*/scanConfigs/*/scanRuns/*}/findingTypeStats"
+                              }
+                            }
+                          ]
                         }
                       }
                     },
@@ -1352,7 +1447,18 @@
                             "(google.api.http).post": "/v1alpha/{parent=projects/*}/scanConfigs",
                             "(google.api.http).body": "scan_config",
                             "(google.api.method_signature)": "parent,scan_config"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1alpha/{parent=projects/*}/scanConfigs",
+                                "body": "scan_config"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,scan_config"
+                            }
+                          ]
                         },
                         "DeleteScanConfig": {
                           "requestType": "DeleteScanConfigRequest",
@@ -1360,7 +1466,17 @@
                           "options": {
                             "(google.api.http).delete": "/v1alpha/{name=projects/*/scanConfigs/*}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1alpha/{name=projects/*/scanConfigs/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "GetScanConfig": {
                           "requestType": "GetScanConfigRequest",
@@ -1368,7 +1484,17 @@
                           "options": {
                             "(google.api.http).get": "/v1alpha/{name=projects/*/scanConfigs/*}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1alpha/{name=projects/*/scanConfigs/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "ListScanConfigs": {
                           "requestType": "ListScanConfigsRequest",
@@ -1376,7 +1502,17 @@
                           "options": {
                             "(google.api.http).get": "/v1alpha/{parent=projects/*}/scanConfigs",
                             "(google.api.method_signature)": "parent"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1alpha/{parent=projects/*}/scanConfigs"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
                         },
                         "UpdateScanConfig": {
                           "requestType": "UpdateScanConfigRequest",
@@ -1385,7 +1521,18 @@
                             "(google.api.http).patch": "/v1alpha/{scan_config.name=projects/*/scanConfigs/*}",
                             "(google.api.http).body": "scan_config",
                             "(google.api.method_signature)": "scan_config,update_mask"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1alpha/{scan_config.name=projects/*/scanConfigs/*}",
+                                "body": "scan_config"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "scan_config,update_mask"
+                            }
+                          ]
                         },
                         "StartScanRun": {
                           "requestType": "StartScanRunRequest",
@@ -1394,7 +1541,18 @@
                             "(google.api.http).post": "/v1alpha/{name=projects/*/scanConfigs/*}:start",
                             "(google.api.http).body": "*",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1alpha/{name=projects/*/scanConfigs/*}:start",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "GetScanRun": {
                           "requestType": "GetScanRunRequest",
@@ -1402,7 +1560,17 @@
                           "options": {
                             "(google.api.http).get": "/v1alpha/{name=projects/*/scanConfigs/*/scanRuns/*}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1alpha/{name=projects/*/scanConfigs/*/scanRuns/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "ListScanRuns": {
                           "requestType": "ListScanRunsRequest",
@@ -1410,7 +1578,17 @@
                           "options": {
                             "(google.api.http).get": "/v1alpha/{parent=projects/*/scanConfigs/*}/scanRuns",
                             "(google.api.method_signature)": "parent"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1alpha/{parent=projects/*/scanConfigs/*}/scanRuns"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
                         },
                         "StopScanRun": {
                           "requestType": "StopScanRunRequest",
@@ -1419,7 +1597,18 @@
                             "(google.api.http).post": "/v1alpha/{name=projects/*/scanConfigs/*/scanRuns/*}:stop",
                             "(google.api.http).body": "*",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1alpha/{name=projects/*/scanConfigs/*/scanRuns/*}:stop",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "ListCrawledUrls": {
                           "requestType": "ListCrawledUrlsRequest",
@@ -1427,7 +1616,17 @@
                           "options": {
                             "(google.api.http).get": "/v1alpha/{parent=projects/*/scanConfigs/*/scanRuns/*}/crawledUrls",
                             "(google.api.method_signature)": "parent"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1alpha/{parent=projects/*/scanConfigs/*/scanRuns/*}/crawledUrls"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
                         },
                         "GetFinding": {
                           "requestType": "GetFindingRequest",
@@ -1435,7 +1634,17 @@
                           "options": {
                             "(google.api.http).get": "/v1alpha/{name=projects/*/scanConfigs/*/scanRuns/*/findings/*}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1alpha/{name=projects/*/scanConfigs/*/scanRuns/*/findings/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "ListFindings": {
                           "requestType": "ListFindingsRequest",
@@ -1443,7 +1652,17 @@
                           "options": {
                             "(google.api.http).get": "/v1alpha/{parent=projects/*/scanConfigs/*/scanRuns/*}/findings",
                             "(google.api.method_signature)": "parent,filter"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1alpha/{parent=projects/*/scanConfigs/*/scanRuns/*}/findings"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,filter"
+                            }
+                          ]
                         },
                         "ListFindingTypeStats": {
                           "requestType": "ListFindingTypeStatsRequest",
@@ -1451,7 +1670,17 @@
                           "options": {
                             "(google.api.http).get": "/v1alpha/{parent=projects/*/scanConfigs/*/scanRuns/*}/findingTypeStats",
                             "(google.api.method_signature)": "parent"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1alpha/{parent=projects/*/scanConfigs/*/scanRuns/*}/findingTypeStats"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
                         }
                       }
                     },
@@ -2300,7 +2529,18 @@
                             "(google.api.http).post": "/v1beta/{parent=projects/*}/scanConfigs",
                             "(google.api.http).body": "scan_config",
                             "(google.api.method_signature)": "parent,scan_config"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta/{parent=projects/*}/scanConfigs",
+                                "body": "scan_config"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,scan_config"
+                            }
+                          ]
                         },
                         "DeleteScanConfig": {
                           "requestType": "DeleteScanConfigRequest",
@@ -2308,7 +2548,17 @@
                           "options": {
                             "(google.api.http).delete": "/v1beta/{name=projects/*/scanConfigs/*}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1beta/{name=projects/*/scanConfigs/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "GetScanConfig": {
                           "requestType": "GetScanConfigRequest",
@@ -2316,7 +2566,17 @@
                           "options": {
                             "(google.api.http).get": "/v1beta/{name=projects/*/scanConfigs/*}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta/{name=projects/*/scanConfigs/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "ListScanConfigs": {
                           "requestType": "ListScanConfigsRequest",
@@ -2324,7 +2584,17 @@
                           "options": {
                             "(google.api.http).get": "/v1beta/{parent=projects/*}/scanConfigs",
                             "(google.api.method_signature)": "parent"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta/{parent=projects/*}/scanConfigs"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
                         },
                         "UpdateScanConfig": {
                           "requestType": "UpdateScanConfigRequest",
@@ -2333,7 +2603,18 @@
                             "(google.api.http).patch": "/v1beta/{scan_config.name=projects/*/scanConfigs/*}",
                             "(google.api.http).body": "scan_config",
                             "(google.api.method_signature)": "scan_config,update_mask"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1beta/{scan_config.name=projects/*/scanConfigs/*}",
+                                "body": "scan_config"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "scan_config,update_mask"
+                            }
+                          ]
                         },
                         "StartScanRun": {
                           "requestType": "StartScanRunRequest",
@@ -2342,7 +2623,18 @@
                             "(google.api.http).post": "/v1beta/{name=projects/*/scanConfigs/*}:start",
                             "(google.api.http).body": "*",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta/{name=projects/*/scanConfigs/*}:start",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "GetScanRun": {
                           "requestType": "GetScanRunRequest",
@@ -2350,7 +2642,17 @@
                           "options": {
                             "(google.api.http).get": "/v1beta/{name=projects/*/scanConfigs/*/scanRuns/*}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta/{name=projects/*/scanConfigs/*/scanRuns/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "ListScanRuns": {
                           "requestType": "ListScanRunsRequest",
@@ -2358,7 +2660,17 @@
                           "options": {
                             "(google.api.http).get": "/v1beta/{parent=projects/*/scanConfigs/*}/scanRuns",
                             "(google.api.method_signature)": "parent"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta/{parent=projects/*/scanConfigs/*}/scanRuns"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
                         },
                         "StopScanRun": {
                           "requestType": "StopScanRunRequest",
@@ -2367,7 +2679,18 @@
                             "(google.api.http).post": "/v1beta/{name=projects/*/scanConfigs/*/scanRuns/*}:stop",
                             "(google.api.http).body": "*",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta/{name=projects/*/scanConfigs/*/scanRuns/*}:stop",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "ListCrawledUrls": {
                           "requestType": "ListCrawledUrlsRequest",
@@ -2375,7 +2698,17 @@
                           "options": {
                             "(google.api.http).get": "/v1beta/{parent=projects/*/scanConfigs/*/scanRuns/*}/crawledUrls",
                             "(google.api.method_signature)": "parent"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta/{parent=projects/*/scanConfigs/*/scanRuns/*}/crawledUrls"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
                         },
                         "GetFinding": {
                           "requestType": "GetFindingRequest",
@@ -2383,7 +2716,17 @@
                           "options": {
                             "(google.api.http).get": "/v1beta/{name=projects/*/scanConfigs/*/scanRuns/*/findings/*}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta/{name=projects/*/scanConfigs/*/scanRuns/*/findings/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "ListFindings": {
                           "requestType": "ListFindingsRequest",
@@ -2391,7 +2734,17 @@
                           "options": {
                             "(google.api.http).get": "/v1beta/{parent=projects/*/scanConfigs/*/scanRuns/*}/findings",
                             "(google.api.method_signature)": "parent,filter"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta/{parent=projects/*/scanConfigs/*/scanRuns/*}/findings"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,filter"
+                            }
+                          ]
                         },
                         "ListFindingTypeStats": {
                           "requestType": "ListFindingTypeStatsRequest",
@@ -2399,7 +2752,17 @@
                           "options": {
                             "(google.api.http).get": "/v1beta/{parent=projects/*/scanConfigs/*/scanRuns/*}/findingTypeStats",
                             "(google.api.method_signature)": "parent"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta/{parent=projects/*/scanConfigs/*/scanRuns/*}/findingTypeStats"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
                         }
                       }
                     },

@@ -3,23 +3,23 @@
     {
       "git": {
         "name": ".",
-        "remote": "sso://user/sofialeon/nodejs-web-security-scanner",
-        "sha": "ab8db1f221f4cad427bd374cb0bfd9b031573509"
+        "remote": "git@github.com:googleapis/nodejs-web-security-scanner.git",
+        "sha": "49895c3f78366879047e6c83c0cb6adc467fe024"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "539f0d44c80ef331ae1a50d92d61b91e77d500dd",
-        "internalRef": "345358447"
+        "sha": "d189e871205fea665a9648f7c4676f027495ccaf",
+        "internalRef": "345596855"
       }
     },
     {
       "git": {
         "name": "synthtool",
         "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "f94318521f63085b9ccb43d42af89f153fb39f15"
+        "sha": "18c5dbdb4ac8cf75d4d8174e7b4558f48e76f8a1"
       }
     }
   ],
