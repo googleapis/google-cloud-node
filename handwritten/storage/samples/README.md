@@ -34,6 +34,7 @@ objects to users via direct download.
   * [Delete Notification](#delete-notification)
   * [Delete Old Version Of File.](#delete-old-version-of-file.)
   * [Disable Bucket Lifecycle Management](#disable-bucket-lifecycle-management)
+  * [Storage Disable Bucket Versioning.](#storage-disable-bucket-versioning.)
   * [Disable Default Event Based Hold](#disable-default-event-based-hold)
   * [Disable Requester Pays](#disable-requester-pays)
   * [Disable Uniform Bucket Level Access](#disable-uniform-bucket-level-access)
@@ -41,6 +42,7 @@ objects to users via direct download.
   * [Download File](#download-file)
   * [Download File Using Requester Pays](#download-file-using-requester-pays)
   * [Enable Bucket Lifecycle Management](#enable-bucket-lifecycle-management)
+  * [Storage Enable Bucket Versioning.](#storage-enable-bucket-versioning.)
   * [Enable Default Event Based Hold](#enable-default-event-based-hold)
   * [Enable Default KMS Key](#enable-default-kms-key)
   * [Enable Requester Pays](#enable-requester-pays)
@@ -393,6 +395,25 @@ __Usage:__
 
 
 
+### Storage Disable Bucket Versioning.
+
+Disables bucket versioning.
+
+View the [source code](https://github.com/googleapis/nodejs-storage/blob/master/samples/disableBucketVersioning.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-storage&page=editor&open_in_editor=samples/disableBucketVersioning.js,samples/README.md)
+
+__Usage:__
+
+
+`node disableBucketVersioning.js <BUCKET_NAME>`
+
+
+-----
+
+
+
+
 ### Disable Default Event Based Hold
 
 View the [source code](https://github.com/googleapis/nodejs-storage/blob/master/samples/disableDefaultEventBasedHold.js).
@@ -505,6 +526,25 @@ __Usage:__
 
 
 `node samples/enableBucketLifecycleManagement.js`
+
+
+-----
+
+
+
+
+### Storage Enable Bucket Versioning.
+
+Enables bucket versioning.
+
+View the [source code](https://github.com/googleapis/nodejs-storage/blob/master/samples/enableBucketVersioning.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-storage&page=editor&open_in_editor=samples/enableBucketVersioning.js,samples/README.md)
+
+__Usage:__
+
+
+`node enableBucketVersioning.js <BUCKET_NAME>`
 
 
 -----
