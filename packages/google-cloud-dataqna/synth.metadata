@@ -1,0 +1,37 @@
+{
+  "sources": [
+    {
+      "git": {
+        "name": ".",
+        "remote": "sso://user/steffanyb/nodejs-data-qna",
+        "sha": "ce813770b0e899ee68a41f734393940e381ec0f3"
+      }
+    },
+    {
+      "git": {
+        "name": "googleapis",
+        "remote": "https://github.com/googleapis/googleapis.git",
+        "sha": "48fa7512d385dd8ea8e51aab083086858b4dbffe",
+        "internalRef": "347907714"
+      }
+    },
+    {
+      "git": {
+        "name": "synthtool",
+        "remote": "https://github.com/googleapis/synthtool.git",
+        "sha": "41e998d5afdc2c2143a23c9b044b9931936f7318"
+      }
+    }
+  ],
+  "destinations": [
+    {
+      "client": {
+        "source": "googleapis",
+        "apiName": "dataqna",
+        "apiVersion": "v1alpha",
+        "language": "nodejs",
+        "generator": "bazel"
+      }
+    }
+  ]
+}

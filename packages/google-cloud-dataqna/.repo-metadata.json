@@ -1,0 +1,13 @@
+{
+  "name": "dataqna",
+  "name_pretty": "Data QnA",
+  "product_documentation": "https://cloud.google.com/bigquery/docs/dataqna",
+  "client_documentation": "https://googleapis.dev/python/dataqna/latest",
+  "issue_tracker": "",
+  "release_level": "alpha",
+  "language": "nodejs",
+  "repo": "googleapis/nodejs-data-qna",
+  "distribution_name": "@google-cloud/data-qna",
+  "api_id": "dataqna.googleapis.com",
+  "requires_billing": true
+}
