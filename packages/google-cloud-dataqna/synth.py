@@ -27,7 +27,7 @@ versions = ['v1alpha']
 name = 'dataqna'
 for version in versions:
   library = gapic.node_library(name, version)
-  s.copy(library, excludes=['package.json'])
+  s.copy(library, excludes=[])
 
 # Copy common templates
 common_templates = gcp.CommonTemplates()
