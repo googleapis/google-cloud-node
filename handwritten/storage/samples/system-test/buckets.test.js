@@ -154,6 +154,22 @@ it("should disable a bucket's versioning", async () => {
   assert.strictEqual(bucket.metadata.versioning.enabled, false);
 });
 
+it('should add label to bucket', async () => {
+  const output = execSync(
+    `node addBucketLabel.js ${bucketName} labelone labelonevalue`
+  );
+  assert.include(output, `Added label to bucket ${bucketName}.`);
+  const [labels] = await storage.bucket(bucketName).getLabels();
+  assert.isTrue('labelone' in labels);
+});
+
+it('should remove label to bucket', async () => {
+  const output = execSync(`node removeBucketLabel.js ${bucketName} labelone`);
+  assert.include(output, `Removed labels from bucket ${bucketName}.`);
+  const [labels] = await storage.bucket(bucketName).getLabels();
+  assert.isFalse('labelone' in labels);
+});
+
 it("should change a bucket's default storage class", async () => {
   const output = execSync(
     `node changeDefaultStorageClass.js ${bucketName} coldline`
