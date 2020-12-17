@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.2.2](https://www.github.com/googleapis/nodejs-bigquery-connection/compare/v1.2.1...v1.2.2) (2020-12-04)
+
+
+### Bug Fixes
+
+* **deps:** roll back dependency @google-cloud/bigquery-connection to ^1.2.0 ([#52](https://www.github.com/googleapis/nodejs-bigquery-connection/issues/52)) ([14f9872](https://www.github.com/googleapis/nodejs-bigquery-connection/commit/14f9872f2175791f663ccfb6511d2d3e408f4151))
+
 ### [1.2.1](https://www.github.com/googleapis/nodejs-bigquery-connection/compare/v1.2.0...v1.2.1) (2020-11-25)
 
 
