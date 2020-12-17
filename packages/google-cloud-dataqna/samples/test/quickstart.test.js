@@ -28,5 +28,7 @@ const project = process.env.GCLOUD_PROJECT;
 
 describe('Quickstart', () => {
   it('should run quickstart', async () => {
+    const stdout = execSync('node ./quickstart.js');
+    assert.include(stdout, `Project: ${project}`);
   });
 });

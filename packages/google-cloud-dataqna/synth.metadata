@@ -3,23 +3,23 @@
     {
       "git": {
         "name": ".",
-        "remote": "sso://user/steffanyb/nodejs-data-qna",
-        "sha": "ce813770b0e899ee68a41f734393940e381ec0f3"
+        "remote": "git@github.com:steffnay/nodejs-data-qna.git",
+        "sha": "fae21956bafc35c2c9943cbdb147bdc85640e663"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "48fa7512d385dd8ea8e51aab083086858b4dbffe",
-        "internalRef": "347907714"
+        "sha": "15af12eb717cd30175825ad412045b9e59b133b4",
+        "internalRef": "348046114"
       }
     },
     {
       "git": {
         "name": "synthtool",
         "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "41e998d5afdc2c2143a23c9b044b9931936f7318"
+        "sha": "b670a77a454f415d247907908e8ee7943e06d718"
       }
     }
   ],

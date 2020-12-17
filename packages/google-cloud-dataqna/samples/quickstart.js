@@ -17,6 +17,11 @@
 
 async function main() {
   async function quickstart() {
+    const {AutoSuggestionServiceClient} = require('@google-cloud/data-qna');
+    const client = new AutoSuggestionServiceClient();
+
+    const projectId = await client.getProjectId();
+    console.info(`Project: ${projectId}`);
   }
   quickstart();
 }

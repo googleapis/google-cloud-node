@@ -33,6 +33,6 @@ for version in versions:
 common_templates = gcp.CommonTemplates()
 templates = common_templates.node_library(
     source_location='build/src', versions=['v1alpha'], default_version='v1alpha')
-s.copy(templates, excludes=['README.md','package.json'])
+s.copy(templates, excludes=['README.md', 'package.json'])
 
 node.postprocess_gapic_library()
