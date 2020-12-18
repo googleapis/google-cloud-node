@@ -16,6 +16,8 @@
     "@google-cloud/aiplatform": "^1.0.0"
   },
   "devDependencies": {
-    "mocha": "^8.0.0"
+    "chai": "^4.2.0",
+    "mocha": "^8.0.0",
+    "uuid": "^8.3.1"
   }
 }

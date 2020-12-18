@@ -21,23 +21,41 @@ import logging
 
 logging.basicConfig(level=logging.DEBUG)
 
+# List of excludes for the enhanced library
+excludes = [
+    "package.json",
+    "README.md",
+    "src/decorator.ts",
+    "src/enhanced-types.json",
+    "src/helpers.ts",
+    "src/index.ts",
+    "src/value-converter.ts",
+    "test/helpers.test.ts",
+    "test/index.test.ts",
+    "tsconfig.json",
+]
+
 # run the gapic generator
 gapic = gcp.GAPICBazel()
-versions = ['v1beta1']
-name = 'aiplatform'
+versions = ["v1beta1"]
+name = "aiplatform"
 for version in versions:
-  library = gapic.node_library(name, version)
-  s.copy(library, excludes=["package.json", "README.md"])
+    library = gapic.node_library(name, version)
+    s.copy(library, excludes=excludes)
 
 # Copy common templates
 common_templates = gcp.CommonTemplates()
 templates = common_templates.node_library(
-    source_location='build/src', versions=versions)
+    source_location="build/src", versions=versions
+)
 # We override the default sample configuration with a custom
 # environment file:
-s.copy(templates, excludes=[
-  ".kokoro/continuous/node12/samples-test.cfg",
-  ".kokoro/presubmit/node12/samples-test.cfg"
-])
+s.copy(
+    templates,
+    excludes=[
+        ".kokoro/continuous/node12/samples-test.cfg",
+        ".kokoro/presubmit/node12/samples-test.cfg",
+    ],
+)
 
 node.postprocess_gapic_library()

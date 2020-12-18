@@ -46,7 +46,8 @@
     "test": "c8 mocha build/test"
   },
   "dependencies": {
-    "google-gax": "^2.9.2"
+    "google-gax": "^2.9.2",
+    "protobuf.js": "^1.1.2"
   },
   "devDependencies": {
     "@types/mocha": "^8.0.3",

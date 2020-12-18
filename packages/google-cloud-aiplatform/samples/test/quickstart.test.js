@@ -23,7 +23,7 @@ const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
 
 describe('quickstart', () => {
   it('should have functional quickstart', async () => {
-    const stdout = execSync('node quickstart');
+    const stdout = execSync('node quickstart.js');
     assert(stdout.match(/DatasetServiceClient/));
   });
 });

@@ -3,7 +3,10 @@
   "skip": [
     "https://codecov.io/gh/googleapis/",
     "www.googleapis.com",
-    "img.shields.io"
+    "img.shields.io",
+    "https://github.com/googleapis/nodejs-ai-platform/blob/master/samples/list-endpoints.js",
+    "https://github.com/googleapis/nodejs-ai-platform/blob/master/samples/create-training-pipeline-image-classification.js",
+    "https://github.com/googleapis/nodejs-ai-platform/blob/master/samples/predict-image-classification.js"
   ],
   "silent": true,
   "concurrency": 10
