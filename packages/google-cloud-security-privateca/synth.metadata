@@ -4,7 +4,7 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/nodejs-security-private-ca.git",
-        "sha": "93caf82031dc7e8b3d5bc12312a4c327b751c127"
+        "sha": "673c8d518f538a78bd6cf4dcb3878c22d52d8038"
       }
     },
     {
@@ -19,7 +19,7 @@
       "git": {
         "name": "synthtool",
         "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "ea52b8a0bd560f72f376efcf45197fb7c8869120"
+        "sha": "ba9918cd22874245b55734f57470c719b577e591"
       }
     }
   ],
