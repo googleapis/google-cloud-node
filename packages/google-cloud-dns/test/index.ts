@@ -123,6 +123,7 @@ describe('DNS', () => {
     it('should inherit from Service', () => {
       assert(dns instanceof Service);
 
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const calledWith = (dns as any).calledWith_[0];
 
       const baseUrl = 'https://dns.googleapis.com/dns/v1';

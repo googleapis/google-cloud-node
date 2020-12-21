@@ -55,6 +55,39 @@ export interface CreateZoneRequest {
   dnsName: string;
   description?: string;
   name?: string;
+  dnssecConfig?: ManagedZoneDnsSecConfig;
+}
+
+export interface ManagedZoneDnsSecConfig {
+  /**
+   * Specifies parameters for generating initial DnsKeys for this ManagedZone. Can only be changed while the state is OFF.
+   */
+  defaultKeySpecs?: DnsKeySpec[];
+  kind?: string | null;
+  /**
+   * Specifies the mechanism for authenticated denial-of-existence responses. Can only be changed while the state is OFF.
+   */
+  nonExistence?: string | null;
+  /**
+   * Specifies whether DNSSEC is enabled, and what mode it is in.
+   */
+  state?: 'on' | 'off' | null;
+}
+
+export interface DnsKeySpec {
+  /**
+   * String mnemonic specifying the DNSSEC algorithm of this key.
+   */
+  algorithm?: string | null;
+  /**
+   * Length of the keys in bits.
+   */
+  keyLength?: number | null;
+  /**
+   * Specifies whether this is a key signing key (KSK) or a zone signing key (ZSK). Key signing keys have the Secure Entry Point flag set and, when active, will only be used to sign resource record sets of type DNSKEY. Zone signing keys do not have the Secure Entry Point flag set and will be used to sign all other types of resource record sets.
+   */
+  keyType?: string | null;
+  kind?: string | null;
 }
 
 export type CreateZoneResponse = [Zone, Metadata];

@@ -21,8 +21,6 @@ import * as promisify from '@google-cloud/promisify';
 import * as assert from 'assert';
 import {describe, it, before, beforeEach} from 'mocha';
 import * as proxyquire from 'proxyquire';
-
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import {Change} from '../src/change';
 
 let promisified = false;
@@ -73,6 +71,7 @@ describe('Change', () => {
     it('should inherit from ServiceObject', () => {
       assert(change instanceof ServiceObject);
 
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const calledWith = (change as any).calledWith_[0];
 
       assert.strictEqual(calledWith.parent, ZONE);

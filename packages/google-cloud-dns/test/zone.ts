@@ -166,6 +166,7 @@ describe('Zone', () => {
       const zone = new Zone(dnsInstance, ZONE_NAME);
       assert(zone instanceof ServiceObject);
 
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const calledWith = (zone as any).calledWith_[0];
 
       assert.strictEqual(calledWith.parent, dnsInstance);

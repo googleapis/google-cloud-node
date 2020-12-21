@@ -115,9 +115,26 @@ describe('dns', () => {
   };
 
   before(async () => {
+    // Clean up any leaked resources
     const [zones] = await dns.getZones();
-    await Promise.all(zones.map(zone => zone.delete({force: true})));
-    await ZONE.create({dnsName: DNS_DOMAIN});
+    await Promise.all(
+      zones.map(async zone => {
+        const hoursOld =
+          (Date.now() - new Date(zone.metadata.creationTime).getTime()) /
+          1000 /
+          60 /
+          60;
+        if (hoursOld > 1) {
+          await zone.delete({force: true});
+        }
+      })
+    );
+    await ZONE.create({
+      dnsName: DNS_DOMAIN,
+      dnssecConfig: {
+        state: 'on',
+      },
+    });
   });
 
   after(done => {
@@ -306,7 +323,12 @@ describe('dns', () => {
     it('should replace records', async () => {
       const name = 'test-zone-' + uuid.v4().substr(0, 18);
       // Do this in a new zone so no existing records are affected.
-      const [zone] = await dns.createZone(name, {dnsName: DNS_DOMAIN});
+      const [zone] = await dns.createZone(name, {
+        dnsName: DNS_DOMAIN,
+        dnssecConfig: {
+          state: 'on',
+        },
+      });
       const [originalRecords] = await zone.getRecords('ns');
       const originalData = originalRecords[0].data;
       const newRecord = zone.record('ns', {
@@ -319,6 +341,7 @@ describe('dns', () => {
       const added = change.metadata.additions[0].rrdatas;
       assert.deepStrictEqual(deleted, originalData);
       assert.deepStrictEqual(added, newRecord.data);
+      await zone.delete({force: true});
     });
   });
 });
