@@ -18,22 +18,17 @@ function main() {
   // [START speech_quickstart]
   // Imports the Google Cloud client library
   const speech = require('@google-cloud/speech');
-  const fs = require('fs').promises;
 
   // Creates a client
   const client = new speech.SpeechClient();
 
   async function quickstart() {
-    // The name of the audio file to transcribe
-    const fileName = './resources/audio.raw';
-
-    // Reads a local audio file and converts it to base64
-    const file = await fs.readFile(fileName);
-    const audioBytes = file.toString('base64');
+    // The path to the remote LINEAR16 file
+    const gcsUri = 'gs://cloud-samples-data/speech/brooklyn_bridge.raw';
 
     // The audio file's encoding, sample rate in hertz, and BCP-47 language code
     const audio = {
-      content: audioBytes,
+      uri: gcsUri,
     };
     const config = {
       encoding: 'LINEAR16',
