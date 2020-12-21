@@ -3,8 +3,8 @@
     {
       "git": {
         "name": ".",
-        "remote": "git@github.com:googleapis/nodejs-ai-platform.git",
-        "sha": "e97531fa5a374ec9215d21aa6b9c3434490a531f"
+        "remote": "https://github.com/googleapis/nodejs-ai-platform.git",
+        "sha": "b697a38f696ab14b3a7ce9563f2ed5449eeeab4f"
       }
     },
     {
