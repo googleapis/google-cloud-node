@@ -21671,6 +21671,186 @@ export namespace google {
                             public toJSON(): { [k: string]: any };
                         }
 
+                        /** Properties of a PlayAudio. */
+                        interface IPlayAudio {
+
+                            /** PlayAudio audioUri */
+                            audioUri?: (string|null);
+
+                            /** PlayAudio allowPlaybackInterruption */
+                            allowPlaybackInterruption?: (boolean|null);
+                        }
+
+                        /** Represents a PlayAudio. */
+                        class PlayAudio implements IPlayAudio {
+
+                            /**
+                             * Constructs a new PlayAudio.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.dialogflow.cx.v3beta1.ResponseMessage.IPlayAudio);
+
+                            /** PlayAudio audioUri. */
+                            public audioUri: string;
+
+                            /** PlayAudio allowPlaybackInterruption. */
+                            public allowPlaybackInterruption: boolean;
+
+                            /**
+                             * Creates a new PlayAudio instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns PlayAudio instance
+                             */
+                            public static create(properties?: google.cloud.dialogflow.cx.v3beta1.ResponseMessage.IPlayAudio): google.cloud.dialogflow.cx.v3beta1.ResponseMessage.PlayAudio;
+
+                            /**
+                             * Encodes the specified PlayAudio message. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.ResponseMessage.PlayAudio.verify|verify} messages.
+                             * @param message PlayAudio message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.dialogflow.cx.v3beta1.ResponseMessage.IPlayAudio, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified PlayAudio message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.ResponseMessage.PlayAudio.verify|verify} messages.
+                             * @param message PlayAudio message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.dialogflow.cx.v3beta1.ResponseMessage.IPlayAudio, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a PlayAudio message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns PlayAudio
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3beta1.ResponseMessage.PlayAudio;
+
+                            /**
+                             * Decodes a PlayAudio message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns PlayAudio
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3beta1.ResponseMessage.PlayAudio;
+
+                            /**
+                             * Verifies a PlayAudio message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a PlayAudio message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns PlayAudio
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3beta1.ResponseMessage.PlayAudio;
+
+                            /**
+                             * Creates a plain object from a PlayAudio message. Also converts values to other types if specified.
+                             * @param message PlayAudio
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.dialogflow.cx.v3beta1.ResponseMessage.PlayAudio, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this PlayAudio to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+                        }
+
+                        /** Properties of an EndInteraction. */
+                        interface IEndInteraction {
+                        }
+
+                        /** Represents an EndInteraction. */
+                        class EndInteraction implements IEndInteraction {
+
+                            /**
+                             * Constructs a new EndInteraction.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.dialogflow.cx.v3beta1.ResponseMessage.IEndInteraction);
+
+                            /**
+                             * Creates a new EndInteraction instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns EndInteraction instance
+                             */
+                            public static create(properties?: google.cloud.dialogflow.cx.v3beta1.ResponseMessage.IEndInteraction): google.cloud.dialogflow.cx.v3beta1.ResponseMessage.EndInteraction;
+
+                            /**
+                             * Encodes the specified EndInteraction message. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.ResponseMessage.EndInteraction.verify|verify} messages.
+                             * @param message EndInteraction message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.dialogflow.cx.v3beta1.ResponseMessage.IEndInteraction, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified EndInteraction message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.ResponseMessage.EndInteraction.verify|verify} messages.
+                             * @param message EndInteraction message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.dialogflow.cx.v3beta1.ResponseMessage.IEndInteraction, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes an EndInteraction message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns EndInteraction
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3beta1.ResponseMessage.EndInteraction;
+
+                            /**
+                             * Decodes an EndInteraction message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns EndInteraction
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3beta1.ResponseMessage.EndInteraction;
+
+                            /**
+                             * Verifies an EndInteraction message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates an EndInteraction message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns EndInteraction
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3beta1.ResponseMessage.EndInteraction;
+
+                            /**
+                             * Creates a plain object from an EndInteraction message. Also converts values to other types if specified.
+                             * @param message EndInteraction
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.dialogflow.cx.v3beta1.ResponseMessage.EndInteraction, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this EndInteraction to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+                        }
+
                         /** Properties of a MixedAudio. */
                         interface IMixedAudio {
 
@@ -21867,186 +22047,6 @@ export namespace google {
                                  */
                                 public toJSON(): { [k: string]: any };
                             }
-                        }
-
-                        /** Properties of an EndInteraction. */
-                        interface IEndInteraction {
-                        }
-
-                        /** Represents an EndInteraction. */
-                        class EndInteraction implements IEndInteraction {
-
-                            /**
-                             * Constructs a new EndInteraction.
-                             * @param [properties] Properties to set
-                             */
-                            constructor(properties?: google.cloud.dialogflow.cx.v3beta1.ResponseMessage.IEndInteraction);
-
-                            /**
-                             * Creates a new EndInteraction instance using the specified properties.
-                             * @param [properties] Properties to set
-                             * @returns EndInteraction instance
-                             */
-                            public static create(properties?: google.cloud.dialogflow.cx.v3beta1.ResponseMessage.IEndInteraction): google.cloud.dialogflow.cx.v3beta1.ResponseMessage.EndInteraction;
-
-                            /**
-                             * Encodes the specified EndInteraction message. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.ResponseMessage.EndInteraction.verify|verify} messages.
-                             * @param message EndInteraction message or plain object to encode
-                             * @param [writer] Writer to encode to
-                             * @returns Writer
-                             */
-                            public static encode(message: google.cloud.dialogflow.cx.v3beta1.ResponseMessage.IEndInteraction, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                            /**
-                             * Encodes the specified EndInteraction message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.ResponseMessage.EndInteraction.verify|verify} messages.
-                             * @param message EndInteraction message or plain object to encode
-                             * @param [writer] Writer to encode to
-                             * @returns Writer
-                             */
-                            public static encodeDelimited(message: google.cloud.dialogflow.cx.v3beta1.ResponseMessage.IEndInteraction, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                            /**
-                             * Decodes an EndInteraction message from the specified reader or buffer.
-                             * @param reader Reader or buffer to decode from
-                             * @param [length] Message length if known beforehand
-                             * @returns EndInteraction
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3beta1.ResponseMessage.EndInteraction;
-
-                            /**
-                             * Decodes an EndInteraction message from the specified reader or buffer, length delimited.
-                             * @param reader Reader or buffer to decode from
-                             * @returns EndInteraction
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3beta1.ResponseMessage.EndInteraction;
-
-                            /**
-                             * Verifies an EndInteraction message.
-                             * @param message Plain object to verify
-                             * @returns `null` if valid, otherwise the reason why it is not
-                             */
-                            public static verify(message: { [k: string]: any }): (string|null);
-
-                            /**
-                             * Creates an EndInteraction message from a plain object. Also converts values to their respective internal types.
-                             * @param object Plain object
-                             * @returns EndInteraction
-                             */
-                            public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3beta1.ResponseMessage.EndInteraction;
-
-                            /**
-                             * Creates a plain object from an EndInteraction message. Also converts values to other types if specified.
-                             * @param message EndInteraction
-                             * @param [options] Conversion options
-                             * @returns Plain object
-                             */
-                            public static toObject(message: google.cloud.dialogflow.cx.v3beta1.ResponseMessage.EndInteraction, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                            /**
-                             * Converts this EndInteraction to JSON.
-                             * @returns JSON object
-                             */
-                            public toJSON(): { [k: string]: any };
-                        }
-
-                        /** Properties of a PlayAudio. */
-                        interface IPlayAudio {
-
-                            /** PlayAudio audioUri */
-                            audioUri?: (string|null);
-
-                            /** PlayAudio allowPlaybackInterruption */
-                            allowPlaybackInterruption?: (boolean|null);
-                        }
-
-                        /** Represents a PlayAudio. */
-                        class PlayAudio implements IPlayAudio {
-
-                            /**
-                             * Constructs a new PlayAudio.
-                             * @param [properties] Properties to set
-                             */
-                            constructor(properties?: google.cloud.dialogflow.cx.v3beta1.ResponseMessage.IPlayAudio);
-
-                            /** PlayAudio audioUri. */
-                            public audioUri: string;
-
-                            /** PlayAudio allowPlaybackInterruption. */
-                            public allowPlaybackInterruption: boolean;
-
-                            /**
-                             * Creates a new PlayAudio instance using the specified properties.
-                             * @param [properties] Properties to set
-                             * @returns PlayAudio instance
-                             */
-                            public static create(properties?: google.cloud.dialogflow.cx.v3beta1.ResponseMessage.IPlayAudio): google.cloud.dialogflow.cx.v3beta1.ResponseMessage.PlayAudio;
-
-                            /**
-                             * Encodes the specified PlayAudio message. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.ResponseMessage.PlayAudio.verify|verify} messages.
-                             * @param message PlayAudio message or plain object to encode
-                             * @param [writer] Writer to encode to
-                             * @returns Writer
-                             */
-                            public static encode(message: google.cloud.dialogflow.cx.v3beta1.ResponseMessage.IPlayAudio, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                            /**
-                             * Encodes the specified PlayAudio message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.ResponseMessage.PlayAudio.verify|verify} messages.
-                             * @param message PlayAudio message or plain object to encode
-                             * @param [writer] Writer to encode to
-                             * @returns Writer
-                             */
-                            public static encodeDelimited(message: google.cloud.dialogflow.cx.v3beta1.ResponseMessage.IPlayAudio, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                            /**
-                             * Decodes a PlayAudio message from the specified reader or buffer.
-                             * @param reader Reader or buffer to decode from
-                             * @param [length] Message length if known beforehand
-                             * @returns PlayAudio
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3beta1.ResponseMessage.PlayAudio;
-
-                            /**
-                             * Decodes a PlayAudio message from the specified reader or buffer, length delimited.
-                             * @param reader Reader or buffer to decode from
-                             * @returns PlayAudio
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3beta1.ResponseMessage.PlayAudio;
-
-                            /**
-                             * Verifies a PlayAudio message.
-                             * @param message Plain object to verify
-                             * @returns `null` if valid, otherwise the reason why it is not
-                             */
-                            public static verify(message: { [k: string]: any }): (string|null);
-
-                            /**
-                             * Creates a PlayAudio message from a plain object. Also converts values to their respective internal types.
-                             * @param object Plain object
-                             * @returns PlayAudio
-                             */
-                            public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3beta1.ResponseMessage.PlayAudio;
-
-                            /**
-                             * Creates a plain object from a PlayAudio message. Also converts values to other types if specified.
-                             * @param message PlayAudio
-                             * @param [options] Conversion options
-                             * @returns Plain object
-                             */
-                            public static toObject(message: google.cloud.dialogflow.cx.v3beta1.ResponseMessage.PlayAudio, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                            /**
-                             * Converts this PlayAudio to JSON.
-                             * @returns JSON object
-                             */
-                            public toJSON(): { [k: string]: any };
                         }
                     }
 
@@ -26684,6 +26684,9 @@ export namespace google {
 
                         /** QueryParameters analyzeQueryTextSentiment */
                         analyzeQueryTextSentiment?: (boolean|null);
+
+                        /** QueryParameters webhookHeaders */
+                        webhookHeaders?: ({ [k: string]: string }|null);
                     }
 
                     /** Represents a QueryParameters. */
@@ -26712,6 +26715,9 @@ export namespace google {
 
                         /** QueryParameters analyzeQueryTextSentiment. */
                         public analyzeQueryTextSentiment: boolean;
+
+                        /** QueryParameters webhookHeaders. */
+                        public webhookHeaders: { [k: string]: string };
 
                         /**
                          * Creates a new QueryParameters instance using the specified properties.

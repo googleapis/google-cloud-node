@@ -382,6 +382,10 @@ export class SessionsClient {
    * entity types to be updated, which in turn might affect results of future
    * queries.
    *
+   * Note: Always use agent versions for production traffic.
+   * See [Versions and
+   * environments](https://cloud.google.com/dialogflow/cx/docs/concept/version).
+   *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.session
@@ -397,6 +401,10 @@ export class SessionsClient {
    *
    *   For more information, see the [sessions
    *   guide](https://cloud.google.com/dialogflow/cx/docs/concept/session).
+   *
+   *   Note: Always use agent versions for production traffic.
+   *   See [Versions and
+   *   environments](https://cloud.google.com/dialogflow/cx/docs/concept/version).
    * @param {google.cloud.dialogflow.cx.v3beta1.QueryParameters} request.queryParams
    *   The parameters of this query.
    * @param {google.cloud.dialogflow.cx.v3beta1.QueryInput} request.queryInput
@@ -678,6 +686,10 @@ export class SessionsClient {
    * Processes a natural language query in audio format in a streaming fashion
    * and returns structured, actionable data as a result. This method is only
    * available via the gRPC API (not REST).
+   *
+   * Note: Always use agent versions for production traffic.
+   * See [Versions and
+   * environments](https://cloud.google.com/dialogflow/cx/docs/concept/version).
    *
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.

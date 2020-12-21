@@ -5999,6 +5999,27 @@
                                 }
                               }
                             },
+                            "PlayAudio": {
+                              "fields": {
+                                "audioUri": {
+                                  "type": "string",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                },
+                                "allowPlaybackInterruption": {
+                                  "type": "bool",
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OUTPUT_ONLY"
+                                  }
+                                }
+                              }
+                            },
+                            "EndInteraction": {
+                              "fields": {}
+                            },
                             "MixedAudio": {
                               "fields": {
                                 "segments": {
@@ -6033,27 +6054,6 @@
                                         "(google.api.field_behavior)": "OUTPUT_ONLY"
                                       }
                                     }
-                                  }
-                                }
-                              }
-                            },
-                            "EndInteraction": {
-                              "fields": {}
-                            },
-                            "PlayAudio": {
-                              "fields": {
-                                "audioUri": {
-                                  "type": "string",
-                                  "id": 1,
-                                  "options": {
-                                    "(google.api.field_behavior)": "REQUIRED"
-                                  }
-                                },
-                                "allowPlaybackInterruption": {
-                                  "type": "bool",
-                                  "id": 2,
-                                  "options": {
-                                    "(google.api.field_behavior)": "OUTPUT_ONLY"
                                   }
                                 }
                               }
@@ -7407,6 +7407,11 @@
                             "analyzeQueryTextSentiment": {
                               "type": "bool",
                               "id": 8
+                            },
+                            "webhookHeaders": {
+                              "keyType": "string",
+                              "type": "string",
+                              "id": 10
                             }
                           }
                         },
