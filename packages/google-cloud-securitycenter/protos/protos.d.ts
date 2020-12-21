@@ -505,6 +505,9 @@ export namespace google {
 
                     /** Finding createTime */
                     createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Finding severity */
+                    severity?: (google.cloud.securitycenter.v1.Finding.Severity|keyof typeof google.cloud.securitycenter.v1.Finding.Severity|null);
                 }
 
                 /** Represents a Finding. */
@@ -545,6 +548,9 @@ export namespace google {
 
                     /** Finding createTime. */
                     public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Finding severity. */
+                    public severity: (google.cloud.securitycenter.v1.Finding.Severity|keyof typeof google.cloud.securitycenter.v1.Finding.Severity);
 
                     /**
                      * Creates a new Finding instance using the specified properties.
@@ -624,6 +630,15 @@ export namespace google {
                         STATE_UNSPECIFIED = 0,
                         ACTIVE = 1,
                         INACTIVE = 2
+                    }
+
+                    /** Severity enum. */
+                    enum Severity {
+                        SEVERITY_UNSPECIFIED = 0,
+                        CRITICAL = 1,
+                        HIGH = 2,
+                        MEDIUM = 3,
+                        LOW = 4
                     }
                 }
 

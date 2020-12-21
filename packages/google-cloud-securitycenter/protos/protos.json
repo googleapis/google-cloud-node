@@ -169,6 +169,10 @@
                         "createTime": {
                           "type": "google.protobuf.Timestamp",
                           "id": 10
+                        },
+                        "severity": {
+                          "type": "Severity",
+                          "id": 12
                         }
                       },
                       "nested": {
@@ -177,6 +181,15 @@
                             "STATE_UNSPECIFIED": 0,
                             "ACTIVE": 1,
                             "INACTIVE": 2
+                          }
+                        },
+                        "Severity": {
+                          "values": {
+                            "SEVERITY_UNSPECIFIED": 0,
+                            "CRITICAL": 1,
+                            "HIGH": 2,
+                            "MEDIUM": 3,
+                            "LOW": 4
                           }
                         }
                       }
@@ -1151,10 +1164,7 @@
                         },
                         "fieldMask": {
                           "type": "google.protobuf.FieldMask",
-                          "id": 7,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
+                          "id": 7
                         },
                         "pageToken": {
                           "type": "string",
@@ -1239,10 +1249,7 @@
                         },
                         "fieldMask": {
                           "type": "google.protobuf.FieldMask",
-                          "id": 7,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
+                          "id": 7
                         },
                         "pageToken": {
                           "type": "string",
@@ -1287,7 +1294,10 @@
                             },
                             "resource": {
                               "type": "Resource",
-                              "id": 3
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
                             }
                           },
                           "nested": {
