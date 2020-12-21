@@ -9,6 +9,8 @@
 [![codecov](https://img.shields.io/codecov/c/github/googleapis/nodejs-data-qna/master.svg?style=flat)](https://codecov.io/gh/googleapis/nodejs-data-qna)
 
 
+
+
 Dataqna client for Node.js
 
 
@@ -117,7 +119,7 @@ Apache Version 2.0
 
 See [LICENSE](https://github.com/googleapis/nodejs-data-qna/blob/master/LICENSE)
 
-[client-docs]: https://googleapis.dev/python/dataqna/latest
+[client-docs]: https://googleapis.dev/nodejs/dataqna/latest
 [product-docs]: https://cloud.google.com/bigquery/docs/dataqna
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project
