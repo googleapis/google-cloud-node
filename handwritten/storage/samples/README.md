@@ -21,6 +21,7 @@ objects to users via direct download.
   * [Add Bucket Conditional Binding](#add-bucket-conditional-binding)
   * [Add Bucket Default Owner Acl](#add-bucket-default-owner-acl)
   * [Add Bucket Iam Member](#add-bucket-iam-member)
+  * [Storage Add Bucket Label.](#storage-add-bucket-label.)
   * [Add Bucket Owner Acl](#add-bucket-owner-acl)
   * [Add File Owner Acl](#add-file-owner-acl)
   * [Storage Get Bucket Metadata.](#storage-get-bucket-metadata.)
@@ -89,6 +90,7 @@ objects to users via direct download.
   * [Storage Remove Bucket Cors Configuration.](#storage-remove-bucket-cors-configuration.)
   * [Remove Bucket Default Owner](#remove-bucket-default-owner)
   * [Remove Bucket Iam Member](#remove-bucket-iam-member)
+  * [Storage Remove Bucket Label.](#storage-remove-bucket-label.)
   * [Remove Bucket Owner Acl](#remove-bucket-owner-acl)
   * [Remove File Owner Acl](#remove-file-owner-acl)
   * [Remove Retention Policy](#remove-retention-policy)
@@ -162,6 +164,25 @@ __Usage:__
 
 
 `node samples/addBucketIamMember.js`
+
+
+-----
+
+
+
+
+### Storage Add Bucket Label.
+
+Adds bucket label.
+
+View the [source code](https://github.com/googleapis/nodejs-storage/blob/master/samples/addBucketLabel.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-storage&page=editor&open_in_editor=samples/addBucketLabel.js,samples/README.md)
+
+__Usage:__
+
+
+`node addBucketLabel.js <BUCKET_NAME> <LABEL_KEY> <LABEL_VALUE>`
 
 
 -----
@@ -1354,6 +1375,25 @@ __Usage:__
 
 
 `node samples/removeBucketIamMember.js`
+
+
+-----
+
+
+
+
+### Storage Remove Bucket Label.
+
+Removes bucket label.
+
+View the [source code](https://github.com/googleapis/nodejs-storage/blob/master/samples/removeBucketLabel.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-storage&page=editor&open_in_editor=samples/removeBucketLabel.js,samples/README.md)
+
+__Usage:__
+
+
+`node removeBucketLabel.js <BUCKET_NAME> JSON.stringify(['labelone','labelone'])`
 
 
 -----
