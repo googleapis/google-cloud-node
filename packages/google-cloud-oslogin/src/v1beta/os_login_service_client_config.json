@@ -21,33 +21,27 @@
       },
       "methods": {
         "DeletePosixAccount": {
-          "timeout_millis": 10000,
-          "retry_codes_name": "idempotent",
+          "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "DeleteSshPublicKey": {
-          "timeout_millis": 10000,
-          "retry_codes_name": "idempotent",
+          "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "GetLoginProfile": {
-          "timeout_millis": 10000,
-          "retry_codes_name": "idempotent",
+          "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "GetSshPublicKey": {
-          "timeout_millis": 10000,
-          "retry_codes_name": "idempotent",
+          "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "ImportSshPublicKey": {
-          "timeout_millis": 10000,
-          "retry_codes_name": "idempotent",
+          "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "UpdateSshPublicKey": {
-          "timeout_millis": 10000,
-          "retry_codes_name": "idempotent",
+          "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         }
       }
