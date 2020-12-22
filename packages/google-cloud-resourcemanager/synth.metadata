@@ -4,14 +4,14 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/nodejs-resource.git",
-        "sha": "25d6722e196833e75c96401f0ee81ed3f98c105e"
+        "sha": "295d9c2e5d91b9b4bfce8d34a99a4a0c955a38e8"
       }
     },
     {
       "git": {
         "name": "synthtool",
         "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "15013eff642a7e7e855aed5a29e6e83c39beba2a"
+        "sha": "363fe305e9ce34a6cd53951c6ee5f997094b54ee"
       }
     }
   ]
